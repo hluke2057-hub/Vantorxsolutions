@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VantorX Backend Test</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#0b1020;color:#edf2ff}
+*{box-sizing:border-box}body{margin:0;padding:32px 16px}.wrap{max-width:680px;margin:auto}.card{background:#131b30;border:1px solid #293653;border-radius:16px;padding:22px;margin:16px 0}h1{margin:0 0 8px}p{color:#aebbd4;line-height:1.5}label{display:block;margin:14px 0 6px;color:#d8e1f5}input{width:100%;padding:12px;border-radius:9px;border:1px solid #3b4b6c;background:#0c1427;color:#fff;font:inherit}button{padding:11px 14px;border:0;border-radius:9px;background:#7c9cff;color:#091126;font-weight:700;cursor:pointer;margin:10px 8px 0 0}button.secondary{background:#273753;color:#eef3ff}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#080d19;padding:14px;border-radius:9px;min-height:50px;color:#d7e5ff}.note{font-size:13px}.status{font-weight:700}a{color:#9bb7ff}
+</style>
+</head>
+<body><main class="wrap">
+<h1>VantorX backend test</h1>
+<p>This page tests the live API using your own test account. Your password is sent only to VantorX's same-origin signup/login endpoint and is not saved in this page. Use an email you can access if confirmation is enabled.</p>
+<div class="card">
+<h2>1. Create test account</h2>
+<label for="name">Full name</label><input id="name" autocomplete="name" maxlength="120" placeholder="Test User">
+<label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com">
+<label for="password">Password (8–128 characters)</label><input id="password" type="password" autocomplete="new-password" minlength="8" maxlength="128">
+<button id="signup">Sign up</button><button class="secondary" id="login">Log in</button>
+</div>
+<div class="card">
+<h2>2. Check session</h2><button id="me">Check current session</button><button class="secondary" id="logout">Log out</button>
+</div>
+<div class="card">
+<h2>3. Create test business</h2>
+<p>This creates a real business record in the connected Supabase project. Use a clearly labeled test name; you can remove the test record later from Supabase if needed.</p>
+<label for="business">Test business name</label><input id="business" maxlength="160" value="VantorX Test Business">
+<button id="create">Create test business</button>
+</div>
+<div class="card"><h2>Results</h2><div id="status" class="status">Ready.</div><pre id="output">Choose an action above to test the API.</pre></div>
+<p class="note">This is a temporary diagnostic page, not an admin panel. Do not share this URL with customers. <a href="/">Return to VantorX homepage</a></p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+function show(label,data){$("status").textContent=label;$("output").textContent=JSON.stringify(data,null,2)}
+async function call(path,method="GET",body){const r=await fetch(path,{method,credentials:"same-origin",headers:body?{"Content-Type":"application/json"}:{},body:body?JSON.stringify(body):undefined});let data;try{data=await r.json()}catch{data={error:"Non-JSON response"}}show(path+" — HTTP "+r.status,data);return {ok:r.ok,status:r.status,data}}
+$("signup").onclick=async()=>{const email=$("email").value.trim(),password=$("password").value,fullName=$("name").value.trim();if(!email||!password){show("Missing details",{error:"Enter email and password."});return}await call("/api/auth/signup","POST",{email,password,fullName})};
+$("login").onclick=async()=>{const email=$("email").value.trim(),password=$("password").value;if(!email||!password){show("Missing details",{error:"Enter email and password."});return}await call("/api/auth/login","POST",{email,password})};
+$("me").onclick=()=>call("/api/auth/me");
+$("logout").onclick=()=>call("/api/auth/logout","POST",{});
+$("create").onclick=async()=>{const name=$("business").value.trim();if(name.length<2){show("Invalid business name",{error:"Enter at least 2 characters."});return}await call("/api/businesses/create","POST",{name,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||"America/New_York"})};
+</script></body></html>
