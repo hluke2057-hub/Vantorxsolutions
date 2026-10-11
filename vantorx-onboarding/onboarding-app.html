@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VantorX Onboarding — Client Setup</title>
+<style>/* ============================================================
+   VANTORX CLIENT HUB — styles.css
+   Premium dark SaaS design system (shared VantorX tokens)
+   ============================================================ */
+
+:root {
+  --bg: #0a0a0d;
+  --bg-soft: #101014;
+  --bg-card: #14141a;
+  --bg-hover: #1b1b22;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.05);
+  --gold: #d4af37;
+  --gold-bright: #f0d060;
+  --gold-dim: rgba(212, 175, 55, 0.14);
+  --text: #f0efe9;
+  --text-soft: #a8a699;
+  --text-dim: #6d6b60;
+  --green: #4ade80;
+  --green-dim: rgba(74, 222, 128, 0.12);
+  --blue: #60a5fa;
+  --blue-dim: rgba(96, 165, 250, 0.12);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167, 139, 250, 0.12);
+  --red: #f87171;
+  --red-dim: rgba(248, 113, 113, 0.12);
+  --orange: #fbbf24;
+  --orange-dim: rgba(251, 191, 36, 0.12);
+  --teal: #2dd4bf;
+  --teal-dim: rgba(45, 212, 191, 0.12);
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --sidebar-w: 248px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+::selection { background: var(--gold-dim); color: var(--gold-bright); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+
+.app { display: flex; height: 100vh; overflow: hidden; }
+
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  gap: 4px;
+  z-index: 40;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 18px;
+  user-select: none;
+}
+.brand-mark {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold) 0%, #9a7b1f 100%);
+  display: grid; place-items: center;
+  color: #0a0a0d;
+  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+}
+.brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.06em; }
+.brand-name .gold { color: var(--gold-bright); }
+.brand-sub { font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; }
+
+.nav-section-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 12px 10px 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: var(--text-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.88rem;
+}
+.nav-item:hover { background: var(--bg-hover); color: var(--text); }
+.nav-item.active {
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+.nav-item .ico { width: 20px; text-align: center; font-size: 1rem; }
+.nav-item .nav-badge {
+  margin-left: auto;
+  background: var(--gold);
+  color: #0a0a0d;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+.nav-item .nav-badge.red { background: var(--red); color: #fff; }
+
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 6px; }
+.sidebar-biz {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.sidebar-biz:hover { border-color: rgba(212, 175, 55, 0.4); }
+.biz-avatar {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 0.8rem;
+}
+.biz-name { font-size: 0.82rem; font-weight: 600; }
+.biz-plan { font-size: 0.68rem; color: var(--text-dim); }
+.biz-caret { margin-left: auto; color: var(--text-dim); font-size: 0.7rem; }
+
+.demo-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: var(--orange-dim);
+  color: var(--orange);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.demo-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* ---------- topbar ---------- */
+
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+.topbar {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--border-soft);
+  background: rgba(10, 10, 13, 0.8);
+  backdrop-filter: blur(12px);
+  z-index: 30;
+}
+.topbar-title { font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
+.topbar-spacer { flex: 1; }
+
+.icon-btn {
+  position: relative;
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-soft);
+  display: grid; place-items: center;
+  font-size: 1rem;
+  transition: all 0.15s var(--ease);
+}
+.icon-btn:hover { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.4); }
+.icon-btn .dot-badge {
+  position: absolute; top: 6px; right: 6px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid var(--bg-soft);
+  display: none;
+}
+.icon-btn .dot-badge.show { display: block; }
+
+.topbar-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 7px 12px;
+  width: 300px;
+  color: var(--text-dim);
+}
+.topbar-search input {
+  background: none; border: none; outline: none;
+  color: var(--text);
+  width: 100%;
+  font-size: 0.85rem;
+}
+.topbar-search kbd {
+  font-family: inherit;
+  font-size: 0.66rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+.avatar-btn {
+  display: flex; align-items: center; gap: 9px;
+  padding: 5px 10px 5px 6px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.avatar-btn:hover { border-color: rgba(212, 175, 55, 0.4); }
+.avatar-circle {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #9a7b1f);
+  color: #0a0a0d;
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 0.72rem;
+}
+.avatar-name { font-size: 0.8rem; font-weight: 600; }
+.avatar-caret { color: var(--text-dim); font-size: 0.65rem; }
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 26px 28px 60px;
+
+}
+.page { max-width: 1200px; margin: 0 auto; animation: page-in 0.3s var(--ease); }
+@keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.page-head { margin-bottom: 22px; }
+.page-title { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; }
+.page-sub { color: var(--text-soft); font-size: 0.9rem; margin-top: 4px; }
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .link { margin-left: auto; }
+
+.link-btn {
+  background: none; border: none;
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.link-btn:hover { color: var(--gold-bright); text-decoration: underline; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 15px;
+  border-radius: 9px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.15s var(--ease);
+  text-decoration: none;
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-gold { background: linear-gradient(135deg, var(--gold), #b8942a); color: #0a0a0d; }
+.btn-gold:hover:not(:disabled) { filter: brightness(1.12); box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3); }
+.btn-ghost { background: var(--bg-card); border-color: var(--border); color: var(--text-soft); }
+.btn-ghost:hover:not(:disabled) { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.btn-sm { padding: 5px 11px; font-size: 0.78rem; border-radius: 8px; }
+.btn-red { background: var(--red-dim); color: var(--red); border-color: rgba(248, 113, 113, 0.3); }
+.btn-red:hover:not(:disabled) { background: rgba(248, 113, 113, 0.2); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+}
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.status-pill .sdot { width: 6px; height: 6px; border-radius: 50%; }
+.status-green { background: var(--green-dim); color: var(--green); }
+.status-green .sdot { background: var(--green); }
+.status-gold { background: var(--gold-dim); color: var(--gold-bright); }
+.status-gold .sdot { background: var(--gold-bright); }
+.status-blue { background: var(--blue-dim); color: var(--blue); }
+.status-blue .sdot { background: var(--blue); }
+.status-purple { background: var(--purple-dim); color: var(--purple); }
+.status-purple .sdot { background: var(--purple); }
+.status-red { background: var(--red-dim); color: var(--red); }
+.status-red .sdot { background: var(--red); }
+.status-orange { background: var(--orange-dim); color: var(--orange); }
+.status-orange .sdot { background: var(--orange); }
+.status-dim { background: var(--bg-hover); color: var(--text-dim); }
+.status-dim .sdot { background: var(--text-dim); }
+
+/* ---------- KPI grid ---------- */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.kpi {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px 16px;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.kpi:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-2px); }
+.kpi-label { font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+.kpi-value { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; margin-top: 5px; }
+.kpi-hint { font-size: 0.72rem; color: var(--text-soft); margin-top: 2px; }
+.kpi.accent-gold { border-color: rgba(212, 175, 55, 0.35); }
+
+/* ---------- tables ---------- */
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th {
+  text-align: left;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td { padding: 10px; border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tbody tr { transition: background 0.12s; }
+tbody tr:hover { background: var(--bg-hover); }
+tr[data-clickable] { cursor: pointer; }
+
+.cell-main { font-weight: 600; }
+.cell-dim { color: var(--text-dim); font-size: 0.78rem; }
+
+.score-bar { width: 54px; height: 5px; background: var(--bg-hover); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 7px; }
+.score-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-bright)); border-radius: 3px; }
+
+/* ---------- lists ---------- */
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.list-row:last-child { border-bottom: none; }
+.row-ico {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: grid; place-items: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+.row-main { min-width: 0; flex: 1; }
+.row-title { font-size: 0.86rem; font-weight: 600; }
+.row-sub { font-size: 0.76rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row-time { font-size: 0.72rem; color: var(--text-dim); white-space: nowrap; }
+
+/* ---------- forms ---------- */
+
+.form-group { margin-bottom: 15px; }
+.form-label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-soft); margin-bottom: 6px; }
+.form-label .req { color: var(--gold); }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 9px 12px;
+  font-size: 0.86rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 0 3px var(--gold-dim);
+}
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-hint { font-size: 0.74rem; color: var(--text-dim); margin-top: 5px; }
+.form-error { color: var(--red); font-size: 0.76rem; margin-top: 5px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+.toggle {
+  position: relative;
+  width: 40px; height: 22px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+  flex-shrink: 0;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--text-soft);
+  transition: transform 0.2s var(--ease), background 0.2s;
+}
+.toggle.on { background: var(--gold-dim); border-color: rgba(212, 175, 55, 0.4); }
+.toggle.on::after { transform: translateX(18px); background: var(--gold-bright); }
+
+/* ---------- tabs ---------- */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+  overflow-x: auto;
+}
+.tab {
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  padding: 9px 14px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--gold-bright); border-bottom-color: var(--gold); }
+.tab .tab-count { font-size: 0.7rem; color: var(--text-dim); margin-left: 5px; }
+
+.filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.select-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  outline: none;
+}
+.select-input:focus { border-color: rgba(212, 175, 55, 0.5); }
+.search-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  outline: none;
+  min-width: 220px;
+}
+.search-input:focus { border-color: rgba(212, 175, 55, 0.5); }
+.result-count { font-size: 0.78rem; color: var(--text-dim); margin-left: auto; }
+
+.seg {
+  display: inline-flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 3px;
+  gap: 2px;
+}
+.seg button {
+  background: none; border: none;
+  color: var(--text-soft);
+  padding: 6px 13px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+.seg button.active { background: var(--gold-dim); color: var(--gold-bright); }
+
+/* ---------- modal / drawer ---------- */
+
+.modal-overlay, .drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+  animation: fade-in 0.18s var(--ease);
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100vw - 40px));
+  max-height: min(82vh, 720px);
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  animation: modal-in 0.22s var(--ease);
+}
+@keyframes modal-in { from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+.modal-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--bg-card);
+  z-index: 2;
+}
+.modal-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.modal-body { padding: 20px; }
+.modal-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 9px; }
+.modal-x { margin-left: auto; }
+
+.drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(480px, 94vw);
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  animation: drawer-in 0.24s var(--ease);
+}
+@keyframes drawer-in { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.drawer-head { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
+.drawer-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 9px; justify-content: flex-end; }
+
+/* ---------- toast ---------- */
+
+.toast-zone { position: fixed; bottom: 22px; right: 22px; display: flex; flex-direction: column; gap: 9px; z-index: 200; }
+.toast {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 0.84rem;
+  box-shadow: var(--shadow);
+  animation: toast-in 0.25s var(--ease);
+  max-width: 380px;
+}
+.toast.success { border-left-color: var(--green); }
+.toast.error { border-left-color: var(--red); }
+.toast.info { border-left-color: var(--blue); }
+.toast.leaving { animation: toast-out 0.25s var(--ease) forwards; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes toast-out { to { opacity: 0; transform: translateY(8px); } }
+
+/* ---------- empty / skeleton ---------- */
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
+.empty-ico { font-size: 2rem; margin-bottom: 10px; opacity: 0.75; }
+.empty-title { font-weight: 700; color: var(--text-soft); margin-bottom: 4px; }
+.empty-msg { font-size: 0.82rem; max-width: 340px; margin: 0 auto; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-card) 50%, var(--bg-hover) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 8px;
+  height: 14px;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* ---------- timeline (activity) ---------- */
+
+.timeline { position: relative; padding-left: 26px; }
+.timeline::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
+.tl-item { position: relative; padding-bottom: 18px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -26px; top: 3px;
+  width: 19px; height: 19px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  font-size: 0.62rem;
+}
+.tl-title { font-size: 0.86rem; font-weight: 600; }
+.tl-desc { font-size: 0.78rem; color: var(--text-soft); }
+.tl-meta { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
+
+/* ---------- transcript ---------- */
+
+.transcript { display: flex; flex-direction: column; gap: 9px; }
+.tr-line { display: flex; gap: 9px; }
+.tr-who { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; width: 58px; flex-shrink: 0; padding-top: 2px; }
+.tr-who.ai { color: var(--gold); }
+.tr-who.human { color: var(--blue); }
+.tr-who.system { color: var(--text-dim); }
+.tr-text {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-size: 0.82rem;
+  flex: 1;
+}
+.tr-time { font-size: 0.66rem; color: var(--text-dim); margin-top: 3px; }
+
+/* ---------- calendar ---------- */
+
+.cal-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.cal-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; min-width: 150px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-dow { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center; padding: 4px 0; }
+.cal-cell {
+  min-height: 86px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 9px;
+  padding: 6px;
+  font-size: 0.72rem;
+  transition: border-color 0.15s;
+}
+.cal-cell:hover { border-color: rgba(212, 175, 55, 0.35); }
+.cal-cell.other { opacity: 0.35; }
+.cal-cell.today .cal-num { background: var(--gold); color: #0a0a0d; }
+.cal-num {
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+}
+.cal-evt {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  font-size: 0.66rem;
+  margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  cursor: pointer;
+}
+.cal-evt.cancelled { background: var(--red-dim); color: var(--red); text-decoration: line-through; }
+.cal-evt.other-type { background: var(--blue-dim); color: var(--blue); }
+
+.cal-day-list { display: flex; flex-direction: column; gap: 9px; }
+.cal-day-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+}
+.cal-day-time { font-family: var(--font-display); font-weight: 700; color: var(--gold-bright); width: 88px; flex-shrink: 0; }
+.cal-day-line { flex: 1; }
+.cal-day-name { font-weight: 600; font-size: 0.88rem; }
+
+.week-cols { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.week-col { background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 10px; padding: 8px; min-height: 160px; }
+.week-col.today-col { border-color: rgba(212, 175, 55, 0.4); }
+.week-dow { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); text-align: center; margin-bottom: 6px; }
+.week-date { text-align: center; font-family: var(--font-display); font-weight: 700; margin-bottom: 8px; }
+.week-col.today-col .week-date { color: var(--gold-bright); }
+
+/* ---------- knowledge / settings list ---------- */
+
+.kv-list { display: flex; flex-direction: column; }
+.kv-row { display: flex; align-items: flex-start; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border-soft); }
+.kv-row:last-child { border-bottom: none; }
+.kv-label { width: 150px; flex-shrink: 0; font-size: 0.78rem; color: var(--text-dim); font-weight: 600; padding-top: 2px; }
+.kv-value { flex: 1; font-size: 0.86rem; }
+
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.cap-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.cap-card .cap-ico { font-size: 1.1rem; }
+
+.section-stack { display: flex; flex-direction: column; gap: 18px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.grid-side { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+
+/* ---------- AI test area ---------- */
+
+.ai-test-box { border: 1px solid rgba(212, 175, 55, 0.3); border-radius: var(--radius); background: linear-gradient(180deg, rgba(212,175,55,0.05), transparent); padding: 18px; }
+.test-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.test-chip {
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 13px;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  transition: all 0.15s;
+}
+.test-chip:hover { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.4); }
+
+.sim-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px dashed rgba(251, 191, 36, 0.4);
+  padding: 3px 9px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.sim-bubble {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 15px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  animation: page-in 0.3s var(--ease);
+}
+.sim-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+.typing-dots { display: inline-flex; gap: 4px; align-items: center; height: 20px; }
+.typing-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: tdot 1s infinite; }
+.typing-dots i:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes tdot { 0%, 100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+
+/* ---------- onboarding ---------- */
+
+.onboard-overlay {
+  position: fixed; inset: 0;
+  background: rgba(4, 4, 6, 0.82);
+  backdrop-filter: blur(6px);
+  z-index: 300;
+  display: grid; place-items: center;
+  animation: fade-in 0.25s var(--ease);
+  padding: 20px;
+}
+.onboard-card {
+  width: min(620px, 100%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  animation: modal-in 0.3s var(--ease);
+}
+.onboard-progress { display: flex; gap: 6px; margin-bottom: 22px; }
+.onboard-progress span { height: 4px; flex: 1; border-radius: 3px; background: var(--bg-hover); transition: background 0.25s; }
+.onboard-progress span.done { background: var(--gold); }
+.onboard-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+.onboard-sub { color: var(--text-soft); font-size: 0.88rem; margin-bottom: 20px; }
+.onboard-option {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 9px;
+  color: var(--text);
+  font-size: 0.86rem;
+  transition: all 0.15s;
+}
+.onboard-option:hover { border-color: rgba(212, 175, 55, 0.4); }
+.onboard-option.selected { border-color: rgba(212, 175, 55, 0.55); background: var(--gold-dim); }
+.onboard-ico { font-size: 1.15rem; width: 26px; text-align: center; }
+
+/* ---------- request status colors ---------- */
+
+.req-status-submitted { background: var(--blue-dim); color: var(--blue); }
+.req-status-in-review { background: var(--orange-dim); color: var(--orange); }
+.req-status-in-progress { background: var(--gold-dim); color: var(--gold-bright); }
+.req-status-waiting { background: var(--purple-dim); color: var(--purple); }
+.req-status-completed { background: var(--green-dim); color: var(--green); }
+
+/* ---------- help ---------- */
+
+.help-topic {
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text);
+  margin-bottom: 10px;
+  transition: all 0.15s;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 11px;
+}
+.help-topic:hover { border-color: rgba(212, 175, 55, 0.4); }
+.help-topic .hp-ico { font-size: 1.1rem; }
+.help-topic .hp-arrow { margin-left: auto; color: var(--text-dim); }
+.help-answer { font-size: 0.84rem; color: var(--text-soft); line-height: 1.65; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s var(--ease);
+    box-shadow: var(--shadow);
+  }
+  .sidebar.mobile-open { transform: none; }
+  .grid-2, .grid-side { grid-template-columns: 1fr; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .content { padding: 18px 16px 60px; }
+}
+
+@media (max-width: 560px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi-value { font-size: 1.3rem; }
+  .topbar-search { width: 100%; }
+  .topbar { padding: 0 12px; gap: 8px; }
+  .avatar-name, .topbar-search kbd { display: none; }
+  .cal-cell { min-height: 58px; }
+  .cal-evt { display: none; }
+  .cal-cell .cal-count { display: block; font-size: 0.62rem; color: var(--gold-bright); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ============================================================
+   SHELL EXTRAS — menu btn, scrim, global search results, settings nav
+   ============================================================ */
+.menu-btn { display: none; }
+@media (max-width: 900px) { .menu-btn { display: grid; } }
+.mobile-scrim { position: fixed; inset: 0; background: rgba(4,4,6,0.7); backdrop-filter: blur(2px); z-index: 35; }
+
+.search-results {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow); max-height: 340px;
+  overflow: auto; z-index: 80; padding: 5px;
+}
+.search-results .sr-item { display: flex; justify-content: space-between; gap: 12px; align-items: center;
+  padding: 9px 10px; border-radius: 8px; cursor: pointer; font-size: 0.84rem; }
+.search-results .sr-item:hover { background: var(--bg-hover); }
+.sr-kind { color: var(--text-dim); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+#topbarSearchWrap { position: relative; }
+
+.settings-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.settings-nav button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-soft);
+  padding: 7px 15px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+.settings-nav button.active { border-color: rgba(212,175,55,0.45); color: var(--gold-bright); background: var(--gold-dim); }
+
+/* ============================================================
+   VANTORX ONBOARDING — wizard-specific styles (obx-*)
+   ============================================================ */
+
+.gold-text { color: var(--gold-bright); }
+
+.obx-wrap { max-width: 880px; margin: 0 auto; padding: 28px 22px 40px; }
+
+.obx-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.obx-brand { display: flex; align-items: center; gap: 10px; }
+.obx-header-right { display: flex; align-items: center; gap: 12px; }
+
+.obx-autosave { color: var(--text-dim); font-size: 0.78rem; transition: color 0.3s; }
+.obx-autosave.flash { color: var(--green); }
+
+.obx-progress-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 22px; }
+.obx-progress-meta { display: flex; justify-content: space-between; margin-top: 12px; }
+.obx-step-label { color: var(--text-dim); font-size: 0.8rem; }
+.obx-step-name { color: var(--gold-bright); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; }
+
+.obx-main { animation: obxFade 0.25s var(--ease); }
+@keyframes obxFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.obx-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; gap: 14px; }
+.obx-nav-right { display: flex; align-items: center; gap: 14px; }
+.obx-validation { color: var(--red); font-size: 0.8rem; }
+.obx-validation.show { animation: obxShake 0.3s; }
+@keyframes obxShake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+
+.obx-foot { text-align: center; color: var(--text-dim); font-size: 0.72rem; margin-top: 34px; }
+
+/* step 1 — industry picker */
+.obx-ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.obx-ind { display: flex; align-items: center; gap: 10px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 10px; padding: 11px 13px; cursor: pointer; color: var(--text); font-size: 0.88rem; transition: border-color 0.15s; }
+.obx-ind:hover { border-color: rgba(212, 175, 55, 0.4); }
+.obx-ind.selected { border-color: rgba(212, 175, 55, 0.55); background: var(--gold-dim); }
+.obx-ind-ico { font-size: 1.15rem; }
+
+/* step 2 — services rows */
+.obx-svc-row { display: grid; grid-template-columns: 1fr 90px 70px 38px; gap: 8px; margin-bottom: 8px; align-items: center; }
+.obx-hint-box { background: var(--bg-soft); border: 1px dashed var(--border); border-radius: 10px;
+  padding: 13px 15px; color: var(--text-soft); font-size: 0.84rem; line-height: 1.5; }
+
+/* step 3 — hours rows */
+.obx-hours-row { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-bottom: 1px solid var(--border-soft); }
+.obx-hours-row:last-of-type { border-bottom: none; }
+.obx-hours-row.is-closed { opacity: 0.55; }
+.obx-hours-day { width: 92px; font-size: 0.86rem; color: var(--text); }
+.obx-hours-time { width: 110px; padding: 7px 9px; font-size: 0.84rem; }
+.obx-hours-dash { color: var(--text-dim); }
+.obx-hours-closed { color: var(--red); font-size: 0.8rem; font-weight: 600; }
+
+/* step 5 — AI preview */
+.obx-ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+.obx-greeting { min-height: 84px; }
+.obx-transfer-when { min-height: 64px; }
+.obx-preview { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; position: sticky; top: 20px; }
+.obx-sim { display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; padding: 4px 2px; }
+.obx-sim-welcome { color: var(--text-dim); font-size: 0.82rem; text-align: center; padding: 26px 0; }
+.obx-sim-bubble { max-width: 85%; padding: 9px 13px; border-radius: 14px; font-size: 0.84rem; line-height: 1.45; }
+.obx-sim-bubble.caller { align-self: flex-end; background: var(--bg-hover); border: 1px solid var(--border); border-bottom-right-radius: 4px; }
+.obx-sim-bubble.ai { align-self: flex-start; background: var(--gold-dim); border: 1px solid rgba(212, 175, 55, 0.35); border-bottom-left-radius: 4px; }
+.obx-sim-bubble.obx-typing { letter-spacing: 3px; color: var(--text-soft); }
+
+/* step 6 — connections */
+.obx-conn-list { display: flex; flex-direction: column; gap: 10px; }
+.obx-conn { display: flex; align-items: center; gap: 14px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px; transition: border-color 0.2s; }
+.obx-conn.on { border-color: rgba(212, 175, 55, 0.4); background: var(--gold-dim); }
+.obx-conn-ico { font-size: 1.4rem; width: 40px; text-align: center; }
+.obx-conn-main { flex: 1; }
+.obx-conn-title { font-weight: 600; font-size: 0.9rem; }
+.obx-conn-desc { color: var(--text-soft); font-size: 0.8rem; margin-top: 2px; }
+
+/* step 7 — checklist */
+.obx-check-list { display: flex; flex-direction: column; gap: 8px; }
+.obx-check { display: flex; align-items: center; gap: 13px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 15px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.obx-check:hover { border-color: rgba(212, 175, 55, 0.35); }
+.obx-check.done { border-color: rgba(74, 222, 128, 0.4); background: var(--green-dim); }
+.obx-check input { display: none; }
+.obx-check-box { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--border); background: var(--bg-hover);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; color: var(--green); }
+.obx-check.done .obx-check-box { border-color: var(--green); }
+.obx-check.done .obx-check-box::after { content: '✓'; }
+.obx-check-main b { display: block; font-size: 0.88rem; font-weight: 600; }
+.obx-check-main i { display: block; font-style: normal; color: var(--text-soft); font-size: 0.78rem; margin-top: 1px; }
+.obx-check-progress { display: flex; align-items: center; gap: 14px; margin-top: 16px; font-size: 0.86rem; }
+.obx-check-ready { color: var(--green); font-weight: 700; }
+
+/* step 8 — review */
+.obx-review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.obx-review-card .kv-row { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-soft); font-size: 0.85rem; }
+.obx-review-card .kv-row:last-child { border-bottom: none; }
+.obx-review-card .kv-label { color: var(--text-dim); flex-shrink: 0; }
+.obx-golive { text-align: center; margin-top: 24px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-soft); }
+.obx-golive-btn { font-size: 1rem; padding: 13px 30px; }
+.obx-golive-done { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.obx-golive-done .big { font-size: 2.6rem; color: var(--green); }
+
+/* responsive */
+@media (max-width: 760px) {
+  .obx-ai-grid, .obx-review-grid, .obx-ind-grid { grid-template-columns: 1fr; }
+  .obx-preview { position: static; }
+  .obx-svc-row { grid-template-columns: 1fr 70px 56px 34px; }
+  .obx-hours-day { width: 72px; }
+  .obx-nav { flex-direction: column-reverse; align-items: stretch; }
+  .obx-nav .btn { width: 100%; }
+  .obx-nav-right { justify-content: space-between; }
+}
+</style>
+</head>
+<body>
+
+<div class="obx-wrap">
+
+  <!-- ===== HEADER ===== -->
+  <header class="obx-header">
+    <div class="obx-brand">
+      <a href="/" title="Back to VantorX portal" style="text-decoration:none;color:inherit;display:flex;gap:10px;align-items:center">
+      <span class="brand-mark">V</span>
+      <span class="brand-name">VantorX <span class="gold-text">Onboarding</span></span>
+      </a>
+    </div>
+    <div class="obx-header-right">
+      <span class="obx-autosave" id="autosaveFlag" title="Progress saves in this browser and syncs to the VantorX platform when you are signed in">✓ Saved</span>
+      <button class="btn btn-ghost btn-sm" id="resetBtn">Start over</button>
+    </div>
+  </header>
+
+  <!-- ===== PROGRESS ===== -->
+  <div class="obx-progress-card">
+    <div class="onboard-progress" id="progBar"></div>
+    <div class="obx-progress-meta">
+      <span class="obx-step-label" id="stepLabel">Step 1 of 8</span>
+      <span class="obx-step-name" id="stepName">Business</span>
+    </div>
+  </div>
+
+  <!-- ===== STEP VIEW ===== -->
+  <main class="obx-main" id="view"></main>
+
+  <!-- ===== NAV ===== -->
+  <div class="obx-nav">
+    <button class="btn btn-ghost" id="backBtn">← Back</button>
+    <div class="obx-nav-right">
+      <span class="obx-validation" id="validationMsg"></span>
+      <button class="btn btn-gold" id="nextBtn">Continue →</button>
+    </div>
+  </div>
+
+  <footer class="obx-foot">VantorX — AI receptionist &amp; lead follow-up for local business · Progress saves locally and syncs to the VantorX platform when signed in.</footer>
+</div>
+
+<script>/* === VantorX Onboarding bundled build - generated by build-bundle.ps1 === */
+/* === Edit the source files in vantorx-onboarding/js/ then rebuild. === */
+/* ---- js/utils.js ---- */
+/* ============================================================
+   VANTORX CLIENT HUB — utils.js
+   Shared helpers. No dependencies.
+   ============================================================ */
+
+const STATUS_META = {
+  Submitted:   { cls: 'req-status-submitted',   icon: '📨' },
+  'In Review': { cls: 'req-status-in-review',   icon: '🔎' },
+  'In Progress': { cls: 'req-status-in-progress', icon: '🛠️' },
+  'Waiting on Client': { cls: 'req-status-waiting', icon: '⏸️' },
+  Completed:   { cls: 'req-status-completed',   icon: '✅' },
+};
+
+const CALL_OUTCOMES = {
+  answered:    { label: 'Answered',    cls: 'status-green' },
+  missed:      { label: 'Missed',      cls: 'status-red' },
+  transferred: { label: 'Transferred', cls: 'status-purple' },
+  booked:      { label: 'Booked',      cls: 'status-gold' },
+  faq:         { label: 'Question Answered', cls: 'status-blue' },
+};
+
+const APPT_STATUS = {
+  Confirmed:  'status-green',
+  Completed:  'status-dim',
+  Rescheduled: 'status-orange',
+  Cancelled:  'status-red',
+};
+
+function esc(s) {
+  return String(s ?? '')
+    .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+}
+
+function fmtTime(iso) {
+  return new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+function fmtDateTime(iso) {
+  return `${fmtDate(iso)} · ${fmtTime(iso)}`;
+}
+
+function fmtDuration(sec) {
+  if (sec == null) return '—';
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return `${m}m ${String(s).padStart(2, '0')}s`;
+}
+
+function relTime(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const min = Math.round(diff / 60000);
+  if (min < 1) return 'just now';
+  if (min < 60) return `${min}m ago`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.round(h / 24);
+  if (d < 7) return `${d}d ago`;
+  return fmtDate(iso);
+}
+
+function debounce(fn, ms) {
+  let t;
+  return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+
+function uid(prefix = 'id') {
+  return `${prefix}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
+}
+
+/* Deterministic PRNG so demo data is stable across reloads until edited */
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function scoreBar(score) {
+  return `<span class="score-bar"><i style="width:${Math.min(100, score)}%"></i></span>${score}`;
+}
+
+function initials(name) {
+  return String(name || '?').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+}
+
+function groupBy(arr, keyFn) {
+  return arr.reduce((acc, item) => {
+    const k = keyFn(item);
+    (acc[k] = acc[k] || []).push(item);
+    return acc;
+  }, {});
+}
+
+function monthLabel(y, m) {
+  return new Date(y, m, 1).toLocaleDateString([], { month: 'long', year: 'numeric' });
+}
+
+function sameDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+
+/* ---- js/data.js ---- */
+/* ============================================================
+   VANTORX ONBOARDING — data.js
+   Presets and demo content: industries, sample services,
+   starter FAQ templates, AI personalities, connection catalog.
+   ============================================================ */
+
+const INDUSTRIES = [
+  { id: 'barbershop', label: 'Barbershop', icon: '💈', services: ['Haircut — $30 / 30 min', 'Haircut + Beard — $45 / 45 min', 'Kids cut — $20 / 25 min', 'Hot towel shave — $35 / 30 min'] },
+  { id: 'salon', label: 'Salon / Spa', icon: '💅', services: ['Cut & style — $55 / 60 min', 'Color — $120 / 120 min', 'Manicure — $35 / 45 min', 'Blowout — $45 / 45 min'] },
+  { id: 'dental', label: 'Dental / Clinic', icon: '🦷', services: ['Cleaning — $120 / 45 min', 'Consultation — $80 / 30 min', 'Emergency visit — $150 / 45 min'] },
+  { id: 'auto', label: 'Auto Detailing', icon: '🚗', services: ['Exterior wash — $40 / 45 min', 'Full detail — $180 / 180 min', 'Interior only — $95 / 90 min'] },
+  { id: 'fitness', label: 'Gym / Studio', icon: '🏋️', services: ['Class drop-in — $20 / 60 min', 'Personal training — $65 / 60 min', 'Monthly membership — $89'] },
+  { id: 'other', label: 'Other', icon: '🏢', services: [] },
+];
+
+const PERSONALITIES = [
+  { id: 'Friendly', icon: '😊', blurb: 'Warm and welcoming — great for salons, barbershops, and local favorites.' },
+  { id: 'Professional', icon: '💼', blurb: 'Polished and direct — ideal for clinics, law offices, and premium brands.' },
+  { id: 'Casual', icon: '😎', blurb: 'Relaxed and conversational — fits studios, creative shops, and young crowds.' },
+];
+
+const CONNECTIONS = [
+  { id: 'calendar', icon: '📅', title: 'Calendar connection', desc: 'Sync with Google Calendar so booked slots never double-book.' },
+  { id: 'phone', icon: '📞', title: 'Business phone number', desc: 'A local number your AI receptionist answers 24/7.' },
+  { id: 'leadflow', icon: '🎯', title: 'LeadFlow CRM', desc: 'Every missed call and inquiry becomes a tracked lead.' },
+  { id: 'clienthub', icon: '🤖', title: 'Client Hub portal', desc: 'Your dashboard for calls, appointments, and AI knowledge.' },
+];
+
+const TESTS = [
+  { id: 'info', label: 'Business information complete', hint: 'Name, contact, hours, and services filled in.' },
+  { id: 'services', label: 'Services and pricing confirmed', hint: 'Prices match what you actually charge.' },
+  { id: 'hours', label: 'Hours and policies confirmed', hint: 'Open times, cancellations, walk-ins.' },
+  { id: 'greeting', label: 'AI greeting reviewed', hint: 'You listened to how the AI answers.' },
+  { id: 'booking', label: 'Booking flow tested', hint: 'The AI booked a test appointment correctly.' },
+  { id: 'transfer', label: 'Human transfer tested', hint: 'The AI passed a complex call to a human.' },
+];
+
+function starterFAQs(industryId) {
+  const common = [
+    { q: 'Where are you located?', a: 'I can text you our address and directions right after this call.' },
+    { q: 'Do you take walk-ins?', a: 'Yes, when there\u2019s availability \u2014 booking ahead guarantees your spot.' },
+    { q: 'What payment methods do you accept?', a: 'We accept all major cards, tap, and cash.' },
+  ];
+  const byId = {
+    barbershop: [
+      { q: 'Do you do beard trims and hot towel shaves?', a: 'Yes — beard trims and hot towel shaves are available with any haircut or on their own.' },
+      { q: 'Do you cut kids\u2019 hair?', a: 'Yes, kids cuts are welcome any day of the week.' },
+    ],
+    salon: [
+      { q: 'How far in advance should I book color?', a: 'Color appointments book out 1\u20132 weeks ahead, especially weekends.' },
+      { q: 'Do you offer bridal or event packages?', a: 'Yes — call us for group and bridal pricing.' },
+    ],
+    dental: [
+      { q: 'Do you take insurance?', a: 'We bill most major PPO plans. Call to confirm your coverage.' },
+      { q: 'What do I do in an emergency?', a: 'Call our line and describe the issue — we reserve same-day emergency slots.' },
+    ],
+    auto: [
+      { q: 'How long does a full detail take?', a: 'A full detail takes about 3 hours; drop it off or wait in our lounge.' },
+      { q: 'Do you offer mobile detailing?', a: 'Not at this time — all services are done at our shop.' },
+    ],
+    fitness: [
+      { q: 'Do I need to book classes in advance?', a: 'Classes are first-come, and members can reserve through the front desk line.' },
+      { q: 'Is there an initiation fee?', a: 'No initiation fee — memberships are month to month.' },
+    ],
+    other: [],
+  };
+  return [...(byId[industryId] || []), ...common];
+}
+
+function sampleGreeting(industryId, businessName, aiName) {
+  const b = businessName || 'the shop';
+  const map = {
+    barbershop: `Thanks for calling ${b}! This is ${aiName}. Want to book a cut, or can I help with something else?`,
+    salon: `Hi, you've reached ${b} — this is ${aiName}. Are you looking to book a service today?`,
+    dental: `Thank you for calling ${b}, this is ${aiName}. Are you an existing patient, or would you like to schedule a visit?`,
+    auto: `${b}, this is ${aiName}. Are you calling to book a detail or asking about a service?`,
+    fitness: `Hey, thanks for calling ${b}! ${aiName} here. Want info on memberships or booking a class?`,
+    other: `Thanks for calling ${b}! This is ${aiName} — how can I help you today?`,
+  };
+  return map[industryId] || map.other;
+}
+
+
+/* ---- js/state.js ---- */
+/* ============================================================
+   VANTORX ONBOARDING — state.js
+   Draft-onboarding store with localStorage persistence.
+   UI never touches localStorage directly.
+   ============================================================ */
+
+const KEY = 'vantorx_onboarding_v1';
+
+function defaultHours() {
+  return {
+    mon: { open: '9:00 AM', close: '7:00 PM', closed: false },
+    tue: { open: '9:00 AM', close: '7:00 PM', closed: false },
+    wed: { open: '9:00 AM', close: '7:00 PM', closed: false },
+    thu: { open: '9:00 AM', close: '7:00 PM', closed: false },
+    fri: { open: '9:00 AM', close: '8:00 PM', closed: false },
+    sat: { open: '10:00 AM', close: '6:00 PM', closed: false },
+    sun: { open: '10:00 AM', close: '4:00 PM', closed: true },
+  };
+}
+
+function blank() {
+  return {
+    version: 1,
+    completed: false,
+    completedAt: null,
+    draft: {
+      name: '', contact: '', email: '', phone: '', industry: '', city: '', website: '',
+      services: [],            // { name, price, minutes }
+      hours: defaultHours(),
+      policies: { cancellation: '', walkins: '', payment: '' },
+      knowledge: [],           // { q, a }
+      notes: '',
+      ai: {
+        name: 'Ava',
+        personality: 'Friendly',
+        greeting: '',
+        transferNumber: '',
+        transferWhen: 'If the caller asks for a human, or the request is outside the AI\u2019s knowledge.',
+      },
+      connections: { calendar: false, phone: false, leadflow: false, clienthub: false },
+      tests: { info: false, services: false, hours: false, greeting: false, booking: false, transfer: false },
+    },
+  };
+}
+
+function deepMerge(base, saved) {
+  if (!saved || typeof saved !== 'object') return base;
+  const out = Array.isArray(base) ? [] : { ...base };
+  for (const k of Object.keys(base)) {
+    if (saved[k] === undefined) continue;
+    const b = base[k], s = saved[k];
+    if (b && typeof b === 'object' && !Array.isArray(b) && s && typeof s === 'object' && !Array.isArray(s)) out[k] = deepMerge(b, s);
+    else if (Array.isArray(b) && Array.isArray(s)) out[k] = s;
+    else out[k] = s;
+  }
+  return out;
+}
+
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return blank();
+    const parsed = JSON.parse(raw);
+    const base = blank();
+    return { ...base, completed: !!parsed.completed, completedAt: parsed.completedAt || null, draft: deepMerge(base.draft, parsed.draft) };
+  } catch (e) {
+    return blank();
+  }
+}
+
+let state = load();
+const listeners = new Set();
+
+function getState() { return state; }
+
+function setState(mutator) {
+  mutator(state);
+  persist();
+  listeners.forEach(fn => { try { fn(state); } catch (e) { console.error(e); } });
+}
+
+function subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); }
+
+function factoryReset() {
+  localStorage.removeItem(KEY);
+  state = blank();
+  listeners.forEach(fn => { try { fn(state); } catch (e) { console.error(e); } });
+}
+
+function persist() {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { console.error('persist failed', e); }
+}
+
+
+/* ---- js/components.js ---- */
+/* ============================================================
+   VANTORX CLIENT HUB — components.js
+   Shared UI primitives: toasts, modal, drawer, confirm,
+   empty states, skeletons.
+   ============================================================ */
+
+/* ---------- toast ---------- */
+
+let toastZone;
+function ensureToastZone() {
+  if (!toastZone) {
+    toastZone = document.createElement('div');
+    toastZone.className = 'toast-zone';
+    document.body.appendChild(toastZone);
+  }
+  return toastZone;
+}
+
+function toast(msg, kind = 'success') {
+  const zone = ensureToastZone();
+  const el = document.createElement('div');
+  el.className = `toast ${kind}`;
+  const icon = kind === 'success' ? '✓' : kind === 'error' ? '✕' : 'ℹ';
+  el.innerHTML = `<span style="font-weight:800;color:var(--gold-bright)">${icon}</span><span>${esc(msg)}</span>`;
+  zone.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('leaving');
+    setTimeout(() => el.remove(), 260);
+  }, 3400);
+}
+
+/* ---------- modal / drawer ----------
+   onOpen fires after the caller has received { close } so callbacks
+   can safely reference close (avoids TDZ issues). */
+
+function openModal({ title, body, footer, onOpen, wide }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  if (wide) modal.style.width = 'min(720px, calc(100vw - 40px))';
+  modal.innerHTML = `
+    <div class="modal-head">
+      <div class="modal-title">${title}</div>
+      <button class="icon-btn modal-x" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">${body}</div>
+    ${footer ? `<div class="modal-foot">${footer}</div>` : ''}
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  const api = { overlay, modal };
+  let closeFn = () => {};
+  api.close = () => closeFn();
+
+  closeFn = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  function onKey(e) { if (e.key === 'Escape') closeFn(); }
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFn(); });
+  modal.querySelector('.modal-x').addEventListener('click', closeFn);
+
+  if (onOpen) queueMicrotask(() => onOpen(api));
+  return api;
+}
+
+function openDrawer({ title, body, footer, onOpen }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'drawer-overlay';
+  const drawer = document.createElement('div');
+  drawer.className = 'drawer';
+  drawer.innerHTML = `
+    <div class="drawer-head">
+      <div class="modal-title">${title}</div>
+      <button class="icon-btn modal-x" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer-body">${body}</div>
+    ${footer ? `<div class="drawer-foot">${footer}</div>` : ''}
+  `;
+  overlay.appendChild(drawer);
+  document.body.appendChild(overlay);
+
+  let closeFn = () => {};
+  const api = { overlay, drawer, close: () => closeFn() };
+
+  closeFn = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  function onKey(e) { if (e.key === 'Escape') closeFn(); }
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFn(); });
+  drawer.querySelector('.modal-x').addEventListener('click', closeFn);
+
+  if (onOpen) queueMicrotask(() => onOpen(api));
+  return api;
+}
+
+function confirmDialog({ title = 'Are you sure?', message = '', confirmText = 'Confirm', danger = false }) {
+  return new Promise(resolve => {
+    const m = openModal({
+      title,
+      body: `<p style="color:var(--text-soft);font-size:0.9rem">${esc(message)}</p>`,
+      footer: `
+        <button class="btn btn-ghost" data-c="no">Cancel</button>
+        <button class="btn ${danger ? 'btn-red' : 'btn-gold'}" data-c="yes">${esc(confirmText)}</button>`,
+      onOpen: ({ modal, close }) => {
+        modal.querySelector('[data-c="no"]').addEventListener('click', () => { close(); resolve(false); });
+        modal.querySelector('[data-c="yes"]').addEventListener('click', () => { close(); resolve(true); });
+      },
+    });
+    const origClose = m.close;
+    // resolve(false) if dismissed via X / overlay / Escape
+    const obs = new MutationObserver(() => {
+      if (!document.body.contains(m.overlay)) { obs.disconnect(); resolve(false); }
+    });
+    obs.observe(document.body, { childList: true });
+    m.close = () => origClose();
+  });
+}
+
+/* ---------- empty / skeleton ---------- */
+
+function emptyState(icon, title, msg, actionHTML = '') {
+  return `
+    <div class="empty-state">
+      <div class="empty-ico">${icon}</div>
+      <div class="empty-title">${esc(title)}</div>
+      <div class="empty-msg">${esc(msg)}</div>
+      ${actionHTML}
+    </div>`;
+}
+
+function skeletonRows(n = 4) {
+  return `<div style="display:flex;flex-direction:column;gap:12px;padding:6px 0">
+    ${Array.from({ length: n }, () => '<div class="skeleton" style="height:34px"></div>').join('')}
+  </div>`;
+}
+
+function statusPill(status, map) {
+  const cls = map[status] || 'status-dim';
+  return `<span class="status-pill ${cls}"><span class="sdot"></span>${esc(status)}</span>`;
+}
+
+
+/* ---- js/sync.js ---- */
+/* ============================================================
+   VANTORX ONBOARDING — sync.js
+   Backend bridge. Every draft change is pushed to the platform
+   server (authoritative copy); localStorage stays as the
+   offline cache. If the server is unreachable, the wizard
+   keeps working and clearly says data is LOCAL ONLY.
+   Requires an authenticated platform session (portal login).
+   ============================================================ */
+
+let online = false;
+let lastError = '';
+let signedIn = false;
+
+function syncStatus() { return { online, signedIn, lastError }; }
+
+function toIso(x) { return x ? x : ''; }
+
+function draftToServer(d) {
+  /* services: drop half-filled rows, strip currency symbols — the server
+     stores price as a number and the go-live check requires a positive one */
+  const services = (d.services || [])
+    .filter(s => (s.name || '').trim() && String(s.price ?? '').trim() !== '')
+    .map(s => ({
+      name: String(s.name).trim(),
+      price: Number(String(s.price).replace(/[^0-9.]/g, '')) || 0,
+      minutes: String(s.minutes ?? '').replace(/[^0-9]/g, '') || '',
+    }));
+  return {
+    name: d.name, contact: d.contact, email: d.email, phone: d.phone,
+    industry: d.industry, city: d.city, website: d.website,
+    services,
+    hours: d.hours,
+    policies: d.policies,
+    knowledge: d.knowledge, notes: d.notes,
+    ai: d.ai,
+    // wizard stores booleans; server expects { enabled: true } objects
+    connections: Object.fromEntries(Object.entries(d.connections || {}).map(([k, v]) => [k, { enabled: !!v }])),
+    testCall: { passed: Object.values(d.tests || {}).some(Boolean) },
+  };
+}
+
+async function api(method, path, body) {
+  const res = await fetch(path, {
+    method, credentials: 'same-origin',
+    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  let data = {};
+  try { data = await res.json(); } catch { /* empty */ }
+  if (!res.ok) { const e = new Error(data.error || ('HTTP ' + res.status)); e.status = res.status; e.data = data; throw e; }
+  return data;
+}
+
+/* session check — fills signedIn, does not throw */
+async function probeSession() {
+  try {
+    const out = await api('GET', '/api/auth/me');
+    signedIn = !!out.user;
+    online = true; lastError = '';
+  } catch (e) {
+    signedIn = false;
+    online = e.status !== undefined;          // reachable but 401
+    lastError = e.status === 401 ? 'Not signed in — open the VantorX portal to sign in.' : e.message;
+  }
+  return { online, signedIn };
+}
+
+/* push full draft to backend; safe to call often */
+async function pushDraft(draft) {
+  try {
+    await api('PUT', '/api/onboarding/draft', draftToServer(draft));
+    online = true; lastError = '';
+    return true;
+  } catch (e) {
+    lastError = e.message;
+    online = e.status !== undefined;
+    return false;
+  }
+}
+
+/* server-side go-live validation — the real gate, not a checkbox */
+async function validateOnServer(draft) {
+  try {
+    const out = await api('POST', '/api/onboarding/validate', draftToServer(draft));
+    online = true; lastError = '';
+    return { ok: true, checks: out.checks };
+  } catch (e) {
+    if (e.status === 401) { online = true; signedIn = false; lastError = 'Not signed in.'; return { ok: false, offline: false, auth: true }; }
+    online = e.status !== undefined; lastError = e.message;
+    return { ok: false, offline: e.status === undefined };
+  }
+}
+
+/* real go-live — server flips the tenant live only if checks pass */
+async function goLiveOnServer() {
+  try {
+    const out = await api('POST', '/api/onboarding/golive', {});
+    online = true; lastError = '';
+    return { ok: true, business: out.business, checks: out.checks };
+  } catch (e) {
+    online = e.status !== undefined;
+    lastError = e.message;
+    if (e.status === 401) { signedIn = false; return { ok: false, auth: true }; }
+    if (e.status === 422) return { ok: false, blocked: true, error: e.message, checks: (e.data && e.data.checks) || null };
+    return { ok: false, offline: e.status === undefined, error: e.message };
+  }
+}
+
+
+/* ---- js/steps/business.js ---- */
+/* ============================================================
+   VANTORX ONBOARDING — steps/business.js
+   Step 1 · Business information + industry picker
+   Step 2 · Services & pricing (industry presets + custom rows)
+   ============================================================ */
+
+/* ---------------- step 1: business ---------------- */
+function paintBusiness(body, d, rerender) {
+  body.innerHTML = `
+    <div class="onboard-title">Tell us about the business</div>
+    <div class="onboard-sub">This is what the AI receptionist says and knows on day one.</div>
+
+    <div class="card-title" style="margin-bottom:12px">🏢 Business details</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Business name <span class="req">*</span></label>
+        <input class="form-input" id="fName" value="${esc(d.name)}" placeholder="e.g. Fade Culture Barbering"></div>
+      <div class="form-group"><label class="form-label">Owner / contact <span class="req">*</span></label>
+        <input class="form-input" id="fContact" value="${esc(d.contact)}" placeholder="Who manages this account"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Email <span class="req">*</span></label>
+        <input class="form-input" id="fEmail" type="email" value="${esc(d.email)}" placeholder="owner@business.com"></div>
+      <div class="form-group"><label class="form-label">Phone <span class="req">*</span></label>
+        <input class="form-input" id="fPhone" value="${esc(d.phone)}" placeholder="(555) 555-0100"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">City <span class="req">*</span></label>
+        <input class="form-input" id="fCity" value="${esc(d.city)}" placeholder="City, ST"></div>
+      <div class="form-group"><label class="form-label">Website (optional)</label>
+        <input class="form-input" id="fWebsite" value="${esc(d.website)}" placeholder="https://"></div>
+    </div>
+
+    <div class="card-title" style="margin:18px 0 12px">🧭 Industry</div>
+    <div class="obx-ind-grid" id="indGrid">
+      ${INDUSTRIES.map(i => `
+        <button class="obx-ind ${d.industry === i.id ? 'selected' : ''}" data-ind="${i.id}">
+          <span class="obx-ind-ico">${i.icon}</span>
+          <span>${i.label}</span>
+        </button>`).join('')}
+    </div>
+    <div class="form-hint" style="margin-top:10px">Industry presets load sample services you can edit in the next step.</div>
+  `;
+
+  const g = id => body.querySelector(id).value.trim();
+  const grab = () => ({
+    name: g('#fName'), contact: g('#fContact'), email: g('#fEmail'),
+    phone: g('#fPhone'), city: g('#fCity'), website: g('#fWebsite'),
+  });
+
+  body.querySelectorAll('[data-ind]').forEach(b => b.addEventListener('click', () => {
+    d.industry = b.dataset.ind;
+    body.querySelectorAll('[data-ind]').forEach(x => x.classList.toggle('selected', x.dataset.ind === d.industry));
+  }));
+
+  body.querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => Object.assign(d, grab())));
+
+  return {
+    validate() {
+      const v = grab();
+      if (!v.name || !v.contact || !v.email || !v.phone || !v.city) return 'Fill in every required field to continue.';
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.email)) return 'Enter a valid email address.';
+      return '';
+    },
+    collect() { Object.assign(d, grab()); },
+  };
+}
+
+/* ---------------- step 2: services ---------------- */
+function paintServices(body, d, rerender) {
+  const presets = (INDUSTRIES.find(i => i.id === d.industry) || {}).services || [];
+  const suggested = presets.filter(p => !d.services.some(s => s.name === parseName(p)));
+
+  body.innerHTML = `
+    <div class="onboard-title">Services &amp; pricing</div>
+    <div class="onboard-sub">What customers can ask about or book. The AI quotes these prices verbatim.</div>
+
+    ${suggested.length ? `
+    <div class="card-title" style="margin-bottom:10px">✨ Suggested for your industry <span class="cell-dim">(tap to add)</span></div>
+    <div class="test-chip-row" style="margin-bottom:18px">
+      ${suggested.map((s, i) => `<button class="test-chip" data-add="${i}">+ ${esc(s)}</button>`).join('')}
+    </div>` : ''}
+
+    <div class="card-title" style="margin-bottom:10px">📋 Your service list</div>
+    <div id="svcRows">
+      ${d.services.length ? d.services.map((s, i) => `
+        <div class="obx-svc-row">
+          <input class="form-input" data-f="name" data-i="${i}" value="${esc(s.name)}" placeholder="Service name">
+          <input class="form-input obx-svc-price" data-f="price" data-i="${i}" value="${esc(s.price)}" placeholder="$0">
+          <input class="form-input obx-svc-min" data-f="minutes" data-i="${i}" value="${esc(s.minutes)}" placeholder="min">
+          <button class="icon-btn" data-del="${i}" title="Remove">✕</button>
+        </div>`).join('')
+      : `<div class="obx-hint-box">No services yet — add one below or tap a suggestion above.</div>`}
+    </div>
+    <button class="btn btn-ghost btn-sm" id="addSvc" style="margin-top:12px">+ Add service</button>
+  `;
+
+  function parseName(p) { return p.split('—')[0].trim(); }
+
+  function parsePreset(p) {
+    const m = p.match(/^(.*?)\s*[—-]\s*\$(\d+)(?:\s*\/\s*(\d+)\s*min)?$/);
+    /* plain numeric price — the server validates it and stores it as a number */
+    return m ? { name: m[1].trim(), price: m[2], minutes: m[3] || '' } : { name: p, price: '', minutes: '' };
+  }
+
+  body.querySelectorAll('[data-add]').forEach(b => b.addEventListener('click', () => {
+    d.services.push(parsePreset(suggested[Number(b.dataset.add)]));
+    rerender();
+  }));
+
+  body.querySelector('#addSvc').addEventListener('click', () => {
+    d.services.push({ name: '', price: '', minutes: '' });
+    rerender();
+  });
+
+  body.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => {
+    d.services.splice(Number(b.dataset.del), 1);
+    rerender();
+  }));
+
+  body.querySelectorAll('[data-f]').forEach(inp => inp.addEventListener('input', () => {
+    const s = d.services[Number(inp.dataset.i)];
+    if (s) s[inp.dataset.f] = inp.value;
+  }));
+
+  return {
+    validate() {
+      const bad = d.services.find(s => (s.name.trim() && !s.price.trim()) || (!s.name.trim() && s.price.trim()));
+      if (bad) return 'Give each service both a name and a price.';
+      return '';
+    },
+    collect() {},
+  };
+}
+
+
+/* ---- js/steps/hours.js ---- */
+/* ============================================================
+   VANTORX ONBOARDING — steps/hours.js
+   Step 3 · Hours & policies   Step 4 · Knowledge / FAQs
+   ============================================================ */
+
+const DAYS = [
+  ['mon', 'Monday'], ['tue', 'Tuesday'], ['wed', 'Wednesday'], ['thu', 'Thursday'],
+  ['fri', 'Friday'], ['sat', 'Saturday'], ['sun', 'Sunday'],
+];
+
+/* ---------------- step 3: hours & policies ---------------- */
+function paintHours(body, d, rerender) {
+  body.innerHTML = `
+    <div class="onboard-title">Hours &amp; policies</div>
+    <div class="onboard-sub">The AI answers "when are you open" and enforces these rules automatically.</div>
+
+    <div class="card-title" style="margin-bottom:12px">🕐 Weekly hours</div>
+    ${DAYS.map(([k, label]) => {
+      const h = d.hours[k];
+      return `
+      <div class="obx-hours-row ${h.closed ? 'is-closed' : ''}">
+        <label class="toggle"><input type="checkbox" data-open="${k}" ${h.closed ? '' : 'checked'}><span></span></label>
+        <span class="obx-hours-day">${label}</span>
+        ${h.closed ? '<span class="obx-hours-closed">Closed</span>' : `
+          <input class="form-input obx-hours-time" type="time" data-o="${k}" value="${to24(h.open)}">
+          <span class="obx-hours-dash">–</span>
+          <input class="form-input obx-hours-time" type="time" data-c="${k}" value="${to24(h.close)}">`}
+      </div>`;
+    }).join('')}
+
+    <div class="card-title" style="margin:20px 0 12px">📜 Policies</div>
+    <div class="form-group"><label class="form-label">Cancellation policy</label>
+      <textarea class="form-textarea" id="polCancel" placeholder="e.g. 24-hour notice or 50% of the service is charged.">${esc(d.policies.cancellation)}</textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Walk-ins</label>
+        <input class="form-input" id="polWalkins" value="${esc(d.policies.walkins)}" placeholder="e.g. Welcome when chairs are free"></div>
+      <div class="form-group"><label class="form-label">Payment methods</label>
+        <input class="form-input" id="polPayment" value="${esc(d.policies.payment)}" placeholder="e.g. Cards, tap, cash"></div>
+    </div>
+  `;
+
+  function to24(t) {
+    const m = String(t).match(/^(\d+):(\d+)\s*(AM|PM)$/i);
+    if (!m) return '09:00';
+    let h = Number(m[1]) % 12;
+    if (m[3].toUpperCase() === 'PM') h += 12;
+    return `${String(h).padStart(2, '0')}:${m[2]}`;
+  }
+
+  body.querySelectorAll('[data-open]').forEach(cb => cb.addEventListener('change', () => {
+    d.hours[cb.dataset.open].closed = !cb.checked;
+    rerender();
+  }));
+  body.querySelectorAll('[data-o]').forEach(inp => inp.addEventListener('change', () => { d.hours[inp.dataset.o].open = to12(inp.value); }));
+  body.querySelectorAll('[data-c]').forEach(inp => inp.addEventListener('change', () => { d.hours[inp.dataset.c].close = to12(inp.value); }));
+  body.querySelector('#polCancel').addEventListener('input', e => { d.policies.cancellation = e.target.value; });
+  body.querySelector('#polWalkins').addEventListener('input', e => { d.policies.walkins = e.target.value; });
+  body.querySelector('#polPayment').addEventListener('input', e => { d.policies.payment = e.target.value; });
+
+  function to12(v) {
+    if (!v) return '9:00 AM';
+    const [hStr, m] = v.split(':');
+    let h = Number(hStr);
+    const ap = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return `${h}:${m} ${ap}`;
+  }
+
+  return {
+    validate() { return ''; },
+    collect() {},
+  };
+}
+
+/* ---------------- step 4: knowledge / FAQs ---------------- */
+function paintKnowledge(body, d, rerender) {
+  body.innerHTML = `
+    <div class="onboard-title">Business knowledge</div>
+    <div class="onboard-sub">Common questions the AI should answer without escalating. Keep answers short and factual.</div>
+
+    <div id="faqRows">
+      ${d.knowledge.length ? d.knowledge.map((f, i) => `
+        <div class="obx-faq-row">
+          <input class="form-input" data-q="${i}" value="${esc(f.q)}" placeholder="Question">
+          <input class="form-input" data-a="${i}" value="${esc(f.a)}" placeholder="Answer">
+          <button class="icon-btn" data-fdel="${i}" title="Remove">✕</button>
+        </div>`).join('')
+      : `<div class="obx-hint-box">No FAQs yet — add starter questions for your industry below.</div>`}
+    </div>
+
+    <div class="test-chip-row" style="margin-top:14px">
+      <button class="test-chip" id="faqAdd">+ Add question</button>
+      ${!d.knowledge.length ? `<button class="test-chip" id="faqStarter">✨ Add starter FAQs</button>` : ''}
+    </div>
+
+    <div class="form-group" style="margin-top:20px">
+      <label class="form-label">Anything else the AI should know? (optional)</label>
+      <textarea class="form-textarea" id="extraNotes" placeholder="Parking directions, building entry, seasonal notes...">${esc(d.notes)}</textarea>
+    </div>
+  `;
+
+  body.querySelector('#faqAdd').addEventListener('click', () => { d.knowledge.push({ q: '', a: '' }); rerender(); });
+  const starter = body.querySelector('#faqStarter');
+  if (starter) starter.addEventListener('click', () => { d.knowledge = starterFAQs(d.industry).map(f => ({ ...f })); rerender(); });
+  body.querySelectorAll('[data-fdel]').forEach(b => b.addEventListener('click', () => { d.knowledge.splice(Number(b.dataset.fdel), 1); rerender(); }));
+  body.querySelectorAll('[data-q]').forEach(inp => inp.addEventListener('input', () => { const f = d.knowledge[Number(inp.dataset.q)]; if (f) f.q = inp.value; }));
+  body.querySelectorAll('[data-a]').forEach(inp => inp.addEventListener('input', () => { const f = d.knowledge[Number(inp.dataset.a)]; if (f) f.a = inp.value; }));
+  body.querySelector('#extraNotes').addEventListener('input', e => { d.notes = e.target.value; });
+
+  return {
+    validate() {
+      const half = d.knowledge.find(f => (f.q.trim() && !f.a.trim()) || (!f.q.trim() && f.a.trim()));
+      if (half) return 'Give each question an answer (or remove the row).';
+      return '';
+    },
+    collect() {},
+  };
+}
+
+
+/* ---- js/steps/ai.js ---- */
+/* ============================================================
+   VANTORX ONBOARDING — steps/ai.js
+   Step 5 · AI receptionist: name, personality, greeting,
+   transfer rules + a live "test call" preview that answers
+   using the draft's real hours, services and FAQs.
+   ============================================================ */
+
+function paintAI(body, d, rerender) {
+  const a = d.ai;
+
+  body.innerHTML = `
+    <div class="onboard-title">Meet your AI receptionist</div>
+    <div class="onboard-sub">It answers every call, books appointments, and only escalates when it should.</div>
+
+    <div class="obx-ai-grid">
+      <div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Receptionist name</label>
+            <input class="form-input" id="aiName" value="${esc(a.name)}" placeholder="Ava"></div>
+          <div class="form-group"><label class="form-label">Personality</label>
+            <select class="select-input" id="aiPersona">
+              ${PERSONALITIES.map(p => `<option value="${p.id}" ${a.personality === p.id ? 'selected' : ''}>${p.icon} ${p.id}</option>`).join('')}
+            </select></div>
+        </div>
+
+        <div class="form-group"><label class="form-label">Opening greeting <span class="req">*</span></label>
+          <textarea class="form-textarea obx-greeting" id="aiGreeting" placeholder="Thanks for calling! How can I help?">${esc(a.greeting)}</textarea>
+          <div style="margin-top:8px"><button class="test-chip" id="genGreeting">✨ Write one for me</button></div></div>
+
+        <div class="card-title" style="margin:18px 0 10px">↪️ Human transfer</div>
+        <div class="form-group"><label class="form-label">Transfer to number</label>
+          <input class="form-input" id="aiTransfer" value="${esc(a.transferNumber)}" placeholder="(555) 555-0100"></div>
+        <div class="form-group"><label class="form-label">When should it transfer?</label>
+          <textarea class="form-textarea obx-transfer-when" id="aiTransferWhen" placeholder="e.g. complaints, medical questions...">${esc(a.transferWhen)}</textarea></div>
+      </div>
+
+      <div class="obx-preview">
+        <div class="card-title" style="margin-bottom:12px">📲 Test call preview <span class="cell-dim">(simulated — answers come from your draft setup)</span></div>
+        <div class="obx-sim" id="simBox">
+          <div class="obx-sim-welcome">Ask the AI something a caller would.</div>
+        </div>
+        <div class="test-chip-row" style="margin-top:12px" id="simChips"></div>
+      </div>
+    </div>
+  `;
+
+  /* ---- inputs ---- */
+  body.querySelector('#aiName').addEventListener('input', e => { a.name = e.target.value; });
+  body.querySelector('#aiPersona').addEventListener('change', e => { a.personality = e.target.value; });
+  body.querySelector('#aiGreeting').addEventListener('input', e => { a.greeting = e.target.value; });
+  body.querySelector('#aiTransfer').addEventListener('input', e => { a.transferNumber = e.target.value; });
+  body.querySelector('#aiTransferWhen').addEventListener('input', e => { a.transferWhen = e.target.value; });
+
+  body.querySelector('#genGreeting').addEventListener('click', () => {
+    a.greeting = sampleGreeting(d.industry, d.name, a.name || 'Ava');
+    rerender();
+  });
+
+  /* ---- simulator ---- */
+  const sim = body.querySelector('#simBox');
+  const chips = body.querySelector('#simChips');
+
+  const CALLS = [
+    { chip: '🕐 "What are your hours?"', match: () => true, reply: hoursReply },
+    { chip: '💰 "How much is it?"', match: () => true, reply: priceReply },
+    { chip: '📅 "Can I book Saturday?"', match: () => true, reply: bookingReply },
+    { chip: '🚶 "Do you take walk-ins?"', match: () => true, reply: walkinReply },
+    { chip: '❓ Anything else', match: q => true, reply: faqReply },
+  ];
+
+  chips.innerHTML = CALLS.map((c, i) => `<button class="test-chip" data-call="${i}">${c.chip}</button>`).join('');
+  chips.querySelectorAll('[data-call]').forEach(b => b.addEventListener('click', () => {
+    const c = CALLS[Number(b.dataset.call)];
+    ask(c.chip.replace(/^[^\s]+\s/, '').replace(/"/g, ''), () => c.reply(d, a));
+  }));
+
+  function bubble(kind, text) {
+    const el = document.createElement('div');
+    el.className = `obx-sim-bubble ${kind}`;
+    el.textContent = text;
+    sim.appendChild(el);
+    sim.scrollTop = sim.scrollHeight;
+  }
+
+  function ask(question, responder) {
+    const welcome = sim.querySelector('.obx-sim-welcome');
+    if (welcome) welcome.remove();
+    bubble('caller', question);
+    const typing = document.createElement('div');
+    typing.className = 'obx-sim-bubble ai obx-typing';
+    typing.textContent = '• • •';
+    sim.appendChild(typing);
+    sim.scrollTop = sim.scrollHeight;
+    setTimeout(() => {
+      typing.remove();
+      bubble('ai', responder());
+    }, 700);
+  }
+
+  return {
+    validate() {
+      if (!a.greeting.trim()) return 'Write or generate an opening greeting.';
+      return '';
+    },
+    collect() {},
+  };
+}
+
+/* ---------- reply engines (use the real draft data) ---------- */
+function hoursReply(d) {
+  const closed = Object.entries(d.hours).filter(([, h]) => h.closed).map(([k]) => k);
+  const names = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
+  const open = Object.entries(d.hours).filter(([, h]) => !h.closed)
+    .map(([k, h]) => `${names[k]} ${h.open}–${h.close}`).join(', ');
+  const closedTxt = closed.length ? ` We're closed on ${closed.map(k => names[k]).join(' and ')}.` : '';
+  return `We're open ${open}.${closedTxt}`;
+}
+
+function priceReply(d) {
+  const first = d.services.find(s => s.name.trim() && s.price.trim());
+  if (!first) return `I can absolutely help with that — let me take your number and we'll confirm pricing.`;
+  const list = d.services.filter(s => s.name.trim() && s.price.trim()).slice(0, 3)
+    .map(s => `${s.name} is ${s.price}${s.minutes ? ` (${s.minutes} min)` : ''}`);
+  return `Sure! ${list.join('; ')}. Would you like to book one?`;
+}
+
+function bookingReply(d, a) {
+  const sat = d.hours.sat;
+  if (sat.closed) return `We're actually closed Saturdays — I can book you Friday or Monday instead. What time works?`;
+  return `Yes! Saturday we're open ${sat.open} to ${sat.close}. What time suits you? I'll put it in the book under your name.`;
+}
+
+function walkinReply(d) {
+  const w = d.policies.walkins.trim();
+  if (w) return `${w}. But booking ahead guarantees your spot — want me to reserve one?`;
+  return `Walk-ins are welcome when there's room, though I'd recommend booking to be safe. Shall I reserve a time?`;
+}
+
+function faqReply(d, a) {
+  const hit = d.knowledge.find(f => f.a.trim());
+  if (hit) return hit.a;
+  if (a.transferNumber.trim()) {
+    return `Great question — let me connect you with the team at ${a.transferNumber} so you get an exact answer. One moment!`;
+  }
+  return `Great question — I'll take your number and have the team call you back with the details.`;
+}
+
+
+/* ---- js/steps/launch.js ---- */
+/* ============================================================
+   VANTORX ONBOARDING — steps/launch.js
+   Step 6 · Connections checklist   Step 7 · Pre-launch tests
+   Step 8 · Review & go-live (completion screen)
+   ============================================================ */
+
+/* ---------------- step 6: connections ---------------- */
+function paintConnections(body, d, rerender) {
+  body.innerHTML = `
+    <div class="onboard-title">Connections</div>
+    <div class="onboard-sub">Switch on what you want. These are provisioning requests saved with your draft and synced to the platform — nothing is connected automatically.</div>
+
+    <div class="obx-conn-list">
+      ${CONNECTIONS.map(c => {
+        const on = d.connections[c.id];
+        return `
+        <div class="obx-conn ${on ? 'on' : ''}">
+          <span class="obx-conn-ico">${c.icon}</span>
+          <div class="obx-conn-main">
+            <div class="obx-conn-title">${c.title}</div>
+            <div class="obx-conn-desc">${c.desc}</div>
+          </div>
+          <label class="toggle"><input type="checkbox" data-conn="${c.id}" ${on ? 'checked' : ''}><span></span></label>
+        </div>`;
+      }).join('')}
+    </div>
+
+    <div class="obx-hint-box" style="margin-top:16px">💡 Actual provisioning (phone number, calendar sync, CRM) is performed by the VantorX team after go-live — these toggles record what you asked for.</div>
+  `;
+
+  body.querySelectorAll('[data-conn]').forEach(cb => cb.addEventListener('change', () => {
+    d.connections[cb.dataset.conn] = cb.checked;
+    rerender();
+  }));
+
+  return { validate() { return ''; }, collect() {} };
+}
+
+/* ---------------- step 7: pre-launch tests ---------------- */
+function paintTests(body, d, rerender) {
+  const allDone = () => TESTS.every(t => d.tests[t.id]);
+
+  body.innerHTML = `
+    <div class="onboard-title">Pre-launch checklist</div>
+    <div class="onboard-sub">Work through each item with the VantorX team. You can go live before everything is checked — items stay saved.</div>
+
+    <div class="obx-check-list">
+      ${TESTS.map(t => {
+        const done = d.tests[t.id];
+        return `
+        <label class="obx-check ${done ? 'done' : ''}">
+          <input type="checkbox" data-test="${t.id}" ${done ? 'checked' : ''}>
+          <span class="obx-check-box"></span>
+          <span class="obx-check-main"><b>${t.label}</b><i>${t.hint}</i></span>
+        </label>`;
+      }).join('')}
+    </div>
+
+    <div class="obx-check-progress" id="checkProg">
+      <strong>${TESTS.filter(t => d.tests[t.id]).length} of ${TESTS.length} complete</strong>
+      ${allDone() ? '<span class="obx-check-ready">✓ Ready for launch</span>' : ''}
+    </div>
+  `;
+
+  body.querySelectorAll('[data-test]').forEach(cb => cb.addEventListener('change', () => {
+    d.tests[cb.dataset.test] = cb.checked;
+    rerender();
+  }));
+
+  return { validate() { return ''; }, collect() {} };
+}
+
+/* ---------------- step 8: review & go-live ---------------- */
+function paintReview(body, d, rerender, goLive, isCompleted) {
+  const b = d;
+  const connOn = CONNECTIONS.filter(c => d.connections[c.id]);
+  const testsDone = TESTS.filter(t => d.tests[t.id]).length;
+
+  body.innerHTML = `
+    <div class="onboard-title">Review &amp; go live</div>
+    <div class="onboard-sub">One last look before the business is marked ready for launch.</div>
+
+    <div class="obx-review-grid">
+      <div class="card obx-review-card">
+        <div class="card-title">🏢 Business</div>
+        <div class="kv-row"><span class="kv-label">Name</span><span>${esc(b.name) || '—'}</span></div>
+        <div class="kv-row"><span class="kv-label">Contact</span><span>${esc(b.contact)} · ${esc(b.phone)}</span></div>
+        <div class="kv-row"><span class="kv-label">City</span><span>${esc(b.city)}</span></div>
+        <div class="kv-row"><span class="kv-label">Services</span><span>${d.services.filter(s => s.name.trim()).length} listed</span></div>
+        <div class="kv-row"><span class="kv-label">Knowledge</span><span>${d.knowledge.filter(f => f.q.trim()).length} FAQs</span></div>
+      </div>
+
+      <div class="card obx-review-card">
+        <div class="card-title">🤖 AI receptionist</div>
+        <div class="kv-row"><span class="kv-label">Name</span><span>${esc(d.ai.name)}</span></div>
+        <div class="kv-row"><span class="kv-label">Personality</span><span>${esc(d.ai.personality)}</span></div>
+        <div class="kv-row"><span class="kv-label">Transfer</span><span>${esc(d.ai.transferNumber) || 'not set'}</span></div>
+        <div class="kv-row"><span class="kv-label">Connections</span><span>${connOn.length ? connOn.map(c => c.title).join(', ') : 'none selected'}</span></div>
+        <div class="kv-row"><span class="kv-label">Checklist</span><span>${testsDone} of ${TESTS.length} done</span></div>
+      </div>
+    </div>
+
+    <div class="obx-golive" id="goLiveBox">
+      ${isCompleted ? `
+        <div class="obx-golive-done">
+          <span class="big">✓</span>
+          <div><strong>${esc(b.name)}</strong> is marked ready for launch.</div>
+          <button class="btn btn-ghost btn-sm" id="reopenBtn">Reopen setup</button>
+        </div>` : `
+        <button class="btn btn-gold obx-golive-btn" id="goLiveBtn">🚀 Mark ready for launch</button>
+        <div class="form-hint" style="margin-top:10px">Go-live validates and saves the business on the VantorX platform server — this is a real record, not a simulation.</div>`}
+    </div>
+  `;
+
+  const gl = body.querySelector('#goLiveBtn');
+  if (gl) gl.addEventListener('click', goLive);
+  const ro = body.querySelector('#reopenBtn');
+  if (ro) ro.addEventListener('click', () => { setState(s => { s.completed = false; }); rerender(); });
+
+  return { validate() { return ''; }, collect() {} };
+}
+
+
+/* ---- js/app.js ---- */
+/* ============================================================
+   VANTORX ONBOARDING — app.js
+   Wizard controller: step routing, progress, validation,
+   autosave indicator, reset. Data model lives in state.js.
+   ============================================================ */
+
+const STEPS = [
+  { key: 'business',    name: 'Business',    paint: paintBusiness },
+  { key: 'services',    name: 'Services',    paint: paintServices },
+  { key: 'hours',       name: 'Hours',       paint: paintHours },
+  { key: 'knowledge',   name: 'Knowledge',   paint: paintKnowledge },
+  { key: 'ai',          name: 'AI Setup',    paint: paintAI },
+  { key: 'connections', name: 'Connections', paint: paintConnections },
+  { key: 'tests',       name: 'Checklist',   paint: paintTests },
+  { key: 'review',      name: 'Go Live',     paint: paintReview },
+];
+
+const view = document.getElementById('view');
+const progBar = document.getElementById('progBar');
+const stepLabel = document.getElementById('stepLabel');
+const stepName = document.getElementById('stepName');
+const backBtn = document.getElementById('backBtn');
+const nextBtn = document.getElementById('nextBtn');
+const validationMsg = document.getElementById('validationMsg');
+const autosaveFlag = document.getElementById('autosaveFlag');
+
+let current = 0;
+let handler = null;   // { validate, collect } returned by the active step
+
+/* ---------------- rendering ---------------- */
+function render() {
+  const state = getState();
+  const step = STEPS[current];
+
+  progBar.innerHTML = STEPS.map((s, i) => `<span class="${i < current ? 'done' : ''}"></span>`).join('');
+  stepLabel.textContent = `Step ${current + 1} of ${STEPS.length}`;
+  stepName.textContent = step.name;
+  backBtn.disabled = current === 0;
+  nextBtn.textContent = current === STEPS.length - 1 ? 'Done ✓' : 'Continue →';
+  backBtn.style.visibility = current === STEPS.length - 1 ? 'hidden' : 'visible';
+
+  handler = step.paint(view, state.draft, render, goLive, state.completed);
+  validationMsg.textContent = '';
+  window.scrollTo({ top: 0 });
+}
+
+/* ---------------- navigation ---------------- */
+function validateCurrent() {
+  if (!handler) return true;
+  const msg = handler.validate();
+  validationMsg.textContent = msg;
+  validationMsg.classList.toggle('show', !!msg);
+  if (msg) toast(msg, 'error');
+  return !msg;
+}
+
+backBtn.addEventListener('click', () => {
+  if (current === 0) return;
+  if (handler) handler.collect();
+  current -= 1;
+  render();
+});
+
+nextBtn.addEventListener('click', () => {
+  if (!validateCurrent()) return;
+  if (handler) handler.collect();
+  if (current < STEPS.length - 1) {
+    current += 1;
+    render();
+  } else {
+    toast('Onboarding complete — you can review or start over anytime.', 'success');
+  }
+});
+
+/* ---------------- go-live ---------------- */
+async function goLive() {
+  if (handler) handler.collect();
+  await pushDraft(getState().draft);   // ensure the server has the latest draft before validating
+  const res = await goLiveOnServer();
+  if (res.ok) {
+    setState(s => { s.completed = true; s.completedAt = new Date().toISOString(); });
+    toast('🎉 ' + (res.business && res.business.name ? res.business.name : 'Business') + ' is LIVE — saved on the VantorX platform.', 'success');
+  } else if (res.blocked) {
+    const failed = res.checks
+      ? Object.entries(res.checks).filter(([, v]) => !v).map(([k]) => k).join(', ')
+      : (res.error || 'validation failed');
+    toast('Go-live blocked by the server — failing checks: ' + failed, 'error');
+  } else if (res.auth) {
+    toast('Not signed in — open the VantorX portal to sign in, then try again.', 'error');
+  } else {
+    toast('Server unreachable — draft saved locally only (' + (res.error || 'offline') + ')', 'error');
+  }
+  flashSaved();
+  render();
+}
+
+/* ---------------- autosave indicator ---------------- */
+let flagTimer = null;
+function flashSaved() {
+  autosaveFlag.classList.add('flash');
+  clearTimeout(flagTimer);
+  flagTimer = setTimeout(() => autosaveFlag.classList.remove('flash'), 1400);
+}
+
+/* ---------------- reset ---------------- */
+document.getElementById('resetBtn').addEventListener('click', async () => {
+  const ok = await confirmDialog({
+    title: 'Start over?',
+    message: 'This clears the onboarding draft and starts over from step 1. The next change you make syncs the cleared draft to the platform.',
+    confirmText: 'Start over',
+    danger: true,
+  });
+  if (!ok) return;
+  factoryReset();
+  current = 0;
+  render();
+  toast('Draft cleared — fresh start.', 'success');
+});
+
+/* ---------------- backend sync ---------------- */
+let pushTimer = null;
+subscribe(() => {
+  flashSaved();
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(() => { pushDraft(getState().draft); }, 800);   // debounced autosave to backend
+});
+
+/* ---------------- boot ---------------- */
+probeSession().then(({ online, signedIn }) => {
+  if (online && signedIn) {
+    pushDraft(getState().draft);                                          // initial push
+  } else if (online && !signedIn) {
+    toast('Not signed in — progress saves locally. Sign in at the portal to sync to the platform.', 'info');
+  } else {
+    toast('Platform server not reachable — progress saves locally only.', 'info');
+  }
+});
+render();
+flashSaved();
+
+
+</script>
+</body>
+</html>

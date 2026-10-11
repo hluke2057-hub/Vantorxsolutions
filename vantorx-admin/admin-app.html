@@ -1,0 +1,3112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VantorX Admin — Internal Operations Console</title>
+<style>/* ============================================================
+   VANTORX CLIENT HUB — styles.css
+   Premium dark SaaS design system (shared VantorX tokens)
+   ============================================================ */
+
+:root {
+  --bg: #0a0a0d;
+  --bg-soft: #101014;
+  --bg-card: #14141a;
+  --bg-hover: #1b1b22;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.05);
+  --gold: #d4af37;
+  --gold-bright: #f0d060;
+  --gold-dim: rgba(212, 175, 55, 0.14);
+  --text: #f0efe9;
+  --text-soft: #a8a699;
+  --text-dim: #6d6b60;
+  --green: #4ade80;
+  --green-dim: rgba(74, 222, 128, 0.12);
+  --blue: #60a5fa;
+  --blue-dim: rgba(96, 165, 250, 0.12);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167, 139, 250, 0.12);
+  --red: #f87171;
+  --red-dim: rgba(248, 113, 113, 0.12);
+  --orange: #fbbf24;
+  --orange-dim: rgba(251, 191, 36, 0.12);
+  --teal: #2dd4bf;
+  --teal-dim: rgba(45, 212, 191, 0.12);
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --sidebar-w: 248px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+::selection { background: var(--gold-dim); color: var(--gold-bright); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+
+.app { display: flex; height: 100vh; overflow: hidden; }
+
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  gap: 4px;
+  z-index: 40;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 18px;
+  user-select: none;
+}
+.brand-mark {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold) 0%, #9a7b1f 100%);
+  display: grid; place-items: center;
+  color: #0a0a0d;
+  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+}
+.brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.06em; }
+.brand-name .gold { color: var(--gold-bright); }
+.brand-sub { font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; }
+
+.nav-section-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 12px 10px 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: var(--text-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.88rem;
+}
+.nav-item:hover { background: var(--bg-hover); color: var(--text); }
+.nav-item.active {
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+.nav-item .ico { width: 20px; text-align: center; font-size: 1rem; }
+.nav-item .nav-badge {
+  margin-left: auto;
+  background: var(--gold);
+  color: #0a0a0d;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+.nav-item .nav-badge.red { background: var(--red); color: #fff; }
+
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 6px; }
+.sidebar-biz {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.sidebar-biz:hover { border-color: rgba(212, 175, 55, 0.4); }
+.biz-avatar {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 0.8rem;
+}
+.biz-name { font-size: 0.82rem; font-weight: 600; }
+.biz-plan { font-size: 0.68rem; color: var(--text-dim); }
+.biz-caret { margin-left: auto; color: var(--text-dim); font-size: 0.7rem; }
+
+.demo-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: var(--orange-dim);
+  color: var(--orange);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.demo-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* ---------- topbar ---------- */
+
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+.topbar {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--border-soft);
+  background: rgba(10, 10, 13, 0.8);
+  backdrop-filter: blur(12px);
+  z-index: 30;
+}
+.topbar-title { font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
+.topbar-spacer { flex: 1; }
+
+.icon-btn {
+  position: relative;
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-soft);
+  display: grid; place-items: center;
+  font-size: 1rem;
+  transition: all 0.15s var(--ease);
+}
+.icon-btn:hover { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.4); }
+.icon-btn .dot-badge {
+  position: absolute; top: 6px; right: 6px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid var(--bg-soft);
+  display: none;
+}
+.icon-btn .dot-badge.show { display: block; }
+
+.topbar-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 7px 12px;
+  width: 300px;
+  color: var(--text-dim);
+}
+.topbar-search input {
+  background: none; border: none; outline: none;
+  color: var(--text);
+  width: 100%;
+  font-size: 0.85rem;
+}
+.topbar-search kbd {
+  font-family: inherit;
+  font-size: 0.66rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+.avatar-btn {
+  display: flex; align-items: center; gap: 9px;
+  padding: 5px 10px 5px 6px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.avatar-btn:hover { border-color: rgba(212, 175, 55, 0.4); }
+.avatar-circle {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #9a7b1f);
+  color: #0a0a0d;
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 0.72rem;
+}
+.avatar-name { font-size: 0.8rem; font-weight: 600; }
+.avatar-caret { color: var(--text-dim); font-size: 0.65rem; }
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 26px 28px 60px;
+
+}
+.page { max-width: 1200px; margin: 0 auto; animation: page-in 0.3s var(--ease); }
+@keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.page-head { margin-bottom: 22px; }
+.page-title { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; }
+.page-sub { color: var(--text-soft); font-size: 0.9rem; margin-top: 4px; }
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .link { margin-left: auto; }
+
+.link-btn {
+  background: none; border: none;
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.link-btn:hover { color: var(--gold-bright); text-decoration: underline; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 15px;
+  border-radius: 9px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.15s var(--ease);
+  text-decoration: none;
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-gold { background: linear-gradient(135deg, var(--gold), #b8942a); color: #0a0a0d; }
+.btn-gold:hover:not(:disabled) { filter: brightness(1.12); box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3); }
+.btn-ghost { background: var(--bg-card); border-color: var(--border); color: var(--text-soft); }
+.btn-ghost:hover:not(:disabled) { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.btn-sm { padding: 5px 11px; font-size: 0.78rem; border-radius: 8px; }
+.btn-red { background: var(--red-dim); color: var(--red); border-color: rgba(248, 113, 113, 0.3); }
+.btn-red:hover:not(:disabled) { background: rgba(248, 113, 113, 0.2); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+}
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.status-pill .sdot { width: 6px; height: 6px; border-radius: 50%; }
+.status-green { background: var(--green-dim); color: var(--green); }
+.status-green .sdot { background: var(--green); }
+.status-gold { background: var(--gold-dim); color: var(--gold-bright); }
+.status-gold .sdot { background: var(--gold-bright); }
+.status-blue { background: var(--blue-dim); color: var(--blue); }
+.status-blue .sdot { background: var(--blue); }
+.status-purple { background: var(--purple-dim); color: var(--purple); }
+.status-purple .sdot { background: var(--purple); }
+.status-red { background: var(--red-dim); color: var(--red); }
+.status-red .sdot { background: var(--red); }
+.status-orange { background: var(--orange-dim); color: var(--orange); }
+.status-orange .sdot { background: var(--orange); }
+.status-dim { background: var(--bg-hover); color: var(--text-dim); }
+.status-dim .sdot { background: var(--text-dim); }
+
+/* ---------- KPI grid ---------- */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.kpi {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px 16px;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.kpi:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-2px); }
+.kpi-label { font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+.kpi-value { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; margin-top: 5px; }
+.kpi-hint { font-size: 0.72rem; color: var(--text-soft); margin-top: 2px; }
+.kpi.accent-gold { border-color: rgba(212, 175, 55, 0.35); }
+
+/* ---------- tables ---------- */
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th {
+  text-align: left;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td { padding: 10px; border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tbody tr { transition: background 0.12s; }
+tbody tr:hover { background: var(--bg-hover); }
+tr[data-clickable] { cursor: pointer; }
+
+.cell-main { font-weight: 600; }
+.cell-dim { color: var(--text-dim); font-size: 0.78rem; }
+
+.score-bar { width: 54px; height: 5px; background: var(--bg-hover); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 7px; }
+.score-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-bright)); border-radius: 3px; }
+
+/* ---------- lists ---------- */
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.list-row:last-child { border-bottom: none; }
+.row-ico {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: grid; place-items: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+.row-main { min-width: 0; flex: 1; }
+.row-title { font-size: 0.86rem; font-weight: 600; }
+.row-sub { font-size: 0.76rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row-time { font-size: 0.72rem; color: var(--text-dim); white-space: nowrap; }
+
+/* ---------- forms ---------- */
+
+.form-group { margin-bottom: 15px; }
+.form-label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-soft); margin-bottom: 6px; }
+.form-label .req { color: var(--gold); }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 9px 12px;
+  font-size: 0.86rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 0 3px var(--gold-dim);
+}
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-hint { font-size: 0.74rem; color: var(--text-dim); margin-top: 5px; }
+.form-error { color: var(--red); font-size: 0.76rem; margin-top: 5px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+.toggle {
+  position: relative;
+  width: 40px; height: 22px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+  flex-shrink: 0;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--text-soft);
+  transition: transform 0.2s var(--ease), background 0.2s;
+}
+.toggle.on { background: var(--gold-dim); border-color: rgba(212, 175, 55, 0.4); }
+.toggle.on::after { transform: translateX(18px); background: var(--gold-bright); }
+
+/* ---------- tabs ---------- */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+  overflow-x: auto;
+}
+.tab {
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  padding: 9px 14px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--gold-bright); border-bottom-color: var(--gold); }
+.tab .tab-count { font-size: 0.7rem; color: var(--text-dim); margin-left: 5px; }
+
+.filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.select-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  outline: none;
+}
+.select-input:focus { border-color: rgba(212, 175, 55, 0.5); }
+.search-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  outline: none;
+  min-width: 220px;
+}
+.search-input:focus { border-color: rgba(212, 175, 55, 0.5); }
+.result-count { font-size: 0.78rem; color: var(--text-dim); margin-left: auto; }
+
+.seg {
+  display: inline-flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 3px;
+  gap: 2px;
+}
+.seg button {
+  background: none; border: none;
+  color: var(--text-soft);
+  padding: 6px 13px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+.seg button.active { background: var(--gold-dim); color: var(--gold-bright); }
+
+/* ---------- modal / drawer ---------- */
+
+.modal-overlay, .drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+  animation: fade-in 0.18s var(--ease);
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100vw - 40px));
+  max-height: min(82vh, 720px);
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  animation: modal-in 0.22s var(--ease);
+}
+@keyframes modal-in { from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+.modal-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--bg-card);
+  z-index: 2;
+}
+.modal-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.modal-body { padding: 20px; }
+.modal-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 9px; }
+.modal-x { margin-left: auto; }
+
+.drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(480px, 94vw);
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  animation: drawer-in 0.24s var(--ease);
+}
+@keyframes drawer-in { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.drawer-head { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
+.drawer-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 9px; justify-content: flex-end; }
+
+/* ---------- toast ---------- */
+
+.toast-zone { position: fixed; bottom: 22px; right: 22px; display: flex; flex-direction: column; gap: 9px; z-index: 200; }
+.toast {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 0.84rem;
+  box-shadow: var(--shadow);
+  animation: toast-in 0.25s var(--ease);
+  max-width: 380px;
+}
+.toast.success { border-left-color: var(--green); }
+.toast.error { border-left-color: var(--red); }
+.toast.info { border-left-color: var(--blue); }
+.toast.leaving { animation: toast-out 0.25s var(--ease) forwards; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes toast-out { to { opacity: 0; transform: translateY(8px); } }
+
+/* ---------- empty / skeleton ---------- */
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
+.empty-ico { font-size: 2rem; margin-bottom: 10px; opacity: 0.75; }
+.empty-title { font-weight: 700; color: var(--text-soft); margin-bottom: 4px; }
+.empty-msg { font-size: 0.82rem; max-width: 340px; margin: 0 auto; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-card) 50%, var(--bg-hover) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 8px;
+  height: 14px;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* ---------- timeline (activity) ---------- */
+
+.timeline { position: relative; padding-left: 26px; }
+.timeline::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
+.tl-item { position: relative; padding-bottom: 18px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -26px; top: 3px;
+  width: 19px; height: 19px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  font-size: 0.62rem;
+}
+.tl-title { font-size: 0.86rem; font-weight: 600; }
+.tl-desc { font-size: 0.78rem; color: var(--text-soft); }
+.tl-meta { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
+
+/* ---------- transcript ---------- */
+
+.transcript { display: flex; flex-direction: column; gap: 9px; }
+.tr-line { display: flex; gap: 9px; }
+.tr-who { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; width: 58px; flex-shrink: 0; padding-top: 2px; }
+.tr-who.ai { color: var(--gold); }
+.tr-who.human { color: var(--blue); }
+.tr-who.system { color: var(--text-dim); }
+.tr-text {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-size: 0.82rem;
+  flex: 1;
+}
+.tr-time { font-size: 0.66rem; color: var(--text-dim); margin-top: 3px; }
+
+/* ---------- calendar ---------- */
+
+.cal-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.cal-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; min-width: 150px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-dow { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center; padding: 4px 0; }
+.cal-cell {
+  min-height: 86px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 9px;
+  padding: 6px;
+  font-size: 0.72rem;
+  transition: border-color 0.15s;
+}
+.cal-cell:hover { border-color: rgba(212, 175, 55, 0.35); }
+.cal-cell.other { opacity: 0.35; }
+.cal-cell.today .cal-num { background: var(--gold); color: #0a0a0d; }
+.cal-num {
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+}
+.cal-evt {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  font-size: 0.66rem;
+  margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  cursor: pointer;
+}
+.cal-evt.cancelled { background: var(--red-dim); color: var(--red); text-decoration: line-through; }
+.cal-evt.other-type { background: var(--blue-dim); color: var(--blue); }
+
+.cal-day-list { display: flex; flex-direction: column; gap: 9px; }
+.cal-day-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+}
+.cal-day-time { font-family: var(--font-display); font-weight: 700; color: var(--gold-bright); width: 88px; flex-shrink: 0; }
+.cal-day-line { flex: 1; }
+.cal-day-name { font-weight: 600; font-size: 0.88rem; }
+
+.week-cols { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.week-col { background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 10px; padding: 8px; min-height: 160px; }
+.week-col.today-col { border-color: rgba(212, 175, 55, 0.4); }
+.week-dow { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); text-align: center; margin-bottom: 6px; }
+.week-date { text-align: center; font-family: var(--font-display); font-weight: 700; margin-bottom: 8px; }
+.week-col.today-col .week-date { color: var(--gold-bright); }
+
+/* ---------- knowledge / settings list ---------- */
+
+.kv-list { display: flex; flex-direction: column; }
+.kv-row { display: flex; align-items: flex-start; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border-soft); }
+.kv-row:last-child { border-bottom: none; }
+.kv-label { width: 150px; flex-shrink: 0; font-size: 0.78rem; color: var(--text-dim); font-weight: 600; padding-top: 2px; }
+.kv-value { flex: 1; font-size: 0.86rem; }
+
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.cap-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.cap-card .cap-ico { font-size: 1.1rem; }
+
+.section-stack { display: flex; flex-direction: column; gap: 18px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.grid-side { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+
+/* ---------- AI test area ---------- */
+
+.ai-test-box { border: 1px solid rgba(212, 175, 55, 0.3); border-radius: var(--radius); background: linear-gradient(180deg, rgba(212,175,55,0.05), transparent); padding: 18px; }
+.test-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.test-chip {
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 13px;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  transition: all 0.15s;
+}
+.test-chip:hover { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.4); }
+
+.sim-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px dashed rgba(251, 191, 36, 0.4);
+  padding: 3px 9px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.sim-bubble {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 15px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  animation: page-in 0.3s var(--ease);
+}
+.sim-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+.typing-dots { display: inline-flex; gap: 4px; align-items: center; height: 20px; }
+.typing-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: tdot 1s infinite; }
+.typing-dots i:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes tdot { 0%, 100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+
+/* ---------- onboarding ---------- */
+
+.onboard-overlay {
+  position: fixed; inset: 0;
+  background: rgba(4, 4, 6, 0.82);
+  backdrop-filter: blur(6px);
+  z-index: 300;
+  display: grid; place-items: center;
+  animation: fade-in 0.25s var(--ease);
+  padding: 20px;
+}
+.onboard-card {
+  width: min(620px, 100%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  animation: modal-in 0.3s var(--ease);
+}
+.onboard-progress { display: flex; gap: 6px; margin-bottom: 22px; }
+.onboard-progress span { height: 4px; flex: 1; border-radius: 3px; background: var(--bg-hover); transition: background 0.25s; }
+.onboard-progress span.done { background: var(--gold); }
+.onboard-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+.onboard-sub { color: var(--text-soft); font-size: 0.88rem; margin-bottom: 20px; }
+.onboard-option {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 9px;
+  color: var(--text);
+  font-size: 0.86rem;
+  transition: all 0.15s;
+}
+.onboard-option:hover { border-color: rgba(212, 175, 55, 0.4); }
+.onboard-option.selected { border-color: rgba(212, 175, 55, 0.55); background: var(--gold-dim); }
+.onboard-ico { font-size: 1.15rem; width: 26px; text-align: center; }
+
+/* ---------- request status colors ---------- */
+
+.req-status-submitted { background: var(--blue-dim); color: var(--blue); }
+.req-status-in-review { background: var(--orange-dim); color: var(--orange); }
+.req-status-in-progress { background: var(--gold-dim); color: var(--gold-bright); }
+.req-status-waiting { background: var(--purple-dim); color: var(--purple); }
+.req-status-completed { background: var(--green-dim); color: var(--green); }
+
+/* ---------- help ---------- */
+
+.help-topic {
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text);
+  margin-bottom: 10px;
+  transition: all 0.15s;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 11px;
+}
+.help-topic:hover { border-color: rgba(212, 175, 55, 0.4); }
+.help-topic .hp-ico { font-size: 1.1rem; }
+.help-topic .hp-arrow { margin-left: auto; color: var(--text-dim); }
+.help-answer { font-size: 0.84rem; color: var(--text-soft); line-height: 1.65; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s var(--ease);
+    box-shadow: var(--shadow);
+  }
+  .sidebar.mobile-open { transform: none; }
+  .grid-2, .grid-side { grid-template-columns: 1fr; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .content { padding: 18px 16px 60px; }
+}
+
+@media (max-width: 560px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi-value { font-size: 1.3rem; }
+  .topbar-search { width: 100%; }
+  .topbar { padding: 0 12px; gap: 8px; }
+  .avatar-name, .topbar-search kbd { display: none; }
+  .cal-cell { min-height: 58px; }
+  .cal-evt { display: none; }
+  .cal-cell .cal-count { display: block; font-size: 0.62rem; color: var(--gold-bright); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ============================================================
+   SHELL EXTRAS — menu btn, scrim, global search results, settings nav
+   ============================================================ */
+.menu-btn { display: none; }
+@media (max-width: 900px) { .menu-btn { display: grid; } }
+.mobile-scrim { position: fixed; inset: 0; background: rgba(4,4,6,0.7); backdrop-filter: blur(2px); z-index: 35; }
+
+.search-results {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow); max-height: 340px;
+  overflow: auto; z-index: 80; padding: 5px;
+}
+.search-results .sr-item { display: flex; justify-content: space-between; gap: 12px; align-items: center;
+  padding: 9px 10px; border-radius: 8px; cursor: pointer; font-size: 0.84rem; }
+.search-results .sr-item:hover { background: var(--bg-hover); }
+.sr-kind { color: var(--text-dim); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+#topbarSearchWrap { position: relative; }
+
+.settings-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.settings-nav button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-soft);
+  padding: 7px 15px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+.settings-nav button.active { border-color: rgba(212,175,55,0.45); color: var(--gold-bright); background: var(--gold-dim); }
+
+/* ============================================================
+   LIVE CONSOLE — shared styles (Business Connect + production
+   pages + auth gate + request board). Appended by PRODUCTION
+   migration; no demo styles below.
+   ============================================================ */
+
+.cx-loading { color: var(--text-dim); font-size: 0.85rem; padding: 14px 2px; }
+
+.cx-error {
+  background: var(--red-dim); color: var(--red);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  border-radius: 8px; padding: 9px 12px; font-size: 0.83rem; font-weight: 600;
+}
+
+/* form rows */
+.cx-form-row { display: grid; gap: 8px; margin-bottom: 10px; }
+.cx-form-row label { font-size: 0.74rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.4px; display: block; margin-bottom: 4px; }
+.cx-form-row input, .cx-form-row select, .cx-form-row textarea {
+  width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px; padding: 8px 10px; font-size: 0.86rem; font-family: inherit;
+}
+.cx-form-row input:focus, .cx-form-row select:focus, .cx-form-row textarea:focus {
+  outline: none; border-color: rgba(212, 175, 55, 0.5);
+}
+
+.cx-check { display: flex; align-items: center; gap: 8px; font-size: 0.84rem; color: var(--text-soft); cursor: pointer; }
+.cx-check input { accent-color: var(--gold); }
+
+/* wizard step indicator */
+.cx-steps { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.cx-step { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-dim); padding: 5px 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); }
+.cx-step-n { width: 20px; height: 20px; border-radius: 50%; background: var(--bg-hover); display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; }
+.cx-step.done { color: var(--green); border-color: rgba(52, 211, 153, 0.35); }
+.cx-step.done .cx-step-n { background: var(--green-dim); color: var(--green); }
+.cx-step.now { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.5); }
+.cx-step.now .cx-step-n { background: var(--gold-dim); color: var(--gold-bright); }
+.cx-step-arrow { color: var(--text-dim); font-size: 0.8rem; }
+
+/* request board */
+.board-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.board-col { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 12px; min-height: 120px; }
+.board-col-head { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-soft); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.board-card { background: var(--bg-hover); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; }
+@media (max-width: 900px) { .board-grid { grid-template-columns: 1fr; } }
+
+/* auth gate */
+.auth-wrap { display: flex; justify-content: center; padding-top: 6vh; }
+.auth-card { width: min(430px, 100%); }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">VX</div>
+      <div>
+        <div class="brand-name">VantorX <span class="gold">Admin</span></div>
+        <div class="brand-sub">Operations Console</div>
+      </div>
+    </div>
+
+    <div class="nav-section-label">Manage</div>
+    <a class="nav-item" data-nav="overview" href="#/overview"><span class="ico">📊</span> Overview</a>
+    <a class="nav-item" data-nav="clients" href="#/clients"><span class="ico">🏢</span> Tenants <span class="nav-badge" id="clientsBadge">0</span></a>
+
+    <div class="nav-section-label">Work</div>
+    <a class="nav-item" data-nav="requests" href="#/requests"><span class="ico">🛠️</span> Change Requests <span class="nav-badge" id="reqBadge">0</span></a>
+    <a class="nav-item" data-nav="billing" href="#/billing"><span class="ico">💳</span> Billing &amp; Plans</a>
+    <a class="nav-item" data-nav="activity" href="#/activity"><span class="ico">🕘</span> Audit Activity</a>
+
+    <div class="nav-section-label">Console</div>
+    <a class="nav-item" data-nav="connect" href="#/connect"><span class="ico">🔌</span> Business Connect</a>
+    <a class="nav-item" data-nav="providers" href="#/providers"><span class="ico">🛰️</span> Providers</a>
+    <a class="nav-item" data-nav="settings" href="#/settings"><span class="ico">⚙️</span> Settings</a>
+
+    <div class="sidebar-bottom">
+      <div class="demo-pill"><span class="dot"></span> Live Platform</div>
+      <div class="sidebar-biz" id="opsCard">
+        <div class="biz-avatar">OP</div>
+        <div>
+          <div class="biz-name" id="opsName">VantorX Team</div>
+          <div class="biz-plan" id="opsPlan">4 staff · all clients</div>
+        </div>
+        <div class="biz-caret">▾</div>
+      </div>
+    </div>
+  </aside>
+  <div class="mobile-scrim" id="mobileScrim" hidden></div>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+    <div class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+      <div class="topbar-title" id="topbarTitle">Overview</div>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-search" id="topbarSearchWrap">
+        <span>🔎</span>
+        <input id="globalSearch" type="text" placeholder="Search clients, requests, invoices…" autocomplete="off">
+        <kbd>/</kbd>
+      </div>
+      <button class="icon-btn" id="notifBtn" aria-label="Notifications">🔔<span class="dot-badge" id="notifDot"></span></button>
+      <button class="avatar-btn" id="accountBtn">
+        <span class="avatar-circle" id="avatarInitials">OP</span>
+        <span class="avatar-name" id="avatarName">Ops</span>
+        <span class="avatar-caret">▾</span>
+      </button>
+    </div>
+
+    <div class="content" id="content"><div id="view"></div></div>
+  </div>
+</div>  <script>/* === VantorX Admin bundled build - generated by build-bundle.ps1 === */
+/* === Edit the source files in vantorx-admin/js/ then rebuild. === */
+/* ---- js/utils.js ---- */
+/* ============================================================
+   VANTORX CLIENT HUB — utils.js
+   Shared helpers. No dependencies.
+   ============================================================ */
+
+const STATUS_META = {
+  Submitted:   { cls: 'req-status-submitted',   icon: '📨' },
+  'In Review': { cls: 'req-status-in-review',   icon: '🔎' },
+  'In Progress': { cls: 'req-status-in-progress', icon: '🛠️' },
+  'Waiting on Client': { cls: 'req-status-waiting', icon: '⏸️' },
+  Completed:   { cls: 'req-status-completed',   icon: '✅' },
+};
+
+const CALL_OUTCOMES = {
+  answered:    { label: 'Answered',    cls: 'status-green' },
+  missed:      { label: 'Missed',      cls: 'status-red' },
+  transferred: { label: 'Transferred', cls: 'status-purple' },
+  booked:      { label: 'Booked',      cls: 'status-gold' },
+  faq:         { label: 'Question Answered', cls: 'status-blue' },
+};
+
+const APPT_STATUS = {
+  Confirmed:  'status-green',
+  Completed:  'status-dim',
+  Rescheduled: 'status-orange',
+  Cancelled:  'status-red',
+};
+
+function esc(s) {
+  return String(s ?? '')
+    .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+}
+
+function fmtTime(iso) {
+  return new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+function fmtDateTime(iso) {
+  return `${fmtDate(iso)} · ${fmtTime(iso)}`;
+}
+
+function fmtDuration(sec) {
+  if (sec == null) return '—';
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return `${m}m ${String(s).padStart(2, '0')}s`;
+}
+
+function relTime(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const min = Math.round(diff / 60000);
+  if (min < 1) return 'just now';
+  if (min < 60) return `${min}m ago`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.round(h / 24);
+  if (d < 7) return `${d}d ago`;
+  return fmtDate(iso);
+}
+
+function debounce(fn, ms) {
+  let t;
+  return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+
+function uid(prefix = 'id') {
+  return `${prefix}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
+}
+
+/* Deterministic PRNG so demo data is stable across reloads until edited */
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function scoreBar(score) {
+  return `<span class="score-bar"><i style="width:${Math.min(100, score)}%"></i></span>${score}`;
+}
+
+function initials(name) {
+  return String(name || '?').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+}
+
+function groupBy(arr, keyFn) {
+  return arr.reduce((acc, item) => {
+    const k = keyFn(item);
+    (acc[k] = acc[k] || []).push(item);
+    return acc;
+  }, {});
+}
+
+function monthLabel(y, m) {
+  return new Date(y, m, 1).toLocaleDateString([], { month: 'long', year: 'numeric' });
+}
+
+function sameDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+
+/* ---- js/realapi.js ---- */
+/* ============================================================
+   VANTORX ADMIN — realapi.js
+   The ONLY data layer of the admin console. Every page talks to
+   the platform server (same origin, cookie session). There is no
+   demo store: if the server is unreachable, pages show an honest
+   error — they never fall back to fake data.
+   ============================================================ */
+
+async function api(method, path, body) {
+  let res;
+  try {
+    res = await fetch(path, {
+      method,
+      credentials: 'same-origin',
+      headers: body ? { 'Content-Type': 'application/json' } : undefined,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+  } catch {
+    return { status: 0, error: 'Platform server not reachable. Start platform/server.ps1 and reload.' };
+  }
+  let data = {};
+  try { data = await res.json(); } catch { /* empty body */ }
+  if (!res.ok) return { status: res.status, error: data.error || `HTTP ${res.status}`, ...data };
+  return { status: res.status, ...data };
+}
+
+const getMe = () => api('GET', '/api/auth/me');
+const login = (email, password) => api('POST', '/api/auth/login', { email, password });
+const logout = () => api('POST', '/api/auth/logout', {});
+const overview = () => api('GET', '/api/admin/overview');
+const audit = () => api('GET', '/api/admin/audit');
+const changeRequests = () => api('GET', '/api/change-requests');
+const setRequestStatus = (id, status) => api('PATCH', `/api/change-requests/${encodeURIComponent(id)}`, { status });
+const notifications = () => api('GET', '/api/notifications');
+const markNotificationsRead = () => api('POST', '/api/notifications/read', {});
+
+
+/* ---- js/components.js ---- */
+/* ============================================================
+   VANTORX CLIENT HUB — components.js
+   Shared UI primitives: toasts, modal, drawer, confirm,
+   empty states, skeletons.
+   ============================================================ */
+
+/* ---------- toast ---------- */
+
+let toastZone;
+function ensureToastZone() {
+  if (!toastZone) {
+    toastZone = document.createElement('div');
+    toastZone.className = 'toast-zone';
+    document.body.appendChild(toastZone);
+  }
+  return toastZone;
+}
+
+function toast(msg, kind = 'success') {
+  const zone = ensureToastZone();
+  const el = document.createElement('div');
+  el.className = `toast ${kind}`;
+  const icon = kind === 'success' ? '✓' : kind === 'error' ? '✕' : 'ℹ';
+  el.innerHTML = `<span style="font-weight:800;color:var(--gold-bright)">${icon}</span><span>${esc(msg)}</span>`;
+  zone.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('leaving');
+    setTimeout(() => el.remove(), 260);
+  }, 3400);
+}
+
+/* ---------- modal / drawer ----------
+   onOpen fires after the caller has received { close } so callbacks
+   can safely reference close (avoids TDZ issues). */
+
+function openModal({ title, body, footer, onOpen, wide }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  if (wide) modal.style.width = 'min(720px, calc(100vw - 40px))';
+  modal.innerHTML = `
+    <div class="modal-head">
+      <div class="modal-title">${title}</div>
+      <button class="icon-btn modal-x" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">${body}</div>
+    ${footer ? `<div class="modal-foot">${footer}</div>` : ''}
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  const api = { overlay, modal };
+  let closeFn = () => {};
+  api.close = () => closeFn();
+
+  closeFn = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  function onKey(e) { if (e.key === 'Escape') closeFn(); }
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFn(); });
+  modal.querySelector('.modal-x').addEventListener('click', closeFn);
+
+  if (onOpen) queueMicrotask(() => onOpen(api));
+  return api;
+}
+
+function openDrawer({ title, body, footer, onOpen }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'drawer-overlay';
+  const drawer = document.createElement('div');
+  drawer.className = 'drawer';
+  drawer.innerHTML = `
+    <div class="drawer-head">
+      <div class="modal-title">${title}</div>
+      <button class="icon-btn modal-x" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer-body">${body}</div>
+    ${footer ? `<div class="drawer-foot">${footer}</div>` : ''}
+  `;
+  overlay.appendChild(drawer);
+  document.body.appendChild(overlay);
+
+  let closeFn = () => {};
+  const api = { overlay, drawer, close: () => closeFn() };
+
+  closeFn = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  function onKey(e) { if (e.key === 'Escape') closeFn(); }
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFn(); });
+  drawer.querySelector('.modal-x').addEventListener('click', closeFn);
+
+  if (onOpen) queueMicrotask(() => onOpen(api));
+  return api;
+}
+
+function confirmDialog({ title = 'Are you sure?', message = '', confirmText = 'Confirm', danger = false }) {
+  return new Promise(resolve => {
+    const m = openModal({
+      title,
+      body: `<p style="color:var(--text-soft);font-size:0.9rem">${esc(message)}</p>`,
+      footer: `
+        <button class="btn btn-ghost" data-c="no">Cancel</button>
+        <button class="btn ${danger ? 'btn-red' : 'btn-gold'}" data-c="yes">${esc(confirmText)}</button>`,
+      onOpen: ({ modal, close }) => {
+        modal.querySelector('[data-c="no"]').addEventListener('click', () => { close(); resolve(false); });
+        modal.querySelector('[data-c="yes"]').addEventListener('click', () => { close(); resolve(true); });
+      },
+    });
+    const origClose = m.close;
+    // resolve(false) if dismissed via X / overlay / Escape
+    const obs = new MutationObserver(() => {
+      if (!document.body.contains(m.overlay)) { obs.disconnect(); resolve(false); }
+    });
+    obs.observe(document.body, { childList: true });
+    m.close = () => origClose();
+  });
+}
+
+/* ---------- empty / skeleton ---------- */
+
+function emptyState(icon, title, msg, actionHTML = '') {
+  return `
+    <div class="empty-state">
+      <div class="empty-ico">${icon}</div>
+      <div class="empty-title">${esc(title)}</div>
+      <div class="empty-msg">${esc(msg)}</div>
+      ${actionHTML}
+    </div>`;
+}
+
+function skeletonRows(n = 4) {
+  return `<div style="display:flex;flex-direction:column;gap:12px;padding:6px 0">
+    ${Array.from({ length: n }, () => '<div class="skeleton" style="height:34px"></div>').join('')}
+  </div>`;
+}
+
+function statusPill(status, map) {
+  const cls = map[status] || 'status-dim';
+  return `<span class="status-pill ${cls}"><span class="sdot"></span>${esc(status)}</span>`;
+}
+
+
+/* ---- js/pages/overview.js ---- */
+/* ============================================================
+   VANTORX ADMIN — pages/overview.js (PRODUCTION)
+   Live KPIs from /api/admin/overview + recent audit trail.
+   ============================================================ */
+
+async function renderOverview(root, ctx) {
+  root.innerHTML = `<div class="cx-loading">Loading live platform data…</div>`;
+  const ov = await ctx.overview(true);
+  if (!ov) { root.innerHTML = `<div class="card">${emptyState('🔒', 'Session expired', 'Sign in again to continue.')}</div>`; ctx.navigate('overview'); return; }
+
+  const biz = ov.businesses || [];
+  const live = biz.filter(b => b.status === 'live').length;
+  const provisioning = biz.filter(b => b.status && b.status !== 'live').length;
+  const counts = ov.counts || {};
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Operations Overview</div>
+      <div class="page-sub">Live platform state — every number below comes from the server database, not a demo store.</div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi accent-gold">
+        <div class="kpi-label">Tenants</div>
+        <div class="kpi-value">${biz.length}</div>
+        <div class="kpi-hint">${live} live · ${provisioning} in onboarding</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Platform users</div>
+        <div class="kpi-value">${(ov.users || []).length}</div>
+        <div class="kpi-hint">owners, staff & admins</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Open change requests</div>
+        <div class="kpi-value">${counts.changeRequests || 0}</div>
+        <div class="kpi-hint"><button class="link" data-go="requests">Open board →</button></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Appointments</div>
+        <div class="kpi-value">${counts.appointments || 0}</div>
+        <div class="kpi-hint">${counts.calls || 0} calls · ${counts.leads || 0} leads</div>
+      </div>
+    </div>
+
+    <div class="grid-side">
+      <div class="section-stack">
+        <div class="card">
+          <div class="card-title">🏢 Tenants <button class="link" data-go="clients">Manage →</button></div>
+          ${biz.length ? `<div class="table-wrap"><table>
+            <thead><tr><th>Tenant</th><th>Industry</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              ${biz.map(b => `
+                <tr data-clickable data-biz="${esc(b.id)}">
+                  <td><span class="cell-main">${esc(b.name)}</span><div class="cell-dim">${esc(b.city || '')}</div></td>
+                  <td class="cell-dim">${esc(b.industry || '—')}</td>
+                  <td>${b.status === 'live'
+                    ? '<span class="status-pill status-green"><span class="sdot"></span>live</span>'
+                    : `<span class="status-pill status-orange"><span class="sdot"></span>${esc(b.status || 'unknown')}</span>`}</td>
+                  <td><button class="btn btn-ghost btn-sm" data-open="${esc(b.id)}">Open</button></td>
+                </tr>`).join('')}
+            </tbody></table></div>`
+            : emptyState('🏢', 'No tenants yet', 'Onboard the first client with Business Connect.',
+                '<button class="btn btn-gold btn-sm" data-go="connect">Open Business Connect →</button>')}
+        </div>
+      </div>
+
+      <div class="section-stack">
+        <div class="card">
+          <div class="card-title">🕘 Recent platform activity <button class="link" data-go="activity">Full audit →</button></div>
+          <div id="ovAudit">${'<div class="cx-loading">Loading audit…</div>'}</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔌 Production onboarding</div>
+          <p class="cell-dim" style="font-size:0.84rem;margin:0 0 10px">New tenants are onboarded through Business Connect: import → validate → dedupe → provision → fail-closed go-live.</p>
+          <button class="btn btn-gold btn-sm" data-go="connect">Open Business Connect →</button>
+        </div>
+      </div>
+    </div>`;
+
+  root.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => ctx.navigate(b.dataset.go)));
+  root.querySelectorAll('[data-biz]').forEach(tr => tr.addEventListener('click', () => ctx.openClient(tr.dataset.biz)));
+  root.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => ctx.openClient(b.dataset.open)));
+
+  const a = await audit();
+  const rows = (a.status === 200 ? (a.rows || []) : []).slice(0, 8);
+  const userById = {};
+  (ov.users || []).forEach(u => { userById[u.id] = u.email; });
+  root.querySelector('#ovAudit').innerHTML = rows.length
+    ? rows.map(r => `
+        <div class="list-row">
+          <div class="row-ico" style="background:var(--bg-hover)">•</div>
+          <div class="row-main">
+            <div class="row-title">${esc(r.action)}</div>
+            <div class="row-sub">${esc(r.detail || '')}</div>
+          </div>
+          <div class="row-time">${relTime(r.at)}</div>
+        </div>`).join('')
+    : emptyState('◔', 'No audit entries yet', 'Platform actions will appear here.');
+}
+
+
+/* ---- js/pages/clients.js ---- */
+/* ============================================================
+   VANTORX ADMIN — pages/clients.js (PRODUCTION)
+   Live tenant management. Data + writes go straight to the
+   platform server (businesses PATCH, services CRUD, hours PUT).
+   ============================================================ */
+
+const DAY_LABELS = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
+
+async function renderClients(root, ctx) {
+  root.innerHTML = `<div class="cx-loading">Loading tenants…</div>`;
+  const ov = await ctx.overview();
+  if (!ov) { root.innerHTML = `<div class="card">${emptyState('🔒', 'Session expired', 'Sign in again.')}</div>`; return; }
+  const biz = ov.businesses || [];
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Tenants</div>
+      <div class="page-sub">${biz.length} client businesses on the platform. Open one to edit profile, services and hours — changes write through to the server.</div>
+    </div>
+    <div class="card">
+      ${biz.length ? `<div class="table-wrap"><table>
+        <thead><tr><th>Tenant</th><th>Industry</th><th>City</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          ${biz.map(b => `
+            <tr data-clickable data-biz="${esc(b.id)}">
+              <td><span class="cell-main">${esc(b.name)}</span><div class="cell-dim">${esc(b.phone || b.email || '')}</div></td>
+              <td class="cell-dim">${esc(b.industry || '—')}</td>
+              <td class="cell-dim">${esc(b.city || '—')}</td>
+              <td>${b.status === 'live'
+                ? '<span class="status-pill status-green"><span class="sdot"></span>live</span>'
+                : `<span class="status-pill status-orange"><span class="sdot"></span>${esc(b.status || 'unknown')}</span>`}</td>
+              <td><button class="btn btn-ghost btn-sm" data-open="${esc(b.id)}">Open</button></td>
+            </tr>`).join('')}
+        </tbody></table></div>`
+        : emptyState('🏢', 'No tenants yet', 'Onboard the first client through Business Connect.',
+            '<button class="btn btn-gold btn-sm" data-go="connect">Open Business Connect →</button>')}
+    </div>`;
+
+  root.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => ctx.navigate(b.dataset.go)));
+  root.querySelectorAll('[data-biz]').forEach(tr => tr.addEventListener('click', () => openClientDetail(tr.dataset.biz, ctx)));
+  root.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => openClientDetail(b.dataset.open, ctx)));
+}
+
+/* ---------------- tenant drawer (live edit) ---------------- */
+
+async function openClientDetail(id, ctx) {
+  const b0 = (ctx.overviewData.businesses || []).find(x => x.id === id);
+  if (!b0) { toast('Tenant not found', 'error'); return; }
+
+  const drawer = openDrawer({
+    title: esc(b0.name),
+    body: `<div class="cx-loading">Loading live tenant data…</div>`,
+    footer: `<button class="btn btn-ghost" data-close>Close</button>`,
+    onOpen: async ({ drawer, close }) => {
+      drawer.querySelector('[data-close]').addEventListener('click', close);
+
+      const [svcR, hrR] = await Promise.all([
+        api('GET', '/api/services'),
+        api('GET', `/api/hours/${encodeURIComponent(id)}`),
+      ]);
+      const services = ((svcR.status === 200 ? svcR.rows : []) || []).filter(s => s.businessId === id);
+      const hoursRow = hrR.status === 200 ? hrR.row : null;
+      const hours = hoursRow || {};
+
+      const dayRow = (k) => {
+        const d = hours[k] || { open: '', close: '', closed: true };
+        return `
+          <div class="cx-form-row" style="grid-template-columns:90px 1fr 1fr 70px;align-items:center">
+            <span class="cell-dim" style="font-size:0.78rem">${DAY_LABELS[k]}</span>
+            <input data-hr-open="${k}" value="${esc(d.open || '')}" placeholder="9:00 AM">
+            <input data-hr-close="${k}" value="${esc(d.close || '')}" placeholder="7:00 PM">
+            <label class="cx-check" style="margin:0"><input type="checkbox" data-hr-closed="${k}" ${d.closed ? 'checked' : ''}> closed</label>
+          </div>`;
+      };
+
+      drawer.querySelector('.drawer-body').innerHTML = `
+        <div class="card-title">Profile</div>
+        <div class="cx-form-row"><label>Name</label><input id="clName" value="${esc(b0.name || '')}"></div>
+        <div class="cx-form-row" style="grid-template-columns:1fr 1fr">
+          <div><label>Industry</label><input id="clIndustry" value="${esc(b0.industry || '')}"></div>
+          <div><label>City</label><input id="clCity" value="${esc(b0.city || '')}"></div>
+        </div>
+        <div class="cx-form-row" style="grid-template-columns:1fr 1fr">
+          <div><label>Phone</label><input id="clPhone" value="${esc(b0.phone || '')}"></div>
+          <div><label>Status</label>
+            <select id="clStatus">
+              ${['live', 'provisioning', 'paused'].map(s => `<option value="${s}" ${b0.status === s ? 'selected' : ''}>${s}</option>`).join('')}
+            </select></div>
+        </div>
+        <button class="btn btn-gold btn-sm" id="clSaveProfile" style="margin-top:6px">Save profile</button>
+
+        <div class="card-title" style="margin-top:18px">Services (${services.length})</div>
+        ${services.length ? `<div>${services.map(s => `
+          <div class="list-row">
+            <div class="row-ico" style="background:var(--bg-hover)">✂</div>
+            <div class="row-main">
+              <div class="row-title">${esc(s.name)}</div>
+              <div class="row-sub">$${Number(s.price).toFixed(2)} · ${s.minutes} min</div>
+            </div>
+            <button class="btn btn-ghost btn-sm" data-svc-del="${esc(s.id)}">Delete</button>
+          </div>`).join('')}</div>`
+          : '<p class="cell-dim" style="font-size:0.82rem">No services yet.</p>'}
+        <div class="cx-form-row" style="grid-template-columns:1fr 90px 70px auto;align-items:end;margin-top:8px">
+          <div><label>New service</label><input id="svcName" placeholder="Deep Tissue Massage"></div>
+          <div><label>Price $</label><input id="svcPrice" type="number" min="0" step="0.01" placeholder="60"></div>
+          <div><label>Min</label><input id="svcMins" type="number" min="5" step="5" placeholder="30"></div>
+          <button class="btn btn-gold btn-sm" id="svcAdd">Add</button>
+        </div>
+
+        <div class="card-title" style="margin-top:18px">Business hours</div>
+        ${['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map(dayRow).join('')}
+        <button class="btn btn-gold btn-sm" id="hrSave" style="margin-top:10px">Save hours</button>`;
+
+      const busy = async (btn, fn) => {
+        btn.disabled = true;
+        try { await fn(); } finally { btn.disabled = false; }
+      };
+
+      drawer.querySelector('#clSaveProfile').addEventListener('click', function () {
+        busy(this, async () => {
+          const r = await api('PATCH', `/api/businesses/${encodeURIComponent(id)}`, {
+            name: drawer.querySelector('#clName').value.trim(),
+            industry: drawer.querySelector('#clIndustry').value.trim(),
+            city: drawer.querySelector('#clCity').value.trim(),
+            phone: drawer.querySelector('#clPhone').value.trim(),
+            status: drawer.querySelector('#clStatus').value,
+          });
+          if (r.error) { toast(r.error, 'error'); return; }
+          toast('Profile saved to server', 'success');
+          await ctx.overview(true);
+        });
+      });        drawer.querySelector('#svcAdd').addEventListener('click', function () {
+        busy(this, async () => {
+          const name = drawer.querySelector('#svcName').value.trim();
+          if (!name) { toast('Service name required', 'error'); return; }
+          const r = await api('POST', '/api/services', {
+            businessId: id,
+            name,
+            price: Number(drawer.querySelector('#svcPrice').value || 0),
+            minutes: Number(drawer.querySelector('#svcMins').value || 30),
+          });
+          if (r.error) { toast(r.error, 'error'); return; }
+          toast('Service added', 'success');
+          close();
+          openClientDetail(id, ctx);
+        });
+      });
+
+      drawer.querySelectorAll('[data-svc-del]').forEach(btn => btn.addEventListener('click', function () {
+        busy(this, async () => {
+          const ok = await confirmDialog({ title: 'Delete service?', message: 'This removes it from the live tenant immediately.', confirmText: 'Delete', danger: true });
+          if (!ok) return;
+          const r = await api('DELETE', `/api/services/${encodeURIComponent(this.dataset.svcDel)}`);
+          if (r.error) { toast(r.error, 'error'); return; }
+          toast('Service deleted', 'success');
+          close();
+          openClientDetail(id, ctx);
+        });
+      }));
+
+      drawer.querySelector('#hrSave').addEventListener('click', function () {
+        busy(this, async () => {
+          const payload = { businessId: id };
+          ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].forEach(k => {
+            payload[k] = {
+              open: drawer.querySelector(`[data-hr-open="${k}"]`).value,
+              close: drawer.querySelector(`[data-hr-close="${k}"]`).value,
+              closed: drawer.querySelector(`[data-hr-closed="${k}"]`).checked,
+            };
+          });
+          const r = await api('PUT', `/api/hours/${encodeURIComponent(id)}`, payload);
+          if (r.error) { toast(r.error, 'error'); return; }
+          toast('Hours saved to server', 'success');
+        });
+      });
+    },
+  });
+  return drawer;
+}
+
+
+/* ---- js/pages/requests.js ---- */
+/* ============================================================
+   VANTORX ADMIN — pages/requests.js (PRODUCTION)
+   Live change-request board. GET /api/change-requests,
+   PATCH /api/change-requests/:id, POST /api/change-requests.
+   ============================================================ */
+
+const COLS = [
+  { key: 'Open', next: 'In Progress', nextLabel: 'Start working →' },
+  { key: 'In Progress', next: 'Completed', nextLabel: 'Mark completed →' },
+  { key: 'Completed', next: null, nextLabel: null },
+];
+
+const TYPE_ICONS = { 'Update hours': '🕐', 'Add service': '➕', 'Pricing update': '💵', 'General request': '📝' };
+
+async function renderRequests(root, ctx) {
+  root.innerHTML = `<div class="cx-loading">Loading change requests…</div>`;
+  const [cr, ov] = await Promise.all([changeRequests(), ctx.overview()]);
+  if (cr.error) { root.innerHTML = `<div class="card">${emptyState('⚠️', 'Could not load requests', esc(cr.error))}</div>`; return; }
+  const rows = cr.rows || [];
+  const bizById = {};
+  ((ov && ov.businesses) || []).forEach(b => { bizById[b.id] = b.name; });
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Change Requests</div>
+      <div class="page-sub">${rows.filter(r => r.status !== 'Completed').length} open across all tenants — live from the platform queue.</div>
+      <span style="flex:1"></span>
+      <button class="btn btn-gold btn-sm" id="crNew">+ New request</button>
+    </div>
+    <div class="board-grid">
+      ${COLS.map(c => `
+        <div class="board-col">
+          <div class="board-col-head">${esc(c.key)} <span class="nav-badge">${rows.filter(r => r.status === c.key).length}</span></div>
+          ${rows.filter(r => r.status === c.key).map(r => `
+            <div class="board-card" data-id="${esc(r.id)}">
+              <div class="row-title">${TYPE_ICONS[r.type] || '📝'} ${esc(r.type)}</div>
+              <div class="row-sub" style="white-space:normal">${esc(r.detail)}</div>
+              <div class="cell-dim" style="font-size:0.72rem;margin-top:6px">${esc(bizById[r.businessId] || r.businessId)} · ${relTime(r.at)}</div>
+              ${c.next ? `<button class="btn btn-ghost btn-sm" data-adv="${esc(r.id)}" data-next="${esc(c.next)}" style="margin-top:8px">${c.nextLabel}</button>` : ''}
+            </div>`).join('') || `<div class="cell-dim" style="font-size:0.8rem;padding:10px 2px">Empty</div>`}
+        </div>`).join('')}
+    </div>`;
+
+  root.querySelectorAll('[data-adv]').forEach(btn => btn.addEventListener('click', async e => {
+    e.stopPropagation();
+    const r = await setRequestStatus(btn.dataset.adv, btn.dataset.next);
+    if (r.error) { toast(r.error, 'error'); return; }
+    toast(`Request moved to ${btn.dataset.next}`, 'success');
+    renderRequests(root, ctx);
+  }));
+
+  root.querySelector('#crNew').addEventListener('click', () => {
+    const ov2 = ctx.overviewData;
+    openModal({
+      title: 'New change request',
+      body: `
+        <div class="cx-form-row"><label>Tenant</label>
+          <select id="crBiz">${(ov2.businesses || []).map(b => `<option value="${esc(b.id)}">${esc(b.name)}</option>`).join('')}</select></div>
+        <div class="cx-form-row"><label>Type</label>
+          <select id="crType">${Object.keys(TYPE_ICONS).map(t => `<option>${esc(t)}</option>`).join('')}</select></div>
+        <div class="cx-form-row"><label>Detail</label><textarea id="crDetail" rows="4" placeholder="What needs to change?"></textarea></div>
+        <div id="crErr"></div>`,
+      footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-create>Create</button>`,
+      onOpen: ({ modal, close }) => {
+        modal.querySelector('[data-cancel]').addEventListener('click', close);
+        modal.querySelector('[data-create]').addEventListener('click', async () => {
+          const detail = modal.querySelector('#crDetail').value.trim();
+          if (!detail) { modal.querySelector('#crErr').innerHTML = '<div class="cx-error">✕ Detail is required</div>'; return; }
+          const r = await api2Create(modal.querySelector('#crBiz').value, modal.querySelector('#crType').value, detail);
+          if (r.error) { modal.querySelector('#crErr').innerHTML = `<div class="cx-error">✕ ${esc(r.error)}</div>`; return; }
+          close(); toast('Request created', 'success'); renderRequests(root, ctx);
+        });
+      },
+    });
+  });
+}
+
+function api2Create(businessId, type, detail) { return api('POST', '/api/change-requests', { businessId, type, detail }); }
+
+
+/* ---- js/pages/billing.js ---- */
+/* ============================================================
+   VANTORX ADMIN — pages/billing.js (PRODUCTION)
+   Live tenant plan status (Business Connect billing consent is
+   recorded server-side). Card payments are NOT CONNECTED — the
+   page says so honestly instead of inventing invoices.
+   ============================================================ */
+
+const PLAN_LABEL = { 'receptionist-pro': 'Receptionist Pro', 'receptionist-starter': 'Receptionist Starter' };
+
+async function renderBilling(root, ctx) {
+  root.innerHTML = `<div class="cx-loading">Loading live billing state…</div>`;
+  const [ov, imp] = await Promise.all([ctx.overview(true), api('GET', '/api/admin/connect/imports')]);
+  if (!ov) { root.innerHTML = `<div class="card">${emptyState('🔒', 'Session expired', 'Sign in again.')}</div>`; return; }
+  const imports = (imp.status === 200 ? imp.imports : []) || [];
+
+  const bizById = {};
+  (ov.businesses || []).forEach(b => { bizById[b.id] = b; });
+
+  // plan data is whatever Business Connect actually recorded per tenant
+  const planRows = imports
+    .filter(m => m.tenantId && bizById[m.tenantId])
+    .map(m => ({ biz: bizById[m.tenantId], planCode: m.planCode || '', consent: !!m.billingConsent, imp: m }));
+
+  const consented = planRows.filter(r => r.consent).length;
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Billing & Plans</div>
+      <div class="page-sub">Subscription intent recorded by Business Connect. ${consented} of ${planRows.length} onboarded tenants consented to subscribe.</div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi accent-gold">
+        <div class="kpi-label">Tenants with plan consent</div>
+        <div class="kpi-value">${consented}</div>
+        <div class="kpi-hint">recorded at import approval</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Active card payments</div>
+        <div class="kpi-value">0</div>
+        <div class="kpi-hint">payment provider not connected — honest counter</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Tenant plan status</div>
+      ${planRows.length ? `<div class="table-wrap"><table>
+        <thead><tr><th>Tenant</th><th>Plan</th><th>Billing consent</th><th>Payment collection</th></tr></thead>
+        <tbody>${planRows.map(r => `
+          <tr>
+            <td><span class="cell-main">${esc(r.biz.name)}</span><div class="cell-dim">${esc(r.biz.id)}</div></td>
+            <td>${r.planCode ? esc(PLAN_LABEL[r.planCode] || r.planCode) : '<span class="cell-dim">— no plan on record</span>'}</td>
+            <td>${r.consent
+              ? '<span class="status-pill status-green"><span class="sdot"></span>consented</span>'
+              : '<span class="status-pill status-dim"><span class="sdot"></span>none recorded</span>'}</td>
+            <td><span class="status-pill status-orange"><span class="sdot"></span>not connected</span></td>
+          </tr>`).join('')}</tbody></table></div>`
+        : emptyState('📋', 'No billed tenants yet', 'Plan consent appears here after a tenant is onboarded through Business Connect.')}
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚠️ What is real vs not connected</div>
+      <div class="kv-list">
+        <div class="kv-row"><div class="kv-label">Plan + consent record</div><div class="kv-value">✅ Real — captured per import, stored server-side, audited</div></div>
+        <div class="kv-row"><div class="kv-label">Card charging / invoices</div><div class="kv-value"><span style="color:var(--orange)">❌ Payment provider NOT CONNECTED</span> — no fake invoices are shown; connect a processor before collecting money</div></div>
+      </div>
+    </div>`;
+}
+
+
+/* ---- js/pages/activity.js ---- */
+/* ============================================================
+   VANTORX ADMIN — pages/activity.js (PRODUCTION)
+   Real platform audit log: GET /api/admin/audit.
+   Every privileged action on the platform is recorded server-side.
+   ============================================================ */
+
+const ACTION_ICONS = {
+  'connect.import_created': '📥', 'connect.import_approved': '✅', 'connect.provisioned': '⚙️',
+  'connect.golive': '🚀', 'connect.golive.blocked': '⛔', 'connect.provision_verify_failed': '⚠️',
+  'business.update': '🏢', 'service.create': '➕', 'service.delete': '🗑️',
+  'hours.update': '🕐', 'request.create': '📝', 'request.status': '🔁',
+  'user.invite_accepted': '👤', 'rx.config_update': '☎️', 'onboarding.golive': '🚀',
+};
+
+async function renderActivity(root, ctx) {
+  root.innerHTML = `<div class="cx-loading">Loading audit trail…</div>`;
+  const [a, ov] = await Promise.all([audit(), ctx.overview()]);
+  if (a.error) { root.innerHTML = `<div class="card">${emptyState('⚠️', 'Could not load audit log', esc(a.error))}</div>`; return; }
+  const rows = a.rows || [];
+
+  const userEmail = {};
+  ((ov && ov.users) || []).forEach(u => { userEmail[u.id] = u.email; });
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Audit Activity</div>
+      <div class="page-sub">Server-recorded trail of every privileged platform action. Newest first (${rows.length} most recent entries).</div>
+    </div>
+    <div class="card">
+      ${rows.length ? `<div>${rows.map(r => `
+        <div class="list-row">
+          <div class="row-ico" style="background:var(--bg-hover)">${ACTION_ICONS[r.action] || '•'}</div>
+          <div class="row-main">
+            <div class="row-title"><code>${esc(r.action)}</code> ${esc(r.detail || '')}</div>
+            <div class="row-sub">${esc(userEmail[r.userId] || r.userId || 'system')}${r.orgId ? ` · org ${esc(r.orgId)}` : ''}</div>
+          </div>
+          <div class="row-time">${relTime(r.at)}</div>
+        </div>`).join('')}</div>`
+        : emptyState('◔', 'Audit log empty', 'Privileged actions will appear here as they happen.')}
+    </div>`;
+}
+
+
+/* ---- js/pages/settings.js ---- */
+/* ============================================================
+   VANTORX ADMIN — pages/settings.js (PRODUCTION)
+   Real session + platform status. No demo reset button: there is
+   no demo data to reset. Shows live server connectivity and the
+   platform's honest integration status.
+   ============================================================ */
+
+function pillFor(status) {
+  if (status === 'connected' || status === 'CONNECTED') return '<span class="status-pill status-green"><span class="sdot"></span>connected</span>';
+  if (status === 'BLOCKED') return '<span class="status-pill status-red"><span class="sdot"></span>blocked</span>';
+  return '<span class="status-pill status-orange"><span class="sdot"></span>not connected</span>';
+}
+
+async function renderSettings(root, ctx) {
+  const u = ctx.user;
+  const h = await api('GET', '/api/health');
+  const health = h.status === 200 ? h : null;
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Settings</div>
+      <div class="page-sub">Live session, platform connectivity and integration status.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">👤 Session</div>
+      <div class="kv-list">
+        <div class="kv-row"><div class="kv-label">Signed in as</div><div class="kv-value">${esc(u ? u.name || u.email : '—')}<div class="cell-dim">${esc(u ? u.email : '')} · role ${esc(u ? u.role : '')}</div></div></div>
+        <div class="kv-row"><div class="kv-label">Auth</div><div class="kv-value">Server-side session cookie (port 8787)</div></div>
+        <div class="kv-row"><div class="kv-label">Data store</div><div class="kv-value"><code>platform/data/vantorx-db.json</code> — persisted, server-owned</div></div>
+      </div>
+      <div style="display:flex;gap:9px;margin-top:14px">
+        <button class="btn btn-gold btn-sm" id="stReload">↻ Reload live data</button>
+        <button class="btn btn-ghost btn-sm" id="stSignOut" style="color:var(--red)">Sign out</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🩺 Platform health</div>
+      ${health ? `
+        <div class="kv-list">
+          <div class="kv-row"><div class="kv-label">Server</div><div class="kv-value"><span class="status-pill status-green"><span class="sdot"></span>reachable</span></div></div>
+          ${Object.keys(health).filter(k => k !== 'status').map(k => `
+            <div class="kv-row"><div class="kv-label">${esc(k)}</div><div class="kv-value">${esc(String(health[k]))}</div></div>`).join('')}
+        </div>`
+        : `<div class="cx-error">✕ Platform server not reachable: ${esc(h.error || 'unknown')}</div>`}
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔌 Integration status (honest)</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Capability</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Business Connect provisioning</td><td><span class="status-pill status-green"><span class="sdot"></span>live</span></td></tr>
+          <tr><td>AI Receptionist engine</td><td><span class="status-pill status-green"><span class="sdot"></span>live (LLM when connected; test console always)</span></td></tr>
+          <tr><td>Telephony / LLM / STT / TTS</td><td>${health && health.providers ? pillFor(health.providers.telephony) + ' telephony · ' + pillFor(health.providers.llm) + ' llm' : '<span class="status-pill status-orange"><span class="sdot"></span>not connected — gates go-live</span>'}</td></tr>
+          <tr><td>Email / SMS delivery</td><td>${health && health.providers ? pillFor(health.providers.email) + ' email · ' + pillFor(health.providers.sms) + ' sms' : '<span class="status-pill status-orange"><span class="sdot"></span>not connected</span>'}</td></tr>
+          <tr><td>Card payments</td><td>${health && health.providers ? pillFor(health.providers.payments) : '<span class="status-pill status-orange"><span class="sdot"></span>not connected</span>'}</td></tr>
+          <tr><td>Full registry + live tests</td><td><a href="#/providers">Open the Providers page →</a></td></tr>
+        </tbody></table></div>
+    </div>`;
+
+  root.querySelector('#stReload').addEventListener('click', async function () {
+    this.disabled = true;
+    try {
+      ctx.overview(true);
+      toast('Live data reloaded', 'success');
+    } finally { this.disabled = false; }
+  });
+  root.querySelector('#stSignOut').addEventListener('click', async () => {
+    const ok = await confirmDialog({ title: 'Sign out?', message: 'End the platform session.', confirmText: 'Sign out' });
+    if (!ok) return;
+    await logout();
+    location.reload();
+  });
+}
+
+
+/* ---- js/pages/connect.js ---- */
+/* ============================================================
+   VANTORX ADMIN — pages/connect.js
+   BUSINESS CONNECT — the production onboarding path.
+   Import → validate → review/dedupe → approve → provision →
+   go-live. Talks to the real platform server (same origin,
+   cookie session). NO demo data, NO localStorage truth:
+   the server state machine is the only source of truth.
+   All identifiers are Cx/cx-prefixed (single-file bundle is
+   top-level concatenated — avoid collisions).
+   ============================================================ */
+
+/* ---------------- api helper (same-origin, cookie session) ---------------- */
+
+async function cxApi(method, path, body) {
+  let res;
+  try {
+    res = await fetch(path, {
+      method,
+      credentials: 'same-origin',
+      headers: body ? { 'Content-Type': 'application/json' } : undefined,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+  } catch {
+    return { status: 0, error: 'Platform server not reachable. Start platform/server.ps1 and reload.' };
+  }
+  let data = {};
+  try { data = await res.json(); } catch { /* empty body */ }
+  if (!res.ok) return { status: res.status, error: data.error || `HTTP ${res.status}`, ...data };
+  return { status: res.status, ...data };
+}
+
+/* ---------------- module state ---------------- */
+
+let cxAuth = null;              // { email, role } | null
+let cxView = { name: 'list' };  // { name:'list' } | { name:'detail', id }
+
+/* ---------------- sample envelope ---------------- */
+
+function cxSampleEnvelope() {
+  return JSON.stringify({
+    schema_version: '1.0',
+    source: { system: 'manual', external_business_key: 'lakeside-001' },
+    business: {
+      legal_name: 'Lakeside Dental PLLC',
+      display_name: 'Lakeside Dental',
+      industry: 'Dental',
+      timezone: 'America/Chicago',
+      phone: '(312) 555-0142',
+      email: 'frontdesk@lakesidedental.example',
+      website: 'lakesidedental.example',
+      currency: 'USD',
+      address: { city: 'Chicago' },
+      hours: [
+        { weekday: 0, closed: true },
+        { weekday: 1, open: '08:00', close: '17:00' },
+        { weekday: 2, open: '08:00', close: '17:00' },
+        { weekday: 3, open: '08:00', close: '17:00' },
+        { weekday: 4, open: '08:00', close: '17:00' },
+        { weekday: 5, open: '08:00', close: '16:00' },
+        { weekday: 6, closed: true },
+      ],
+    },
+    services: [
+      { name: 'Cleaning', duration_minutes: 45, price_minor: 12000, external_key: 'svc-cleaning' },
+      { name: 'Consultation', duration_minutes: 30, price_minor: 8000 },
+    ],
+    users: [
+      { email: 'owner@lakesidedental.example', role: 'business_owner' },
+    ],
+    receptionist: { name: 'Ava', greeting: 'Thanks for calling Lakeside Dental!', enabled: false },
+    knowledge: [
+      { kind: 'faq', title: 'Do you take walk-ins?', content: 'We see walk-ins when the schedule allows.' },
+    ],
+    integrations: [{ provider: 'google_calendar' }],
+    billing: { consent_to_subscribe: true, plan_code: 'receptionist-pro' },
+  }, null, 2);
+}
+
+/* ---------------- shared bits ---------------- */
+
+function cxStatePill(state) {
+  const map = {
+    importing: 'status-dim', mapped: 'status-dim',
+    validated: 'status-blue', approved: 'status-gold',
+    provisioning: 'status-orange', ready_for_go_live: 'status-green', active: 'status-green',
+    validation_failed: 'status-red', duplicate_review: 'status-orange',
+    provisioning_partial: 'status-red', verification_failed: 'status-red', cancelled: 'status-dim',
+  };
+  const label = String(state || '').replace(/_/g, ' ');
+  return `<span class="status-pill ${map[state] || 'status-dim'}"><span class="sdot"></span>${esc(label)}</span>`;
+}
+
+function cxSteps(state) {
+  const order = ['import', 'validate', 'review', 'provision', 'golive'];
+  let activeIdx = 1;
+  switch (state) {
+    case 'importing': case 'mapped': activeIdx = 0; break;
+    case 'validation_failed': activeIdx = 1; break;
+    case 'validated': case 'duplicate_review': activeIdx = 2; break;
+    case 'approved': case 'provisioning': case 'provisioning_partial': case 'verification_failed': activeIdx = 3; break;
+    case 'ready_for_go_live': activeIdx = 4; break;
+    case 'active': activeIdx = 5; break;
+    default: activeIdx = 1;
+  }
+  return `<div class="cx-steps">${order.map((s, i) => `
+    <div class="cx-step ${i < activeIdx ? 'done' : ''} ${i === activeIdx && state !== 'active' ? 'now' : ''}">
+      <span class="cx-step-n">${i < activeIdx || state === 'active' ? '✓' : i + 1}</span>
+      <span>${s}</span>
+    </div>`).join('<span class="cx-step-arrow">→</span>')}</div>`;
+}
+
+function cxIssueRows(issues) {
+  if (!issues || !issues.length) return '';
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>Severity</th><th>Path</th><th>Code</th><th>Problem</th><th>How to fix</th></tr></thead>
+    <tbody>${issues.map(i => `
+      <tr>
+        <td><span class="status-pill ${i.severity === 'error' ? 'status-red' : 'status-orange'}"><span class="sdot"></span>${esc(i.severity)}</span></td>
+        <td><code>${esc(i.path)}</code></td>
+        <td><code>${esc(i.code)}</code></td>
+        <td>${esc(i.message)}</td>
+        <td class="cell-dim">${esc(i.remediation || '')}</td>
+      </tr>`).join('')}</tbody></table></div>`;
+}
+
+function cxErrBanner(msg) {
+  return msg ? `<div class="cx-error">✕ ${esc(msg)}</div>` : '';
+}
+
+/* ============================================================
+   ENTRY — auth gate then workspace
+   ============================================================ */
+
+async function renderConnect(root, ctx) {
+  root.innerHTML = `<div class="cx-loading">Connecting to platform…</div>`;
+  const me = await cxApi('GET', '/api/auth/me');
+  cxAuth = (me.status === 200 && me.user) ? me.user : null;
+
+  if (!cxAuth) { cxRenderSignIn(root); return; }
+  if (cxAuth.role !== 'vantorx_admin') {
+    root.innerHTML = `
+      <div class="page-head"><div class="page-title">Business Connect</div>
+      <div class="page-sub">Production tenant onboarding console.</div></div>
+      <div class="card">${emptyState('🔒', 'Platform admin required',
+        `Signed in as ${cxAuth.email} (${cxAuth.role}). Business Connect is restricted to vantorx_admin accounts.`,
+        `<button class="btn btn-gold btn-sm" id="cxSignOut">Sign out</button>`)}</div>`;
+    root.querySelector('#cxSignOut').addEventListener('click', cxSignOut);
+    return;
+  }
+  if (cxView.name === 'detail' && cxView.id) await cxRenderDetail(root);
+  else await cxRenderList(root);
+}
+
+/* ---------------- sign in ---------------- */
+
+function cxRenderSignIn(root) {
+  root.innerHTML = `
+    <div class="page-head"><div class="page-title">Business Connect</div>
+      <div class="page-sub">Production tenant onboarding — sign in with a platform admin account.</div></div>
+    <div class="card cx-auth-card">
+      <div class="card-title">🔐 Platform sign-in</div>
+      <div class="cx-form-row"><label>Email or username</label><input id="cxEmail" type="text" placeholder="Email or username" autocomplete="username"></div>
+      <div class="cx-form-row"><label>Password</label><input id="cxPass" type="password" autocomplete="current-password"></div>
+      <div id="cxErr"></div>
+      <div style="display:flex;gap:9px;margin-top:14px">
+        <button class="btn btn-gold" id="cxLoginBtn">Sign in</button>
+      </div>
+      <div class="cell-dim" style="margin-top:12px;font-size:0.78rem">
+        Sessions are cookie-based on the platform server (port 8787). Credentials are never stored in this page.
+      </div>
+    </div>`;
+  const submit = async () => {
+    const email = root.querySelector('#cxEmail').value.trim();
+    const pass = root.querySelector('#cxPass').value;
+    root.querySelector('#cxErr').innerHTML = '';
+    const r = await cxApi('POST', '/api/auth/login', { email, password: pass });
+    if (r.error) { root.querySelector('#cxErr').innerHTML = cxErrBanner(r.error); return; }
+    toast('Signed in to platform', 'success');
+    await renderConnect(root);
+  };
+  root.querySelector('#cxLoginBtn').addEventListener('click', submit);
+  root.querySelector('#cxPass').addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+}
+
+async function cxSignOut() {
+  await cxApi('POST', '/api/auth/logout', {});
+  cxAuth = null;
+  cxView = { name: 'list' };
+  toast('Signed out', 'info');
+  const root = document.querySelector('#view .page');
+  if (root) await renderConnect(root);
+}
+
+/* ============================================================
+   LIST VIEW
+   ============================================================ */
+
+async function cxRenderList(root) {
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Clients · Business Connect</div>
+      <div class="page-sub">VantorX provisions every client for them: add the client → validate → review → provision → readiness checks → GO LIVE. Every gate is enforced server-side; clients never set themselves up.</div>
+    </div>
+    <div class="card" id="cxInqCard" style="margin-bottom:14px">
+      <div class="card-title">📬 Sales inquiries <span style="flex:1"></span><span class="cell-dim" style="font-size:0.75rem">from the VantorX website</span></div>
+      <div id="cxInqBody"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏢 Client setups
+        <span style="flex:1"></span>
+        <span class="cell-dim" id="cxWho" style="font-size:0.75rem;margin-right:10px"></span>
+        <button class="btn btn-ghost btn-sm" id="cxRefresh">↻ Refresh</button>
+        <button class="btn btn-ghost btn-sm" id="cxNew">+ Import JSON</button>
+        <button class="btn btn-gold btn-sm" id="cxAddClient">+ Add New Client</button>
+      </div>
+      <div id="cxListBody"></div>
+    </div>`;
+
+  const who = root.querySelector('#cxWho');
+  who.textContent = `signed in: ${cxAuth.email}`;
+  root.querySelector('#cxRefresh').addEventListener('click', () => cxRenderList(root));
+  root.querySelector('#cxNew').addEventListener('click', () => cxOpenNewImport(root));
+  root.querySelector('#cxAddClient').addEventListener('click', () => cxOpenAddClient(root, null));
+  cxLoadInquiries(root);
+
+  const body = root.querySelector('#cxListBody');
+  const r = await cxApi('GET', '/api/admin/connect/imports');
+  if (r.error) { body.innerHTML = cxErrBanner(r.error); return; }
+  const rows = r.imports || [];
+  if (!rows.length) {
+    body.innerHTML = emptyState('🔌', 'No imports yet',
+      'Create the first import: paste a schema 1.0 business envelope and the wizard will validate, dedupe, provision and gate go-live.');
+    return;
+  }
+  body.innerHTML = `<div class="table-wrap"><table>
+    <thead><tr><th>Import</th><th>Business / file</th><th>State</th><th>Errors</th><th>Tenant</th><th>Updated</th><th></th></tr></thead>
+    <tbody>${rows.map(m => `
+      <tr data-clickable data-imp="${esc(m.id)}">
+        <td><code>${esc(m.id)}</code></td>
+        <td><span class="cell-main">${esc(m.filename || '(pasted envelope)')}</span><div class="cell-dim">by ${esc(m.createdBy || '')}</div></td>
+        <td>${cxStatePill(m.state)}</td>
+        <td>${m.errorCount ? `<span class="status-pill status-red"><span class="sdot"></span>${m.errorCount}</span>` : '<span class="cell-dim">0</span>'}</td>
+        <td>${m.tenantId ? `<code>${esc(m.tenantId)}</code>` : '<span class="cell-dim">—</span>'}</td>
+        <td class="cell-dim">${relTime(m.updatedAt)}</td>
+        <td><button class="btn btn-ghost btn-sm" data-open="${esc(m.id)}">Open</button></td>
+      </tr>`).join('')}</tbody></table></div>`;
+
+  body.querySelectorAll('[data-imp]').forEach(tr => tr.addEventListener('click', () => {
+    cxView = { name: 'detail', id: tr.dataset.imp };
+    cxRenderDetail(root);
+  }));
+}
+
+
+/* ---------------- sales inquiries (from the public website) ---------------- */
+
+async function cxLoadInquiries(root) {
+  const body = root.querySelector('#cxInqBody');
+  if (!body) return;
+  const r = await cxApi('GET', '/api/admin/inquiries');
+  if (r.error) { body.innerHTML = `<div class="cell-dim" style="padding:8px 2px">${esc(r.error)}</div>`; return; }
+  const rows = (r.inquiries || []).filter(q => q.status === 'new' || q.status === 'contacted');
+  if (!rows.length) { body.innerHTML = `<div class="cell-dim" style="padding:8px 2px">No open inquiries. New website submissions appear here.</div>`; return; }
+  body.innerHTML = `<div class="table-wrap"><table>
+    <thead><tr><th>When</th><th>Who</th><th>Interested in</th><th>Message</th><th></th></tr></thead>
+    <tbody>${rows.slice(0, 15).map(q => `
+      <tr>
+        <td class="cell-dim">${relTime(q.createdAt)}<div>${esc(q.kind)}</div></td>
+        <td><span class="cell-main">${esc(q.name)}</span><div class="cell-dim">${esc(q.business || '')} · ${esc(q.email)}${q.phone ? ' · ' + esc(q.phone) : ''}</div></td>
+        <td class="cell-dim">${esc((q.interests || []).join(', ') || q.industry || '')}</td>
+        <td class="cell-dim" style="max-width:280px">${esc((q.message || '').slice(0, 140))}</td>
+        <td style="white-space:nowrap">
+          <button class="btn btn-gold btn-sm" data-inq-start="${esc(q.id)}">Start client setup</button>
+          <button class="btn btn-ghost btn-sm" data-inq-done="${esc(q.id)}">Dismiss</button>
+        </td>
+      </tr>`).join('')}</tbody></table></div>`;
+  body.querySelectorAll('[data-inq-start]').forEach(b => b.addEventListener('click', async () => {
+    const q = rows.find(x => x.id === b.dataset.inqStart);
+    await cxApi('PATCH', '/api/admin/inquiries/' + q.id, { status: 'contacted' });
+    cxOpenAddClient(root, q);
+  }));
+  body.querySelectorAll('[data-inq-done]').forEach(b => b.addEventListener('click', async () => {
+    await cxApi('PATCH', '/api/admin/inquiries/' + b.dataset.inqDone, { status: 'lost' });
+    cxLoadInquiries(root);
+  }));
+}
+
+/* ---------------- + Add New Client (guided provisioning form) ----------------
+   Builds a schema 1.0 envelope and feeds the SAME server pipeline as a pasted import
+   (validate -> review -> provision -> readiness -> go-live). Nothing is written to a tenant here. */
+
+function cxOpenAddClient(root, inq) {
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const hoursRows = days.map((d, i) => {
+    const closed = (i === 0 || i === 6);
+    return `<tr><td style="padding:3px 8px 3px 0">${d}</td>
+      <td><input type="time" id="cxH${i}o" value="09:00" ${closed ? 'disabled' : ''}></td>
+      <td><input type="time" id="cxH${i}c" value="17:00" ${closed ? 'disabled' : ''}></td>
+      <td><label style="display:flex;gap:5px;align-items:center"><input type="checkbox" id="cxH${i}x" ${closed ? 'checked' : ''}> closed</label></td></tr>`;
+  }).join('');
+  const tz = ['America/New_York', 'America/Chicago', 'America/Denver', 'America/Phoenix', 'America/Los_Angeles', 'America/Anchorage', 'Pacific/Honolulu'];
+  openModal({
+    title: 'Add New Client',
+    wide: true,
+    body: `
+      <p class="cell-dim" style="margin:0 0 10px;font-size:0.82rem">Enter what you know now. Everything is validated and reviewed before anything is created — and the client stays <strong>not live</strong> until all readiness checks pass and you click GO LIVE.</p>
+      <div class="cx-form-row"><strong>1 · Business</strong></div>
+      <div class="cx-form-row"><label>Business name *</label><input id="cxAcName" type="text" value="${esc(inq ? inq.business : '')}" placeholder="Lakeside Barbers"></div>
+      <div class="cx-form-row"><label>Industry *</label><input id="cxAcInd" type="text" value="${esc(inq ? inq.industry : '')}" placeholder="Barber / Salon / Dental / Detailing…"></div>
+      <div class="cx-form-row"><label>Business phone *</label><input id="cxAcPhone" type="text" value="${esc(inq ? inq.phone : '')}" placeholder="(813) 555-0100"></div>
+      <div class="cx-form-row"><label>Business email *</label><input id="cxAcEmail" type="text" value="${esc(inq ? inq.email : '')}"></div>
+      <div class="cx-form-row"><label>Website</label><input id="cxAcWeb" type="text" value="${esc(inq ? inq.website : '')}"></div>
+      <div class="cx-form-row"><label>City</label><input id="cxAcCity" type="text"></div>
+      <div class="cx-form-row"><label>Time zone</label><select id="cxAcTz">${tz.map(z => `<option ${z === 'America/New_York' ? 'selected' : ''}>${z}</option>`).join('')}</select></div>
+      <div class="cx-form-row"><strong>2 · Hours</strong></div>
+      <table style="font-size:0.82rem">${hoursRows}</table>
+      <div class="cx-form-row"><strong>3 · Services</strong> <span class="cell-dim">one per line: name | minutes | price in dollars</span>
+        <textarea id="cxAcSvc" rows="5" placeholder="Haircut | 30 | 35&#10;Beard trim | 15 | 15"></textarea></div>
+      <div class="cx-form-row"><strong>4 · Business knowledge / FAQs</strong> <span class="cell-dim">one per line: question | answer (policies, parking, payment, etc.)</span>
+        <textarea id="cxAcKb" rows="5" placeholder="Do you take walk-ins? | Yes, when the schedule allows."></textarea></div>
+      <div class="cx-form-row"><strong>5 · AI receptionist</strong></div>
+      <div class="cx-form-row"><label>Receptionist name</label><input id="cxAcRxName" type="text" value="Ava"></div>
+      <div class="cx-form-row"><label>Greeting</label><input id="cxAcRxGreet" type="text" placeholder="Thanks for calling … how can I help?"></div>
+      <div class="cx-form-row"><strong>6 · Client login (owner)</strong></div>
+      <div class="cx-form-row"><label>Owner email *</label><input id="cxAcOwner" type="text" value="${esc(inq ? inq.email : '')}"></div>
+      <div class="cx-form-row"><label><input type="checkbox" id="cxAcCal"> Connect Google Calendar (completed later under Connections)</label></div>
+      <div id="cxAcErr" style="margin-top:10px"></div>`,
+    footer: `<button class="btn btn-ghost" data-cx-cancel>Cancel</button>
+             <button class="btn btn-gold" data-cx-create>Create client setup</button>`,
+    onOpen: ({ modal, close }) => {
+      const q = (id) => modal.querySelector('#' + id);
+      days.forEach((d, i) => q(`cxH${i}x`).addEventListener('change', () => {
+        q(`cxH${i}o`).disabled = q(`cxH${i}c`).disabled = q(`cxH${i}x`).checked;
+      }));
+      modal.querySelector('[data-cx-cancel]').addEventListener('click', close);
+      modal.querySelector('[data-cx-create]').addEventListener('click', async () => {
+        const err = q('cxAcErr'); err.innerHTML = '';
+        const name = q('cxAcName').value.trim();
+        const owner = q('cxAcOwner').value.trim();
+        if (!name || !q('cxAcInd').value.trim() || !q('cxAcPhone').value.trim() || !q('cxAcEmail').value.trim() || !owner) {
+          err.innerHTML = cxErrBanner('Business name, industry, business phone, business email and owner email are required.'); return;
+        }
+        const hours = days.map((d, i) => q(`cxH${i}x`).checked
+          ? { weekday: i, closed: true }
+          : { weekday: i, open: q(`cxH${i}o`).value, close: q(`cxH${i}c`).value });
+        const services = q('cxAcSvc').value.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+          const [n, m, p] = l.split('|').map(x => (x || '').trim());
+          const svc = { name: n, duration_minutes: parseInt(m, 10) || 30 };
+          const price = parseFloat((p || '').replace(/[^0-9.]/g, ''));
+          if (!isNaN(price)) svc.price_minor = Math.round(price * 100);
+          return svc;
+        });
+        const knowledge = q('cxAcKb').value.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+          const [a, ...rest] = l.split('|');
+          return { kind: 'faq', title: (a || '').trim(), content: rest.join('|').trim() };
+        }).filter(k => k.title && k.content);
+        const envelope = {
+          schema_version: '1.0',
+          source: { system: 'manual', external_business_key: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') },
+          business: {
+            display_name: name, legal_name: name, industry: q('cxAcInd').value.trim(),
+            timezone: q('cxAcTz').value, phone: q('cxAcPhone').value.trim(),
+            email: q('cxAcEmail').value.trim() || undefined, website: q('cxAcWeb').value.trim() || undefined,
+            currency: 'USD', address: { city: q('cxAcCity').value.trim() || undefined }, hours,
+          },
+          services,
+          users: [{ email: owner, role: 'business_owner' }],
+          receptionist: { name: q('cxAcRxName').value.trim() || 'Ava', greeting: q('cxAcRxGreet').value.trim() || undefined, enabled: false },
+          knowledge,
+          integrations: q('cxAcCal').checked ? [{ provider: 'google_calendar' }] : [],
+        };
+        const r = await cxApi('POST', '/api/admin/connect/imports', { envelope: JSON.stringify(envelope), filename: `${name} (guided form)` });
+        if (r.error && !r.import) { err.innerHTML = cxErrBanner(r.error); return; }
+        close();
+        const imp = r.import;
+        toast(`Client setup ${imp.id} created — state: ${imp.state}`, imp.state === 'validated' ? 'success' : 'error');
+        cxView = { name: 'detail', id: imp.id };
+        cxRenderDetail(root);
+      });
+    },
+  });
+}
+
+
+/* ---------------- owner invitation hand-off ---------------- */
+
+async function cxLoadInvites(root, tenantId) {
+  const box = root.querySelector('#cxInviteBody');
+  if (!box) return;
+  const r = await cxApi('GET', '/api/admin/tenants/' + encodeURIComponent(tenantId) + '/invites');
+  if (r.error) { box.innerHTML = `<span class="cell-dim">${esc(r.error)}</span>`; return; }
+  const enrolled = r.enrolled || [], pending = r.invites || [];
+  const enr = enrolled.length
+    ? `<div class="list-row"><div class="row-main"><div class="row-title">Enrolled</div><div class="row-sub">${enrolled.map(u => esc(u.email) + ' (' + esc(u.role || 'user') + ')').join(' · ')}</div></div><span class="status-pill status-green"><span class="sdot"></span>active</span></div>` : '';
+  const pen = pending.map(i => `
+    <div class="list-row" style="flex-wrap:wrap;gap:8px">
+      <div class="row-main"><div class="row-title">${esc(i.email)} <span class="cell-dim">(${esc(i.role || 'owner')})</span></div>
+        <div class="row-sub">${i.expired ? 'Invitation expired — renew it to issue a fresh link.' : 'Invited ' + esc(relTime(i.invitedAt)) + ' · valid 14 days'}</div>
+        <input type="text" readonly value="${esc(i.link)}" data-inv-link="${esc(i.userId)}" style="width:100%;margin-top:6px;font-family:ui-monospace,monospace;font-size:0.76rem"></div>
+      <button class="btn btn-gold btn-sm" data-inv-copy="${esc(i.userId)}">Copy link</button>
+      <button class="btn btn-ghost btn-sm" data-inv-renew="${esc(i.userId)}">Renew</button>
+    </div>`).join('');
+  box.innerHTML = (enr + pen) || '<span class="cell-dim">No owner users found for this business.</span>';
+  box.querySelectorAll('[data-inv-copy]').forEach(b => b.addEventListener('click', async () => {
+    const inp = box.querySelector(`[data-inv-link="${b.dataset.invCopy}"]`);
+    try { await navigator.clipboard.writeText(inp.value); toast('Invitation link copied', 'success'); }
+    catch (e) { inp.select(); toast('Press Ctrl+C to copy the selected link', 'info'); }
+  }));
+  box.querySelectorAll('[data-inv-renew]').forEach(b => b.addEventListener('click', async () => {
+    const x = await cxApi('POST', '/api/admin/invites/' + encodeURIComponent(b.dataset.invRenew) + '/renew', {});
+    if (x.error) { toast(x.error, 'error'); return; }
+    toast('New invitation link issued', 'success');
+    cxLoadInvites(root, tenantId);
+  }));
+}
+
+/* ---------------- new import modal ---------------- */
+
+function cxOpenNewImport(root) {
+  openModal({
+    title: 'New Business Connect import',
+    wide: true,
+    body: `
+      <p class="cell-dim" style="margin:0 0 10px;font-size:0.82rem">
+        Paste a <strong>schema_version 1.0</strong> envelope. Validation, duplicate detection and provisioning all run
+        server-side — this form never edits tenant data directly.</p>
+      <div class="cx-form-row"><label>Filename / source label</label>
+        <input id="cxImpFile" type="text" placeholder="e.g. lakeside-dental.json"></div>
+      <div class="cx-form-row"><label>Envelope JSON</label>
+        <textarea id="cxImpJson" rows="16" spellcheck="false" style="font-family:ui-monospace,monospace;font-size:0.78rem"></textarea></div>
+      <div style="display:flex;gap:9px;margin-top:4px">
+        <button class="btn btn-ghost btn-sm" id="cxSample">Load sample envelope</button>
+      </div>
+      <div id="cxImpErr" style="margin-top:10px"></div>`,
+    footer: `<button class="btn btn-ghost" data-cx-cancel>Cancel</button>
+             <button class="btn btn-gold" data-cx-create>Create import</button>`,
+    onOpen: ({ modal, close }) => {
+      modal.querySelector('#cxSample').addEventListener('click', () => {
+        modal.querySelector('#cxImpJson').value = cxSampleEnvelope();
+      });
+      modal.querySelector('[data-cx-cancel]').addEventListener('click', close);
+      modal.querySelector('[data-cx-create]').addEventListener('click', async () => {
+        const raw = modal.querySelector('#cxImpJson').value.trim();
+        const errBox = modal.querySelector('#cxImpErr');
+        errBox.innerHTML = '';
+        if (!raw) { errBox.innerHTML = cxErrBanner('Paste an envelope or load the sample.'); return; }
+        const r = await cxApi('POST', '/api/admin/connect/imports', {
+          envelope: raw,
+          filename: modal.querySelector('#cxImpFile').value.trim(),
+        });
+        if (r.error && !r.import) { errBox.innerHTML = cxErrBanner(r.error); return; }
+        close();
+        const imp = r.import;
+        toast(`Import ${imp.id} created — state: ${imp.state}`, imp.state === 'validated' ? 'success' : 'error');
+        cxView = { name: 'detail', id: imp.id };
+        cxRenderDetail(root);
+      });
+    },
+  });
+}
+
+/* ============================================================
+   DETAIL VIEW — the wizard, driven entirely by server state
+   ============================================================ */
+
+async function cxRenderDetail(root) {
+  root.innerHTML = `<div class="cx-loading">Loading import…</div>`;
+  const r = await cxApi('GET', `/api/admin/connect/imports/${encodeURIComponent(cxView.id)}`);
+  if (r.error) {
+    root.innerHTML = `
+      <div class="page-head"><div class="page-title">Business Connect</div></div>
+      <div class="card">${cxErrBanner(r.error)}
+        <button class="btn btn-ghost btn-sm" id="cxBack1">← Back to imports</button></div>`;
+    root.querySelector('#cxBack1').addEventListener('click', () => { cxView = { name: 'list' }; cxRenderList(root); });
+    return;
+  }
+
+  const imp = r.import;
+  const dupes = r.duplicates || [];
+  const run = r.provisioningRun || null;
+  const glc = r.goLiveChecks || null;
+
+  const issues = (imp.issues || []).filter(i => i.severity === 'error');
+  const warnOnly = (imp.issues || []).length > 0 && issues.length === 0;
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Import ${esc(imp.id)} ${cxStatePill(imp.state)}</div>
+      <div class="page-sub">${esc(imp.filename || '(pasted envelope)')} · created ${relTime(imp.createdAt)} by ${esc(imp.createdBy || '')}
+        ${imp.externalBusinessKey ? ` · external key <code>${esc(imp.externalBusinessKey)}</code>` : ''}</div>
+    </div>
+    ${cxSteps(imp.state)}
+    <div class="section-stack" style="margin-top:14px">
+
+      ${cxErrBanner(imp.state === 'validation_failed' ? '' : '')}
+      <div class="card">
+        <div class="card-title">🗺️ Mapped envelope
+          <span style="flex:1"></span>
+          <button class="btn btn-ghost btn-sm" id="cxBack">← All imports</button>
+          <button class="btn btn-ghost btn-sm" id="cxRaw">View JSON</button>
+        </div>
+        <div class="kv-list">
+          ${cxKv('Legal name', imp.envelope && imp.envelope.business ? imp.envelope.business.legal_name : '')}
+          ${cxKv('Display name', imp.envelope && imp.envelope.business ? imp.envelope.business.display_name : '')}
+          ${cxKv('Industry', imp.envelope && imp.envelope.business ? imp.envelope.business.industry : '')}
+          ${cxKv('Plan / billing consent', `${imp.planCode || '—'} · ${imp.billingConsent ? 'consented' : 'no billing consent'}`)}
+          ${cxKv('Schema version', imp.schemaVersion || '—')}
+        </div>
+      </div>
+
+      ${issues.length ? `
+      <div class="card">
+        <div class="card-title">⛔ Validation errors (${issues.length}) — provisioning is blocked until fixed</div>
+        ${cxIssueRows(imp.issues)}
+        <p class="cell-dim" style="font-size:0.8rem;margin:10px 0 0">
+          The envelope is immutable after import (audit trail). Fix the source data and create a corrected re-import;
+          use the same <code>source.external_business_key</code> so duplicate detection can link them.</p>
+      </div>` : ''}
+
+      ${warnOnly && imp.issues.length ? `
+      <div class="card">
+        <div class="card-title">⚠️ Warnings</div>
+        ${cxIssueRows(imp.issues)}
+      </div>` : ''}
+
+      ${cxActionsCard(root, imp, dupes, r)}
+
+      ${dupes.length ? `
+      <div class="card">
+        <div class="card-title">👥 Possible duplicates in existing tenants (scored, never auto-merged)</div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Tenant</th><th>Name</th><th>Status</th><th>Score</th><th>Reasons</th></tr></thead>
+          <tbody>${dupes.map(d => `
+            <tr>
+              <td><code>${esc(d.tenantId)}</code></td>
+              <td>${esc(d.name)}</td>
+              <td>${esc(d.status || '')}</td>
+              <td><span class="status-pill ${d.score >= 80 ? 'status-red' : 'status-orange'}"><span class="sdot"></span>${d.score}</span></td>
+              <td class="cell-dim">${esc((d.reasons || []).join('; '))}</td>
+            </tr>`).join('')}</tbody></table></div>
+      </div>` : ''}
+
+      ${(r.review || []).length ? `
+      <div class="card">
+        <div class="card-title">🔍 Review — exactly what will be provisioned</div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Field</th><th>Value after normalization</th><th>Source</th></tr></thead>
+          <tbody>${r.review.map(f => `
+            <tr><td><code>${esc(f.field)}</code></td><td>${esc(f.value || '—')}</td>
+            <td>${f.source === 'normalized' ? '<span class="status-pill status-blue"><span class="sdot"></span>normalized</span>' : '<span class="cell-dim">import</span>'}</td></tr>`).join('')}</tbody></table></div>
+      </div>` : ''}
+
+      ${run ? `
+      <div class="card">
+        <div class="card-title">⚙️ Provisioning run <code>${esc(run.id)}</code></div>
+        <div class="kv-list">
+          ${cxKv('Run state', esc(String(run.state).replace(/_/g, ' ')))}
+          ${cxKv('Idempotency key', `<code>${esc(run.idempotencyKey)}</code>`)}
+          ${cxKv('Attempts', String(run.attempts))}
+          ${run.tenantId ? cxKv('Tenant', `<code>${esc(run.tenantId)}</code>`) : ''}
+          ${run.failureDetail ? cxKv('Last failure', esc(run.failureDetail)) : ''}
+        </div>
+        ${run.steps && run.steps.length ? `
+        <div style="margin-top:10px">${run.steps.map(s => `
+          <div class="list-row">
+            <div class="row-ico" style="background:${s.state === 'done' ? 'var(--green-dim);color:var(--green)' : s.state === 'failed' ? 'var(--red-dim);color:var(--red)' : 'var(--bg-hover)'}">
+              ${s.state === 'done' ? '✓' : s.state === 'failed' ? '✕' : '•'}</div>
+            <div class="row-main">
+              <div class="row-title">${esc(s.key)}</div>
+              <div class="row-sub">${esc(s.detail || '')}</div>
+            </div>
+            <span class="status-pill ${s.state === 'done' ? 'status-green' : s.state === 'failed' ? 'status-red' : 'status-dim'}"><span class="sdot"></span>${esc(s.state)}</span>
+          </div>`).join('')}</div>` : ''}
+      </div>` : ''}
+
+      ${glc && imp.tenantId ? `
+      <div class="card">
+        <div class="card-title">🚦 Go-live checks <span style="flex:1"></span>
+          <button class="btn btn-ghost btn-sm" id="cxRecheck">↻ Re-run checks</button></div>
+        ${glc.checks.map(c => `
+          <div class="list-row">
+            <div class="row-ico" style="background:${c.pass ? 'var(--green-dim);color:var(--green)' : 'var(--red-dim);color:var(--red)'}">${c.pass ? '✓' : '✕'}</div>
+            <div class="row-main">
+              <div class="row-title">${esc(c.label)} ${c.required ? '<span class="cell-dim">(required)</span>' : ''}</div>
+              <div class="row-sub">${esc(c.detail || '')}</div>
+            </div>
+            <span class="status-pill ${c.pass ? 'status-green' : 'status-red'}"><span class="sdot"></span>${c.pass ? 'pass' : 'blocked'}</span>
+          </div>`).join('')}
+        ${!glc.ready ? `<p class="cell-dim" style="font-size:0.8rem;margin:10px 0 0">
+          Blocked by: ${glc.blockers.map(b => `<code>${esc(b)}</code>`).join(', ')}. Go-live will fail closed until every required check passes.</p>` : ''}
+      </div>` : ''}
+
+      ${imp.tenantId ? `
+      <div class="card" id="cxInviteCard">
+        <div class="card-title">🔑 Owner access — hand-off <span style="flex:1"></span></div>
+        <p class="cell-dim" style="font-size:0.82rem;margin:0 0 10px">Send the private link below to the owner (email or text). They choose a password and land in their finished system. Treat the link like a password. Go-live requires the owner to have enrolled.</p>
+        <div id="cxInviteBody"><span class="cell-dim">Loading…</span></div>
+      </div>` : ''}
+    </div>`;
+
+  if (imp.tenantId) cxLoadInvites(root, imp.tenantId);
+  root.querySelector('#cxBack').addEventListener('click', () => { cxView = { name: 'list' }; cxRenderList(root); });
+  root.querySelector('#cxRaw').addEventListener('click', () => {
+    openModal({
+      title: `Envelope — ${imp.id}`,
+      wide: true,
+      body: `<textarea readonly rows="20" style="width:100%;font-family:ui-monospace,monospace;font-size:0.78rem">${esc(JSON.stringify(imp.envelope, null, 2))}</textarea>`,
+      footer: `<button class="btn btn-ghost" data-close3>Close</button>`,
+      onOpen: ({ modal, close }) => modal.querySelector('[data-close3]').addEventListener('click', close),
+    });
+  });
+  const recheck = root.querySelector('#cxRecheck');
+  if (recheck) recheck.addEventListener('click', () => cxRenderDetail(root));
+
+  cxBindActions(root, imp);
+}
+
+function cxKv(label, valueHtml) {
+  return `<div class="kv-row"><div class="kv-label">${label}</div><div class="kv-value">${valueHtml || '<span class="cell-dim">—</span>'}</div></div>`;
+}
+
+/* ---------------- state-driven action card ---------------- */
+
+function cxActionsCard(root, imp, dupes, detail) {
+  const state = imp.state;
+  let body = '';
+  const dupNote = dupes.length
+    ? `<p class="cell-dim" style="font-size:0.8rem;margin:8px 0 0">${dupes.length} possible duplicate${dupes.length === 1 ? '' : 's'} detected. Approving without resolving requires explicit confirmation — imports are never auto-merged.</p>`
+    : '';
+
+  if (state === 'validated' || state === 'duplicate_review') {
+    body = `
+      <div class="card-title">✅ Ready for review & approval</div>
+      <p class="cell-dim" style="font-size:0.85rem;margin:0 0 10px">Validation passed. Approving locks this import for provisioning. Duplicate checks re-run server-side at approval time.</p>
+      ${dupNote}
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap">
+        <button class="btn btn-gold" id="cxBtnApprove">Approve import</button>
+        ${dupes.length ? `<button class="btn btn-red" id="cxBtnApproveDespite">Approve anyway — create as separate business</button>` : ''}
+      </div>`;
+  } else if (state === 'approved') {
+    body = `
+      <div class="card-title">Approved — ready to provision</div>
+      <p class="cell-dim" style="font-size:0.85rem;margin:0 0 10px">Provisioning creates the tenant (org + business), profile, hours, services, receptionist config, declared integrations (recorded honestly as <strong>not_configured</strong>) and owner invitation. It is idempotent — safe to re-run.</p>
+      <button class="btn btn-gold" id="cxBtnProvision">Provision tenant</button>`;
+  } else if (state === 'provisioning_partial' || state === 'verification_failed') {
+    body = `
+      <div class="card-title">⚠️ Provisioning incomplete</div>
+      <p class="cell-dim" style="font-size:0.85rem;margin:0 0 10px">The last run stopped with failures. Re-running resumes from completed steps — finished steps are skipped, partial ones are retried (upsert semantics).</p>
+      <button class="btn btn-gold" id="cxBtnProvision">Resume provisioning (idempotent)</button>`;
+  } else if (state === 'ready_for_go_live') {
+    body = `
+      <div class="card-title">🚀 Ready for go-live</div>
+      <p class="cell-dim" style="font-size:0.85rem;margin:0 0 10px">Tenant provisioned and verified. Go-live is <strong>fail-closed</strong>: it requires the explicit owner-approval flag AND every required check passing (including an enrolled owner and real receptionist provider readiness).</p>
+      <label class="cx-check"><input type="checkbox" id="cxOwnerApproval">
+        <span>Business owner has explicitly approved go-live (documented consent)</span></label>
+      <div style="margin-top:12px"><button class="btn btn-gold" id="cxBtnGolive">Execute go-live</button></div>`;
+  } else if (state === 'active') {
+    body = `
+      <div class="card-title">🏆 Tenant is live</div>
+      <p class="cell-dim" style="font-size:0.85rem;margin:0 0 4px">Business Connect onboarding complete for tenant <code>${esc(imp.tenantId || '')}</code>. Ongoing configuration lives in the tenant's own apps (Client Hub, AI Receptionist).</p>`;
+  } else if (state === 'validation_failed') {
+    body = `
+      <div class="card-title">⛔ Validation failed</div>
+      <p class="cell-dim" style="font-size:0.85rem;margin:0">Fix the errors listed above in the source data, then create a corrected re-import. Approval and provisioning stay locked.</p>`;
+  } else if (state === 'provisioning') {
+    body = `<div class="card-title">⏳ Provisioning in progress…</div>
+      <p class="cell-dim" style="font-size:0.85rem;margin:0">Refresh to see the latest run state.</p>
+      <button class="btn btn-ghost btn-sm" id="cxRef" style="margin-top:8px">↻ Refresh</button>`;
+  }
+
+  return body ? `<div class="card" id="cxActions">${body}</div>` : '';
+}
+
+function cxBindActions(root, imp) {
+  const bind = (id, fn) => { const el = root.querySelector(id); if (el) el.addEventListener('click', fn); };
+  const refresh = () => cxRenderDetail(root);
+
+  bind('#cxRef', refresh);
+
+  bind('#cxBtnApprove', async () => {
+    const r = await cxApi('POST', `/api/admin/connect/imports/${imp.id}/approve`, {});
+    if (r.status === 409 && r.needsDuplicateResolution) {
+      toast('Duplicates found — resolve or approve explicitly', 'info');
+      refresh(); return;
+    }
+    if (r.error) { toast(r.error, 'error'); refresh(); return; }
+    toast('Import approved', 'success'); refresh();
+  });
+
+  bind('#cxBtnApproveDespite', async () => {
+    const ok = await confirmDialog({
+      title: 'Create as a separate business?',
+      message: 'Possible duplicates were detected. This records "proceed-separate" on the import and creates a NEW tenant alongside the possible matches. Nothing is merged.',
+      confirmText: 'Approve despite duplicates',
+      danger: true,
+    });
+    if (!ok) return;
+    const r = await cxApi('POST', `/api/admin/connect/imports/${imp.id}/approve`, { proceedDespiteDuplicates: true });
+    if (r.error) { toast(r.error, 'error'); refresh(); return; }
+    toast('Import approved (proceed-separate recorded)', 'success'); refresh();
+  });
+
+  bind('#cxBtnProvision', async () => {
+    const r = await cxApi('POST', `/api/admin/connect/imports/${imp.id}/provision`, {});
+    if (r.error) { toast(r.error, 'error'); refresh(); return; }
+    if (r.already) toast('Provisioning already complete (idempotent re-run)', 'info');
+    else toast(`Provisioned tenant ${r.tenantId} — state: ${r.state}`, r.state === 'ready_for_go_live' ? 'success' : 'error');
+    refresh();
+  });
+
+  bind('#cxBtnGolive', async () => {
+    const chk = root.querySelector('#cxOwnerApproval');
+    if (!chk || !chk.checked) { toast('Owner approval must be checked — go-live is fail-closed', 'error'); return; }
+    const ok = await confirmDialog({
+      title: 'Execute go-live?',
+      message: 'The tenant becomes active for real call handling. All required checks must pass, including enrolled owner and receptionist provider readiness (real telephony/LLM credentials).',
+      confirmText: 'Go live',
+      danger: true,
+    });
+    if (!ok) return;
+    const r = await cxApi('POST', `/api/admin/connect/imports/${imp.id}/golive`, { ownerApproval: true });
+    if (r.error) { toast(r.error, 'error'); refresh(); return; }
+    toast('Tenant is live', 'success'); refresh();
+  });
+}
+
+
+/* ---- js/pages/providers.js ---- */
+/* ============================================================
+   VANTORX ADMIN — pages/providers.js (PRODUCTION)
+   Real provider registry from the server environment. Every
+   status is evaluated server-side from actual env vars — this
+   page never guesses and never fakes a connection.
+   ============================================================ */
+
+const CAPS = [
+  { key: 'telephony', label: 'Telephony (real inbound calls)' },
+  { key: 'llm', label: 'LLM (conversation brain)' },
+  { key: 'stt', label: 'Speech-to-text' },
+  { key: 'tts', label: 'Text-to-speech' },
+  { key: 'calendar', label: 'Calendar / booking' },
+  { key: 'crm', label: 'CRM / LeadFlow' },
+  { key: 'email', label: 'Email delivery' },
+  { key: 'sms', label: 'SMS delivery' },
+  { key: 'payments', label: 'Payments / billing' },
+];
+
+function pill(status) {
+  if (status === 'connected' || status === 'CONNECTED') return `<span class="status-pill status-green"><span class="sdot"></span>connected</span>`;
+  if (status === 'BLOCKED') return `<span class="status-pill status-red"><span class="sdot"></span>blocked</span>`;
+  return `<span class="status-pill status-orange"><span class="sdot"></span>not connected</span>`;
+}
+
+async function renderProviders(root, ctx) {
+  root.innerHTML = `<div class="page-head"><div class="page-title">Providers</div><div class="page-sub">Live status from server environment variables. Secrets never leave the server.</div></div><div id="pvBody"><div class="card">Loading…</div></div>`;
+
+  const r = await api('GET', '/api/admin/providers');
+  const e = await api('GET', '/api/admin/env-status');
+  const body = root.querySelector('#pvBody');
+  if (r.status !== 200) {
+    body.innerHTML = `<div class="card"><div class="cx-error">✕ ${esc(r.error || 'Failed to load provider status')}</div></div>`;
+    return;
+  }
+  const pv = r.providers || {};
+  const testsDone = {};
+
+  const capRow = (c) => {
+    const st = pv[c.key] || { status: 'NOT_CONNECTED', note: '' };
+    return `<tr>
+      <td><strong>${esc(c.label)}</strong><div class="cell-dim" style="font-size:0.78rem">${esc(st.note || '')}</div>
+        <div class="cell-dim" style="font-size:0.75rem;margin-top:2px">env: ${((st.envPresent || []).length ? '✓ ' + esc((st.envPresent || []).join(', ')) + ' ' : '') + ((st.envMissing || []).length ? '✗ ' + esc((st.envMissing || []).join(', ')) : '')}</div></td>
+      <td>${esc(st.provider || '—')}</td>
+      <td>${pill(st.status)}</td>
+      <td><button class="btn btn-ghost btn-sm" data-test="${esc(c.key)}" ${st.status === 'NOT_CONNECTED' ? 'disabled' : ''}>Test</button><div class="cell-dim" style="font-size:0.75rem;margin-top:4px;max-width:280px" data-testout="${esc(c.key)}"></div></td>
+    </tr>`;
+  };
+
+  const numRow = (n) => `<tr><td><code>${esc(n.number)}</code></td><td>${esc(n.provider || '')}</td><td>${esc(n.businessId)}</td><td><button class="btn btn-ghost btn-sm" data-unmapnum="${esc(n.id)}" style="color:var(--red)">Unmap</button></td></tr>`;
+  const agentRow = (a) => `<tr><td><code>${esc(a.agentId)}</code></td><td>${esc(a.businessId)}</td><td><button class="btn btn-ghost btn-sm" data-unmapagent="${esc(a.id)}" style="color:var(--red)">Unmap</button></td></tr>`;
+
+  const businesses = (ctx.overviewData ? ctx.overviewData.businesses : []) || [];
+  const bizOpts = businesses.map(b => `<option value="${esc(b.id)}">${esc(b.name)} (${esc(b.id)})</option>`).join('');
+
+  body.innerHTML = `
+    <div class="card">
+      <div class="card-title">🔌 Provider registry <span class="dim small">— connected = required env vars present in the SERVER environment</span></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Capability</th><th>Provider</th><th>Status</th><th>Live test</th></tr></thead>
+        <tbody>${CAPS.map(capRow).join('')}</tbody>
+      </table></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📞 Voice number mapping <span class="dim small">— which business answers each phone number (Twilio)</span></div>
+      ${r.voiceNumbers && r.voiceNumbers.length ? `<div class="table-wrap"><table><thead><tr><th>Number</th><th>Provider</th><th>Business</th><th></th></tr></thead><tbody>${r.voiceNumbers.map(numRow).join('')}</tbody></table></div>` : '<p class="cell-dim" style="margin:0 0 10px">No numbers mapped. A real caller dialing an unmapped number gets a "not in service" response — never a fake receptionist.</p>'}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin-top:10px">
+        <div><label class="cell-dim small">Number (E.164)</label><br><input id="vnNum" placeholder="+13125550142" style="min-width:180px"></div>
+        <div><label class="cell-dim small">Business</label><br><select id="vnBiz" style="min-width:220px">${bizOpts}</select></div>
+        <button class="btn btn-gold btn-sm" id="vnAdd">Map number</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🤖 Retell agent mapping <span class="dim small">— Retell agent → business (voice pipeline mode)</span></div>
+      ${r.voiceAgents && r.voiceAgents.length ? `<div class="table-wrap"><table><thead><tr><th>Agent ID</th><th>Business</th><th></th></tr></thead><tbody>${r.voiceAgents.map(agentRow).join('')}</tbody></table></div>` : '<p class="cell-dim" style="margin:0 0 10px">No Retell agents mapped.</p>'}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin-top:10px">
+        <div><label class="cell-dim small">Agent ID</label><br><input id="vaId" placeholder="agent_..." style="min-width:180px"></div>
+        <div><label class="cell-dim small">Business</label><br><select id="vaBiz" style="min-width:220px">${bizOpts}</select></div>
+        <button class="btn btn-gold btn-sm" id="vaAdd">Map agent</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔐 Server environment variables <span class="dim small">— names and presence only, never values</span></div>
+      ${e.status === 200 ? `<div class="table-wrap"><table><thead><tr><th>Variable</th><th>Present</th></tr></thead><tbody>
+        ${(e.rows || []).map(v => `<tr><td><code>${esc(v.name)}</code></td><td>${v.present ? '<span class="status-pill status-green"><span class="sdot"></span>yes</span>' : '<span class="status-pill status-orange"><span class="sdot"></span>no</span>'}</td></tr>`).join('')}
+      </tbody></table></div><p class="cell-dim small" style="margin:8px 0 0">Set secrets in the server environment or <code>platform/.env</code> (git-ignored), then restart the server.</p>` : `<div class="cx-error">✕ ${esc(e.error || 'env status unavailable')}</div>`}
+    </div>`;
+
+  body.querySelectorAll('[data-test]').forEach(btn => btn.addEventListener('click', async function () {
+    const cap = this.dataset.test;
+    this.disabled = true;
+    const out = body.querySelector(`[data-testout="${cap}"]`);
+    out.textContent = 'testing…';
+    const t = await api('POST', '/api/admin/providers/test', { capability: cap });
+    this.disabled = false;
+    testsDone[cap] = true;
+    out.textContent = t.status ? `${t.status} — ${t.detail || ''}` : (t.error || 'test failed');
+    toast(`${cap}: ${t.status || 'error'}`, t.status === 'CONNECTED' ? 'success' : 'info');
+  }));
+
+  body.querySelector('#vnAdd').addEventListener('click', async () => {
+    const number = body.querySelector('#vnNum').value.trim();
+    const businessId = body.querySelector('#vnBiz').value;
+    if (!number) { toast('Enter a phone number', 'info'); return; }
+    const res = await api('POST', '/api/admin/voice/numbers', { number, businessId });
+    if (res.status === 201) { toast('Number mapped', 'success'); renderProviders(root, ctx); }
+    else toast(res.error || 'Mapping failed', 'info');
+  });
+  body.querySelector('#vaAdd').addEventListener('click', async () => {
+    const agentId = body.querySelector('#vaId').value.trim();
+    const businessId = body.querySelector('#vaBiz').value;
+    if (!agentId) { toast('Enter an agent ID', 'info'); return; }
+    const res = await api('POST', '/api/admin/voice/agents', { agentId, businessId });
+    if (res.status === 201) { toast('Agent mapped', 'success'); renderProviders(root, ctx); }
+    else toast(res.error || 'Mapping failed', 'info');
+  });
+  body.querySelectorAll('[data-unmapnum]').forEach(btn => btn.addEventListener('click', async function () {
+    if (!(await confirmDialog({ title: 'Unmap number?', message: 'Callers to this number will no longer reach a receptionist.', confirmText: 'Unmap' }))) return;
+    const res = await api('DELETE', `/api/admin/voice/numbers/${encodeURIComponent(this.dataset.unmapnum)}`);
+    if (res.status === 200) { toast('Unmapped', 'success'); renderProviders(root, ctx); } else toast(res.error || 'Failed', 'info');
+  }));
+  body.querySelectorAll('[data-unmapagent]').forEach(btn => btn.addEventListener('click', async function () {
+    if (!(await confirmDialog({ title: 'Unmap agent?', message: 'This Retell agent will no longer route to a business.', confirmText: 'Unmap' }))) return;
+    const res = await api('DELETE', `/api/admin/voice/agents/${encodeURIComponent(this.dataset.unmapagent)}`);
+    if (res.status === 200) { toast('Unmapped', 'success'); renderProviders(root, ctx); } else toast(res.error || 'Failed', 'info');
+  }));
+}
+
+
+/* ---- js/app.js ---- */
+/* ============================================================
+   VANTORX ADMIN — app.js (PRODUCTION)
+   Auth gate (vantorx_admin only) · router · sidebar · topbar
+   (search/notifications/account/home) · mobile drawer.
+   All data comes from the platform server via realapi.js.
+   There is no demo store and no offline fake data.
+   ============================================================ */
+
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+
+/* ---------------- session + shared cache ---------------- */
+
+let authUser = null;        // { id, email, name, role } | null
+let overviewData = null;    // last /api/admin/overview payload
+
+const ctx = {
+  navigate,
+  get user() { return authUser; },
+  get overviewData() { return overviewData; },
+  async overview(force) {
+    if (force || !overviewData) {
+      const r = await overview();
+      if (r.status === 200) {
+        overviewData = r;
+        paintBadges();
+      } else if (r.status === 401) {
+        authUser = null;
+        return null;
+      } else {
+        throw new Error(r.error || 'Failed to load platform data');
+      }
+    }
+    return overviewData;
+  },
+  openClient: (id) => openClientDetail(id, ctx),
+};
+
+/* ---------------- routing ---------------- */
+
+const routes = {
+  overview: renderOverview,
+  clients: renderClients,
+  requests: renderRequests,
+  billing: renderBilling,
+  activity: renderActivity,
+  settings: renderSettings,
+  connect: renderConnect,
+  providers: renderProviders,
+};
+
+const TITLES = {
+  overview: 'Overview', clients: 'Clients', requests: 'Change Requests',
+  billing: 'Billing & Plans', activity: 'Audit Activity', settings: 'Settings',
+  connect: 'Business Connect', providers: 'Providers',
+};
+
+function parseHash() {
+  const h = (location.hash || '#/overview').replace(/^#\//, '');
+  const [page] = h.split('/');
+  return { page: page || 'overview' };
+}
+
+function setActiveNav(page) {
+  $$('#sidebar .nav-item').forEach(a => a.classList.toggle('active', a.dataset.nav === page));
+}
+
+async function router() {
+  const view = $('#view');
+  if (!authUser || authUser.role !== 'vantorx_admin') {
+    setActiveNav('');
+    $('#topbarTitle').textContent = 'VantorX Admin';
+    view.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'page';
+    view.appendChild(el);
+    renderAuth(el);
+    return;
+  }
+  paintIdentity();
+  const { page } = parseHash();
+  const render = routes[page] || renderOverview;
+  setActiveNav(page);
+  $('#topbarTitle').textContent = TITLES[page] || 'VantorX Admin';
+  view.innerHTML = '';
+  const pageEl = document.createElement('div');
+  pageEl.className = 'page';
+  view.appendChild(pageEl);
+  try {
+    await render(pageEl, ctx);
+  } catch (err) {
+    console.error('Render failed on', page, err);
+    pageEl.innerHTML = `<div class="card">${emptyState('⚠️', 'Could not load live data', String(err.message || err) + ' — the console only shows real platform data, so it stays empty until the server responds.')}</div>`;
+  }
+  closeMobileNav();
+  $('.content').scrollTop = 0;
+}
+
+/* ---------------- auth gate ---------------- */
+
+function renderAuth(root) {
+  root.innerHTML = `
+    <div class="auth-wrap">
+      <div class="card auth-card">
+        <div class="card-title">🔐 Platform sign-in</div>
+        <p class="cell-dim" style="font-size:0.84rem;margin:0 0 12px">This console runs live against the VantorX platform. Access is restricted to <strong>vantorx_admin</strong> accounts.</p>
+        <div class="cx-form-row"><label>Email or username</label><input id="authEmail" type="text" placeholder="Email or username" autocomplete="username"></div>
+        <div class="cx-form-row"><label>Password</label><input id="authPass" type="password" autocomplete="current-password"></div>
+        <div id="authErr"></div>
+        <div style="display:flex;gap:9px;margin-top:14px">
+          <button class="btn btn-gold" id="authGo">Sign in</button>
+          <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal home</a>
+        </div>
+      </div>
+    </div>`;
+  const submit = async () => {
+    const email = root.querySelector('#authEmail').value.trim();
+    const pass = root.querySelector('#authPass').value;
+    root.querySelector('#authErr').innerHTML = '';
+    const r = await login(email, pass);
+    if (r.error) { root.querySelector('#authErr').innerHTML = `<div class="cx-error">✕ ${esc(r.error)}</div>`; return; }
+    if (r.user.role !== 'vantorx_admin') {
+      root.querySelector('#authErr').innerHTML = `<div class="cx-error">✕ ${esc(r.user.email)} is a ${esc(r.user.role)} account — the admin console requires a platform admin.</div>`;
+      return;
+    }
+    authUser = r.user;
+    overviewData = null;
+    toast('Signed in to live platform', 'success');
+    router();
+  };
+  root.querySelector('#authGo').addEventListener('click', submit);
+  root.querySelector('#authPass').addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+}
+
+/* ---------------- identity + badges ---------------- */
+
+function paintIdentity() {
+  if (!authUser) return;
+  const name = authUser.name || authUser.email;
+  $('#avatarName').textContent = String(name).split(' ')[0];
+  $('#avatarInitials').textContent = String(name).split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+  $('#opsName').textContent = 'Platform Admin';
+  $('#opsPlan').textContent = authUser.email;
+}
+
+function paintBadges() {
+  if (!overviewData) return;
+  const bizCount = overviewData.businesses.length;
+  $('#clientsBadge').textContent = bizCount;
+  const open = overviewData.counts.changeRequests || 0;
+  const reqBadge = $('#reqBadge');
+  reqBadge.textContent = open;
+  reqBadge.classList.toggle('red', open > 5);
+}
+
+async function refreshNotificationsDot() {
+  const r = await notifications();
+  if (r.status !== 200) return;
+  const unread = (r.rows || []).filter(n => !n.read).length;
+  $('#notifDot').classList.toggle('show', unread > 0);
+}
+
+/* ---------------- boot ---------------- */
+
+window.addEventListener('hashchange', router);
+window.addEventListener('DOMContentLoaded', async () => {
+  const me = await getMe();
+  if (me.status === 200 && me.user && me.user.role === 'vantorx_admin') {
+    authUser = me.user;
+    try { await ctx.overview(true); } catch (e) { console.warn('overview load failed', e); }
+    refreshNotificationsDot();
+  }
+  router();
+});
+
+/* ---------------- navigation helper ---------------- */
+
+function navigate(route) {
+  const target = '#/' + route;
+  if (location.hash === target) router();
+  else location.hash = target;
+}
+
+/* ---------------- sidebar / mobile drawer ---------------- */
+
+const sidebar = $('#sidebar');
+const scrim = $('#mobileScrim');
+
+function closeMobileNav() {
+  sidebar.classList.remove('mobile-open');
+  scrim.hidden = true;
+}
+$('#menuBtn').addEventListener('click', () => {
+  sidebar.classList.add('mobile-open');
+  scrim.hidden = false;
+});
+scrim.addEventListener('click', closeMobileNav);
+$$('#sidebar .nav-item').forEach(a => a.addEventListener('click', closeMobileNav));
+
+/* ---------------- notifications (real, all tenants for admin) ---------------- */
+
+$('#notifBtn').addEventListener('click', async () => {
+  const r = await notifications();
+  const rows = (r.status === 200 ? (r.rows || []) : []).slice(0, 30);
+  openModal({
+    title: `Notifications${rows.length ? ` · ${rows.filter(n => !n.read).length} unread` : ''}`,
+    wide: true,
+    body: rows.length
+      ? `<div>${rows.map(n => `
+          <div class="list-row" style="${n.read ? 'opacity:0.55' : ''}">
+            <div class="row-ico" style="background:var(--bg-hover)">•</div>
+            <div class="row-main">
+              <div class="row-title">${esc(n.title)}</div>
+              <div class="row-sub">${esc(n.body || '')}</div>
+            </div>
+            <div class="row-time">${relTime(n.at)}</div>
+          </div>`).join('')}</div>`
+      : emptyState('◔', 'No notifications', 'Tenant events appear here as they happen on the platform.'),
+    footer: `<button class="btn btn-ghost btn-sm" data-close2>Close</button>
+             ${rows.length ? '<button class="btn btn-gold btn-sm" data-markread>Mark all read</button>' : ''}`,
+    onOpen: ({ modal, close }) => {
+      modal.querySelector('[data-close2]').addEventListener('click', close);
+      const mark = modal.querySelector('[data-markread]');
+      if (mark) mark.addEventListener('click', async () => {
+        await markNotificationsRead();
+        close();
+        refreshNotificationsDot();
+        toast('All notifications marked read', 'success');
+      });
+    },
+  });
+  refreshNotificationsDot();
+});
+
+/* ---------------- account menu (real session) ---------------- */
+
+$('#accountBtn').addEventListener('click', openAccount);
+$('#opsCard').addEventListener('click', openAccount);
+
+function openAccount() {
+  if (!authUser) { router(); return; }
+  openModal({
+    title: 'Account',
+    body: `
+      <div class="kv-list">
+        <div class="kv-row"><div class="kv-label">Signed in</div><div class="kv-value">${esc(authUser.name || authUser.email)}<div class="cell-dim">${esc(authUser.email)} · ${esc(authUser.role)}</div></div></div>
+        <div class="kv-row"><div class="kv-label">Data source</div><div class="kv-value">Live platform server — port 8787</div></div>
+      </div>
+      <div style="display:flex;gap:9px;margin-top:16px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" data-act="reload">↻ Reload live data</button>
+        <button class="btn btn-ghost btn-sm" data-act="signout" style="color:var(--red)">Sign out</button>
+      </div>`,
+    onOpen: ({ modal, close }) => {
+      modal.querySelector('[data-act="reload"]').addEventListener('click', async () => {
+        close();
+        overviewData = null;
+        await ctx.overview(true);
+        router();
+        toast('Live data reloaded', 'success');
+      });
+      modal.querySelector('[data-act="signout"]').addEventListener('click', async () => {
+        close();
+        await logout();
+        authUser = null;
+        overviewData = null;
+        toast('Signed out', 'info');
+        router();
+      });
+    },
+  });
+}
+
+/* ---------------- global search (live tenants + users) ---------------- */
+
+const searchInput = $('#globalSearch');
+const searchWrap = $('#topbarSearchWrap');
+let searchBox = null;
+
+function searchAll(q) {
+  const s = q.toLowerCase();
+  const out = [];
+  if (overviewData) {
+    overviewData.businesses.forEach(b => {
+      if ((b.name + ' ' + (b.industry || '') + ' ' + (b.city || '')).toLowerCase().includes(s))
+        out.push({ kind: 'Tenant', label: b.name, sub: `${b.industry || ''} · ${b.status || ''}`, go: () => ctx.openClient(b.id) });
+    });
+    overviewData.users.forEach(u => {
+      if ((u.email + ' ' + u.name).toLowerCase().includes(s))
+        out.push({ kind: 'User', label: u.name || u.email, sub: `${u.email} · ${u.role}`, go: () => navigate('activity') });
+    });
+  }
+  return out.slice(0, 8);
+}
+
+function closeSearch() {
+  if (searchBox) { searchBox.remove(); searchBox = null; }
+}
+
+function renderSearchResults() {
+  closeSearch();
+  const q = searchInput.value.trim();
+  if (q.length < 2) return;
+  const hits = searchAll(q);
+  searchBox = document.createElement('div');
+  searchBox.className = 'search-results';
+  if (!hits.length) {
+    searchBox.innerHTML = `<div class="sr-item"><span class="cell-dim">No matches for "${esc(q)}"</span></div>`;
+  } else {
+    hits.forEach(h => {
+      const row = document.createElement('div');
+      row.className = 'sr-item';
+      row.innerHTML = `<span><strong>${esc(h.label)}</strong>&nbsp; <span class="cell-dim">${esc(h.sub)}</span></span><span class="sr-kind">${esc(h.kind)}</span>`;
+      row.addEventListener('click', () => { searchInput.value = ''; closeSearch(); h.go(); });
+      searchBox.appendChild(row);
+    });
+  }
+  searchWrap.appendChild(searchBox);
+}
+
+searchInput.addEventListener('input', renderSearchResults);
+searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSearch(); searchInput.blur(); } });
+document.addEventListener('click', e => { if (searchBox && !e.target.closest('#topbarSearchWrap')) closeSearch(); });
+
+/* "/" focuses search */
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && !/input|textarea|select/i.test(e.target.tagName) && authUser) {
+    e.preventDefault();
+    searchInput.focus();
+  }
+});
+
+
+</script>
+  <!-- providers page lives at js/pages/providers.js -->
+</body>
+</html>

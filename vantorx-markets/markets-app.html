@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overview · VantorX Markets Intelligence</title>
+<style>/* ============================================================
+   VANTORX CLIENT HUB — styles.css
+   Premium dark SaaS design system (shared VantorX tokens)
+   ============================================================ */
+
+:root {
+  --bg: #0a0a0d;
+  --bg-soft: #101014;
+  --bg-card: #14141a;
+  --bg-hover: #1b1b22;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.05);
+  --gold: #d4af37;
+  --gold-bright: #f0d060;
+  --gold-dim: rgba(212, 175, 55, 0.14);
+  --text: #f0efe9;
+  --text-soft: #a8a699;
+  --text-dim: #6d6b60;
+  --green: #4ade80;
+  --green-dim: rgba(74, 222, 128, 0.12);
+  --blue: #60a5fa;
+  --blue-dim: rgba(96, 165, 250, 0.12);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167, 139, 250, 0.12);
+  --red: #f87171;
+  --red-dim: rgba(248, 113, 113, 0.12);
+  --orange: #fbbf24;
+  --orange-dim: rgba(251, 191, 36, 0.12);
+  --teal: #2dd4bf;
+  --teal-dim: rgba(45, 212, 191, 0.12);
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --sidebar-w: 248px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+::selection { background: var(--gold-dim); color: var(--gold-bright); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+
+.app { display: flex; height: 100vh; overflow: hidden; }
+
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  gap: 4px;
+  z-index: 40;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 18px;
+  user-select: none;
+}
+.brand-mark {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold) 0%, #9a7b1f 100%);
+  display: grid; place-items: center;
+  color: #0a0a0d;
+  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+}
+.brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.06em; }
+.brand-name .gold { color: var(--gold-bright); }
+.brand-sub { font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; }
+
+.nav-section-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 12px 10px 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: var(--text-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.88rem;
+}
+.nav-item:hover { background: var(--bg-hover); color: var(--text); }
+.nav-item.active {
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+.nav-item .ico { width: 20px; text-align: center; font-size: 1rem; }
+.nav-item .nav-badge {
+  margin-left: auto;
+  background: var(--gold);
+  color: #0a0a0d;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+.nav-item .nav-badge.red { background: var(--red); color: #fff; }
+
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 6px; }
+.sidebar-biz {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.sidebar-biz:hover { border-color: rgba(212, 175, 55, 0.4); }
+.biz-avatar {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 0.8rem;
+}
+.biz-name { font-size: 0.82rem; font-weight: 600; }
+.biz-plan { font-size: 0.68rem; color: var(--text-dim); }
+.biz-caret { margin-left: auto; color: var(--text-dim); font-size: 0.7rem; }
+
+.demo-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: var(--orange-dim);
+  color: var(--orange);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.demo-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* ---------- topbar ---------- */
+
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+.topbar {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--border-soft);
+  background: rgba(10, 10, 13, 0.8);
+  backdrop-filter: blur(12px);
+  z-index: 30;
+}
+.topbar-title { font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
+.topbar-spacer { flex: 1; }
+
+.icon-btn {
+  position: relative;
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-soft);
+  display: grid; place-items: center;
+  font-size: 1rem;
+  transition: all 0.15s var(--ease);
+}
+.icon-btn:hover { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.4); }
+.icon-btn .dot-badge {
+  position: absolute; top: 6px; right: 6px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid var(--bg-soft);
+  display: none;
+}
+.icon-btn .dot-badge.show { display: block; }
+
+.topbar-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 7px 12px;
+  width: 300px;
+  color: var(--text-dim);
+}
+.topbar-search input {
+  background: none; border: none; outline: none;
+  color: var(--text);
+  width: 100%;
+  font-size: 0.85rem;
+}
+.topbar-search kbd {
+  font-family: inherit;
+  font-size: 0.66rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+.avatar-btn {
+  display: flex; align-items: center; gap: 9px;
+  padding: 5px 10px 5px 6px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.avatar-btn:hover { border-color: rgba(212, 175, 55, 0.4); }
+.avatar-circle {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #9a7b1f);
+  color: #0a0a0d;
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 0.72rem;
+}
+.avatar-name { font-size: 0.8rem; font-weight: 600; }
+.avatar-caret { color: var(--text-dim); font-size: 0.65rem; }
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 26px 28px 60px;
+
+}
+.page { max-width: 1200px; margin: 0 auto; animation: page-in 0.3s var(--ease); }
+@keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.page-head { margin-bottom: 22px; }
+.page-title { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; }
+.page-sub { color: var(--text-soft); font-size: 0.9rem; margin-top: 4px; }
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .link { margin-left: auto; }
+
+.link-btn {
+  background: none; border: none;
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.link-btn:hover { color: var(--gold-bright); text-decoration: underline; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 15px;
+  border-radius: 9px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.15s var(--ease);
+  text-decoration: none;
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-gold { background: linear-gradient(135deg, var(--gold), #b8942a); color: #0a0a0d; }
+.btn-gold:hover:not(:disabled) { filter: brightness(1.12); box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3); }
+.btn-ghost { background: var(--bg-card); border-color: var(--border); color: var(--text-soft); }
+.btn-ghost:hover:not(:disabled) { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.btn-sm { padding: 5px 11px; font-size: 0.78rem; border-radius: 8px; }
+.btn-red { background: var(--red-dim); color: var(--red); border-color: rgba(248, 113, 113, 0.3); }
+.btn-red:hover:not(:disabled) { background: rgba(248, 113, 113, 0.2); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+}
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.status-pill .sdot { width: 6px; height: 6px; border-radius: 50%; }
+.status-green { background: var(--green-dim); color: var(--green); }
+.status-green .sdot { background: var(--green); }
+.status-gold { background: var(--gold-dim); color: var(--gold-bright); }
+.status-gold .sdot { background: var(--gold-bright); }
+.status-blue { background: var(--blue-dim); color: var(--blue); }
+.status-blue .sdot { background: var(--blue); }
+.status-purple { background: var(--purple-dim); color: var(--purple); }
+.status-purple .sdot { background: var(--purple); }
+.status-red { background: var(--red-dim); color: var(--red); }
+.status-red .sdot { background: var(--red); }
+.status-orange { background: var(--orange-dim); color: var(--orange); }
+.status-orange .sdot { background: var(--orange); }
+.status-dim { background: var(--bg-hover); color: var(--text-dim); }
+.status-dim .sdot { background: var(--text-dim); }
+
+/* ---------- KPI grid ---------- */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.kpi {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px 16px;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.kpi:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-2px); }
+.kpi-label { font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+.kpi-value { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; margin-top: 5px; }
+.kpi-hint { font-size: 0.72rem; color: var(--text-soft); margin-top: 2px; }
+.kpi.accent-gold { border-color: rgba(212, 175, 55, 0.35); }
+
+/* ---------- tables ---------- */
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th {
+  text-align: left;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td { padding: 10px; border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tbody tr { transition: background 0.12s; }
+tbody tr:hover { background: var(--bg-hover); }
+tr[data-clickable] { cursor: pointer; }
+
+.cell-main { font-weight: 600; }
+.cell-dim { color: var(--text-dim); font-size: 0.78rem; }
+
+.score-bar { width: 54px; height: 5px; background: var(--bg-hover); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 7px; }
+.score-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-bright)); border-radius: 3px; }
+
+/* ---------- lists ---------- */
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.list-row:last-child { border-bottom: none; }
+.row-ico {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: grid; place-items: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+.row-main { min-width: 0; flex: 1; }
+.row-title { font-size: 0.86rem; font-weight: 600; }
+.row-sub { font-size: 0.76rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row-time { font-size: 0.72rem; color: var(--text-dim); white-space: nowrap; }
+
+/* ---------- forms ---------- */
+
+.form-group { margin-bottom: 15px; }
+.form-label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-soft); margin-bottom: 6px; }
+.form-label .req { color: var(--gold); }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 9px 12px;
+  font-size: 0.86rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 0 3px var(--gold-dim);
+}
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-hint { font-size: 0.74rem; color: var(--text-dim); margin-top: 5px; }
+.form-error { color: var(--red); font-size: 0.76rem; margin-top: 5px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+.toggle {
+  position: relative;
+  width: 40px; height: 22px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+  flex-shrink: 0;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--text-soft);
+  transition: transform 0.2s var(--ease), background 0.2s;
+}
+.toggle.on { background: var(--gold-dim); border-color: rgba(212, 175, 55, 0.4); }
+.toggle.on::after { transform: translateX(18px); background: var(--gold-bright); }
+
+/* ---------- tabs ---------- */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+  overflow-x: auto;
+}
+.tab {
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  padding: 9px 14px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--gold-bright); border-bottom-color: var(--gold); }
+.tab .tab-count { font-size: 0.7rem; color: var(--text-dim); margin-left: 5px; }
+
+.filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.select-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  outline: none;
+}
+.select-input:focus { border-color: rgba(212, 175, 55, 0.5); }
+.search-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  outline: none;
+  min-width: 220px;
+}
+.search-input:focus { border-color: rgba(212, 175, 55, 0.5); }
+.result-count { font-size: 0.78rem; color: var(--text-dim); margin-left: auto; }
+
+.seg {
+  display: inline-flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 3px;
+  gap: 2px;
+}
+.seg button {
+  background: none; border: none;
+  color: var(--text-soft);
+  padding: 6px 13px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+.seg button.active { background: var(--gold-dim); color: var(--gold-bright); }
+
+/* ---------- modal / drawer ---------- */
+
+.modal-overlay, .drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+  animation: fade-in 0.18s var(--ease);
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100vw - 40px));
+  max-height: min(82vh, 720px);
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  animation: modal-in 0.22s var(--ease);
+}
+@keyframes modal-in { from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+.modal-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--bg-card);
+  z-index: 2;
+}
+.modal-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.modal-body { padding: 20px; }
+.modal-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 9px; }
+.modal-x { margin-left: auto; }
+
+.drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(480px, 94vw);
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  animation: drawer-in 0.24s var(--ease);
+}
+@keyframes drawer-in { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.drawer-head { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
+.drawer-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 9px; justify-content: flex-end; }
+
+/* ---------- toast ---------- */
+
+.toast-zone { position: fixed; bottom: 22px; right: 22px; display: flex; flex-direction: column; gap: 9px; z-index: 200; }
+.toast {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 0.84rem;
+  box-shadow: var(--shadow);
+  animation: toast-in 0.25s var(--ease);
+  max-width: 380px;
+}
+.toast.success { border-left-color: var(--green); }
+.toast.error { border-left-color: var(--red); }
+.toast.info { border-left-color: var(--blue); }
+.toast.leaving { animation: toast-out 0.25s var(--ease) forwards; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes toast-out { to { opacity: 0; transform: translateY(8px); } }
+
+/* ---------- empty / skeleton ---------- */
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
+.empty-ico { font-size: 2rem; margin-bottom: 10px; opacity: 0.75; }
+.empty-title { font-weight: 700; color: var(--text-soft); margin-bottom: 4px; }
+.empty-msg { font-size: 0.82rem; max-width: 340px; margin: 0 auto; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-card) 50%, var(--bg-hover) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 8px;
+  height: 14px;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* ---------- timeline (activity) ---------- */
+
+.timeline { position: relative; padding-left: 26px; }
+.timeline::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
+.tl-item { position: relative; padding-bottom: 18px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -26px; top: 3px;
+  width: 19px; height: 19px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  font-size: 0.62rem;
+}
+.tl-title { font-size: 0.86rem; font-weight: 600; }
+.tl-desc { font-size: 0.78rem; color: var(--text-soft); }
+.tl-meta { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
+
+/* ---------- transcript ---------- */
+
+.transcript { display: flex; flex-direction: column; gap: 9px; }
+.tr-line { display: flex; gap: 9px; }
+.tr-who { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; width: 58px; flex-shrink: 0; padding-top: 2px; }
+.tr-who.ai { color: var(--gold); }
+.tr-who.human { color: var(--blue); }
+.tr-who.system { color: var(--text-dim); }
+.tr-text {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-size: 0.82rem;
+  flex: 1;
+}
+.tr-time { font-size: 0.66rem; color: var(--text-dim); margin-top: 3px; }
+
+/* ---------- calendar ---------- */
+
+.cal-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.cal-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; min-width: 150px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-dow { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center; padding: 4px 0; }
+.cal-cell {
+  min-height: 86px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 9px;
+  padding: 6px;
+  font-size: 0.72rem;
+  transition: border-color 0.15s;
+}
+.cal-cell:hover { border-color: rgba(212, 175, 55, 0.35); }
+.cal-cell.other { opacity: 0.35; }
+.cal-cell.today .cal-num { background: var(--gold); color: #0a0a0d; }
+.cal-num {
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+}
+.cal-evt {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  font-size: 0.66rem;
+  margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  cursor: pointer;
+}
+.cal-evt.cancelled { background: var(--red-dim); color: var(--red); text-decoration: line-through; }
+.cal-evt.other-type { background: var(--blue-dim); color: var(--blue); }
+
+.cal-day-list { display: flex; flex-direction: column; gap: 9px; }
+.cal-day-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+}
+.cal-day-time { font-family: var(--font-display); font-weight: 700; color: var(--gold-bright); width: 88px; flex-shrink: 0; }
+.cal-day-line { flex: 1; }
+.cal-day-name { font-weight: 600; font-size: 0.88rem; }
+
+.week-cols { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.week-col { background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 10px; padding: 8px; min-height: 160px; }
+.week-col.today-col { border-color: rgba(212, 175, 55, 0.4); }
+.week-dow { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); text-align: center; margin-bottom: 6px; }
+.week-date { text-align: center; font-family: var(--font-display); font-weight: 700; margin-bottom: 8px; }
+.week-col.today-col .week-date { color: var(--gold-bright); }
+
+/* ---------- knowledge / settings list ---------- */
+
+.kv-list { display: flex; flex-direction: column; }
+.kv-row { display: flex; align-items: flex-start; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border-soft); }
+.kv-row:last-child { border-bottom: none; }
+.kv-label { width: 150px; flex-shrink: 0; font-size: 0.78rem; color: var(--text-dim); font-weight: 600; padding-top: 2px; }
+.kv-value { flex: 1; font-size: 0.86rem; }
+
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.cap-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.cap-card .cap-ico { font-size: 1.1rem; }
+
+.section-stack { display: flex; flex-direction: column; gap: 18px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.grid-side { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+
+/* ---------- AI test area ---------- */
+
+.ai-test-box { border: 1px solid rgba(212, 175, 55, 0.3); border-radius: var(--radius); background: linear-gradient(180deg, rgba(212,175,55,0.05), transparent); padding: 18px; }
+.test-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.test-chip {
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 13px;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  transition: all 0.15s;
+}
+.test-chip:hover { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.4); }
+
+.sim-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px dashed rgba(251, 191, 36, 0.4);
+  padding: 3px 9px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.sim-bubble {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 15px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  animation: page-in 0.3s var(--ease);
+}
+.sim-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+.typing-dots { display: inline-flex; gap: 4px; align-items: center; height: 20px; }
+.typing-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: tdot 1s infinite; }
+.typing-dots i:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes tdot { 0%, 100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+
+/* ---------- onboarding ---------- */
+
+.onboard-overlay {
+  position: fixed; inset: 0;
+  background: rgba(4, 4, 6, 0.82);
+  backdrop-filter: blur(6px);
+  z-index: 300;
+  display: grid; place-items: center;
+  animation: fade-in 0.25s var(--ease);
+  padding: 20px;
+}
+.onboard-card {
+  width: min(620px, 100%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  animation: modal-in 0.3s var(--ease);
+}
+.onboard-progress { display: flex; gap: 6px; margin-bottom: 22px; }
+.onboard-progress span { height: 4px; flex: 1; border-radius: 3px; background: var(--bg-hover); transition: background 0.25s; }
+.onboard-progress span.done { background: var(--gold); }
+.onboard-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+.onboard-sub { color: var(--text-soft); font-size: 0.88rem; margin-bottom: 20px; }
+.onboard-option {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 9px;
+  color: var(--text);
+  font-size: 0.86rem;
+  transition: all 0.15s;
+}
+.onboard-option:hover { border-color: rgba(212, 175, 55, 0.4); }
+.onboard-option.selected { border-color: rgba(212, 175, 55, 0.55); background: var(--gold-dim); }
+.onboard-ico { font-size: 1.15rem; width: 26px; text-align: center; }
+
+/* ---------- request status colors ---------- */
+
+.req-status-submitted { background: var(--blue-dim); color: var(--blue); }
+.req-status-in-review { background: var(--orange-dim); color: var(--orange); }
+.req-status-in-progress { background: var(--gold-dim); color: var(--gold-bright); }
+.req-status-waiting { background: var(--purple-dim); color: var(--purple); }
+.req-status-completed { background: var(--green-dim); color: var(--green); }
+
+/* ---------- help ---------- */
+
+.help-topic {
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text);
+  margin-bottom: 10px;
+  transition: all 0.15s;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 11px;
+}
+.help-topic:hover { border-color: rgba(212, 175, 55, 0.4); }
+.help-topic .hp-ico { font-size: 1.1rem; }
+.help-topic .hp-arrow { margin-left: auto; color: var(--text-dim); }
+.help-answer { font-size: 0.84rem; color: var(--text-soft); line-height: 1.65; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s var(--ease);
+    box-shadow: var(--shadow);
+  }
+  .sidebar.mobile-open { transform: none; }
+  .grid-2, .grid-side { grid-template-columns: 1fr; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .content { padding: 18px 16px 60px; }
+}
+
+@media (max-width: 560px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi-value { font-size: 1.3rem; }
+  .topbar-search { width: 100%; }
+  .topbar { padding: 0 12px; gap: 8px; }
+  .avatar-name, .topbar-search kbd { display: none; }
+  .cal-cell { min-height: 58px; }
+  .cal-evt { display: none; }
+  .cal-cell .cal-count { display: block; font-size: 0.62rem; color: var(--gold-bright); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ============================================================
+   SHELL EXTRAS — menu btn, scrim, global search results, settings nav
+   ============================================================ */
+.menu-btn { display: none; }
+@media (max-width: 900px) { .menu-btn { display: grid; } }
+.mobile-scrim { position: fixed; inset: 0; background: rgba(4,4,6,0.7); backdrop-filter: blur(2px); z-index: 35; }
+
+.search-results {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow); max-height: 340px;
+  overflow: auto; z-index: 80; padding: 5px;
+}
+.search-results .sr-item { display: flex; justify-content: space-between; gap: 12px; align-items: center;
+  padding: 9px 10px; border-radius: 8px; cursor: pointer; font-size: 0.84rem; }
+.search-results .sr-item:hover { background: var(--bg-hover); }
+.sr-kind { color: var(--text-dim); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+#topbarSearchWrap { position: relative; }
+
+.settings-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.settings-nav button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-soft);
+  padding: 7px 15px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+.settings-nav button.active { border-color: rgba(212,175,55,0.45); color: var(--gold-bright); background: var(--gold-dim); }
+
+/* ============================================================
+   VANTORX ONBOARDING — wizard-specific styles (obx-*)
+   ============================================================ */
+
+.gold-text { color: var(--gold-bright); }
+
+.obx-wrap { max-width: 880px; margin: 0 auto; padding: 28px 22px 40px; }
+
+.obx-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.obx-brand { display: flex; align-items: center; gap: 10px; }
+.obx-header-right { display: flex; align-items: center; gap: 12px; }
+
+.obx-autosave { color: var(--text-dim); font-size: 0.78rem; transition: color 0.3s; }
+.obx-autosave.flash { color: var(--green); }
+
+.obx-progress-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 22px; }
+.obx-progress-meta { display: flex; justify-content: space-between; margin-top: 12px; }
+.obx-step-label { color: var(--text-dim); font-size: 0.8rem; }
+.obx-step-name { color: var(--gold-bright); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; }
+
+.obx-main { animation: obxFade 0.25s var(--ease); }
+@keyframes obxFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.obx-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; gap: 14px; }
+.obx-nav-right { display: flex; align-items: center; gap: 14px; }
+.obx-validation { color: var(--red); font-size: 0.8rem; }
+.obx-validation.show { animation: obxShake 0.3s; }
+@keyframes obxShake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+
+.obx-foot { text-align: center; color: var(--text-dim); font-size: 0.72rem; margin-top: 34px; }
+
+/* step 1 — industry picker */
+.obx-ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.obx-ind { display: flex; align-items: center; gap: 10px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 10px; padding: 11px 13px; cursor: pointer; color: var(--text); font-size: 0.88rem; transition: border-color 0.15s; }
+.obx-ind:hover { border-color: rgba(212, 175, 55, 0.4); }
+.obx-ind.selected { border-color: rgba(212, 175, 55, 0.55); background: var(--gold-dim); }
+.obx-ind-ico { font-size: 1.15rem; }
+
+/* step 2 — services rows */
+.obx-svc-row { display: grid; grid-template-columns: 1fr 90px 70px 38px; gap: 8px; margin-bottom: 8px; align-items: center; }
+.obx-hint-box { background: var(--bg-soft); border: 1px dashed var(--border); border-radius: 10px;
+  padding: 13px 15px; color: var(--text-soft); font-size: 0.84rem; line-height: 1.5; }
+
+/* step 3 — hours rows */
+.obx-hours-row { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-bottom: 1px solid var(--border-soft); }
+.obx-hours-row:last-of-type { border-bottom: none; }
+.obx-hours-row.is-closed { opacity: 0.55; }
+.obx-hours-day { width: 92px; font-size: 0.86rem; color: var(--text); }
+.obx-hours-time { width: 110px; padding: 7px 9px; font-size: 0.84rem; }
+.obx-hours-dash { color: var(--text-dim); }
+.obx-hours-closed { color: var(--red); font-size: 0.8rem; font-weight: 600; }
+
+/* step 5 — AI preview */
+.obx-ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+.obx-greeting { min-height: 84px; }
+.obx-transfer-when { min-height: 64px; }
+.obx-preview { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; position: sticky; top: 20px; }
+.obx-sim { display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; padding: 4px 2px; }
+.obx-sim-welcome { color: var(--text-dim); font-size: 0.82rem; text-align: center; padding: 26px 0; }
+.obx-sim-bubble { max-width: 85%; padding: 9px 13px; border-radius: 14px; font-size: 0.84rem; line-height: 1.45; }
+.obx-sim-bubble.caller { align-self: flex-end; background: var(--bg-hover); border: 1px solid var(--border); border-bottom-right-radius: 4px; }
+.obx-sim-bubble.ai { align-self: flex-start; background: var(--gold-dim); border: 1px solid rgba(212, 175, 55, 0.35); border-bottom-left-radius: 4px; }
+.obx-sim-bubble.obx-typing { letter-spacing: 3px; color: var(--text-soft); }
+
+/* step 6 — connections */
+.obx-conn-list { display: flex; flex-direction: column; gap: 10px; }
+.obx-conn { display: flex; align-items: center; gap: 14px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px; transition: border-color 0.2s; }
+.obx-conn.on { border-color: rgba(212, 175, 55, 0.4); background: var(--gold-dim); }
+.obx-conn-ico { font-size: 1.4rem; width: 40px; text-align: center; }
+.obx-conn-main { flex: 1; }
+.obx-conn-title { font-weight: 600; font-size: 0.9rem; }
+.obx-conn-desc { color: var(--text-soft); font-size: 0.8rem; margin-top: 2px; }
+
+/* step 7 — checklist */
+.obx-check-list { display: flex; flex-direction: column; gap: 8px; }
+.obx-check { display: flex; align-items: center; gap: 13px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 15px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.obx-check:hover { border-color: rgba(212, 175, 55, 0.35); }
+.obx-check.done { border-color: rgba(74, 222, 128, 0.4); background: var(--green-dim); }
+.obx-check input { display: none; }
+.obx-check-box { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--border); background: var(--bg-hover);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; color: var(--green); }
+.obx-check.done .obx-check-box { border-color: var(--green); }
+.obx-check.done .obx-check-box::after { content: '✓'; }
+.obx-check-main b { display: block; font-size: 0.88rem; font-weight: 600; }
+.obx-check-main i { display: block; font-style: normal; color: var(--text-soft); font-size: 0.78rem; margin-top: 1px; }
+.obx-check-progress { display: flex; align-items: center; gap: 14px; margin-top: 16px; font-size: 0.86rem; }
+.obx-check-ready { color: var(--green); font-weight: 700; }
+
+/* step 8 — review */
+.obx-review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.obx-review-card .kv-row { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-soft); font-size: 0.85rem; }
+.obx-review-card .kv-row:last-child { border-bottom: none; }
+.obx-review-card .kv-label { color: var(--text-dim); flex-shrink: 0; }
+.obx-golive { text-align: center; margin-top: 24px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-soft); }
+.obx-golive-btn { font-size: 1rem; padding: 13px 30px; }
+.obx-golive-done { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.obx-golive-done .big { font-size: 2.6rem; color: var(--green); }
+
+/* ============================================================
+   VANTORX SPORTS — app extensions
+   ============================================================ */
+
+/* global search */
+.global-search { position: relative; }
+.global-search input { width: 250px; }
+.search-hit { display: flex; align-items: center; gap: 10px; padding: 9px 12px; font-size: 0.84rem; color: var(--text-soft); cursor: pointer; }
+.search-hit:hover { background: var(--bg-hover); color: var(--text); }
+.search-hit .sh-ico { width: 20px; text-align: center; flex-shrink: 0; }
+
+/* demo chip in sidebar foot */
+.sidebar-foot { padding: 12px 16px; border-top: 1px solid var(--border-soft); }
+.demo-chip { font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 7px 10px; text-align: center; }
+
+/* stats row (fitness/reports pages) */
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.stat-label { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; }
+.stat-value { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; margin-top: 4px; }
+.stat-sub { font-size: 0.75rem; color: var(--text-soft); margin-top: 2px; }
+.stat-danger { color: var(--red); }
+.stat-warn { color: var(--gold-bright); }
+
+/* load bars (fitness page) */
+.load-grid { display: flex; flex-direction: column; gap: 10px; }
+.load-row { display: grid; grid-template-columns: 140px 1fr auto; gap: 12px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border-soft); }
+.load-row:last-child { border-bottom: none; }
+.load-name { font-size: 0.84rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.load-bars { display: flex; align-items: flex-end; gap: 3px; height: 34px; }
+.load-bars i { flex: 1; min-width: 6px; background: linear-gradient(180deg, rgba(212,175,55,0.25), rgba(212,175,55,0.7)); border-radius: 2px 2px 0 0; transition: height .3s; }
+.load-bars i.hot { background: linear-gradient(180deg, rgba(248,113,113,0.35), rgba(248,113,113,0.85)); }
+.load-days { display: grid; grid-template-columns: 140px 1fr auto; gap: 12px; margin-top: 8px; }
+.load-days span { display: flex; flex-direction: column; align-items: center; font-size: 0.62rem; color: var(--text-dim); }
+.load-days span:first-child { visibility: hidden; }
+.load-days span:last-child { visibility: hidden; }
+
+/* generic data table */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.data-table th { text-align: left; padding: 8px 10px; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border); }
+.data-table td { padding: 9px 10px; border-bottom: 1px solid var(--border-soft); }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* report body inside modal */
+.report-body { font-size: 0.88rem; color: var(--text-soft); line-height: 1.65; }
+.report-body p { margin: 0 0 10px; }
+.report-body b { color: var(--text); }
+
+/* AI chat */
+.obx-chat { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; padding: 4px 2px; }
+.obx-msg { max-width: 88%; padding: 10px 13px; border-radius: var(--radius); font-size: 0.85rem; line-height: 1.55; }
+.obx-msg.me { align-self: flex-end; background: var(--gold-dim); border: 1px solid rgba(212,175,55,0.35); color: var(--text); }
+.obx-msg.ai { align-self: flex-start; background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-soft); }
+.obx-msg.ai b { color: var(--gold-bright); display: block; margin-bottom: 4px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* form grid */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field span { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; margin-bottom: 6px; }
+.field input, .field select { width: 100%; padding: 9px 11px; background: var(--bg-hover); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 0.86rem; font-family: var(--font-body); }
+.field input:focus, .field select:focus { outline: none; border-color: rgba(212,175,55,0.5); }
+.row-side { flex-shrink: 0; display: flex; align-items: center; }
+
+/* tour */
+.tour-box { position: fixed; z-index: 1200; width: min(320px, calc(100vw - 24px)); background: var(--bg-card); border: 1px solid rgba(212,175,55,0.4); border-radius: var(--radius); padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.55); }
+.tour-title { font-weight: 700; color: var(--gold-bright); margin-bottom: 6px; }
+.tour-body { font-size: 0.84rem; color: var(--text-soft); line-height: 1.55; }
+.tour-actions { display: flex; justify-content: space-between; margin-top: 14px; }
+
+/* account menu */
+.account-menu { position: absolute; top: calc(100% + 8px); right: 0; min-width: 210px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 12px 40px rgba(0,0,0,0.55); z-index: 1100; overflow: hidden; }
+.account-name { padding: 12px 14px; font-weight: 700; border-bottom: 1px solid var(--border-soft); }
+.account-role { display: block; font-size: 0.72rem; font-weight: 500; color: var(--text-dim); margin-top: 2px; }
+.account-item { display: block; width: 100%; text-align: left; padding: 11px 14px; background: none; border: none; color: var(--text-soft); font-size: 0.85rem; cursor: pointer; font-family: var(--font-body); }
+.account-item:hover { background: var(--bg-hover); color: var(--gold-bright); }
+
+/* misc */
+.list-rows { display: flex; flex-direction: column; }
+.empty-note { padding: 18px 6px; color: var(--text-dim); font-size: 0.85rem; }
+
+/* form-result chips (overview) */
+.obx-form-chip { padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 0.8rem; cursor: pointer; }
+.obx-form-chip b { margin-right: 4px; }
+.obx-form-chip.status-green { border-color: rgba(74,222,128,0.35); color: var(--green); background: rgba(74,222,128,0.08); }
+.obx-form-chip.status-orange { border-color: rgba(251,191,36,0.35); color: var(--gold-bright); background: rgba(251,191,36,0.08); }
+.obx-form-chip.status-red { border-color: rgba(248,113,113,0.35); color: var(--red); background: rgba(248,113,113,0.08); }
+
+/* responsive */
+@media (max-width: 900px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .load-row { grid-template-columns: 96px 1fr; }
+  .load-row .status-pill { display: none; }
+  .global-search input { width: 150px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="/" title="Back to VantorX portal" style="text-decoration:none;color:inherit;display:flex;gap:10px;align-items:center">
+      <span class="brand-mark">V</span>
+      <div>
+        <div class="brand-name">VantorX <span class="gold">Markets</span></div>
+        <div class="brand-sub" id="syncStatus">Not synced — connect in Settings</div>
+      </div>
+      </a>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-section">Markets</div>
+      <div class="nav-item" data-page="overview" id="tour-target-overview"><span class="nav-ico">📊</span> Overview</div>
+      <div class="nav-item" data-page="markets"><span class="nav-ico">🎯</span> Market Board</div>
+      <div class="nav-section">Intelligence</div>
+      <div class="nav-item" data-page="signals" id="tour-target-signals"><span class="nav-ico">🤖</span> AI Signals</div>
+      <div class="nav-section">Account</div>
+      <div class="nav-item" data-page="portfolio"><span class="nav-ico">💼</span> Portfolio</div>
+      <div class="nav-item" data-page="settings" id="tour-target-settings"><span class="nav-ico">⚙️</span> Settings</div>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="demo-chip" id="modeChip">Not connected — no market data</div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+
+    <header class="topbar">
+      <button class="burger" id="burger" aria-label="Menu">☰</button>
+      <div class="topbar-title" id="pageTitle">Overview</div>
+      <div class="topbar-spacer"></div>
+      <div class="global-search">
+        <input id="globalSearch" placeholder="Search markets…  (press /)" autocomplete="off">
+        <div class="search-results" id="searchResults" style="display:none"></div>
+      </div>
+      <button class="icon-btn" id="notifBtn" aria-label="Notifications">🔔<span class="dot-badge" id="notifDot"></span></button>
+      <button class="avatar-btn" id="avatarBtn"><span id="avatarInitials">G</span></button>
+    </header>
+
+    <main class="view" id="view"></main>
+
+  </div>
+</div>
+
+<script>/* === VantorX Markets Intelligence bundled build - generated by build-bundle.ps1 === */
+/* === Edit the source files in vantorx-markets/js/ then rebuild. === */
+/* ---- js/utils.js ---- */
+/* ============================================================
+   VANTORX CLIENT HUB — utils.js
+   Shared helpers. No dependencies.
+   ============================================================ */
+
+const STATUS_META = {
+  Submitted:   { cls: 'req-status-submitted',   icon: '📨' },
+  'In Review': { cls: 'req-status-in-review',   icon: '🔎' },
+  'In Progress': { cls: 'req-status-in-progress', icon: '🛠️' },
+  'Waiting on Client': { cls: 'req-status-waiting', icon: '⏸️' },
+  Completed:   { cls: 'req-status-completed',   icon: '✅' },
+};
+
+const CALL_OUTCOMES = {
+  answered:    { label: 'Answered',    cls: 'status-green' },
+  missed:      { label: 'Missed',      cls: 'status-red' },
+  transferred: { label: 'Transferred', cls: 'status-purple' },
+  booked:      { label: 'Booked',      cls: 'status-gold' },
+  faq:         { label: 'Question Answered', cls: 'status-blue' },
+};
+
+const APPT_STATUS = {
+  Confirmed:  'status-green',
+  Completed:  'status-dim',
+  Rescheduled: 'status-orange',
+  Cancelled:  'status-red',
+};
+
+function esc(s) {
+  return String(s ?? '')
+    .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+}
+
+function fmtTime(iso) {
+  return new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+function fmtDateTime(iso) {
+  return `${fmtDate(iso)} · ${fmtTime(iso)}`;
+}
+
+function fmtDuration(sec) {
+  if (sec == null) return '—';
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return `${m}m ${String(s).padStart(2, '0')}s`;
+}
+
+function relTime(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const min = Math.round(diff / 60000);
+  if (min < 1) return 'just now';
+  if (min < 60) return `${min}m ago`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.round(h / 24);
+  if (d < 7) return `${d}d ago`;
+  return fmtDate(iso);
+}
+
+function debounce(fn, ms) {
+  let t;
+  return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+
+function uid(prefix = 'id') {
+  return `${prefix}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
+}
+
+/* Deterministic PRNG so demo data is stable across reloads until edited */
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function scoreBar(score) {
+  return `<span class="score-bar"><i style="width:${Math.min(100, score)}%"></i></span>${score}`;
+}
+
+function initials(name) {
+  return String(name || '?').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+}
+
+function groupBy(arr, keyFn) {
+  return arr.reduce((acc, item) => {
+    const k = keyFn(item);
+    (acc[k] = acc[k] || []).push(item);
+    return acc;
+  }, {});
+}
+
+function monthLabel(y, m) {
+  return new Date(y, m, 1).toLocaleDateString([], { month: 'long', year: 'numeric' });
+}
+
+function sameDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+/* USD volume formatting; null/undefined renders as an honest dash */
+function fmtUsd(n) {
+  if (n === null || n === undefined || !Number.isFinite(n)) return '—';
+  if (n >= 1e9) return `$${(n / 1e9).toFixed(2)}B`;
+  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
+  if (n >= 1e3) return `$${(n / 1e3).toFixed(0)}k`;
+  return `$${Math.round(n)}`;
+}
+
+
+/* ---- js/data.js ---- */
+/* ============================================================
+   VANTORX MARKETS INTELLIGENCE — data.js
+   UI constants only. This build has NO synthetic market
+   universe: every market row comes from the live Polymarket
+   sync (see app.js). Nothing here contains invented data.
+   ============================================================ */
+
+const CATEGORY_ICON = {
+  Politics: '🏛️', Sports: '⚽', Crypto: '₿', Economics: '📈', 'Tech & AI': '🤖', Culture: '🎬',
+};
+
+/* icon for any category string, including live ones Polymarket returns */
+function categoryIcon(cat) {
+  return CATEGORY_ICON[cat] || '🎯';
+}
+
+
+/* ---- js/state.js ---- */
+/* ============================================================
+   VANTORX MARKETS INTELLIGENCE — state.js (v2, LIVE ONLY)
+   No demo dataset exists in this build. `markets` stays empty
+   until a real Polymarket sync succeeds; nothing synthetic is
+   ever seeded. Only user preferences (settings) persist —
+   market data is always re-fetched live.
+   ============================================================ */
+
+const KEY = 'vantorx_markets_v2';
+const LEGACY_KEY = 'vantorx_markets_v1'; // old demo build — discarded on load
+
+function baseState() {
+  return {
+    version: 2,
+    account: { name: 'Guest', role: 'Local session' },
+    sources: {
+      live: false,          // true only after a successful live sync
+      lastSync: null,       // ISO string of the last successful sync
+      error: null,          // last sync error, shown honestly in the UI
+      syncing: false,
+      endpoint: 'https://gamma-api.polymarket.com',
+    },
+    markets: [],            // live Polymarket data only — never seeded
+    notifications: [],      // nothing invented; fills only if real features emit events
+    settings: {
+      liveSync: true,       // auto-sync live Polymarket data on boot
+      compactTables: false,
+    },
+  };
+}
+
+function load() {
+  try {
+    localStorage.removeItem(LEGACY_KEY);
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      if (saved && saved.version === 2) {
+        const base = baseState();
+        base.settings = { ...base.settings, ...(saved.settings || {}) };
+        return base;
+      }
+    }
+  } catch (e) { /* corrupted or private mode — fall through to defaults */ }
+  return baseState();
+}
+
+let state = load();
+const listeners = new Set();
+
+function getState() { return state; }
+
+function setState(mutator) {
+  mutator(state);
+  persist();
+  listeners.forEach(fn => fn(state));
+}
+
+function subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); }
+
+/* only preferences are persisted; market data always comes from a live sync */
+function persist() {
+  try {
+    localStorage.setItem(KEY, JSON.stringify({ version: 2, settings: state.settings }));
+  } catch (e) { /* private mode */ }
+}
+
+
+/* ---- js/components.js ---- */
+/* ============================================================
+   VANTORX CLIENT HUB — components.js
+   Shared UI primitives: toasts, modal, drawer, confirm,
+   empty states, skeletons.
+   ============================================================ */
+
+/* ---------- toast ---------- */
+
+let toastZone;
+function ensureToastZone() {
+  if (!toastZone) {
+    toastZone = document.createElement('div');
+    toastZone.className = 'toast-zone';
+    document.body.appendChild(toastZone);
+  }
+  return toastZone;
+}
+
+function toast(msg, kind = 'success') {
+  const zone = ensureToastZone();
+  const el = document.createElement('div');
+  el.className = `toast ${kind}`;
+  const icon = kind === 'success' ? '✓' : kind === 'error' ? '✕' : 'ℹ';
+  el.innerHTML = `<span style="font-weight:800;color:var(--gold-bright)">${icon}</span><span>${esc(msg)}</span>`;
+  zone.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('leaving');
+    setTimeout(() => el.remove(), 260);
+  }, 3400);
+}
+
+/* ---------- modal / drawer ----------
+   onOpen fires after the caller has received { close } so callbacks
+   can safely reference close (avoids TDZ issues). */
+
+function openModal({ title, body, footer, onOpen, wide }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  if (wide) modal.style.width = 'min(720px, calc(100vw - 40px))';
+  modal.innerHTML = `
+    <div class="modal-head">
+      <div class="modal-title">${title}</div>
+      <button class="icon-btn modal-x" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">${body}</div>
+    ${footer ? `<div class="modal-foot">${footer}</div>` : ''}
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  const api = { overlay, modal };
+  let closeFn = () => {};
+  api.close = () => closeFn();
+
+  closeFn = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  function onKey(e) { if (e.key === 'Escape') closeFn(); }
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFn(); });
+  modal.querySelector('.modal-x').addEventListener('click', closeFn);
+
+  if (onOpen) queueMicrotask(() => onOpen(api));
+  return api;
+}
+
+function openDrawer({ title, body, footer, onOpen }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'drawer-overlay';
+  const drawer = document.createElement('div');
+  drawer.className = 'drawer';
+  drawer.innerHTML = `
+    <div class="drawer-head">
+      <div class="modal-title">${title}</div>
+      <button class="icon-btn modal-x" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer-body">${body}</div>
+    ${footer ? `<div class="drawer-foot">${footer}</div>` : ''}
+  `;
+  overlay.appendChild(drawer);
+  document.body.appendChild(overlay);
+
+  let closeFn = () => {};
+  const api = { overlay, drawer, close: () => closeFn() };
+
+  closeFn = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  function onKey(e) { if (e.key === 'Escape') closeFn(); }
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFn(); });
+  drawer.querySelector('.modal-x').addEventListener('click', closeFn);
+
+  if (onOpen) queueMicrotask(() => onOpen(api));
+  return api;
+}
+
+function confirmDialog({ title = 'Are you sure?', message = '', confirmText = 'Confirm', danger = false }) {
+  return new Promise(resolve => {
+    const m = openModal({
+      title,
+      body: `<p style="color:var(--text-soft);font-size:0.9rem">${esc(message)}</p>`,
+      footer: `
+        <button class="btn btn-ghost" data-c="no">Cancel</button>
+        <button class="btn ${danger ? 'btn-red' : 'btn-gold'}" data-c="yes">${esc(confirmText)}</button>`,
+      onOpen: ({ modal, close }) => {
+        modal.querySelector('[data-c="no"]').addEventListener('click', () => { close(); resolve(false); });
+        modal.querySelector('[data-c="yes"]').addEventListener('click', () => { close(); resolve(true); });
+      },
+    });
+    const origClose = m.close;
+    // resolve(false) if dismissed via X / overlay / Escape
+    const obs = new MutationObserver(() => {
+      if (!document.body.contains(m.overlay)) { obs.disconnect(); resolve(false); }
+    });
+    obs.observe(document.body, { childList: true });
+    m.close = () => origClose();
+  });
+}
+
+/* ---------- empty / skeleton ---------- */
+
+function emptyState(icon, title, msg, actionHTML = '') {
+  return `
+    <div class="empty-state">
+      <div class="empty-ico">${icon}</div>
+      <div class="empty-title">${esc(title)}</div>
+      <div class="empty-msg">${esc(msg)}</div>
+      ${actionHTML}
+    </div>`;
+}
+
+function skeletonRows(n = 4) {
+  return `<div style="display:flex;flex-direction:column;gap:12px;padding:6px 0">
+    ${Array.from({ length: n }, () => '<div class="skeleton" style="height:34px"></div>').join('')}
+  </div>`;
+}
+
+function statusPill(status, map) {
+  const cls = map[status] || 'status-dim';
+  return `<span class="status-pill ${cls}"><span class="sdot"></span>${esc(status)}</span>`;
+}
+
+
+/* ---- js/pages/overview.js ---- */
+/* ============================================================
+   VANTORX MARKETS INTELLIGENCE — pages/overview.js
+   Board KPIs, category breakdown and volume leaders, all
+   computed from live synced Polymarket data only. KPIs that
+   would need invented data (portfolio P/L, AI signal counts)
+   are shown honestly as not connected.
+   ============================================================ */
+
+function renderOverview(root, ctx) {
+  const s = ctx.getState();
+  const markets = s.markets;
+  const byVol = [...markets].sort((a, b) => (b.vol || 0) - (a.vol || 0));
+  const totalVol = markets.reduce((a, m) => a + (m.vol || 0), 0);
+
+  const cats = {};
+  for (const m of markets) {
+    cats[m.cat] = cats[m.cat] || { n: 0, vol: 0 };
+    cats[m.cat].n++;
+    cats[m.cat].vol += (m.vol || 0);
+  }
+  const catRows = Object.entries(cats).sort((a, b) => b[1].vol - a[1].vol);
+  const maxVol = catRows[0]?.[1].vol || 1;
+
+  const syncPill = s.sources.syncing ? 'Syncing…' : s.sources.live ? 'Live' : markets.length ? 'Offline' : 'Not connected';
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Market Overview</div>
+      <div class="page-sub">${markets.length ? `${markets.length} open Polymarket markets · read-only live prices` : 'No market data loaded yet'}</div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Open markets</div>
+        <div class="kpi-value">${markets.length}</div>
+        <div class="kpi-hint">across ${catRows.length} categories</div>
+      </div>
+      <div class="kpi accent-gold">
+        <div class="kpi-label">Board volume</div>
+        <div class="kpi-value">${fmtUsd(totalVol)}</div>
+        <div class="kpi-hint">all-time USD · Polymarket</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Largest category</div>
+        <div class="kpi-value" style="font-size:26px">${catRows[0] ? esc(catRows[0][0]) : '—'}</div>
+        <div class="kpi-hint">${catRows[0] ? `${fmtUsd(catRows[0][1].vol)} volume` : 'no data'}</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Data source</div>
+        <div class="kpi-value" style="font-size:26px">${syncPill}</div>
+        <div class="kpi-hint">${s.sources.lastSync ? `last sync ${relTime(s.sources.lastSync)}` : 'never synced'}</div>
+      </div>
+    </div>
+
+    ${markets.length ? `
+    <div class="grid-side">
+      <div class="section-stack">
+
+        <div class="card">
+          <div class="card-title">🔥 Volume leaders <button class="link" data-go="markets">Full board →</button></div>
+          ${byVol.slice(0, 5).map(moverRow).join('')}
+        </div>
+
+        <div class="card">
+          <div class="card-title">🤖 AI signals</div>
+          ${emptyState('🤖', 'Signal engine not connected', 'This build shows live market data only — no AI signals are generated.')}
+        </div>
+
+      </div>
+
+      <div class="section-stack">
+
+        <div class="card">
+          <div class="card-title">🗂 Category breakdown</div>
+          ${catRows.map(([cat, v]) => `
+            <div class="kv-row">
+              <div class="kv-label">${categoryIcon(cat)} ${esc(cat)} <span class="cell-dim">· ${v.n} markets</span></div>
+              <div class="kv-value"><span class="score-bar" style="width:100px;display:inline-block;vertical-align:middle"><i style="width:${Math.max(4, Math.round(v.vol / maxVol * 100))}%"></i></span>&nbsp;${fmtUsd(v.vol)}</div>
+            </div>`).join('')}
+        </div>
+
+        <div class="card">
+          <div class="card-title">🕘 Activity</div>
+          ${emptyState('🕘', 'No activity yet', 'Activity appears here as connected features are used — nothing is simulated.')}
+        </div>
+
+      </div>
+    </div>` : `
+    <div class="card">
+      ${emptyState('📡', 'No market data', s.sources.error
+        ? `Last sync failed: ${s.sources.error}. No demo data is substituted — retry the live sync.`
+        : 'Sync live Polymarket data to load the real board. Auto-sync can be enabled in Settings.')}
+      <div style="display:flex;gap:8px;padding:0 0 12px">
+        <button class="btn btn-gold" id="ovSync">Sync live data now</button>
+        <button class="btn btn-ghost" data-go="settings">Open Settings</button>
+      </div>
+    </div>`}
+  `;
+
+  root.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => ctx.navigate(b.dataset.go)));
+  const syncBtn = root.querySelector('#ovSync');
+  if (syncBtn) syncBtn.addEventListener('click', () => ctx.syncLive());
+}
+
+function moverRow(m) {
+  return `
+    <div class="list-row" data-clickable data-market="${m.id}">
+      <div class="row-ico">🎯</div>
+      <div class="row-main">
+        <div class="row-title">${esc(m.q)}</div>
+        <div class="row-sub">${categoryIcon(m.cat)} ${esc(m.cat)} · ${m.vol ? `${fmtUsd(m.vol)} volume` : 'volume n/a'}</div>
+      </div>
+      <div class="row-side" style="text-align:right">
+        <div style="font-weight:700">${m.yes !== null ? `${m.yes}¢` : '—'}</div>
+        <div class="cell-dim">YES</div>
+      </div>
+    </div>`;
+}
+
+
+/* ---- js/pages/markets.js ---- */
+/* ============================================================
+   VANTORX MARKETS INTELLIGENCE — pages/markets.js
+   Full board: category tabs derived from live data, search,
+   real YES/NO pricing. The drawer pulls a real 24h price
+   history from Polymarket's public CLOB endpoint. No fake
+   order book, no simulated positions.
+   ============================================================ */
+
+function renderMarkets(root, ctx) {
+  let cat = '';
+  let query = '';
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Market Board</div>
+      <div class="page-sub">Real Polymarket markets, read-only. Click any row for the live workup.</div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="seg" id="catTabs"></div>
+      <input class="search-input" id="mktSearch" placeholder="Search question or category…" autocomplete="off">
+      <span class="result-count" id="mktCount"></span>
+    </div>
+
+    <div class="card"><div class="table-wrap"><table id="mktTable">
+      <thead><tr><th>Market</th><th>Category</th><th>YES</th><th>NO</th><th>Volume</th><th>Liquidity</th><th>Closes</th></tr></thead>
+      <tbody id="mktRows"></tbody>
+    </table></div></div>
+  `;
+
+  const rows = root.querySelector('#mktRows');
+  const count = root.querySelector('#mktCount');
+  const table = root.querySelector('#mktTable');
+
+  function paintTabs() {
+    const s = ctx.getState();
+    const seen = [];
+    for (const m of s.markets) if (!seen.includes(m.cat)) seen.push(m.cat);
+    const tabs = root.querySelector('#catTabs');
+    tabs.innerHTML = `<button class="seg-btn ${cat === '' ? 'active' : ''}" data-cat="">All</button>` +
+      seen.map(c => `<button class="seg-btn ${cat === c ? 'active' : ''}" data-cat="${esc(c)}">${categoryIcon(c)} ${esc(c)}</button>`).join('');
+    tabs.querySelectorAll('.seg-btn').forEach(b => b.addEventListener('click', () => {
+      cat = b.dataset.cat;
+      tabs.querySelectorAll('.seg-btn').forEach(x => x.classList.toggle('active', x === b));
+      paint();
+    }));
+  }
+
+  function paint() {
+    const s = ctx.getState();
+    const list = s.markets
+      .filter(m => !cat || m.cat === cat)
+      .filter(m => !query || `${m.q} ${m.cat}`.toLowerCase().includes(query))
+      .sort((a, b) => (b.vol || 0) - (a.vol || 0));
+
+    count.textContent = `${list.length} markets`;
+    table.style.fontSize = s.settings.compactTables ? '0.8rem' : '';
+
+    rows.innerHTML = list.length ? list.map(m => `
+      <tr data-clickable data-id="${m.id}">
+        <td><span class="cell-main">${esc(m.q)}</span></td>
+        <td class="cell-dim">${categoryIcon(m.cat)} ${esc(m.cat)}</td>
+        <td><b>${m.yes !== null ? `${m.yes}¢` : '—'}</b></td>
+        <td>${m.no !== null ? `${m.no}¢` : '—'}</td>
+        <td>${fmtUsd(m.vol)}</td>
+        <td class="cell-dim">${fmtUsd(m.liq)}</td>
+        <td class="cell-dim">${m.close ? esc(shortDate(m.close)) : '—'}</td>
+      </tr>`).join('')
+      : `<tr><td colspan="7">${emptyState('📡', 'No markets loaded', s.sources.error
+          ? `Live sync failed: ${s.sources.error}. No data is faked to cover it — retry from Settings.`
+          : 'Run a live sync from Settings to load real Polymarket data.')}</td></tr>`;
+
+    rows.querySelectorAll('tr[data-id]').forEach(tr => tr.addEventListener('click', () => openMarket(tr.dataset.id, ctx)));
+  }
+
+  root.querySelector('#mktSearch').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); paint(); });
+
+  paintTabs();
+  paint();
+}
+
+function shortDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+/* ---------------- market drawer (live detail) ---------------- */
+
+function yesTokenOf(m) {
+  let t = m.tokens;
+  if (typeof t === 'string') { try { t = JSON.parse(t); } catch { return (t && t.length > 20) ? t : null; } }
+  if (Array.isArray(t) && t.length) return String(t[0]);
+  return null;
+}
+
+async function openMarket(id, ctx) {
+  const s = ctx.getState();
+  const m = s.markets.find(x => x.id === id);
+  if (!m) return;
+
+  const api = openDrawer({ title: esc(m.q), body: drawerBody(m) });
+
+  const token = yesTokenOf(m);
+  const zone = () => api.drawer.querySelector('#trendZone');
+  if (!token) {
+    const el = zone();
+    if (el) el.innerHTML = `<div class="obx-hint-box">This market exposes no outcome token, so no price history is available.</div>`;
+    return;
+  }
+  try {
+    const res = await fetch(`https://clob.polymarket.com/prices-history?market=${encodeURIComponent(token)}&interval=1d&fidelity=60`, { headers: { Accept: 'application/json' } });
+    if (!res.ok) throw new Error(`history HTTP ${res.status}`);
+    const data = await res.json();
+    const pts = (data.history || []).map(h => h.p);
+    const el = zone();
+    if (el && api.drawer.isConnected) el.innerHTML = trendBlock(pts);
+  } catch (err) {
+    const el = zone();
+    if (el && api.drawer.isConnected) el.innerHTML = `<div class="obx-hint-box">⚠️ Price history unavailable (${esc(err.message)}).</div>`;
+  }
+}
+
+function drawerBody(m) {
+  return `
+    <div style="display:flex;align-items:center;gap:16px;padding:6px 0 16px">
+      <div style="text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--gold-bright)">${m.yes !== null ? `${m.yes}¢` : '—'}</div>
+        <div class="cell-dim">YES · NO ${m.no !== null ? `${m.no}¢` : '—'}</div>
+      </div>
+      <div style="flex:1">
+        ${m.yes !== null ? `
+        <div style="display:flex;height:12px;border-radius:6px;overflow:hidden;font-size:0.62rem">
+          <div style="width:${m.yes}%;background:var(--green);color:#04120a;display:flex;align-items:center;justify-content:center;font-weight:700">YES</div>
+          <div style="width:${m.no}%;background:var(--red);color:#1a0505;display:flex;align-items:center;justify-content:center;font-weight:700">NO</div>
+        </div>` : `<div class="obx-hint-box">The API returned no price for this market.</div>`}
+        <div class="cell-dim" style="margin-top:6px">Implied probability${m.close ? ` · closes ${esc(new Date(m.close).toLocaleDateString())}` : ''}</div>
+      </div>
+    </div>
+
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><div class="kpi-label">Volume</div><div class="kpi-value" style="font-size:1.2rem">${fmtUsd(m.vol)}</div></div>
+      <div class="kpi"><div class="kpi-label">Liquidity</div><div class="kpi-value" style="font-size:1.2rem">${fmtUsd(m.liq)}</div></div>
+      <div class="kpi"><div class="kpi-label">Category</div><div class="kpi-value" style="font-size:1.2rem">${categoryIcon(m.cat)} ${esc(m.cat)}</div></div>
+    </div>
+
+    <div class="card-title" style="margin:16px 0 8px">📈 24h price history (live)</div>
+    <div id="trendZone"><div class="obx-hint-box">Loading live price history…</div></div>
+
+    <div class="card-title" style="margin:16px 0 8px">📚 Order book</div>
+    <div class="obx-hint-box">Order book is not connected in this build — no depth data is shown rather than simulated.</div>
+
+    <div class="card-title" style="margin:16px 0 8px">🤖 AI signal</div>
+    <div class="obx-hint-box">Signal engine not connected — this build displays market data only and generates no AI signals.</div>
+  `;
+}
+
+function trendBlock(pts) {
+  if (!pts || pts.length < 2) return `<div class="obx-hint-box">No price history returned for this market.</div>`;
+  const firstPct = Math.round(pts[0] * 100);
+  const lastPct = Math.round(pts[pts.length - 1] * 100);
+  const bars = pts.map(p => {
+    const pct = Math.round(p * 100);
+    const h = 12 + Math.round(pct * 0.5);
+    return `<div title="${pct}¢" style="flex:1;height:${h}%;min-height:6px;background:${pct >= firstPct ? 'rgba(74,222,128,0.55)' : 'rgba(248,113,113,0.5)'};border-radius:2px 2px 0 0"></div>`;
+  }).join('');
+  return `
+    <div style="display:flex;align-items:flex-end;gap:2px;height:64px;padding:0 2px">${bars}</div>
+    <div style="display:flex;justify-content:space-between" class="cell-dim"><span>24h ago · ${firstPct}¢</span><span>${lastPct - firstPct >= 0 ? '+' : ''}${lastPct - firstPct}¢ today</span></div>`;
+}
+
+
+/* ---- js/pages/signals.js ---- */
+/* ============================================================
+   VANTORX MARKETS INTELLIGENCE — pages/signals.js
+   The analyst answers ONLY from live synced Polymarket data —
+   real prices, real volumes, real close dates. There is no
+   signal engine in this build, so the signal board and the
+   "data sources" card say so honestly.
+   ============================================================ */
+
+const CHIPS = [
+  'Top markets by volume',
+  'What closes soonest?',
+  'Anything about bitcoin?',
+  'Show me politics markets',
+];
+
+function renderSignals(root, ctx) {
+  const s = ctx.getState();
+  const markets = s.markets;
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">AI Signals</div>
+      <div class="page-sub">The analyst reports only what the live data says — it never invents numbers.</div>
+    </div>
+
+    <div class="grid-side">
+      <div class="section-stack">
+
+        <div class="card">
+          <div class="card-title">💬 Ask the analyst</div>
+          <div class="obx-chat" id="chatBox">
+            <div class="obx-msg ai"><b>Analyst</b> ${markets.length
+              ? `I'm reading ${markets.length} live Polymarket markets. Ask about a market, a category or any keyword — I only report what the synced data says.`
+              : `I have no market data yet. Run a live sync from Settings and I'll read the real board.`}</div>
+          </div>
+          <div class="test-chip-row" style="margin:10px 0" id="chipRow">
+            ${CHIPS.map((c, i) => `<button class="test-chip" data-chip="${i}">${esc(c)}</button>`).join('')}
+          </div>
+          <div style="display:flex;gap:8px">
+            <input class="search-input" id="askInput" placeholder="Ask about a market, category or keyword…" style="flex:1" autocomplete="off">
+            <button class="btn btn-gold" id="askBtn">Ask</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎯 Signal board</div>
+          ${emptyState('🤖', 'Signal engine not connected', 'No AI signals are generated in this build. The board and analyst use live Polymarket data only.')}
+        </div>
+
+      </div>
+
+      <div class="section-stack">
+
+        <div class="card">
+          <div class="card-title">⏳ Closing soonest</div>
+          ${closingSoon(markets)}
+        </div>
+
+        <div class="card">
+          <div class="card-title">📡 Data sources</div>
+          <div class="kv-list">
+            <div class="kv-row"><div class="kv-label">Market data</div><div class="kv-value"><span class="status-pill ${s.sources.live ? 'status-green' : 'status-orange'}"><span class="sdot"></span>${s.sources.live ? 'Polymarket live' : s.markets.length ? 'Stale (offline)' : 'Not connected'}</span></div></div>
+            <div class="kv-row"><div class="kv-label">AI signal engine</div><div class="kv-value"><span class="status-pill status-orange"><span class="sdot"></span>Not connected</span></div></div>
+            <div class="kv-row"><div class="kv-label">News &amp; events feed</div><div class="kv-value"><span class="status-pill status-orange"><span class="sdot"></span>Not connected</span></div></div>
+          </div>
+          <div class="obx-hint-box" style="margin-top:10px">${s.sources.live
+            ? `✅ Last live sync ${esc(new Date(s.sources.lastSync).toLocaleTimeString())} — ${markets.length} markets.`
+            : s.sources.error ? `🔴 Last sync failed: ${esc(s.sources.error)} — no demo data is substituted.`
+            : '🔴 No live sync yet — connect in Settings.'}</div>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  const chatBox = root.querySelector('#chatBox');
+  const askInput = root.querySelector('#askInput');
+
+  function addMsg(who, text) {
+    const div = document.createElement('div');
+    div.className = 'obx-msg ' + (who === 'ai' ? 'ai' : 'me');
+    div.innerHTML = who === 'ai' ? `<b>Analyst</b> ${text}` : esc(text);
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function priceOf(m) { return m.yes !== null ? `${m.yes}¢ YES` : 'price n/a'; }
+
+  function answer(q) {
+    const s2 = ctx.getState();
+    const list = s2.markets;
+    if (!list.length) return 'No market data loaded. Run a live sync from Settings first — I only speak from live data.';
+
+    const lower = q.toLowerCase();
+    if (/top|volume|biggest/.test(lower)) {
+      const top = [...list].sort((a, b) => (b.vol || 0) - (a.vol || 0)).slice(0, 3);
+      return `By all-time volume: ${top.map(m => `"${esc(m.q)}" at ${priceOf(m)} (${fmtUsd(m.vol)})`).join('; ')}.`;
+    }
+    if (/clos|soon|end/.test(lower)) {
+      const soon = [...list].filter(m => m.close).sort((a, b) => new Date(a.close) - new Date(b.close)).slice(0, 3);
+      return soon.length
+        ? `Closing soonest: ${soon.map(m => `"${esc(m.q)}" — ${new Date(m.close).toLocaleDateString()}, at ${priceOf(m)}`).join('; ')}.`
+        : 'None of the synced markets carry a close date from the API.';
+    }
+
+    const words = lower.split(/\W+/).filter(w => w.length > 3);
+    const hits = list.filter(m => {
+      const hay = `${m.q} ${m.cat}`.toLowerCase();
+      return hay.includes(lower) || words.some(w => hay.includes(w));
+    }).slice(0, 3);
+    if (hits.length) {
+      return hits.map(m => `"${esc(m.q)}" (${categoryIcon(m.cat)} ${esc(m.cat)}) is at ${priceOf(m)} with ${fmtUsd(m.vol)} volume${m.close ? `, closing ${new Date(m.close).toLocaleDateString()}` : ''}.`).join(' ');
+    }
+    return `I searched all ${list.length} synced markets for "${esc(q)}" and found no match. The signal engine is not connected, so keyword search across market questions is all I can offer.`;
+  }
+
+  function ask(q) {
+    const text = q.trim();
+    if (!text) return;
+    addMsg('me', text);
+    askInput.value = '';
+    const typing = document.createElement('div');
+    typing.className = 'obx-msg ai';
+    typing.innerHTML = '<span class="typing-dots"><i></i><i></i><i></i></span>';
+    chatBox.appendChild(typing);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    setTimeout(() => {
+      typing.remove();
+      addMsg('ai', answer(text));
+    }, 450);
+  }
+
+  root.querySelectorAll('[data-chip]').forEach(b => b.addEventListener('click', () => ask(CHIPS[Number(b.dataset.chip)])));
+  root.querySelector('#askBtn').addEventListener('click', () => ask(askInput.value));
+  askInput.addEventListener('keydown', e => { if (e.key === 'Enter') ask(askInput.value); });
+}
+
+function closingSoon(markets) {
+  const soon = [...markets].filter(m => m.close)
+    .sort((a, b) => new Date(a.close) - new Date(b.close)).slice(0, 5);
+  if (!soon.length) {
+    return emptyState('⏳', markets.length ? 'No close dates' : 'No data', markets.length
+      ? 'The API returned no close dates for the synced markets.'
+      : 'Sync live data to see which markets close soonest.');
+  }
+  return soon.map(m => `
+    <div class="kv-row">
+      <div class="kv-label">${esc(m.q.length > 52 ? m.q.slice(0, 52) + '…' : m.q)}</div>
+      <div class="kv-value cell-dim">${new Date(m.close).toLocaleDateString()} · ${m.yes !== null ? `${m.yes}¢` : '—'}</div>
+    </div>`).join('');
+}
+
+
+/* ---- js/pages/portfolio.js ---- */
+/* ============================================================
+   VANTORX MARKETS INTELLIGENCE — pages/portfolio.js
+   Honest by design: no broker, wallet or paper-trading book
+   is connected in this build, so there are no positions —
+   and none are simulated.
+   ============================================================ */
+
+function renderPortfolio(root, ctx) {
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Portfolio</div>
+      <div class="page-sub">Positions, P/L and exposure.</div>
+    </div>
+
+    <div class="card">
+      ${emptyState('💼', 'Trading is not connected',
+        'This build is a read-only market viewer. No broker, wallet or paper-trading book is connected, so there are no positions to show — and none are simulated.')}
+      <div style="display:flex;gap:8px;padding:0 0 12px">
+        <button class="btn btn-gold" data-go="markets">Browse the market board</button>
+      </div>
+    </div>
+  `;
+
+  root.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => ctx.navigate(b.dataset.go)));
+}
+
+
+/* ---- js/pages/settings.js ---- */
+/* ============================================================
+   VANTORX MARKETS INTELLIGENCE — pages/settings.js
+   Preferences and the Polymarket live-data connection. Live
+   sync is READ-ONLY and keyless. There is no demo dataset in
+   this build, so there is no "back to demo" switch — only a
+   live sync, and an honest error when it fails.
+   ============================================================ */
+
+const TOGGLES = [
+  { key: 'liveSync',      label: 'Polymarket live data', sub: 'Auto-sync real market prices every time the app opens' },
+  { key: 'compactTables', label: 'Compact tables',       sub: 'Denser rows on the market board' },
+];
+
+function renderSettings(root, ctx) {
+  const s = ctx.getState();
+
+  root.innerHTML = `
+    <div class="page-head">
+      <div class="page-title">Settings</div>
+      <div class="page-sub">Data sources and display preferences. Preferences are saved in this browser only.</div>
+    </div>
+
+    <div class="grid-side">
+      <div class="section-stack">
+
+        <div class="card">
+          <div class="card-title">⚙️ Preferences</div>
+          ${TOGGLES.map(t => `
+            <div class="list-row" data-clickable data-toggle="${t.key}">
+              <div class="row-main">
+                <div class="row-title">${esc(t.label)}</div>
+                <div class="row-sub">${esc(t.sub)}</div>
+              </div>
+              <div class="row-side">
+                <div class="toggle ${s.settings[t.key] ? 'on' : ''}" role="switch" aria-checked="${s.settings[t.key]}"></div>
+              </div>
+            </div>`).join('')}
+        </div>
+
+        <div class="card">
+          <div class="card-title">🔗 Polymarket connection</div>
+          <div class="kv-list">
+            <div class="kv-row"><div class="kv-label">Endpoint</div><div class="kv-value cell-dim">${esc(s.sources.endpoint)}</div></div>
+            <div class="kv-row"><div class="kv-label">Status</div><div class="kv-value"><span class="status-pill ${s.sources.live ? 'status-green' : 'status-orange'}"><span class="sdot"></span>${s.sources.live ? 'Live (read-only)' : s.markets.length ? 'Offline — stale data' : 'Not connected'}</span></div></div>
+            <div class="kv-row"><div class="kv-label">Last sync</div><div class="kv-value">${s.sources.lastSync ? esc(new Date(s.sources.lastSync).toLocaleString()) : 'never'}</div></div>
+            ${s.sources.error ? `<div class="kv-row"><div class="kv-label" style="color:var(--red)">Last error</div><div class="kv-value">${esc(s.sources.error)}</div></div>` : ''}
+            <div class="kv-row"><div class="kv-label">API key</div><div class="kv-value">not required — public read API</div></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button class="btn btn-gold" id="testConn">${s.sources.live ? 'Refresh live data' : 'Connect &amp; sync'}</button>
+          </div>
+          <div class="obx-hint-box" style="margin-top:10px">This build reads public market prices from Polymarket's open Gamma API — no account, no keys, no trading. If the API is unreachable the board stays empty and the error is shown; no demo data is ever substituted.</div>
+        </div>
+
+      </div>
+
+      <div class="section-stack">
+
+        <div class="card">
+          <div class="card-title">👤 Account</div>
+          ${emptyState('👤', 'No account connected',
+            'This app runs locally against public Polymarket data. Nothing is tied to a user account, and no account details are simulated.')}
+        </div>
+
+        <div class="card">
+          <div class="card-title">🔒 Data honesty</div>
+          <div class="kv-list">
+            <div class="kv-row"><div class="kv-label">Market data</div><div class="kv-value">100% live Polymarket</div></div>
+            <div class="kv-row"><div class="kv-label">Demo / sample data</div><div class="kv-value">none in this build</div></div>
+            <div class="kv-row"><div class="kv-label">AI signals</div><div class="kv-value">engine not connected</div></div>
+            <div class="kv-row"><div class="kv-label">Trading / portfolio</div><div class="kv-value">not connected</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  root.querySelectorAll('[data-toggle]').forEach(row => row.addEventListener('click', () => {
+    const key = row.dataset.toggle;
+    ctx.setState(st => { st.settings[key] = !st.settings[key]; });
+    const t = TOGGLES.find(x => x.key === key);
+    toast(`${t.label} — ${ctx.getState().settings[key] ? 'enabled' : 'disabled'}`, 'info');
+    /* enabling live sync triggers a real sync immediately */
+    if (key === 'liveSync' && ctx.getState().settings.liveSync) ctx.syncLive();
+  }));
+
+  root.querySelector('#testConn').addEventListener('click', () => ctx.syncLive());
+}
+
+
+/* ---- js/app.js ---- */
+/* ============================================================
+   VANTORX MARKETS INTELLIGENCE — app.js
+   Router, sidebar, search, notifications. Data is LIVE ONLY:
+   a read-only sync from Polymarket's public Gamma API. There
+   is no demo dataset and no fallback — when the API is
+   unreachable the board stays empty (or shows clearly-stale
+   data) and the error is surfaced honestly.
+   ============================================================ */
+
+const ctx = {
+  getState, setState, navigate,
+  syncLive,
+  refreshSyncUI,
+  settings: null,
+};
+
+const PAGES = {
+  overview:  { title: 'Overview',     icon: '📊', render: renderOverview },
+  markets:   { title: 'Market Board', icon: '🎯', render: renderMarkets },
+  signals:   { title: 'AI Signals',   icon: '🤖', render: renderSignals },
+  portfolio: { title: 'Portfolio',    icon: '💼', render: renderPortfolio },
+  settings:  { title: 'Settings',     icon: '⚙️', render: renderSettings },
+};
+
+function route() {
+  const hash = location.hash.replace(/^#\/?/, '') || 'overview';
+  const [page] = hash.split('/');
+  return { page: PAGES[page] ? page : 'overview' };
+}
+
+function navigate(page) { location.hash = `#/${page}`; }
+
+function render() {
+  const { page } = route();
+  const def = PAGES[page];
+
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.page === page);
+  });
+
+  document.getElementById('view').innerHTML = '';
+  def.render(document.getElementById('view'), ctx);
+
+  document.getElementById('pageTitle').textContent = def.title;
+  document.title = `${def.title} · VantorX Markets Intelligence`;
+
+  paintSyncStatus();
+}
+
+/* ---------------- sync status in sidebar ---------------- */
+function paintSyncStatus() {
+  const s = getState();
+  const el = document.getElementById('syncStatus');
+  const chip = document.getElementById('modeChip');
+  if (s.sources.syncing) {
+    el.textContent = 'Syncing live data…';
+    chip.textContent = 'Syncing — Polymarket live';
+    return;
+  }
+  if (s.sources.live) {
+    el.textContent = `Live · Polymarket · synced ${new Date(s.sources.lastSync).toLocaleTimeString()}`;
+    chip.textContent = 'Live Mode — read-only Polymarket data';
+  } else if (s.markets.length && s.sources.lastSync) {
+    el.textContent = `Offline — stale data from ${new Date(s.sources.lastSync).toLocaleTimeString()}`;
+    chip.textContent = 'Offline — showing last synced data';
+  } else if (s.sources.error) {
+    el.textContent = 'Sync failed — retry in Settings';
+    chip.textContent = 'Not connected — no market data';
+  } else {
+    el.textContent = 'Not synced — connect in Settings';
+    chip.textContent = 'Not connected — no market data';
+  }
+}
+
+function refreshSyncUI() { paintSyncStatus(); render(); }
+
+/* ---------------- Polymarket live sync (read-only, keyless) ----------------
+   Gamma list endpoint, newest by 24h volume. Anything the API does not
+   provide stays null in the model — never invented. On failure there is
+   NO demo fallback: the error is stored and the UI says so. */
+async function syncLive({ silent = false } = {}) {
+  if (getState().sources.syncing) return;
+  setState(st => {
+    st.sources.syncing = true;
+    st.sources.error = null;
+  });
+  paintSyncStatus();
+  if (!silent) toast('Syncing live data from Polymarket…', 'info');
+  try {
+    const url = 'https://gamma-api.polymarket.com/markets?closed=false&limit=40&order=volume24hr&ascending=false';
+    const res = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!res.ok) throw new Error(`Polymarket HTTP ${res.status}`);
+    const data = await res.json();
+    const list = Array.isArray(data) ? data : (data.data || []);
+    const mapped = list.map(mapLiveMarket).filter(Boolean);
+
+    setState(st => {
+      st.markets = mapped;
+      st.sources.live = true;
+      st.sources.lastSync = new Date().toISOString();
+      st.sources.syncing = false;
+      st.sources.error = mapped.length ? null : 'Polymarket returned no open markets';
+    });
+    if (!silent) toast(`Live sync OK — ${mapped.length} real markets loaded (read-only)`, 'success');
+  } catch (err) {
+    setState(st => {
+      st.sources.live = false;
+      st.sources.syncing = false;
+      st.sources.error = err.message;
+    });
+    toast(`Live sync failed (${err.message}) — no data is faked to cover it`, 'error');
+  }
+  refreshSyncUI();
+}
+
+/* Gamma returns some fields as JSON-encoded strings; parse defensively. */
+function parsePrice(v) {
+  if (v === null || v === undefined) return null;
+  if (typeof v === 'number') return v > 1 ? v / 100 : v;
+  if (typeof v === 'string') {
+    try { const s = JSON.parse(v); return Array.isArray(s) ? parsePrice(s[0]) : parsePrice(Number(s)); }
+    catch { const n = Number(v); return Number.isFinite(n) ? (n > 1 ? n / 100 : n) : null; }
+  }
+  if (Array.isArray(v)) return parsePrice(v[0]);
+  return null;
+}
+
+function mapLiveMarket(mk, i) {
+  if (!mk) return null;
+  const yes = parsePrice(mk.outcomePrices ?? mk.outcomes);
+  /* one-decimal cents so a 0.4% longshot never displays as a fake "0¢" */
+  const pct = yes !== null ? Math.round(yes * 1000) / 10 : null;
+  const vol = mk.volumeNum ?? (mk.volume ? Number(mk.volume) : null);
+  const liq = mk.liquidityNum ?? (mk.liquidity ? Number(mk.liquidity) : null);
+  return {
+    id: String(mk.id ?? mk.slug ?? `live-${i}`),
+    q: mk.question ?? mk.title ?? 'Untitled market',
+    cat: mk.category || 'Uncategorized',
+    yes: pct, no: pct !== null ? 100 - pct : null,
+    chg: null, spread: null, trades: null,  // not provided by this endpoint — never invented
+    vol: Number.isFinite(vol) ? Math.round(vol) : null,
+    liq: Number.isFinite(liq) ? Math.round(liq) : null,
+    trend: null,                            // fetched live per-market in the drawer
+    ai: null,                               // signal engine not connected in this build
+    resolved: !!mk.closed,
+    close: mk.endDate ?? mk.closeTime ?? null,
+    tokens: mk.clobTokenIds ?? null,
+  };
+}
+
+/* ---------------- global search ---------------- */
+function initSearch() {
+  const input = document.getElementById('globalSearch');
+  const results = document.getElementById('searchResults');
+  let open = false;
+
+  function close() { results.style.display = 'none'; open = false; }
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { close(); return; }
+    const s = getState();
+    const hits = [];
+    for (const m of s.markets) {
+      const hay = `${m.q} ${m.cat}`.toLowerCase();
+      if (hay.includes(q)) {
+        hits.push({ icon: '🎯', text: `${m.yes !== null ? m.yes + '¢' : '—'} · ${m.q}`, go: () => { location.hash = '#/markets'; } });
+      }
+    }
+    if (!hits.length) hits.push({ icon: '🔍', text: 'No matches in the synced markets', go: close });
+    results.innerHTML = hits.slice(0, 8).map((h, i) =>
+      `<div class="search-hit" data-hit="${i}"><span class="sh-ico">${h.icon}</span>${esc(h.text)}</div>`).join('');
+    results.style.display = 'block';
+    open = true;
+    results.querySelectorAll('[data-hit]').forEach((el, i) => {
+      el.addEventListener('click', () => { hits[i].go(); close(); input.value = ''; });
+    });
+  });
+
+  document.addEventListener('click', e => {
+    if (open && !results.contains(e.target) && e.target !== input) close();
+  });
+}
+
+/* ---------------- notifications ---------------- */
+function initNotifications() {
+  const btn = document.getElementById('notifBtn');
+  const dot = document.getElementById('notifDot');
+
+  function paintDot() {
+    const unread = getState().notifications.filter(n => !n.read).length;
+    dot.style.display = unread ? 'block' : 'none';
+  }
+
+  btn.addEventListener('click', () => {
+    const s = getState();
+    openModal({
+      title: '🔔 Notifications',
+      body: s.notifications.length ? `<div class="list-rows">
+        ${s.notifications.map(n => `
+          <div class="list-row" data-clickable data-link="${n.link || ''}">
+            <div class="row-ico">${n.icon}</div>
+            <div class="row-main">
+              <div class="row-title">${esc(n.title)}</div>
+              <div class="row-sub">${esc(n.body)}</div>
+            </div>
+          </div>`).join('')}
+      </div>`
+      : emptyState('🔔', 'No notifications', 'Nothing has been emitted yet. This build generates no simulated alerts.'),
+      footer: `<button class="btn btn-gold" data-nn-close>Close</button>`,
+      onOpen: ({ modal, close }) => {
+        modal.querySelectorAll('[data-link]').forEach(el => el.addEventListener('click', () => {
+          if (el.dataset.link) location.hash = el.dataset.link;
+          close();
+        }));
+        modal.querySelector('[data-nn-close]').addEventListener('click', close);
+      },
+    });
+  });
+
+  subscribe(paintDot);
+  paintDot();
+}
+
+/* ---------------- mobile drawer ---------------- */
+function initDrawer() {
+  const burger = document.getElementById('burger');
+  const sidebar = document.getElementById('sidebar');
+  const scrim = document.getElementById('scrim');
+  function close() { sidebar.classList.remove('open'); scrim.classList.remove('show'); }
+  burger.addEventListener('click', () => { sidebar.classList.toggle('open'); scrim.classList.toggle('show'); });
+  scrim.addEventListener('click', close);
+  sidebar.addEventListener('click', e => { if (e.target.closest('.nav-item')) close(); });
+}
+
+/* ---------------- account menu ---------------- */
+function initAccount() {
+  const btn = document.getElementById('avatarBtn');
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const existing = document.querySelector('.account-menu');
+    if (existing) { existing.remove(); return; }
+    const s = getState();
+    const menu = document.createElement('div');
+    menu.className = 'account-menu';
+    menu.innerHTML = `
+      <div class="account-name">${esc(s.account.name)}<span class="account-role">${esc(s.account.role)}</span></div>
+      <button class="account-item" data-act="refresh">🔄 Refresh live data</button>
+      <button class="account-item" data-act="settings">⚙️ Connection settings</button>
+    `;
+    btn.appendChild(menu);
+    menu.querySelector('[data-act="refresh"]').addEventListener('click', () => { menu.remove(); syncLive(); });
+    menu.querySelector('[data-act="settings"]').addEventListener('click', () => { menu.remove(); navigate('settings'); });
+  });
+  document.addEventListener('click', () => {
+    const m = document.querySelector('.account-menu');
+    if (m) m.remove();
+  });
+}
+
+/* ---------------- boot ---------------- */
+function paintIdentity() {
+  const s = getState();
+  document.getElementById('avatarInitials').textContent =
+    s.account.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+}
+
+function boot() {
+  paintIdentity();
+  initSearch();
+  initNotifications();
+  initDrawer();
+  initAccount();
+  window.addEventListener('hashchange', render);
+  render();
+  /* auto-sync live Polymarket data on boot when enabled in settings */
+  if (getState().settings.liveSync) syncLive({ silent: true });
+}
+
+boot();
+
+
+</script>
+</body>
+</html>
