@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VantorX — AI Receptionist | Sales Presentation</title>
+<style>
+/* ============================================================
+   VANTORX — PREMIUM SALES PRESENTATION (self-contained)
+   Black/charcoal · gold · glass · glow
+   ============================================================ */
+
+:root {
+  --bg-0: #050506;
+  --bg-1: #0b0b0f;
+  --bg-2: #121218;
+  --gold: #d4af37;
+  --gold-bright: #f0d060;
+  --gold-dim: rgba(212, 175, 55, 0.14);
+  --white: #f5f4ef;
+  --muted: #9a978c;
+  --green: #4ade80;
+  --red: #f87171;
+  --glass: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(212,175,55,0.06), transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(120,90,255,0.05), transparent 50%),
+    var(--bg-0);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Background FX ---------- */
+.bg-fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.orb {
+  position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5;
+  animation: orbDrift 26s ease-in-out infinite alternate;
+}
+.orb-1 { width: 55vmax; height: 55vmax; top: -25vmax; left: -15vmax; background: radial-gradient(circle, rgba(212,175,55,0.16), transparent 65%); }
+.orb-2 { width: 45vmax; height: 45vmax; bottom: -20vmax; right: -10vmax; background: radial-gradient(circle, rgba(120,90,255,0.10), transparent 65%); animation-delay: -8s; }
+.orb-3 { width: 30vmax; height: 30vmax; top: 40%; left: 55%; background: radial-gradient(circle, rgba(212,175,55,0.07), transparent 60%); animation-delay: -16s; }
+@keyframes orbDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(4vmax, -3vmax) scale(1.12); }
+}
+.grid-overlay {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 30%, transparent 75%);
+}
+
+/* ---------- Deck / slides ---------- */
+.deck { position: relative; z-index: 1; height: 100%; }
+.slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 84px 72px 110px;
+  opacity: 0; visibility: hidden;
+  transform: translateX(60px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease), visibility 0.65s;
+  overflow-y: auto;
+}
+.slide.active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 2; }
+.slide.exit-left { transform: translateX(-60px); }
+.slide.exit-right { transform: translateX(60px); }
+
+.slide-inner { width: min(1240px, 100%); margin: auto; }
+
+/* staggered reveal for direct children */
+.slide.active .slide-inner > * { animation: riseIn 0.8s var(--ease) both; }
+.slide.active .slide-inner > *:nth-child(1) { animation-delay: 0.05s; }
+.slide.active .slide-inner > *:nth-child(2) { animation-delay: 0.14s; }
+.slide.active .slide-inner > *:nth-child(3) { animation-delay: 0.23s; }
+.slide.active .slide-inner > *:nth-child(4) { animation-delay: 0.32s; }
+.slide.active .slide-inner > *:nth-child(5) { animation-delay: 0.41s; }
+.slide.active .slide-inner > *:nth-child(6) { animation-delay: 0.5s; }
+.slide.active .slide-inner > *:nth-child(7) { animation-delay: 0.59s; }
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Typography ---------- */
+.eyebrow {
+  font-family: var(--font-display); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.34em; color: var(--gold); margin-bottom: 18px; text-transform: uppercase;
+}
+.gold-eyebrow { color: var(--gold-bright); text-shadow: 0 0 24px rgba(212,175,55,0.55); }
+.danger-eyebrow { color: var(--red); }
+.success-eyebrow { color: var(--green); }
+
+.slide-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.9rem, 3.6vw, 3.1rem); line-height: 1.12;
+  letter-spacing: -0.02em; margin-bottom: 16px;
+}
+.slide-sub {
+  font-size: clamp(1rem, 1.4vw, 1.2rem); color: var(--muted);
+  font-weight: 300; margin-bottom: 34px; max-width: 56ch;
+}
+.closing-line {
+  margin-top: 34px; font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: var(--muted); font-style: italic; font-weight: 300;
+  border-left: 2px solid var(--gold); padding-left: 18px;
+}
+.closing-line.gold-line { color: var(--gold-bright); border-left-color: var(--gold-bright); font-style: normal; font-weight: 500; }
+.mini-title { font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.22em; color: var(--gold); margin: 26px 0 14px; }
+.gold { color: var(--gold-bright); }
+
+/* ---------- Glass ---------- */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block; font-family: var(--font-display);
+  font-weight: 600; letter-spacing: 0.12em; font-size: 0.95rem;
+  padding: 16px 38px; border-radius: 999px; border: none; cursor: pointer;
+  text-decoration: none; transition: all 0.3s var(--ease);
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-bright) 55%, var(--gold) 100%);
+  color: #141005;
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.35);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 44px rgba(212, 175, 55, 0.55); }
+.btn-huge { font-size: 1.15rem; padding: 22px 54px; letter-spacing: 0.16em; }
+
+/* ============================================================
+   SLIDE 1 — COVER
+   ============================================================ */
+.cover { text-align: center; }
+.cover-flow {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  flex-wrap: wrap; margin-bottom: 44px;
+}
+.flow-step {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px; font-size: 0.85rem; font-weight: 500;
+  border-radius: 14px; color: var(--muted); white-space: nowrap;
+}
+.flow-step .fs-icon { font-size: 1.1rem; }
+.glow-gold { border-color: rgba(212,175,55,0.45); box-shadow: 0 0 30px rgba(212,175,55,0.15); color: var(--gold-bright); }
+.glow-green { border-color: rgba(74,222,128,0.35); box-shadow: 0 0 30px rgba(74,222,128,0.10); color: var(--green); }
+.flow-arrow { color: var(--gold); font-size: 1.2rem; opacity: 0.7; }
+
+.brand-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(3.4rem, 9vw, 7rem); letter-spacing: 0.06em; line-height: 1;
+  background: linear-gradient(180deg, #ffffff 20%, #b9b5a6 90%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 18px;
+}
+.cover-tagline {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.3rem, 2.6vw, 2.1rem); margin-bottom: 16px;
+  color: var(--gold-bright);
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.35);
+}
+.cover-sub {
+  max-width: 58ch; margin: 0 auto 36px; color: var(--muted);
+  font-size: clamp(1rem, 1.5vw, 1.25rem); font-weight: 300; line-height: 1.6;
+}
+
+/* ============================================================
+   CARD GRIDS
+   ============================================================ */
+.card-grid { display: grid; gap: 20px; margin-top: 10px; }
+.card-grid.four { grid-template-columns: repeat(4, 1fr); }
+.card-grid.three { grid-template-columns: repeat(3, 1fr); }
+
+.card {
+  padding: 30px 26px; border-radius: 20px;
+  transition: transform 0.35s var(--ease), border-color 0.35s, box-shadow 0.35s;
+}
+.card:hover { transform: translateY(-6px); border-color: rgba(212,175,55,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 34px rgba(212,175,55,0.08); }
+.card h3 { font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0.14em; margin-bottom: 10px; }
+.card p { color: var(--muted); font-size: 0.92rem; line-height: 1.55; font-weight: 300; }
+.card-icon {
+  width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+  font-size: 1.5rem; margin-bottom: 18px;
+  background: var(--gold-dim); border: 1px solid rgba(212,175,55,0.25);
+}
+.card-icon.danger {
+  background: rgba(248,113,113,0.10); border-color: rgba(248,113,113,0.3);
+}
+
+/* ============================================================
+   SLIDE 3 — SPLIT
+   ============================================================ */
+.split { display: grid; grid-template-columns: 1.05fr 1fr; gap: 44px; align-items: center; margin-top: 8px; }
+.ai-visual {
+  padding: 46px 36px; text-align: center; position: relative; overflow: hidden;
+  border-color: rgba(212,175,55,0.28);
+  background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.10), rgba(255,255,255,0.03) 60%);
+}
+.ai-core {
+  width: 110px; height: 110px; margin: 0 auto 22px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 2.6rem; color: var(--gold-bright);
+  border: 1px solid rgba(212,175,55,0.4); position: relative;
+  background: radial-gradient(circle at 50% 35%, rgba(212,175,55,0.22), rgba(212,175,55,0.04) 70%);
+  box-shadow: 0 0 60px rgba(212,175,55,0.25), inset 0 0 30px rgba(212,175,55,0.12);
+}
+.ai-pulse {
+  position: absolute; inset: -14px; border-radius: 50%;
+  border: 1px solid rgba(212,175,55,0.5);
+  animation: aiPulse 2.6s ease-out infinite;
+}
+@keyframes aiPulse {
+  0% { transform: scale(0.85); opacity: 0.9; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.ai-visual-label { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.1em; font-size: 1rem; margin-bottom: 10px; }
+.ai-visual-note { color: var(--muted); font-size: 0.9rem; font-weight: 300; }
+.ai-visual-note strong { color: var(--gold-bright); font-weight: 500; }
+
+.feature-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 22px; }
+.feature-list li {
+  display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  border-radius: 12px; font-size: 0.95rem; font-weight: 400;
+}
+.check { color: var(--gold-bright); font-weight: 700; }
+
+/* ============================================================
+   SLIDE 4 — PIPELINE
+   ============================================================ */
+.pipeline { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pipe-node {
+  padding: 16px 20px; border-radius: 14px; font-family: var(--font-display);
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; line-height: 1.35;
+  max-width: 180px; text-align: center;
+}
+.pipe-conn {
+  flex: 1; min-width: 24px; height: 2px; min-height: 2px;
+  background: linear-gradient(90deg, rgba(212,175,55,0.15), rgba(212,175,55,0.65));
+  position: relative;
+}
+.pipe-conn::after {
+  content: '▸'; position: absolute; right: -4px; top: 50%;
+  transform: translateY(-50%); color: var(--gold); font-size: 0.9rem;
+}
+.gold-node { border-color: rgba(212,175,55,0.5); box-shadow: 0 0 26px rgba(212,175,55,0.16); color: var(--gold-bright); }
+.green-node { border-color: rgba(74,222,128,0.45); box-shadow: 0 0 26px rgba(74,222,128,0.12); color: var(--green); }
+.calendar-pipeline { margin-top: 10px; }
+
+/* ============================================================
+   SLIDE 5 — CHAT
+   ============================================================ */
+.chat-grid {
+  display: flex; flex-wrap: wrap; gap: 14px; max-width: 980px; margin-top: 6px;
+}
+.chat-grid.compact { margin-top: 26px; gap: 10px; }
+.chat-bubble {
+  padding: 14px 22px; border-radius: 18px 18px 18px 4px; font-size: 1rem;
+  font-weight: 400; color: var(--white); line-height: 1.45;
+}
+.chat-bubble.user { border-color: rgba(212,175,55,0.22); }
+.chat-bubble.ai {
+  align-self: flex-start; border-radius: 18px 18px 4px 18px;
+  background: linear-gradient(135deg, rgba(212,175,55,0.16), rgba(212,175,55,0.05));
+  border: 1px solid rgba(212,175,55,0.4); color: var(--gold-bright);
+}
+
+/* ============================================================
+   SLIDE 6 — BOOKING DEMO
+   ============================================================ */
+.booking-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+.chat-thread {
+  padding: 26px; display: flex; flex-direction: column; gap: 14px; justify-content: center;
+}
+.chat-status {
+  display: inline-flex; align-items: center; gap: 5px; align-self: flex-start;
+  font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.2em;
+  color: var(--gold); padding: 10px 16px; border-radius: 999px;
+  background: var(--gold-dim); border: 1px solid rgba(212,175,55,0.25);
+}
+.chat-status span { width: 5px; height: 5px; border-radius: 50%; background: var(--gold-bright); animation: blink 1.2s infinite; }
+.chat-status span:nth-child(2) { animation-delay: 0.2s; }
+.chat-status span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+.calendar-card { padding: 26px; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.cal-head {
+  font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.26em;
+  color: var(--gold); display: flex; align-items: center; gap: 10px;
+}
+.cal-head::before { content: '🗓️'; }
+.slot-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.slot {
+  flex: 1; min-width: 90px; padding: 14px 10px; border-radius: 12px; cursor: pointer;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+  color: var(--white); font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
+  transition: all 0.25s var(--ease);
+}
+.slot:hover { border-color: rgba(212,175,55,0.5); transform: translateY(-2px); }
+.slot.selected {
+  background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(212,175,55,0.08));
+  border-color: var(--gold); color: var(--gold-bright);
+  box-shadow: 0 0 24px rgba(212,175,55,0.25);
+}
+.booked-confirm {
+  font-family: var(--font-display); font-weight: 700; letter-spacing: 0.12em;
+  color: var(--green); font-size: 0.95rem; padding: 14px 18px; border-radius: 12px;
+  background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.3);
+  display: flex; flex-direction: column; gap: 4px;
+  animation: confirmPop 0.6s var(--ease) both 0.4s;
+}
+.booked-confirm small { font-family: var(--font-body); font-weight: 300; letter-spacing: 0.04em; color: rgba(74,222,128,0.75); text-transform: none; font-size: 0.8rem; }
+@keyframes confirmPop { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+
+/* ============================================================
+   SLIDE 7 — RESCHEDULE / CANCEL
+   ============================================================ */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 8px; }
+.flow-card { padding: 34px 30px; }
+.flow-badge {
+  display: inline-block; font-family: var(--font-display); font-weight: 700;
+  font-size: 0.75rem; letter-spacing: 0.28em; padding: 8px 18px; border-radius: 999px;
+  margin-bottom: 20px;
+}
+.flow-badge.gold { background: var(--gold-dim); color: var(--gold-bright); border: 1px solid rgba(212,175,55,0.4); }
+.flow-badge.red { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.35); }
+.quote { font-size: 1.25rem; font-weight: 300; font-style: italic; margin-bottom: 22px; color: var(--white); }
+.mini-steps { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mini-steps span {
+  font-size: 0.85rem; color: var(--muted); padding: 8px 14px; border-radius: 10px;
+  background: rgba(255,255,255,0.035); border: 1px solid var(--glass-border);
+}
+.mini-steps span.ok { color: var(--green); border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.06); }
+.mini-arrow { color: var(--gold); font-weight: 700; }
+
+/* ============================================================
+   SLIDE 8 — TRANSFER
+   ============================================================ */
+.transfer-visual {
+  display: flex; align-items: center; gap: 18px; padding: 30px 34px; margin-top: 4px;
+  flex-wrap: wrap;
+}
+.tv-node {
+  font-family: var(--font-display); font-weight: 700; letter-spacing: 0.12em;
+  font-size: 0.9rem; padding: 18px 26px; border-radius: 14px;
+  background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+}
+.tv-node.gold {
+  color: var(--gold-bright); border-color: rgba(212,175,55,0.5);
+  background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.18), rgba(212,175,55,0.04));
+  box-shadow: 0 0 34px rgba(212,175,55,0.2);
+}
+.tv-link { width: 40px; height: 2px; background: linear-gradient(90deg, rgba(212,175,55,0.2), rgba(212,175,55,0.6)); }
+.tv-links { display: flex; flex-direction: column; gap: 12px; }
+.tv-links .tv-link { width: 46px; }
+.tv-link.human { background: linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.55)); }
+.tv-branches { display: flex; flex-direction: column; gap: 12px; }
+.tv-branch {
+  font-size: 0.92rem; padding: 14px 20px; border-radius: 12px; color: var(--white);
+}
+.tv-branch.human { color: var(--white); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); }
+
+/* ============================================================
+   SLIDE 9 — VIDEO
+   ============================================================ */
+.video-slide { display: flex; flex-direction: column; }
+.video-player {
+  position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 58vh;
+  margin: 8px auto 6px; overflow: hidden; border-radius: 22px;
+  border: 1px solid rgba(212,175,55,0.3);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(212,175,55,0.1);
+}
+.video-player video { width: 100%; height: 100%; object-fit: cover; display: block; background: transparent; }
+.video-placeholder {
+  position: absolute; inset: 0; display: grid; place-items: center; align-content: center;
+  gap: 20px; cursor: pointer;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(212,175,55,0.12), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0 2px, transparent 2px 14px),
+    #0a0a0e;
+}
+.video-placeholder.removed { display: none; }
+.vp-ring {
+  width: 110px; height: 110px; border-radius: 50%;
+  border: 1px solid rgba(212,175,55,0.5); display: grid; place-items: center;
+  background: rgba(212,175,55,0.08);
+  box-shadow: 0 0 50px rgba(212,175,55,0.3);
+  animation: vpBreathe 3s ease-in-out infinite;
+}
+@keyframes vpBreathe {
+  0%, 100% { box-shadow: 0 0 40px rgba(212,175,55,0.2); transform: scale(1); }
+  50% { box-shadow: 0 0 70px rgba(212,175,55,0.4); transform: scale(1.05); }
+}
+.vp-play { font-size: 2.2rem; color: var(--gold-bright); margin-left: 6px; }
+.video-placeholder p { color: var(--muted); font-size: 0.9rem; letter-spacing: 0.06em; }
+.video-placeholder code {
+  background: rgba(212,175,55,0.12); padding: 2px 8px; border-radius: 6px;
+  color: var(--gold-bright); font-size: 0.85em;
+}
+.video-controls {
+  position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center;
+  gap: 14px; padding: 14px 18px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  opacity: 0; transition: opacity 0.3s;
+}
+.video-player:hover .video-controls, .video-controls.visible { opacity: 1; }
+.video-controls button {
+  background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border);
+  color: var(--white); width: 40px; height: 40px; border-radius: 10px; cursor: pointer;
+  font-size: 1rem; transition: all 0.25s;
+}
+.video-controls button:hover { border-color: var(--gold); color: var(--gold-bright); }
+.vc-progress { flex: 1; height: 5px; border-radius: 999px; background: rgba(255,255,255,0.12); cursor: pointer; position: relative; }
+.vc-bar {
+  height: 100%; width: 0%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  box-shadow: 0 0 12px rgba(212,175,55,0.6); position: relative;
+}
+.vc-time { font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; min-width: 84px; text-align: center; }
+
+/* ============================================================
+   SLIDE 10 — LIVE DEMO PHONE
+   ============================================================ */
+.live-slide { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.live-slide .slide-sub { margin-left: auto; margin-right: auto; }
+.phone-visual {
+  width: min(300px, 80vw); border-radius: 40px; padding: 16px; margin: 6px auto 30px;
+  border: 1px solid rgba(212,175,55,0.35);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(212,175,55,0.12);
+  background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+}
+.phone-notch {
+  width: 90px; height: 22px; background: #050506; border-radius: 999px;
+  margin: 0 auto 14px; border: 1px solid rgba(255,255,255,0.06);
+}
+.phone-screen {
+  border-radius: 26px; padding: 34px 20px 30px; text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(212,175,55,0.14), transparent 65%),
+    linear-gradient(180deg, #0d0d12, #070709);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.call-wave { display: flex; align-items: center; gap: 5px; height: 40px; margin-bottom: 10px; }
+.call-wave span {
+  width: 4px; border-radius: 999px; background: var(--gold-bright);
+  height: 12px; animation: waveBar 1.1s ease-in-out infinite;
+}
+.call-wave span:nth-child(2) { animation-delay: 0.12s; }
+.call-wave span:nth-child(3) { animation-delay: 0.24s; }
+.call-wave span:nth-child(4) { animation-delay: 0.36s; }
+.call-wave span:nth-child(5) { animation-delay: 0.48s; }
+.call-wave span:nth-child(6) { animation-delay: 0.6s; }
+.call-wave span:nth-child(7) { animation-delay: 0.72s; }
+.call-wave span:nth-child(8) { animation-delay: 0.84s; }
+@keyframes waveBar {
+  0%, 100% { height: 10px; opacity: 0.5; }
+  50% { height: 34px; opacity: 1; }
+}
+.call-name { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: 0.06em; }
+.call-number {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: 0.14em;
+  color: var(--gold-bright); font-size: 1.15rem; padding: 6px 18px; border-radius: 999px;
+  background: var(--gold-dim); border: 1px solid rgba(212,175,55,0.3);
+}
+.call-timer { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 0.9rem; letter-spacing: 0.2em; }
+.call-btn { margin-bottom: 6px; }
+
+/* ============================================================
+   SLIDE 12 — NUMBER FLOW
+   ============================================================ */
+.number-flow { display: flex; flex-direction: column; gap: 26px; margin-top: 10px; }
+.nf-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.nf-row.alt .nf-node { border-style: dashed; }
+.nf-node {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: 0.12em;
+  font-size: 0.9rem; padding: 20px 30px; border-radius: 16px; text-align: center;
+}
+.nf-node.gold { color: var(--gold-bright); border-color: rgba(212,175,55,0.45); box-shadow: 0 0 30px rgba(212,175,55,0.14); }
+.nf-node.human { border-color: rgba(255,255,255,0.3); }
+.nf-arrow { font-size: 1.6rem; color: var(--gold); font-weight: 300; }
+
+/* ============================================================
+   SLIDE 13 — CHAOS FLOW
+   ============================================================ */
+.chaos-flow {
+  display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 16px;
+  max-width: 1000px;
+}
+.chaos-node {
+  font-size: 0.95rem; padding: 14px 20px; border-radius: 999px;
+  background: rgba(248,113,113,0.05); border: 1px solid rgba(248,113,113,0.22);
+  color: rgba(255, 220, 220, 0.92);
+  animation: chaosShake 3.4s ease-in-out infinite;
+}
+.chaos-node.missed {
+  background: rgba(248,113,113,0.14); border-color: rgba(248,113,113,0.5);
+  color: var(--red); font-weight: 600;
+  box-shadow: 0 0 26px rgba(248,113,113,0.15);
+}
+@keyframes chaosShake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+  75% { transform: translate(1px, 1px); }
+}
+
+/* ============================================================
+   SLIDE 14 — CALM LIST
+   ============================================================ */
+.calm-list { display: flex; flex-direction: column; gap: 14px; max-width: 860px; }
+.calm-row {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  gap: 18px; padding: 20px 28px; font-family: var(--font-display);
+  font-size: clamp(0.8rem, 1.1vw, 1rem); font-weight: 600; letter-spacing: 0.1em;
+}
+.calm-row > span:first-child { color: var(--muted); text-align: left; }
+.calm-arrow { color: var(--gold); font-size: 1.3rem; }
+.calm-result {
+  color: var(--gold-bright); text-align: right;
+  text-shadow: 0 0 22px rgba(212,175,55,0.4);
+}
+
+/* ============================================================
+   SLIDE 15 — STEPS
+   ============================================================ */
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 10px; }
+.step { padding: 28px 26px; position: relative; transition: all 0.35s var(--ease); }
+.step:hover { transform: translateY(-5px); border-color: rgba(212,175,55,0.4); }
+.step-num {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.6rem;
+  background: linear-gradient(135deg, var(--gold), rgba(212,175,55,0.35));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.step h3 { font-family: var(--font-display); font-size: 0.9rem; letter-spacing: 0.16em; margin: 10px 0 8px; }
+.step p { color: var(--muted); font-size: 0.88rem; font-weight: 300; line-height: 1.5; }
+
+/* ============================================================
+   SLIDE 16 — TEST LIST
+   ============================================================ */
+.test-list {
+  list-style: none; display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px; max-width: 880px; margin-top: 6px;
+}
+.test-list li {
+  display: flex; align-items: center; gap: 14px; padding: 16px 20px;
+  font-size: 0.95rem; border-radius: 12px;
+}
+.tcheck {
+  width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--gold-dim); color: var(--gold-bright); font-size: 0.8rem;
+  font-weight: 700; border: 1px solid rgba(212,175,55,0.35); flex-shrink: 0;
+}
+
+/* ============================================================
+   SLIDE 17 — PACKAGE
+   ============================================================ */
+.package { padding: 40px 44px; border-color: rgba(212,175,55,0.35); max-width: 780px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.1), transparent 60%),
+    var(--glass);
+}
+.package-head {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.5rem;
+  letter-spacing: 0.18em; text-align: center; margin-bottom: 28px; color: var(--gold-bright);
+  text-shadow: 0 0 30px rgba(212,175,55,0.4);
+}
+.pkg-icon { margin-right: 6px; }
+.package-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.pkg-item {
+  padding: 16px 20px; border-radius: 12px; font-size: 0.9rem; font-weight: 500;
+  letter-spacing: 0.06em; background: rgba(255,255,255,0.04);
+  border: 1px solid var(--glass-border); display: flex; align-items: center; gap: 10px;
+}
+.pkg-item::before { content: '✓'; color: var(--gold-bright); font-weight: 700; }
+
+/* ============================================================
+   SLIDE 18 — PRICING
+   ============================================================ */
+.pricing-slide { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.price-card {
+  width: min(520px, 100%); padding: 46px 44px; border-radius: 26px;
+  border: 1px solid rgba(212,175,55,0.4);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.12), transparent 65%),
+    var(--glass);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55), 0 0 70px rgba(212,175,55,0.12);
+}
+.price-label { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 18px; }
+.price-line { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-bottom: 30px; }
+.price-amount {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(3.4rem, 6vw, 5rem); line-height: 1;
+  background: linear-gradient(180deg, #ffffff, #b9b5a6);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.price-period { color: var(--muted); font-size: 1.15rem; font-weight: 300; }
+.price-features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 12px; }
+.price-features li {
+  padding: 13px 18px; border-radius: 12px; font-size: 0.98rem;
+  background: rgba(255,255,255,0.035); border: 1px solid var(--glass-border);
+}
+
+/* ============================================================
+   SLIDE 19 — VALUE SPLIT
+   ============================================================ */
+.value-split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: stretch; margin-top: 10px; }
+.value-col { padding: 34px 30px; }
+.value-col h3 {
+  font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.28em;
+  margin-bottom: 20px;
+}
+.value-col.before h3 { color: var(--red); }
+.value-col.after h3 { color: var(--green); }
+.value-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.value-col li {
+  font-size: 0.95rem; color: var(--muted); font-weight: 300; padding: 12px 16px;
+  border-radius: 10px; background: rgba(255,255,255,0.03);
+  border: 1px solid var(--glass-border);
+}
+.value-col.after li { color: var(--white); border-color: rgba(74,222,128,0.25); background: rgba(74,222,128,0.05); }
+.value-arrow { align-self: center; font-size: 2.2rem; color: var(--gold); font-weight: 300; }
+
+/* ============================================================
+   SLIDE 20 — TIMELINE
+   ============================================================ */
+.timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 10px; }
+.tl-item {
+  display: flex; align-items: center; gap: 16px; padding: 24px 22px;
+  transition: all 0.35s var(--ease);
+}
+.tl-item:hover { transform: translateY(-4px); border-color: rgba(212,175,55,0.4); }
+.tl-num {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.3rem;
+  color: var(--gold-bright); opacity: 0.9; flex-shrink: 0;
+}
+.tl-text { font-family: var(--font-display); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; line-height: 1.45; }
+
+/* ============================================================
+   SLIDE 21 — CLOSE
+   ============================================================ */
+.close-slide { text-align: center; }
+.close-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2.6rem, 6.5vw, 4.8rem); line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+.close-sub {
+  font-size: clamp(1.2rem, 2.2vw, 1.7rem); color: var(--muted); font-weight: 300;
+  margin-bottom: 40px;
+}
+.contact-block {
+  margin: 44px auto 0; padding: 28px 40px; display: inline-block;
+  border-color: rgba(212,175,55,0.3);
+}
+.brand-mini { font-family: var(--font-display); font-weight: 800; letter-spacing: 0.14em; font-size: 1.2rem; margin-bottom: 14px; }
+.contact-row { color: var(--muted); font-size: 0.98rem; padding: 4px 0; font-weight: 300; }
+.contact-row a { color: var(--white); text-decoration: none; border-bottom: 1px solid rgba(212,175,55,0.35); transition: color 0.25s; }
+.contact-row a:hover { color: var(--gold-bright); }
+
+/* ============================================================
+   NAV CHROME
+   ============================================================ */
+.progress-track {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 50;
+  background: rgba(255,255,255,0.06);
+}
+.progress-fill {
+  height: 100%; width: 0%; border-radius: 0 999px 999px 0;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  box-shadow: 0 0 16px rgba(212,175,55,0.7);
+  transition: width 0.5s var(--ease);
+}
+.deck-nav {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+  z-index: 50; display: flex; align-items: center; gap: 26px;
+  padding: 12px 22px; border-radius: 999px;
+  background: rgba(12,12,16,0.72);
+}
+.deck-brand { font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.16em; }
+.nav-controls { display: flex; align-items: center; gap: 14px; }
+.nav-btn {
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
+  background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border);
+  color: var(--white); font-size: 1.1rem; transition: all 0.25s var(--ease);
+  display: grid; place-items: center;
+}
+.nav-btn:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-bright); box-shadow: 0 0 20px rgba(212,175,55,0.25); }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+.slide-counter {
+  font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 0.14em;
+  color: var(--muted); min-width: 64px; text-align: center; font-variant-numeric: tabular-nums;
+}
+.chapter-label {
+  font-family: var(--font-display); font-size: 0.68rem; letter-spacing: 0.3em;
+  color: var(--gold); text-transform: uppercase;
+}
+
+.chapter-banner {
+  position: fixed; top: 42px; right: 48px; z-index: 40;
+  font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.34em;
+  color: var(--gold); text-transform: uppercase; opacity: 0;
+  pointer-events: none;
+}
+.chapter-banner.show { animation: bannerFade 2.4s var(--ease) both; }
+@keyframes bannerFade {
+  0% { opacity: 0; transform: translateY(-8px); }
+  18% { opacity: 1; transform: translateY(0); }
+  72% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1080px) {
+  .slide { padding: 76px 40px 108px; }
+  .card-grid.four { grid-template-columns: repeat(2, 1fr); }
+  .card-grid.three, .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .timeline { grid-template-columns: repeat(2, 1fr); }
+  .split, .booking-demo, .two-col { grid-template-columns: 1fr; }
+  .value-split { grid-template-columns: 1fr; }
+  .value-arrow { transform: rotate(90deg); justify-self: center; }
+  .chapter-banner { right: 24px; }
+}
+
+@media (max-width: 640px) {
+  .slide { padding: 64px 20px 120px; }
+  .card-grid.four, .card-grid.three, .steps-grid, .timeline,
+  .test-list, .feature-list, .package-items { grid-template-columns: 1fr; }
+  .slide-title { font-size: 1.7rem; }
+  .cover-flow { gap: 8px; }
+  .flow-step { padding: 9px 14px; font-size: 0.72rem; }
+  .flow-arrow { display: none; }
+  .deck-nav { gap: 14px; padding: 10px 16px; bottom: 14px; }
+  .deck-brand, .chapter-label { display: none; }
+  .pipe-node { max-width: none; flex: 1 1 100%; }
+  .pipe-conn { display: none; }
+  .video-player { aspect-ratio: auto; height: 46vh; }
+  .brand-title { font-size: 3rem; }
+  .nf-row { justify-content: center; text-align: center; }
+  .nf-arrow { transform: rotate(90deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+<div class="bg-fx" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<main id="deck" class="deck">
+
+  <!-- ============ SLIDE 1 — COVER ============ -->
+  <section class="slide active" data-slide="1" data-chapter="THE PITCH">
+    <div class="slide-inner cover">
+      <div class="cover-flow" aria-hidden="true">
+        <div class="flow-step glass"><span class="fs-icon">📞</span><span>Customer calls</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step glass glow-gold"><span class="fs-icon">✦</span><span>VantorX AI answers</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step glass"><span class="fs-icon">🤖</span><span>AI handles request</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step glass glow-green"><span class="fs-icon">📅</span><span>Booked / answered / transferred</span></div>
+      </div>
+      <p class="eyebrow">AI RECEPTIONIST&nbsp;&nbsp;•&nbsp;&nbsp;APPOINTMENT AUTOMATION&nbsp;&nbsp;•&nbsp;&nbsp;CUSTOMER COMMUNICATION</p>
+      <h1 class="brand-title">VANTOR<span class="gold">X</span></h1>
+      <h2 class="cover-tagline">Never Miss Another Customer Call.</h2>
+      <p class="cover-sub">Your AI receptionist answers calls, handles customers, and books appointments while you focus on your business.</p>
+      <button class="btn btn-gold next-btn" data-goto="2">See How It Works →</button>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 2 — THE PROBLEM ============ -->
+  <section class="slide" data-slide="2" data-chapter="THE PROBLEM">
+    <div class="slide-inner">
+      <p class="eyebrow">The Problem</p>
+      <h2 class="slide-title">Your Phone Shouldn't Be Running Your Business.</h2>
+      <div class="card-grid four">
+        <div class="card glass problem-card">
+          <div class="card-icon danger">📵</div>
+          <h3>MISSED CALLS</h3>
+          <p>Customers call while you're busy or away.</p>
+        </div>
+        <div class="card glass problem-card">
+          <div class="card-icon danger">⚡</div>
+          <h3>INTERRUPTIONS</h3>
+          <p>Employees stop working to answer repetitive questions.</p>
+        </div>
+        <div class="card glass problem-card">
+          <div class="card-icon danger">⏳</div>
+          <h3>SLOW RESPONSES</h3>
+          <p>Customers don't always want to wait for a callback.</p>
+        </div>
+        <div class="card glass problem-card">
+          <div class="card-icon danger">📉</div>
+          <h3>LOST OPPORTUNITIES</h3>
+          <p>Customers may move on when they can't reach a business.</p>
+        </div>
+      </div>
+      <p class="closing-line">“Your team should be focused on running the business — not constantly answering the phone.”</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3 — THE SOLUTION ============ -->
+  <section class="slide" data-slide="3" data-chapter="THE SOLUTION">
+    <div class="slide-inner">
+      <p class="eyebrow">The Solution</p>
+      <h2 class="slide-title">Meet Your AI Receptionist.</h2>
+      <p class="slide-sub">VantorX gives your business an AI receptionist that can handle customer calls and routine conversations automatically.</p>
+      <div class="split">
+        <div class="glass ai-visual">
+          <div class="ai-core"><div class="ai-pulse"></div><span>✦</span></div>
+          <p class="ai-visual-label">Conversational AI Voice Receptionist</p>
+          <p class="ai-visual-note">Talks with customers like a person — <strong>not a “press 1 for sales” phone menu.</strong></p>
+        </div>
+        <ul class="feature-list">
+          <li><span class="check">✓</span> Incoming calls</li>
+          <li><span class="check">✓</span> Customer questions</li>
+          <li><span class="check">✓</span> Services and pricing</li>
+          <li><span class="check">✓</span> Business hours</li>
+          <li><span class="check">✓</span> Appointment booking</li>
+          <li><span class="check">✓</span> Appointment rescheduling</li>
+          <li><span class="check">✓</span> Appointment cancellations</li>
+          <li><span class="check">✓</span> Human transfers</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4 — HOW IT WORKS ============ -->
+  <section class="slide" data-slide="4" data-chapter="HOW IT WORKS">
+    <div class="slide-inner">
+      <p class="eyebrow">How The AI Actually Works</p>
+      <h2 class="slide-title">Here's What Happens When Someone Calls.</h2>
+      <div class="pipeline" aria-label="Call flow">
+        <div class="pipe-node glass">CUSTOMER CALLS</div>
+        <div class="pipe-conn"></div>
+        <div class="pipe-node glass gold-node">VANTORX ANSWERS</div>
+        <div class="pipe-conn"></div>
+        <div class="pipe-node glass">AI UNDERSTANDS THE REQUEST</div>
+        <div class="pipe-conn"></div>
+        <div class="pipe-node glass">AI USES BUSINESS INFORMATION</div>
+        <div class="pipe-conn"></div>
+        <div class="pipe-node glass">AI TAKES THE CORRECT ACTION</div>
+        <div class="pipe-conn"></div>
+        <div class="pipe-node glass green-node">CUSTOMER GETS AN ANSWER</div>
+      </div>
+      <div class="calendar-pipeline">
+        <h3 class="mini-title">For Appointments</h3>
+        <div class="pipeline">
+          <div class="pipe-node glass">CUSTOMER REQUEST</div>
+          <div class="pipe-conn"></div>
+          <div class="pipe-node glass">AI CHECKS CALENDAR</div>
+          <div class="pipe-conn"></div>
+          <div class="pipe-node glass">AVAILABLE TIME FOUND</div>
+          <div class="pipe-conn"></div>
+          <div class="pipe-node glass">CUSTOMER CHOOSES</div>
+          <div class="pipe-conn"></div>
+          <div class="pipe-node glass">APPOINTMENT BOOKED</div>
+          <div class="pipe-conn"></div>
+          <div class="pipe-node glass green-node">CUSTOMER CONFIRMED</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 5 — WHAT CUSTOMERS CAN ASK ============ -->
+  <section class="slide" data-slide="5" data-chapter="THE SOLUTION">
+    <div class="slide-inner">
+      <p class="eyebrow">What Customers Can Ask</p>
+      <h2 class="slide-title">Customers Can Actually Talk To It.</h2>
+      <div class="chat-grid">
+        <div class="chat-bubble user glass">“How much is a haircut?”</div>
+        <div class="chat-bubble user glass">“What time do you close?”</div>
+        <div class="chat-bubble user glass">“Do you take walk-ins?”</div>
+        <div class="chat-bubble user glass">“Do you have anything available tomorrow?”</div>
+        <div class="chat-bubble user glass">“Can I move my appointment?”</div>
+        <div class="chat-bubble user glass">“I need to cancel my appointment.”</div>
+        <div class="chat-bubble user glass">“Can I speak to someone?”</div>
+      </div>
+      <p class="closing-line">The AI is configured around the individual business, so it can answer approved questions using that business's information.</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 6 — APPOINTMENT BOOKING ============ -->
+  <section class="slide" data-slide="6" data-chapter="THE SOLUTION">
+    <div class="slide-inner">
+      <p class="eyebrow">Appointment Booking</p>
+      <h2 class="slide-title">Your Calendar Becomes Part of the Conversation.</h2>
+      <div class="booking-demo">
+        <div class="chat-thread glass">
+          <div class="chat-bubble user">“Do you have anything tomorrow around 2?”</div>
+          <div class="chat-bubble ai">“Let me check the schedule for you.”</div>
+          <div class="chat-status typing"><span></span><span></span><span></span> CHECKING CALENDAR…</div>
+        </div>
+        <div class="calendar-card glass">
+          <div class="cal-head">AVAILABLE TIMES</div>
+          <div class="slot-row">
+            <button class="slot" type="button">1:30 PM</button>
+            <button class="slot selected" type="button">2:00 PM</button>
+            <button class="slot" type="button">3:30 PM</button>
+          </div>
+          <div class="booked-confirm">APPOINTMENT BOOKED ✓<small>Tomorrow — 2:00 PM · Customer confirmed</small></div>
+        </div>
+      </div>
+      <p class="closing-line">The AI checks the connected calendar before offering or confirming appointment times.</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 7 — RESCHEDULE / CANCEL ============ -->
+  <section class="slide" data-slide="7" data-chapter="THE SOLUTION">
+    <div class="slide-inner">
+      <p class="eyebrow">Rescheduling &amp; Cancellations</p>
+      <h2 class="slide-title">Customers Can Manage Their Appointments.</h2>
+      <div class="two-col">
+        <div class="glass flow-card">
+          <div class="flow-badge gold">RESCHEDULE</div>
+          <p class="quote">“I need to move my appointment.”</p>
+          <div class="mini-steps">
+            <span>AI checks existing appointment &amp; availability</span>
+            <span class="mini-arrow">→</span>
+            <span>Customer chooses</span>
+            <span class="mini-arrow">→</span>
+            <span class="ok">Appointment rescheduled</span>
+          </div>
+        </div>
+        <div class="glass flow-card">
+          <div class="flow-badge red">CANCEL</div>
+          <p class="quote">“I need to cancel my appointment.”</p>
+          <div class="mini-steps">
+            <span>AI pulls up the appointment</span>
+            <span class="mini-arrow">→</span>
+            <span>Customer confirms</span>
+            <span class="mini-arrow">→</span>
+            <span class="ok">Appointment canceled</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 8 — HUMAN TRANSFERS ============ -->
+  <section class="slide" data-slide="8" data-chapter="THE SOLUTION">
+    <div class="slide-inner">
+      <p class="eyebrow">Human Transfers</p>
+      <h2 class="slide-title">AI When You Want It. A Human When You Need One.</h2>
+      <p class="slide-sub">The goal isn't to replace your team. It's to keep your team from handling every repetitive call.</p>
+      <div class="transfer-visual glass">
+        <div class="tv-node">CUSTOMER</div>
+        <div class="tv-link"></div>
+        <div class="tv-node gold">VANTORX AI</div>
+        <div class="tv-links">
+          <div class="tv-link"></div>
+          <div class="tv-link human"></div>
+        </div>
+        <div class="tv-branches">
+          <div class="tv-branch glass">Routine request → AI handles it</div>
+          <div class="tv-branch glass human">Important request → Transfer to human</div>
+        </div>
+      </div>
+      <div class="chat-grid compact">
+        <div class="chat-bubble user glass">“Can I speak with the owner?”</div>
+        <div class="chat-bubble user glass">“I need help with something specific.”</div>
+        <div class="chat-bubble user glass">“I want to talk to someone.”</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 9 — DEMO VIDEO ============ -->
+  <section class="slide" data-slide="9" data-chapter="DEMO" data-emphasis="video">
+    <div class="slide-inner video-slide">
+      <p class="eyebrow gold-eyebrow">REAL AI • REAL CONVERSATION • REAL WORKFLOW</p>
+      <h2 class="slide-title">Let's Hear It For Ourselves.</h2>
+      <p class="slide-sub">This is the actual VantorX AI receptionist handling a customer conversation.</p>
+      <div class="video-player glass" id="videoPlayer">
+        <video id="demoVideo" playsinline preload="metadata" poster="">
+          <source src="DEMO_VIDEO_URL" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-placeholder" id="videoPlaceholder">
+          <div class="vp-ring"><div class="vp-play">▶</div></div>
+          <p>DEMO VIDEO — replace <code>DEMO_VIDEO_URL</code> in this file with your video</p>
+        </div>
+        <div class="video-controls" id="videoControls">
+          <button id="vcPlay" type="button" aria-label="Play/Pause">▶</button>
+          <div class="vc-progress" id="vcProgress"><div class="vc-bar" id="vcBar"></div></div>
+          <span class="vc-time" id="vcTime">0:00 / 0:00</span>
+          <button id="vcMute" type="button" aria-label="Mute/Unmute">🔊</button>
+          <button id="vcFull" type="button" aria-label="Fullscreen">⛶</button>
+        </div>
+      </div>
+      <p class="closing-line">Watch how the AI answers questions, checks availability, and handles appointments.</p>
+      <button class="btn btn-gold next-btn" data-goto="10">Continue →</button>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 10 — LIVE AI DEMO ============ -->
+  <section class="slide" data-slide="10" data-chapter="DEMO" data-emphasis="live">
+    <div class="slide-inner live-slide">
+      <p class="eyebrow gold-eyebrow">LIVE AI DEMO</p>
+      <h2 class="slide-title">Now Try It Yourself.</h2>
+      <p class="slide-sub">Call the VantorX AI receptionist and have a conversation with it.</p>
+      <div class="phone-visual glass">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="call-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <p class="call-name">VantorX AI</p>
+          <p class="call-number">DEMO_PHONE_NUMBER</p>
+          <p class="call-timer" id="callTimer">00:00</p>
+        </div>
+      </div>
+      <a class="btn btn-gold btn-huge call-btn" id="callAiBtn" href="tel:DEMO_PHONE_NUMBER">📞 CALL THE AI</a>
+      <p class="closing-line">Ask about services, pricing, availability, booking, or rescheduling.</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 11 — BUSINESS KNOWLEDGE ============ -->
+  <section class="slide" data-slide="11" data-chapter="HOW IT WORKS">
+    <div class="slide-inner">
+      <p class="eyebrow">Business Knowledge</p>
+      <h2 class="slide-title">The AI Learns YOUR Business.</h2>
+      <div class="card-grid three">
+        <div class="card glass"><div class="card-icon">✂️</div><h3>SERVICES</h3><p>Prices, descriptions, durations</p></div>
+        <div class="card glass"><div class="card-icon">🕐</div><h3>HOURS</h3><p>Opening hours and availability</p></div>
+        <div class="card glass"><div class="card-icon">📜</div><h3>POLICIES</h3><p>Cancellation, walk-in, deposit policies</p></div>
+        <div class="card glass"><div class="card-icon">📍</div><h3>LOCATION</h3><p>Address and directions</p></div>
+        <div class="card glass"><div class="card-icon">💬</div><h3>FAQS</h3><p>Common customer questions</p></div>
+        <div class="card glass"><div class="card-icon">🗓️</div><h3>BOOKING RULES</h3><p>How appointments should be handled</p></div>
+      </div>
+      <p class="closing-line">“Your AI should sound like it works for your business — not like a generic chatbot.”</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 12 — KEEP YOUR NUMBER ============ -->
+  <section class="slide" data-slide="12" data-chapter="HOW IT WORKS">
+    <div class="slide-inner">
+      <p class="eyebrow">Phone Setup</p>
+      <h2 class="slide-title">Keep Your Existing Business Number.</h2>
+      <p class="slide-sub">Customers can continue calling the number they already know.</p>
+      <div class="number-flow">
+        <div class="nf-row">
+          <div class="nf-node glass">YOUR BUSINESS NUMBER</div>
+          <div class="nf-arrow gold">→</div>
+          <div class="nf-node glass gold">VANTORX</div>
+          <div class="nf-arrow gold">→</div>
+          <div class="nf-node glass">AI RECEPTIONIST</div>
+        </div>
+        <div class="nf-row alt">
+          <div class="nf-node glass">IMPORTANT CALL</div>
+          <div class="nf-arrow gold">→</div>
+          <div class="nf-node glass gold">VANTORX</div>
+          <div class="nf-arrow gold">→</div>
+          <div class="nf-node glass human">YOUR TEAM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 13 — BEFORE VANTORX ============ -->
+  <section class="slide" data-slide="13" data-chapter="THE COMPARISON">
+    <div class="slide-inner">
+      <p class="eyebrow danger-eyebrow">Without Automation</p>
+      <h2 class="slide-title">Before VantorX</h2>
+      <div class="chaos-flow">
+        <div class="chaos-node">📞 Phone rings</div>
+        <div class="chaos-node">🤝 Employee is helping a customer</div>
+        <div class="chaos-node">📞 Phone rings again</div>
+        <div class="chaos-node missed">📵 Missed call</div>
+        <div class="chaos-node">🎙️ Voicemail</div>
+        <div class="chaos-node">↩️ Employee calls back</div>
+        <div class="chaos-node">🔁 Repetitive question</div>
+        <div class="chaos-node">📅 Appointment request</div>
+        <div class="chaos-node">🛑 Employee stops working</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 14 — WITH VANTORX ============ -->
+  <section class="slide" data-slide="14" data-chapter="THE COMPARISON">
+    <div class="slide-inner">
+      <p class="eyebrow success-eyebrow">With VantorX</p>
+      <h2 class="slide-title">With VantorX</h2>
+      <div class="calm-list">
+        <div class="calm-row glass"><span>CUSTOMER CALLS</span><span class="calm-arrow">→</span><span class="calm-result">AI ANSWERS</span></div>
+        <div class="calm-row glass"><span>CUSTOMER HAS QUESTION</span><span class="calm-arrow">→</span><span class="calm-result">AI ANSWERS</span></div>
+        <div class="calm-row glass"><span>CUSTOMER WANTS APPOINTMENT</span><span class="calm-arrow">→</span><span class="calm-result">AI BOOKS</span></div>
+        <div class="calm-row glass"><span>CUSTOMER NEEDS TO RESCHEDULE</span><span class="calm-arrow">→</span><span class="calm-result">AI HANDLES IT</span></div>
+        <div class="calm-row glass"><span>CUSTOMER NEEDS HUMAN</span><span class="calm-arrow">→</span><span class="calm-result">AI TRANSFERS</span></div>
+      </div>
+      <p class="closing-line gold-line">“Your team stays focused on the business.”</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 15 — IMPLEMENTATION ============ -->
+  <section class="slide" data-slide="15" data-chapter="IMPLEMENTATION">
+    <div class="slide-inner">
+      <p class="eyebrow">Implementation</p>
+      <h2 class="slide-title">We Build It Around Your Business.</h2>
+      <div class="steps-grid three">
+        <div class="step glass"><span class="step-num">01</span><h3>BUSINESS DISCOVERY</h3><p>Services, pricing, hours, policies, FAQs, location</p></div>
+        <div class="step glass"><span class="step-num">02</span><h3>KNOWLEDGE BASE</h3><p>Organize approved information</p></div>
+        <div class="step glass"><span class="step-num">03</span><h3>CALENDAR</h3><p>Connect appointment calendar</p></div>
+        <div class="step glass"><span class="step-num">04</span><h3>PHONE</h3><p>Connect existing business phone setup</p></div>
+        <div class="step glass"><span class="step-num">05</span><h3>AI CONFIGURATION</h3><p>Personality, conversation flow, tools, business rules</p></div>
+        <div class="step glass"><span class="step-num">06</span><h3>TEST + LAUNCH</h3><p>Test major customer scenarios before launch</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 16 — TESTING ============ -->
+  <section class="slide" data-slide="16" data-chapter="IMPLEMENTATION">
+    <div class="slide-inner">
+      <p class="eyebrow">Testing</p>
+      <h2 class="slide-title">We Don't Just Turn It On.</h2>
+      <ul class="test-list">
+        <li class="glass"><span class="tcheck">✓</span> Incoming calls</li>
+        <li class="glass"><span class="tcheck">✓</span> Business questions</li>
+        <li class="glass"><span class="tcheck">✓</span> Services and pricing</li>
+        <li class="glass"><span class="tcheck">✓</span> Appointment booking</li>
+        <li class="glass"><span class="tcheck">✓</span> Unavailable appointment times</li>
+        <li class="glass"><span class="tcheck">✓</span> Rescheduling</li>
+        <li class="glass"><span class="tcheck">✓</span> Cancellations</li>
+        <li class="glass"><span class="tcheck">✓</span> Human transfers</li>
+        <li class="glass"><span class="tcheck">✓</span> Calendar connection</li>
+        <li class="glass"><span class="tcheck">✓</span> Edge cases</li>
+      </ul>
+      <p class="closing-line">“We test the customer experience before your customers experience it.”</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 17 — WHAT YOU GET ============ -->
+  <section class="slide" data-slide="17" data-chapter="THE PACKAGE">
+    <div class="slide-inner">
+      <p class="eyebrow">What You Get</p>
+      <h2 class="slide-title">Your VantorX System.</h2>
+      <div class="package glass">
+        <div class="package-head"><span class="pkg-icon">✦</span> AI RECEPTIONIST</div>
+        <div class="package-items">
+          <div class="pkg-item">24/7 CALL ANSWERING</div>
+          <div class="pkg-item">APPOINTMENT BOOKING</div>
+          <div class="pkg-item">RESCHEDULING</div>
+          <div class="pkg-item">CANCELLATIONS</div>
+          <div class="pkg-item">BUSINESS KNOWLEDGE BASE</div>
+          <div class="pkg-item">HUMAN CALL TRANSFERS</div>
+          <div class="pkg-item">ONGOING UPDATES &amp; MAINTENANCE</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 18 — PRICING ============ -->
+  <section class="slide" data-slide="18" data-chapter="THE PACKAGE">
+    <div class="slide-inner pricing-slide">
+      <p class="eyebrow">Pricing</p>
+      <h2 class="slide-title">Simple Pricing.</h2>
+      <div class="price-card glass">
+        <div class="price-label">VANTORX AI RECEPTIONIST</div>
+        <div class="price-line"><span class="price-amount">$399</span><span class="price-period">/ month</span></div>
+        <ul class="price-features">
+          <li>✓ AI Receptionist</li>
+          <li>✓ Call Answering</li>
+          <li>✓ Appointment Booking</li>
+          <li>✓ Rescheduling &amp; Cancellations</li>
+          <li>✓ Business Knowledge Base</li>
+          <li>✓ Human Call Transfers</li>
+          <li>✓ Ongoing Updates &amp; Maintenance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 19 — THE VALUE ============ -->
+  <section class="slide" data-slide="19" data-chapter="THE PACKAGE">
+    <div class="slide-inner">
+      <p class="eyebrow">The Value</p>
+      <h2 class="slide-title">Your Team Gets Time Back.</h2>
+      <div class="value-split">
+        <div class="value-col glass before">
+          <h3>BEFORE</h3>
+          <ul>
+            <li>Answer repetitive calls</li>
+            <li>Check appointment availability</li>
+            <li>Return missed calls</li>
+            <li>Answer basic questions</li>
+            <li>Handle appointment changes</li>
+          </ul>
+        </div>
+        <div class="value-arrow">→</div>
+        <div class="value-col glass after">
+          <h3>AFTER</h3>
+          <ul>
+            <li>Serve customers</li>
+            <li>Run the business</li>
+            <li>Focus on higher-value work</li>
+            <li>Let VantorX handle repetitive communication</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 20 — GETTING STARTED ============ -->
+  <section class="slide" data-slide="20" data-chapter="GET STARTED">
+    <div class="slide-inner">
+      <p class="eyebrow">Getting Started</p>
+      <h2 class="slide-title">Getting Started Is Simple.</h2>
+      <div class="timeline">
+        <div class="tl-item glass"><span class="tl-num">01</span><span class="tl-text">YOU SAY YES</span></div>
+        <div class="tl-item glass"><span class="tl-num">02</span><span class="tl-text">WE COLLECT YOUR BUSINESS INFORMATION</span></div>
+        <div class="tl-item glass"><span class="tl-num">03</span><span class="tl-text">WE CONNECT YOUR CALENDAR + PHONE</span></div>
+        <div class="tl-item glass"><span class="tl-num">04</span><span class="tl-text">WE BUILD YOUR AI</span></div>
+        <div class="tl-item glass"><span class="tl-num">05</span><span class="tl-text">WE TEST EVERYTHING</span></div>
+        <div class="tl-item glass"><span class="tl-num">06</span><span class="tl-text">YOU GO LIVE</span></div>
+      </div>
+      <p class="closing-line">“We handle the technical setup.”</p>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 21 — FINAL CLOSE ============ -->
+  <section class="slide" data-slide="21" data-chapter="GET STARTED">
+    <div class="slide-inner cover close-slide">
+      <h2 class="close-title">Your Next Customer Is<br /><span class="gold">Already Calling.</span></h2>
+      <p class="close-sub">Let VantorX answer.</p>
+      <a class="btn btn-gold btn-huge" id="getStartedBtn" href="tel:8137773509">GET STARTED</a>
+      <div class="contact-block glass">
+        <div class="brand-mini">VANTOR<span class="gold">X</span></div>
+        <div class="contact-row"><a href="tel:8137773509">Luke Hamilton — CEO — 813-777-3509</a></div>
+        <div class="contact-row"><a href="tel:3303221452">Lucas — 330-322-1452</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== NAV CHROME ===== -->
+<div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+<nav class="deck-nav glass" aria-label="Presentation navigation">
+  <div class="deck-brand">VANTOR<span class="gold">X</span></div>
+  <div class="nav-controls">
+    <button class="nav-btn" id="prevBtn" aria-label="Previous slide">←</button>
+    <span class="slide-counter" id="slideCounter">1 / 21</span>
+    <button class="nav-btn" id="nextBtn" aria-label="Next slide">→</button>
+  </div>
+  <div class="chapter-label" id="chapterLabel">THE PITCH</div>
+</nav>
+
+<div class="chapter-banner" id="chapterBanner" aria-hidden="true"></div>
+
+<script>
+/* ============================================================
+   VANTORX — PRESENTATION ENGINE
+   Navigation · keyboard · progress · video · placeholders
+   ============================================================ */
+
+(function () {
+  'use strict';
+
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+  let animating = false;
+
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const counter = document.getElementById('slideCounter');
+  const chapterLabel = document.getElementById('chapterLabel');
+  const chapterBanner = document.getElementById('chapterBanner');
+  const progressFill = document.getElementById('progressFill');
+
+  /* ---------- Core navigation ---------- */
+
+  function goTo(index, dir) {
+    if (animating) return;
+    index = Math.max(0, Math.min(total - 1, index));
+    if (index === current) return;
+
+    animating = true;
+    const from = slides[current];
+    const to = slides[index];
+
+    from.classList.remove('active');
+    from.classList.add(dir === 'back' ? 'exit-right' : 'exit-left');
+    setTimeout(() => from.classList.remove('exit-left', 'exit-right'), 700);
+
+    to.classList.add('active');
+    to.scrollTop = 0;
+
+    current = index;
+    updateChrome();
+    showChapterBanner(to.dataset.chapter || '');
+    stopDemoMedia(from);
+
+    setTimeout(() => { animating = false; }, 250);
+  }
+
+  const next = () => goTo(current + 1, 'fwd');
+  const prev = () => goTo(current - 1, 'back');
+
+  function updateChrome() {
+    counter.textContent = (current + 1) + ' / ' + total;
+    progressFill.style.width = ((current + 1) / total) * 100 + '%';
+    chapterLabel.textContent = slides[current].dataset.chapter || '';
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  let bannerTimer = null;
+  function showChapterBanner(text) {
+    if (!text) return;
+    chapterBanner.textContent = text;
+    chapterBanner.classList.remove('show');
+    void chapterBanner.offsetWidth;
+    chapterBanner.classList.add('show');
+    clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(() => chapterBanner.classList.remove('show'), 2500);
+  }
+
+  /* ---------- Keyboard ---------- */
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.matches('input, textarea')) return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+      case 'PageDown':
+      case ' ':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+      case 'PageUp':
+        e.preventDefault(); prev(); break;
+      case 'Home': goTo(0, 'back'); break;
+      case 'End': goTo(total - 1, 'fwd'); break;
+      case 'f': case 'F': {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen().catch(() => {});
+        break;
+      }
+    }
+  });
+
+  /* ---------- Buttons ---------- */
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  document.querySelectorAll('[data-goto]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = parseInt(btn.dataset.goto, 10) - 1;
+      goTo(target, target > current ? 'fwd' : 'back');
+    });
+  });
+
+  /* ---------- Slide 6 — interactive slots ---------- */
+
+  document.querySelectorAll('.slot').forEach((slot) => {
+    slot.addEventListener('click', () => {
+      slot.parentElement.querySelectorAll('.slot').forEach((s) => s.classList.remove('selected'));
+      slot.classList.add('selected');
+      const confirm = slot.closest('.calendar-card').querySelector('.booked-confirm');
+      if (confirm) {
+        confirm.querySelector('small').textContent =
+          'Tomorrow — ' + slot.textContent.trim() + ' · Customer confirmed';
+        confirm.style.animation = 'none';
+        void confirm.offsetWidth;
+        confirm.style.animation = '';
+      }
+    });
+  });
+
+  /* ---------- Slide 9 — video player ---------- */
+
+  const video = document.getElementById('demoVideo');
+  const player = document.getElementById('videoPlayer');
+  const placeholder = document.getElementById('videoPlaceholder');
+  const vcPlay = document.getElementById('vcPlay');
+  const vcBar = document.getElementById('vcBar');
+  const vcProgress = document.getElementById('vcProgress');
+  const vcTime = document.getElementById('vcTime');
+  const vcMute = document.getElementById('vcMute');
+  const vcFull = document.getElementById('vcFull');
+  const controlsBar = document.getElementById('videoControls');
+
+  const hasVideo = video && video.querySelector('source') &&
+    !/DEMO_VIDEO_URL/.test(video.querySelector('source').getAttribute('src') || '');
+
+  if (video && player) {
+    const fmt = (t) => {
+      if (!isFinite(t)) return '0:00';
+      const m = Math.floor(t / 60), s = Math.floor(t % 60);
+      return m + ':' + String(s).padStart(2, '0');
+    };
+
+    const showControls = () => {
+      controlsBar.classList.add('visible');
+      clearTimeout(player._ctrlTimer);
+      player._ctrlTimer = setTimeout(() => controlsBar.classList.remove('visible'), 2600);
+    };
+    player.addEventListener('mousemove', showControls);
+    player.addEventListener('touchstart', showControls);
+
+    if (placeholder) {
+      placeholder.addEventListener('click', () => {
+        if (hasVideo) {
+          placeholder.classList.add('removed');
+          video.play().catch(() => {});
+        } else {
+          placeholder.querySelector('p').textContent =
+            'Add your demo video URL in this file (source src="DEMO_VIDEO_URL") to enable playback';
+        }
+      });
+    }
+
+    vcPlay.addEventListener('click', () => {
+      if (!hasVideo) return;
+      if (video.paused) video.play().catch(() => {});
+      else video.pause();
+    });
+
+    video.addEventListener('play', () => {
+      vcPlay.textContent = '❚❚';
+      if (placeholder) placeholder.classList.add('removed');
+    });
+    video.addEventListener('pause', () => { vcPlay.textContent = '▶'; });
+    video.addEventListener('ended', () => { vcPlay.textContent = '↻'; });
+
+    video.addEventListener('timeupdate', () => {
+      if (video.duration) vcBar.style.width = (video.currentTime / video.duration) * 100 + '%';
+      vcTime.textContent = fmt(video.currentTime) + ' / ' + fmt(video.duration);
+    });
+
+    vcProgress.addEventListener('click', (e) => {
+      if (!video.duration) return;
+      const rect = vcProgress.getBoundingClientRect();
+      video.currentTime = ((e.clientX - rect.left) / rect.width) * video.duration;
+    });
+
+    vcMute.addEventListener('click', () => {
+      video.muted = !video.muted;
+      vcMute.textContent = video.muted ? '🔇' : '🔊';
+    });
+
+    vcFull.addEventListener('click', () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else player.requestFullscreen().catch(() => {});
+    });
+  }
+
+  function stopDemoMedia(slideEl) {
+    const v = slideEl.querySelector('video');
+    if (v && !v.paused) v.pause();
+  }
+
+  /* ---------- Slide 10 — live demo phone timer ---------- */
+
+  const callTimer = document.getElementById('callTimer');
+  if (callTimer) {
+    let secs = 0, timerId = null;
+    const tick = () => {
+      secs++;
+      const m = Math.floor(secs / 60), s = secs % 60;
+      callTimer.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    };
+    const sync = () => {
+      const slide10 = document.querySelector('.slide[data-slide="10"]');
+      const active = slide10 && slide10.classList.contains('active');
+      if (active && !timerId) { secs = 0; timerId = setInterval(tick, 1000); }
+      if (!active && timerId) { clearInterval(timerId); timerId = null; callTimer.textContent = '00:00'; }
+    };
+    const observer = new MutationObserver(sync);
+    observer.observe(document.getElementById('deck'), { subtree: true, attributes: true, attributeFilter: ['class'] });
+  }
+
+  /* ---------- Placeholder config ---------- */
+  // Fill these in (or edit the HTML directly) to activate the demo video / demo phone.
+  window.VANTORX_CONFIG = {
+    demoVideoUrl: '',        // e.g. 'demo.mp4' or 'https://.../demo.mp4'
+    demoPhoneDisplay: '',    // e.g. '(813) 555-0100' — shown on the phone screen
+    demoPhoneTel: '',        // e.g. '+18135550100' — used for the tel: link
+    apply() {
+      if (this.demoVideoUrl && video && video.querySelector('source')) {
+        video.querySelector('source').src = this.demoVideoUrl;
+        video.load();
+      }
+      if (this.demoPhoneDisplay) {
+        document.querySelectorAll('.call-number').forEach((el) => { el.textContent = this.demoPhoneDisplay; });
+      }
+      if (this.demoPhoneTel) {
+        document.querySelectorAll('a[href="tel:DEMO_PHONE_NUMBER"]').forEach((a) => {
+          a.setAttribute('href', 'tel:' + this.demoPhoneTel.replace(/[^\d+]/g, ''));
+        });
+      }
+    }
+  };
+
+  /* ---------- Init ---------- */
+
+  updateChrome();
+  showChapterBanner(slides[0].dataset.chapter || '');
+})();
+</script>
+</body>
+</html>
