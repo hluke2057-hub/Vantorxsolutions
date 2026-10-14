@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/api/auth/:action", "destination": "/api/auth?action=:action" },
+    { "source": "/api/businesses/create", "destination": "/api/businesses" },
+    { "source": "/api/receptionist/config", "destination": "/api/receptionist?action=config" }
+  ]
+}

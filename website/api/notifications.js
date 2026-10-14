@@ -1,4 +1,4 @@
-const { getSession, supabaseRequest, jsonError, methodNotAllowed } = require("../_lib/supabase");
+const { getSession, supabaseRequest, jsonError, methodNotAllowed } = require("./_lib/supabase");
 
 module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");

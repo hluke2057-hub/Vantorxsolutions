@@ -1,4 +1,4 @@
-const { getSession, supabaseRequest, jsonError, methodNotAllowed } = require("../_lib/supabase");
+const { getSession, supabaseRequest, jsonError, methodNotAllowed } = require("./_lib/supabase");
 
 async function resolveBusinessId(session, requestedId) {
   if (requestedId && typeof requestedId === "string" && requestedId.trim()) {
