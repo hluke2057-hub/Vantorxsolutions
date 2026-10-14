@@ -28,6 +28,22 @@
 <label for="business">Test business name</label><input id="business" maxlength="160" value="VantorX Test Business">
 <button id="create">Create test business</button>
 </div>
+<div class="card">
+<h2>4. Test Platform Endpoints</h2>
+<p>Test the connected tenant API routes while signed in.</p>
+<button id="listBiz">List Businesses</button>
+<button id="listLeads" class="secondary">List Leads</button>
+<button id="createLead">Add Test Lead</button>
+<button id="listAppts" class="secondary">List Appointments</button>
+<button id="testInquiry" class="secondary">Test Marketing Form (/api/audit)</button>
+<div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+  <a href="/client-hub/" target="_blank">Open Client Hub ↗</a>
+  <a href="/leadflow/" target="_blank">Open LeadFlow ↗</a>
+  <a href="/vantorx-receptionist/" target="_blank">Open Receptionist ↗</a>
+  <a href="/vantorx-onboarding/" target="_blank">Open Onboarding ↗</a>
+  <a href="/vantorx-admin/" target="_blank">Open Admin ↗</a>
+</div>
+</div>
 <div class="card"><h2>Results</h2><div id="status" class="status">Ready.</div><pre id="output">Choose an action above to test the API.</pre></div>
 <p class="note">This is a temporary diagnostic page, not an admin panel. Do not share this URL with customers. <a href="/">Return to VantorX homepage</a></p>
 </main>
@@ -40,4 +56,9 @@ $("login").onclick=async()=>{const email=$("email").value.trim(),password=$("pas
 $("me").onclick=()=>call("/api/auth/me");
 $("logout").onclick=()=>call("/api/auth/logout","POST",{});
 $("create").onclick=async()=>{const name=$("business").value.trim();if(name.length<2){show("Invalid business name",{error:"Enter at least 2 characters."});return}await call("/api/businesses/create","POST",{name,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||"America/New_York"})};
+$("listBiz").onclick=()=>call("/api/businesses");
+$("listLeads").onclick=()=>call("/api/leads");
+$("createLead").onclick=()=>call("/api/leads","POST",{name:"Sarah Miller (Test)",email:"sarah@example.com",phone:"555-0199",source:"Backend Test",notes:"Requested quote for AI Receptionist"});
+$("listAppts").onclick=()=>call("/api/appointments");
+$("testInquiry").onclick=()=>call("/api/audit","POST",{name:"John Doe",email:"john@example.com",phone:"555-0100",business:"Acme Services",businessType:"HVAC",interests:["Website Design","AI Receptionist"],challenge:"Need automated phone coverage"});
 </script></body></html>

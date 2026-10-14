@@ -1,0 +1,2387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VantorX Voice — AI Receptionist</title>
+<style>/* ============================================================
+   VANTORX CLIENT HUB — styles.css
+   Premium dark SaaS design system (shared VantorX tokens)
+   ============================================================ */
+
+:root {
+  --bg: #0a0a0d;
+  --bg-soft: #101014;
+  --bg-card: #14141a;
+  --bg-hover: #1b1b22;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.05);
+  --gold: #d4af37;
+  --gold-bright: #f0d060;
+  --gold-dim: rgba(212, 175, 55, 0.14);
+  --text: #f0efe9;
+  --text-soft: #a8a699;
+  --text-dim: #6d6b60;
+  --green: #4ade80;
+  --green-dim: rgba(74, 222, 128, 0.12);
+  --blue: #60a5fa;
+  --blue-dim: rgba(96, 165, 250, 0.12);
+  --purple: #a78bfa;
+  --purple-dim: rgba(167, 139, 250, 0.12);
+  --red: #f87171;
+  --red-dim: rgba(248, 113, 113, 0.12);
+  --orange: #fbbf24;
+  --orange-dim: rgba(251, 191, 36, 0.12);
+  --teal: #2dd4bf;
+  --teal-dim: rgba(45, 212, 191, 0.12);
+  --radius: 12px;
+  --radius-lg: 16px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --font-display: 'Sora', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --sidebar-w: 248px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+::selection { background: var(--gold-dim); color: var(--gold-bright); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+
+.app { display: flex; height: 100vh; overflow: hidden; }
+
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px;
+  gap: 4px;
+  z-index: 40;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 18px;
+  user-select: none;
+}
+.brand-mark {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold) 0%, #9a7b1f 100%);
+  display: grid; place-items: center;
+  color: #0a0a0d;
+  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+}
+.brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.06em; }
+.brand-name .gold { color: var(--gold-bright); }
+.brand-sub { font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; }
+
+.nav-section-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 12px 10px 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: var(--text-soft);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.88rem;
+}
+.nav-item:hover { background: var(--bg-hover); color: var(--text); }
+.nav-item.active {
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+.nav-item .ico { width: 20px; text-align: center; font-size: 1rem; }
+.nav-item .nav-badge {
+  margin-left: auto;
+  background: var(--gold);
+  color: #0a0a0d;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+.nav-item .nav-badge.red { background: var(--red); color: #fff; }
+
+.sidebar-bottom { margin-top: auto; display: flex; flex-direction: column; gap: 6px; }
+.sidebar-biz {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.sidebar-biz:hover { border-color: rgba(212, 175, 55, 0.4); }
+.biz-avatar {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 0.8rem;
+}
+.biz-name { font-size: 0.82rem; font-weight: 600; }
+.biz-plan { font-size: 0.68rem; color: var(--text-dim); }
+.biz-caret { margin-left: auto; color: var(--text-dim); font-size: 0.7rem; }
+
+.demo-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: var(--orange-dim);
+  color: var(--orange);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.demo-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* ---------- topbar ---------- */
+
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+.topbar {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--border-soft);
+  background: rgba(10, 10, 13, 0.8);
+  backdrop-filter: blur(12px);
+  z-index: 30;
+}
+.topbar-title { font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
+.topbar-spacer { flex: 1; }
+
+.icon-btn {
+  position: relative;
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-soft);
+  display: grid; place-items: center;
+  font-size: 1rem;
+  transition: all 0.15s var(--ease);
+}
+.icon-btn:hover { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.4); }
+.icon-btn .dot-badge {
+  position: absolute; top: 6px; right: 6px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid var(--bg-soft);
+  display: none;
+}
+.icon-btn .dot-badge.show { display: block; }
+
+.topbar-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 7px 12px;
+  width: 300px;
+  color: var(--text-dim);
+}
+.topbar-search input {
+  background: none; border: none; outline: none;
+  color: var(--text);
+  width: 100%;
+  font-size: 0.85rem;
+}
+.topbar-search kbd {
+  font-family: inherit;
+  font-size: 0.66rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+.avatar-btn {
+  display: flex; align-items: center; gap: 9px;
+  padding: 5px 10px 5px 6px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease);
+}
+.avatar-btn:hover { border-color: rgba(212, 175, 55, 0.4); }
+.avatar-circle {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #9a7b1f);
+  color: #0a0a0d;
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 0.72rem;
+}
+.avatar-name { font-size: 0.8rem; font-weight: 600; }
+.avatar-caret { color: var(--text-dim); font-size: 0.65rem; }
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 26px 28px 60px;
+
+}
+.page { max-width: 1200px; margin: 0 auto; animation: page-in 0.3s var(--ease); }
+@keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.page-head { margin-bottom: 22px; }
+.page-title { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; }
+.page-sub { color: var(--text-soft); font-size: 0.9rem; margin-top: 4px; }
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .link { margin-left: auto; }
+
+.link-btn {
+  background: none; border: none;
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.link-btn:hover { color: var(--gold-bright); text-decoration: underline; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 15px;
+  border-radius: 9px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.15s var(--ease);
+  text-decoration: none;
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-gold { background: linear-gradient(135deg, var(--gold), #b8942a); color: #0a0a0d; }
+.btn-gold:hover:not(:disabled) { filter: brightness(1.12); box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3); }
+.btn-ghost { background: var(--bg-card); border-color: var(--border); color: var(--text-soft); }
+.btn-ghost:hover:not(:disabled) { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.btn-sm { padding: 5px 11px; font-size: 0.78rem; border-radius: 8px; }
+.btn-red { background: var(--red-dim); color: var(--red); border-color: rgba(248, 113, 113, 0.3); }
+.btn-red:hover:not(:disabled) { background: rgba(248, 113, 113, 0.2); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+}
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.status-pill .sdot { width: 6px; height: 6px; border-radius: 50%; }
+.status-green { background: var(--green-dim); color: var(--green); }
+.status-green .sdot { background: var(--green); }
+.status-gold { background: var(--gold-dim); color: var(--gold-bright); }
+.status-gold .sdot { background: var(--gold-bright); }
+.status-blue { background: var(--blue-dim); color: var(--blue); }
+.status-blue .sdot { background: var(--blue); }
+.status-purple { background: var(--purple-dim); color: var(--purple); }
+.status-purple .sdot { background: var(--purple); }
+.status-red { background: var(--red-dim); color: var(--red); }
+.status-red .sdot { background: var(--red); }
+.status-orange { background: var(--orange-dim); color: var(--orange); }
+.status-orange .sdot { background: var(--orange); }
+.status-dim { background: var(--bg-hover); color: var(--text-dim); }
+.status-dim .sdot { background: var(--text-dim); }
+
+/* ---------- KPI grid ---------- */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.kpi {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px 16px;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.kpi:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-2px); }
+.kpi-label { font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+.kpi-value { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; margin-top: 5px; }
+.kpi-hint { font-size: 0.72rem; color: var(--text-soft); margin-top: 2px; }
+.kpi.accent-gold { border-color: rgba(212, 175, 55, 0.35); }
+
+/* ---------- tables ---------- */
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th {
+  text-align: left;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td { padding: 10px; border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tbody tr { transition: background 0.12s; }
+tbody tr:hover { background: var(--bg-hover); }
+tr[data-clickable] { cursor: pointer; }
+
+.cell-main { font-weight: 600; }
+.cell-dim { color: var(--text-dim); font-size: 0.78rem; }
+
+.score-bar { width: 54px; height: 5px; background: var(--bg-hover); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 7px; }
+.score-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-bright)); border-radius: 3px; }
+
+/* ---------- lists ---------- */
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.list-row:last-child { border-bottom: none; }
+.row-ico {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: grid; place-items: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+.row-main { min-width: 0; flex: 1; }
+.row-title { font-size: 0.86rem; font-weight: 600; }
+.row-sub { font-size: 0.76rem; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row-time { font-size: 0.72rem; color: var(--text-dim); white-space: nowrap; }
+
+/* ---------- forms ---------- */
+
+.form-group { margin-bottom: 15px; }
+.form-label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-soft); margin-bottom: 6px; }
+.form-label .req { color: var(--gold); }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 9px 12px;
+  font-size: 0.86rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 0 3px var(--gold-dim);
+}
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-hint { font-size: 0.74rem; color: var(--text-dim); margin-top: 5px; }
+.form-error { color: var(--red); font-size: 0.76rem; margin-top: 5px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+.toggle {
+  position: relative;
+  width: 40px; height: 22px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+  flex-shrink: 0;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--text-soft);
+  transition: transform 0.2s var(--ease), background 0.2s;
+}
+.toggle.on { background: var(--gold-dim); border-color: rgba(212, 175, 55, 0.4); }
+.toggle.on::after { transform: translateX(18px); background: var(--gold-bright); }
+
+/* ---------- tabs ---------- */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+  overflow-x: auto;
+}
+.tab {
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  padding: 9px 14px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--gold-bright); border-bottom-color: var(--gold); }
+.tab .tab-count { font-size: 0.7rem; color: var(--text-dim); margin-left: 5px; }
+
+.filter-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+.select-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  outline: none;
+}
+.select-input:focus { border-color: rgba(212, 175, 55, 0.5); }
+.search-input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  outline: none;
+  min-width: 220px;
+}
+.search-input:focus { border-color: rgba(212, 175, 55, 0.5); }
+.result-count { font-size: 0.78rem; color: var(--text-dim); margin-left: auto; }
+
+.seg {
+  display: inline-flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 3px;
+  gap: 2px;
+}
+.seg button {
+  background: none; border: none;
+  color: var(--text-soft);
+  padding: 6px 13px;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+.seg button.active { background: var(--gold-dim); color: var(--gold-bright); }
+
+/* ---------- modal / drawer ---------- */
+
+.modal-overlay, .drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 100;
+  animation: fade-in 0.18s var(--ease);
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100vw - 40px));
+  max-height: min(82vh, 720px);
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  animation: modal-in 0.22s var(--ease);
+}
+@keyframes modal-in { from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+.modal-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--bg-card);
+  z-index: 2;
+}
+.modal-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.modal-body { padding: 20px; }
+.modal-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 9px; }
+.modal-x { margin-left: auto; }
+
+/* promise-based modal (receptionist local) */
+.modal-card {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100vw - 40px));
+  max-height: min(82vh, 720px);
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  animation: modal-in 0.22s var(--ease);
+}
+.modal-card.wide { width: min(720px, calc(100vw - 40px)); }
+.modal-card .modal-x {
+  background: none; border: none;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  padding: 4px 8px;
+  border-radius: 7px;
+}
+.modal-card .modal-x:hover { color: var(--text); background: var(--bg-hover); }
+
+.drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(480px, 94vw);
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  animation: drawer-in 0.24s var(--ease);
+}
+@keyframes drawer-in { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.drawer-head { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
+.drawer-foot { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 9px; justify-content: flex-end; }
+
+/* ---------- toast ---------- */
+
+.toast-zone { position: fixed; bottom: 22px; right: 22px; display: flex; flex-direction: column; gap: 9px; z-index: 200; }
+.toast {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 0.84rem;
+  box-shadow: var(--shadow);
+  animation: toast-in 0.25s var(--ease);
+  max-width: 380px;
+}
+.toast.success { border-left-color: var(--green); }
+.toast.error { border-left-color: var(--red); }
+.toast.info { border-left-color: var(--blue); }
+.toast.leaving { animation: toast-out 0.25s var(--ease) forwards; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes toast-out { to { opacity: 0; transform: translateY(8px); } }
+
+/* ---------- empty / skeleton ---------- */
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
+.empty-ico { font-size: 2rem; margin-bottom: 10px; opacity: 0.75; }
+.empty-title { font-weight: 700; color: var(--text-soft); margin-bottom: 4px; }
+.empty-msg { font-size: 0.82rem; max-width: 340px; margin: 0 auto; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-card) 50%, var(--bg-hover) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 8px;
+  height: 14px;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* ---------- timeline (activity) ---------- */
+
+.timeline { position: relative; padding-left: 26px; }
+.timeline::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 1px; background: var(--border); }
+.tl-item { position: relative; padding-bottom: 18px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -26px; top: 3px;
+  width: 19px; height: 19px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: grid; place-items: center;
+  font-size: 0.62rem;
+}
+.tl-title { font-size: 0.86rem; font-weight: 600; }
+.tl-desc { font-size: 0.78rem; color: var(--text-soft); }
+.tl-meta { font-size: 0.7rem; color: var(--text-dim); margin-top: 2px; }
+
+/* ---------- transcript ---------- */
+
+.transcript { display: flex; flex-direction: column; gap: 9px; }
+.tr-line { display: flex; gap: 9px; }
+.tr-who { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; width: 58px; flex-shrink: 0; padding-top: 2px; }
+.tr-who.ai { color: var(--gold); }
+.tr-who.human { color: var(--blue); }
+.tr-who.system { color: var(--text-dim); }
+.tr-text {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-size: 0.82rem;
+  flex: 1;
+}
+.tr-time { font-size: 0.66rem; color: var(--text-dim); margin-top: 3px; }
+
+/* ---------- calendar ---------- */
+
+.cal-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.cal-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; min-width: 150px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-dow { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-align: center; padding: 4px 0; }
+.cal-cell {
+  min-height: 86px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 9px;
+  padding: 6px;
+  font-size: 0.72rem;
+  transition: border-color 0.15s;
+}
+.cal-cell:hover { border-color: rgba(212, 175, 55, 0.35); }
+.cal-cell.other { opacity: 0.35; }
+.cal-cell.today .cal-num { background: var(--gold); color: #0a0a0d; }
+.cal-num {
+  width: 20px; height: 20px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+}
+.cal-evt {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--gold-dim);
+  color: var(--gold-bright);
+  font-size: 0.66rem;
+  margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  cursor: pointer;
+}
+.cal-evt.cancelled { background: var(--red-dim); color: var(--red); text-decoration: line-through; }
+.cal-evt.other-type { background: var(--blue-dim); color: var(--blue); }
+
+.cal-day-list { display: flex; flex-direction: column; gap: 9px; }
+.cal-day-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+}
+.cal-day-time { font-family: var(--font-display); font-weight: 700; color: var(--gold-bright); width: 88px; flex-shrink: 0; }
+.cal-day-line { flex: 1; }
+.cal-day-name { font-weight: 600; font-size: 0.88rem; }
+
+.week-cols { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.week-col { background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: 10px; padding: 8px; min-height: 160px; }
+.week-col.today-col { border-color: rgba(212, 175, 55, 0.4); }
+.week-dow { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); text-align: center; margin-bottom: 6px; }
+.week-date { text-align: center; font-family: var(--font-display); font-weight: 700; margin-bottom: 8px; }
+.week-col.today-col .week-date { color: var(--gold-bright); }
+
+/* ---------- knowledge / settings list ---------- */
+
+.kv-list { display: flex; flex-direction: column; }
+.kv-row { display: flex; align-items: flex-start; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border-soft); }
+.kv-row:last-child { border-bottom: none; }
+.kv-label { width: 150px; flex-shrink: 0; font-size: 0.78rem; color: var(--text-dim); font-weight: 600; padding-top: 2px; }
+.kv-value { flex: 1; font-size: 0.86rem; }
+
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.cap-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.cap-card .cap-ico { font-size: 1.1rem; }
+
+.section-stack { display: flex; flex-direction: column; gap: 18px; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.grid-side { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+
+/* ---------- AI test area ---------- */
+
+.ai-test-box { border: 1px solid rgba(212, 175, 55, 0.3); border-radius: var(--radius); background: linear-gradient(180deg, rgba(212,175,55,0.05), transparent); padding: 18px; }
+.test-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.test-chip {
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 13px;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  transition: all 0.15s;
+}
+.test-chip:hover { color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.4); }
+
+.sim-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px dashed rgba(251, 191, 36, 0.4);
+  padding: 3px 9px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.sim-bubble {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 15px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  animation: page-in 0.3s var(--ease);
+}
+.sim-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+.typing-dots { display: inline-flex; gap: 4px; align-items: center; height: 20px; }
+.typing-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: tdot 1s infinite; }
+.typing-dots i:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes tdot { 0%, 100% { opacity: 0.25; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+
+/* ---------- onboarding ---------- */
+
+.onboard-overlay {
+  position: fixed; inset: 0;
+  background: rgba(4, 4, 6, 0.82);
+  backdrop-filter: blur(6px);
+  z-index: 300;
+  display: grid; place-items: center;
+  animation: fade-in 0.25s var(--ease);
+  padding: 20px;
+}
+.onboard-card {
+  width: min(620px, 100%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow);
+  animation: modal-in 0.3s var(--ease);
+}
+.onboard-progress { display: flex; gap: 6px; margin-bottom: 22px; }
+.onboard-progress span { height: 4px; flex: 1; border-radius: 3px; background: var(--bg-hover); transition: background 0.25s; }
+.onboard-progress span.done { background: var(--gold); }
+.onboard-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+.onboard-sub { color: var(--text-soft); font-size: 0.88rem; margin-bottom: 20px; }
+.onboard-option {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 9px;
+  color: var(--text);
+  font-size: 0.86rem;
+  transition: all 0.15s;
+}
+.onboard-option:hover { border-color: rgba(212, 175, 55, 0.4); }
+.onboard-option.selected { border-color: rgba(212, 175, 55, 0.55); background: var(--gold-dim); }
+.onboard-ico { font-size: 1.15rem; width: 26px; text-align: center; }
+
+/* ---------- request status colors ---------- */
+
+.req-status-submitted { background: var(--blue-dim); color: var(--blue); }
+.req-status-in-review { background: var(--orange-dim); color: var(--orange); }
+.req-status-in-progress { background: var(--gold-dim); color: var(--gold-bright); }
+.req-status-waiting { background: var(--purple-dim); color: var(--purple); }
+.req-status-completed { background: var(--green-dim); color: var(--green); }
+
+/* ---------- help ---------- */
+
+.help-topic {
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text);
+  margin-bottom: 10px;
+  transition: all 0.15s;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 11px;
+}
+.help-topic:hover { border-color: rgba(212, 175, 55, 0.4); }
+.help-topic .hp-ico { font-size: 1.1rem; }
+.help-topic .hp-arrow { margin-left: auto; color: var(--text-dim); }
+.help-answer { font-size: 0.84rem; color: var(--text-soft); line-height: 1.65; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s var(--ease);
+    box-shadow: var(--shadow);
+  }
+  .sidebar.mobile-open { transform: none; }
+  .grid-2, .grid-side { grid-template-columns: 1fr; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .content { padding: 18px 16px 60px; }
+}
+
+@media (max-width: 560px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi-value { font-size: 1.3rem; }
+  .topbar-search { width: 100%; }
+  .topbar { padding: 0 12px; gap: 8px; }
+  .avatar-name, .topbar-search kbd { display: none; }
+  .cal-cell { min-height: 58px; }
+  .cal-evt { display: none; }
+  .cal-cell .cal-count { display: block; font-size: 0.62rem; color: var(--gold-bright); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ============================================================
+   SHELL EXTRAS — menu btn, scrim, global search results, settings nav
+   ============================================================ */
+.menu-btn { display: none; }
+@media (max-width: 900px) { .menu-btn { display: grid; } }
+.mobile-scrim { position: fixed; inset: 0; background: rgba(4,4,6,0.7); backdrop-filter: blur(2px); z-index: 35; }
+
+.search-results {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow); max-height: 340px;
+  overflow: auto; z-index: 80; padding: 5px;
+}
+.search-results .sr-item { display: flex; justify-content: space-between; gap: 12px; align-items: center;
+  padding: 9px 10px; border-radius: 8px; cursor: pointer; font-size: 0.84rem; }
+.search-results .sr-item:hover { background: var(--bg-hover); }
+.sr-kind { color: var(--text-dim); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+#topbarSearchWrap { position: relative; }
+
+.settings-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.settings-nav button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-soft);
+  padding: 7px 15px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+.settings-nav button.active { border-color: rgba(212,175,55,0.45); color: var(--gold-bright); background: var(--gold-dim); }
+
+/* ============================================================
+   VANTORX ONBOARDING — wizard-specific styles (obx-*)
+   ============================================================ */
+
+.gold-text { color: var(--gold-bright); }
+
+.obx-wrap { max-width: 880px; margin: 0 auto; padding: 28px 22px 40px; }
+
+.obx-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.obx-brand { display: flex; align-items: center; gap: 10px; }
+.obx-header-right { display: flex; align-items: center; gap: 12px; }
+
+.obx-autosave { color: var(--text-dim); font-size: 0.78rem; transition: color 0.3s; }
+.obx-autosave.flash { color: var(--green); }
+
+.obx-progress-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 22px; }
+.obx-progress-meta { display: flex; justify-content: space-between; margin-top: 12px; }
+.obx-step-label { color: var(--text-dim); font-size: 0.8rem; }
+.obx-step-name { color: var(--gold-bright); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; }
+
+.obx-main { animation: obxFade 0.25s var(--ease); }
+@keyframes obxFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.obx-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; gap: 14px; }
+.obx-nav-right { display: flex; align-items: center; gap: 14px; }
+.obx-validation { color: var(--red); font-size: 0.8rem; }
+.obx-validation.show { animation: obxShake 0.3s; }
+@keyframes obxShake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+
+.obx-foot { text-align: center; color: var(--text-dim); font-size: 0.72rem; margin-top: 34px; }
+
+/* step 1 — industry picker */
+.obx-ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.obx-ind { display: flex; align-items: center; gap: 10px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 10px; padding: 11px 13px; cursor: pointer; color: var(--text); font-size: 0.88rem; transition: border-color 0.15s; }
+.obx-ind:hover { border-color: rgba(212, 175, 55, 0.4); }
+.obx-ind.selected { border-color: rgba(212, 175, 55, 0.55); background: var(--gold-dim); }
+.obx-ind-ico { font-size: 1.15rem; }
+
+/* step 2 — services rows */
+.obx-svc-row { display: grid; grid-template-columns: 1fr 90px 70px 38px; gap: 8px; margin-bottom: 8px; align-items: center; }
+.obx-hint-box { background: var(--bg-soft); border: 1px dashed var(--border); border-radius: 10px;
+  padding: 13px 15px; color: var(--text-soft); font-size: 0.84rem; line-height: 1.5; }
+
+/* step 3 — hours rows */
+.obx-hours-row { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-bottom: 1px solid var(--border-soft); }
+.obx-hours-row:last-of-type { border-bottom: none; }
+.obx-hours-row.is-closed { opacity: 0.55; }
+.obx-hours-day { width: 92px; font-size: 0.86rem; color: var(--text); }
+.obx-hours-time { width: 110px; padding: 7px 9px; font-size: 0.84rem; }
+.obx-hours-dash { color: var(--text-dim); }
+.obx-hours-closed { color: var(--red); font-size: 0.8rem; font-weight: 600; }
+
+/* step 5 — AI preview */
+.obx-ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+.obx-greeting { min-height: 84px; }
+.obx-transfer-when { min-height: 64px; }
+.obx-preview { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; position: sticky; top: 20px; }
+.obx-sim { display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; padding: 4px 2px; }
+.obx-sim-welcome { color: var(--text-dim); font-size: 0.82rem; text-align: center; padding: 26px 0; }
+.obx-sim-bubble { max-width: 85%; padding: 9px 13px; border-radius: 14px; font-size: 0.84rem; line-height: 1.45; }
+.obx-sim-bubble.caller { align-self: flex-end; background: var(--bg-hover); border: 1px solid var(--border); border-bottom-right-radius: 4px; }
+.obx-sim-bubble.ai { align-self: flex-start; background: var(--gold-dim); border: 1px solid rgba(212, 175, 55, 0.35); border-bottom-left-radius: 4px; }
+.obx-sim-bubble.obx-typing { letter-spacing: 3px; color: var(--text-soft); }
+
+/* step 6 — connections */
+.obx-conn-list { display: flex; flex-direction: column; gap: 10px; }
+.obx-conn { display: flex; align-items: center; gap: 14px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px; transition: border-color 0.2s; }
+.obx-conn.on { border-color: rgba(212, 175, 55, 0.4); background: var(--gold-dim); }
+.obx-conn-ico { font-size: 1.4rem; width: 40px; text-align: center; }
+.obx-conn-main { flex: 1; }
+.obx-conn-title { font-weight: 600; font-size: 0.9rem; }
+.obx-conn-desc { color: var(--text-soft); font-size: 0.8rem; margin-top: 2px; }
+
+/* step 7 — checklist */
+.obx-check-list { display: flex; flex-direction: column; gap: 8px; }
+.obx-check { display: flex; align-items: center; gap: 13px; background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 15px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.obx-check:hover { border-color: rgba(212, 175, 55, 0.35); }
+.obx-check.done { border-color: rgba(74, 222, 128, 0.4); background: var(--green-dim); }
+.obx-check input { display: none; }
+.obx-check-box { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--border); background: var(--bg-hover);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; color: var(--green); }
+.obx-check.done .obx-check-box { border-color: var(--green); }
+.obx-check.done .obx-check-box::after { content: '✓'; }
+.obx-check-main b { display: block; font-size: 0.88rem; font-weight: 600; }
+.obx-check-main i { display: block; font-style: normal; color: var(--text-soft); font-size: 0.78rem; margin-top: 1px; }
+.obx-check-progress { display: flex; align-items: center; gap: 14px; margin-top: 16px; font-size: 0.86rem; }
+.obx-check-ready { color: var(--green); font-weight: 700; }
+
+/* step 8 — review */
+.obx-review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.obx-review-card .kv-row { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--border-soft); font-size: 0.85rem; }
+.obx-review-card .kv-row:last-child { border-bottom: none; }
+.obx-review-card .kv-label { color: var(--text-dim); flex-shrink: 0; }
+.obx-golive { text-align: center; margin-top: 24px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-soft); }
+.obx-golive-btn { font-size: 1rem; padding: 13px 30px; }
+.obx-golive-done { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.obx-golive-done .big { font-size: 2.6rem; color: var(--green); }
+
+/* ============================================================
+   AI RECEPTIONIST — layout + utility additions
+   (the shared hub CSS has .brand/.nav-item/.form-input naming;
+   the receptionist shell uses .sidebar-brand/.nav-link/.input.
+   These additions keep the same dark-navy/gold design tokens.)
+   ============================================================ */
+
+/* --- shell --- */
+.sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 6px 10px 18px; user-select: none; }
+.nav-list { display: flex; flex-direction: column; gap: 3px; }
+.nav-link {
+  display: flex; align-items: center; gap: 11px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: var(--text-soft);
+  text-decoration: none;
+  font-size: 0.88rem;
+  border: 1px solid transparent;
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+}
+.nav-link:hover { background: var(--bg-hover); color: var(--text); }
+.nav-link.active { background: var(--gold-dim); color: var(--gold-bright); border-color: rgba(212, 175, 55, 0.25); }
+.nav-ico { width: 20px; text-align: center; font-size: 0.9rem; flex-shrink: 0; }
+.sidebar-foot { margin-top: auto; display: flex; flex-direction: column; gap: 4px; padding-top: 14px; border-top: 1px solid var(--border-soft); }
+#app { display: flex; height: 100vh; overflow: hidden; }
+
+/* --- topbar extras --- */
+.topbar-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+/* --- utilities used across receptionist pages --- */
+.row { display: flex; align-items: center; }
+.row.gap { gap: 9px; }
+.row.between { justify-content: space-between; }
+.row.wrap { flex-wrap: wrap; }
+.dim { color: var(--text-dim); }
+.small { font-size: 0.78rem; }
+.link { color: var(--gold-bright); text-decoration: none; cursor: pointer; }
+.link:hover { text-decoration: underline; }
+.list { display: flex; flex-direction: column; }
+
+/* --- form controls (short names) --- */
+.input {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 9px 12px;
+  font-size: 0.86rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input:focus { border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 0 0 3px var(--gold-dim); }
+.input.small { padding: 6px 10px; font-size: 0.8rem; }
+.input.grow { flex: 1; min-width: 140px; }
+.grow { flex: 1; min-width: 0; }
+.field { margin-bottom: 14px; }
+.label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-soft); margin-bottom: 6px; }
+
+/* --- chips + buttons --- */
+.chip { cursor: pointer; }
+.chip:hover { border-color: rgba(212, 175, 55, 0.4); color: var(--gold-bright); }
+.chip.active { background: var(--gold-dim); border-color: rgba(212, 175, 55, 0.45); color: var(--gold-bright); }
+.btn.primary { background: linear-gradient(135deg, var(--gold), #b8942a); color: #0a0a0d; }
+.btn.primary:hover:not(:disabled) { filter: brightness(1.12); box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3); }
+.btn.ghost { background: var(--bg-card); border-color: var(--border); color: var(--text-soft); }
+.btn.ghost:hover:not(:disabled) { color: var(--text); border-color: rgba(255,255,255,0.2); }
+.btn.gold { background: linear-gradient(135deg, var(--gold), #b8942a); color: #0a0a0d; }
+.btn.gold:hover:not(:disabled) { filter: brightness(1.12); box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3); }
+.btn.danger { background: var(--red-dim); color: var(--red); border-color: rgba(248, 113, 113, 0.3); }
+.btn.danger:hover:not(:disabled) { background: rgba(248, 113, 113, 0.2); }
+.btn.small { padding: 5px 11px; font-size: 0.78rem; border-radius: 8px; }
+
+/* --- status line + pulse dot --- */
+.stat-line { display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.stat-line.ok { color: var(--green); }
+.stat-line.dim { color: var(--text-dim); }
+.pulse {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  flex-shrink: 0;
+  display: inline-block;
+}
+.stat-line.ok .pulse { background: var(--green); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); animation: pulse-ok 2s infinite; }
+@keyframes pulse-ok {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.45); }
+  70% { box-shadow: 0 0 0 7px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+/* --- live pill (telephony status) --- */
+.live-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 11px;
+  border-radius: 99px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--border);
+  max-width: 100%;
+}
+.live-pill.off { background: var(--bg-hover); color: var(--orange); border-color: rgba(251, 191, 36, 0.35); }
+.live-pill.on { background: var(--green-dim); color: var(--green); border-color: rgba(74, 222, 128, 0.35); }
+.live-pill .pulse { width: 7px; height: 7px; background: currentColor; }
+
+/* --- page heading inside cards --- */
+.page-head { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+.grid-side { display: grid; grid-template-columns: minmax(300px, 2fr) minmax(340px, 3fr); gap: 18px; align-items: start; }
+@media (max-width: 900px) { .grid-2, .grid-side { grid-template-columns: 1fr; } }
+
+/* --- transcript rows (caller / ai / sys) --- */
+.transcript {
+  display: flex; flex-direction: column; gap: 9px;
+  min-height: 260px; max-height: 420px;
+  overflow-y: auto;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 14px;
+}
+.tr { display: flex; gap: 9px; align-items: flex-start; }
+.tr-caller .tr-who { color: var(--blue); }
+.tr-ai .tr-who { color: var(--gold); }
+.tr-sys .tr-who { color: var(--text-dim); }
+.tr-sys { opacity: 0.75; }
+.tr-caller .tr-text { border-color: rgba(96, 165, 250, 0.28); }
+.tr-ai .tr-text { border-color: rgba(212, 175, 55, 0.28); }
+.tr-sys .tr-text { border-color: transparent; background: transparent; padding-inline: 0; }
+.tr-who { font-size: 0.64rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; width: 96px; flex-shrink: 0; padding-top: 3px; }
+.tr-text {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.86rem;
+  max-width: 85%;
+}
+
+/* --- kv list label width --- */
+.kv-row > span { width: 150px; flex-shrink: 0; color: var(--text-dim); font-size: 0.8rem; }
+
+/* responsive */
+@media (max-width: 760px) {
+  .obx-ai-grid, .obx-review-grid, .obx-ind-grid { grid-template-columns: 1fr; }
+  .obx-preview { position: static; }
+  .obx-svc-row { grid-template-columns: 1fr 70px 56px 34px; }
+  .obx-hours-day { width: 72px; }
+  .obx-nav { flex-direction: column-reverse; align-items: stretch; }
+  .obx-nav .btn { width: 100%; }
+  .obx-nav-right { justify-content: space-between; }
+}
+</style>
+</head>
+<body>
+
+<!-- app.js injects <aside class="sidebar"> and <div class="main"> into #app,
+     and mounts <div id="modalHost"> for promise-based modals. -->
+<div id="app"></div>
+
+<script>/* === VantorX AI Receptionist bundled build - generated by build-bundle.ps1 === */
+/* === Edit the source files in vantorx-receptionist/js/ then rebuild. === */
+/* ---- js/utils.js ---- */
+/* ============================================================
+   VANTORX CLIENT HUB — utils.js
+   Shared helpers. No dependencies.
+   ============================================================ */
+
+const STATUS_META = {
+  Submitted:   { cls: 'req-status-submitted',   icon: '📨' },
+  'In Review': { cls: 'req-status-in-review',   icon: '🔎' },
+  'In Progress': { cls: 'req-status-in-progress', icon: '🛠️' },
+  'Waiting on Client': { cls: 'req-status-waiting', icon: '⏸️' },
+  Completed:   { cls: 'req-status-completed',   icon: '✅' },
+};
+
+const CALL_OUTCOMES = {
+  answered:    { label: 'Answered',    cls: 'status-green' },
+  missed:      { label: 'Missed',      cls: 'status-red' },
+  transferred: { label: 'Transferred', cls: 'status-purple' },
+  booked:      { label: 'Booked',      cls: 'status-gold' },
+  faq:         { label: 'Question Answered', cls: 'status-blue' },
+};
+
+const APPT_STATUS = {
+  Confirmed:  'status-green',
+  Completed:  'status-dim',
+  Rescheduled: 'status-orange',
+  Cancelled:  'status-red',
+};
+
+function esc(s) {
+  return String(s ?? '')
+    .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+}
+
+function fmtTime(iso) {
+  return new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+}
+
+function fmtDateTime(iso) {
+  return `${fmtDate(iso)} · ${fmtTime(iso)}`;
+}
+
+function fmtDuration(sec) {
+  if (sec == null) return '—';
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return `${m}m ${String(s).padStart(2, '0')}s`;
+}
+
+function relTime(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const min = Math.round(diff / 60000);
+  if (min < 1) return 'just now';
+  if (min < 60) return `${min}m ago`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.round(h / 24);
+  if (d < 7) return `${d}d ago`;
+  return fmtDate(iso);
+}
+
+function debounce(fn, ms) {
+  let t;
+  return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+}
+
+function uid(prefix = 'id') {
+  return `${prefix}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
+}
+
+/* Deterministic PRNG so demo data is stable across reloads until edited */
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function scoreBar(score) {
+  return `<span class="score-bar"><i style="width:${Math.min(100, score)}%"></i></span>${score}`;
+}
+
+function initials(name) {
+  return String(name || '?').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+}
+
+function groupBy(arr, keyFn) {
+  return arr.reduce((acc, item) => {
+    const k = keyFn(item);
+    (acc[k] = acc[k] || []).push(item);
+    return acc;
+  }, {});
+}
+
+function monthLabel(y, m) {
+  return new Date(y, m, 1).toLocaleDateString([], { month: 'long', year: 'numeric' });
+}
+
+function sameDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+
+/* ---- js/api.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — api.js
+   Thin authenticated client for the platform backend.
+   Same-origin session cookie (HttpOnly) — no tokens in JS.
+   The UI renders exactly what the server returns; nothing is
+   faked client-side.
+   ============================================================ */
+
+async function jfetch(path, opts = {}) {
+  const res = await fetch(path, {
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    ...opts,
+  });
+  let data = null;
+  try { data = await res.json(); } catch { /* empty body */ }
+  if (!res.ok) {
+    const err = new Error((data && data.error) || `HTTP ${res.status}`);
+    err.status = res.status;
+    err.data = data;
+    throw err;
+  }
+  return data;
+}
+
+const api = {
+  me: () => jfetch('/api/auth/me'),
+  login: (email, password) => jfetch('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
+  logout: () => jfetch('/api/auth/logout', { method: 'POST', body: '{}' }),
+  signup: (payload) => jfetch('/api/auth/signup', { method: 'POST', body: JSON.stringify(payload) }),
+
+  businesses: () => jfetch('/api/businesses').then((d) => d.rows || []),
+
+  /* receptionist */
+  config: (businessId) => jfetch(`/api/receptionist/config?businessId=${encodeURIComponent(businessId)}`),
+  saveConfig: (businessId, patch) => jfetch('/api/receptionist/config', { method: 'PUT', body: JSON.stringify({ businessId, ...patch }) }),
+  readiness: (businessId) => jfetch(`/api/receptionist/readiness?businessId=${encodeURIComponent(businessId)}`),
+  activate: (businessId) => jfetch('/api/receptionist/activate', { method: 'POST', body: JSON.stringify({ businessId, action: 'activate' }) }),
+  deactivate: (businessId) => jfetch('/api/receptionist/activate', { method: 'POST', body: JSON.stringify({ businessId, action: 'deactivate' }) }),
+
+  talk: (payload) => jfetch('/api/receptionist/talk', { method: 'POST', body: JSON.stringify(payload) }),
+
+  services: (businessId) => jfetch(`/api/services?businessId=${encodeURIComponent(businessId)}`).then((d) => d.rows || []),
+  hours: (businessId) => jfetch(`/api/hours?businessId=${encodeURIComponent(businessId)}`).then((d) => d.hours || d.row || null),
+  appointments: (businessId) => jfetch(`/api/appointments?businessId=${encodeURIComponent(businessId)}`).then((d) => d.rows || []),
+  calls: (businessId) => jfetch(`/api/calls?businessId=${encodeURIComponent(businessId)}`).then((d) => d.rows || []),
+  notifications: () => jfetch('/api/notifications').then((d) => d.rows || []),
+};
+
+
+/* ---- js/store.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — store.js
+   Tiny reactive store over the backend. NO localStorage as
+   production truth: every page view fetches live state from
+   the platform API. Auth gate mirrors the portal.
+   ============================================================ */
+
+const listeners = new Set();
+
+const store = {
+  user: null,
+  business: null,
+  businesses: [],
+  config: null,
+  providers: [],
+  readiness: null,
+  services: [],
+  hours: null,
+  appointments: [],
+  calls: [],
+  notifications: [],
+  loaded: false,
+};
+
+function subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); }
+function emit() { listeners.forEach((f) => f()); }
+
+async function boot() {
+  try {
+    const me = await api.me();
+    store.user = me.user;
+  } catch {
+    store.user = null;
+    store.loaded = true;
+    emit();
+    return store;
+  }
+  await refreshAll();
+  return store;
+}
+
+async function refreshAll() {
+  const bizs = await api.businesses();
+  store.businesses = bizs;
+  const desired = sessionStorage.getItem('rx-biz');
+  store.business = bizs.find((b) => b.id === desired) || bizs[0] || null;
+  if (!store.business) { store.loaded = true; emit(); return store; }
+  sessionStorage.setItem('rx-biz', store.business.id);
+  const bid = store.business.id;
+  const [cfg, appts, calls, notifs] = await Promise.all([
+    api.config(bid),
+    api.appointments(bid),
+    api.calls(bid),
+    api.notifications().catch(() => []),
+  ]);
+  store.config = cfg.config;
+  store.providers = cfg.providers || [];
+  store.readiness = cfg.readiness || null;
+  store.appointments = appts;
+  store.calls = calls;
+  store.notifications = notifs;
+  store.loaded = true;
+  emit();
+  return store;
+}
+
+async function switchBusiness(id) {
+  sessionStorage.setItem('rx-biz', id);
+  await refreshAll();
+}
+
+/* wrap an action with a global busy flag + error toast */
+async function act(fn, onErr) {
+  store.busy = true; emit();
+  try { return await fn(); }
+  catch (e) { if (onErr) onErr(e); else console.error(e); return null; }
+  finally { store.busy = false; emit(); }
+}
+
+async function logout() {
+  try { await api.logout(); } catch { /* ignore */ }
+  store.user = null;
+  emit();
+}
+
+
+/* ---- js/components.js ---- */
+/* ============================================================
+   VANTORX CLIENT HUB — components.js
+   Shared UI primitives: toasts, modal, drawer, confirm,
+   empty states, skeletons.
+   ============================================================ */
+
+/* ---------- toast ---------- */
+
+let toastZone;
+function ensureToastZone() {
+  if (!toastZone) {
+    toastZone = document.createElement('div');
+    toastZone.className = 'toast-zone';
+    document.body.appendChild(toastZone);
+  }
+  return toastZone;
+}
+
+function toast(msg, kind = 'success') {
+  const zone = ensureToastZone();
+  const el = document.createElement('div');
+  el.className = `toast ${kind}`;
+  const icon = kind === 'success' ? '✓' : kind === 'error' ? '✕' : 'ℹ';
+  el.innerHTML = `<span style="font-weight:800;color:var(--gold-bright)">${icon}</span><span>${esc(msg)}</span>`;
+  zone.appendChild(el);
+  setTimeout(() => {
+    el.classList.add('leaving');
+    setTimeout(() => el.remove(), 260);
+  }, 3400);
+}
+
+/* ---------- modal / drawer ----------
+   onOpen fires after the caller has received { close } so callbacks
+   can safely reference close (avoids TDZ issues). */
+
+function openModal({ title, body, footer, onOpen, wide }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  if (wide) modal.style.width = 'min(720px, calc(100vw - 40px))';
+  modal.innerHTML = `
+    <div class="modal-head">
+      <div class="modal-title">${title}</div>
+      <button class="icon-btn modal-x" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">${body}</div>
+    ${footer ? `<div class="modal-foot">${footer}</div>` : ''}
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  const api = { overlay, modal };
+  let closeFn = () => {};
+  api.close = () => closeFn();
+
+  closeFn = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  function onKey(e) { if (e.key === 'Escape') closeFn(); }
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFn(); });
+  modal.querySelector('.modal-x').addEventListener('click', closeFn);
+
+  if (onOpen) queueMicrotask(() => onOpen(api));
+  return api;
+}
+
+function openDrawer({ title, body, footer, onOpen }) {
+  const overlay = document.createElement('div');
+  overlay.className = 'drawer-overlay';
+  const drawer = document.createElement('div');
+  drawer.className = 'drawer';
+  drawer.innerHTML = `
+    <div class="drawer-head">
+      <div class="modal-title">${title}</div>
+      <button class="icon-btn modal-x" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer-body">${body}</div>
+    ${footer ? `<div class="drawer-foot">${footer}</div>` : ''}
+  `;
+  overlay.appendChild(drawer);
+  document.body.appendChild(overlay);
+
+  let closeFn = () => {};
+  const api = { overlay, drawer, close: () => closeFn() };
+
+  closeFn = () => { overlay.remove(); document.removeEventListener('keydown', onKey); };
+  function onKey(e) { if (e.key === 'Escape') closeFn(); }
+  document.addEventListener('keydown', onKey);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFn(); });
+  drawer.querySelector('.modal-x').addEventListener('click', closeFn);
+
+  if (onOpen) queueMicrotask(() => onOpen(api));
+  return api;
+}
+
+function confirmDialog({ title = 'Are you sure?', message = '', confirmText = 'Confirm', danger = false }) {
+  return new Promise(resolve => {
+    const m = openModal({
+      title,
+      body: `<p style="color:var(--text-soft);font-size:0.9rem">${esc(message)}</p>`,
+      footer: `
+        <button class="btn btn-ghost" data-c="no">Cancel</button>
+        <button class="btn ${danger ? 'btn-red' : 'btn-gold'}" data-c="yes">${esc(confirmText)}</button>`,
+      onOpen: ({ modal, close }) => {
+        modal.querySelector('[data-c="no"]').addEventListener('click', () => { close(); resolve(false); });
+        modal.querySelector('[data-c="yes"]').addEventListener('click', () => { close(); resolve(true); });
+      },
+    });
+    const origClose = m.close;
+    // resolve(false) if dismissed via X / overlay / Escape
+    const obs = new MutationObserver(() => {
+      if (!document.body.contains(m.overlay)) { obs.disconnect(); resolve(false); }
+    });
+    obs.observe(document.body, { childList: true });
+    m.close = () => origClose();
+  });
+}
+
+/* ---------- empty / skeleton ---------- */
+
+function emptyState(icon, title, msg, actionHTML = '') {
+  return `
+    <div class="empty-state">
+      <div class="empty-ico">${icon}</div>
+      <div class="empty-title">${esc(title)}</div>
+      <div class="empty-msg">${esc(msg)}</div>
+      ${actionHTML}
+    </div>`;
+}
+
+function skeletonRows(n = 4) {
+  return `<div style="display:flex;flex-direction:column;gap:12px;padding:6px 0">
+    ${Array.from({ length: n }, () => '<div class="skeleton" style="height:34px"></div>').join('')}
+  </div>`;
+}
+
+function statusPill(status, map) {
+  const cls = map[status] || 'status-dim';
+  return `<span class="status-pill ${cls}"><span class="sdot"></span>${esc(status)}</span>`;
+}
+
+/* ---------- KPI grid — receptionist local addition ---------- */
+function kpiGrid(items) {
+  return `<div class="kpi-grid">${items.map((i) => `
+    <div class="kpi"><div class="kpi-label">${esc(i.label)}</div><div class="kpi-value">${esc(i.value)}</div>${i.hint ? `<div class="kpi-hint">${esc(i.hint)}</div>` : ''}</div>`).join('')}</div>`;
+}
+
+/* ---------- modal (promise-based) — receptionist local addition ---------- */
+function modal({ title = '', body = '', actions = [], wide = false }) {
+  return new Promise((resolve) => {
+    const host = document.getElementById('modalHost');
+    if (!host) { resolve(null); return; }
+    const wrap = document.createElement('div');
+    wrap.className = 'modal-overlay';
+    wrap.innerHTML = `
+      <div class="modal-card${wide ? ' wide' : ''}" role="dialog" aria-modal="true">
+        <div class="modal-head"><strong>${esc(title)}</strong><button class="modal-x" aria-label="Close">✕</button></div>
+        <div class="modal-body">${body}</div>
+        <div class="modal-foot">
+          ${actions.map((a, i) => `<button class="btn ${a.kind || 'ghost'}" data-i="${i}">${esc(a.label)}</button>`).join('')}
+        </div>
+      </div>`;
+    const close = (val) => { wrap.remove(); resolve(val); };
+    wrap.addEventListener('click', (e) => {
+      if (e.target === wrap) close(null);
+      const x = e.target.closest('.modal-x'); if (x) close(null);
+      const b = e.target.closest('button[data-i]');
+      if (b) { const a = actions[Number(b.dataset.i)]; close(a ? (a.fn ? a.fn() || true : true) : true); }
+    });
+    host.appendChild(wrap);
+  });
+}
+
+
+/* ---- js/pages/dashboard.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — pages/dashboard.js
+   Everything shown comes from the server: provider matrix with
+   honest NOT CONNECTED states, fail-closed readiness, real
+   call/appointment data.
+   ============================================================ */
+
+const DAY_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+function statusTag(status) {
+  if (status === 'connected') return '<span class="status-pill status-green"><span class="sdot"></span>connected</span>';
+  if (status === 'first-party' || status === 'vantorx-first-party') return '<span class="status-pill status-gold"><span class="sdot"></span>first-party</span>';
+  return `<span class="status-pill status-dim"><span class="sdot"></span>${esc(String(status || 'NOT_CONNECTED'))}</span>`;
+}
+
+function renderDashboard(root, ctx) {
+  const { store } = ctx;
+  const s = store;
+  const today = new Date().toDateString();
+  const todayAppts = s.appointments.filter((a) => new Date(a.at).toDateString() === today && a.status !== 'Cancelled');
+  const todaysCalls = s.calls.filter((c) => new Date(c.at).toDateString() === today);
+  const rdy = s.readiness || { checks: [], blockers: [], ready: false };
+  const active = s.config && s.config.active;
+
+  root.innerHTML = `
+    <section class="card">
+      <div class="row between wrap">
+        <div>
+          <div class="stat-line ${active ? 'ok' : 'dim'}">
+            <span class="pulse"></span> Receptionist ${active ? 'ACTIVE' : 'NOT ACTIVATED'} — ${esc(s.business ? s.business.name : '')}
+          </div>
+          <h2 class="page-head" style="margin:6px 0 0">Real platform capability. Honest integrations.</h2>
+          <p class="dim" style="max-width:640px">Voice runs on configured telephony + LLM + speech providers. Anything not configured shows <b>NOT CONNECTED — SETUP REQUIRED</b> and blocks activation (fail-closed). The test console is real backend logic against the real calendar, clearly labeled TEST MODE.</p>
+        </div>
+        <div class="row gap">
+          <a class="btn primary" href="#/test">▶ Open test console</a>
+          <a class="btn ghost" href="#/settings">⚙ Settings & activation</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-label">Calls today</div><div class="kpi-value">${todaysCalls.length}</div></div>
+      <div class="kpi"><div class="kpi-label">Booked by AI (all)</div><div class="kpi-value">${s.appointments.filter((a) => a.source === 'ai-receptionist').length}</div></div>
+      <div class="kpi"><div class="kpi-label">Appointments today</div><div class="kpi-value">${todayAppts.length}</div></div>
+      <div class="kpi ${rdy.ready ? 'accent-gold' : ''}"><div class="kpi-label">Readiness</div><div class="kpi-value">${rdy.ready ? 'READY' : `${rdy.checks.filter((c) => c.required && !c.pass).length} blockers`}</div><div class="kpi-hint">${rdy.ready ? 'eligible to activate' : 'fail-closed until resolved'}</div></div>
+    </div>
+
+    <div class="grid-2">
+      <section class="card">
+        <h3>Provider status <span class="dim small">— code exists ≠ connected</span></h3>
+        <div class="list">
+          ${(s.providers || []).map((p) => `
+            <div class="list-row">
+              <div>
+                <div>${esc(p.capability)}</div>
+                <div class="dim small">${esc(p.provider || 'no provider configured')}${p.note ? ` — ${esc(p.note)}` : ''}</div>
+              </div>
+              ${statusTag(p.status)}
+            </div>`).join('')}
+        </div>
+      </section>
+      <section class="card">
+        <h3>Activation readiness <span class="dim small">— server-evaluated, fail-closed</span></h3>
+        <div class="list">
+          ${rdy.checks.map((c) => `
+            <div class="list-row">
+              <div>
+                <div>${esc(c.label)} ${c.required ? '<span class="dim small">(required)</span>' : '<span class="dim small">(optional)</span>'}</div>
+                <div class="dim small">${esc(c.detail || '')}</div>
+              </div>
+              <span class="status-pill ${c.pass ? 'status-green' : c.required ? 'status-dim' : 'status-dim'}"><span class="sdot"></span>${c.pass ? 'pass' : c.required ? 'BLOCKER' : 'todo'}</span>
+            </div>`).join('')}
+        </div>
+        ${!rdy.ready ? `<p class="dim small" style="margin-top:8px">Activation is blocked until every required check passes. Blockers: ${esc(rdy.blockers.join(', '))}.</p>` : ''}
+      </section>
+    </div>
+
+    <div class="grid-2">
+      <section class="card">
+        <h3>Recent calls</h3>
+        ${s.calls.length ? s.calls.slice(0, 5).map((c) => `
+          <div class="list-row">
+            <div><b>${esc(c.caller || c.from || 'Caller')}</b> <span class="dim small">${esc(c.phone || '')}</span><div class="dim small">${esc(c.summary || '')}</div></div>
+            <div class="dim small">${relTime(c.at)}${c.testMode ? ' · TEST' : ''}</div>
+          </div>`).join('') : '<div class="dim">No calls yet — run the test console.</div>'}
+      </section>
+      <section class="card">
+        <h3>Upcoming appointments</h3>
+        ${s.appointments.filter((a) => a.status !== 'Cancelled').slice(0, 5).map((a) => `
+          <div class="list-row">
+            <div><b>${fmtTime(a.at)}</b> — ${esc(a.customer)}</div>
+            <div class="dim small">${esc(a.service)} · ${esc(a.bookedBy || a.source || '')}</div>
+          </div>`).join('') || '<div class="dim">Nothing booked yet.</div>'}
+      </section>
+    </div>`;
+}
+
+
+/* ---- js/pages/test.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — pages/test.js
+   Server-driven test conversation. Every turn is a POST to the
+   backend engine; nothing is decided in the browser. TEST MODE
+   banner always visible; bookings need an explicit apply.
+   ============================================================ */
+
+const SCENARIOS = [
+  'I need a haircut tomorrow.',
+  'How much is a haircut?',
+  'What time do you open on Saturday?',
+  'Do you take walk-ins?',
+  'I need to reschedule my appointment.',
+  "I'd like a beard trim Friday at 2 PM.",
+  'Can I talk to a real person?',
+  'Where are you located?',
+];
+
+let session = null; // { id, testMode }
+let lastPreview = null;
+
+function renderTest(root, ctx) {
+  const { store, refresh, toast } = ctx;
+  root.innerHTML = `
+    <section class="card">
+      <div class="row between wrap">
+        <h3 style="margin:0">Test console <span class="status-pill status-gold"><span class="sdot"></span>TEST MODE</span></h3>
+        <div class="row gap">
+          <button class="btn primary" id="btnStart">☎ Start test call</button>
+          <button class="btn danger" id="btnEnd" disabled>■ End & save</button>
+        </div>
+      </div>
+      <p class="dim small" style="margin:8px 0 0">Runs the <b>real backend engine</b> against the <b>real calendar</b> — availability is genuinely checked and applied bookings are real appointments. It is labeled TEST MODE because it is a web console test, not a production phone call${store.config && store.config.active ? '; the receptionist is also ACTIVE for real callers.' : '.'}</p>
+    </section>
+    <div class="grid-side" style="margin-top:18px">
+      <section class="card">
+        <h3>Scenario starters</h3>
+        <div class="row gap wrap" style="margin-top:6px">
+          ${SCENARIOS.map((x) => `<button class="chip" data-scenario="${esc(x)}" ${session ? '' : 'disabled'}>${esc(x)}</button>`).join('')}
+        </div>
+        <div class="kv-list" style="margin-top:14px">
+          <div class="kv-row"><span>Engine</span><b>platform/server.ps1 (server-side)</b></div>
+          <div class="kv-row"><span>Calendar</span><b>${esc((store.providers.find((p) => /calendar/i.test(p.capability)) || {}).status || '—')}</b></div>
+          <div class="kv-row"><span>Booking rule</span><b>explicit apply only</b></div>
+        </div>
+      </section>
+      <section class="card">
+        <h3>Live transcript</h3>
+        <div id="transcript" class="transcript"><div class="dim">Start a test call to begin.</div></div>
+        <div class="row gap" style="margin-top:10px">
+          <input class="input grow" id="sayInput" placeholder="${session ? 'Type what the caller says…' : 'Start the call first'}" ${session ? '' : 'disabled'} />
+          <button class="btn primary" id="btnSay" ${session ? '' : 'disabled'}>Send</button>
+        </div>
+        <div class="row between" style="margin-top:10px">
+          <div id="previewBox" class="dim small">${lastPreview ? `Pending: ${esc(lastPreview.detail || '')}` : ''}</div>
+          <button class="btn gold" id="btnApply" ${lastPreview ? '' : 'disabled'}>✓ Apply to calendar</button>
+        </div>
+      </section>
+    </div>`;
+  wireTest(root, ctx);
+  const t = root.querySelector('#transcript');
+  t.scrollTop = t.scrollHeight;
+}
+
+function paint(role, text) {
+  const t = document.getElementById('transcript');
+  if (!t) return;
+  const cls = role === 'caller' ? 'tr-caller' : role === 'ai' ? 'tr-ai' : 'tr-sys';
+  const who = role === 'caller' ? 'Caller' : role === 'ai' ? 'AI Receptionist' : '';
+  t.insertAdjacentHTML('beforeend', `<div class="tr ${cls}">${who ? `<div class="tr-who">${who}</div>` : ''}<div class="tr-text">${esc(text)}</div></div>`);
+  t.scrollTop = t.scrollHeight;
+}
+
+async function wireTest(root, ctx) {
+  const { store, toast, refreshAll } = ctx;
+  const bid = store.business.id;
+
+  root.querySelector('#btnStart').addEventListener('click', async () => {
+    try {
+      const r = await api.talk({ action: 'start', businessId: bid, callerName: 'Web test caller', phone: '(555) 010-2030' });
+      session = { id: r.sessionId, testMode: r.testMode };
+      const t = document.getElementById('transcript');
+      t.innerHTML = '';
+      paint('sys', `— test call connected · engine: server · ${r.providers.filter((p) => p.status !== 'connected').length} provider(s) NOT CONNECTED —`);
+      paint('ai', r.greeting);
+      setLive(true);
+      root.querySelectorAll('[data-scenario]').forEach((b) => (b.disabled = false));
+    } catch (e) { toast(e.message, 'error'); }
+  });
+
+  root.querySelector('#btnSay').addEventListener('click', () => send(ctx));
+  root.querySelector('#sayInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') send(ctx); });
+  root.querySelectorAll('[data-scenario]').forEach((b) => b.addEventListener('click', () => {
+    const inp = document.getElementById('sayInput');
+    inp.value = b.dataset.scenario;
+    send(ctx);
+  }));
+  root.querySelector('#btnEnd').addEventListener('click', async () => {
+    try {
+      const r = await api.talk({ action: 'end', sessionId: session.id });
+      paint('sys', '— call ended · durable record saved (channel: web-test) —');
+      session = null; setLive(false); refreshAll();
+    } catch (e) { toast(e.message, 'error'); }
+  });
+  root.querySelector('#btnApply').addEventListener('click', async () => {
+    try {
+      const r = await api.talk({ action: 'apply', sessionId: session.id });
+      if (r.ok) {
+        paint('sys', `— APPLIED to real calendar: ${r.detail || 'booking committed'} —`);
+        toast('Booking committed to the real calendar', 'success');
+        lastPreview = null;
+        const b = document.getElementById('btnApply'); if (b) b.disabled = true;
+        refreshAll();
+      } else { toast(r.reason === 'conflict' ? 'Slot no longer available' : (r.error || 'Apply failed'), 'error'); }
+    } catch (e) { toast(e.message, 'error'); }
+  });
+}
+
+async function send(ctx) {
+  const inp = document.getElementById('sayInput');
+  const text = (inp.value || '').trim();
+  if (!text || !session) return;
+  paint('caller', text);
+  inp.value = '';
+  try {
+    const r = await api.talk({ action: 'turn', sessionId: session.id, text });
+    setTimeout(() => {
+      paint('ai', r.reply);
+      if (r.preview) {
+        lastPreview = r.preview;
+        const box = document.getElementById('previewBox');
+        if (box) box.innerHTML = `<b>Pending (not committed):</b> ${esc(r.preview.detail || '')}`;
+        const b = document.getElementById('btnApply'); if (b) b.disabled = false;
+      }
+    }, 160);
+  } catch (e) { paint('sys', `— error: ${e.message} —`); }
+}
+
+function setLive(on) {
+  const b1 = document.getElementById('btnStart'), b2 = document.getElementById('btnEnd');
+  const inp = document.getElementById('sayInput'), sb = document.getElementById('btnSay');
+  if (b1) b1.disabled = on; if (b2) b2.disabled = !on;
+  if (inp) { inp.disabled = !on; inp.placeholder = on ? 'Type what the caller says…' : 'Start the call first'; }
+  if (sb) sb.disabled = !on;
+}
+
+
+/* ---- js/pages/calls.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — pages/calls.js
+   Call history straight from the platform DB, transcript modal.
+   web-test records are clearly labeled and never shown as
+   production telephony calls.
+   ============================================================ */
+
+let filter = 'all';
+let query = '';
+
+function outcomeTag(o, testMode) {
+  const map = {
+    'appointment-booked': 'status-green',
+    rescheduled: 'status-green',
+    cancelled: 'status-orange',
+    transferred: 'status-blue',
+    'transfer-preview': 'status-blue',
+    'message-taken': 'status-gold',
+    answered: 'status-dim',
+    missed: 'status-dim',
+  };
+  const cls = map[o] || 'status-dim';
+  const label = (o || 'answered').replace('appointment-booked', 'booked').replace('message-taken', 'message') + (testMode ? ' · TEST' : '');
+  return `<span class="status-pill ${cls}"><span class="sdot"></span>${esc(label)}</span>`;
+}
+
+function renderCalls(root, ctx) {
+  const { store } = ctx;
+  const calls = store.calls || [];
+  const shown = calls.filter((c) => {
+    const okF = filter === 'all' || (filter === 'booked' ? c.outcome === 'appointment-booked' : c.outcome === filter);
+    const okQ = !query || [c.caller, c.phone, c.summary].join(' ').toLowerCase().includes(query);
+    return okF && okQ;
+  });
+  root.innerHTML = `
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-label">Total calls</div><div class="kpi-value">${calls.length}</div></div>
+      <div class="kpi"><div class="kpi-label">Booked</div><div class="kpi-value">${calls.filter((c) => c.outcome === 'appointment-booked').length}</div></div>
+      <div class="kpi"><div class="kpi-label">Transfers</div><div class="kpi-value">${calls.filter((c) => /transfer/.test(c.outcome)).length}</div></div>
+      <div class="kpi"><div class="kpi-label">Test-mode calls</div><div class="kpi-value">${calls.filter((c) => c.testMode).length}</div><div class="kpi-hint">channel: web-test</div></div>
+    </div>
+    <section class="card">
+      <div class="row between wrap" style="margin-bottom:10px">
+        <div class="row gap wrap">
+          ${['all', 'booked', 'transferred', 'message-taken'].map((f) => `<button class="chip${filter === f ? ' active' : ''}" data-filter="${f}">${f === 'all' ? 'All' : f.replace('-', ' ')}</button>`).join('')}
+        </div>
+        <input class="input" id="q" placeholder="Search calls…" value="${esc(query)}" style="max-width:220px" />
+      </div>
+      ${shown.length ? `
+      <div class="table-wrap"><table>
+        <thead><tr><th>Caller</th><th>Phone</th><th>When</th><th>Channel</th><th>Outcome</th><th>Summary</th><th></th></tr></thead>
+        <tbody>${shown.map((c) => `
+          <tr>
+            <td><b>${esc(c.caller || c.from || '—')}</b></td>
+            <td class="dim">${esc(c.phone || '')}</td>
+            <td class="dim">${fmtTime(c.at)}</td>
+            <td class="dim">${esc(c.channel || 'telephony')}</td>
+            <td>${outcomeTag(c.outcome, c.testMode)}</td>
+            <td class="dim small">${esc(c.summary || '')}</td>
+            <td><button class="btn ghost small" data-open="${c.id}">View</button></td>
+          </tr>`).join('')}</tbody>
+      </table></div>` : '<div class="dim">No calls match. Run the test console to generate a real backend record.</div>'}
+    </section>`;
+  wireCalls(root, ctx);
+}
+
+function wireCalls(root, ctx) {
+  root.querySelectorAll('[data-filter]').forEach((b) => b.addEventListener('click', () => { filter = b.dataset.filter; renderCalls(root, ctx); }));
+  const q = root.querySelector('#q');
+  q.addEventListener('input', () => { query = q.value.toLowerCase().trim(); renderCalls(root, ctx); const q2 = root.querySelector('#q'); q2.focus(); q2.setSelectionRange(q2.value.length, q2.value.length); });
+  root.querySelectorAll('[data-open]').forEach((b) => b.addEventListener('click', () => openDetail(b.dataset.open, ctx)));
+}
+
+function openDetail(id, ctx) {
+  const c = ((ctx && ctx.store) || { calls: [] }).calls.find((x) => x.id === id);
+  if (!c) return;
+  modal({
+    title: `Call — ${c.caller || c.from}`,
+    wide: true,
+    body: `
+      <div class="kv-list" style="margin-bottom:10px">
+        <div class="kv-row"><span>Channel</span><b>${esc(c.channel || 'telephony')}${c.testMode ? ' (TEST MODE)' : ''}</b></div>
+        <div class="kv-row"><span>Phone</span><b>${esc(c.phone || '—')}</b></div>
+        <div class="kv-row"><span>When</span><b>${fmtTime(c.at)} (${relTime(c.at)})</b></div>
+        <div class="kv-row"><span>Outcome</span><b>${esc(c.outcome || 'answered')}</b></div>
+        <div class="kv-row"><span>Summary</span><b>${esc(c.summary || '—')}</b></div>
+      </div>
+      <h4 style="margin:6px 0">Transcript</h4>
+      <div class="transcript" style="max-height:300px">
+        ${Array.isArray(c.transcript)
+          ? (c.transcript.map((m) => `
+            <div class="tr ${m.role === 'caller' ? 'tr-caller' : m.role === 'ai' ? 'tr-ai' : 'tr-sys'}">
+              ${m.role !== 'sys' ? `<div class="tr-who">${m.role === 'caller' ? 'Caller' : 'AI Receptionist'}</div>` : ''}
+              <div class="tr-text">${esc(m.text)}</div>
+            </div>`).join('') || '<div class="dim">No transcript recorded.</div>')
+          : (c.transcript
+            ? `<div class="tr tr-sys"><div class="tr-text">${esc(String(c.transcript))}</div></div>`
+            : '<div class="dim">No transcript recorded.</div>')}
+      </div>`,
+    actions: [{ label: 'Close', kind: 'primary', fn: () => {} }],
+  });
+}
+
+
+/* ---- js/pages/appointments.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — pages/appointments.js
+   Real appointments from the platform DB. Source is shown
+   honestly (ai-receptionist / owner / client-hub / seed).
+   ============================================================ */
+
+function renderAppointments(root, ctx) {
+  const { store, refresh } = ctx;
+  const rows = (store.appointments || []).slice().sort((a, b) => new Date(a.at) - new Date(b.at));
+  const now = Date.now();
+  const upcoming = rows.filter((a) => a.status !== 'Cancelled' && new Date(a.at).getTime() >= now - 36e5);
+  const past = rows.filter((a) => !(a.status !== 'Cancelled' && new Date(a.at).getTime() >= now - 36e5)).reverse();
+
+  const row = (a) => `
+    <tr>
+      <td><b>${fmtTime(a.at)}</b></td>
+      <td>${esc(a.customer || '—')}</td>
+      <td>${esc(a.service || '')}</td>
+      <td class="dim">${a.status === 'Cancelled' ? '<span class="status-pill status-dim"><span class="sdot"></span>cancelled</span>' : esc(a.status)}</td>
+      <td class="dim small">${esc(a.bookedBy || a.source || '—')}${a.source === 'ai-receptionist' ? ' 🤖' : ''}</td>
+      <td class="dim small">${relTime(a.at)}</td>
+      <td>${a.status !== 'Cancelled' && new Date(a.at).getTime() >= now ? `<button class="btn ghost small" data-cancel="${a.id}">Cancel</button>` : ''}</td>
+    </tr>`;
+
+  root.innerHTML = `
+    <section class="card">
+      <h3>Upcoming</h3>
+      ${upcoming.length ? `<div class="table-wrap"><table>
+        <thead><tr><th>When</th><th>Customer</th><th>Service</th><th>Status</th><th>Booked by</th><th></th><th></th></tr></thead>
+        <tbody>${upcoming.map(row).join('')}</tbody></table></div>`
+      : '<div class="dim">No upcoming appointments. Book one via the test console — applies are real.</div>'}
+    </section>
+    <section class="card" style="margin-top:18px">
+      <h3>History</h3>
+      ${past.length ? `<div class="table-wrap"><table>
+        <thead><tr><th>When</th><th>Customer</th><th>Service</th><th>Status</th><th>Booked by</th><th></th><th></th></tr></thead>
+        <tbody>${past.slice(0, 25).map(row).join('')}</tbody></table></div>`
+      : '<div class="dim">Nothing yet.</div>'}
+    </section>`;
+
+  root.querySelectorAll('[data-cancel]').forEach((b) => b.addEventListener('click', async () => {
+    const ok = await confirmDialog({ title: 'Cancel appointment?', message: 'This updates the real calendar record.', confirmText: 'Cancel appointment', danger: true });
+    if (!ok) return;
+    try {
+      await fetch(`/api/appointments/${b.dataset.cancel}`, {
+        method: 'PATCH', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'Cancelled' }),
+      });
+      toast('Appointment cancelled', 'success');
+      await ctx.refreshAll();
+      refresh();
+    } catch (e) { toast(e.message, 'error'); }
+  }));
+}
+
+
+/* ---- js/pages/knowledge.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — pages/knowledge.js
+   Canonical business data (services, hours, location) comes
+   from the platform records — shown read-only here with a
+   pointer to where it's managed. FAQs + receptionist policies
+   are receptionist-scoped and editable (persisted server-side).
+   ============================================================ */
+
+function renderKnowledge(root, ctx) {
+  const { store, refresh } = ctx;
+  const cfg = store.config;
+  const hours = store.hours || (store.business && null);
+  const k = cfg ? cfg.knowledge : { faqs: [], policies: {} };
+
+  const dayRow = (d, label) => {
+    if (!hours || !hours[d]) return '';
+    const r = hours[d];
+    return `<div class="kv-row"><span>${label}</span><b>${r.closed ? 'Closed' : `${esc(r.open)} – ${esc(r.close)}`}</b></div>`;
+  };
+
+  root.innerHTML = `
+    <div class="grid-2">
+      <section class="card">
+        <h3>Canonical business data <span class="dim small">— managed in Onboarding/Admin</span></h3>
+        <div class="kv-list">
+          <div class="kv-row"><span>Business</span><b>${esc(store.business ? store.business.name : '')}</b></div>
+          <div class="kv-row"><span>Location</span><b>${esc([store.business && store.business.city].filter(Boolean).join('') || '—')}</b></div>
+          <div class="kv-row"><span>Timezone</span><b>${esc((store.business && store.business.timezone) || 'local')}</b></div>
+        </div>
+        <h4 style="margin:12px 0 4px">Services (price · duration)</h4>
+        <div class="list">
+          ${(store.services || []).map((s) => `<div class="list-row"><div>${esc(s.name)}</div><b>$${esc(s.price)} · ${esc(s.minutes)} min</b></div>`).join('') || '<div class="dim">No services configured.</div>'}
+        </div>
+        <h4 style="margin:12px 0 4px">Hours</h4>
+        <div class="kv-list">
+          ${dayRow('mon', 'Monday')}${dayRow('tue', 'Tuesday')}${dayRow('wed', 'Wednesday')}${dayRow('thu', 'Thursday')}${dayRow('fri', 'Friday')}${dayRow('sat', 'Saturday')}${dayRow('sun', 'Sunday')}
+          ${!hours ? '<div class="dim small">Hours record not loaded.</div>' : ''}
+        </div>
+      </section>
+      <section class="card">
+        <h3>Receptionist knowledge <span class="dim small">— saved to the platform</span></h3>
+        <h4 style="margin:8px 0 4px">FAQs</h4>
+        <div id="faqList" class="list">
+          ${(k.faqs || []).map((f) => `
+            <div class="list-row">
+              <div><div>${esc(f.q)}</div><div class="dim small">${esc(f.a)}</div></div>
+              <button class="btn ghost small" data-del="${esc(f.q)}">Remove</button>
+            </div>`).join('') || '<div class="dim">No FAQs yet.</div>'}
+        </div>
+        <div class="row gap wrap" style="margin-top:8px">
+          <input class="input" id="faqQ" placeholder="Question" style="max-width:220px" />
+          <input class="input grow" id="faqA" placeholder="Answer" />
+          <button class="btn primary" id="faqAdd">Add FAQ</button>
+        </div>
+        <h4 style="margin:14px 0 4px">Policies</h4>
+        <div class="field"><label class="label">Cancellation</label><input class="input" id="polC" value="${esc((k.policies || {}).cancellation || '')}" /></div>
+        <div class="field"><label class="label">Walk-ins</label><input class="input" id="polW" value="${esc((k.policies || {}).walkins || '')}" /></div>
+        <div class="field"><label class="label">Payment</label><input class="input" id="polP" value="${esc((k.policies || {}).payment || '')}" /></div>
+        <button class="btn primary" id="polSave" style="margin-top:10px">Save policies</button>
+      </section>
+    </div>`;
+
+  const bid = store.business.id;
+  const saveFaqs = async (faqs) => {
+    try {
+      await api.saveConfig(bid, { knowledge: { faqs } });
+      toast('Saved to platform', 'success');
+      await ctx.refreshAll(); refresh();
+    } catch (e) { toast(e.message, 'error'); }
+  };
+
+  root.querySelector('#faqAdd').addEventListener('click', () => {
+    const q = root.querySelector('#faqQ').value.trim();
+    const a = root.querySelector('#faqA').value.trim();
+    if (!q || !a) { toast('Question and answer required', 'error'); return; }
+    saveFaqs([...(store.config.knowledge.faqs || []), { q, a }]);
+  });
+  root.querySelectorAll('[data-del]').forEach((b) => b.addEventListener('click', () => {
+    saveFaqs((store.config.knowledge.faqs || []).filter((f) => f.q !== b.dataset.del));
+  }));
+  root.querySelector('#polSave').addEventListener('click', async () => {
+    try {
+      await api.saveConfig(bid, { knowledge: { policies: {
+        cancellation: root.querySelector('#polC').value.trim(),
+        walkins: root.querySelector('#polW').value.trim(),
+        payment: root.querySelector('#polP').value.trim(),
+      } } });
+      toast('Policies saved', 'success');
+      await ctx.refreshAll(); refresh();
+    } catch (e) { toast(e.message, 'error'); }
+  });
+}
+
+
+/* ---- js/pages/settings.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — pages/settings.js
+   Profile settings (persisted server-side), provider matrix,
+   and activation gated by the server's fail-closed readiness.
+   A 422 from activate shows the exact blockers; nothing is
+   activated client-side.
+   ============================================================ */
+
+function renderSettings(root, ctx) {
+  const { store, refresh } = ctx;
+  const cfg = store.config;
+  if (!cfg) { root.innerHTML = '<div class="dim">Config not loaded.</div>'; return; }
+  const p = cfg.profile;
+  const rdy = store.readiness || { checks: [], ready: false, blockers: [] };
+
+  root.innerHTML = `
+    <div class="grid-2">
+      <section class="card">
+        <h3>Receptionist profile</h3>
+        <div class="field"><label class="label">Greeting ({business} is replaced automatically)</label><input class="input" id="greeting" value="${esc(p.greeting || '')}" placeholder="Thank you for calling {business}…" /></div>
+        <div class="field"><label class="label">Personality</label>
+          <select class="input" id="personality">
+            ${['warm-professional', 'crisp-efficient', 'friendly-casual'].map((x) => `<option ${p.personality === x ? 'selected' : ''}>${x}</option>`).join('')}
+          </select></div>
+        <div class="field"><label class="label">Transfer number (human fallback)</label><input class="input" id="transfer" value="${esc(p.transferNumber || '')}" placeholder="+1 …" /></div>
+        <div class="field"><label class="label">After hours</label>
+          <select class="input" id="afterHours">
+            ${['message', 'voicemail', 'transfer'].map((x) => `<option ${p.afterHours === x ? 'selected' : ''}>${x}</option>`).join('')}
+          </select></div>
+        <div class="row gap wrap" style="margin-top:6px">
+          <label class="row gap" style="align-items:center"><input type="checkbox" id="allowBooking" ${p.allowBooking ? 'checked' : ''}/> Allow booking</label>
+          <label class="row gap" style="align-items:center"><input type="checkbox" id="allowTransfer" ${p.allowTransfer ? 'checked' : ''}/> Allow transfer</label>
+          <label class="row gap" style="align-items:center"><input type="checkbox" id="allowMessages" ${p.allowMessages ? 'checked' : ''}/> Take messages</label>
+        </div>
+        <button class="btn primary" id="saveProfile" style="margin-top:12px">Save profile</button>
+      </section>
+
+      <section class="card">
+        <h3>Activation</h3>
+        <p class="dim small">The server decides. Activation fails closed (HTTP 422) while any required check below is unmet.</p>
+        <div class="list">
+          ${rdy.checks.map((c) => `
+            <div class="list-row">
+              <div>${esc(c.label)}${c.required ? ' <span class="dim small">(required)</span>' : ''}</div>
+              <span class="status-pill ${c.pass ? 'status-green' : 'status-dim'}"><span class="sdot"></span>${c.pass ? 'pass' : c.required ? 'BLOCKER' : 'todo'}</span>
+            </div>`).join('')}
+        </div>
+        <div class="row gap" style="margin-top:12px">
+          ${cfg.active
+            ? `<button class="btn danger" id="deact">■ Deactivate receptionist</button>`
+            : `<button class="btn gold" id="act">▲ Activate receptionist</button>`}
+        </div>
+        <div id="blockerMsg" class="dim small" style="margin-top:8px">${rdy.ready ? '' : `Blockers: ${esc(rdy.blockers.join(', '))}`}</div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:18px">
+      <h3>Provider matrix <span class="dim small">— honest integration status</span></h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Capability</th><th>Provider</th><th>Status</th><th>What's needed</th></tr></thead>
+        <tbody>
+          ${(store.providers || []).map((x) => `
+            <tr>
+              <td><b>${esc(x.capability)}</b></td>
+              <td class="dim">${esc(x.provider || '—')}</td>
+              <td>${x.status === 'connected' ? '<span class="status-pill status-green"><span class="sdot"></span>connected</span>' : x.status === 'first-party' ? '<span class="status-pill status-gold"><span class="sdot"></span>first-party</span>' : '<span class="status-pill status-dim"><span class="sdot"></span>NOT CONNECTED</span>'}</td>
+              <td class="dim small">${esc(x.note || '')}</td>
+            </tr>`).join('')}
+        </tbody></table></div>
+      <p class="dim small" style="margin-top:8px">Until telephony + LLM + STT + TTS are connected to real providers, voice answering is unavailable — the test console remains the way to exercise the full conversation/booking logic against the real calendar.</p>
+    </section>`;
+
+  root.querySelector('#saveProfile').addEventListener('click', async () => {
+    try {
+      await api.saveConfig(store.business.id, { profile: {
+        greeting: root.querySelector('#greeting').value.trim(),
+        personality: root.querySelector('#personality').value,
+        transferNumber: root.querySelector('#transfer').value.trim(),
+        afterHours: root.querySelector('#afterHours').value,
+        allowBooking: root.querySelector('#allowBooking').checked,
+        allowTransfer: root.querySelector('#allowTransfer').checked,
+        allowMessages: root.querySelector('#allowMessages').checked,
+      } });
+      toast('Profile saved to platform', 'success');
+      await ctx.refreshAll(); refresh();
+    } catch (e) { toast(e.message, 'error'); }
+  });
+
+  const actBtn = root.querySelector('#act');
+  if (actBtn) actBtn.addEventListener('click', async () => {
+    try {
+      await api.activate(store.business.id);
+      toast('Receptionist ACTIVATED (server-verified readiness)', 'success');
+      await ctx.refreshAll(); refresh();
+    } catch (e) {
+      if (e.status === 422 && e.data && e.data.blockers) {
+        toast(`Blocked by server: ${e.data.blockers.join(', ')}`, 'error');
+        const box = root.querySelector('#blockerMsg');
+        if (box) box.textContent = `Blockers: ${e.data.blockers.join(', ')}`;
+      } else { toast(e.message, 'error'); }
+    }
+  });
+  const deactBtn = root.querySelector('#deact');
+  if (deactBtn) deactBtn.addEventListener('click', async () => {
+    const ok = await confirmDialog({ title: 'Deactivate receptionist?', message: 'Real callers will no longer be answered; the test console stays available.', confirmText: 'Deactivate', danger: true });
+    if (!ok) return;
+    try {
+      await api.deactivate(store.business.id);
+      toast('Receptionist deactivated', 'success');
+      await ctx.refreshAll(); refresh();
+    } catch (e) { toast(e.message, 'error'); }
+  });
+}
+
+
+/* ---- js/app.js ---- */
+/* ============================================================
+   VANTORX AI RECEPTIONIST — app.js
+   Shell + router. Auth-gated: redirects to the portal when not
+   signed in. Routes: dashboard/test/calls/appointments/
+   knowledge/settings
+   ============================================================ */
+
+const PAGES = {
+  dashboard: { title: 'Dashboard', icon: '◎', render: renderDashboard },
+  test: { title: 'Test Console', icon: '▶', render: renderTest },
+  calls: { title: 'Calls', icon: '☏', render: renderCalls },
+  appointments: { title: 'Appointments', icon: '🗓', render: renderAppointments },
+  knowledge: { title: 'Knowledge', icon: '📖', render: renderKnowledge },
+  settings: { title: 'Settings', icon: '⚙', render: renderSettings },
+};
+
+function providerChip() {
+  const s = store;
+  if (!s.config) return '';
+  const t = s.config.channels.telephony.status;
+  const ok = t === 'connected';
+  return `
+    <div class="live-pill ${ok ? 'on' : 'off'}" title="${esc(s.config.channels.telephony.note || '')}">
+      <span class="pulse"></span>${ok ? 'TELEPHONY LIVE' : 'NOT CONNECTED — SETUP REQUIRED'}
+    </div>`;
+}
+
+function nav() {
+  const unread = store.notifications.filter((n) => !n.read).length;
+  return `
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <a href="/" title="Back to VantorX portal" style="text-decoration:none;color:inherit;display:flex;gap:10px;align-items:center">
+        <span class="brand-mark">V</span>
+        <span class="brand-name">VantorX <span class="gold">Voice</span></span>
+        </a>
+      </div>
+      <nav class="nav-list">
+        ${Object.entries(PAGES).map(([k, p]) => `
+          <a class="nav-link${(location.hash || '#/dashboard') === `#/${k}` ? ' active' : ''}" href="#/${k}">
+            <span class="nav-ico">${p.icon}</span>${p.title}
+          </a>`).join('')}
+      </nav>
+      <div class="sidebar-foot">
+        ${providerChip()}
+        <select class="input small" id="bizSwitch" style="margin-top:8px">
+          ${store.businesses.map((b) => `<option value="${b.id}" ${store.business && store.business.id === b.id ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}
+        </select>
+        <div class="dim small" style="margin-top:6px">${esc(store.user ? store.user.email : '')} · <a href="#" id="lnkLogout" class="dim">sign out</a></div>
+      </div>
+    </aside>`;
+}
+
+function shell() {
+  document.getElementById('app').innerHTML = `
+    ${nav()}
+    <div class="main">
+      <header class="topbar">
+        <div class="topbar-title" id="pageTitle">Dashboard</div>
+        <div class="topbar-actions">
+          <span class="dim small" id="bizLabel">${esc(store.business ? store.business.name : '')}</span>
+        </div>
+      </header>
+      <div class="content" id="pageRoot"></div>
+    </div>
+    <div id="modalHost"></div>`;
+  document.getElementById('bizSwitch').addEventListener('change', async (e) => { await switchBusiness(e.target.value); renderRoute(); });
+  document.getElementById('lnkLogout').addEventListener('click', async (e) => { e.preventDefault(); await logout(); location.href = '/platform/portal.html'; });
+}
+
+let booted = false;
+async function start() {
+  if (booted) return;
+  booted = true;
+  await boot();
+  if (!store.user) { location.href = '/platform/portal.html'; return; }
+  shell();
+  subscribe(() => {
+    const chipHost = document.querySelector('.sidebar-foot');
+    if (!chipHost) return;
+    // light refresh of dynamic bits without nuking page state
+    const active = location.hash || '#/dashboard';
+    document.querySelectorAll('.nav-link').forEach((a) => a.classList.toggle('active', a.getAttribute('href') === active));
+  });
+  window.addEventListener('hashchange', renderRoute);
+  if (!location.hash) location.hash = '#/dashboard';
+  renderRoute();
+}
+
+function renderRoute() {
+  if (!store.user) return;
+  const key = (location.hash.replace('#/', '') || 'dashboard').split('?')[0];
+  const page = PAGES[key] || PAGES.dashboard;
+  document.getElementById('pageTitle').textContent = page.title;
+  const root = document.getElementById('pageRoot');
+  if (!store.loaded) { root.innerHTML = '<div class="dim">Loading…</div>'; return; }
+  page.render(root, { store, refresh: renderRoute, toast, emit, refreshAll });
+}
+
+start();
+
+
+</script>
+</body>
+</html>

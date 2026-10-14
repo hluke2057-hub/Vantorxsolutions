@@ -17,7 +17,7 @@ export async function api(method, path, body) {
   try {
     res = await fetch(path, { method, credentials: 'same-origin', headers: body ? { 'Content-Type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined });
   } catch (e) {
-    return { ok: false, status: 0, error: 'Platform server not reachable. Start platform/server.ps1 and reload.' };
+    return { ok: false, status: 0, error: 'Platform backend not reachable. Please check your connection and reload.' };
   }
   let data = {};
   try { data = await res.json(); } catch { /* empty */ }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VantorX Onboarding — Client Setup</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="obx-wrap">
+
+  <!-- ===== HEADER ===== -->
+  <header class="obx-header">
+    <div class="obx-brand">
+      <a href="/" title="Back to VantorX portal" style="text-decoration:none;color:inherit;display:flex;gap:10px;align-items:center">
+      <span class="brand-mark">V</span>
+      <span class="brand-name">VantorX <span class="gold-text">Onboarding</span></span>
+      </a>
+    </div>
+    <div class="obx-header-right">
+      <span class="obx-autosave" id="autosaveFlag" title="Progress saves in this browser and syncs to the VantorX platform when you are signed in">✓ Saved</span>
+      <button class="btn btn-ghost btn-sm" id="resetBtn">Start over</button>
+    </div>
+  </header>
+
+  <!-- ===== PROGRESS ===== -->
+  <div class="obx-progress-card">
+    <div class="onboard-progress" id="progBar"></div>
+    <div class="obx-progress-meta">
+      <span class="obx-step-label" id="stepLabel">Step 1 of 8</span>
+      <span class="obx-step-name" id="stepName">Business</span>
+    </div>
+  </div>
+
+  <!-- ===== STEP VIEW ===== -->
+  <main class="obx-main" id="view"></main>
+
+  <!-- ===== NAV ===== -->
+  <div class="obx-nav">
+    <button class="btn btn-ghost" id="backBtn">← Back</button>
+    <div class="obx-nav-right">
+      <span class="obx-validation" id="validationMsg"></span>
+      <button class="btn btn-gold" id="nextBtn">Continue →</button>
+    </div>
+  </div>
+
+  <footer class="obx-foot">VantorX — AI receptionist &amp; lead follow-up for local business · Progress saves locally and syncs to the VantorX platform when signed in.</footer>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

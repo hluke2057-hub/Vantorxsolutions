@@ -19,7 +19,19 @@ module.exports = async function handler(req, res) {
     setSessionCookies(res, session);
     return res.status(200).json({ ok: true, user: { id: session.user.id, email: session.user.email } });
   } catch (err) {
-    if (err.status === 400 || err.status === 401) return res.status(401).json({ ok: false, error: "Invalid email or password, or email confirmation is required." });
+    if (err.status === 400 || err.status === 401) {
+      let msg = "Invalid email or password, or email confirmation is required.";
+      if (err.message) {
+        if (/email not confirmed/i.test(err.message)) {
+          msg = "Email confirmation is required before logging in. Please check your inbox.";
+        } else if (/invalid login credentials/i.test(err.message)) {
+          msg = "Invalid email or password.";
+        } else if (!err.message.includes("Supabase")) {
+          msg = err.message;
+        }
+      }
+      return res.status(401).json({ ok: false, error: msg });
+    }
     return jsonError(res, err);
   }
 };

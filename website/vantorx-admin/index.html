@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VantorX Admin — Internal Operations Console</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">VX</div>
+      <div>
+        <div class="brand-name">VantorX <span class="gold">Admin</span></div>
+        <div class="brand-sub">Operations Console</div>
+      </div>
+    </div>
+
+    <div class="nav-section-label">Manage</div>
+    <a class="nav-item" data-nav="overview" href="#/overview"><span class="ico">📊</span> Overview</a>
+    <a class="nav-item" data-nav="clients" href="#/clients"><span class="ico">🏢</span> Tenants <span class="nav-badge" id="clientsBadge">0</span></a>
+
+    <div class="nav-section-label">Work</div>
+    <a class="nav-item" data-nav="requests" href="#/requests"><span class="ico">🛠️</span> Change Requests <span class="nav-badge" id="reqBadge">0</span></a>
+    <a class="nav-item" data-nav="billing" href="#/billing"><span class="ico">💳</span> Billing &amp; Plans</a>
+    <a class="nav-item" data-nav="activity" href="#/activity"><span class="ico">🕘</span> Audit Activity</a>
+
+    <div class="nav-section-label">Console</div>
+    <a class="nav-item" data-nav="connect" href="#/connect"><span class="ico">🔌</span> Business Connect</a>
+    <a class="nav-item" data-nav="providers" href="#/providers"><span class="ico">🛰️</span> Providers</a>
+    <a class="nav-item" data-nav="settings" href="#/settings"><span class="ico">⚙️</span> Settings</a>
+
+    <div class="sidebar-bottom">
+      <div class="demo-pill"><span class="dot"></span> Live Platform</div>
+      <div class="sidebar-biz" id="opsCard">
+        <div class="biz-avatar">OP</div>
+        <div>
+          <div class="biz-name" id="opsName">VantorX Team</div>
+          <div class="biz-plan" id="opsPlan">4 staff · all clients</div>
+        </div>
+        <div class="biz-caret">▾</div>
+      </div>
+    </div>
+  </aside>
+  <div class="mobile-scrim" id="mobileScrim" hidden></div>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+    <div class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+      <div class="topbar-title" id="topbarTitle">Overview</div>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-search" id="topbarSearchWrap">
+        <span>🔎</span>
+        <input id="globalSearch" type="text" placeholder="Search clients, requests, invoices…" autocomplete="off">
+        <kbd>/</kbd>
+      </div>
+      <button class="icon-btn" id="notifBtn" aria-label="Notifications">🔔<span class="dot-badge" id="notifDot"></span></button>
+      <button class="avatar-btn" id="accountBtn">
+        <span class="avatar-circle" id="avatarInitials">OP</span>
+        <span class="avatar-name" id="avatarName">Ops</span>
+        <span class="avatar-caret">▾</span>
+      </button>
+    </div>
+
+    <div class="content" id="content"><div id="view"></div></div>
+  </div>
+</div>  <script type="module" src="js/app.js"></script>
+  <!-- providers page lives at js/pages/providers.js -->
+</body>
+</html>
