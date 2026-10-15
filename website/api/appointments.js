@@ -19,11 +19,11 @@ module.exports = async function handler(req, res) {
 
   try {
     const session = await getSession(req, res);
-    if (!session) {
-      return res.status(401).json({ ok: false, error: "Authentication required." });
-    }
 
     if (req.method === "GET") {
+      if (!session) {
+        return res.status(401).json({ ok: false, error: "Authentication required." });
+      }
       const bizId = await resolveBusinessId(session, req.query && req.query.businessId);
       if (!bizId) {
         return res.status(200).json({ ok: true, rows: [] });
