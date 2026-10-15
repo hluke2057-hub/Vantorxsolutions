@@ -35,52 +35,51 @@ module.exports = async function handler(req, res) {
       const recordingUrl = message.recordingUrl || callData.recordingUrl || null;
       const bizId = req.query?.businessId || "e951dc91-b0e5-4f8e-9b27-80c539a16c66";
 
-      // Insert record into calls table
-      await supabaseRequest("/rest/v1/calls", {
-        method: "POST",
-        headers: {
-          Prefer: "return=representation",
-        },
-        body: JSON.stringify({
-          business_id: bizId,
-          provider_call_id: providerCallId,
-          caller_name: callerName,
-          caller_phone: callerPhone,
-          direction: "inbound",
-          status: "completed",
-          started_at: callData.startedAt || new Date().toISOString(),
-          ended_at: callData.endedAt || new Date().toISOString(),
-          duration_seconds: durationSeconds,
-          summary: summary,
-          transcript: transcript,
-          recording_url: recordingUrl,
-          metadata: { provider: "vapi", raw: body },
-        }),
-      });
+      // 1. Try secure database RPC (bypasses RLS under security definer)
+      try {
+        const rpcRes = await supabaseRequest("/rest/v1/rpc/record_voice_call", {
+          method: "POST",
+          body: JSON.stringify({
+            p_business_id: bizId,
+            p_provider_call_id: providerCallId,
+            p_caller_name: callerName,
+            p_caller_phone: callerPhone || null,
+            p_direction: "inbound",
+            p_status: "completed",
+            p_started_at: callData.startedAt || new Date().toISOString(),
+            p_ended_at: callData.endedAt || new Date().toISOString(),
+            p_duration_seconds: durationSeconds,
+            p_summary: summary || null,
+            p_transcript: transcript || null,
+            p_recording_url: recordingUrl || null,
+            p_metadata: { provider: "vapi", raw: body },
+          }),
+        });
 
-      // Automatically capture lead in LeadFlow if caller phone is known
-      if (callerPhone) {
+        return res.status(200).json({ ok: true, result: rpcRes });
+      } catch (err) {
+        // 2. Resilient fallback: log to audit_log and return 200 OK so Vapi webhook does not fail
         try {
-          await supabaseRequest("/rest/v1/leads", {
+          await supabaseRequest("/rest/v1/audit_log", {
             method: "POST",
-            headers: {
-              Prefer: "return=minimal",
-            },
             body: JSON.stringify({
-              business_id: bizId,
-              name: callerName || "Inbound Phone Lead",
-              phone: callerPhone,
-              source: "AI Receptionist Ava",
-              status: "contacted",
-              notes: summary || "Auto-captured from AI phone call.",
+              action: "vapi.call_webhook",
+              entity_type: "call",
+              details: {
+                providerCallId,
+                callerPhone,
+                callerName,
+                durationSeconds,
+                summary,
+                transcript,
+                recordingUrl,
+                error: err.message,
+              },
             }),
           });
-        } catch (_) {
-          // non-fatal lead sync
-        }
+        } catch (_) {}
+        return res.status(200).json({ ok: true, message: "Webhook acknowledged", warning: err.message });
       }
-
-      return res.status(200).json({ ok: true, message: "Call webhook processed successfully" });
     }
 
     const session = await getSession(req, res);
