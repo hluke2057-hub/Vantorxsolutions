@@ -3,7 +3,7 @@ const COOKIE_REFRESH = "vx_refresh";
 
 function config() {
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key) {
     const err = new Error("Backend is not configured");
     err.status = 503;

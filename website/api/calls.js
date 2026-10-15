@@ -13,11 +13,76 @@ async function resolveBusinessId(session, requestedId) {
 
 module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
-  if (req.method !== "GET") {
-    return methodNotAllowed(res, ["GET"]);
+  if (req.method !== "GET" && req.method !== "POST") {
+    return methodNotAllowed(res, ["GET", "POST"]);
   }
 
   try {
+    if (req.method === "POST") {
+      // Inbound webhook from Vapi / Voice Provider
+      const body = req.body || {};
+      const message = body.message || body;
+      const callData = message.call || body.call || {};
+      const customer = message.customer || callData.customer || {};
+      const analysis = message.analysis || callData.analysis || {};
+
+      const providerCallId = callData.id || message.callId || body.id || `call_${Date.now()}`;
+      const callerPhone = customer.number || customer.phone || callData.phoneNumber || "";
+      const callerName = analysis.structuredData?.caller_name || customer.name || "Inbound Caller";
+      const durationSeconds = Math.round(Number(callData.duration || message.duration || 0));
+      const summary = message.summary || analysis.summary || "";
+      const transcript = message.transcript || "";
+      const recordingUrl = message.recordingUrl || callData.recordingUrl || null;
+      const bizId = req.query?.businessId || "e951dc91-b0e5-4f8e-9b27-80c539a16c66";
+
+      // Insert record into calls table
+      await supabaseRequest("/rest/v1/calls", {
+        method: "POST",
+        headers: {
+          Prefer: "return=representation",
+        },
+        body: JSON.stringify({
+          business_id: bizId,
+          provider_call_id: providerCallId,
+          caller_name: callerName,
+          caller_phone: callerPhone,
+          direction: "inbound",
+          status: "completed",
+          started_at: callData.startedAt || new Date().toISOString(),
+          ended_at: callData.endedAt || new Date().toISOString(),
+          duration_seconds: durationSeconds,
+          summary: summary,
+          transcript: transcript,
+          recording_url: recordingUrl,
+          metadata: { provider: "vapi", raw: body },
+        }),
+      });
+
+      // Automatically capture lead in LeadFlow if caller phone is known
+      if (callerPhone) {
+        try {
+          await supabaseRequest("/rest/v1/leads", {
+            method: "POST",
+            headers: {
+              Prefer: "return=minimal",
+            },
+            body: JSON.stringify({
+              business_id: bizId,
+              name: callerName || "Inbound Phone Lead",
+              phone: callerPhone,
+              source: "AI Receptionist Ava",
+              status: "contacted",
+              notes: summary || "Auto-captured from AI phone call.",
+            }),
+          });
+        } catch (_) {
+          // non-fatal lead sync
+        }
+      }
+
+      return res.status(200).json({ ok: true, message: "Call webhook processed successfully" });
+    }
+
     const session = await getSession(req, res);
     if (!session) {
       return res.status(401).json({ ok: false, error: "Authentication required." });
