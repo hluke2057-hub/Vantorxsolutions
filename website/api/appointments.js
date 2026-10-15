@@ -58,11 +58,6 @@ module.exports = async function handler(req, res) {
 
     // POST - create appointment
     const body = req.body || {};
-    const bizId = await resolveBusinessId(session, body.businessId);
-    if (!bizId) {
-      return res.status(400).json({ ok: false, error: "Business context is required before creating an appointment." });
-    }
-
     const customer = (body.customer || body.customer_name || body.customerName || "").trim();
     if (!customer) {
       return res.status(400).json({ ok: false, error: "Customer name is required." });
@@ -70,27 +65,69 @@ module.exports = async function handler(req, res) {
 
     const startsAt = body.at || body.starts_at || body.startsAt || new Date().toISOString();
     const endsAt = body.ends_at || body.endsAt || new Date(new Date(startsAt).getTime() + 30 * 60000).toISOString();
+    const service = body.notes || body.service || "Consultation";
+    const phone = body.customer_phone || body.phone || null;
+    const email = body.customer_email || body.email || null;
 
-    const inserted = await supabaseRequest("/rest/v1/appointments", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${session.accessToken}`,
-        Prefer: "return=representation",
-      },
-      body: JSON.stringify({
-        business_id: bizId,
-        customer_name: customer,
-        customer_email: body.customer_email || body.email || null,
-        customer_phone: body.customer_phone || body.phone || null,
-        starts_at: startsAt,
-        ends_at: endsAt,
-        status: body.status || "confirmed",
-        notes: body.notes || body.service || null,
-        created_by: session.user.id,
-      }),
-    });
+    if (session) {
+      const bizId = await resolveBusinessId(session, body.businessId);
+      if (!bizId) {
+        return res.status(400).json({ ok: false, error: "Business context is required before creating an appointment." });
+      }
 
-    return res.status(201).json({ ok: true, appointment: Array.isArray(inserted) ? inserted[0] : inserted });
+      const inserted = await supabaseRequest("/rest/v1/appointments", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+          Prefer: "return=representation",
+        },
+        body: JSON.stringify({
+          business_id: bizId,
+          customer_name: customer,
+          customer_email: email,
+          customer_phone: phone,
+          starts_at: startsAt,
+          ends_at: endsAt,
+          status: body.status || "confirmed",
+          notes: service,
+          created_by: session.user.id,
+        }),
+      });
+
+      return res.status(201).json({ ok: true, appointment: Array.isArray(inserted) ? inserted[0] : inserted });
+    }
+
+    // Unauthenticated booking (from AI receptionist Ava or external calendar webhook)
+    const targetBizId = body.businessId || body.business_id || "e951dc91-b0e5-4f8e-9b27-80c539a16c66";
+    try {
+      const rpcResult = await supabaseRequest("/rest/v1/rpc/book_appointment", {
+        method: "POST",
+        body: JSON.stringify({
+          p_business_id: targetBizId,
+          p_customer_name: customer,
+          p_customer_phone: phone,
+          p_customer_email: email,
+          p_starts_at: startsAt,
+          p_ends_at: endsAt,
+          p_service: service,
+          p_source: body.source || "AI Receptionist Ava",
+        }),
+      });
+      return res.status(201).json({ ok: true, result: rpcResult });
+    } catch (rpcErr) {
+      // Fallback: log to audit_log
+      try {
+        await supabaseRequest("/rest/v1/audit_log", {
+          method: "POST",
+          body: JSON.stringify({
+            action: "appointment.request_received",
+            entity_type: "appointment",
+            details: { customer, phone, email, startsAt, service, error: rpcErr.message },
+          }),
+        });
+      } catch (_) {}
+      return res.status(200).json({ ok: true, message: "Appointment request logged", warning: rpcErr.message });
+    }
   } catch (err) {
     return jsonError(res, err);
   }
