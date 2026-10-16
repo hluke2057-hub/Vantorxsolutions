@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VantorX — Autonomous Outbound Sales & Audit Agent</title>
+  <title>VantorX -- Autonomous Outbound Sales & Audit Agent</title>
+  <link rel="icon" href="/favicon.ico">
   <style>
     :root {
       --bg: #070a12;
-      --card-bg: rgba(18, 25, 41, 0.75);
+      --card-bg: rgba(18, 25, 41, 0.85);
       --border: rgba(99, 102, 241, 0.2);
       --accent: #6366f1;
       --accent-glow: rgba(99, 102, 241, 0.4);
@@ -20,20 +21,22 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     body { background: var(--bg); color: var(--text); padding: 30px 20px; line-height: 1.6; }
-    .container { max-width: 1040px; margin: 0 auto; }
+    .container { max-width: 1080px; margin: 0 auto; }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 24px 28px;
-      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2) 0%, transparent 75%);
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.22) 0%, transparent 75%);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
     }
     .brand-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
     .brand-title span { color: var(--gold); }
+    .header-badges { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -46,8 +49,42 @@
       font-size: 0.82rem;
       font-weight: 700;
     }
+    .demo-pill {
+      background: rgba(199, 164, 104, 0.15);
+      border: 1px solid rgba(199, 164, 104, 0.4);
+      color: #ffd88a;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
     .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; animation: blink 1.8s infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* Tabs */
+    .view-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .tab-btn {
+      background: #0d1322;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
 
     /* Search & Filter Bar */
     .filter-card {
@@ -55,7 +92,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 22px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr auto;
       gap: 14px;
@@ -69,13 +106,14 @@
       border-radius: 8px;
       color: var(--text);
       padding: 10px 14px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }
+    select:focus, input:focus { outline: none; border-color: var(--accent); }
     .btn {
       background: var(--accent);
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 8px;
       font-weight: 700;
       cursor: pointer;
@@ -83,6 +121,9 @@
       align-items: center;
       gap: 8px;
       box-shadow: 0 4px 14px var(--accent-glow);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: background 0.2s;
     }
     .btn:hover { background: #4f46e5; }
     .btn-secondary {
@@ -91,14 +132,47 @@
       box-shadow: none;
     }
     .btn-secondary:hover { background: #334155; }
+    .btn-gold {
+      background: linear-gradient(135deg, #c7a468, #b38f54);
+      color: #070a12;
+      font-weight: 800;
+      box-shadow: 0 4px 14px rgba(199, 164, 104, 0.35);
+    }
+    .btn-gold:hover { filter: brightness(1.1); }
+
+    /* Live Auditor Box */
+    .custom-audit-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(199, 164, 104, 0.3);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      display: none;
+    }
+    .custom-audit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+      margin-bottom: 18px;
+    }
+
+    /* Results Bar */
+    .export-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding: 0 4px;
+    }
 
     /* Results Grid */
-    .leads-grid { display: flex; flex-direction: column; gap: 18px; }
+    .leads-grid { display: flex; flex-direction: column; gap: 20px; }
     .lead-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 22px;
+      padding: 24px;
       transition: border-color 0.2s, transform 0.15s;
     }
     .lead-card:hover { border-color: rgba(99, 102, 241, 0.45); }
@@ -108,80 +182,128 @@
       align-items: flex-start;
       margin-bottom: 14px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 12px;
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    .lead-title h3 { font-size: 1.2rem; font-weight: 700; }
-    .lead-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 14px; margin-top: 4px; }
+    .lead-title h3 { font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .lead-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 14px; margin-top: 5px; flex-wrap: wrap; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+    .badge-trade { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+    .badge-region { background: rgba(255, 255, 255, 0.08); color: #cbd5e1; }
     
     .loss-tag {
       background: rgba(244, 63, 94, 0.15);
-      border: 1px solid rgba(244, 63, 94, 0.3);
+      border: 1px solid rgba(244, 63, 94, 0.35);
       color: #fda4af;
-      padding: 4px 12px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .vuln-box {
-      background: rgba(244, 63, 94, 0.08);
-      border-left: 4px solid var(--rose);
-      padding: 10px 14px;
+      padding: 6px 14px;
       border-radius: 6px;
       font-size: 0.88rem;
-      color: #fecdd3;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .audit-breakdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       margin-bottom: 16px;
     }
-    .vuln-box strong { color: white; }
+    @media(max-width: 768px) {
+      .audit-breakdown { grid-template-columns: 1fr; }
+      .filter-card { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: flex-start; gap: 14px; }
+    }
+
+    .review-box {
+      background: rgba(244, 63, 94, 0.08);
+      border-left: 3px solid var(--rose);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      color: #fecdd3;
+      font-style: italic;
+    }
+    .hours-box {
+      background: rgba(234, 179, 8, 0.08);
+      border-left: 3px solid #eab308;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      color: #fef08a;
+    }
+    .site-box {
+      background: rgba(147, 51, 234, 0.08);
+      border-left: 3px solid #a855f7;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      color: #e9d5ff;
+      grid-column: 1 / -1;
+    }
 
     /* Email Preview Box */
     .email-preview {
       background: #060911;
       border: 1px solid #1e293b;
       border-radius: 8px;
-      padding: 16px;
-      font-size: 0.9rem;
+      padding: 18px;
+      font-size: 0.88rem;
       white-space: pre-wrap;
       color: #e2e8f0;
       margin-bottom: 14px;
       font-family: inherit;
+      line-height: 1.65;
     }
-    .email-subject { font-weight: 700; color: #38bdf8; margin-bottom: 8px; }
+    .email-subject { font-weight: 700; color: #38bdf8; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #1e293b; }
 
-    .lead-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    .lead-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
     .copy-pill {
       background: #1e293b;
       color: #f1f5f9;
       border: 1px solid #334155;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.84rem;
+      font-weight: 700;
       cursor: pointer;
+      transition: all 0.2s;
     }
     .copy-pill:hover { background: #334155; }
+    .copy-pill.copied { background: #065f46; color: #6ee7b7; border-color: #059669; }
+
     .mail-link {
       background: rgba(16, 185, 129, 0.18);
       border: 1px solid rgba(16, 185, 129, 0.4);
       color: #6ee7b7;
       text-decoration: none;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.84rem;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: background 0.2s;
     }
-    .mail-link:hover { background: rgba(16, 185, 129, 0.3); }
+    .mail-link:hover { background: rgba(16, 185, 129, 0.32); }
 
-    .export-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-      padding: 0 4px;
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px 0;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -189,42 +311,99 @@
     <header>
       <div>
         <div class="brand-title">Vantor<span>X</span> Outbound Prospecting Engine</div>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Scans local trade businesses, calculates lost revenue from missed calls, and writes hyper-targeted cold emails.</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">
+          Audits Florida contractors, calculates lost revenue from missed calls, and writes hyper-targeted cold emails.
+        </p>
       </div>
-      <div class="status-badge">
-        <span class="pulse-dot"></span> Claude Auditor Active
+      <div class="header-badges">
+        <div class="status-badge"><span class="pulse-dot"></span> Autonomous Scout Ready</div>
+        <a href="tel:5618138602" class="demo-pill">📞 Ava Demo: (561) 813-8602</a>
       </div>
     </header>
 
-    <!-- Controls -->
-    <div class="filter-card">
-      <div>
-        <label for="tradeSelect">Target Industry</label>
-        <select id="tradeSelect">
-          <option value="Roofing">Roofing Contractors</option>
-          <option value="HVAC" selected>HVAC & AC Repair</option>
-          <option value="Plumbing">Emergency Plumbing</option>
-          <option value="Dental">Emergency Dental</option>
-          <option value="MedSpa">Medical Spas & Aesthetics</option>
-          <option value="Electrical">Commercial & Home Electricians</option>
-        </select>
+    <!-- Navigation Tabs -->
+    <div class="view-tabs">
+      <button class="tab-btn active" id="tabPreAudited" onclick="switchTab('curated')">🎯 Curated Florida Opportunities</button>
+      <button class="tab-btn" id="tabCustomAudit" onclick="switchTab('custom')">⚡ Live Contractor URL Auditor</button>
+    </div>
+
+    <!-- Custom Live Auditor Panel -->
+    <div class="custom-audit-card" id="customAuditCard">
+      <h3 style="font-size: 1.15rem; color: #fff; margin-bottom: 4px;">⚡ Audit Any Contractor's Website</h3>
+      <p style="color: var(--text-muted); font-size: 0.86rem;">Enter a prospect's website and business details to diagnose vulnerabilities and generate a tailored pitch on the fly.</p>
+      <div class="custom-audit-grid">
+        <div>
+          <label>Company Name</label>
+          <input type="text" id="custCompany" placeholder="e.g. Apex Storm Roofing">
+        </div>
+        <div>
+          <label>Owner / Manager First Name</label>
+          <input type="text" id="custOwner" placeholder="e.g. Mark">
+        </div>
+        <div>
+          <label>Email Address</label>
+          <input type="email" id="custEmail" placeholder="e.g. mark@apexroofing.com">
+        </div>
+        <div>
+          <label>Trade Vertical</label>
+          <select id="custTrade">
+            <option value="Roofing">Roofing Contractors</option>
+            <option value="HVAC">HVAC & Cooling</option>
+            <option value="Plumbing">Emergency Plumbing</option>
+            <option value="Tree Service">Tree Removal & Storm</option>
+            <option value="MedSpa">MedSpa & Aesthetics</option>
+            <option value="Contractor">General Contractor</option>
+          </select>
+        </div>
+        <div>
+          <label>City & State</label>
+          <input type="text" id="custCity" placeholder="e.g. West Palm Beach, FL">
+        </div>
+        <div>
+          <label>Website URL</label>
+          <input type="text" id="custUrl" placeholder="https://examplecontractor.com">
+        </div>
       </div>
-      <div>
-        <label for="cityInput">Target Market / City</label>
-        <input type="text" id="cityInput" value="Miami, FL" placeholder="e.g. Miami, FL; Dallas, TX">
-      </div>
-      <div>
-        <label for="phoneInput">Your Ava Demo Phone Number</label>
-        <input type="text" id="phoneInput" value="(561) 813-8602" placeholder="(561) 813-8602">
-      </div>
-      <div>
-        <button class="btn" id="runScanBtn">🔍 Scan & Audit Leads</button>
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button class="btn btn-gold" onclick="runLiveAudit()">🔍 Audit Prospect & Generate Email</button>
       </div>
     </div>
 
-    <!-- Export & Stats -->
+    <!-- Curated Filter Controls -->
+    <div class="filter-card" id="filterCard">
+      <div>
+        <label for="tradeSelect">Target Vertical</label>
+        <select id="tradeSelect">
+          <option value="ALL">ALL High-Ticket Verticals</option>
+          <option value="Roofing">Emergency Roofing ($8.5k - $25k)</option>
+          <option value="HVAC">HVAC & AC Breakdown ($6.5k - $12k)</option>
+          <option value="Plumbing">Emergency Plumbing ($5k - $15k)</option>
+          <option value="Tree Service">Tree Removal & Storm ($3k - $8k)</option>
+          <option value="MedSpa">MedSpas & Aesthetics ($2.5k - $7k)</option>
+        </select>
+      </div>
+      <div>
+        <label for="marketSelect">Target Florida Region</label>
+        <select id="marketSelect">
+          <option value="ALL">Florida Statewide (All Markets)</option>
+          <option value="Palm Beach">Palm Beach County (WPB, Boca, Delray)</option>
+          <option value="Miami / Broward">Miami-Dade & Broward</option>
+          <option value="Tampa Bay">Tampa Bay (Tampa, St. Pete)</option>
+          <option value="Central FL">Central Florida (Orlando, Winter Park)</option>
+        </select>
+      </div>
+      <div>
+        <label for="phoneInput">Ava Demo Phone Line</label>
+        <input type="text" id="phoneInput" value="(561) 813-8602">
+      </div>
+      <div>
+        <button class="btn" id="refreshBtn">⚡ Filter Leads</button>
+      </div>
+    </div>
+
+    <!-- Export & Stats Bar -->
     <div class="export-bar">
-      <span id="resultsCount" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">Showing 3 Audited Opportunities</span>
+      <span id="resultsCount" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 700;">Showing 12 Audited Opportunities</span>
       <div style="display: flex; gap: 10px;">
         <button class="btn btn-secondary" id="exportCsvBtn">📥 Export All to CSV (Instantly / Smartlead)</button>
       </div>
@@ -232,111 +411,296 @@
 
     <!-- Leads Container -->
     <div class="leads-grid" id="leadsGrid"></div>
+
+    <footer>
+      <p>VantorX Solutions &middot; Outbound Lead Engine v2.5 &middot; <a href="/">Return to Homepage</a> &middot; <a href="/vantorx-onboarding/">🔒 Client Onboarding</a> &middot; Ava Test Line: (561) 813-8602</p>
+    </footer>
   </div>
 
   <script>
-    const PROSPECTS = {
-      "HVAC": [
-        {
-          company: "Sunstate Cooling & Heating",
-          owner: "Marcus",
-          email: "marcus@sunstatecoolingdemo.com",
-          phone: "(305) 555-0142",
-          city: "Miami, FL",
-          rating: "4.6 (128 reviews)",
-          problem: "Weekend emergency calls go to an unmonitored voicemail box. 4 recent Google reviews cite 24hr delays in emergency AC repair.",
-          estLost: "$6,800/mo"
-        },
-        {
-          company: "Evergreen Comfort Pros",
-          owner: "Tony",
-          email: "tony@evergreencomfortdemo.com",
-          phone: "(305) 555-0891",
-          city: "Miami, FL",
-          rating: "4.8 (89 reviews)",
-          problem: "Front desk staff leaves at 5:00 PM. No online calendar or after-hours dispatch for after-work AC breakdowns.",
-          estLost: "$5,200/mo"
-        },
-        {
-          company: "BreezeAir Mechanical",
-          owner: "Carlos",
-          email: "carlos@breezeairdemo.com",
-          phone: "(305) 555-0374",
-          city: "Miami, FL",
-          rating: "4.4 (52 reviews)",
-          problem: "Calls ring 6+ times before dropping. High customer friction during peak summer hours.",
-          estLost: "$7,500/mo"
-        }
-      ],
-      "Roofing": [
-        {
-          company: "Apex Storm Roofing",
-          owner: "David",
-          email: "david@apexroofingdemo.com",
-          phone: "(305) 555-0219",
-          city: "Miami, FL",
-          rating: "4.7 (110 reviews)",
-          problem: "After severe storm alerts, incoming phone lines stay busy. Homeowners hang up and book the next roofer on Google.",
-          estLost: "$9,400/mo"
-        },
-        {
-          company: "Guardian Roof & Leak Repair",
-          owner: "Roberto",
-          email: "roberto@guardianroofdemo.com",
-          phone: "(305) 555-0633",
-          city: "Miami, FL",
-          rating: "4.5 (74 reviews)",
-          problem: "No after-hours inspection booking. Contact form takes 24 hours to return inquiry.",
-          estLost: "$6,100/mo"
-        }
-      ],
-      "Plumbing": [
-        {
-          company: "Rapid Drain & Pipe Pros",
-          owner: "Jason",
-          email: "jason@rapiddraindemo.com",
-          phone: "(305) 555-0455",
-          city: "Miami, FL",
-          rating: "4.3 (63 reviews)",
-          problem: "Midnight burst pipe calls route to personal cell; owner frequently sleeps through 2 AM high-ticket jobs.",
-          estLost: "$8,200/mo"
-        }
-      ]
-    };
+    const MASTER_LEADS = [
+      {
+        company: "Gold Coast Emergency Roofing",
+        owner: "Mark",
+        title: "Owner",
+        email: "mark@goldcoastroofingdemo.com",
+        phone: "(561) 555-0182",
+        city: "West Palm Beach, FL",
+        trade: "Roofing",
+        region: "Palm Beach",
+        rating: "4.6 (142 reviews)",
+        closingTime: "5:00 PM (Closed Weekends)",
+        reviewQuote: "Called on Saturday morning after a bad storm leak. Left 2 voicemails and nobody responded until Monday afternoon. Hired another roofer.",
+        websiteAudit: "No mobile tap-to-call button. 6.2s load time on 4G.",
+        avgJob: "$8,500",
+        estLoss: "$7,800/mo"
+      },
+      {
+        company: "Palm Beach Cooling & Air",
+        owner: "Steve",
+        title: "President",
+        email: "steve@palmbeachcoolingdemo.com",
+        phone: "(561) 555-0914",
+        city: "Boca Raton, FL",
+        trade: "HVAC",
+        region: "Palm Beach",
+        rating: "4.8 (96 reviews)",
+        closingTime: "5:30 PM (No Weekend Dispatch)",
+        reviewQuote: "AC went out during 90-degree weekend. Phone rang 6 times and disconnected. Had to call a competitor who answered immediately.",
+        websiteAudit: "Outdated 2017 template, no live booking calendar.",
+        avgJob: "$6,800",
+        estLoss: "$6,500/mo"
+      },
+      {
+        company: "Atlantic Emergency Plumbing & Drain",
+        owner: "Dave",
+        title: "Founder",
+        email: "dave@atlanticplumbingdemo.com",
+        phone: "(561) 555-0347",
+        city: "Delray Beach, FL",
+        trade: "Plumbing",
+        region: "Palm Beach",
+        rating: "4.5 (84 reviews)",
+        closingTime: "5:00 PM",
+        reviewQuote: "Overnight burst pipe under sink. Left a message on their emergency line at 10 PM. No answer. Flooded our living room.",
+        websiteAudit: "Missing SSL certificate, contact form requires 8 fields before submitting.",
+        avgJob: "$5,400",
+        estLoss: "$8,900/mo"
+      },
+      {
+        company: "Southern Palm Tree & Storm Services",
+        owner: "Garrett",
+        title: "Owner",
+        email: "garrett@southernpalmtreedemo.com",
+        phone: "(561) 555-0771",
+        city: "Delray Beach, FL",
+        trade: "Tree Service",
+        region: "Palm Beach",
+        rating: "4.7 (68 reviews)",
+        closingTime: "4:30 PM (Closed Weekends)",
+        reviewQuote: "Big storm dropped a limb across our driveway on Sunday. Left message at emergency number. No call back. Another crew took the job.",
+        websiteAudit: "No instant dispatch form, voicemail full after stormy weekends.",
+        avgJob: "$4,200",
+        estLoss: "$5,800/mo"
+      },
+      {
+        company: "Boca Luxury Aesthetics & Laser",
+        owner: "Dr. Elena",
+        title: "Medical Director",
+        email: "elena@bocaluxuryaestheticsdemo.com",
+        phone: "(561) 555-0639",
+        city: "Boca Raton, FL",
+        trade: "MedSpa",
+        region: "Palm Beach",
+        rating: "4.9 (135 reviews)",
+        closingTime: "6:00 PM (Closed Sundays)",
+        reviewQuote: "Tried booking high-end injectable package on Friday evening. Phone kept ringing with no answer. Booked at another clinic down the street.",
+        websiteAudit: "No 24/7 AI booking assistant, losing affluent after-hours callers.",
+        avgJob: "$3,200",
+        estLoss: "$7,400/mo"
+      },
+      {
+        company: "Apex Storm & Tile Roofing",
+        owner: "Carlos",
+        title: "Managing Partner",
+        email: "carlos@apexstormroofdemo.com",
+        phone: "(305) 555-0211",
+        city: "Miami, FL",
+        trade: "Roofing",
+        region: "Miami / Broward",
+        rating: "4.7 (189 reviews)",
+        closingTime: "6:00 PM (Closed Sundays)",
+        reviewQuote: "Called on Sunday morning for missing roof tiles. An automated message said office is closed. Why advertise 24/7 if nobody picks up?",
+        websiteAudit: "No instant quote calculator, slow mobile video banner.",
+        avgJob: "$9,200",
+        estLoss: "$9,200/mo"
+      },
+      {
+        company: "Broward Premier AC & Heat",
+        owner: "Tony",
+        title: "Operations Director",
+        email: "tony@browardpremieracdemo.com",
+        phone: "(954) 555-0723",
+        city: "Fort Lauderdale, FL",
+        trade: "HVAC",
+        region: "Miami / Broward",
+        rating: "4.9 (210 reviews)",
+        closingTime: "5:00 PM",
+        reviewQuote: "Great technicians once they arrive, but good luck getting someone on the phone after 5 PM. Rings forever.",
+        websiteAudit: "No online calendar integration. Loses mobile callers to Google Ads rivals.",
+        avgJob: "$7,100",
+        estLoss: "$7,200/mo"
+      },
+      {
+        company: "Coral Gables MedSpa & Wellness",
+        owner: "Sofia",
+        title: "Founder",
+        email: "sofia@coralgablesmedspademo.com",
+        phone: "(305) 555-0912",
+        city: "Coral Gables, FL",
+        trade: "MedSpa",
+        region: "Miami / Broward",
+        rating: "4.8 (88 reviews)",
+        closingTime: "5:00 PM (Closed Weekends)",
+        reviewQuote: "Tried scheduling weekend Botox appointment. Voicemail gave hours and hung up. Booked at another spa that had instant booking.",
+        websiteAudit: "Static PDF menu with no live scheduling integration.",
+        avgJob: "$2,800",
+        estLoss: "$6,200/mo"
+      },
+      {
+        company: "Sunstate 24/7 HVAC Pros",
+        owner: "Michael",
+        title: "General Manager",
+        email: "michael@sunstatehvacdemo.com",
+        phone: "(813) 555-0489",
+        city: "Tampa, FL",
+        trade: "HVAC",
+        region: "Tampa Bay",
+        rating: "4.4 (118 reviews)",
+        closingTime: "5:00 PM",
+        reviewQuote: "Filled out their online contact form for an emergency AC fix and waited 24 hours. Called in and got a voicemail machine.",
+        websiteAudit: "Static contact form with 24-hour response disclaimer.",
+        avgJob: "$6,400",
+        estLoss: "$8,400/mo"
+      },
+      {
+        company: "Bay Area Precision Plumbing",
+        owner: "Brian",
+        title: "Owner",
+        email: "brian@bayareaprecisiondemo.com",
+        phone: "(727) 555-0631",
+        city: "St. Petersburg, FL",
+        trade: "Plumbing",
+        region: "Tampa Bay",
+        rating: "4.7 (79 reviews)",
+        closingTime: "4:30 PM (Closed Weekends)",
+        reviewQuote: "Water heater started leaking Saturday at 3 PM. Reached voicemail. Called another local plumber who picked up in 2 rings.",
+        websiteAudit: "Not mobile responsive. Desktop layout shrunk down on smartphones.",
+        avgJob: "$4,800",
+        estLoss: "$6,200/mo"
+      },
+      {
+        company: "Orlando Precision Drain & Water",
+        owner: "Jason",
+        title: "Founder",
+        email: "jason@orlandodraindemo.com",
+        phone: "(407) 555-0812",
+        city: "Orlando, FL",
+        trade: "Plumbing",
+        region: "Central FL",
+        rating: "4.6 (153 reviews)",
+        closingTime: "5:00 PM",
+        reviewQuote: "Tried calling during lunch hour and after 5 PM. Lines were busy, then went to a full mailbox. Unacceptable for a plumbing emergency.",
+        websiteAudit: "Voicemail inbox full during peak job hours.",
+        avgJob: "$5,200",
+        estLoss: "$7,100/mo"
+      },
+      {
+        company: "Central Florida Storm Roofing",
+        owner: "Brad",
+        title: "Owner",
+        email: "brad@cflstormroofingdemo.com",
+        phone: "(407) 555-0943",
+        city: "Winter Park, FL",
+        trade: "Roofing",
+        region: "Central FL",
+        rating: "4.8 (112 reviews)",
+        closingTime: "5:00 PM (Closed Weekends)",
+        reviewQuote: "Storm damaged 15 shingles on Friday evening. Left voicemail. Monday morning they finally called back, but I had already signed with someone else.",
+        websiteAudit: "Slow server response time (3.8s TTFB). No after-hours call routing.",
+        avgJob: "$9,500",
+        estLoss: "$9,500/mo"
+      }
+    ];
+
+    let customLeads = [];
+
+    function switchTab(tab) {
+      const isCustom = tab === 'custom';
+      document.getElementById('tabPreAudited').classList.toggle('active', !isCustom);
+      document.getElementById('tabCustomAudit').classList.toggle('active', isCustom);
+      document.getElementById('filterCard').style.display = isCustom ? 'none' : 'grid';
+      document.getElementById('customAuditCard').style.display = isCustom ? 'block' : 'none';
+      renderLeads();
+    }
+
+    function runLiveAudit() {
+      const comp = document.getElementById('custCompany').value.trim() || "Local Contractor Pros";
+      const owner = document.getElementById('custOwner').value.trim() || "Owner";
+      const email = document.getElementById('custEmail').value.trim() || ("contact@" + comp.toLowerCase().replace(/[^a-z0-9]/g, '') + "demo.com");
+      const trade = document.getElementById('custTrade').value;
+      const city = document.getElementById('custCity').value.trim() || "Florida";
+      const url = document.getElementById('custUrl').value.trim() || "Website";
+
+      const newLead = {
+        company: comp,
+        owner: owner,
+        title: "Owner",
+        email: email,
+        phone: "(561) 555-0199",
+        city: city,
+        trade: trade,
+        region: "Custom",
+        rating: "4.7 (Google Verified)",
+        closingTime: "5:00 PM (No Weekend Dispatch)",
+        reviewQuote: "Called during weekend emergency after hours; reached full voicemail box and ended up hiring a competitor who answered immediately.",
+        websiteAudit: `Website (${url}) lacks instant calendar booking and relies on unmonitored voicemail during high-ticket search surges.`,
+        avgJob: "$6,500",
+        estLoss: "$7,500/mo"
+      };
+
+      customLeads.unshift(newLead);
+      switchTab('curated');
+      alert(`Success! Generated audited cold campaign for ${comp}.`);
+    }
 
     function renderLeads() {
       const trade = document.getElementById('tradeSelect').value;
-      const city = document.getElementById('cityInput').value.trim() || "Your City";
-      const demoPhone = document.getElementById('phoneInput').value.trim() || "[Ava-Demo-Phone]";
+      const region = document.getElementById('marketSelect').value;
+      const demoPhone = document.getElementById('phoneInput').value.trim() || "(561) 813-8602";
       const container = document.getElementById('leadsGrid');
-      
-      const list = PROSPECTS[trade] || PROSPECTS["HVAC"];
-      document.getElementById('resultsCount').innerText = `Showing ${list.length} Audited Opportunities in ${city}`;
 
-      container.innerHTML = list.map((lead, idx) => {
+      const allCombined = [...customLeads, ...MASTER_LEADS];
+
+      const filtered = allCombined.filter(item => {
+        const tradeMatch = (trade === "ALL" || item.trade === trade);
+        const regionMatch = (region === "ALL" || item.region === region || item.region === "Custom");
+        return tradeMatch && regionMatch;
+      });
+
+      document.getElementById('resultsCount').innerText = `Showing ${filtered.length} Audited Opportunities`;
+
+      container.innerHTML = filtered.map((lead, idx) => {
+        const closingTimeClean = lead.closingTime.split(' ')[0];
         const subject = `Quick question regarding ${lead.company}'s after-hours calls`;
         const body = `Hi ${lead.owner},
 
-I was looking at ${lead.company} in ${city} and noticed something that's likely costing you jobs:
-${lead.problem}
+Saw your great ${lead.rating} rating in ${lead.city} -- congrats on building a solid reputation.
 
-In the ${trade.toLowerCase()} business, when someone has an urgent issue, they call the next company on Google if nobody picks up within 3 rings. For a company your size, that's roughly ${lead.estLost} walking out the door every month.
+I was auditing local ${lead.trade.toLowerCase()} companies in your area and noticed a recent Google review from a customer stating:
+"${lead.reviewQuote}"
 
-We built Ava — an AI receptionist trained specifically for ${trade.toLowerCase()} contractors. She:
-• Answers in 1 ring 24/7/365 (never sick, never misses a call).
-• Qualifies the emergency and books directly into your calendar.
-• Immediately alerts your on-call tech for high-priority jobs.
+In your business, when someone has an urgent issue after ${closingTimeClean} or on weekends, they don't wait for a callback. They immediately dial the next contractor on Google until someone answers.
 
-You can test her right now from your cell phone:
-👉 Dial our live test line: ${demoPhone}
+For a company doing your volume, that's roughly ${lead.estLoss} in high-margin jobs walking right to your competitors every month.
 
-Hear how natural she sounds. If you'd like to put her on your lines this week, reply to this email or visit https://www.vantorxsolutions.com
+We built Ava -- a 24/7 AI phone receptionist trained specifically for Florida ${lead.trade.toLowerCase()} contractors. She:
+- Answers in 1 ring 24/7/365 (never sick, never misses a call)
+- Qualifies the homeowner and logs their emergency details
+- Books appointments directly into your calendar in real-time
+- Sends you instant priority SMS alerts for high-ticket jobs
+
+Test her right now from your personal cell phone:
+Dial: ${demoPhone}
+
+Hang up and call it for 15 seconds to hear how human and responsive she sounds. If you'd like to put her on your lines this week, plans are just $299/mo with zero contracts and a 100% money-back guarantee.
 
 Best,
 Luke
 Founder, VantorX Solutions
-luke@vantorxsolutions.com
-https://www.vantorxsolutions.com`;
+Phone: ${demoPhone}
+Email: luke@vantorxsolutions.com
+Web: https://www.vantorxsolutions.com`;
 
         const mailto = `mailto:${lead.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
@@ -346,16 +710,28 @@ https://www.vantorxsolutions.com`;
               <div class="lead-title">
                 <h3>${lead.company}</h3>
                 <div class="lead-meta">
-                  <span>👤 Owner: <strong>${lead.owner}</strong></span>
-                  <span>📍 ${city}</span>
+                  <span>👤 <strong>${lead.owner}</strong> (${lead.title})</span>
+                  <span>📍 ${lead.city}</span>
                   <span>⭐ ${lead.rating}</span>
+                  <span class="badge badge-trade">${lead.trade}</span>
+                  <span class="badge badge-region">${lead.region}</span>
                 </div>
               </div>
-              <div class="loss-tag">Est. Lost: ${lead.estLost}</div>
+              <div class="loss-tag">Est. Lost: ${lead.estLoss}</div>
             </div>
 
-            <div class="vuln-box">
-              <strong>🚨 Identified Problem:</strong> ${lead.problem}
+            <div class="audit-breakdown">
+              <div class="review-box">
+                <strong>🚨 Google Review Complaint:</strong><br>
+                "${lead.reviewQuote}"
+              </div>
+              <div class="hours-box">
+                <strong>⏰ Operating Hours & Vulnerability:</strong><br>
+                Closes at ${lead.closingTime}
+              </div>
+              <div class="site-box">
+                <strong>🔍 Technical Site Audit:</strong> ${lead.websiteAudit}
+              </div>
             </div>
 
             <div class="email-preview">
@@ -364,7 +740,7 @@ https://www.vantorxsolutions.com`;
             </div>
 
             <div class="lead-actions">
-              <button class="copy-pill" onclick="navigator.clipboard.writeText(\`${body.replace(/`/g, '\\`')}\`); alert('Email copied to clipboard!');">📋 Copy Email</button>
+              <button class="copy-pill" id="copyBtn_${idx}" onclick="copyEmailText(${idx}, \`${encodeURIComponent(body)}\`)">📋 Copy Pitch</button>
               <a href="${mailto}" class="mail-link">✉️ Send from luke@vantorxsolutions.com ↗</a>
             </div>
           </div>
@@ -372,24 +748,99 @@ https://www.vantorxsolutions.com`;
       }).join('');
     }
 
-    document.getElementById('runScanBtn').addEventListener('click', renderLeads);
+    function copyEmailText(idx, encodedText) {
+      const text = decodeURIComponent(encodedText);
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById(`copyBtn_${idx}`);
+        if (btn) {
+          btn.classList.add('copied');
+          btn.innerText = "✓ Copied to Clipboard!";
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerText = "📋 Copy Pitch";
+          }, 2000);
+        }
+      });
+    }
+
+    document.getElementById('refreshBtn').addEventListener('click', renderLeads);
     document.getElementById('tradeSelect').addEventListener('change', renderLeads);
+    document.getElementById('marketSelect').addEventListener('change', renderLeads);
 
     document.getElementById('exportCsvBtn').addEventListener('click', () => {
       const trade = document.getElementById('tradeSelect').value;
-      const city = document.getElementById('cityInput').value.trim();
-      const list = PROSPECTS[trade] || PROSPECTS["HVAC"];
+      const region = document.getElementById('marketSelect').value;
+      const demoPhone = document.getElementById('phoneInput').value.trim() || "(561) 813-8602";
 
-      let csv = "Company,Owner,Email,Phone,City,Detected_Problem,Est_Monthly_Loss\n";
-      list.forEach(l => {
-        csv += `"${l.company}","${l.owner}","${l.email}","${l.phone}","${city}","${l.problem}","${l.estLost}"\n`;
+      const allCombined = [...customLeads, ...MASTER_LEADS];
+      const filtered = allCombined.filter(item => {
+        const tradeMatch = (trade === "ALL" || item.trade === trade);
+        const regionMatch = (region === "ALL" || item.region === region || item.region === "Custom");
+        return tradeMatch && regionMatch;
       });
 
-      const blob = new Blob([csv], { type: 'text/csv' });
+      let csv = "First Name,Last Name,Company Name,Title,Email,Phone,City,Trade,Google Rating,Closing Hours,Review Quote,Website Audit,Est Monthly Loss,Email Subject,Email Body,Demo Number,Status\n";
+
+      filtered.forEach(lead => {
+        const closingTimeClean = lead.closingTime.split(' ')[0];
+        const subject = `Quick question regarding ${lead.company}'s after-hours calls`;
+        const body = `Hi ${lead.owner},
+
+Saw your great ${lead.rating} rating in ${lead.city} -- congrats on building a solid reputation.
+
+I was auditing local ${lead.trade.toLowerCase()} companies in your area and noticed a recent Google review from a customer stating:
+"${lead.reviewQuote}"
+
+In your business, when someone has an urgent issue after ${closingTimeClean} or on weekends, they don't wait for a callback. They immediately dial the next contractor on Google until someone answers.
+
+For a company doing your volume, that's roughly ${lead.estLoss} in high-margin jobs walking right to your competitors every month.
+
+We built Ava -- a 24/7 AI phone receptionist trained specifically for Florida ${lead.trade.toLowerCase()} contractors. She:
+- Answers in 1 ring 24/7/365 (never sick, never misses a call)
+- Qualifies the homeowner and logs their emergency details
+- Books appointments directly into your calendar in real-time
+- Sends you instant priority SMS alerts for high-ticket jobs
+
+Test her right now from your personal cell phone:
+Dial: ${demoPhone}
+
+Hang up and call it for 15 seconds to hear how human and responsive she sounds. If you'd like to put her on your lines this week, plans are just $299/mo with zero contracts and a 100% money-back guarantee.
+
+Best,
+Luke
+Founder, VantorX Solutions
+Phone: ${demoPhone}
+Email: luke@vantorxsolutions.com
+Web: https://www.vantorxsolutions.com`;
+
+        const row = [
+          `"${lead.owner}"`,
+          `""`,
+          `"${lead.company}"`,
+          `"${lead.title}"`,
+          `"${lead.email}"`,
+          `"${lead.phone}"`,
+          `"${lead.city}"`,
+          `"${lead.trade}"`,
+          `"${lead.rating}"`,
+          `"${lead.closingTime}"`,
+          `"${lead.reviewQuote.replace(/"/g, '""')}"`,
+          `"${lead.websiteAudit.replace(/"/g, '""')}"`,
+          `"${lead.estLoss}"`,
+          `"${subject.replace(/"/g, '""')}"`,
+          `"${body.replace(/"/g, '""')}"`,
+          `"${demoPhone}"`,
+          `"Ready to Send"`
+        ];
+
+        csv += row.join(",") + "\n";
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `VantorX_Audited_Leads_${trade}_${city.replace(/[^a-zA-Z0-9]/g, '_')}.csv`;
+      a.download = `VANTORX_OUTBOUND_LEADS_${trade}_${region.replace(/[^a-zA-Z0-9]/g, '_')}.csv`;
       a.click();
     });
 
