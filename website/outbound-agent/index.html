@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VantorX — Autonomous Outbound Sales & Audit Agent</title>
+  <style>
+    :root {
+      --bg: #070a12;
+      --card-bg: rgba(18, 25, 41, 0.75);
+      --border: rgba(99, 102, 241, 0.2);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.4);
+      --gold: #c7a468;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 30px 20px; line-height: 1.6; }
+    .container { max-width: 1040px; margin: 0 auto; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 28px;
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2) 0%, transparent 75%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 28px;
+    }
+    .brand-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
+    .brand-title span { color: var(--gold); }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; animation: blink 1.8s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* Search & Filter Bar */
+    .filter-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 14px;
+      align-items: end;
+    }
+    label { display: block; font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
+    select, input {
+      width: 100%;
+      background: #090e1a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      color: var(--text);
+      padding: 10px 14px;
+      font-size: 0.95rem;
+    }
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .btn:hover { background: #4f46e5; }
+    .btn-secondary {
+      background: #1e293b;
+      color: #cbd5e1;
+      box-shadow: none;
+    }
+    .btn-secondary:hover { background: #334155; }
+
+    /* Results Grid */
+    .leads-grid { display: flex; flex-direction: column; gap: 18px; }
+    .lead-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .lead-card:hover { border-color: rgba(99, 102, 241, 0.45); }
+    .lead-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 12px;
+    }
+    .lead-title h3 { font-size: 1.2rem; font-weight: 700; }
+    .lead-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 14px; margin-top: 4px; }
+    
+    .loss-tag {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .vuln-box {
+      background: rgba(244, 63, 94, 0.08);
+      border-left: 4px solid var(--rose);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      color: #fecdd3;
+      margin-bottom: 16px;
+    }
+    .vuln-box strong { color: white; }
+
+    /* Email Preview Box */
+    .email-preview {
+      background: #060911;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      color: #e2e8f0;
+      margin-bottom: 14px;
+      font-family: inherit;
+    }
+    .email-subject { font-weight: 700; color: #38bdf8; margin-bottom: 8px; }
+
+    .lead-actions { display: flex; gap: 10px; justify-content: flex-end; }
+    .copy-pill {
+      background: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid #334155;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .copy-pill:hover { background: #334155; }
+    .mail-link {
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mail-link:hover { background: rgba(16, 185, 129, 0.3); }
+
+    .export-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding: 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <div class="brand-title">Vantor<span>X</span> Outbound Prospecting Engine</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Scans local trade businesses, calculates lost revenue from missed calls, and writes hyper-targeted cold emails.</p>
+      </div>
+      <div class="status-badge">
+        <span class="pulse-dot"></span> Claude Auditor Active
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="filter-card">
+      <div>
+        <label for="tradeSelect">Target Industry</label>
+        <select id="tradeSelect">
+          <option value="Roofing">Roofing Contractors</option>
+          <option value="HVAC" selected>HVAC & AC Repair</option>
+          <option value="Plumbing">Emergency Plumbing</option>
+          <option value="Dental">Emergency Dental</option>
+          <option value="MedSpa">Medical Spas & Aesthetics</option>
+          <option value="Electrical">Commercial & Home Electricians</option>
+        </select>
+      </div>
+      <div>
+        <label for="cityInput">Target Market / City</label>
+        <input type="text" id="cityInput" value="Miami, FL" placeholder="e.g. Miami, FL; Dallas, TX">
+      </div>
+      <div>
+        <label for="phoneInput">Your Ava Demo Phone Number</label>
+        <input type="text" id="phoneInput" value="(Pending Vapi Number)" placeholder="e.g. (305) 555-0199">
+      </div>
+      <div>
+        <button class="btn" id="runScanBtn">🔍 Scan & Audit Leads</button>
+      </div>
+    </div>
+
+    <!-- Export & Stats -->
+    <div class="export-bar">
+      <span id="resultsCount" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">Showing 3 Audited Opportunities</span>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-secondary" id="exportCsvBtn">📥 Export All to CSV (Instantly / Smartlead)</button>
+      </div>
+    </div>
+
+    <!-- Leads Container -->
+    <div class="leads-grid" id="leadsGrid"></div>
+  </div>
+
+  <script>
+    const PROSPECTS = {
+      "HVAC": [
+        {
+          company: "Sunstate Cooling & Heating",
+          owner: "Marcus",
+          email: "marcus@sunstatecoolingdemo.com",
+          phone: "(305) 555-0142",
+          city: "Miami, FL",
+          rating: "4.6 (128 reviews)",
+          problem: "Weekend emergency calls go to an unmonitored voicemail box. 4 recent Google reviews cite 24hr delays in emergency AC repair.",
+          estLost: "$6,800/mo"
+        },
+        {
+          company: "Evergreen Comfort Pros",
+          owner: "Tony",
+          email: "tony@evergreencomfortdemo.com",
+          phone: "(305) 555-0891",
+          city: "Miami, FL",
+          rating: "4.8 (89 reviews)",
+          problem: "Front desk staff leaves at 5:00 PM. No online calendar or after-hours dispatch for after-work AC breakdowns.",
+          estLost: "$5,200/mo"
+        },
+        {
+          company: "BreezeAir Mechanical",
+          owner: "Carlos",
+          email: "carlos@breezeairdemo.com",
+          phone: "(305) 555-0374",
+          city: "Miami, FL",
+          rating: "4.4 (52 reviews)",
+          problem: "Calls ring 6+ times before dropping. High customer friction during peak summer hours.",
+          estLost: "$7,500/mo"
+        }
+      ],
+      "Roofing": [
+        {
+          company: "Apex Storm Roofing",
+          owner: "David",
+          email: "david@apexroofingdemo.com",
+          phone: "(305) 555-0219",
+          city: "Miami, FL",
+          rating: "4.7 (110 reviews)",
+          problem: "After severe storm alerts, incoming phone lines stay busy. Homeowners hang up and book the next roofer on Google.",
+          estLost: "$9,400/mo"
+        },
+        {
+          company: "Guardian Roof & Leak Repair",
+          owner: "Roberto",
+          email: "roberto@guardianroofdemo.com",
+          phone: "(305) 555-0633",
+          city: "Miami, FL",
+          rating: "4.5 (74 reviews)",
+          problem: "No after-hours inspection booking. Contact form takes 24 hours to return inquiry.",
+          estLost: "$6,100/mo"
+        }
+      ],
+      "Plumbing": [
+        {
+          company: "Rapid Drain & Pipe Pros",
+          owner: "Jason",
+          email: "jason@rapiddraindemo.com",
+          phone: "(305) 555-0455",
+          city: "Miami, FL",
+          rating: "4.3 (63 reviews)",
+          problem: "Midnight burst pipe calls route to personal cell; owner frequently sleeps through 2 AM high-ticket jobs.",
+          estLost: "$8,200/mo"
+        }
+      ]
+    };
+
+    function renderLeads() {
+      const trade = document.getElementById('tradeSelect').value;
+      const city = document.getElementById('cityInput').value.trim() || "Your City";
+      const demoPhone = document.getElementById('phoneInput').value.trim() || "[Ava-Demo-Phone]";
+      const container = document.getElementById('leadsGrid');
+      
+      const list = PROSPECTS[trade] || PROSPECTS["HVAC"];
+      document.getElementById('resultsCount').innerText = `Showing ${list.length} Audited Opportunities in ${city}`;
+
+      container.innerHTML = list.map((lead, idx) => {
+        const subject = `Quick question regarding ${lead.company}'s after-hours calls`;
+        const body = `Hi ${lead.owner},
+
+I was looking at ${lead.company} in ${city} and noticed something that's likely costing you jobs:
+${lead.problem}
+
+In the ${trade.toLowerCase()} business, when someone has an urgent issue, they call the next company on Google if nobody picks up within 3 rings. For a company your size, that's roughly ${lead.estLost} walking out the door every month.
+
+We built Ava — an AI receptionist trained specifically for ${trade.toLowerCase()} contractors. She:
+• Answers in 1 ring 24/7/365 (never sick, never misses a call).
+• Qualifies the emergency and books directly into your calendar.
+• Immediately alerts your on-call tech for high-priority jobs.
+
+You can test her right now from your cell phone:
+👉 Dial our live test line: ${demoPhone}
+
+Hear how natural she sounds. If you'd like to put her on your lines this week, reply to this email or visit https://www.vantorxsolutions.com
+
+Best,
+Luke
+Founder, VantorX Solutions
+luke@vantorxsolutions.com
+https://www.vantorxsolutions.com`;
+
+        const mailto = `mailto:${lead.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        return `
+          <div class="lead-card">
+            <div class="lead-header">
+              <div class="lead-title">
+                <h3>${lead.company}</h3>
+                <div class="lead-meta">
+                  <span>👤 Owner: <strong>${lead.owner}</strong></span>
+                  <span>📍 ${city}</span>
+                  <span>⭐ ${lead.rating}</span>
+                </div>
+              </div>
+              <div class="loss-tag">Est. Lost: ${lead.estLost}</div>
+            </div>
+
+            <div class="vuln-box">
+              <strong>🚨 Identified Problem:</strong> ${lead.problem}
+            </div>
+
+            <div class="email-preview">
+              <div class="email-subject">Subject: ${subject}</div>
+              <div>${body}</div>
+            </div>
+
+            <div class="lead-actions">
+              <button class="copy-pill" onclick="navigator.clipboard.writeText(\`${body.replace(/`/g, '\\`')}\`); alert('Email copied to clipboard!');">📋 Copy Email</button>
+              <a href="${mailto}" class="mail-link">✉️ Send from luke@vantorxsolutions.com ↗</a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.getElementById('runScanBtn').addEventListener('click', renderLeads);
+    document.getElementById('tradeSelect').addEventListener('change', renderLeads);
+
+    document.getElementById('exportCsvBtn').addEventListener('click', () => {
+      const trade = document.getElementById('tradeSelect').value;
+      const city = document.getElementById('cityInput').value.trim();
+      const list = PROSPECTS[trade] || PROSPECTS["HVAC"];
+
+      let csv = "Company,Owner,Email,Phone,City,Detected_Problem,Est_Monthly_Loss\n";
+      list.forEach(l => {
+        csv += `"${l.company}","${l.owner}","${l.email}","${l.phone}","${city}","${l.problem}","${l.estLost}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `VantorX_Audited_Leads_${trade}_${city.replace(/[^a-zA-Z0-9]/g, '_')}.csv`;
+      a.click();
+    });
+
+    renderLeads();
+  </script>
+</body>
+</html>
