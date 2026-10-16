@@ -80,7 +80,7 @@ export default async function handler(req, res) {
     if (action === "plans") {
       return res.status(200).json({
         ok: true,
-        publishableKey: DEFAULT_PUB_KEY,
+        publishableKey: STRIPE_PUB_KEY,
         plans: PLANS,
         defaultPaymentLink: PLANS.receptionist.paymentLink
       });
