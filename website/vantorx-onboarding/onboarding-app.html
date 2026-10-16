@@ -45,7 +45,11 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body { height: 100%; }
+html {
+  min-height: 100%;
+  height: auto;
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--bg);
@@ -54,7 +58,10 @@ body {
   font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  overflow: hidden;
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden;
 }
 
 ::selection { background: var(--gold-dim); color: var(--gold-bright); }
@@ -954,7 +961,14 @@ tr[data-clickable] { cursor: pointer; }
 
 .gold-text { color: var(--gold-bright); }
 
-.obx-wrap { max-width: 880px; margin: 0 auto; padding: 28px 22px 40px; }
+.obx-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 22px 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .obx-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
 .obx-brand { display: flex; align-items: center; gap: 10px; }
@@ -968,7 +982,7 @@ tr[data-clickable] { cursor: pointer; }
 .obx-step-label { color: var(--text-dim); font-size: 0.8rem; }
 .obx-step-name { color: var(--gold-bright); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; }
 
-.obx-main { animation: obxFade 0.25s var(--ease); }
+.obx-main { animation: obxFade 0.25s var(--ease); flex: 1; }
 @keyframes obxFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 .obx-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; gap: 14px; }
@@ -977,7 +991,7 @@ tr[data-clickable] { cursor: pointer; }
 .obx-validation.show { animation: obxShake 0.3s; }
 @keyframes obxShake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 
-.obx-foot { text-align: center; color: var(--text-dim); font-size: 0.72rem; margin-top: 34px; }
+.obx-foot { text-align: center; color: var(--text-dim); font-size: 0.72rem; margin-top: auto; padding-top: 34px; }
 
 /* step 1 — industry picker */
 .obx-ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -1059,6 +1073,151 @@ tr[data-clickable] { cursor: pointer; }
   .obx-nav .btn { width: 100%; }
   .obx-nav-right { justify-content: space-between; }
 }
+
+/* ============================================================
+   PRIVATE CLIENT ACCESS GATE
+   ============================================================ */
+.obx-gate-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0 40px;
+  width: 100%;
+}
+.obx-gate-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 38px 32px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  animation: obxFade 0.3s var(--ease);
+}
+.obx-gate-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--gold-bright);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+.obx-gate-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.obx-gate-desc {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+.obx-gate-form {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: left;
+  margin-bottom: 18px;
+}
+.obx-gate-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.obx-gate-input-row {
+  display: flex;
+  gap: 10px;
+}
+.obx-gate-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 11px 14px;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s;
+}
+.obx-gate-input:focus {
+  border-color: var(--gold);
+  outline: none;
+}
+.obx-gate-error {
+  color: var(--red);
+  font-size: 0.82rem;
+  margin-top: 10px;
+  display: none;
+}
+.obx-gate-error.show {
+  display: block;
+}
+.obx-gate-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+.obx-gate-divider::before, .obx-gate-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.obx-gate-portal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-soft);
+  color: var(--text-soft);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: all 0.2s;
+}
+.obx-gate-portal-link:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.obx-gate-footer {
+  margin-top: 22px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 16px;
+  line-height: 1.5;
+}
+.obx-gate-footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+.obx-gate-footer a:hover {
+  text-decoration: underline;
+}
 </style>
 </head>
 <body>
@@ -1080,7 +1239,7 @@ tr[data-clickable] { cursor: pointer; }
   </header>
 
   <!-- ===== PROGRESS ===== -->
-  <div class="obx-progress-card">
+  <div class="obx-progress-card" id="progressCard">
     <div class="onboard-progress" id="progBar"></div>
     <div class="obx-progress-meta">
       <span class="obx-step-label" id="stepLabel">Step 1 of 8</span>
@@ -1092,7 +1251,7 @@ tr[data-clickable] { cursor: pointer; }
   <main class="obx-main" id="view"></main>
 
   <!-- ===== NAV ===== -->
-  <div class="obx-nav">
+  <div class="obx-nav" id="navCard">
     <button class="btn btn-ghost" id="backBtn">← Back</button>
     <div class="obx-nav-right">
       <span class="obx-validation" id="validationMsg"></span>
@@ -2202,12 +2361,107 @@ const backBtn = document.getElementById('backBtn');
 const nextBtn = document.getElementById('nextBtn');
 const validationMsg = document.getElementById('validationMsg');
 const autosaveFlag = document.getElementById('autosaveFlag');
+const progressCard = document.getElementById('progressCard');
+const navCard = document.getElementById('navCard');
+const resetBtn = document.getElementById('resetBtn');
+
+const ACCESS_CODES = ['VANTORX2026', 'VANTORX', 'LUKE2026', 'CLIENT2026', 'LAUNCH2026'];
+
+function checkUnlocked() {
+  if (sessionStorage.getItem('vantorx_onboard_unlocked') === 'true' || localStorage.getItem('vantorx_onboard_unlocked') === 'true') {
+    return true;
+  }
+  const params = new URLSearchParams(window.location.search);
+  const code = (params.get('code') || params.get('access') || params.get('key') || '').trim().toUpperCase();
+  if (code && ACCESS_CODES.includes(code)) {
+    sessionStorage.setItem('vantorx_onboard_unlocked', 'true');
+    localStorage.setItem('vantorx_onboard_unlocked', 'true');
+    return true;
+  }
+  return false;
+}
+
+let unlocked = checkUnlocked();
+
+function paintGate() {
+  if (progressCard) progressCard.style.display = 'none';
+  if (navCard) navCard.style.display = 'none';
+  if (resetBtn) resetBtn.style.display = 'none';
+  if (autosaveFlag) autosaveFlag.style.display = 'none';
+
+  view.innerHTML = `
+    <div class="obx-gate-wrap">
+      <div class="obx-gate-card">
+        <div class="obx-gate-badge">🔒 Private Client Portal</div>
+        <h2>Client Onboarding Access</h2>
+        <p class="obx-gate-desc">This onboarding pipeline is private and reserved for active VantorX Solutions clients. Enter your Client Access Passcode or sign into your Client Hub account to begin setup.</p>
+        
+        <div class="obx-gate-form">
+          <label class="obx-gate-label" for="gateCode">Client Access Passcode</label>
+          <div class="obx-gate-input-row">
+            <input type="text" class="obx-gate-input" id="gateCode" placeholder="Enter Access Code (e.g. VANTORX2026)" autocomplete="off" />
+            <button class="btn btn-gold" id="unlockGateBtn">Unlock Setup →</button>
+          </div>
+          <div id="gateError" class="obx-gate-error">✕ Invalid access code. Please check your welcome email or contact Luke.</div>
+        </div>
+
+        <div class="obx-gate-divider"><span>OR</span></div>
+
+        <a href="/client-hub/" class="obx-gate-portal-link">
+          <span>🔐 Sign in with Client Hub Account</span> ↗
+        </a>
+
+        <div class="obx-gate-footer">
+          Need your access code? Call or text Luke directly at <a href="tel:5618138602"><strong>(561) 813-8602</strong></a> or email <a href="mailto:luke@vantorxsolutions.com">luke@vantorxsolutions.com</a>.
+        </div>
+      </div>
+    </div>
+  `;
+
+  const input = document.getElementById('gateCode');
+  const btn = document.getElementById('unlockGateBtn');
+  const err = document.getElementById('gateError');
+
+  function tryUnlock() {
+    const val = (input.value || '').trim().toUpperCase();
+    if (ACCESS_CODES.includes(val)) {
+      err.classList.remove('show');
+      sessionStorage.setItem('vantorx_onboard_unlocked', 'true');
+      localStorage.setItem('vantorx_onboard_unlocked', 'true');
+      unlocked = true;
+      if (progressCard) progressCard.style.display = '';
+      if (navCard) navCard.style.display = '';
+      if (resetBtn) resetBtn.style.display = '';
+      if (autosaveFlag) autosaveFlag.style.display = '';
+      toast('Access verified. Welcome to VantorX Client Onboarding!', 'success');
+      render();
+    } else {
+      err.classList.add('show');
+      input.focus();
+    }
+  }
+
+  btn.addEventListener('click', tryUnlock);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') tryUnlock();
+  });
+  input.focus();
+}
 
 let current = 0;
 let handler = null;   // { validate, collect } returned by the active step
 
 /* ---------------- rendering ---------------- */
 function render() {
+  if (!unlocked) {
+    paintGate();
+    return;
+  }
+  if (progressCard) progressCard.style.display = '';
+  if (navCard) navCard.style.display = '';
+  if (resetBtn) resetBtn.style.display = '';
+  if (autosaveFlag) autosaveFlag.style.display = '';
+
   const state = getState();
   const step = STEPS[current];
 
@@ -2220,7 +2474,7 @@ function render() {
 
   handler = step.paint(view, state.draft, render, goLive, state.completed);
   validationMsg.textContent = '';
-  window.scrollTo({ top: 0 });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /* ---------------- navigation ---------------- */
@@ -2307,15 +2561,14 @@ subscribe(() => {
 /* ---------------- boot ---------------- */
 probeSession().then(({ online, signedIn }) => {
   if (online && signedIn) {
-    pushDraft(getState().draft);                                          // initial push
-  } else if (online && !signedIn) {
-    toast('Not signed in — progress saves locally. Sign in at the portal to sync to the platform.', 'info');
-  } else {
-    toast('Platform server not reachable — progress saves locally only.', 'info');
+    unlocked = true;
+    sessionStorage.setItem('vantorx_onboard_unlocked', 'true');
+    pushDraft(getState().draft);
+    render();
   }
 });
 render();
-flashSaved();
+if (unlocked) flashSaved();
 
 
 </script>
