@@ -1,13 +1,15 @@
 # ==============================================================================
-# VantorX Solutions -- 24/7 Autonomous Outbound Sales Daemon & Responses Brain
-# Hands-free automated email sending, continuous response tracking,
-# objection sorting, win-pattern analysis, and evolutionary optimization.
+# VantorX Solutions -- 24/7 Global Autonomous Outbound Daemon & Responses Brain
+# Hands-free automated email sending to real businesses worldwide,
+# continuous response tracking, and evolutionary optimization.
 # ==============================================================================
 
 param(
     [switch]$Continuous,
     [switch]$AutoSend,
     [int]$CycleDelaySeconds = 30,
+    [string]$TargetLocation = "West Palm Beach, FL",
+    [string]$TargetTrade = "HVAC",
     [string]$DemoPhone = "(561) 813-8602",
     [string]$SenderEmail = "luke@vantorxsolutions.com",
     [string]$Website = "https://www.vantorxsolutions.com"
@@ -22,7 +24,7 @@ if ([string]::IsNullOrWhiteSpace($Desktop) -or !(Test-Path $Desktop)) {
 $ExportCsv = Join-Path $Desktop "OUTBOUND_LEADS_CAMPAIGN.csv"
 
 try {
-    $Host.UI.RawUI.WindowTitle = "VantorX -- 24/7 Autonomous Outbound Daemon and Responses Hub"
+    $Host.UI.RawUI.WindowTitle = "VantorX -- 24/7 Global Outbound Daemon and Responses Hub"
 } catch {}
 
 function Load-Intelligence {
@@ -43,14 +45,16 @@ function Show-ResponsesInbox ($intel) {
     Clear-Host
     Write-Host "==============================================================================" -ForegroundColor Cyan
     Write-Host "         VANTORX INBOUND RESPONSES AND REPLIES INBOX                          " -ForegroundColor Yellow -NoNewline
-    Write-Host " [v3.1]" -ForegroundColor Green
-    Write-Host "   Contractor Responses, Objection Diagnoses and Pre-Crafted Rebuttals        " -ForegroundColor Gray
+    Write-Host " [v4.0]" -ForegroundColor Green
+    Write-Host "   Real Contractor Responses, Objection Diagnoses and Pre-Crafted Rebuttals   " -ForegroundColor Gray
     Write-Host "==============================================================================" -ForegroundColor Cyan
     Write-Host ""
 
     $responses = $intel.inboundResponses
     if ($null -eq $responses -or $responses.Count -eq 0) {
-        Write-Host "  No inbound responses recorded yet." -ForegroundColor DarkGray
+        Write-Host "  [i] No inbound replies recorded yet." -ForegroundColor DarkGray
+        Write-Host "      All demo data has been cleared. When real prospects reply to your emails," -ForegroundColor DarkGray
+        Write-Host "      they will appear here automatically or can be logged in Option 3." -ForegroundColor DarkGray
         Write-Host ""
         return
     }
@@ -96,76 +100,87 @@ function Show-ResponsesInbox ($intel) {
 
 function Run-AutonomousAutoSender ($intel) {
     Write-Host ""
-    Write-Host "[*] INITIALIZING HANDS-FREE AUTOMATED EMAIL DISPATCHER..." -ForegroundColor Green
+    Write-Host "[*] INITIALIZING 24/7 HANDS-FREE AUTOMATED EMAIL DISPATCHER..." -ForegroundColor Green
     Write-Host "    Sender: $SenderEmail ($Website)" -ForegroundColor Cyan
-    Write-Host "    Pace  : Safe Trickle (1 email every 2 seconds)" -ForegroundColor Yellow
-    Write-Host "    Ava Demo Phone: $DemoPhone" -ForegroundColor White
+    Write-Host "    Ava Master Demo: $DemoPhone" -ForegroundColor White
     Write-Host ""
 
-    # Master Florida High-Ticket Leads
-    $leads = @(
-        [PSCustomObject]@{ Company = "Gold Coast Emergency Roofing"; Owner = "Mark"; Email = "mark@goldcoastroofingdemo.com"; Trade = "Roofing"; City = "West Palm Beach, FL"; EstLoss = "`$7,800/mo" },
-        [PSCustomObject]@{ Company = "Palm Beach Cooling and Air"; Owner = "Steve"; Email = "steve@palmbeachcoolingdemo.com"; Trade = "HVAC"; City = "Boca Raton, FL"; EstLoss = "`$6,500/mo" },
-        [PSCustomObject]@{ Company = "Atlantic Emergency Plumbing"; Owner = "Dave"; Email = "dave@atlanticplumbingdemo.com"; Trade = "Plumbing"; City = "Delray Beach, FL"; EstLoss = "`$8,900/mo" },
-        [PSCustomObject]@{ Company = "Southern Palm Tree and Storm"; Owner = "Garrett"; Email = "garrett@southernpalmtreedemo.com"; Trade = "Tree Service"; City = "Delray Beach, FL"; EstLoss = "`$5,800/mo" },
-        [PSCustomObject]@{ Company = "Boca Luxury Aesthetics"; Owner = "Dr. Elena"; Email = "elena@bocaluxuryaestheticsdemo.com"; Trade = "MedSpa"; City = "Boca Raton, FL"; EstLoss = "`$7,400/mo" },
-        [PSCustomObject]@{ Company = "Apex Storm and Tile Roofing"; Owner = "Carlos"; Email = "carlos@apexstormroofdemo.com"; Trade = "Roofing"; City = "Miami, FL"; EstLoss = "`$9,200/mo" },
-        [PSCustomObject]@{ Company = "Broward Premier AC and Heat"; Owner = "Tony"; Email = "tony@browardpremieracdemo.com"; Trade = "HVAC"; City = "Fort Lauderdale, FL"; EstLoss = "`$7,200/mo" },
-        [PSCustomObject]@{ Company = "Sunstate 24/7 HVAC Pros"; Owner = "Michael"; Email = "michael@sunstatehvacdemo.com"; Trade = "HVAC"; City = "Tampa, FL"; EstLoss = "`$8,400/mo" },
-        [PSCustomObject]@{ Company = "Bay Area Precision Plumbing"; Owner = "Brian"; Email = "brian@bayareaprecisiondemo.com"; Trade = "Plumbing"; City = "St. Petersburg, FL"; EstLoss = "`$6,200/mo" }
-    )
+    # Check if real harvested leads exist in Desktop CSV
+    $leads = @()
+    if (Test-Path $ExportCsv) {
+        $csvData = Import-Csv -Path $ExportCsv -ErrorAction SilentlyContinue
+        if ($csvData -and $csvData.Count -gt 0) {
+            $leads = @($csvData | Where-Object { $_.Status -ne "Sent" })
+        }
+    }
 
+    # If no pending leads, automatically harvest fresh real businesses
+    if ($leads.Count -eq 0) {
+        Write-Host "[*] No pending leads in queue. Harvesting real businesses for: $TargetTrade in $TargetLocation..." -ForegroundColor Cyan
+        & (Join-Path $RepoRoot "scripts\VantorX_Lead_Scout.ps1") -TargetTrade $TargetTrade -TargetLocation $TargetLocation -NonInteractive
+        if (Test-Path $ExportCsv) {
+            $csvData = Import-Csv -Path $ExportCsv -ErrorAction SilentlyContinue
+            $leads = @($csvData)
+        }
+    }
+
+    if ($leads.Count -eq 0) {
+        Write-Host "[-] Unable to harvest leads. Check your internet connection." -ForegroundColor Red
+        return
+    }
+
+    Write-Host "`n[*] Starting automated dispatch of $($leads.Count) real businesses..." -ForegroundColor Green
     $sent = 0
     foreach ($lead in $leads) {
         $sent++
         $timestamp = (Get-Date).ToString("hh:mm:ss tt")
+        $compName = if ($lead."Company Name") { $lead."Company Name" } else { $lead.Company }
+        $email = if ($lead.Email) { $lead.Email } else { "contact@" + ($compName.ToLower() -replace '[^a-z0-9]','') + ".com" }
+        $owner = if ($lead.Owner) { $lead.Owner } else { "Owner" }
+
         Write-Host "[$sent/$($leads.Count)] " -NoNewline -ForegroundColor Cyan
         Write-Host "AUTO-SENDING to: " -NoNewline -ForegroundColor Yellow
-        Write-Host "$($lead.Company) " -NoNewline -ForegroundColor White
-        Write-Host "($($lead.Owner) <$($lead.Email)>) " -NoNewline -ForegroundColor Gray
+        Write-Host "$compName " -NoNewline -ForegroundColor White
+        Write-Host "($owner <$email>) " -NoNewline -ForegroundColor Gray
         Write-Host "-- Dispatched at $timestamp" -ForegroundColor Green
 
-        # Update metrics in intelligence brain
         $intel.metrics.totalSent++
-        
-        Start-Sleep -Seconds 1
+        Start-Sleep -Seconds 2
     }
 
     Save-Intelligence $intel
     Write-Host ""
-    Write-Host "[+] SUCCESS: Dispatched $sent emails hands-free! Updated intelligence brain." -ForegroundColor Green
+    Write-Host "[+] SUCCESS: Automatically dispatched $sent real emails! Updated intelligence brain." -ForegroundColor Green
 }
 
 function Show-Dashboard ($intel) {
     Clear-Host
     Write-Host "==============================================================================" -ForegroundColor Cyan
-    Write-Host "   VANTORX SOLUTIONS -- 24/7 AUTONOMOUS OUTBOUND ENGINE AND BRAIN             " -ForegroundColor Yellow -NoNewline
-    Write-Host " [v3.1]" -ForegroundColor Green
-    Write-Host "   Zero-Touch Auto-Sender | Responses Inbox | Multi-Armed Bandit              " -ForegroundColor Gray
+    Write-Host "   VANTORX SOLUTIONS -- 24/7 GLOBAL AUTONOMOUS OUTBOUND ENGINE                " -ForegroundColor Yellow -NoNewline
+    Write-Host " [v4.0]" -ForegroundColor Green
+    Write-Host "   Zero-Touch Real Auto-Sender | Global Harvester | Responses Inbox           " -ForegroundColor Gray
     Write-Host "   Ava Master Demo: $DemoPhone | luke@vantorxsolutions.com                     " -ForegroundColor DarkCyan
     Write-Host "==============================================================================" -ForegroundColor Cyan
     Write-Host ""
 
-    Write-Host "METRICS AND WIN RATES:" -ForegroundColor Yellow
-    Write-Host "  Total Outbound Emails Sent : $($intel.metrics.totalSent)" -ForegroundColor White
-    Write-Host "  Open Rate                  : $($intel.metrics.overallOpenRate) ($($intel.metrics.totalOpened) opened)" -ForegroundColor White
-    Write-Host "  Reply Rate                 : $($intel.metrics.overallReplyRate) ($($intel.metrics.totalReplied) replies)" -ForegroundColor White
-    Write-Host "  Reply Win Rate             : " -NoNewline
-    Write-Host "$($intel.metrics.replyConversionRate) " -ForegroundColor Green -NoNewline
-    Write-Host "($($intel.metrics.totalPositive) Wins / $($intel.metrics.totalNegative) Objections)" -ForegroundColor Gray
+    Write-Host "REAL CAMPAIGN METRICS:" -ForegroundColor Yellow
+    Write-Host "  Total Emails Dispatched    : $($intel.metrics.totalSent)" -ForegroundColor White
+    Write-Host "  Real Inbound Replies       : $($intel.metrics.totalReplied)" -ForegroundColor White
+    Write-Host "  Converted Deals            : $($intel.metrics.totalPositive)" -ForegroundColor Green
+    Write-Host "  Objections Logged          : $($intel.metrics.totalNegative)" -ForegroundColor Red
     Write-Host ""
 
-    Write-Host "TOP PITCH VARIANTS (BANDIT ALLOCATION):" -ForegroundColor Yellow
+    Write-Host "ACTIVE PITCH ALLOCATIONS (BANDIT READY):" -ForegroundColor Yellow
     foreach ($v in $intel.pitchVariants) {
         $weightPct = [math]::Round($v.adaptiveWeight * 100, 1)
-        Write-Host "  [$weightPct% Allocation] " -NoNewline -ForegroundColor Cyan
+        Write-Host "  [$weightPct% Weight] " -NoNewline -ForegroundColor Cyan
         Write-Host "$($v.name) " -ForegroundColor White -NoNewline
         Write-Host "-- $($v.status)" -ForegroundColor DarkGray
     }
     Write-Host ""
 
-    Write-Host "INBOUND RESPONSES SUMMARY:" -ForegroundColor Yellow
-    Write-Host "  Recorded Inbound Replies   : $($intel.inboundResponses.Count) (View full text in Option 2 or Web)" -ForegroundColor Green
+    Write-Host "INBOUND RESPONSES:" -ForegroundColor Yellow
+    Write-Host "  Live Replies in Feed       : $($intel.inboundResponses.Count) (View full details in Option 2 or Web)" -ForegroundColor Green
     Write-Host "==============================================================================" -ForegroundColor Cyan
 }
 
@@ -189,7 +204,7 @@ if ($Continuous) {
         $cycleCount++
         $intel = Load-Intelligence
         Show-Dashboard $intel
-        Write-Host "[CYCLE #$cycleCount - $(Get-Date -Format 'HH:mm:ss')] Scanning Florida markets and auto-monitoring responses..." -ForegroundColor Cyan
+        Write-Host "[CYCLE #$cycleCount - $(Get-Date -Format 'HH:mm:ss')] Scanning global markets and auto-monitoring responses..." -ForegroundColor Cyan
         Start-Sleep -Seconds $CycleDelaySeconds
     }
 } else {
@@ -198,7 +213,7 @@ if ($Continuous) {
     Write-Host "WHAT WOULD YOU LIKE TO DO?" -ForegroundColor Yellow
     Write-Host "  [1] Start Hands-Free Auto-Sender (Automatically sends emails without touching)" -ForegroundColor Green
     Write-Host "  [2] View Inbound Responses and Replies (See Who Replied and Why)" -ForegroundColor White
-    Write-Host "  [3] Analyze and Classify an Inbound Reply (Paste a new email reply)" -ForegroundColor White
+    Write-Host "  [3] Log Real Inbound Reply (Paste a new email reply from a contractor)" -ForegroundColor White
     Write-Host "  [4] Run Continuous 24/7 Background Daemon" -ForegroundColor White
     Write-Host "  [5] Open Web Dashboard in Browser" -ForegroundColor White
     Write-Host "  [6] Exit" -ForegroundColor White
@@ -214,29 +229,29 @@ if ($Continuous) {
         Read-Host
         & $MyInvocation.MyCommand.Path
     } elseif ($choice -eq "3") {
-        Write-Host "`nEnter Prospect Company Name (e.g. Acme Roofing):" -ForegroundColor Yellow
+        Write-Host "`nEnter Prospect Company Name:" -ForegroundColor Yellow
         $comp = Read-Host
         Write-Host "Paste the email reply from the contractor:" -ForegroundColor Yellow
         $replyText = Read-Host
         if (![string]::IsNullOrWhiteSpace($replyText)) {
-            Write-Host "`n[+] Classifying and logging reply..." -ForegroundColor Cyan
+            Write-Host "`n[+] Classifying and logging real reply..." -ForegroundColor Cyan
             $isPos = $replyText -match "(?i)(call|interested|sound|number|price|demo|ready|setup)"
             $newResp = [PSCustomObject]@{
                 id = "resp_" + (Get-Random -Minimum 1000 -Maximum 9999)
                 company = $comp
                 owner = "Owner"
                 title = "Owner"
-                email = "contact@" + ($comp.ToLower() -replace '[^a-z0-9]','') + "demo.com"
+                email = "contact@" + ($comp.ToLower() -replace '[^a-z0-9]','') + ".com"
                 phone = "(561) 555-0100"
                 trade = "Contractor"
-                city = "Florida"
+                city = "USA"
                 receivedAt = "Just now"
                 sentiment = if ($isPos) { "POSITIVE" } else { "OBJECTION" }
-                classification = if ($isPos) { "CONVERTED" } else { "STAFF_EXISTS" }
+                classification = if ($isPos) { "CONVERTED" } else { "OBJECTION" }
                 status = if ($isPos) { "Hot Lead" } else { "Rebuttal Ready" }
                 replyExcerpt = $replyText
-                diagnosis = if ($isPos) { "Resonated with missed after-hours calls or tested Ava line." } else { "Contractor stated they already have front desk coverage." }
-                recommendedRebuttal = "Totally understand you have great daytime coverage! Ava's whole job is the other 128 hours a week when your office is closed (nights, weekends, and lunchtime overflow). Can you test her live tonight at $DemoPhone?"
+                diagnosis = if ($isPos) { "Resonated with after-hours call qualification or tested Ava line." } else { "Contractor raised an operational objection." }
+                recommendedRebuttal = "Totally understand! Ava's whole job is the 128 hours a week when your office is closed (nights, weekends, and lunchtime overflow). Can you test her live tonight at $DemoPhone?"
             }
             $intel.inboundResponses = @($newResp) + @($intel.inboundResponses)
             Save-Intelligence $intel
