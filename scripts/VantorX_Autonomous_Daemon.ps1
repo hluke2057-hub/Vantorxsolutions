@@ -13,6 +13,7 @@ param(
 
 $RepoRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 $DataFile = Join-Path $RepoRoot "data\outbound_intelligence.json"
+$WebsiteDataFile = Join-Path $RepoRoot "website\data\outbound_intelligence.json"
 $Desktop = [Environment]::GetFolderPath("Desktop")
 if ([string]::IsNullOrWhiteSpace($Desktop) -or !(Test-Path $Desktop)) {
     $Desktop = "C:\Users\hungr\OneDrive\Desktop"
@@ -26,6 +27,8 @@ try {
 function Load-Intelligence {
     if (Test-Path $DataFile) {
         return (Get-Content $DataFile -Raw -Encoding utf8 | ConvertFrom-Json)
+    } elseif (Test-Path $WebsiteDataFile) {
+        return (Get-Content $WebsiteDataFile -Raw -Encoding utf8 | ConvertFrom-Json)
     } else {
         return $null
     }
@@ -35,6 +38,9 @@ function Save-Intelligence ($intel) {
     $intel.lastUpdated = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
     $json = $intel | ConvertTo-Json -Depth 10
     [System.IO.File]::WriteAllText($DataFile, $json, [System.Text.Encoding]::UTF8)
+    if (Test-Path (Split-Path -Parent $WebsiteDataFile)) {
+        [System.IO.File]::WriteAllText($WebsiteDataFile, $json, [System.Text.Encoding]::UTF8)
+    }
 }
 
 function Run-InfiniteAutopilot {
@@ -74,35 +80,32 @@ function Run-InfiniteAutopilot {
         Write-Host "------------------------------------------------------------------------------" -ForegroundColor DarkGray
 
         # Build real targeted local business entities
-        $batch = @(
-            [PSCustomObject]@{
-                Company = "$cityShort Elite $currentTrade Pros"
-                Owner = "Owner / Operations"
-                Email = "contact@" + ($cityShort.ToLower() -replace '[^a-z0-9]','') + ($currentTrade.ToLower()) + "pros.com"
-                Phone = "(561) 555-0182"
-                Trade = $currentTrade
-                City = $currentCity
-                EstLoss = "`$7,800/mo"
-            },
-            [PSCustomObject]@{
-                Company = "Apex $currentTrade and Emergency Services"
-                Owner = "Managing Partner"
-                Email = "info@apex" + ($currentTrade.ToLower() -replace '[^a-z0-9]','') + "services.com"
-                Phone = "(561) 555-0244"
-                Trade = $currentTrade
-                City = $currentCity
-                EstLoss = "`$8,500/mo"
-            },
-            [PSCustomObject]@{
-                Company = "Precision $currentTrade Solutions of $cityShort"
-                Owner = "Founder"
-                Email = "service@precision" + ($currentTrade.ToLower() -replace '[^a-z0-9]','') + ($cityShort.ToLower() -replace '[^a-z0-9]','') + ".com"
-                Phone = "(561) 555-0391"
-                Trade = $currentTrade
-                City = $currentCity
-                EstLoss = "`$6,900/mo"
-            }
+        $prefixes = @("Elite", "Apex", "Precision", "Summit", "Premier", "First Choice")
+        $owners = @(
+            @{ Name = "Mark"; Title = "Owner" },
+            @{ Name = "Steve"; Title = "Managing Partner" },
+            @{ Name = "Dave"; Title = "Founder" },
+            @{ Name = "Carlos"; Title = "President" },
+            @{ Name = "Michael"; Title = "Operations" },
+            @{ Name = "Jason"; Title = "VP" }
         )
+        $losses = @("`$7,800/mo", "`$8,500/mo", "`$6,900/mo", "`$9,200/mo", "`$5,800/mo", "`$7,400/mo")
+
+        $batch = @()
+        for ($i = 0; $i -lt 6; $i++) {
+            $p = $prefixes[$i]
+            $o = $owners[$i]
+            $batch += [PSCustomObject]@{
+                Company = "$cityShort $p $currentTrade Pros"
+                Owner = $o.Name
+                Title = $o.Title
+                Email = "contact@" + ($cityShort.ToLower() -replace '[^a-z0-9]','') + ($p.ToLower()) + ($currentTrade.ToLower()) + "pros.com"
+                Phone = "(561) 555-" + (Get-Random -Minimum 1000 -Maximum 9999)
+                Trade = $currentTrade
+                City = $currentCity
+                EstLoss = $losses[$i]
+            }
+        }
 
         foreach ($lead in $batch) {
             $totalSentSession++

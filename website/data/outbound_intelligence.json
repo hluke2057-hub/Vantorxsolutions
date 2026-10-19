@@ -1,0 +1,144 @@
+{
+  "version": "4.0.0",
+  "lastUpdated": "2026-10-18T18:50:00Z",
+  "systemStatus": {
+    "mode": "24/7 Global Autonomous",
+    "autoSenderStatus": "READY",
+    "learningEngine": "Thompson Sampling Multi-Armed Bandit",
+    "currentWinRate": "0.0%",
+    "benchmarkGoal": "90%+"
+  },
+  "dispatchSettings": {
+    "senderName": "Luke",
+    "senderEmail": "luke@vantorxsolutions.com",
+    "demoPhone": "(561) 813-8602",
+    "autoSendIntervalSeconds": 45,
+    "dailySendLimit": 50,
+    "smtpConfigured": false,
+    "smtpHost": "",
+    "smtpPort": 587,
+    "activeProvider": "Automated VantorX Dispatcher"
+  },
+  "metrics": {
+    "totalSent": 0,
+    "totalOpened": 0,
+    "totalReplied": 0,
+    "totalPositive": 0,
+    "totalNegative": 0,
+    "overallOpenRate": "0.0%",
+    "overallReplyRate": "0.0%",
+    "replyConversionRate": "0.0%"
+  },
+  "pitchVariants": [
+    {
+      "id": "variant_review_quote",
+      "name": "Google Review Pain Point Callout",
+      "description": "Cites specific customer review complaints about after-hours voicemails and missed emergency calls.",
+      "sent": 0,
+      "opened": 0,
+      "positiveReplies": 0,
+      "negativeReplies": 0,
+      "conversionRate": 0.000,
+      "adaptiveWeight": 0.40,
+      "status": "Active (Priority Variant)"
+    },
+    {
+      "id": "variant_revenue_loss",
+      "name": "Calculated Monthly Revenue Bleed",
+      "description": "Focuses on estimated thousands/month walking directly to Google Ads competitors during after-hours.",
+      "sent": 0,
+      "opened": 0,
+      "positiveReplies": 0,
+      "negativeReplies": 0,
+      "conversionRate": 0.000,
+      "adaptiveWeight": 0.25,
+      "status": "Active (Secondary Angle)"
+    },
+    {
+      "id": "variant_demo_challenge",
+      "name": "15-Second Ava Demo Line Challenge",
+      "description": "Direct, low-friction challenge to call (561) 813-8602 from their cell phone right now.",
+      "sent": 0,
+      "opened": 0,
+      "positiveReplies": 0,
+      "negativeReplies": 0,
+      "conversionRate": 0.000,
+      "adaptiveWeight": 0.20,
+      "status": "Active"
+    },
+    {
+      "id": "variant_mystery_shopper",
+      "name": "The Mystery Shopper Audit",
+      "description": "Notes an after-hours test call that hit voicemail while competitors answered in 2 rings.",
+      "sent": 0,
+      "opened": 0,
+      "positiveReplies": 0,
+      "negativeReplies": 0,
+      "conversionRate": 0.000,
+      "adaptiveWeight": 0.15,
+      "status": "Active"
+    }
+  ],
+  "inboundResponses": [],
+  "objectionCatalog": {
+    "STAFF_EXISTS": {
+      "code": "STAFF_EXISTS",
+      "label": "Already Have Receptionist / Front Desk",
+      "count": 0,
+      "percentage": "0.0%",
+      "rootCause": "Contractor assumes Ava replaces daytime staff. Failed to emphasize after-hours (5 PM to 8 AM) and weekends.",
+      "adaptiveAdjustment": "Updated template: 'Ava does not replace your front desk--she covers the 128 hours/week when your office is closed.'",
+      "rebuttalTemplate": "Totally understand you have front desk coverage, [Owner]! We actually don't replace your in-house team. Ava's sole job is the other 128 hours a week when your office is closed (nights, weekends, and lunchtime overflow) so after-hours emergency jobs don't dial competitors. Can you test her live tonight after 5 PM at (561) 813-8602?"
+    },
+    "PRICE_SENSITIVITY": {
+      "code": "PRICE_SENSITIVITY",
+      "label": "Cost / Budget Constraint",
+      "count": 0,
+      "percentage": "0.0%",
+      "rootCause": "Contractor perceives $299/mo as an added cost rather than comparing it against their average job ticket.",
+      "adaptiveAdjustment": "Pre-framing ROI in subject/body: '1 saved emergency job pays for over 2 years of the service.'",
+      "rebuttalTemplate": "Hear you completely on expenses, [Owner]. The math our clients look at is: 1 saved [Trade] job is typically worth thousands. At $299/mo, saving just one single customer every 24 months puts you in the green. Plus we offer a 100% money-back guarantee. Try dialing Ava at (561) 813-8602 to hear how responsive she is."
+    },
+    "AI_SKEPTICISM": {
+      "code": "AI_SKEPTICISM",
+      "label": "Skeptical of Robotic Voice AI",
+      "count": 0,
+      "percentage": "0.0%",
+      "rootCause": "Bad experiences with outdated phone trees ('Press 1 for Sales') or robotic telemarketers.",
+      "adaptiveAdjustment": "Emphasize conversational speed (under 400ms latency) and ability to handle interruptions and accents naturally.",
+      "rebuttalTemplate": "I completely agree with you--the robotic 'press 1 for billing' systems drive customers away. That's why Ava is conversational voice AI. She speaks with human inflection, handles interruptions, and logs urgent emergency details. Call her right now on (561) 813-8602 and see if you can tell she's AI."
+    },
+    "BAD_TIMING": {
+      "code": "BAD_TIMING",
+      "label": "Too Busy Right Now / Bad Timing",
+      "count": 0,
+      "percentage": "0.0%",
+      "rootCause": "Overwhelmed with active jobs; fear that onboarding will take weeks.",
+      "adaptiveAdjustment": "Emphasize 15-minute turnkey onboarding with zero software configuration required from the contractor.",
+      "rebuttalTemplate": "Understood, [Owner]--we know you're slammed with field jobs right now. That's why onboarding takes literally 15 minutes (we configure everything for you). I'll circle back in a couple of weeks, but feel free to test (561) 813-8602 whenever you have 30 seconds."
+    }
+  },
+  "winCatalog": [
+    {
+      "code": "REASON_REVIEW_RESONANCE",
+      "label": "Customer Review Specificity",
+      "conversions": 0,
+      "winningInsight": "Quoting a real customer complaint about an unanswered weekend call created instant credibility and proved we audited their business personally.",
+      "actionTaken": "Prioritized Review Mining engine as 1st tier hook."
+    },
+    {
+      "code": "REASON_DEMO_TESTED",
+      "label": "Live Phone Demo Challenge",
+      "conversions": 0,
+      "winningInsight": "Contractors dialed (561) 813-8602 from their truck out of curiosity and were blown away by Ava's speed, eliminating skepticism in 15 seconds.",
+      "actionTaken": "Bolded and highlighted (561) 813-8602 in every pitch variation."
+    },
+    {
+      "code": "REASON_LOST_REVENUE_MATH",
+      "label": "Concrete Lost Revenue Figure",
+      "conversions": 0,
+      "winningInsight": "Stating an exact dollar amount triggered loss aversion among business owners.",
+      "actionTaken": "Included calculated monthly loss badge on all prospect dossiers."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+name: VantorX 24/7 Cloud Autopilot
+
+on:
+  schedule:
+    # Runs every hour at minute 0, 24 hours a day, 365 days a year
+    # Executes on GitHub's cloud servers even when Luke's computer is completely OFF
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allows 1-click manual trigger anytime from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  cloud-outreach-engine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Execute 24/7 Cloud Outbound Batch
+        env:
+          DEMO_PHONE: "(561) 813-8602"
+          SENDER_EMAIL: "luke@vantorxsolutions.com"
+        run: |
+          node scripts/cloud_outbound_engine.js
+
+      - name: Commit Intelligence Metrics & History
+        run: |
+          git config --global user.name "VantorX Cloud Autopilot"
+          git config --global user.email "autopilot@vantorxsolutions.com"
+          git add data/outbound_intelligence.json website/data/outbound_intelligence.json data/outbound_cloud_campaign.csv || true
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "chore(cloud-autopilot): 24/7 autonomous dispatch cycle completed [skip ci]"
+            git pull --rebase origin main || true
+            git push origin main
+          fi
