@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leave a Review — VantorX Solutions</title>
+<meta name="description" content="Share your experience and feedback. Your satisfaction is our #1 priority.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c1017;--bg2:#121824;--bg3:#182030;--line:#222c3f;--line2:#2d3a52;
+  --ink:#f1f5f9;--dim:#94a3b8;--faint:#64748b;
+  --accent:#c7a468;--accent2:#dfbe82;--accent-glow:rgba(199,164,104,0.18);
+  --ok:#34d399;--warn:#fbbf24;--err:#f87171;
+  --font-sans:'Inter',system-ui,sans-serif;--font-head:'Space Grotesk',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;-webkit-font-smoothing:antialiased}
+.card{background:var(--bg2);border:1px solid var(--line2);border-radius:22px;padding:34px 28px;max-width:480px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,0.5);text-align:center;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent2),var(--accent))}
+.brand-badge{display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;color:var(--dim);margin-bottom:18px}
+.brand-badge b{color:var(--accent2)}
+h1{font-family:var(--font-head);font-size:24px;font-weight:700;margin-bottom:8px;line-height:1.25}
+p.sub{color:var(--dim);font-size:14.5px;margin-bottom:24px;line-height:1.5}
+
+/* Star Rating */
+.stars{display:flex;justify-content:center;gap:12px;margin-bottom:14px}
+.star-btn{background:none;border:none;font-size:38px;cursor:pointer;color:var(--line2);transition:transform 0.15s,color 0.15s;padding:4px}
+.star-btn:hover{transform:scale(1.2)}
+.star-btn.active{color:var(--warn);text-shadow:0 0 16px rgba(251,191,36,0.4)}
+.rating-label{font-size:14px;font-weight:600;color:var(--accent2);min-height:22px;margin-bottom:24px}
+
+/* Positive Screen (4-5 Stars) */
+.state-positive{display:none;animation:fadeIn 0.3s ease-out}
+.state-negative{display:none;animation:fadeIn 0.3s ease-out}
+.state-thanks{display:none;animation:fadeIn 0.3s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;font-weight:700;font-size:15px;padding:13px 20px;border-radius:12px;cursor:pointer;transition:all 0.2s;text-decoration:none;border:none}
+.btn-gold{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0f141c;box-shadow:0 4px 18px rgba(199,164,104,0.3)}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(199,164,104,0.45)}
+.btn-ghost{background:var(--bg3);color:var(--ink);border:1px solid var(--line2);margin-top:10px}
+.btn-ghost:hover{border-color:var(--accent)}
+
+.quote-box{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:18px;text-align:left}
+.quote-box label{font-size:12px;font-weight:600;color:var(--dim);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.04em}
+.quote-box textarea{width:100%;background:transparent;border:none;color:var(--ink);font-size:13.5px;font-family:var(--font-sans);resize:none;outline:none}
+
+/* Negative Feedback Form (Shield) */
+.form-group{text-align:left;margin-bottom:14px}
+.form-group label{display:block;font-size:12.5px;font-weight:500;color:var(--dim);margin-bottom:5px}
+.form-group input,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;color:var(--ink);font-size:14px;font-family:var(--font-sans)}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
+
+.shield-notice{background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);color:#6ee7b7;padding:10px 14px;border-radius:10px;font-size:12.5px;margin-bottom:16px;text-align:left;display:flex;align-items:center;gap:8px}
+
+.footer-note{margin-top:22px;color:var(--faint);font-size:12px}
+.footer-note a{color:var(--faint);text-decoration:none}
+.footer-note a:hover{color:var(--dim);text-decoration:underline}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e293b;border:1px solid var(--accent);color:var(--ink);padding:10px 18px;border-radius:999px;font-size:13px;opacity:0;transition:all 0.25s;pointer-events:none;z-index:99}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="brand-badge">
+    <span>⭐ Verified Review Portal for <b id="bizNameText">VantorX Solutions</b></span>
+  </div>
+
+  <!-- Step 1: Star Rating -->
+  <div id="stepRating">
+    <h1 id="headlineText">How was your experience?</h1>
+    <p class="sub" id="subText">Please take 10 seconds to tap a rating below. Your feedback directly shapes our service.</p>
+
+    <div class="stars" id="starContainer">
+      <button class="star-btn" data-value="1" aria-label="1 star">★</button>
+      <button class="star-btn" data-value="2" aria-label="2 stars">★</button>
+      <button class="star-btn" data-value="3" aria-label="3 stars">★</button>
+      <button class="star-btn" data-value="4" aria-label="4 stars">★</button>
+      <button class="star-btn" data-value="5" aria-label="5 stars">★</button>
+    </div>
+    <div class="rating-label" id="ratingLabel">Tap a star to rate</div>
+  </div>
+
+  <!-- Step 2A: Positive Screen (4-5 Stars) -> Direct to Google -->
+  <div id="stepPositive" class="state-positive">
+    <div style="font-size:38px;margin-bottom:8px">🎉</div>
+    <h1>Thank You So Much!</h1>
+    <p class="sub">We’re thrilled you had a 5-star experience! Would you take 15 seconds to paste your review on Google? It means the world to our team.</p>
+
+    <div class="quote-box">
+      <label>Your Review Draft (Editable):</label>
+      <textarea id="reviewDraftText" rows="3">Exceptional service and communication! VantorX built our website and 24/7 AI receptionist seamlessly. Highly recommend to any business owner looking to grow.</textarea>
+      <div style="text-align:right;margin-top:4px">
+        <button id="copyReviewBtn" style="background:none;border:none;color:var(--accent2);font-size:12px;font-weight:600;cursor:pointer">📋 Copy to Clipboard</button>
+      </div>
+    </div>
+
+    <a id="googleReviewBtn" class="btn btn-gold" href="#" target="_blank" rel="noopener">
+      <span>⭐ Post on Google Reviews</span> ↗
+    </a>
+    <button class="btn btn-ghost" id="editRatingBtn1">Change Rating</button>
+  </div>
+
+  <!-- Step 2B: Negative Shield (1-3 Stars) -> Private Feedback -->
+  <div id="stepNegative" class="state-negative">
+    <div style="font-size:36px;margin-bottom:8px">🤝</div>
+    <h1>We Want to Make This Right</h1>
+    <p class="sub">Your feedback is important to us. Please let our management team know what went wrong so we can resolve it immediately.</p>
+
+    <div class="shield-notice">
+      <span>🔒</span>
+      <span><strong>Private Owner Shield:</strong> This goes directly to the business owner and management, not public Google.</span>
+    </div>
+
+    <form id="negativeFeedbackForm">
+      <div class="form-group">
+        <label for="fbName">Your Name *</label>
+        <input type="text" id="fbName" required placeholder="John Doe">
+      </div>
+      <div class="form-group">
+        <label for="fbPhone">Phone Number *</label>
+        <input type="tel" id="fbPhone" required placeholder="(561) 555-0123">
+      </div>
+      <div class="form-group">
+        <label for="fbMsg">How can we improve or make this right? *</label>
+        <textarea id="fbMsg" rows="3" required placeholder="Tell us what happened..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-gold" id="sendFeedbackBtn">Send Private Feedback Directly to Owner</button>
+      <button type="button" class="btn btn-ghost" id="editRatingBtn2">Change Rating</button>
+    </form>
+  </div>
+
+  <!-- Step 3: Feedback Thank You -->
+  <div id="stepThanks" class="state-thanks">
+    <div style="font-size:42px;margin-bottom:12px;color:var(--ok)">✓</div>
+    <h1>Message Received</h1>
+    <p class="sub">Thank you for your honesty. Your private message has been dispatched directly to <strong id="thanksOwnerName">Luke</strong>. We will reach out personally within 24 hours to address this.</p>
+    <a href="/" class="btn btn-ghost" style="margin-top:14px">Return to Homepage</a>
+  </div>
+
+  <div class="footer-note">
+    Powered by <a href="/">VantorX Solutions</a> Review Engine
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const bizName = (urlParams.get('biz') || 'VantorX Solutions').trim();
+  const ownerName = (urlParams.get('owner') || 'Luke').trim();
+  const customGoogleUrl = urlParams.get('google');
+
+  // Fallback Google Review Search URL for VantorX Solutions
+  const defaultGoogleUrl = "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4"; // Placeholder or direct search URL
+  const activeGoogleUrl = customGoogleUrl || `https://www.google.com/search?q=${encodeURIComponent(bizName + " West Palm Beach reviews")}`;
+
+  document.getElementById('bizNameText').textContent = bizName;
+  document.getElementById('googleReviewBtn').href = activeGoogleUrl;
+  document.getElementById('thanksOwnerName').textContent = ownerName;
+
+  // Custom trade draft text
+  const reviewDraft = document.getElementById('reviewDraftText');
+  if (bizName !== 'VantorX Solutions') {
+    reviewDraft.value = `Excellent experience with ${bizName}! Prompt, professional, and reliable. Highly recommended!`;
+  }
+
+  const starBtns = document.querySelectorAll('.star-btn');
+  const ratingLabel = document.getElementById('ratingLabel');
+  const stepRating = document.getElementById('stepRating');
+  const stepPositive = document.getElementById('stepPositive');
+  const stepNegative = document.getElementById('stepNegative');
+  const stepThanks = document.getElementById('stepThanks');
+  const toast = document.getElementById('toast');
+
+  let selectedRating = 0;
+
+  const labels = {
+    1: '1 Star — Terrible experience',
+    2: '2 Stars — Needs improvement',
+    3: '3 Stars — Average / OK',
+    4: '4 Stars — Great experience!',
+    5: '5 Stars — Absolutely amazing!'
+  };
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function highlightStars(val) {
+    starBtns.forEach(btn => {
+      const v = parseInt(btn.dataset.value, 10);
+      btn.classList.toggle('active', v <= val);
+    });
+  }
+
+  starBtns.forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      const val = parseInt(btn.dataset.value, 10);
+      highlightStars(val);
+      ratingLabel.textContent = labels[val] || '';
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      highlightStars(selectedRating);
+      ratingLabel.textContent = selectedRating ? labels[selectedRating] : 'Tap a star to rate';
+    });
+
+    btn.addEventListener('click', () => {
+      selectedRating = parseInt(btn.dataset.value, 10);
+      highlightStars(selectedRating);
+      ratingLabel.textContent = labels[selectedRating];
+
+      // Smart Shield Gate routing:
+      setTimeout(() => {
+        stepRating.style.display = 'none';
+        if (selectedRating >= 4) {
+          stepPositive.style.display = 'block';
+        } else {
+          stepNegative.style.display = 'block';
+        }
+      }, 250);
+    });
+  });
+
+  function resetToRating() {
+    stepPositive.style.display = 'none';
+    stepNegative.style.display = 'none';
+    stepThanks.style.display = 'none';
+    stepRating.style.display = 'block';
+    selectedRating = 0;
+    highlightStars(0);
+    ratingLabel.textContent = 'Tap a star to rate';
+  }
+
+  document.getElementById('editRatingBtn1').addEventListener('click', resetToRating);
+  document.getElementById('editRatingBtn2').addEventListener('click', resetToRating);
+
+  document.getElementById('copyReviewBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(reviewDraft.value).then(() => {
+      showToast('✓ Review copied! Ready to paste on Google.');
+    });
+  });
+
+  document.getElementById('googleReviewBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(reviewDraft.value);
+    showToast('✓ Copied review to clipboard. Opening Google...');
+  });
+
+  // Handle Private Shield Form Submission (1-3 stars)
+  const form = document.getElementById('negativeFeedbackForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('sendFeedbackBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending feedback to owner...';
+
+    const payload = {
+      type: 'review_shield_feedback',
+      business: bizName,
+      rating: selectedRating,
+      name: document.getElementById('fbName').value.trim(),
+      phone: document.getElementById('fbPhone').value.trim(),
+      feedback: document.getElementById('fbMsg').value.trim(),
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      await fetch('/api/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: payload.name,
+          email: "shield@vantorxsolutions.com",
+          phone: payload.phone,
+          business: payload.business,
+          challenge: `[PRIVATE REVIEW SHIELD - ${payload.rating} STARS]\n${payload.feedback}`,
+          website_confirm: ""
+        })
+      });
+    } catch (err) {
+      console.warn("Feedback network fallback:", err);
+    }
+
+    stepNegative.style.display = 'none';
+    stepThanks.style.display = 'block';
+    showToast('Feedback sent privately to management.');
+  });
+})();
+</script>
+</body>
+</html>

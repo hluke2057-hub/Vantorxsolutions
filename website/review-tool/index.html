@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VantorX Review Funnel™ — Automated Google Review Engine &amp; Sentiment Shield</title>
+<meta name="description" content="Generate high-converting 5-star Google review requests via SMS, filter negative reviews with a private feedback shield, and print instant QR codes for customers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c1017;--bg2:#121824;--bg3:#182030;--line:#222c3f;--line2:#2d3a52;
+  --ink:#f1f5f9;--dim:#94a3b8;--faint:#64748b;
+  --accent:#c7a468;--accent2:#dfbe82;--accent-glow:rgba(199,164,104,0.18);
+  --ok:#34d399;--warn:#fbbf24;--err:#f87171;
+  --font-sans:'Inter',system-ui,sans-serif;--font-head:'Space Grotesk',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--line);background:rgba(12,16,23,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:50}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--ink)}
+.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:18px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-size:14px;padding:9px 18px;border-radius:10px;cursor:pointer;transition:all 0.2s;border:none;text-decoration:none}
+.btn-gold{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0f141c;box-shadow:0 4px 14px rgba(199,164,104,0.25)}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(199,164,104,0.35);text-decoration:none}
+.btn-ghost{background:var(--bg2);color:var(--ink);border:1px solid var(--line2)}
+.btn-ghost:hover{border-color:var(--accent);text-decoration:none}
+.btn-sm{padding:6px 14px;font-size:13px;border-radius:8px}
+
+.hero{padding:44px 0 28px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-glow);color:var(--accent2);border:1px solid rgba(199,164,104,0.35);padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:600;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em}
+h1{font-family:var(--font-head);font-size:clamp(28px,3.8vw,42px);font-weight:700;line-height:1.2;margin-bottom:12px}
+.subhead{color:var(--dim);font-size:16px;max-width:740px;margin:0 auto}
+
+.main-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:60px}
+@media(max-width:960px){.main-grid{grid-template-columns:1fr}}
+
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px}
+.panel-head{font-family:var(--font-head);font-size:20px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+
+.form-group{margin-bottom:16px}
+label{display:block;font-size:13px;font-weight:500;color:var(--dim);margin-bottom:6px}
+input,textarea{width:100%;background:var(--bg);border:1px solid var(--line2);border-radius:10px;padding:10px 14px;color:var(--ink);font-size:14px;font-family:var(--font-sans)}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.shield-card{background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(14,165,233,0.04));border:1px solid rgba(52,211,153,0.3);border-radius:14px;padding:18px;margin-bottom:20px}
+.shield-card h4{color:#6ee7b7;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.shield-card p{font-size:13px;color:var(--dim);line-height:1.45}
+
+.preview-box{background:#080b10;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:18px}
+.preview-box label{font-size:12px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px}
+.preview-box textarea{background:transparent;border:none;color:var(--ink);font-family:var(--font-mono);font-size:13px;line-height:1.5;resize:none}
+
+.qr-box{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:#080b10;border:1px solid var(--line);border-radius:14px;margin-bottom:18px}
+.qr-canvas{background:#ffffff;padding:12px;border-radius:10px}
+
+.toast{position:fixed;bottom:24px;right:24px;background:#1e293b;border:1px solid var(--accent);color:var(--ink);padding:12px 20px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,0.5);opacity:0;transform:translateY(10px);transition:all 0.25s;pointer-events:none;z-index:100}
+.toast.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="/" class="brand">Vantor<span>X</span></a>
+    <div class="nav-links">
+      <a href="/#services" class="btn btn-ghost btn-sm">Services</a>
+      <a href="/#pricing" class="btn btn-ghost btn-sm">Pricing</a>
+      <a href="/aeo-tool/" class="btn btn-ghost btn-sm">🧠 AEO Tool</a>
+      <a href="/review/" class="btn btn-ghost btn-sm" target="_blank">⭐ Live Shield</a>
+      <a href="/#contact" class="btn btn-gold btn-sm">Book Demo</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="badge">⭐ 5-Star Review Acceleration</div>
+    <h1>Review Funnel™ &amp; Negative Feedback Shield</h1>
+    <p class="subhead">Never let a frustrated customer leave a public 1-star review on Google. Our smart review funnel sends 4 &amp; 5-star ratings straight to Google, while private 1–3 star feedback is routed directly to you.</p>
+  </div>
+
+  <div class="main-grid">
+    <!-- Configuration Panel -->
+    <div class="panel">
+      <div class="panel-head">
+        <span>⚙️ Funnel Configuration</span>
+        <button class="btn btn-ghost btn-sm" id="loadVantorXBtn">Load VantorX</button>
+      </div>
+
+      <div class="shield-card">
+        <h4>🛡️ Smart Sentiment Shield Active</h4>
+        <p>• <strong>4 &amp; 5-Star Ratings:</strong> Directs customers to post their review directly on Google with pre-copied praise.<br>
+           • <strong>1 to 3-Star Ratings:</strong> Catches complaints privately so you can call and resolve issues before they ever hit the internet.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="cfgBiz">Business Name *</label>
+        <input type="text" id="cfgBiz" value="VantorX Solutions">
+      </div>
+
+      <div class="row2">
+        <div class="form-group">
+          <label for="cfgOwner">Owner / Manager Name *</label>
+          <input type="text" id="cfgOwner" value="Luke">
+        </div>
+        <div class="form-group">
+          <label for="cfgTrade">Trade / Category</label>
+          <input type="text" id="cfgTrade" value="AI &amp; Web Systems">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cfgGoogle">Google Review Direct Link (Optional)</label>
+        <input type="url" id="cfgGoogle" placeholder="https://g.page/r/XXXXX/review (or leave blank for auto Google search)">
+      </div>
+
+      <div class="preview-box">
+        <label>Your Customer Review Link:</label>
+        <input type="text" id="liveFunnelUrl" readonly style="background:#121824;font-family:var(--font-mono);font-size:12px;color:var(--accent2)">
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <button class="btn btn-ghost btn-sm" id="copyLinkBtn">📋 Copy Link</button>
+          <a class="btn btn-ghost btn-sm" id="testLinkBtn" href="/review/" target="_blank">🔗 Test Funnel ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dispatch & QR Code Panel -->
+    <div class="panel">
+      <div class="panel-head">
+        <span>📱 Dispatch &amp; QR Code</span>
+        <span style="font-size:12.5px;color:var(--ok)">✓ 1-Tap Mobile Ready</span>
+      </div>
+
+      <div class="form-group">
+        <label for="custName">Customer First Name</label>
+        <input type="text" id="custName" placeholder="e.g. Michael">
+      </div>
+
+      <div class="form-group">
+        <label for="custPhone">Customer Phone Number</label>
+        <input type="tel" id="custPhone" placeholder="e.g. (561) 555-0199">
+      </div>
+
+      <div class="preview-box">
+        <label>Generated SMS Review Request:</label>
+        <textarea id="smsText" rows="4"></textarea>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <button class="btn btn-gold btn-sm" id="sendSmsBtn">📱 Send SMS Text</button>
+          <button class="btn btn-ghost btn-sm" id="copySmsBtn">📋 Copy SMS</button>
+        </div>
+      </div>
+
+      <div class="panel-head" style="margin-top:20px;font-size:16px">
+        <span>🖨️ Counter &amp; Truck Magnet QR Code</span>
+      </div>
+
+      <div class="qr-box">
+        <img id="qrImg" src="" alt="Review QR Code" style="width:160px;height:160px;background:#fff;padding:8px;border-radius:10px;margin-bottom:12px">
+        <p style="font-size:12.5px;color:var(--dim);margin-bottom:10px">Scan with any smartphone camera to open the review shield</p>
+        <a class="btn btn-ghost btn-sm" id="downloadQrBtn" href="#" download="review-qr-code.png">💾 Download High-Res QR Code</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+(function() {
+  const cfgBiz = document.getElementById('cfgBiz');
+  const cfgOwner = document.getElementById('cfgOwner');
+  const cfgTrade = document.getElementById('cfgTrade');
+  const cfgGoogle = document.getElementById('cfgGoogle');
+  const liveFunnelUrl = document.getElementById('liveFunnelUrl');
+  const testLinkBtn = document.getElementById('testLinkBtn');
+  const copyLinkBtn = document.getElementById('copyLinkBtn');
+  const custName = document.getElementById('custName');
+  const custPhone = document.getElementById('custPhone');
+  const smsText = document.getElementById('smsText');
+  const sendSmsBtn = document.getElementById('sendSmsBtn');
+  const copySmsBtn = document.getElementById('copySmsBtn');
+  const qrImg = document.getElementById('qrImg');
+  const downloadQrBtn = document.getElementById('downloadQrBtn');
+  const toast = document.getElementById('toast');
+  const loadVantorXBtn = document.getElementById('loadVantorXBtn');
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function updateFunnel() {
+    const biz = cfgBiz.value.trim() || 'VantorX Solutions';
+    const owner = cfgOwner.value.trim() || 'Luke';
+    const google = cfgGoogle.value.trim();
+
+    const baseUrl = window.location.origin + '/review/';
+    const params = new URLSearchParams();
+    params.set('biz', biz);
+    params.set('owner', owner);
+    if (google) params.set('google', google);
+
+    const fullUrl = baseUrl + '?' + params.toString();
+    liveFunnelUrl.value = fullUrl;
+    testLinkBtn.href = fullUrl;
+
+    // Update SMS template
+    const cName = custName.value.trim() || 'there';
+    smsText.value = `Hi ${cName}! Thanks for choosing ${biz}. Could you take 15 seconds to tap this link and rate your experience? ${fullUrl} — ${owner}`;
+
+    // Update QR Code
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(fullUrl)}`;
+    qrImg.src = qrUrl;
+    downloadQrBtn.href = qrUrl;
+  }
+
+  [cfgBiz, cfgOwner, cfgTrade, cfgGoogle, custName, custPhone].forEach(el => {
+    el.addEventListener('input', updateFunnel);
+  });
+
+  copyLinkBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(liveFunnelUrl.value);
+    showToast('✓ Review link copied to clipboard!');
+  });
+
+  copySmsBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(smsText.value);
+    showToast('✓ SMS message copied to clipboard!');
+  });
+
+  sendSmsBtn.addEventListener('click', () => {
+    const phone = (custPhone.value || '').replace(/[^0-9+]/g, '');
+    const body = encodeURIComponent(smsText.value);
+    if (phone) {
+      window.location.href = `sms:${phone}?body=${body}`;
+    } else {
+      window.location.href = `sms:?body=${body}`;
+    }
+    showToast('Opening native messages app...');
+  });
+
+  loadVantorXBtn.addEventListener('click', () => {
+    cfgBiz.value = "VantorX Solutions";
+    cfgOwner.value = "Luke";
+    cfgTrade.value = "Websites & AI Phone Systems";
+    cfgGoogle.value = "";
+    updateFunnel();
+    showToast('Reset to VantorX Solutions');
+  });
+
+  updateFunnel();
+})();
+</script>
+</body>
+</html>
