@@ -373,7 +373,8 @@
 
     <!-- Navigation Tabs -->
     <div class="view-tabs">
-      <button class="tab-btn active" id="tabCurated" onclick="switchTab('curated')">🎯 Live Pipeline & Dispatches</button>
+      <button class="tab-btn active" id="tabCurated" onclick="switchTab('curated')">🎯 Live Pipeline & Queue</button>
+      <button class="tab-btn tab-btn-blue" id="tabSentOutbox" onclick="switchTab('sentOutbox')">📤 All Sent Emails (<span id="sentBadgeCount">0</span>)</button>
       <button class="tab-btn tab-btn-emerald" id="tabResponses" onclick="switchTab('responses')">📬 Inbound Responses & Replies <span class="badge" id="respBadgeCount" style="background:#059669;color:#fff;margin-left:4px;">0</span></button>
       <button class="tab-btn tab-btn-gold" id="tabBrain" onclick="switchTab('brain')">🧠 Adaptive Learning Brain</button>
     </div>
@@ -396,6 +397,27 @@
           <h3>Autopilot is Ready</h3>
           <p>Click the big green <strong>"GO"</strong> button above. The engine will instantly begin harvesting real businesses, auditing their sites, and sending personalized emails with safe delays automatically.</p>
         </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- TAB 2: ALL SENT EMAILS (ONE SPOT OUTBOX)       -->
+    <!-- ============================================== -->
+    <div class="panel" id="sentOutboxPanel" style="display: none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+        <div>
+          <h3 style="font-size: 1.25rem; color: #fff;">📤 All Sent Outbound Emails (One Spot)</h3>
+          <p style="font-size: 0.86rem; color: var(--text-muted); margin-top:2px;">
+            Complete chronological record of all emails physically dispatched from <strong>luke@vantorxsolutions.com</strong> via Resend API and cloud batches.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-secondary" onclick="exportCsv()">📥 Export All Sent (CSV)</button>
+        </div>
+      </div>
+
+      <div class="leads-grid" id="sentEmailsGrid">
+        <!-- Rendered via JavaScript -->
       </div>
     </div>
 
@@ -647,40 +669,84 @@
 
     function switchTab(tab) {
       document.getElementById('tabCurated').classList.toggle('active', tab === 'curated');
+      document.getElementById('tabSentOutbox').classList.toggle('active', tab === 'sentOutbox');
       document.getElementById('tabResponses').classList.toggle('active', tab === 'responses');
       document.getElementById('tabBrain').classList.toggle('active', tab === 'brain');
 
       document.getElementById('curatedPanel').style.display = (tab === 'curated') ? 'block' : 'none';
+      document.getElementById('sentOutboxPanel').style.display = (tab === 'sentOutbox') ? 'block' : 'none';
       document.getElementById('responsesPanel').style.display = (tab === 'responses') ? 'block' : 'none';
       document.getElementById('brainPanel').style.display = (tab === 'brain') ? 'block' : 'none';
 
       if (tab === 'responses') renderResponses();
       if (tab === 'brain') renderBrain();
       if (tab === 'curated') renderLeads();
+      if (tab === 'sentOutbox') renderSentOutbox();
     }
 
     // Manual Cloud Trigger
-    function toggleMasterAutopilot() {
-      syncCloudIntelligence(true);
+    async function toggleMasterAutopilot() {
+      const btnText = document.getElementById('masterGoBtnText');
+      if (btnText) btnText.innerText = "SYNCING CLOUD DB...";
+      await syncCloudIntelligence(true);
+      if (btnText) btnText.innerText = "SYNC CLOUD TELEMETRY";
     }
-      const nextLead = AUTOPILOT.activeLeads.find(l => !l.sent);
-      if (nextLead) {
-        dispatchSingleLead(nextLead);
+
+    function renderSentOutbox() {
+      const container = document.getElementById('sentEmailsGrid');
+      if (!container) return;
+      const sentLeads = AUTOPILOT.activeLeads.filter(l => l.sent || l.resendMessageId || l.dispatchedAt);
+      
+      const countEl = document.getElementById('sentBadgeCount');
+      if (countEl) countEl.innerText = sentLeads.length;
+
+      if (sentLeads.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div style="font-size: 2.6rem; margin-bottom: 12px;">📭</div>
+            <h3>No Sent Emails In Outbox</h3>
+            <p>Emails dispatched via cloud batches or direct Resend transmission will display here.</p>
+          </div>
+        `;
+        return;
       }
 
-      if (!AUTOPILOT.running) return;
+      container.innerHTML = sentLeads.map((lead, idx) => {
+        const timeStr = lead.dispatchedAt || lead.sentAt 
+          ? new Date(lead.dispatchedAt || lead.sentAt).toLocaleString() 
+          : "Recent Cloud Batch";
 
-      // 3. Initiate Safe Anti-Spam Randomized Delay (45s - 75s)
-      const safeSeconds = Math.floor(Math.random() * 30) + 45;
-      AUTOPILOT.secondsRemaining = safeSeconds;
+        const resendBadge = lead.resendMessageId
+          ? `<span class="badge" style="background:rgba(16,185,129,0.2);color:#34d399;border:1px solid #10b981;font-weight:700;">✅ Resend ID: ${lead.resendMessageId.slice(0, 16)}...</span>`
+          : `<span class="badge badge-sent">✅ Dispatched</span>`;
 
-      // Fallback timer if Web Worker is inactive
-      if (!keepAliveWorker) {
-        clearInterval(AUTOPILOT.countdownTimer);
-        AUTOPILOT.countdownTimer = setInterval(() => {
-          handleWorkerTick();
-        }, 1000);
-      }
+        return `
+          <div class="lead-card sent-card" style="border-left: 4px solid #10b981;">
+            <div class="lead-header">
+              <div class="lead-title">
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 4px;">📅 Sent at: <strong>${timeStr}</strong></div>
+                <h3>${lead.company}</h3>
+                <div class="lead-meta">
+                  <span>👤 <strong>${lead.owner}</strong> (${lead.title || 'Owner'})</span>
+                  <span>📍 ${lead.city}</span>
+                  <span>✉️ To: <strong style="color: #38bdf8;">${lead.email}</strong></span>
+                  <span class="badge badge-trade">${lead.trade}</span>
+                  <span class="badge badge-service-ai">☎️ ${lead.serviceCategory || 'AI Receptionist'}</span>
+                  ${resendBadge}
+                </div>
+              </div>
+              <div class="loss-tag">Est. Lost: ${lead.estLoss || '$7,800/mo'}</div>
+            </div>
+
+            <div class="email-preview" style="background:#0a0f1d; border:1px solid #1e293b; border-radius:8px; padding:16px; margin-top:14px;">
+              <div class="email-subject" style="color:#38bdf8; font-weight:700; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid #1e293b;">
+                <strong>Subject:</strong> ${lead.subject}
+              </div>
+              <div style="white-space: pre-line; color: #cbd5e1; font-size: 0.88rem; line-height: 1.6;">${lead.body}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     // ==============================================
@@ -1252,8 +1318,9 @@ Website: ${WEBSITE_URL}`
       loadState();
       updateHUDMetrics();
       renderLeads();
+      renderSentOutbox();
       renderResponses();
-      syncCloudIntelligence();
+      syncCloudIntelligence(false);
     });
   </script>
 </body>
