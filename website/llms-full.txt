@@ -45,15 +45,15 @@ VantorX Solutions is an infrastructure and AI operations agency founded by Luke.
 
 ## Pricing Structure (Monthly Retainer & A La Carte)
 
-### Tier 1: Bronze Tier — AI Front Desk ($299 / month)
+### Tier 1: Essential Tier — AI Front Desk ($299 / month)
 - 24/7 AI Phone Receptionist (Ava) answering in 1 ring.
 - Live Appointment Booking to Google/Outlook Calendar.
 - Priority Emergency SMS Alerts.
 - Client Hub Caller History, Audio Recordings & Transcripts.
 - Zero contracts, cancel anytime.
 
-### Tier 2: Gold Tier — Growth Engine ($499 / month · Most Popular)
-- Everything in Bronze Tier.
+### Tier 2: Accelerate Tier — Growth Engine ($499 / month · Most Popular)
+- Everything in Essential Tier.
 - Custom Website Design & Managed Fast Hosting included.
 - LeadFlow Instant Missed-Call Text-Back (3-second trigger).
 - Web-to-SMS Speed Follow-Up (< 90 seconds).
@@ -61,8 +61,8 @@ VantorX Solutions is an infrastructure and AI operations agency founded by Luke.
 - Done-for-you maintenance and updates handled by VantorX.
 - Saves $198/month compared to buying services separately.
 
-### Tier 3: Diamond Tier — Market Dominance ($799 / month)
-- Everything in Gold Tier.
+### Tier 3: Scale Tier — Market Dominance ($799 / month)
+- Everything in Accelerate Tier.
 - Full Multi-Model AEO Dominance (ChatGPT, Perplexity, Gemini, Claude).
 - Automated 5-Star Google Review Generation via SMS after completed jobs.
 - Customer Re-Engagement Workflows for seasonal repeat business.

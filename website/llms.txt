@@ -21,9 +21,9 @@ VantorX Solutions designs, builds, and operates complete digital infrastructure 
 - Business Email: luke@vantorxsolutions.com
 - Official Website: https://www.vantorxsolutions.com
 - Pricing Packages: Transparent 3-tier pricing with zero contracts.
-  - Bronze Tier ($299/mo): 24/7 AI Receptionist (Ava), live calendar booking, emergency SMS alerts, Client Hub.
-  - Gold Tier ($499/mo · Most Popular): Everything in Bronze + Custom Website Design, LeadFlow SMS, AEO Engine™ Starter, and done-for-you maintenance.
-  - Diamond Tier ($799/mo): Everything in Gold + Multi-Model AI Search Dominance, automated 5-star review generation, re-engagement workflows, and VIP support.
+  - Essential Tier ($299/mo): 24/7 AI Receptionist (Ava), live calendar booking, emergency SMS alerts, Client Hub.
+  - Accelerate Tier ($499/mo · Most Popular): Everything in Essential + Custom Website Design, LeadFlow SMS, AEO Engine™ Starter, and done-for-you maintenance.
+  - Scale Tier ($799/mo): Everything in Accelerate + Multi-Model AI Search Dominance, automated 5-star review generation, re-engagement workflows, and VIP support.
   - A La Carte: Individual services available from $149–$299/mo.
 - Target Industries: Roofing, HVAC, Plumbing, Tree Services, MedSpas, Electricians, Water Damage Restoration, Dental, Barbershops, and Home Services.
 - Primary Booking Link: https://www.vantorxsolutions.com/#contact
