@@ -7,6 +7,7 @@
 import { esc } from '../utils.js';
 import { CONNECTIONS, TESTS } from '../data.js';
 import { setState } from '../state.js';
+import { generateLlmsTxt, generateJsonLd } from '../aeo-generator.js';
 
 /* ---------------- step 6: connections ---------------- */
 export function paintConnections(body, d, rerender) {
@@ -102,6 +103,23 @@ export function paintReview(body, d, rerender, goLive, isCompleted) {
         <div class="kv-row"><span class="kv-label">Connections</span><span>${connOn.length ? connOn.map(c => c.title).join(', ') : 'none selected'}</span></div>
         <div class="kv-row"><span class="kv-label">Checklist</span><span>${testsDone} of ${TESTS.length} done</span></div>
       </div>
+
+      <div class="card obx-review-card" style="grid-column: 1 / -1; margin-top: 14px; border-color: rgba(199,164,104,0.4); background: var(--bg-soft, #161e2e);">
+        <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>🧠 AEO Engine™ Standard Generated (ChatGPT &amp; Perplexity)</span>
+          <span style="font-size:12px;color:var(--accent2);font-weight:600">${d.connections.aeo ? '✓ AEO Provisioning Active' : '⚡ Instant Preview Available'}</span>
+        </div>
+        <p style="font-size:13.5px;color:var(--dim);margin:6px 0 14px">Your business data has been compiled into the official AI search protocol so ChatGPT, Claude, and Perplexity recommend you #1.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-gold btn-sm" id="viewLlmsBtn">📄 View / Copy llms.txt</button>
+          <button class="btn btn-ghost btn-sm" id="viewJsonBtn">📋 View / Copy Schema.org</button>
+          <button class="btn btn-ghost btn-sm" id="dlLlmsBtn">💾 Download llms.txt</button>
+          <a href="/aeo-tool/" target="_blank" class="btn btn-ghost btn-sm">⚡ Open AEO Simulator ↗</a>
+        </div>
+        <div id="aeoPreviewBox" style="display:none;margin-top:14px;background:#080b10;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px;max-height:240px;overflow-y:auto">
+          <pre id="aeoPreContent" style="font-family:monospace;font-size:12px;color:#cbd5e1;white-space:pre-wrap;"></pre>
+        </div>
+      </div>
     </div>
 
     <div class="obx-golive" id="goLiveBox">
@@ -120,6 +138,47 @@ export function paintReview(body, d, rerender, goLive, isCompleted) {
   if (gl) gl.addEventListener('click', goLive);
   const ro = body.querySelector('#reopenBtn');
   if (ro) ro.addEventListener('click', () => { setState(s => { s.completed = false; }); rerender(); });
+
+  const pBox = body.querySelector('#aeoPreviewBox');
+  const pPre = body.querySelector('#aeoPreContent');
+  const viewLlmsBtn = body.querySelector('#viewLlmsBtn');
+  const viewJsonBtn = body.querySelector('#viewJsonBtn');
+  const dlLlmsBtn = body.querySelector('#dlLlmsBtn');
+
+  if (viewLlmsBtn && pBox && pPre) {
+    viewLlmsBtn.addEventListener('click', () => {
+      const txt = generateLlmsTxt(d);
+      pPre.textContent = txt;
+      pBox.style.display = 'block';
+      navigator.clipboard.writeText(txt);
+      viewLlmsBtn.textContent = '✓ Copied llms.txt to Clipboard!';
+      setTimeout(() => { viewLlmsBtn.textContent = '📄 View / Copy llms.txt'; }, 2500);
+    });
+  }
+
+  if (viewJsonBtn && pBox && pPre) {
+    viewJsonBtn.addEventListener('click', () => {
+      const jsonStr = generateJsonLd(d);
+      pPre.textContent = jsonStr;
+      pBox.style.display = 'block';
+      navigator.clipboard.writeText(jsonStr);
+      viewJsonBtn.textContent = '✓ Copied Schema to Clipboard!';
+      setTimeout(() => { viewJsonBtn.textContent = '📋 View / Copy Schema.org'; }, 2500);
+    });
+  }
+
+  if (dlLlmsBtn) {
+    dlLlmsBtn.addEventListener('click', () => {
+      const txt = generateLlmsTxt(d);
+      const blob = new Blob([txt], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'llms.txt';
+      a.click();
+      dlLlmsBtn.textContent = '✓ Downloaded llms.txt!';
+      setTimeout(() => { dlLlmsBtn.textContent = '💾 Download llms.txt'; }, 2500);
+    });
+  }
 
   return { validate() { return ''; }, collect() {} };
 }

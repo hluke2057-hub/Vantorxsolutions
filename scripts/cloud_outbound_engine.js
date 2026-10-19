@@ -206,6 +206,35 @@ Direct: ${DEMO_PHONE}
 Website: ${WEBSITE_URL}`;
       return { subject, body };
     }
+  },
+
+  service_aeo_optimization: {
+    category: "AEO Engine™ (AI Search & Ranking)",
+    generate: (lead, subject) => {
+      const body = `Hi ${lead.owner},
+
+I was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended ${lead.trade.toLowerCase()} contractors in ${lead.city}.
+
+While ${lead.company} has a solid local reputation, when homeowners in your market ask ChatGPT or Perplexity "Who is the most reliable ${lead.trade.toLowerCase()} contractor near me?", the AI engines aren't recommending you -- they're actively directing high-ticket jobs to your competitors.
+
+Here's why: Traditional SEO only targets Google links. Today, millions of homeowners are searching using conversational AI assistants on their phones. AI engines ignore traditional keywords unless your business has an engineered llms.txt protocol and structured Schema.org entity data.
+
+We built the AEO Engine™ (Answer Engine Optimization) specifically for ${lead.trade.toLowerCase()} businesses. We generate, verify, and host your official llms.txt standard and rich knowledge graph so ChatGPT, Perplexity, and Gemini recommend ${lead.company} as the #1 local authority.
+
+I put together a 3-minute video audit showing what ChatGPT and Perplexity say when homeowners search for ${lead.trade.toLowerCase()} in ${lead.city}, and how we can get you indexed as the top recommended choice.
+
+Could we jump on a brief 10-15 minute Zoom screen share this Tuesday at 2:30 PM or Thursday at 11:00 AM so I can show you the screen recording?
+
+You can also book a time directly on my calendar here:
+👉 ${BOOKING_URL}
+
+Best,
+${SENDER_NAME}
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`;
+      return { subject, body };
+    }
   }
 };
 
@@ -239,6 +268,12 @@ const AUDIT_VULNERABILITIES = [
     audit: "Fragmented software setup with zero centralized lead pipeline or call tracking.",
     loss: "$8,900/mo",
     suggestedService: "service_full_operations"
+  },
+  {
+    quote: "Asked ChatGPT for the best contractor in town -- it recommended 3 other companies and didn't even mention our name.",
+    audit: "Completely absent from AI search knowledge graphs with zero llms.txt protocol or JSON-LD schema.",
+    loss: "$11,400/mo",
+    suggestedService: "service_aeo_optimization"
   }
 ];
 

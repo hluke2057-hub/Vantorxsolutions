@@ -37,8 +37,8 @@ function blank() {
         transferNumber: '',
         transferWhen: 'If the caller asks for a human, or the request is outside the AI\u2019s knowledge.',
       },
-      connections: { calendar: false, phone: false, leadflow: false, clienthub: false },
-      tests: { info: false, services: false, hours: false, greeting: false, booking: false, transfer: false },
+      connections: { calendar: false, phone: false, leadflow: false, clienthub: false, aeo: false },
+      tests: { info: false, services: false, hours: false, greeting: false, booking: false, transfer: false, aeo: false },
     },
   };
 }

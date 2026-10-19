@@ -151,6 +151,28 @@
       "adaptiveWeight": 0.17,
       "status": "Active",
       "zoomPitch": "15-minute Zoom screen share walking through the complete done-for-you growth ecosystem"
+    },
+    {
+      "id": "service_aeo_optimization",
+      "serviceCategory": "AEO Engine™ (AI Search & Ranking)",
+      "name": "Answer Engine Optimization (AEO / GEO) for ChatGPT & Perplexity",
+      "description": "Targets businesses invisible on AI assistants. Builds official llms.txt and schema graph so ChatGPT, Perplexity, and Gemini recommend them as the #1 local contractor.",
+      "subjectLines": [
+        "{company} on ChatGPT and Perplexity",
+        "AI search audit for {company} in {city}",
+        "Quick question for {owner} regarding {company}'s AI ranking"
+      ],
+      "activeSubjectIndex": 0,
+      "sent": 0,
+      "opened": 0,
+      "unopenedAfter48h": 0,
+      "positiveReplies": 0,
+      "negativeReplies": 0,
+      "zoomBookings": 0,
+      "conversionRate": 0,
+      "adaptiveWeight": 0.22,
+      "status": "Active (Next-Gen AI Growth)",
+      "zoomPitch": "15-minute Zoom screen share to reveal live ChatGPT/Perplexity audit and demonstrate custom llms.txt and schema ranking engine"
     }
   ],
   "inboundResponses": [],

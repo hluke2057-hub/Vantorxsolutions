@@ -226,6 +226,7 @@
     .badge-service-speed { background: rgba(234, 179, 8, 0.15); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.4); }
     .badge-service-missed { background: rgba(244, 63, 94, 0.15); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.4); }
     .badge-service-full { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-service-aeo { background: rgba(199, 164, 104, 0.15); color: #dfbe82; border: 1px solid rgba(199, 164, 104, 0.4); }
     
     .loss-tag {
       background: rgba(244, 63, 94, 0.15);
@@ -972,6 +973,48 @@ Direct: ${DEMO_PHONE}
 Website: ${WEBSITE_URL}`
           };
         }
+      },
+      {
+        id: "service_aeo_optimization",
+        category: "AEO Engine™ (AI Search & Ranking)",
+        badgeClass: "badge-service-aeo",
+        badgeLabel: "🧠 AEO Engine™ (AI Search)",
+        weight: 22,
+        status: "Active (Next-Gen AI Growth)",
+        subjectLines: [
+          "{company} on ChatGPT and Perplexity",
+          "AI search audit for {company} in {city}",
+          "Quick question for {owner} regarding {company}'s AI ranking"
+        ],
+        activeSubjectIndex: 0,
+        unopened48h: 0,
+        generate: (lead, subject) => {
+          return {
+            subject: subject,
+            body: `Hi ${lead.owner},
+
+I was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended ${lead.trade.toLowerCase()} contractors in ${lead.city}.
+
+While ${lead.company} has a solid local reputation, when homeowners in your market ask ChatGPT or Perplexity "Who is the most reliable ${lead.trade.toLowerCase()} contractor near me?", the AI engines aren't recommending you -- they're actively directing high-ticket jobs to your competitors.
+
+Here's why: Traditional SEO only targets Google links. Today, millions of homeowners are searching using conversational AI assistants on their phones. AI engines ignore traditional keywords unless your business has an engineered llms.txt protocol and structured Schema.org entity data.
+
+We built the AEO Engine™ (Answer Engine Optimization) specifically for ${lead.trade.toLowerCase()} businesses. We generate, verify, and host your official llms.txt standard and rich knowledge graph so ChatGPT, Perplexity, and Gemini recommend ${lead.company} as the #1 local authority.
+
+I put together a 3-minute video audit showing what ChatGPT and Perplexity say when homeowners search for ${lead.trade.toLowerCase()} in ${lead.city}, and how we can get you indexed as the top recommended choice.
+
+Could we jump on a brief 10-15 minute Zoom screen share this Tuesday at 2:30 PM or Thursday at 11:00 AM so I can show you the screen recording?
+
+You can also book a time directly on my calendar here:
+👉 ${BOOKING_URL}
+
+Best,
+Luke
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`
+          };
+        }
       }
     ];
 
@@ -987,7 +1030,7 @@ Website: ${WEBSITE_URL}`
           "Submitted an online estimate quote form on Saturday, received zero follow-up until Tuesday afternoon.",
           "Rang 6 times during the day while crew was on-site. Had to dial the next contractor on Google.",
           "Disconnected setup: web inquiries went into a black hole and after-hours calls went to voicemail.",
-          "AC broke down on a 90-degree Sunday. Phone rang 6 times and dropped without emergency triage."
+          "Asked ChatGPT for the best contractor in town -- it recommended 3 other companies and didn't even mention our name."
         ];
         const audits = [
           "Voicemail unmonitored during peak evening emergency search surges.",
@@ -995,9 +1038,9 @@ Website: ${WEBSITE_URL}`
           "Over 48-hour response lag on digital inquiries without instant SMS speed-to-lead.",
           "Zero instant missed-call text-back to rescue daytime lost callers.",
           "Fragmented software setup with zero centralized lead pipeline or call tracking.",
-          "Lacks 24/7 conversational receptionist and real-time calendar booking."
+          "Completely absent from AI search knowledge graphs with zero llms.txt protocol or JSON-LD schema."
         ];
-        const losses = ["$7,800/mo", "$8,500/mo", "$9,200/mo", "$6,400/mo", "$8,900/mo", "$7,400/mo"];
+        const losses = ["$7,800/mo", "$8,500/mo", "$9,200/mo", "$6,400/mo", "$8,900/mo", "$11,400/mo"];
 
         const newBatch = [];
         for (let i = 0; i < 6; i++) {

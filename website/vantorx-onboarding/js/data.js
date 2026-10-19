@@ -24,6 +24,7 @@ export const CONNECTIONS = [
   { id: 'phone', icon: '📞', title: 'Business phone number', desc: 'A local number your AI receptionist answers 24/7.' },
   { id: 'leadflow', icon: '🎯', title: 'LeadFlow CRM', desc: 'Every missed call and inquiry becomes a tracked lead.' },
   { id: 'clienthub', icon: '🤖', title: 'Client Hub portal', desc: 'Your dashboard for calls, appointments, and AI knowledge.' },
+  { id: 'aeo', icon: '🧠', title: 'AEO Engine™ (AI Search & Ranking)', desc: 'Engineered llms.txt & JSON-LD schema so ChatGPT, Perplexity & Gemini recommend your business #1.' },
 ];
 
 export const TESTS = [
@@ -33,6 +34,7 @@ export const TESTS = [
   { id: 'greeting', label: 'AI greeting reviewed', hint: 'You listened to how the AI answers.' },
   { id: 'booking', label: 'Booking flow tested', hint: 'The AI booked a test appointment correctly.' },
   { id: 'transfer', label: 'Human transfer tested', hint: 'The AI passed a complex call to a human.' },
+  { id: 'aeo', label: 'AEO & AI Search schema generated', hint: 'llms.txt and JSON-LD structured data verified for ChatGPT & Perplexity.' },
 ];
 
 export function starterFAQs(industryId) {
