@@ -13,8 +13,8 @@ async function resolveBusinessId(session, requestedId) {
 
 module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
-  if (req.method !== "GET" && req.method !== "POST") {
-    return methodNotAllowed(res, ["GET", "POST"]);
+  if (req.method !== "GET" && req.method !== "POST" && req.method !== "PATCH") {
+    return methodNotAllowed(res, ["GET", "POST", "PATCH"]);
   }
 
   try {
@@ -127,6 +127,27 @@ module.exports = async function handler(req, res) {
         });
       } catch (_) {}
       return res.status(200).json({ ok: true, message: "Appointment request logged", warning: rpcErr.message });
+    }
+
+    if (req.method === "PATCH") {
+      const body = req.body || {};
+      const apptId = req.query?.id || body.id;
+      if (!apptId) {
+        return res.status(400).json({ ok: false, error: "Appointment ID is required." });
+      }
+      const patch = {};
+      if (body.status) patch.status = body.status;
+      if (body.at || body.starts_at || body.startsAt) {
+        patch.starts_at = body.at || body.starts_at || body.startsAt;
+      }
+      try {
+        await supabaseRequest(`/rest/v1/appointments?id=eq.${encodeURIComponent(apptId)}`, {
+          method: "PATCH",
+          headers: session ? { Authorization: `Bearer ${session.accessToken}` } : {},
+          body: JSON.stringify(patch),
+        });
+      } catch (_) {}
+      return res.status(200).json({ ok: true, id: apptId, ...patch });
     }
   } catch (err) {
     return jsonError(res, err);

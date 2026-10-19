@@ -2,8 +2,13 @@
   "rewrites": [
     { "source": "/api/auth/:action", "destination": "/api/auth?action=:action" },
     { "source": "/api/businesses/create", "destination": "/api/businesses" },
-    { "source": "/api/receptionist/config", "destination": "/api/receptionist?action=config" },
+    { "source": "/api/businesses/:id", "destination": "/api/businesses?id=:id" },
+    { "source": "/api/receptionist/:action", "destination": "/api/receptionist?action=:action" },
     { "source": "/api/onboarding/:action", "destination": "/api/onboarding?action=:action" },
-    { "source": "/api/billing/:action", "destination": "/api/billing?action=:action" }
+    { "source": "/api/billing/:action", "destination": "/api/billing?action=:action" },
+    { "source": "/api/appointments/:id", "destination": "/api/appointments?id=:id" },
+    { "source": "/api/notifications/:action", "destination": "/api/notifications?action=:action" },
+    { "source": "/api/change-requests/:id", "destination": "/api/change-requests?id=:id" },
+    { "source": "/api/admin/inquiries", "destination": "/api/change-requests?action=inquiries" }
   ]
 }

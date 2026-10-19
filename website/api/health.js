@@ -34,6 +34,7 @@ module.exports = async function handler(req, res) {
     checks: {
       supabase_url_configured: validUrl,
       supabase_publishable_key_configured: Boolean(publishableKey),
+      resend_api_key_configured: Boolean(process.env.RESEND_API_KEY),
     },
     message: configured
       ? "Backend environment is configured."
