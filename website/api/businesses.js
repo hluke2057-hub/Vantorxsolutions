@@ -55,28 +55,28 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, rows });
     }
 
-    // POST - create business
-    const body = req.body || {};
-    const name = typeof body.name === "string" ? body.name.trim() : "";
-    const slug = typeof body.slug === "string" ? body.slug.trim().toLowerCase() : "";
-    const timezone = typeof body.timezone === "string" ? body.timezone.trim() : "America/New_York";
-    if (name.length < 2 || name.length > 160) {
-      return res.status(400).json({ ok: false, error: "Business name must be between 2 and 160 characters." });
-    }
-    if (slug && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
-      return res.status(400).json({ ok: false, error: "Slug may contain lowercase letters, numbers, and single hyphens." });
-    }
-    if (timezone.length > 80) {
-      return res.status(400).json({ ok: false, error: "Invalid timezone." });
-    }
+    if (req.method === "POST") {
+      const body = req.body || {};
+      const name = typeof body.name === "string" ? body.name.trim() : "";
+      const slug = typeof body.slug === "string" ? body.slug.trim().toLowerCase() : "";
+      const timezone = typeof body.timezone === "string" ? body.timezone.trim() : "America/New_York";
+      if (name.length < 2 || name.length > 160) {
+        return res.status(400).json({ ok: false, error: "Business name must be between 2 and 160 characters." });
+      }
+      if (slug && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+        return res.status(400).json({ ok: false, error: "Slug may contain lowercase letters, numbers, and single hyphens." });
+      }
+      if (timezone.length > 80) {
+        return res.status(400).json({ ok: false, error: "Invalid timezone." });
+      }
 
-    const businessId = await supabaseRequest("/rest/v1/rpc/create_business_with_owner", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${session.accessToken}` },
-      body: JSON.stringify({ business_name: name, business_slug: slug || null, business_timezone: timezone }),
-    });
+      const businessId = await supabaseRequest("/rest/v1/rpc/create_business_with_owner", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${session.accessToken}` },
+        body: JSON.stringify({ business_name: name, business_slug: slug || null, business_timezone: timezone }),
+      });
 
-    return res.status(201).json({ ok: true, businessId });
+      return res.status(201).json({ ok: true, businessId });
     }
 
     if (req.method === "PATCH") {
