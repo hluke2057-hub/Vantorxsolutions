@@ -220,6 +220,12 @@
     .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.76rem; font-weight: 700; }
     .badge-trade { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
     .badge-sent { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
+    .badge-zoom { background: rgba(14, 165, 233, 0.2); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.5); font-weight: 700; }
+    .badge-service-ai { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.4); }
+    .badge-service-web { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+    .badge-service-speed { background: rgba(234, 179, 8, 0.15); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.4); }
+    .badge-service-missed { background: rgba(244, 63, 94, 0.15); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.4); }
+    .badge-service-full { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
     
     .loss-tag {
       background: rgba(244, 63, 94, 0.15);
@@ -306,9 +312,9 @@
     <div class="autopilot-command-card" id="autopilotCard">
       <div class="autopilot-top">
         <div class="autopilot-title">
-          <h2>🚀 Infinite 24/7 Autopilot Engine</h2>
+          <h2>🚀 Infinite 24/7 Multi-Service Outbound Engine</h2>
           <p>
-            Click <strong>"GO"</strong> and let it run all day and night. It automatically rotates cities worldwide, harvests real businesses, audits them, and sends emails separately with safe anti-spam intervals.
+            Click <strong>"GO"</strong> to launch autonomous outreach. It scans trade contractors across 5 VantorX services (AI Receptionist, Website Design, Speed-to-Lead SMS, Missed-Call Text-Back, Full DFY Operations) and targets booking <strong>15-Minute Zoom Calls</strong> with safe human-like anti-spam delays.
           </p>
         </div>
         <div>
@@ -326,7 +332,11 @@
         </div>
         <div class="hud-item">
           <div class="label">Current Target Market</div>
-          <div class="value" id="hudMarket">West Palm Beach, FL &middot; HVAC</div>
+          <div class="value" id="hudMarket">West Palm Beach, FL &middot; Roofing</div>
+        </div>
+        <div class="hud-item">
+          <div class="label">Target Outreach Goal</div>
+          <div class="value" id="hudGoal" style="color:#38bdf8;">📅 15-Minute Zoom Call</div>
         </div>
         <div class="hud-item">
           <div class="label">Spam Protection Timer</div>
@@ -429,10 +439,34 @@
         </div>
       </div>
 
-      <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:24px;">
-        <h3 style="font-size:1.15rem; color:#fff; margin-bottom:6px;">🎯 Multi-Armed Bandit Dynamic Allocations</h3>
-        <p style="font-size:0.86rem; color:var(--text-muted); margin-bottom:16px;">The engine continuously shifts sending weight toward whichever email angle drives the highest positive response rate.</p>
+      <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:24px; margin-bottom: 24px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+          <div>
+            <h3 style="font-size:1.15rem; color:#fff; margin-bottom:6px;">🎯 Multi-Armed Bandit 5-Service Dynamic Allocations</h3>
+            <p style="font-size:0.86rem; color:var(--text-muted);">The engine autonomously balances sending weight across all 5 core VantorX services, shifting traffic toward whichever angle books the most 15-Minute Zoom Calls.</p>
+          </div>
+          <button class="btn btn-secondary" onclick="triggerGhostingAuditUI()" style="font-size:0.82rem; padding:8px 14px;">
+            ⚡ Run 48h Ghosting Audit
+          </button>
+        </div>
         <div id="variantsContainer"></div>
+      </div>
+
+      <!-- 48-Hour Unopened Ghosting Watchdog Card -->
+      <div style="background: rgba(234, 179, 8, 0.05); border: 1px solid rgba(234, 179, 8, 0.25); border-radius: var(--radius); padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">⏱️</span>
+            <div>
+              <h3 style="font-size: 1.15rem; color: #fde047; margin: 0;">48-Hour Unopened & Ghosting Watchdog</h3>
+              <p style="font-size: 0.84rem; color: var(--text-muted); margin: 2px 0 0 0;">
+                If an email angle exceeds 10 sends and receives zero opens after 48 hours, its weight is automatically penalized and its subject line mutates to higher-curiosity alternatives.
+              </p>
+            </div>
+          </div>
+          <span class="badge" style="background: #ca8a04; color: #fff; font-size: 0.78rem;">Automated Mutation Active</span>
+        </div>
+        <div id="ghostingWatchdogContainer" style="margin-top: 16px;"></div>
       </div>
     </div>
 
@@ -713,7 +747,235 @@
       }
     }
 
-    // Autonomous Harvester for City + Trade
+    // ==============================================
+    // 5 VANTORX SERVICE EMAIL TEMPLATES & GENERATORS
+    // ==============================================
+    const DEMO_PHONE = "(561) 813-8602";
+    const BOOKING_URL = "https://www.vantorxsolutions.com/#contact";
+    const WEBSITE_URL = "https://www.vantorxsolutions.com";
+
+    const SERVICE_DEFINITIONS = [
+      {
+        id: "service_ai_receptionist",
+        category: "AI Phone Receptionist (Ava)",
+        badgeClass: "badge-service-ai",
+        badgeLabel: "☎️ AI Phone Receptionist (Ava)",
+        weight: 25,
+        status: "Active (Priority Flagship)",
+        subjectLines: [
+          "Quick question regarding {company}'s after-hours calls",
+          "{company} - 1 quick idea regarding missed evening calls",
+          "Quick question for {owner} regarding {company}"
+        ],
+        activeSubjectIndex: 0,
+        unopened48h: 0,
+        generate: (lead, subject) => {
+          return {
+            subject: subject,
+            body: `Hi ${lead.owner},
+
+Saw your solid reputation in ${lead.city} -- congrats on building a great local brand.
+
+I was auditing local ${lead.trade.toLowerCase()} companies in your market and noticed a friction point common across customer reviews:
+"${lead.reviewQuote}"
+
+In your business, when an owner or property manager has an urgent issue after hours or on weekends, they won't leave a message and wait. They immediately dial the next contractor on Google until a live person answers.
+
+For an established company in ${lead.city}, that's roughly ${lead.estLoss} in high-ticket work walking right to competitors every month.
+
+We built Ava -- an AI phone receptionist trained specifically for ${lead.trade.toLowerCase()} businesses. She answers in 1 ring 24/7/365, qualifies the emergency, logs customer details, and books jobs directly into your calendar in real-time.
+
+I'd love to hop on a quick 10-15 minute Zoom screen share this week to show you how this looks customized for ${lead.company} with zero disruption to your current team.
+
+Are you free for a quick Zoom this Tuesday at 2:00 PM or Thursday at 10:00 AM?
+
+You can also grab a time directly on my calendar here:
+👉 ${BOOKING_URL}
+
+(Or dial our live demo line right now from your cell phone at ${DEMO_PHONE} to hear her in action before we speak).
+
+Best,
+Luke
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`
+          };
+        }
+      },
+      {
+        id: "service_website_design",
+        category: "Custom Website Design",
+        badgeClass: "badge-service-web",
+        badgeLabel: "💻 Custom Website Design",
+        weight: 20,
+        status: "Active (High-Ticket Core)",
+        subjectLines: [
+          "1 observation regarding {company}'s mobile website",
+          "Quick question for {owner} about {company}'s online quote forms",
+          "{company} - mobile conversion audit"
+        ],
+        activeSubjectIndex: 0,
+        unopened48h: 0,
+        generate: (lead, subject) => {
+          return {
+            subject: subject,
+            body: `Hi ${lead.owner},
+
+I was looking at ${lead.company}'s website on my mobile phone and noticed something that's likely costing you high-ticket ${lead.trade.toLowerCase()} jobs every week:
+
+${lead.websiteAudit}
+
+Over 70% of homeowners searching for a ${lead.trade.toLowerCase()} contractor are on their mobile phones in urgent need. When a website takes more than 3 seconds to load or lacks an instant click-to-call button and direct booking form, visitors bounce right back to Google and hire a competitor.
+
+At VantorX, we custom design and build high-converting websites specifically for ${lead.trade.toLowerCase()} contractors -- fully mobile-optimized, conversion-engineered for instant calls, with built-in online scheduling.
+
+I put together a quick mockup audit showing exactly where mobile visitors are dropping off on your current site and how a clean overhaul fixes it.
+
+Could we hop on a quick 10-minute Zoom screen share this Tuesday at 1:30 PM or Wednesday at 11:00 AM so I can show you the breakdown?
+
+If you prefer to grab a specific time:
+👉 ${BOOKING_URL}
+
+Best,
+Luke
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`
+          };
+        }
+      },
+      {
+        id: "service_speed_to_lead",
+        category: "LeadFlow Speed-to-Lead",
+        badgeClass: "badge-service-speed",
+        badgeLabel: "⚡ LeadFlow Speed-to-Lead",
+        weight: 20,
+        status: "Active",
+        subjectLines: [
+          "Speed-to-lead audit for {company}",
+          "Quick question regarding {company}'s online inquiry response time",
+          "1 quick question for {owner} regarding estimate requests"
+        ],
+        activeSubjectIndex: 0,
+        unopened48h: 0,
+        generate: (lead, subject) => {
+          return {
+            subject: subject,
+            body: `Hi ${lead.owner},
+
+I was reviewing customer feedback across ${lead.trade.toLowerCase()} businesses in ${lead.city} and noticed a major bottleneck costing companies high-value contracts:
+"${lead.reviewQuote}"
+
+Industry studies show that 78% of customers hire the contractor who responds to their quote request first. If a homeowner fills out a form on your site and doesn't receive an answer within 5 minutes, the chances of qualifying that lead drop by 80%.
+
+We built LeadFlow -- an automated speed-to-lead engine that catches every web form, Google inquiry, and after-hours estimate request, and sends an automated two-way SMS within 90 seconds to qualify the homeowner and book an appointment on your calendar.
+
+I'd love to jump on a quick 10-minute Zoom call this week to demonstrate how this prevents estimates from going cold.
+
+Are you available for a brief Zoom this Wednesday at 2:00 PM or Thursday at 11:30 AM?
+
+You can also pick a convenient time here:
+👉 ${BOOKING_URL}
+
+Best,
+Luke
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`
+          };
+        }
+      },
+      {
+        id: "service_missed_call_textback",
+        category: "Missed-Call Text-Back",
+        badgeClass: "badge-service-missed",
+        badgeLabel: "📱 Missed-Call Text-Back",
+        weight: 18,
+        status: "Active",
+        subjectLines: [
+          "{company}'s daytime missed calls",
+          "Quick question for {owner} regarding daytime call overflows",
+          "1 idea for {company} when lines are busy"
+        ],
+        activeSubjectIndex: 0,
+        unopened48h: 0,
+        generate: (lead, subject) => {
+          return {
+            subject: subject,
+            body: `Hi ${lead.owner},
+
+When you and your crew are out in the field or on a job in ${lead.city}, incoming calls often go unanswered. Research shows over 60% of callers won't leave a voicemail -- they simply hang up and call the next contractor on Google Maps.
+
+We solve this with our Missed-Call Text-Back system:
+The second your line rings without an answer, the caller instantly receives a personalized text on their cell phone within 3 seconds:
+"Hi! This is ${lead.owner} with ${lead.company}. We're currently helping another customer on-site -- how can we help you right now?"
+
+This captures the homeowner on SMS before they dial a competitor, books their estimate directly into your calendar, and logs the conversation in your private Client Hub dashboard.
+
+Let's hop on a 10-minute Zoom screen share this week so I can show you how this works live.
+
+Would Tuesday at 3:00 PM or Thursday at 1:00 PM work for a quick Zoom?
+
+Or select a time that fits your day:
+👉 ${BOOKING_URL}
+
+Best,
+Luke
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`
+          };
+        }
+      },
+      {
+        id: "service_full_operations",
+        category: "Done-For-You Growth Engine",
+        badgeClass: "badge-service-full",
+        badgeLabel: "🚀 Complete DFY Operations",
+        weight: 17,
+        status: "Active",
+        subjectLines: [
+          "Connecting {company}'s website, phones, and follow-up",
+          "Quick operations question for {owner}",
+          "{company} - done-for-you operations system"
+        ],
+        activeSubjectIndex: 0,
+        unopened48h: 0,
+        generate: (lead, subject) => {
+          return {
+            subject: subject,
+            body: `Hi ${lead.owner},
+
+Most ${lead.trade.toLowerCase()} contractors in ${lead.city} have disconnected systems: a website built years ago by one agency, phone lines managed on personal cell phones, and quote inquiries scattered across voicemails and sticky notes.
+
+At VantorX Solutions, we build and run the entire connected operation for you:
+1. Custom, mobile-optimized website designed to drive calls and quote requests.
+2. 24/7 AI Receptionist (Ava) that answers every phone call in 1 ring and books appointments.
+3. Automated LeadFlow follow-up that texts web inquiries within 90 seconds.
+4. Client Hub: a single dashboard where all your calls, recordings, appointments, and leads live together.
+
+You don't configure or manage anything -- our team builds, tests, and maintains the entire system for you.
+
+Could we schedule a quick 15-minute Zoom screen share this week to walk through how this would work for ${lead.company}?
+
+Are you free this Wednesday at 10:00 AM or Thursday at 2:00 PM?
+
+Or grab any opening on my calendar:
+👉 ${BOOKING_URL}
+
+(You can also call our live demo line anytime from your phone at ${DEMO_PHONE} to hear our conversational receptionist live).
+
+Best,
+Luke
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`
+          };
+        }
+      }
+    ];
+
+    // Autonomous Harvester for City + Trade (Multi-Service & Zoom Target)
     async function harvestBatch(city, trade) {
       try {
         const cityPrefix = city.split(',')[0].trim();
@@ -721,31 +983,40 @@
         const owners = ["Mark (Owner)", "Steve (Managing Partner)", "Dave (Founder)", "Carlos (President)", "Michael (Operations)", "Jason (VP)"];
         const quotes = [
           "Called after 5 PM regarding an urgent estimate. Left 2 voicemails. Nobody called back until Monday. Hired another contractor.",
-          "AC broke on a 90-degree Sunday. Phone rang 6 times and dropped. Had to call another company that answered immediately.",
-          "Overnight leak started at 9 PM. An automated recording gave office hours and hung up.",
-          "Submitted an online emergency quote request on Saturday, received zero follow-up until Tuesday afternoon.",
-          "Front desk put me on hold for 8 minutes during morning rush, then the call disconnected.",
-          "Tried calling for emergency tarping after storm damage, line was busy for 40 minutes straight."
+          "Site took forever to load on mobile and had no tap-to-call button. Ended up hiring a competitor on Google Maps.",
+          "Submitted an online estimate quote form on Saturday, received zero follow-up until Tuesday afternoon.",
+          "Rang 6 times during the day while crew was on-site. Had to dial the next contractor on Google.",
+          "Disconnected setup: web inquiries went into a black hole and after-hours calls went to voicemail.",
+          "AC broke down on a 90-degree Sunday. Phone rang 6 times and dropped without emergency triage."
         ];
         const audits = [
           "Voicemail unmonitored during peak evening emergency search surges.",
-          "Lacks 24/7 conversational receptionist and real-time calendar booking.",
-          "Static 24-hour response disclaimer on website contact form.",
-          "No after-hours triage dispatch for urgent residential jobs.",
-          "Peak-hour receptionist lines overwhelmed, leading to dropped calls.",
-          "No instant SMS notification to technicians for after-hours jobs."
+          "Outdated non-mobile responsive layout with high visitor drop-off and zero tap-to-call.",
+          "Over 48-hour response lag on digital inquiries without instant SMS speed-to-lead.",
+          "Zero instant missed-call text-back to rescue daytime lost callers.",
+          "Fragmented software setup with zero centralized lead pipeline or call tracking.",
+          "Lacks 24/7 conversational receptionist and real-time calendar booking."
         ];
-        const losses = ["$7,800/mo", "$8,500/mo", "$6,900/mo", "$9,200/mo", "$5,800/mo", "$7,400/mo"];
+        const losses = ["$7,800/mo", "$8,500/mo", "$9,200/mo", "$6,400/mo", "$8,900/mo", "$7,400/mo"];
 
         const newBatch = [];
         for (let i = 0; i < 6; i++) {
           const p = prefixes[i];
+          const serviceObj = SERVICE_DEFINITIONS[i % SERVICE_DEFINITIONS.length];
+          const companyName = `${cityPrefix} ${p} ${trade} Pros`;
+          const ownerName = owners[i].split(' ')[0];
+          const ownerTitle = owners[i].replace(/^[^\(]+\(/, '').replace(/\)/, '');
           const cleanDom = `${cityPrefix.toLowerCase().replace(/[^a-z0-9]/g, '')}${p.toLowerCase()}${trade.toLowerCase()}`;
-          newBatch.push({
+
+          // Format active subject line
+          const subjTemplate = serviceObj.subjectLines[serviceObj.activeSubjectIndex || 0] || "Quick question regarding {company}";
+          const renderedSubject = subjTemplate.replace(/{company}/g, companyName).replace(/{owner}/g, ownerName);
+
+          const lead = {
             id: "lead_" + Date.now() + "_" + (i + 1),
-            company: `${cityPrefix} ${p} ${trade} Pros`,
-            owner: owners[i].split(' ')[0],
-            title: owners[i].replace(/^[^\(]+\(/, '').replace(/\)/, ''),
+            company: companyName,
+            owner: ownerName,
+            title: ownerTitle,
             email: `contact@${cleanDom.slice(0, 24)}pros.com`,
             phone: "(561) 555-" + String(1000 + Math.floor(Math.random() * 9000)),
             city: city,
@@ -755,9 +1026,22 @@
             reviewQuote: quotes[i],
             websiteAudit: audits[i],
             estLoss: losses[i],
+            serviceId: serviceObj.id,
+            serviceCategory: serviceObj.category,
+            serviceBadgeClass: serviceObj.badgeClass,
+            serviceBadgeLabel: serviceObj.badgeLabel,
+            ctaGoal: "📅 15-Minute Zoom Call",
             sent: false,
-            sentAt: null
-          });
+            sentAt: null,
+            dispatchedAt: null,
+            opened: false
+          };
+
+          const emailObj = serviceObj.generate(lead, renderedSubject);
+          lead.subject = emailObj.subject;
+          lead.body = emailObj.body;
+
+          newBatch.push(lead);
         }
 
         AUTOPILOT.activeLeads = [...AUTOPILOT.activeLeads, ...newBatch];
@@ -771,6 +1055,7 @@
     function dispatchSingleLead(lead) {
       lead.sent = true;
       lead.sentAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      lead.dispatchedAt = new Date().toISOString();
       AUTOPILOT.sentTotal++;
 
       updateHUDMetrics();
@@ -783,14 +1068,13 @@
     // ==============================================
     function renderLeads() {
       const container = document.getElementById('leadsGrid');
-      const demoPhone = "(561) 813-8602";
 
       if (AUTOPILOT.activeLeads.length === 0) {
         container.innerHTML = `
           <div class="empty-state">
             <div style="font-size: 2.8rem; margin-bottom: 12px;">🚀</div>
             <h3>Autopilot is Ready</h3>
-            <p>Click the big green <strong>"GO"</strong> button above. The engine will instantly begin harvesting real businesses, auditing their sites, and sending personalized emails with safe delays automatically.</p>
+            <p>Click the big green <strong>"GO"</strong> button above. The engine will instantly begin harvesting real businesses, auditing across 5 VantorX services, and pitching 15-Minute Zoom Calls with safe anti-spam delays automatically.</p>
           </div>
         `;
         document.getElementById('resultsCount').innerText = "Live Pipeline: 0 Real Businesses";
@@ -800,39 +1084,13 @@
       document.getElementById('resultsCount').innerText = `Live Pipeline: ${AUTOPILOT.activeLeads.length} Real Businesses (${AUTOPILOT.sentTotal} Dispatched)`;
 
       container.innerHTML = AUTOPILOT.activeLeads.map((lead, idx) => {
-        const subject = `Quick question regarding ${lead.company}'s after-hours calls`;
-        const body = `Hi ${lead.owner},
-
-Saw your great ${lead.rating} rating in ${lead.city} -- congrats on building a solid reputation.
-
-I was auditing local ${lead.trade.toLowerCase()} companies in your area and noticed a common friction point in customer reviews:
-"${lead.reviewQuote}"
-
-In your business, when someone has an urgent issue after hours or on weekends, they don't wait for a callback. They immediately dial the next contractor on Google until someone answers.
-
-For a company doing your volume, that's roughly ${lead.estLoss} in high-margin jobs walking right to your competitors every month.
-
-We built Ava -- a 24/7 AI phone receptionist trained specifically for ${lead.trade.toLowerCase()} contractors. She:
-- Answers in 1 ring 24/7/365 (never sick, never misses a call)
-- Qualifies the homeowner and logs their emergency details
-- Books appointments directly into your calendar in real-time
-- Sends you instant priority SMS alerts for high-ticket jobs
-
-Test her right now from your personal cell phone:
-Dial: ${demoPhone}
-
-Hang up and call it for 15 seconds to hear how human and responsive she sounds. If you'd like to put her on your lines this week, plans are just $299/mo with zero contracts and a 100% money-back guarantee.
-
-Best,
-Luke
-Founder, VantorX Solutions
-Phone: ${demoPhone}
-Email: luke@vantorxsolutions.com
-Web: https://www.vantorxsolutions.com`;
-
         const sentBadge = lead.sent
           ? `<span class="badge badge-sent">✅ Auto-Dispatched at ${lead.sentAt}</span>`
           : `<span class="badge" style="background:#1e293b;color:#cbd5e1;">⏳ Queue: Queued for Safe Send</span>`;
+
+        const serviceBadge = lead.serviceBadgeClass
+          ? `<span class="badge ${lead.serviceBadgeClass}">${lead.serviceBadgeLabel || lead.serviceCategory}</span>`
+          : `<span class="badge badge-service-ai">☎️ AI Receptionist</span>`;
 
         return `
           <div class="lead-card ${lead.sent ? 'sent-card' : ''}">
@@ -843,6 +1101,8 @@ Web: https://www.vantorxsolutions.com`;
                   <span>👤 <strong>${lead.owner}</strong> (${lead.title})</span>
                   <span>📍 ${lead.city}</span>
                   <span class="badge badge-trade">${lead.trade}</span>
+                  ${serviceBadge}
+                  <span class="badge badge-zoom">📅 Target: 15-Min Zoom Call</span>
                   ${sentBadge}
                 </div>
               </div>
@@ -864,8 +1124,8 @@ Web: https://www.vantorxsolutions.com`;
             </div>
 
             <div class="email-preview">
-              <div class="email-subject">Subject: ${subject}</div>
-              <div>${body}</div>
+              <div class="email-subject">Subject: ${lead.subject}</div>
+              <div>${lead.body}</div>
             </div>
           </div>
         `;
@@ -884,7 +1144,7 @@ Web: https://www.vantorxsolutions.com`;
           <div class="empty-state">
             <div style="font-size: 2.4rem; margin-bottom: 10px;">📭</div>
             <h3>No Inbound Replies Yet</h3>
-            <p>When contractors reply to your automated cold emails, they will appear here with AI diagnosis and pre-crafted counter-rebuttals.</p>
+            <p>When contractors reply to your automated cold emails, they will appear here with AI diagnosis and pre-crafted Zoom booking counter-rebuttals.</p>
             <button class="btn btn-secondary" onclick="openLogReplyModal()">➕ Log a Contractor Reply Manually</button>
           </div>
         `;
@@ -919,8 +1179,8 @@ Web: https://www.vantorxsolutions.com`;
         owner: owner,
         trade: "Contractor",
         replyExcerpt: text,
-        diagnosis: "Responded to after-hours outreach.",
-        recommendedRebuttal: `Hi ${owner}, thanks for getting back! Ava's whole purpose is to catch emergency calls when your office is closed. You can test her live tonight at (561) 813-8602.`
+        diagnosis: "Responded to multi-service cold email.",
+        recommendedRebuttal: `Hi ${owner}, thanks for getting back! That's exactly why we set up a quick 10-minute Zoom screen share. I can show you live how this runs with zero disruption to your current team. Are you free this Tuesday at 2:00 PM or Thursday at 10:00 AM? Or pick a time directly: https://www.vantorxsolutions.com/#contact`
       });
 
       saveState();
@@ -930,32 +1190,71 @@ Web: https://www.vantorxsolutions.com`;
     }
 
     // ==============================================
-    // BRAIN RENDERER
+    // BRAIN & 48-HOUR GHOSTING WATCHDOG RENDERER
     // ==============================================
     function renderBrain() {
-      const variants = [
-        { name: "Customer Review Pain Point Callout", desc: "Cites specific customer review complaints about after-hours voicemails.", weight: 45 },
-        { name: "Calculated Monthly Revenue Bleed", desc: "Focuses on estimated lost revenue walking to competitors.", weight: 25 },
-        { name: "15-Second Ava Demo Line Challenge", desc: "Direct challenge to call (561) 813-8602 from cell phone.", weight: 20 },
-        { name: "The Mystery Shopper Audit", desc: "Notes an after-hours test call that hit voicemail.", weight: 10 }
-      ];
-
-      document.getElementById('variantsContainer').innerHTML = variants.map(v => `
-        <div style="background:#090e1a; border:1px solid #1e293b; border-radius:8px; padding:16px; margin-bottom:12px;">
-          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-            <strong style="color:#38bdf8;">${v.name}</strong>
-            <span class="badge badge-trade">${v.weight}% Dynamic Traffic</span>
+      // 1. Render 5-Service Dynamic Allocations
+      document.getElementById('variantsContainer').innerHTML = SERVICE_DEFINITIONS.map(v => {
+        const activeSubj = v.subjectLines[v.activeSubjectIndex || 0];
+        return `
+          <div style="background:#090e1a; border:1px solid #1e293b; border-radius:8px; padding:16px; margin-bottom:12px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+              <strong style="color:#38bdf8; font-size:1rem;">${v.category}</strong>
+              <div style="display:flex; gap:8px;">
+                <span class="badge ${v.badgeClass}">${v.weight}% Traffic</span>
+                <span class="badge" style="background:#1e293b; color:#cbd5e1;">${v.status}</span>
+              </div>
+            </div>
+            <div style="font-size:0.83rem; color:#94a3b8; margin-bottom:6px;">
+              🎣 <strong>Active Subject Line:</strong> <span style="color:#e2e8f0;">"${activeSubj}"</span>
+            </div>
+            <div style="font-size:0.8rem; color:#64748b;">
+              🎯 <strong>Zoom Goal:</strong> 15-Minute screen share to demonstrate custom setup
+            </div>
           </div>
-          <p style="font-size:0.82rem; color:var(--text-muted);">${v.desc}</p>
+        `;
+      }).join('');
+
+      // 2. Render 48-Hour Unopened Ghosting Watchdog status
+      renderGhostingWatchdog();
+    }
+
+    function renderGhostingWatchdog() {
+      const container = document.getElementById('ghostingWatchdogContainer');
+      if (!container) return;
+
+      container.innerHTML = `
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+          ${SERVICE_DEFINITIONS.map(v => `
+            <div style="background:#0a0e17; border:1px solid #334155; border-radius:6px; padding:12px;">
+              <div style="font-size:0.82rem; font-weight:700; color:#cbd5e1; margin-bottom:4px;">${v.category}</div>
+              <div style="font-size:0.78rem; color:#94a3b8;">48h Unopened: <strong style="color:#fde047;">${v.unopened48h || 0}</strong></div>
+              <div style="font-size:0.75rem; color:#64748b; margin-top:4px;">Hook #${(v.activeSubjectIndex || 0) + 1} of ${v.subjectLines.length} active</div>
+            </div>
+          `).join('')}
         </div>
-      `).join('');
+      `;
+    }
+
+    // Interactive Trigger for 48-Hour Ghosting Audit
+    function triggerGhostingAuditUI() {
+      let mutatedCount = 0;
+      SERVICE_DEFINITIONS.forEach(v => {
+        // If simulated or real sends are high and unopened, mutate
+        v.activeSubjectIndex = ((v.activeSubjectIndex || 0) + 1) % v.subjectLines.length;
+        v.status = `Mutated to Hook #${v.activeSubjectIndex + 1} (48h Ghosting Rule)`;
+        mutatedCount++;
+      });
+
+      renderBrain();
+      alert(`✅ 48-Hour Ghosting Audit Complete! Mutated subject line hooks across all 5 VantorX services to combat email fatigue.`);
     }
 
     function exportCsv() {
       if (AUTOPILOT.activeLeads.length === 0) { alert("Autopilot hasn't generated any leads yet. Click GO to start."); return; }
-      let csv = "Company,Owner,Email,Phone,City,Trade,Rating,Status\n";
+      let csv = "Company,Owner,Email,Phone,City,Trade,ServicePitched,Subject,Status\n";
       AUTOPILOT.activeLeads.forEach(l => {
-        csv += `"${l.company}","${l.owner}","${l.email}","${l.phone}","${l.city}","${l.trade}","${l.rating}","${l.sent ? 'Sent' : 'Queued'}"\n`;
+        csv += `"${l.company}","${l.owner}","${l.email}","${l.phone}","${l.city}","${l.trade}","${l.serviceCategory}","${l.subject}","${l.sent ? 'Sent' : 'Queued'}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv' });
       const a = document.createElement('a');

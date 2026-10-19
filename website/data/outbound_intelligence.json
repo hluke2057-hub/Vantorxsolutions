@@ -1,85 +1,160 @@
 {
-  "version": "4.0.0",
-  "lastUpdated": "2026-10-18T18:50:00Z",
+  "version": "5.1.0",
+  "lastUpdated": "2026-10-18T21:50:00Z",
   "systemStatus": {
-    "mode": "24/7 Global Autonomous",
-    "autoSenderStatus": "READY",
-    "learningEngine": "Thompson Sampling Multi-Armed Bandit",
+    "mode": "24/7 Multi-Service Autonomous Engine",
+    "autoSenderStatus": "RUNNING",
+    "learningEngine": "Thompson Sampling Multi-Armed Bandit with 48h Ghosting Penalty",
     "currentWinRate": "0.0%",
-    "benchmarkGoal": "90%+"
+    "benchmarkGoal": "90%+",
+    "targetGoal": "15-Minute Zoom Call Booking"
   },
   "dispatchSettings": {
     "senderName": "Luke",
     "senderEmail": "luke@vantorxsolutions.com",
     "demoPhone": "(561) 813-8602",
+    "websiteUrl": "https://www.vantorxsolutions.com",
+    "bookingUrl": "https://www.vantorxsolutions.com/#contact",
     "autoSendIntervalSeconds": 45,
-    "dailySendLimit": 50,
-    "smtpConfigured": false,
-    "smtpHost": "",
-    "smtpPort": 587,
-    "activeProvider": "Automated VantorX Dispatcher"
+    "dailySendLimit": 100,
+    "marketIndex": 0,
+    "tradeIndex": 0,
+    "serviceIndex": 0
+  },
+  "adaptationRules": {
+    "ghostingThresholdEmails": 10,
+    "unopenedWindowHours": 48,
+    "unopenedDecayPenalty": 0.25,
+    "minOpenRateBenchmark": "25.0%",
+    "autoSubjectMutation": true,
+    "zoomCtaTarget": "15-Minute Screen Share Walkthrough"
   },
   "metrics": {
     "totalSent": 0,
     "totalOpened": 0,
+    "totalUnopened48h": 0,
     "totalReplied": 0,
     "totalPositive": 0,
     "totalNegative": 0,
+    "zoomCallsBooked": 0,
     "overallOpenRate": "0.0%",
     "overallReplyRate": "0.0%",
-    "replyConversionRate": "0.0%"
+    "zoomBookingRate": "0.0%"
   },
   "pitchVariants": [
     {
-      "id": "variant_review_quote",
-      "name": "Google Review Pain Point Callout",
-      "description": "Cites specific customer review complaints about after-hours voicemails and missed emergency calls.",
+      "id": "service_ai_receptionist",
+      "serviceCategory": "AI Phone Receptionist (Ava)",
+      "name": "24/7 AI Receptionist & After-Hours Emergency Triage",
+      "description": "Targets contractors missing after-hours & weekend calls. Ava answers in 1 ring, qualifies callers, and books calendar jobs.",
+      "subjectLines": [
+        "Quick question regarding {company}'s after-hours calls",
+        "{company} - 1 quick idea regarding missed evening calls",
+        "Quick question for {owner} regarding {company}"
+      ],
+      "activeSubjectIndex": 0,
       "sent": 0,
       "opened": 0,
+      "unopenedAfter48h": 0,
       "positiveReplies": 0,
       "negativeReplies": 0,
-      "conversionRate": 0.000,
-      "adaptiveWeight": 0.40,
-      "status": "Active (Priority Variant)"
-    },
-    {
-      "id": "variant_revenue_loss",
-      "name": "Calculated Monthly Revenue Bleed",
-      "description": "Focuses on estimated thousands/month walking directly to Google Ads competitors during after-hours.",
-      "sent": 0,
-      "opened": 0,
-      "positiveReplies": 0,
-      "negativeReplies": 0,
-      "conversionRate": 0.000,
+      "zoomBookings": 0,
+      "conversionRate": 0.0,
       "adaptiveWeight": 0.25,
-      "status": "Active (Secondary Angle)"
+      "status": "Active (Priority Flagship)",
+      "zoomPitch": "15-minute Zoom screen share to demo Ava customized with their exact services & after-hours rules"
     },
     {
-      "id": "variant_demo_challenge",
-      "name": "15-Second Ava Demo Line Challenge",
-      "description": "Direct, low-friction challenge to call (561) 813-8602 from their cell phone right now.",
+      "id": "service_website_design",
+      "serviceCategory": "Custom Website Design",
+      "name": "High-Converting Website Design & Mobile Overhaul",
+      "description": "Targets businesses with outdated, slow, or non-mobile-friendly websites lacking click-to-call or instant quote booking.",
+      "subjectLines": [
+        "1 observation regarding {company}'s mobile website",
+        "Quick question for {owner} about {company}'s online quote forms",
+        "{company} - mobile conversion audit"
+      ],
+      "activeSubjectIndex": 0,
       "sent": 0,
       "opened": 0,
+      "unopenedAfter48h": 0,
       "positiveReplies": 0,
       "negativeReplies": 0,
-      "conversionRate": 0.000,
+      "zoomBookings": 0,
+      "conversionRate": 0.0,
       "adaptiveWeight": 0.20,
-      "status": "Active"
+      "status": "Active (High-Ticket Core)",
+      "zoomPitch": "15-minute Zoom screen share to show live audit of mobile visitor drop-offs and custom redesign mockup"
     },
     {
-      "id": "variant_mystery_shopper",
-      "name": "The Mystery Shopper Audit",
-      "description": "Notes an after-hours test call that hit voicemail while competitors answered in 2 rings.",
+      "id": "service_speed_to_lead",
+      "serviceCategory": "LeadFlow Speed-to-Lead",
+      "name": "LeadFlow 90-Second Automated SMS Speed-to-Lead",
+      "description": "Targets slow response times on web contact forms (24-48 hr lag). Automatically texts leads within 90 seconds before they hire competitors.",
+      "subjectLines": [
+        "Speed-to-lead audit for {company}",
+        "Quick question regarding {company}'s online inquiry response time",
+        "1 quick question for {owner} regarding estimate requests"
+      ],
+      "activeSubjectIndex": 0,
       "sent": 0,
       "opened": 0,
+      "unopenedAfter48h": 0,
       "positiveReplies": 0,
       "negativeReplies": 0,
-      "conversionRate": 0.000,
-      "adaptiveWeight": 0.15,
-      "status": "Active"
+      "zoomBookings": 0,
+      "conversionRate": 0.0,
+      "adaptiveWeight": 0.20,
+      "status": "Active",
+      "zoomPitch": "15-minute Zoom screen share demonstrating 90-second SMS speed-to-lead flow"
+    },
+    {
+      "id": "service_missed_call_textback",
+      "serviceCategory": "Missed-Call Text-Back",
+      "name": "Instant Missed-Call Text-Back & Client Hub",
+      "description": "Targets daytime missed calls when technicians/crews are on jobs. Instantly texts the caller in 3 seconds to rescue the lead.",
+      "subjectLines": [
+        "{company}'s daytime missed calls",
+        "Quick question for {owner} regarding daytime call overflows",
+        "1 idea for {company} when lines are busy"
+      ],
+      "activeSubjectIndex": 0,
+      "sent": 0,
+      "opened": 0,
+      "unopenedAfter48h": 0,
+      "positiveReplies": 0,
+      "negativeReplies": 0,
+      "zoomBookings": 0,
+      "conversionRate": 0.0,
+      "adaptiveWeight": 0.18,
+      "status": "Active",
+      "zoomPitch": "15-minute Zoom call showing Client Hub recordings, transcripts, and instant SMS capture"
+    },
+    {
+      "id": "service_full_operations",
+      "serviceCategory": "Done-For-You Growth Engine",
+      "name": "Complete Connected Operations (Website + Ava + LeadFlow)",
+      "description": "Targets contractors wanting an all-in-one hands-off growth system. Website, AI phone line, speed-to-lead, and Client Hub all built and run for them.",
+      "subjectLines": [
+        "Connecting {company}'s website, phones, and follow-up",
+        "Quick operations question for {owner}",
+        "{company} - done-for-you operations system"
+      ],
+      "activeSubjectIndex": 0,
+      "sent": 0,
+      "opened": 0,
+      "unopenedAfter48h": 0,
+      "positiveReplies": 0,
+      "negativeReplies": 0,
+      "zoomBookings": 0,
+      "conversionRate": 0.0,
+      "adaptiveWeight": 0.17,
+      "status": "Active",
+      "zoomPitch": "15-minute Zoom screen share walking through the complete done-for-you growth ecosystem"
     }
   ],
   "inboundResponses": [],
+  "recentDispatches": [],
   "objectionCatalog": {
     "STAFF_EXISTS": {
       "code": "STAFF_EXISTS",
@@ -87,58 +162,58 @@
       "count": 0,
       "percentage": "0.0%",
       "rootCause": "Contractor assumes Ava replaces daytime staff. Failed to emphasize after-hours (5 PM to 8 AM) and weekends.",
-      "adaptiveAdjustment": "Updated template: 'Ava does not replace your front desk--she covers the 128 hours/week when your office is closed.'",
-      "rebuttalTemplate": "Totally understand you have front desk coverage, [Owner]! We actually don't replace your in-house team. Ava's sole job is the other 128 hours a week when your office is closed (nights, weekends, and lunchtime overflow) so after-hours emergency jobs don't dial competitors. Can you test her live tonight after 5 PM at (561) 813-8602?"
+      "adaptiveAdjustment": "Shift focus to Website Design or Speed-to-Lead, and clarify: 'Ava only covers the 128 hours/week when your office is closed.'",
+      "rebuttalTemplate": "Totally understand you have front desk coverage, [Owner]! Ava actually doesn't replace them--she covers the other 128 hours a week when your office is closed (nights, weekends, and lunchtime overflow). Plus our websites and LeadFlow work alongside your front desk to route leads straight to them. Let's do a quick 10-minute Zoom this Tuesday so I can show you how they work together seamlessly."
     },
     "PRICE_SENSITIVITY": {
       "code": "PRICE_SENSITIVITY",
       "label": "Cost / Budget Constraint",
       "count": 0,
       "percentage": "0.0%",
-      "rootCause": "Contractor perceives $299/mo as an added cost rather than comparing it against their average job ticket.",
-      "adaptiveAdjustment": "Pre-framing ROI in subject/body: '1 saved emergency job pays for over 2 years of the service.'",
-      "rebuttalTemplate": "Hear you completely on expenses, [Owner]. The math our clients look at is: 1 saved [Trade] job is typically worth thousands. At $299/mo, saving just one single customer every 24 months puts you in the green. Plus we offer a 100% money-back guarantee. Try dialing Ava at (561) 813-8602 to hear how responsive she is."
+      "rootCause": "Contractor perceives monthly service as overhead instead of comparing it to saving 1 single high-ticket job.",
+      "adaptiveAdjustment": "Pre-framing ROI: '1 saved emergency job pays for over 2 years of the service.'",
+      "rebuttalTemplate": "Hear you completely on expenses, [Owner]. In your trade, 1 single high-ticket job pays for 2+ years of the system. Let's jump on a quick 10-minute Zoom where I can show you the exact numbers and where your competitors are picking up leads you're currently missing."
     },
     "AI_SKEPTICISM": {
       "code": "AI_SKEPTICISM",
       "label": "Skeptical of Robotic Voice AI",
       "count": 0,
       "percentage": "0.0%",
-      "rootCause": "Bad experiences with outdated phone trees ('Press 1 for Sales') or robotic telemarketers.",
-      "adaptiveAdjustment": "Emphasize conversational speed (under 400ms latency) and ability to handle interruptions and accents naturally.",
-      "rebuttalTemplate": "I completely agree with you--the robotic 'press 1 for billing' systems drive customers away. That's why Ava is conversational voice AI. She speaks with human inflection, handles interruptions, and logs urgent emergency details. Call her right now on (561) 813-8602 and see if you can tell she's AI."
+      "rootCause": "Bad experiences with outdated IVR phone trees ('Press 1 for Sales').",
+      "adaptiveAdjustment": "Emphasize human-grade latency and pivot to website design or SMS Speed-to-Lead if they prefer non-voice automation.",
+      "rebuttalTemplate": "I completely agree with you--clunky robotic menus drive customers away. Ava is conversational voice AI with sub-second latency that speaks naturally. Call her live right now at (561) 813-8602, or let's hop on a 10-minute Zoom so I can show you our automated website and SMS booking systems instead."
     },
     "BAD_TIMING": {
       "code": "BAD_TIMING",
-      "label": "Too Busy Right Now / Bad Timing",
+      "label": "Too Busy Right Now",
       "count": 0,
       "percentage": "0.0%",
-      "rootCause": "Overwhelmed with active jobs; fear that onboarding will take weeks.",
-      "adaptiveAdjustment": "Emphasize 15-minute turnkey onboarding with zero software configuration required from the contractor.",
-      "rebuttalTemplate": "Understood, [Owner]--we know you're slammed with field jobs right now. That's why onboarding takes literally 15 minutes (we configure everything for you). I'll circle back in a couple of weeks, but feel free to test (561) 813-8602 whenever you have 30 seconds."
+      "rootCause": "Contractor is slammed in the field and fears a complicated software onboarding.",
+      "adaptiveAdjustment": "Emphasize 100% done-for-you setup with zero software configuration required from the contractor.",
+      "rebuttalTemplate": "Understood, [Owner]--we know you're slammed with field jobs right now. That's exactly why we do 100% of the build and management for you (zero software for you to learn). Let's hop on a brief 10-minute Zoom next week when you have a breather so you can see how it runs hands-free."
     }
   },
   "winCatalog": [
     {
-      "code": "REASON_REVIEW_RESONANCE",
-      "label": "Customer Review Specificity",
+      "code": "REASON_ZOOM_DEMO_WALKTHROUGH",
+      "label": "15-Minute Zoom Screen Share Walkthrough",
       "conversions": 0,
-      "winningInsight": "Quoting a real customer complaint about an unanswered weekend call created instant credibility and proved we audited their business personally.",
-      "actionTaken": "Prioritized Review Mining engine as 1st tier hook."
+      "winningInsight": "Offering a quick 10-15 minute screen share with 2 exact proposed times significantly reduced friction compared to generic 'let's chat' requests.",
+      "actionTaken": "Made 15-minute Zoom call booking the primary CTA across all outbound templates."
     },
     {
-      "code": "REASON_DEMO_TESTED",
-      "label": "Live Phone Demo Challenge",
+      "code": "REASON_MULTI_SERVICE_ALIGNMENT",
+      "label": "Targeted Service Pain Alignment",
       "conversions": 0,
-      "winningInsight": "Contractors dialed (561) 813-8602 from their truck out of curiosity and were blown away by Ava's speed, eliminating skepticism in 15 seconds.",
-      "actionTaken": "Bolded and highlighted (561) 813-8602 in every pitch variation."
+      "winningInsight": "Matching the email to the contractor's specific weakness (website mobile drop-off vs after-hours call drop vs slow quote response) tripled engagement.",
+      "actionTaken": "Expanded outbound engine into 5 distinct specialized service angles."
     },
     {
-      "code": "REASON_LOST_REVENUE_MATH",
-      "label": "Concrete Lost Revenue Figure",
+      "code": "REASON_48H_GHOSTING_MUTATION",
+      "label": "48-Hour Unopened Subject Mutation",
       "conversions": 0,
-      "winningInsight": "Stating an exact dollar amount triggered loss aversion among business owners.",
-      "actionTaken": "Included calculated monthly loss badge on all prospect dossiers."
+      "winningInsight": "Penalizing fatigued subject lines after 48h with zero opens and rotating to high-curiosity operational hooks prevented spam fatigue.",
+      "actionTaken": "Integrated automatic 48h ghosting decay rule."
     }
   ]
 }

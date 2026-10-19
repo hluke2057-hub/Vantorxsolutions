@@ -89,7 +89,15 @@ function Run-InfiniteAutopilot {
             @{ Name = "Michael"; Title = "Operations" },
             @{ Name = "Jason"; Title = "VP" }
         )
-        $losses = @("`$7,800/mo", "`$8,500/mo", "`$6,900/mo", "`$9,200/mo", "`$5,800/mo", "`$7,400/mo")
+        $services = @(
+            "[AI Phone Receptionist] 24/7 Call Answering & After-Hours Triage",
+            "[Website Design] Mobile Conversion & Online Scheduling Overhaul",
+            "[Speed-to-Lead] LeadFlow 90-Second Automated SMS Booking",
+            "[Missed-Call Text-Back] Instant 3-Second Lead Recovery System",
+            "[Full Growth Operations] Website + Ava AI + LeadFlow Pipeline",
+            "[AI Phone Receptionist] Ava 24/7 Weekend Emergency Dispatch"
+        )
+        $losses = @("`$7,800/mo", "`$8,500/mo", "`$9,200/mo", "`$6,400/mo", "`$8,900/mo", "`$7,400/mo")
 
         $batch = @()
         for ($i = 0; $i -lt 6; $i++) {
@@ -103,6 +111,7 @@ function Run-InfiniteAutopilot {
                 Phone = "(561) 555-" + (Get-Random -Minimum 1000 -Maximum 9999)
                 Trade = $currentTrade
                 City = $currentCity
+                Service = $services[$i]
                 EstLoss = $losses[$i]
             }
         }
@@ -115,9 +124,10 @@ function Run-InfiniteAutopilot {
             Write-Host "[$totalSentSession] " -NoNewline -ForegroundColor Cyan
             Write-Host "DISPATCHED: " -NoNewline -ForegroundColor Green
             Write-Host "$($lead.Company) " -NoNewline -ForegroundColor White
-            Write-Host "($($lead.Owner) <$($lead.Email)>) at $timestamp" -ForegroundColor DarkGray
-            Write-Host "    Audited Vulnerability: After-hours voicemail bleed ($($lead.EstLoss))" -ForegroundColor Yellow
-            Write-Host "    Ava Demo Number Included: $DemoPhone" -ForegroundColor DarkCyan
+            Write-Host "($($lead.Owner) [$($lead.Email)]) at $timestamp" -ForegroundColor DarkGray
+            Write-Host "    Service Pitched: $($lead.Service)" -ForegroundColor Cyan
+            Write-Host "    Target CTA: 15-Minute Zoom Screen Share ($Website)" -ForegroundColor Yellow
+            Write-Host "    Ava Live Demo Included: $DemoPhone" -ForegroundColor DarkCyan
 
             # Update master intelligence
             $intel.metrics.totalSent++
