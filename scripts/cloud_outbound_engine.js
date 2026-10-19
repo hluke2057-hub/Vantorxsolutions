@@ -25,6 +25,32 @@ const SENDER_EMAIL = process.env.SENDER_EMAIL || "luke@vantorxsolutions.com";
 const SENDER_NAME = "Luke";
 const WEBSITE_URL = "https://www.vantorxsolutions.com";
 const BOOKING_URL = "https://www.vantorxsolutions.com/#contact";
+const RESEND_API_KEY = process.env.RESEND_API_KEY || null;
+
+async function sendPhysicalEmail(lead) {
+  if (!RESEND_API_KEY) return null;
+  try {
+    const payload = {
+      from: `${SENDER_NAME} <${SENDER_EMAIL}>`,
+      to: [lead.email],
+      subject: lead.subject,
+      text: lead.body
+    };
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+    const data = await response.json();
+    return data.id || null;
+  } catch (err) {
+    console.error(`[Resend Error] Delivery failed for ${lead.email}:`, err.message);
+    return null;
+  }
+}
 
 const TARGET_MARKETS = [
   "West Palm Beach, FL", "Boca Raton, FL", "Miami, FL", "Fort Lauderdale, FL",
@@ -385,7 +411,7 @@ function selectAdaptiveVariant(variants) {
   return variants[0];
 }
 
-function runCloudBatch() {
+async function runCloudBatch() {
   const files = getFilePaths();
   let intel = loadIntelligence(files.dataFile);
   if (!intel) {
@@ -417,6 +443,8 @@ function runCloudBatch() {
   console.log(`Primary CTA:        15-Minute Zoom Call Booking Walkthrough`);
   console.log(`Booking URL:        ${BOOKING_URL}`);
   console.log(`Ava Demo Line:      ${DEMO_PHONE}`);
+  console.log(`Sender:             ${SENDER_NAME} <${SENDER_EMAIL}>`);
+  console.log(`Resend Live Engine: ${RESEND_API_KEY ? "CONNECTED (Physical Inboxes)" : "STAGED (CSV & JSON Hub)"}`);
   console.log(`Sent Total:         ${intel.metrics ? intel.metrics.totalSent : 0}\n`);
 
   const batchSize = 5;
@@ -464,6 +492,15 @@ function runCloudBatch() {
     const emailContent = generator.generate(lead, subject);
     lead.subject = emailContent.subject;
     lead.body = emailContent.body;
+
+    // Physical delivery via Resend API if API key configured
+    if (RESEND_API_KEY) {
+      const resendId = await sendPhysicalEmail(lead);
+      if (resendId) {
+        lead.resendMessageId = resendId;
+        lead.sentPhysically = true;
+      }
+    }
 
     // Increment variant metrics
     if (chosenVariant) {
@@ -525,7 +562,10 @@ function runCloudBatch() {
 }
 
 if (require.main === module) {
-  runCloudBatch();
+  runCloudBatch().catch(err => {
+    console.error("Batch execution error:", err);
+    process.exit(1);
+  });
 }
 
 module.exports = { runCloudBatch, evaluate48HourGhosting, SERVICE_GENERATORS };

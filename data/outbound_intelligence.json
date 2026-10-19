@@ -1,6 +1,6 @@
 ﻿{
     "version":  "5.1.0",
-    "lastUpdated":  "2026-10-19T16:06:58Z",
+    "lastUpdated":  "2026-10-19T17:34:07Z",
     "systemStatus":  {
                          "mode":  "24/7 Multi-Service Autonomous Engine",
                          "autoSenderStatus":  "RUNNING",
@@ -30,7 +30,7 @@
                             "zoomCtaTarget":  "15-Minute Screen Share Walkthrough"
                         },
     "metrics":  {
-                    "totalSent":  76,
+                    "totalSent":  77,
                     "totalOpened":  0,
                     "totalUnopened48h":  0,
                     "totalReplied":  0,
@@ -179,6 +179,28 @@
 
                          ],
     "recentDispatches":  [
+                             {
+                                 "id":  "test_dispatch_1792431247481",
+                                 "company":  "VantorX Solutions (Owner Test)",
+                                 "owner":  "Luke",
+                                 "title":  "Founder and CEO",
+                                 "email":  "hluke2057@gmail.com",
+                                 "phone":  "(561) 813-8602",
+                                 "city":  "Boca Raton, FL",
+                                 "trade":  "AI Automation and Trade Growth",
+                                 "reviewQuote":  "Testing live AEO search protocol and Ava 24/7 dispatcher.",
+                                 "websiteAudit":  "AEO llms.txt protocol verified active and live on production.",
+                                 "estLoss":  "$11,400/mo",
+                                 "variantId":  "service_aeo_optimization",
+                                 "serviceCategory":  "AEO Engine (AI Search and Ranking)",
+                                 "ctaGoal":  "15-Minute Zoom Call",
+                                 "subject":  "Quick question for Luke regarding AI search rankings",
+                                 "body":  "Hi Luke,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended contractors in your market.\n\nWhile your company has a solid local reputation, when homeowners in your market ask ChatGPT or Perplexity \u0027Who is the most reliable contractor near me?\u0027, the AI engines aren\u0027t recommending you -- they\u0027re actively directing high-ticket jobs to competitors.\n\nHere\u0027s why: Traditional SEO only targets Google links. Today, millions of homeowners are searching using conversational AI assistants on their phones. AI engines ignore traditional keywords unless your business has an engineered llms.txt protocol and structured Schema.org entity data.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for local service businesses. We generate, verify, and host your official llms.txt standard and rich knowledge graph so ChatGPT, Perplexity, and Gemini recommend your company as the #1 local authority.\n\nI put together a 3-minute video audit showing what ChatGPT and Perplexity say when homeowners search for local services in your area, and how we can get you indexed as the top recommended choice.\n\nCould we jump on a brief 10-15 minute Zoom screen share this Tuesday at 2:30 PM or Thursday at 11:00 AM so I can show you the screen recording?\n\nYou can also book a time directly on my calendar here:\n-\u003e https://www.vantorxsolutions.com/#contact\n\n(Or call our live AI receptionist test line anytime from your phone at (561) 813-8602 to hear conversational AI in action).\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+                                 "resendMessageId":  "01a1553a-4d51-7041-9526-36c178149079",
+                                 "sent":  true,
+                                 "opened":  false,
+                                 "dispatchedAt":  "2026-10-19T17:34:07Z"
+                             },
                              {
                                  "id":  "test_dispatch_1792426018851",
                                  "company":  "VantorX Solutions (Owner Test)",

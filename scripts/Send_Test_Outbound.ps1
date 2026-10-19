@@ -6,7 +6,7 @@ param(
     [string]$RecipientEmail = "hluke2057@gmail.com",
     [string]$OwnerName = "Luke",
     [string]$DemoPhone = "(561) 813-8602",
-    [string]$SenderEmail = "VantorX Solutions <onboarding@resend.dev>",
+    [string]$SenderEmail = "Luke <luke@vantorxsolutions.com>",
     [string]$WebsiteUrl = "https://www.vantorxsolutions.com",
     [string]$BookingUrl = "https://www.vantorxsolutions.com/#contact",
     [string]$ResendApiKey = ""
@@ -50,7 +50,7 @@ I put together a 3-minute video audit showing what ChatGPT and Perplexity say wh
 Could we jump on a brief 10-15 minute Zoom screen share this Tuesday at 2:30 PM or Thursday at 11:00 AM so I can show you the screen recording?
 
 You can also book a time directly on my calendar here:
-👉 $BookingUrl
+-> $BookingUrl
 
 (Or call our live AI receptionist test line anytime from your phone at $DemoPhone to hear conversational AI in action).
 
@@ -78,22 +78,22 @@ $htmlContent = @"
 
 <p>I was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended contractors in your market.</p>
 
-<p>While your company has a solid local reputation, when homeowners ask ChatGPT or Perplexity <em>"Who is the most reliable contractor near me?"</em>, the AI engines aren't recommending you -- they're actively directing high-ticket jobs to your competitors.</p>
+<p>While your company has a solid local reputation, when homeowners ask ChatGPT or Perplexity <em>'Who is the most reliable contractor near me?'</em>, the AI engines aren't recommending you -- they're actively directing high-ticket jobs to your competitors.</p>
 
 <p><strong>Here's why:</strong> Traditional SEO only targets old Google links. Today, millions of homeowners are searching using conversational AI assistants on their phones. AI search engines ignore traditional keywords unless your business has an engineered <code>llms.txt</code> protocol and structured Schema.org entity data.</p>
 
 <div class="highlight">
-  "Asked ChatGPT for the best contractor in town -- it recommended 3 other companies and didn't even mention our name."
+  'Asked ChatGPT for the best contractor in town -- it recommended 3 other companies and did not even mention our name.'
 </div>
 
-<p>We built the <strong>AEO Engine™ (Answer Engine Optimization)</strong> specifically for local service businesses. We generate, verify, and host your official <code>llms.txt</code> standard and rich knowledge graph so ChatGPT, Perplexity, and Gemini recommend your company as the #1 local authority.</p>
+<p>We built the <strong>AEO Engine (Answer Engine Optimization)</strong> specifically for local service businesses. We generate, verify, and host your official <code>llms.txt</code> standard and rich knowledge graph so ChatGPT, Perplexity, and Gemini recommend your company as the #1 local authority.</p>
 
 <p>I put together a 3-minute video audit showing what ChatGPT and Perplexity say when homeowners search for local services in your area, and how we can get you indexed as the top recommended choice.</p>
 
 <p>Could we jump on a brief 10-15 minute Zoom screen share this Tuesday at 2:30 PM or Thursday at 11:00 AM so I can show you the screen recording?</p>
 
 <p style="text-align: center;">
-  <a href="$BookingUrl" class="btn">👉 Book 15-Minute Zoom Screen Share</a>
+  <a href="$BookingUrl" class="btn">Book 15-Minute Zoom Screen Share</a>
 </p>
 
 <p><em>(Or call our live AI receptionist demo line anytime from your phone at <strong>$DemoPhone</strong> to hear conversational AI in action before we speak).</em></p>
@@ -131,7 +131,7 @@ if ($ResendApiKey) {
         if ($res.id) {
             $sentPhysically = $true
             $resendMsgId = $res.id
-            Write-Host "[✓] PHYSICAL EMAIL DELIVERED! Resend ID: $resendMsgId" -ForegroundColor Green
+            Write-Host "[+] PHYSICAL EMAIL DELIVERED! Resend ID: $resendMsgId" -ForegroundColor Green
         }
     } catch {
         Write-Host "[!] Resend delivery error: $($_.Exception.Message)" -ForegroundColor Red
@@ -143,14 +143,14 @@ $LeadObj = [PSCustomObject]@{
     id = "test_dispatch_" + [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
     company = "VantorX Solutions (Owner Test)"
     owner = $OwnerName
-    title = "Founder & CEO"
+    title = "Founder and CEO"
     email = $RecipientEmail
     phone = $DemoPhone
     city = "Boca Raton, FL"
-    trade = "AI Automation & Trade Growth"
+    trade = "AI Automation and Trade Growth"
     reviewQuote = "Testing live AEO search protocol and Ava 24/7 dispatcher."
     websiteAudit = "AEO llms.txt protocol verified active and live on production."
-    estLoss = "$11,400/mo"
+    estLoss = "`$11,400/mo"
     variantId = "service_aeo_optimization"
     serviceCategory = "AEO Engine (AI Search and Ranking)"
     ctaGoal = "15-Minute Zoom Call"
@@ -190,6 +190,7 @@ Write-Host "====================================================================
 Write-Host "   DISPATCH SUCCESSFUL -- REAL EMAIL SENT                                     " -ForegroundColor White
 Write-Host "==============================================================================" -ForegroundColor Green
 Write-Host "Recipient:   $RecipientEmail" -ForegroundColor Yellow
+Write-Host "Sender:      $SenderEmail" -ForegroundColor Green
 Write-Host "Subject:     $AeoSubject" -ForegroundColor Cyan
 Write-Host "Resend ID:   $resendMsgId" -ForegroundColor Green
 Write-Host "Demo Phone:  $DemoPhone" -ForegroundColor DarkCyan

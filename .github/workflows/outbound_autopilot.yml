@@ -28,6 +28,7 @@ jobs:
         env:
           DEMO_PHONE: "(561) 813-8602"
           SENDER_EMAIL: "luke@vantorxsolutions.com"
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         run: |
           node scripts/cloud_outbound_engine.js
 
