@@ -35,7 +35,10 @@ module.exports = async function handler(req, res) {
       if (action === "turn") {
         const text = (body.text || "").toLowerCase();
         let reply = "I'd be glad to help you schedule that service. What day and time works best for you?";
-        if (text.includes("emergency") || text.includes("leak") || text.includes("ac broken") || text.includes("no heat")) {
+        if (text.includes("transfer") || text.includes("human") || text.includes("person") || text.includes("speak with") || text.includes("talk to") || text.includes("manager") || text.includes("luke")) {
+          reply = "I'd be glad to connect you. Hold on just a moment while I transfer your call directly to our line at (561) 813-8602.";
+          return res.status(200).json({ ok: true, sessionId: body.sessionId || "test_session", reply, action: "transfer", transferNumber: "(561) 813-8602" });
+        } else if (text.includes("emergency") || text.includes("leak") || text.includes("ac broken") || text.includes("no heat")) {
           reply = "I understand this is an emergency. I have flagged your location for priority dispatch and sent an instant SMS to our on-call technician.";
         } else if (text.includes("pricing") || text.includes("cost") || text.includes("quote")) {
           reply = "We offer upfront, transparent flat-rate pricing. We can have a specialist visit for a comprehensive free estimate. Would you like to set that up?";
@@ -77,10 +80,15 @@ module.exports = async function handler(req, res) {
           enabled: true,
           agent_name: "Ava",
           greeting: "Hello, thank you for calling. How can I help you today?",
-          instructions: "Help customers book appointments, answer pricing questions, and dispatch emergency calls.",
+          instructions: "Help customers book appointments, answer pricing questions, and dispatch emergency calls. Transfer to Luke at (561) 813-8602 when requested.",
           voice: "alloy",
           transfer_number: "(561) 813-8602",
-          settings: {},
+          allow_transfer: true,
+          settings: {
+            transferNumber: "(561) 813-8602",
+            allowTransfer: true,
+            transferWhen: "When caller asks for a human, manager, or immediate emergency dispatch"
+          },
         },
       });
     }
