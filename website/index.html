@@ -323,6 +323,30 @@ footer{border-top:1px solid var(--line);padding:38px 0;color:var(--faint);font-s
 footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
 @media(max-width:980px){.services{grid-template-columns:repeat(2,1fr)}.s-web,.s-2,.s-3{grid-column:span 2}.s-web{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.price{grid-template-columns:1fr}}
 @media(max-width:720px){.nav nav{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--line);flex-direction:column;padding:16px 22px;gap:14px;align-items:flex-start}.nav nav.open{display:flex}#menuBtn{display:block}.services,.steps,.fgrid{grid-template-columns:1fr}.s-web,.s-2,.s-3{grid-column:auto}section{padding:60px 0}.hero{padding-top:44px}}
+.mobile-bar{display:none}
+@media(max-width:768px){
+  body{padding-bottom:76px}
+  .mobile-bar{
+    position:fixed;bottom:0;left:0;right:0;z-index:900;
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;
+    padding:10px 16px;background:rgba(11,15,22,.94);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid rgba(255,255,255,.14);
+    box-shadow:0 -6px 24px rgba(0,0,0,.5);
+  }
+  .m-btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    padding:12px 14px;border-radius:10px;font:700 14px Inter,sans-serif;
+    text-decoration:none;text-align:center;min-height:44px;
+  }
+  .m-btn-call{
+    background:rgba(255,255,255,.06);color:#ECEEF2;border:1px solid rgba(255,255,255,.2);
+  }
+  .m-btn-demo{
+    background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%);color:#07090E;font-weight:700;
+    border:1px solid rgba(255,255,255,.25);box-shadow:0 2px 12px rgba(245,158,11,.35);
+  }
+}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -449,7 +473,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
         <li>Client Hub: Caller Recordings, Logs &amp; Transcripts</li>
         <li>Zero Contracts · Cancel Anytime</li>
       </ul>
-      <a class="btn btn-ghost btn-sm" href="https://buy.stripe.com/test_00wcN553c43E9lIgFldnW00" target="_blank" style="width:100%;text-align:center;margin-top:14px">Get Essential ($299/mo) →</a>
+      <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="Essential Tier ($299/mo)" style="width:100%;text-align:center;margin-top:14px">Get Essential ($299/mo) →</a>
     </div>
 
     <div class="card hl" style="border-color:rgba(199,164,104,.6);background:linear-gradient(180deg,rgba(199,164,104,.06),var(--bg2));box-shadow:0 10px 30px rgba(0,0,0,.3)">
@@ -465,7 +489,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
         <li><b>AEO Engine™ Starter:</b> llms.txt &amp; schema for ChatGPT &amp; Perplexity</li>
         <li><b>Done-for-you Maintenance:</b> We handle all updates</li>
       </ul>
-      <a class="btn btn-gold btn-sm" href="#contact" style="width:100%;text-align:center;margin-top:14px">Get Accelerate ($499/mo) →</a>
+      <a class="btn btn-gold btn-sm select-tier-btn" href="#contact" data-tier="Accelerate Tier ($499/mo)" style="width:100%;text-align:center;margin-top:14px">Get Accelerate ($499/mo) →</a>
     </div>
 
     <div class="card">
@@ -481,7 +505,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
         <li><b>VIP Dedicated Priority Support:</b> Same-day updates by our team</li>
         <li><b>Custom Integrations:</b> Direct webhook &amp; CRM pipeline wiring</li>
       </ul>
-      <a class="btn btn-ghost btn-sm" href="#contact" style="width:100%;text-align:center;margin-top:14px">Get Scale ($799/mo) →</a>
+      <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="Scale Tier ($799/mo)" style="width:100%;text-align:center;margin-top:14px">Get Scale ($799/mo) →</a>
     </div>
   </div>
 
@@ -497,28 +521,28 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
         <h4 style="font-size:17px;margin-bottom:4px">24/7 AI Receptionist</h4>
         <div class="amt" style="font-size:22px;margin:6px 0">$299<small> / mo</small></div>
         <p style="font-size:13px;color:var(--dim)">Ava voice AI answering in 1 ring, calendar booking &amp; SMS alerts.</p>
-        <a class="btn btn-ghost btn-sm" href="https://buy.stripe.com/test_00wcN553c43E9lIgFldnW00" target="_blank" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
+        <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: AI Receptionist ($299/mo)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
       </div>
       <div class="card" style="padding:22px;text-align:center">
         <div style="font-size:26px;margin-bottom:8px">💻</div>
         <h4 style="font-size:17px;margin-bottom:4px">Custom Website Design</h4>
         <div class="amt" style="font-size:22px;margin:6px 0">$199<small> / mo</small></div>
         <p style="font-size:13px;color:var(--dim)">Mobile-optimized design, managed hosting &amp; updates (or $997 one-time).</p>
-        <a class="btn btn-ghost btn-sm" href="#contact" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
+        <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: Custom Website ($199/mo)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
       </div>
       <div class="card" style="padding:22px;text-align:center">
         <div style="font-size:26px;margin-bottom:8px">🧠</div>
         <h4 style="font-size:17px;margin-bottom:4px">AEO Engine™ (AI Search)</h4>
         <div class="amt" style="font-size:22px;margin:6px 0">$199<small> / mo</small></div>
         <p style="font-size:13px;color:var(--dim)">llms.txt standard &amp; JSON-LD schema so ChatGPT &amp; Perplexity recommend you.</p>
-        <a class="btn btn-ghost btn-sm" href="#contact" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
+        <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: AEO Engine ($199/mo)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
       </div>
       <div class="card" style="padding:22px;text-align:center">
         <div style="font-size:26px;margin-bottom:8px">📈</div>
         <h4 style="font-size:17px;margin-bottom:4px">LeadFlow Speed-to-Lead</h4>
         <div class="amt" style="font-size:22px;margin:6px 0">$149<small> / mo</small></div>
         <p style="font-size:13px;color:var(--dim)">Missed-call text-back &amp; instant web form SMS follow-up under 90 seconds.</p>
-        <a class="btn btn-ghost btn-sm" href="#contact" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
+        <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: LeadFlow SMS ($149/mo)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
       </div>
     </div>
   </div>
@@ -593,7 +617,46 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
       else{msg.style.color='#e08383';msg.textContent=x.d.error||'Something went wrong. Please try again in a moment.';}
     }).catch(function(){btn.disabled=false;btn.textContent='Book My Demo →';msg.style.color='#e08383';msg.textContent='We couldn’t send that. Please check your connection and try again.';});
   });
+
+  document.querySelectorAll('.select-tier-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      var tier = btn.getAttribute('data-tier');
+      if(!tier) return;
+      var checkboxes = document.querySelectorAll('#opts input[type=checkbox]');
+      var found = false;
+      checkboxes.forEach(function(cb){
+        if(cb.value.indexOf(tier) !== -1 || tier.indexOf(cb.value) !== -1){
+          cb.checked = true;
+          found = true;
+        } else {
+          cb.checked = false;
+        }
+      });
+      if(!found && checkboxes.length > 0) {
+        checkboxes.forEach(function(cb){
+          if((tier.indexOf('Essential') !== -1 && cb.value.indexOf('Essential') !== -1) ||
+             (tier.indexOf('Accelerate') !== -1 && cb.value.indexOf('Accelerate') !== -1) ||
+             (tier.indexOf('Scale') !== -1 && cb.value.indexOf('Scale') !== -1) ||
+             (tier.indexOf('Receptionist') !== -1 && cb.value.indexOf('Receptionist') !== -1) ||
+             (tier.indexOf('Website') !== -1 && cb.value.indexOf('Website') !== -1) ||
+             (tier.indexOf('AEO') !== -1 && cb.value.indexOf('AEO') !== -1) ||
+             (tier.indexOf('LeadFlow') !== -1 && cb.value.indexOf('LeadFlow') !== -1)){
+            cb.checked = true;
+          }
+        });
+      }
+      var targetInput = document.getElementById('fName');
+      if(targetInput){
+        setTimeout(function(){ targetInput.focus(); }, 350);
+      }
+    });
+  });
 })();
 </script>
+
+<aside class="mobile-bar" aria-label="Quick Actions">
+  <a href="tel:5618138602" class="m-btn m-btn-call">📞 Call Demo Line</a>
+  <a href="#contact" class="m-btn m-btn-demo">⚡ Book Demo</a>
+</aside>
 </body>
 </html>
