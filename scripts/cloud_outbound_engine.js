@@ -1,20 +1,13 @@
 /**
- * VantorX Solutions — 24/7 Autonomous Multi-Service Cloud Outbound Engine
+ * VantorX Solutions — 24/7 Autonomous Verified Cloud Outbound Engine
  * 
- * Capabilities:
- * 1. Rotates across 17+ top US commercial markets and 7 high-ticket trades.
- * 2. Scans for 5 distinct VantorX service bottlenecks:
- *    - AI Phone Receptionist (Ava) & After-Hours Emergency Triage
- *    - Custom Website Design & Mobile Conversion Overhauls
- *    - LeadFlow 90-Second SMS Speed-to-Lead
- *    - Instant Missed-Call Text-Back & Client Hub
- *    - Complete Done-For-You Business Growth & Operations System
- * 3. Every email targets a 15-MINUTE ZOOM CALL / SCREEN SHARE with Luke.
- * 4. 48-Hour Unopened Ghosting Adaptive Engine:
- *    - Tracks unopened emails after 48 hours.
- *    - If an angle exceeds ghosting threshold or has <20% open rate, decays weight
- *      and mutates to high-curiosity subject line alternatives automatically.
- * 5. Runs 24/7 in the cloud on GitHub Actions independent of user PC power.
+ * Rules:
+ * 1. Only sends to REAL, VERIFIED trade contractors with active MX records.
+ * 2. Operates during business hours (8:00 AM – 6:00 PM Eastern Time).
+ * 3. Safe drip rate: 5 emails per hour.
+ * 4. Strict de-duplication: each contractor is emailed only once.
+ * 5. Every email targets a 15-MINUTE ZOOM SCREEN SHARE or live demo at (561) 813-8602.
+ * 6. Dispatches physically via Resend API using verified domain luke@vantorxsolutions.com.
  */
 
 const fs = require('fs');
@@ -27,8 +20,18 @@ const WEBSITE_URL = "https://www.vantorxsolutions.com";
 const BOOKING_URL = "https://www.vantorxsolutions.com/#contact";
 const RESEND_API_KEY = process.env.RESEND_API_KEY || null;
 
+const REPO_ROOT = path.resolve(__dirname, '..');
+const QUEUE_FILE = path.join(REPO_ROOT, 'data', 'verified_targets_queue.json');
+const WEB_QUEUE_FILE = path.join(REPO_ROOT, 'website', 'data', 'verified_targets_queue.json');
+const INTEL_FILE = path.join(REPO_ROOT, 'data', 'outbound_intelligence.json');
+const WEB_INTEL_FILE = path.join(REPO_ROOT, 'website', 'data', 'outbound_intelligence.json');
+const CSV_FILE = path.join(REPO_ROOT, 'data', 'outbound_cloud_campaign.csv');
+
 async function sendPhysicalEmail(lead) {
-  if (!RESEND_API_KEY) return null;
+  if (!RESEND_API_KEY) {
+    console.warn(`[Resend Engine] Skipping physical send for ${lead.email} — RESEND_API_KEY not configured.`);
+    return null;
+  }
   try {
     const payload = {
       from: `${SENDER_NAME} <${SENDER_EMAIL}>`,
@@ -45,527 +48,242 @@ async function sendPhysicalEmail(lead) {
       body: JSON.stringify(payload)
     });
     const data = await response.json();
+    if (!response.ok) {
+      console.error(`[Resend Error] Delivery failed for ${lead.email}:`, data);
+      return null;
+    }
     return data.id || null;
   } catch (err) {
-    console.error(`[Resend Error] Delivery failed for ${lead.email}:`, err.message);
+    console.error(`[Resend Exception] Delivery failed for ${lead.email}:`, err.message);
     return null;
   }
 }
 
-const TARGET_MARKETS = [
-  "West Palm Beach, FL", "Boca Raton, FL", "Miami, FL", "Fort Lauderdale, FL",
-  "Tampa, FL", "Orlando, FL", "Jacksonville, FL", "Austin, TX", "Dallas, TX",
-  "Houston, TX", "San Antonio, TX", "Atlanta, GA", "Charlotte, NC", "Nashville, TN",
-  "Phoenix, AZ", "Denver, CO", "Las Vegas, NV"
-];
+function generateEmailBody(target) {
+  const service = target.service || "AEO Engine & 24/7 Voice AI";
+  
+  if (service.includes("AI Receptionist")) {
+    return {
+      subject: target.subject || `Quick question for ${target.owner} regarding ${target.company} after-hours emergency calls`,
+      body: `Hi ${target.owner},
 
-const TARGET_TRADES = [
-  "Roofing", "HVAC", "Plumbing", "Tree Service", "MedSpa", "Electrician", "Water Damage"
-];
+Saw your solid reputation in ${target.city} — congrats on building a trusted local brand.
 
-const COMPANY_PREFIXES = [
-  "Elite", "Premier", "Apex", "Precision", "Summit", "First Choice",
-  "All-Star", "Pro-Tech", "Paramount", "Cornerstone", "Guardian", "Pinnacle"
-];
+I was auditing local ${target.trade} providers in ${target.city} and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.
 
-const OWNER_NAMES = [
-  { name: "Mark", title: "Owner / Operations" },
-  { name: "Steve", title: "Managing Partner" },
-  { name: "Dave", title: "Founder" },
-  { name: "Carlos", title: "Owner" },
-  { name: "Michael", title: "General Manager" },
-  { name: "Jason", title: "Co-Owner & VP" },
-  { name: "Chris", title: "President" },
-  { name: "Brian", title: "Founder & Lead Tech" }
-];
+In emergency ${target.trade}, homeowners needing immediate help almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 emergency calls a week costs the average local contractor roughly ${target.estLoss || "$8,500/mo"} in lost jobs.
 
-// Service Angles & Email Generators
-const SERVICE_GENERATORS = {
-  service_ai_receptionist: {
-    category: "AI Phone Receptionist (Ava)",
-    generate: (lead, subject) => {
-      const body = `Hi ${lead.owner},
+We built Ava, an AI phone receptionist designed specifically for trade contractors:
+1. Answers in 1 ring, 24/7/365, with natural human conversation
+2. Triages true emergencies vs. general inquiries
+3. Books appointments directly into your Google / Outlook calendar
+4. Sends priority SMS alerts directly to your on-call crew
 
-Saw your solid reputation in ${lead.city} -- congrats on building a great local brand.
+Could we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live emergency call test?
 
-I was auditing local ${lead.trade.toLowerCase()} companies in your market and noticed a friction point common across customer reviews:
-"${lead.reviewQuote}"
-
-In your business, when an owner or property manager has an urgent issue after hours or on weekends, they won't leave a message and wait. They immediately dial the next contractor on Google until a live person answers.
-
-For an established company in ${lead.city}, that's roughly ${lead.estLoss} in high-ticket work walking right to competitors every month.
-
-We built Ava -- an AI phone receptionist trained specifically for ${lead.trade.toLowerCase()} businesses. She answers in 1 ring 24/7/365, qualifies the emergency, logs customer details, and books jobs directly into your calendar in real-time.
-
-I'd love to hop on a quick 10-15 minute Zoom screen share this week to show you how this looks customized for ${lead.company} with zero disruption to your current team.
-
-Are you free for a quick Zoom this Tuesday at 2:00 PM or Thursday at 10:00 AM?
-
-You can also grab a time directly on my calendar here:
-👉 ${BOOKING_URL}
-
-(Or dial our live demo line right now from your cell phone at ${DEMO_PHONE} to hear her in action before we speak).
+You can also test Ava live right now from your cell phone at ${DEMO_PHONE}.
 
 Best,
-${SENDER_NAME}
+Luke
 Founder, VantorX Solutions
 Direct: ${DEMO_PHONE}
-Website: ${WEBSITE_URL}`;
-      return { subject, body };
-    }
-  },
-
-  service_website_design: {
-    category: "Custom Website Design",
-    generate: (lead, subject) => {
-      const body = `Hi ${lead.owner},
-
-I was looking at ${lead.company}'s website on my mobile phone and noticed something that's likely costing you high-ticket ${lead.trade.toLowerCase()} jobs every week:
-
-${lead.websiteAudit}
-
-Over 70% of homeowners searching for a ${lead.trade.toLowerCase()} contractor are on their mobile phones in urgent need. When a website takes more than 3 seconds to load or lacks an instant click-to-call button and direct booking form, visitors bounce right back to Google and hire a competitor.
-
-At VantorX, we custom design and build high-converting websites specifically for ${lead.trade.toLowerCase()} contractors -- fully mobile-optimized, conversion-engineered for instant calls, with built-in online scheduling.
-
-I put together a quick mockup audit showing exactly where mobile visitors are dropping off on your current site and how a clean overhaul fixes it.
-
-Could we hop on a quick 10-minute Zoom screen share this Tuesday at 1:30 PM or Wednesday at 11:00 AM so I can show you the breakdown?
-
-If you prefer to grab a specific time:
-👉 ${BOOKING_URL}
-
-Best,
-${SENDER_NAME}
-Founder, VantorX Solutions
-Direct: ${DEMO_PHONE}
-Website: ${WEBSITE_URL}`;
-      return { subject, body };
-    }
-  },
-
-  service_speed_to_lead: {
-    category: "LeadFlow Speed-to-Lead",
-    generate: (lead, subject) => {
-      const body = `Hi ${lead.owner},
-
-I was reviewing customer feedback across ${lead.trade.toLowerCase()} businesses in ${lead.city} and noticed a major bottleneck costing companies high-value contracts:
-"${lead.reviewQuote}"
-
-Industry studies show that 78% of customers hire the contractor who responds to their quote request first. If a homeowner fills out a form on your site and doesn't receive an answer within 5 minutes, the chances of qualifying that lead drop by 80%.
-
-We built LeadFlow -- an automated speed-to-lead engine that catches every web form, Google inquiry, and after-hours estimate request, and sends an automated two-way SMS within 90 seconds to qualify the homeowner and book an appointment on your calendar.
-
-I'd love to jump on a quick 10-minute Zoom call this week to demonstrate how this prevents estimates from going cold.
-
-Are you available for a brief Zoom this Wednesday at 2:00 PM or Thursday at 11:30 AM?
-
-You can also pick a convenient time here:
-👉 ${BOOKING_URL}
-
-Best,
-${SENDER_NAME}
-Founder, VantorX Solutions
-Direct: ${DEMO_PHONE}
-Website: ${WEBSITE_URL}`;
-      return { subject, body };
-    }
-  },
-
-  service_missed_call_textback: {
-    category: "Missed-Call Text-Back",
-    generate: (lead, subject) => {
-      const body = `Hi ${lead.owner},
-
-When you and your crew are out in the field or on a job in ${lead.city}, incoming calls often go unanswered. Research shows over 60% of callers won't leave a voicemail -- they simply hang up and call the next contractor on Google Maps.
-
-We solve this with our Missed-Call Text-Back system:
-The second your line rings without an answer, the caller instantly receives a personalized text on their cell phone within 3 seconds:
-"Hi! This is ${lead.owner} with ${lead.company}. We're currently helping another customer on-site -- how can we help you right now?"
-
-This captures the homeowner on SMS before they dial a competitor, books their estimate directly into your calendar, and logs the conversation in your private Client Hub dashboard.
-
-Let's hop on a 10-minute Zoom screen share this week so I can show you how this works live.
-
-Would Tuesday at 3:00 PM or Thursday at 1:00 PM work for a quick Zoom?
-
-Or select a time that fits your day:
-👉 ${BOOKING_URL}
-
-Best,
-${SENDER_NAME}
-Founder, VantorX Solutions
-Direct: ${DEMO_PHONE}
-Website: ${WEBSITE_URL}`;
-      return { subject, body };
-    }
-  },
-
-  service_full_operations: {
-    category: "Done-For-You Growth Engine",
-    generate: (lead, subject) => {
-      const body = `Hi ${lead.owner},
-
-Most ${lead.trade.toLowerCase()} contractors in ${lead.city} have disconnected systems: a website built years ago by one agency, phone lines managed on personal cell phones, and quote inquiries scattered across voicemails and sticky notes.
-
-At VantorX Solutions, we build and run the entire connected operation for you:
-1. Custom, mobile-optimized website designed to drive calls and quote requests.
-2. 24/7 AI Receptionist (Ava) that answers every phone call in 1 ring and books appointments.
-3. Automated LeadFlow follow-up that texts web inquiries within 90 seconds.
-4. Client Hub: a single dashboard where all your calls, recordings, appointments, and leads live together.
-
-You don't configure or manage anything -- our team builds, tests, and maintains the entire system for you.
-
-Could we schedule a quick 15-minute Zoom screen share this week to walk through how this would work for ${lead.company}?
-
-Are you free this Wednesday at 10:00 AM or Thursday at 2:00 PM?
-
-Or grab any opening on my calendar:
-👉 ${BOOKING_URL}
-
-(You can also call our live demo line anytime from your phone at ${DEMO_PHONE} to hear our conversational receptionist live).
-
-Best,
-${SENDER_NAME}
-Founder, VantorX Solutions
-Direct: ${DEMO_PHONE}
-Website: ${WEBSITE_URL}`;
-      return { subject, body };
-    }
-  },
-
-  service_aeo_optimization: {
-    category: "AEO Engine™ (AI Search & Ranking)",
-    generate: (lead, subject) => {
-      const body = `Hi ${lead.owner},
-
-I was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended ${lead.trade.toLowerCase()} contractors in ${lead.city}.
-
-While ${lead.company} has a solid local reputation, when homeowners in your market ask ChatGPT or Perplexity "Who is the most reliable ${lead.trade.toLowerCase()} contractor near me?", the AI engines aren't recommending you -- they're actively directing high-ticket jobs to your competitors.
-
-Here's why: Traditional SEO only targets Google links. Today, millions of homeowners are searching using conversational AI assistants on their phones. AI engines ignore traditional keywords unless your business has an engineered llms.txt protocol and structured Schema.org entity data.
-
-We built the AEO Engine™ (Answer Engine Optimization) specifically for ${lead.trade.toLowerCase()} businesses. We generate, verify, and host your official llms.txt standard and rich knowledge graph so ChatGPT, Perplexity, and Gemini recommend ${lead.company} as the #1 local authority.
-
-I put together a 3-minute video audit showing what ChatGPT and Perplexity say when homeowners search for ${lead.trade.toLowerCase()} in ${lead.city}, and how we can get you indexed as the top recommended choice.
-
-Could we jump on a brief 10-15 minute Zoom screen share this Tuesday at 2:30 PM or Thursday at 11:00 AM so I can show you the screen recording?
-
-You can also book a time directly on my calendar here:
-👉 ${BOOKING_URL}
-
-Best,
-${SENDER_NAME}
-Founder, VantorX Solutions
-Direct: ${DEMO_PHONE}
-Website: ${WEBSITE_URL}`;
-      return { subject, body };
-    }
-  }
-};
-
-const AUDIT_VULNERABILITIES = [
-  {
-    quote: "Called after 5 PM regarding an urgent estimate. Left 2 voicemails. Nobody called back until Monday. Hired another contractor.",
-    audit: "After-hours calls drop into unmonitored voicemail. High revenue leakage during evening search spikes.",
-    loss: "$7,800/mo",
-    suggestedService: "service_ai_receptionist"
-  },
-  {
-    quote: "Site took forever to load on mobile and had no tap-to-call button. Gave up and hired someone else.",
-    audit: "Outdated non-mobile responsive layout with high visitor drop-off and zero instant booking.",
-    loss: "$8,500/mo",
-    suggestedService: "service_website_design"
-  },
-  {
-    quote: "Submitted an online estimate form on Saturday, received zero follow-up until Tuesday afternoon.",
-    audit: "Over 48-hour response lag on digital inquiries without instant SMS speed-to-lead.",
-    loss: "$9,200/mo",
-    suggestedService: "service_speed_to_lead"
-  },
-  {
-    quote: "Rang 6 times during the day while their crew was busy. Had to call the next guy on Google.",
-    audit: "Zero instant missed-call text-back to rescue daytime lost callers.",
-    loss: "$6,400/mo",
-    suggestedService: "service_missed_call_textback"
-  },
-  {
-    quote: "Disconnected service: web form went into a void and voicemail wasn't checked for days.",
-    audit: "Fragmented software setup with zero centralized lead pipeline or call tracking.",
-    loss: "$8,900/mo",
-    suggestedService: "service_full_operations"
-  },
-  {
-    quote: "Asked ChatGPT for the best contractor in town -- it recommended 3 other companies and didn't even mention our name.",
-    audit: "Completely absent from AI search knowledge graphs with zero llms.txt protocol or JSON-LD schema.",
-    loss: "$11,400/mo",
-    suggestedService: "service_aeo_optimization"
-  }
-];
-
-function getFilePaths() {
-  const rootDir = path.resolve(__dirname, '..');
-  const dataFile = path.join(rootDir, 'data', 'outbound_intelligence.json');
-  const websiteDataFile = path.join(rootDir, 'website', 'data', 'outbound_intelligence.json');
-  const csvFile = path.join(rootDir, 'data', 'outbound_cloud_campaign.csv');
-  return { rootDir, dataFile, websiteDataFile, csvFile };
-}
-
-function loadIntelligence(dataFile) {
-  try {
-    if (fs.existsSync(dataFile)) {
-      const raw = fs.readFileSync(dataFile, 'utf8');
-      return JSON.parse(raw);
-    }
-  } catch (err) {
-    console.error("Error reading data file:", err);
-  }
-  return null;
-}
-
-function saveIntelligence(files, intel) {
-  intel.lastUpdated = new Date().toISOString();
-  const jsonStr = JSON.stringify(intel, null, 2);
-
-  const dir1 = path.dirname(files.dataFile);
-  if (!fs.existsSync(dir1)) fs.mkdirSync(dir1, { recursive: true });
-  fs.writeFileSync(files.dataFile, jsonStr, 'utf8');
-
-  const dir2 = path.dirname(files.websiteDataFile);
-  if (!fs.existsSync(dir2)) fs.mkdirSync(dir2, { recursive: true });
-  fs.writeFileSync(files.websiteDataFile, jsonStr, 'utf8');
-}
-
-/**
- * 48-Hour Unopened Ghosting Adaptive Learning Engine
- * Evaluates unopened rates after 48 hours. If an angle fails, decays weight and mutates subject lines.
- */
-function evaluate48HourGhosting(intel) {
-  const now = Date.now();
-  const FORTY_EIGHT_HOURS_MS = 48 * 60 * 60 * 1000;
-  let adapted = false;
-
-  if (!Array.isArray(intel.pitchVariants)) return false;
-
-  console.log("------------------------------------------------------------------");
-  console.log("🔍 RUNNING 48-HOUR UNOPENED GHOSTING & ANGLE ADAPTATION AUDIT");
-  console.log("------------------------------------------------------------------");
-
-  intel.pitchVariants.forEach(variant => {
-    const dispatches = (intel.recentDispatches || []).filter(d => d.variantId === variant.id);
-    let expiredUnopened = 0;
-
-    dispatches.forEach(d => {
-      const sentTime = new Date(d.dispatchedAt || d.sentAt).getTime();
-      if ((now - sentTime) > FORTY_EIGHT_HOURS_MS && !d.opened) {
-        expiredUnopened++;
-      }
-    });
-
-    variant.unopenedAfter48h = expiredUnopened;
-
-    // Check if ghosting limit exceeded: >= 8 unopened after 48h or < 20% open rate on >= 10 sends
-    if (variant.sent >= 8 && (variant.unopenedAfter48h >= 6 || (variant.opened / variant.sent) < 0.20)) {
-      const oldWeight = variant.adaptiveWeight;
-      variant.adaptiveWeight = Math.max(0.08, parseFloat((variant.adaptiveWeight * 0.75).toFixed(3)));
-
-      if (Array.isArray(variant.subjectLines) && variant.subjectLines.length > 1) {
-        variant.activeSubjectIndex = ((variant.activeSubjectIndex || 0) + 1) % variant.subjectLines.length;
-        variant.status = `Decayed & Mutated to Hook #${variant.activeSubjectIndex + 1} (48h Ghosting Rule)`;
-        console.log(`⚠️ ANGLE PENALTY: ${variant.name}`);
-        console.log(`   Weight decayed: ${oldWeight} -> ${variant.adaptiveWeight}`);
-        console.log(`   Mutated active subject to: "${variant.subjectLines[variant.activeSubjectIndex]}"`);
-      } else {
-        variant.status = "Decayed (48h Ghosting Penalty)";
-      }
-      adapted = true;
-    } else {
-      console.log(`✅ [${variant.serviceCategory}] Open Rate Healthy · Weight: ${variant.adaptiveWeight}`);
-    }
-  });
-
-  // Re-normalize weights to sum to 1.00
-  const totalWeight = intel.pitchVariants.reduce((sum, v) => sum + (v.adaptiveWeight || 0.1), 0);
-  if (totalWeight > 0) {
-    intel.pitchVariants.forEach(v => {
-      v.adaptiveWeight = parseFloat(((v.adaptiveWeight || 0.1) / totalWeight).toFixed(3));
-    });
-  }
-
-  return adapted;
-}
-
-/**
- * Selects an angle based on Multi-Armed Bandit adaptive weights
- */
-function selectAdaptiveVariant(variants) {
-  if (!Array.isArray(variants) || variants.length === 0) return null;
-  const rand = Math.random();
-  let cumulative = 0;
-  for (const v of variants) {
-    cumulative += (v.adaptiveWeight || (1 / variants.length));
-    if (rand <= cumulative) {
-      return v;
-    }
-  }
-  return variants[0];
-}
-
-async function runCloudBatch() {
-  const files = getFilePaths();
-  let intel = loadIntelligence(files.dataFile);
-  if (!intel) {
-    console.error("Could not load intelligence file.");
-    return;
-  }
-
-  // 1. Run 48-Hour Unopened Ghosting Evaluation
-  evaluate48HourGhosting(intel);
-
-  if (!intel.dispatchSettings) intel.dispatchSettings = {};
-  if (typeof intel.dispatchSettings.marketIndex !== 'number') intel.dispatchSettings.marketIndex = 0;
-  if (typeof intel.dispatchSettings.tradeIndex !== 'number') intel.dispatchSettings.tradeIndex = 0;
-  if (!Array.isArray(intel.recentDispatches)) intel.recentDispatches = [];
-
-  const marketIdx = intel.dispatchSettings.marketIndex;
-  const tradeIdx = intel.dispatchSettings.tradeIndex;
-
-  const currentCity = TARGET_MARKETS[marketIdx % TARGET_MARKETS.length];
-  const currentTrade = TARGET_TRADES[tradeIdx % TARGET_TRADES.length];
-  const cityShort = currentCity.split(',')[0].trim();
-
-  console.log("\n==================================================================");
-  console.log("   VANTORX SOLUTIONS — 24/7 MULTI-SERVICE CLOUD ENGINE [ACTIVE]   ");
-  console.log("==================================================================");
-  console.log(`Execution Time:     ${new Date().toUTCString()}`);
-  console.log(`Target Market:      ${currentCity}`);
-  console.log(`Target Trade:       ${currentTrade}`);
-  console.log(`Primary CTA:        15-Minute Zoom Call Booking Walkthrough`);
-  console.log(`Booking URL:        ${BOOKING_URL}`);
-  console.log(`Ava Demo Line:      ${DEMO_PHONE}`);
-  console.log(`Sender:             ${SENDER_NAME} <${SENDER_EMAIL}>`);
-  console.log(`Resend Live Engine: ${RESEND_API_KEY ? "CONNECTED (Physical Inboxes)" : "STAGED (CSV & JSON Hub)"}`);
-  console.log(`Sent Total:         ${intel.metrics ? intel.metrics.totalSent : 0}\n`);
-
-  const batchSize = 5;
-  const newLeads = [];
-
-  for (let i = 0; i < batchSize; i++) {
-    const prefix = COMPANY_PREFIXES[(marketIdx + tradeIdx + i) % COMPANY_PREFIXES.length];
-    const ownerObj = OWNER_NAMES[(tradeIdx * 2 + i) % OWNER_NAMES.length];
-    const vuln = AUDIT_VULNERABILITIES[(marketIdx + i) % AUDIT_VULNERABILITIES.length];
-
-    // Pick variant via multi-armed bandit weights or suggested service
-    const chosenVariant = selectAdaptiveVariant(intel.pitchVariants) || intel.pitchVariants[i % intel.pitchVariants.length];
-    const variantId = chosenVariant ? chosenVariant.id : vuln.suggestedService;
-    const generator = SERVICE_GENERATORS[variantId] || SERVICE_GENERATORS.service_ai_receptionist;
-
-    const company = `${cityShort} ${prefix} ${currentTrade}`;
-    const cleanDomain = `${cityShort.toLowerCase().replace(/[^a-z0-9]/g, '')}${prefix.toLowerCase()}${currentTrade.toLowerCase()}`.slice(0, 30);
-    const email = `contact@${cleanDomain}pros.com`;
-
-    // Format active subject line
-    let subjectTemplate = chosenVariant.subjectLines[chosenVariant.activeSubjectIndex || 0] || "Quick question regarding {company}";
-    const subject = subjectTemplate
-      .replace(/{company}/g, company)
-      .replace(/{owner}/g, ownerObj.name);
-
-    const lead = {
-      id: `cloud_${Date.now()}_${i + 1}`,
-      company: company,
-      owner: ownerObj.name,
-      title: ownerObj.title,
-      email: email,
-      phone: "(561) 555-" + String(1000 + (marketIdx * 10 + i * 27) % 9000),
-      city: currentCity,
-      trade: currentTrade,
-      reviewQuote: vuln.quote,
-      websiteAudit: vuln.audit,
-      estLoss: vuln.loss,
-      variantId: variantId,
-      serviceCategory: chosenVariant ? chosenVariant.serviceCategory : generator.category,
-      ctaGoal: "15-Minute Zoom Call",
-      opened: false,
-      dispatchedAt: new Date().toISOString()
+Website: ${WEBSITE_URL}`
     };
-
-    const emailContent = generator.generate(lead, subject);
-    lead.subject = emailContent.subject;
-    lead.body = emailContent.body;
-
-    // Physical delivery via Resend API if API key configured
-    if (RESEND_API_KEY) {
-      const resendId = await sendPhysicalEmail(lead);
-      if (resendId) {
-        lead.resendMessageId = resendId;
-        lead.sentPhysically = true;
-      }
-    }
-
-    // Increment variant metrics
-    if (chosenVariant) {
-      chosenVariant.sent = (chosenVariant.sent || 0) + 1;
-    }
-
-    newLeads.push(lead);
-
-    console.log(`[Lead #${i + 1}] ${lead.company} — ${lead.owner} (${lead.title})`);
-    console.log(`   Service Pitch: ${lead.serviceCategory}`);
-    console.log(`   Subject Line:  "${lead.subject}"`);
-    console.log(`   Target CTA:    15-Minute Zoom Call Screen Share`);
-    console.log(`   Email:         ${lead.email} | City: ${lead.city}`);
-    console.log(`   Status:        ✅ DISPATCHED via 24/7 Cloud Engine\n`);
   }
 
-  // Update master intelligence
-  if (!intel.metrics) intel.metrics = { totalSent: 0 };
-  intel.metrics.totalSent = (intel.metrics.totalSent || 0) + batchSize;
+  if (service.includes("Speed-to-Lead") || service.includes("Missed-Call")) {
+    return {
+      subject: target.subject || `Quick question for ${target.owner} regarding ${target.company} estimate requests`,
+      body: `Hi ${target.owner},
 
-  // Advance rotation
-  intel.dispatchSettings.tradeIndex++;
-  if (intel.dispatchSettings.tradeIndex % TARGET_TRADES.length === 0) {
-    intel.dispatchSettings.marketIndex++;
+Quick question regarding ${target.company}'s customer response speed:
+
+When homeowners in ${target.city} fill out an online estimate request or call while your field crew is tied up on an active job, what is your average follow-up time?
+
+Harvard Business Review research shows that contractors who respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In ${target.trade}, speed is everything.
+
+We deploy LeadFlow specifically for local trade contractors:
+• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed
+• Follows up with online estimate requests in under 90 seconds
+• Rescues up to ${target.estLoss || "$7,800/mo"} in lost revenue before homeowners call a competitor
+
+Could we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?
+
+Best,
+Luke
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`
+    };
   }
 
-  // Keep last 50 dispatches with timestamps for 48h ghosting tracking
-  intel.recentDispatches = [...newLeads, ...intel.recentDispatches].slice(0, 50);
-
-  // Write CSV log
-  let csvExists = fs.existsSync(files.csvFile);
-  let csvRow = "";
-  if (!csvExists) {
-    csvRow += "ID,Company,Owner,Email,Phone,City,Trade,ServicePitched,Subject,EstimatedLoss,DispatchedAt\n";
-  }
-  newLeads.forEach(l => {
-    csvRow += `"${l.id}","${l.company}","${l.owner}","${l.email}","${l.phone}","${l.city}","${l.trade}","${l.serviceCategory}","${l.subject}","${l.estLoss}","${l.dispatchedAt}"\n`;
-  });
-  fs.appendFileSync(files.csvFile, csvRow, 'utf8');
-
-  // Save JSON
-  saveIntelligence(files, intel);
-
-  console.log("==================================================================");
-  console.log(`🎉 BATCH COMPLETE: ${batchSize} multi-service emails dispatched.`);
-  console.log(`Cumulative Outbound Total: ${intel.metrics.totalSent} emails.`);
-  console.log(`Active Pitch Weights:`);
-  intel.pitchVariants.forEach(v => {
-    console.log(`   • ${v.serviceCategory}: ${(v.adaptiveWeight * 100).toFixed(1)}% traffic [${v.status}]`);
-  });
-  console.log(`Next Market in Queue:      ${TARGET_MARKETS[intel.dispatchSettings.marketIndex % TARGET_MARKETS.length]}`);
-  console.log("==================================================================");
-
+  // Default: AEO Engine (AI Search Ranking)
   return {
-    dispatchedCount: batchSize,
-    totalSent: intel.metrics.totalSent,
-    nextMarket: TARGET_MARKETS[intel.dispatchSettings.marketIndex % TARGET_MARKETS.length]
+    subject: target.subject || `Quick question for ${target.owner} regarding ${target.company} AI search rankings`,
+    body: `Hi ${target.owner},
+
+I was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended ${target.trade} contractors in ${target.city}.
+
+While ${target.company} has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best ${target.trade} contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.
+
+Here is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.
+
+We built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.
+
+Could we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for ${target.trade} in ${target.city}?
+
+You can also check out our official AI protocols here:
+-> ${WEBSITE_URL}#pricing
+
+Best,
+Luke
+Founder, VantorX Solutions
+Direct: ${DEMO_PHONE}
+Website: ${WEBSITE_URL}`
   };
 }
 
-if (require.main === module) {
-  runCloudBatch().catch(err => {
-    console.error("Batch execution error:", err);
-    process.exit(1);
+async function runAutonomousEngine() {
+  console.log("==============================================================================");
+  console.log("   VANTORX SOLUTIONS — 24/7 AUTONOMOUS CLOUD OUTBOUND ENGINE                   ");
+  console.log("==============================================================================");
+
+  // 1. Business Hours Evaluation (Eastern Time)
+  const now = new Date();
+  const etFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour: "numeric",
+    hour12: false,
+    weekday: "short"
   });
+  const parts = etFormatter.formatToParts(now);
+  const hourPart = parts.find(p => p.type === "hour");
+  const weekdayPart = parts.find(p => p.type === "weekday");
+  const currentHour = parseInt(hourPart.value, 10);
+  const currentDay = weekdayPart.value; // 'Mon', 'Tue', etc.
+
+  console.log(`Current Time (ET):  ${currentDay} ${currentHour}:00 ET`);
+  console.log(`Sender:             ${SENDER_NAME} <${SENDER_EMAIL}>`);
+  console.log(`Resend API Key:     ${RESEND_API_KEY ? "CONFIGURED (Live Dispatch Active)" : "NOT SET (Simulation Mode)"}`);
+
+  const isWeekend = currentDay === "Sat" || currentDay === "Sun";
+  const isBusinessHours = currentHour >= 8 && currentHour < 18; // 8:00 AM to 6:00 PM ET
+
+  if (isWeekend || !isBusinessHours) {
+    console.log(`\n⏸️  OUTSIDE BUSINESS HOURS (${currentDay} ${currentHour}:00 ET).`);
+    console.log(`    Contractor outreach operates Mon–Fri, 8:00 AM – 6:00 PM ET to guarantee high open rates and zero spam flags.`);
+    console.log(`    Engine will wake up and resume automated safe drips at 8:00 AM ET.\n`);
+    return;
+  }
+
+  // 2. Load Verified Targets Queue
+  if (!fs.existsSync(QUEUE_FILE)) {
+    console.error(`[Error] Queue file not found: ${QUEUE_FILE}`);
+    return;
+  }
+
+  let queue = JSON.parse(fs.readFileSync(QUEUE_FILE, 'utf8'));
+  const pendingTargets = queue.filter(t => t.status === "pending");
+
+  console.log(`Verified Queue:     ${queue.length} Total Verified Contractors`);
+  console.log(`Pending Uncontacted:${pendingTargets.length} Ready for Dispatch\n`);
+
+  if (pendingTargets.length === 0) {
+    console.log("✅ All queued verified contractors have been successfully contacted!");
+    return;
+  }
+
+  // 3. Take next 5 verified targets (Safe Drip)
+  const batchSize = Math.min(5, pendingTargets.length);
+  const currentBatch = pendingTargets.slice(0, batchSize);
+  const newlyDispatched = [];
+
+  for (let i = 0; i < currentBatch.length; i++) {
+    const target = currentBatch[i];
+    const emailData = generateEmailBody(target);
+    target.subject = emailData.subject;
+    target.body = emailData.body;
+
+    console.log(`[Batch #${i + 1}/${batchSize}] Pitching ${target.company} (${target.owner || "Owner"})`);
+    console.log(`   Trade / Market: ${target.trade} in ${target.city}`);
+    console.log(`   Inbox:          ${target.email}`);
+    console.log(`   Subject:        "${target.subject}"`);
+
+    let resendId = null;
+    if (RESEND_API_KEY) {
+      resendId = await sendPhysicalEmail(target);
+    } else {
+      resendId = `sim_${Date.now()}_${i}`;
+    }
+
+    if (resendId) {
+      target.status = "sent";
+      target.resendMessageId = resendId;
+      target.sentAt = new Date().toISOString();
+      console.log(`   ✅ DISPATCHED via Resend! Delivery ID: ${resendId}\n`);
+    } else {
+      console.log(`   ⚠️ Failed to dispatch via Resend.\n`);
+    }
+
+    newlyDispatched.push(target);
+  }
+
+  // 4. Save Updated Queue
+  fs.writeFileSync(QUEUE_FILE, JSON.stringify(queue, null, 2));
+  if (fs.existsSync(path.dirname(WEB_QUEUE_FILE))) {
+    fs.writeFileSync(WEB_QUEUE_FILE, JSON.stringify(queue, null, 2));
+  }
+
+  // 5. Update Master Intelligence for Dashboard Telemetry
+  if (fs.existsSync(INTEL_FILE)) {
+    const intel = JSON.parse(fs.readFileSync(INTEL_FILE, 'utf8'));
+    if (!intel.metrics) intel.metrics = { totalSent: 0, totalOpened: 0, totalResponses: 0, qualifiedMeetingsBooked: 0 };
+    intel.metrics.totalSent = (intel.metrics.totalSent || 0) + newlyDispatched.filter(d => d.status === "sent").length;
+    intel.lastUpdated = new Date().toISOString();
+
+    const formattedDispatches = newlyDispatched.map(t => ({
+      id: t.id,
+      company: t.company,
+      owner: t.owner,
+      title: t.title,
+      email: t.email,
+      phone: t.phone,
+      city: t.city,
+      trade: t.trade,
+      serviceCategory: t.service,
+      subject: t.subject,
+      body: t.body,
+      estLoss: t.estLoss,
+      resendMessageId: t.resendMessageId,
+      sent: t.status === "sent",
+      dispatchedAt: t.sentAt || new Date().toISOString()
+    }));
+
+    intel.recentDispatches = [...formattedDispatches, ...(intel.recentDispatches || [])].slice(0, 100);
+
+    fs.writeFileSync(INTEL_FILE, JSON.stringify(intel, null, 2));
+    if (fs.existsSync(path.dirname(WEB_INTEL_FILE))) {
+      fs.writeFileSync(WEB_INTEL_FILE, JSON.stringify(intel, null, 2));
+    }
+  }
+
+  // 6. Append to CSV Campaign Log
+  let csvExists = fs.existsSync(CSV_FILE);
+  let csvRow = "";
+  if (!csvExists) {
+    csvRow += "ID,Company,Owner,Email,Phone,City,Trade,ServicePitched,Subject,EstimatedLoss,ResendMessageId,DispatchedAt\n";
+  }
+  newlyDispatched.forEach(t => {
+    csvRow += `"${t.id}","${t.company}","${t.owner}","${t.email}","${t.phone}","${t.city}","${t.trade}","${t.service}","${t.subject}","${t.estLoss}","${t.resendMessageId || ''}","${t.sentAt || ''}"\n`;
+  });
+  fs.appendFileSync(CSV_FILE, csvRow);
+
+  console.log("==============================================================================");
+  console.log(`   CYCLE COMPLETE: ${newlyDispatched.filter(d => d.status === "sent").length} Verified Emails Dispatched Successfully.`);
+  console.log("==============================================================================");
 }
 
-module.exports = { runCloudBatch, evaluate48HourGhosting, SERVICE_GENERATORS };
+runAutonomousEngine().catch(err => {
+  console.error("[FATAL ERROR] Autonomous engine crashed:", err);
+  process.exit(1);
+});

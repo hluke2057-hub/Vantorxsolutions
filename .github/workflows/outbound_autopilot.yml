@@ -35,8 +35,7 @@ jobs:
       - name: Commit Intelligence Metrics & History
         run: |
           git config --global user.name "VantorX Cloud Autopilot"
-          git config --global user.email "autopilot@vantorxsolutions.com"
-          git add data/outbound_intelligence.json website/data/outbound_intelligence.json data/outbound_cloud_campaign.csv || true
+          git add data/ website/data/ || true
           if git diff --staged --quiet; then
             echo "No data changes to commit."
           else
