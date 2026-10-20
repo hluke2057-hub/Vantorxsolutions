@@ -27,6 +27,14 @@ const INTEL_FILE = path.join(REPO_ROOT, 'data', 'outbound_intelligence.json');
 const WEB_INTEL_FILE = path.join(REPO_ROOT, 'website', 'data', 'outbound_intelligence.json');
 const CSV_FILE = path.join(REPO_ROOT, 'data', 'outbound_cloud_campaign.csv');
 
+function readJsonSafe(filePath) {
+  let content = fs.readFileSync(filePath, 'utf8');
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  return JSON.parse(content);
+}
+
 async function sendPhysicalEmail(lead) {
   if (!RESEND_API_KEY) {
     console.warn(`[Resend Engine] Skipping physical send for ${lead.email} — RESEND_API_KEY not configured.`);
@@ -182,7 +190,7 @@ async function runAutonomousEngine() {
     return;
   }
 
-  let queue = JSON.parse(fs.readFileSync(QUEUE_FILE, 'utf8'));
+  let queue = readJsonSafe(QUEUE_FILE);
   const pendingTargets = queue.filter(t => t.status === "pending");
 
   console.log(`Verified Queue:     ${queue.length} Total Verified Contractors`);
@@ -236,7 +244,7 @@ async function runAutonomousEngine() {
 
   // 5. Update Master Intelligence for Dashboard Telemetry
   if (fs.existsSync(INTEL_FILE)) {
-    const intel = JSON.parse(fs.readFileSync(INTEL_FILE, 'utf8'));
+    const intel = readJsonSafe(INTEL_FILE);
     if (!intel.metrics) intel.metrics = { totalSent: 0, totalOpened: 0, totalResponses: 0, qualifiedMeetingsBooked: 0 };
     intel.metrics.totalSent = (intel.metrics.totalSent || 0) + newlyDispatched.filter(d => d.status === "sent").length;
     intel.lastUpdated = new Date().toISOString();
