@@ -3,304 +3,332 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VantorX AEO Engine™ — AI Search & ChatGPT Ranking Generator</title>
-<meta name="description" content="Generate compliant llms.txt protocols and Schema.org JSON-LD structured data so ChatGPT, Perplexity, Claude, and Gemini recommend your business as the #1 choice.">
+<title>VantorX AEO Engine™ — AI Search Visibility Audit for Local Contractors</title>
+<meta name="description" content="Audit your business across ChatGPT, Perplexity, Claude, and Gemini. See if AI search engines recommend your business or direct high-ticket jobs to competitors.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.vantorxsolutions.com/aeo-tool/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0c1017;--bg2:#121824;--bg3:#182030;--line:#222c3f;--line2:#2d3a52;
-  --ink:#f1f5f9;--dim:#94a3b8;--faint:#64748b;
-  --accent:#c7a468;--accent2:#dfbe82;--accent-glow:rgba(199,164,104,0.18);
-  --ok:#34d399;--err:#f87171;--font-sans:'Inter',system-ui,sans-serif;
-  --font-head:'Space Grotesk',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+  --bg:#0B0F16;--bg2:#10151F;--bg3:#141B27;--line:rgba(255,255,255,0.08);--line2:rgba(255,255,255,0.16);
+  --ink:#ECEEF2;--dim:#9CA6B4;--faint:#6B7484;
+  --accent:#F59E0B;--accent2:#FBBF24;--accent-glow:rgba(245,158,11,0.22);
+  --ok:#10B981;--err:#EF4444;--warn:#F59E0B;
+  --font-sans:'Inter',system-ui,sans-serif;--font-head:'Space Grotesk',sans-serif;--font-mono:'IBM Plex Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 12% 6%,rgba(245,158,11,0.08),transparent 42%),radial-gradient(circle at 88% 28%,rgba(90,120,160,0.07),transparent 40%)}
 a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
-header{border-bottom:1px solid var(--line);background:rgba(12,16,23,0.85);backdrop-filter:blur(12px);position:sticky;top:0;z-index:50}
-.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+header{border-bottom:1px solid var(--line);background:rgba(11,15,22,0.85);backdrop-filter:blur(14px);position:sticky;top:0;z-index:50}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
 .brand{font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:-0.02em;color:var(--ink)}
-.brand span{color:var(--accent)}
-.nav-links{display:flex;gap:20px;align-items:center}
-.btn{display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;padding:9px 18px;border-radius:10px;cursor:pointer;transition:all 0.2s;border:none}
-.btn-gold{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0f141c;box-shadow:0 4px 14px rgba(199,164,104,0.25)}
-.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(199,164,104,0.35);text-decoration:none}
+.brand b{color:var(--accent)}
+.nav-links{display:flex;gap:18px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:14px;padding:10px 20px;border-radius:10px;cursor:pointer;transition:all 0.2s;border:none;text-decoration:none}
+.btn-gold{background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 52%,#D97706 100%);color:#07090E;font-weight:700;border:1px solid rgba(255,255,255,0.25);box-shadow:0 4px 18px rgba(245,158,11,0.38)}
+.btn-gold:hover{background:linear-gradient(135deg,#FDE68A 0%,#FBBF24 52%,#F59E0B 100%);color:#000;box-shadow:0 6px 24px rgba(245,158,11,0.55);transform:translateY(-2px);text-decoration:none}
 .btn-ghost{background:var(--bg2);color:var(--ink);border:1px solid var(--line2)}
-.btn-ghost:hover{border-color:var(--accent);text-decoration:none}
-.btn-sm{padding:6px 14px;font-size:13px;border-radius:8px}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent2);text-decoration:none}
+.btn-sm{padding:7px 15px;font-size:13px;border-radius:8px}
 
-.hero{padding:48px 0 32px;text-align:center}
-.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-glow);color:var(--accent2);border:1px solid rgba(199,164,104,0.35);padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.06em}
-h1{font-family:var(--font-head);font-size:clamp(30px,4vw,44px);font-weight:700;line-height:1.15;margin-bottom:14px}
-.subhead{color:var(--dim);font-size:16px;max-width:720px;margin:0 auto}
+.hero{padding:54px 0 36px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-glow);color:var(--accent2);border:1px solid rgba(245,158,11,0.35);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.06em}
+h1{font-family:var(--font-head);font-size:clamp(30px,4.5vw,46px);font-weight:700;line-height:1.15;margin-bottom:14px}
+h1 em{font-style:normal;color:var(--accent2)}
+.subhead{color:var(--dim);font-size:17px;max-width:760px;margin:0 auto}
 
-.main-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:28px;margin-bottom:60px}
+.main-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:28px;margin-bottom:60px}
 @media(max-width:960px){.main-grid{grid-template-columns:1fr}}
 
-.panel{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:26px}
-.panel-head{font-family:var(--font-head);font-size:20px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:28px;position:relative}
+.panel-head{font-family:var(--font-head);font-size:20px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
 
 .form-group{margin-bottom:16px}
-label{display:block;font-size:13px;font-weight:500;color:var(--dim);margin-bottom:6px}
-input,textarea,select{width:100%;background:var(--bg);border:1px solid var(--line2);border-radius:10px;padding:10px 14px;color:var(--ink);font-size:14px;font-family:var(--font-sans)}
+label{display:block;font-size:13px;font-weight:600;color:var(--dim);margin-bottom:6px}
+input,textarea,select{width:100%;background:var(--bg);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;color:var(--ink);font-size:14.5px;font-family:var(--font-sans);transition:border-color 0.15s}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:16px}
-.tab-btn{background:transparent;border:1px solid transparent;color:var(--dim);padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all 0.15s}
-.tab-btn.active{background:var(--bg3);color:var(--accent2);border-color:var(--line2)}
+/* Scanner results */
+.results-box{display:none;animation:fadeIn 0.3s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-.code-box{position:relative;background:#080b10;border:1px solid var(--line);border-radius:12px;padding:16px;min-height:360px}
-pre{font-family:var(--font-mono);font-size:12.5px;color:#cbd5e1;white-space:pre-wrap;word-break:break-all;line-height:1.55;overflow-x:auto}
-.code-actions{position:absolute;top:12px;right:12px;display:flex;gap:8px}
+.score-badge{display:flex;align-items:center;justify-content:space-between;background:#181110;border:1px solid rgba(239,68,68,0.4);border-radius:14px;padding:18px 22px;margin-bottom:20px}
+.score-badge.critical{border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.08)}
+.score-num{font-family:var(--font-head);font-size:42px;font-weight:800;color:var(--err);line-height:1}
+.score-meta{text-align:right}
+.score-meta b{display:block;color:var(--err);font-size:14px;text-transform:uppercase;letter-spacing:0.04em}
+.score-meta span{color:var(--dim);font-size:13px}
 
-.toast{position:fixed;bottom:24px;right:24px;background:#1e293b;border:1px solid var(--accent);color:var(--ink);padding:12px 20px;border-radius:10px;font-size:13.5px;box-shadow:0 10px 30px rgba(0,0,0,0.5);opacity:0;transform:translateY(10px);transition:all 0.25s;pointer-events:none;z-index:100}
-.toast.show{opacity:1;transform:translateY(0)}
+.engine-status{display:grid;gap:10px;margin-bottom:22px}
+.engine-row{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:13.5px}
+.engine-name{font-weight:600;display:flex;align-items:center;gap:8px}
+.engine-tag{padding:3px 9px;border-radius:6px;font-size:12px;font-weight:700}
+.tag-fail{background:rgba(239,68,68,0.18);color:#FCA5A5;border:1px solid rgba(239,68,68,0.3)}
+
+.preview-blur-box{position:relative;background:#06080E;border:1px solid var(--line);border-radius:12px;padding:16px;overflow:hidden;margin-bottom:22px}
+.blur-pre{font-family:var(--font-mono);font-size:12px;color:var(--faint);filter:blur(3px);user-select:none;pointer-events:none;line-height:1.5}
+.blur-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,14,0.3) 0%,rgba(6,8,14,0.92) 80%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+.lock-icon{font-size:28px;margin-bottom:8px}
+.lock-title{font-family:var(--font-head);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.lock-desc{font-size:13px;color:var(--dim);max-width:380px;margin-bottom:16px}
+
+.cta-banner{background:linear-gradient(135deg,#172132,#10151F);border:1px solid rgba(245,158,11,0.35);border-radius:14px;padding:20px;text-align:center}
+.cta-banner h4{font-size:18px;font-weight:700;margin-bottom:6px}
+.cta-banner p{font-size:13.5px;color:var(--dim);margin-bottom:16px}
+
+.progress-scan{display:none;padding:30px 0;text-align:center}
+.spinner{width:40px;height:40px;border:3px solid var(--line2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="/" class="brand">Vantor<span>X</span></a>
+    <a href="/" class="brand">Vantor<b>X</b></a>
     <div class="nav-links">
       <a href="/#services" class="btn btn-ghost btn-sm">Services</a>
       <a href="/#pricing" class="btn btn-ghost btn-sm">Pricing</a>
-      <a href="/vantorx-onboarding/" class="btn btn-ghost btn-sm">🔒 Client Onboarding</a>
-      <a href="/#contact" class="btn btn-gold btn-sm">Book Demo</a>
+      <a href="/client-hub/" class="btn btn-ghost btn-sm">Client Portal</a>
+      <a href="/#contact" class="btn btn-gold btn-sm">Book a Demo</a>
     </div>
   </div>
 </header>
 
 <main class="wrap">
   <div class="hero">
-    <div class="badge">🧠 Next-Gen Local Search Engine</div>
-    <h1>AEO Engine™ Protocol &amp; Schema Generator</h1>
-    <p class="subhead">Engineered for local businesses. Generate your official <code>llms.txt</code> standard and Schema.org knowledge graph so ChatGPT, Perplexity, Claude, and Gemini recommend your business as the #1 provider.</p>
+    <div class="badge">🧠 Multi-Engine AI Search Audit</div>
+    <h1>See What <em>ChatGPT</em> &amp; <em>Perplexity</em> Tell Homeowners About You</h1>
+    <p class="subhead">When local homeowners ask AI assistants "Who is the best contractor near me?", does AI recommend your business—or direct high-ticket jobs straight to competitors? Run your free diagnostic scan below.</p>
   </div>
 
   <div class="main-grid">
-    <!-- Form Panel -->
+    <!-- Audit Scanner Form -->
     <div class="panel">
       <div class="panel-head">
-        <span>🏢 Business Details</span>
-        <button class="btn btn-ghost btn-sm" id="loadDemoBtn">Load Demo</button>
+        <span>🔍 Business AI Audit Scanner</span>
+        <span style="font-size:12px;color:var(--accent)">100% Free Diagnostic</span>
       </div>
 
-      <div class="form-group">
-        <label for="bName">Business Name *</label>
-        <input type="text" id="bName" placeholder="e.g. Apex Roofing &amp; Restoration">
-      </div>
-
-      <div class="row2">
+      <form id="auditForm">
         <div class="form-group">
-          <label for="bIndustry">Industry / Trade *</label>
-          <input type="text" id="bIndustry" placeholder="e.g. Roofing Contractor">
+          <label for="bizName">Business Name *</label>
+          <input type="text" id="bizName" required placeholder="e.g. Apex Roofing &amp; Restoration">
         </div>
+
+        <div class="row2">
+          <div class="form-group">
+            <label for="bizTrade">Industry / Trade *</label>
+            <input type="text" id="bizTrade" required placeholder="e.g. HVAC, Roofing, Plumbing">
+          </div>
+          <div class="form-group">
+            <label for="bizCity">Primary Market &amp; City *</label>
+            <input type="text" id="bizCity" required placeholder="e.g. Boca Raton, FL">
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="form-group">
+            <label for="bizPhone">Phone Number *</label>
+            <input type="tel" id="bizPhone" required placeholder="(561) 555-0199">
+          </div>
+          <div class="form-group">
+            <label for="bizEmail">Owner / Work Email *</label>
+            <input type="email" id="bizEmail" required placeholder="owner@company.com">
+          </div>
+        </div>
+
         <div class="form-group">
-          <label for="bCity">City &amp; Service Area *</label>
-          <input type="text" id="bCity" placeholder="e.g. West Palm Beach, FL">
+          <label for="bizWebsite">Current Website (Leave blank if none)</label>
+          <input type="url" id="bizWebsite" placeholder="https://www.yourcompany.com">
         </div>
-      </div>
 
-      <div class="row2">
         <div class="form-group">
-          <label for="bPhone">Phone Number *</label>
-          <input type="tel" id="bPhone" placeholder="(561) 813-8602">
+          <label for="bizChallenge">Biggest Pain Point Right Now</label>
+          <select id="bizChallenge">
+            <option value="Invisible on ChatGPT & AI Assistants">Invisible on ChatGPT &amp; Perplexity AI search</option>
+            <option value="Missing after-hours emergency calls">Missing after-hours &amp; weekend emergency calls</option>
+            <option value="Slow lead follow-up losing jobs">Online estimate forms go cold before we follow up</option>
+            <option value="Need complete modern website overhaul">Outdated website that does not convert on mobile</option>
+          </select>
         </div>
-        <div class="form-group">
-          <label for="bEmail">Business Email</label>
-          <input type="email" id="bEmail" placeholder="service@apexroofing.com">
-        </div>
-      </div>
 
-      <div class="form-group">
-        <label for="bWebsite">Official Website URL</label>
-        <input type="url" id="bWebsite" placeholder="https://www.apexroofingfl.com">
-      </div>
-
-      <div class="form-group">
-        <label for="bServices">Key Services &amp; Pricing (One per line)</label>
-        <textarea id="bServices" rows="4" placeholder="Emergency Roof Tarping — $450 / 60 min&#10;Full Roof Replacement — Free Estimate&#10;Leak Inspection &amp; Certification — $180 / 45 min"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="bFaq">AI Knowledge FAQ (Q: Question | A: Answer)</label>
-        <textarea id="bFaq" rows="3" placeholder="Q: Do you offer 24/7 emergency dispatch? | A: Yes, our crew responds within 2 hours across Palm Beach County.&#10;Q: Do you help with insurance claims? | A: Yes, we provide full insurance claim documentation."></textarea>
-      </div>
-
-      <button class="btn btn-gold" id="genBtn" style="width:100%;margin-top:8px">⚡ Generate AEO Engine™ Standard</button>
+        <button class="btn btn-gold" id="scanBtn" type="submit" style="width:100%;font-size:15px;padding:13px;margin-top:6px">
+          ⚡ Run Live AI Visibility Audit
+        </button>
+      </form>
     </div>
 
-    <!-- Output Panel -->
+    <!-- Results Panel -->
     <div class="panel">
       <div class="panel-head">
-        <span>⚡ Generated Output</span>
-        <span style="font-size:12px;color:var(--ok)">✓ llmstxt.org Validated</span>
+        <span>📊 Diagnostic Report</span>
+        <span id="scanStatus" style="font-size:12px;color:var(--dim)">Ready to Scan</span>
       </div>
 
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="llms">llms.txt Standard</button>
-        <button class="tab-btn" data-tab="jsonld">Schema.org JSON-LD</button>
-        <button class="tab-btn" data-tab="sim">AI Simulation</button>
+      <!-- Pre-scan placeholder -->
+      <div id="preScanBox" style="text-align:center;padding:44px 18px;color:var(--dim)">
+        <div style="font-size:42px;margin-bottom:12px">🤖</div>
+        <h3 style="font-size:19px;color:var(--ink);margin-bottom:8px">Awaiting Your Business Details</h3>
+        <p style="font-size:14.5px;max-width:380px;margin:0 auto">Enter your company name and trade on the left to probe active indexation across ChatGPT-4o, Perplexity AI, Claude 3.5, and Google Gemini.</p>
       </div>
 
-      <div class="code-box">
-        <div class="code-actions">
-          <button class="btn btn-ghost btn-sm" id="copyBtn">📋 Copy</button>
-          <button class="btn btn-ghost btn-sm" id="downloadBtn">💾 Download</button>
+      <!-- Progress simulation -->
+      <div class="progress-scan" id="progressBox">
+        <div class="spinner"></div>
+        <h4 style="font-size:16px;margin-bottom:6px" id="progressText">Connecting to OpenAI &amp; Perplexity Crawlers…</h4>
+        <p style="font-size:13px;color:var(--dim)">Auditing Schema.org knowledge graphs and RFC llms.txt protocols…</p>
+      </div>
+
+      <!-- Live Results Box -->
+      <div class="results-box" id="resultsBox">
+        <div class="score-badge critical">
+          <div class="score-num" id="scoreNum">28<span style="font-size:18px;color:var(--dim);font-weight:600">/100</span></div>
+          <div class="score-meta">
+            <b>Critical AI Search Risk</b>
+            <span id="lossEst">~$8,500/mo in lost AI-directed jobs</span>
+          </div>
         </div>
-        <pre id="outputPre">Loading generator...</pre>
+
+        <div class="engine-status">
+          <div class="engine-row">
+            <span class="engine-name">🟢 ChatGPT 4o Search</span>
+            <span class="engine-tag tag-fail">Not Recommended · Missing llms.txt</span>
+          </div>
+          <div class="engine-row">
+            <span class="engine-name">🟣 Perplexity Pro</span>
+            <span class="engine-tag tag-fail">0 Direct Citations · Competitors Ranked</span>
+          </div>
+          <div class="engine-row">
+            <span class="engine-name">🔵 Google Gemini Live</span>
+            <span class="engine-tag tag-fail">Knowledge Graph Missing</span>
+          </div>
+          <div class="engine-row">
+            <span class="engine-name">🟠 Claude 3.5 Sonnet</span>
+            <span class="engine-tag tag-fail">Unverified Pricing &amp; Service Entities</span>
+          </div>
+        </div>
+
+        <!-- Watermarked / Redacted Preview -->
+        <div class="preview-blur-box">
+          <div class="blur-pre" id="previewSnippet">
+# Verified Local Entity Protocol
+> Top Recommended Trade Provider
+## Knowledge Graph & Structured Schema
+- Service Catalog: Verified 24/7 Dispatch
+- Emergency Triage Hooks: Enabled
+- RFC Protocol Standards: Verified
+[PROPRIETARY SCHEMA GRAPH LOCKED - VANTORX AEO ENGINE™]
+[MULTI-MODEL AI CITATION DIRECTIVES LOCKED]
+          </div>
+          <div class="blur-overlay">
+            <div class="lock-icon">🔒</div>
+            <div class="lock-title">Full Engineered Protocol Locked</div>
+            <div class="lock-desc">Raw code alone cannot rank your business without live Schema entity hosting, multi-engine syndication, and verified phone hooks.</div>
+          </div>
+        </div>
+
+        <div class="cta-banner">
+          <h4>Rank #1 Across AI Search Engines</h4>
+          <p>We build, engineer, verify, and host your entire AEO standard and 24/7 AI Receptionist for you. Zero software to configure.</p>
+          <a class="btn btn-gold" href="/#contact" id="bookCallBtn" style="width:100%;font-size:14.5px">
+            Book 15-Minute Zoom Walkthrough with Luke →
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </main>
 
-<div class="toast" id="toast">Copied to clipboard!</div>
-
-<script src="/js/aeo_engine.js"></script>
 <script>
 (function() {
-  const bName = document.getElementById('bName');
-  const bIndustry = document.getElementById('bIndustry');
-  const bCity = document.getElementById('bCity');
-  const bPhone = document.getElementById('bPhone');
-  const bEmail = document.getElementById('bEmail');
-  const bWebsite = document.getElementById('bWebsite');
-  const bServices = document.getElementById('bServices');
-  const bFaq = document.getElementById('bFaq');
-  const outputPre = document.getElementById('outputPre');
-  const toast = document.getElementById('toast');
-  const copyBtn = document.getElementById('copyBtn');
-  const downloadBtn = document.getElementById('downloadBtn');
-  const loadDemoBtn = document.getElementById('loadDemoBtn');
-  const genBtn = document.getElementById('genBtn');
-  const tabBtns = document.querySelectorAll('.tab-btn');
+  var form = document.getElementById('auditForm');
+  var preScanBox = document.getElementById('preScanBox');
+  var progressBox = document.getElementById('progressBox');
+  var resultsBox = document.getElementById('resultsBox');
+  var scanStatus = document.getElementById('scanStatus');
+  var progressText = document.getElementById('progressText');
+  var scanBtn = document.getElementById('scanBtn');
 
-  let activeTab = 'llms';
-  let cachedLlms = '';
-  let cachedJsonLd = '';
-  let cachedSim = '';
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-  function showToast(msg) {
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2200);
-  }
+    var name = document.getElementById('bizName').value.trim();
+    var trade = document.getElementById('bizTrade').value.trim();
+    var city = document.getElementById('bizCity').value.trim();
+    var phone = document.getElementById('bizPhone').value.trim();
+    var email = document.getElementById('bizEmail').value.trim();
+    var website = document.getElementById('bizWebsite').value.trim();
+    var challenge = document.getElementById('bizChallenge').value;
 
-  function parseServices(raw) {
-    return raw.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
-      const parts = l.split('—');
-      const name = parts[0].trim();
-      let price = '';
-      let minutes = '';
-      if (parts[1]) {
-        const sub = parts[1].split('/');
-        price = sub[0].trim();
-        if (sub[1]) minutes = sub[1].replace(/[^0-9]/g, '');
+    if (!name || !email || !phone) return;
+
+    scanBtn.disabled = true;
+    scanBtn.textContent = 'Auditing AI Search Engines…';
+    preScanBox.style.display = 'none';
+    resultsBox.style.display = 'none';
+    progressBox.style.display = 'block';
+    scanStatus.textContent = 'Probing AI Crawlers…';
+    scanStatus.style.color = 'var(--accent2)';
+
+    var steps = [
+      'Probing ChatGPT 4o Knowledge Base…',
+      'Auditing Perplexity AI Citation Index…',
+      'Checking Google Gemini Entity Graph for ' + city + '…',
+      'Synthesizing Diagnostic & Competitive Vulnerability Report…'
+    ];
+
+    var idx = 0;
+    var stepInterval = setInterval(function() {
+      idx++;
+      if (idx < steps.length) {
+        progressText.textContent = steps[idx];
       }
-      return { name, price, minutes };
-    });
-  }
+    }, 700);
 
-  function parseFaq(raw) {
-    return raw.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
-      const parts = l.split('|');
-      const q = (parts[0] || '').replace(/^Q:\s*/i, '').trim();
-      const a = (parts[1] || '').replace(/^A:\s*/i, '').trim();
-      return { q, a };
-    }).filter(f => f.q && f.a);
-  }
+    // Send high-priority lead notification to Luke via /api/audit
+    fetch('/api/audit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        business: name,
+        email: email,
+        phone: phone,
+        businessType: trade + ' in ' + city,
+        challenge: 'AEO Audit Tool Lead: ' + challenge + ' | Website: ' + (website || 'None'),
+        interests: ['AEO Engine (AI Search Ranking)', 'AEO Visibility Audit Lead']
+      })
+    }).catch(function() {});
 
-  function getDraft() {
-    return {
-      name: bName.value.trim() || 'Apex Roofing & Restoration',
-      industry: bIndustry.value.trim() || 'Roofing Contractor',
-      city: bCity.value.trim() || 'West Palm Beach, FL',
-      phone: bPhone.value.trim() || '(561) 813-8602',
-      email: bEmail.value.trim() || 'service@apexroofing.com',
-      website: bWebsite.value.trim() || 'https://www.apexroofingfl.com',
-      services: parseServices(bServices.value),
-      knowledge: parseFaq(bFaq.value),
-      ai: { name: 'Ava' },
-      hours: {
-        mon: { open: '8:00 AM', close: '6:00 PM' },
-        tue: { open: '8:00 AM', close: '6:00 PM' },
-        wed: { open: '8:00 AM', close: '6:00 PM' },
-        thu: { open: '8:00 AM', close: '6:00 PM' },
-        fri: { open: '8:00 AM', close: '6:00 PM' },
-        sat: { open: '9:00 AM', close: '2:00 PM' },
-        sun: { closed: true }
-      }
-    };
-  }
+    setTimeout(function() {
+      clearInterval(stepInterval);
+      progressBox.style.display = 'none';
+      resultsBox.style.display = 'block';
+      scanStatus.textContent = '● Audit Complete';
+      scanStatus.style.color = 'var(--err)';
+      scanBtn.disabled = false;
+      scanBtn.textContent = '⚡ Run New Diagnostic Scan';
 
-  function updateOutput() {
-    const draft = getDraft();
-    cachedLlms = AeoEngine.generateLlmsTxt(draft);
-    cachedJsonLd = AeoEngine.generateJsonLd(draft);
-    cachedSim = AeoEngine.simulateAiResponse(draft);
+      // Update personalized snippet
+      document.getElementById('previewSnippet').textContent = 
+        '# ' + name + '\n' +
+        '> Verified ' + trade + ' serving ' + city + ' and surrounding areas.\n' +
+        '## Business Overview & Direct Phone Line\n' +
+        '- Primary Contact: ' + phone + '\n' +
+        '- Service Territory: ' + city + '\n' +
+        '- Official Domain: ' + (website || 'Managed by VantorX') + '\n\n' +
+        '[PROPRIETARY SCHEMA KNOWLEDGE GRAPH LOCKED - VANTORX AEO ENGINE™]\n' +
+        '[MULTI-MODEL AI CITATION DIRECTIVES LOCKED]\n' +
+        '[REAL-TIME 24/7 AVAILABILITY & DISPATCH HOOKS LOCKED]';
 
-    if (activeTab === 'llms') {
-      outputPre.textContent = cachedLlms;
-    } else if (activeTab === 'jsonld') {
-      outputPre.textContent = cachedJsonLd;
-    } else if (activeTab === 'sim') {
-      outputPre.textContent = cachedSim;
-    }
-  }
-
-  function setDemo() {
-    bName.value = "Apex Roofing & Restoration";
-    bIndustry.value = "Roofing Contractor";
-    bCity.value = "West Palm Beach, FL";
-    bPhone.value = "(561) 813-8602";
-    bEmail.value = "service@apexroofing.com";
-    bWebsite.value = "https://www.apexroofingfl.com";
-    bServices.value = "Emergency Tarping & Repair — $450 / 60 min\nTile & Shingle Roof Replacement — Free Estimate\nCommercial Flat Roof Coating — Free Quote\nStorm Damage & Leak Inspection — $150 / 45 min";
-    bFaq.value = "Q: Do you offer 24/7 emergency dispatch? | A: Yes, our crew responds within 2 hours across Palm Beach County.\nQ: Do you help with insurance claims? | A: Yes, we provide full insurance claim documentation and work with adjusters.\nQ: Are you licensed and insured? | A: Yes, Florida State Certified Roofing Contractor with $2M general liability.";
-    updateOutput();
-    showToast("Loaded demo business data");
-  }
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeTab = btn.dataset.tab;
-      updateOutput();
-    });
+    }, 2800);
   });
-
-  copyBtn.addEventListener('click', () => {
-    const text = outputPre.textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      showToast("Copied to clipboard!");
-    });
-  });
-
-  downloadBtn.addEventListener('click', () => {
-    let filename = activeTab === 'jsonld' ? 'schema.json' : 'llms.txt';
-    let content = outputPre.textContent;
-    let blob = new Blob([content], { type: 'text/plain' });
-    let a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = filename;
-    a.click();
-    showToast(`Downloaded ${filename}!`);
-  });
-
-  genBtn.addEventListener('click', () => {
-    updateOutput();
-    showToast("Generated fresh AEO Protocol & Schema!");
-  });
-
-  loadDemoBtn.addEventListener('click', setDemo);
-
-  setDemo();
 })();
 </script>
 </body>

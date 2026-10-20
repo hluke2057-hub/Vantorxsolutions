@@ -9,6 +9,34 @@
     { "source": "/api/appointments/:id", "destination": "/api/appointments?id=:id" },
     { "source": "/api/notifications/:action", "destination": "/api/notifications?action=:action" },
     { "source": "/api/change-requests/:id", "destination": "/api/change-requests?id=:id" },
-    { "source": "/api/admin/inquiries", "destination": "/api/change-requests?action=inquiries" }
+    { "source": "/api/admin/inquiries", "destination": "/api/change-requests?action=inquiries" },
+    { "source": "/.well-known/llms.txt", "destination": "/llms.txt" },
+    { "source": "/.well-known/llms-full.txt", "destination": "/llms-full.txt" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/llms-full.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    }
   ]
 }
