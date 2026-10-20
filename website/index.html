@@ -80,11 +80,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0B0F16;--bg2:#10151F;--bg3:#141B27;--ink:#ECEEF2;--dim:#9CA6B4;--faint:#6B7484;--accent:#C7A468;--accent2:#DBBE8A;--soft:rgba(199,164,104,.14);--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.16);--ok:#5FD97A}
+:root{--bg:#0B0F16;--bg2:#10151F;--bg3:#141B27;--ink:#ECEEF2;--dim:#9CA6B4;--faint:#6B7484;--accent:#F59E0B;--accent2:#FBBF24;--soft:rgba(245,158,11,.16);--line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.16);--ok:#5FD97A}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
 body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;
-  background-image:radial-gradient(circle at 12% 6%,rgba(199,164,104,.09),transparent 42%),radial-gradient(circle at 88% 28%,rgba(90,120,160,.07),transparent 40%)}
+  background-image:radial-gradient(circle at 12% 6%,rgba(245,158,11,.09),transparent 42%),radial-gradient(circle at 88% 28%,rgba(90,120,160,.07),transparent 40%)}
 h1,h2,h3{font-family:'Space Grotesk',Inter,sans-serif;line-height:1.12;letter-spacing:-.02em}
 a{color:inherit}
 .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
@@ -95,10 +95,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(11,15,22,.82);backdrop-f
 .logo{font:700 21px 'Space Grotesk';text-decoration:none;letter-spacing:-.02em}.logo b{color:var(--accent)}
 .nav nav{display:flex;gap:22px;margin-left:auto;align-items:center}
 .nav nav a{color:var(--dim);text-decoration:none;font-size:14.5px;font-weight:500}.nav nav a:hover{color:var(--ink)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:11px;padding:13px 22px;font:600 15px Inter;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
-.btn-gold{background:var(--accent);color:#14110a}.btn-gold:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:11px;padding:13px 22px;font:600 15px Inter;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s,box-shadow .15s}
+.btn-gold{background:linear-gradient(135deg,#FBBF24 0%,#F59E0B 52%,#D97706 100%);color:#07090E;font-weight:700;border:1px solid rgba(255,255,255,.25);box-shadow:0 4px 18px rgba(245,158,11,.38);letter-spacing:-.01em}
+.btn-gold:hover{background:linear-gradient(135deg,#FDE68A 0%,#FBBF24 52%,#F59E0B 100%);box-shadow:0 6px 24px rgba(245,158,11,.55);transform:translateY(-2px);color:#000000}
 .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line2)}.btn-ghost:hover{border-color:var(--accent);color:var(--accent2)}
-.btn-sm{padding:9px 16px;font-size:14px}
+.btn-sm{padding:9px 18px;font-size:14px;font-weight:700}
 #menuBtn{display:none;margin-left:auto;background:none;border:1px solid var(--line2);color:var(--ink);border-radius:9px;padding:8px 12px;font-size:15px}
 section{padding:84px 0}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent2);font:600 12.5px 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
@@ -405,7 +406,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
         </div></div>
       <div class="full"><label for="fMsg">Anything we should know?</label><textarea id="fMsg" placeholder="Do you have a website today? What’s your biggest headache — missed calls, no online presence, follow-up?"></textarea></div>
     </div>
-    <div style="margin-top:18px"><button class="btn btn-gold" type="submit" id="fBtn">Request my demo</button></div>
+    <div style="margin-top:18px"><button class="btn btn-gold" type="submit" id="fBtn" style="padding:14px 28px;font-size:16px">Book My Demo →</button></div>
     <p id="fmsg" role="status" aria-live="polite"></p>
   </form>
 </div></section>
@@ -425,17 +426,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
     var name=document.getElementById('fName').value.trim(), email=document.getElementById('fEmail').value.trim();
     if(name.length<2||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.style.color='#e08383';msg.textContent='Please enter your name and a valid email address.';return;}
     var interests=Array.prototype.map.call(document.querySelectorAll('#opts input:checked'),function(i){return i.value;});
-    btn.disabled=true; btn.textContent='Sending…';
+    btn.disabled=true; btn.textContent='Booking your demo…';
     fetch('/api/audit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       name:name,business:document.getElementById('fBiz').value,email:email,phone:document.getElementById('fPhone').value,
       businessType:document.getElementById('fType').value,interests:interests,challenge:document.getElementById('fMsg').value,
       website_confirm:document.getElementById('hp').value})})
     .then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok,d:d};});})
     .then(function(x){
-      btn.disabled=false; btn.textContent='Request my demo';
+      btn.disabled=false; btn.textContent='Book My Demo →';
       if(x.ok){msg.style.color='var(--accent2)';msg.textContent='Thanks — we’ve received your request and will be in touch shortly.';f.reset();document.querySelector('#opts input').checked=true;}
       else{msg.style.color='#e08383';msg.textContent=x.d.error||'Something went wrong. Please try again in a moment.';}
-    }).catch(function(){btn.disabled=false;btn.textContent='Request my demo';msg.style.color='#e08383';msg.textContent='We couldn’t send that. Please check your connection and try again.';});
+    }).catch(function(){btn.disabled=false;btn.textContent='Book My Demo →';msg.style.color='#e08383';msg.textContent='We couldn’t send that. Please check your connection and try again.';});
   });
 })();
 </script>
