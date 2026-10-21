@@ -1,7 +1,7 @@
-# PowerShell script to build the complete multi-product cold calling cockpit
+﻿# PowerShell script to build the complete multi-product cold calling cockpit
 $ErrorActionPreference = "Stop"
 
-$leadsRaw = Get-Content "$PSScriptRoot/../data/normalized_lead_targets.json" -Raw
+$leadsRaw = [System.IO.File]::ReadAllText("$PSScriptRoot/../data/normalized_lead_targets.json", [System.Text.Encoding]::UTF8)
 
 $htmlTemplate = @'
 <!DOCTYPE html>
