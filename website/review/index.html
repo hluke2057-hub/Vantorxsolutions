@@ -158,9 +158,9 @@ p.sub{color:var(--dim);font-size:14.5px;margin-bottom:24px;line-height:1.5}
   const ownerName = (urlParams.get('owner') || 'Luke').trim();
   const customGoogleUrl = urlParams.get('google');
 
-  // Fallback Google Review Search URL for VantorX Solutions
-  const defaultGoogleUrl = "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4"; // Placeholder or direct search URL
-  const activeGoogleUrl = customGoogleUrl || `https://www.google.com/search?q=${encodeURIComponent(bizName + " West Palm Beach reviews")}`;
+  // Official Verified Google Review URL for VantorX Solutions
+  const defaultGoogleUrl = "https://g.page/r/CbYBs5wxgBKbEBM/review";
+  const activeGoogleUrl = customGoogleUrl || (bizName === 'VantorX Solutions' ? defaultGoogleUrl : `https://www.google.com/search?q=${encodeURIComponent(bizName + " West Palm Beach reviews")}`);
 
   document.getElementById('bizNameText').textContent = bizName;
   document.getElementById('googleReviewBtn').href = activeGoogleUrl;

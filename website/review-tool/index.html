@@ -118,7 +118,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--accent)}
 
       <div class="form-group">
         <label for="cfgGoogle">Google Review Direct Link (Optional)</label>
-        <input type="url" id="cfgGoogle" placeholder="https://g.page/r/XXXXX/review (or leave blank for auto Google search)">
+        <input type="url" id="cfgGoogle" value="https://g.page/r/CbYBs5wxgBKbEBM/review" placeholder="https://g.page/r/XXXXX/review">
       </div>
 
       <div class="preview-box">
@@ -251,9 +251,9 @@ input:focus,textarea:focus{outline:none;border-color:var(--accent)}
     cfgBiz.value = "VantorX Solutions";
     cfgOwner.value = "Luke";
     cfgTrade.value = "Websites & AI Phone Systems";
-    cfgGoogle.value = "";
+    cfgGoogle.value = "https://g.page/r/CbYBs5wxgBKbEBM/review";
     updateFunnel();
-    showToast('Reset to VantorX Solutions');
+    showToast('Loaded VantorX Solutions');
   });
 
   updateFunnel();
