@@ -914,17 +914,18 @@
     "owner": "Marcus",
     "subject": "Quick question for Marcus regarding First Response 24/7 flood call answering",
     "trade": "Restoration",
-    "sentAt": null,
+    "sentAt": "2026-10-21T13:33:40.796Z",
     "title": "Founder",
     "company": "First Response Water Restoration",
     "estLoss": ",000/mo",
-    "resendMessageId": null,
-    "status": "pending",
+    "resendMessageId": "01a15eaa-e5e5-7914-9641-d7395a4aa2d5",
+    "status": "sent",
     "painPoint": "Flooded home calls hang up within 10 seconds if a human or AI does not answer on ring 1",
     "phone": "(561) 922-7711",
     "fullOwner": "Marcus Reed",
     "city": "Boca Raton, FL",
-    "email": "dispatch@firstresponsefl.com"
+    "email": "dispatch@firstresponsefl.com",
+    "body": "Hi Marcus,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Restoration contractors in Boca Raton, FL.\n\nWhile First Response Water Restoration has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Restoration contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Restoration in Boca Raton, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "service": "LeadFlow 90-Second SMS Speed-to-Lead and Missed-Call Recovery",
@@ -932,17 +933,18 @@
     "owner": "Leo",
     "subject": "Quick question for Leo regarding Dry Pro instant lead recovery speed",
     "trade": "Restoration",
-    "sentAt": null,
+    "sentAt": "2026-10-21T13:33:40.963Z",
     "title": "Operations Director",
     "company": "Dry Pro Disaster Recovery",
     "estLoss": ",500/mo",
-    "resendMessageId": null,
-    "status": "pending",
+    "resendMessageId": "01a15eaa-e687-72cd-8505-d116e0eb8b41",
+    "status": "sent",
     "painPoint": "High-ticket water damage insurance jobs lost to competitors who text back instantly",
     "phone": "(954) 888-9922",
     "fullOwner": "Leo Vance",
     "city": "Fort Lauderdale, FL",
-    "email": "service@dryproflorida.com"
+    "email": "service@dryproflorida.com",
+    "body": "Hi Leo,\n\nQuick question regarding Dry Pro Disaster Recovery's customer response speed:\n\nWhen homeowners in Fort Lauderdale, FL fill out an online estimate request or call while your field crew is tied up on an active job, what is your average follow-up time?\n\nHarvard Business Review research shows that contractors who respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Restoration, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to ,500/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "service": "24/7 AI Phone Receptionist (Ava) and After-Hours Emergency Triage",
@@ -953,12 +955,15 @@
     "title": "Owner & Lead Technician",
     "company": "Coastline Cooling & Heating",
     "estLoss": "$9,200/mo",
-    "status": "pending",
+    "status": "sent",
     "painPoint": "Voicemail bottleneck when emergency AC compressor breakdowns occur over the weekend",
     "phone": "(941) 782-9388",
     "fullOwner": "Robert Vance",
     "city": "Sarasota, FL",
-    "email": "service@coastlinecooling.com"
+    "email": "service@coastlinecooling.com",
+    "body": "Hi Robert,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Sarasota, FL.\n\nWhile Coastline Cooling & Heating has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Sarasota, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a15eaa-e71c-7b98-8438-ab9ee87f932a",
+    "sentAt": "2026-10-21T13:33:41.111Z"
   },
   {
     "service": "LeadFlow 90-Second Speed-to-Lead SMS",
@@ -969,12 +974,15 @@
     "title": "President",
     "company": "Gulf Coast Air Systems",
     "estLoss": "$7,800/mo",
-    "status": "pending",
+    "status": "sent",
     "painPoint": "High-intent web inquiry leads calling competitors when response takes over an hour",
     "phone": "(813) 689-2080",
     "fullOwner": "Dean Rogers",
     "city": "Tampa, FL",
-    "email": "contact@gulfcoastairsystems.com"
+    "email": "contact@gulfcoastairsystems.com",
+    "body": "Hi Dean,\n\nQuick question regarding Gulf Coast Air Systems's customer response speed:\n\nWhen homeowners in Tampa, FL fill out an online estimate request or call while your field crew is tied up on an active job, what is your average follow-up time?\n\nHarvard Business Review research shows that contractors who respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In HVAC, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $7,800/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a15eaa-e7ae-7548-afff-18094254c9c8",
+    "sentAt": "2026-10-21T13:33:41.257Z"
   },
   {
     "service": "24/7 AI Phone Receptionist (Ava) and Emergency Call Triage",
@@ -985,12 +993,15 @@
     "title": "Master Plumber & Owner",
     "company": "Titan Plumbing Solutions",
     "estLoss": "$8,500/mo",
-    "status": "pending",
+    "status": "sent",
     "painPoint": "Missing after-hours slab leak and emergency water heater replacement jobs",
     "phone": "(407) 555-0198",
     "fullOwner": "Mark Deluca",
     "city": "Orlando, FL",
-    "email": "info@titanplumbingsolutions.com"
+    "email": "info@titanplumbingsolutions.com",
+    "body": "Hi Mark,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Plumbing contractors in Orlando, FL.\n\nWhile Titan Plumbing Solutions has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Plumbing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Plumbing in Orlando, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a15eaa-e83e-7986-a06b-469bfe029edf",
+    "sentAt": "2026-10-21T13:33:41.444Z"
   },
   {
     "service": "Instant Missed-Call Text-Back Automation",
