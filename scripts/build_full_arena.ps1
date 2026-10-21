@@ -591,9 +591,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="obj-accordion">
             <div class="obj-acc-head"><span>❌ 1. "How much is this going to cost me?"</span> <span class="tag">Price Anchor</span></div>
             <div class="obj-acc-body">
-              "Unlike call centers that charge $3,000/mo plus $2 per minute, Ava is a flat $299 a month with <strong>zero setup contracts</strong>.<br><br>
+              "Unlike call centers that charge $3,000/mo plus $2 per minute, Ava is just $397 a month with <strong>zero long-term contracts</strong>.<br><br>
               In <span class="dyn-trade">[Trade]</span>, one single $4,000 to $8,000 emergency replacement job pays for the entire year on day one. Have your cell? Dial <strong>(561) 813-8602</strong> right now and test her."
-              <div class="obj-acc-note">💡 Strategy: Anchor the $299 price against their $8,000 ticket price. Zero risk.</div>
+              <div class="obj-acc-note">💡 Strategy: Anchor the $397 price against their $8,000 ticket price. Zero risk.</div>
             </div>
           </div>
 
@@ -1105,9 +1105,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="obj-accordion">
             <div class="obj-acc-head"><span>❌ 1. "I'm interested in everything, but what is the total cost?"</span> <span class="tag">Bundle Price</span></div>
             <div class="obj-acc-body">
-              "If you bought this piecemeal from agencies, you'd pay $6,000 for the site, $500/mo for an answering service, $300/mo for SMS tools, and $1,000/mo for SEO—over $2,000 a month.<br><br>
-              Our complete all-in-one bundle includes the custom website build, Ava 24/7 Voice AI, 90s Speed-to-Lead, and Google Review / AEO dominance for one simple flat setup and $499/mo with zero contracts. One single emergency ticket covers the entire setup."
-              <div class="obj-acc-note">💡 Strategy: Compare $2,000/mo agency cost with $499/mo all-in-one efficiency.</div>
+              "If you bought this piecemeal from agencies, you'd pay $6,000 for the site, $600/mo for an answering service, $300/mo for SMS tools, and $1,000/mo for SEO—over $2,500 a month.<br><br>
+              Our complete all-in-one Accelerate bundle includes the custom website build, Ava 24/7 Voice AI, 90s Speed-to-Lead, and Google Review / AEO dominance for one simple flat setup and $697/mo with zero long-term contracts. One single emergency ticket covers the entire investment."
+              <div class="obj-acc-note">💡 Strategy: Compare $2,500/mo agency retainers with $697/mo all-in-one efficiency.</div>
             </div>
           </div>
 
@@ -1146,7 +1146,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="obj-accordion">
             <div class="obj-acc-head"><span>❌ 6. "Can we start with one thing and add the others later?"</span> <span class="tag">Phased Entry</span></div>
             <div class="obj-acc-body">
-              "100%! Most guys start with Ava for $299/mo to plug their immediate weekend emergency call leak. Once they see 3 jobs booked in their first week, they roll into the website and AEO upgrade. What's your biggest headache right now—missed calls, or an outdated website?"
+              "100%! Most guys start with Ava for $397/mo to plug their immediate weekend emergency call leak. Once they see 3 jobs booked in their first week, they roll into the website and AEO upgrade. What's your biggest headache right now—missed calls, or an outdated website?"
               <div class="obj-acc-note">💡 Strategy: Offer a low-friction entry point, then upsell.</div>
             </div>
           </div>
@@ -2230,15 +2230,15 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         stage1: "Dave speaking. I get 20 sales calls a day. What do you want?",
         stage2: "I'm not looking to spend thousands of dollars on fancy tech right now. Economy is tight.",
         stage3: "Cut the fluff. How much is this thing gonna cost me every single month?",
-        stage4: "I bet there's a 12-month lock-in contract and hidden setup fees.",
-        stage5: "Zero contracts and $299? And it pays for itself with one single emergency call?",
+        stage4: "I bet there's a 12-month lock-in contract and hidden fees.",
+        stage5: "Zero long-term contracts and $397? And it pays for itself with one single emergency call?",
         victory: "Alright Luke, the math makes total sense. Text me your link right now, I'm locking this in before my competitor does."
       },
       hints: {
         stage1: 'Respect his timebox: "Luke from VantorX. Got 20 seconds or should I hang up?"',
         stage2: 'Anchor to revenue loss: "In Miami plumbing, when an $8,000 emergency water heater job calls at 8 PM on a Saturday, where does that call ring right now?"',
-        stage3: 'Deliver the price anchor: "Zero contracts, $299 a month flat. One single emergency job pays for the entire year."',
-        stage4: 'Prove zero risk: "No contracts, cancel anytime. Plus you test her free right now: (561) 813-8602."',
+        stage3: 'Deliver the price anchor: "Zero long-term contracts, $397 a month flat. One single emergency job pays for the entire year."',
+        stage4: 'Prove zero risk: "No long-term contracts, cancel anytime. Plus you test her free right now: (561) 813-8602."',
         stage5: 'Close on the ROI: "Text me your cell right now or dial (561) 813-8602 to test Ava."'
       }
     }
@@ -2671,7 +2671,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       }
     } else if (stage === 3) {
       const hasAgreement = t.includes('agree') || t.includes('completely agree') || t.includes('makes sense') || t.includes('hear you') || t.includes('fair') || t.includes('100%');
-      const hasObjectionCounter = t.includes('buried') || t.includes('receipt') || t.includes('after-hours') || t.includes('weekend') || t.includes('299') || t.includes('contract') || t.includes('done for you') || t.includes('15 second');
+      const hasObjectionCounter = t.includes('buried') || t.includes('receipt') || t.includes('after-hours') || t.includes('weekend') || t.includes('397') || t.includes('299') || t.includes('697') || t.includes('contract') || t.includes('done for you') || t.includes('15 second');
 
       if (hasAgreement && hasObjectionCounter) {
         return {

@@ -105,8 +105,8 @@ $rebuttals = @{
     @{ text = "Okay sure, what is your email? Bye."; score = 4.5; tactic = "Passive Lost Lead" }
   )
   "persona_price_screener" = @(
-    @{ text = "Zero contracts, starting at $299/mo. One emergency water leak or AC replacement pays for the entire year. But do not buy anything -- just dial (561) 813-8602 right now to see if she is even worth 10 cents to your business."; score = 9.5; tactic = "ROI Contrast + Test Line Anchor" },
-    @{ text = "It depends on what package you want, between $299 and $799."; score = 6.0; tactic = "Premature Feature Pitch" },
+    @{ text = "Zero contracts, starting at $397/mo. One emergency water leak or AC replacement pays for the entire year. But do not buy anything -- just dial (561) 813-8602 right now to see if she is even worth 10 cents to your business."; score = 9.5; tactic = "ROI Contrast + Test Line Anchor" },
+    @{ text = "It depends on what package you want, between $397 and $1,297."; score = 6.0; tactic = "Premature Feature Pitch" },
     @{ text = "It is very affordable, let us schedule a call to discuss pricing."; score = 4.2; tactic = "Evasive Sales Trap" }
   )
 }

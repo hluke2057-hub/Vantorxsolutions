@@ -197,7 +197,7 @@ We built Ava -- a 24/7 AI phone receptionist trained specifically for $($lead.Tr
 Test her right now from your personal cell phone:
 Dial: $DemoPhone
 
-Hang up and call it for 15 seconds to hear how human and responsive she sounds. If you'd like to put her on your lines this week, plans are just `$299/mo with zero contracts and a 100% money-back guarantee.
+Hang up and call it for 15 seconds to hear how human and responsive she sounds. If you'd like to put her on your lines this week, plans are just `$397/mo with zero long-term contracts and a 100% money-back guarantee.
 
 Best,
 Luke
