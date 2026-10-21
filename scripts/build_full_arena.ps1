@@ -1,4 +1,4 @@
-﻿# PowerShell script to build the complete multi-product cold calling cockpit
+# PowerShell script to build the complete multi-product cold calling cockpit
 $ErrorActionPreference = "Stop"
 
 $leadsRaw = [System.IO.File]::ReadAllText("$PSScriptRoot/../data/normalized_lead_targets.json", [System.Text.Encoding]::UTF8)
@@ -36,7 +36,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .live-demo-pill:hover{background:rgba(245,158,11,0.15);border-color:var(--accent)}
 
 /* Navigation Tabs */
-.tabs{display:flex;gap:8px;margin:20px 0 16px;border-bottom:1px solid var(--line);padding-bottom:12px;overflow-x:auto}
+.tabs{display:flex;gap:8px;margin:16px 0 16px;border-bottom:1px solid var(--line);padding:10px 0;overflow-x:auto;position:sticky;top:58px;z-index:45;background:rgba(7,10,15,0.96);backdrop-filter:blur(14px)}
 .tab-btn{background:none;border:none;color:var(--dim);font-family:var(--font-head);font-size:14.5px;font-weight:600;padding:8px 16px;border-radius:8px;cursor:pointer;transition:all 0.15s;white-space:nowrap}
 .tab-btn.active{background:var(--accent-glow);color:var(--accent2);border:1px solid rgba(245,158,11,0.35)}
 .tab-btn:hover:not(.active){color:var(--ink);background:var(--bg2)}
@@ -292,11 +292,11 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
 <main class="wrap">
   <div class="tabs">
-    <button class="tab-btn active" data-tab="tabLeads">📋 Daily Leads Dispatcher &amp; Leak Calculator</button>
-    <button class="tab-btn" data-tab="tabScript">📜 Multi-Product Teleprompter</button>
-    <button class="tab-btn" data-tab="tabRPG">🎮 Cold Call Quest (Sales RPG 2.0)</button>
-    <button class="tab-btn" data-tab="tabObjections">🛡️ 45+ Master Objection Library</button>
-    <button class="tab-btn" data-tab="tabSimulationData">📊 50-Call Simulation Logs</button>
+    <button class="tab-btn active" type="button" id="tabBtnLeads" data-tab="tabLeads" onclick="switchTab('tabLeads')">📋 100-Lead Dial Queue (+25/Day)</button>
+    <button class="tab-btn" type="button" id="tabBtnScript" data-tab="tabScript" onclick="switchTab('tabScript')">📜 Multi-Product Teleprompter</button>
+    <button class="tab-btn" type="button" id="tabBtnRPG" data-tab="tabRPG" onclick="switchTab('tabRPG')">🎮 Cold Call Quest (Sales RPG 2.0)</button>
+    <button class="tab-btn" type="button" id="tabBtnObjections" data-tab="tabObjections" onclick="switchTab('tabObjections')">🛡️ 45+ Master Objection Library</button>
+    <button class="tab-btn" type="button" id="tabBtnSimulationData" data-tab="tabSimulationData" onclick="switchTab('tabSimulationData')">📊 50-Call Simulation Logs</button>
   </div>
 
   <!-- TAB 0: 📋 LEAD DISPATCHER & LEAK CALCULATOR -->
@@ -305,7 +305,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
         <div>
           <h2 style="font-size:22px;margin-bottom:4px;font-family:var(--font-head)">📋 Nationwide Trade Leads Dispatcher &amp; Leak Calculator (250+ Targets)</h2>
-          <p style="color:var(--dim);font-size:14px">Automated 25-lead daily rotation across Florida, Texas, California, Georgia, North Carolina, Arizona, Ohio &amp; more. Click any lead to copy phone, view revenue leak calculations, check off calls, and launch custom pitch scripts.</p>
+          <p style="color:var(--dim);font-size:14px">Starts with 100 primed high-ticket targets across FL, TX, CA, GA, NC, AZ, OH &amp; more. Unlocks +25 fresh leads every 24 hours, or add +25 on demand. Click any lead to copy phone, view revenue leak calculations, check off calls, and launch custom teleprompters.</p>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <button class="btn btn-gold btn-sm" id="exportLeadsCsvBtn">📥 Export Leads &amp; Call Logs CSV</button>
@@ -313,20 +313,22 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         </div>
       </div>
 
-      <!-- 📅 Daily 25-Lead Batch & Quota HUD -->
+      <!-- 📅 Daily 100+ Lead Batch & Quota HUD -->
       <div class="daily-batch-banner">
         <div class="batch-hud-grid">
           <div class="batch-title-area">
-            <h3><span>📅</span> <span id="batchHeadingText">TODAY'S FRESH BATCH: 25 TARGET LEADS</span></h3>
+            <h3><span>🎯</span> <span id="batchHeadingText">ACTIVE COLD CALL QUEUE: 100 TARGETS (+25 ADDED DAILY)</span></h3>
             <div class="batch-subtitle">
-              <span id="todayDateDisplay">Wednesday, October 21, 2026</span> · Daily high-ticket trade leads across FL, TX, CA, GA, NC, AZ, OH &amp; more.
+              <span id="todayDateDisplay">Wednesday, October 21, 2026</span> · Starts with 100 nationwide leads · +25 fresh leads added every 24h · Hit [⚡ Add +25 Leads Now] anytime!
             </div>
           </div>
           <div class="batch-controls">
             <div style="display:flex;align-items:center;gap:6px">
-              <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">BATCH:</span>
+              <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">QUEUE:</span>
               <select id="batchSelect" class="custom-select">
-                <option value="today">📅 Today's Batch (25 Leads)</option>
+                <option value="activeQueue" selected>⭐ Active Dial Queue (100 Leads · Starts 100 + Daily Growth)</option>
+                <option value="todayFresh">⚡ Today's +25 Fresh Additions Only</option>
+                <option value="all">🌐 All 250 Nationwide Leads</option>
                 <option value="1">Batch 1: Florida Metro HVAC &amp; Roofing (25)</option>
                 <option value="2">Batch 2: Florida Coastal &amp; Central (25)</option>
                 <option value="3">Batch 3: Florida Commercial &amp; Specialty (25)</option>
@@ -337,10 +339,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <option value="8">Batch 8: North Carolina Carolinas (25)</option>
                 <option value="9">Batch 9: Arizona Phoenix &amp; Tucson (25)</option>
                 <option value="10">Batch 10: Ohio, Colorado &amp; Nevada (25)</option>
-                <option value="all">🌐 All 250 Nationwide Leads</option>
               </select>
             </div>
-            <button class="btn btn-ghost btn-sm" id="btnNextBatch" title="Advance to next 25 unworked targets">⚡ Pull Next 25 Leads</button>
+            <button class="btn btn-gold btn-sm" id="btnAdd25Leads" style="font-weight:700" title="Expand your active queue with +25 fresh leads immediately">⚡ Add +25 Leads Now</button>
             <div style="display:flex;align-items:center;gap:6px">
               <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">REP:</span>
               <select id="callerSelect" class="custom-select" style="max-width:140px">
@@ -357,7 +358,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="quota-progress-card">
           <div class="quota-meter-wrap">
             <div class="quota-meter-header">
-              <span>🎯 DAILY DIAL QUOTA: <strong><span id="quotaCount">0</span> / <span id="quotaTotal">25</span> COMPLETED</strong></span>
+              <span>🎯 DIAL QUOTA: <strong><span id="quotaCount">0</span> / <span id="quotaTotal">100</span> COMPLETED</strong></span>
               <span>PACING: <strong><span id="quotaPct">0%</span></strong></span>
             </div>
             <div class="quota-bar-track">
@@ -365,7 +366,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             </div>
           </div>
           <div class="quota-stats-chips">
-            <div class="quota-chip" id="chipUncalled" style="color:var(--dim)">⏳ 25 To Call</div>
+            <div class="quota-chip" id="chipUncalled" style="color:var(--dim)">⏳ 100 To Call</div>
             <div class="quota-chip" id="chipCalled" style="color:#6ee7b7">✓ 0 Called</div>
             <div class="quota-chip" id="chipDemos" style="color:var(--accent2)">🎉 0 Demos</div>
           </div>
@@ -1365,88 +1366,118 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 <div class="toast" id="toast">Copied to clipboard!</div>
 
 <script>
-(function() {
-  // 80 Verified Targets Dataset
-  const LEADS_DATA = __LEADS_JSON__;
-
-  // Sound Engine
-  let soundEnabled = true;
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-  function playSound(type) {
-    if (!soundEnabled) return;
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    const now = audioCtx.currentTime;
-
-    if (type === 'hit') {
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(220, now);
-      osc.frequency.exponentialRampToValueAtTime(80, now + 0.15);
-      gain.gain.setValueAtTime(0.3, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
-      osc.start(now);
-      osc.stop(now + 0.15);
-    } else if (type === 'slash') {
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(600, now);
-      osc.frequency.exponentialRampToValueAtTime(150, now + 0.2);
-      gain.gain.setValueAtTime(0.35, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
-      osc.start(now);
-      osc.stop(now + 0.2);
-    } else if (type === 'xp') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(523.25, now);
-      osc.frequency.setValueAtTime(659.25, now + 0.08);
-      gain.gain.setValueAtTime(0.2, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
-      osc.start(now);
-      osc.stop(now + 0.2);
-    } else if (type === 'levelup') {
-      const notes = [523.25, 659.25, 783.99, 1046.50];
-      notes.forEach((freq, idx) => {
-        const o = audioCtx.createOscillator();
-        const g = audioCtx.createGain();
-        o.connect(g);
-        g.connect(audioCtx.destination);
-        o.type = 'square';
-        o.frequency.setValueAtTime(freq, now + idx * 0.1);
-        g.gain.setValueAtTime(0.25, now + idx * 0.1);
-        g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.15);
-        o.start(now + idx * 0.1);
-        o.stop(now + idx * 0.1 + 0.15);
-      });
-    }
-  }
-
-  const soundBtn = document.getElementById('soundToggleBtn');
-  soundBtn.addEventListener('click', () => {
-    soundEnabled = !soundEnabled;
-    soundBtn.textContent = soundEnabled ? '🔊 Audio: ON' : '🔇 Audio: MUTED';
-    soundBtn.style.color = soundEnabled ? 'var(--accent2)' : 'var(--dim)';
-  });
-
-  // Tab Switching
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabPanels = document.querySelectorAll('.tab-panel');
-
-  function switchTab(targetTabId) {
+// ============================================================
+// 🌐 GLOBAL BULLETPROOF TAB SWITCHER
+// ============================================================
+window.switchTab = function(targetTabId) {
+  try {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
     tabBtns.forEach(b => {
-      if (b.dataset.tab === targetTabId) b.classList.add('active');
+      const isTarget = (b.dataset.tab === targetTabId) || (b.getAttribute('onclick') && b.getAttribute('onclick').includes(targetTabId));
+      if (isTarget) b.classList.add('active');
       else b.classList.remove('active');
     });
     tabPanels.forEach(p => {
       if (p.id === targetTabId) p.classList.add('active');
       else p.classList.remove('active');
     });
+  } catch(e) {
+    console.error('Error switching tab:', e);
+  }
+};
+
+(function() {
+  // Nationwide Targets Dataset
+  const LEADS_DATA = __LEADS_JSON__;
+
+  // Sound Engine (Lazy Loaded on User Interaction)
+  let soundEnabled = true;
+  let audioCtx = null;
+  function getAudioContext() {
+    if (!audioCtx) {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      } catch(e) {
+        console.warn('AudioContext unavailable or not supported:', e);
+      }
+    }
+    return audioCtx;
   }
 
+  function playSound(type) {
+    if (!soundEnabled) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    try {
+      if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      const now = ctx.currentTime;
+
+      if (type === 'hit') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(80, now + 0.15);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      } else if (type === 'slash') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(600, now);
+        osc.frequency.exponentialRampToValueAtTime(150, now + 0.2);
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } else if (type === 'xp') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.08);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } else if (type === 'levelup') {
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
+          o.connect(g);
+          g.connect(ctx.destination);
+          o.type = 'square';
+          o.frequency.setValueAtTime(freq, now + idx * 0.1);
+          g.gain.setValueAtTime(0.25, now + idx * 0.1);
+          g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.15);
+          o.start(now + idx * 0.1);
+          o.stop(now + idx * 0.1 + 0.15);
+        });
+      }
+    } catch(err) {
+      console.warn('playSound audio error:', err);
+    }
+  }
+
+  const soundBtn = document.getElementById('soundToggleBtn');
+  if (soundBtn) {
+    soundBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      soundBtn.textContent = soundEnabled ? '🔊 Audio: ON' : '🔇 Audio: MUTED';
+      soundBtn.style.color = soundEnabled ? 'var(--accent2)' : 'var(--dim)';
+    });
+  }
+
+  // Tab Switching Listeners
+  const tabBtns = document.querySelectorAll('.tab-btn');
   tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      if (target) window.switchTab(target);
+    });
   });
 
   // Toast
@@ -1497,15 +1528,32 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     });
   }
 
-  // Calculate Today's Batch (1 to 10 rotating daily based on calendar day)
+  // Base Starting Queue: 100 leads, +25 daily auto growth, + manual additions
+  const BASE_QUEUE_SIZE = 100;
+  const LAUNCH_DATE = new Date('2026-10-21T00:00:00');
+  const msPerDay = 1000 * 60 * 60 * 24;
   const now = new Date();
-  const startOfYear = new Date(now.getFullYear(), 0, 0);
-  const diff = now - startOfYear;
-  const oneDay = 1000 * 60 * 60 * 24;
-  const dayOfYear = Math.floor(diff / oneDay);
-  const defaultBatchNum = ((dayOfYear - 1) % 10) + 1; // 1 to 10
+  const daysSinceLaunch = Math.max(0, Math.floor((now.getTime() - LAUNCH_DATE.getTime()) / msPerDay));
+  const autoDailyAdditions = daysSinceLaunch * 25;
 
-  let currentBatch = 'today';
+  let manualAdditions = 0;
+  try {
+    manualAdditions = parseInt(localStorage.getItem('vantorx_manual_lead_additions') || '0', 10);
+  } catch(e) {
+    manualAdditions = 0;
+  }
+
+  function getActiveQueueLimit() {
+    return Math.min(LEADS_DATA.length, BASE_QUEUE_SIZE + autoDailyAdditions + manualAdditions);
+  }
+
+  function getTodayFreshRange() {
+    const limit = getActiveQueueLimit();
+    const start = Math.max(0, limit - 25);
+    return { start, end: limit };
+  }
+
+  let currentBatch = 'activeQueue';
   let currentProductFilter = 'all';
   let currentStateFilter = 'all';
   let currentStatusFilter = 'all'; // 'all', 'uncalled', 'called'
@@ -1516,6 +1564,32 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   if (dateEl) dateEl.textContent = todayDateStr;
 
   const leadTableBody = document.getElementById('leadTableBody');
+
+  function updateBatchDropdownLabels() {
+    const activeLimit = getActiveQueueLimit();
+    const batchSel = document.getElementById('batchSelect');
+    if (batchSel) {
+      const optActive = batchSel.querySelector('option[value="activeQueue"]');
+      if (optActive) optActive.textContent = `⭐ Active Dial Queue (${activeLimit} Leads · Starts 100 + Daily Growth)`;
+    }
+  }
+
+  function updateBatchHeading() {
+    const heading = document.getElementById('batchHeadingText');
+    const activeLimit = getActiveQueueLimit();
+    if (heading) {
+      if (currentBatch === 'activeQueue') {
+        heading.textContent = `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (+25 ADDED DAILY)`;
+      } else if (currentBatch === 'todayFresh') {
+        heading.textContent = `TODAY'S 25 FRESH UNLOCKED TARGETS`;
+      } else if (currentBatch === 'all') {
+        heading.textContent = `NATIONWIDE MASTER DIRECTORY (250 TARGETS)`;
+      } else {
+        heading.textContent = `BATCH #${currentBatch}: 25 NATIONWIDE TARGET LEADS`;
+      }
+    }
+    updateBatchDropdownLabels();
+  }
 
   function getProductBadgeHtml(prod) {
     const map = {
@@ -1528,20 +1602,24 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     return map[prod] || map.ava;
   }
 
-  function getEffectiveBatchNum() {
-    if (currentBatch === 'today') return defaultBatchNum;
-    if (currentBatch === 'all') return null;
-    return parseInt(currentBatch, 10);
-  }
-
   function renderLeadsTable() {
     leadTableBody.innerHTML = '';
     const q = leadSearchQuery.toLowerCase().trim();
-    const effBatch = getEffectiveBatchNum();
+    const activeLimit = getActiveQueueLimit();
+    const freshRange = getTodayFreshRange();
 
-    const filtered = LEADS_DATA.filter(lead => {
-      // 1. Batch filter
-      if (effBatch !== null && lead.batch !== effBatch) return false;
+    const filtered = LEADS_DATA.filter((lead, index) => {
+      // 1. Queue / Batch filter
+      if (currentBatch === 'activeQueue') {
+        if (index >= activeLimit) return false;
+      } else if (currentBatch === 'todayFresh') {
+        if (index < freshRange.start || index >= freshRange.end) return false;
+      } else if (currentBatch === 'all') {
+        // all leads included
+      } else {
+        const batchNum = parseInt(currentBatch, 10);
+        if (lead.batch !== batchNum) return false;
+      }
       // 2. State filter
       const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
       if (currentStateFilter !== 'all' && leadState !== currentStateFilter) return false;
@@ -1724,12 +1802,25 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   }
 
   function updateQuotaHUD() {
-    const effBatch = getEffectiveBatchNum();
-    const batchLeads = LEADS_DATA.filter(l => effBatch === null || l.batch === effBatch);
+    const activeLimit = getActiveQueueLimit();
+    const freshRange = getTodayFreshRange();
+
+    let batchLeads = [];
+    if (currentBatch === 'activeQueue') {
+      batchLeads = LEADS_DATA.slice(0, activeLimit);
+    } else if (currentBatch === 'todayFresh') {
+      batchLeads = LEADS_DATA.slice(freshRange.start, freshRange.end);
+    } else if (currentBatch === 'all') {
+      batchLeads = LEADS_DATA;
+    } else {
+      const bNum = parseInt(currentBatch, 10);
+      batchLeads = LEADS_DATA.filter(l => l.batch === bNum);
+    }
+
     const totalInBatch = batchLeads.length;
     const calledInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called).length;
     const demosInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called && CALL_RECORDS[l.id]?.outcome === 'Booked Demo').length;
-    const uncalledInBatch = totalInBatch - calledInBatch;
+    const uncalledInBatch = Math.max(0, totalInBatch - calledInBatch);
     const pct = totalInBatch > 0 ? Math.round((calledInBatch / totalInBatch) * 100) : 0;
 
     const countEl = document.getElementById('quotaCount');
@@ -1775,29 +1866,34 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   if (batchSelectEl) {
     batchSelectEl.addEventListener('change', (e) => {
       currentBatch = e.target.value;
-      const heading = document.getElementById('batchHeadingText');
-      if (heading) {
-        if (currentBatch === 'today') heading.textContent = `TODAY'S FRESH BATCH: 25 TARGET LEADS (BATCH #${defaultBatchNum})`;
-        else if (currentBatch === 'all') heading.textContent = `NATIONWIDE MASTER DIRECTORY (250 TARGETS)`;
-        else heading.textContent = `BATCH #${currentBatch}: 25 NATIONWIDE TARGET LEADS`;
-      }
+      updateBatchHeading();
       renderLeadsTable();
-      showToast(`✓ Switched to ${currentBatch === 'today' ? "Today's Batch" : (currentBatch === 'all' ? "All 250 Leads" : `Batch #${currentBatch}`)}`);
+      updateQuotaHUD();
+      showToast(`✓ Switched view: ${batchSelectEl.options[batchSelectEl.selectedIndex].text}`);
     });
   }
 
-  // Next Batch Button Listener
-  const btnNextBatchEl = document.getElementById('btnNextBatch');
-  if (btnNextBatchEl) {
-    btnNextBatchEl.addEventListener('click', () => {
-      let cur = currentBatch === 'today' ? defaultBatchNum : (currentBatch === 'all' ? 1 : parseInt(currentBatch, 10));
-      let next = cur >= 10 ? 1 : cur + 1;
-      currentBatch = String(next);
-      if (batchSelectEl) batchSelectEl.value = String(next);
-      const heading = document.getElementById('batchHeadingText');
-      if (heading) heading.textContent = `BATCH #${next}: 25 NATIONWIDE TARGET LEADS`;
+  // Add +25 Leads Button Listener
+  const btnAdd25Leads = document.getElementById('btnAdd25Leads');
+  if (btnAdd25Leads) {
+    btnAdd25Leads.addEventListener('click', () => {
+      const curLimit = getActiveQueueLimit();
+      if (curLimit >= LEADS_DATA.length) {
+        showToast('⭐ All 250 nationwide leads are already unlocked in your queue!');
+        return;
+      }
+      manualAdditions += 25;
+      try {
+        localStorage.setItem('vantorx_manual_lead_additions', String(manualAdditions));
+      } catch(e) {}
+      const newLimit = getActiveQueueLimit();
+      currentBatch = 'activeQueue';
+      if (batchSelectEl) batchSelectEl.value = 'activeQueue';
+      updateBatchHeading();
       renderLeadsTable();
-      showToast(`✓ Loaded Batch #${next} (25 Fresh Targets)!`);
+      updateQuotaHUD();
+      playSound('levelup');
+      showToast(`⚡ Unlocked +25 Fresh Leads! Active queue now: ${newLimit} targets.`);
     });
   }
 
@@ -2940,6 +3036,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   });
 
   // Initialization
+  updateBatchHeading();
   renderLeadsTable();
   renderMasterObjectionCards('all', '');
   startDungeon('roofer');
@@ -2951,5 +3048,6 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
 $html = $htmlTemplate.Replace('__LEADS_JSON__', $leadsRaw)
 
-[System.IO.File]::WriteAllText("$PSScriptRoot/../website/cold-call-arena/index.html", $html, [System.Text.Encoding]::UTF8)
+$utf8WithBom = New-Object System.Text.UTF8Encoding($true)
+[System.IO.File]::WriteAllText("$PSScriptRoot/../website/cold-call-arena/index.html", $html, $utf8WithBom)
 Write-Host "Successfully generated multi-product Cold Calling Cockpit in website/cold-call-arena/index.html"
