@@ -1487,12 +1487,15 @@
     "title": "Operations Director",
     "company": "Disaster Clean Florida",
     "estLoss": "$16,500/mo",
-    "status": "pending",
+    "status": "sent",
     "painPoint": "Emergency hurricane damage calls going to voicemail during high-water events",
     "phone": "(904) 731-9900",
     "fullOwner": "Ray Fletcher",
     "city": "Jacksonville, FL",
-    "email": "dispatch@disastercleanfl.com"
+    "email": "dispatch@disastercleanfl.com",
+    "body": "Hi Ray,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Restoration contractors in Jacksonville, FL.\n\nWhile Disaster Clean Florida has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Restoration contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Restoration in Jacksonville, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a15fed-67eb-7d2c-b708-8fbe3e7571fe",
+    "sentAt": "2026-10-21T19:25:56.659Z"
   },
   {
     "service": "AEO Engineâ„¢ (AI Search Optimization)",
@@ -1503,11 +1506,14 @@
     "title": "President",
     "company": "Total Mitigation & Mold Pros",
     "estLoss": "$11,000/mo",
-    "status": "pending",
+    "status": "sent",
     "painPoint": "Insurance policyholders using ChatGPT to find top emergency restoration companies",
     "phone": "(813) 514-8800",
     "fullOwner": "Nick Castelli",
     "city": "St. Petersburg, FL",
-    "email": "info@totalmitigationmold.com"
+    "email": "info@totalmitigationmold.com",
+    "body": "Hi Nick,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Restoration contractors in St. Petersburg, FL.\n\nWhile Total Mitigation & Mold Pros has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Restoration contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Restoration in St. Petersburg, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a15fed-68a2-77ce-8a4e-dfdcf0e5c4a2",
+    "sentAt": "2026-10-21T19:25:56.845Z"
   }
 ]

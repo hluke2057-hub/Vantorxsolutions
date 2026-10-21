@@ -1,6 +1,6 @@
 {
   "version": "5.1.0",
-  "lastUpdated": "2026-10-21T18:22:53.036Z",
+  "lastUpdated": "2026-10-21T19:25:56.848Z",
   "systemStatus": {
     "mode": "24/7 Multi-Service Autonomous Engine",
     "autoSenderStatus": "RUNNING",
@@ -30,7 +30,7 @@
     "zoomCtaTarget": "15-Minute Screen Share Walkthrough"
   },
   "metrics": {
-    "totalSent": 155,
+    "totalSent": 157,
     "totalOpened": 0,
     "totalUnopened48h": 0,
     "totalReplied": 0,
@@ -177,6 +177,40 @@
   ],
   "inboundResponses": [],
   "recentDispatches": [
+    {
+      "id": "fl_trade_079",
+      "company": "Disaster Clean Florida",
+      "owner": "Ray",
+      "title": "Operations Director",
+      "email": "dispatch@disastercleanfl.com",
+      "phone": "(904) 731-9900",
+      "city": "Jacksonville, FL",
+      "trade": "Restoration",
+      "serviceCategory": "24/7 AI Phone Receptionist & Emergency Triage",
+      "subject": "Zero-ring hurricane response for Ray at Disaster Clean Florida",
+      "body": "Hi Ray,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Restoration contractors in Jacksonville, FL.\n\nWhile Disaster Clean Florida has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Restoration contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Restoration in Jacksonville, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$16,500/mo",
+      "resendMessageId": "01a15fed-67eb-7d2c-b708-8fbe3e7571fe",
+      "sent": true,
+      "dispatchedAt": "2026-10-21T19:25:56.659Z"
+    },
+    {
+      "id": "fl_trade_080",
+      "company": "Total Mitigation & Mold Pros",
+      "owner": "Nick",
+      "title": "President",
+      "email": "info@totalmitigationmold.com",
+      "phone": "(813) 514-8800",
+      "city": "St. Petersburg, FL",
+      "trade": "Restoration",
+      "serviceCategory": "AEO Engineâ„¢ (AI Search Optimization)",
+      "subject": "ChatGPT AI visibility for Nick at Total Mitigation Pros",
+      "body": "Hi Nick,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Restoration contractors in St. Petersburg, FL.\n\nWhile Total Mitigation & Mold Pros has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Restoration contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Restoration in St. Petersburg, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$11,000/mo",
+      "resendMessageId": "01a15fed-68a2-77ce-8a4e-dfdcf0e5c4a2",
+      "sent": true,
+      "dispatchedAt": "2026-10-21T19:25:56.845Z"
+    },
     {
       "id": "fl_trade_074",
       "company": "Plumb Tech Solutions",
@@ -1919,46 +1953,6 @@
       "dispatchedAt": "2026-10-19T13:39:11.136Z",
       "subject": "1 idea for Boca Raton Apex MedSpa when lines are busy",
       "body": "Hi Mark,\n\nWhen you and your crew are out in the field or on a job in Boca Raton, FL, incoming calls often go unanswered. Research shows over 60% of callers won't leave a voicemail -- they simply hang up and call the next contractor on Google Maps.\n\nWe solve this with our Missed-Call Text-Back system:\nThe second your line rings without an answer, the caller instantly receives a personalized text on their cell phone within 3 seconds:\n\"Hi! This is Mark with Boca Raton Apex MedSpa. We're currently helping another customer on-site -- how can we help you right now?\"\n\nThis captures the homeowner on SMS before they dial a competitor, books their estimate directly into your calendar, and logs the conversation in your private Client Hub dashboard.\n\nLet's hop on a 10-minute Zoom screen share this week so I can show you how this works live.\n\nWould Tuesday at 3:00 PM or Thursday at 1:00 PM work for a quick Zoom?\n\nOr select a time that fits your day:\n👉 https://www.vantorxsolutions.com/#contact\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
-    },
-    {
-      "id": "cloud_1792417151136_4",
-      "company": "Boca Raton Precision MedSpa",
-      "owner": "Steve",
-      "title": "Managing Partner",
-      "email": "contact@bocaratonprecisionmedspapros.com",
-      "phone": "(561) 555-1091",
-      "city": "Boca Raton, FL",
-      "trade": "MedSpa",
-      "reviewQuote": "Disconnected service: web form went into a void and voicemail wasn't checked for days.",
-      "websiteAudit": "Fragmented software setup with zero centralized lead pipeline or call tracking.",
-      "estLoss": "$8,900/mo",
-      "variantId": "service_full_operations",
-      "serviceCategory": "Done-For-You Growth Engine",
-      "ctaGoal": "15-Minute Zoom Call",
-      "opened": false,
-      "dispatchedAt": "2026-10-19T13:39:11.136Z",
-      "subject": "Connecting Boca Raton Precision MedSpa's website, phones, and follow-up",
-      "body": "Hi Steve,\n\nMost medspa contractors in Boca Raton, FL have disconnected systems: a website built years ago by one agency, phone lines managed on personal cell phones, and quote inquiries scattered across voicemails and sticky notes.\n\nAt VantorX Solutions, we build and run the entire connected operation for you:\n1. Custom, mobile-optimized website designed to drive calls and quote requests.\n2. 24/7 AI Receptionist (Ava) that answers every phone call in 1 ring and books appointments.\n3. Automated LeadFlow follow-up that texts web inquiries within 90 seconds.\n4. Client Hub: a single dashboard where all your calls, recordings, appointments, and leads live together.\n\nYou don't configure or manage anything -- our team builds, tests, and maintains the entire system for you.\n\nCould we schedule a quick 15-minute Zoom screen share this week to walk through how this would work for Boca Raton Precision MedSpa?\n\nAre you free this Wednesday at 10:00 AM or Thursday at 2:00 PM?\n\nOr grab any opening on my calendar:\n👉 https://www.vantorxsolutions.com/#contact\n\n(You can also call our live demo line anytime from your phone at (561) 813-8602 to hear our conversational receptionist live).\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
-    },
-    {
-      "id": "cloud_1792417151136_5",
-      "company": "Boca Raton Summit MedSpa",
-      "owner": "Dave",
-      "title": "Founder",
-      "email": "contact@bocaratonsummitmedspapros.com",
-      "phone": "(561) 555-1118",
-      "city": "Boca Raton, FL",
-      "trade": "MedSpa",
-      "reviewQuote": "Asked ChatGPT for the best contractor in town -- it recommended 3 other companies and didn't even mention our name.",
-      "websiteAudit": "Completely absent from AI search knowledge graphs with zero llms.txt protocol or JSON-LD schema.",
-      "estLoss": "$11,400/mo",
-      "variantId": "service_aeo_optimization",
-      "serviceCategory": "AEO Engine™ (AI Search & Ranking)",
-      "ctaGoal": "15-Minute Zoom Call",
-      "opened": false,
-      "dispatchedAt": "2026-10-19T13:39:11.136Z",
-      "subject": "Boca Raton Summit MedSpa on ChatGPT and Perplexity",
-      "body": "Hi Dave,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended medspa contractors in Boca Raton, FL.\n\nWhile Boca Raton Summit MedSpa has a solid local reputation, when homeowners in your market ask ChatGPT or Perplexity \"Who is the most reliable medspa contractor near me?\", the AI engines aren't recommending you -- they're actively directing high-ticket jobs to your competitors.\n\nHere's why: Traditional SEO only targets Google links. Today, millions of homeowners are searching using conversational AI assistants on their phones. AI engines ignore traditional keywords unless your business has an engineered llms.txt protocol and structured Schema.org entity data.\n\nWe built the AEO Engine™ (Answer Engine Optimization) specifically for medspa businesses. We generate, verify, and host your official llms.txt standard and rich knowledge graph so ChatGPT, Perplexity, and Gemini recommend Boca Raton Summit MedSpa as the #1 local authority.\n\nI put together a 3-minute video audit showing what ChatGPT and Perplexity say when homeowners search for medspa in Boca Raton, FL, and how we can get you indexed as the top recommended choice.\n\nCould we jump on a brief 10-15 minute Zoom screen share this Tuesday at 2:30 PM or Thursday at 11:00 AM so I can show you the screen recording?\n\nYou can also book a time directly on my calendar here:\n👉 https://www.vantorxsolutions.com/#contact\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
     }
   ],
   "objectionCatalog": {
