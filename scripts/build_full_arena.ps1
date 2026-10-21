@@ -69,6 +69,44 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
 /* 📋 LEAD DISPATCHER & LEAK CALCULATOR TABLE (EXCEL STYLE) */
 .lead-cockpit{background:var(--bg2);border:1px solid var(--line2);border-radius:18px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,0.4);position:relative}
+
+/* 📅 DAILY BATCH & DIAL QUOTA HUD */
+.daily-batch-banner{background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(26,36,56,0.98));border:1.5px solid rgba(245,158,11,0.35);border-radius:14px;padding:16px 20px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.batch-hud-grid{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.batch-title-area h3{font-family:var(--font-head);font-size:17.5px;font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:8px}
+.batch-subtitle{font-size:12.5px;color:var(--dim);margin-top:3px}
+.batch-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.custom-select{background:var(--bg);border:1px solid var(--line2);color:var(--ink);padding:8px 12px;border-radius:8px;font-family:var(--font-head);font-size:13px;font-weight:600;cursor:pointer;outline:none}
+.custom-select:focus{border-color:var(--accent)}
+
+/* 🎯 QUOTA & CALL PROGRESS TRACKER */
+.quota-progress-card{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.quota-meter-wrap{flex:1;min-width:240px}
+.quota-meter-header{display:flex;justify-content:space-between;font-size:12px;font-family:var(--font-mono);color:var(--dim);margin-bottom:5px}
+.quota-meter-header strong{color:#ffffff}
+.quota-bar-track{height:8px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden;position:relative}
+.quota-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--ok));border-radius:999px;transition:width 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 10px rgba(52,211,153,0.4)}
+.quota-stats-chips{display:flex;gap:8px;flex-wrap:wrap}
+.quota-chip{background:var(--bg);border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-size:11.5px;font-family:var(--font-mono);display:flex;align-items:center;gap:6px}
+
+/* 📞 CALL STATUS CHECKBOX & ROW HIGHLIGHTING */
+.lead-status-box{display:flex;align-items:center;gap:8px}
+.call-checkbox{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:2px solid var(--dim);border-radius:4px;background:var(--bg);cursor:pointer;display:grid;place-content:center;transition:all 0.15s;flex-shrink:0}
+.call-checkbox:checked{background:var(--ok);border-color:var(--ok)}
+.call-checkbox:checked::before{content:'✓';color:#070a0f;font-size:13px;font-weight:900}
+.call-checkbox:hover{border-color:var(--accent2)}
+.status-badge{font-size:11px;font-family:var(--font-mono);font-weight:700;padding:2px 7px;border-radius:5px;display:inline-flex;align-items:center;gap:4px}
+.status-badge-uncalled{background:rgba(148,163,184,0.12);color:var(--dim);border:1px solid rgba(148,163,184,0.25)}
+.status-badge-called{background:rgba(52,211,153,0.15);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4)}
+.outcome-select{background:var(--bg2);border:1px solid var(--line);color:var(--ink);font-size:11.5px;border-radius:5px;padding:2px 6px;cursor:pointer;outline:none;max-width:145px}
+.outcome-select:focus{border-color:var(--accent)}
+.caller-tag{font-size:10px;color:var(--ok);font-family:var(--font-mono);margin-top:2px}
+.btn-note{background:none;border:none;color:var(--dim);cursor:pointer;font-size:13px;padding:2px;transition:color 0.15s}
+.btn-note:hover{color:var(--accent2)}
+.excel-table tr.lead-row-called{background:rgba(52,211,153,0.04)}
+.excel-table tr.lead-row-called:hover td{background:rgba(52,211,153,0.08)}
+.excel-table tr.lead-row-called .lead-company-name{color:#94a3b8!important;text-decoration:line-through;text-decoration-color:rgba(52,211,153,0.6)}
+
 .kpi-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:20px}
 .kpi-card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .kpi-label{font-size:11px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase;margin-bottom:4px}
@@ -253,7 +291,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
 <main class="wrap">
   <div class="tabs">
-    <button class="tab-btn active" data-tab="tabLeads">📋 Lead Dispatcher &amp; Leak Calculator (80)</button>
+    <button class="tab-btn active" data-tab="tabLeads">📋 Daily Leads Dispatcher &amp; Leak Calculator</button>
     <button class="tab-btn" data-tab="tabScript">📜 Multi-Product Teleprompter</button>
     <button class="tab-btn" data-tab="tabRPG">🎮 Cold Call Quest (Sales RPG 2.0)</button>
     <button class="tab-btn" data-tab="tabObjections">🛡️ 45+ Master Objection Library</button>
@@ -265,32 +303,94 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     <div class="lead-cockpit">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
         <div>
-          <h2 style="font-size:22px;margin-bottom:4px;font-family:var(--font-head)">📋 Florida Trade Leads Dispatcher &amp; Leak Calculator</h2>
-          <p style="color:var(--dim);font-size:14px">Real-time revenue leak diagnosis for 80 verified Florida contractors. Click any lead to calculate their exact annual loss, copy their phone number, and load their custom sales script.</p>
+          <h2 style="font-size:22px;margin-bottom:4px;font-family:var(--font-head)">📋 Nationwide Trade Leads Dispatcher &amp; Leak Calculator (250+ Targets)</h2>
+          <p style="color:var(--dim);font-size:14px">Automated 25-lead daily rotation across Florida, Texas, California, Georgia, North Carolina, Arizona, Ohio &amp; more. Click any lead to copy phone, view revenue leak calculations, check off calls, and launch custom pitch scripts.</p>
         </div>
-        <button class="btn btn-gold btn-sm" id="exportLeadsCsvBtn">📥 Export Leads CSV</button>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-gold btn-sm" id="exportLeadsCsvBtn">📥 Export Leads &amp; Call Logs CSV</button>
+          <button class="btn btn-ghost btn-sm" id="resetCallsBtn" style="border:1px solid rgba(248,113,113,0.3);color:#fca5a5" title="Clear checked calls on this browser">🔄 Reset My Calls</button>
+        </div>
+      </div>
+
+      <!-- 📅 Daily 25-Lead Batch & Quota HUD -->
+      <div class="daily-batch-banner">
+        <div class="batch-hud-grid">
+          <div class="batch-title-area">
+            <h3><span>📅</span> <span id="batchHeadingText">TODAY'S FRESH BATCH: 25 TARGET LEADS</span></h3>
+            <div class="batch-subtitle">
+              <span id="todayDateDisplay">Wednesday, October 21, 2026</span> · Daily high-ticket trade leads across FL, TX, CA, GA, NC, AZ, OH &amp; more.
+            </div>
+          </div>
+          <div class="batch-controls">
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">BATCH:</span>
+              <select id="batchSelect" class="custom-select">
+                <option value="today">📅 Today's Batch (25 Leads)</option>
+                <option value="1">Batch 1: Florida Metro HVAC &amp; Roofing (25)</option>
+                <option value="2">Batch 2: Florida Coastal &amp; Central (25)</option>
+                <option value="3">Batch 3: Florida Commercial &amp; Specialty (25)</option>
+                <option value="4">Batch 4: Florida &amp; Texas DFW (25)</option>
+                <option value="5">Batch 5: Texas Metroplex &amp; Houston (25)</option>
+                <option value="6">Batch 6: California LA &amp; Bay Area (25)</option>
+                <option value="7">Batch 7: Georgia Atlanta &amp; Savannah (25)</option>
+                <option value="8">Batch 8: North Carolina Carolinas (25)</option>
+                <option value="9">Batch 9: Arizona Phoenix &amp; Tucson (25)</option>
+                <option value="10">Batch 10: Ohio, Colorado &amp; Nevada (25)</option>
+                <option value="all">🌐 All 250 Nationwide Leads</option>
+              </select>
+            </div>
+            <button class="btn btn-ghost btn-sm" id="btnNextBatch" title="Advance to next 25 unworked targets">⚡ Pull Next 25 Leads</button>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">REP:</span>
+              <select id="callerSelect" class="custom-select" style="max-width:140px">
+                <option value="Luke">Luke (Founder)</option>
+                <option value="Buddy (Rep 2)">Buddy (Rep 2)</option>
+                <option value="Sales Rep 3">Sales Rep 3</option>
+                <option value="Guest Caller">Guest Caller</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quota Progress Bar -->
+        <div class="quota-progress-card">
+          <div class="quota-meter-wrap">
+            <div class="quota-meter-header">
+              <span>🎯 DAILY DIAL QUOTA: <strong><span id="quotaCount">0</span> / <span id="quotaTotal">25</span> COMPLETED</strong></span>
+              <span>PACING: <strong><span id="quotaPct">0%</span></strong></span>
+            </div>
+            <div class="quota-bar-track">
+              <div class="quota-bar-fill" id="quotaBarFill" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="quota-stats-chips">
+            <div class="quota-chip" id="chipUncalled" style="color:var(--dim)">⏳ 25 To Call</div>
+            <div class="quota-chip" id="chipCalled" style="color:#6ee7b7">✓ 0 Called</div>
+            <div class="quota-chip" id="chipDemos" style="color:var(--accent2)">🎉 0 Demos</div>
+          </div>
+        </div>
       </div>
 
       <!-- High-Level Leak KPIs -->
       <div class="kpi-bar">
         <div class="kpi-card">
-          <div class="kpi-label">🎯 Qualified Targets</div>
-          <div class="kpi-val" id="kpiTargetCount">80 Contractors</div>
-          <div class="kpi-sub">Tampa, Orlando, Miami, Palm Beach</div>
+          <div class="kpi-label">🎯 Active Targets In View</div>
+          <div class="kpi-val" id="kpiTargetCount">25 Contractors</div>
+          <div class="kpi-sub">Targeted high-ticket market</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">💸 Total Annual Leaks Detected</div>
-          <div class="kpi-val" style="color:#f87171" id="kpiTotalLeak">$9,820,000 / yr</div>
+          <div class="kpi-val" style="color:#f87171" id="kpiTotalLeak">$3,250,000 / yr</div>
           <div class="kpi-sub">Missed emergency calls &amp; slow response</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">📊 Average Leak per Business</div>
-          <div class="kpi-val" style="color:var(--accent2)" id="kpiAvgLeak">$10,229 / mo</div>
-          <div class="kpi-sub">$122,750 / yr in lost high-ticket jobs</div>
+          <div class="kpi-val" style="color:var(--accent2)" id="kpiAvgLeak">$10,830 / mo</div>
+          <div class="kpi-sub">$130,000 / yr in lost high-ticket jobs</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">🛡️ Average Net Savings</div>
-          <div class="kpi-val" style="color:var(--ok)" id="kpiAvgSavings">+$119,162 / yr</div>
+          <div class="kpi-val" style="color:var(--ok)" id="kpiAvgSavings">+$126,412 / yr</div>
           <div class="kpi-sub">Net profit saved after VantorX setup</div>
         </div>
       </div>
@@ -299,14 +399,40 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <div class="lead-filter-bar">
         <div class="lead-search-box">
           <span class="lead-search-icon">🔍</span>
-          <input type="text" class="lead-search-input" id="leadSearchInput" placeholder="Search contractor name, owner, city, trade, or leak..." autocomplete="off">
+          <input type="text" class="lead-search-input" id="leadSearchInput" placeholder="Search contractor name, owner, city, state, trade, or leak..." autocomplete="off">
         </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <select id="stateFilterSelect" class="custom-select">
+            <option value="all">All States</option>
+            <option value="FL">FL (Florida - 80)</option>
+            <option value="TX">TX (Texas - 45)</option>
+            <option value="CA">CA (California - 30)</option>
+            <option value="GA">GA (Georgia - 24)</option>
+            <option value="NC">NC (North Carolina - 21)</option>
+            <option value="AZ">AZ (Arizona - 18)</option>
+            <option value="OH">OH (Ohio - 12)</option>
+            <option value="CO">CO (Colorado - 10)</option>
+            <option value="NV">NV (Nevada - 10)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+        <!-- Call Status Filter Pills -->
         <div class="lead-pills">
-          <button class="lead-pill-btn active" data-filter="all">All Leads (80)</button>
-          <button class="lead-pill-btn" data-filter="ava">🤖 Ava Voice AI (33)</button>
-          <button class="lead-pill-btn" data-filter="website">🌐 Custom Websites (15)</button>
-          <button class="lead-pill-btn" data-filter="speed">⚡ Speed-to-Lead (21)</button>
-          <button class="lead-pill-btn" data-filter="aeo">⭐ AEO &amp; Reviews (11)</button>
+          <button class="lead-pill-btn active" data-status-filter="all">All Status (<span id="countStatusAll">25</span>)</button>
+          <button class="lead-pill-btn" data-status-filter="uncalled">⏳ Remaining To Call (<span id="countStatusUncalled">25</span>)</button>
+          <button class="lead-pill-btn" data-status-filter="called">✅ Already Called (<span id="countStatusCalled">0</span>)</button>
+        </div>
+
+        <!-- Product Offer Pills -->
+        <div class="lead-pills">
+          <button class="lead-pill-btn active" data-filter="all">All Offers</button>
+          <button class="lead-pill-btn" data-filter="ava">🤖 Ava Voice</button>
+          <button class="lead-pill-btn" data-filter="website">🌐 Websites</button>
+          <button class="lead-pill-btn" data-filter="speed">⚡ Speed-to-Lead</button>
+          <button class="lead-pill-btn" data-filter="aeo">⭐ AEO &amp; Reviews</button>
+          <button class="lead-pill-btn" data-filter="bundle">🚀 Full Bundle</button>
         </div>
       </div>
 
@@ -315,19 +441,21 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <table class="excel-table" id="leadExcelTable">
           <thead>
             <tr>
+              <th style="min-width:130px">Call Status</th>
               <th>Contractor / Company</th>
               <th>Decision Maker</th>
-              <th>City &amp; Trade</th>
+              <th>City, State &amp; Trade</th>
               <th>Phone (Click to Dial)</th>
               <th>Primary Leak Detected</th>
               <th>Annual Leak ($)</th>
               <th>Net Saved ($)</th>
               <th>Recommended Offer</th>
+              <th>Outcome &amp; Notes</th>
               <th style="text-align:right">Action</th>
             </tr>
           </thead>
           <tbody id="leadTableBody">
-            <!-- Populated via JavaScript from 80 normalized targets -->
+            <!-- Populated via JavaScript from 250 normalized targets -->
           </tbody>
         </table>
       </div>
@@ -346,7 +474,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <span id="activeLeadName" style="color:var(--accent2)">Palm Air Air Conditioning, Inc.</span>
             <span class="badge-prod badge-prod-ava" id="activeLeadProdBadge">🤖 Ava AI Voice</span>
           </div>
-          <div style="display:flex;align-items:center;gap:8px">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span class="status-badge status-badge-uncalled" id="prompterStatusBadge">⏳ To Call</span>
+            <button class="btn btn-ghost btn-sm" id="prompterToggleCallBtn" style="border:1px solid rgba(52,211,153,0.5);color:#6ee7b7">✓ Mark as Called</button>
             <a href="tel:5612031315" class="btn btn-gold btn-sm" id="activeLeadCallBtn">📞 Call (561) 203-1315</a>
             <button class="btn btn-ghost btn-sm" id="clearActiveLeadBtn">✕ Clear Lead</button>
           </div>
@@ -1341,10 +1471,49 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   });
 
   // ============================================================
-  // 📋 RENDER LEAD DISPATCHER TABLE (80 TARGETS)
+  // 📋 LEAD DISPATCHER, DAILY 25-LEAD ENGINE & CALL TRACKER
   // ============================================================
-  let currentLeadFilter = 'all';
+  let CALL_RECORDS = {};
+  try {
+    CALL_RECORDS = JSON.parse(localStorage.getItem('vantorx_lead_calls_v1')) || {};
+  } catch(e) {
+    CALL_RECORDS = {};
+  }
+  function saveCallRecords() {
+    try {
+      localStorage.setItem('vantorx_lead_calls_v1', JSON.stringify(CALL_RECORDS));
+    } catch(e) {}
+  }
+
+  let activeCaller = localStorage.getItem('vantorx_active_caller') || 'Luke';
+  const callerSelectEl = document.getElementById('callerSelect');
+  if (callerSelectEl) {
+    callerSelectEl.value = activeCaller;
+    callerSelectEl.addEventListener('change', (e) => {
+      activeCaller = e.target.value;
+      localStorage.setItem('vantorx_active_caller', activeCaller);
+      showToast(`Active caller set to: ${activeCaller}`);
+    });
+  }
+
+  // Calculate Today's Batch (1 to 10 rotating daily based on calendar day)
+  const now = new Date();
+  const startOfYear = new Date(now.getFullYear(), 0, 0);
+  const diff = now - startOfYear;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+  const defaultBatchNum = ((dayOfYear - 1) % 10) + 1; // 1 to 10
+
+  let currentBatch = 'today';
+  let currentProductFilter = 'all';
+  let currentStateFilter = 'all';
+  let currentStatusFilter = 'all'; // 'all', 'uncalled', 'called'
   let leadSearchQuery = '';
+
+  const todayDateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const dateEl = document.getElementById('todayDateDisplay');
+  if (dateEl) dateEl.textContent = todayDateStr;
+
   const leadTableBody = document.getElementById('leadTableBody');
 
   function getProductBadgeHtml(prod) {
@@ -1358,30 +1527,72 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     return map[prod] || map.ava;
   }
 
+  function getEffectiveBatchNum() {
+    if (currentBatch === 'today') return defaultBatchNum;
+    if (currentBatch === 'all') return null;
+    return parseInt(currentBatch, 10);
+  }
+
   function renderLeadsTable() {
     leadTableBody.innerHTML = '';
     const q = leadSearchQuery.toLowerCase().trim();
+    const effBatch = getEffectiveBatchNum();
 
     const filtered = LEADS_DATA.filter(lead => {
-      const matchFilter = currentLeadFilter === 'all' || lead.product === currentLeadFilter;
-      if (!matchFilter) return false;
+      // 1. Batch filter
+      if (effBatch !== null && lead.batch !== effBatch) return false;
+      // 2. State filter
+      const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
+      if (currentStateFilter !== 'all' && leadState !== currentStateFilter) return false;
+      // 3. Product filter
+      if (currentProductFilter !== 'all' && lead.product !== currentProductFilter) return false;
+      // 4. Call status filter
+      const isCalled = !!(CALL_RECORDS[lead.id] && CALL_RECORDS[lead.id].called);
+      if (currentStatusFilter === 'uncalled' && isCalled) return false;
+      if (currentStatusFilter === 'called' && !isCalled) return false;
+      // 5. Search query
       if (!q) return true;
       return (
         lead.company.toLowerCase().includes(q) ||
         lead.owner.toLowerCase().includes(q) ||
         lead.city.toLowerCase().includes(q) ||
+        leadState.toLowerCase().includes(q) ||
         lead.trade.toLowerCase().includes(q) ||
         lead.painPoint.toLowerCase().includes(q)
       );
     });
 
+    if (filtered.length === 0) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="11" style="text-align:center;padding:32px;color:var(--dim)">
+        🔍 No contractor targets match your selected filters. Try switching batches or resetting filters.
+      </td>`;
+      leadTableBody.appendChild(tr);
+      updateQuotaHUD();
+      return;
+    }
+
     filtered.forEach(lead => {
+      const isCalled = !!(CALL_RECORDS[lead.id] && CALL_RECORDS[lead.id].called);
+      const rec = CALL_RECORDS[lead.id] || {};
+      const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
       const tr = document.createElement('tr');
       tr.id = `leadRow_${lead.id}`;
+      if (isCalled) tr.classList.add('lead-row-called');
+
       tr.innerHTML = `
         <td>
-          <div style="font-weight:700;color:#ffffff">${lead.company}</div>
-          <div style="font-size:11.5px;color:var(--dim)">ID: ${lead.id}</div>
+          <div class="lead-status-box">
+            <input type="checkbox" class="call-checkbox" data-id="${lead.id}" ${isCalled ? 'checked' : ''} title="Check off when called">
+            <div>
+              ${isCalled ? '<span class="status-badge status-badge-called">✓ Called</span>' : '<span class="status-badge status-badge-uncalled">⏳ To Call</span>'}
+              ${isCalled && rec.caller ? `<div class="caller-tag">By ${rec.caller} · ${rec.timestamp || ''}</div>` : ''}
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="lead-company-name" style="font-weight:700;color:#ffffff">${lead.company}</div>
+          <div style="font-size:11px;color:var(--dim)">ID: ${lead.id} · Batch #${lead.batch}</div>
         </td>
         <td>
           <div style="font-weight:600;color:var(--accent2)">${lead.owner}</div>
@@ -1389,12 +1600,12 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         </td>
         <td>
           <div>${lead.city}</div>
-          <div style="font-size:11.5px;color:var(--dim)">${lead.trade}</div>
+          <div style="font-size:11.5px;color:var(--dim)">${lead.trade} · <span style="color:var(--accent2);font-weight:700">${leadState}</span></div>
         </td>
         <td>
           <a href="tel:${lead.phone.replace(/[^0-9]/g, '')}" style="color:var(--blue);font-family:var(--font-mono);font-weight:700;text-decoration:none">${lead.phone}</a>
         </td>
-        <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis" title="${lead.painPoint}">
+        <td style="max-width:230px;overflow:hidden;text-overflow:ellipsis" title="${lead.painPoint}">
           <span style="font-size:12px;color:#e2e8f0">${lead.painPoint}</span>
         </td>
         <td>
@@ -1407,11 +1618,97 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <td>
           ${getProductBadgeHtml(lead.product)}
         </td>
+        <td>
+          <div style="display:flex;align-items:center;gap:6px">
+            <select class="outcome-select" data-id="${lead.id}">
+              <option value="Left Voicemail" ${rec.outcome==='Left Voicemail'?'selected':''}>📞 Left Voicemail</option>
+              <option value="Booked Demo" ${rec.outcome==='Booked Demo'?'selected':''}>🎉 Booked Demo</option>
+              <option value="Callback Scheduled" ${rec.outcome==='Callback Scheduled'?'selected':''}>⏳ Callback</option>
+              <option value="Not Interested" ${rec.outcome==='Not Interested'?'selected':''}>❌ Not Interested</option>
+              <option value="Gatekeeper / No Answer" ${rec.outcome==='Gatekeeper / No Answer'?'selected':''}>🚫 Gatekeeper</option>
+            </select>
+            <button class="btn-note" data-id="${lead.id}" title="${rec.notes ? rec.notes : 'Click to add note'}">📝</button>
+          </div>
+          ${rec.notes ? `<div style="font-size:11px;color:var(--accent2);max-width:145px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px" title="${rec.notes}">"${rec.notes}"</div>` : ''}
+        </td>
         <td style="text-align:right">
           <button class="btn-pitch-lead" data-id="${lead.id}">📞 Pitch Lead ➔</button>
         </td>
       `;
       leadTableBody.appendChild(tr);
+    });
+
+    // Wire Checkboxes
+    document.querySelectorAll('.call-checkbox').forEach(cb => {
+      cb.addEventListener('change', (e) => {
+        const id = cb.dataset.id;
+        if (cb.checked) {
+          const lead = LEADS_DATA.find(l => l.id === id);
+          const prevOutcome = CALL_RECORDS[id]?.outcome || 'Left Voicemail';
+          const prevNotes = CALL_RECORDS[id]?.notes || '';
+          CALL_RECORDS[id] = {
+            called: true,
+            caller: activeCaller,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            outcome: prevOutcome,
+            notes: prevNotes
+          };
+          showToast(`✓ Marked ${lead?.company || 'Lead'} as Called by ${activeCaller}!`);
+        } else {
+          if (CALL_RECORDS[id]) {
+            CALL_RECORDS[id].called = false;
+          }
+          showToast('Unmarked call status.');
+        }
+        saveCallRecords();
+        renderLeadsTable();
+        updateQuotaHUD();
+      });
+    });
+
+    // Wire Outcome Dropdowns
+    document.querySelectorAll('.outcome-select').forEach(sel => {
+      sel.addEventListener('change', (e) => {
+        const id = sel.dataset.id;
+        const outcome = sel.value;
+        if (!CALL_RECORDS[id]) {
+          CALL_RECORDS[id] = {
+            called: true,
+            caller: activeCaller,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            outcome: outcome,
+            notes: ''
+          };
+        } else {
+          CALL_RECORDS[id].called = true;
+          CALL_RECORDS[id].outcome = outcome;
+        }
+        saveCallRecords();
+        renderLeadsTable();
+        updateQuotaHUD();
+        showToast(`Outcome logged: ${outcome}`);
+      });
+    });
+
+    // Wire Notes
+    document.querySelectorAll('.btn-note').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        const currentNote = CALL_RECORDS[id]?.notes || '';
+        const lead = LEADS_DATA.find(l => l.id === id);
+        const note = prompt(`Add a quick call note for ${lead?.company || 'this contractor'}:`, currentNote);
+        if (note !== null) {
+          if (!CALL_RECORDS[id]) {
+            CALL_RECORDS[id] = { called: true, caller: activeCaller, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), outcome: 'Left Voicemail', notes: note.trim() };
+          } else {
+            CALL_RECORDS[id].notes = note.trim();
+          }
+          saveCallRecords();
+          renderLeadsTable();
+          showToast('✓ Note saved!');
+        }
+      });
     });
 
     // Wire Pitch Buttons
@@ -1421,44 +1718,217 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         loadLeadIntoTeleprompter(btn.dataset.id);
       });
     });
+
+    updateQuotaHUD();
   }
 
-  // Filter Pills & Search
-  document.querySelectorAll('.lead-pill-btn').forEach(btn => {
+  function updateQuotaHUD() {
+    const effBatch = getEffectiveBatchNum();
+    const batchLeads = LEADS_DATA.filter(l => effBatch === null || l.batch === effBatch);
+    const totalInBatch = batchLeads.length;
+    const calledInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called).length;
+    const demosInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called && CALL_RECORDS[l.id]?.outcome === 'Booked Demo').length;
+    const uncalledInBatch = totalInBatch - calledInBatch;
+    const pct = totalInBatch > 0 ? Math.round((calledInBatch / totalInBatch) * 100) : 0;
+
+    const countEl = document.getElementById('quotaCount');
+    const totalEl = document.getElementById('quotaTotal');
+    const pctEl = document.getElementById('quotaPct');
+    const barEl = document.getElementById('quotaBarFill');
+    const chipU = document.getElementById('chipUncalled');
+    const chipC = document.getElementById('chipCalled');
+    const chipD = document.getElementById('chipDemos');
+
+    if (countEl) countEl.textContent = calledInBatch;
+    if (totalEl) totalEl.textContent = totalInBatch;
+    if (pctEl) pctEl.textContent = `${pct}%`;
+    if (barEl) barEl.style.width = `${pct}%`;
+    if (chipU) chipU.textContent = `⏳ ${uncalledInBatch} To Call`;
+    if (chipC) chipC.textContent = `✓ ${calledInBatch} Called`;
+    if (chipD) chipD.textContent = `🎉 ${demosInBatch} Demos`;
+
+    const cAll = document.getElementById('countStatusAll');
+    const cUnc = document.getElementById('countStatusUncalled');
+    const cCal = document.getElementById('countStatusCalled');
+    if (cAll) cAll.textContent = totalInBatch;
+    if (cUnc) cUnc.textContent = uncalledInBatch;
+    if (cCal) cCal.textContent = calledInBatch;
+
+    // Update KPI Cards
+    const kpiT = document.getElementById('kpiTargetCount');
+    const kpiL = document.getElementById('kpiTotalLeak');
+    const kpiA = document.getElementById('kpiAvgLeak');
+    const kpiS = document.getElementById('kpiAvgSavings');
+
+    if (kpiT) kpiT.textContent = `${totalInBatch} Contractors`;
+    const totalLoss = batchLeads.reduce((acc, l) => acc + l.annualLoss, 0);
+    if (kpiL) kpiL.textContent = `$${(totalLoss / 1000000).toFixed(2)}M / yr`;
+    const avgLoss = totalInBatch > 0 ? Math.round(batchLeads.reduce((acc, l) => acc + l.monthlyLoss, 0) / totalInBatch) : 0;
+    if (kpiA) kpiA.textContent = `$${avgLoss.toLocaleString()} / mo`;
+    const avgSave = totalInBatch > 0 ? Math.round(batchLeads.reduce((acc, l) => acc + l.netSavings, 0) / totalInBatch) : 0;
+    if (kpiS) kpiS.textContent = `+$${avgSave.toLocaleString()} / yr`;
+  }
+
+  // Batch Select Listener
+  const batchSelectEl = document.getElementById('batchSelect');
+  if (batchSelectEl) {
+    batchSelectEl.addEventListener('change', (e) => {
+      currentBatch = e.target.value;
+      const heading = document.getElementById('batchHeadingText');
+      if (heading) {
+        if (currentBatch === 'today') heading.textContent = `TODAY'S FRESH BATCH: 25 TARGET LEADS (BATCH #${defaultBatchNum})`;
+        else if (currentBatch === 'all') heading.textContent = `NATIONWIDE MASTER DIRECTORY (250 TARGETS)`;
+        else heading.textContent = `BATCH #${currentBatch}: 25 NATIONWIDE TARGET LEADS`;
+      }
+      renderLeadsTable();
+      showToast(`✓ Switched to ${currentBatch === 'today' ? "Today's Batch" : (currentBatch === 'all' ? "All 250 Leads" : `Batch #${currentBatch}`)}`);
+    });
+  }
+
+  // Next Batch Button Listener
+  const btnNextBatchEl = document.getElementById('btnNextBatch');
+  if (btnNextBatchEl) {
+    btnNextBatchEl.addEventListener('click', () => {
+      let cur = currentBatch === 'today' ? defaultBatchNum : (currentBatch === 'all' ? 1 : parseInt(currentBatch, 10));
+      let next = cur >= 10 ? 1 : cur + 1;
+      currentBatch = String(next);
+      if (batchSelectEl) batchSelectEl.value = String(next);
+      const heading = document.getElementById('batchHeadingText');
+      if (heading) heading.textContent = `BATCH #${next}: 25 NATIONWIDE TARGET LEADS`;
+      renderLeadsTable();
+      showToast(`✓ Loaded Batch #${next} (25 Fresh Targets)!`);
+    });
+  }
+
+  // State Filter Select Listener
+  const stateFilterEl = document.getElementById('stateFilterSelect');
+  if (stateFilterEl) {
+    stateFilterEl.addEventListener('change', (e) => {
+      currentStateFilter = e.target.value;
+      renderLeadsTable();
+      showToast(`State filter: ${currentStateFilter.toUpperCase()}`);
+    });
+  }
+
+  // Call Status Filter Pills Listener
+  document.querySelectorAll('[data-status-filter]').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.lead-pill-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('[data-status-filter]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      currentLeadFilter = btn.dataset.filter;
+      currentStatusFilter = btn.dataset.statusFilter;
       renderLeadsTable();
     });
   });
 
-  document.getElementById('leadSearchInput').addEventListener('input', (e) => {
-    leadSearchQuery = e.target.value;
-    renderLeadsTable();
+  // Product Filter Pills Listener
+  document.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentProductFilter = btn.dataset.filter;
+      renderLeadsTable();
+    });
   });
 
-  // Export CSV
+  // Search Input Listener
+  const searchInputEl = document.getElementById('leadSearchInput');
+  if (searchInputEl) {
+    searchInputEl.addEventListener('input', (e) => {
+      leadSearchQuery = e.target.value;
+      renderLeadsTable();
+    });
+  }
+
+  // Reset Calls Button Listener
+  const resetCallsBtnEl = document.getElementById('resetCallsBtn');
+  if (resetCallsBtnEl) {
+    resetCallsBtnEl.addEventListener('click', () => {
+      if (confirm('Are you sure you want to reset all checked calls and history for this browser?')) {
+        CALL_RECORDS = {};
+        saveCallRecords();
+        renderLeadsTable();
+        showToast('✓ Call tracker reset to zero.');
+      }
+    });
+  }
+
+  // Export CSV Listener
   document.getElementById('exportLeadsCsvBtn').addEventListener('click', () => {
-    let csv = 'ID,Company,Owner,Title,City,Trade,Phone,Service,AnnualLeak,NetSavings,PainPoint\n';
+    let csv = 'ID,Company,Owner,Title,City,State,Trade,Phone,Service,AnnualLeak,NetSavings,CallStatus,CalledBy,CallTimestamp,Outcome,Notes\n';
     LEADS_DATA.forEach(l => {
-      csv += `"${l.id}","${l.company}","${l.owner}","${l.title}","${l.city}","${l.trade}","${l.phone}","${l.service}",${l.annualLoss},${l.netSavings},"${l.painPoint.replace(/"/g, '""')}"\n`;
+      const rec = CALL_RECORDS[l.id] || {};
+      const status = rec.called ? 'Called' : 'Uncalled';
+      const caller = rec.caller || '';
+      const ts = rec.timestamp || '';
+      const outcome = rec.outcome || '';
+      const notes = (rec.notes || '').replace(/"/g, '""');
+      const leadState = l.state || (l.city.includes(', ') ? l.city.split(', ')[1] : 'FL');
+      csv += `"${l.id}","${l.company}","${l.owner}","${l.title}","${l.city}","${leadState}","${l.trade}","${l.phone}","${l.service}",${l.annualLoss},${l.netSavings},"${status}","${caller}","${ts}","${outcome}","${notes}"\n`;
     });
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', 'VantorX_Florida_Trade_Leads_80.csv');
+    link.setAttribute('download', `VantorX_Nationwide_Leads_250_with_Call_Logs.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showToast('✓ 80 Leads exported to CSV!');
+    showToast('✓ 250 Leads with Call Logs exported to CSV!');
   });
 
   // ============================================================
   // 🎯 LOAD LEAD INTO MULTI-PRODUCT TELEPROMPTER
   // ============================================================
   let activeLead = LEADS_DATA[0];
+
+  function updatePrompterCallStatus(leadId) {
+    const rec = CALL_RECORDS[leadId];
+    const statusBadge = document.getElementById('prompterStatusBadge');
+    const toggleBtn = document.getElementById('prompterToggleCallBtn');
+    if (!statusBadge || !toggleBtn) return;
+
+    if (rec && rec.called) {
+      statusBadge.className = 'status-badge status-badge-called';
+      statusBadge.textContent = `✓ Called by ${rec.caller || 'Rep'} (${rec.outcome || 'Logged'})`;
+      toggleBtn.textContent = '✕ Mark as Uncalled';
+      toggleBtn.style.color = '#f87171';
+      toggleBtn.style.borderColor = 'rgba(248,113,113,0.5)';
+    } else {
+      statusBadge.className = 'status-badge status-badge-uncalled';
+      statusBadge.textContent = '⏳ To Call';
+      toggleBtn.textContent = '✓ Mark as Called';
+      toggleBtn.style.color = '#6ee7b7';
+      toggleBtn.style.borderColor = 'rgba(52,211,153,0.5)';
+    }
+  }
+
+  // In-prompter Mark as Called Button Listener
+  const prompterToggleBtnEl = document.getElementById('prompterToggleCallBtn');
+  if (prompterToggleBtnEl) {
+    prompterToggleBtnEl.addEventListener('click', () => {
+      if (!activeLead) return;
+      const id = activeLead.id;
+      const isCalled = !!(CALL_RECORDS[id] && CALL_RECORDS[id].called);
+      if (isCalled) {
+        CALL_RECORDS[id].called = false;
+        showToast(`Unmarked ${activeLead.company} as called.`);
+      } else {
+        const prevOutcome = CALL_RECORDS[id]?.outcome || 'Left Voicemail';
+        const prevNotes = CALL_RECORDS[id]?.notes || '';
+        CALL_RECORDS[id] = {
+          called: true,
+          caller: activeCaller,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          outcome: prevOutcome,
+          notes: prevNotes
+        };
+        showToast(`✓ Marked ${activeLead.company} as CALLED by ${activeCaller}!`);
+      }
+      saveCallRecords();
+      updatePrompterCallStatus(activeLead.id);
+      renderLeadsTable();
+    });
+  }
 
   function loadLeadIntoTeleprompter(leadId) {
     const lead = LEADS_DATA.find(l => l.id === leadId);
@@ -1472,6 +1942,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     // 2. Update Banner
     document.getElementById('activeLeadName').textContent = lead.company;
     document.getElementById('activeLeadOwner').textContent = `${lead.owner} (${lead.title})`;
+    const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
     document.getElementById('activeLeadLocation').textContent = `${lead.city} · ${lead.trade}`;
     document.getElementById('activeLeadLoss').textContent = `-$${lead.annualLoss.toLocaleString()} / year ($${lead.monthlyLoss.toLocaleString()}/mo)`;
     document.getElementById('activeLeadSavings').textContent = `+$${lead.netSavings.toLocaleString()} / year`;
@@ -1490,32 +1961,40 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     }
     document.getElementById('activeLeadLeakQuote').innerHTML = `💡 <strong>Your Opening Leak Hook for ${lead.owner}:</strong> ${hook}`;
 
-    // 4. Update all dynamic placeholders in scripts
+    // 4. Update Prompter Call Status Badge
+    updatePrompterCallStatus(lead.id);
+
+    // 5. Update all dynamic placeholders in scripts
     document.querySelectorAll('.dyn-owner').forEach(el => el.textContent = lead.owner);
     document.querySelectorAll('.dyn-company').forEach(el => el.textContent = lead.company);
     document.querySelectorAll('.dyn-city').forEach(el => el.textContent = lead.city);
     document.querySelectorAll('.dyn-trade').forEach(el => el.textContent = lead.trade);
     document.querySelectorAll('.dyn-loss').forEach(el => el.textContent = `$${lead.annualLoss.toLocaleString()}/yr ($${lead.monthlyLoss.toLocaleString()}/mo)`);
 
-    // 5. Switch to Product Script
+    // 6. Switch to Product Script
     switchProductScript(lead.product);
 
-    // 6. Switch to Teleprompter Tab & Scroll
+    // 7. Switch to Teleprompter Tab & Scroll
     switchTab('tabScript');
     window.scrollTo({ top: 120, behavior: 'smooth' });
   }
 
   // Clear Active Lead
   document.getElementById('clearActiveLeadBtn').addEventListener('click', () => {
-    document.getElementById('activeLeadName').textContent = 'Generic Florida Contractor';
+    document.getElementById('activeLeadName').textContent = 'Generic Contractor Target';
     document.getElementById('activeLeadOwner').textContent = '[Owner Name]';
-    document.getElementById('activeLeadLocation').textContent = '[City] · [Trade]';
+    document.getElementById('activeLeadLocation').textContent = '[City, State] · [Trade]';
     document.getElementById('activeLeadLoss').textContent = '-$96,000 / year';
     document.getElementById('activeLeadSavings').textContent = '+$92,412 / year';
     document.querySelectorAll('.dyn-owner').forEach(el => el.textContent = '[Owner]');
     document.querySelectorAll('.dyn-company').forEach(el => el.textContent = '[Company]');
     document.querySelectorAll('.dyn-city').forEach(el => el.textContent = '[City]');
     document.querySelectorAll('.dyn-trade').forEach(el => el.textContent = '[Trade]');
+    const statusBadge = document.getElementById('prompterStatusBadge');
+    if (statusBadge) {
+      statusBadge.className = 'status-badge status-badge-uncalled';
+      statusBadge.textContent = '⏳ To Call';
+    }
     showToast('Reset to generic script placeholders.');
   });
 
