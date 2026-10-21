@@ -3,25 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VantorX — Cold Calling Cockpit &amp; AI Sparring Arena</title>
-<meta name="description" content="Battle-tested master cold calling script, objection battlecard, and live AI contractor roleplay sparring arena for Luke Hamilton.">
+<title>VantorX — Cold Calling Cockpit &amp; Sales RPG Game</title>
+<meta name="description" content="Battle-tested master cold calling script, complete objection battlecard, and Cold Call Quest RPG batting cage game for Luke Hamilton.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#070a0f;--bg2:#0f1522;--bg3:#151d2f;--line:rgba(255,255,255,0.08);--line2:rgba(255,255,255,0.14);
   --ink:#f1f5f9;--dim:#94a3b8;--faint:#64748b;
   --accent:#f59e0b;--accent2:#fbbf24;--accent-glow:rgba(245,158,11,0.22);
-  --ok:#34d399;--err:#f87171;--blue:#38bdf8;
+  --ok:#34d399;--err:#f87171;--blue:#38bdf8;--purple:#a855f7;
   --font-sans:'Inter',system-ui,sans-serif;--font-head:'Space Grotesk',sans-serif;--font-mono:'IBM Plex Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:60px}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:70px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
 
 /* Top Cockpit Header */
-header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:18px 0;position:sticky;top:0;z-index:50}
+header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:16px 0;position:sticky;top:0;z-index:50}
 .head-grid{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
 .brand{font-family:var(--font-head);font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px}
 .brand span{color:var(--accent)}
@@ -30,7 +30,7 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
 .badge-stats{font-size:12px;color:var(--dim);background:var(--bg);border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-family:var(--font-mono)}
 
 /* Navigation Tabs */
-.tabs{display:flex;gap:10px;margin:24px 0 20px;border-bottom:1px solid var(--line);padding-bottom:12px;overflow-x:auto}
+.tabs{display:flex;gap:10px;margin:22px 0 18px;border-bottom:1px solid var(--line);padding-bottom:12px;overflow-x:auto}
 .tab-btn{background:none;border:none;color:var(--dim);font-family:var(--font-head);font-size:15px;font-weight:600;padding:8px 16px;border-radius:8px;cursor:pointer;transition:all 0.15s;white-space:nowrap}
 .tab-btn.active{background:var(--accent-glow);color:var(--accent2);border:1px solid rgba(245,158,11,0.35)}
 .tab-btn:hover:not(.active){color:var(--ink);background:var(--bg2)}
@@ -40,60 +40,119 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
 .tab-panel.active{display:block;animation:fadeIn 0.25s ease-out}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* Master Teleprompter Section */
-.teleprompter{background:var(--bg2);border:1px solid var(--line2);border-radius:18px;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,0.4);position:relative}
+/* Teleprompter Styling */
+.teleprompter{background:var(--bg2);border:1px solid var(--line2);border-radius:18px;padding:26px;box-shadow:0 20px 50px rgba(0,0,0,0.4);position:relative}
 .teleprompter::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent2),var(--accent))}
-.script-phase{margin-bottom:24px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+.script-section-header{display:flex;align-items:center;justify-content:space-between;margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.script-section-header h3{font-family:var(--font-head);font-size:17px;font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:8px}
+
+.script-phase{margin-bottom:18px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
 .phase-tag{font-size:11.5px;font-family:var(--font-mono);font-weight:600;color:var(--accent2);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
-.script-line{font-size:19px;font-weight:600;color:#ffffff;line-height:1.55}
+.script-line{font-size:18px;font-weight:600;color:#ffffff;line-height:1.6}
 .script-line em{color:var(--accent2);font-style:normal;background:rgba(245,158,11,0.12);padding:1px 6px;border-radius:4px}
 .script-line strong{color:var(--blue);font-weight:700}
 .delivery-tip{font-size:13px;color:var(--dim);margin-top:10px;display:flex;align-items:center;gap:6px}
 
-/* Objection Matrix */
+/* Objection Accordion inside Tab 1 */
+.obj-accordion{border:1px solid var(--line);border-radius:12px;background:var(--bg);margin-bottom:10px;overflow:hidden;transition:border-color 0.15s}
+.obj-accordion:hover{border-color:rgba(245,158,11,0.3)}
+.obj-acc-head{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:600;font-size:15px;color:#fca5a5}
+.obj-acc-head span.tag{font-size:11px;font-family:var(--font-mono);background:var(--bg2);color:var(--dim);padding:3px 8px;border-radius:4px}
+.obj-acc-body{padding:0 18px 16px;display:none;font-size:15px;line-height:1.6;color:#ffffff;border-top:1px solid var(--line);padding-top:12px;background:var(--bg3)}
+.obj-acc-body em{color:var(--accent2);font-style:normal}
+.obj-acc-note{font-size:12.5px;color:var(--dim);margin-top:8px}
+
+/* Standalone Objection Grid (Tab 2) */
 .obj-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .obj-pill{background:var(--bg2);border:1px solid var(--line);color:var(--dim);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s}
 .obj-pill:hover,.obj-pill.active{background:rgba(245,158,11,0.14);border-color:var(--accent);color:var(--accent2)}
-.obj-card{background:var(--bg2);border:1px solid var(--line2);border-radius:16px;padding:24px;margin-bottom:16px}
-.obj-title{font-size:18px;font-weight:700;color:#fca5a5;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.obj-rebuttal{font-size:16px;font-weight:600;color:#ffffff;background:#070a0f;border:1px solid #1e293b;border-radius:12px;padding:16px 20px;line-height:1.6}
+.obj-card{background:var(--bg2);border:1px solid var(--line2);border-radius:16px;padding:22px;margin-bottom:14px}
+.obj-title{font-size:17px;font-weight:700;color:#fca5a5;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.obj-rebuttal{font-size:15.5px;font-weight:600;color:#ffffff;background:#070a0f;border:1px solid #1e293b;border-radius:12px;padding:16px 20px;line-height:1.6}
 .obj-rebuttal em{color:var(--accent2);font-style:normal}
 .obj-note{font-size:13px;color:var(--dim);margin-top:10px}
 
-/* Interactive Sparring Arena (Batting Cage) */
-.arena-grid{display:grid;grid-template-columns:300px 1fr;gap:20px}
-@media(max-width:880px){.arena-grid{grid-template-columns:1fr}}
+/* ============================================================ */
+/* 🎮 VIDEO GAME RPG STYLING (Cold Call Quest)                 */
+/* ============================================================ */
+.rpg-cockpit{background:var(--bg2);border:1px solid var(--line2);border-radius:20px;padding:22px;box-shadow:0 24px 60px rgba(0,0,0,0.5);position:relative}
+.rpg-header{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+@media(max-width:768px){.rpg-header{grid-template-columns:1fr}}
 
-.opponents-panel{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:18px}
-.opp-card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;transition:all 0.15s}
-.opp-card:hover{border-color:var(--accent)}
-.opp-card.active{background:rgba(245,158,11,0.08);border-color:var(--accent)}
-.opp-name{font-weight:700;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:6px}
-.opp-desc{font-size:12.5px;color:var(--dim);margin-top:4px}
-.opp-toughness{font-size:11px;font-family:var(--font-mono);color:var(--accent);margin-top:6px}
+/* Player Hero Card */
+.player-card{background:var(--bg3);border:2px solid var(--accent);border-radius:16px;padding:16px;position:relative;overflow:hidden}
+.player-card::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(245,158,11,0.18),transparent 70%)}
+.player-info{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.player-avatar{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:24px;color:#070a0f;font-weight:800}
+.player-name{font-family:var(--font-head);font-weight:700;font-size:17px}
+.player-title{font-size:12px;color:var(--accent2);font-family:var(--font-mono)}
 
-.chat-box{background:var(--bg2);border:1px solid var(--line2);border-radius:16px;display:flex;flex-direction:column;height:520px;overflow:hidden}
-.chat-head{padding:14px 18px;background:var(--bg3);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
-.chat-messages{flex:1;padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
-.msg{max-width:82%;padding:12px 16px;border-radius:14px;font-size:14.5px;line-height:1.5}
-.msg-prospect{background:var(--bg);border:1px solid var(--line);align-self:flex-start;color:var(--ink)}
-.msg-luke{background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(217,119,6,0.15));border:1px solid rgba(245,158,11,0.4);align-self:flex-end;color:#ffffff}
-.msg-coach{background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.25);color:var(--blue);align-self:center;font-size:13px;border-radius:8px;padding:8px 14px;width:100%}
+/* Bars (HP & XP) */
+.stat-bar-wrap{margin-bottom:8px}
+.stat-label{display:flex;justify-content:space-between;font-size:11.5px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px}
+.bar-track{width:100%;height:10px;background:rgba(0,0,0,0.5);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+.bar-fill-hp{height:100%;background:linear-gradient(90deg,#ef4444,#22c55e);width:100%;transition:width 0.3s ease}
+.bar-fill-xp{height:100%;background:linear-gradient(90deg,#f59e0b,#fbbf24);width:0%;transition:width 0.3s ease}
 
-.chat-input-bar{padding:14px;background:var(--bg3);border-top:1px solid var(--line);display:flex;gap:10px}
-.chat-input-bar input{flex:1;background:var(--bg);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;color:var(--ink);font-size:14.5px}
-.chat-input-bar button{background:var(--accent);color:#070a0f;font-weight:700;border:none;border-radius:10px;padding:0 20px;cursor:pointer}
+/* Boss Monster Card */
+.boss-card{background:var(--bg3);border:2px solid #ef4444;border-radius:16px;padding:16px;position:relative}
+.boss-info{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.boss-avatar{width:48px;height:48px;border-radius:12px;background:#ef4444;display:grid;place-items:center;font-size:24px}
+.boss-name{font-family:var(--font-head);font-weight:700;font-size:17px;color:#fca5a5}
+.boss-title{font-size:12px;color:#f87171;font-family:var(--font-mono)}
+.bar-fill-boss{height:100%;background:linear-gradient(90deg,#f87171,#ef4444);width:100%;transition:width 0.3s ease}
 
-.quick-prompts{display:flex;gap:8px;overflow-x:auto;padding:8px 14px;background:var(--bg);border-top:1px solid var(--line)}
-.qp-btn{background:var(--bg2);border:1px solid var(--line);color:var(--dim);font-size:12px;padding:5px 10px;border-radius:6px;cursor:pointer;white-space:nowrap}
-.qp-btn:hover{color:var(--ink);border-color:var(--accent)}
+/* Inventory (Swords & Armor) */
+.inventory-bar{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.inv-title{font-size:12px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em}
+.swords-rack{display:flex;gap:8px;flex-wrap:wrap}
+.sword-slot{background:var(--bg2);border:1px solid var(--line2);border-radius:8px;padding:6px 12px;font-size:12px;display:flex;align-items:center;gap:6px;font-weight:600;color:var(--dim)}
+.sword-slot.equipped{border-color:var(--accent);color:#ffffff;background:rgba(245,158,11,0.12);box-shadow:0 0 10px rgba(245,158,11,0.25)}
+.sword-slot.locked{opacity:0.4;cursor:not-allowed}
 
+/* Battle Arena Layout */
+.battle-arena{display:grid;grid-template-columns:280px 1fr;gap:18px}
+@media(max-width:880px){.battle-arena{grid-template-columns:1fr}}
+
+.dungeons-list{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px}
+.dungeon-item{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.15s}
+.dungeon-item:hover{border-color:var(--accent)}
+.dungeon-item.active{background:rgba(245,158,11,0.1);border-color:var(--accent)}
+
+/* Combat Terminal / Feed */
+.combat-terminal{background:var(--bg);border:1px solid var(--line2);border-radius:14px;display:flex;flex-direction:column;height:460px;overflow:hidden}
+.terminal-head{background:var(--bg3);padding:10px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-family:var(--font-mono);font-size:12px}
+.combat-log{flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.log-row{padding:8px 12px;border-radius:8px;line-height:1.45}
+.log-boss{background:rgba(239,68,68,0.12);border-left:3px solid #ef4444;color:#fee2e2}
+.log-luke{background:rgba(245,158,11,0.12);border-left:3px solid var(--accent);color:#fef3c7}
+.log-system{background:rgba(56,189,248,0.1);border-left:3px solid var(--blue);color:#e0f2fe;font-size:12.5px;font-family:var(--font-mono)}
+.log-victory{background:linear-gradient(90deg,rgba(52,211,153,0.2),transparent);border-left:4px solid var(--ok);color:#6ee7b7;font-weight:700}
+
+/* Combat Spell / Attack Action Bar */
+.combat-actions{background:var(--bg3);border-top:1px solid var(--line);padding:12px 14px}
+.action-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+@media(max-width:680px){.action-grid{grid-template-columns:1fr 1fr}}
+.btn-action{background:var(--bg);border:1px solid var(--line2);color:var(--ink);padding:10px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;transition:all 0.15s;text-align:center}
+.btn-action:hover{border-color:var(--accent);background:rgba(245,158,11,0.1);transform:translateY(-1px)}
+.btn-action span.dmg{display:block;font-size:10.5px;font-family:var(--font-mono);color:var(--accent2);margin-top:2px}
+
+.custom-chat-row{display:flex;gap:8px}
+.custom-chat-row input{flex:1;background:var(--bg);border:1px solid var(--line2);border-radius:8px;padding:10px 14px;color:var(--ink);font-size:13.5px}
+.custom-chat-row button{background:var(--accent);color:#070a0f;font-weight:700;border:none;border-radius:8px;padding:0 18px;cursor:pointer}
+
+/* Buttons & Toast */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:14px;padding:10px 18px;border-radius:10px;cursor:pointer;text-decoration:none;border:none}
 .btn-gold{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#070a0f}
 .btn-ghost{background:var(--bg3);color:var(--ink);border:1px solid var(--line2)}
+.btn-sm{padding:7px 14px;font-size:12.5px}
 
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e293b;border:1px solid var(--accent);color:var(--ink);padding:10px 20px;border-radius:999px;font-size:13.5px;opacity:0;transition:all 0.25s;pointer-events:none;z-index:99}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Level Up Overlay */
+.level-up-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.9);background:var(--bg2);border:2px solid var(--accent);box-shadow:0 0 50px rgba(245,158,11,0.5);border-radius:20px;padding:32px 28px;text-align:center;max-width:440px;width:90%;z-index:100;opacity:0;pointer-events:none;transition:all 0.3s ease}
+.level-up-modal.active{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
 </style>
 </head>
 <body>
@@ -107,91 +166,241 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
       <div class="live-demo-pill" id="copyDemoPill" title="Click to copy demo number">
         <span>📞 Demo: (561) 813-8602</span> <span style="font-size:11px">📋</span>
       </div>
-      <div class="badge-stats">Simulation: 70% Win Rate · 50 Calls Tested</div>
+      <button class="btn btn-ghost btn-sm" id="soundToggleBtn">🔊 Audio: ON</button>
     </div>
   </div>
 </header>
 
 <main class="wrap">
   <div class="tabs">
-    <button class="tab-btn active" data-tab="tabScript">📜 #1 Champion Script</button>
+    <button class="tab-btn active" data-tab="tabScript">📜 1 Full Script &amp; Objections</button>
+    <button class="tab-btn" data-tab="tabRPG">🎮 Cold Call Quest (Sales RPG)</button>
     <button class="tab-btn" data-tab="tabObjections">🛡️ Objection Battlecard</button>
-    <button class="tab-btn" data-tab="tabSparring">🥊 AI Batting Cage (Sparring)</button>
     <button class="tab-btn" data-tab="tabSimulationData">📊 50-Call Simulation Logs</button>
   </div>
 
-  <!-- TAB 1: Champion Script Teleprompter -->
+  <!-- TAB 1: ONE COMPLETE SCRIPT WITH ALL OBJECTIONS -->
   <div id="tabScript" class="tab-panel active">
     <div class="teleprompter">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
         <div>
-          <h2 style="font-size:22px;margin-bottom:4px">The 20-Second "Disarming Permission" Script</h2>
-          <p style="color:var(--dim);font-size:14px">Optimized via 50-call adversarial simulation. Total speaking time: 35 seconds.</p>
+          <h2 style="font-size:22px;margin-bottom:4px">The Complete Cold Calling Playbook</h2>
+          <p style="color:var(--dim);font-size:14px">Everything on one screen: Gatekeeper bypass, Core pitch, Branching bridges, All 10 Objections, and Exits.</p>
         </div>
-        <button class="btn btn-gold btn-sm" id="copyFullScriptBtn">📋 Copy Full Script</button>
+        <button class="btn btn-gold btn-sm" id="copyFullPlaybookBtn">📋 Copy Entire Complete Script</button>
       </div>
 
-      <!-- Phase 1 -->
+      <!-- SECTION 0: GATEKEEPER -->
+      <div class="script-section-header" style="margin-top:0">
+        <h3><span>🛡️</span> Stage 0: Gatekeeper / Dispatcher Interception (If Owner Doesn't Pick Up)</h3>
+      </div>
+      <div class="script-phase">
+        <div class="phase-tag">
+          <span>Gatekeeper Opener</span>
+          <span>Casual Local Peer</span>
+        </div>
+        <div class="script-line">
+          "Hey! Is <em>[Owner's First Name]</em> around? It's Luke — quick question about your weekend dispatch routing."
+        </div>
+        <div class="delivery-tip">
+          💡 If she asks <em>"What is this regarding?"</em> ➔ <strong>"Just had a quick operational question about your after-hours emergency call routing in [City]. Is he out on a job site right now or in later today?"</strong>
+        </div>
+      </div>
+
+      <!-- SECTION 1: CORE PITCH -->
+      <div class="script-section-header">
+        <h3><span>⚡</span> Stage 1: The Core Pitch (When Owner Answers)</h3>
+      </div>
+
+      <!-- Phase 1: Opener -->
       <div class="script-phase">
         <div class="phase-tag">
           <span>Phase 1: The Disarming Permission Opener (0:00 - 0:08)</span>
-          <span style="color:var(--ok)">✓ 70% Retention</span>
+          <span style="color:var(--ok)">✓ 70% Win Rate</span>
         </div>
         <div class="script-line">
           "Hey <em>[Owner's First Name]</em>, Luke from VantorX. I know you were not expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
         </div>
         <div class="delivery-tip">
-          💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and pause after "hang up." When you offer to hang up, their reflex is to say: <em>"Haha, alright, what you got?"</em>
+          💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle and say: <em>"Haha, alright, what you got?"</em>
         </div>
       </div>
 
-      <!-- Phase 2 -->
+      <!-- Phase 2: Pain & Question -->
       <div class="script-phase">
         <div class="phase-tag">
-          <span>Phase 2: The Specific Pain Problem (0:08 - 0:20)</span>
-          <span style="color:var(--ok)">✓ Targets $8k+ Leak</span>
+          <span>Phase 2: The $8,000 Emergency Pain Hook (0:08 - 0:20)</span>
+          <span style="color:var(--ok)">✓ High-Ticket Bleed</span>
         </div>
         <div class="script-line">
-          "I'll be super quick: I was looking at your Google profile in <em>[City]</em>. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose the $8,000 job to the next competitor. <strong>Where does that call ring for you right now?</strong>"
+          "I'll be super quick: I was looking at your Google profile in <em>[City]</em>. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose the $8,000 job to the next competitor on Google.<br><br>
+          <strong>Where does that call ring for you right now?</strong>"
         </div>
         <div class="delivery-tip">
-          💡 <em>Delivery Tip:</em> Stop talking completely and let them answer. Select your bridge below based on what they say:
+          💡 <em>Delivery Tip:</em> BITE YOUR TONGUE UNTIL HE SPEAKS. Select his answer below:
         </div>
-        <div style="margin-top:14px;display:grid;gap:8px">
+        <div style="margin-top:12px;display:grid;gap:8px">
           <div style="background:var(--bg2);padding:10px 14px;border-radius:8px;font-size:13.5px;border-left:3px solid #38bdf8">
-            <strong style="color:#38bdf8">👉 If they say "Voicemail / Check Monday":</strong> "And that's the bleeding point — homeowners in an emergency won't wait. They hang up and call the next contractor down the list. That's exactly why we built Ava."
+            <strong style="color:#38bdf8">👉 If he says "Voicemail / Check Monday":</strong> "And that's the bleeding point — homeowners in an emergency won't wait. They hang up and call the next contractor down the list. That's exactly why we built Ava."
           </div>
           <div style="background:var(--bg2);padding:10px 14px;border-radius:8px;font-size:13.5px;border-left:3px solid #38bdf8">
-            <strong style="color:#38bdf8">👉 If they say "My cell / I take it":</strong> "Man, you're working 24/7! You're either interrupting dinner with your family or answering calls covered in dust on a job. That's exactly why we built Ava — to be your filter."
+            <strong style="color:#38bdf8">👉 If he says "My cell / I take it":</strong> "Man, you're working 24/7! You're either interrupting dinner with your family or answering calls covered in dust on a job. That's exactly why we built Ava — to be your filter."
           </div>
           <div style="background:var(--bg2);padding:10px 14px;border-radius:8px;font-size:13.5px;border-left:3px solid #38bdf8">
-            <strong style="color:#38bdf8">👉 If they say "Answering service":</strong> "Those services usually take 15 minutes to relay a message, and half the time they misspell the address. That's exactly why we built Ava."
+            <strong style="color:#38bdf8">👉 If he says "Answering service":</strong> "Those call centers usually take 15 minutes to relay a message, and half the time they misspell the address. That's exactly why we built Ava."
           </div>
         </div>
       </div>
 
-      <!-- Phase 3 -->
+      <!-- Phase 3: The Close Challenge -->
       <div class="script-phase">
         <div class="phase-tag">
           <span>Phase 3: The Irresistible Test Challenge (0:20 - 0:35)</span>
-          <span style="color:var(--ok)">✓ Micro-Commitment Close</span>
+          <span style="color:var(--ok)">✓ Zero-Friction Close</span>
         </div>
         <div class="script-line">
           "That's exactly why I'm calling. We built <strong>Ava</strong> — she's a 24/7 AI voice receptionist trained for Florida contractors that answers in 1 ring and books calendar jobs.<br><br>
-          <strong>Have your cell in your hand? Punch in our live demo line right now: <em>(561) 813-8602</em>.</strong> Hang up with me and call it for 30 seconds. If she sounds like a robot, you never have to talk to me again."
+          <strong>Have your cell in your hand? Punch in our live demo line right now: <em>(561) 813-8602</em>.</strong><br>
+          Hang up with me and call it for 30 seconds. If she sounds like a robot, you never have to talk to me again."
         </div>
         <div class="delivery-tip">
-          💡 <em>Delivery Tip:</em> You are NOT asking them to buy a monthly plan! You are only asking them to test a phone number. That friction is zero.
+          💡 <em>Delivery Tip:</em> You are NOT selling a monthly plan! You are only challenging him to test a phone number. Friction is zero.
+        </div>
+      </div>
+
+      <!-- SECTION 2: ALL 10 OBJECTION REBUTTALS INLINED -->
+      <div class="script-section-header">
+        <h3><span>🥊</span> Stage 2: Instant Objection Rebuttal Bank (Click to Open While on Call)</h3>
+      </div>
+
+      <div id="inlineObjBank">
+        <!-- 1 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 1. "Just send me an email."</span> <span class="tag">Brush-Off</span></div>
+          <div class="obj-acc-body">
+            "I'm happy to do that, <em>[Name]</em>. But let's be honest — my email is just going to sit at the bottom of your inbox behind 50 supply orders and receipts.<br><br>
+            <strong>Literally take 15 seconds to dial our live test line: (561) 813-8602.</strong> Hear Ava answer in 1 ring. If you don't love it, you never have to reply to me again."
+            <div class="obj-acc-note">💡 Radical honesty: Acknowledges email is useless and challenges them to immediate proof.</div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 2. "We already have a receptionist / answering service."</span> <span class="tag">Existing Staff</span></div>
+          <div class="obj-acc-body">
+            "That's awesome — she's probably incredible from 8 AM to 5 PM! <strong>But what happens between 6 PM and 7 AM, or all day Saturday and Sunday?</strong><br><br>
+            Over 35% of emergency calls happen when your office is closed. Ava doesn't replace your receptionist; she covers the off-hours so you stop donating after-hours revenue to your competitors."
+            <div class="obj-acc-note">💡 Never criticize staff. Frame Ava as after-hours coverage that relieves them.</div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 3. "How much is this going to cost me?"</span> <span class="tag">Price Screen</span></div>
+          <div class="obj-acc-body">
+            "Zero contracts, starting at <strong>$299 a month</strong>. In your trade, <strong>one single emergency job pays for the entire year</strong>.<br><br>
+            But don't buy anything right now — just dial <em>(561) 813-8602</em> from your cell and see if she's even worth 10 cents to your business."
+            <div class="obj-acc-note">💡 Extreme ROI contrast. One $8,000 job dwarfs $299.</div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 4. "AI sounds robotic and fake — my customers would hate that."</span> <span class="tag">Tech Cynic</span></div>
+          <div class="obj-acc-body">
+            "I 100% agree with you — the robotic phone trees from 2 years ago drive customers away. Ava is conversational voice AI with zero latency. She breathes and pauses naturally.<br><br>
+            <strong>Punch in (561) 813-8602 right now from your cell.</strong> If you can tell she's AI within the first 30 seconds, I'll never call you again."
+            <div class="obj-acc-note">💡 Agree with them first, then challenge them to prove it wrong.</div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 5. "I'm slammed on a job / driving right now."</span> <span class="tag">Time Pressure</span></div>
+          <div class="obj-acc-body">
+            "I completely hear you — that's exactly why we do 100% of the build for you with zero software to learn.<br><br>
+            I'll let you get back to work: <strong>when you park, just dial (561) 813-8602 for 30 seconds</strong>. Can I shoot you a quick 1-line text with the number so you have it in your phone?"
+            <div class="obj-acc-note">💡 Removes pressure and gets permission to text them your demo number.</div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 6. "We have plenty of work / not looking for more leads."</span> <span class="tag">Capacity</span></div>
+          <div class="obj-acc-body">
+            "That's the best position to be in, <em>[Name]</em>! But this isn't about getting more leads — it's about <strong>reputation and high-ticket emergencies</strong>.<br><br>
+            When your best repeat customer calls you on a Saturday with an emergency and gets your voicemail, they get frustrated. Ava ensures your existing VIP clients get answered in 1 ring 24/7."
+            <div class="obj-acc-note">💡 Reframes from 'sales leads' to customer retention and VIP reputation.</div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 7. "How did you get my number / is this a scam?"</span> <span class="tag">Suspicion</span></div>
+          <div class="obj-acc-body">
+            "I found your listing right on Google in <em>[City]</em> — your phone number is public right on your business profile!<br><br>
+            I'm based right here in South Florida. I'm not asking for your credit card or selling you anything right now. I literally just wanted you to hear Ava on <strong>(561) 813-8602</strong> and see what's possible."
+            <div class="obj-acc-note">💡 Radical transparency. Proves you are a real local person.</div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 8. "I need to talk to my business partner / wife first."</span> <span class="tag">Decision Stall</span></div>
+          <div class="obj-acc-body">
+            "100% — you should definitely talk to them! But don't try to explain voice AI to them yourself.<br><br>
+            <strong>Put them on speakerphone tonight and dial (561) 813-8602 together.</strong> Test her for 60 seconds. If both of you love it, let's talk tomorrow."
+            <div class="obj-acc-note">💡 Eliminates second-hand pitch telephone. The test line does the selling.</div>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 9. "We don't do after-hours emergency calls."</span> <span class="tag">Service Mismatch</span></div>
+          <div class="obj-acc-body">
+            "Got it! Then Ava is even more valuable for you during the day when you're busy.<br><br>
+            When your guys are on a roof or under a house and the phone rings, Ava answers in 1 ring, takes their info, and sends you a clean text summary so you don't lose the daytime estimate."
+            <div class="obj-acc-note">💡 Pivots to daytime missed-call text-back.</div>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="obj-accordion">
+          <div class="obj-acc-head"><span>❌ 10. "I'm not interested." (Instant Cold Hang-Up Defense)</span> <span class="tag">Hard No</span></div>
+          <div class="obj-acc-body">
+            "Fair enough, <em>[Name]</em> — I'll get out of your hair!<br><br>
+            Before I hang up, just save this in your cell: <strong>(561) 813-8602</strong>. If you ever have a weekend where you're tired of answering emergency calls while eating dinner, dial it."
+            <div class="obj-acc-note">💡 Exit with grace. Leaves your number planted in their mind.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: EXITS -->
+      <div class="script-section-header">
+        <h3><span>🏆</span> Stage 3: The 3 Closing Scenarios</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
+        <div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px">
+          <div style="font-size:12px;color:var(--ok);font-weight:700">SCENARIO A: CALL NOW</div>
+          <p style="font-size:14px;margin-top:6px">"Awesome! Dial <strong>(561) 813-8602</strong>. Pretend you're a homeowner with an emergency. I'll shoot you a quick text in 5 minutes to see what you thought."</p>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px">
+          <div style="font-size:12px;color:var(--blue);font-weight:700">SCENARIO B: SEND TEXT</div>
+          <p style="font-size:14px;margin-top:6px">"Perfect. I just texted you the demo line from my cell: <strong>(561) 813-8602</strong>. Tap it whenever you have a free 30 seconds."</p>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px">
+          <div style="font-size:12px;color:var(--accent2);font-weight:700">SCENARIO C: 10-MIN ZOOM</div>
+          <p style="font-size:14px;margin-top:6px">"Let's hop on a 10-minute Zoom tomorrow at 9 AM or 1 PM so I can show you how Ava syncs to your calendar. Which time works better?"</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TAB 2: Objection Battlecard -->
+  <!-- TAB 2: STANDALONE OBJECTION BATTLECARD -->
   <div id="tabObjections" class="tab-panel">
     <div class="teleprompter">
       <h2 style="font-size:22px;margin-bottom:6px">Instant Objection Battlecard</h2>
-      <p style="color:var(--dim);font-size:14px;margin-bottom:20px">Click any objection to view the lethal word-for-word rebuttal:</p>
+      <p style="color:var(--dim);font-size:14px;margin-bottom:20px">Click any pill to highlight the exact rebuttal:</p>
 
       <div class="obj-filter">
         <button class="obj-pill active" data-obj="all">All Objections (10)</button>
@@ -208,172 +417,153 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
       </div>
 
       <div id="objCardsContainer">
-        <!-- Objection 1 -->
-        <div class="obj-card" data-category="email">
-          <div class="obj-title">❌ "Just send me an email."</div>
-          <div class="obj-rebuttal">
-            "I'm happy to do that, <em>[Name]</em>. But let's be honest — my email is just going to sit at the bottom of your inbox behind 50 supply orders.<br><br>
-            <strong>Literally take 15 seconds to dial our live test line: (561) 813-8602.</strong> Hear Ava answer in 1 ring. If you don't love it, you never have to reply to me again."
+        <!-- Rendered dynamically or mapped from Tab 1 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 🎮 COLD CALL QUEST (SALES RPG GAME) -->
+  <div id="tabRPG" class="tab-panel">
+    <div class="rpg-cockpit">
+      <!-- Player & Boss HUD -->
+      <div class="rpg-header">
+        <!-- Luke's Hero Card -->
+        <div class="player-card">
+          <div class="player-info">
+            <div class="player-avatar">🗡️</div>
+            <div>
+              <div class="player-name">Luke the Closer <span style="font-size:12px;color:var(--accent)" id="playerLvlBadge">LVL 1</span></div>
+              <div class="player-title" id="playerRankTitle">Rookie Phone Warrior</div>
+            </div>
+            <div style="margin-left:auto;text-align:right">
+              <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim)">STREAK</div>
+              <div style="font-size:16px;font-weight:800;color:var(--accent2)" id="streakCount">🔥 0</div>
+            </div>
           </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Radical honesty. Contractors respect someone who acknowledges that email pitches are useless and pivots to immediate proof.</div>
+
+          <!-- HP Bar -->
+          <div class="stat-bar-wrap">
+            <div class="stat-label"><span>REJECTION ARMOR (HP)</span> <span id="playerHpText">100 / 100</span></div>
+            <div class="bar-track"><div class="bar-fill-hp" id="playerHpBar"></div></div>
+          </div>
+
+          <!-- XP Bar -->
+          <div class="stat-bar-wrap">
+            <div class="stat-label"><span>CLOSING XP</span> <span id="playerXpText">0 / 100 XP</span></div>
+            <div class="bar-track"><div class="bar-fill-xp" id="playerXpBar"></div></div>
+          </div>
         </div>
 
-        <!-- Objection 2 -->
-        <div class="obj-card" data-category="have_one">
-          <div class="obj-title">❌ "We already have a receptionist / answering service."</div>
-          <div class="obj-rebuttal">
-            "That's awesome — they're probably great from 8 AM to 5 PM! <strong>But what happens between 6 PM and 7 AM, or on weekends?</strong><br><br>
-            Over 35% of emergency calls in Florida happen after hours. Ava doesn't replace your front desk; she acts as your after-hours safety net so zero jobs go to competitors."
+        <!-- Boss Monster Card -->
+        <div class="boss-card">
+          <div class="boss-info">
+            <div class="boss-avatar" id="bossAvatar">🚛</div>
+            <div>
+              <div class="boss-name" id="bossName">Rick "The Road Rager"</div>
+              <div class="boss-title" id="bossDungeonTitle">Dungeon: I-95 Traffic Jam · Tampa, FL</div>
+            </div>
+            <div style="margin-left:auto;text-align:right">
+              <div style="font-size:11px;font-family:var(--font-mono);color:#f87171">BOSS HP</div>
+              <div style="font-size:16px;font-weight:800;color:#ef4444" id="bossHpText">100 / 100</div>
+            </div>
           </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Never attack their existing staff. Frame Ava as after-hours coverage that relieves their team.</div>
+
+          <!-- Boss HP Bar -->
+          <div class="stat-bar-wrap">
+            <div class="stat-label"><span>CONTRACTOR RESISTANCE</span> <span id="bossHpPercent">100%</span></div>
+            <div class="bar-track"><div class="bar-fill-boss" id="bossHpBar"></div></div>
+          </div>
+          <div style="font-size:11.5px;color:var(--dim);margin-top:6px;display:flex;justify-content:space-between">
+            <span>Special Attack: <em>Backing Up Trailer</em></span>
+            <span style="color:#f87171">Weakness: <em>Direct Permission</em></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swords & Weapons Rack -->
+      <div class="inventory-bar">
+        <div class="inv-title">⚔️ Weapons &amp; Relics Rack:</div>
+        <div class="swords-rack">
+          <div class="sword-slot equipped" id="sword1" title="Level 1: Basic 20s Disarm">🗡️ Rusty Dagger of Directness</div>
+          <div class="sword-slot locked" id="sword2" title="Unlocks at Level 2 (+35 DMG)">⚔️ Broadsword of the $8k Leak</div>
+          <div class="sword-slot locked" id="sword3" title="Unlocks at Level 3 (+50 DMG)">🗡️✨ Obsidian Katana of Radical Honesty</div>
+          <div class="sword-slot locked" id="sword4" title="Unlocks at Level 4 (Blocks Damage)">🛡️ Aegis of Total Agreement</div>
+          <div class="sword-slot locked" id="sword5" title="Unlocks at Level 5 (Legendary 1-Hit Demo KO)">⚡⚔️ Excalibur of Ava (561) 813-8602</div>
+        </div>
+      </div>
+
+      <!-- Battle Arena Grid -->
+      <div class="battle-arena">
+        <!-- Dungeon Boss Selector -->
+        <div class="dungeons-list">
+          <div style="font-size:12px;font-family:var(--font-mono);color:var(--dim);margin-bottom:10px;text-transform:uppercase">Choose Contractor Dungeon:</div>
+          
+          <div class="dungeon-item active" data-dungeon="roofer">
+            <div style="font-weight:700;font-size:14px">🚛 Dungeon 1: Highway Hauler</div>
+            <div style="font-size:12px;color:var(--dim)">Boss: Rick the Roofer (HP: 100)</div>
+          </div>
+
+          <div class="dungeon-item" data-dungeon="gatekeeper">
+            <div style="font-weight:700;font-size:14px">👩‍💼 Dungeon 2: Gate of Despair</div>
+            <div style="font-size:12px;color:var(--dim)">Boss: Karen the Sentinel (HP: 120)</div>
+          </div>
+
+          <div class="dungeon-item" data-dungeon="skeptic">
+            <div style="font-weight:700;font-size:14px">🔧 Dungeon 3: Cave of Skepticism</div>
+            <div style="font-size:12px;color:var(--dim)">Boss: Mike the Robot Crusher (HP: 150)</div>
+          </div>
+
+          <div class="dungeon-item" data-dungeon="price">
+            <div style="font-weight:700;font-size:14px">💰 Dungeon 4: Vault of Greed</div>
+            <div style="font-size:12px;color:var(--dim)">Boss: Dave the Budget Dragon (HP: 200)</div>
+          </div>
+
+          <button class="btn btn-ghost btn-sm" id="restartMatchBtn" style="width:100%;margin-top:10px">🔄 Restart Dungeon Match</button>
         </div>
 
-        <!-- Objection 3 -->
-        <div class="obj-card" data-category="cost">
-          <div class="obj-title">❌ "How much is this going to cost me?"</div>
-          <div class="obj-rebuttal">
-            "Zero contracts, starting at <strong>$299 a month</strong>. In your trade, <strong>one single emergency job pays for the entire year</strong>.<br><br>
-            But don't buy anything right now — just dial <em>(561) 813-8602</em> from your cell and see if she's even worth 10 cents to your business."
+        <!-- Combat Feed & Spells -->
+        <div class="combat-terminal">
+          <div class="terminal-head">
+            <span>⚔️ TURN-BASED COLD CALL COMBAT</span>
+            <span id="turnIndicator" style="color:var(--accent2)">YOUR TURN: SELECT ATTACK</span>
           </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Extreme ROI contrast. One $8k roof or AC replacement makes $299 look like pocket change.</div>
-        </div>
 
-        <!-- Objection 4 -->
-        <div class="obj-card" data-category="robot">
-          <div class="obj-title">❌ "AI sounds robotic and customers hate that."</div>
-          <div class="obj-rebuttal">
-            "I 100% agree with you — the robotic phone trees from 2 years ago drive customers away. Ava is sub-second conversational voice AI.<br><br>
-            <strong>Punch in (561) 813-8602 right now from your cell.</strong> If you can tell she's AI within the first 30 seconds, I'll never call you again."
+          <div class="combat-log" id="combatLog">
+            <!-- Combat turns appended here -->
           </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Agree with their premise immediately, then issue the zero-risk challenge.</div>
-        </div>
 
-        <!-- Objection 5 -->
-        <div class="obj-card" data-category="busy">
-          <div class="obj-title">❌ "I'm slammed on a job / driving right now."</div>
-          <div class="obj-rebuttal">
-            "I completely hear you — that's exactly why we do 100% of the build for you with zero software to learn.<br><br>
-            I'll let you get back to work: <strong>when you park, just dial (561) 813-8602 for 30 seconds</strong>. I'll shoot you a quick text with the number so you have it."
-          </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Disarms pressure, validates their busy day, and gets permission to text them your demo link.</div>
-        </div>
+          <!-- Combat Action Bar (Skills & Spells) -->
+          <div class="combat-actions">
+            <div class="action-grid">
+              <button class="btn-action" data-action="disarm">
+                🗡️ 20s Disarm
+                <span class="dmg">30 DMG · Stuns Boss</span>
+              </button>
+              <button class="btn-action" data-action="leak">
+                💥 $8k Leak Hook
+                <span class="dmg">45 DMG · Bleed</span>
+              </button>
+              <button class="btn-action" data-action="shield">
+                🛡️ Total Agreement
+                <span class="dmg">Block · +20 HP Heal</span>
+              </button>
+              <button class="btn-action" data-action="ultimate" style="border-color:var(--accent);background:rgba(245,158,11,0.15)">
+                ⚡ Ava Demo Challenge
+                <span class="dmg">75 DMG · Critical Finish</span>
+              </button>
+            </div>
 
-        <!-- Objection 6 -->
-        <div class="obj-card" data-category="gatekeeper">
-          <div class="obj-title">🛡️ Gatekeeper: "He's not available / What is this regarding?"</div>
-          <div class="obj-rebuttal">
-            "Hey, no problem at all! It's Luke — I just had a quick operational question for him about your weekend dispatch routing.<br><br>
-            <strong>Is he out on a job site right now or in the office later this afternoon?</strong>"
+            <form class="custom-chat-row" id="customAttackForm">
+              <input type="text" id="customAttackInput" placeholder="Or type your own custom words to attack..." autocomplete="off">
+              <button type="submit">Cast Spell ➔</button>
+            </form>
           </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Sounds casual, relaxed, and like a familiar peer. Never say 'I am a sales rep selling AI software'.</div>
-        </div>
-
-        <!-- Objection 7 -->
-        <div class="obj-card" data-category="capacity">
-          <div class="obj-title">❌ "We have plenty of work / we're not looking for more leads."</div>
-          <div class="obj-rebuttal">
-            "That's the best position to be in, <em>[Name]</em>! But this isn't about getting more leads — it's about <strong>reputation and high-ticket emergencies</strong>.<br><br>
-            When your best repeat customer calls you on a Saturday with an emergency and gets your voicemail, they get frustrated. Ava ensures your existing VIP clients get answered in 1 ring 24/7."
-          </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Reframes from 'sales leads' to customer retention and VIP reputation.</div>
-        </div>
-
-        <!-- Objection 8 -->
-        <div class="obj-card" data-category="scam">
-          <div class="obj-title">❌ "How did you get my number / is this a scam?"</div>
-          <div class="obj-rebuttal">
-            "I found your listing right on Google in <em>[City]</em> — your phone number is public right on your business profile!<br><br>
-            I'm based right here in South Florida. I'm not asking for your credit card or selling you anything right now. I literally just wanted you to hear Ava on <strong>(561) 813-8602</strong> and see what's possible."
-          </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Radical transparency. Shows you are a real local person, not an overseas spam bot.</div>
-        </div>
-
-        <!-- Objection 9 -->
-        <div class="obj-card" data-category="partner">
-          <div class="obj-title">❌ "I need to talk to my business partner / wife first."</div>
-          <div class="obj-rebuttal">
-            "100% — you should definitely talk to them! But don't try to explain voice AI to them yourself.<br><br>
-            <strong>Put them on speakerphone tonight and dial (561) 813-8602 together.</strong> Test her for 60 seconds. If both of you love it, let's talk tomorrow."
-          </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Eliminates second-hand pitch telephone syndrome. Giving them a 60-second test number does the selling for you.</div>
-        </div>
-
-        <!-- Objection 10 -->
-        <div class="obj-card" data-category="not_interested">
-          <div class="obj-title">❌ "I'm not interested." (Instant Cold Defense)</div>
-          <div class="obj-rebuttal">
-            "Fair enough, <em>[Name]</em> — I'll get out of your hair!<br><br>
-            Before I hang up, just save this in your cell: <strong>(561) 813-8602</strong>. If you ever have a weekend where you're tired of answering emergency calls while eating dinner, dial it."
-          </div>
-          <div class="obj-note">💡 <strong>Why this works:</strong> Never fight a hard no. Exiting with grace and planting the number in their phone keeps the door open.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TAB 3: Interactive Sparring Arena -->
-  <div id="tabSparring" class="tab-panel">
-    <div class="arena-grid">
-      <!-- Opponent Selector -->
-      <div class="opponents-panel">
-        <h3 style="font-size:16px;margin-bottom:12px;font-family:var(--font-head)">Select Sparring Opponent:</h3>
-        
-        <div class="opp-card active" data-opp="roofer">
-          <div class="opp-name"><span>🚛</span> Rick (Roofer in Truck)</div>
-          <div class="opp-desc">In traffic, hauling trailer, irritable. Has 10 seconds.</div>
-          <div class="opp-toughness">Difficulty: ⭐⭐⭐⭐ (8.5/10)</div>
-        </div>
-
-        <div class="opp-card" data-opp="gatekeeper">
-          <div class="opp-name"><span>👩‍💼</span> Karen (Front Desk Gatekeeper)</div>
-          <div class="opp-desc">Screens calls relentlessly. Tries to deflect to email.</div>
-          <div class="opp-toughness">Difficulty: ⭐⭐⭐⭐⭐ (9.0/10)</div>
-        </div>
-
-        <div class="opp-card" data-opp="skeptic">
-          <div class="opp-name"><span>🔧</span> Mike (AC Tech &amp; AI Skeptic)</div>
-          <div class="opp-desc">Hates robot menus. Thinks customers will leave.</div>
-          <div class="opp-toughness">Difficulty: ⭐⭐⭐⭐ (8.0/10)</div>
-        </div>
-
-        <div class="opp-card" data-opp="price">
-          <div class="opp-name"><span>💰</span> Dave (Price Screener)</div>
-          <div class="opp-desc">Defensive on budget. Asks for prices in 5 seconds.</div>
-          <div class="opp-toughness">Difficulty: ⭐⭐⭐ (7.8/10)</div>
-        </div>
-
-        <button class="btn btn-ghost" id="resetArenaBtn" style="width:100%;margin-top:14px;font-size:13px">🔄 Reset Sparring Match</button>
-      </div>
-
-      <!-- Live Chat Arena -->
-      <div class="chat-box">
-        <div class="chat-head">
-          <div style="font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px">
-            <span id="oppAvatar">🚛</span> <span id="oppTitle">Rick (Roofer in Truck)</span>
-          </div>
-          <div style="font-size:12px;color:var(--ok);font-family:var(--font-mono)">🟢 LIVE SIMULATION</div>
-        </div>
-
-        <div class="chat-messages" id="chatMsgs">
-          <!-- Populated via JS -->
-        </div>
-
-        <div class="quick-prompts">
-          <span style="font-size:11.5px;color:var(--dim);align-self:center">Quick Hooks:</span>
-          <button class="qp-btn" data-text="Hey, Luke from VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?">20s Permission Hook</button>
-          <button class="qp-btn" data-text="Hey, Luke here in Palm Beach. Quick question about your weekend emergency call routing?">Weekend Routing Hook</button>
-          <button class="qp-btn" data-text="Completely hear you — punch in (561) 813-8602 on your cell and hang up with me. Hear Ava answer in 1 ring.">Micro-Commitment Close</button>
-        </div>
-
-        <form class="chat-input-bar" id="chatForm">
-          <input type="text" id="chatInput" placeholder="Type what you would say to the contractor..." autocomplete="off">
-          <button type="submit">Say This ➔</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 4: 50-Call Simulation Data -->
+  <!-- TAB 4: SIMULATION DATA -->
   <div id="tabSimulationData" class="tab-panel">
     <div class="teleprompter">
       <h2 style="font-size:22px;margin-bottom:6px">50-Call Multi-Agent Simulation Report</h2>
@@ -396,22 +586,87 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
           <div style="font-size:13px;color:var(--dim)">0% Conversion · 100% Hang-Up Rate</div>
         </div>
       </div>
-
-      <div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:18px">
-        <h4 style="font-size:15px;margin-bottom:8px">Why the 20-Second Disarm Won:</h4>
-        <p style="font-size:14px;color:var(--dim);line-height:1.6">
-          When cold callers say <em>"How are you today?"</em> or launch into a pitch, contractors immediately trigger their defense shield and hang up. But asking <em>"I know you weren't expecting my call — got 20 seconds or should I hang up?"</em> completely disarms them. It respects their time, sounds like a confident peer, and prompts them to grant permission.
-        </p>
-      </div>
     </div>
   </div>
 </main>
+
+<!-- Level Up Victory Modal -->
+<div class="level-up-modal" id="levelUpModal">
+  <div style="font-size:54px;margin-bottom:10px">🎉⚔️</div>
+  <h2 style="font-family:var(--font-head);font-size:26px;color:var(--accent2);margin-bottom:6px">LEVEL UP!</h2>
+  <div style="font-size:18px;font-weight:700;margin-bottom:8px" id="modalNewLevelTitle">Level 2: Phone Warrior</div>
+  <p style="color:var(--dim);font-size:14px;margin-bottom:20px" id="modalUnlockDesc">You unlocked: <strong>⚔️ Broadsword of the $8k Leak</strong>!</p>
+  <button class="btn btn-gold" id="closeModalBtn" style="width:100%">Claim Loot &amp; Keep Slaying ➔</button>
+</div>
 
 <div class="toast" id="toast">Copied to clipboard!</div>
 
 <script>
 (function() {
-  // Tabs
+  // Sound Engine (Web Audio API - Synthesized 8-Bit Retro Sounds)
+  let soundEnabled = true;
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  function playSound(type) {
+    if (!soundEnabled) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+
+    if (type === 'hit') {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, now);
+      osc.frequency.exponentialRampToValueAtTime(80, now + 0.15);
+      gain.gain.setValueAtTime(0.3, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+      osc.start(now);
+      osc.stop(now + 0.15);
+    } else if (type === 'slash') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(600, now);
+      osc.frequency.exponentialRampToValueAtTime(150, now + 0.2);
+      gain.gain.setValueAtTime(0.35, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+      osc.start(now);
+      osc.stop(now + 0.2);
+    } else if (type === 'xp') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, now); // C5
+      osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+      osc.start(now);
+      osc.stop(now + 0.2);
+    } else if (type === 'levelup') {
+      // Arpeggio Fanfare
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C E G C
+      notes.forEach((freq, idx) => {
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.type = 'square';
+        o.frequency.setValueAtTime(freq, now + idx * 0.1);
+        g.gain.setValueAtTime(0.25, now + idx * 0.1);
+        g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.15);
+        o.start(now + idx * 0.1);
+        o.stop(now + idx * 0.1 + 0.15);
+      });
+    }
+  }
+
+  const soundBtn = document.getElementById('soundToggleBtn');
+  soundBtn.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    soundBtn.textContent = soundEnabled ? '🔊 Audio: ON' : '🔇 Audio: MUTED';
+    soundBtn.style.color = soundEnabled ? 'var(--accent2)' : 'var(--dim)';
+  });
+
+  // Tab Switching
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -424,8 +679,17 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
     });
   });
 
-  // Copy Demo
-  const demoPill = document.getElementById('copyDemoPill');
+  // Accordion in Tab 1
+  document.querySelectorAll('.obj-acc-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const body = head.nextElementSibling;
+      const isOpen = body.style.display === 'block';
+      body.style.display = isOpen ? 'none' : 'block';
+      head.style.color = isOpen ? '#fca5a5' : 'var(--accent2)';
+    });
+  });
+
+  // Toast
   const toast = document.getElementById('toast');
   function showToast(msg) {
     toast.textContent = msg;
@@ -433,177 +697,329 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
     setTimeout(() => toast.classList.remove('show'), 2200);
   }
 
-  demoPill.addEventListener('click', () => {
+  document.getElementById('copyDemoPill').addEventListener('click', () => {
     navigator.clipboard.writeText('(561) 813-8602').then(() => showToast('✓ (561) 813-8602 copied!'));
   });
 
-  // Copy Full Script
-  const copyScriptBtn = document.getElementById('copyFullScriptBtn');
-  if (copyScriptBtn) {
-    copyScriptBtn.addEventListener('click', () => {
-      const fullText = "Hey [Owner], Luke from VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?\n\nI'll be super quick: I was looking at your Google profile in [City]. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose the $8,000 job to the next competitor. Where does that call ring for you right now?\n\nThat's exactly why I'm calling. We built Ava — she's a 24/7 AI voice receptionist trained for Florida contractors that answers in 1 ring and books calendar jobs.\n\nHave your cell in your hand? Punch in our live demo line right now: (561) 813-8602. Hang up with me and call it for 30 seconds. If she sounds like a robot, you never have to talk to me again.";
-      navigator.clipboard.writeText(fullText).then(() => showToast('✓ Full champion script copied!'));
-    });
-  }
+  // Copy Full Playbook
+  document.getElementById('copyFullPlaybookBtn').addEventListener('click', () => {
+    const txt = `VANTORX SOLUTIONS — MASTER COLD CALLING PLAYBOOK
 
-  // Objection Filters
-  const objPills = document.querySelectorAll('.obj-pill');
-  const objCards = document.querySelectorAll('.obj-card');
+[STAGE 0: GATEKEEPER]
+"Hey! Is [Owner's First Name] around? It's Luke — quick question about your weekend dispatch routing."
 
-  objPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      objPills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      const cat = pill.dataset.obj;
-      objCards.forEach(card => {
-        if (cat === 'all' || card.dataset.category === cat) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
+[STAGE 1: CORE PITCH]
+"Hey [Owner], Luke from VantorX. I know you were not expecting my call — got 20 seconds or should I hang up?
+
+I'll be super quick: I was looking at your Google profile in [City]. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose the $8,000 job to the next competitor. Where does that call ring for you right now?
+
+That's exactly why I'm calling. We built Ava — she's a 24/7 AI voice receptionist trained for Florida contractors that answers in 1 ring and books calendar jobs.
+
+Have your cell in your hand? Punch in our live demo line right now: (561) 813-8602. Hang up with me and call it for 30 seconds. If she sounds like a robot, you never have to talk to me again."
+
+[STAGE 2: TOP REBUTTALS]
+1. "Send an email" -> "Happy to, but it'll sit behind 50 supply receipts. Take 15s to dial (561) 813-8602 right now."
+2. "We have a receptionist" -> "She's great 8-5! But what about 6PM-8AM and weekends? Over 35% of emergency calls happen after-hours."
+3. "How much is it?" -> "Zero contracts, $299/mo. One single emergency job pays for the entire year."
+4. "AI sounds robotic" -> "Agree with you! Dial (561) 813-8602 right now. If she sounds like a robot, I'll never call you again."
+5. "I'm slammed" -> "That's why we do 100% of it for you. When you park, dial (561) 813-8602. Can I text you the number?"`;
+    navigator.clipboard.writeText(txt).then(() => showToast('✓ Full master playbook copied!'));
   });
 
-  // Sparring Batting Cage Engine
-  const opponentPresets = {
+  // Populate Tab 2 Objections from Tab 1 data
+  const tab2Container = document.getElementById('objCardsContainer');
+  document.querySelectorAll('.obj-accordion').forEach((acc, idx) => {
+    const title = acc.querySelector('.obj-acc-head span').textContent;
+    const body = acc.querySelector('.obj-acc-body').innerHTML;
+    const card = document.createElement('div');
+    card.className = 'obj-card';
+    card.innerHTML = `<div class="obj-title">${title}</div><div class="obj-rebuttal">${body}</div>`;
+    tab2Container.appendChild(card);
+  });
+
+  // ============================================================
+  // 🎮 RPG GAME ENGINE (Cold Call Quest)
+  // ============================================================
+  let player = {
+    lvl: 1,
+    title: 'Rookie Phone Warrior',
+    hp: 100,
+    maxHp: 100,
+    xp: 0,
+    nextLvlXp: 100,
+    streak: 0,
+    swordsUnlocked: 1
+  };
+
+  const ranks = [
+    { lvl: 1, title: 'Rookie Phone Warrior', swordId: 'sword1', unlockName: '🗡️ Rusty Dagger of Directness' },
+    { lvl: 2, title: 'Cold Call Paladin', swordId: 'sword2', unlockName: '⚔️ Broadsword of the $8,000 Leak' },
+    { lvl: 3, title: 'Objection Slayer', swordId: 'sword3', unlockName: '🗡️✨ Obsidian Katana of Radical Honesty' },
+    { lvl: 4, title: 'Closing Centurion', swordId: 'sword4', unlockName: '🛡️ Aegis of Total Agreement' },
+    { lvl: 5, title: 'Mythic Rainmaker', swordId: 'sword5', unlockName: '⚡⚔️ Excalibur of Ava (561) 813-8602' }
+  ];
+
+  const dungeons = {
     roofer: {
+      name: 'Rick "The Road Rager"',
+      title: 'Dungeon: I-95 Traffic Jam · Tampa, FL',
       avatar: '🚛',
-      title: 'Rick (Roofer in Truck)',
-      initialMsg: "(Loud background road noise) Yeah this is Rick. Make it quick man, I'm backing up a trailer on a job site.",
-      responses: [
-        { trigger: ['hang up', '20 seconds', 'quick'], reply: "Alright you got 20 seconds. What is this about?", feedback: "✓ Great hook! You earned 20 seconds of undivided attention." },
-        { trigger: ['saturday', '8 pm', 'emergency', 'weekend', 'voicemail'], reply: "Honestly if I'm not working, it goes to voicemail. Homeowners usually just leave a message or wait till Monday.", feedback: "✓ Boom. He admitted his revenue leak. Now pivot to Ava's test line." },
-        { trigger: ['561', '813-8602', 'ava', 'dial', 'demo', 'call it'], reply: "(Chuckles) Alright Luke, you got balls. Giving me a number to test. Send me a quick text with it and I'll tap it when I park.", feedback: "🏆 WIN! You secured permission to text your live demo line." }
-      ],
-      defaultReply: "Look man, I gotta get back to my crew. If you got something to show me, send a text.",
-      defaultFeedback: "⚠️ He's getting impatient. Keep it brief and challenge him to call (561) 813-8602."
+      maxHp: 100,
+      hp: 100,
+      attackName: 'Trailer Backup Rage',
+      baseDmg: 20,
+      intro: "(Heavy diesel engine & traffic horns) Yeah this is Rick. Make it quick man, I'm backing up a trailer on a job site."
     },
     gatekeeper: {
+      name: 'Karen "The Iron Gatekeeper"',
+      title: 'Dungeon: The Front Desk Citadel · Orlando, FL',
       avatar: '👩‍💼',
-      title: 'Karen (Front Desk Gatekeeper)',
-      initialMsg: "Thank you for calling Premier Services, this is Karen. How can I direct your call?",
-      responses: [
-        { trigger: ['luke', 'dispatch', 'routing', 'operational', 'weekend'], reply: "He's out in the field right now inspecting a commercial job. What company did you say you were with?", feedback: "✓ Good peer framing! You avoided sounding like a telemarketer." },
-        { trigger: ['vantorx', 'receptionist', 'overflow', 'phone'], reply: "We don't really take unsolicited sales calls. You can send an email to info@company.com and we'll review it.", feedback: "⚠️ Standard gatekeeper brush-off. Don't fight her—ask for his cell to send an audio preview." },
-        { trigger: ['cell', 'text', 'preview', '561'], reply: "Well, I can let him know you reached out. What's the number again? I'll pass it to his cell.", feedback: "🏆 WIN! You penetrated the gatekeeper screen." }
-      ],
-      defaultReply: "He's very busy today. You'll have to send an email.",
-      defaultFeedback: "⚠️ Don't pitch features to the gatekeeper. Frame yourself as an operational peer asking about weekend routing."
+      maxHp: 120,
+      hp: 120,
+      attackName: 'Email Deflection Shield',
+      baseDmg: 25,
+      intro: "Premier Mechanical, this is Karen. He is unavailable. What company are you with and what is this regarding?"
     },
     skeptic: {
+      name: 'Mike "The Robot Crusher"',
+      title: 'Dungeon: The Old-School Garage · West Palm, FL',
       avatar: '🔧',
-      title: 'Mike (AC Tech & AI Skeptic)',
-      initialMsg: "Mike here. What's up?",
-      responses: [
-        { trigger: ['expecting', '20 seconds', 'hang up'], reply: "Haha, at least you're honest. Go ahead, I'm listening.", feedback: "✓ Disarmed his natural skepticism with upfront honesty." },
-        { trigger: ['ai', 'robot', 'receptionist'], reply: "Listen Luke, I hate robots. If a computer answered my phone my customers would think I went out of business.", feedback: "⚠️ Expected pushback. Agree with him immediately, then challenge him to test Ava!" },
-        { trigger: ['agree', 'two years ago', '561', '813-8602', 'call', 'prove'], reply: "Fair enough. If she sounds like Siri I'm blocking your number, but I'll dial it right now.", feedback: "🏆 WIN! You challenged his skepticism with zero risk." }
-      ],
-      defaultReply: "I just don't think technology can replace a real human who knows Florida AC units.",
-      defaultFeedback: "💡 Remind him: Ava doesn't replace him; she just catches the calls he physically can't answer at 9 PM."
+      maxHp: 150,
+      hp: 150,
+      attackName: 'Anti-Robot Tirade',
+      baseDmg: 30,
+      intro: "Mike here. Look, if this is about AI software, don't waste your breath. Real humans only."
     },
     price: {
+      name: 'Dave "The Budget Dragon"',
+      title: 'Dungeon: The P&L Treasury · Miami, FL',
       avatar: '💰',
-      title: 'Dave (Price Screener)',
-      initialMsg: "Dave speaking. What is this?",
-      responses: [
-        { trigger: ['20 seconds', 'luke', 'hang up'], reply: "Alright Luke, what are you selling and how much is it gonna cost me?", feedback: "✓ He's guarded on cost. Anchor value against a single lost job before quoting price." },
-        { trigger: ['299', 'contract', 'job', 'pays', 'emergency'], reply: "Huh, $299? Most agencies try to charge me three grand a month. What's the catch?", feedback: "✓ Excellent ROI framing. You removed contract fear and shocked him with affordability." },
-        { trigger: ['catch', 'test', '561', '813-8602', 'try'], reply: "Alright, give me the number. Let's see what she can do.", feedback: "🏆 WIN! Price objection completely obliterated." }
-      ],
-      defaultReply: "I get 10 sales calls a day. Tell me the price or take me off your list.",
-      defaultFeedback: "💡 Be transparent: 'Zero contracts, starting at $299/mo. One job pays for the year.'"
+      maxHp: 200,
+      hp: 200,
+      attackName: 'Wallet Clench',
+      baseDmg: 35,
+      intro: "Dave speaking. I get 15 sales calls a day. Tell me the price right now or lose my number."
     }
   };
 
-  let currentOpp = 'roofer';
-  const oppCards = document.querySelectorAll('.opp-card');
-  const chatMsgs = document.getElementById('chatMsgs');
-  const chatForm = document.getElementById('chatForm');
-  const chatInput = document.getElementById('chatInput');
-  const oppAvatar = document.getElementById('oppAvatar');
-  const oppTitle = document.getElementById('oppTitle');
-  const resetBtn = document.getElementById('resetArenaBtn');
+  let currentDungeonKey = 'roofer';
+  let currentBoss = Object.assign({}, dungeons.roofer);
 
-  function loadOpponent(key) {
-    currentOpp = key;
-    const opp = opponentPresets[key];
-    oppAvatar.textContent = opp.avatar;
-    oppTitle.textContent = opp.title;
-    chatMsgs.innerHTML = '';
+  // UI Elements
+  const playerHpBar = document.getElementById('playerHpBar');
+  const playerHpText = document.getElementById('playerHpText');
+  const playerXpBar = document.getElementById('playerXpBar');
+  const playerXpText = document.getElementById('playerXpText');
+  const playerLvlBadge = document.getElementById('playerLvlBadge');
+  const playerRankTitle = document.getElementById('playerRankTitle');
+  const streakCount = document.getElementById('streakCount');
 
-    const firstMsg = document.createElement('div');
-    firstMsg.className = 'msg msg-prospect';
-    firstMsg.innerHTML = `<strong>${opp.title}:</strong><br>${opp.initialMsg}`;
-    chatMsgs.appendChild(firstMsg);
+  const bossAvatar = document.getElementById('bossAvatar');
+  const bossName = document.getElementById('bossName');
+  const bossDungeonTitle = document.getElementById('bossDungeonTitle');
+  const bossHpBar = document.getElementById('bossHpBar');
+  const bossHpText = document.getElementById('bossHpText');
+  const bossHpPercent = document.getElementById('bossHpPercent');
+  const combatLog = document.getElementById('combatLog');
+  const turnIndicator = document.getElementById('turnIndicator');
+
+  function updateHUD() {
+    // Player HP
+    const hpPct = Math.max(0, Math.min(100, (player.hp / player.maxHp) * 100));
+    playerHpBar.style.width = hpPct + '%';
+    playerHpText.textContent = `${player.hp} / ${player.maxHp}`;
+    if (hpPct < 30) playerHpBar.style.background = '#ef4444';
+    else playerHpBar.style.background = 'linear-gradient(90deg, #ef4444, #22c55e)';
+
+    // Player XP
+    const xpPct = Math.min(100, (player.xp / player.nextLvlXp) * 100);
+    playerXpBar.style.width = xpPct + '%';
+    playerXpText.textContent = `${player.xp} / ${player.nextLvlXp} XP`;
+
+    playerLvlBadge.textContent = `LVL ${player.lvl}`;
+    playerRankTitle.textContent = player.title;
+    streakCount.textContent = `🔥 ${player.streak}`;
+
+    // Boss HP
+    const bPct = Math.max(0, Math.min(100, (currentBoss.hp / currentBoss.maxHp) * 100));
+    bossHpBar.style.width = bPct + '%';
+    bossHpText.textContent = `${Math.max(0, currentBoss.hp)} / ${currentBoss.maxHp}`;
+    bossHpPercent.textContent = Math.round(bPct) + '%';
   }
 
-  oppCards.forEach(card => {
-    card.addEventListener('click', () => {
-      oppCards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      loadOpponent(card.dataset.opp);
-    });
-  });
+  function appendLog(html, type) {
+    const row = document.createElement('div');
+    row.className = `log-row log-${type}`;
+    row.innerHTML = html;
+    combatLog.appendChild(row);
+    combatLog.scrollTop = combatLog.scrollHeight;
+  }
 
-  resetBtn.addEventListener('click', () => loadOpponent(currentOpp));
+  function startDungeon(key) {
+    currentDungeonKey = key;
+    currentBoss = Object.assign({}, dungeons[key]);
+    currentBoss.hp = currentBoss.maxHp;
 
-  chatForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const txt = chatInput.value.trim();
-    if (!txt) return;
+    bossAvatar.textContent = currentBoss.avatar;
+    bossName.textContent = currentBoss.name;
+    bossDungeonTitle.textContent = currentBoss.title;
 
-    // Add Luke message
-    const lukeMsg = document.createElement('div');
-    lukeMsg.className = 'msg msg-luke';
-    lukeMsg.innerHTML = `<strong>You:</strong><br>${txt}`;
-    chatMsgs.appendChild(lukeMsg);
-    chatInput.value = '';
+    combatLog.innerHTML = '';
+    appendLog(`⚔️ <strong>ENTERED ${currentBoss.title.toUpperCase()}</strong>`, 'system');
+    appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.intro}"`, 'boss');
+    turnIndicator.textContent = 'YOUR TURN: SELECT ATTACK SKILL';
+    updateHUD();
+  }
 
-    // Scroll
-    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  function addXP(amount) {
+    player.xp += amount;
+    playSound('xp');
+    appendLog(`✨ Gained <strong>+${amount} XP</strong>!`, 'system');
 
-    // Process Opponent & Coach
-    setTimeout(() => {
-      const opp = opponentPresets[currentOpp];
-      const lower = txt.toLowerCase();
-      let matched = null;
+    if (player.xp >= player.nextLvlXp) {
+      player.xp -= player.nextLvlXp;
+      player.lvl++;
+      player.nextLvlXp = Math.round(player.nextLvlXp * 1.5);
+      player.maxHp += 20;
+      player.hp = player.maxHp;
 
-      for (let r of opp.responses) {
-        if (r.trigger.some(k => lower.includes(k))) {
-          matched = r;
-          break;
-        }
+      const rank = ranks.find(r => r.lvl === player.lvl) || { title: 'Legendary Rainmaker', swordId: 'sword5', unlockName: '⚡ Mythic Staff' };
+      player.title = rank.title;
+
+      // Unlock sword
+      const swordEl = document.getElementById(rank.swordId);
+      if (swordEl) {
+        swordEl.classList.remove('locked');
+        swordEl.classList.add('equipped');
       }
 
-      const oppReplyText = matched ? matched.reply : opp.defaultReply;
-      const coachFeedbackText = matched ? matched.feedback : opp.defaultFeedback;
+      playSound('levelup');
+      document.getElementById('modalNewLevelTitle').textContent = `Level ${player.lvl}: ${player.title}`;
+      document.getElementById('modalUnlockDesc').innerHTML = `You unlocked: <strong>${rank.unlockName}</strong>! Rejection Armor increased to ${player.maxHp} HP.`;
+      document.getElementById('levelUpModal').classList.add('active');
+    }
+    updateHUD();
+  }
 
-      const oppMsg = document.createElement('div');
-      oppMsg.className = 'msg msg-prospect';
-      oppMsg.innerHTML = `<strong>${opp.title}:</strong><br>${oppReplyText}`;
-      chatMsgs.appendChild(oppMsg);
-
-      const coachMsg = document.createElement('div');
-      coachMsg.className = 'msg msg-coach';
-      coachMsg.innerHTML = `<strong>🥊 Sales Coach Feedback:</strong> ${coachFeedbackText}`;
-      chatMsgs.appendChild(coachMsg);
-
-      chatMsgs.scrollTop = chatMsgs.scrollHeight;
-    }, 450);
+  document.getElementById('closeModalBtn').addEventListener('click', () => {
+    document.getElementById('levelUpModal').classList.remove('active');
   });
 
-  // Quick Prompt Buttons
-  document.querySelectorAll('.qp-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      chatInput.value = btn.dataset.text;
-      chatInput.focus();
+  // Combat Execution
+  function executeAttack(action, customText) {
+    let dmg = 0;
+    let playerMove = '';
+    let attackType = 'slash';
+
+    if (action === 'disarm') {
+      dmg = 35 + (player.lvl * 5);
+      playerMove = `Luke equips <strong>[20s Permission Dagger]</strong>: <em>"Got 20 seconds or should I hang up?"</em>`;
+    } else if (action === 'leak') {
+      dmg = 45 + (player.lvl * 5);
+      playerMove = `Luke strikes with <strong>[Pain Hook]</strong>: <em>"Where does an $8,000 Saturday emergency call ring right now?"</em>`;
+    } else if (action === 'shield') {
+      player.hp = Math.min(player.maxHp, player.hp + 25);
+      playerMove = `Luke raises <strong>[Total Agreement Shield]</strong>: <em>"I completely agree with you."</em> (+25 HP Healed!)`;
+      dmg = 15;
+      attackType = 'hit';
+    } else if (action === 'ultimate') {
+      dmg = 70 + (player.lvl * 10);
+      playerMove = `💥 <strong>ULTIMATE EXECUTION!</strong> Luke casts <strong>[Ava 561-813-8602 Challenge]</strong>: <em>"Punch in our live demo line right now. If she sounds like a robot, lose my number!"</em>`;
+      attackType = 'slash';
+    } else if (customText) {
+      dmg = 40 + (player.lvl * 5);
+      playerMove = `Luke speaks: <em>"${customText}"</em>`;
+    }
+
+    playSound(attackType);
+    appendLog(playerMove, 'luke');
+
+    currentBoss.hp -= dmg;
+    appendLog(`🗡️ Hit ${currentBoss.name} for <strong>${dmg} damage</strong>!`, 'system');
+    updateHUD();
+
+    // Check Victory
+    if (currentBoss.hp <= 0) {
+      currentBoss.hp = 0;
+      updateHUD();
+      player.streak++;
+      playSound('levelup');
+      appendLog(`🏆 <strong>BOSS DEFEATED!</strong> ${currentBoss.name} agreed to dial (561) 813-8602!`, 'victory');
+      addXP(100);
+      turnIndicator.textContent = 'VICTORY! DUNGEON CLEARED.';
+      return;
+    }
+
+    // Boss Counter-Attack
+    turnIndicator.textContent = 'BOSS IS RETALIATING...';
+    setTimeout(() => {
+      let bossDmg = Math.round(currentBoss.baseDmg * (0.8 + Math.random() * 0.4));
+      let bossPhrase = '';
+
+      if (action === 'shield') {
+        bossDmg = 0;
+        bossPhrase = `"${currentBoss.name}'s objection was completely deflected by your Agreement Shield!" (0 DMG)`;
+      } else {
+        const excuses = [
+          `"Look man, I'm slammed on a job site." (-${bossDmg} HP)`,
+          `"Just send me an email, I don't have time." (-${bossDmg} HP)`,
+          `"We already have someone handling our phones." (-${bossDmg} HP)`,
+          `"How much is this going to cost me?" (-${bossDmg} HP)`
+        ];
+        bossPhrase = excuses[Math.floor(Math.random() * excuses.length)];
+      }
+
+      playSound('hit');
+      player.hp = Math.max(0, player.hp - bossDmg);
+      appendLog(`<strong>${currentBoss.name} attacks with [${currentBoss.attackName}]:</strong> ${bossPhrase}`, 'boss');
+      updateHUD();
+
+      if (player.hp <= 0) {
+        player.hp = 0;
+        player.streak = 0;
+        updateHUD();
+        appendLog(`💀 <strong>KNOCKED OUT!</strong> You took too much emotional damage. Click 'Restart Dungeon Match' to try again!`, 'system');
+        turnIndicator.textContent = 'DEFEAT. REST AND RETRY.';
+      } else {
+        turnIndicator.textContent = 'YOUR TURN: SELECT ATTACK SKILL';
+      }
+    }, 600);
+  }
+
+  // Dungeon Buttons
+  document.querySelectorAll('.dungeon-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.dungeon-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      startDungeon(item.dataset.dungeon);
     });
   });
 
-  // Initialize Roofer
-  loadOpponent('roofer');
+  document.getElementById('restartMatchBtn').addEventListener('click', () => {
+    player.hp = player.maxHp;
+    startDungeon(currentDungeonKey);
+  });
+
+  // Action Buttons
+  document.querySelectorAll('.btn-action').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (player.hp <= 0 || currentBoss.hp <= 0) return;
+      executeAttack(btn.dataset.action, null);
+    });
+  });
+
+  // Custom Input
+  document.getElementById('customAttackForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('customAttackInput');
+    const txt = input.value.trim();
+    if (!txt || player.hp <= 0 || currentBoss.hp <= 0) return;
+    executeAttack(null, txt);
+    input.value = '';
+  });
+
+  // Initialize
+  startDungeon('roofer');
 })();
 </script>
 </body>
