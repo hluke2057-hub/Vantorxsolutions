@@ -1,4 +1,4 @@
-# PowerShell script to build the complete multi-product cold calling cockpit
+﻿# PowerShell script to build the complete multi-product cold calling cockpit
 $ErrorActionPreference = "Stop"
 
 $leadsRaw = [System.IO.File]::ReadAllText("$PSScriptRoot/../data/normalized_lead_targets.json", [System.Text.Encoding]::UTF8)
@@ -271,6 +271,60 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
 .level-up-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.9);background:var(--bg2);border:2px solid var(--accent);box-shadow:0 0 50px rgba(245,158,11,0.5);border-radius:20px;padding:32px 28px;text-align:center;max-width:440px;width:90%;z-index:100;opacity:0;pointer-events:none;transition:all 0.3s ease}
 .level-up-modal.active{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+
+/* 👤 User Profile Badge & Account Center */
+.user-profile-badge{display:flex;align-items:center;gap:9px;background:var(--bg3);border:1.5px solid rgba(245,158,11,0.35);padding:5px 14px 5px 8px;border-radius:999px;cursor:pointer;transition:all 0.15s;user-select:none}
+.user-profile-badge:hover{background:rgba(245,158,11,0.18);border-color:var(--accent)}
+.user-avatar{width:26px;height:26px;border-radius:50%;background:rgba(245,158,11,0.25);display:flex;align-items:center;justify-content:center;font-size:14px}
+.user-meta{display:flex;flex-direction:column;line-height:1.2}
+.user-name{font-size:12.5px;font-weight:700;color:#ffffff}
+.user-rank{font-size:10.5px;color:var(--accent2);font-family:var(--font-mono)}
+
+/* 🔒 Modals & Overlays */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);z-index:110;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--bg2);border:1.5px solid rgba(245,158,11,0.45);border-radius:20px;padding:28px;max-width:520px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,0.65);position:relative;animation:fadeIn 0.2s ease-out}
+
+/* 🔒 Level 5 Lead Gating Card */
+.leads-locked-card{background:linear-gradient(135deg,rgba(15,21,34,0.98),rgba(22,30,50,0.98));border:2px solid rgba(245,158,11,0.45);border-radius:18px;padding:48px 32px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.5);margin:20px 0}
+.lock-shield-icon{font-size:56px;margin-bottom:12px;filter:drop-shadow(0 0 18px rgba(245,158,11,0.5))}
+.leads-locked-card h2{font-size:24px;font-family:var(--font-head);color:#ffffff;margin-bottom:8px}
+.lock-subtitle{font-size:14.5px;color:var(--dim);max-width:620px;margin:0 auto 24px;line-height:1.6}
+.gate-progress-card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px 20px;max-width:600px;margin:0 auto 24px;text-align:left}
+.gate-progress-header{display:flex;justify-content:space-between;font-size:13px;font-family:var(--font-mono);color:var(--dim);margin-bottom:8px}
+.gate-progress-track{height:10px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden}
+.gate-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--ok));border-radius:999px;transition:width 0.4s ease}
+.gate-checklist{max-width:600px;margin:0 auto 28px;text-align:left;display:flex;flex-direction:column;gap:10px}
+.gate-check-item{display:flex;align-items:center;gap:12px;background:var(--bg3);border:1px solid var(--line);padding:11px 16px;border-radius:8px;font-size:13.5px;color:#e2e8f0;transition:all 0.15s}
+.gate-check-item.done{border-color:rgba(52,211,153,0.35);background:rgba(52,211,153,0.08);color:#6ee7b7}
+.gate-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* 🎯 Daily Goals & First Sale Math Banner */
+.daily-goals-banner{background:linear-gradient(135deg,rgba(18,24,38,0.98),rgba(28,36,58,0.98));border:1.5px solid rgba(56,189,248,0.35);border-radius:14px;padding:16px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.goal-metric{display:flex;align-items:center;gap:12px}
+.goal-metric-icon{font-size:28px}
+.goal-metric-info div:first-child{font-size:11.5px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase}
+.goal-metric-info div:last-child{font-size:17.5px;font-weight:700;color:#ffffff}
+.goal-metric-info div:last-child span{color:var(--accent2)}
+
+/* 🎓 Closer Academy Cards & Quizzes */
+.academy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-top:20px}
+.academy-card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:24px;transition:all 0.2s;position:relative;display:flex;flex-direction:column}
+.academy-card:hover{border-color:rgba(245,158,11,0.35);transform:translateY(-2px)}
+.academy-card.completed{border-color:rgba(52,211,153,0.4);background:linear-gradient(180deg,rgba(15,21,34,0.98),rgba(16,36,32,0.95))}
+.mod-tag{font-size:11px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px}
+.mod-title{font-size:18px;font-family:var(--font-head);font-weight:700;color:#ffffff;margin-bottom:10px}
+.mod-desc{font-size:13.5px;color:var(--dim);line-height:1.55;margin-bottom:16px;flex:1}
+.mod-quiz-box{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
+.quiz-q-title{font-size:13.5px;font-weight:600;color:#ffffff;margin-bottom:10px}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-opt-btn{background:var(--bg2);border:1px solid var(--line);padding:10px 14px;border-radius:8px;text-align:left;color:var(--ink);font-size:13px;cursor:pointer;transition:all 0.15s;line-height:1.4}
+.quiz-opt-btn:hover{border-color:var(--accent);background:var(--bg3)}
+.quiz-opt-btn.correct{border-color:var(--ok);background:rgba(52,211,153,0.15);color:#6ee7b7;font-weight:600}
+.quiz-opt-btn.wrong{border-color:var(--err);background:rgba(248,113,113,0.15);color:#fca5a5}
+.mod-badge{position:absolute;top:18px;right:18px;font-size:11.5px;font-family:var(--font-mono);padding:3px 8px;border-radius:999px}
+.mod-badge.pending{background:rgba(148,163,184,0.12);color:var(--dim)}
+.mod-badge.passed{background:rgba(52,211,153,0.2);color:#34d399;font-weight:700}
 </style>
 </head>
 <body>
@@ -280,7 +334,14 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     <div class="brand">
       <span>⚡</span> Vantor<b>X</b> Cold Calling Cockpit
     </div>
-    <div style="display:flex;align-items:center;gap:10px">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div class="user-profile-badge" id="userProfileBtn" title="Click to view stats or switch caller account">
+        <span class="user-avatar" id="headerUserAvatar">👑</span>
+        <div class="user-meta">
+          <div class="user-name" id="headerUserName">Luke (Founder)</div>
+          <div class="user-rank" id="headerUserRank">Lvl 5 · Mythic Closer</div>
+        </div>
+      </div>
       <div class="live-demo-pill" id="copyDemoPill" title="Click to copy demo number">
         <span>📞 Demo: (561) 813-8602</span> <span style="font-size:11px">📋</span>
       </div>
@@ -293,6 +354,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 <main class="wrap">
   <div class="tabs">
     <button class="tab-btn active" type="button" id="tabBtnLeads" data-tab="tabLeads" onclick="switchTab('tabLeads')">📋 100-Lead Dial Queue (+25/Day)</button>
+    <button class="tab-btn" type="button" id="tabBtnAcademy" data-tab="tabAcademy" onclick="switchTab('tabAcademy')">🎓 Closer Academy (Certification)</button>
     <button class="tab-btn" type="button" id="tabBtnScript" data-tab="tabScript" onclick="switchTab('tabScript')">📜 Multi-Product Teleprompter</button>
     <button class="tab-btn" type="button" id="tabBtnRPG" data-tab="tabRPG" onclick="switchTab('tabRPG')">🎮 Cold Call Quest (Sales RPG 2.0)</button>
     <button class="tab-btn" type="button" id="tabBtnObjections" data-tab="tabObjections" onclick="switchTab('tabObjections')">🛡️ 45+ Master Objection Library</button>
@@ -301,7 +363,63 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
   <!-- TAB 0: 📋 LEAD DISPATCHER & LEAK CALCULATOR -->
   <div id="tabLeads" class="tab-panel active">
-    <div class="lead-cockpit">
+    <!-- 🔒 Level 5 Gating Card (Shown when locked) -->
+    <div id="leadsLockedGate" class="leads-locked-card" style="display:none">
+      <div class="lock-shield-icon">🔒</div>
+      <h2>Nationwide Leads Dispatcher is Locked</h2>
+      <p class="lock-subtitle">You must reach <strong>Level 5: Certified Closer (500 XP)</strong> and complete the Closer Academy before unlocking live contractor phone numbers.</p>
+      
+      <div class="gate-progress-card">
+        <div class="gate-progress-header">
+          <span>Readiness Progress: <strong>Level <span id="gateCurLevel">1</span> of 5 (<span id="gateCurXp">0</span> / 500 XP)</strong></span>
+          <span><strong id="gateCurPct">0%</strong></span>
+        </div>
+        <div class="gate-progress-track">
+          <div class="gate-progress-fill" id="gateProgressFill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="gate-checklist">
+        <div class="gate-check-item" id="gateCheckMod1"><span class="gate-icon">⏳</span> <span><strong>Module 1:</strong> The 4-Second Disarm &amp; Contractor Psyche (+100 XP)</span></div>
+        <div class="gate-check-item" id="gateCheckMod2"><span class="gate-icon">⏳</span> <span><strong>Module 2:</strong> The $8,000 Leak &amp; Live Demo Drop (+100 XP)</span></div>
+        <div class="gate-check-item" id="gateCheckMod3"><span class="gate-icon">⏳</span> <span><strong>Module 3:</strong> 45+ Knee-Jerk Objection Reflex Blitz (+100 XP)</span></div>
+        <div class="gate-check-item" id="gateCheckMod4"><span class="gate-icon">⏳</span> <span><strong>Module 4:</strong> RPG Combat Sparring (Defeat 2 Bosses) (+100 XP)</span></div>
+        <div class="gate-check-item" id="gateCheckMod5"><span class="gate-icon">⏳</span> <span><strong>Module 5:</strong> Closing &amp; Option 1 Agreement ($697) (+100 XP)</span></div>
+      </div>
+
+      <div class="gate-actions">
+        <button class="btn btn-gold" type="button" onclick="switchTab('tabAcademy')">🎓 Enter Closer Academy ➔</button>
+        <button class="btn btn-ghost" type="button" onclick="switchTab('tabRPG')">⚔️ Spar with Boss in RPG ➔</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="btnFounderOverride" style="border:1px dashed var(--accent);color:var(--accent2);font-size:12px" title="Bypass for Luke/Admin">👑 Founder Instant Bypass</button>
+      </div>
+    </div>
+
+    <!-- Leads Cockpit Container (Shown when unlocked) -->
+    <div id="leadsTableContainer" class="lead-cockpit">
+      <!-- 🎯 Daily Goals & First Sale Math Banner -->
+      <div class="daily-goals-banner">
+        <div class="goal-metric">
+          <div class="goal-metric-icon">🎯</div>
+          <div class="goal-metric-info">
+            <div>Daily Outbound Dials</div>
+            <div><span id="goalDialsDone">0</span> / 75 <small style="font-size:12px;color:var(--dim);font-weight:400">Dials</small></div>
+          </div>
+        </div>
+        <div class="goal-metric">
+          <div class="goal-metric-icon">⚔️</div>
+          <div class="goal-metric-info">
+            <div>Daily Sim Warm-Up</div>
+            <div><span id="goalSimsDone">0</span> / 3 <small style="font-size:12px;color:var(--dim);font-weight:400">Bosses</small></div>
+          </div>
+        </div>
+        <div class="goal-metric">
+          <div class="goal-metric-icon">💰</div>
+          <div class="goal-metric-info">
+            <div>First Sale Math Formula</div>
+            <div style="font-size:13px;font-weight:600;color:#e2e8f0">75 Dials ➔ 12-15 Pickups ➔ 2-3 Live Demos ➔ <span style="color:var(--ok)">1 Closed Deal ($1,694)</span></div>
+          </div>
+        </div>
+      </div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
         <div>
           <h2 style="font-size:22px;margin-bottom:4px;font-family:var(--font-head)">📋 Nationwide Trade Leads Dispatcher &amp; Leak Calculator (250+ Targets)</h2>
@@ -460,6 +578,178 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <!-- Populated via JavaScript from 250 normalized targets -->
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: 🎓 CLOSER ACADEMY (FULL COURSE & LEVEL 5 CERTIFICATION) -->
+  <div id="tabAcademy" class="tab-panel">
+    <div class="lead-cockpit" style="margin-bottom:24px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:16px">
+        <div>
+          <div style="font-size:12px;font-family:var(--font-mono);color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em">Official VantorX Training &amp; Readiness Certification</div>
+          <h2 style="font-size:24px;margin-top:2px;font-family:var(--font-head);color:#ffffff">🎓 Closer Academy: Road to Level 5 (License to Dial)</h2>
+          <p style="color:var(--dim);font-size:14px;max-width:750px">Complete all 5 modules below to earn 500 XP, reach Level 5, and unlock the live Nationwide Leads Dispatcher. Never burn high-ticket contractor leads by guessing on the phone.</p>
+        </div>
+        <div style="background:var(--bg3);border:1px solid rgba(245,158,11,0.3);padding:12px 18px;border-radius:12px;text-align:right">
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Your Certification Progress</div>
+          <div style="font-size:18px;font-weight:700;color:var(--accent2)"><span id="academyCompletedCount">0</span> / 5 Modules Passed</div>
+          <div style="font-size:11.5px;color:#6ee7b7;margin-top:2px" id="academyStatusText">🔒 Leads Locked (Reach Level 5)</div>
+        </div>
+      </div>
+
+      <!-- Academy Readiness Progress Bar -->
+      <div class="quota-meter-wrap" style="margin-top:10px">
+        <div class="quota-meter-header">
+          <span>ACADEMY XP: <strong><span id="academyXpText">0</span> / 500 XP</strong></span>
+          <span>COMPLETION: <strong><span id="academyPctText">0%</span></strong></span>
+        </div>
+        <div class="quota-bar-track" style="height:10px">
+          <div class="quota-bar-fill" id="academyBarFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Interactive Modules Grid -->
+    <div class="academy-grid">
+      <!-- MODULE 1 -->
+      <div class="academy-card" id="modCard1">
+        <span class="mod-badge pending" id="modBadge1">Pending (+100 XP)</span>
+        <div class="mod-tag">Module 1 · Mindset &amp; Openers</div>
+        <div class="mod-title">🧠 Contractor Psyche &amp; The 4-Second Disarm</div>
+        <div class="mod-desc">
+          Trade contractors are stressed, under trucks, or driving trailers. If you sound like a cheerful telemarketer (<em>"Hi, how are you today?"</em>), they hang up in 2 seconds. Use calm peer-to-peer authority: <strong>"Luke with VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?"</strong>
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q1: A contractor barks: <em>"Yeah, who's this? I'm backing up a trailer."</em> What do you say?</div>
+          <div class="quiz-options" data-mod="1" data-q="1">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(1, 1, 0, false)">A) "Hi sir, sorry to bother you! We do artificial intelligence for trades..."</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(1, 1, 1, true)">B) "Luke with VantorX. I know you're in the middle of a job — got 20 seconds or should I hang up?"</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(1, 1, 2, false)">C) "Wait, don't hang up! We can make you $50,000 this month!"</button>
+          </div>
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q2: Why is <em>"or should I hang up?"</em> the ultimate cold call disarm?</div>
+          <div class="quiz-options" data-mod="1" data-q="2">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(1, 2, 0, true)">A) Giving them permission to say no defuses their fight-or-flight reflex and prompts: <em>"Alright, 20 seconds, what is it?"</em></button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(1, 2, 1, false)">B) Because it makes the contractor feel guilty.</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(1, 2, 2, false)">C) Because we actually want them to hang up.</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 2 -->
+      <div class="academy-card" id="modCard2">
+        <span class="mod-badge pending" id="modBadge2">Pending (+100 XP)</span>
+        <div class="mod-tag">Module 2 · The Hook &amp; Proof</div>
+        <div class="mod-title">💸 The $8,000 Revenue Leak &amp; Live Demo Drop</div>
+        <div class="mod-desc">
+          Never pitch generic "AI software". Pitch the <strong>missed high-ticket emergency job</strong>. An HVAC install is $4,500–$9,000. When an AC dies at 7:30 PM, the homeowner calls 3 contractors. The first to answer gets the check. Then drop Ava's phone number live.
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q1: Contractor: <em>"I don't need any software, my phone rings plenty during the day."</em></div>
+          <div class="quiz-options" data-mod="2" data-q="1">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(2, 1, 0, false)">A) "Our software runs on the newest neural network models."</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(2, 1, 1, true)">B) "That's great for 9 to 5, but when an AC compressor blows at 8 PM or on Saturday, where does that call go? If it hits voicemail, they call the next roofer/HVAC guy on Google. Missing one call a month costs you $72k a year."</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(2, 1, 2, false)">C) "Well, your competitors are buying AI so you will lose."</button>
+          </div>
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q2: When should you drop Ava's live demo number <strong>(561) 813-8602</strong>?</div>
+          <div class="quiz-options" data-mod="2" data-q="2">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(2, 2, 0, true)">A) Within 60 seconds of uncovering their leak: invite them to dial it right on speaker or text it while on the phone.</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(2, 2, 1, false)">B) In a follow-up cold email next week.</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(2, 2, 2, false)">C) Only after they sign a contract.</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 3 -->
+      <div class="academy-card" id="modCard3">
+        <span class="mod-badge pending" id="modBadge3">Pending (+100 XP)</span>
+        <div class="mod-tag">Module 3 · Reflex Blitz</div>
+        <div class="mod-title">🛡️ 45+ Knee-Jerk Objection Reflexes</div>
+        <div class="mod-desc">
+          Contractor pushback is a knee-jerk reflex to get off the phone. Never argue. Agree, pivot, and bridge back to the live demo. Test your reflexes on the big 3 objections.
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q1: Contractor: <em>"Just email me some information."</em></div>
+          <div class="quiz-options" data-mod="3" data-q="1">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 1, 0, true)">A) "I can definitely do that, but my emails usually get buried under supplier invoices. If I give you our demo line right now, it takes 30 seconds to hear her on speaker — got a pen or your phone?"</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 1, 1, false)">B) "No, I don't send emails. Listen to me now."</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 1, 2, false)">C) "Sure! What is your email?" (and hang up)</button>
+          </div>
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q2: Contractor: <em>"We already have an answering service."</em></div>
+          <div class="quiz-options" data-mod="3" data-q="2">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 2, 0, true)">A) "Totally get it. Most services take down a misspelled note and email it 2 hours later. Ava actually qualifies the emergency, quotes your rates, and books them in under 5 seconds."</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 2, 1, false)">B) "Answering services are obsolete, fire them today."</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 2, 2, false)">C) "Oh okay, sorry to bother you then."</button>
+          </div>
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q3: Contractor: <em>"How much is this going to cost me?"</em> (Early on call)</div>
+          <div class="quiz-options" data-mod="3" data-q="3">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 3, 0, true)">A) "Between $397 and $697 a month with no long-term contracts. Most contractors cover that with a single booked job in week one. Fair enough?"</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 3, 1, false)">B) "It depends, let's talk for 45 minutes first."</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(3, 3, 2, false)">C) "It's super cheap, only like $50!"</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODULE 4 -->
+      <div class="academy-card" id="modCard4">
+        <span class="mod-badge pending" id="modBadge4">Pending (+100 XP)</span>
+        <div class="mod-tag">Module 4 · Live Simulation</div>
+        <div class="mod-title">⚔️ RPG Combat Sparring (Defeat 2 Bosses)</div>
+        <div class="mod-desc">
+          Theory means nothing until you face real conversational pressure. Jump into <strong>Cold Call Quest (Sales RPG 2.0)</strong>, engage the contractor bosses (Rick the Roofer, Dave the HVAC Owner, or Sal the Commercial Plumber), and bring them to complete agreement under the 2-minute timer.
+        </div>
+
+        <div class="mod-quiz-box" style="text-align:center;padding:24px">
+          <div style="font-size:32px;margin-bottom:8px">🎮⚔️</div>
+          <div style="font-size:16px;font-weight:700;color:#ffffff;margin-bottom:6px">Boss Sparring Requirement:</div>
+          <div style="font-size:20px;font-weight:800;color:var(--accent2);margin-bottom:12px">
+            <span id="mod4BossCount">0</span> / 2 Bosses Defeated
+          </div>
+          <button class="btn btn-gold btn-sm" type="button" onclick="switchTab('tabRPG')" style="width:100%">⚔️ Launch Cold Call Quest Sparring ➔</button>
+        </div>
+      </div>
+
+      <!-- MODULE 5 -->
+      <div class="academy-card" id="modCard5">
+        <span class="mod-badge pending" id="modBadge5">Pending (+100 XP)</span>
+        <div class="mod-tag">Module 5 · High-Ticket Closing</div>
+        <div class="mod-title">🤝 Closing the Deal &amp; Option 1 Agreement</div>
+        <div class="mod-desc">
+          Lock in the sale with authority: <strong>$697/mo Pro AI Receptionist + $997 Setup Fee</strong> (or $397/mo Starter + $497 Setup). Set expectation for 48-hour voice calibration with zero phone disruption.
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q1: Which tier should you recommend first to any 2–10 truck contractor?</div>
+          <div class="quiz-options" data-mod="5" data-q="1">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(5, 1, 0, false)">A) The $397 Starter plan (voice receptionist only).</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(5, 1, 1, true)">B) The $697/mo Pro AI Receptionist + Speed-to-Lead bundle ($997 setup fee) because it captures both after-hours calls and auto-texts website leads in 5 seconds.</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(5, 1, 2, false)">C) Free 30-day trial.</button>
+          </div>
+        </div>
+
+        <div class="mod-quiz-box">
+          <div class="quiz-q-title">Q2: What is the exact launch timeline you promise the contractor?</div>
+          <div class="quiz-options" data-mod="5" data-q="2">
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(5, 2, 0, true)">A) 48 hours — we build Ava's custom knowledge base, test call her live, and configure simple phone forwarding with zero downtime.</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(5, 2, 1, false)">B) 4 to 6 weeks.</button>
+            <button class="quiz-opt-btn" type="button" onclick="checkQuizAnswer(5, 2, 2, false)">C) Same-hour automatic switch.</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1363,6 +1653,74 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   <button class="btn btn-gold" id="closeModalBtn" style="width:100%">Claim Loot &amp; Keep Slaying ➔</button>
 </div>
 
+<!-- 🏆 Level 5 License to Dial Unlocked Modal -->
+<div class="level-up-modal" id="licenseUnlockedModal" style="border-color:var(--ok)">
+  <div style="font-size:54px;margin-bottom:10px">🏆📜</div>
+  <h2 style="font-family:var(--font-head);font-size:26px;color:#34d399;margin-bottom:6px">LICENSE TO DIAL UNLOCKED!</h2>
+  <div style="font-size:18px;font-weight:700;margin-bottom:8px">Level 5: Certified Closer</div>
+  <p style="color:var(--dim);font-size:14px;margin-bottom:20px">You have completed the Closer Academy, mastered the $8,000 leak strategy, and proven your reflexes. <strong>All 100+ Nationwide Trade Leads are now unlocked.</strong></p>
+  <button class="btn btn-gold" id="btnClaimLicense" style="width:100%">Open Nationwide Leads Dispatcher ➔</button>
+</div>
+
+<!-- 👤 Account Switcher / Sign Up Modal -->
+<div class="modal-overlay" id="accountModal">
+  <div class="modal-box">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h3 style="font-family:var(--font-head);font-size:20px;color:var(--accent2);display:flex;align-items:center;gap:8px">
+        <span>👤</span> Rep Profile &amp; Account Center
+      </h3>
+      <button class="btn btn-ghost btn-sm" id="closeAccountModalBtn" style="font-size:16px;padding:4px 10px">✕</button>
+    </div>
+
+    <!-- Active Profile Card -->
+    <div style="background:var(--bg3);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:44px;height:44px;border-radius:50%;background:rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;font-size:22px" id="modalActiveAvatar">👑</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:#ffffff" id="modalActiveName">Luke</div>
+          <div style="font-size:12px;color:var(--accent2);font-family:var(--font-mono)" id="modalActiveRole">Founder &amp; Closer</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:14px;font-weight:700;color:var(--ok)" id="modalActiveLevel">Level 5</div>
+        <div style="font-size:11.5px;color:var(--dim)" id="modalActiveXp">500 / 500 XP</div>
+      </div>
+    </div>
+
+    <!-- Founder God Mode / Bypass Toggle -->
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--accent2)">👑 Founder Lead Bypass (God Mode)</div>
+        <div style="font-size:11.5px;color:var(--dim)">Instantly unlocks leads queue regardless of level</div>
+      </div>
+      <button class="btn btn-gold btn-sm" id="btnToggleFounderBypass">Bypass: ON</button>
+    </div>
+
+    <!-- Switch Existing Account -->
+    <div style="margin-bottom:20px">
+      <label style="display:block;font-size:12.5px;font-weight:600;color:var(--dim);margin-bottom:6px;font-family:var(--font-mono)">SWITCH ACTIVE CALLER PROFILE:</label>
+      <div id="accountProfileList" style="display:flex;flex-direction:column;gap:8px;max-height:160px;overflow-y:auto">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Create New Rep Account Form -->
+    <div style="border-top:1px solid var(--line);padding-top:16px">
+      <div style="font-size:13px;font-weight:700;color:#ffffff;margin-bottom:10px">➕ Create New Sales Rep Account</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <input type="text" id="newRepName" placeholder="Rep Name (e.g. Jason)" class="custom-select" style="width:100%">
+        <select id="newRepRole" class="custom-select" style="width:100%">
+          <option value="Outbound Closer">Outbound Closer</option>
+          <option value="Appointment Setter">Appointment Setter</option>
+          <option value="Sales Rep (Buddy)">Sales Rep (Buddy)</option>
+          <option value="Guest Caller">Guest Caller</option>
+        </select>
+      </div>
+      <button class="btn btn-gold" id="btnCreateAccount" style="width:100%;font-weight:700">Create Rep Account &amp; Start Academy ➔</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">Copied to clipboard!</div>
 
 <script>
@@ -1501,6 +1859,435 @@ window.switchTab = function(targetTabId) {
       head.style.color = isOpen ? '#fca5a5' : 'var(--accent2)';
     });
   });
+
+  // ============================================================
+  // 👤 USER ACCOUNTS, CLOSER ACADEMY & LEVEL 5 GATING ENGINE
+  // ============================================================
+  const DEFAULT_PROFILES = {
+    luke: {
+      id: 'luke',
+      name: 'Luke (Founder)',
+      role: 'Founder & Closer',
+      avatar: '👑',
+      level: 5,
+      xp: 500,
+      isFounder: true,
+      founderBypass: true,
+      modulesPassed: [1, 2, 3, 4, 5],
+      bossesDefeated: 5,
+      dailyDials: 0,
+      dailySims: 0
+    },
+    buddy: {
+      id: 'buddy',
+      name: 'Buddy (Rep 2)',
+      role: 'Outbound Closer',
+      avatar: '⚔️',
+      level: 1,
+      xp: 0,
+      isFounder: false,
+      founderBypass: false,
+      modulesPassed: [],
+      bossesDefeated: 0,
+      dailyDials: 0,
+      dailySims: 0
+    }
+  };
+
+  let USER_PROFILES = {};
+  try {
+    USER_PROFILES = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2')) || DEFAULT_PROFILES;
+  } catch(e) {
+    USER_PROFILES = DEFAULT_PROFILES;
+  }
+  if (!USER_PROFILES.luke) USER_PROFILES.luke = DEFAULT_PROFILES.luke;
+  if (!USER_PROFILES.buddy) USER_PROFILES.buddy = DEFAULT_PROFILES.buddy;
+
+  let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
+  if (!USER_PROFILES[activeUserId]) activeUserId = 'luke';
+
+  function saveUserProfiles() {
+    try {
+      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(USER_PROFILES));
+      localStorage.setItem('vantorx_active_user_id_v2', activeUserId);
+    } catch(e) {}
+  }
+
+  function getActiveUser() {
+    return USER_PROFILES[activeUserId] || USER_PROFILES.luke;
+  }
+
+  function getRankTitle(lvl) {
+    const titles = {
+      1: 'Rookie Phone Warrior',
+      2: 'Cold Call Paladin',
+      3: 'Objection Slayer',
+      4: 'Closing Centurion',
+      5: 'Mythic Rainmaker'
+    };
+    return titles[lvl] || 'Closer';
+  }
+
+  function updateUserUI() {
+    const user = getActiveUser();
+    // 1. Header Badge
+    const hAvatar = document.getElementById('headerUserAvatar');
+    const hName = document.getElementById('headerUserName');
+    const hRank = document.getElementById('headerUserRank');
+    if (hAvatar) hAvatar.textContent = user.avatar || '👤';
+    if (hName) hName.textContent = user.name;
+    if (hRank) hRank.textContent = `Lvl ${user.level} · ${getRankTitle(user.level)}`;
+
+    // 2. Caller Select in Leads Table
+    if (callerSelectEl) {
+      let found = false;
+      for (let i = 0; i < callerSelectEl.options.length; i++) {
+        if (callerSelectEl.options[i].value === user.name) found = true;
+      }
+      if (!found) {
+        const o = document.createElement('option');
+        o.value = user.name;
+        o.textContent = user.name;
+        callerSelectEl.appendChild(o);
+      }
+      callerSelectEl.value = user.name;
+      activeCaller = user.name;
+    }
+
+    // 3. Modal Info
+    const mAvatar = document.getElementById('modalActiveAvatar');
+    const mName = document.getElementById('modalActiveName');
+    const mRole = document.getElementById('modalActiveRole');
+    const mLevel = document.getElementById('modalActiveLevel');
+    const mXp = document.getElementById('modalActiveXp');
+    if (mAvatar) mAvatar.textContent = user.avatar || '👤';
+    if (mName) mName.textContent = user.name;
+    if (mRole) mRole.textContent = user.role;
+    if (mLevel) mLevel.textContent = `Level ${user.level} · ${getRankTitle(user.level)}`;
+    if (mXp) mXp.textContent = `${user.xp} / 500 XP`;
+
+    // 4. Founder bypass button
+    const btnBypass = document.getElementById('btnToggleFounderBypass');
+    if (btnBypass) {
+      btnBypass.textContent = user.founderBypass ? 'Bypass: ON' : 'Bypass: OFF';
+      btnBypass.className = user.founderBypass ? 'btn btn-gold btn-sm' : 'btn btn-ghost btn-sm';
+    }
+
+    // 5. Update components
+    updateLeadGateVisibility();
+    updateAcademyUI();
+    updateDailyGoalsUI();
+    renderAccountProfileList();
+  }
+
+  function updateLeadGateVisibility() {
+    const user = getActiveUser();
+    const isUnlocked = user.level >= 5 || user.founderBypass === true;
+    const gateCard = document.getElementById('leadsLockedGate');
+    const tableContainer = document.getElementById('leadsTableContainer');
+
+    if (gateCard && tableContainer) {
+      if (isUnlocked) {
+        gateCard.style.display = 'none';
+        tableContainer.style.display = 'block';
+      } else {
+        gateCard.style.display = 'block';
+        tableContainer.style.display = 'none';
+
+        const curLevel = document.getElementById('gateCurLevel');
+        const curXp = document.getElementById('gateCurXp');
+        const curPct = document.getElementById('gateCurPct');
+        const barFill = document.getElementById('gateProgressFill');
+        const pct = Math.min(100, Math.round((user.xp / 500) * 100));
+
+        if (curLevel) curLevel.textContent = user.level;
+        if (curXp) curXp.textContent = user.xp;
+        if (curPct) curPct.textContent = `${pct}%`;
+        if (barFill) barFill.style.width = `${pct}%`;
+
+        for (let m = 1; m <= 5; m++) {
+          const item = document.getElementById(`gateCheckMod${m}`);
+          if (item) {
+            const isDone = user.modulesPassed.includes(m);
+            if (isDone) {
+              item.classList.add('done');
+              const icon = item.querySelector('.gate-icon');
+              if (icon) icon.textContent = '✓';
+            } else {
+              item.classList.remove('done');
+              const icon = item.querySelector('.gate-icon');
+              if (icon) icon.textContent = '⏳';
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function updateAcademyUI() {
+    const user = getActiveUser();
+    const countEl = document.getElementById('academyCompletedCount');
+    const xpText = document.getElementById('academyXpText');
+    const pctText = document.getElementById('academyPctText');
+    const barFill = document.getElementById('academyBarFill');
+    const statusText = document.getElementById('academyStatusText');
+
+    const passedCount = user.modulesPassed.length;
+    const pct = Math.min(100, Math.round((user.xp / 500) * 100));
+
+    if (countEl) countEl.textContent = passedCount;
+    if (xpText) xpText.textContent = user.xp;
+    if (pctText) pctText.textContent = `${pct}%`;
+    if (barFill) barFill.style.width = `${pct}%`;
+
+    if (statusText) {
+      if (user.level >= 5 || user.founderBypass) {
+        statusText.textContent = '🎉 Level 5 Certified · Leads Unlocked!';
+        statusText.style.color = 'var(--ok)';
+      } else {
+        statusText.textContent = '🔒 Leads Locked (Reach Level 5)';
+        statusText.style.color = 'var(--accent2)';
+      }
+    }
+
+    for (let m = 1; m <= 5; m++) {
+      const card = document.getElementById(`modCard${m}`);
+      const badge = document.getElementById(`modBadge${m}`);
+      const isPassed = user.modulesPassed.includes(m);
+      if (card) {
+        if (isPassed) card.classList.add('completed');
+        else card.classList.remove('completed');
+      }
+      if (badge) {
+        if (isPassed) {
+          badge.textContent = '✓ Certified (+100 XP)';
+          badge.className = 'mod-badge passed';
+        } else {
+          badge.textContent = 'Pending (+100 XP)';
+          badge.className = 'mod-badge pending';
+        }
+      }
+    }
+
+    const bCount = document.getElementById('mod4BossCount');
+    if (bCount) bCount.textContent = user.bossesDefeated || 0;
+  }
+
+  function updateDailyGoalsUI() {
+    const user = getActiveUser();
+    const gDials = document.getElementById('goalDialsDone');
+    const gSims = document.getElementById('goalSimsDone');
+    if (gDials) gDials.textContent = user.dailyDials || 0;
+    if (gSims) gSims.textContent = user.dailySims || 0;
+  }
+
+  window.checkQuizAnswer = function(modNum, qNum, optIndex, isCorrect) {
+    const user = getActiveUser();
+    const qBox = document.querySelector(`.quiz-options[data-mod="${modNum}"][data-q="${qNum}"]`);
+    if (!qBox) return;
+
+    const btns = qBox.querySelectorAll('.quiz-opt-btn');
+    btns.forEach((btn, idx) => {
+      btn.disabled = true;
+      if (idx === optIndex) {
+        if (isCorrect) {
+          btn.classList.add('correct');
+          playSound('hit');
+          showToast('✓ Correct! Great conversational reflex.');
+        } else {
+          btn.classList.add('wrong');
+          playSound('slash');
+          showToast('❌ Incorrect response. Contractors will hang up!');
+          setTimeout(() => {
+            btns.forEach(b => {
+              b.disabled = false;
+              b.classList.remove('wrong', 'correct');
+            });
+          }, 1800);
+        }
+      }
+    });
+
+    if (!isCorrect) return;
+
+    // Check if entire module is complete
+    const modQBoxes = document.querySelectorAll(`.quiz-options[data-mod="${modNum}"]`);
+    let allAnswered = true;
+    modQBoxes.forEach(box => {
+      const hasCorrect = box.querySelector('.quiz-opt-btn.correct');
+      if (!hasCorrect) allAnswered = false;
+    });
+
+    if (allAnswered && !user.modulesPassed.includes(modNum)) {
+      user.modulesPassed.push(modNum);
+      user.xp = Math.min(500, user.xp + 100);
+      user.level = Math.min(5, Math.floor(user.xp / 100) + 1);
+
+      playSound('levelup');
+      showToast(`🎉 Module ${modNum} Passed! +100 XP (Level ${user.level})!`);
+
+      if (user.level >= 5) showLicenseUnlockedModal();
+
+      saveUserProfiles();
+      updateUserUI();
+    }
+  };
+
+  function recordBossDefeat(bossKey) {
+    const user = getActiveUser();
+    user.bossesDefeated = (user.bossesDefeated || 0) + 1;
+    user.dailySims = (user.dailySims || 0) + 1;
+
+    if (user.bossesDefeated >= 2 && !user.modulesPassed.includes(4)) {
+      user.modulesPassed.push(4);
+      user.xp = Math.min(500, user.xp + 100);
+      user.level = Math.min(5, Math.floor(user.xp / 100) + 1);
+      playSound('levelup');
+      showToast('🎉 Module 4 Complete: 2 Bosses Slayed! +100 XP Earned!');
+      if (user.level >= 5) showLicenseUnlockedModal();
+    }
+
+    saveUserProfiles();
+    updateUserUI();
+  }
+
+  function showLicenseUnlockedModal() {
+    const modal = document.getElementById('licenseUnlockedModal');
+    if (modal) {
+      modal.classList.add('active');
+      playSound('levelup');
+    }
+  }
+
+  const btnClaimLicense = document.getElementById('btnClaimLicense');
+  if (btnClaimLicense) {
+    btnClaimLicense.addEventListener('click', () => {
+      const modal = document.getElementById('licenseUnlockedModal');
+      if (modal) modal.classList.remove('active');
+      window.switchTab('tabLeads');
+    });
+  }
+
+  const userProfileBtn = document.getElementById('userProfileBtn');
+  const accountModal = document.getElementById('accountModal');
+  const closeAccountModalBtn = document.getElementById('closeAccountModalBtn');
+
+  if (userProfileBtn && accountModal) {
+    userProfileBtn.addEventListener('click', () => {
+      accountModal.classList.add('active');
+      renderAccountProfileList();
+    });
+  }
+  if (closeAccountModalBtn && accountModal) {
+    closeAccountModalBtn.addEventListener('click', () => {
+      accountModal.classList.remove('active');
+    });
+  }
+
+  const btnToggleFounderBypass = document.getElementById('btnToggleFounderBypass');
+  if (btnToggleFounderBypass) {
+    btnToggleFounderBypass.addEventListener('click', () => {
+      const user = getActiveUser();
+      user.founderBypass = !user.founderBypass;
+      saveUserProfiles();
+      updateUserUI();
+      showToast(`Founder Bypass: ${user.founderBypass ? 'ACTIVE (All Leads Unlocked)' : 'INACTIVE (Gated to Level 5)'}`);
+    });
+  }
+
+  const btnFounderOverride = document.getElementById('btnFounderOverride');
+  if (btnFounderOverride) {
+    btnFounderOverride.addEventListener('click', () => {
+      const user = getActiveUser();
+      user.founderBypass = true;
+      saveUserProfiles();
+      updateUserUI();
+      showToast('👑 Founder Bypass Activated! Leads Dispatcher Unlocked.');
+    });
+  }
+
+  function renderAccountProfileList() {
+    const list = document.getElementById('accountProfileList');
+    if (!list) return;
+    list.innerHTML = '';
+    Object.keys(USER_PROFILES).forEach(uid => {
+      const u = USER_PROFILES[uid];
+      const isCur = uid === activeUserId;
+      const row = document.createElement('div');
+      row.style.display = 'flex';
+      row.style.alignItems = 'center';
+      row.style.justifyContent = 'space-between';
+      row.style.background = isCur ? 'rgba(245,158,11,0.14)' : 'var(--bg)';
+      row.style.border = isCur ? '1.5px solid var(--accent)' : '1px solid var(--line)';
+      row.style.borderRadius = '8px';
+      row.style.padding = '8px 12px';
+      row.style.cursor = 'pointer';
+
+      row.innerHTML = `
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:16px">${u.avatar || '👤'}</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#ffffff">${u.name} ${isCur ? '<span style="font-size:10px;color:var(--accent2)">(Active)</span>' : ''}</div>
+            <div style="font-size:11px;color:var(--dim)">${u.role} · Level ${u.level} (${u.xp} XP)</div>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:4px 8px">${isCur ? '✓ Using' : 'Switch ➔'}</button>
+      `;
+
+      row.addEventListener('click', () => {
+        activeUserId = uid;
+        saveUserProfiles();
+        updateUserUI();
+        showToast(`Switched active caller to: ${u.name}`);
+        if (accountModal) accountModal.classList.remove('active');
+      });
+
+      list.appendChild(row);
+    });
+  }
+
+  const btnCreateAccount = document.getElementById('btnCreateAccount');
+  if (btnCreateAccount) {
+    btnCreateAccount.addEventListener('click', () => {
+      const nameInput = document.getElementById('newRepName');
+      const roleSelect = document.getElementById('newRepRole');
+      const name = nameInput ? nameInput.value.trim() : '';
+      const role = roleSelect ? roleSelect.value : 'Outbound Closer';
+
+      if (!name) {
+        showToast('Please enter a name for the new sales rep account.');
+        return;
+      }
+
+      const uid = 'rep_' + Date.now().toString(36);
+      const avatars = ['⚡', '⚔️', '🎯', '🔥', '🛡️', '🚀'];
+      const chosenAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+
+      USER_PROFILES[uid] = {
+        id: uid,
+        name: name,
+        role: role,
+        avatar: chosenAvatar,
+        level: 1,
+        xp: 0,
+        isFounder: false,
+        founderBypass: false,
+        modulesPassed: [],
+        bossesDefeated: 0,
+        dailyDials: 0,
+        dailySims: 0
+      };
+
+      activeUserId = uid;
+      if (nameInput) nameInput.value = '';
+      saveUserProfiles();
+      updateUserUI();
+      playSound('levelup');
+      showToast(`✓ Account created for ${name}! Welcome to the Closer Academy.`);
+      if (accountModal) accountModal.classList.remove('active');
+      window.switchTab('tabAcademy');
+    });
+  }
 
   // ============================================================
   // 📋 LEAD DISPATCHER, DAILY 25-LEAD ENGINE & CALL TRACKER
@@ -1732,11 +2519,19 @@ window.switchTab = function(targetTabId) {
             outcome: prevOutcome,
             notes: prevNotes
           };
+          const u = getActiveUser();
+          u.dailyDials = (u.dailyDials || 0) + 1;
+          saveUserProfiles();
+          updateDailyGoalsUI();
           showToast(`✓ Marked ${lead?.company || 'Lead'} as Called by ${activeCaller}!`);
         } else {
           if (CALL_RECORDS[id]) {
             CALL_RECORDS[id].called = false;
           }
+          const u = getActiveUser();
+          u.dailyDials = Math.max(0, (u.dailyDials || 1) - 1);
+          saveUserProfiles();
+          updateDailyGoalsUI();
           showToast('Unmarked call status.');
         }
         saveCallRecords();
@@ -2957,6 +3752,7 @@ window.switchTab = function(targetTabId) {
       speakContractor(currentBoss.dialogue.victory);
 
       turnIndicator.textContent = 'VICTORY! COMPLETE AGREEMENT REACHED.';
+      recordBossDefeat(currentBoss.key);
       return;
     }
 
@@ -3036,6 +3832,7 @@ window.switchTab = function(targetTabId) {
   });
 
   // Initialization
+  updateUserUI();
   updateBatchHeading();
   renderLeadsTable();
   renderMasterObjectionCards('all', '');
