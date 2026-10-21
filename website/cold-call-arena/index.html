@@ -1198,15 +1198,15 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         </div>
       </div>
 
-      <!-- ⏳ 30-Second Contractor Impatience Clock Banner -->
+      <!-- ⏱️ 2-Minute Contractor Patience Clock Banner -->
       <div class="impatience-banner" id="impatienceBanner">
         <div class="impatience-top">
           <div class="impatience-title">
-            <span style="font-size:16px">⏳</span>
-            <span>CONTRACTOR IMPATIENCE CLOCK:</span>
-            <span class="impatience-digits" id="impatienceDigits">30s</span>
+            <span style="font-size:16px">⏱️</span>
+            <span>CONTRACTOR PATIENCE CLOCK:</span>
+            <span class="impatience-digits" id="impatienceDigits">2:00</span>
           </div>
-          <div class="impatience-warn" id="impatienceWarn">⚠️ 30s pause or hesitation = Boss regains +20 HP!</div>
+          <div class="impatience-warn" id="impatienceWarn">⚠️ 2 min pause or hesitation = Boss regains +20 HP!</div>
         </div>
         <div class="impatience-track">
           <div class="impatience-fill" id="impatienceFill"></div>
@@ -6743,8 +6743,15 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   let currentBoss = Object.assign({}, dungeons.roofer);
   let currentStage = 1;
   let matchStarted = false;
-  let impatienceRemaining = 30;
+  const IMPATIENCE_MAX = 120; // 2 minutes conversational clock
+  let impatienceRemaining = IMPATIENCE_MAX;
   let impatienceInterval = null;
+
+  function formatImpatience(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  }
 
   const playerHpBar = document.getElementById('playerHpBar');
   const playerHpText = document.getElementById('playerHpText');
@@ -6827,11 +6834,11 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     if (!matchStarted) return;
     if (impatienceInterval) clearInterval(impatienceInterval);
     if (impatienceWarn) {
-      impatienceWarn.textContent = '⚠️ 30s pause or hesitation = Boss regains +20 HP!';
+      impatienceWarn.textContent = '⚠️ 2 min pause or hesitation = Boss regains +20 HP!';
       impatienceWarn.style.color = 'var(--err)';
     }
-    impatienceRemaining = 30;
-    impatienceDigits.textContent = '30s';
+    impatienceRemaining = IMPATIENCE_MAX;
+    impatienceDigits.textContent = formatImpatience(impatienceRemaining);
     impatienceDigits.classList.remove('urgent');
     impatienceFill.style.width = '100%';
 
@@ -6842,10 +6849,10 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       }
 
       impatienceRemaining--;
-      impatienceDigits.textContent = impatienceRemaining + 's';
-      impatienceFill.style.width = (impatienceRemaining / 30 * 100) + '%';
+      impatienceDigits.textContent = formatImpatience(impatienceRemaining);
+      impatienceFill.style.width = (impatienceRemaining / IMPATIENCE_MAX * 100) + '%';
 
-      if (impatienceRemaining <= 8) {
+      if (impatienceRemaining <= 15) {
         impatienceDigits.classList.add('urgent');
       }
 
@@ -6868,14 +6875,14 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         const bark = impatientQuotes[Math.floor(Math.random() * impatientQuotes.length)];
 
         appendLog(`<strong>${currentBoss.name} shouts:</strong> ${bark}`, 'boss');
-        appendLog(`⚠️ <strong>DEAD AIR PENALTY:</strong> 30-second hesitation allowed contractor to regain composure! Boss <strong>regained +${regenAmount} HP</strong> (+${regenAmount} Resistance). You took <strong>${playerDmg} Rejection Damage</strong>!`, 'regen');
+        appendLog(`⚠️ <strong>DEAD AIR PENALTY:</strong> 2-minute hesitation allowed contractor to regain composure! Boss <strong>regained +${regenAmount} HP</strong> (+${regenAmount} Resistance). You took <strong>${playerDmg} Rejection Damage</strong>!`, 'regen');
 
         appendLog(`
           <div class="coach-head">
             <span class="coach-title">🧑‍🏫 <strong>COACH VANCE WARNING</strong></span>
             <span class="coach-grade-badge grade-f">GRADE F · DEAD AIR</span>
           </div>
-          <div class="coach-critique">Contractors are busy and impatient. 5+ seconds of dead air kills the call and triggers instant hang-up resistance. Keep your momentum!</div>
+          <div class="coach-critique">Contractors are busy and impatient. 2 minutes of silence kills call momentum and triggers hang-up resistance. Keep your momentum!</div>
           <div class="coach-prescription">💡 <strong>Coach Tip:</strong> When stuck, ask for permission or state: <em>"Where does an $8k emergency call ring right now?"</em></div>
         `, 'coach');
 
@@ -6911,11 +6918,11 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     combatLog.innerHTML = '';
     appendLog(`⚔️ <strong>ENTERED ${currentBoss.title.toUpperCase()}</strong>`, 'system');
     appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.stage1}"`, 'boss');
-    appendLog(`⏸️ <strong>READY TO ENGAGE:</strong> Game clock is paused. The match and 30-second conversational clock will start when you send your first reply!`, 'system');
+    appendLog(`⏸️ <strong>READY TO ENGAGE:</strong> Game clock is paused. The match and 2-minute conversational clock will start when you send your first reply!`, 'system');
     turnIndicator.textContent = 'GAME PAUSED: SEND YOUR FIRST CHAT TO START';
 
-    impatienceRemaining = 30;
-    impatienceDigits.textContent = 'READY · 30s';
+    impatienceRemaining = IMPATIENCE_MAX;
+    impatienceDigits.textContent = 'READY · 2:00';
     impatienceDigits.classList.remove('urgent');
     impatienceFill.style.width = '100%';
     if (impatienceWarn) {
@@ -7297,7 +7304,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
     if (!matchStarted) {
       matchStarted = true;
-      appendLog(`⚔️ <strong>CALL ENGAGED:</strong> Battle commenced! The 30-second conversational clock is now active.`, 'system');
+      appendLog(`⚔️ <strong>CALL ENGAGED:</strong> Battle commenced! The 2-minute conversational clock is now active.`, 'system');
       if (sendAttackBtn) sendAttackBtn.innerHTML = '⚔️ Send Rebuttal ➔';
       if (customAttackInput) customAttackInput.placeholder = 'Type or speak what you say to the contractor out loud...';
     }
