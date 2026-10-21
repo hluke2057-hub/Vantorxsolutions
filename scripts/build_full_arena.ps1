@@ -1,4 +1,4 @@
-﻿# PowerShell script to build the complete multi-product cold calling cockpit
+# PowerShell script to build the complete multi-product cold calling cockpit
 $ErrorActionPreference = "Stop"
 
 $leadsRaw = [System.IO.File]::ReadAllText("$PSScriptRoot/../data/normalized_lead_targets.json", [System.Text.Encoding]::UTF8)
@@ -9,8 +9,9 @@ $htmlTemplate = @'
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VantorX — Cold Calling Cockpit, Leads Dispatcher &amp; Sales RPG</title>
-<meta name="description" content="Multi-product cold calling teleprompter, 80 Florida trade leads dispatcher with annual leak calculator, 45+ objection battlecards, and Cold Call Quest RPG.">
+<title>VantorX — Cold Calling Cockpit, 250+ Nationwide Leads &amp; Sales RPG</title>
+<meta name="description" content="Multi-product cold calling teleprompter, 250+ nationwide trade leads dispatcher with 25-daily automated rotation, call tracking, 45+ objection battlecards, and Cold Call Quest RPG.">
+<meta name="version" content="2.2.0-daily-leads">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
