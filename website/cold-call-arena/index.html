@@ -155,7 +155,18 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
           "I'll be super quick: I was looking at your Google profile in <em>[City]</em>. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose the $8,000 job to the next competitor. <strong>Where does that call ring for you right now?</strong>"
         </div>
         <div class="delivery-tip">
-          💡 <em>Delivery Tip:</em> Stop talking completely and let them answer. They will either say "my cell" or "answering service" or "voicemail." Whatever they say is your bridge to Phase 3.
+          💡 <em>Delivery Tip:</em> Stop talking completely and let them answer. Select your bridge below based on what they say:
+        </div>
+        <div style="margin-top:14px;display:grid;gap:8px">
+          <div style="background:var(--bg2);padding:10px 14px;border-radius:8px;font-size:13.5px;border-left:3px solid #38bdf8">
+            <strong style="color:#38bdf8">👉 If they say "Voicemail / Check Monday":</strong> "And that's the bleeding point — homeowners in an emergency won't wait. They hang up and call the next contractor down the list. That's exactly why we built Ava."
+          </div>
+          <div style="background:var(--bg2);padding:10px 14px;border-radius:8px;font-size:13.5px;border-left:3px solid #38bdf8">
+            <strong style="color:#38bdf8">👉 If they say "My cell / I take it":</strong> "Man, you're working 24/7! You're either interrupting dinner with your family or answering calls covered in dust on a job. That's exactly why we built Ava — to be your filter."
+          </div>
+          <div style="background:var(--bg2);padding:10px 14px;border-radius:8px;font-size:13.5px;border-left:3px solid #38bdf8">
+            <strong style="color:#38bdf8">👉 If they say "Answering service":</strong> "Those services usually take 15 minutes to relay a message, and half the time they misspell the address. That's exactly why we built Ava."
+          </div>
         </div>
       </div>
 
@@ -183,12 +194,16 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
       <p style="color:var(--dim);font-size:14px;margin-bottom:20px">Click any objection to view the lethal word-for-word rebuttal:</p>
 
       <div class="obj-filter">
-        <button class="obj-pill active" data-obj="all">All Objections</button>
+        <button class="obj-pill active" data-obj="all">All Objections (10)</button>
         <button class="obj-pill" data-obj="email">"Send me an email"</button>
         <button class="obj-pill" data-obj="have_one">"We already have someone"</button>
         <button class="obj-pill" data-obj="cost">"How much does it cost?"</button>
         <button class="obj-pill" data-obj="robot">"AI sounds robotic"</button>
         <button class="obj-pill" data-obj="busy">"I'm slammed on a job"</button>
+        <button class="obj-pill" data-obj="capacity">"Plenty of work"</button>
+        <button class="obj-pill" data-obj="partner">"Talk to partner/wife"</button>
+        <button class="obj-pill" data-obj="scam">"Is this a scam?"</button>
+        <button class="obj-pill" data-obj="not_interested">"Not interested"</button>
         <button class="obj-pill" data-obj="gatekeeper">Gatekeeper Bypass</button>
       </div>
 
@@ -251,6 +266,46 @@ header{background:rgba(15,21,34,0.85);backdrop-filter:blur(14px);border-bottom:1
             <strong>Is he out on a job site right now or in the office later this afternoon?</strong>"
           </div>
           <div class="obj-note">💡 <strong>Why this works:</strong> Sounds casual, relaxed, and like a familiar peer. Never say 'I am a sales rep selling AI software'.</div>
+        </div>
+
+        <!-- Objection 7 -->
+        <div class="obj-card" data-category="capacity">
+          <div class="obj-title">❌ "We have plenty of work / we're not looking for more leads."</div>
+          <div class="obj-rebuttal">
+            "That's the best position to be in, <em>[Name]</em>! But this isn't about getting more leads — it's about <strong>reputation and high-ticket emergencies</strong>.<br><br>
+            When your best repeat customer calls you on a Saturday with an emergency and gets your voicemail, they get frustrated. Ava ensures your existing VIP clients get answered in 1 ring 24/7."
+          </div>
+          <div class="obj-note">💡 <strong>Why this works:</strong> Reframes from 'sales leads' to customer retention and VIP reputation.</div>
+        </div>
+
+        <!-- Objection 8 -->
+        <div class="obj-card" data-category="scam">
+          <div class="obj-title">❌ "How did you get my number / is this a scam?"</div>
+          <div class="obj-rebuttal">
+            "I found your listing right on Google in <em>[City]</em> — your phone number is public right on your business profile!<br><br>
+            I'm based right here in South Florida. I'm not asking for your credit card or selling you anything right now. I literally just wanted you to hear Ava on <strong>(561) 813-8602</strong> and see what's possible."
+          </div>
+          <div class="obj-note">💡 <strong>Why this works:</strong> Radical transparency. Shows you are a real local person, not an overseas spam bot.</div>
+        </div>
+
+        <!-- Objection 9 -->
+        <div class="obj-card" data-category="partner">
+          <div class="obj-title">❌ "I need to talk to my business partner / wife first."</div>
+          <div class="obj-rebuttal">
+            "100% — you should definitely talk to them! But don't try to explain voice AI to them yourself.<br><br>
+            <strong>Put them on speakerphone tonight and dial (561) 813-8602 together.</strong> Test her for 60 seconds. If both of you love it, let's talk tomorrow."
+          </div>
+          <div class="obj-note">💡 <strong>Why this works:</strong> Eliminates second-hand pitch telephone syndrome. Giving them a 60-second test number does the selling for you.</div>
+        </div>
+
+        <!-- Objection 10 -->
+        <div class="obj-card" data-category="not_interested">
+          <div class="obj-title">❌ "I'm not interested." (Instant Cold Defense)</div>
+          <div class="obj-rebuttal">
+            "Fair enough, <em>[Name]</em> — I'll get out of your hair!<br><br>
+            Before I hang up, just save this in your cell: <strong>(561) 813-8602</strong>. If you ever have a weekend where you're tired of answering emergency calls while eating dinner, dial it."
+          </div>
+          <div class="obj-note">💡 <strong>Why this works:</strong> Never fight a hard no. Exiting with grace and planting the number in their phone keeps the door open.</div>
         </div>
       </div>
     </div>
