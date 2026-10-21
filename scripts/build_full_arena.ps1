@@ -1,4 +1,4 @@
-# PowerShell script to build the complete multi-product cold calling cockpit
+﻿# PowerShell script to build the complete multi-product cold calling cockpit
 $ErrorActionPreference = "Stop"
 
 $leadsRaw = [System.IO.File]::ReadAllText("$PSScriptRoot/../data/normalized_lead_targets.json", [System.Text.Encoding]::UTF8)
@@ -2247,6 +2247,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   let currentDungeonKey = 'roofer';
   let currentBoss = Object.assign({}, dungeons.roofer);
   let currentStage = 1;
+  let matchStarted = false;
   let impatienceRemaining = 30;
   let impatienceInterval = null;
 
@@ -2271,6 +2272,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
   const impatienceDigits = document.getElementById('impatienceDigits');
   const impatienceFill = document.getElementById('impatienceFill');
+  const impatienceWarn = document.getElementById('impatienceWarn');
+  const sendAttackBtn = document.getElementById('sendAttackBtn');
+  const customAttackInput = document.getElementById('customAttackInput');
   const coachHintDrawer = document.getElementById('coachHintDrawer');
   const coachHintText = document.getElementById('coachHintText');
   const requestHintBtn = document.getElementById('requestHintBtn');
@@ -2325,7 +2329,12 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   }
 
   function startImpatienceTimer() {
+    if (!matchStarted) return;
     if (impatienceInterval) clearInterval(impatienceInterval);
+    if (impatienceWarn) {
+      impatienceWarn.textContent = '⚠️ 30s pause or hesitation = Boss regains +20 HP!';
+      impatienceWarn.style.color = 'var(--err)';
+    }
     impatienceRemaining = 30;
     impatienceDigits.textContent = '30s';
     impatienceDigits.classList.remove('urgent');
@@ -2393,6 +2402,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
   function startDungeon(key) {
     pauseImpatienceTimer();
+    matchStarted = false;
     currentDungeonKey = key;
     currentBoss = Object.assign({}, dungeons[key]);
     currentBoss.hp = currentBoss.maxHp;
@@ -2406,11 +2416,24 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     combatLog.innerHTML = '';
     appendLog(`⚔️ <strong>ENTERED ${currentBoss.title.toUpperCase()}</strong>`, 'system');
     appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.stage1}"`, 'boss');
-    turnIndicator.textContent = 'YOUR TURN: SPEAK OR TYPE REBUTTAL';
+    appendLog(`⏸️ <strong>READY TO ENGAGE:</strong> Game clock is paused. The match and 30-second conversational clock will start when you send your first reply!`, 'system');
+    turnIndicator.textContent = 'GAME PAUSED: SEND YOUR FIRST CHAT TO START';
+
+    impatienceRemaining = 30;
+    impatienceDigits.textContent = 'READY · 30s';
+    impatienceDigits.classList.remove('urgent');
+    impatienceFill.style.width = '100%';
+    if (impatienceWarn) {
+      impatienceWarn.textContent = '⏸️ Game clock paused — starts when you send your first reply!';
+      impatienceWarn.style.color = 'var(--accent2)';
+    }
+
+    if (sendAttackBtn) sendAttackBtn.innerHTML = '⚔️ Send First Reply ➔';
+    if (customAttackInput) customAttackInput.placeholder = 'Send your first reply to start the game and begin the call...';
+
     speakContractor(currentBoss.dialogue.stage1);
 
     updateHUD();
-    startImpatienceTimer();
   }
 
   function addXP(amount) {
@@ -2777,6 +2800,13 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     if (player.hp <= 0 || currentBoss.hp <= 0) return;
     pauseImpatienceTimer();
 
+    if (!matchStarted) {
+      matchStarted = true;
+      appendLog(`⚔️ <strong>CALL ENGAGED:</strong> Battle commenced! The 30-second conversational clock is now active.`, 'system');
+      if (sendAttackBtn) sendAttackBtn.innerHTML = '⚔️ Send Rebuttal ➔';
+      if (customAttackInput) customAttackInput.placeholder = 'Type or speak what you say to the contractor out loud...';
+    }
+
     appendLog(`<strong>Luke says:</strong> "${userText}"`, 'luke');
     coachHintDrawer.style.display = 'none';
 
@@ -2815,6 +2845,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       updateHUD();
       player.streak++;
       playSound('levelup');
+      matchStarted = false;
+      pauseImpatienceTimer();
+      if (impatienceDigits) impatienceDigits.textContent = 'VICTORY';
 
       appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.victory}"`, 'boss');
       appendLog(`🏆 <strong>BOSS DEFEATED — COMPLETE AGREEMENT REACHED!</strong> ${currentBoss.name} agreed to test Ava on (561) 813-8602!`, 'victory');
@@ -2870,6 +2903,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     player.hp = 0;
     player.streak = 0;
     pauseImpatienceTimer();
+    matchStarted = false;
+    if (impatienceDigits) impatienceDigits.textContent = 'DEFEAT';
     updateHUD();
     appendLog(`💀 <strong>KNOCKED OUT!</strong> You took too much emotional rejection damage. Click 'Restart Dungeon Match' to try again!`, 'system');
     turnIndicator.textContent = 'DEFEAT. REST AND RETRY.';
