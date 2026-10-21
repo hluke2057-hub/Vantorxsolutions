@@ -319,6 +319,19 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .mod-badge{position:absolute;top:18px;right:18px;font-size:11.5px;font-family:var(--font-mono);padding:3px 8px;border-radius:999px}
 .mod-badge.pending{background:rgba(148,163,184,0.12);color:var(--dim)}
 .mod-badge.passed{background:rgba(52,211,153,0.2);color:#34d399;font-weight:700}
+
+/* ⚔️ Prominent Caller Switcher / Login Banner */
+.caller-bar{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,rgba(18,24,38,0.98),rgba(24,32,52,0.98));border:1px solid rgba(245,158,11,0.35);border-radius:12px;padding:10px 18px;margin-bottom:16px;flex-wrap:wrap;gap:12px;box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.caller-bar-status{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.caller-badge-dot{width:9px;height:9px;background:var(--ok);border-radius:50%;box-shadow:0 0 8px var(--ok);display:inline-block;animation:pulse 2s infinite}
+.caller-name-highlight{font-weight:700;color:#ffffff;font-size:14.5px}
+.caller-level-pill{font-size:11.5px;font-family:var(--font-mono);background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.4);color:var(--accent2);padding:2px 8px;border-radius:999px}
+.caller-bar-buttons{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.caller-switch-pill{background:var(--bg2);border:1px solid var(--line);color:var(--ink);font-size:12.5px;padding:6px 12px;border-radius:8px;cursor:pointer;transition:all 0.15s ease;font-weight:500}
+.caller-switch-pill:hover{border-color:var(--accent);background:var(--bg3);color:#ffffff}
+.caller-switch-pill.active{background:linear-gradient(135deg,rgba(245,158,11,0.25),rgba(217,119,6,0.3));border-color:var(--accent);color:#ffffff;font-weight:700;box-shadow:0 0 10px rgba(245,158,11,0.2)}
+.caller-switch-pill.add-rep{background:rgba(56,189,248,0.12);border-color:rgba(56,189,248,0.35);color:#38bdf8}
+.caller-switch-pill.add-rep:hover{background:rgba(56,189,248,0.25);border-color:#38bdf8;color:#ffffff}
 </style>
 </head>
 <body>
@@ -329,23 +342,39 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <span>⚡</span> Vantor<b>X</b> Cold Calling Cockpit
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <div class="user-profile-badge" id="userProfileBtn" title="Click to view stats or switch caller account">
+      <div class="user-profile-badge" id="userProfileBtn" onclick="openAccountModal()" title="Click to view stats or switch caller account">
         <span class="user-avatar" id="headerUserAvatar">👑</span>
         <div class="user-meta">
           <div class="user-name" id="headerUserName">Luke (Founder)</div>
           <div class="user-rank" id="headerUserRank">Lvl 5 · Mythic Closer</div>
         </div>
       </div>
-      <div class="live-demo-pill" id="copyDemoPill" title="Click to copy demo number">
+      <div class="live-demo-pill" id="copyDemoPill" onclick="copyDemoNumber()" title="Click to copy demo number">
         <span>📞 Demo: (561) 813-8602</span> <span style="font-size:11px">📋</span>
       </div>
-      <button class="btn btn-ghost btn-sm" id="voiceToggleBtn">🗣️ Voice: ON</button>
-      <button class="btn btn-ghost btn-sm" id="soundToggleBtn">🔊 Audio: ON</button>
+      <button class="btn btn-ghost btn-sm" id="voiceToggleBtn" onclick="toggleVoice()">🗣️ Voice: ON</button>
+      <button class="btn btn-ghost btn-sm" id="soundToggleBtn" onclick="toggleSound()">🔊 Audio: ON</button>
     </div>
   </div>
 </header>
 
 <main class="wrap">
+  <!-- ⚔️ PROMINENT CALLER LOGIN & REP SWITCHER BAR -->
+  <div class="caller-bar" id="callerQuickBar">
+    <div class="caller-bar-status">
+      <span class="caller-badge-dot"></span>
+      <span style="font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:0.05em">Active Closer:</span>
+      <span class="caller-name-highlight" id="callerBarCurrent">👑 Luke (Founder)</span>
+      <span class="caller-level-pill" id="callerBarLevel">Lvl 5 · Unlocked 🔓</span>
+    </div>
+    <div class="caller-bar-buttons">
+      <span style="font-size:12px;color:var(--dim)">Quick Switch:</span>
+      <button type="button" class="caller-switch-pill active" id="quickPillLuke" onclick="quickSwitchCaller('luke')">👑 Luke (Founder)</button>
+      <button type="button" class="caller-switch-pill" id="quickPillBuddy" onclick="quickSwitchCaller('buddy')">⚔️ Buddy (Rep 2)</button>
+      <button type="button" class="caller-switch-pill add-rep" onclick="openAccountModal()">➕ Sign In / Add Rep</button>
+    </div>
+  </div>
+
   <div class="tabs">
     <button class="tab-btn active" type="button" id="tabBtnLeads" data-tab="tabLeads" onclick="switchTab('tabLeads')">📋 100-Lead Dial Queue (+25/Day)</button>
     <button class="tab-btn" type="button" id="tabBtnAcademy" data-tab="tabAcademy" onclick="switchTab('tabAcademy')">🎓 Closer Academy (Certification)</button>
@@ -384,7 +413,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <div class="gate-actions">
         <button class="btn btn-gold" type="button" onclick="switchTab('tabAcademy')">🎓 Enter Closer Academy ➔</button>
         <button class="btn btn-ghost" type="button" onclick="switchTab('tabRPG')">⚔️ Spar with Boss in RPG ➔</button>
-        <button class="btn btn-ghost btn-sm" type="button" id="btnFounderOverride" style="border:1px dashed var(--accent);color:var(--accent2);font-size:12px" title="Bypass for Luke/Admin">👑 Founder Instant Bypass</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="btnFounderOverride" onclick="activateFounderBypass()" style="border:1px dashed var(--accent);color:var(--accent2);font-size:12px" title="Bypass for Luke/Admin">👑 Founder Instant Bypass</button>
       </div>
     </div>
 
@@ -1644,7 +1673,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   <h2 style="font-family:var(--font-head);font-size:26px;color:var(--accent2);margin-bottom:6px">LEVEL UP!</h2>
   <div style="font-size:18px;font-weight:700;margin-bottom:8px" id="modalNewLevelTitle">Level 2: Phone Warrior</div>
   <p style="color:var(--dim);font-size:14px;margin-bottom:20px" id="modalUnlockDesc">You unlocked: <strong>⚔️ Broadsword of the $8k Leak</strong>!</p>
-  <button class="btn btn-gold" id="closeModalBtn" style="width:100%">Claim Loot &amp; Keep Slaying ➔</button>
+  <button class="btn btn-gold" id="closeModalBtn" onclick="closeLevelUpModal()" style="width:100%">Claim Loot &amp; Keep Slaying ➔</button>
 </div>
 
 <!-- 🏆 Level 5 License to Dial Unlocked Modal -->
@@ -1653,7 +1682,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   <h2 style="font-family:var(--font-head);font-size:26px;color:#34d399;margin-bottom:6px">LICENSE TO DIAL UNLOCKED!</h2>
   <div style="font-size:18px;font-weight:700;margin-bottom:8px">Level 5: Certified Closer</div>
   <p style="color:var(--dim);font-size:14px;margin-bottom:20px">You have completed the Closer Academy, mastered the $8,000 leak strategy, and proven your reflexes. <strong>All 100+ Nationwide Trade Leads are now unlocked.</strong></p>
-  <button class="btn btn-gold" id="btnClaimLicense" style="width:100%">Open Nationwide Leads Dispatcher ➔</button>
+  <button class="btn btn-gold" id="btnClaimLicense" onclick="claimLicenseAndGoToLeads()" style="width:100%">Open Nationwide Leads Dispatcher ➔</button>
 </div>
 
 <!-- 👤 Account Switcher / Sign Up Modal -->
@@ -1663,7 +1692,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <h3 style="font-family:var(--font-head);font-size:20px;color:var(--accent2);display:flex;align-items:center;gap:8px">
         <span>👤</span> Rep Profile &amp; Account Center
       </h3>
-      <button class="btn btn-ghost btn-sm" id="closeAccountModalBtn" style="font-size:16px;padding:4px 10px">✕</button>
+      <button class="btn btn-ghost btn-sm" id="closeAccountModalBtn" onclick="closeAccountModal()" style="font-size:16px;padding:4px 10px">✕</button>
     </div>
 
     <!-- Active Profile Card -->
@@ -1687,7 +1716,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div style="font-size:13px;font-weight:700;color:var(--accent2)">👑 Founder Lead Bypass (God Mode)</div>
         <div style="font-size:11.5px;color:var(--dim)">Instantly unlocks leads queue regardless of level</div>
       </div>
-      <button class="btn btn-gold btn-sm" id="btnToggleFounderBypass">Bypass: ON</button>
+      <button class="btn btn-gold btn-sm" id="btnToggleFounderBypass" onclick="toggleFounderBypass()">Bypass: ON</button>
     </div>
 
     <!-- Switch Existing Account -->
@@ -1710,7 +1739,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <option value="Guest Caller">Guest Caller</option>
         </select>
       </div>
-      <button class="btn btn-gold" id="btnCreateAccount" style="width:100%;font-weight:700">Create Rep Account &amp; Start Academy ➔</button>
+      <button class="btn btn-gold" id="btnCreateAccount" onclick="createNewAccountFromModal()" style="width:100%;font-weight:700">Create Rep Account &amp; Start Academy ➔</button>
     </div>
   </div>
 </div>
@@ -1719,7 +1748,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
 <script>
 // ============================================================
-// 🌐 GLOBAL BULLETPROOF TAB SWITCHER
+// 🌐 GLOBAL BULLETPROOF HELPER FUNCTIONS & TAB SWITCHER
 // ============================================================
 window.switchTab = function(targetTabId) {
   try {
@@ -1737,6 +1766,61 @@ window.switchTab = function(targetTabId) {
   } catch(e) {
     console.error('Error switching tab:', e);
   }
+};
+
+window.showToast = function(msg) {
+  try {
+    const toast = document.getElementById('toast');
+    if (toast) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+  } catch(e) {}
+};
+
+window.copyDemoNumber = function() {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText('(561) 813-8602').then(() => {
+        window.showToast('✓ (561) 813-8602 copied to clipboard!');
+      }).catch(() => {
+        window.showToast('Demo Number: (561) 813-8602');
+      });
+    } else {
+      window.showToast('Demo Number: (561) 813-8602');
+    }
+  } catch(e) {
+    window.showToast('Demo Number: (561) 813-8602');
+  }
+};
+
+window.openAccountModal = function() {
+  try {
+    const modal = document.getElementById('accountModal');
+    if (modal) {
+      modal.classList.add('active');
+      if (typeof window.renderAccountProfileList === 'function') {
+        window.renderAccountProfileList();
+      }
+    }
+  } catch(e) {
+    console.error('Error opening account modal:', e);
+  }
+};
+
+window.closeAccountModal = function() {
+  try {
+    const modal = document.getElementById('accountModal');
+    if (modal) modal.classList.remove('active');
+  } catch(e) {}
+};
+
+window.closeLevelUpModal = function() {
+  try {
+    const modal = document.getElementById('levelUpModal');
+    if (modal) modal.classList.remove('active');
+  } catch(e) {}
 };
 
 (function() {
@@ -6401,6 +6485,9 @@ window.switchTab = function(targetTabId) {
   let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
   if (!USER_PROFILES[activeUserId]) activeUserId = 'luke';
 
+  let activeCaller = localStorage.getItem('vantorx_active_caller') || 'Luke (Founder)';
+  let callerSelectEl = null;
+
   function saveUserProfiles() {
     try {
       localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(USER_PROFILES));
@@ -6424,55 +6511,77 @@ window.switchTab = function(targetTabId) {
   }
 
   function updateUserUI() {
-    const user = getActiveUser();
-    // 1. Header Badge
-    const hAvatar = document.getElementById('headerUserAvatar');
-    const hName = document.getElementById('headerUserName');
-    const hRank = document.getElementById('headerUserRank');
-    if (hAvatar) hAvatar.textContent = user.avatar || '👤';
-    if (hName) hName.textContent = user.name;
-    if (hRank) hRank.textContent = `Lvl ${user.level} · ${getRankTitle(user.level)}`;
+    try {
+      const user = getActiveUser();
+      // 1. Header Badge
+      const hAvatar = document.getElementById('headerUserAvatar');
+      const hName = document.getElementById('headerUserName');
+      const hRank = document.getElementById('headerUserRank');
+      if (hAvatar) hAvatar.textContent = user.avatar || '👤';
+      if (hName) hName.textContent = user.name;
+      if (hRank) hRank.textContent = `Lvl ${user.level} · ${getRankTitle(user.level)}`;
 
-    // 2. Caller Select in Leads Table
-    if (callerSelectEl) {
-      let found = false;
-      for (let i = 0; i < callerSelectEl.options.length; i++) {
-        if (callerSelectEl.options[i].value === user.name) found = true;
+      // 2. Caller Bar Update
+      const barCurrent = document.getElementById('callerBarCurrent');
+      const barLevel = document.getElementById('callerBarLevel');
+      if (barCurrent) barCurrent.textContent = `${user.avatar || '👤'} ${user.name}`;
+      if (barLevel) {
+        const isUnlocked = user.level >= 5 || user.founderBypass === true;
+        barLevel.textContent = `Lvl ${user.level} · ${isUnlocked ? 'Unlocked 🔓' : 'Academy Gated 🔒'}`;
+        barLevel.style.color = isUnlocked ? 'var(--ok)' : 'var(--accent2)';
+        barLevel.style.borderColor = isUnlocked ? 'rgba(52,211,153,0.4)' : 'rgba(245,158,11,0.4)';
       }
-      if (!found) {
-        const o = document.createElement('option');
-        o.value = user.name;
-        o.textContent = user.name;
-        callerSelectEl.appendChild(o);
+
+      const pillLuke = document.getElementById('quickPillLuke');
+      const pillBuddy = document.getElementById('quickPillBuddy');
+      if (pillLuke) pillLuke.classList.toggle('active', activeUserId === 'luke');
+      if (pillBuddy) pillBuddy.classList.toggle('active', activeUserId === 'buddy');
+
+      // 3. Caller Select in Leads Table
+      callerSelectEl = callerSelectEl || document.getElementById('callerSelect');
+      if (callerSelectEl) {
+        let found = false;
+        for (let i = 0; i < callerSelectEl.options.length; i++) {
+          if (callerSelectEl.options[i].value === user.name) found = true;
+        }
+        if (!found) {
+          const o = document.createElement('option');
+          o.value = user.name;
+          o.textContent = user.name;
+          callerSelectEl.appendChild(o);
+        }
+        callerSelectEl.value = user.name;
       }
-      callerSelectEl.value = user.name;
       activeCaller = user.name;
+      try { localStorage.setItem('vantorx_active_caller', activeCaller); } catch(e) {}
+
+      // 4. Modal Info
+      const mAvatar = document.getElementById('modalActiveAvatar');
+      const mName = document.getElementById('modalActiveName');
+      const mRole = document.getElementById('modalActiveRole');
+      const mLevel = document.getElementById('modalActiveLevel');
+      const mXp = document.getElementById('modalActiveXp');
+      if (mAvatar) mAvatar.textContent = user.avatar || '👤';
+      if (mName) mName.textContent = user.name;
+      if (mRole) mRole.textContent = user.role;
+      if (mLevel) mLevel.textContent = `Level ${user.level} · ${getRankTitle(user.level)}`;
+      if (mXp) mXp.textContent = `${user.xp} / 500 XP`;
+
+      // 5. Founder bypass button
+      const btnBypass = document.getElementById('btnToggleFounderBypass');
+      if (btnBypass) {
+        btnBypass.textContent = user.founderBypass ? 'Bypass: ON' : 'Bypass: OFF';
+        btnBypass.className = user.founderBypass ? 'btn btn-gold btn-sm' : 'btn btn-ghost btn-sm';
+      }
+
+      // 6. Update components
+      updateLeadGateVisibility();
+      updateAcademyUI();
+      updateDailyGoalsUI();
+      renderAccountProfileList();
+    } catch(err) {
+      console.warn('updateUserUI error:', err);
     }
-
-    // 3. Modal Info
-    const mAvatar = document.getElementById('modalActiveAvatar');
-    const mName = document.getElementById('modalActiveName');
-    const mRole = document.getElementById('modalActiveRole');
-    const mLevel = document.getElementById('modalActiveLevel');
-    const mXp = document.getElementById('modalActiveXp');
-    if (mAvatar) mAvatar.textContent = user.avatar || '👤';
-    if (mName) mName.textContent = user.name;
-    if (mRole) mRole.textContent = user.role;
-    if (mLevel) mLevel.textContent = `Level ${user.level} · ${getRankTitle(user.level)}`;
-    if (mXp) mXp.textContent = `${user.xp} / 500 XP`;
-
-    // 4. Founder bypass button
-    const btnBypass = document.getElementById('btnToggleFounderBypass');
-    if (btnBypass) {
-      btnBypass.textContent = user.founderBypass ? 'Bypass: ON' : 'Bypass: OFF';
-      btnBypass.className = user.founderBypass ? 'btn btn-gold btn-sm' : 'btn btn-ghost btn-sm';
-    }
-
-    // 5. Update components
-    updateLeadGateVisibility();
-    updateAcademyUI();
-    updateDailyGoalsUI();
-    renderAccountProfileList();
   }
 
   function updateLeadGateVisibility() {
@@ -6679,26 +6788,90 @@ window.switchTab = function(targetTabId) {
     });
   }
 
+  window.renderAccountProfileList = renderAccountProfileList;
+  window.quickSwitchCaller = function(uid) {
+    if (!USER_PROFILES[uid]) {
+      activeUserId = 'luke';
+    } else {
+      activeUserId = uid;
+    }
+    saveUserProfiles();
+    updateUserUI();
+    renderLeadsTable();
+    showToast(`✓ Switched caller account to: ${getActiveUser().name}`);
+  };
+
+  window.activateFounderBypass = function() {
+    const user = getActiveUser();
+    user.founderBypass = true;
+    saveUserProfiles();
+    updateUserUI();
+    showToast('👑 Founder Bypass Activated! Leads Dispatcher Unlocked.');
+  };
+
+  window.toggleFounderBypass = function() {
+    const user = getActiveUser();
+    user.founderBypass = !user.founderBypass;
+    saveUserProfiles();
+    updateUserUI();
+    showToast(`Founder Bypass: ${user.founderBypass ? 'ACTIVE (All Leads Unlocked)' : 'INACTIVE (Gated to Level 5)'}`);
+  };
+
+  window.claimLicenseAndGoToLeads = function() {
+    const modal = document.getElementById('licenseUnlockedModal');
+    if (modal) modal.classList.remove('active');
+    window.switchTab('tabLeads');
+  };
+
+  window.createNewAccountFromModal = function() {
+    const nameInput = document.getElementById('newRepName');
+    const roleSelect = document.getElementById('newRepRole');
+    const name = nameInput ? nameInput.value.trim() : '';
+    const role = roleSelect ? roleSelect.value : 'Outbound Closer';
+
+    if (!name) {
+      showToast('Please enter a name for the new sales rep account.');
+      return;
+    }
+
+    const uid = 'rep_' + Date.now().toString(36);
+    const avatars = ['⚡', '⚔️', '🎯', '🔥', '🛡️', '🚀'];
+    const chosenAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+
+    USER_PROFILES[uid] = {
+      id: uid,
+      name: name,
+      role: role,
+      avatar: chosenAvatar,
+      level: 1,
+      xp: 0,
+      isFounder: false,
+      founderBypass: false,
+      modulesPassed: [],
+      bossesDefeated: 0,
+      dailyDials: 0,
+      dailySims: 0
+    };
+
+    activeUserId = uid;
+    if (nameInput) nameInput.value = '';
+    saveUserProfiles();
+    updateUserUI();
+    playSound('levelup');
+    showToast(`✓ Account created for ${name}! Welcome to the Closer Academy.`);
+    const accountModal = document.getElementById('accountModal');
+    if (accountModal) accountModal.classList.remove('active');
+    window.switchTab('tabAcademy');
+  };
+
   const btnToggleFounderBypass = document.getElementById('btnToggleFounderBypass');
   if (btnToggleFounderBypass) {
-    btnToggleFounderBypass.addEventListener('click', () => {
-      const user = getActiveUser();
-      user.founderBypass = !user.founderBypass;
-      saveUserProfiles();
-      updateUserUI();
-      showToast(`Founder Bypass: ${user.founderBypass ? 'ACTIVE (All Leads Unlocked)' : 'INACTIVE (Gated to Level 5)'}`);
-    });
+    btnToggleFounderBypass.addEventListener('click', window.toggleFounderBypass);
   }
 
   const btnFounderOverride = document.getElementById('btnFounderOverride');
   if (btnFounderOverride) {
-    btnFounderOverride.addEventListener('click', () => {
-      const user = getActiveUser();
-      user.founderBypass = true;
-      saveUserProfiles();
-      updateUserUI();
-      showToast('👑 Founder Bypass Activated! Leads Dispatcher Unlocked.');
-    });
+    btnFounderOverride.addEventListener('click', window.activateFounderBypass);
   }
 
   function renderAccountProfileList() {
@@ -6730,10 +6903,7 @@ window.switchTab = function(targetTabId) {
       `;
 
       row.addEventListener('click', () => {
-        activeUserId = uid;
-        saveUserProfiles();
-        updateUserUI();
-        showToast(`Switched active caller to: ${u.name}`);
+        window.quickSwitchCaller(uid);
         if (accountModal) accountModal.classList.remove('active');
       });
 
@@ -6743,45 +6913,7 @@ window.switchTab = function(targetTabId) {
 
   const btnCreateAccount = document.getElementById('btnCreateAccount');
   if (btnCreateAccount) {
-    btnCreateAccount.addEventListener('click', () => {
-      const nameInput = document.getElementById('newRepName');
-      const roleSelect = document.getElementById('newRepRole');
-      const name = nameInput ? nameInput.value.trim() : '';
-      const role = roleSelect ? roleSelect.value : 'Outbound Closer';
-
-      if (!name) {
-        showToast('Please enter a name for the new sales rep account.');
-        return;
-      }
-
-      const uid = 'rep_' + Date.now().toString(36);
-      const avatars = ['⚡', '⚔️', '🎯', '🔥', '🛡️', '🚀'];
-      const chosenAvatar = avatars[Math.floor(Math.random() * avatars.length)];
-
-      USER_PROFILES[uid] = {
-        id: uid,
-        name: name,
-        role: role,
-        avatar: chosenAvatar,
-        level: 1,
-        xp: 0,
-        isFounder: false,
-        founderBypass: false,
-        modulesPassed: [],
-        bossesDefeated: 0,
-        dailyDials: 0,
-        dailySims: 0
-      };
-
-      activeUserId = uid;
-      if (nameInput) nameInput.value = '';
-      saveUserProfiles();
-      updateUserUI();
-      playSound('levelup');
-      showToast(`✓ Account created for ${name}! Welcome to the Closer Academy.`);
-      if (accountModal) accountModal.classList.remove('active');
-      window.switchTab('tabAcademy');
-    });
+    btnCreateAccount.addEventListener('click', window.createNewAccountFromModal);
   }
 
   // ============================================================
@@ -6799,8 +6931,7 @@ window.switchTab = function(targetTabId) {
     } catch(e) {}
   }
 
-  let activeCaller = localStorage.getItem('vantorx_active_caller') || 'Luke';
-  const callerSelectEl = document.getElementById('callerSelect');
+  callerSelectEl = callerSelectEl || document.getElementById('callerSelect');
   if (callerSelectEl) {
     callerSelectEl.value = activeCaller;
     callerSelectEl.addEventListener('change', (e) => {
@@ -7880,7 +8011,6 @@ window.switchTab = function(targetTabId) {
 
   // Speech-to-Text
   const voiceMicBtn = document.getElementById('voiceMicBtn');
-  const customAttackInput = document.getElementById('customAttackInput');
   const micIcon = document.getElementById('micIcon');
   const micLabel = document.getElementById('micLabel');
   let recognition = null;
@@ -8312,19 +8442,25 @@ window.switchTab = function(targetTabId) {
     });
   });
 
-  document.getElementById('restartMatchBtn').addEventListener('click', () => {
-    player.hp = player.maxHp;
-    startDungeon(currentDungeonKey);
-  });
+  const restartBtn = document.getElementById('restartMatchBtn');
+  if (restartBtn) {
+    restartBtn.addEventListener('click', () => {
+      player.hp = player.maxHp;
+      startDungeon(currentDungeonKey);
+    });
+  }
 
-  document.getElementById('customAttackForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = document.getElementById('customAttackInput');
-    const txt = input.value.trim();
-    if (!txt || player.hp <= 0 || currentBoss.hp <= 0) return;
-    executeTurn(txt);
-    input.value = '';
-  });
+  const customForm = document.getElementById('customAttackForm');
+  if (customForm) {
+    customForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('customAttackInput');
+      const txt = input ? input.value.trim() : '';
+      if (!txt || player.hp <= 0 || currentBoss.hp <= 0) return;
+      executeTurn(txt);
+      if (input) input.value = '';
+    });
+  }
 
   // Initialization
   updateUserUI();
