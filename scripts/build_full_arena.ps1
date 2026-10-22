@@ -370,11 +370,29 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .flashcard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:14px}
 .fc-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.15s;display:flex;flex-direction:column;justify-content:space-between}
 .fc-card:hover{border-color:var(--accent)}
-.fc-card.reviewed{border-color:rgba(52,211,153,0.4);background:rgba(16,36,32,0.4)}
+.fc-card.reviewed, .fc-card.revealed{border-color:rgba(52,211,153,0.5) !important;background:rgba(16,36,32,0.55) !important;box-shadow:0 0 12px rgba(52,211,153,0.15)}
 .fc-cue{font-weight:700;color:#f87171;font-size:13px;margin-bottom:8px}
-.fc-reveal-btn{background:var(--bg3);border:1px solid var(--line);color:var(--accent2);padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;align-self:flex-start}
+.fc-reveal-btn{background:var(--bg3);border:1px solid var(--line);color:var(--accent2);padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;align-self:flex-start;pointer-events:auto}
 .fc-ans{display:none;font-size:12.5px;color:#e2e8f0;line-height:1.45;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
-.fc-card.reviewed .fc-ans{display:block}
+.fc-card.reviewed .fc-ans, .fc-card.revealed .fc-ans{display:block !important;animation:fadeIn 0.2s ease}
+
+/* ⚔️ LMS Lesson Boss Clash Arena */
+.lms-boss-clash-card{background:linear-gradient(180deg,rgba(26,18,36,0.95),rgba(15,23,42,0.98));border:1.5px solid rgba(239,68,68,0.45);border-radius:14px;padding:20px;margin:22px 0 16px;box-shadow:0 4px 24px rgba(0,0,0,0.45);position:relative;overflow:hidden}
+.lms-boss-clash-card.defeated{border-color:rgba(52,211,153,0.6);background:linear-gradient(180deg,rgba(6,78,59,0.3),rgba(15,23,42,0.98));box-shadow:0 0 20px rgba(52,211,153,0.2)}
+.boss-clash-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:14px;margin-bottom:14px}
+.boss-clash-profile{display:flex;align-items:center;gap:12px}
+.boss-clash-avatar{width:46px;height:46px;border-radius:12px;background:rgba(239,68,68,0.2);border:1px solid #ef4444;display:grid;place-items:center;font-size:24px}
+.lms-boss-clash-card.defeated .boss-clash-avatar{background:rgba(52,211,153,0.2);border-color:#34d399}
+.boss-clash-meta .boss-clash-name{font-family:var(--font-head);font-size:16px;font-weight:700;color:#ffffff}
+.boss-clash-meta .boss-clash-title{font-size:11.5px;color:#fca5a5;font-family:var(--font-mono)}
+.lms-boss-clash-card.defeated .boss-clash-meta .boss-clash-title{color:#6ee7b7}
+.boss-clash-health{min-width:170px;text-align:right}
+.boss-hp-track{width:100%;height:10px;background:rgba(0,0,0,0.6);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);margin-top:4px}
+.boss-hp-fill{height:100%;background:linear-gradient(90deg,#ef4444,#f87171);width:100%;transition:width 0.4s ease}
+.lms-boss-clash-card.defeated .boss-hp-fill{background:linear-gradient(90deg,#10b981,#34d399);width:0%}
+.boss-speech-bubble{background:rgba(0,0,0,0.5);border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 10px 10px 0;margin-bottom:16px;font-size:13.5px;line-height:1.6;color:#fee2e2}
+.lms-boss-clash-card.defeated .boss-speech-bubble{border-left-color:#34d399;color:#d1fae5}
+.lms-boss-clash-card.clash-shake{animation:actShake 0.4s ease;border-color:#ef4444 !important}
 
 /* Lesson Bottom Action */
 .lms-stage-footer{border-top:1px solid var(--line);padding-top:20px;margin-top:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
@@ -888,29 +906,42 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
             <p><strong>The Core Psychological Rule:</strong> You must speak in a calm, grounded, slow cadence. Your voice must drop in pitch at the end of sentences (downward inflection), signaling status and authority. Never apologize for calling. You are a trade operations specialist diagnosing lost revenue.</p>
 
-            <!-- MANDATORY DRILL 1.1 -->
-            <div class="lms-activity-card" id="activity-box-1-1">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: The 4-Second Amygdala Tonality Test</div>
-                <span class="act-status-badge" id="actBadge-1-1">🔒 Drill Required to Advance</span>
+            <!-- ⚔️ BOSS CLASH 1.1 -->
+            <div class="lms-boss-clash-card" id="activity-box-1-1">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">🔨</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Rick "The Roof Ripper" Henderson</div>
+                    <div class="boss-clash-title">Owner, Apex Commercial Roofing (Tampa, FL) · Resistance: 100 HP</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-1-1">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-1-1" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="act-scenario-box">
-                <strong>Live Scenario:</strong> You dial a South Florida commercial roofer at 11:15 AM. A gruff male voice barks: <em>"Yeah, talk to me! I'm on a 2-story roof in 95-degree heat with a nail gun in my hand. Make it fast."</em>
+
+              <div class="boss-speech-bubble" id="bossSpeech-1-1">
+                <strong>Rick:</strong> "Yeah, talk to me! I'm on a 2-story metal roof in 95-degree heat with a nail gun in my hand. Make it fast or get off my phone."
               </div>
-              <div class="act-prompt">
-                To hold conversational frame, prevent an immediate 2.8-second hang-up, and earn authority, which exact response must you deliver?
+
+              <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                Select your opening strike to disarm Rick's amygdala, control conversational frame, and deal 100 DMG:
               </div>
               <div class="act-options" data-step="1">
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-1', 1, 0, false, 'Cheery telemarketer greeting with high pitch and asking for 5 minutes triggers immediate amygdala threat defense. Result: Roofer hangs up instantly.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-1', 1, 0, false, 'Cheery telemarketer greeting with high pitch and asking for 5 minutes triggers immediate amygdala threat defense. Rick barks: &quot;I don\'t have time for this shit!&quot; *CLICK* (-25 HP Rep)')">
                   A) "Hi sir! Good morning! Hope you're staying cool up there! I'm Jordan from VantorX Solutions and I'd love 5 minutes to discuss your missed call leads..."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-1', 1, 1, false, 'Apologizing surrenders peer authority, makes you sound like a nuisance solicitor, and loses control of the call. Result: Roofer tells you to get lost.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-1', 1, 1, false, 'Apologizing surrenders peer authority and makes you sound like a nuisance solicitor. Rick yells: &quot;Then don\'t call me!&quot; *CLICK* (-25 HP Rep)')">
                   B) "So sorry to bother you while you're working up there! Can you call me back later this evening when you're off the roof?"
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-1', 1, 2, true, 'Masterful execution! Low downward inflection, gives immediate permission to hang up (disarming threat response), and anchors high-ticket trade emergency pain in 15 seconds. Roofer replies: &quot;Alright, 20 seconds. What is it?&quot;')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-1', 1, 2, true, 'CRITICAL HIT (100 DMG)! Low downward inflection, grants permission to hang up (disarming threat defense), and anchors $8,000 emergency trade leak in 15 seconds. Rick lowers the nail gun: &quot;Alright Luke... you got 20 seconds. What is it?&quot;')">
                   C) "Luke from VantorX. Got 20 seconds or should I hang up? ... Look, I know you're on a hot roof, so I'll be blunt. Most roofers in Palm Beach lose between three and eight thousand a week on emergency calls that hit voicemail after 6 PM."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-1', 1, 3, false, 'Pitching software features and monthly pricing in the first 4 seconds before establishing trade pain is guaranteed suicide. Result: Click.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-1', 1, 3, false, 'Pitching software features and monthly pricing in the first 4 seconds before establishing trade pain is guaranteed suicide. Rick hangs up immediately.')">
                   D) "I'll be quick! We build 24/7 AI receptionist bots that answer your phone automatically for $397 a month so you can work roofs all day."
                 </button>
               </div>
@@ -920,7 +951,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 1 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit11" disabled type="button" onclick="completeLmsUnit('1-1', '1-2')">🔒 Complete Drill Above to Unlock Lesson 1.2 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit11" disabled type="button" onclick="completeLmsUnit('1-1', '1-2')">🔒 Defeat Boss Above to Unlock Lesson 1.2 ➔</button>
           </div>
         </div>
 
@@ -972,29 +1003,40 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('gatekeeper_extraction')">🔊 Play Audio</button>
             </div>
 
-            <!-- MANDATORY DRILL 1.2 -->
-            <div class="lms-activity-card" id="activity-box-1-2">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: Front Office Infiltration &amp; Owner Extraction</div>
-                <span class="act-status-badge" id="actBadge-1-2">🔒 2-Step Drill Required</span>
+            <!-- ⚔️ BOSS CLASH 1.2 -->
+            <div class="lms-boss-clash-card" id="activity-box-1-2">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">🛡️</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Karen "The Iron Dispatcher"</div>
+                    <div class="boss-clash-title">Front Desk Sentinel, Gulf Coast Plumbing (Tampa, FL) · Resistance: 100 HP (2 Phases)</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-1-2">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-1-2" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
               
               <!-- Step 1 -->
               <div class="act-step-wrapper" data-step="1">
-                <div class="act-scenario-box">
-                  <strong>Step 1 — Gatekeeper Greeting:</strong> You call the office line of a plumbing company in Tampa. A dispatcher answers: <em>"Gulf Coast Plumbing, this is Karen, how can I direct your call?"</em>
+                <div class="boss-speech-bubble" id="bossSpeech-1-2-1">
+                  <strong>Karen:</strong> "Gulf Coast Plumbing, this is Karen, how can I direct your call?"
                 </div>
-                <div class="act-prompt">
-                  How do you open without triggering her telemarketer defense shield?
+                <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                  Deliver your opening phrase to bypass Karen's telemarketer shield and deal 50 DMG:
                 </div>
                 <div class="act-options" data-step="1">
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 0, false, 'Pitching the company name and software demonstration to a front-desk dispatcher violates the Iron Law. Karen replies: &quot;We are not interested, please remove us from your list&quot; *CLICK*.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 0, false, 'Pitching the company name and software demonstration to a front-desk dispatcher violates the Iron Law. Karen replies: &quot;We are not interested, please remove us from your list&quot; *CLICK*. (-25 HP Rep)')">
                     A) "Hi Karen! I'm calling from VantorX Solutions to schedule a 15-minute demonstration with the business owner regarding your missed emergency call volume."
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 1, true, 'Subcontractor Peer Tonality nailed! Casual, low vocal pitch, first names only, sounds like an existing trade partner or supplier. Karen does not flag you as a salesperson.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 1, true, 'DIRECT HIT (50 DMG)! Subcontractor Peer Tonality executed! Casual, low vocal pitch, first names only, sounds like an existing trade partner or supplier. Karen does not flag you as a salesperson.')">
                     B) "Hey Karen, is Mike around or is he out on a job site right now?"
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 2, false, 'Asking for &quot;the owner&quot; by title immediately screams cold caller. Dispatchers are trained to screen anyone who doesn\'t know the owner\'s first name.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 2, false, 'Asking for &quot;the owner&quot; by title immediately screams cold caller. Dispatchers are trained to screen anyone who doesn\'t know the owner\'s first name. (-25 HP Rep)')">
                     C) "Good morning ma'am, may I speak with whoever makes executive decisions regarding your phone system?"
                   </button>
                 </div>
@@ -1003,11 +1045,11 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
               <!-- Step 2 -->
               <div class="act-step-wrapper" data-step="2" style="display:none;margin-top:16px;border-top:1px dashed var(--line);padding-top:14px">
-                <div class="act-scenario-box">
-                  <strong>Step 2 — The Gatekeeper Counter:</strong> Karen responds: <em>"Mike is out running service calls all day. What company are you with and what is this regarding so I can take a message?"</em>
+                <div class="boss-speech-bubble" id="bossSpeech-1-2-2">
+                  <strong>Karen:</strong> "Mike is out running service calls all day. What company are you with and what is this regarding so I can take a message?"
                 </div>
-                <div class="act-prompt">
-                  What is your exact operational counter to extract Mike's mobile cell number?
+                <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                  Execute the exact operational counter to extract Mike's mobile cell number and deal final 50 DMG:
                 </div>
                 <div class="act-options" data-step="2">
                   <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 2, 0, false, 'Leaving a sales message on a dispatcher pad gets thrown in the trash 100% of the time.')">
@@ -1016,7 +1058,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                   <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 2, 1, false, 'Pitching AI voice features to Karen burns the lead immediately.')">
                     B) "Tell him we build 24/7 AI dispatchers that answer emergency calls after hours."
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 2, 2, true, 'Flawless extraction! Framing the call as an operational dispatch question in Tampa and offering a binary choice (cell vs shop return time) prompts Karen to give you his direct cell number.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 2, 2, true, 'CRITICAL KNOCKOUT (50 DMG)! Flawless extraction! Framing the call as an operational dispatch question in Tampa with binary choice prompts Karen to surrender cell: &quot;Try his cell, it\'s (813) 555-0192. Tell him Karen gave it to you.&quot;')">
                     C) "It's Luke with VantorX — quick operational question about your weekend emergency call routing in Tampa. Does he check his cell between jobs or should I catch him at the shop around 4:30?"
                   </button>
                 </div>
@@ -1027,7 +1069,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 2 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit12" disabled type="button" onclick="completeLmsUnit('1-2', '1-3')">🔒 Complete Drill Above to Unlock Lesson 1.3 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit12" disabled type="button" onclick="completeLmsUnit('1-2', '1-3')">🔒 Defeat Boss Above to Unlock Lesson 1.3 ➔</button>
           </div>
         </div>
 
@@ -1071,29 +1113,40 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('disarm_delivery')">🔊 Play Audio</button>
             </div>
 
-            <!-- MANDATORY DRILL 1.3 -->
-            <div class="lms-activity-card" id="activity-box-1-3">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: Owner Identity Verification &amp; The Disarm</div>
-                <span class="act-status-badge" id="actBadge-1-3">🔒 2-Step Drill Required</span>
+            <!-- ⚔️ BOSS CLASH 1.3 -->
+            <div class="lms-boss-clash-card" id="activity-box-1-3">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">🎯</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Chris (Tech) &amp; Mike "The Check Signer"</div>
+                    <div class="boss-clash-title">Apex Electrical (Orlando, FL) · Resistance: 100 HP (2 Phases)</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-1-3">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-1-3" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
               
               <!-- Step 1 -->
               <div class="act-step-wrapper" data-step="1">
-                <div class="act-scenario-box">
-                  <strong>Step 1 — Identity Pre-Check Gate:</strong> You dial a cell number from the queue. A man answers: <em>"Apex Electrical, this is Chris."</em>
+                <div class="boss-speech-bubble" id="bossSpeech-1-3-1">
+                  <strong>Chris (Lead Wireman):</strong> "Apex Electrical, this is Chris. What's up?"
                 </div>
-                <div class="act-prompt">
-                  Before launching into any pitch, what is your mandatory reflexive response?
+                <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                  Execute the mandatory Pre-Pitch Verification Gate before launching your pitch to deal 50 DMG:
                 </div>
                 <div class="act-options" data-step="1">
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 1, 0, false, 'Fatal rookie error: you never pitch until you verify owner authority. Chris could be an apprentice or field wireman.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 1, 0, false, 'Fatal rookie error: you never pitch until you verify owner authority. Chris is just a field wireman with zero checkbook authority. (-25 HP Rep)')">
                     A) "Hey Chris, Luke from VantorX. Got 20 seconds? Most electrical contractors lose $8,000 on after-hours emergency calls..."
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 1, 1, true, 'Essential pre-pitch verification gate executed! This confirms whether Chris holds the business checkbook or is just a lead wireman.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 1, 1, true, 'DIRECT HIT (50 DMG)! Essential pre-pitch verification gate executed! Confirms authority before pitching. Chris replies: &quot;I\'m on a scissor lift, Mike the owner is sitting in the truck cab — let me hand him the phone.&quot;')">
                     B) "Hey Chris? Luke from VantorX — you the owner or am I talking to the lead electrician?"
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 1, 2, false, 'Asking if they are the CEO sounds corporate and awkward for a residential contractor.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 1, 2, false, 'Asking if they are the CEO sounds corporate and awkward for a residential contractor. Chris laughs and hangs up. (-25 HP Rep)')">
                     C) "Are you the Chief Executive Officer and authorized signatory of Apex Electrical?"
                   </button>
                 </div>
@@ -1102,17 +1155,17 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
               <!-- Step 2 -->
               <div class="act-step-wrapper" data-step="2" style="display:none;margin-top:16px;border-top:1px dashed var(--line);padding-top:14px">
-                <div class="act-scenario-box">
-                  <strong>Step 2 — The Autonomy Disarm:</strong> Chris confirms: <em>"Yeah, I started Apex 14 years ago and sign the checks. What is this regarding?"</em>
+                <div class="boss-speech-bubble" id="bossSpeech-1-3-2">
+                  <strong>Mike (Owner):</strong> "Yeah, this is Mike. I sign the checks. What is this regarding? Make it quick."
                 </div>
-                <div class="act-prompt">
-                  What is the exact 4-second disarm formula to take command of the conversation?
+                <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                  Deliver the exact 4-second disarm formula to take command of the conversation and deal final 50 DMG:
                 </div>
                 <div class="act-options" data-step="2">
                   <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 2, 0, false, 'Asking for 10 minutes right off the bat before building any tension triggers immediate sales resistance.')">
-                    A) "Great Chris! Can we put 10 minutes on your calendar tomorrow so I can show you how Ava works?"
+                    A) "Great Mike! Can we put 10 minutes on your calendar tomorrow so I can show you how Ava works?"
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 2, 1, true, 'Textbook Disarm Delivery! Subverts the high-pressure sales pitch, gives him permission to hang up, and earns 20 seconds of undivided attention.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 2, 1, true, 'CRITICAL KNOCKOUT (50 DMG)! Textbook Disarm Delivery! Subverts high-pressure expectation, gives permission to hang up, and earns 20 seconds of undivided attention. Mike yields: &quot;Alright Luke, you got 20 seconds. What do you got?&quot;')">
                     B) "Luke with VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?"
                   </button>
                   <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-3', 2, 2, false, 'Contractors will simply say &quot;No, we are fine&quot; and hang up.')">
@@ -1126,7 +1179,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 3 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit13" disabled type="button" onclick="completeLmsUnit('1-3', '1-4')">🔒 Complete Drill Above to Unlock Lesson 1.4 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit13" disabled type="button" onclick="completeLmsUnit('1-3', '1-4')">🔒 Defeat Boss Above to Unlock Lesson 1.4 ➔</button>
           </div>
         </div>
 
@@ -1145,82 +1198,95 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
             <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:10px 16px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
               <span style="font-size:13px;color:var(--dim)">Drill Progress:</span>
-              <strong style="color:var(--accent2);font-size:15px"><span id="lmsFcRevealedCount">0</span> / 10 Mastered</strong>
+              <strong style="color:var(--accent2);font-size:15px" id="fcMasteryCount"><span id="lmsFcRevealedCount">0</span> / 10 Mastered</strong>
             </div>
 
             <div class="flashcard-grid">
-              <div class="fc-card" id="fc-1">
+              <div class="fc-card" id="fc-1" onclick="revealLmsFlashcard(1)">
                 <div class="fc-cue">1. "Just email me some information."</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(1)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(1)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our live demo line right now, it takes 30 seconds on speaker — got a pen or your cell?"</div>
               </div>
-              <div class="fc-card" id="fc-2">
+              <div class="fc-card" id="fc-2" onclick="revealLmsFlashcard(2)">
                 <div class="fc-cue">2. "Not interested / Take me off your list."</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(2)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(2)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"I completely understand — you get 20 telemarketers a day. I'm not asking you to buy anything right now. I just have a 15-second question about your after-hours emergency calls..."</div>
               </div>
-              <div class="fc-card" id="fc-3">
+              <div class="fc-card" id="fc-3" onclick="revealLmsFlashcard(3)">
                 <div class="fc-cue">3. "We're slammed / It's our busy season."</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(3)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(3)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"That's exactly why I called. When your crews are running 100% full, that's when after-hours $8,000 emergency replacement calls slip to voicemail and call your competitor down the road."</div>
               </div>
-              <div class="fc-card" id="fc-4">
+              <div class="fc-card" id="fc-4" onclick="revealLmsFlashcard(4)">
                 <div class="fc-cue">4. "I'm driving / On a job site right now."</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(4)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(4)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"Understood Mike, keep your eyes on the road. I've got 15 seconds: we build emergency dispatch lines for trade contractors so you don't lose $8,000 weekend jobs while driving or on-site. I'll shoot a 30-second audio text to this cell with our live demo recording so you can tap it when you park. Wrapping up around 5 today?"</div>
               </div>
-              <div class="fc-card" id="fc-5">
+              <div class="fc-card" id="fc-5" onclick="revealLmsFlashcard(5)">
                 <div class="fc-cue">5. "Call me back next month / after season."</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(5)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(5)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"Happy to do that, but storm season and summer heat is happening right now. Missing one single weekend emergency job this week costs more than an entire year of Ava."</div>
               </div>
-              <div class="fc-card" id="fc-6">
+              <div class="fc-card" id="fc-6" onclick="revealLmsFlashcard(6)">
                 <div class="fc-cue">6. "Karen: What company are you with &amp; regarding?"</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(6)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(6)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"Hey Karen, it's Luke — quick operational question about your weekend emergency dispatch routing in [City]. Is the owner on a job site right now or in the office?"</div>
               </div>
-              <div class="fc-card" id="fc-7">
+              <div class="fc-card" id="fc-7" onclick="revealLmsFlashcard(7)">
                 <div class="fc-cue">7. "Who gave you my cell phone number?"</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(7)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(7)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"You're registered as the primary license holder with the state contractor registry. I only call trade business owners directly."</div>
               </div>
-              <div class="fc-card" id="fc-8">
+              <div class="fc-card" id="fc-8" onclick="revealLmsFlashcard(8)">
                 <div class="fc-cue">8. "Bad economy / Tight budget right now."</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(8)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(8)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"Totally get it. That's why there are zero long-term contracts. And in [Trade], a single $5,000 emergency replacement job covers the entire year on day one."</div>
               </div>
-              <div class="fc-card" id="fc-9">
+              <div class="fc-card" id="fc-9" onclick="revealLmsFlashcard(9)">
                 <div class="fc-cue">9. "I do all my own calls on my cell phone."</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(9)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(9)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"Respect that! But when you're in an attic or under a truck with tools in your hand at 6:30 PM, where does a new customer call go? If it hits voicemail, they tap the next guy on Google."</div>
               </div>
-              <div class="fc-card" id="fc-10">
+              <div class="fc-card" id="fc-10" onclick="revealLmsFlashcard(10)">
                 <div class="fc-cue">10. "What is this about? Make it fast."</div>
-                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(10)">Reveal Rebuttal ➔</button>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(10)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"Luke from VantorX. Got 20 seconds or should I hang up?"</div>
               </div>
             </div>
 
-            <!-- MANDATORY DRILL 1.4 -->
-            <div class="lms-activity-card" id="activity-box-1-4" style="margin-top:20px">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: Rapid Reflex Gauntlet (Flip 10 Cards + Pass Drill)</div>
-                <span class="act-status-badge" id="actBadge-1-4">🔒 Flashcards + Reflex Required</span>
+            <!-- ⚔️ BOSS CLASH 1.4 -->
+            <div class="lms-boss-clash-card" id="activity-box-1-4" style="margin-top:24px">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">⚡</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Marco "The Highway Driver"</div>
+                    <div class="boss-clash-title">Florida Air Masters (Miami, FL) · Resistance: 100 HP (Rapid Reflex Gauntlet)</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-1-4">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-1-4" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="act-scenario-box">
-                <strong>Reflex Gauntlet Challenge:</strong> The contractor snaps: <em>"I'm driving right now in heavy traffic on I-95."</em>
+
+              <div class="boss-speech-bubble" id="bossSpeech-1-4">
+                <strong>Marco:</strong> "I'm driving right now in heavy rush-hour traffic on I-95. What the hell do you want?"
               </div>
-              <div class="act-prompt">
-                Select the exact non-negotiable closer response that respects his safety while capturing the appointment:
+
+              <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                Deliver the non-negotiable closer response that respects driver safety while capturing the appointment to deal 100 DMG:
               </div>
               <div class="act-options" data-step="1">
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-4', 1, 0, false, 'Telling someone who answered on mobile while driving to dial another number on speaker is physically impossible and dangerous.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-4', 1, 0, false, 'Telling someone who answered on mobile while driving to dial another number on speaker is physically impossible and dangerous. Marco yells: &quot;I\'m driving you idiot!&quot; *CLICK*. (-25 HP Rep)')">
                   A) "Since you're hands-free, punch in our live demo line (561) 813-8602 right now and listen to Ava for 30 seconds."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-4', 1, 1, true, 'Elite Closer Reflex! Keeps his eyes on the road, anchors the $8,000 lost job, drops an audio-text demo recording to his cell, and establishes a timebox follow-up for 5 PM.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-4', 1, 1, true, 'CRITICAL KNOCKOUT (100 DMG)! Elite Closer Reflex! Keeps eyes on the road, anchors $8,000 lost job, drops an audio-text demo recording to his cell, and establishes 5 PM wrap timebox. Marco concedes: &quot;Yeah, text it to this cell. I wrap around 5:30. I\'ll check it out.&quot;')">
                   B) "Understood Mike, keep your eyes on the road. I've got 15 seconds: we build emergency dispatch lines for trade contractors so you don't lose $8,000 weekend jobs while driving or on-site. I'll shoot a 30-second audio text to this cell with our live demo recording so you can tap it when you park. Wrapping up around 5 today?"
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-4', 1, 2, false, 'Contractors will not pull over for a cold caller. They will hang up.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-4', 1, 2, false, 'Contractors will not pull over for a cold caller. They will hang up. (-25 HP Rep)')">
                   C) "Can you pull over to the shoulder for 2 minutes so I can give you a quick walkthrough?"
                 </button>
               </div>
@@ -1230,7 +1296,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 4 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit14" disabled type="button" onclick="completeLmsUnit('1-4', '1-5')">🔒 Flip 10 Cards &amp; Pass Drill to Unlock Exam ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit14" disabled type="button" onclick="completeLmsUnit('1-4', '1-5')">🔒 Flip 10 Cards &amp; Defeat Boss to Unlock Exam ➔</button>
           </div>
         </div>
 
@@ -1372,13 +1438,24 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               "Missing just ONE single emergency replacement call every 60 days costs your business $51,000 a year. Ava costs $397 to $697 a month flat. That means capturing one single weekend call pays for Ava for the entire year on day one."
             </div>
 
-            <!-- MANDATORY DRILL 2.1 -->
-            <div class="lms-activity-card" id="activity-box-2-1">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: The $8,000 Leak Calculator &amp; ROI Anchor</div>
-                <span class="act-status-badge" id="actBadge-2-1">🔒 Drill Required to Advance</span>
+            <!-- ⚔️ BOSS CLASH 2.1 -->
+            <div class="lms-boss-clash-card" id="activity-box-2-1">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">💸</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Frank "The Overbooked Roofer"</div>
+                    <div class="boss-clash-title">Owner, Suncoast Roofing &amp; Solar (Sarasota, FL) · Resistance: 100 HP</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-2-1">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-2-1" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
-              
+
               <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:14px;margin-bottom:14px">
                 <strong style="color:var(--accent2);font-size:13px">📊 Interactive Revenue Leak Math:</strong>
                 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;text-align:center">
@@ -1397,20 +1474,21 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 </div>
               </div>
 
-              <div class="act-scenario-box">
-                <strong>Contractor Pushback:</strong> Roofer says: <em>"We don't need fancy software, our crews are booked full for the next two weeks anyway."</em>
+              <div class="boss-speech-bubble" id="bossSpeech-2-1">
+                <strong>Frank:</strong> "We don't need fancy software or phone receptionists, our crews are booked full for the next two weeks anyway."
               </div>
-              <div class="act-prompt">
-                Which rebuttal properly reframes his standard work versus high-margin emergency leaks?
+
+              <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                Deliver the trade economics pivot that exposes Frank's hidden weekend revenue leak to deal 100 DMG:
               </div>
               <div class="act-options" data-step="1">
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-1', 1, 0, false, 'Arguing with the contractor about whether he has enough work creates adversarial friction.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-1', 1, 0, false, 'Arguing with the contractor about whether he has enough work creates adversarial friction. Frank snaps: &quot;I know my business better than you!&quot; *CLICK*. (-25 HP Rep)')">
                   A) "You might think you have enough work, but you're leaving a lot of money on the table."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-1', 1, 1, true, 'Masterful Trade Economics Pivot! Validates his full schedule, highlights the high-margin nature of after-hours emergency jobs, and proves that capturing ONE single job pays for Ava for the entire year.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-1', 1, 1, true, 'CRITICAL KNOCKOUT (100 DMG)! Masterful Trade Economics Pivot! Validates his full schedule, highlights high-margin nature of after-hours emergency jobs, and proves capturing ONE single job pays for Ava for the entire year. Frank admits: &quot;Honestly... we lost two emergency calls last weekend because I was out with the family. How does your thing work?&quot;')">
                   B) "That's exactly why I called. You're booked full on standard daytime jobs, but when an $8,000 emergency calls at 8 PM on a Saturday, that call hits voicemail and books with the contractor down the road. Capturing just ONE single weekend emergency call every 60 days pays for Ava for the entire year on day one."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-1', 1, 2, false, 'Offering a price discount before defending the value immediately devalues the service.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-1', 1, 2, false, 'Offering a price discount before defending the value immediately devalues the service. (-25 HP Rep)')">
                   C) "If you're booked up, I can give you a 50% discount on the setup fee if you sign up today."
                 </button>
               </div>
@@ -1420,7 +1498,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 6 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit21" disabled type="button" onclick="completeLmsUnit('2-1', '2-2')">🔒 Complete Drill Above to Unlock Lesson 2.2 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit21" disabled type="button" onclick="completeLmsUnit('2-1', '2-2')">🔒 Defeat Boss Above to Unlock Lesson 2.2 ➔</button>
           </div>
         </div>
 
@@ -1448,36 +1526,73 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <li><strong>Ava:</strong> Answers on Ring 1, triages the emergency, asks for the square footage/tonnage/leak location, and writes directly into their dispatch calendar.</li>
             </ul>
 
-            <!-- MANDATORY DRILL 2.2 -->
-            <div class="lms-activity-card" id="activity-box-2-2">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: Competitor Flaw Disarmament</div>
-                <span class="act-status-badge" id="actBadge-2-2">🔒 Drill Required to Advance</span>
+            <!-- ⚔️ BOSS CLASH 2.2 -->
+            <div class="lms-boss-clash-card" id="activity-box-2-2">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">🤖</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Mike "The Robot Crusher"</div>
+                    <div class="boss-clash-title">Precision HVAC &amp; Electric (Jacksonville, FL) · Resistance: 100 HP (2 Phases)</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-2-2">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-2-2" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="act-scenario-box">
-                <strong>Contractor Pushback:</strong> HVAC Owner says: <em>"We already pay an answering service $300 a month to pick up the phones when our office closes at 5 PM."</em>
+
+              <!-- Step 1 -->
+              <div class="act-step-wrapper" data-step="1">
+                <div class="boss-speech-bubble" id="bossSpeech-2-2-1">
+                  <strong>Mike:</strong> "I hate AI and robot voices. My customers are old school, they want to talk to real people, not a damn computer."
+                </div>
+                <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                  Deploy the Total Agreement Shield to disarm Mike's anti-AI bias and deal 50 DMG:
+                </div>
+                <div class="act-options" data-step="1">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 1, 0, false, 'Lecturing a blue-collar trades boss about tech trends triggers immediate hostility. Mike barks: &quot;Keep your robots away from my business!&quot; *CLICK*. (-25 HP Rep)')">
+                    A) "AI is the future of every trade business, you need to adapt before you get left behind."
+                  </button>
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 1, 1, true, 'DIRECT HIT (50 DMG)! Total Agreement Shield deployed! Completely disarms defense by agreeing 100%, then highlights zero-latency natural speech. Mike pauses: &quot;Well... we already pay an answering service $300 a month anyway.&quot;')">
+                    B) "I completely agree Mike — 99% of AI bots sound like robotic trash and piss trade customers off. That's exactly why Ava is engineered with zero latency and natural Florida inflection. If she sounded like a robot, I wouldn't be on the phone with you."
+                  </button>
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 1, 2, false, 'Telling an owner his customers don\'t care shows you don\'t respect trade reputation. (-25 HP Rep)')">
+                    C) "Honestly, customers don't even care as long as someone picks up the phone."
+                  </button>
+                </div>
+                <div class="act-feedback" data-step="1"></div>
               </div>
-              <div class="act-prompt">
-                What is the fatal operational flaw of answering services that you expose on the call?
+
+              <!-- Step 2 -->
+              <div class="act-step-wrapper" data-step="2" style="display:none;margin-top:16px;border-top:1px dashed var(--line);padding-top:14px">
+                <div class="boss-speech-bubble" id="bossSpeech-2-2-2">
+                  <strong>Mike:</strong> "Well we already pay an answering service $300 a month to pick up the phones when our office closes at 5 PM."
+                </div>
+                <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                  Target the fatal operational flaw of answering services to deal final 50 DMG:
+                </div>
+                <div class="act-options" data-step="2">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 2, 0, false, 'Answering services are legitimate companies; calling them a scam damages your credibility. (-25 HP Rep)')">
+                    A) "Answering services are a total scam, you shouldn't be paying them anything."
+                  </button>
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 2, 1, true, 'CRITICAL KNOCKOUT (50 DMG)! Precision competitor flaw takedown! Targets 4-minute hold times, per-minute billing overages, and lack of trade booking. Mike concedes: &quot;Yeah, our answering service put my own mother on hold for 5 minutes last month. Show me how fast Ava picks up.&quot;')">
+                    B) "I completely understand! But answering services put homeowners with water leaks on hold for 4 minutes, charge $2/minute overage fees, and just scribble a message on an email that reaches you 2 hours later after the homeowner already hired someone else. Ava answers on Ring 1, asks the tonnage and issue, and books directly into your calendar."
+                  </button>
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 2, 2, false, 'Does not address why Ava is better than what he already has. (-25 HP Rep)')">
+                    C) "Well, Ava is an artificial intelligence and answering services are human beings."
+                  </button>
+                </div>
+                <div class="act-feedback" data-step="2"></div>
               </div>
-              <div class="act-options" data-step="1">
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 1, 0, false, 'Answering services are legitimate companies; saying they are a scam damages your credibility.')">
-                  A) "Answering services are a total scam, you shouldn't be paying them anything."
-                </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 1, 1, true, 'Precision competitor flaw takedown! Targets the 4-minute hold times, per-minute billing overages, and lack of trade dispatch booking.')">
-                  B) "I completely understand! But answering services put homeowners with water leaks on hold for 4 minutes, charge $2/minute overage fees, and just scribble a message on an email that reaches you 2 hours later after the homeowner already hired someone else. Ava answers on Ring 1, asks the tonnage and issue, and books directly into your calendar."
-                </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-2', 1, 2, false, 'Does not address why Ava is better than what he already has.')">
-                  C) "Well, Ava is an artificial intelligence and answering services are human beings."
-                </button>
-              </div>
-              <div class="act-feedback" data-step="1"></div>
             </div>
           </div>
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 7 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit22" disabled type="button" onclick="completeLmsUnit('2-2', '2-3')">🔒 Complete Drill Above to Unlock Lesson 2.3 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit22" disabled type="button" onclick="completeLmsUnit('2-2', '2-3')">🔒 Defeat Boss Above to Unlock Lesson 2.3 ➔</button>
           </div>
         </div>
 
@@ -1520,26 +1635,37 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('demo_challenge')">🔊 Play Audio</button>
             </div>
 
-            <!-- MANDATORY DRILL 2.3 -->
-            <div class="lms-activity-card" id="activity-box-2-3">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: Channel Protocol Decision Challenge</div>
-                <span class="act-status-badge" id="actBadge-2-3">🔒 2-Step Decision Tree Required</span>
+            <!-- ⚔️ BOSS CLASH 2.3 -->
+            <div class="lms-boss-clash-card" id="activity-box-2-3">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">📞</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Dan "The Supply House Cell Boss"</div>
+                    <div class="boss-clash-title">Dan's Commercial Electrical (Fort Myers, FL) · Resistance: 100 HP (2 Phases)</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-2-3">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-2-3" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
               
               <!-- Step 1 -->
               <div class="act-step-wrapper" data-step="1">
-                <div class="act-scenario-box">
-                  <strong>Scenario 1 — Mobile Phone Call:</strong> You dialed the contractor's direct cell phone. He is currently talking to you on his iPhone while standing by his truck.
+                <div class="boss-speech-bubble" id="bossSpeech-2-3-1">
+                  <strong>Dan:</strong> "Look, I'm at the supply house counter right now picking up 200 amp panels. Just tell me what it is."
                 </div>
-                <div class="act-prompt">
-                  What is the ONLY professional way to deliver the demo line without making an amateur mistake?
+                <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                  Deliver the Mobile Cell Text Drop Protocol to deal 50 DMG:
                 </div>
                 <div class="act-options" data-step="1">
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-3', 1, 0, false, 'Fatal phone mechanics failure: he is TALKING to you on his cell phone right now! Telling him to dial another number on speaker while on the call makes no sense.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-3', 1, 0, false, 'Fatal phone mechanics failure: he is TALKING to you on his cell phone right now! Telling him to dial another number on speaker while on the call makes no sense. Dan barks: &quot;I\'m talking to you on it!&quot; *CLICK*. (-25 HP Rep)')">
                     A) "Grab your cell right now and dial our live demo line (561) 813-8602 on speakerphone while I stay on the line."
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-3', 1, 1, true, 'Flawless Mobile Protocol! Sends direct audio/text to the device he is holding, with a concrete timebox follow-up.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-3', 1, 1, true, 'DIRECT HIT (50 DMG)! Flawless Mobile Protocol! Sends direct audio/text to the device he is holding, with a concrete timebox follow-up. Dan says: &quot;What if I was sitting at my office desk on my landline phone?&quot;')">
                     B) "I just shot a direct text with our live dispatch line — (561) 813-8602 — to this cell phone. When we hang up or when you wrap, tap it on speaker and hear Ava answer on ring one. What time do you wrap your last call today so I can follow up?"
                   </button>
                 </div>
@@ -1548,17 +1674,17 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
               <!-- Step 2 -->
               <div class="act-step-wrapper" data-step="2" style="display:none;margin-top:16px;border-top:1px dashed var(--line);padding-top:14px">
-                <div class="act-scenario-box">
-                  <strong>Scenario 2 — Office Desk Landline Call:</strong> You reached the owner sitting at his desk at the shop. He answered on the physical desk landline phone.
+                <div class="boss-speech-bubble" id="bossSpeech-2-3-2">
+                  <strong>Dan:</strong> "What if I was sitting at my office desk on my landline phone?"
                 </div>
-                <div class="act-prompt">
-                  What is the exact execution to get him to test Ava immediately?
+                <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                  Execute the exact Desk Landline Speaker Challenge to deal final 50 DMG:
                 </div>
                 <div class="act-options" data-step="2">
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-3', 2, 0, true, 'Desk Phone Speaker Challenge executed! Since he is on a landline, his mobile phone is in his pocket. He can dial and test Ava live on speaker while you stay on the desk phone.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-3', 2, 0, true, 'CRITICAL KNOCKOUT (50 DMG)! Desk Phone Speaker Challenge executed! Since he is on a landline, his mobile phone is in his pocket. He dials and tests Ava live on speaker while you stay on the desk line. Dan concedes: &quot;Hell, I\'ll dial it right now on speaker while you\'re on the line.&quot;')">
                     A) "Pull your cell phone out of your pocket right now and dial our live demo line on speaker: (561) 813-8602. Pretend it's 8 PM on a Sunday. Listen to how fast she picks up and books a job while I stay on the line."
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-3', 2, 1, false, 'Emailing a demo number to an office inbox leads to 90% drop-off.')">
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('2-3', 2, 1, false, 'Emailing a demo number to an office inbox leads to 90% drop-off. (-25 HP Rep)')">
                     B) "I'll email our live demo number to your office inbox so you can try it next week."
                   </button>
                 </div>
@@ -1569,7 +1695,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 8 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit23" disabled type="button" onclick="completeLmsUnit('2-3', '2-4')">🔒 Complete Drill Above to Unlock Lesson 2.4 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit23" disabled type="button" onclick="completeLmsUnit('2-3', '2-4')">🔒 Defeat Boss Above to Unlock Lesson 2.4 ➔</button>
           </div>
         </div>
 
@@ -1742,26 +1868,39 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               </div>
             </div>
 
-            <!-- MANDATORY DRILL 3.1 -->
-            <div class="lms-activity-card" id="activity-box-3-1">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: Pricing Objection &amp; Contract Terms</div>
-                <span class="act-status-badge" id="actBadge-3-1">🔒 Drill Required to Advance</span>
+            <!-- ⚔️ BOSS CLASH 3.1 -->
+            <div class="lms-boss-clash-card" id="activity-box-3-1">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">🤝</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Dave "The Budget Dragon"</div>
+                    <div class="boss-clash-title">Owner, All-Star Plumbing &amp; Drain (Naples, FL) · Resistance: 100 HP</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-3-1">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-3-1" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="act-scenario-box">
-                <strong>Contractor Pushback:</strong> Plumber says: <em>"I'm not signing any 12-month contract, and I can't afford thousands of dollars a month right now."</em>
+
+              <div class="boss-speech-bubble" id="bossSpeech-3-1">
+                <strong>Dave:</strong> "I'm sick of paying agencies $2,000 a month on 12-month lock-in contracts that deliver zero results. How much is this going to cost me?"
               </div>
-              <div class="act-prompt">
-                Which response delivers the exact VantorX pricing anchor and removes financial friction?
+
+              <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                Deliver the exact VantorX pricing anchor and month-to-month terms to deal 100 DMG:
               </div>
               <div class="act-options" data-step="1">
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-1', 1, 0, false, 'Does not mention the flat rate or contract terms.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-1', 1, 0, false, 'Vague claims without stating flat rate or contract terms invite skepticism. Dave snaps: &quot;That\'s what every slick marketer says!&quot; *CLICK*. (-25 HP Rep)')">
                   A) "Don't worry, we are very affordable compared to hiring a full-time receptionist."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-1', 1, 1, true, 'Flawless Price Anchoring! Zero long-term contracts, $397 flat monthly rate, and anchors against a single emergency job paying for the entire year.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-1', 1, 1, true, 'CRITICAL KNOCKOUT (100 DMG)! Flawless Price Anchoring! Zero long-term contracts, $397 flat monthly rate, and anchors against a single emergency job paying for the entire year. Dave admits: &quot;Wait, zero long-term contract? $397 flat? That\'s actually reasonable. Walk me through setup.&quot;')">
                   B) "There are zero long-term contracts — it's month-to-month, cancel anytime. It's a flat $397 a month. A single water heater replacement or slab leak repair is $2,500 to $4,800. Capturing just ONE single after-hours job pays for Ava for the entire year on day one."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-1', 1, 2, false, 'Dropping prices randomly signals weak value.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-1', 1, 2, false, 'Dropping prices and pushing contracts when he just said he hates contracts destroys trust. (-25 HP Rep)')">
                   C) "I can drop the price to $199 a month if you promise to stay for 6 months."
                 </button>
               </div>
@@ -1771,7 +1910,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 11 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit31" disabled type="button" onclick="completeLmsUnit('3-1', '3-2')">🔒 Complete Drill Above to Unlock Lesson 3.2 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit31" disabled type="button" onclick="completeLmsUnit('3-1', '3-2')">🔒 Defeat Boss Above to Unlock Lesson 3.2 ➔</button>
           </div>
         </div>
 
@@ -1793,26 +1932,39 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               "We never port your numbers or touch your existing carrier. We set up simple conditional call forwarding (*71) so when your lines ring 4 times unanswered or after 5 PM, Ava picks up seamlessly. You have zero downtime and full control."
             </div>
 
-            <!-- MANDATORY DRILL 3.2 -->
-            <div class="lms-activity-card" id="activity-box-3-2">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: Eliminating Carrier &amp; Tech Anxiety</div>
-                <span class="act-status-badge" id="actBadge-3-2">🔒 Drill Required to Advance</span>
+            <!-- ⚔️ BOSS CLASH 3.2 -->
+            <div class="lms-boss-clash-card" id="activity-box-3-2">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">🚀</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Gary "The Fleet Patriarch"</div>
+                    <div class="boss-clash-title">Gary &amp; Sons Mechanical (14 Vans, St. Petersburg, FL) · Resistance: 100 HP</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-3-2">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-3-2" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="act-scenario-box">
-                <strong>Contractor Pushback:</strong> Contractor says: <em>"My company phone number has been wrapped on 12 trucks for 18 years. I'm not changing my phone carrier or risking my phones going down."</em>
+
+              <div class="boss-speech-bubble" id="bossSpeech-3-2">
+                <strong>Gary:</strong> "My company phone number has been wrapped on 14 trucks for 22 years. I'm not changing my phone carrier or risking my phones going down for even an hour."
               </div>
-              <div class="act-prompt">
-                How do you dismantle this technical fear in under 15 seconds?
+
+              <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                Dismantle Gary's carrier and downtime anxiety in 15 seconds to deal 100 DMG:
               </div>
               <div class="act-options" data-step="1">
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-2', 1, 0, false, 'Porting phone numbers takes 7-14 business days and frequently causes downtime — this would terrify the contractor.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-2', 1, 0, false, 'Porting phone numbers takes 7-14 business days and frequently causes downtime — this terrifies fleet owners. Gary snaps: &quot;Not a chance in hell!&quot; *CLICK*. (-25 HP Rep)')">
                   A) "We'll port your phone numbers over to our cloud network within two weeks."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-2', 1, 1, true, 'Zero-Downtime Guarantee nailed! Proves they keep their exact carrier, exact number, and uses standard *71 forwarding with zero disruption.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-2', 1, 1, true, 'CRITICAL KNOCKOUT (100 DMG)! Zero-Downtime Guarantee nailed! Explains we NEVER touch his carrier or port numbers. Simple *71 conditional forwarding only answers after 4 rings or after-hours. Gary concedes: &quot;So it only picks up when my dispatcher doesn\'t? That fixes our entire weekend problem. Let\'s do it.&quot;')">
                   B) "We NEVER touch your carrier and NEVER port your number. You keep your exact same phone company and exact same number. We simply turn on conditional call forwarding (*71) so when your line rings 4 times unanswered or after 5 PM, Ava picks up seamlessly. You have zero downtime and remain in complete control."
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-2', 1, 2, false, 'Giving them a new number requires reprinting truck wraps and business cards, which contractors will never do.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-2', 1, 2, false, 'Contractors will not rebrand or reprint truck wraps for a secondary number. (-25 HP Rep)')">
                   C) "You will get a new secondary phone number to put on your future website."
                 </button>
               </div>
@@ -1822,7 +1974,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 12 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit32" disabled type="button" onclick="completeLmsUnit('3-2', '3-3')">🔒 Complete Drill Above to Unlock Lesson 3.3 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit32" disabled type="button" onclick="completeLmsUnit('3-2', '3-3')">🔒 Defeat Boss Above to Unlock Lesson 3.3 ➔</button>
           </div>
         </div>
 
@@ -1857,26 +2009,39 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               </div>
             </div>
 
-            <!-- MANDATORY DRILL 3.3 -->
-            <div class="lms-activity-card" id="activity-box-3-3">
-              <div class="act-header">
-                <div class="act-title">⚡ MANDATORY PRACTICE DRILL: Master 4-Minute Symphony Sequence</div>
-                <span class="act-status-badge" id="actBadge-3-3">🔒 Call Flow Chronology Required</span>
+            <!-- ⚔️ BOSS CLASH 3.3 -->
+            <div class="lms-boss-clash-card" id="activity-box-3-3">
+              <div class="boss-clash-top">
+                <div class="boss-clash-profile">
+                  <div class="boss-clash-avatar">🎼</div>
+                  <div class="boss-clash-meta">
+                    <div class="boss-clash-name">Tony "The Grand Slam Commercial Contractor"</div>
+                    <div class="boss-clash-title">Tri-County Commercial Builders (Fort Lauderdale, FL) · Resistance: 100 HP</div>
+                  </div>
+                </div>
+                <div class="boss-clash-health">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5" id="bossHpText-3-3">HP: 100 / 100</div>
+                  <div class="boss-hp-track">
+                    <div class="boss-hp-fill" id="bossHpFill-3-3" style="width:100%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="act-scenario-box">
-                <strong>Call Symphony Flow:</strong> A cold call has 5 non-negotiable milestones. If you deliver them out of order (such as dropping the demo before verifying the owner, or asking for the calendar before anchoring the ROI), the prospect hangs up.
+
+              <div class="boss-speech-bubble" id="bossSpeech-3-3">
+                <strong>Tony:</strong> "You've got 4 minutes before my project executive meeting. Give me the whole picture from top to bottom."
               </div>
-              <div class="act-prompt">
-                Which chronological progression represents the master VantorX 4-minute call symphony?
+
+              <div class="act-prompt" style="font-weight:600;font-size:13px;color:#e2e8f0;margin-bottom:10px">
+                Deploy the master 4-minute call symphony in perfect chronological order to deal 100 DMG:
               </div>
               <div class="act-options" data-step="1">
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-3', 1, 0, false, 'Pitching the demo line in the first 15 seconds without permission or owner verification guarantees an immediate hang-up.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-3', 1, 0, false, 'Pitching the demo line in the first 15 seconds without permission or owner verification guarantees an immediate hang-up. Tony barks: &quot;I don\'t buy cold pitches!&quot; *CLICK*. (-25 HP Rep)')">
                   A) 1. Live Demo Drop ➔ 2. Price Quote ➔ 3. Ask who the owner is ➔ 4. Close
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-3', 1, 1, true, 'Master Symphony Flow Achieved! Follows the exact psychological progression: Disarm (Autonomy) ➔ Verify Owner ➔ Agitate High-Ticket Trade Leak ➔ Total Agreement + Demo Drop ➔ Calendar Timebox Close.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-3', 1, 1, true, 'CRITICAL KNOCKOUT (100 DMG)! Master Symphony Flow Achieved! Follows the exact psychological progression: 1. 4-Sec Permission Disarm ➔ 2. Owner Pre-Verification Gate ➔ 3. High-Ticket After-Hours Leak Agitation ➔ 4. Total Agreement Shield + Instant Text Demo Drop ((561) 813-8602) ➔ 5. 10-Minute Next-Day Calendar Close. Tony concedes: &quot;Damn. You guys are the real deal. Put me down for 10 AM tomorrow to review the portal.&quot;')">
                   B) 1. 4-Second Permission Disarm ➔ 2. Owner Pre-Verification Gate ➔ 3. High-Ticket After-Hours Leak Agitation ➔ 4. Total Agreement Shield + Instant Text Demo Drop ((561) 813-8602) ➔ 5. 10-Minute Next-Day Calendar Close
                 </button>
-                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-3', 1, 2, false, 'Asking for the close before proving ROI or demonstrating Ava will trigger sales defense.')">
+                <button class="act-opt-btn" type="button" onclick="submitUnitActivity('3-3', 1, 2, false, 'Asking for the close before proving ROI or demonstrating Ava will trigger sales defense. (-25 HP Rep)')">
                   C) 1. Rapport building ➔ 2. Calendar close ➔ 3. Demo drop ➔ 4. Overcome objections
                 </button>
               </div>
@@ -1886,7 +2051,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
           <div class="lms-stage-footer">
             <span style="font-size:12.5px;color:var(--dim)">Step 13 of 15 Complete</span>
-            <button class="btn btn-secondary" id="btnCompleteUnit33" disabled type="button" onclick="completeLmsUnit('3-3', '3-4')">🔒 Complete Drill Above to Unlock Lesson 3.4 ➔</button>
+            <button class="btn btn-secondary" id="btnCompleteUnit33" disabled type="button" onclick="completeLmsUnit('3-3', '3-4')">🔒 Defeat Boss Above to Unlock Lesson 3.4 ➔</button>
           </div>
         </div>
 
@@ -3540,6 +3705,7 @@ window.saveBrainSettings = function() {
 
   // Migration for existing saved profiles:
   Object.keys(USER_PROFILES).forEach(k => {
+    if (k === 'buddy') return;
     const u = USER_PROFILES[k];
     if (!u.unitActivitiesDone) {
       u.unitActivitiesDone = u.isFounder ? ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'] : [];
@@ -3828,13 +3994,15 @@ window.saveBrainSettings = function() {
 
     if (fbBox) {
       fbBox.className = 'act-feedback show ' + (isCorrect ? 'ok' : 'err');
-      fbBox.innerHTML = (isCorrect ? '✓ <strong>Correct Execution:</strong> ' : '❌ <strong>Fatal Sales Mistake:</strong> ') + feedbackText;
+      fbBox.innerHTML = (isCorrect ? '✓ <strong>Effective Strike:</strong> ' : '❌ <strong>Fatal Sales Mistake (Boss Repulses Call):</strong> ') + feedbackText;
     }
 
     if (!isCorrect) {
       playSound('slash');
-      showToast('❌ Incorrect choice. Contractors will hang up! Read feedback and try again.');
+      showToast('❌ Strike Blocked! Contractor pushes back. Read feedback and strike again.');
+      cardEl.classList.add('clash-shake');
       setTimeout(() => {
+        cardEl.classList.remove('clash-shake');
         btns.forEach(b => {
           b.disabled = false;
           b.classList.remove('wrong');
@@ -3846,32 +4014,44 @@ window.saveBrainSettings = function() {
 
     playSound('hit');
 
-    // If multi-step (e.g. 1-2, 1-3, 2-3), reveal next step if exists
+    // Multi-step boss handling (e.g. 1-2, 1-3, 2-2, 2-3)
     const nextStepEl = cardEl.querySelector('.act-step-wrapper[data-step="' + (stepIdx + 1) + '"]');
     if (nextStepEl) {
-      showToast('✓ Step ' + stepIdx + ' passed! Complete Step ' + (stepIdx + 1) + ' below.');
+      const hpFill = cardEl.querySelector('.boss-hp-fill');
+      const hpText = cardEl.querySelector('#bossHpText-' + unitId) || cardEl.querySelector('.boss-clash-health div');
+      if (hpFill) hpFill.style.width = '50%';
+      if (hpText) hpText.textContent = 'HP: 50 / 100 (Wounded)';
+      
+      showToast('⚔️ Direct Hit! Boss wounded (50 HP). Execute Phase ' + (stepIdx + 1) + ' below!');
       nextStepEl.style.display = 'block';
       nextStepEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
-    // All steps passed for this unit!
+    // Boss Defeated!
+    const hpFill = cardEl.querySelector('.boss-hp-fill');
+    const hpText = cardEl.querySelector('#bossHpText-' + unitId) || cardEl.querySelector('.boss-clash-health div');
+    if (hpFill) hpFill.style.width = '0%';
+    if (hpText) hpText.textContent = '🏆 DEFEATED (0 HP)';
+
+    cardEl.classList.add('defeated');
+    cardEl.classList.add('passed');
+
     if (!user.unitActivitiesDone) user.unitActivitiesDone = [];
     if (!user.unitActivitiesDone.includes(unitId)) {
       user.unitActivitiesDone.push(unitId);
-      user.xp = Math.min(1500, user.xp + 50);
+      user.xp = Math.min(1500, (user.xp || 0) + 50);
+      user.bossesDefeated = (user.bossesDefeated || 0) + 1;
       saveUserProfiles();
       updateUserUI();
     }
 
     playSound('levelup');
-    showToast('🎉 Mandatory Drill for Lesson ' + unitId + ' Passed! Next lesson button unlocked.');
+    showToast('🏆 BOSS DEFEATED! Lesson ' + unitId + ' Complete! Next Lesson Unlocked (+50 XP)');
 
-    // Update UI elements for this activity
-    cardEl.classList.add('passed');
     const badge = cardEl.querySelector('.act-status-badge');
     if (badge) {
-      badge.textContent = '✓ Drill Passed (Unlocked)';
+      badge.textContent = '🏆 Boss Defeated (Passed)';
       badge.classList.add('passed');
     }
 
@@ -3942,8 +4122,11 @@ window.saveBrainSettings = function() {
     if (!user.flashcardsRevealed) user.flashcardsRevealed = [];
 
     const card = document.getElementById('fc-' + idx);
+    let isNowRevealed = false;
     if (card) {
       card.classList.toggle('revealed');
+      card.classList.toggle('reviewed');
+      isNowRevealed = card.classList.contains('revealed') || card.classList.contains('reviewed');
     }
 
     if (!user.flashcardsRevealed.includes(idx)) {
@@ -3953,10 +4136,22 @@ window.saveBrainSettings = function() {
 
     const btn = card ? card.querySelector('.fc-reveal-btn') : null;
     if (btn) {
-      btn.textContent = '✓ Mastered';
-      btn.style.borderColor = '#34d399';
-      btn.style.color = '#34d399';
+      if (isNowRevealed) {
+        btn.textContent = '✓ Mastered (Hide)';
+        btn.style.borderColor = '#34d399';
+        btn.style.color = '#34d399';
+      } else {
+        btn.textContent = 'Reveal Rebuttal ➔';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      }
     }
+
+    const count = user.flashcardsRevealed.length;
+    const lmsFcEl = document.getElementById('lmsFcRevealedCount');
+    if (lmsFcEl) lmsFcEl.textContent = count;
+    const countEl14 = document.getElementById('fcMasteryCount');
+    if (countEl14) countEl14.textContent = `${count} / 10 Mastered`;
 
     updateAcademyUI();
 
@@ -4088,18 +4283,32 @@ window.saveBrainSettings = function() {
 
     // 3. Update Lesson 1.4 Flashcard Drill UI
     const cardCount = user.flashcardsRevealed.length;
+    const lmsFcEl = document.getElementById('lmsFcRevealedCount');
+    if (lmsFcEl) lmsFcEl.textContent = cardCount;
     const countEl14 = document.getElementById('fcMasteryCount');
     if (countEl14) countEl14.textContent = `${cardCount} / 10 Mastered`;
 
     for (let c = 1; c <= 10; c++) {
       const card = document.getElementById('fc-' + c);
-      if (card && user.flashcardsRevealed.includes(c)) {
-        card.classList.add('revealed');
-        const btn = card.querySelector('.fc-reveal-btn');
-        if (btn) {
-          btn.textContent = '✓ Mastered';
-          btn.style.borderColor = '#34d399';
-          btn.style.color = '#34d399';
+      if (card) {
+        if (user.flashcardsRevealed.includes(c)) {
+          card.classList.add('revealed');
+          card.classList.add('reviewed');
+          const btn = card.querySelector('.fc-reveal-btn');
+          if (btn) {
+            btn.textContent = '✓ Mastered';
+            btn.style.borderColor = '#34d399';
+            btn.style.color = '#34d399';
+          }
+        } else {
+          card.classList.remove('revealed');
+          card.classList.remove('reviewed');
+          const btn = card.querySelector('.fc-reveal-btn');
+          if (btn) {
+            btn.textContent = 'Reveal Rebuttal ➔';
+            btn.style.borderColor = '';
+            btn.style.color = '';
+          }
         }
       }
     }
@@ -4110,11 +4319,11 @@ window.saveBrainSettings = function() {
       const drillPassed = acts.includes('1-4') || user.founderBypass;
       if ((cardCount >= 10 && drillPassed) || user.founderBypass) {
         btnUnit14.disabled = false;
-        btnUnit14.textContent = '✓ Complete Lesson 1.4 & Unlock Day 1 Exam ➔';
+        btnUnit14.textContent = '✓ Marco Defeated & 10 Cards Mastered ➔ Unlock Day 1 Exam ➔';
         btnUnit14.style.background = 'linear-gradient(135deg, #10b981, #059669)';
       } else {
         btnUnit14.disabled = true;
-        const msg = cardCount < 10 ? `🔒 Review All 10 Cards (${cardCount}/10 Done) to Unlock Exam ➔` : '🔒 Pass Reflex Drill Below to Unlock Exam ➔';
+        const msg = cardCount < 10 ? `🔒 Review All 10 Cards (${cardCount}/10 Done) to Unlock Exam ➔` : '🔒 Defeat Boss Marco Below to Unlock Exam ➔';
         btnUnit14.textContent = msg;
         btnUnit14.style.background = '';
       }
@@ -4153,7 +4362,7 @@ window.saveBrainSettings = function() {
       }
     }
 
-    // 4b. Update All Mandatory Lesson Activity Cards and Next Buttons
+    // 4b. Update All Mandatory Lesson Boss Clash Cards and Next Buttons
     const lessonNextConfig = [
       { unit: '1-1', btn: 'btnCompleteUnit11', next: '1-2', label: '1.2' },
       { unit: '1-2', btn: 'btnCompleteUnit12', next: '1-3', label: '1.3' },
@@ -4170,18 +4379,26 @@ window.saveBrainSettings = function() {
       const cardEl = document.getElementById('activity-box-' + item.unit);
       const isPassed = acts.includes(item.unit) || user.founderBypass;
       if (cardEl) {
+        const hpFill = cardEl.querySelector('.boss-hp-fill');
+        const hpText = cardEl.querySelector('#bossHpText-' + item.unit) || cardEl.querySelector('.boss-clash-health div');
+        const badge = cardEl.querySelector('.act-status-badge');
+
         if (isPassed) {
+          cardEl.classList.add('defeated');
           cardEl.classList.add('passed');
-          const badge = cardEl.querySelector('.act-status-badge');
+          if (hpFill) hpFill.style.width = '0%';
+          if (hpText) hpText.textContent = '🏆 DEFEATED (0 HP)';
           if (badge) {
-            badge.textContent = '✓ Drill Passed (Unlocked)';
+            badge.textContent = '🏆 Boss Defeated (Passed)';
             badge.classList.add('passed');
           }
         } else {
+          cardEl.classList.remove('defeated');
           cardEl.classList.remove('passed');
-          const badge = cardEl.querySelector('.act-status-badge');
+          if (hpFill) hpFill.style.width = '100%';
+          if (hpText) hpText.textContent = 'HP: 100 / 100';
           if (badge) {
-            badge.textContent = '🔒 Drill Required to Advance';
+            badge.textContent = '⚔️ Boss Fight Required';
             badge.classList.remove('passed');
           }
         }
@@ -4192,29 +4409,37 @@ window.saveBrainSettings = function() {
         if (isPassed) {
           nextBtn.disabled = false;
           nextBtn.className = 'btn btn-gold';
-          nextBtn.innerHTML = `✓ Mark Complete &amp; Continue to ${item.label} ➔`;
+          nextBtn.innerHTML = `✓ Boss Defeated ➔ Continue to Lesson ${item.label} ➔`;
           nextBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
         } else {
           nextBtn.disabled = true;
           nextBtn.className = 'btn btn-secondary';
-          nextBtn.innerHTML = `🔒 Complete Drill Above to Unlock Lesson ${item.label} ➔`;
+          nextBtn.innerHTML = `🔒 Defeat Boss Above to Unlock Lesson ${item.label} ➔`;
           nextBtn.style.background = '';
         }
       }
     });
 
-    // 1-4 Drill Status Badge
+    // 1-4 Marco Boss Clash Status
     const card14 = document.getElementById('activity-box-1-4');
     if (card14) {
       const isPassed14 = acts.includes('1-4') || user.founderBypass;
+      const hpFill14 = card14.querySelector('.boss-hp-fill');
+      const hpText14 = card14.querySelector('#bossHpText-1-4') || card14.querySelector('.boss-clash-health div');
+      const b14 = card14.querySelector('.act-status-badge');
+
       if (isPassed14) {
+        card14.classList.add('defeated');
         card14.classList.add('passed');
-        const b = card14.querySelector('.act-status-badge');
-        if (b) { b.textContent = '✓ Drill Passed (Unlocked)'; b.classList.add('passed'); }
+        if (hpFill14) hpFill14.style.width = '0%';
+        if (hpText14) hpText14.textContent = '🏆 DEFEATED (0 HP)';
+        if (b14) { b14.textContent = '🏆 Boss Defeated (Passed)'; b14.classList.add('passed'); }
       } else {
+        card14.classList.remove('defeated');
         card14.classList.remove('passed');
-        const b = card14.querySelector('.act-status-badge');
-        if (b) { b.textContent = '🔒 Reflex Drill Required'; b.classList.remove('passed'); }
+        if (hpFill14) hpFill14.style.width = '100%';
+        if (hpText14) hpText14.textContent = 'HP: 100 / 100';
+        if (b14) { b14.textContent = '⚔️ 10 Cards + Boss Fight Required'; b14.classList.remove('passed'); }
       }
     }
 
