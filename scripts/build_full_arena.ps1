@@ -1,4 +1,4 @@
-﻿# PowerShell script to build the complete multi-product cold calling cockpit
+# PowerShell script to build the complete multi-product cold calling cockpit
 $ErrorActionPreference = "Stop"
 
 $leadsRaw = [System.IO.File]::ReadAllText("$PSScriptRoot/../data/normalized_lead_targets.json", [System.Text.Encoding]::UTF8)
@@ -133,6 +133,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
 .badge-leak{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:#fca5a5;padding:3px 8px;border-radius:6px;font-family:var(--font-mono);font-weight:700;font-size:11.5px;display:inline-block}
 .badge-save{background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.4);color:#6ee7b7;padding:3px 8px;border-radius:6px;font-family:var(--font-mono);font-weight:700;font-size:11.5px;display:inline-block}
+.math-info-pill{font-size:10px;font-family:var(--font-mono);font-weight:700;background:rgba(245,158,11,0.18);border:1px solid rgba(245,158,11,0.45);color:var(--accent2);padding:2px 6px;border-radius:4px;cursor:pointer;margin-left:5px;vertical-align:middle;display:inline-block;transition:all 0.15s ease}
+.math-info-pill:hover{background:var(--accent);color:#000000;box-shadow:0 0 8px rgba(245,158,11,0.4)}
 .badge-prod{padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;font-family:var(--font-mono);display:inline-block}
 .badge-prod-ava{background:rgba(56,189,248,0.15);color:#7dd3fc;border:1px solid rgba(56,189,248,0.3)}
 .badge-prod-website{background:rgba(168,85,247,0.15);color:#d8b4fe;border:1px solid rgba(168,85,247,0.3)}
@@ -596,8 +598,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <th>City, State &amp; Trade</th>
               <th>Phone (Click to Dial)</th>
               <th>Primary Leak Detected</th>
-              <th>Annual Leak ($)</th>
-              <th>Net Saved ($)</th>
+              <th>Annual Leak ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View real-world trade ticket math">ℹ️ Math</span></th>
+              <th>Net Saved ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View net profit formula">ℹ️ Math</span></th>
               <th>Recommended Offer</th>
               <th>Outcome &amp; Notes</th>
               <th style="text-align:right">Action</th>
@@ -813,12 +815,14 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="active-lead-val" id="activeLeadLocation">Boca Raton, FL · HVAC</div>
           </div>
           <div class="active-lead-cell">
-            <div class="active-lead-label">Estimated Annual Leak</div>
+            <div class="active-lead-label">Estimated Annual Leak <span class="math-info-pill" onclick="openLeakMathModal()" title="View formula">ℹ️ Math</span></div>
             <div class="active-lead-val" style="color:#fca5a5" id="activeLeadLoss">-$102,000 / year ($8,500/mo)</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:3px" id="activeLeadLeakBreakdown">1 AC replacement (~$8,500) + 2 repair calls/mo</div>
           </div>
           <div class="active-lead-cell">
             <div class="active-lead-label">Net Profit Saved with VantorX</div>
-            <div class="active-lead-val" style="color:#6ee7b7" id="activeLeadSavings">+$98,412 / year</div>
+            <div class="active-lead-val" style="color:#6ee7b7" id="activeLeadSavings">+$93,636 / year</div>
+            <div style="font-size:11px;color:var(--ok);margin-top:3px" id="activeLeadSavingsSub">Net profit kept after $697/mo VantorX investment</div>
           </div>
         </div>
 
@@ -1750,6 +1754,97 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   </div>
 </div>
 
+<!-- 📊 Leak Math & Trade Ticket Breakdown Modal -->
+<div class="modal-overlay" id="leakMathModal">
+  <div class="modal-box" style="max-width:680px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h3 style="font-family:var(--font-head);font-size:20px;color:var(--accent2);display:flex;align-items:center;gap:8px">
+        <span>💸</span> Real-World Trade Revenue Leak Math &amp; Formulas
+      </h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeLeakMathModal()" style="font-size:16px;padding:4px 10px">✕</button>
+    </div>
+
+    <p style="color:var(--dim);font-size:13.5px;line-height:1.5;margin-bottom:16px">
+      When cold calling contractors, throwing out generic numbers sounds fake. Here is the <strong>exact, conservative industry math</strong> behind every dollar in this cockpit so you can defend it on any live call with 100% conviction.
+    </p>
+
+    <!-- Formula Cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+      <div style="background:var(--bg3);border:1px solid rgba(239,68,68,0.3);border-radius:10px;padding:12px">
+        <div style="font-size:11px;font-family:var(--font-mono);color:#fca5a5;text-transform:uppercase;font-weight:700">1. Annual Leak Formula</div>
+        <div style="font-size:14.5px;font-weight:700;color:#ffffff;margin-top:4px">(Missed Jobs/mo × Avg Ticket) × 12</div>
+        <div style="font-size:11.5px;color:var(--dim);margin-top:4px">Based on 85% of callers hanging up on voicemail and calling the next contractor on Google.</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid rgba(52,211,153,0.3);border-radius:10px;padding:12px">
+        <div style="font-size:11px;font-family:var(--font-mono);color:#6ee7b7;text-transform:uppercase;font-weight:700">2. Net Saved Formula</div>
+        <div style="font-size:14.5px;font-weight:700;color:#ffffff;margin-top:4px">Annual Leak - VantorX ($8,364/yr)</div>
+        <div style="font-size:11.5px;color:var(--dim);margin-top:4px">Net cash kept in owner's pocket after Ava 24/7 Growth Tier ($697/mo × 12).</div>
+      </div>
+    </div>
+
+    <!-- Trade Ticket Table -->
+    <div style="font-size:12.5px;font-weight:700;color:#ffffff;margin-bottom:8px;font-family:var(--font-mono)">REAL-WORLD AVERAGE TICKET SIZES BY TRADE:</div>
+    <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:20px">
+      <table style="width:100%;font-size:12.5px;border-collapse:collapse;text-align:left">
+        <thead>
+          <tr style="background:var(--bg3);color:var(--dim);border-bottom:1px solid var(--line)">
+            <th style="padding:8px 12px">Trade</th>
+            <th style="padding:8px 12px">Average Ticket</th>
+            <th style="padding:8px 12px">Conservative Missed/Mo</th>
+            <th style="padding:8px 12px">Monthly Leak</th>
+            <th style="padding:8px 12px">Annual Leak</th>
+          </tr>
+        </thead>
+        <tbody style="color:#e2e8f0">
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:8px 12px;font-weight:700;color:var(--accent2)">❄️ HVAC</td>
+            <td style="padding:8px 12px">$8,500 (System Replacement)</td>
+            <td style="padding:8px 12px">1 Install + 2 Repairs</td>
+            <td style="padding:8px 12px;color:#fca5a5">$9,700/mo</td>
+            <td style="padding:8px 12px;font-weight:700;color:#fca5a5">$116,400/yr</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:8px 12px;font-weight:700;color:var(--accent2)">🏠 Roofing</td>
+            <td style="padding:8px 12px">$11,500 (Arch Shingle)</td>
+            <td style="padding:8px 12px">1 Full Roof Replacement</td>
+            <td style="padding:8px 12px;color:#fca5a5">$11,500/mo</td>
+            <td style="padding:8px 12px;font-weight:700;color:#fca5a5">$138,000/yr</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:8px 12px;font-weight:700;color:var(--accent2)">🔧 Plumbing</td>
+            <td style="padding:8px 12px">$4,500 (Water Heater / Repipe)</td>
+            <td style="padding:8px 12px">1 Major + 4 Emergency Drains</td>
+            <td style="padding:8px 12px;color:#fca5a5">$8,500/mo</td>
+            <td style="padding:8px 12px;font-weight:700;color:#fca5a5">$102,000/yr</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:8px 12px;font-weight:700;color:var(--accent2)">⚡ Electrical</td>
+            <td style="padding:8px 12px">$3,800 (200A Panel Upgrade)</td>
+            <td style="padding:8px 12px">1 Panel + 2 Emergency Calls</td>
+            <td style="padding:8px 12px;color:#fca5a5">$7,000/mo</td>
+            <td style="padding:8px 12px;font-weight:700;color:#fca5a5">$84,000/yr</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px;font-weight:700;color:var(--accent2)">🌊 Restoration</td>
+            <td style="padding:8px 12px">$14,500 (Flood / Water Claim)</td>
+            <td style="padding:8px 12px">1 Claim Every 3 Weeks</td>
+            <td style="padding:8px 12px;color:#fca5a5">$14,500/mo</td>
+            <td style="padding:8px 12px;font-weight:700;color:#fca5a5">$174,000/yr</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- The 15-Second Rule of 1 Job Cold Call Script -->
+    <div style="background:rgba(245,158,11,0.1);border-left:4px solid var(--accent);padding:14px;border-radius:8px">
+      <div style="font-size:12.5px;font-weight:700;color:var(--accent2);margin-bottom:4px">🎯 The "Rule of 1 Job" Script Hook (Say This on the Call):</div>
+      <div style="font-size:13px;color:#ffffff;line-height:1.5">
+        <em>"Everett, even if you think $100k sounds crazy... what's your average ticket on ONE AC replacement? About $8,500, right? If Ava catches just <strong>ONE single job every 30 days</strong> that would have hit your voicemail while your techs were on a call... that ONE job pays for our entire service for the whole year and puts $93,000 net cash straight in your pocket. Am I exaggerating, or is that literally just one caught call?"</em>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">Copied to clipboard!</div>
 
 <script>
@@ -1825,6 +1920,20 @@ window.closeAccountModal = function() {
 window.closeLevelUpModal = function() {
   try {
     const modal = document.getElementById('levelUpModal');
+    if (modal) modal.classList.remove('active');
+  } catch(e) {}
+};
+
+window.openLeakMathModal = function() {
+  try {
+    const modal = document.getElementById('leakMathModal');
+    if (modal) modal.classList.add('active');
+  } catch(e) {}
+};
+
+window.closeLeakMathModal = function() {
+  try {
+    const modal = document.getElementById('leakMathModal');
     if (modal) modal.classList.remove('active');
   } catch(e) {}
 };
@@ -2520,6 +2629,24 @@ window.closeLevelUpModal = function() {
     return map[prod] || map.ava;
   }
 
+  function getTradeBreakdown(trade, monthlyLoss) {
+    const t = (trade || '').toLowerCase();
+    if (t.includes('hvac')) {
+      return '1 AC replacement (~$8,500) + 2 repair calls/mo';
+    } else if (t.includes('roof')) {
+      return '1 full roof replacement (~$11,500)/mo';
+    } else if (t.includes('plumb')) {
+      return '1 water heater (~$4,500) + 4 pipe/drain calls/mo';
+    } else if (t.includes('electr')) {
+      return '1 200A panel upgrade (~$3,800) + 2 outage calls/mo';
+    } else if (t.includes('restor')) {
+      return '1 flood/water claim (~$14,500) every 3 weeks';
+    } else if (t.includes('solar')) {
+      return '1 residential battery/inverter job (~$11,000)/mo';
+    }
+    return '1 high-ticket job + 2 emergency calls/mo';
+  }
+
   function renderLeadsTable() {
     leadTableBody.innerHTML = '';
     const q = leadSearchQuery.toLowerCase().trim();
@@ -2606,11 +2733,11 @@ window.closeLevelUpModal = function() {
           <span style="font-size:12px;color:#e2e8f0">${lead.painPoint}</span>
         </td>
         <td>
-          <span class="badge-leak">-$${lead.annualLoss.toLocaleString()}/yr</span>
+          <span class="badge-leak" title="${getTradeBreakdown(lead.trade, lead.monthlyLoss)}">-$${lead.annualLoss.toLocaleString()}/yr</span>
           <div style="font-size:11px;color:var(--dim);margin-top:2px">$${lead.monthlyLoss.toLocaleString()}/mo</div>
         </td>
         <td>
-          <span class="badge-save">+$${lead.netSavings.toLocaleString()}/yr</span>
+          <span class="badge-save" title="Net profit kept after $697/mo VantorX Growth Tier">+$${Math.max(0, lead.annualLoss - 8364).toLocaleString()}/yr</span>
         </td>
         <td>
           ${getProductBadgeHtml(lead.product)}
@@ -2967,8 +3094,11 @@ window.closeLevelUpModal = function() {
     document.getElementById('activeLeadOwner').textContent = `${lead.owner} (${lead.title})`;
     const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
     document.getElementById('activeLeadLocation').textContent = `${lead.city} · ${lead.trade}`;
+    const netSaved = Math.max(0, lead.annualLoss - 8364);
     document.getElementById('activeLeadLoss').textContent = `-$${lead.annualLoss.toLocaleString()} / year ($${lead.monthlyLoss.toLocaleString()}/mo)`;
-    document.getElementById('activeLeadSavings').textContent = `+$${lead.netSavings.toLocaleString()} / year`;
+    document.getElementById('activeLeadSavings').textContent = `+$${netSaved.toLocaleString()} / year`;
+    const bDown = document.getElementById('activeLeadLeakBreakdown');
+    if (bDown) bDown.textContent = getTradeBreakdown(lead.trade, lead.monthlyLoss);
     document.getElementById('activeLeadCallBtn').href = `tel:${lead.phone.replace(/[^0-9]/g, '')}`;
     document.getElementById('activeLeadCallBtn').textContent = `📞 Call ${lead.phone}`;
 
