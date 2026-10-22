@@ -740,15 +740,15 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <span class="lms-nav-icon" id="navIcon-1-1">▶</span>
             </button>
             <button type="button" class="lms-nav-item locked" id="navItem-1-2" onclick="selectLmsUnit('1-2')">
-              <span>🎯 1.2: 4-Sec Disarm &amp; Tone</span>
+              <span>🛡️ 1.2: Gatekeeper &amp; Owner Extraction</span>
               <span class="lms-nav-icon" id="navIcon-1-2">🔒</span>
             </button>
             <button type="button" class="lms-nav-item locked" id="navItem-1-3" onclick="selectLmsUnit('1-3')">
-              <span>🛠️ 1.3: Florida Trade Jargon</span>
+              <span>🎯 1.3: Pre-Pitch Check &amp; 4-Sec Disarm</span>
               <span class="lms-nav-icon" id="navIcon-1-3">🔒</span>
             </button>
             <button type="button" class="lms-nav-item locked" id="navItem-1-4" onclick="selectLmsUnit('1-4')">
-              <span>🛡️ 1.4: 10 Flashcard Drill</span>
+              <span>⚡ 1.4: 10 Hardcore Objections</span>
               <span class="lms-nav-icon" id="navIcon-1-4">🔒</span>
             </button>
             <button type="button" class="lms-nav-item locked" id="navItem-1-5" onclick="selectLmsUnit('1-5')">
@@ -874,28 +874,48 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="lms-lesson-view" id="view-1-2">
           <div class="lms-view-head">
             <div>
-              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.2: The 4-Second Disarm</span></div>
-              <div class="lms-view-title">🎯 The 4-Second Disarm &amp; Tonality Masterclass</div>
+              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.2: Gatekeeper Disarmament &amp; Owner Extraction</span></div>
+              <div class="lms-view-title">🛡️ Infiltrating the Front Office &amp; Extracting Owner Cell</div>
             </div>
-            <span class="lms-time-pill">⏱️ 12 Mins</span>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
           </div>
 
           <div class="lms-text-block">
-            <p>Every cold call has a 4-second biological window. During those 4 seconds, the prospect's amygdala (the brain's threat-detection center) evaluates whether you are a friend, an enemy, or a needy telemarketer trying to extract time and money.</p>
-
-            <div class="lms-script-box">
-              <strong>The Master Opener Formula:</strong><br>
-              "[Your Name] with VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?"
+            <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);padding:14px 18px;border-radius:10px;margin-bottom:18px">
+              <strong style="color:#f87171;font-size:14px">🚨 The Iron Law of Trade Cold Calling: NEVER PITCH A GATEKEEPER</strong>
+              <p style="font-size:12.5px;color:#e2e8f0;margin-top:6px;line-height:1.5">Receptionists, office dispatchers, customer service reps, and apprentices have <strong>zero budget authority</strong>. Their sole job is filtering out salespeople. If you start pitching Ava AI or software features to an office dispatcher, you have burned the lead. You must treat gatekeepers with casual peer respect, get to the owner, or extract the owner's direct cell phone immediately.</p>
             </div>
 
-            <p><strong>Why "Or Should I Hang Up?" Disarms Them:</strong> Most sales trainers teach reps to bulldoze through objections. When you offer to hang up, you do the exact opposite of what a telemarketer does. You give them full autonomy. Because they have permission to say no, they no longer need to fight you. 90% of contractors respond: <em>"Alright, 20 seconds. Make it quick."</em></p>
+            <h4 style="color:#ffffff;font-size:15px;margin:16px 0 8px">1. The Subcontractor Peer Tonality</h4>
+            <p>Rookie telemarketers sound eager, apologetic, and formal (<em>"Good morning ma'am! May I please speak with the person in charge of your marketing and phone systems?"</em>). This screams "solicitor" within 1.5 seconds. Elite closers speak with <strong>subcontractor peer tone</strong> — low vocal pitch, casual phrasing, first names only, as if they work with the owner every week.</p>
+
+            <div class="lms-transcript-compare">
+              <div class="lms-bad-call">
+                <div class="lms-call-hdr">❌ The Telemarketer Trap (Immediate Wall)</div>
+                <div class="lms-call-body">
+                  <strong>Dispatcher:</strong> "Gulf Coast Plumbing, how can I direct your call?"<br>
+                  <strong>Rookie Rep:</strong> "Hi there! I'm calling from VantorX Solutions to see if we can schedule a quick 15-minute software demonstration for the owner regarding after-hours calls..."<br>
+                  <strong>Dispatcher:</strong> "We're not interested. Please remove us from your list." <em>*CLICK*</em>
+                </div>
+              </div>
+              <div class="lms-good-call">
+                <div class="lms-call-hdr">✓ Elite Closer Owner Extraction (Cell Captured)</div>
+                <div class="lms-call-body">
+                  <strong>Dispatcher:</strong> "Gulf Coast Plumbing, this is Karen."<br>
+                  <strong>Elite Closer:</strong> "Hey Karen, is Mike around or is he out on a job site right now?"<br>
+                  <strong>Dispatcher:</strong> "He's in the field all day. What is this regarding?"<br>
+                  <strong>Elite Closer:</strong> "It's Luke — quick operational question about your weekend emergency call routing in Tampa. Does he check his cell or should I catch him at the shop around 4:30?"<br>
+                  <strong>Dispatcher:</strong> "Try his cell, it's (813) 555-0192."
+                </div>
+              </div>
+            </div>
 
             <div class="lms-audio-bar">
               <div>
-                <strong style="color:var(--accent2);font-size:13.5px">🗣️ Audio Simulation: Master Disarm Delivery</strong>
-                <div style="font-size:12px;color:var(--dim)">Hear the exact pacing, vocal weight, and pause before "or should I hang up?"</div>
+                <strong style="color:var(--accent2);font-size:13.5px">🗣️ Audio Simulation: Gatekeeper Infiltration &amp; Cell Extraction</strong>
+                <div style="font-size:12px;color:var(--dim)">Listen to the calm, authoritative subcontractor tonality that gets owner cell numbers</div>
               </div>
-              <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('disarm_delivery')">🔊 Play Audio</button>
+              <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('gatekeeper_extraction')">🔊 Play Audio</button>
             </div>
           </div>
 
@@ -909,55 +929,40 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="lms-lesson-view" id="view-1-3">
           <div class="lms-view-head">
             <div>
-              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.3: Florida Trade Jargon</span></div>
-              <div class="lms-view-title">🛠️ Florida Trade Jargon Cheatsheet</div>
+              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.3: Pre-Pitch Check &amp; 4-Sec Disarm</span></div>
+              <div class="lms-view-title">🎯 Owner Pre-Verification &amp; The 4-Second Disarm</div>
             </div>
             <span class="lms-time-pill">⏱️ 15 Mins</span>
           </div>
 
           <div class="lms-text-block">
-            <p>If you don't know trade terms, contractors will smell inexperience within 10 seconds. You must know their vocabulary, common emergency issues, and average job ticket values:</p>
+            <h4 style="color:#ffffff;font-size:15px;margin-bottom:8px">1. The Mandatory Pre-Pitch Verification Gate</h4>
+            <p>When you dial a direct mobile number from the queue, never assume the person who answers is the owner. In trade companies, cell phones are frequently answered by lead technicians, apprentices, or job foremen. <strong>Never run your pitch until you verify you are speaking with the license holder or business owner.</strong></p>
 
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:16px 0">
-              <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px">
-                <strong style="color:#f59e0b">🏠 Roofing Terminology</strong>
-                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55;margin-top:6px">
-                  <li><strong>Architectural Shingles:</strong> 30-year high-wind shingles common in FL.</li>
-                  <li><strong>Emergency Tarping:</strong> $1,200–$2,500 emergency storm job.</li>
-                  <li><strong>Full Reroof:</strong> $12,000 to $25,000 high-ticket replacement.</li>
-                  <li><strong>Pain Point:</strong> Returning 15 missed calls while standing on a 6/12 pitch roof in 95° heat.</li>
-                </ul>
-              </div>
+            <div class="lms-script-box">
+              <strong>Exact Word-for-Word Owner Pre-Check:</strong><br>
+              Prospect: <em>"Yeah, talk to me."</em><br>
+              Closer: <strong>"Hey [Owner First Name]? [Your Name] from VantorX — you the owner or am I talking to the job foreman?"</strong><br><br>
+              • <strong>If Owner answers:</strong> "Yeah, I own the place, what do you need?" ➔ <em>PROCEED TO DISARM.</em><br>
+              • <strong>If Helper/Tech answers:</strong> "Dave's on a ladder right now, I'm his helper." ➔ <em>"Gotcha brother, won't interrupt you with tools in your hand. What's Dave's direct cell so I can catch him when he's down?"</em>
+            </div>
 
-              <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px">
-                <strong style="color:#38bdf8">❄️ HVAC Terminology</strong>
-                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55;margin-top:6px">
-                  <li><strong>Capacitor vs. Compressor:</strong> $250 quick repair vs $5,000+ system replacement.</li>
-                  <li><strong>16 SEER2 Heat Pumps:</strong> Standard Florida residential replacement.</li>
-                  <li><strong>Refrigerant R-410A:</strong> Phaseout regulations driving new unit upgrades.</li>
-                  <li><strong>Pain Point:</strong> Attics hitting 130°F where techs cannot answer cell phones.</li>
-                </ul>
-              </div>
+            <h4 style="color:#ffffff;font-size:15px;margin:20px 0 8px">2. The 4-Second Disarm Formula</h4>
+            <p>Once owner identity is locked, you have exactly 4 seconds before sales defense hardens. You must use downward inflection and deliver the disarm without hesitation:</p>
 
-              <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px">
-                <strong style="color:#34d399">💧 Plumbing Terminology</strong>
-                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55;margin-top:6px">
-                  <li><strong>Slab Leak:</strong> Water pipe ruptured under concrete ($4,000–$8,000).</li>
-                  <li><strong>Hydro-Jetting:</strong> High-pressure commercial line clearing ($1,500).</li>
-                  <li><strong>Tankless Changeout:</strong> $3,500 emergency installation.</li>
-                  <li><strong>Pain Point:</strong> Saturday 9 PM flooded kitchens going to competitor voicemail.</li>
-                </ul>
-              </div>
+            <div class="lms-script-box" style="border-color:rgba(52,211,153,0.4);background:rgba(52,211,153,0.06)">
+              <strong style="color:#34d399">The Master Disarm Formula:</strong><br>
+              <strong>"[Your Name] with VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?"</strong>
+            </div>
 
-              <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px">
-                <strong style="color:#fbbf24">⚡ Electrical Terminology</strong>
-                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55;margin-top:6px">
-                  <li><strong>200A Service Upgrade:</strong> Replacing obsolete 100A panels ($3,500–$5,500).</li>
-                  <li><strong>Generator Transfer Switch:</strong> Hurricane season installation ($4,000).</li>
-                  <li><strong>Panel Burnout:</strong> Emergency fire hazard service call ($2,500+).</li>
-                  <li><strong>Pain Point:</strong> Trying to return customer calls with both hands inside a live breaker panel.</li>
-                </ul>
+            <p style="margin-top:12px"><strong>The Psychology:</strong> By offering to hang up, you grant total autonomy. Telemarketers cling to the line desperately. When you offer to hang up, you subvert their expectation of a high-pressure sales pitch. 90% of contractors reply: <em>"Alright, 20 seconds. What do you got?"</em></p>
+
+            <div class="lms-audio-bar">
+              <div>
+                <strong style="color:var(--accent2);font-size:13.5px">🗣️ Audio Simulation: Owner Pre-Check &amp; Disarm Delivery</strong>
+                <div style="font-size:12px;color:var(--dim)">Hear the exact pacing, vocal weight, and pause before "or should I hang up?"</div>
               </div>
+              <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('disarm_delivery')">🔊 Play Audio</button>
             </div>
           </div>
 
@@ -1004,7 +1009,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <div class="fc-card" id="fc-4">
                 <div class="fc-cue">4. "I'm driving / On a job site right now."</div>
                 <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(4)">Reveal Rebuttal ➔</button>
-                <div class="fc-ans">"Understood, I'll be 15 seconds. Since you're hands-free, dial our live demo line (561) 813-8602 for 20 seconds and see what she sounds like on speaker."</div>
+                <div class="fc-ans">"Understood Mike, keep your eyes on the road. I've got 15 seconds: we build emergency dispatch lines for trade contractors so you don't lose $8,000 weekend jobs while driving or on-site. I'll shoot a 30-second audio text to this cell with our live demo recording so you can tap it when you park. Wrapping up around 5 today?"</div>
               </div>
               <div class="fc-card" id="fc-5">
                 <div class="fc-cue">5. "Call me back next month / after season."</div>
@@ -1052,7 +1057,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.5: Certification Exam</span></div>
               <div class="lms-view-title">📝 Day 1 Certification Exam (Contractor Mindset &amp; Objections)</div>
             </div>
-            <span class="exam-score-badge" id="day1ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 7 / 8 (87.5%+)</span>
+            <span class="exam-score-badge" id="day1ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 8 / 8 (100% Strict Mastery)</span>
           </div>
 
           <div class="lms-lock-screen" id="lockScreen15" style="display:none">
@@ -1063,77 +1068,85 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
 
           <div id="examBody15">
-            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score at least <strong>7 out of 8 (87.5%+)</strong> to earn your Day 1 Certification (+500 XP) and unlock Day 2.</p>
+            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score <strong>8 out of 8 (100% Mastery)</strong> to earn Day 1 Certification (+500 XP) and unlock Day 2. There are no softball questions. Each wrong option reflects a common amateur mistake that burns contractor leads.</p>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q1: A contractor barks aggressively: <em>"Yeah, who's this? I'm backing up a trailer on a job site."</em> What is your exact response?</div>
+              <div class="quiz-q-title">Q1: You dial a direct cell number from the queue. A rough male voice answers: <em>"Yeah, talk to me."</em> What is your mandatory first reflex before speaking any part of your script?</div>
               <div class="quiz-options" data-day="1" data-q="1">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 0, false)">A) "Hi sir! So sorry to bother you! We offer revolutionary AI voice solutions for trade contractors..."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 1, true)">B) "Luke with VantorX. I know you're in the middle of a job — got 20 seconds or should I hang up?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 2, false)">C) "Wait, don't hang up! We can add $50,000 to your roofing pipeline this month!"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 0, false)">A) Deliver the 4-second disarm immediately: "Luke from VantorX. Got 20 seconds or should I hang up?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 1, true)">B) Verify owner identity: "Hey Mike? Luke with VantorX — you the owner or am I talking to the job foreman?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 2, false)">C) Ask formal permission: "Hi, am I speaking with the primary executive decision maker for the company?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 3, false)">D) Start pitching Ava's after-hours dispatch capabilities immediately before they can hang up.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q2: Why does the phrase <em>"or should I hang up?"</em> disarm a hostile contractor?</div>
+              <div class="quiz-q-title">Q2: You call a roofing company's office line. A receptionist answers: <em>"Thanks for calling Gulf Coast Roofing, this is Sarah, how can I direct your call?"</em> How do you reach the owner without triggering a gatekeeper block?</div>
               <div class="quiz-options" data-day="1" data-q="2">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 0, true)">A) Giving them permission to say no removes the pressure of a sales trap and defuses their fight-or-flight reflex.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 1, false)">B) Because contractors feel guilty when you offer to hang up.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 2, false)">C) Because we secretly want them to hang up so we can call someone else.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 0, false)">A) "Hi Sarah, I'm calling from VantorX regarding your website and AI phone systems. Can I speak to the person in charge of technology?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 1, true)">B) "Hey Sarah, is Mike around or is he out on a job site right now?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 2, false)">C) "Sarah, tell Mike it's an urgent regulatory matter regarding his Florida state contractor license."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 3, false)">D) "I need to speak to the owner right now about the thousands in emergency repair calls you're missing on weekends."</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q3: Contractor: <em>"Just email me some information."</em> What is the correct pivot?</div>
+              <div class="quiz-q-title">Q3: Sarah the Gatekeeper responds: <em>"Mike is in the field all day. What company are you with and what is this regarding so I can pass a message?"</em></div>
               <div class="quiz-options" data-day="1" data-q="3">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 0, true)">A) "I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our live demo line right now, it takes 30 seconds to hear her on speaker — got a pen or your cell?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 1, false)">B) "No, email doesn't work. Listen to me on the phone right now."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 2, false)">C) "Sounds great! What is your email address?" (and politely end the call)</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 0, false)">A) "We provide automated AI receptionists that handle after-hours emergency calls for roofing contractors."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 1, true)">B) "It's Luke — quick operational question about your weekend emergency call routing in Tampa. Does he check his cell or should I catch him at the shop around 4:30?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 2, false)">C) "Tell him Luke called about an urgent business opportunity and have him call my cell number back."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 3, false)">D) "Can you just give me his personal cell phone number so I don't have to bother you with technical questions?"</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q4: Contractor: <em>"We're slammed right now, it's our busy season."</em> How do you flip this capacity paradox?</div>
+              <div class="quiz-q-title">Q4: Contractor answers his cell while driving a work truck: <em>"Yeah, who's this? I'm driving right now."</em> What is the exact professional closer protocol?</div>
               <div class="quiz-options" data-day="1" data-q="4">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 0, false)">A) "You should hire more subcontractors so you can take more calls."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 1, true)">B) "That's exactly why I called. When your crews are running 100% full, that's when after-hours $8,000 emergency replacement calls slip to voicemail and call your competitor down the road."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 2, false)">C) "Okay, I will call you back in 6 months when you're slow."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 0, true)">A) "Understood Mike, keep your eyes on the road. I've got 15 seconds: we build emergency dispatch lines for trade contractors so you don't lose $8,000 weekend jobs while driving or on-site. I'll shoot a 30-second audio text to this cell with our live demo recording so you can tap it when you park. Wrapping up around 5 today?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 1, false)">B) "Since you're on hands-free speaker right now, dial our live demo line (561) 813-8602 for 20 seconds and see what she sounds like on speaker."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 2, false)">C) "Can you pull over to the side of the road for 2 minutes? This will save your company tens of thousands of dollars."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 3, false)">D) "No problem at all, I'll send an email with our deck to your office and follow up next Tuesday."</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q5: Contractor: <em>"Not interested. Take me off your list."</em> What is the disarm?</div>
+              <div class="quiz-q-title">Q5: A junior tech or apprentice answers the company truck cell: <em>"Superior HVAC, this is Jason."</em> What do you do?</div>
               <div class="quiz-options" data-day="1" data-q="5">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 0, true)">A) "I completely understand — you get 20 telemarketers a day. I'm not asking you to buy anything right now. I just have a 15-second question about your after-hours emergency calls..."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 1, false)">B) "Why aren't you interested? You don't even know what I'm selling!"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 2, false)">C) Argue with them about the legalities of the Do Not Call registry.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 0, false)">A) Pitch Jason on how Ava will make his on-call night shifts easier so he advocates for you to the owner.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 1, true)">B) "Hey Jason, Luke with VantorX. Is Dave in the truck with you or is he running another crew today?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 2, false)">C) "Jason, please transfer me to whoever has authority to purchase communication software."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 3, false)">D) Hang up immediately and place the lead on the callback queue for tomorrow.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q6: Karen the Gatekeeper: <em>"Premier Mechanical, Karen speaking. What company are you with and what is this regarding?"</em></div>
+              <div class="quiz-q-title">Q6: Why is <em>"I know you weren't expecting my call — got 20 seconds or should I hang up?"</em> mathematically superior to conventional rapport openers?</div>
               <div class="quiz-options" data-day="1" data-q="6">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 0, false)">A) "I am calling to sell AI receptionist software to the owner. Can I speak to the person in charge of IT?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 1, true)">B) "Hey Karen, it's Luke — quick operational question about your weekend emergency dispatch routing in Orlando. Is the owner on a job site right now or in the office?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 2, false)">C) "It's a personal call for Mr. Davis."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 0, false)">A) It catches them off-guard with aggressive reverse psychology so they feel socially trapped into listening.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 1, false)">B) It lowers prospect status by showing the salesperson is dominant and doesn't care about their business.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 2, true)">C) It acknowledges reality, demonstrates peer respect for their job site, and neutralizes sales defense by giving explicit autonomy to decline.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 3, false)">D) It triggers an adrenaline-fueled fight-or-flight reflex that forces an immediate impulse agreement.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q7: Contractor: <em>"I'm driving right now."</em> How do you respect their timebox while holding frame?</div>
+              <div class="quiz-q-title">Q7: Contractor demands aggressively: <em>"Who gave you my personal cell phone number? Is this a telemarketer?"</em></div>
               <div class="quiz-options" data-day="1" data-q="7">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 0, true)">A) "Understood, I'll be 15 seconds. Since you're hands-free, dial our live demo line (561) 813-8602 for 20 seconds and see what she sounds like on speaker."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 1, false)">B) "Pull over to the side of the road so we can talk for 15 minutes."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 2, false)">C) Hang up immediately without saying anything.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 0, true)">A) "You're registered as the primary license holder with the state contractor registry. I only call trade business owners directly — got 20 seconds or should I let you go?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 1, false)">B) "Your number is publicly listed on Google Maps and Yelp, so it's fair game for anyone to call."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 2, false)">C) "I apologize if I caught you at a bad time, our lead software scraped it from a public records database."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 3, false)">D) "One of your mutual supply house partners in your county asked me to reach out to you directly."</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q8: Contractor: <em>"Who gave you my cell phone number?"</em></div>
+              <div class="quiz-q-title">Q8: After hearing your 20-second opener, the owner says: <em>"Just email me some information."</em> Why does agreeing immediately kill the deal?</div>
               <div class="quiz-options" data-day="1" data-q="8">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 0, false)">A) "I bought a list of numbers on the internet."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 1, true)">B) "You're registered as the primary license holder with the state contractor registry. I only call trade business owners directly."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 2, false)">C) "A friend of yours told me to call you."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 0, true)">A) Contractors receive 100+ invoices and supply quotes daily; general info emails get buried or sent to spam, converting a warm live conversation into a dead lead.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 1, false)">B) Florida contractors are legally prohibited from reviewing commercial software solicitations via email.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 2, false)">C) Emailing marketing collateral voids your commission under VantorX outbound policy.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 3, false)">D) It signals to the prospect that your software does not have a live phone demonstration.</button>
               </div>
             </div>
           </div>
@@ -1226,9 +1239,22 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="lms-text-block">
             <p>The single greatest weapon in the VantorX cold call arsenal is the <strong>Live Demo Line: (561) 813-8602</strong>. When a contractor hears Ava answer on the first ring, with authentic Florida trade inflection, 90% of objections vanish instantly.</p>
 
-            <div class="lms-script-box">
-              <strong>Exact Word-for-Word Delivery:</strong><br>
-              "Have your cell in your hand? Punch in our live demo line right now on speaker: <strong>(561) 813-8602</strong>. Pretend you're an angry homeowner with water pouring into your kitchen on a Saturday night. Hear what she sounds like for 20 seconds."
+            <div class="lms-callout" style="border-left: 3px solid var(--accent); background: rgba(245,158,11,0.06); padding: 14px 18px; margin: 16px 0; border-radius: 6px;">
+              <strong style="color:var(--accent); font-size:13.5px;">⚠️ CRITICAL COLD CALL REALITY — MOBILE VS. OFFICE LANDLINE:</strong>
+              <p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: var(--fg);">
+                <strong>90% of trade cold calls reach the owner on his personal mobile cell phone while he is driving or on-site.</strong><br>
+                Never make the rookie mistake of telling an owner on his cell to <em>"punch in a number on speaker right now"</em> — he is literally talking to you on that very device. Instead, distinguish your delivery based on where he answered:
+              </p>
+            </div>
+
+            <div class="lms-script-box" style="margin-bottom: 14px;">
+              <strong style="color:var(--accent2);">Case A: Contractor Answered on Cell Phone (Standard Protocol):</strong><br>
+              <em>"I just shot a direct text with our live dispatch line — <strong>(561) 813-8602</strong> — to this cell phone. When we hang up or when you park, tap it on speaker and hear Ava answer on ring one. Pretend you have an emergency $8,000 burst pipe. What time do you wrap your last call today so I can see what you thought?"</em>
+            </div>
+
+            <div class="lms-script-box" style="margin-bottom: 18px;">
+              <strong style="color:var(--accent2);">Case B: Contractor Answered on Office Desk Phone / Landline:</strong><br>
+              <em>"Pull your cell phone out of your pocket right now and dial our live demo line on speaker: <strong>(561) 813-8602</strong>. Pretend it's 8 PM on a Sunday. Listen to how fast she picks up and books a roof estimate while I stay on the line."</em>
             </div>
 
             <div class="lms-audio-bar">
@@ -1281,7 +1307,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <div class="lms-breadcrumbs">Day 2 ➔ <span>Lesson 2.5: Certification Exam</span></div>
               <div class="lms-view-title">📝 Day 2 Certification Exam (Revenue Leaks &amp; Hard Objections)</div>
             </div>
-            <span class="exam-score-badge" id="day2ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 7 / 8 (87.5%+)</span>
+            <span class="exam-score-badge" id="day2ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 8 / 8 (100% Strict Mastery + 2 Bosses)</span>
           </div>
 
           <div class="lms-lock-screen" id="lockScreen25" style="display:none">
@@ -1292,77 +1318,85 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
 
           <div id="examBody25">
-            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score at least <strong>7 out of 8 (87.5%+)</strong> to earn your Day 2 Certification (+500 XP) and unlock Day 3.</p>
+            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score <strong>8 out of 8 (100% Mastery)</strong> and defeat at least 2 Bosses in RPG to earn Day 2 Certification (+500 XP) and unlock Day 3. Every option tests real trade closing psychology.</p>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q1: Contractor: <em>"I don't need any software, my phone rings plenty during the day."</em> What is the leak pivot?</div>
+              <div class="quiz-q-title">Q1: When a contractor insists: <em>"We don't need any software, our phones ring plenty during the day,"</em> what economic reality exposes their leak?</div>
               <div class="quiz-options" data-day="2" data-q="1">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 0, false)">A) "Our software runs on neural networks."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 1, true)">B) "That's great for 9 to 5, but when an AC compressor blows at 8 PM or on Saturday, where does that call go? If it hits voicemail, they call the next guy on Google. Missing one call a month costs you over $70,000 a year."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 2, false)">C) "Well, your competitors are buying AI so you will lose."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 0, false)">A) Daytime scheduled repair tickets carry low margins ($150–$350), whereas after-hours emergency calls (blown compressors, slab leaks, storm damage) average $5,000–$9,000 and 85% of callers hang up if they hit voicemail.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 1, false)">B) Contractors are legally required by Florida trade statutes to maintain 24/7 human-equivalent dispatch coverage.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 2, false)">C) Competitors who run AI will underbid their commercial service contracts by 40% within 12 months.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 3, true)">D) "That's great for 9 to 5, but when an $8,000 emergency replacement calls at 8 PM or on Saturday, where does that call ring? If it hits voicemail, they tap the next contractor on Google and you lose thousands."</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q2: When should you drop Ava's live demo number <strong>(561) 813-8602</strong>?</div>
+              <div class="quiz-q-title">Q2: When an owner objects: <em>"We already pay an answering service $300 a month to pick up our phones after 5 PM,"</em> what is their fatal operational flaw?</div>
               <div class="quiz-options" data-day="2" data-q="2">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 0, true)">A) Within 60 seconds of uncovering their after-hours leak: invite them to dial it right on speaker while staying on the line.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 1, false)">B) In a follow-up email 3 days later.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 2, false)">C) Only after they sign a 12-month agreement.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 0, true)">A) Traditional call centers put emergency callers on hold for 3-5 minutes, charge per-minute overages, cannot diagnose trade technical emergencies, and cannot live-book into dispatch software like ServiceTitan.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 1, false)">B) Third-party answering services are legally prohibited from handling trade customer information in Florida.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 2, false)">C) Answering services require long-term 3-year commercial contracts that bankrupt smaller trade businesses.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 3, false)">D) Answering services only employ automated IVR touch-tone menus that homeowners refuse to use.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q3: Contractor: <em>"We already have an answering service."</em> What is their fatal operational flaw?</div>
+              <div class="quiz-q-title">Q3: You are speaking with an owner who is at his office desk or shop. What is the exact sequence to execute the Live Demo Drop?</div>
               <div class="quiz-options" data-day="2" data-q="3">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 0, true)">A) They put emergency callers on hold for 4 minutes, charge $2/min, misspell details, and don't book jobs into calendar software.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 1, false)">B) They are too cheap.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 2, false)">C) They don't speak English.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 0, false)">A) Email him a link to a YouTube video demonstrating Ava's voice capabilities while keeping him on the phone.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 1, true)">B) Instruct him to put his phone on speaker, use his office line or cell to dial (561) 813-8602 right now, and roleplay an emergency caller with a water leak or blown AC for 20 seconds.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 2, false)">C) Hang up immediately, promise to call him back in 15 minutes, and text him a prerecorded audio file.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 3, false)">D) Play an audio clip through your computer microphone while talking over it to explain technical specifications.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q4: How does the Total Agreement Shield disarm: <em>"I hate AI. Every robo-caller sounds like a broken microwave"</em>?</div>
+              <div class="quiz-q-title">Q4: Owner snaps: <em>"I hate AI. Every robo-caller sounds like a broken microwave and my customers want real people."</em> How do you hold frame?</div>
               <div class="quiz-options" data-day="2" data-q="4">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 0, false)">A) Tell them that AI has advanced and they are being old-fashioned.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 1, true)">B) "I agree with you 100%! Most AI sounds awful. That's why we trained Ava specifically on trade jargon. Punch in (561) 813-8602 right now — if she sounds fake, hang up and lose my number."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 2, false)">C) Argue that humans make more mistakes than computers.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 0, false)">A) Disagree firmly and explain that OpenAI large language models have achieved human parity on benchmark tests.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 1, true)">B) Total Agreement Shield: "I agree with you 100%! Most AI sounds awful. That's why we calibrated Ava specifically on Florida trade slang. Dial (561) 813-8602 on speaker right now — if she sounds robotic, hang up on me and lose my number."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 2, false)">C) Offer a 50% discount on the setup fee to compensate for his skepticism about automated technology.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 3, false)">D) Ask him to describe in detail the last bad experience he had with an automated telephone system.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q5: If a contractor asks: <em>"How much is this going to cost me?"</em> in the first 30 seconds of the call:</div>
+              <div class="quiz-q-title">Q5: In the first 45 seconds, the contractor demands: <em>"Cut the sales crap — how much is this going to cost me?"</em> How do you respond?</div>
               <div class="quiz-options" data-day="2" data-q="5">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 0, true)">A) State the transparent flat range ($397 to $697/mo, no contracts) and immediately bridge: "Most guys cover that with one job in week one. But let's see if she even works for your crews first."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 1, false)">B) Refuse to give pricing until they commit to a 45-minute demo meeting.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 2, false)">C) Quote an artificially low price like $49 and hide the setup fee.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 0, false)">A) Refuse to give any price until he commits to a full 45-minute technical screen-share demonstration.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 1, false)">B) Quote $49/month to keep him on the phone, intending to reveal the $997 setup fee at the very end of the call.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 2, true)">C) State the transparent flat range ($397 Starter or $697 Pro bundle), anchor it against an $8,000 emergency ticket ROI, and pivot back: "One captured emergency covers an entire year. But let's see if she even fits your call flow first."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 3, false)">D) Ask him what his company's annual gross revenue was last year before quoting a price.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q6: Contractor: <em>"I need to talk to my business partner / wife before I do anything."</em></div>
+              <div class="quiz-q-title">Q6: Owner says: <em>"I need to run this past my business partner / wife before I spend any money."</em> What is the elite closer play?</div>
               <div class="quiz-options" data-day="2" data-q="6">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 0, false)">A) "Why can't you make decisions on your own?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 1, true)">B) "100%! Don't try to explain software to them. Put your phone on speaker in front of them and dial (561) 813-8602. When they hear how human she sounds, the decision makes itself."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 2, false)">C) "Let's set up a 3-way conference call next week."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 0, false)">A) Challenge his decision-making authority: "Are you not the primary owner who signs the checks for this company?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 1, true)">B) Arm him with the demo tool instead of forcing him to explain software: "100%. Don't try to explain AI to them. Put your phone on speaker with them tonight and dial (561) 813-8602 for 20 seconds. Let Ava sell herself."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 2, false)">C) Schedule a 3-way conference call 10 days out when both partners might have 45 minutes of free time.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 3, false)">D) Offer to waive the setup fee if he signs an agreement before hanging up today.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q7: Contractor: <em>"We're booked out 3 weeks in advance. We don't need work."</em></div>
+              <div class="quiz-q-title">Q7: Contractor says: <em>"We're booked out 4 weeks solid, we can't take any more work right now."</em> What is the counter?</div>
               <div class="quiz-options" data-day="2" data-q="7">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 0, true)">A) "You're booked out on low-margin scheduled calls. But when an $8,000 emergency replacement calls at 8 PM on a Saturday, where does that call ring right now?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 1, false)">B) "Then you must be rich, why don't you buy it anyway?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 2, false)">C) "Congratulations, have a nice day." (hang up)</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 0, false)">A) Suggest he hire more subcontractors or purchase additional work vans to expand his workforce.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 1, true)">B) "Being booked out 4 weeks on standard maintenance is great, but when a homeowner with an $8,500 replacement emergency calls this Saturday at 9 PM, do you want that job or do you want your competitor down the road cashing that check?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 2, false)">C) Apologize and place him on a 6-month callback calendar until his schedule slows down.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 3, false)">D) Pitch him on Ava's appointment rescheduling features rather than emergency job capture.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q8: What percentage of after-hours emergency trade callers leave a voicemail when hitting an answering machine?</div>
+              <div class="quiz-q-title">Q8: According to trade service analytics across HVAC, roofing, and plumbing contractors, what percentage of emergency after-hours callers hang up without leaving a voicemail when hitting an answering machine?</div>
               <div class="quiz-options" data-day="2" data-q="8">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 0, false)">A) Over 75% leave detailed voicemails.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 1, true)">B) Less than 15% leave a voicemail — the rest immediately hang up and tap the next competitor on Google.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 2, false)">C) 50% send an email instead.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 0, false)">A) Less than 25% (most homeowners leave detailed voice recordings).</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 1, false)">B) Roughly 50% (half leave voicemails, half wait until morning).</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 2, true)">C) Over 85% (emergency callers are in panic mode and immediately tap the next business on Google Maps until a live voice answers).</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 3, false)">D) 100% (nobody has left a voicemail on a trade contractor's phone since 2018).</button>
               </div>
             </div>
           </div>
@@ -1512,7 +1546,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <div class="lms-breadcrumbs">Day 3 ➔ <span>Lesson 3.5: Final Board Exam</span></div>
               <div class="lms-view-title">🏆 Final Certification Board Exam (15 Comprehensive Scenarios)</div>
             </div>
-            <span class="exam-score-badge" id="day3ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 14 / 15 (90%+)</span>
+            <span class="exam-score-badge" id="day3ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 14 / 15 (93.3% Strict Mastery + 4 Bosses)</span>
           </div>
 
           <div class="lms-lock-screen" id="lockScreen35" style="display:none">
@@ -1523,140 +1557,155 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
 
           <div id="examBody35">
-            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score at least <strong>14 out of 15 (90%+)</strong> to graduate, earn Level 5 Certified Closer, and unlock the live lead dispatcher.</p>
+            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score at least <strong>14 out of 15 (93.3% Strict Mastery)</strong> and defeat all 4 Crucible Bosses to earn Level 5 Certified Closer status and unlock the live lead dispatcher. Every question tests real closing mastery.</p>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q1: Which tier should you recommend first to any 2–10 truck contractor?</div>
+              <div class="quiz-q-title">Q1: Which tier should you recommend first to any 2–10 truck trade contractor?</div>
               <div class="quiz-options" data-day="3" data-q="1">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 0, false)">A) The $397 Starter plan.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 1, true)">B) The $697/mo Pro AI Receptionist + Speed-to-Lead bundle ($997 setup fee) because it captures after-hours phone calls and auto-texts website leads in 5 seconds.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 2, false)">C) Free 30-day trial with no card.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 0, false)">A) The $397 Starter Plan to reduce upfront sales friction and get them signed quickly without risk.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 1, true)">B) The $697/mo Pro AI Receptionist + Speed-to-Lead bundle ($997 setup fee) because it captures after-hours phone calls and auto-texts web form leads within 5 seconds, stopping both major revenue leaks.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 2, false)">C) A custom enterprise tier billed at $1,497/mo with mandatory dedicated VoIP server hosting.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 3, false)">D) A 14-day free trial without a credit card to prove software performance before asking for payment.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q2: What is the exact launch timeline and operational impact you promise the contractor?</div>
+              <div class="quiz-q-title">Q2: What is the exact launch timeline and operational impact you promise the contractor to eliminate fear of phone disruption?</div>
               <div class="quiz-options" data-day="3" data-q="2">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 0, true)">A) 48 hours — custom trade calibration with zero phone downtime via simple call forwarding (*71).</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 1, false)">B) 4 to 6 weeks of extensive IT overhaul.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 2, false)">C) Instant switch requiring changing all phone numbers.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 0, true)">A) 48 hours — custom trade calibration with zero phone downtime via simple conditional call forwarding (*71), without switching carriers or changing their existing business numbers.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 1, false)">B) 3 to 4 business days involving a full porting transfer of their primary business lines to VantorX SIP servers.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 2, false)">C) Immediate instant activation requiring the contractor to cancel their current cellular provider and install softphones.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 3, false)">D) 2 weeks of developer coding to rebuild their CRM database architecture from scratch.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q3: A contractor says: <em>"Send me an email with your pricing and deck."</em> What do you say?</div>
+              <div class="quiz-q-title">Q3: A busy owner on a job site brushes you off: <em>"Send me an email with your pricing and deck so I can look over it later."</em> What is the elite counter-play?</div>
               <div class="quiz-options" data-day="3" data-q="3">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 0, true)">A) "I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our demo line right now, it takes 30 seconds to hear her on speaker — got a pen or your cell?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 1, false)">B) "Sure thing, what's your email?" (and hang up)</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 2, false)">C) "No, I don't send emails."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 0, true)">A) "I can definitely send an email, Mike, but it'll get buried under 50 supply receipts. If I give you our live demo line right now, it takes 30 seconds on speaker to hear her — got your cell or a second phone handy?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 1, false)">B) "Emailing sales decks is against our company policy because trade owners never open attachments."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 2, false)">C) "I'll email the deck right away, and I will place a priority calendar hold on your calendar for tomorrow at 8 AM."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 3, false)">D) "If I send the email, will you promise to sign the agreement by 5 PM today so we can begin onboarding?"</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q4: Gatekeeper Karen says: <em>"Mr. Davis doesn't have time to test demo phone numbers."</em> How do you pivot?</div>
+              <div class="quiz-q-title">Q4: Gatekeeper Karen says: <em>"Mr. Davis doesn't have time to test demo phone numbers and he doesn't take unsolicited sales calls."</em> How do you pivot without burning the office?</div>
               <div class="quiz-options" data-day="3" data-q="4">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 0, false)">A) "Can you give me his personal cell phone number instead?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 1, true)">B) "Understood Karen. But you're in the office right now — dial (561) 813-8602 from your desk phone right now for 20 seconds. If Ava sounds like a robot, you can hang up on me forever."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 2, false)">C) "Why are you being so difficult Karen?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 0, true)">A) "Karen, you're the office manager who handles dispatch when Mike is in the field. Dial (561) 813-8602 from your desk phone right now for 20 seconds. If Ava sounds like a robot or can't handle emergency triage, tell Mike I called and you rejected us."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 1, false)">B) "Can you please give me Mr. Davis's direct mobile phone number so I don't have to take up any more of your time?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 2, false)">C) "Tell Mr. Davis that his competitors are using artificial intelligence and his company will be obsolete within two years."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 3, false)">D) "I understand Karen, please transfer me directly to your accounts payable department so I can verify billing."</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q5: Mike the Electrician says: <em>"I'm a master electrician. My customers want a real person who understands amperage, not some computer."</em> What is your shield?</div>
+              <div class="quiz-q-title">Q5: Mike the Electrician challenges you: <em>"I'm a licensed master electrician. My customers want a real person who understands breaker amperage, not a computer."</em> What is your shield?</div>
               <div class="quiz-options" data-day="3" data-q="5">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 0, true)">A) Total Agreement: "I agree 100%! Most AI doesn't know the difference between 100A and 200A. That's why Ava was custom-trained on electrical triage. Dial (561) 813-8602 right now and test her terminology."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 1, false)">B) "AI is smarter than master electricians."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 2, false)">C) "You should calm down Mike."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 0, true)">A) Total Agreement Shield: "I agree 100%! Most AI doesn't know the difference between 100A and 200A. That's why Ava was custom-trained on electrical triage. Dial (561) 813-8602 right now on speaker and test her terminology."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 1, false)">B) Disagree and explain that generative neural networks possess more electrical engineering knowledge than human master tradesmen.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 2, false)">C) Offer to remove all electrical jargon from the bot so it only collects the customer's name and telephone number.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 3, false)">D) Ask Mike to provide a 50-page technical glossary so our engineering team can spend a month coding custom responses.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q6: Dave the Plumber says: <em>"I bet there's a 12-month lock-in contract and hidden per-minute fees."</em> What do you answer?</div>
+              <div class="quiz-q-title">Q6: Dave the Plumber objects: <em>"I bet there's a 12-month lock-in contract and hidden per-minute usage fees."</em> What is your exact response?</div>
               <div class="quiz-options" data-day="3" data-q="6">
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 0, true)">A) "Zero long-term contracts, cancel anytime. Flat monthly rate with no per-minute extortion. And one single water heater or slab leak covers almost the entire year."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 1, false)">B) "Yes, but our contract is very standard."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 2, false)">C) "Don't worry about contracts right now."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 1, false)">B) "There is a 12-month commitment, but it comes with a 100% money-back guarantee if we don't double your inbound revenue."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 2, false)">C) "We charge standard metered cellular carrier fees of $0.18 per minute plus a nominal server maintenance retainer."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 3, false)">D) "Contracts are standard across all SaaS platforms, but we can negotiate a 6-month trial if you pay upfront."</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q7: Why do we never use the phrase: <em>"I'm following up on an email I sent you"</em>?</div>
+              <div class="quiz-q-title">Q7: Why must an outbound closer NEVER say: <em>"I'm following up on an email I sent you earlier this week"</em>?</div>
               <div class="quiz-options" data-day="3" data-q="7">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 0, true)">A) Because it instantly brands you as a weak telemarketer making cold excuses, destroying your status before you even speak.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 1, false)">B) Because emails are illegal in Florida.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 2, false)">C) Because contractors always read their emails.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 0, true)">A) It instantly brands you as a weak telemarketer making excuses, destroys your peer status before you even speak, and gives them an immediate excuse to say 'I didn't get it, send it again.'</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 1, false)">B) Federal FCC regulations classify cold email follow-up phone calls as commercial telephone harassment.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 2, false)">C) Contractors always read their cold emails, so reminding them is redundant and annoying.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 3, false)">D) It reveals that your automated email marketing software has poor inbox deliverability.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q8: When closing on the phone, what is the best closing question?</div>
+              <div class="quiz-q-title">Q8: When closing an owner at the end of a successful demo, which closing question maintains frame and moves directly to onboarding?</div>
               <div class="quiz-options" data-day="3" data-q="8">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 0, false)">A) "Do you want to buy this right now?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 1, true)">B) "Should I text the setup link to your cell, or let's lock in 10 minutes on your calendar tomorrow morning before your crews dispatch?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 2, false)">C) "Can you give me your credit card number?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 0, false)">A) "Do you think you might be interested in purchasing this software system sometime this week?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 1, true)">B) The Assumptive Choice Close: "Should I text the setup link to this cell, or let's lock in 10 minutes on your calendar tomorrow morning before your crews dispatch?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 2, false)">C) "Can you read me the numbers on your company credit card right now so I can charge your setup fee?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 3, false)">D) "Would you like me to send over our 12-page terms of service agreement for your attorney to review?"</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q9: A contractor claims: <em>"I never miss calls, I keep my phone on my belt 24/7."</em> What is the truth?</div>
+              <div class="quiz-q-title">Q9: A stubborn contractor insists: <em>"I never miss calls, I keep my phone on my belt 24/7."</em> What operational reality shatters this delusion?</div>
               <div class="quiz-options" data-day="3" data-q="9">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 0, true)">A) When they are on a ladder, driving, or having dinner with family, calls roll to voicemail where over 85% of high-ticket emergency callers hang up without leaving a message.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 1, false)">B) They are telling the 100% truth and don't need Ava.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 2, false)">C) They probably have an assistant following them around.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 0, true)">A) When they are inside a 130°F attic, on a 2-story roof with power tools, or having dinner with family, emergency calls roll to voicemail where over 85% of high-ticket homeowners hang up and immediately call the next contractor on Google Maps.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 1, false)">B) Cellular carriers in Florida frequently drop incoming calls in rural service zones without alerting the subscriber.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 2, false)">C) Keeping a phone on your belt violates OSHA commercial job site safety standards for licensed trades.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 3, false)">D) Contractors who answer calls on job sites are rated 40% lower on Google Reviews due to background noise.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q10: What is the speed-to-lead requirement for modern website leads?</div>
+              <div class="quiz-q-title">Q10: What is the speed-to-lead requirement for trade web form leads, and how does Ava execute it?</div>
               <div class="quiz-options" data-day="3" data-q="10">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 0, false)">A) Calling back within 24 to 48 hours is fine.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 1, true)">B) Contact within 5 minutes results in a 21x higher qualification rate; Ava auto-texts web form submissions in under 5 seconds.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 2, false)">C) Speed does not matter as long as the price is low.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 0, false)">A) Responding within 24 hours via email quote maintains high professionalism and allows thorough job estimating.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 1, true)">B) Contact within 5 minutes results in a 21x higher qualification rate; Ava auto-texts web form leads within 5 seconds with an interactive conversational booking prompt.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 2, false)">C) Contacting web leads in under 30 minutes is sufficient for residential service contractors.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 3, false)">D) Speed-to-lead only applies to commercial bidding opportunities, not residential repair requests.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q11: How many dials per day is the recommended quota to guarantee your first closed sale in week one?</div>
+              <div class="quiz-q-title">Q11: What is the daily dial benchmark required to guarantee 1 closed customer per week for an outbound trade rep?</div>
               <div class="quiz-options" data-day="3" data-q="11">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 0, false)">A) 10 dials a day.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 1, true)">B) 75 dials per day (75 dials ➔ 12–15 pickups ➔ 2–3 live demos ➔ 1 closed deal).</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 2, false)">C) 500 dials a day on an auto-dialer.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 0, false)">A) 15–20 high-touch personalized dials per day with detailed pre-call website analysis.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 1, true)">B) 75 targeted dials per day (75 dials ➔ 12–15 pickups ➔ 2–3 live demos ➔ 1 closed high-ticket deal).</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 2, false)">C) 400 random automated robocalls per day using an overseas auto-dialer.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 3, false)">D) 50 LinkedIn direct messages combined with 10 cold emails per day.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q12: If a contractor says: <em>"We do all commercial work, we don't do residential emergency repairs."</em></div>
+              <div class="quiz-q-title">Q12: If a commercial mechanical contractor says: <em>"We do all commercial HVAC, we don't do residential emergency repairs,"</em> what is the pivot?</div>
               <div class="quiz-options" data-day="3" data-q="12">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 0, true)">A) "Commercial rooftop units and industrial plumbing failures are $15,000+ jobs. Facility managers expect instant answers 24/7 or they call the next commercial mechanical company on their vendor list."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 1, false)">B) "Sorry, Ava only works for residential."</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 2, false)">C) "You should switch to residential work."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 0, true)">A) "Commercial rooftop unit (RTU) failures and industrial chiller leaks are $15,000+ jobs. Facility managers and property directors expect instant 24/7 phone response or they immediately dial the next mechanical contractor on their emergency vendor list."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 1, false)">B) "Ava is engineered exclusively for residential homeowners, so our Pro tier would not be suitable for your operations."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 2, false)">C) "You should consider launching a residential division to capture high-margin weekend homeowner calls."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 3, false)">D) "Commercial facility managers always submit service tickets through online work order portals rather than calling."</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q13: What should you do immediately if you fumble a sentence or stutter on a call?</div>
+              <div class="quiz-q-title">Q13: If you stumble over a word or fumble your opener during a live call, what is the mandatory mental reflex?</div>
               <div class="quiz-options" data-day="3" data-q="13">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 0, false)">A) Apologize profusely for being nervous.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 1, true)">B) Pause calmly for 1 second, lower your vocal pitch, and deliver the live demo challenge with complete authority.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 2, false)">C) Hang up and call back pretending to be someone else.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 0, false)">A) Apologize immediately to the contractor for being nervous and ask if you can restart the conversation.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 1, true)">B) Pause calmly for 1 second, lower your vocal pitch, hold frame without apologizing, and transition smoothly into the pain hook or demo challenge with complete authority.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 2, false)">C) Speed up your speaking rate by 30% to finish the pitch before the prospect can notice your mistake.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 3, false)">D) Hang up the call immediately, flag the lead as bad data, and move to the next contact.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
-              <div class="quiz-q-title">Q14: How does Ava handle customer service appointments?</div>
+              <div class="quiz-q-title">Q14: How does Ava handle customer service dispatching and appointment scheduling?</div>
               <div class="quiz-options" data-day="3" data-q="14">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 0, true)">A) She qualifies their issue, collects name/address/trade issue, quotes their diagnostic dispatch fee, and writes directly into ServiceTitan, Housecall Pro, or Google Calendar.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 1, false)">B) She tells them to write a letter to the company.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 2, false)">C) She takes down only their first name and hangs up.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 0, true)">A) She qualifies their emergency issue, collects full name/address/trade problem, quotes the contractor's dispatch diagnostic fee, and writes the booking directly into ServiceTitan, Housecall Pro, or Google Calendar while sending an instant SMS summary to the on-call tech.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 1, false)">B) She records a 3-minute voicemail and emails the audio file to the contractor's general inbox.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 2, false)">C) She sends an automated link instructing the customer to fill out a 10-step online intake questionnaire.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 3, false)">D) She transfers all callers directly to the contractor's personal cell phone regardless of the time of night.</button>
               </div>
             </div>
 
             <div class="mod-quiz-box">
               <div class="quiz-q-title">Q15: What is the primary mindset of a Top 1% VantorX Closer?</div>
               <div class="quiz-options" data-day="3" data-q="15">
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 0, false)">A) Selling software at all costs through aggressive high-pressure tactics.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 1, true)">B) Acting as an operational peer who diagnoses high-ticket revenue leaks and protects trade contractors from losing emergency jobs to competitors.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 2, false)">C) Reading a script as fast as possible before the prospect speaks.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 0, false)">A) A high-pressure software salesperson focused on closing transactions on the first call at all costs.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 1, true)">B) An operational diagnostic peer who acts as a trusted revenue protector, diagnosing after-hours leaks and safeguarding trade owners from hemorrhaging $8,000 emergency jobs to local competitors.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 2, false)">C) A telemarketer reading a rigid script word-for-word as fast as possible to beat the prospect's interruption reflex.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 3, false)">D) A customer support representative who answers questions passively and sends brochures upon request.</button>
               </div>
             </div>
           </div>
@@ -3443,12 +3492,16 @@ window.saveBrainSettings = function() {
       text = "Yeah, who's this? I'm standing on a two-story roof in 95-degree heat with a nail gun in my hand. Make it fast.";
       pitch = 0.85;
       rate = 1.05;
+    } else if (type === 'gatekeeper_extraction') {
+      text = "Hey Sarah, Luke here — quick operational question regarding Mike's emergency call dispatch schedule in Tampa. Does he check his cell between jobs or should I catch him at the shop around 4:30?";
+      pitch = 0.95;
+      rate = 1.02;
     } else if (type === 'disarm_delivery') {
       text = "Luke from VantorX. Got 20 seconds or should I hang up? ... Look, I know you're on a job site, so I'll be blunt. Most roofers in Palm Beach lose between three and eight thousand a week on emergency calls that hit voicemail after 6 PM.";
       pitch = 0.95;
       rate = 1.05;
     } else if (type === 'demo_challenge') {
-      text = "Have your cell in your hand? Punch in our live demo line right now on speaker: 5 6 1, 8 1 3, 8 6 0 2. Pretend you're an angry homeowner with water pouring into your kitchen on a Saturday night. Hear what she sounds like for 20 seconds.";
+      text = "I just shot a direct text with our live demo line — 561-813-8602 — to this cell. Tap it on speaker when you park or step off the roof, and listen to Ava answer on ring one. What time do you wrap today so I can hear what you thought?";
       pitch = 0.95;
       rate = 1.0;
     } else {
@@ -4901,8 +4954,8 @@ window.saveBrainSettings = function() {
         stage1: 'Disarm his hostility: "Luke from VantorX. Got 20 seconds or should I hang up?"',
         stage2: 'Hit the emergency pain: "You\'re booked out 3 weeks on standard jobs, but when an $8,000 panel emergency rings at 8 PM on a Saturday, where does that call ring right now?"',
         stage3: 'Shield agreement: "I agree with you 100%! Most AI sounds awful. That\'s why we trained Ava specifically on trade jargon."',
-        stage4: 'The Ava Challenge: "Have your cell in your hand? Punch in our live demo line right now: (561) 813-8602. If she sounds like a robot, you never have to talk to me again."',
-        stage5: 'Lock the agreement: "Dial (561) 813-8602 right now for 30 seconds, or let me text you the direct line."'
+        stage4: 'The Ava Demo Drop: "I just texted our live line (561) 813-8602 to your cell. Tap it on speaker when you park; if she sounds like a robot, you never have to talk to me again."',
+        stage5: 'Lock the agreement: "I just texted (561) 813-8602 to your cell. Tap it on speaker when you wrap, or let\'s put 10 minutes on your calendar tomorrow morning."'
       }
     },
     price: {
@@ -5522,7 +5575,7 @@ window.saveBrainSettings = function() {
       damage += 15;
       playerHeal += 15;
       critique = 'Masterful Total Agreement Shield! You validated his skepticism, instantly diffusing conversational tension.';
-      prescription = 'Now deliver the live challenge: <em>"Have your cell in your hand? Punch in our live demo line right now: (561) 813-8602."</em>';
+      prescription = 'Now deliver the live demo challenge: <em>"I just texted our live demo line (561) 813-8602 directly to your cell. Tap it on speaker the second you park to hear Ava answer on ring one."</em>';
     }
 
     if (intents.demo_challenge) {
