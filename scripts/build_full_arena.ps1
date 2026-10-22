@@ -1628,7 +1628,11 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
         <div class="combat-terminal">
           <div class="terminal-head">
-            <span>⚔️ LIVE VERBAL COMBAT FEED</span>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span>⚔️ LIVE VERBAL COMBAT FEED</span>
+              <span class="brain-mode-badge" id="brainModeBadge" style="font-size:11px;font-family:var(--font-mono);background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.4);color:#6ee7b7;padding:2px 8px;border-radius:4px">🧠 Adaptive Brain: ACTIVE</span>
+              <button type="button" class="btn-brain-toggle" onclick="openBrainSettingsModal()" style="background:var(--bg2);border:1px solid var(--line2);color:var(--dim);padding:2px 8px;border-radius:4px;font-size:11px;cursor:pointer;font-weight:600">⚙️ AI Mode</button>
+            </div>
             <span id="turnIndicator" style="color:var(--accent2)">YOUR TURN: SPEAK OR TYPE REBUTTAL</span>
           </div>
 
@@ -1884,6 +1888,56 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   </div>
 </div>
 
+<!-- 🧠 Adaptive Brain / Live LLM Settings Modal -->
+<div class="modal-overlay" id="brainSettingsModal">
+  <div class="modal-box" style="max-width:540px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h3 style="font-family:var(--font-head);font-size:19px;color:var(--accent2);display:flex;align-items:center;gap:8px">
+        <span>🧠</span> Contractor AI Brain Configuration
+      </h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeBrainSettingsModal()" style="font-size:16px;padding:4px 10px">✕</button>
+    </div>
+    <p style="color:var(--dim);font-size:13px;line-height:1.5;margin-bottom:16px">
+      Control how contractor bosses think, adapt, and banter during sparring matches.
+    </p>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
+      <label style="display:flex;align-items:flex-start;gap:12px;background:var(--bg3);border:1.5px solid var(--accent);border-radius:12px;padding:14px;cursor:pointer">
+        <input type="radio" name="brainModeChoice" value="adaptive" id="radioBrainAdaptive" checked style="margin-top:3px">
+        <div>
+          <div style="font-weight:700;color:var(--accent2);font-size:14px">🧠 Built-in Adaptive Engine (Recommended)</div>
+          <div style="font-size:12px;color:var(--dim);margin-top:2px">100% Free &amp; Zero-Lag. Understands 20+ sales intents, emotional tone, trade-specific objections, and gives dynamic non-scripted responses.</div>
+        </div>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:12px;background:var(--bg3);border:1px solid var(--line2);border-radius:12px;padding:14px;cursor:pointer">
+        <input type="radio" name="brainModeChoice" value="live_llm" id="radioBrainLLM" style="margin-top:3px">
+        <div>
+          <div style="font-weight:700;color:#ffffff;font-size:14px">⚡ Live LLM Brain Mode (Custom API Key)</div>
+          <div style="font-size:12px;color:var(--dim);margin-top:2px">Connect your OpenAI (gpt-4o-mini) or Groq (llama-3.3-70b) API key for completely open-ended, infinite contractor banter.</div>
+        </div>
+      </label>
+    </div>
+
+    <div id="llmKeyConfigArea" style="display:none;background:var(--bg);border:1px solid var(--line2);border-radius:12px;padding:14px;margin-bottom:16px">
+      <div style="font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:6px;font-family:var(--font-mono)">API PROVIDER:</div>
+      <select id="llmProviderSelect" class="custom-select" style="width:100%;margin-bottom:12px">
+        <option value="groq">⚡ Groq Cloud (llama-3.3-70b-versatile · Ultra Fast &amp; Free Tier)</option>
+        <option value="openai">🤖 OpenAI (gpt-4o-mini · Fast &amp; Creative)</option>
+      </select>
+      <div style="font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:6px;font-family:var(--font-mono)">YOUR API KEY:</div>
+      <input type="password" id="llmApiKeyInput" placeholder="Paste gsk_... or sk-... key" style="width:100%;background:var(--bg2);border:1px solid var(--line2);color:var(--ink);padding:9px 12px;border-radius:8px;font-family:var(--font-mono);font-size:12.5px;outline:none">
+      <div style="font-size:11px;color:var(--dim);margin-top:8px;line-height:1.4">
+        🔒 Stored solely in your browser's private localStorage. Never transmitted to VantorX servers.
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px">
+      <button class="btn btn-ghost btn-sm" onclick="closeBrainSettingsModal()">Cancel</button>
+      <button class="btn btn-gold btn-sm" onclick="saveBrainSettings()">Save Settings</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast">Copied to clipboard!</div>
 
 <script>
@@ -1975,6 +2029,76 @@ window.closeLeakMathModal = function() {
     const modal = document.getElementById('leakMathModal');
     if (modal) modal.classList.remove('active');
   } catch(e) {}
+};
+
+window.openBrainSettingsModal = function() {
+  try {
+    const modal = document.getElementById('brainSettingsModal');
+    if (modal) modal.classList.add('active');
+    const mode = localStorage.getItem('vantorx_rpg_brain_mode') || 'adaptive';
+    const provider = localStorage.getItem('vantorx_rpg_llm_provider') || 'groq';
+    const key = localStorage.getItem('vantorx_rpg_llm_key') || '';
+    const rAdaptive = document.getElementById('radioBrainAdaptive');
+    const rLLM = document.getElementById('radioBrainLLM');
+    const configArea = document.getElementById('llmKeyConfigArea');
+    const provSelect = document.getElementById('llmProviderSelect');
+    const keyInput = document.getElementById('llmApiKeyInput');
+
+    if (rAdaptive) rAdaptive.checked = (mode === 'adaptive');
+    if (rLLM) rLLM.checked = (mode === 'live_llm');
+    if (configArea) configArea.style.display = (mode === 'live_llm') ? 'block' : 'none';
+    if (provSelect) provSelect.value = provider;
+    if (keyInput) keyInput.value = key;
+
+    if (rAdaptive && rLLM) {
+      rAdaptive.onchange = () => { if (configArea) configArea.style.display = 'none'; };
+      rLLM.onchange = () => { if (configArea) configArea.style.display = 'block'; };
+    }
+  } catch(e) {}
+};
+
+window.closeBrainSettingsModal = function() {
+  try {
+    const modal = document.getElementById('brainSettingsModal');
+    if (modal) modal.classList.remove('active');
+  } catch(e) {}
+};
+
+window.saveBrainSettings = function() {
+  try {
+    const rLLM = document.getElementById('radioBrainLLM');
+    const mode = (rLLM && rLLM.checked) ? 'live_llm' : 'adaptive';
+    const prov = document.getElementById('llmProviderSelect')?.value || 'groq';
+    const key = document.getElementById('llmApiKeyInput')?.value.trim() || '';
+
+    if (mode === 'live_llm' && !key) {
+      alert('Please enter your API key to use Live LLM Brain Mode, or select Built-in Adaptive Engine.');
+      return;
+    }
+
+    localStorage.setItem('vantorx_rpg_brain_mode', mode);
+    localStorage.setItem('vantorx_rpg_llm_provider', prov);
+    localStorage.setItem('vantorx_rpg_llm_key', key);
+
+    const badge = document.getElementById('brainModeBadge');
+    if (badge) {
+      if (mode === 'live_llm') {
+        badge.textContent = `⚡ Live LLM: ${prov.toUpperCase()}`;
+        badge.style.background = 'rgba(245,158,11,0.2)';
+        badge.style.borderColor = 'var(--accent)';
+        badge.style.color = 'var(--accent2)';
+      } else {
+        badge.textContent = '🧠 Adaptive Brain: ACTIVE';
+        badge.style.background = 'rgba(52,211,153,0.15)';
+        badge.style.borderColor = 'rgba(52,211,153,0.4)';
+        badge.style.color = '#6ee7b7';
+      }
+    }
+    window.closeBrainSettingsModal();
+    window.showToast(`✓ Brain Mode updated: ${mode === 'live_llm' ? 'Live ' + prov.toUpperCase() : 'Adaptive On-Device'}`);
+  } catch(e) {
+    console.warn(e);
+  }
 };
 
 (function() {
@@ -3393,15 +3517,26 @@ window.closeLeakMathModal = function() {
     });
   }
 
-  function speakContractor(text) {
+  function speakContractor(text, bossKey) {
     if (!voiceEnabled || !window.speechSynthesis) return;
     try {
       window.speechSynthesis.cancel();
       const clean = text.replace(/\([^)]*\)/g, '').trim();
       if (!clean) return;
       const utt = new SpeechSynthesisUtterance(clean);
-      utt.pitch = 0.88;
-      utt.rate = 1.05;
+      if (bossKey === 'gatekeeper') {
+        utt.pitch = 1.15;
+        utt.rate = 1.0;
+      } else if (bossKey === 'skeptic') {
+        utt.pitch = 0.82;
+        utt.rate = 0.98;
+      } else if (bossKey === 'price') {
+        utt.pitch = 0.95;
+        utt.rate = 1.12;
+      } else {
+        utt.pitch = 0.86;
+        utt.rate = 1.04;
+      }
       window.speechSynthesis.speak(utt);
     } catch(e) {}
   }
@@ -3536,6 +3671,17 @@ window.closeLeakMathModal = function() {
   let currentBoss = Object.assign({}, dungeons.roofer);
   let currentStage = 1;
   let matchStarted = false;
+  let matchHistory = [];
+  let conversationMemory = {
+    turns: 0,
+    rapportUnlocked: false,
+    painUnlocked: false,
+    objectionUnlocked: false,
+    demoUnlocked: false,
+    agreementUnlocked: false,
+    bossResistance: 100,
+    bossMood: 'Hostile & Guarded'
+  };
   const IMPATIENCE_MAX = 120; // 2 minutes conversational clock
   let impatienceRemaining = IMPATIENCE_MAX;
   let impatienceInterval = null;
@@ -3603,15 +3749,37 @@ window.closeLeakMathModal = function() {
     bossHpText.textContent = `${Math.max(0, currentBoss.hp)} / ${currentBoss.maxHp}`;
     bossHpPercent.textContent = Math.round(bPct) + '%';
 
-    stageSteps.forEach((step, idx) => {
-      const stepIdx = idx + 1;
-      step.classList.remove('active', 'done');
-      if (stepIdx < currentStage) step.classList.add('done');
-      else if (stepIdx === currentStage) step.classList.add('active');
-    });
+    if (stageSteps && stageSteps.length === 5) {
+      stageSteps[0].classList.remove('active', 'done');
+      stageSteps[1].classList.remove('active', 'done');
+      stageSteps[2].classList.remove('active', 'done');
+      stageSteps[3].classList.remove('active', 'done');
+      stageSteps[4].classList.remove('active', 'done');
 
-    const stageNames = ['1: Opener', '2: $8k Pain Hook', '3: Objection Gauntlet', '4: Demo Challenge', '5: Complete Agreement'];
-    bossStageLabel.textContent = `Stage ${stageNames[currentStage - 1] || '5'}`;
+      if (conversationMemory.rapportUnlocked) stageSteps[0].classList.add('done');
+      else stageSteps[0].classList.add('active');
+
+      if (conversationMemory.painUnlocked) stageSteps[1].classList.add('done');
+      else if (conversationMemory.rapportUnlocked) stageSteps[1].classList.add('active');
+
+      if (conversationMemory.objectionUnlocked) stageSteps[2].classList.add('done');
+      else if (conversationMemory.painUnlocked) stageSteps[2].classList.add('active');
+
+      if (conversationMemory.demoUnlocked) stageSteps[3].classList.add('done');
+      else if (conversationMemory.objectionUnlocked) stageSteps[3].classList.add('active');
+
+      if (conversationMemory.agreementUnlocked) stageSteps[4].classList.add('done');
+      else if (conversationMemory.demoUnlocked) stageSteps[4].classList.add('active');
+    }
+
+    let unlockedMilestones = 0;
+    if (conversationMemory.rapportUnlocked) unlockedMilestones++;
+    if (conversationMemory.painUnlocked) unlockedMilestones++;
+    if (conversationMemory.objectionUnlocked) unlockedMilestones++;
+    if (conversationMemory.demoUnlocked) unlockedMilestones++;
+    if (conversationMemory.agreementUnlocked) unlockedMilestones++;
+
+    bossStageLabel.textContent = `Milestones: ${unlockedMilestones} / 5 Done`;
     bossStatusText.textContent = currentBoss.status || 'Defensive';
   }
 
@@ -3704,6 +3872,20 @@ window.closeLeakMathModal = function() {
     currentStage = 1;
     currentBoss.status = 'Hostile & Guarded';
 
+    conversationMemory = {
+      turns: 0,
+      rapportUnlocked: false,
+      painUnlocked: false,
+      objectionUnlocked: false,
+      demoUnlocked: false,
+      agreementUnlocked: false,
+      bossResistance: currentBoss.maxHp,
+      bossMood: 'Hostile & Guarded'
+    };
+    matchHistory = [
+      { role: 'assistant', content: currentBoss.dialogue.stage1 }
+    ];
+
     bossAvatar.textContent = currentBoss.avatar;
     bossName.textContent = currentBoss.name;
     bossDungeonTitle.textContent = currentBoss.title;
@@ -3726,7 +3908,7 @@ window.closeLeakMathModal = function() {
     if (sendAttackBtn) sendAttackBtn.innerHTML = '⚔️ Send First Reply ➔';
     if (customAttackInput) customAttackInput.placeholder = 'Send your first reply to start the game and begin the call...';
 
-    speakContractor(currentBoss.dialogue.stage1);
+    speakContractor(currentBoss.dialogue.stage1, currentBoss.key);
 
     updateHUD();
   }
@@ -3772,7 +3954,19 @@ window.closeLeakMathModal = function() {
   });
 
   requestHintBtn.addEventListener('click', () => {
-    coachHintText.innerHTML = currentBoss.hints['stage' + currentStage] || 'Keep the conversation centered on after-hours emergency calls and the live demo line.';
+    let hint = '';
+    if (!conversationMemory.rapportUnlocked) {
+      hint = currentBoss.hints.stage1 || 'Disarm with 20 seconds permission: "Luke from VantorX. Got 20 seconds or should I hang up?"';
+    } else if (!conversationMemory.painUnlocked) {
+      hint = currentBoss.hints.stage2 || 'Expose the after-hours leak: "Where does an $8,000 Saturday emergency call ring right now?"';
+    } else if (!conversationMemory.objectionUnlocked) {
+      hint = currentBoss.hints.stage3 || 'Use Total Agreement Shield: "I completely agree with you! Most AI sounds awful..."';
+    } else if (!conversationMemory.demoUnlocked) {
+      hint = currentBoss.hints.stage4 || 'Challenge them on the live line: "Punch in (561) 813-8602 right now on your phone."';
+    } else {
+      hint = currentBoss.hints.stage5 || 'Lock down agreement: "Should I text you the direct demo line or schedule 10 minutes tomorrow?"';
+    }
+    coachHintText.innerHTML = hint;
     coachHintDrawer.style.display = coachHintDrawer.style.display === 'none' ? 'block' : 'none';
   });
 
@@ -3834,263 +4028,322 @@ window.closeLeakMathModal = function() {
     }
   });
 
-  // Coach Vance Linguistic Brain
-  function evaluateSalesTurn(text, stage, bossKey) {
-    const t = text.toLowerCase().trim();
+  // ============================================================
+  // 🧠 ADAPTIVE CONVERSATIONAL CONTRACTOR BRAIN ENGINE
+  // ============================================================
+  let activeBrainMode = localStorage.getItem('vantorx_rpg_brain_mode') || 'adaptive';
+  let llmProvider = localStorage.getItem('vantorx_rpg_llm_provider') || 'groq';
+  let llmApiKey = localStorage.getItem('vantorx_rpg_llm_key') || '';
 
-    if (t.length < 5 || t === 'idk' || t === 'i don\'t know' || t.startsWith('uh') || t.startsWith('um')) {
+
+  function parseSalesSpeech(text) {
+    const t = text.toLowerCase().trim();
+    return {
+      t: t,
+      greeting: /^(hey|hi|hello|good\s+morning|good\s+afternoon|howdy|what'?s\s+up|how\s+are\s+you|how's\s+it\s+going)/i.test(t),
+      permission: /(20\s*sec|30\s*sec|quick\s*(question|sec|call|minute)|hang\s*up|expecting\s*my\s*call|won'?t\s*keep\s*you|catch\s*you\s*at\s*a\s*bad\s*time|bad\s*time|timebox)/i.test(t),
+      identity: /(luke|vantorx|local\s*in|calling\s*out\s*of|florida|tampa|orlando|miami|palm\s*beach)/i.test(t),
+      trade_mention: /(roof|shingle|tile|flat\s*roof|hvac|a\/?c|air\s*condition|plumb|water\s*heater|drain|pipe|electr|panel|breaker|amp|contractor|job\s*site|crew|trailer|tpo|slab\s*leak)/i.test(t),
+      pain_missed_calls: /(miss|missed|voicemail|answering\s*machine|ring|after\s*hours|night|weekend|saturday|sunday|8\s*pm|9\s*pm|dinner|emergency|leak|flood|burst|outage|power\s*out)/i.test(t),
+      pain_lost_competitor: /(competitor|next\s*(guy|contractor|roofer|plumber)|google|lost\s*(job|lead|money|revenue)|drywall|ceiling|panic)/i.test(t),
+      dollar_anchor: /(8\,?000|8k|10\,?000|10k|5\,?000|5k|12\,?000|12k|15\,?000|15k|high\s*ticket|thousand|\$)/i.test(t),
+      solution_ava: /(ava|ai|receptionist|voice\s*(agent|bot|assistant)|phone\s*system|first\s*ring|picks\s*up|answer|24\/7|dispatch|bilingual|triage)/i.test(t),
+      agreement_shield: /(agree|completely\s*agree|100%|i\s*hear\s*you|makes\s*(total\s*)?sense|you'?re\s*right|fair\s*enough|understand|i'?d\s*feel\s*the\s*same|that'?s\s*(exactly\s*)?why)/i.test(t),
+      demo_challenge: /(561[\s\-\.]*813[\s\-\.]*8602|813[\s\-\.]*8602|punch\s*in|dial|call\s*(it|her|this|the\s*number)|test\s*her|demo\s*line|listen\s*to\s*her|sounds?\s*like\s*a\s*robot|lose\s*my\s*number|speakerphone)/i.test(t),
+      pricing_terms: /(397|697|299|price|cost|how\s*much|month|flat|no\s*contract|cancel\s*anytime|month\s*to\s*month|guarantee|pays?\s*for\s*itself|roi)/i.test(t),
+      closing_action: /(text|shoot\s*me\s*a\s*text|send\s*a\s*text|link|calendar|book|schedule|tomorrow|zoom|morning|afternoon|patch\s*through|transfer|cell\s*number)/i.test(t),
+      objection_answering_service: /(answering\s*service|front\s*desk|secretary|receptionist|wife\s*(answers|handles)|on\s*call)/i.test(t),
+      objection_ai_doubt: /(robot|fake|automated|computer|siri|alexa|press\s*1|hate\s*ai|broken\s*microwave)/i.test(t),
+      objection_busy: /(busy|slammed|on\s*a\s*job|email|send\s*an\s*email|send\s*info|driving)/i.test(t),
+      hesitation: /^(uh|um|er|idk|i\s*don'?t\s*know|wait)/i.test(t) || t.length < 5,
+      spam_pitch: /(buy|cheap\s*software|special\s*deal|special\s*promotion|pitch\s*you|are\s*you\s*the\s*decision\s*maker|do\s*you\s*have\s*15\s*minutes)/i.test(t),
+      curiosity_question: /\?|what\s+do\s+you|how\s+do\s+you|where\s+do|who\s+handles|do\s+you\s+guys/i.test(t)
+    };
+  }
+
+  function generateAdaptiveContractorReply(bossKey, userText, memory, intents) {
+    const turns = memory.turns;
+
+    if (bossKey === 'roofer') {
+      if (intents.spam_pitch) {
+        return "Look kid, I get 20 telemarketers a week calling my cell while I'm trying to work. I don't buy 'software promotions'. If you're a real human with a real service for roofing guys, tell me in plain English or lose my number.";
+      }
+      if (intents.hesitation) {
+        return "Hey Luke, you still there? I don't get paid to sit here listening to dead air while I'm backing up a trailer. Speak up or I'm hanging up.";
+      }
+      if (intents.closing_action && memory.demoUnlocked) {
+        return "Holy cow... she actually answered on the first ring and asked if I had active leaks in Hillsborough County. Alright Luke, you won me over. Shoot that text with the link to my cell right now.";
+      }
+      if (intents.demo_challenge) {
+        return "(Sound of truck idling) Alright, smart guy. You're putting your money where your mouth is. I got my speakerphone on right now. 5-6-1... 8-1-3... 8-6-0-2. Ringing it now... let's see how this thing sounds.";
+      }
+      if (intents.pricing_terms) {
+        return "Look, zero contracts and $397 a month is pocket change in roofing — one single $10,000 shingle replacement pays for the entire year. But I've been burned by marketing agencies before. How fast does this actually get set up?";
+      }
+      if (intents.objection_ai_doubt) {
+        if (intents.agreement_shield) {
+          return "Ha! At least you didn't bullshit me like the other sales reps. So you're saying she doesn't sound like Siri? What happens when an angry homeowner calls with water pouring into their kitchen?";
+        }
+        return "Don't tell me AI is great, kid. My customers in South Tampa are in their 50s and 60s. They hate automated press-1 menus. They want to talk to Rick, not a robot.";
+      }
+      if (intents.pain_lost_competitor || (intents.pain_missed_calls && intents.dollar_anchor)) {
+        return "Damn it... you're not wrong about that. Homeowners panic when water is leaking through their drywall. If it hits my voicemail, they just tap the next roofer on Google. But what am I supposed to do, pay a full-time girl $4,000 a month to sit in my house at 9 PM on Saturday?";
+      }
+      if (intents.pain_missed_calls) {
+        return "Look, my crews knock off at 5 PM. After that, my cell rings to voicemail while I'm eating dinner with my wife. When a thunderstorm rolls through Tampa at 8 PM on a Saturday, calls come in. Most folks leave a message if they really want an estimate... don't they?";
+      }
+      if (intents.trade_mention) {
+        return "Yeah, we run architectural shingles, modified bitumen, and standing seam metal. 3 crews out today from Brandon to Clearwater. Why, what does that have to do with why you're calling my mobile?";
+      }
+      if (intents.permission) {
+        return "Alright, Luke. I appreciate you not beating around the bush. You got 20 seconds before I have to guide this trailer into the supply yard. What's on your mind?";
+      }
+      if (intents.greeting && turns <= 1) {
+        return "(Heavy diesel truck idling & horn honk) Sweating through my shirt in Tampa traffic, man. Who is this and what's going on?";
+      }
+      if (intents.curiosity_question) {
+        return "My biggest headache? Finding reliable labor that shows up on Monday, and trying to return 15 missed calls while I'm standing on a 6/12 pitch roof in 95-degree heat. What's your solution?";
+      }
+      if (memory.bossResistance < 40) {
+        return "Alright, Luke. You actually know how roofing works and you're not wasting my time. What's the next step? How do I hear this Ava thing?";
+      } else if (memory.bossResistance < 70) {
+        return "I hear you, man. But every tech guy who calls me promises the moon. How does this thing actually connect to my current cell phone?";
+      }
+      return "Alright, make your point. I got a trailer to unload in about 2 minutes. What do you have for roofing contractors?";
+    }
+
+    if (bossKey === 'gatekeeper') {
+      if (intents.spam_pitch) {
+        return "We do not accept unsolicited sales calls or vendor solicitations. If you'd like to leave your company website, I can pass it along, but Mr. Davis does not take cold calls.";
+      }
+      if (intents.closing_action && memory.demoUnlocked) {
+        return "Mr. Davis has a 10-minute window open tomorrow at 9:15 AM before his team dispatch walk. I'll put you on his calendar, Luke. What email should I send the invite to?";
+      }
+      if (intents.demo_challenge) {
+        return "I'm dialing it right now from our front desk desk phone... (561) 813-8602. Hold on one moment while I listen to the greeting.";
+      }
+      if (intents.objection_answering_service) {
+        return "We used an answering service last summer and it was an absolute nightmare. They misspelled customer addresses and didn't know the difference between a blown capacitor and a compressor.";
+      }
+      if (intents.pain_missed_calls) {
+        return "Well, after 6 PM our calls forward to whoever the on-call technician is. But when they're in an attic in 110-degree heat, they obviously can't answer the phone. That does cause dropped calls.";
+      }
+      if (intents.identity && intents.permission) {
+        return "Good morning, Luke. What company did you say you were calling with? Mr. Davis is currently in a production meeting, but is this regarding our current dispatch software?";
+      }
+      if (intents.curiosity_question) {
+        return "We have 14 technicians covering Orange and Seminole counties. We handle residential replacements and commercial rooftop units.";
+      }
+      if (memory.bossResistance < 50) {
+        return "Honestly, if Ava can actually triage service calls and book directly onto our calendar without putting people on hold, Mr. Davis would want to see this.";
+      }
+      return "Mr. Davis is very protective of his schedule. If you can explain in 30 seconds how this helps our dispatching, I might be able to find 10 minutes for you.";
+    }
+
+    if (bossKey === 'skeptic') {
+      if (intents.spam_pitch) {
+        return "Stop right there, son. I'm a master electrician, not a software buyer. Don't give me rehearsed sales talk or I'm hanging up.";
+      }
+      if (intents.closing_action && memory.demoUnlocked) {
+        return "I'll be damned... she answered on the first ring, asked if it was 200A residential or commercial, and scheduled an emergency slot. Alright Luke, you proved your point. Text me your info.";
+      }
+      if (intents.demo_challenge) {
+        return "(Tools clanking) Alright, you're pretty cocky. I'm punching in (561) 813-8602 on speaker right now. If she stumbles or sounds like a GPS, you lose this number forever.";
+      }
+      if (intents.objection_ai_doubt) {
+        if (intents.agreement_shield) {
+          return "Ha! Finally, a tech guy who doesn't lie to my face. Yeah, most AI sounds like a broken microwave. So how did you train her on electrical terminology?";
+        }
+        return "Every AI I've ever heard sounds like a soulless computer. Homeowners with sparks flying out of their breaker panel want a real human being who understands amperage.";
+      }
+      if (intents.dollar_anchor || intents.pain_missed_calls) {
+        return "Look, standard rewires we're booked out 3 weeks. But emergency panel burnouts or storm generator cutovers? Those are $4,000 to $8,000 cash jobs. Those hurt when they slip through the cracks.";
+      }
+      if (intents.permission) {
+        return "Luke, is it? Look, I'm staring into an open 200-amp service panel right now. Tell me what you've got in 20 seconds, plain English.";
+      }
+      if (memory.bossResistance < 50) {
+        return "Alright, I'm listening. If this thing actually knows how to ask about breaker sizes and doesn't sound like a robot, maybe it's worth testing.";
+      }
+      return "We've been in business in Palm Beach for 22 years without fancy software. Why do I need an AI answering my phone?";
+    }
+
+    if (bossKey === 'price') {
+      if (intents.closing_action && memory.demoUnlocked) {
+        return "Alright Luke, the math is undeniable. $397 with no contract pays for itself on the first water heater changeout. Shoot that link to my cell right now.";
+      }
+      if (intents.demo_challenge) {
+        return "Let me call it right now while you're on the line. 5-6-1... 8-1-3... 8-6-0-2. Ringing now... let's see what she's got.";
+      }
+      if (intents.pricing_terms) {
+        return "Wait, $397 a month flat with zero long-term contract? No setup fee extortion? If she books just one slab leak or water heater ($3,500), she pays for almost the whole year.";
+      }
+      if (intents.pain_missed_calls || intents.dollar_anchor) {
+        return "Look, a slab leak or commercial drain backup is $5,000 to $12,000. When that calls at 11 PM on a Sunday and rings to voicemail, yeah, they call the 24/7 rooter guy down the street.";
+      }
+      if (intents.permission) {
+        return "Alright, 20 seconds. What is it? No fluff, tell me how it puts cash in my pocket.";
+      }
+      if (memory.bossResistance < 50) {
+        return "Look, I like that there's no 12-month lock-in contract. But how do I know she actually answers fast enough before they hang up?";
+      }
+      return "Dave here. I get 20 telemarketers a day. What's the price and what do you do?";
+    }
+
+    return "Alright, I hear you. But make it quick — how does this help my trade business today?";
+  }
+
+  function evaluateSalesTurn(userText, memory, currentBoss) {
+    const intents = parseSalesSpeech(userText);
+    memory.turns++;
+
+    if (intents.hesitation) {
       return {
         grade: 'F',
-        score: 15,
+        score: 20,
         critique: 'Fatal hesitation! Dead air or stutters make you sound inexperienced and trigger defensive contractor reflexes.',
         prescription: 'Speak with calm authority. Use: <em>"Luke from VantorX. Got 20 seconds or should I hang up?"</em>',
         damage: 0,
         xp: 0,
-        healBoss: 25,
-        counterDmg: 25,
-        advanceStage: false,
+        healBoss: 15,
+        counterDmg: 20,
+        intents: intents,
         agreementAchieved: false
       };
     }
 
-    const spamWords = ['buy', 'cheap software', 'special deal', 'special promotion', 'sell you', 'pitch you', 'are you the decision maker', 'do you have 15 minutes'];
-    for (const w of spamWords) {
-      if (t.includes(w)) {
-        return {
-          grade: 'F',
-          score: 20,
-          critique: `Fatal sales trap! Mentioning "${w}" flags you as a telemarketer instantly. Contractors hate software pitches.`,
-          prescription: 'Anchor to their missed emergency jobs, never "software" or "buying". Ask: <em>"Where does an $8k Saturday emergency call ring right now?"</em>',
-          damage: 0,
-          xp: 0,
-          healBoss: 20,
-          counterDmg: 22,
-          advanceStage: false,
-          agreementAchieved: false
-        };
-      }
+    if (intents.spam_pitch) {
+      return {
+        grade: 'F',
+        score: 25,
+        critique: 'Fatal telemarketer trap! Words like "buy", "software promotion", or "decision maker" instantly trigger sales defense.',
+        prescription: 'Anchor to their missed emergency calls and lost revenue, never "buying software".',
+        damage: 0,
+        xp: 0,
+        healBoss: 15,
+        counterDmg: 20,
+        intents: intents,
+        agreementAchieved: false
+      };
     }
 
-    if (stage === 1) {
-      const hasPermission = t.includes('20 second') || t.includes('hang up') || t.includes('expecting') || t.includes('quick question');
-      const hasIdentity = t.includes('luke') || t.includes('vantorx') || t.includes('routing') || t.includes('around');
+    let score = 50;
+    let damage = 18;
+    let counterDmg = 0;
+    let playerHeal = 0;
+    let critique = '';
+    let prescription = '';
 
-      if (hasPermission && hasIdentity) {
-        return {
-          grade: 'S',
-          score: 96,
-          critique: 'Flawless pattern interrupt! You disarmed hostility and gave the contractor total control of the conversation.',
-          prescription: 'Next beat: <em>"In your trade, when an emergency job calls at 8 PM on a Saturday, where does that call ring right now?"</em>',
-          damage: 32,
-          xp: 35,
-          healBoss: 0,
-          counterDmg: 0,
-          advanceStage: true,
-          nextStageDialogue: dungeons[bossKey].dialogue.stage2,
-          agreementAchieved: false
-        };
-      } else if (hasPermission || hasIdentity) {
-        return {
-          grade: 'A',
-          score: 82,
-          critique: 'Good opening rhythm. You got his attention without sounding pushy.',
-          prescription: 'Make sure to explicitly state: <em>"Got 20 seconds or should I hang up?"</em> to maximize permission.',
-          damage: 22,
-          xp: 25,
-          healBoss: 0,
-          counterDmg: 8,
-          advanceStage: true,
-          nextStageDialogue: dungeons[bossKey].dialogue.stage2,
-          agreementAchieved: false
-        };
-      } else {
-        return {
-          grade: 'C',
-          score: 50,
-          critique: 'Weak opener. You didn\'t ask for permission or set a clear time boundary.',
-          prescription: 'Try: <em>"Hey [Name], Luke from VantorX. I know you weren\'t expecting my call — got 20 seconds or should I hang up?"</em>',
-          damage: 8,
-          xp: 5,
-          healBoss: 5,
-          counterDmg: 16,
-          advanceStage: false,
-          agreementAchieved: false
-        };
-      }
-    } else if (stage === 2) {
-      const hasPainDollars = t.includes('8000') || t.includes('8,000') || t.includes('8k') || t.includes('emergency') || t.includes('saturday') || t.includes('weekend');
-      const hasRingQuestion = t.includes('where does that call ring') || t.includes('ring') || t.includes('voicemail') || t.includes('competitor') || t.includes('missed');
-
-      if (hasPainDollars && hasRingQuestion) {
-        return {
-          grade: 'S',
-          score: 98,
-          critique: 'Master-level pain anchor! You highlighted high-ticket lost revenue ($8,000) and forced him to evaluate his current phone setup.',
-          prescription: 'Next beat: Acknowledge his objection with the Total Agreement Shield.',
-          damage: 35,
-          xp: 40,
-          healBoss: 0,
-          counterDmg: 0,
-          advanceStage: true,
-          nextStageDialogue: dungeons[bossKey].dialogue.stage3,
-          agreementAchieved: false
-        };
-      } else if (hasPainDollars || hasRingQuestion) {
-        return {
-          grade: 'A',
-          score: 80,
-          critique: 'Solid hook. You touched on missed calls, but anchoring the exact $8,000 Saturday emergency job hits much harder.',
-          prescription: 'Include: <em>"...most guys send it to voicemail and lose the $8,000 job to the next competitor. Where does that call ring right now?"</em>',
-          damage: 24,
-          xp: 25,
-          healBoss: 0,
-          counterDmg: 10,
-          advanceStage: true,
-          nextStageDialogue: dungeons[bossKey].dialogue.stage3,
-          agreementAchieved: false
-        };
-      } else {
-        return {
-          grade: 'C',
-          score: 45,
-          critique: 'You drifted away from the pain. Contractors only care about stopping revenue leaks, not vague benefits.',
-          prescription: 'Ask him directly: <em>"When an emergency calls at 8 PM on a Saturday, where does that call ring right now?"</em>',
-          damage: 10,
-          xp: 5,
-          healBoss: 10,
-          counterDmg: 18,
-          advanceStage: false,
-          agreementAchieved: false
-        };
-      }
-    } else if (stage === 3) {
-      const hasAgreement = t.includes('agree') || t.includes('completely agree') || t.includes('makes sense') || t.includes('hear you') || t.includes('fair') || t.includes('100%');
-      const hasObjectionCounter = t.includes('buried') || t.includes('receipt') || t.includes('after-hours') || t.includes('weekend') || t.includes('397') || t.includes('299') || t.includes('697') || t.includes('contract') || t.includes('done for you') || t.includes('15 second');
-
-      if (hasAgreement && hasObjectionCounter) {
-        return {
-          grade: 'S',
-          score: 96,
-          critique: 'Textbook Total Agreement Shield! You validated his objection, removed all tension, and pivoted straight to the solution.',
-          prescription: 'Next beat: Deliver the live 30-second Ava test challenge to (561) 813-8602.',
-          damage: 32,
-          xp: 35,
-          healBoss: 0,
-          counterDmg: 0,
-          playerHeal: 15,
-          advanceStage: true,
-          nextStageDialogue: dungeons[bossKey].dialogue.stage4,
-          agreementAchieved: false
-        };
-      } else if (hasAgreement || hasObjectionCounter) {
-        return {
-          grade: 'A',
-          score: 82,
-          critique: 'Good deflection. You addressed the objection without sounding argumentative.',
-          prescription: 'Always start with: <em>"I completely agree with you..."</em> before giving your explanation.',
-          damage: 22,
-          xp: 20,
-          healBoss: 0,
-          counterDmg: 10,
-          advanceStage: true,
-          nextStageDialogue: dungeons[bossKey].dialogue.stage4,
-          agreementAchieved: false
-        };
-      } else {
-        return {
-          grade: 'B',
-          score: 65,
-          critique: 'Average rebuttal. You didn\'t use the Total Agreement Shield to soften the pushback.',
-          prescription: 'Agree first, then bridge: <em>"I agree with you! That\'s why we do 100% of it for you."</em>',
-          damage: 14,
-          xp: 10,
-          healBoss: 0,
-          counterDmg: 14,
-          advanceStage: false,
-          agreementAchieved: false
-        };
-      }
-    } else if (stage === 4) {
-      const hasPhone = t.includes('(561) 813-8602') || t.includes('561-813-8602') || t.includes('5618138602') || t.includes('813-8602');
-      const hasChallenge = t.includes('punch in') || t.includes('call it') || t.includes('cell') || t.includes('robot') || t.includes('lose my number') || t.includes('30 second') || t.includes('test');
-
-      if (hasPhone && hasChallenge) {
-        return {
-          grade: 'S',
-          score: 99,
-          critique: 'Irresistible zero-risk challenge! You challenged him to catch her sounding robotic on (561) 813-8602.',
-          prescription: 'Final beat: Lock down the complete agreement (Live dial handoff or calendar booking).',
-          damage: 35,
-          xp: 40,
-          healBoss: 0,
-          counterDmg: 0,
-          advanceStage: true,
-          nextStageDialogue: dungeons[bossKey].dialogue.stage5,
-          agreementAchieved: false
-        };
-      } else if (hasPhone || hasChallenge) {
-        return {
-          grade: 'A',
-          score: 84,
-          critique: 'Good push to the demo. Make sure to emphasize the phone number (561) 813-8602 directly.',
-          prescription: 'Use: <em>"Have your cell in your hand? Punch in our live demo line right now: (561) 813-8602."</em>',
-          damage: 25,
-          xp: 25,
-          healBoss: 0,
-          counterDmg: 8,
-          advanceStage: true,
-          nextStageDialogue: dungeons[bossKey].dialogue.stage5,
-          agreementAchieved: false
-        };
-      } else {
-        return {
-          grade: 'C',
-          score: 55,
-          critique: 'You explained the demo instead of putting the phone in his hands.',
-          prescription: 'Don\'t explain Ava — challenge him to dial (561) 813-8602 for 30 seconds right now.',
-          damage: 10,
-          xp: 5,
-          healBoss: 5,
-          counterDmg: 16,
-          advanceStage: false,
-          agreementAchieved: false
-        };
-      }
-    } else {
-      const hasClosingAsk = t.includes('text') || t.includes('punch') || t.includes('dial') || t.includes('zoom') || t.includes('calendar') || t.includes('tomorrow') || t.includes('which time') || t.includes('transfer');
-
-      if (hasClosingAsk) {
-        return {
-          grade: 'S',
-          score: 100,
-          critique: '🏆 MASTER RAINMAKER CLOSE! You secured complete agreement with zero resistance. The contractor agreed to test Ava.',
-          prescription: 'You closed the call cleanly. Great job holding frame from opening to exit!',
-          damage: 100,
-          xp: 150,
-          healBoss: 0,
-          counterDmg: 0,
-          advanceStage: false,
-          nextStageDialogue: dungeons[bossKey].dialogue.victory,
-          agreementAchieved: true
-        };
-      } else {
-        return {
-          grade: 'B',
-          score: 70,
-          critique: 'Almost closed! Give him the direct option: dial right now or text him the demo number.',
-          prescription: 'Say: <em>"Hang up with me and dial (561) 813-8602 right now, or can I text you the link?"</em>',
-          damage: 15,
-          xp: 15,
-          healBoss: 0,
-          counterDmg: 10,
-          advanceStage: false,
-          agreementAchieved: false
-        };
-      }
+    if (intents.permission || (intents.greeting && intents.identity)) {
+      memory.rapportUnlocked = true;
+      score += 25;
+      damage += 15;
+      critique = 'Excellent disarm! You respected the contractor\'s busy schedule and earned control of the call.';
+      prescription = 'Now pivot straight to trade pain: <em>"When an emergency leak calls at 8 PM on a Saturday, where does that call ring right now?"</em>';
     }
+
+    if (intents.pain_missed_calls || intents.dollar_anchor || intents.pain_lost_competitor) {
+      memory.painUnlocked = true;
+      score += 25;
+      damage += 20;
+      critique = 'Lethal trade pain hook! You highlighted missed after-hours calls and high-ticket lost revenue.';
+      prescription = 'If he pushes back on robots, use the Total Agreement Shield: <em>"I completely agree with you! Most AI sounds fake..."</em>';
+    }
+
+    if (intents.agreement_shield) {
+      memory.objectionUnlocked = true;
+      score += 20;
+      damage += 15;
+      playerHeal += 15;
+      critique = 'Masterful Total Agreement Shield! You validated his skepticism, instantly diffusing conversational tension.';
+      prescription = 'Now deliver the live challenge: <em>"Have your cell in your hand? Punch in our live demo line right now: (561) 813-8602."</em>';
+    }
+
+    if (intents.demo_challenge) {
+      memory.demoUnlocked = true;
+      score += 30;
+      damage += 25;
+      critique = 'Irresistible zero-risk challenge! You challenged him to catch Ava sounding robotic on (561) 813-8602.';
+      prescription = 'Lock down the close: Offer to text him the link or schedule a 10-minute walkthrough tomorrow.';
+    }
+
+    if (intents.pricing_terms) {
+      score += 15;
+      damage += 10;
+      critique = 'Clear price anchoring! Highlighting the $397 flat rate with zero long-term contracts removes financial hesitation.';
+      prescription = 'Remind him that one single emergency repair pays for the entire year of Ava.';
+    }
+
+    if (intents.closing_action && (memory.demoUnlocked || memory.painUnlocked)) {
+      memory.agreementUnlocked = true;
+      score = 100;
+      damage += 45;
+      critique = '🏆 MASTER RAINMAKER CLOSE! You secured complete agreement with zero friction.';
+      prescription = 'Call closed cleanly. Outstanding demonstration of conversational control!';
+    }
+
+    score = Math.min(100, score);
+    let grade = 'C';
+    if (score >= 90) grade = 'S';
+    else if (score >= 80) grade = 'A';
+    else if (score >= 65) grade = 'B';
+    else if (score >= 45) grade = 'C';
+    else grade = 'F';
+
+    if (score < 60) {
+      counterDmg = 12;
+      if (!critique) critique = 'The contractor is still guarded. Anchor your statement to their trade and missed after-hours jobs.';
+      if (!prescription) prescription = 'Ask directly: <em>"Where does an $8,000 Saturday emergency call ring right now?"</em>';
+    }
+
+    const isVictorious = (memory.agreementUnlocked || (memory.bossResistance - damage <= 0 && memory.demoUnlocked));
+
+    return {
+      grade: grade,
+      score: score,
+      critique: critique,
+      prescription: prescription,
+      damage: damage,
+      xp: Math.round(damage * 1.2),
+      healBoss: 0,
+      counterDmg: counterDmg,
+      playerHeal: playerHeal,
+      intents: intents,
+      agreementAchieved: isVictorious
+    };
   }
 
-  function executeTurn(userText) {
+  async function callLiveLLM(provider, apiKey, systemPrompt, conversationHistory) {
+    const endpoint = (provider === 'groq') 
+      ? 'https://api.groq.com/openai/v1/chat/completions'
+      : 'https://api.openai.com/v1/chat/completions';
+    const model = (provider === 'groq') ? 'llama-3.3-70b-versatile' : 'gpt-4o-mini';
+
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      ...conversationHistory.slice(-8)
+    ];
+
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: messages,
+        max_tokens: 120,
+        temperature: 0.8
+      })
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    return data.choices[0].message.content.trim();
+  }
+
+  async function executeTurn(userText) {
     if (player.hp <= 0 || currentBoss.hp <= 0) return;
     pauseImpatienceTimer();
 
@@ -4102,11 +4355,16 @@ window.closeLeakMathModal = function() {
     }
 
     appendLog(`<strong>Luke says:</strong> "${userText}"`, 'luke');
-    coachHintDrawer.style.display = 'none';
+    if (coachHintDrawer) coachHintDrawer.style.display = 'none';
 
-    const evalRes = evaluateSalesTurn(userText, currentStage, currentBoss.key);
+    // 1. Evaluate sales turn & update conversational memory
+    const evalRes = evaluateSalesTurn(userText, conversationMemory, currentBoss);
     let finalDmg = Math.round(evalRes.damage * player.dmgMultiplier);
 
+    // 2. Add to matchHistory for conversational context
+    matchHistory.push({ role: 'user', content: userText });
+
+    // 3. Render Coach Vance evaluation
     const gradeClass = `grade-${evalRes.grade.toLowerCase()}`;
     const coachHtml = `
       <div class="coach-head">
@@ -4119,22 +4377,38 @@ window.closeLeakMathModal = function() {
     `;
     appendLog(coachHtml, 'coach');
 
+    // 4. Update player & boss HP
     if (evalRes.playerHeal) player.hp = Math.min(player.maxHp, player.hp + evalRes.playerHeal);
     if (evalRes.healBoss) currentBoss.hp = Math.min(currentBoss.maxHp, currentBoss.hp + evalRes.healBoss);
     if (finalDmg > 0) {
       playSound('slash');
-      currentBoss.hp -= finalDmg;
+      currentBoss.hp = Math.max(0, currentBoss.hp - finalDmg);
+      conversationMemory.bossResistance = Math.max(0, conversationMemory.bossResistance - finalDmg);
     }
     if (evalRes.xp > 0) addXP(evalRes.xp);
 
+    // Dynamic boss demeanor status
+    if (evalRes.agreementAchieved || currentBoss.hp <= 0) {
+      currentBoss.status = 'Ready to Close & Agree';
+    } else if (conversationMemory.demoUnlocked) {
+      currentBoss.status = 'Dialing Live Demo (561) 813-8602';
+    } else if (conversationMemory.objectionUnlocked) {
+      currentBoss.status = 'Intrigued & Softening';
+    } else if (conversationMemory.painUnlocked) {
+      currentBoss.status = 'Thinking About Lost Revenue';
+    } else if (conversationMemory.rapportUnlocked) {
+      currentBoss.status = 'Listening (Guarded)';
+    }
+
     if (!evalRes.agreementAchieved && currentBoss.hp <= 0) {
       currentBoss.hp = 1;
-      appendLog(`🛡️ <strong>STAGGERED:</strong> ${currentBoss.name} has 1 HP left, but won't agree until you close the deal in Stage 5!`, 'system');
+      appendLog(`🛡️ <strong>STAGGERED:</strong> ${currentBoss.name} is on the verge of agreeing! Deliver the closing punch or challenge them to dial (561) 813-8602!`, 'system');
     }
 
     updateHUD();
 
-    if (evalRes.agreementAchieved && currentBoss.hp <= 0) {
+    // 5. Check Complete Victory
+    if (evalRes.agreementAchieved && (currentBoss.hp <= 0 || conversationMemory.demoUnlocked || conversationMemory.agreementUnlocked)) {
       currentBoss.hp = 0;
       updateHUD();
       player.streak++;
@@ -4143,55 +4417,63 @@ window.closeLeakMathModal = function() {
       pauseImpatienceTimer();
       if (impatienceDigits) impatienceDigits.textContent = 'VICTORY';
 
-      appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.victory}"`, 'boss');
+      const victoryText = currentBoss.dialogue.victory || "Alright Luke, you won me over. Shoot me a text with setup info.";
+      appendLog(`<strong>${currentBoss.name}:</strong> "${victoryText}"`, 'boss');
       appendLog(`🏆 <strong>BOSS DEFEATED — COMPLETE AGREEMENT REACHED!</strong> ${currentBoss.name} agreed to test Ava on (561) 813-8602!`, 'victory');
-      speakContractor(currentBoss.dialogue.victory);
+      speakContractor(victoryText, currentBoss.key);
 
       turnIndicator.textContent = 'VICTORY! COMPLETE AGREEMENT REACHED.';
       recordBossDefeat(currentBoss.key);
       return;
     }
 
-    if (evalRes.advanceStage) {
-      currentStage++;
-      const stageStatuses = ['Hostile & Guarded', 'Skeptical & Listening', 'Defensive on Objections', 'Challenged on Demo', 'Ready to Agree'];
-      currentBoss.status = stageStatuses[currentStage - 1] || 'Ready to Agree';
-      updateHUD();
+    // 6. Generate Adaptive Contractor Reply (Live LLM or Built-in Engine)
+    turnIndicator.textContent = `${currentBoss.name.toUpperCase()} IS RESPONDING...`;
 
-      turnIndicator.textContent = 'CONTRACTOR IS RESPONDING...';
-      setTimeout(() => {
-        const nextSpeech = evalRes.nextStageDialogue || currentBoss.dialogue['stage' + currentStage];
-        appendLog(`<strong>${currentBoss.name}:</strong> "${nextSpeech}"`, 'boss');
-        speakContractor(nextSpeech);
-        turnIndicator.textContent = 'YOUR TURN: SPEAK OR TYPE REBUTTAL';
-        startImpatienceTimer();
-      }, 700);
+    const brainMode = localStorage.getItem('vantorx_rpg_brain_mode') || 'adaptive';
+    const currentLlmProvider = localStorage.getItem('vantorx_rpg_llm_provider') || 'groq';
+    const currentLlmKey = localStorage.getItem('vantorx_rpg_llm_key') || '';
+
+    let contractorSpeech = '';
+
+    if (brainMode === 'live_llm' && currentLlmKey) {
+      try {
+        const sysPrompt = `You are roleplaying as ${currentBoss.name}, a real-world contractor boss (${currentBoss.title}).
+Status: ${currentBoss.status}.
+Your personality: Tough, pragmatic, busy, hates fake sales pitches, cares about crew operations, missed revenue, and avoiding gimmicks.
+The user is Luke Hamilton, founder of VantorX Solutions, cold-calling you to offer Ava, an AI phone receptionist ($397/mo flat, no contract) with a live demo line at (561) 813-8602.
+Reply directly to what Luke just said in 1 to 3 punchy sentences. Stay in character as a blue-collar trades boss.
+If Luke asks good trade questions or challenges you to dial (561) 813-8602, react realistically. If Luke says something robotic or generic, push back.
+Do NOT break character. Do NOT output asterisks or action descriptors like *sighs*. Only output spoken dialogue.`;
+        contractorSpeech = await callLiveLLM(currentLlmProvider, currentLlmKey, sysPrompt, matchHistory);
+      } catch (err) {
+        console.warn('Live LLM failed, falling back to adaptive brain:', err);
+        contractorSpeech = generateAdaptiveContractorReply(currentBoss.key, userText, conversationMemory, evalRes.intents);
+      }
     } else {
-      turnIndicator.textContent = 'CONTRACTOR IS RETALIATING...';
-      setTimeout(() => {
-        let bossDmg = evalRes.counterDmg || currentBoss.baseDmg;
-        playSound('hit');
-        player.hp = Math.max(0, player.hp - bossDmg);
-
-        const pushbacks = [
-          `"You're not answering my question, kid." (-${bossDmg} HP)`,
-          `"Sounds like a canned sales pitch." (-${bossDmg} HP)`,
-          `"I don't have time for games today." (-${bossDmg} HP)`
-        ];
-        const retort = pushbacks[Math.floor(Math.random() * pushbacks.length)];
-        appendLog(`<strong>${currentBoss.name}:</strong> ${retort}`, 'boss');
-        speakContractor(retort);
-
-        updateHUD();
-
-        if (player.hp <= 0) {
-          playerKnockout();
-        } else {
-          turnIndicator.textContent = 'YOUR TURN: SPEAK OR TYPE REBUTTAL';
-          startImpatienceTimer();
-        }
-      }, 700);
+      contractorSpeech = generateAdaptiveContractorReply(currentBoss.key, userText, conversationMemory, evalRes.intents);
     }
+
+    // Retaliation damage if turn was ineffective or spammy
+    if (evalRes.counterDmg > 0) {
+      playSound('hit');
+      player.hp = Math.max(0, player.hp - evalRes.counterDmg);
+      updateHUD();
+      if (player.hp <= 0) {
+        appendLog(`<strong>${currentBoss.name}:</strong> "${contractorSpeech}" <span style="color:var(--err);font-weight:700">(-${evalRes.counterDmg} HP)</span>`, 'boss');
+        speakContractor(contractorSpeech, currentBoss.key);
+        playerKnockout();
+        return;
+      }
+    }
+
+    setTimeout(() => {
+      appendLog(`<strong>${currentBoss.name}:</strong> "${contractorSpeech}"${evalRes.counterDmg > 0 ? ` <span style="color:var(--err);font-size:12px">(-${evalRes.counterDmg} HP)</span>` : ''}`, 'boss');
+      matchHistory.push({ role: 'assistant', content: contractorSpeech });
+      speakContractor(contractorSpeech, currentBoss.key);
+      turnIndicator.textContent = 'YOUR TURN: SPEAK OR TYPE REBUTTAL';
+      startImpatienceTimer();
+    }, 600);
   }
 
   function playerKnockout() {
@@ -4234,6 +4516,18 @@ window.closeLeakMathModal = function() {
   }
 
   // Initialization
+  try {
+    const savedBrainMode = localStorage.getItem('vantorx_rpg_brain_mode') || 'adaptive';
+    const savedLlmProv = localStorage.getItem('vantorx_rpg_llm_provider') || 'groq';
+    const badge = document.getElementById('brainModeBadge');
+    if (badge && savedBrainMode === 'live_llm') {
+      badge.textContent = `⚡ Live LLM: ${savedLlmProv.toUpperCase()}`;
+      badge.style.background = 'rgba(245,158,11,0.2)';
+      badge.style.borderColor = 'var(--accent)';
+      badge.style.color = 'var(--accent2)';
+    }
+  } catch(e) {}
+
   updateUserUI();
   updateBatchHeading();
   renderLeadsTable();
