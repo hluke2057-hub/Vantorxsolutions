@@ -1,4 +1,4 @@
-# PowerShell script to build the complete multi-product cold calling cockpit
+﻿# PowerShell script to build the complete multi-product cold calling cockpit
 $ErrorActionPreference = "Stop"
 
 $leadsRaw = [System.IO.File]::ReadAllText("$PSScriptRoot/../data/normalized_lead_targets.json", [System.Text.Encoding]::UTF8)
@@ -124,7 +124,26 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .lead-pill-btn{background:var(--bg);border:1px solid var(--line);color:var(--dim);padding:7px 14px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s}
 .lead-pill-btn:hover,.lead-pill-btn.active{background:rgba(245,158,11,0.15);border-color:var(--accent);color:var(--accent2)}
 
-.excel-table-wrap{overflow-x:auto;border:1px solid var(--line2);border-radius:14px;background:var(--bg);max-height:560px}
+.excel-table-wrap{overflow-x:auto;overflow-y:auto;border:1px solid var(--line2);border-radius:14px;background:var(--bg);max-height:820px;position:relative}
+.excel-table-wrap::-webkit-scrollbar{width:8px;height:8px}
+.excel-table-wrap::-webkit-scrollbar-track{background:var(--bg2)}
+.excel-table-wrap::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
+.excel-table-wrap::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+.lead-pagination-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:12px 16px;background:var(--bg2);border:1px solid var(--line2);border-radius:12px;margin-bottom:12px}
+.lead-page-info{font-size:12.5px;color:var(--dim);display:flex;align-items:center;gap:10px}
+.lead-page-info strong{color:#ffffff}
+.lead-page-nav{display:flex;align-items:center;gap:6px}
+.btn-page-nav{background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.15s}
+.btn-page-nav:hover:not(:disabled){border-color:var(--accent);color:var(--accent2);background:rgba(245,158,11,0.12)}
+.btn-page-nav:disabled{opacity:0.35;cursor:not-allowed}
+.lead-size-selector{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dim)}
+.btn-size-pill{background:var(--bg);border:1px solid var(--line);color:var(--dim);padding:4px 10px;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;transition:all 0.15s}
+.btn-size-pill.active,.btn-size-pill:hover{background:rgba(245,158,11,0.22);border-color:var(--accent);color:var(--accent2)}
+.btn-reset-filters{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.35);color:#fca5a5;padding:5px 12px;border-radius:8px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all 0.15s}
+.btn-reset-filters:hover{background:rgba(239,68,68,0.3);border-color:rgba(239,68,68,0.6);color:#ffffff}
+.search-scope-badge{font-size:11px;font-family:var(--font-mono);font-weight:700;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.35);color:#7dd3fc;padding:2px 8px;border-radius:4px;display:inline-block}
+
 .excel-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left;white-space:nowrap}
 .excel-table th{background:var(--bg3);padding:12px 14px;font-family:var(--font-mono);font-size:11.5px;font-weight:700;color:var(--dim);border-bottom:1px solid var(--line2);position:sticky;top:0;z-index:10;text-transform:uppercase;letter-spacing:0.04em}
 .excel-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
@@ -577,13 +596,33 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         </div>
 
         <!-- Product Offer Pills -->
-        <div class="lead-pills">
-          <button class="lead-pill-btn active" data-filter="all">All Offers</button>
-          <button class="lead-pill-btn" data-filter="ava">🤖 Ava Voice</button>
-          <button class="lead-pill-btn" data-filter="website">🌐 Websites</button>
-          <button class="lead-pill-btn" data-filter="speed">⚡ Speed-to-Lead</button>
-          <button class="lead-pill-btn" data-filter="aeo">⭐ AEO &amp; Reviews</button>
-          <button class="lead-pill-btn" data-filter="bundle">🚀 Full Bundle</button>
+        <div class="lead-pills" id="leadProductFilters">
+          <button class="lead-pill-btn active" data-lead-filter="all">All Offers (250)</button>
+          <button class="lead-pill-btn" data-lead-filter="ava">🤖 Ava Voice (84)</button>
+          <button class="lead-pill-btn" data-lead-filter="website">🌐 Custom Websites (34)</button>
+          <button class="lead-pill-btn" data-lead-filter="speed">⚡ Speed-to-Lead (66)</button>
+          <button class="lead-pill-btn" data-lead-filter="aeo">⭐ AEO &amp; Reviews (45)</button>
+          <button class="lead-pill-btn" data-lead-filter="bundle">🚀 Full Bundle (21)</button>
+        </div>
+      </div>
+
+      <!-- Pagination & View Controls Bar -->
+      <div class="lead-pagination-bar" id="leadPaginationBar">
+        <div class="lead-page-info">
+          <span id="leadPageRangeText">Showing <strong>1–50</strong> of <strong>100</strong> active queue leads</span>
+          <button class="btn-reset-filters" id="btnResetFilters" style="display:none" onclick="resetAllLeadFilters()" title="Reset all search queries and filters">🔄 Reset Filters</button>
+        </div>
+        <div class="lead-page-nav">
+          <button class="btn-page-nav" id="btnPrevPage" onclick="changeLeadPage(-1)" disabled>◀ Prev</button>
+          <span style="font-size:12px;font-family:var(--font-mono);color:var(--accent2);padding:0 6px" id="pageNumberIndicator">Page 1 / 2</span>
+          <button class="btn-page-nav" id="btnNextPage" onclick="changeLeadPage(1)">Next ▶</button>
+        </div>
+        <div class="lead-size-selector">
+          <span>Rows:</span>
+          <button class="btn-size-pill" data-size="25" onclick="setLeadPageSize(25)">25</button>
+          <button class="btn-size-pill active" data-size="50" onclick="setLeadPageSize(50)">50</button>
+          <button class="btn-size-pill" data-size="100" onclick="setLeadPageSize(100)">100</button>
+          <button class="btn-size-pill" data-size="all" onclick="setLeadPageSize('all')">All (250)</button>
         </div>
       </div>
 
@@ -1636,13 +1675,13 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       </div>
 
       <div class="obj-filter" id="objFilterPills">
-        <button class="obj-pill active" data-filter="all">All Objections (46)</button>
-        <button class="obj-pill" data-filter="ava">🤖 Ava Voice (12)</button>
-        <button class="obj-pill" data-filter="website">🌐 Custom Websites (10)</button>
-        <button class="obj-pill" data-filter="speed">⚡ Speed-to-Lead (8)</button>
-        <button class="obj-pill" data-filter="aeo">⭐ AEO &amp; Reviews (8)</button>
-        <button class="obj-pill" data-filter="bundle">🚀 Full Bundle (6)</button>
-        <button class="obj-pill" data-filter="gatekeeper">🛡️ Gatekeeper (2)</button>
+        <button class="obj-pill active" data-obj-filter="all">All Objections (46)</button>
+        <button class="obj-pill" data-obj-filter="ava">🤖 Ava Voice (12)</button>
+        <button class="obj-pill" data-obj-filter="website">🌐 Custom Websites (10)</button>
+        <button class="obj-pill" data-obj-filter="speed">⚡ Speed-to-Lead (8)</button>
+        <button class="obj-pill" data-obj-filter="aeo">⭐ AEO &amp; Reviews (8)</button>
+        <button class="obj-pill" data-obj-filter="bundle">🚀 Full Bundle (6)</button>
+        <button class="obj-pill" data-obj-filter="gatekeeper">🛡️ Gatekeeper (2)</button>
       </div>
 
       <div id="objCardsContainer">
@@ -2647,23 +2686,77 @@ window.closeLeakMathModal = function() {
     return '1 high-ticket job + 2 emergency calls/mo';
   }
 
+  // Pagination State & Controls
+  let leadPageSize = 50;
+  let currentLeadPage = 1;
+
+  window.setLeadPageSize = function(size) {
+    leadPageSize = size;
+    currentLeadPage = 1;
+    document.querySelectorAll('.btn-size-pill').forEach(b => {
+      b.classList.toggle('active', b.dataset.size === String(size));
+    });
+    renderLeadsTable();
+  };
+
+  window.changeLeadPage = function(delta) {
+    currentLeadPage += delta;
+    renderLeadsTable();
+    const t = document.querySelector('.excel-table-wrap');
+    if (t) t.scrollTop = 0;
+  };
+
+  window.resetAllLeadFilters = function() {
+    currentStateFilter = 'all';
+    currentProductFilter = 'all';
+    currentStatusFilter = 'all';
+    leadSearchQuery = '';
+    currentLeadPage = 1;
+    const sInp = document.getElementById('leadSearchInput');
+    if (sInp) sInp.value = '';
+    const sState = document.getElementById('stateFilterSelect');
+    if (sState) sState.value = 'all';
+    document.querySelectorAll('#leadProductFilters [data-lead-filter]').forEach(b => {
+      b.classList.toggle('active', b.dataset.leadFilter === 'all');
+    });
+    document.querySelectorAll('[data-status-filter]').forEach(b => {
+      b.classList.toggle('active', b.dataset.statusFilter === 'all');
+    });
+    renderLeadsTable();
+    showToast('✓ Cleared all filters back to active queue.');
+  };
+
   function renderLeadsTable() {
     leadTableBody.innerHTML = '';
     const q = leadSearchQuery.toLowerCase().trim();
     const activeLimit = getActiveQueueLimit();
     const freshRange = getTodayFreshRange();
 
+    const hasSearch = q.length > 0;
+    const hasStateFilter = currentStateFilter !== 'all';
+    const hasProductFilter = currentProductFilter !== 'all';
+    const hasStatusFilter = currentStatusFilter !== 'all';
+    const isCustomFilter = hasSearch || hasStateFilter || hasProductFilter || hasStatusFilter;
+
+    // Show or hide Reset Filters pill
+    const btnReset = document.getElementById('btnResetFilters');
+    if (btnReset) btnReset.style.display = isCustomFilter ? 'inline-flex' : 'none';
+
+    // If user explicitly picked Batch 1..10 from the queue dropdown, constrain to that batch.
+    // If they picked "Active Queue" or "Today Fresh" but are filtering by state/product/search, search across ALL 250 NATIONWIDE LEADS!
+    const isNumberedBatch = (currentBatch !== 'activeQueue' && currentBatch !== 'todayFresh' && currentBatch !== 'all');
+
     const filtered = LEADS_DATA.filter((lead, index) => {
       // 1. Queue / Batch filter
-      if (currentBatch === 'activeQueue') {
-        if (index >= activeLimit) return false;
-      } else if (currentBatch === 'todayFresh') {
-        if (index < freshRange.start || index >= freshRange.end) return false;
-      } else if (currentBatch === 'all') {
-        // all leads included
-      } else {
+      if (isNumberedBatch) {
         const batchNum = parseInt(currentBatch, 10);
         if (lead.batch !== batchNum) return false;
+      } else if (!isCustomFilter) {
+        if (currentBatch === 'activeQueue') {
+          if (index >= activeLimit) return false;
+        } else if (currentBatch === 'todayFresh') {
+          if (index < freshRange.start || index >= freshRange.end) return false;
+        }
       }
       // 2. State filter
       const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
@@ -2686,17 +2779,54 @@ window.closeLeakMathModal = function() {
       );
     });
 
-    if (filtered.length === 0) {
+    const totalCount = filtered.length;
+    const totalPages = (leadPageSize === 'all') ? 1 : Math.max(1, Math.ceil(totalCount / leadPageSize));
+    if (currentLeadPage > totalPages) currentLeadPage = totalPages;
+    if (currentLeadPage < 1) currentLeadPage = 1;
+
+    // Update Pagination Display
+    const rangeText = document.getElementById('leadPageRangeText');
+    if (rangeText) {
+      const scopeNote = (!isNumberedBatch && isCustomFilter) ? ' <span class="search-scope-badge">🌐 Nationwide Search</span>' : '';
+      if (totalCount === 0) {
+        rangeText.innerHTML = `Found <strong>0</strong> matching contractor targets${scopeNote}`;
+      } else if (leadPageSize === 'all' || totalCount <= leadPageSize) {
+        rangeText.innerHTML = `Showing all <strong>${totalCount}</strong> matching leads${scopeNote}`;
+      } else {
+        const startNum = (currentLeadPage - 1) * leadPageSize + 1;
+        const endNum = Math.min(totalCount, currentLeadPage * leadPageSize);
+        rangeText.innerHTML = `Showing <strong>${startNum}–${endNum}</strong> of <strong>${totalCount}</strong> leads${scopeNote}`;
+      }
+    }
+
+    const pageNumEl = document.getElementById('pageNumberIndicator');
+    if (pageNumEl) pageNumEl.textContent = `Page ${currentLeadPage} / ${totalPages}`;
+    const btnPrev = document.getElementById('btnPrevPage');
+    const btnNext = document.getElementById('btnNextPage');
+    if (btnPrev) btnPrev.disabled = (currentLeadPage <= 1);
+    if (btnNext) btnNext.disabled = (currentLeadPage >= totalPages);
+
+    if (totalCount === 0) {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td colspan="11" style="text-align:center;padding:32px;color:var(--dim)">
-        🔍 No contractor targets match your selected filters. Try switching batches or resetting filters.
+      tr.innerHTML = `<td colspan="11" style="text-align:center;padding:36px;color:var(--dim)">
+        🔍 No contractor targets match your selected filters. 
+        <button onclick="resetAllLeadFilters()" style="background:var(--accent);color:#070a0f;border:none;padding:6px 14px;border-radius:6px;font-weight:700;margin-left:10px;cursor:pointer">🔄 Reset Filters</button>
       </td>`;
       leadTableBody.appendChild(tr);
       updateQuotaHUD();
       return;
     }
 
-    filtered.forEach(lead => {
+    // Slice for active page view
+    let displayed = [];
+    if (leadPageSize === 'all') {
+      displayed = filtered;
+    } else {
+      const start = (currentLeadPage - 1) * leadPageSize;
+      displayed = filtered.slice(start, start + leadPageSize);
+    }
+
+    displayed.forEach(lead => {
       const isCalled = !!(CALL_RECORDS[lead.id] && CALL_RECORDS[lead.id].called);
       const rec = CALL_RECORDS[lead.id] || {};
       const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
@@ -2919,6 +3049,7 @@ window.closeLeakMathModal = function() {
   if (batchSelectEl) {
     batchSelectEl.addEventListener('change', (e) => {
       currentBatch = e.target.value;
+      currentLeadPage = 1;
       updateBatchHeading();
       renderLeadsTable();
       updateQuotaHUD();
@@ -2941,6 +3072,7 @@ window.closeLeakMathModal = function() {
       } catch(e) {}
       const newLimit = getActiveQueueLimit();
       currentBatch = 'activeQueue';
+      currentLeadPage = 1;
       if (batchSelectEl) batchSelectEl.value = 'activeQueue';
       updateBatchHeading();
       renderLeadsTable();
@@ -2955,6 +3087,7 @@ window.closeLeakMathModal = function() {
   if (stateFilterEl) {
     stateFilterEl.addEventListener('change', (e) => {
       currentStateFilter = e.target.value;
+      currentLeadPage = 1;
       renderLeadsTable();
       showToast(`State filter: ${currentStateFilter.toUpperCase()}`);
     });
@@ -2966,16 +3099,18 @@ window.closeLeakMathModal = function() {
       document.querySelectorAll('[data-status-filter]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentStatusFilter = btn.dataset.statusFilter;
+      currentLeadPage = 1;
       renderLeadsTable();
     });
   });
 
-  // Product Filter Pills Listener
-  document.querySelectorAll('[data-filter]').forEach(btn => {
+  // Product Filter Pills Listener (Scoped to Leads Table)
+  document.querySelectorAll('#leadProductFilters [data-lead-filter]').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#leadProductFilters [data-lead-filter]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      currentProductFilter = btn.dataset.filter;
+      currentProductFilter = btn.dataset.leadFilter;
+      currentLeadPage = 1;
       renderLeadsTable();
     });
   });
@@ -2985,6 +3120,7 @@ window.closeLeakMathModal = function() {
   if (searchInputEl) {
     searchInputEl.addEventListener('input', (e) => {
       leadSearchQuery = e.target.value;
+      currentLeadPage = 1;
       renderLeadsTable();
     });
   }
@@ -3229,18 +3365,18 @@ window.closeLeakMathModal = function() {
     });
   }
 
-  // Objection Filter Pills
+  // Objection Filter Pills (Scoped to Objection Library)
   document.querySelectorAll('#objFilterPills .obj-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       document.querySelectorAll('#objFilterPills .obj-pill').forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-      renderMasterObjectionCards(pill.dataset.filter, document.getElementById('objLibrarySearchInput').value);
+      renderMasterObjectionCards(pill.dataset.objFilter, document.getElementById('objLibrarySearchInput').value);
     });
   });
 
   document.getElementById('objLibrarySearchInput').addEventListener('input', (e) => {
     const activePill = document.querySelector('#objFilterPills .obj-pill.active');
-    const filter = activePill ? activePill.dataset.filter : 'all';
+    const filter = activePill ? activePill.dataset.objFilter : 'all';
     renderMasterObjectionCards(filter, e.target.value);
   });
 
