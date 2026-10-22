@@ -85,27 +85,27 @@ $personas = @(
 
 $rebuttals = @{
   "persona_truck_contractor" = @(
-    @{ text = "Completely hear you [Name] -- punch in (561) 813-8602 on your phone when you park and hang up with me. Hear our AI receptionist Ava answer in 1 ring. If she sounds like a robot, lose my number."; score = 9.4; tactic = "Micro-Commitment Test Line" },
+    @{ text = "Completely hear you [Name] -- I'll text you our direct demo line (561) 813-8602 right now. When you park, tap it for 20 seconds. If Ava sounds like a robot, text me 'lose my number'."; score = 9.4; tactic = "Micro-Commitment Test Line" },
     @{ text = "I will be done in 10 seconds: Ava answers your after-hours calls so you do not lose jobs while you are driving. Can I send a 30-second text?"; score = 8.8; tactic = "Quick Text Permission" },
     @{ text = "Sorry to bother you! When would be a better time to call back?"; score = 4.1; tactic = "Weak Surrender" }
   )
   "persona_gatekeeper" = @(
     @{ text = "Hey, no problem at all! It is Luke -- I had a quick operational question for him about your weekend dispatch routing. Is he out on a job right now or in later today?"; score = 9.1; tactic = "Casual Peer Familiarity" },
-    @{ text = "Sure, what is his direct email? And what is his cell so I know he receives the audio clip of Ava?"; score = 8.3; tactic = "Forwarding & Cell Extraction" },
+    @{ text = "Sure, what is his direct email? And what is his cell so I can text him our live demo number and dispatch overview?"; score = 8.3; tactic = "Forwarding & Cell Extraction" },
     @{ text = "This is a sales call for software. Can you connect me to the owner please?"; score = 2.0; tactic = "Direct Rejection Trigger" }
   )
   "persona_ai_skeptic" = @(
-    @{ text = "I 100% agree with you -- the robotic menus from 2 years ago drive customers away. Ava is conversational voice AI with zero latency. Punch in (561) 813-8602 right now from your cell. If you can tell she is AI, you never have to speak to me again."; score = 9.6; tactic = "Agreement + Live Proof Challenge" },
+    @{ text = "I 100% agree with you -- robotic automated menus drive customers away. Ava is conversational voice AI with zero latency. Let me text you our direct demo line right now so you can dial it the second we hang up. If you can tell she is AI, you never have to speak to me again."; score = 9.6; tactic = "Agreement + Live Proof Challenge" },
     @{ text = "Actually AI has gotten much better recently and lots of companies use it."; score = 5.2; tactic = "Defensive Argument" },
     @{ text = "She does not sound robotic at all, trust me."; score = 4.0; tactic = "Unsubstantiated Claim" }
   )
   "persona_send_email" = @(
-    @{ text = "Happy to do that [Name]. My email is just going to sit at the bottom of your inbox though. Literally take 15 seconds to dial our live test line: (561) 813-8602. If you do not love it, ignore me forever."; score = 9.3; tactic = "Radical Honesty + Low-Friction Pivot" },
+    @{ text = "Happy to do that [Name]. My email is just going to sit at the bottom of your inbox though. Let me text you our live demo line right now: (561) 813-8602. When we hang up, tap it for 20 seconds. If you do not love it, text me 'lose my number'."; score = 9.3; tactic = "Radical Honesty + Low-Friction Pivot" },
     @{ text = "What is the best email? I will send over a 20-second video demo of Ava booking a job."; score = 8.5; tactic = "Video Asset Follow-Up" },
     @{ text = "Okay sure, what is your email? Bye."; score = 4.5; tactic = "Passive Lost Lead" }
   )
   "persona_price_screener" = @(
-    @{ text = "Zero contracts, starting at $397/mo. One emergency water leak or AC replacement pays for the entire year. But do not buy anything -- just dial (561) 813-8602 right now to see if she is even worth 10 cents to your business."; score = 9.5; tactic = "ROI Contrast + Test Line Anchor" },
+    @{ text = "Zero contracts, starting at $397/mo. One emergency water leak or AC replacement pays for the entire year. But do not buy anything -- let me text you our direct demo line (561) 813-8602 right now so you can hear her for 20 seconds and see if she is even worth 10 cents to your business."; score = 9.5; tactic = "ROI Contrast + Test Line Anchor" },
     @{ text = "It depends on what package you want, between $397 and $1,297."; score = 6.0; tactic = "Premature Feature Pitch" },
     @{ text = "It is very affordable, let us schedule a call to discuss pricing."; score = 4.2; tactic = "Evasive Sales Trap" }
   )
