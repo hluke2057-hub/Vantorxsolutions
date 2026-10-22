@@ -328,44 +328,65 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .goal-metric-info div:last-child{font-size:17.5px;font-weight:700;color:#ffffff}
 .goal-metric-info div:last-child span{color:var(--accent2)}
 
-/* 🎓 Closer Academy 3-Day Curriculum & Quizzes */
-.academy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-top:20px}
-.academy-card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:24px;transition:all 0.2s;position:relative;display:flex;flex-direction:column}
-.academy-card:hover{border-color:rgba(245,158,11,0.35);transform:translateY(-2px)}
-.academy-card.completed{border-color:rgba(52,211,153,0.4);background:linear-gradient(180deg,rgba(15,21,34,0.98),rgba(16,36,32,0.95))}
-.mod-tag{font-size:11px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px}
-.mod-title{font-size:18px;font-family:var(--font-head);font-weight:700;color:#ffffff;margin-bottom:10px}
-.mod-desc{font-size:13.5px;color:var(--dim);line-height:1.55;margin-bottom:16px;flex:1}
-.mod-quiz-box{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
-.quiz-q-title{font-size:13.5px;font-weight:600;color:#ffffff;margin-bottom:10px}
+/* 🎓 VANTORX LMS COURSE PLAYER */
+.lms-container{display:grid;grid-template-columns:310px 1fr;gap:20px;align-items:start}
+@media(max-width:960px){.lms-container{grid-template-columns:1fr}}
+.lms-sidebar{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto}
+.lms-day-block{margin-bottom:16px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.lms-day-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.lms-day-hdr{font-size:11.5px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.lms-nav-list{display:flex;flex-direction:column;gap:6px}
+.lms-nav-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;background:var(--bg);border:1px solid var(--line);color:var(--dim);font-size:12.5px;cursor:pointer;transition:all 0.15s;text-align:left;line-height:1.35}
+.lms-nav-item:hover:not(.locked){border-color:var(--accent);color:#ffffff}
+.lms-nav-item.active{background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(217,119,6,0.25));border-color:var(--accent);color:#ffffff;font-weight:600}
+.lms-nav-item.completed{border-color:rgba(52,211,153,0.3);color:#6ee7b7}
+.lms-nav-item.locked{opacity:0.45;cursor:not-allowed}
+.lms-nav-icon{font-size:12px;margin-left:6px;flex-shrink:0}
+
+/* LMS Stage */
+.lms-stage{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:26px;min-height:550px;display:flex;flex-direction:column}
+.lms-lesson-view{display:none}
+.lms-lesson-view.active{display:block}
+.lms-view-head{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.lms-breadcrumbs{font-size:12px;font-family:var(--font-mono);color:var(--dim)}
+.lms-breadcrumbs span{color:var(--accent2);font-weight:600}
+.lms-time-pill{font-size:11.5px;font-family:var(--font-mono);background:var(--bg);border:1px solid var(--line);padding:3px 10px;border-radius:999px;color:var(--accent2)}
+.lms-view-title{font-size:22px;font-family:var(--font-head);font-weight:700;color:#ffffff;margin-top:6px}
+.lms-text-block{font-size:14px;line-height:1.7;color:var(--ink);margin-bottom:18px}
+.lms-text-block p{margin-bottom:12px}
+.lms-script-box{background:var(--bg);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 10px 10px 0;margin:16px 0;font-size:14px;color:#f8fafc;line-height:1.6}
+.lms-audio-bar{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:12px 18px;margin:16px 0;flex-wrap:wrap;gap:10px}
+.lms-transcript-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+@media(max-width:768px){.lms-transcript-compare{grid-template-columns:1fr}}
+.lms-bad-call{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.3);border-radius:10px;padding:14px}
+.lms-good-call{background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.3);border-radius:10px;padding:14px}
+.lms-call-hdr{font-size:12px;font-weight:700;margin-bottom:8px;font-family:var(--font-mono);text-transform:uppercase}
+.lms-bad-call .lms-call-hdr{color:#f87171}
+.lms-good-call .lms-call-hdr{color:#34d399}
+.lms-call-body{font-size:12.5px;color:#e2e8f0;line-height:1.55}
+
+/* Flashcards */
+.flashcard-drill-wrap{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:18px;margin:18px 0}
+.flashcard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:14px}
+.fc-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.15s;display:flex;flex-direction:column;justify-content:space-between}
+.fc-card:hover{border-color:var(--accent)}
+.fc-card.reviewed{border-color:rgba(52,211,153,0.4);background:rgba(16,36,32,0.4)}
+.fc-cue{font-weight:700;color:#f87171;font-size:13px;margin-bottom:8px}
+.fc-reveal-btn{background:var(--bg3);border:1px solid var(--line);color:var(--accent2);padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;align-self:flex-start}
+.fc-ans{display:none;font-size:12.5px;color:#e2e8f0;line-height:1.45;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.fc-card.reviewed .fc-ans{display:block}
+
+/* Lesson Bottom Action */
+.lms-stage-footer{border-top:1px solid var(--line);padding-top:20px;margin-top:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.lms-lock-screen{text-align:center;padding:50px 20px}
+.lms-lock-icon{font-size:48px;margin-bottom:12px}
+.lms-lock-title{font-size:20px;color:#ffffff;font-family:var(--font-head);font-weight:700;margin-bottom:8px}
+.lms-lock-desc{font-size:14px;color:var(--dim);max-width:480px;margin:0 auto 20px}
 .quiz-options{display:flex;flex-direction:column;gap:8px}
-.quiz-opt-btn{background:var(--bg2);border:1px solid var(--line);padding:10px 14px;border-radius:8px;text-align:left;color:var(--ink);font-size:13px;cursor:pointer;transition:all 0.15s;line-height:1.4}
+.quiz-opt-btn{background:var(--bg);border:1px solid var(--line);padding:10px 14px;border-radius:8px;text-align:left;color:var(--ink);font-size:13px;cursor:pointer;transition:all 0.15s;line-height:1.4}
 .quiz-opt-btn:hover{border-color:var(--accent);background:var(--bg3)}
 .quiz-opt-btn.correct{border-color:var(--ok);background:rgba(52,211,153,0.15);color:#6ee7b7;font-weight:600}
 .quiz-opt-btn.wrong{border-color:var(--err);background:rgba(248,113,113,0.15);color:#fca5a5}
-.mod-badge{position:absolute;top:18px;right:18px;font-size:11.5px;font-family:var(--font-mono);padding:3px 8px;border-radius:999px}
-.mod-badge.pending{background:rgba(148,163,184,0.12);color:var(--dim)}
-.mod-badge.passed{background:rgba(52,211,153,0.2);color:#34d399;font-weight:700}
-
-/* 📅 3-Day Closer Academy Tabs & Components */
-.academy-day-tabs{display:flex;gap:10px;margin-top:16px;border-bottom:1px solid var(--line);padding-bottom:12px;flex-wrap:wrap}
-.academy-day-btn{background:var(--bg2);border:1px solid var(--line);color:var(--dim);padding:10px 18px;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px}
-.academy-day-btn:hover{border-color:var(--accent);color:#ffffff}
-.academy-day-btn.active{background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(217,119,6,0.25));border-color:var(--accent);color:var(--accent2);font-weight:700;box-shadow:0 0 12px rgba(245,158,11,0.2)}
-.academy-day-btn.completed{border-color:rgba(52,211,153,0.4);color:#6ee7b7}
-.academy-day-panel{display:none}
-.academy-day-panel.active{display:block}
-.lesson-card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:20px}
-.lesson-card-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;border-bottom:1px solid var(--line);padding-bottom:10px;flex-wrap:wrap}
-.lesson-title{font-size:17px;font-weight:700;color:#ffffff;font-family:var(--font-head)}
-.lesson-badge{font-size:11px;font-family:var(--font-mono);background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.4);color:var(--accent2);padding:2px 8px;border-radius:6px}
-.lesson-body{font-size:13.5px;color:var(--dim);line-height:1.65}
-.lesson-quote{background:var(--bg);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;color:#f1f5f9;font-size:13.5px}
-.objection-drill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:14px}
-.objection-drill-card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;transition:all 0.15s}
-.objection-drill-card:hover{border-color:var(--accent2)}
-.objection-cue{font-weight:700;color:#f87171;font-size:13px;margin-bottom:6px}
-.objection-rebuttal{font-size:12.5px;color:#e2e8f0;line-height:1.5}
 .exam-container{background:linear-gradient(180deg,var(--bg2),var(--bg3));border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:20px}
 .exam-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:12px;flex-wrap:wrap;gap:10px}
 .exam-score-badge{font-size:13px;font-weight:700;padding:4px 12px;border-radius:8px;font-family:var(--font-mono)}
@@ -673,24 +694,24 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     </div>
   </div>
 
-  <!-- TAB: 🎓 CLOSER ACADEMY (FULL 3-DAY COMPREHENSIVE CERTIFICATION) -->
+  <!-- TAB: 🎓 CLOSER ACADEMY (FULL 3-DAY LMS COURSE PLAYER) -->
   <div id="tabAcademy" class="tab-panel">
-    <div class="lead-cockpit" style="margin-bottom:20px">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:14px">
+    <div class="lead-cockpit" style="margin-bottom:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:12px">
         <div>
-          <div style="font-size:12px;font-family:var(--font-mono);color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em">Official VantorX Training &amp; Readiness Certification</div>
+          <div style="font-size:12px;font-family:var(--font-mono);color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em">Official VantorX Training &amp; Readiness LMS</div>
           <h2 style="font-size:24px;margin-top:2px;font-family:var(--font-head);color:#ffffff">🎓 Closer Academy: Road to Level 5 (License to Dial)</h2>
-          <p style="color:var(--dim);font-size:14px;max-width:780px">High-Ticket Trade Closer Certification. Expect <strong>2 to 3 days of rigorous training (~45–60 mins/day)</strong> before making live outbound calls. Nationwide contractor leads ($697/mo deals) remain protected until you prove total conversational readiness across all 3 days.</p>
+          <p style="color:var(--dim);font-size:13.5px;max-width:780px">High-Ticket Trade Closer Certification LMS. <strong>Linear progressive mastery:</strong> you must complete each lesson in sequence, practice the interactive flashcards, defeat contractor bosses in live combat, and pass all 3 certification exams to unlock live nationwide leads.</p>
         </div>
-        <div style="background:var(--bg3);border:1px solid rgba(245,158,11,0.3);padding:12px 18px;border-radius:12px;text-align:right">
-          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Certification Progress</div>
+        <div style="background:var(--bg3);border:1px solid rgba(245,158,11,0.3);padding:10px 16px;border-radius:12px;text-align:right">
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Course Certification Progress</div>
           <div style="font-size:18px;font-weight:700;color:var(--accent2)"><span id="academyDaysCount">0</span> / 3 Days Passed</div>
           <div style="font-size:11.5px;color:#6ee7b7;margin-top:2px" id="academyStatusText">🔒 Leads Locked (Reach Level 5)</div>
         </div>
       </div>
 
       <!-- Academy Readiness Progress Bar -->
-      <div class="quota-meter-wrap" style="margin-top:10px">
+      <div class="quota-meter-wrap" style="margin-top:8px">
         <div class="quota-meter-header">
           <span>ACADEMY XP: <strong><span id="academyXpText">0</span> / 1,500 XP (Level <span id="academyLevelText">1</span> of 5)</strong></span>
           <span>COMPLETION: <strong><span id="academyPctText">0%</span></strong></span>
@@ -699,583 +720,945 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="quota-bar-fill" id="academyBarFill" style="width:0%"></div>
         </div>
       </div>
-
-      <!-- 📅 3-Day Course Stepper Tabs -->
-      <div class="academy-day-tabs">
-        <button type="button" class="academy-day-btn active" id="btnDayTab1" onclick="switchAcademyDay(1)">
-          <span>📅 DAY 1:</span> Contractor Psyche &amp; 45+ Objections (+500 XP)
-        </button>
-        <button type="button" class="academy-day-btn" id="btnDayTab2" onclick="switchAcademyDay(2)">
-          <span>📅 DAY 2:</span> $8k Revenue Leak, Live Demo &amp; Sparring (+500 XP)
-        </button>
-        <button type="button" class="academy-day-btn" id="btnDayTab3" onclick="switchAcademyDay(3)">
-          <span>📅 DAY 3:</span> High-Ticket Closing &amp; Board Exam (+500 XP)
-        </button>
-      </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- 📅 DAY 1 PANEL: TRADE PSYCHOLOGY & 45+ OBJECTIONS -->
-    <!-- ============================================================ -->
-    <div id="dayPanel1" class="academy-day-panel active">
-      <!-- Lesson 1: Mindset & The 4-Sec Disarm -->
-      <div class="lesson-card">
-        <div class="lesson-card-header">
-          <div class="lesson-title">🧠 Part 1: The 6 AM Job Site Reality &amp; The 4-Second Disarm</div>
-          <span class="lesson-badge">Estimated Time: 15 Mins</span>
-        </div>
-        <div class="lesson-body">
-          <p>Trade business owners (roofing, HVAC, plumbing, electrical) are not sitting comfortably in air-conditioned offices waiting for vendors. They are on job sites in 95-degree heat, under work trucks, ordering supply runs, or guiding trailers. If your voice sounds like a smiling, high-pitched telemarketer (<em>"Hi, how are you doing today sir?!"</em>), they hang up in 2.8 seconds.</p>
-          
-          <div class="lesson-quote">
-            <strong>The 4-Second Disarm Script:</strong><br>
-            "Luke with VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?"
+    <!-- 🎓 TWO-COLUMN LMS INTERFACE -->
+    <div class="lms-container">
+      <!-- LEFT COLUMN: SYLLABUS NAVIGATOR -->
+      <div class="lms-sidebar">
+        <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em">COURSE SYLLABUS · LINEAR TRACK</div>
+
+        <!-- DAY 1 BLOCK -->
+        <div class="lms-day-block">
+          <div class="lms-day-hdr">
+            <span>📅 DAY 1: PSYCHOLOGY &amp; OBJECTIONS</span>
+            <span id="navDay1Status" style="font-size:10.5px;color:var(--dim)">0/5 Done</span>
           </div>
-
-          <p><strong>Why This Works Psychologically:</strong> Giving the prospect permission to say no disarms their fight-or-flight defensive wall. Instead of resisting a sales trap, their brain relaxes: <em>"Alright, 20 seconds. What is it?"</em> Maintain calm, slow peer tonality as if you are a local contractor calling them about dispatch operations.</p>
-        </div>
-      </div>
-
-      <!-- Lesson 2: Master Objection Armor (The 10 Knee-Jerk Brush-Offs) -->
-      <div class="lesson-card">
-        <div class="lesson-card-header">
-          <div class="lesson-title">🛡️ Part 2: Master Objection Armor (The 10 Knee-Jerk Brush-Offs)</div>
-          <span class="lesson-badge">Estimated Time: 25 Mins</span>
-        </div>
-        <div class="lesson-body">
-          <p>Contractors push back out of reflex, not logic. Never argue. Use the <strong>Agree ➔ Pivot ➔ Bridge</strong> formula. Study these 10 exact word-for-word rebuttals before taking the Day 1 Exam:</p>
-          
-          <div class="objection-drill-grid">
-            <div class="objection-drill-card">
-              <div class="objection-cue">1. "Just email me some information."</div>
-              <div class="objection-rebuttal">"I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our live demo line right now, it takes 30 seconds to hear her on speaker — got a pen or your cell?"</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">2. "Not interested / Take me off your list."</div>
-              <div class="objection-rebuttal">"I completely understand — you get 20 telemarketers a day. I'm not asking you to buy anything right now. I just have a 15-second question about your after-hours emergency calls..."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">3. "We're slammed / It's our busy season."</div>
-              <div class="objection-rebuttal">"That's exactly why I called. When your crews are running 100% full, that's when after-hours $8,000 emergency calls slip to voicemail and call your competitor down the street."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">4. "I'm driving / On a job site right now."</div>
-              <div class="objection-rebuttal">"Understood, I'll be 15 seconds. Have your cell in your hand? Punch in our live demo line (561) 813-8602 for 20 seconds and see what she sounds like."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">5. "Call me back next month / after season."</div>
-              <div class="objection-rebuttal">"Happy to do that, but storm season and summer heat is happening right now. Missing one single weekend emergency job this week costs more than an entire year of Ava."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">6. "Karen: What company are you with and what is this regarding?"</div>
-              <div class="objection-rebuttal">"Hey Karen, it's Luke — quick operational question about your weekend emergency dispatch routing in [City]. Is the owner on a job site right now or in the office?"</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">7. "Who gave you my cell phone number?"</div>
-              <div class="objection-rebuttal">"You're registered as the primary license holder with the state contractor registry. I only call trade business owners directly."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">8. "Bad economy / Tight budget right now."</div>
-              <div class="objection-rebuttal">"Totally get it. That's why there are zero long-term contracts. And in [Trade], a single $5,000 emergency replacement job covers the entire year on day one."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">9. "I do all my own calls on my cell phone."</div>
-              <div class="objection-rebuttal">"Respect that! But when you're in an attic or under a truck with tools in your hand at 6:30 PM, where does a new customer call go? If it hits voicemail, they tap the next guy on Google."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">10. "What is this about? Make it fast."</div>
-              <div class="objection-rebuttal">"Luke from VantorX. Got 20 seconds or should I hang up?"</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Part 3: Day 1 Exam -->
-      <div class="exam-container" id="day1ExamBox">
-        <div class="exam-header">
-          <div>
-            <h3 style="font-size:18px;color:#ffffff;font-family:var(--font-head)">📝 Day 1 Certification Exam (Contractor Mindset &amp; Objections)</h3>
-            <p style="color:var(--dim);font-size:13px;margin-top:2px">Passing Requirement: Score 7 / 8 (87.5%+) to unlock Day 2 (+500 XP).</p>
-          </div>
-          <span class="exam-score-badge" id="day1ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Pending Exam</span>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q1: A contractor barks aggressively: <em>"Yeah, who's this? I'm backing up a trailer on a job site."</em> What is your exact response?</div>
-          <div class="quiz-options" data-day="1" data-q="1">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 0, false)">A) "Hi sir! So sorry to bother you! We offer revolutionary AI voice solutions for trade contractors..."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 1, true)">B) "Luke with VantorX. I know you're in the middle of a job — got 20 seconds or should I hang up?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 2, false)">C) "Wait, don't hang up! We can add $50,000 to your roofing pipeline this month!"</button>
+          <div class="lms-nav-list">
+            <button type="button" class="lms-nav-item active" id="navItem-1-1" onclick="selectLmsUnit('1-1')">
+              <span>🧠 1.1: Contractor Psyche</span>
+              <span class="lms-nav-icon" id="navIcon-1-1">▶</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-1-2" onclick="selectLmsUnit('1-2')">
+              <span>🎯 1.2: 4-Sec Disarm &amp; Tone</span>
+              <span class="lms-nav-icon" id="navIcon-1-2">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-1-3" onclick="selectLmsUnit('1-3')">
+              <span>🛠️ 1.3: Florida Trade Jargon</span>
+              <span class="lms-nav-icon" id="navIcon-1-3">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-1-4" onclick="selectLmsUnit('1-4')">
+              <span>🛡️ 1.4: 10 Flashcard Drill</span>
+              <span class="lms-nav-icon" id="navIcon-1-4">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-1-5" onclick="selectLmsUnit('1-5')">
+              <span>📝 1.5: Day 1 Exam (8 Qs)</span>
+              <span class="lms-nav-icon" id="navIcon-1-5">🔒</span>
+            </button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q2: Why does the phrase <em>"or should I hang up?"</em> disarm a hostile contractor?</div>
-          <div class="quiz-options" data-day="1" data-q="2">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 0, true)">A) Giving them permission to say no removes the pressure of a sales trap and defuses their fight-or-flight reflex.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 1, false)">B) Because contractors feel guilty when you offer to hang up.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 2, false)">C) Because we secretly want them to hang up so we can call someone else.</button>
+        <!-- DAY 2 BLOCK -->
+        <div class="lms-day-block">
+          <div class="lms-day-hdr">
+            <span>📅 DAY 2: LEAK MATH &amp; DEMO DROP</span>
+            <span id="navDay2Status" style="font-size:10.5px;color:var(--dim)">0/5 Done</span>
+          </div>
+          <div class="lms-nav-list">
+            <button type="button" class="lms-nav-item locked" id="navItem-2-1" onclick="selectLmsUnit('2-1')">
+              <span>💸 2.1: $8k Leak Economics</span>
+              <span class="lms-nav-icon" id="navIcon-2-1">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-2-2" onclick="selectLmsUnit('2-2')">
+              <span>🤖 2.2: Total Agreement Shield</span>
+              <span class="lms-nav-icon" id="navIcon-2-2">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-2-3" onclick="selectLmsUnit('2-3')">
+              <span>📞 2.3: Live Demo Drop</span>
+              <span class="lms-nav-icon" id="navIcon-2-3">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-2-4" onclick="selectLmsUnit('2-4')">
+              <span>⚔️ 2.4: RPG Sparring (2 Bosses)</span>
+              <span class="lms-nav-icon" id="navIcon-2-4">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-2-5" onclick="selectLmsUnit('2-5')">
+              <span>📝 2.5: Day 2 Exam (8 Qs)</span>
+              <span class="lms-nav-icon" id="navIcon-2-5">🔒</span>
+            </button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q3: Contractor: <em>"Just email me some information."</em> What is the correct pivot?</div>
-          <div class="quiz-options" data-day="1" data-q="3">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 0, true)">A) "I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our live demo line right now, it takes 30 seconds to hear her on speaker — got a pen or your cell?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 1, false)">B) "No, email doesn't work. Listen to me on the phone right now."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 2, false)">C) "Sounds great! What is your email address?" (and politely end the call)</button>
+        <!-- DAY 3 BLOCK -->
+        <div class="lms-day-block">
+          <div class="lms-day-hdr">
+            <span>📅 DAY 3: CLOSING &amp; BOARD EXAM</span>
+            <span id="navDay3Status" style="font-size:10.5px;color:var(--dim)">0/5 Done</span>
           </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q4: Contractor: <em>"We're slammed right now, it's our busy season."</em> How do you flip this capacity paradox?</div>
-          <div class="quiz-options" data-day="1" data-q="4">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 0, false)">A) "You should hire more subcontractors so you can take more calls."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 1, true)">B) "That's exactly why I called. When your crews are running 100% full, that's when after-hours $8,000 emergency replacement calls slip to voicemail and call your competitor down the road."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 2, false)">C) "Okay, I will call you back in 6 months when you're slow."</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q5: Contractor: <em>"Not interested. Take me off your list."</em> What is the disarm?</div>
-          <div class="quiz-options" data-day="1" data-q="5">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 0, true)">A) "I completely understand — you get 20 telemarketers a day. I'm not asking you to buy anything right now. I just have a 15-second question about your after-hours emergency calls..."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 1, false)">B) "Why aren't you interested? You don't even know what I'm selling!"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 2, false)">C) Argue with them about the legalities of the Do Not Call registry.</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q6: Karen the Gatekeeper: <em>"Premier Mechanical, Karen speaking. What company are you with and what is this regarding?"</em></div>
-          <div class="quiz-options" data-day="1" data-q="6">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 0, false)">A) "I am calling to sell AI receptionist software to the owner. Can I speak to the person in charge of IT?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 1, true)">B) "Hey Karen, it's Luke — quick operational question about your weekend emergency dispatch routing in Orlando. Is the owner on a job site right now or in the office?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 2, false)">C) "It's a personal call for Mr. Davis."</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q7: Contractor: <em>"I'm driving right now."</em> How do you respect their timebox while holding frame?</div>
-          <div class="quiz-options" data-day="1" data-q="7">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 0, true)">A) "Understood, I'll be 15 seconds. Since you're hands-free, dial our live demo line (561) 813-8602 for 20 seconds and see what she sounds like on speaker."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 1, false)">B) "Pull over to the side of the road so we can talk for 15 minutes."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 2, false)">C) Hang up immediately without saying anything.</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q8: Contractor: <em>"Who gave you my cell phone number?"</em></div>
-          <div class="quiz-options" data-day="1" data-q="8">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 0, false)">A) "I bought a list of numbers on the internet."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 1, true)">B) "You're registered as the primary license holder with the state contractor registry. I only call trade business owners directly."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 2, false)">C) "A friend of yours told me to call you."</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- 📅 DAY 2 PANEL: THE $8,000 LEAK & AI SKEPTICISM -->
-    <!-- ============================================================ -->
-    <div id="dayPanel2" class="academy-day-panel">
-      <!-- Lesson 1: The Economics of Missed Emergency Calls -->
-      <div class="lesson-card">
-        <div class="lesson-card-header">
-          <div class="lesson-title">💸 Part 1: The Economics of Missed Emergency Calls ($8,000 Leak Math)</div>
-          <span class="lesson-badge">Estimated Time: 15 Mins</span>
-        </div>
-        <div class="lesson-body">
-          <p>Never pitch "AI features" or "software". Contractors do not care about technology; they care about <strong>missed high-ticket emergency jobs</strong>. Learn the average emergency ticket sizes for your trade targets:</p>
-          
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0">
-            <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:12px;border-radius:10px">
-              <div style="font-size:12px;color:var(--dim);text-transform:uppercase">Roofing Storm Damage</div>
-              <div style="font-size:20px;font-weight:700;color:var(--accent2)">$8,500 Avg</div>
-              <div style="font-size:11.5px;color:var(--dim);margin-top:4px">Drywall leaks, missing shingles, tarps</div>
-            </div>
-            <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:12px;border-radius:10px">
-              <div style="font-size:12px;color:var(--dim);text-transform:uppercase">HVAC Weekend Replacement</div>
-              <div style="font-size:20px;font-weight:700;color:var(--accent2)">$6,200 Avg</div>
-              <div style="font-size:11.5px;color:var(--dim);margin-top:4px">Blown compressor in 95° FL heat</div>
-            </div>
-            <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:12px;border-radius:10px">
-              <div style="font-size:12px;color:var(--dim);text-transform:uppercase">Plumbing Slab Leak / Sewer</div>
-              <div style="font-size:20px;font-weight:700;color:var(--accent2)">$4,800 Avg</div>
-              <div style="font-size:11.5px;color:var(--dim);margin-top:4px">Water pouring into kitchen on Sunday night</div>
-            </div>
-          </div>
-
-          <div class="lesson-quote">
-            <strong>The Core Math Reality:</strong><br>
-            A homeowner in a panic will <em>never</em> leave a voicemail. They dial the top 3 contractors on Google Maps. The first one to answer with a live, knowledgeable voice gets the job. Missing just <strong>one single emergency call every 90 days</strong> costs a contractor over $25,000 to $34,000 a year.
+          <div class="lms-nav-list">
+            <button type="button" class="lms-nav-item locked" id="navItem-3-1" onclick="selectLmsUnit('3-1')">
+              <span>🤝 3.1: High-Ticket Packaging</span>
+              <span class="lms-nav-icon" id="navIcon-3-1">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-3-2" onclick="selectLmsUnit('3-2')">
+              <span>🚀 3.2: 48-Hour Zero-Downtime</span>
+              <span class="lms-nav-icon" id="navIcon-3-2">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-3-3" onclick="selectLmsUnit('3-3')">
+              <span>🎼 3.3: 4-Min Call Symphony</span>
+              <span class="lms-nav-icon" id="navIcon-3-3">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-3-4" onclick="selectLmsUnit('3-4')">
+              <span>⚔️ 3.4: 4-Boss Crucible</span>
+              <span class="lms-nav-icon" id="navIcon-3-4">🔒</span>
+            </button>
+            <button type="button" class="lms-nav-item locked" id="navItem-3-5" onclick="selectLmsUnit('3-5')">
+              <span>🏆 3.5: Final Board Exam (15 Qs)</span>
+              <span class="lms-nav-icon" id="navIcon-3-5">🔒</span>
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Lesson 2: Hard Skepticism Objection Shields -->
-      <div class="lesson-card">
-        <div class="lesson-card-header">
-          <div class="lesson-title">🛡️ Part 2: Hard Skepticism &amp; Tech Objection Armor</div>
-          <span class="lesson-badge">Estimated Time: 20 Mins</span>
-        </div>
-        <div class="lesson-body">
-          <div class="objection-drill-grid">
-            <div class="objection-drill-card">
-              <div class="objection-cue">1. "We already have an answering service."</div>
-              <div class="objection-rebuttal">"Totally get it. Most services put callers on hold for 4 minutes, charge $2/min, misspell customer addresses, and don't know the difference between a capacitor and a compressor. Ava answers in 1 ring, speaks trade jargon, and books jobs directly into your dispatch calendar."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">2. "I hate AI / My customers want real humans."</div>
-              <div class="objection-rebuttal">"I agree with you 100%! Most AI sounds like a broken microwave. That's why we trained Ava specifically on trade jargon. Punch in (561) 813-8602 right now — if she sounds like Siri or a robot, hang up and lose my number."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">3. "How much is this gonna cost me?" (Early on call)</div>
-              <div class="objection-rebuttal">"Between $397 and $697 flat a month with zero long-term contracts. Most contractors cover that with a single booked job in week one. But before we talk money, let's see if she even works for your crews."</div>
-            </div>
-            <div class="objection-drill-card">
-              <div class="objection-cue">4. "I need to talk to my partner / wife first."</div>
-              <div class="objection-rebuttal">"100%! Don't try to explain software to them. Put your phone on speaker right now in front of them and dial (561) 813-8602. When they hear how human she sounds, the decision makes itself."</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Part 3: Live RPG Sparring Check -->
-      <div class="lesson-card" style="border-color:rgba(52,211,153,0.3)">
-        <div class="lesson-card-header">
-          <div class="lesson-title">⚔️ Part 3: Practical Sparring Requirement (Defeat 2 RPG Bosses)</div>
-          <span class="lesson-badge" style="background:rgba(52,211,153,0.15);color:#34d399;border-color:rgba(52,211,153,0.4)">Required Before Passing Day 2</span>
-        </div>
-        <div class="lesson-body">
-          <p>You cannot pass Day 2 by only reading. You must jump into <strong>Cold Call Quest RPG</strong>, face the contractor bosses (Rick the Roofer, Mike the Electrician, or Dave the Plumber), and bring at least <strong>2 bosses to complete agreement</strong> under the 2-minute timer.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg);padding:14px 18px;border-radius:10px;margin-top:10px;flex-wrap:wrap;gap:10px">
+      <!-- RIGHT COLUMN: MAIN STAGE CONTENT PLAYER -->
+      <div class="lms-stage">
+        <!-- UNIT 1.1 -->
+        <div class="lms-lesson-view active" id="view-1-1">
+          <div class="lms-view-head">
             <div>
-              <span style="font-size:13px;color:var(--dim)">Current Sparring Progress:</span>
-              <div style="font-size:18px;font-weight:700;color:var(--accent2)"><span id="day2BossCount">0</span> / 2 Bosses Defeated</div>
+              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.1: Contractor Mindset</span></div>
+              <div class="lms-view-title">🧠 The 6 AM Job Site Reality &amp; Contractor Psyche</div>
             </div>
-            <button class="btn btn-gold btn-sm" type="button" onclick="switchTab('tabRPG')">⚔️ Launch Cold Call Quest Sparring ➔</button>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
           </div>
-        </div>
-      </div>
 
-      <!-- Part 4: Day 2 Exam -->
-      <div class="exam-container" id="day2ExamBox">
-        <div class="exam-header">
-          <div>
-            <h3 style="font-size:18px;color:#ffffff;font-family:var(--font-head)">📝 Day 2 Certification Exam (Revenue Leaks &amp; Hard Objections)</h3>
-            <p style="color:var(--dim);font-size:13px;margin-top:2px">Passing Requirement: Score 7 / 8 (87.5%+) AND Defeat 2 RPG Bosses to unlock Day 3 (+500 XP).</p>
-          </div>
-          <span class="exam-score-badge" id="day2ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Pending Exam</span>
-        </div>
+          <div class="lms-text-block">
+            <p>Trade business owners (roofers, HVAC techs, plumbers, electricians) live in an entirely different psychological reality than corporate executives. When you dial their phone at 9:30 AM or 1:45 PM, they are not sitting at a desk with a coffee. They are on job sites in 95-degree heat, managing temperamental crews, waiting for supply house orders, or guiding heavy equipment.</p>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q1: Contractor: <em>"I don't need any software, my phone rings plenty during the day."</em> What is the leak pivot?</div>
-          <div class="quiz-options" data-day="2" data-q="1">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 0, false)">A) "Our software runs on neural networks."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 1, true)">B) "That's great for 9 to 5, but when an AC compressor blows at 8 PM or on Saturday, where does that call go? If it hits voicemail, they call the next guy on Google. Missing one call a month costs you over $70,000 a year."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 2, false)">C) "Well, your competitors are buying AI so you will lose."</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q2: When should you drop Ava's live demo number <strong>(561) 813-8602</strong>?</div>
-          <div class="quiz-options" data-day="2" data-q="2">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 0, true)">A) Within 60 seconds of uncovering their after-hours leak: invite them to dial it right on speaker while staying on the line.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 1, false)">B) In a follow-up email 3 days later.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 2, false)">C) Only after they sign a 12-month agreement.</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q3: Contractor: <em>"We already have an answering service."</em> What is their fatal operational flaw?</div>
-          <div class="quiz-options" data-day="2" data-q="3">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 0, true)">A) They put emergency callers on hold for 4 minutes, charge $2/min, misspell details, and don't book jobs into calendar software.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 1, false)">B) They are too cheap.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 2, false)">C) They don't speak English.</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q4: How does the Total Agreement Shield disarm: <em>"I hate AI. Every robo-caller sounds like a broken microwave"</em>?</div>
-          <div class="quiz-options" data-day="2" data-q="4">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 0, false)">A) Tell them that AI has advanced and they are being old-fashioned.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 1, true)">B) "I agree with you 100%! Most AI sounds awful. That's why we trained Ava specifically on trade jargon. Punch in (561) 813-8602 right now — if she sounds fake, hang up and lose my number."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 2, false)">C) Argue that humans make more mistakes than computers.</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q5: If a contractor asks: <em>"How much is this going to cost me?"</em> in the first 30 seconds of the call:</div>
-          <div class="quiz-options" data-day="2" data-q="5">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 0, true)">A) State the transparent flat range ($397 to $697/mo, no contracts) and immediately bridge: "Most guys cover that with one job in week one. But let's see if she even works for your crews first."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 1, false)">B) Refuse to give pricing until they commit to a 45-minute demo meeting.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 2, false)">C) Quote an artificially low price like $49 and hide the setup fee.</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q6: Contractor: <em>"I need to talk to my business partner / wife before I do anything."</em></div>
-          <div class="quiz-options" data-day="2" data-q="6">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 0, false)">A) "Why can't you make decisions on your own?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 1, true)">B) "100%! Don't try to explain software to them. Put your phone on speaker in front of them and dial (561) 813-8602. When they hear how human she sounds, the decision makes itself."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 2, false)">C) "Let's set up a 3-way conference call next week."</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q7: Contractor: <em>"We're booked out 3 weeks in advance. We don't need work."</em></div>
-          <div class="quiz-options" data-day="2" data-q="7">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 0, true)">A) "You're booked out on low-margin scheduled calls. But when an $8,000 emergency replacement calls at 8 PM on a Saturday, where does that call ring right now?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 1, false)">B) "Then you must be rich, why don't you buy it anyway?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 2, false)">C) "Congratulations, have a nice day." (hang up)</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q8: What percentage of after-hours emergency trade callers leave a voicemail when hitting an answering machine?</div>
-          <div class="quiz-options" data-day="2" data-q="8">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 0, false)">A) Over 75% leave detailed voicemails.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 1, true)">B) Less than 15% leave a voicemail — the rest immediately hang up and tap the next competitor on Google.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 2, false)">C) 50% send an email instead.</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============================================================ -->
-    <!-- 📅 DAY 3 PANEL: CLOSING, BOSS CRUCIBLE & FINAL EXAM -->
-    <!-- ============================================================ -->
-    <div id="dayPanel3" class="academy-day-panel">
-      <!-- Lesson 1: High-Ticket Closing & The 2 Offer Structures -->
-      <div class="lesson-card">
-        <div class="lesson-card-header">
-          <div class="lesson-title">🤝 Part 1: High-Ticket Closing &amp; The 2 Offer Structures</div>
-          <span class="lesson-badge">Estimated Time: 15 Mins</span>
-        </div>
-        <div class="lesson-body">
-          <p>Always lead with the <strong>Pro Bundle</strong> first. It provides maximum value and produces the highest retention. Only fall back to the Starter plan if the contractor has cash flow constraints.</p>
-
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0">
-            <div style="background:var(--bg);border:2px solid var(--accent);padding:16px;border-radius:12px;position:relative">
-              <span style="position:absolute;top:10px;right:10px;background:var(--accent);color:#000;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px">RECOMMENDED DEFAULT</span>
-              <div style="font-size:13px;color:var(--accent2);font-weight:700">OPTION 1: PRO BUNDLE</div>
-              <div style="font-size:22px;font-weight:800;color:#ffffff;margin:4px 0">$697 / month</div>
-              <div style="font-size:12px;color:var(--dim);margin-bottom:8px">+$997 One-Time Voice &amp; Knowledge Setup Fee</div>
-              <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.5">
-                <li>24/7 AI Phone Receptionist (Ava)</li>
-                <li>Instant 5-Second Speed-to-Lead Website Auto-Texting</li>
-                <li>Direct Dispatch Calendar Booking</li>
-                <li>Zero Long-Term Contracts (Cancel Anytime)</li>
-              </ul>
+            <div class="lms-audio-bar">
+              <div>
+                <strong style="color:var(--accent2);font-size:13.5px">🗣️ Audio Simulation: The Job Site Reality</strong>
+                <div style="font-size:12px;color:var(--dim)">Hear what a Florida contractor actually sounds like when answering a cold call</div>
+              </div>
+              <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('roofer_busy')">🔊 Play Audio</button>
             </div>
 
-            <div style="background:var(--bg);border:1px solid var(--line);padding:16px;border-radius:12px">
-              <div style="font-size:13px;color:var(--dim);font-weight:700">OPTION 2: STARTER (FALLBACK)</div>
-              <div style="font-size:22px;font-weight:800;color:#ffffff;margin:4px 0">$397 / month</div>
-              <div style="font-size:12px;color:var(--dim);margin-bottom:8px">+$497 One-Time Setup Fee</div>
-              <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.5">
-                <li>After-Hours &amp; Overflow AI Voice Receptionist</li>
-                <li>Emergency Job Dispatch Notifications via SMS</li>
-                <li>Zero Long-Term Contracts</li>
-              </ul>
+            <div class="lms-transcript-compare">
+              <div class="lms-bad-call">
+                <div class="lms-call-hdr">❌ The Dead Telemarketer Opener (Hung up in 2.8s)</div>
+                <div class="lms-call-body">
+                  <strong>Roofer:</strong> "Yeah, who's this?"<br>
+                  <strong>Rookie Rep:</strong> <em>"Hi sir! Good morning! Hope you're having an amazing day! My name is Jordan and I'm calling from VantorX Solutions to see if you have 5 minutes to discuss..."</em><br>
+                  <strong>Roofer:</strong> *CLICK* (Immediate disconnect)
+                </div>
+              </div>
+              <div class="lms-good-call">
+                <div class="lms-call-hdr">✓ The Elite VantorX Closer (Earns Authority)</div>
+                <div class="lms-call-body">
+                  <strong>Roofer:</strong> "Yeah, who's this?"<br>
+                  <strong>Elite Closer:</strong> <em>"Luke with VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?"</em><br>
+                  <strong>Roofer:</strong> "Alright, you got 20 seconds. What is it?"
+                </div>
+              </div>
             </div>
+
+            <p><strong>The Core Psychological Rule:</strong> You must speak in a calm, grounded, slow cadence. Your voice must drop in pitch at the end of sentences (downward inflection), signaling status and authority. Never apologize for calling. You are a trade operations specialist diagnosing lost revenue.</p>
           </div>
 
-          <div class="lesson-quote">
-            <strong>The 48-Hour Zero-Downtime Guarantee:</strong><br>
-            "We don't touch your existing phone carrier or port your numbers. We configure simple conditional call forwarding (*71) so when your lines ring unanswered or after 5 PM, Ava picks up seamlessly. Zero downtime, zero hassle."
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 1 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('1-1', '1-2')">✓ Mark Complete &amp; Continue to 1.2 ➔</button>
           </div>
         </div>
-      </div>
 
-      <!-- Lesson 2: Full Call Symphony -->
-      <div class="lesson-card">
-        <div class="lesson-card-header">
-          <div class="lesson-title">🎼 Part 2: The Full Call Symphony (Open to Close in 4 Minutes)</div>
-          <span class="lesson-badge">Estimated Time: 15 Mins</span>
-        </div>
-        <div class="lesson-body">
-          <p>Every successful VantorX cold call moves through 5 organic movements. Memorize the flow:</p>
-          <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
-            <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
-              <strong style="color:var(--accent2)">0:00 – 0:15 (The Disarm):</strong> "Luke with VantorX. Got 20 seconds or should I hang up?"
-            </div>
-            <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
-              <strong style="color:var(--accent2)">0:15 – 0:45 (The Trade Leak Hook):</strong> "In [Trade], when an emergency call comes in at 8 PM on a Saturday, where does that ring right now?"
-            </div>
-            <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
-              <strong style="color:var(--accent2)">0:45 – 1:30 (The Live Demo Drop):</strong> "Punch in our live demo line right now on speaker: (561) 813-8602. Hear her for 20 seconds."
-            </div>
-            <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
-              <strong style="color:var(--accent2)">1:30 – 2:30 (The Objection Shield):</strong> Agree, pivot, and anchor the $397/$697 ROI against one single emergency job.
-            </div>
-            <div style="background:var(--bg);border-left:3px solid var(--ok);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
-              <strong style="color:#6ee7b7">2:30 – 4:00 (The Close):</strong> "Should I send the setup link to your cell, or let's lock in 10 minutes on your calendar tomorrow morning?"
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Part 3: Grand Master RPG Sparring -->
-      <div class="lesson-card" style="border-color:rgba(245,158,11,0.4)">
-        <div class="lesson-card-header">
-          <div class="lesson-title">⚔️ Part 3: Grand Master Boss Crucible (All 4 Bosses Slayed)</div>
-          <span class="lesson-badge">Crucible Requirement</span>
-        </div>
-        <div class="lesson-body">
-          <p>Before earning your Level 5 License to Dial, you must prove you can defeat all 4 contractor dungeon bosses in Cold Call Quest (Rick the Roofer, Karen the Gatekeeper, Mike the Electrician, and Dave the Plumber):</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg);padding:14px 18px;border-radius:10px;margin-top:10px;flex-wrap:wrap;gap:10px">
+        <!-- UNIT 1.2 -->
+        <div class="lms-lesson-view" id="view-1-2">
+          <div class="lms-view-head">
             <div>
-              <span style="font-size:13px;color:var(--dim)">Total Crucible Bosses Defeated:</span>
-              <div style="font-size:18px;font-weight:700;color:var(--accent2)"><span id="day3BossCount">0</span> / 4 Bosses Defeated</div>
+              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.2: The 4-Second Disarm</span></div>
+              <div class="lms-view-title">🎯 The 4-Second Disarm &amp; Tonality Masterclass</div>
             </div>
-            <button class="btn btn-gold btn-sm" type="button" onclick="switchTab('tabRPG')">⚔️ Spar with Remaining Bosses ➔</button>
+            <span class="lms-time-pill">⏱️ 12 Mins</span>
           </div>
-        </div>
-      </div>
 
-      <!-- Part 4: 15-Question Final Board Exam -->
-      <div class="exam-container" id="day3ExamBox">
-        <div class="exam-header">
-          <div>
-            <h3 style="font-size:18px;color:#ffffff;font-family:var(--font-head)">🏆 Final Certification Board Exam (15 Scenarios)</h3>
-            <p style="color:var(--dim);font-size:13px;margin-top:2px">Passing Requirement: Score 14 / 15 (90%+) AND Defeat all 4 RPG Bosses to earn Level 5 License to Dial.</p>
+          <div class="lms-text-block">
+            <p>Every cold call has a 4-second biological window. During those 4 seconds, the prospect's amygdala (the brain's threat-detection center) evaluates whether you are a friend, an enemy, or a needy telemarketer trying to extract time and money.</p>
+
+            <div class="lms-script-box">
+              <strong>The Master Opener Formula:</strong><br>
+              "[Your Name] with VantorX. I know you weren't expecting my call — got 20 seconds or should I hang up?"
+            </div>
+
+            <p><strong>Why "Or Should I Hang Up?" Disarms Them:</strong> Most sales trainers teach reps to bulldoze through objections. When you offer to hang up, you do the exact opposite of what a telemarketer does. You give them full autonomy. Because they have permission to say no, they no longer need to fight you. 90% of contractors respond: <em>"Alright, 20 seconds. Make it quick."</em></p>
+
+            <div class="lms-audio-bar">
+              <div>
+                <strong style="color:var(--accent2);font-size:13.5px">🗣️ Audio Simulation: Master Disarm Delivery</strong>
+                <div style="font-size:12px;color:var(--dim)">Hear the exact pacing, vocal weight, and pause before "or should I hang up?"</div>
+              </div>
+              <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('disarm_delivery')">🔊 Play Audio</button>
+            </div>
           </div>
-          <span class="exam-score-badge" id="day3ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Pending Board Exam</span>
-        </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q1: Which tier should you recommend first to any 2–10 truck contractor?</div>
-          <div class="quiz-options" data-day="3" data-q="1">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 0, false)">A) The $397 Starter plan.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 1, true)">B) The $697/mo Pro AI Receptionist + Speed-to-Lead bundle ($997 setup fee) because it captures after-hours phone calls and auto-texts website leads in 5 seconds.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 2, false)">C) Free 30-day trial with no card.</button>
-          </div>
-        </div>
-
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q2: What is the exact launch timeline and operational impact you promise the contractor?</div>
-          <div class="quiz-options" data-day="3" data-q="2">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 0, true)">A) 48 hours — custom trade calibration with zero phone downtime via simple call forwarding (*71).</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 1, false)">B) 4 to 6 weeks of extensive IT overhaul.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 2, false)">C) Instant switch requiring changing all phone numbers.</button>
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 2 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('1-2', '1-3')">✓ Mark Complete &amp; Continue to 1.3 ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q3: A contractor says: <em>"Send me an email with your pricing and deck."</em> What do you say?</div>
-          <div class="quiz-options" data-day="3" data-q="3">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 0, true)">A) "I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our demo line right now, it takes 30 seconds to hear her on speaker — got a pen or your cell?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 1, false)">B) "Sure thing, what's your email?" (and hang up)</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 2, false)">C) "No, I don't send emails."</button>
+        <!-- UNIT 1.3 -->
+        <div class="lms-lesson-view" id="view-1-3">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.3: Florida Trade Jargon</span></div>
+              <div class="lms-view-title">🛠️ Florida Trade Jargon Cheatsheet</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>If you don't know trade terms, contractors will smell inexperience within 10 seconds. You must know their vocabulary, common emergency issues, and average job ticket values:</p>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:16px 0">
+              <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px">
+                <strong style="color:#f59e0b">🏠 Roofing Terminology</strong>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55;margin-top:6px">
+                  <li><strong>Architectural Shingles:</strong> 30-year high-wind shingles common in FL.</li>
+                  <li><strong>Emergency Tarping:</strong> $1,200–$2,500 emergency storm job.</li>
+                  <li><strong>Full Reroof:</strong> $12,000 to $25,000 high-ticket replacement.</li>
+                  <li><strong>Pain Point:</strong> Returning 15 missed calls while standing on a 6/12 pitch roof in 95° heat.</li>
+                </ul>
+              </div>
+
+              <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px">
+                <strong style="color:#38bdf8">❄️ HVAC Terminology</strong>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55;margin-top:6px">
+                  <li><strong>Capacitor vs. Compressor:</strong> $250 quick repair vs $5,000+ system replacement.</li>
+                  <li><strong>16 SEER2 Heat Pumps:</strong> Standard Florida residential replacement.</li>
+                  <li><strong>Refrigerant R-410A:</strong> Phaseout regulations driving new unit upgrades.</li>
+                  <li><strong>Pain Point:</strong> Attics hitting 130°F where techs cannot answer cell phones.</li>
+                </ul>
+              </div>
+
+              <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px">
+                <strong style="color:#34d399">💧 Plumbing Terminology</strong>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55;margin-top:6px">
+                  <li><strong>Slab Leak:</strong> Water pipe ruptured under concrete ($4,000–$8,000).</li>
+                  <li><strong>Hydro-Jetting:</strong> High-pressure commercial line clearing ($1,500).</li>
+                  <li><strong>Tankless Changeout:</strong> $3,500 emergency installation.</li>
+                  <li><strong>Pain Point:</strong> Saturday 9 PM flooded kitchens going to competitor voicemail.</li>
+                </ul>
+              </div>
+
+              <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px">
+                <strong style="color:#fbbf24">⚡ Electrical Terminology</strong>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55;margin-top:6px">
+                  <li><strong>200A Service Upgrade:</strong> Replacing obsolete 100A panels ($3,500–$5,500).</li>
+                  <li><strong>Generator Transfer Switch:</strong> Hurricane season installation ($4,000).</li>
+                  <li><strong>Panel Burnout:</strong> Emergency fire hazard service call ($2,500+).</li>
+                  <li><strong>Pain Point:</strong> Trying to return customer calls with both hands inside a live breaker panel.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 3 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('1-3', '1-4')">✓ Mark Complete &amp; Continue to 1.4 ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q4: Gatekeeper Karen says: <em>"Mr. Davis doesn't have time to test demo phone numbers."</em> How do you pivot?</div>
-          <div class="quiz-options" data-day="3" data-q="4">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 0, false)">A) "Can you give me his personal cell phone number instead?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 1, true)">B) "Understood Karen. But you're in the office right now — dial (561) 813-8602 from your desk phone right now for 20 seconds. If Ava sounds like a robot, you can hang up on me forever."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 2, false)">C) "Why are you being so difficult Karen?"</button>
+        <!-- UNIT 1.4 -->
+        <div class="lms-lesson-view" id="view-1-4">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.4: 10 Objection Flashcards</span></div>
+              <div class="lms-view-title">🛡️ 10 Knee-Jerk Objection Reflex Flashcards</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p><strong>Interactive Mastery Drill:</strong> You cannot pass Day 1 without knowing these 10 objections cold. Click <strong>"Reveal Elite Rebuttal"</strong> on all 10 cards below. The completion button will unlock only after you have reviewed all 10 cards.</p>
+
+            <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:10px 16px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <span style="font-size:13px;color:var(--dim)">Drill Progress:</span>
+              <strong style="color:var(--accent2);font-size:15px"><span id="lmsFcRevealedCount">0</span> / 10 Mastered</strong>
+            </div>
+
+            <div class="flashcard-grid">
+              <div class="fc-card" id="fc-1">
+                <div class="fc-cue">1. "Just email me some information."</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(1)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our live demo line right now, it takes 30 seconds on speaker — got a pen or your cell?"</div>
+              </div>
+              <div class="fc-card" id="fc-2">
+                <div class="fc-cue">2. "Not interested / Take me off your list."</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(2)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"I completely understand — you get 20 telemarketers a day. I'm not asking you to buy anything right now. I just have a 15-second question about your after-hours emergency calls..."</div>
+              </div>
+              <div class="fc-card" id="fc-3">
+                <div class="fc-cue">3. "We're slammed / It's our busy season."</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(3)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"That's exactly why I called. When your crews are running 100% full, that's when after-hours $8,000 emergency replacement calls slip to voicemail and call your competitor down the road."</div>
+              </div>
+              <div class="fc-card" id="fc-4">
+                <div class="fc-cue">4. "I'm driving / On a job site right now."</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(4)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"Understood, I'll be 15 seconds. Since you're hands-free, dial our live demo line (561) 813-8602 for 20 seconds and see what she sounds like on speaker."</div>
+              </div>
+              <div class="fc-card" id="fc-5">
+                <div class="fc-cue">5. "Call me back next month / after season."</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(5)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"Happy to do that, but storm season and summer heat is happening right now. Missing one single weekend emergency job this week costs more than an entire year of Ava."</div>
+              </div>
+              <div class="fc-card" id="fc-6">
+                <div class="fc-cue">6. "Karen: What company are you with &amp; regarding?"</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(6)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"Hey Karen, it's Luke — quick operational question about your weekend emergency dispatch routing in [City]. Is the owner on a job site right now or in the office?"</div>
+              </div>
+              <div class="fc-card" id="fc-7">
+                <div class="fc-cue">7. "Who gave you my cell phone number?"</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(7)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"You're registered as the primary license holder with the state contractor registry. I only call trade business owners directly."</div>
+              </div>
+              <div class="fc-card" id="fc-8">
+                <div class="fc-cue">8. "Bad economy / Tight budget right now."</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(8)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"Totally get it. That's why there are zero long-term contracts. And in [Trade], a single $5,000 emergency replacement job covers the entire year on day one."</div>
+              </div>
+              <div class="fc-card" id="fc-9">
+                <div class="fc-cue">9. "I do all my own calls on my cell phone."</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(9)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"Respect that! But when you're in an attic or under a truck with tools in your hand at 6:30 PM, where does a new customer call go? If it hits voicemail, they tap the next guy on Google."</div>
+              </div>
+              <div class="fc-card" id="fc-10">
+                <div class="fc-cue">10. "What is this about? Make it fast."</div>
+                <button class="fc-reveal-btn" type="button" onclick="revealLmsFlashcard(10)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"Luke from VantorX. Got 20 seconds or should I hang up?"</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 4 of 15 Complete</span>
+            <button class="btn btn-gold" id="btnCompleteUnit14" disabled type="button" onclick="completeLmsUnit('1-4', '1-5')">🔒 Review All 10 Cards to Unlock Exam ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q5: Mike the Electrician says: <em>"I'm a master electrician. My customers want a real person who understands amperage, not some computer."</em> What is your shield?</div>
-          <div class="quiz-options" data-day="3" data-q="5">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 0, true)">A) Total Agreement: "I agree 100%! Most AI doesn't know the difference between 100A and 200A. That's why Ava was custom-trained on electrical triage. Dial (561) 813-8602 right now and test her terminology."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 1, false)">B) "AI is smarter than master electricians."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 2, false)">C) "You should calm down Mike."</button>
+        <!-- UNIT 1.5 (DAY 1 EXAM) -->
+        <div class="lms-lesson-view" id="view-1-5">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 1 ➔ <span>Lesson 1.5: Certification Exam</span></div>
+              <div class="lms-view-title">📝 Day 1 Certification Exam (Contractor Mindset &amp; Objections)</div>
+            </div>
+            <span class="exam-score-badge" id="day1ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 7 / 8 (87.5%+)</span>
+          </div>
+
+          <div class="lms-lock-screen" id="lockScreen15" style="display:none">
+            <div class="lms-lock-icon">🔒</div>
+            <div class="lms-lock-title">Day 1 Exam is Locked</div>
+            <div class="lms-lock-desc">You must complete Lessons 1.1, 1.2, 1.3, and review all 10 Objection Flashcards in Lesson 1.4 before taking this exam.</div>
+            <button class="btn btn-gold" type="button" onclick="selectLmsUnit('1-1')">Go to Lesson 1.1 ➔</button>
+          </div>
+
+          <div id="examBody15">
+            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score at least <strong>7 out of 8 (87.5%+)</strong> to earn your Day 1 Certification (+500 XP) and unlock Day 2.</p>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q1: A contractor barks aggressively: <em>"Yeah, who's this? I'm backing up a trailer on a job site."</em> What is your exact response?</div>
+              <div class="quiz-options" data-day="1" data-q="1">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 0, false)">A) "Hi sir! So sorry to bother you! We offer revolutionary AI voice solutions for trade contractors..."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 1, true)">B) "Luke with VantorX. I know you're in the middle of a job — got 20 seconds or should I hang up?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 1, 2, false)">C) "Wait, don't hang up! We can add $50,000 to your roofing pipeline this month!"</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q2: Why does the phrase <em>"or should I hang up?"</em> disarm a hostile contractor?</div>
+              <div class="quiz-options" data-day="1" data-q="2">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 0, true)">A) Giving them permission to say no removes the pressure of a sales trap and defuses their fight-or-flight reflex.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 1, false)">B) Because contractors feel guilty when you offer to hang up.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 2, false)">C) Because we secretly want them to hang up so we can call someone else.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q3: Contractor: <em>"Just email me some information."</em> What is the correct pivot?</div>
+              <div class="quiz-options" data-day="1" data-q="3">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 0, true)">A) "I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our live demo line right now, it takes 30 seconds to hear her on speaker — got a pen or your cell?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 1, false)">B) "No, email doesn't work. Listen to me on the phone right now."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 3, 2, false)">C) "Sounds great! What is your email address?" (and politely end the call)</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q4: Contractor: <em>"We're slammed right now, it's our busy season."</em> How do you flip this capacity paradox?</div>
+              <div class="quiz-options" data-day="1" data-q="4">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 0, false)">A) "You should hire more subcontractors so you can take more calls."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 1, true)">B) "That's exactly why I called. When your crews are running 100% full, that's when after-hours $8,000 emergency replacement calls slip to voicemail and call your competitor down the road."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 4, 2, false)">C) "Okay, I will call you back in 6 months when you're slow."</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q5: Contractor: <em>"Not interested. Take me off your list."</em> What is the disarm?</div>
+              <div class="quiz-options" data-day="1" data-q="5">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 0, true)">A) "I completely understand — you get 20 telemarketers a day. I'm not asking you to buy anything right now. I just have a 15-second question about your after-hours emergency calls..."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 1, false)">B) "Why aren't you interested? You don't even know what I'm selling!"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 5, 2, false)">C) Argue with them about the legalities of the Do Not Call registry.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q6: Karen the Gatekeeper: <em>"Premier Mechanical, Karen speaking. What company are you with and what is this regarding?"</em></div>
+              <div class="quiz-options" data-day="1" data-q="6">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 0, false)">A) "I am calling to sell AI receptionist software to the owner. Can I speak to the person in charge of IT?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 1, true)">B) "Hey Karen, it's Luke — quick operational question about your weekend emergency dispatch routing in Orlando. Is the owner on a job site right now or in the office?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 6, 2, false)">C) "It's a personal call for Mr. Davis."</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q7: Contractor: <em>"I'm driving right now."</em> How do you respect their timebox while holding frame?</div>
+              <div class="quiz-options" data-day="1" data-q="7">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 0, true)">A) "Understood, I'll be 15 seconds. Since you're hands-free, dial our live demo line (561) 813-8602 for 20 seconds and see what she sounds like on speaker."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 1, false)">B) "Pull over to the side of the road so we can talk for 15 minutes."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 7, 2, false)">C) Hang up immediately without saying anything.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q8: Contractor: <em>"Who gave you my cell phone number?"</em></div>
+              <div class="quiz-options" data-day="1" data-q="8">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 0, false)">A) "I bought a list of numbers on the internet."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 1, true)">B) "You're registered as the primary license holder with the state contractor registry. I only call trade business owners directly."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 8, 2, false)">C) "A friend of yours told me to call you."</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q6: Dave the Plumber says: <em>"I bet there's a 12-month lock-in contract and hidden per-minute fees."</em> What do you answer?</div>
-          <div class="quiz-options" data-day="3" data-q="6">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 0, true)">A) "Zero long-term contracts, cancel anytime. Flat monthly rate with no per-minute extortion. And one single water heater or slab leak covers almost the entire year."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 1, false)">B) "Yes, but our contract is very standard."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 2, false)">C) "Don't worry about contracts right now."</button>
+        <!-- UNIT 2.1 -->
+        <div class="lms-lesson-view" id="view-2-1">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 2 ➔ <span>Lesson 2.1: Revenue Leak Economics</span></div>
+              <div class="lms-view-title">💸 The $8,000 Revenue Leak &amp; Emergency Math</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>Never pitch "features". Contractors don't want software; they want to stop bleeding thousands of dollars on after-hours emergency calls. When a homeowner experiences an emergency (water leaking from a ceiling, AC blowing 90° air in July, overflowing toilet), their panic is at a 10 out of 10. They dial the first 3 contractors on Google Maps. <strong>The first company with a live, knowledgeable voice gets the $5,000 to $9,000 job.</strong></p>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:16px 0">
+              <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:14px;border-radius:10px">
+                <div style="font-size:11px;color:var(--dim);text-transform:uppercase">Roofing Storm Damage</div>
+                <div style="font-size:22px;font-weight:700;color:var(--accent2)">$8,500 Avg</div>
+                <div style="font-size:11.5px;color:var(--dim);margin-top:4px">Drywall leaks, missing shingles, tarps</div>
+              </div>
+              <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:14px;border-radius:10px">
+                <div style="font-size:11px;color:var(--dim);text-transform:uppercase">HVAC Compressor Blowout</div>
+                <div style="font-size:22px;font-weight:700;color:var(--accent2)">$6,200 Avg</div>
+                <div style="font-size:11.5px;color:var(--dim);margin-top:4px">System freeze-ups in Florida heat</div>
+              </div>
+              <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:14px;border-radius:10px">
+                <div style="font-size:11px;color:var(--dim);text-transform:uppercase">Plumbing Slab Leak</div>
+                <div style="font-size:22px;font-weight:700;color:var(--accent2)">$4,800 Avg</div>
+                <div style="font-size:11.5px;color:var(--dim);margin-top:4px">Under-slab pipe rupture on Sunday night</div>
+              </div>
+            </div>
+
+            <div class="lms-script-box">
+              <strong>The Math That Closes Deals:</strong><br>
+              "Missing just ONE single emergency replacement call every 60 days costs your business $51,000 a year. Ava costs $397 to $697 a month flat. That means capturing one single weekend call pays for Ava for the entire year on day one."
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 6 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('2-1', '2-2')">✓ Mark Complete &amp; Continue to 2.2 ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q7: Why do we never use the phrase: <em>"I'm following up on an email I sent you"</em>?</div>
-          <div class="quiz-options" data-day="3" data-q="7">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 0, true)">A) Because it instantly brands you as a weak telemarketer making cold excuses, destroying your status before you even speak.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 1, false)">B) Because emails are illegal in Florida.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 2, false)">C) Because contractors always read their emails.</button>
+        <!-- UNIT 2.2 -->
+        <div class="lms-lesson-view" id="view-2-2">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 2 ➔ <span>Lesson 2.2: Total Agreement Shield</span></div>
+              <div class="lms-view-title">🤖 Total Agreement Shield vs. "I Hate AI / Robots"</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>Contractors hate AI because 99% of "AI bots" sound like Siri reading a dictionary. They also hate human answering services because answering services put callers on hold for 4 minutes, charge $2/min, misspell caller names, and don't know the difference between a capacitor and a compressor.</p>
+
+            <div class="lms-script-box">
+              <strong>The Total Agreement Shield Script:</strong><br>
+              "I agree with you 100%! Most AI sounds like a broken microwave. That's why we trained Ava specifically on trade jargon. Punch in (561) 813-8602 right now — if she sounds fake or robotic, hang up on me and lose my number."
+            </div>
+
+            <p><strong>The Operational Contrast:</strong></p>
+            <ul style="font-size:13.5px;color:#e2e8f0;line-height:1.65;padding-left:18px">
+              <li><strong>Old Answering Service:</strong> 4-minute hold times, $2/min overage fees, notes emailed 2 hours late. Homeowner has already hired someone else.</li>
+              <li><strong>Ava:</strong> Answers on Ring 1, triages the emergency, asks for the square footage/tonnage/leak location, and writes directly into their dispatch calendar.</li>
+            </ul>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 7 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('2-2', '2-3')">✓ Mark Complete &amp; Continue to 2.3 ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q8: When closing on the phone, what is the best closing question?</div>
-          <div class="quiz-options" data-day="3" data-q="8">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 0, false)">A) "Do you want to buy this right now?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 1, true)">B) "Should I text the setup link to your cell, or let's lock in 10 minutes on your calendar tomorrow morning before your crews dispatch?"</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 2, false)">C) "Can you give me your credit card number?"</button>
+        <!-- UNIT 2.3 -->
+        <div class="lms-lesson-view" id="view-2-3">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 2 ➔ <span>Lesson 2.3: Live Demo Challenge Drop</span></div>
+              <div class="lms-view-title">📞 The 60-Second Live Demo Challenge Drop</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 12 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>The single greatest weapon in the VantorX cold call arsenal is the <strong>Live Demo Line: (561) 813-8602</strong>. When a contractor hears Ava answer on the first ring, with authentic Florida trade inflection, 90% of objections vanish instantly.</p>
+
+            <div class="lms-script-box">
+              <strong>Exact Word-for-Word Delivery:</strong><br>
+              "Have your cell in your hand? Punch in our live demo line right now on speaker: <strong>(561) 813-8602</strong>. Pretend you're an angry homeowner with water pouring into your kitchen on a Saturday night. Hear what she sounds like for 20 seconds."
+            </div>
+
+            <div class="lms-audio-bar">
+              <div>
+                <strong style="color:var(--accent2);font-size:13.5px">🗣️ Audio Simulation: Delivering the Demo Challenge</strong>
+                <div style="font-size:12px;color:var(--dim)">Listen to how an elite closer drops (561) 813-8602 without hesitation</div>
+              </div>
+              <button class="btn btn-gold btn-sm" type="button" onclick="playContractorAudioSimulation('demo_challenge')">🔊 Play Audio</button>
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 8 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('2-3', '2-4')">✓ Mark Complete &amp; Continue to 2.4 ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q9: A contractor claims: <em>"I never miss calls, I keep my phone on my belt 24/7."</em> What is the truth?</div>
-          <div class="quiz-options" data-day="3" data-q="9">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 0, true)">A) When they are on a ladder, driving, or having dinner with family, calls roll to voicemail where over 85% of high-ticket emergency callers hang up without leaving a message.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 1, false)">B) They are telling the 100% truth and don't need Ava.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 2, false)">C) They probably have an assistant following them around.</button>
+        <!-- UNIT 2.4 -->
+        <div class="lms-lesson-view" id="view-2-4">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 2 ➔ <span>Lesson 2.4: Cold Call Quest Sparring</span></div>
+              <div class="lms-view-title">⚔️ Practical Sparring Requirement (Defeat 2 Bosses)</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>Theory means nothing without emotional resilience. You cannot pass Day 2 or unlock the Day 2 Exam until you prove you can bring at least <strong>2 contractor bosses to complete agreement</strong> in Cold Call Quest RPG under the 2-minute timer.</p>
+
+            <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:16px 20px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:20px 0">
+              <div>
+                <div style="font-size:13px;color:var(--dim)">Your Current Combat Record:</div>
+                <div style="font-size:24px;font-weight:800;color:var(--accent2)"><span id="lmsBossCountD2">0</span> / 2 Bosses Defeated</div>
+              </div>
+              <button class="btn btn-gold" type="button" onclick="switchTab('tabRPG')">⚔️ Open Cold Call Quest &amp; Fight Bosses ➔</button>
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 9 of 15 Complete</span>
+            <button class="btn btn-gold" id="btnCompleteUnit24" type="button" onclick="completeLmsUnit('2-4', '2-5')">✓ Verify Sparring &amp; Unlock Day 2 Exam ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q10: What is the speed-to-lead requirement for modern website leads?</div>
-          <div class="quiz-options" data-day="3" data-q="10">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 0, false)">A) Calling back within 24 to 48 hours is fine.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 1, true)">B) Contact within 5 minutes results in a 21x higher qualification rate; Ava auto-texts web form submissions in under 5 seconds.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 2, false)">C) Speed does not matter as long as the price is low.</button>
+        <!-- UNIT 2.5 (DAY 2 EXAM) -->
+        <div class="lms-lesson-view" id="view-2-5">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 2 ➔ <span>Lesson 2.5: Certification Exam</span></div>
+              <div class="lms-view-title">📝 Day 2 Certification Exam (Revenue Leaks &amp; Hard Objections)</div>
+            </div>
+            <span class="exam-score-badge" id="day2ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 7 / 8 (87.5%+)</span>
+          </div>
+
+          <div class="lms-lock-screen" id="lockScreen25" style="display:none">
+            <div class="lms-lock-icon">🔒</div>
+            <div class="lms-lock-title">Day 2 Exam is Locked</div>
+            <div class="lms-lock-desc">You must complete Lessons 2.1, 2.2, 2.3, and defeat at least 2 Bosses in Cold Call Quest RPG in Lesson 2.4 before taking this exam.</div>
+            <button class="btn btn-gold" type="button" onclick="selectLmsUnit('2-1')">Go to Lesson 2.1 ➔</button>
+          </div>
+
+          <div id="examBody25">
+            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score at least <strong>7 out of 8 (87.5%+)</strong> to earn your Day 2 Certification (+500 XP) and unlock Day 3.</p>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q1: Contractor: <em>"I don't need any software, my phone rings plenty during the day."</em> What is the leak pivot?</div>
+              <div class="quiz-options" data-day="2" data-q="1">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 0, false)">A) "Our software runs on neural networks."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 1, true)">B) "That's great for 9 to 5, but when an AC compressor blows at 8 PM or on Saturday, where does that call go? If it hits voicemail, they call the next guy on Google. Missing one call a month costs you over $70,000 a year."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 1, 2, false)">C) "Well, your competitors are buying AI so you will lose."</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q2: When should you drop Ava's live demo number <strong>(561) 813-8602</strong>?</div>
+              <div class="quiz-options" data-day="2" data-q="2">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 0, true)">A) Within 60 seconds of uncovering their after-hours leak: invite them to dial it right on speaker while staying on the line.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 1, false)">B) In a follow-up email 3 days later.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 2, 2, false)">C) Only after they sign a 12-month agreement.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q3: Contractor: <em>"We already have an answering service."</em> What is their fatal operational flaw?</div>
+              <div class="quiz-options" data-day="2" data-q="3">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 0, true)">A) They put emergency callers on hold for 4 minutes, charge $2/min, misspell details, and don't book jobs into calendar software.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 1, false)">B) They are too cheap.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 3, 2, false)">C) They don't speak English.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q4: How does the Total Agreement Shield disarm: <em>"I hate AI. Every robo-caller sounds like a broken microwave"</em>?</div>
+              <div class="quiz-options" data-day="2" data-q="4">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 0, false)">A) Tell them that AI has advanced and they are being old-fashioned.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 1, true)">B) "I agree with you 100%! Most AI sounds awful. That's why we trained Ava specifically on trade jargon. Punch in (561) 813-8602 right now — if she sounds fake, hang up and lose my number."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 4, 2, false)">C) Argue that humans make more mistakes than computers.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q5: If a contractor asks: <em>"How much is this going to cost me?"</em> in the first 30 seconds of the call:</div>
+              <div class="quiz-options" data-day="2" data-q="5">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 0, true)">A) State the transparent flat range ($397 to $697/mo, no contracts) and immediately bridge: "Most guys cover that with one job in week one. But let's see if she even works for your crews first."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 1, false)">B) Refuse to give pricing until they commit to a 45-minute demo meeting.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 5, 2, false)">C) Quote an artificially low price like $49 and hide the setup fee.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q6: Contractor: <em>"I need to talk to my business partner / wife before I do anything."</em></div>
+              <div class="quiz-options" data-day="2" data-q="6">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 0, false)">A) "Why can't you make decisions on your own?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 1, true)">B) "100%! Don't try to explain software to them. Put your phone on speaker in front of them and dial (561) 813-8602. When they hear how human she sounds, the decision makes itself."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 2, false)">C) "Let's set up a 3-way conference call next week."</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q7: Contractor: <em>"We're booked out 3 weeks in advance. We don't need work."</em></div>
+              <div class="quiz-options" data-day="2" data-q="7">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 0, true)">A) "You're booked out on low-margin scheduled calls. But when an $8,000 emergency replacement calls at 8 PM on a Saturday, where does that call ring right now?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 1, false)">B) "Then you must be rich, why don't you buy it anyway?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 7, 2, false)">C) "Congratulations, have a nice day." (hang up)</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q8: What percentage of after-hours emergency trade callers leave a voicemail when hitting an answering machine?</div>
+              <div class="quiz-options" data-day="2" data-q="8">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 0, false)">A) Over 75% leave detailed voicemails.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 1, true)">B) Less than 15% leave a voicemail — the rest immediately hang up and tap the next competitor on Google.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 8, 2, false)">C) 50% send an email instead.</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q11: How many dials per day is the recommended quota to guarantee your first closed sale in week one?</div>
-          <div class="quiz-options" data-day="3" data-q="11">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 0, false)">A) 10 dials a day.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 1, true)">B) 75 dials per day (75 dials ➔ 12–15 pickups ➔ 2–3 live demos ➔ 1 closed deal).</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 2, false)">C) 500 dials a day on an auto-dialer.</button>
+        <!-- UNIT 3.1 -->
+        <div class="lms-lesson-view" id="view-3-1">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 3 ➔ <span>Lesson 3.1: High-Ticket Packaging</span></div>
+              <div class="lms-view-title">🤝 High-Ticket Packaging ($697 Pro vs. $397 Starter)</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>Always pitch the <strong>Pro Bundle ($697/month + $997 Setup)</strong> first. It gives contractors both phone call coverage and website speed-to-lead auto-texting. Only drop to the Starter tier if they are a 1-man operation on a strict budget.</p>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0">
+              <div style="background:var(--bg);border:2px solid var(--accent);padding:18px;border-radius:12px;position:relative">
+                <span style="position:absolute;top:10px;right:10px;background:var(--accent);color:#000;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px">RECOMMENDED DEFAULT</span>
+                <div style="font-size:13px;color:var(--accent2);font-weight:700">OPTION 1: PRO BUNDLE</div>
+                <div style="font-size:24px;font-weight:800;color:#ffffff;margin:4px 0">$697 / month</div>
+                <div style="font-size:12px;color:var(--dim);margin-bottom:10px">+$997 Setup Fee (Voice Training + Knowledge Base)</div>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55">
+                  <li>24/7 AI Phone Receptionist (Ava)</li>
+                  <li>Instant 5-Second Speed-to-Lead Website Auto-Texting</li>
+                  <li>Direct Calendar Dispatch Integration</li>
+                  <li>Zero Long-Term Contracts (Cancel Anytime)</li>
+                </ul>
+              </div>
+
+              <div style="background:var(--bg);border:1px solid var(--line);padding:18px;border-radius:12px">
+                <div style="font-size:13px;color:var(--dim);font-weight:700">OPTION 2: STARTER (FALLBACK)</div>
+                <div style="font-size:24px;font-weight:800;color:#ffffff;margin:4px 0">$397 / month</div>
+                <div style="font-size:12px;color:var(--dim);margin-bottom:10px">+$497 Setup Fee</div>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55">
+                  <li>After-Hours &amp; Overflow AI Voice Receptionist</li>
+                  <li>SMS Dispatch Lead Notifications</li>
+                  <li>Zero Long-Term Contracts</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 11 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('3-1', '3-2')">✓ Mark Complete &amp; Continue to 3.2 ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q12: If a contractor says: <em>"We do all commercial work, we don't do residential emergency repairs."</em></div>
-          <div class="quiz-options" data-day="3" data-q="12">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 0, true)">A) "Commercial rooftop units and industrial plumbing failures are $15,000+ jobs. Facility managers expect instant answers 24/7 or they call the next commercial mechanical company on their vendor list."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 1, false)">B) "Sorry, Ava only works for residential."</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 2, false)">C) "You should switch to residential work."</button>
+        <!-- UNIT 3.2 -->
+        <div class="lms-lesson-view" id="view-3-2">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 3 ➔ <span>Lesson 3.2: 48-Hour Zero-Downtime Guarantee</span></div>
+              <div class="lms-view-title">🚀 48-Hour Zero-Downtime Launch &amp; Call Forwarding (*71)</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 10 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>The #1 hesitation contractors have when signing up is: <em>"Are you going to mess up my current phone number or leave me without phones for a week?"</em> You must remove this fear in 15 seconds.</p>
+
+            <div class="lms-script-box">
+              <strong>The 48-Hour Zero-Downtime Guarantee Script:</strong><br>
+              "We never port your numbers or touch your existing carrier. We set up simple conditional call forwarding (*71) so when your lines ring 4 times unanswered or after 5 PM, Ava picks up seamlessly. You have zero downtime and full control."
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 12 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('3-2', '3-3')">✓ Mark Complete &amp; Continue to 3.3 ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q13: What should you do immediately if you fumble a sentence or stutter on a call?</div>
-          <div class="quiz-options" data-day="3" data-q="13">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 0, false)">A) Apologize profusely for being nervous.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 1, true)">B) Pause calmly for 1 second, lower your vocal pitch, and deliver the live demo challenge with complete authority.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 2, false)">C) Hang up and call back pretending to be someone else.</button>
+        <!-- UNIT 3.3 -->
+        <div class="lms-lesson-view" id="view-3-3">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 3 ➔ <span>Lesson 3.3: 4-Min Call Symphony</span></div>
+              <div class="lms-view-title">🎼 The Full Call Symphony (Open to Close in 4 Minutes)</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>Study the master 4-minute call symphony from first ring to credit card:</p>
+
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+              <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
+                <strong style="color:var(--accent2)">0:00 – 0:15 (The Disarm):</strong> "Luke with VantorX. Got 20 seconds or should I hang up?"
+              </div>
+              <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
+                <strong style="color:var(--accent2)">0:15 – 0:45 (The Trade Leak Hook):</strong> "In [Trade], when an emergency call comes in at 8 PM on a Saturday, where does that ring right now?"
+              </div>
+              <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
+                <strong style="color:var(--accent2)">0:45 – 1:30 (The Live Demo Drop):</strong> "Punch in our live demo line right now on speaker: (561) 813-8602. Hear her for 20 seconds."
+              </div>
+              <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
+                <strong style="color:var(--accent2)">1:30 – 2:30 (The Objection Shield):</strong> Agree, pivot, and anchor the $397/$697 ROI against one single emergency job.
+              </div>
+              <div style="background:var(--bg);border-left:3px solid var(--ok);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
+                <strong style="color:#6ee7b7">2:30 – 4:00 (The Close):</strong> "Should I send the setup link to your cell, or let's lock in 10 minutes on your calendar tomorrow morning?"
+              </div>
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 13 of 15 Complete</span>
+            <button class="btn btn-gold" type="button" onclick="completeLmsUnit('3-3', '3-4')">✓ Mark Complete &amp; Continue to 3.4 ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q14: How does Ava handle customer service appointments?</div>
-          <div class="quiz-options" data-day="3" data-q="14">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 0, true)">A) She qualifies their issue, collects name/address/trade issue, quotes their diagnostic dispatch fee, and writes directly into ServiceTitan, Housecall Pro, or Google Calendar.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 1, false)">B) She tells them to write a letter to the company.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 2, false)">C) She takes down only their first name and hangs up.</button>
+        <!-- UNIT 3.4 -->
+        <div class="lms-lesson-view" id="view-3-4">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 3 ➔ <span>Lesson 3.4: Boss Crucible</span></div>
+              <div class="lms-view-title">⚔️ Grand Master Boss Crucible (All 4 Bosses Defeated)</div>
+            </div>
+            <span class="lms-time-pill">⏱️ 15 Mins</span>
+          </div>
+
+          <div class="lms-text-block">
+            <p>Before earning your Level 5 License to Dial, you must prove you can defeat all 4 contractor dungeon bosses in Cold Call Quest (Rick the Roofer, Karen the Gatekeeper, Mike the Electrician, and Dave the Plumber):</p>
+
+            <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:16px 20px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:20px 0">
+              <div>
+                <div style="font-size:13px;color:var(--dim)">Total Crucible Bosses Defeated:</div>
+                <div style="font-size:24px;font-weight:800;color:var(--accent2)"><span id="lmsBossCountD3">0</span> / 4 Bosses Defeated</div>
+              </div>
+              <button class="btn btn-gold" type="button" onclick="switchTab('tabRPG')">⚔️ Spar with Remaining Bosses ➔</button>
+            </div>
+          </div>
+
+          <div class="lms-stage-footer">
+            <span style="font-size:12.5px;color:var(--dim)">Step 14 of 15 Complete</span>
+            <button class="btn btn-gold" id="btnCompleteUnit34" type="button" onclick="completeLmsUnit('3-4', '3-5')">✓ Verify Crucible &amp; Unlock Board Exam ➔</button>
           </div>
         </div>
 
-        <div class="mod-quiz-box">
-          <div class="quiz-q-title">Q15: What is the primary mindset of a Top 1% VantorX Closer?</div>
-          <div class="quiz-options" data-day="3" data-q="15">
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 0, false)">A) Selling software at all costs through aggressive high-pressure tactics.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 1, true)">B) Acting as an operational peer who diagnoses high-ticket revenue leaks and protects trade contractors from losing emergency jobs to competitors.</button>
-            <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 2, false)">C) Reading a script as fast as possible before the prospect speaks.</button>
+        <!-- UNIT 3.5 (BOARD EXAM) -->
+        <div class="lms-lesson-view" id="view-3-5">
+          <div class="lms-view-head">
+            <div>
+              <div class="lms-breadcrumbs">Day 3 ➔ <span>Lesson 3.5: Final Board Exam</span></div>
+              <div class="lms-view-title">🏆 Final Certification Board Exam (15 Comprehensive Scenarios)</div>
+            </div>
+            <span class="exam-score-badge" id="day3ExamBadge" style="background:rgba(245,158,11,0.15);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)">Passing: 14 / 15 (90%+)</span>
+          </div>
+
+          <div class="lms-lock-screen" id="lockScreen35" style="display:none">
+            <div class="lms-lock-icon">🔒</div>
+            <div class="lms-lock-title">Final Board Exam is Locked</div>
+            <div class="lms-lock-desc">You must complete Lessons 3.1, 3.2, 3.3, and defeat all 4 Bosses in Cold Call Quest RPG in Lesson 3.4 before taking this final certification exam.</div>
+            <button class="btn btn-gold" type="button" onclick="selectLmsUnit('3-1')">Go to Lesson 3.1 ➔</button>
+          </div>
+
+          <div id="examBody35">
+            <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">Score at least <strong>14 out of 15 (90%+)</strong> to graduate, earn Level 5 Certified Closer, and unlock the live lead dispatcher.</p>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q1: Which tier should you recommend first to any 2–10 truck contractor?</div>
+              <div class="quiz-options" data-day="3" data-q="1">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 0, false)">A) The $397 Starter plan.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 1, true)">B) The $697/mo Pro AI Receptionist + Speed-to-Lead bundle ($997 setup fee) because it captures after-hours phone calls and auto-texts website leads in 5 seconds.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 2, false)">C) Free 30-day trial with no card.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q2: What is the exact launch timeline and operational impact you promise the contractor?</div>
+              <div class="quiz-options" data-day="3" data-q="2">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 0, true)">A) 48 hours — custom trade calibration with zero phone downtime via simple call forwarding (*71).</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 1, false)">B) 4 to 6 weeks of extensive IT overhaul.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 2, 2, false)">C) Instant switch requiring changing all phone numbers.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q3: A contractor says: <em>"Send me an email with your pricing and deck."</em> What do you say?</div>
+              <div class="quiz-options" data-day="3" data-q="3">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 0, true)">A) "I can definitely send an email, but it'll get buried under 50 supply receipts. If I give you our demo line right now, it takes 30 seconds to hear her on speaker — got a pen or your cell?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 1, false)">B) "Sure thing, what's your email?" (and hang up)</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 3, 2, false)">C) "No, I don't send emails."</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q4: Gatekeeper Karen says: <em>"Mr. Davis doesn't have time to test demo phone numbers."</em> How do you pivot?</div>
+              <div class="quiz-options" data-day="3" data-q="4">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 0, false)">A) "Can you give me his personal cell phone number instead?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 1, true)">B) "Understood Karen. But you're in the office right now — dial (561) 813-8602 from your desk phone right now for 20 seconds. If Ava sounds like a robot, you can hang up on me forever."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 4, 2, false)">C) "Why are you being so difficult Karen?"</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q5: Mike the Electrician says: <em>"I'm a master electrician. My customers want a real person who understands amperage, not some computer."</em> What is your shield?</div>
+              <div class="quiz-options" data-day="3" data-q="5">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 0, true)">A) Total Agreement: "I agree 100%! Most AI doesn't know the difference between 100A and 200A. That's why Ava was custom-trained on electrical triage. Dial (561) 813-8602 right now and test her terminology."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 1, false)">B) "AI is smarter than master electricians."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 5, 2, false)">C) "You should calm down Mike."</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q6: Dave the Plumber says: <em>"I bet there's a 12-month lock-in contract and hidden per-minute fees."</em> What do you answer?</div>
+              <div class="quiz-options" data-day="3" data-q="6">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 0, true)">A) "Zero long-term contracts, cancel anytime. Flat monthly rate with no per-minute extortion. And one single water heater or slab leak covers almost the entire year."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 1, false)">B) "Yes, but our contract is very standard."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 6, 2, false)">C) "Don't worry about contracts right now."</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q7: Why do we never use the phrase: <em>"I'm following up on an email I sent you"</em>?</div>
+              <div class="quiz-options" data-day="3" data-q="7">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 0, true)">A) Because it instantly brands you as a weak telemarketer making cold excuses, destroying your status before you even speak.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 1, false)">B) Because emails are illegal in Florida.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 7, 2, false)">C) Because contractors always read their emails.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q8: When closing on the phone, what is the best closing question?</div>
+              <div class="quiz-options" data-day="3" data-q="8">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 0, false)">A) "Do you want to buy this right now?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 1, true)">B) "Should I text the setup link to your cell, or let's lock in 10 minutes on your calendar tomorrow morning before your crews dispatch?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 8, 2, false)">C) "Can you give me your credit card number?"</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q9: A contractor claims: <em>"I never miss calls, I keep my phone on my belt 24/7."</em> What is the truth?</div>
+              <div class="quiz-options" data-day="3" data-q="9">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 0, true)">A) When they are on a ladder, driving, or having dinner with family, calls roll to voicemail where over 85% of high-ticket emergency callers hang up without leaving a message.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 1, false)">B) They are telling the 100% truth and don't need Ava.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 9, 2, false)">C) They probably have an assistant following them around.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q10: What is the speed-to-lead requirement for modern website leads?</div>
+              <div class="quiz-options" data-day="3" data-q="10">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 0, false)">A) Calling back within 24 to 48 hours is fine.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 1, true)">B) Contact within 5 minutes results in a 21x higher qualification rate; Ava auto-texts web form submissions in under 5 seconds.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 10, 2, false)">C) Speed does not matter as long as the price is low.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q11: How many dials per day is the recommended quota to guarantee your first closed sale in week one?</div>
+              <div class="quiz-options" data-day="3" data-q="11">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 0, false)">A) 10 dials a day.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 1, true)">B) 75 dials per day (75 dials ➔ 12–15 pickups ➔ 2–3 live demos ➔ 1 closed deal).</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 11, 2, false)">C) 500 dials a day on an auto-dialer.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q12: If a contractor says: <em>"We do all commercial work, we don't do residential emergency repairs."</em></div>
+              <div class="quiz-options" data-day="3" data-q="12">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 0, true)">A) "Commercial rooftop units and industrial plumbing failures are $15,000+ jobs. Facility managers expect instant answers 24/7 or they call the next commercial mechanical company on their vendor list."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 1, false)">B) "Sorry, Ava only works for residential."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 12, 2, false)">C) "You should switch to residential work."</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q13: What should you do immediately if you fumble a sentence or stutter on a call?</div>
+              <div class="quiz-options" data-day="3" data-q="13">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 0, false)">A) Apologize profusely for being nervous.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 1, true)">B) Pause calmly for 1 second, lower your vocal pitch, and deliver the live demo challenge with complete authority.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 13, 2, false)">C) Hang up and call back pretending to be someone else.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q14: How does Ava handle customer service appointments?</div>
+              <div class="quiz-options" data-day="3" data-q="14">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 0, true)">A) She qualifies their issue, collects name/address/trade issue, quotes their diagnostic dispatch fee, and writes directly into ServiceTitan, Housecall Pro, or Google Calendar.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 1, false)">B) She tells them to write a letter to the company.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 14, 2, false)">C) She takes down only their first name and hangs up.</button>
+              </div>
+            </div>
+
+            <div class="mod-quiz-box">
+              <div class="quiz-q-title">Q15: What is the primary mindset of a Top 1% VantorX Closer?</div>
+              <div class="quiz-options" data-day="3" data-q="15">
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 0, false)">A) Selling software at all costs through aggressive high-pressure tactics.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 1, true)">B) Acting as an operational peer who diagnoses high-ticket revenue leaks and protects trade contractors from losing emergency jobs to competitors.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 15, 2, false)">C) Reading a script as fast as possible before the prospect speaks.</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2687,6 +3070,8 @@ window.saveBrainSettings = function() {
       xp: 1500,
       isFounder: true,
       founderBypass: true,
+      completedUnits: ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'],
+      flashcardsRevealed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       daysPassed: [1, 2, 3],
       modulesPassed: [1, 2, 3, 4, 5],
       bossesDefeated: 5,
@@ -2702,6 +3087,8 @@ window.saveBrainSettings = function() {
       xp: 0,
       isFounder: false,
       founderBypass: false,
+      completedUnits: [],
+      flashcardsRevealed: [],
       daysPassed: [],
       modulesPassed: [],
       bossesDefeated: 0,
@@ -2723,6 +3110,16 @@ window.saveBrainSettings = function() {
   Object.keys(USER_PROFILES).forEach(k => {
     const u = USER_PROFILES[k];
     if (!u.daysPassed) u.daysPassed = (u.isFounder || (u.modulesPassed && u.modulesPassed.length >= 5)) ? [1, 2, 3] : [];
+    if (!u.completedUnits) {
+      if (u.isFounder || (u.daysPassed && u.daysPassed.length >= 3)) {
+        u.completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
+      } else {
+        u.completedUnits = [];
+      }
+    }
+    if (!u.flashcardsRevealed) {
+      u.flashcardsRevealed = (u.isFounder || (u.daysPassed && u.daysPassed.includes(1))) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [];
+    }
     if (u.isFounder) { u.xp = 1500; u.level = 5; }
   });
 
@@ -2872,8 +3269,212 @@ window.saveBrainSettings = function() {
     }
   }
 
+  // ============================================================
+  // 🎓 TWO-COLUMN LMS ENGINE & LINEAR MASTERY CONTROLLER
+  // ============================================================
+  const LMS_UNITS = [
+    '1-1', '1-2', '1-3', '1-4', '1-5',
+    '2-1', '2-2', '2-3', '2-4', '2-5',
+    '3-1', '3-2', '3-3', '3-4', '3-5'
+  ];
+
+  let currentActiveLmsUnit = '1-1';
+
+  function isUnitUnlocked(unitId, user) {
+    if (!user) user = getActiveUser();
+    if (user.founderBypass === true || user.isFounder === true) return true;
+    if (unitId === '1-1') return true;
+
+    const completed = user.completedUnits || [];
+    const days = user.daysPassed || [];
+    const bosses = user.bossesDefeated || 0;
+    const cards = user.flashcardsRevealed || [];
+
+    switch (unitId) {
+      case '1-2': return completed.includes('1-1');
+      case '1-3': return completed.includes('1-2');
+      case '1-4': return completed.includes('1-3');
+      case '1-5': return completed.includes('1-4') && cards.length >= 10;
+      
+      case '2-1': return days.includes(1);
+      case '2-2': return completed.includes('2-1');
+      case '2-3': return completed.includes('2-2');
+      case '2-4': return completed.includes('2-3');
+      case '2-5': return completed.includes('2-4') && bosses >= 2;
+
+      case '3-1': return days.includes(2);
+      case '3-2': return completed.includes('3-1');
+      case '3-3': return completed.includes('3-2');
+      case '3-4': return completed.includes('3-3');
+      case '3-5': return completed.includes('3-4') && bosses >= 4;
+      default: return false;
+    }
+  }
+
+  function isUnitCompleted(unitId, user) {
+    if (!user) user = getActiveUser();
+    const completed = user.completedUnits || [];
+    const days = user.daysPassed || [];
+
+    if (unitId === '1-5') return days.includes(1);
+    if (unitId === '2-5') return days.includes(2);
+    if (unitId === '3-5') return days.includes(3);
+    return completed.includes(unitId);
+  }
+
+  window.selectLmsUnit = function(unitId) {
+    const user = getActiveUser();
+    const unlocked = isUnitUnlocked(unitId, user);
+    const isExam = ['1-5', '2-5', '3-5'].includes(unitId);
+
+    if (!unlocked && !isExam) {
+      playSound('slash');
+      showToast(`🔒 Lesson ${unitId} is locked. Complete earlier lessons and prerequisites first!`);
+      return;
+    }
+
+    currentActiveLmsUnit = unitId;
+
+    // 1. Switch active view
+    document.querySelectorAll('.lms-lesson-view').forEach(view => {
+      view.classList.remove('active');
+    });
+    const targetView = document.getElementById('view-' + unitId);
+    if (targetView) targetView.classList.add('active');
+
+    // 2. Switch active sidebar item
+    document.querySelectorAll('.lms-nav-item').forEach(item => {
+      item.classList.remove('active');
+    });
+    const targetNav = document.getElementById('navItem-' + unitId);
+    if (targetNav) targetNav.classList.add('active');
+
+    // 3. Scroll main stage to top
+    const stage = document.querySelector('.lms-stage');
+    if (stage) stage.scrollTop = 0;
+
+    // 4. Update dynamic Academy UI
+    updateAcademyUI();
+  };
+
+  window.completeLmsUnit = function(unitId, nextUnitId) {
+    const user = getActiveUser();
+    if (!user.completedUnits) user.completedUnits = [];
+
+    // Verify prerequisites for specific gating units
+    if (unitId === '1-4') {
+      const cardCount = (user.flashcardsRevealed || []).length;
+      if (!user.founderBypass && cardCount < 10) {
+        playSound('slash');
+        showToast('⚠️ You must review and flip all 10 objection flashcards before continuing!');
+        return;
+      }
+    } else if (unitId === '2-4') {
+      const bossCount = user.bossesDefeated || 0;
+      if (!user.founderBypass && bossCount < 2) {
+        playSound('slash');
+        showToast('⚠️ You must defeat at least 2 contractor bosses in Cold Call Quest RPG first!');
+        return;
+      }
+    } else if (unitId === '3-4') {
+      const bossCount = user.bossesDefeated || 0;
+      if (!user.founderBypass && bossCount < 4) {
+        playSound('slash');
+        showToast('⚠️ You must defeat all 4 contractor bosses in the Crucible first!');
+        return;
+      }
+    }
+
+    if (!user.completedUnits.includes(unitId)) {
+      user.completedUnits.push(unitId);
+      saveUserProfiles();
+    }
+
+    playSound('hit');
+    showToast(`✓ Lesson ${unitId} Completed!`);
+    updateAcademyUI();
+
+    if (nextUnitId) {
+      window.selectLmsUnit(nextUnitId);
+    }
+  };
+
+  window.revealLmsFlashcard = function(idx) {
+    const user = getActiveUser();
+    if (!user.flashcardsRevealed) user.flashcardsRevealed = [];
+
+    const card = document.getElementById('fc-' + idx);
+    if (card) {
+      card.classList.toggle('revealed');
+    }
+
+    if (!user.flashcardsRevealed.includes(idx)) {
+      user.flashcardsRevealed.push(idx);
+      saveUserProfiles();
+    }
+
+    const btn = card ? card.querySelector('.fc-reveal-btn') : null;
+    if (btn) {
+      btn.textContent = '✓ Mastered';
+      btn.style.borderColor = '#34d399';
+      btn.style.color = '#34d399';
+    }
+
+    updateAcademyUI();
+
+    if (user.flashcardsRevealed.length >= 10) {
+      playSound('hit');
+      showToast('🎉 All 10 Objection Flashcards Mastered! Lesson 1.5 Exam Unlocked!');
+    }
+  };
+
+  window.playContractorAudioSimulation = function(type) {
+    if (!('speechSynthesis' in window)) {
+      showToast('⚠️ Audio speech synthesis not supported in this browser.');
+      return;
+    }
+    window.speechSynthesis.cancel();
+
+    let text = '';
+    let pitch = 1.0;
+    let rate = 1.0;
+
+    if (type === 'roofer_busy') {
+      text = "Yeah, who's this? I'm standing on a two-story roof in 95-degree heat with a nail gun in my hand. Make it fast.";
+      pitch = 0.85;
+      rate = 1.05;
+    } else if (type === 'disarm_delivery') {
+      text = "Luke from VantorX. Got 20 seconds or should I hang up? ... Look, I know you're on a job site, so I'll be blunt. Most roofers in Palm Beach lose between three and eight thousand a week on emergency calls that hit voicemail after 6 PM.";
+      pitch = 0.95;
+      rate = 1.05;
+    } else if (type === 'demo_challenge') {
+      text = "Have your cell in your hand? Punch in our live demo line right now on speaker: 5 6 1, 8 1 3, 8 6 0 2. Pretend you're an angry homeowner with water pouring into your kitchen on a Saturday night. Hear what she sounds like for 20 seconds.";
+      pitch = 0.95;
+      rate = 1.0;
+    } else {
+      text = "VantorX Solutions closer simulation audio.";
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.pitch = pitch;
+    utterance.rate = rate;
+
+    try {
+      const voices = window.speechSynthesis.getVoices();
+      const enVoice = voices.find(v => v.lang && v.lang.startsWith('en')) || voices[0];
+      if (enVoice) utterance.voice = enVoice;
+    } catch(e) {}
+
+    showToast('🔊 Playing audio simulation...');
+    window.speechSynthesis.speak(utterance);
+  };
+
   function updateAcademyUI() {
     const user = getActiveUser();
+    if (!user.completedUnits) user.completedUnits = [];
+    if (!user.flashcardsRevealed) user.flashcardsRevealed = [];
+    if (!user.daysPassed) user.daysPassed = [];
+
     const countEl = document.getElementById('academyDaysCount');
     const xpText = document.getElementById('academyXpText');
     const levelText = document.getElementById('academyLevelText');
@@ -2881,7 +3482,7 @@ window.saveBrainSettings = function() {
     const barFill = document.getElementById('academyBarFill');
     const statusText = document.getElementById('academyStatusText');
 
-    const passedDays = user.daysPassed ? user.daysPassed.length : 0;
+    const passedDays = user.daysPassed.length;
     const pct = Math.min(100, Math.round((user.xp / 1500) * 100));
 
     if (countEl) countEl.textContent = passedDays;
@@ -2900,63 +3501,159 @@ window.saveBrainSettings = function() {
       }
     }
 
-    // Update Day Stepper Tab buttons
-    for (let d = 1; d <= 3; d++) {
-      const btn = document.getElementById(`btnDayTab${d}`);
-      const isPassed = user.daysPassed && user.daysPassed.includes(d);
-      if (btn) {
-        if (isPassed) {
-          btn.classList.add('completed');
-          if (!btn.querySelector('.day-done-tag')) {
-            const tag = document.createElement('span');
-            tag.className = 'day-done-tag';
-            tag.style.color = '#34d399';
-            tag.style.fontWeight = '700';
-            tag.style.marginLeft = '4px';
-            tag.textContent = '✓ Certified';
-            btn.appendChild(tag);
-          }
-        } else {
-          btn.classList.remove('completed');
-          const tag = btn.querySelector('.day-done-tag');
-          if (tag) tag.remove();
+    // 1. Update 15 LMS Syllabus Navigation Items in Sidebar
+    LMS_UNITS.forEach(u => {
+      const navItem = document.getElementById('navItem-' + u);
+      const navIcon = document.getElementById('navIcon-' + u);
+      if (!navItem || !navIcon) return;
+
+      const completed = isUnitCompleted(u, user);
+      const unlocked = isUnitUnlocked(u, user);
+
+      if (completed) {
+        navItem.classList.remove('locked');
+        navItem.classList.add('completed');
+        navIcon.textContent = '✓';
+        navIcon.style.color = '#34d399';
+      } else if (unlocked) {
+        navItem.classList.remove('locked', 'completed');
+        navIcon.textContent = '▶';
+        navIcon.style.color = 'var(--accent2)';
+      } else {
+        navItem.classList.add('locked');
+        navItem.classList.remove('completed');
+        navIcon.textContent = '🔒';
+        navIcon.style.color = 'var(--dim)';
+      }
+    });
+
+    // 2. Update Day Status Headers in Syllabus Sidebar
+    const d1Units = ['1-1','1-2','1-3','1-4','1-5'];
+    const d2Units = ['2-1','2-2','2-3','2-4','2-5'];
+    const d3Units = ['3-1','3-2','3-3','3-4','3-5'];
+
+    const d1Done = d1Units.filter(u => isUnitCompleted(u, user)).length;
+    const d2Done = d2Units.filter(u => isUnitCompleted(u, user)).length;
+    const d3Done = d3Units.filter(u => isUnitCompleted(u, user)).length;
+
+    const navD1 = document.getElementById('navDay1Status');
+    const navD2 = document.getElementById('navDay2Status');
+    const navD3 = document.getElementById('navDay3Status');
+
+    if (navD1) navD1.textContent = user.daysPassed.includes(1) ? '✓ Certified' : `${d1Done}/5 Done`;
+    if (navD2) navD2.textContent = user.daysPassed.includes(2) ? '✓ Certified' : `${d2Done}/5 Done`;
+    if (navD3) navD3.textContent = user.daysPassed.includes(3) ? '🏆 Level 5' : `${d3Done}/5 Done`;
+
+    // 3. Update Lesson 1.4 Flashcard Drill UI
+    const cardCount = user.flashcardsRevealed.length;
+    const countEl14 = document.getElementById('fcMasteryCount');
+    if (countEl14) countEl14.textContent = `${cardCount} / 10 Mastered`;
+
+    for (let c = 1; c <= 10; c++) {
+      const card = document.getElementById('fc-' + c);
+      if (card && user.flashcardsRevealed.includes(c)) {
+        card.classList.add('revealed');
+        const btn = card.querySelector('.fc-reveal-btn');
+        if (btn) {
+          btn.textContent = '✓ Mastered';
+          btn.style.borderColor = '#34d399';
+          btn.style.color = '#34d399';
         }
       }
     }
 
-    // Boss counts
-    const d2Boss = document.getElementById('day2BossCount');
-    const d3Boss = document.getElementById('day3BossCount');
-    if (d2Boss) d2Boss.textContent = Math.min(2, user.bossesDefeated || 0);
-    if (d3Boss) d3Boss.textContent = Math.min(4, user.bossesDefeated || 0);
+    const btnUnit14 = document.getElementById('btnCompleteUnit14');
+    if (btnUnit14) {
+      if (cardCount >= 10 || user.founderBypass) {
+        btnUnit14.disabled = false;
+        btnUnit14.textContent = '✓ Complete Lesson 1.4 & Unlock Day 1 Exam ➔';
+        btnUnit14.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      } else {
+        btnUnit14.disabled = true;
+        btnUnit14.textContent = `🔒 Review All 10 Cards (${cardCount}/10 Done) to Unlock Exam ➔`;
+        btnUnit14.style.background = '';
+      }
+    }
 
-    // Exam badges
+    // 4. Update Lesson 2.4 & 3.4 Combat Counts & Buttons
+    const bosses = user.bossesDefeated || 0;
+    const bossD2El = document.getElementById('lmsBossCountD2');
+    const bossD3El = document.getElementById('lmsBossCountD3');
+    if (bossD2El) bossD2El.textContent = Math.min(2, bosses);
+    if (bossD3El) bossD3El.textContent = Math.min(4, bosses);
+
+    const btnUnit24 = document.getElementById('btnCompleteUnit24');
+    if (btnUnit24) {
+      if (bosses >= 2 || user.founderBypass) {
+        btnUnit24.disabled = false;
+        btnUnit24.textContent = '✓ Verify Sparring & Unlock Day 2 Exam ➔';
+        btnUnit24.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      } else {
+        btnUnit24.disabled = true;
+        btnUnit24.textContent = `🔒 Defeat ${Math.max(0, 2 - bosses)} More Bosses in RPG to Unlock Exam ➔`;
+        btnUnit24.style.background = '';
+      }
+    }
+
+    const btnUnit34 = document.getElementById('btnCompleteUnit34');
+    if (btnUnit34) {
+      if (bosses >= 4 || user.founderBypass) {
+        btnUnit34.disabled = false;
+        btnUnit34.textContent = '✓ Verify Crucible & Unlock Board Exam ➔';
+        btnUnit34.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      } else {
+        btnUnit34.disabled = true;
+        btnUnit34.textContent = `🔒 Defeat ${Math.max(0, 4 - bosses)} More Bosses in Crucible to Unlock Board Exam ➔`;
+        btnUnit34.style.background = '';
+      }
+    }
+
+    // 5. Exam Lock Screens vs Bodies
+    const lock15 = document.getElementById('lockScreen15');
+    const body15 = document.getElementById('examBody15');
+    if (lock15 && body15) {
+      const u15Unlocked = isUnitUnlocked('1-5', user);
+      lock15.style.display = u15Unlocked ? 'none' : 'block';
+      body15.style.display = u15Unlocked ? 'block' : 'none';
+    }
+
+    const lock25 = document.getElementById('lockScreen25');
+    const body25 = document.getElementById('examBody25');
+    if (lock25 && body25) {
+      const u25Unlocked = isUnitUnlocked('2-5', user);
+      lock25.style.display = u25Unlocked ? 'none' : 'block';
+      body25.style.display = u25Unlocked ? 'block' : 'none';
+    }
+
+    const lock35 = document.getElementById('lockScreen35');
+    const body35 = document.getElementById('examBody35');
+    if (lock35 && body35) {
+      const u35Unlocked = isUnitUnlocked('3-5', user);
+      lock35.style.display = u35Unlocked ? 'none' : 'block';
+      body35.style.display = u35Unlocked ? 'block' : 'none';
+    }
+
+    // 6. Exam Badges
     const b1 = document.getElementById('day1ExamBadge');
     const b2 = document.getElementById('day2ExamBadge');
     const b3 = document.getElementById('day3ExamBadge');
-    if (b1) {
-      if (user.daysPassed && user.daysPassed.includes(1)) {
-        b1.textContent = '✓ Day 1 Certified (+500 XP)';
-        b1.style.background = 'rgba(52,211,153,0.2)';
-        b1.style.borderColor = 'rgba(52,211,153,0.4)';
-        b1.style.color = '#34d399';
-      }
+    if (b1 && user.daysPassed.includes(1)) {
+      b1.textContent = '✓ Day 1 Certified (+500 XP)';
+      b1.style.background = 'rgba(52,211,153,0.2)';
+      b1.style.borderColor = 'rgba(52,211,153,0.4)';
+      b1.style.color = '#34d399';
     }
-    if (b2) {
-      if (user.daysPassed && user.daysPassed.includes(2)) {
-        b2.textContent = '✓ Day 2 Certified (+500 XP)';
-        b2.style.background = 'rgba(52,211,153,0.2)';
-        b2.style.borderColor = 'rgba(52,211,153,0.4)';
-        b2.style.color = '#34d399';
-      }
+    if (b2 && user.daysPassed.includes(2)) {
+      b2.textContent = '✓ Day 2 Certified (+500 XP)';
+      b2.style.background = 'rgba(52,211,153,0.2)';
+      b2.style.borderColor = 'rgba(52,211,153,0.4)';
+      b2.style.color = '#34d399';
     }
-    if (b3) {
-      if (user.daysPassed && user.daysPassed.includes(3)) {
-        b3.textContent = '🏆 Board Certified Closer (+500 XP)';
-        b3.style.background = 'rgba(52,211,153,0.2)';
-        b3.style.borderColor = 'rgba(52,211,153,0.4)';
-        b3.style.color = '#34d399';
-      }
+    if (b3 && user.daysPassed.includes(3)) {
+      b3.textContent = '🏆 Board Certified Closer (+500 XP)';
+      b3.style.background = 'rgba(52,211,153,0.2)';
+      b3.style.borderColor = 'rgba(52,211,153,0.4)';
+      b3.style.color = '#34d399';
     }
   }
 
@@ -2967,27 +3664,6 @@ window.saveBrainSettings = function() {
     if (gDials) gDials.textContent = user.dailyDials || 0;
     if (gSims) gSims.textContent = user.dailySims || 0;
   }
-
-  window.switchAcademyDay = function(dayNum) {
-    const user = getActiveUser();
-    if (!user.founderBypass && !user.isFounder) {
-      if (dayNum === 2 && !user.daysPassed.includes(1)) {
-        showToast('🔒 Complete Day 1 Exam first to unlock Day 2!');
-        return;
-      }
-      if (dayNum === 3 && !user.daysPassed.includes(2)) {
-        showToast('🔒 Complete Day 2 Exam & Defeat 2 Bosses first to unlock Day 3!');
-        return;
-      }
-    }
-
-    for (let d = 1; d <= 3; d++) {
-      const btn = document.getElementById(`btnDayTab${d}`);
-      const panel = document.getElementById(`dayPanel${d}`);
-      if (btn) btn.classList.toggle('active', d === dayNum);
-      if (panel) panel.classList.toggle('active', d === dayNum);
-    }
-  };
 
   window.checkDayAnswer = function(dayNum, qNum, optIndex, isCorrect) {
     const user = getActiveUser();
@@ -3027,6 +3703,9 @@ window.saveBrainSettings = function() {
 
     if (dayNum === 1 && answeredCorrect >= 8 && !user.daysPassed.includes(1)) {
       user.daysPassed.push(1);
+      if (!user.completedUnits) user.completedUnits = [];
+      if (!user.completedUnits.includes('1-5')) user.completedUnits.push('1-5');
+      if (!user.completedUnits.includes('2-1')) user.completedUnits.push('2-1');
       user.xp = Math.min(1500, user.xp + 500);
       user.level = Math.min(5, Math.floor(user.xp / 300) + 1);
       playSound('levelup');
@@ -3038,6 +3717,9 @@ window.saveBrainSettings = function() {
         showToast('⚠️ Exam passed! Now defeat at least 2 Bosses in Cold Call Quest RPG to finish Day 2!');
       } else if (!user.daysPassed.includes(2)) {
         user.daysPassed.push(2);
+        if (!user.completedUnits) user.completedUnits = [];
+        if (!user.completedUnits.includes('2-5')) user.completedUnits.push('2-5');
+        if (!user.completedUnits.includes('3-1')) user.completedUnits.push('3-1');
         user.xp = Math.min(1500, user.xp + 500);
         user.level = Math.min(5, Math.floor(user.xp / 300) + 1);
         playSound('levelup');
@@ -3050,6 +3732,8 @@ window.saveBrainSettings = function() {
         showToast('⚠️ Board Exam passed! Now defeat all 4 Bosses in Cold Call Quest RPG to earn your License to Dial!');
       } else if (!user.daysPassed.includes(3)) {
         user.daysPassed.push(3);
+        if (!user.completedUnits) user.completedUnits = [];
+        if (!user.completedUnits.includes('3-5')) user.completedUnits.push('3-5');
         user.xp = 1500;
         user.level = 5;
         playSound('levelup');
@@ -3078,6 +3762,9 @@ window.saveBrainSettings = function() {
       day2Boxes.forEach(b => { if (b.querySelector('.quiz-opt-btn.correct')) day2Correct++; });
       if (day2Correct >= 8) {
         user.daysPassed.push(2);
+        if (!user.completedUnits) user.completedUnits = [];
+        if (!user.completedUnits.includes('2-5')) user.completedUnits.push('2-5');
+        if (!user.completedUnits.includes('3-1')) user.completedUnits.push('3-1');
         user.xp = Math.min(1500, user.xp + 500);
         user.level = Math.min(5, Math.floor(user.xp / 300) + 1);
         playSound('levelup');
@@ -3092,6 +3779,8 @@ window.saveBrainSettings = function() {
       day3Boxes.forEach(b => { if (b.querySelector('.quiz-opt-btn.correct')) day3Correct++; });
       if (day3Correct >= 14) {
         user.daysPassed.push(3);
+        if (!user.completedUnits) user.completedUnits = [];
+        if (!user.completedUnits.includes('3-5')) user.completedUnits.push('3-5');
         user.xp = 1500;
         user.level = 5;
         playSound('levelup');
@@ -3144,6 +3833,7 @@ window.saveBrainSettings = function() {
     } else {
       activeUserId = uid;
     }
+    if (window.selectLmsUnit) window.selectLmsUnit('1-1');
     saveUserProfiles();
     updateUserUI();
     renderLeadsTable();
@@ -3196,6 +3886,8 @@ window.saveBrainSettings = function() {
       xp: 0,
       isFounder: false,
       founderBypass: false,
+      completedUnits: [],
+      flashcardsRevealed: [],
       daysPassed: [],
       modulesPassed: [],
       bossesDefeated: 0,
@@ -3206,6 +3898,7 @@ window.saveBrainSettings = function() {
     activeUserId = uid;
     if (nameInput) nameInput.value = '';
     saveUserProfiles();
+    if (window.selectLmsUnit) window.selectLmsUnit('1-1');
     updateUserUI();
     playSound('levelup');
     showToast(`✓ Account created for ${name}! Welcome to the Closer Academy.`);
@@ -5101,6 +5794,7 @@ Do NOT break character. Do NOT output asterisks or action descriptors like *sigh
     }
   } catch(e) {}
 
+  if (window.selectLmsUnit) window.selectLmsUnit('1-1');
   updateUserUI();
   updateBatchHeading();
   renderLeadsTable();
