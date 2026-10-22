@@ -80,15 +80,18 @@ async function router() {
     authEl.className = 'page';
     authEl.innerHTML = `
       <div style="display:flex;justify-content:center;padding-top:8vh">
-        <div class="card" style="width:min(430px,100%)">
+        <div class="card" style="width:min(440px,100%)">
           <div class="card-title">🔐 Sign in to your Hub</div>
-          <p class="cell-dim" style="font-size:0.84rem;margin:0 0 12px">Your Hub shows your live business data from the VantorX platform.</p>
+          <p class="cell-dim" style="font-size:0.84rem;margin:0 0 12px">Your Hub shows your live business data, call recordings, and Ava settings.</p>
           <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="hubEmail" type="email" autocomplete="username"/></div>
           <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="hubPass" type="password" autocomplete="current-password"/></div>
           <div id="hubAuthErr"></div>
-          <div style="display:flex;gap:9px;margin-top:14px">
-            <button class="btn btn-gold" id="hubGo">Sign in</button>
-            <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal home</a>
+          <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
+            <button class="btn btn-gold" id="hubGo" style="flex:1">Sign In</button>
+            <button class="btn btn-ghost" id="hubDemo" style="flex:1">⚡ Demo Preview</button>
+          </div>
+          <div style="margin-top:14px;text-align:center">
+            <a class="cell-dim" href="/" style="font-size:0.8rem;text-decoration:none">← Return to VantorX Portal</a>
           </div>
         </div>
       </div>`;
@@ -101,10 +104,16 @@ async function router() {
       if (!r.ok) { authEl.querySelector('#hubAuthErr').innerHTML = `<div class="cx-error">✕ ${U.esc(r.error)}</div>`; return; }
       router();
     });
+    authEl.querySelector('#hubDemo').addEventListener('click', () => {
+      S.mountDemoMode();
+      toast('Welcome to Apex Plumbing Interactive Hub Demo', 'success');
+      router();
+    });
     authEl.querySelector('#hubPass').addEventListener('keydown', e => { if (e.key === 'Enter') authEl.querySelector('#hubGo').click(); });
     closeMobileNav();
     return;
   }
+
   if (s.adminAccount) {
     setActiveNav('');
     view.innerHTML = '';

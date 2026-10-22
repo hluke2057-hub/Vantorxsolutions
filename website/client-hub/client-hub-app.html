@@ -443,6 +443,67 @@ async function platformLogout() {
   emit();
 }
 
+function mountDemoMode() {
+  snapshot = {
+    ...snapshot,
+    signedIn: true,
+    authRequired: false,
+    adminAccount: false,
+    needOnboarding: false,
+    ready: true,
+    serverError: null,
+    business: {
+      name: 'Apex Plumbing & HVAC',
+      phone: '(561) 813-8602',
+      email: 'service@apexplumbing.com',
+      address: 'Tampa, FL',
+      industry: 'Plumbing & HVAC',
+    },
+    ai: {
+      name: 'Ava',
+      status: 'online',
+      calendar: 'Google Calendar (Synced)',
+      transferNumber: '(561) 813-8602',
+      knowledge: {
+        policies: '24-hour cancellation notice required. 24/7 emergency dispatch available.',
+        payments: 'All major credit cards, debit, ACH, and tap-to-pay.',
+        faqs: [
+          { q: 'What are your hours?', a: 'Monday through Saturday, 7:00 AM to 7:00 PM. Emergency on-call technicians 24/7.' },
+          { q: 'Do you charge a diagnostic trip fee?', a: 'Standard diagnostic service call is $89, waived if repair work is authorized.' },
+          { q: 'Do you offer financing for water heater or AC replacements?', a: 'Yes, 0% APR financing options are available through our portal.' }
+        ],
+      },
+    },
+    account: { name: 'Luke Hamilton (Demo)', email: 'luke@vantorxsolutions.com' },
+    calls: [
+      { id: 'c1', caller: 'Marcus Vance', from: '+15615550184', at: new Date(Date.now() - 1800000).toISOString(), outcome: 'Appointment Booked', summary: 'Commercial tankless water heater leaking in utility closet. Booked emergency inspection for 1:30 PM.', transcript: 'Caller: We have water pouring out of our commercial tankless heater. / Ava: Understood Marcus, I am flagging this as high-priority emergency. Let me lock in our on-call tech Gary for 1:30 PM today.' },
+      { id: 'c2', caller: 'Sarah Jenkins', from: '+15615550133', at: new Date(Date.now() - 7200000).toISOString(), outcome: 'Transferred', summary: 'Main sewer line backup into basement. Transferred immediately to on-call dispatcher cell.', transcript: 'Caller: Our sewer line is backing up into the downstairs bathroom! / Ava: That is an urgent emergency. I am transferring you directly to our lead master plumber right now. Please hold for two seconds.' },
+      { id: 'c3', caller: 'Robert Hayes', from: '+15615550198', at: new Date(Date.now() - 14400000).toISOString(), outcome: 'Quote Provided', summary: 'Inquired about AC tune-up special. Ava quoted $129 and sent booking SMS link.', transcript: 'Caller: How much is your spring AC tune-up? / Ava: Our comprehensive 21-point AC precision tune-up is $129. Would you like me to reserve a morning slot this Thursday?' }
+    ],
+    appointments: [
+      { id: 'a1', customer: 'Marcus Vance', phone: '(561) 555-0184', service: 'Emergency Water Heater Inspection', at: new Date(Date.now() + 7200000).toISOString(), status: 'Confirmed' },
+      { id: 'a2', customer: 'Linda Kowalski', phone: '(561) 555-0167', service: 'Full HVAC System Diagnostic', at: new Date(Date.now() + 86400000).toISOString(), status: 'Confirmed' }
+    ],
+    leads: [
+      { id: 'l1', name: 'Marcus Vance', phone: '(561) 555-0184', source: 'Inbound Phone Call (Ava)', status: 'Booked', value: 1850, createdAt: new Date(Date.now() - 1800000).toISOString() },
+      { id: 'l2', name: 'Sarah Jenkins', phone: '(561) 555-0133', source: 'Speed-to-Lead Web Form', status: 'In Progress', value: 3400, createdAt: new Date(Date.now() - 7200000).toISOString() },
+      { id: 'l3', name: 'Robert Hayes', phone: '(561) 555-0198', source: 'Google Local Services Ads', status: 'New', value: 129, createdAt: new Date(Date.now() - 14400000).toISOString() }
+    ],
+    tasks: [],
+    notifications: [
+      { id: 'n1', title: 'New Call Booked', message: 'Ava booked emergency inspection for Marcus Vance ($1,850)', read: false, createdAt: new Date(Date.now() - 1800000).toISOString() },
+      { id: 'n2', title: 'AEO Search Protocol Verified', message: 'ChatGPT & Perplexity schema crawled successfully (100% score)', read: true, createdAt: new Date(Date.now() - 86400000).toISOString() }
+    ],
+    activity: [
+      { type: 'calls', icon: '📞', title: 'Call — Marcus Vance', desc: 'Commercial water heater emergency booked', at: new Date(Date.now() - 1800000).toISOString() },
+      { type: 'appointments', icon: '📅', title: 'Appointment — Marcus Vance', desc: 'Emergency Water Heater Inspection · Confirmed', at: new Date(Date.now() - 1800000).toISOString() }
+    ],
+    requests: [],
+    aiTests: []
+  };
+  emit();
+}
+
 function initSessionFromCache() { return { get: () => snapshot }; }
 
 /* ---------------- write-through actions (server → re-hydrate) ---------------- */
@@ -2626,9 +2687,12 @@ async function router() {
           <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="hubEmail" type="email" autocomplete="username"/></div>
           <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="hubPass" type="password" autocomplete="current-password"/></div>
           <div id="hubAuthErr"></div>
-          <div style="display:flex;gap:9px;margin-top:14px">
-            <button class="btn btn-gold" id="hubGo">Sign in</button>
-            <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal home</a>
+          <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
+            <button class="btn btn-gold" id="hubGo" style="flex:1">Sign In</button>
+            <button class="btn btn-ghost" id="hubDemo" style="flex:1">⚡ Demo Preview</button>
+          </div>
+          <div style="margin-top:14px;text-align:center">
+            <a class="cell-dim" href="/" style="font-size:0.8rem;text-decoration:none">← Return to VantorX Portal</a>
           </div>
         </div>
       </div>`;
@@ -2639,6 +2703,11 @@ async function router() {
       authEl.querySelector('#hubAuthErr').innerHTML = '';
       const r = await S.platformLogin(email, pass);
       if (!r.ok) { authEl.querySelector('#hubAuthErr').innerHTML = `<div class="cx-error">✕ ${U.esc(r.error)}</div>`; return; }
+      router();
+    });
+    authEl.querySelector('#hubDemo').addEventListener('click', () => {
+      mountDemoMode();
+      toast('Welcome to Apex Plumbing Interactive Hub Demo', 'success');
       router();
     });
     authEl.querySelector('#hubPass').addEventListener('keydown', e => { if (e.key === 'Enter') authEl.querySelector('#hubGo').click(); });
