@@ -1807,14 +1807,14 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
 
           <div class="lms-text-block">
-            <p>Always pitch the <strong>Pro Bundle ($697/month + $997 Setup)</strong> first. It gives contractors both phone call coverage and website speed-to-lead auto-texting. Only drop to the Starter tier if they are a 1-man operation on a strict budget.</p>
+            <p>Always pitch the <strong>Pro Bundle ($697/month with $0 Setup Fee)</strong> first. It gives contractors both phone call coverage and website speed-to-lead auto-texting. Only drop to the Starter tier if they are a 1-man operation on a strict budget.</p>
 
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0">
               <div style="background:var(--bg);border:2px solid var(--accent);padding:18px;border-radius:12px;position:relative">
                 <span style="position:absolute;top:10px;right:10px;background:var(--accent);color:#000;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px">RECOMMENDED DEFAULT</span>
                 <div style="font-size:13px;color:var(--accent2);font-weight:700">OPTION 1: PRO BUNDLE</div>
                 <div style="font-size:24px;font-weight:800;color:#ffffff;margin:4px 0">$697 / month</div>
-                <div style="font-size:12px;color:var(--dim);margin-bottom:10px">+$997 Setup Fee (Voice Training + Knowledge Base)</div>
+                <div style="font-size:12px;color:var(--ok);font-weight:700;margin-bottom:10px">⚡ $0 Setup Fee • Zero Long-Term Contracts</div>
                 <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55">
                   <li>24/7 AI Phone Receptionist (Ava)</li>
                   <li>Instant 5-Second Speed-to-Lead Website Auto-Texting</li>
@@ -1826,7 +1826,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <div style="background:var(--bg);border:1px solid var(--line);padding:18px;border-radius:12px">
                 <div style="font-size:13px;color:var(--dim);font-weight:700">OPTION 2: STARTER (FALLBACK)</div>
                 <div style="font-size:24px;font-weight:800;color:#ffffff;margin:4px 0">$397 / month</div>
-                <div style="font-size:12px;color:var(--dim);margin-bottom:10px">+$497 Setup Fee</div>
+                <div style="font-size:12px;color:var(--ok);font-weight:700;margin-bottom:10px">⚡ $0 Setup Fee • Zero Long-Term Contracts</div>
                 <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55">
                   <li>After-Hours &amp; Overflow AI Voice Receptionist</li>
                   <li>SMS Dispatch Lead Notifications</li>
@@ -2074,7 +2074,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <div class="quiz-q-title">Q1: Which tier should you recommend first to any 2–10 truck trade contractor?</div>
               <div class="quiz-options" data-day="3" data-q="1">
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 0, false)">A) The $397 Starter Plan to reduce upfront sales friction and get them signed quickly without risk.</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 1, true)">B) The $697/mo Pro AI Receptionist + Speed-to-Lead bundle ($997 setup fee) because it captures after-hours phone calls and auto-texts web form leads within 5 seconds, stopping both major revenue leaks.</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 1, true)">B) The $697/mo Pro AI Receptionist + Speed-to-Lead bundle (with $0 setup fee) because it captures after-hours phone calls and auto-texts web form leads within 5 seconds, stopping both major revenue leaks.</button>
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 2, false)">C) A custom enterprise tier billed at $1,497/mo with mandatory dedicated VoIP server hosting.</button>
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(3, 1, 3, false)">D) A 14-day free trial without a credit card to prove software performance before asking for payment.</button>
               </div>
@@ -2337,13 +2337,13 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         </div>
 
         <div class="script-phase" style="border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.06)">
-          <div class="phase-tag"><span style="color:var(--accent2)">Phase 4: The Demo Link &amp; Live AI Test Challenge</span><span>Zero-Risk Close</span></div>
+          <div class="phase-tag"><span style="color:var(--accent2)">Phase 4: Luke's Takeaway Close &amp; Time Choice</span><span>High-Confidence Close</span></div>
           <div class="script-line">
-            "Tell you what: I'll text a link to this cell right now to set up a quick 10-minute demo.<br><br>
-            And once we get off the phone here, you can also dial our live AI test line: <strong>(561) 813-8602</strong>. <em>If she sounds robotic, ignore the link and you never have to talk to me again. Fair enough?</em>"
+            "So if you're sick of losing money, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, tailored to your business.<br><br>
+            Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
           </div>
           <div class="delivery-tip">
-            💡 <em>Why This Works:</em> Eliminates 100% of skepticism. You aren't "selling" software; you are letting Ava sell herself in 15 seconds.
+            💡 <em>Why This Works:</em> Direct, high-confidence takeaway close that pivots immediately to an alternative-choice calendar slot. If they want to test Ava first, you shoot a text with the meeting link and the live demo line: <strong>(561) 813-8602</strong>.
           </div>
         </div>
 
@@ -2547,8 +2547,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="obj-acc-head"><span>❌ 3. "Websites are too expensive — agencies quote $6,000+."</span> <span class="tag">Agency Trauma</span></div>
             <div class="obj-acc-body">
               "I completely agree with you! Marketing agencies charge $6,000 upfront and then bill you $150/hr for every small photo change. That's ridiculous.<br><br>
-              Our custom builds for Florida trade contractors are $1,497 flat with zero monthly lock-in fees. One single job covers the entire website for life."
-              <div class="obj-acc-note">💡 Strategy: Validate agency ripoffs and position your transparent $1,497 flat pricing.</div>
+              Our custom builds for Florida trade contractors are $799 flat with zero monthly lock-in fees. One single job covers the entire website for life."
+              <div class="obj-acc-note">💡 Strategy: Validate agency ripoffs and position your transparent $799 flat pricing.</div>
             </div>
           </div>
 
@@ -2580,7 +2580,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="obj-accordion">
             <div class="obj-acc-head"><span>❌ 7. "How much does a new website actually cost?"</span> <span class="tag">Direct Price</span></div>
             <div class="obj-acc-body">
-              "$1,497 flat build. No hidden fees, no agency retainers. Includes custom design, mobile optimization, local SEO tags, tap-to-call, and fast hosting setup. We can also bundle it with Ava voice reception. What features are most important to you?"
+              "$799 flat build. No hidden fees, no agency retainers. Includes custom design, mobile optimization, local SEO tags, tap-to-call, and fast hosting setup. We can also bundle it with Ava voice reception. What features are most important to you?"
               <div class="obj-acc-note">💡 Strategy: State the price with complete confidence.</div>
             </div>
           </div>
