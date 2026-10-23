@@ -7006,23 +7006,23 @@ window.saveBrainSettings = function() {
       dollar_anchor: /(8\,?000|8k|10\,?000|10k|5\,?000|5k|6\,?000|6k|12\,?000|12k|15\,?000|15k|100\,?000|100k|high\s*ticket|thousand|\$)/i.test(t),
       trade_mention: /(roof|shingle|tile|flat\s*roof|hvac|a\/?c|air\s*condition|plumb|water\s*heater|drain|pipe|electr|panel|breaker|amp|contractor|job\s*site|crew|trailer|tpo|slab\s*leak)/i.test(t),
       
-      // Solution & Technology
-      solution_ava: /(ava|ai\s*receptionist|voice\s*ai|phone\s*system|front\s*desk\s*ai|1\s*ring|first\s*ring|24\/7|dispatch|bilingual|triage|calendar|books?\s*(into|appointments)|texts?\s*(your\s*)?crew)/i.test(t),
+      // Solution & Technology (Broad match for Ava and phone features)
+      solution_ava: /(ava|ai\s*receptionist|voice\s*ai|phone\s*system|front\s*desk\s*ai|1\s*ring|first\s*ring|24\/7|dispatch|bilingual|triage|calendar|books?\s*(into|appointments)|texts?\s*(your\s*)?crew|answering\s*service|ai\s*answers|she\s*answers|install\s*ava)/i.test(t),
       carrier_tech_71: /(\*71|star\s*71|conditional\s*forwarding|call\s*forwarding|don'?t\s*change\s*(your\s*)?number|keep\s*(your\s*)?number|no\s*porting|never\s*port|verizon|at&t|t\-mobile|carrier)/i.test(t),
-      setup_speed: /(48\s*hours|2\s*days|done\s*for\s*you|fast\s*setup|live\s*by\s*the\s*weekend|quick\s*setup|ready\s*in\s*48)/i.test(t),
+      setup_speed: /(48\s*hours|2\s*days|done\s*for\s*you|fast\s*setup|live\s*by\s*the\s*weekend|quick\s*setup|ready\s*in\s*48|how\s*fast|how\s*long\s*does\s*it\s*take)/i.test(t),
       
       // Agreement Shield
       agreement_shield: /(agree|completely\s*agree|100%|i\s*hear\s*you|makes\s*(total\s*)?sense|you'?re\s*(totally\s*)?right|fair\s*enough|understand|i'?d\s*feel\s*the\s*same|that'?s\s*(exactly\s*)?why|most\s*ai\s*sounds?\s*(awful|fake|robotic|garbage|clunky|telemarketer)|hate\s*(ai|robots?))/i.test(t),
       
-      // Demo Challenge & Friction Killer
+      // Demo Challenge & Friction Killer (Matches (561) 813-8602 and live test requests)
       demo_challenge: /(561[\s\-\.]*813[\s\-\.]*8602|813[\s\-\.]*8602|punch\s*in|dial|call\s*(it|her|this|the\s*number|our\s*ai)|test\s*her|demo\s*line|live\s*ai\s*test|sounds?\s*like\s*a\s*robot|sounds?\s*robotic|never\s*talk\s*to\s*me\s*again|lose\s*my\s*number|speakerphone)/i.test(t),
       
-      // Luke's Signature Takeaway Close & Time Lock
+      // Closing & Time Proposals (Matches any meeting time proposal)
       takeaway_close: /(sick\s*of\s*losing\s*money|losing\s*money|quick\s*(5|10|5\-10|5\s*to\s*10)\s*min|tailored\s*to\s*your\s*business|exactly\s*tailored|show\s*you\s*exactly\s*what\s*we\s*do|meeting\s*so\s*i\s*can\s*show|hop\s*on\s*a\s*quick)/i.test(t),
-      alternative_choice_time: /(morning\s*(or|before)|afternoon|4[\:\.]?30|4\s*pm|5\s*pm|9\s*am|tomorrow\s*(morning|afternoon)|easier\s*to\s*catch|before\s*crews\s*roll|later\s*in\s*the\s*afternoon)/i.test(t),
+      alternative_choice_time: /(tomorrow|morning|afternoon|4[\:\.]?30|4\s*pm|5\s*pm|9\s*am|walkthrough|meeting|calendar|invite|zoom|call\s*you\s*tomorrow|what\s*time\s*works|when\s*are\s*you\s*free)/i.test(t),
       
-      // Pricing & Packages & Downsell
-      pricing_terms: /(397|697|1\,?297|799|price|cost|how\s*much|month|flat|no\s*contract|cancel\s*anytime|month\s*to\s*month|guarantee|pays?\s*for\s*itself|roi|no\s*setup|zero\s*setup)/i.test(t),
+      // Pricing & Packages (Broad match for any dollar figure or cost terms)
+      pricing_terms: /(300|397|697|1\,?200|1\,?297|799|\$|dollars?|bucks|cost|price|how\s*much|month|flat|no\s*contract|cancel\s*anytime|month\s*to\s*month|guarantee|pays?\s*for\s*itself|roi|no\s*setup|zero\s*setup)/i.test(t),
       packages_pitch: /(accelerate|scale|essential|basic\s*package|full\s*package|front\-office|bundle|downsell|standalone|just\s*ava|just\s*the\s*website|799\s*flat|custom\s*website|speed\s*to\s*lead)/i.test(t),
       
       // Gatekeeper Reframe
@@ -7033,6 +7033,10 @@ window.saveBrainSettings = function() {
       email_rebuttal: /(sit\s*in\s*your\s*inbox|behind\s*50\s*supply\s*receipts|supply\s*receipts|get\s*buried|shoot\s*a\s*(quick\s*)?text\s*instead|text\s*you\s*our\s*calendar|send\s*an\s*email)/i.test(t),
       driving_rebuttal: /(eyes\s*on\s*the\s*road|keep\s*your\s*eyes|when\s*you\s*park|wrap\s*up|park\s*your\s*truck|tap\s*it\s*when\s*you|slammed|driving)/i.test(t),
       
+      // User questions back to contractor
+      user_questions_who_answers: /(who\s*answers|what\s*happens\s*to\s*calls|where\s*does\s*the\s*call\s*go|do\s*you\s*have\s*a\s*receptionist)/i.test(t),
+      user_questions_ticket: /(how\s*much\s*is\s*a\s*(job|leak|ticket|replacement)|average\s*(ticket|job)|what\s*do\s*you\s*lose)/i.test(t),
+
       hesitation: /^(uh|um|er|idk|i\s*don'?t\s*know|wait)/i.test(t) || t.length < 4,
       spam_pitch: /(cheap\s*software|special\s*deal|special\s*promotion|pitch\s*you|are\s*you\s*the\s*decision\s*maker|do\s*you\s*have\s*15\s*minutes)/i.test(t),
       curiosity_question: /\?|what\s+do\s+you|how\s+do\s+you|where\s+do|who\s+handles|do\s+you\s+guys/i.test(t)
@@ -7075,35 +7079,80 @@ window.saveBrainSettings = function() {
         ]);
       }
 
-      // CLOSE: Luke's Takeaway Close or Alternative-Choice Time Lock
-      if (intents.takeaway_close || intents.alternative_choice_time || (intents.closing_action && memory.demoUnlocked)) {
+      // USER ASKS QUESTION: Who answers right now?
+      if (intents.user_questions_who_answers) {
+        return pickAdaptiveReply(memory, [
+          `(Nail gun pauses) Right now? If I'm up on a ladder, it goes to my cell phone and rings into voicemail. Half the time my wife is busy with the kids, so nobody answers. That's why I'm asking what you do about it.`,
+          `(Heavy sigh) Right now it's just my cell phone. When I'm spraying poly or nailing shingles, I can't touch my phone. The homeowner calls the next roofer on Google. What is your system?`
+        ]);
+      }
+
+      // CLOSE / TIME PROPOSAL: User proposes meeting or close
+      if (intents.alternative_choice_time || intents.takeaway_close) {
         memory.agreementUnlocked = true;
         memory.currentPhase = 'victory';
         return pickAdaptiveReply(memory, [
-          `You know what, Luke? You're a straight shooter. I am sick of losing money and watching $8,000 emergency roof jobs roll to the next guy in Tampa. Tomorrow afternoon around 4:30 works perfect -- I'll be off the job site in Clearwater. Shoot that demo link and calendar invite to my cell right now.`,
+          `Tomorrow afternoon around 4:30 works perfect -- I'll be off the job site in Clearwater by then. Shoot that demo link and calendar invite to my cell right now. You earned this one, Luke.`,
           `Fair deal, Luke. That's a no-bullshit offer. I've got 10 minutes tomorrow afternoon around 4:30 right after we wrap our shingle delivery. Send that text to my cell and I'll dial your AI line the second I park.`
         ]);
       }
 
-      // DEMO CHALLENGE: Live test line (561) 813-8602 & Friction Killer
+      // DEMO CHALLENGE: Live test line (561) 813-8602
       if (intents.demo_challenge) {
         memory.demoUnlocked = true;
         memory.topicsCovered['demo_challenge'] = true;
         memory.lastBossQuestion = 'ask_closing';
         return pickAdaptiveReply(memory, [
-          `(Sound of truck idling) Alright, smart guy. You're putting your money where your mouth is. I got my speakerphone on right now. 5-6-1... 8-1-3... 8-6-0-2. Ringing it now... let's see how this thing sounds.`,
-          `(Truck door thuds shut) 'If she sounds robotic, you can never talk to me again.' I respect that bet, Luke. I just tapped (561) 813-8602 into my cell. (Pause) Holy cow... she picked up on the first ring and asked if I had active leaks in Hillsborough County. Alright Luke, she's not a joke. What's the damage and what's next?`,
-          `(Radio chatter) You've got balls putting your reputation on the line like that. I'm saving (561) 813-8602 in my phone right now. When we hang up, I'm dialing her on speaker. If she sounds like a robot, you lose this number forever.`
+          `(Sound of truck idling) Alright, smart guy. You're putting your money where your mouth is. I got my speakerphone on right now. 5-6-1... 8-1-3... 8-6-0-2. Ringing it now... (Pause) Holy cow, she picked up on the first ring and asked if I had active leaks in Hillsborough County. Alright Luke, she's not a joke. When can we do a quick walkthrough tomorrow?`,
+          `(Truck door thuds shut) 'If she sounds robotic, you can never talk to me again.' I respect that bet, Luke. I just tapped (561) 813-8602 into my cell. (Pause) Damn, zero latency. Alright Luke, you proved she sounds human. What time tomorrow works for a quick walkthrough?`
         ]);
       }
 
-      // CARRIER *71 & TECHNICAL MASTERY
+      // CARRIER *71 & TECHNICAL ROLLOVER
       if (intents.carrier_tech_71) {
         memory.topicsCovered['carrier_tech_71'] = true;
         memory.lastBossQuestion = 'ask_robot_ai_doubt';
         return pickAdaptiveReply(memory, [
-          `(Air brake hiss) Wait a second... so I don't have to switch my Verizon carrier or port my business number? You just dial star-7-1 to forward after-hours and busy lines? Okay, that eliminates a massive headache. But look... what happens when an angry homeowner calls with water pouring through their drywall? Does she sound like an annoying computer?`,
-          `(Tools clanking) Conditional forwarding with star-7-1? Okay, that's actually clean. I thought you were gonna try to port my company line like these other clowns. But does she really sound like a live human dispatcher?`
+          `(Air brake hiss) Wait a second... so I don't have to switch my Verizon carrier or port my business number? You just dial star-7-1 to forward after-hours and busy lines? Okay, that eliminates a massive headache. But does she really sound like a live human dispatcher or an annoying computer?`,
+          `(Tools clanking) Conditional forwarding with star-7-1? Okay, that's actually clean. I thought you were gonna try to port my company line like these other clowns. How do I test her live right now?`
+        ]);
+      }
+
+      // PRICING & PACKAGES
+      if (intents.pricing_terms || intents.packages_pitch) {
+        memory.topicsCovered['pricing'] = true;
+        memory.lastBossQuestion = 'ask_setup_speed';
+        return pickAdaptiveReply(memory, [
+          `Look, zero contracts and $300 to $397 a month is pocket change in roofing -- literally one $8,000 shingle replacement pays for the entire year. But I've been burned by marketing agencies before. How fast does this actually get set up?`,
+          `Wait, zero setup fees and month-to-month? Most agencies try to hit me with a $2,500 'onboarding' fee before they do anything. So you earn your business 30 days at a time? That's fair. How do I hear her live?`
+        ]);
+      }
+
+      // SETUP SPEED & ONBOARDING
+      if (intents.setup_speed) {
+        memory.topicsCovered['setup_speed'] = true;
+        if (!memory.topicsCovered['pricing']) {
+          memory.lastBossQuestion = 'ask_pricing';
+          return pickAdaptiveReply(memory, [
+            `48 hours? That's fast. Most tech guys take a month just to send a login. So while my crews are on a roof in Tampa, you guys build and test the whole thing? How much is this actually gonna run me every month?`,
+            `Live in 48 hours with zero work on my end? Alright, that's legit. But what's the catch on pricing? Do you lock me into a 12-month agency contract?`
+          ]);
+        } else {
+          memory.lastBossQuestion = 'ask_closing';
+          return pickAdaptiveReply(memory, [
+            `Live in 48 hours and no long-term contracts? That's clean as hell. Alright Luke, what's the next step? What time tomorrow works for a quick 10-minute walkthrough?`,
+            `48-hour turnkey setup? Alright, you've answered my questions. When are you free tomorrow afternoon so we can look at the dashboard?`
+          ]);
+        }
+      }
+
+      // SOLUTION: AVA / AI RECEPTIONIST EXPLANATION
+      if (intents.solution_ava) {
+        memory.topicsCovered['solution_ava'] = true;
+        memory.lastBossQuestion = 'ask_robot_ai_doubt';
+        return pickAdaptiveReply(memory, [
+          `(Nail gun pauses) Wait, so Ava answers on the first ring 24/7 and texts me the customer's address and leak details while I'm on a roof? That solves the phone distraction. But does she sound like an annoying robot? Homeowners with a leaking roof want to talk to a real person, not an automated computer.`,
+          `(Compressor hums) So she answers when my hands are full, qualifies the job, and texts my cell? That would stop jobs from rolling to competitors. But what's the monthly damage on this, Luke? How much does it cost?`
         ]);
       }
 
@@ -7114,27 +7163,7 @@ window.saveBrainSettings = function() {
         memory.lastBossQuestion = 'ask_demo_challenge';
         return pickAdaptiveReply(memory, [
           `(Chuckles) Ha! Finally a tech guy who doesn't blow smoke. Yeah, 99% of AI sounds like an automated telemarketer from India. So how is Ava different? What happens when a commercial warehouse roof is leaking at midnight?`,
-          `(Grins) Well at least you're honest about it. Every other sales rep claims their robot sounds like Morgan Freeman. So how do I test her right now to see if she sounds real?`
-        ]);
-      }
-
-      // SETUP SPEED & ONBOARDING
-      if (intents.setup_speed) {
-        memory.topicsCovered['setup_speed'] = true;
-        memory.lastBossQuestion = 'ask_pricing';
-        return pickAdaptiveReply(memory, [
-          `48 hours? That's fast. Most tech guys take a month just to send a login. So while my crews are on a roof in Tampa, you guys build and test the whole thing? How much is this actually gonna run me every month?`,
-          `Live in 48 hours with zero work on my end? Alright, that's legit. But what's the catch on pricing? Do you lock me into a 12-month agency contract?`
-        ]);
-      }
-
-      // PRICING & PACKAGES
-      if (intents.pricing_terms || intents.packages_pitch) {
-        memory.topicsCovered['pricing'] = true;
-        memory.lastBossQuestion = 'ask_setup_speed';
-        return pickAdaptiveReply(memory, [
-          `Look, zero contracts and $397 a month is pocket change in roofing -- literally one $8,000 shingle replacement pays for the entire year. But I've been burned by marketing agencies before. How fast does this actually get set up?`,
-          `Wait, zero setup fees and month-to-month? Most agencies try to hit me with a $2,500 'onboarding' fee before they do anything. So you earn your business 30 days at a time? That's fair.`
+          `(Grins) Well at least you're honest about it. Every other sales rep claims their robot sounds like Morgan Freeman. How do I test her right now to see if she sounds real?`
         ]);
       }
 
@@ -7179,10 +7208,11 @@ window.saveBrainSettings = function() {
         ]);
       }
 
-      if (memory.bossResistance < 45) {
+      // PROGRESSIVE CONVERSATIONAL FALLBACK (Never repeats opening when pain is unlocked)
+      if (memory.painUnlocked || memory.topicsCovered['leak'] || memory.topicsCovered['solution_ava']) {
         return pickAdaptiveReply(memory, [
-          `Alright, Luke. You actually know how roofing works and you're not wasting my time. What's the next step? How do I hear this Ava thing?`,
-          `Look, I'm liking what I'm hearing. If you can show me this live tomorrow, I'm open to it. When do we hop on?`
+          `Look Luke, I hear what you're saying about the after-hours leaks. But give me the straight facts on pricing and how she sounds live on (561) 813-8602.`,
+          `I'm listening, Luke, but make it plain English -- how do we test this Ava thing right now so I know it doesn't sound like a computerized joke?`
         ]);
       }
 
@@ -7209,7 +7239,7 @@ window.saveBrainSettings = function() {
       }
 
       // CLOSE / CALENDAR BOOKING
-      if (intents.takeaway_close || intents.alternative_choice_time || (intents.closing_action && memory.painUnlocked)) {
+      if (intents.takeaway_close || intents.alternative_choice_time) {
         memory.agreementUnlocked = true;
         memory.currentPhase = 'victory';
         return pickAdaptiveReply(memory, [
@@ -7229,6 +7259,15 @@ window.saveBrainSettings = function() {
         ]);
       }
 
+      // SOLUTION AVA EXPLANATION
+      if (intents.solution_ava) {
+        memory.topicsCovered['solution_ava'] = true;
+        return pickAdaptiveReply(memory, [
+          `(Typing pauses) So Ava answers on the first ring, collects the customer's AC brand and issue, and texts the dispatch board directly? That would literally save me 3 hours of phone tag every morning. What's the monthly cost for a setup like that?`,
+          `Answering instantly without putting homeowners on hold? That fixes our biggest customer complaint. How does she handle after-hours emergency calls?`
+        ]);
+      }
+
       // ANSWERING SERVICE COMPARISON
       if (intents.answering_service_flaws) {
         memory.objectionUnlocked = true;
@@ -7238,11 +7277,27 @@ window.saveBrainSettings = function() {
         ]);
       }
 
+      // PRICING & PACKAGES
+      if (intents.pricing_terms || intents.packages_pitch) {
+        memory.topicsCovered['pricing'] = true;
+        return pickAdaptiveReply(memory, [
+          `$300 to $397 a month with no setup fee? That's half what we currently pay that awful call center, and they botch half the messages! Let me test Ava on (561) 813-8602 right now.`,
+          `Zero contracts and month-to-month? That sounds reasonable. What time tomorrow morning can Mr. Davis see a quick demo?`
+        ]);
+      }
+
       // PERMISSION / GREETING
       if (intents.greeting || intents.permission_opener) {
         return pickAdaptiveReply(memory, [
           `Premier Mechanical, Karen speaking. Mr. Davis is currently tied up in a production meeting. What company are you with and what is this regarding?`,
           `Good morning, Premier Mechanical. He is out in the field on a job site today. Is this regarding our current dispatch software or a new project?`
+        ]);
+      }
+
+      if (memory.painUnlocked || memory.topicsCovered['solution_ava']) {
+        return pickAdaptiveReply(memory, [
+          `I understand what you're saying about after-hours AC calls, Luke. But tell me how Ava connects to our dispatch schedule before I patch you through to Mr. Davis.`,
+          `Gary is very particular about customer service. Give me the direct demo number so I can test her from my desk right now.`
         ]);
       }
 
@@ -7283,6 +7338,24 @@ window.saveBrainSettings = function() {
         ]);
       }
 
+      // PRICING & PACKAGES
+      if (intents.pricing_terms || intents.packages_pitch) {
+        memory.topicsCovered['pricing'] = true;
+        return pickAdaptiveReply(memory, [
+          `$300 to $397 a month flat with zero contracts and no setup fee? In electrical, one commercial generator or subpanel replacement covers the whole year. Alright, that takes the financial risk off the table. What time tomorrow works for a quick walkthrough?`,
+          `Zero setup fee and month-to-month? That's fair. If she books just one $5k service upgrade, she pays for herself ten times over. What time tomorrow works for a quick walkthrough?`
+        ]);
+      }
+
+      // SOLUTION AVA EXPLANATION
+      if (intents.solution_ava) {
+        memory.topicsCovered['solution_ava'] = true;
+        return pickAdaptiveReply(memory, [
+          `(Wire strippers snap) So Ava answers when my hands are inside a 480-volt panel, takes down the breaker size and issue, and texts my cell? That saves me having to climb down off the ladder. But what's the monthly damage on this, Luke? How much does it cost?`,
+          `An AI answering emergency electrical calls? If she can actually qualify whether sparks are flying or if it's just a tripped GFCI, that's huge. What's the price?`
+        ]);
+      }
+
       // CARRIER *71 & TECHNICAL MASTERY
       if (intents.carrier_tech_71) {
         return pickAdaptiveReply(memory, [
@@ -7318,6 +7391,13 @@ window.saveBrainSettings = function() {
         ]);
       }
 
+      if (memory.painUnlocked || memory.topicsCovered['solution_ava']) {
+        return pickAdaptiveReply(memory, [
+          `Look son, I hear what you're saying about after-hours outages. But give me the straight price and tell me how I test her right now.`,
+          `I'm listening, Luke. But dial our trade number on (561) 813-8602 so I can hear her voice before we talk contracts.`
+        ]);
+      }
+
       return pickAdaptiveReply(memory, [
         `We've been in business in Palm Beach for 22 years without fancy software. Why do I need an AI answering my phone?`,
         `Look son, I'm a master electrician, not a tech investor. If you've got something that actually works for trade contractors, spit it out.`
@@ -7333,7 +7413,7 @@ window.saveBrainSettings = function() {
         memory.agreementUnlocked = true;
         memory.currentPhase = 'victory';
         return pickAdaptiveReply(memory, [
-          `Alright Luke, the math is undeniable. $397 with no contract pays for itself on the first water heater changeout. Shoot that link to my cell right now, let's lock down tomorrow morning at 9 AM.`,
+          `Alright Luke, the math is undeniable. $300 to $397 with no contract pays for itself on the first water heater changeout. Shoot that link to my cell right now, let's lock down tomorrow morning at 9 AM.`,
           `You got a deal, Luke. I am sick of losing emergency calls to the franchise rooter down the road. Put me down for tomorrow afternoon at 4:30. Text me the invite.`
         ]);
       }
@@ -7343,16 +7423,25 @@ window.saveBrainSettings = function() {
         memory.demoUnlocked = true;
         return pickAdaptiveReply(memory, [
           `Let me call it right now while you're on the line. 5-6-1... 8-1-3... 8-6-0-2. Ringing now... (Pause) 'Thanks for calling...' Holy cow, she picked up on the first ring. And she asked if water was actively flooding the floor. Alright Luke, she's legitimate. What's the setup fee and contract terms?`,
-          `I just called (561) 813-8602 from my desk phone. She answered before the second ring and asked for my zip code in Miami. Alright, you backed it up. How much is the onboarding fee?`
+          `I just called (561) 813-8602 from my desk phone. She answered before the second ring and asked for my zip code in Miami. Alright, you backed it up. When can we do a quick walkthrough tomorrow?`
         ]);
       }
 
-      // PRICING & NO CONTRACTS ($397 / $0 setup)
-      if (intents.pricing_terms) {
+      // SOLUTION AVA EXPLANATION
+      if (intents.solution_ava) {
+        memory.topicsCovered['solution_ava'] = true;
+        return pickAdaptiveReply(memory, [
+          `(Pipe wrench clangs) Answering on the first ring with zero per-minute overages? If she catches just one slab leak while I'm asleep, that's $5k cash in the bank. Cut the fluff though -- what does this actually cost per month?`,
+          `So Ava answers 24/7 and texts my emergency on-call plumber the address and issue immediately? That beats paying $1,400 to an answering service. What's the price?`
+        ]);
+      }
+
+      // PRICING & NO CONTRACTS ($300 / $397 / $0 setup)
+      if (intents.pricing_terms || intents.packages_pitch) {
         memory.topicsCovered['pricing'] = true;
         return pickAdaptiveReply(memory, [
-          `Wait a minute... $397 a month flat with zero long-term contract? No setup fee extortion? If she books just one slab leak or water heater changeout ($3,500), she pays for almost the whole damn year. But how do I know she actually answers fast enough before they hang up?`,
-          `Zero setup fees and month-to-month? That takes the risk off the table. But does she answer within 1 ring every single time?`
+          `Wait a minute... $300 to $397 a month flat with zero long-term contract and zero setup fee? If she books just one slab leak or water heater changeout ($3,500), she pays for almost the whole damn year. That takes the financial risk off the table. When can we do a quick walkthrough tomorrow?`,
+          `Zero setup fees and month-to-month? That eliminates agency extortion. But does she answer within 1 ring every single time? How do I hear her live?`
         ]);
       }
 
@@ -7371,6 +7460,13 @@ window.saveBrainSettings = function() {
         return pickAdaptiveReply(memory, [
           `Dave speaking. I get 20 telemarketers a day trying to sell me SEO junk. You got 20 seconds, tell me what you do.`,
           `20 seconds starts right now. No fluff, tell me how it puts cash in my pocket.`
+        ]);
+      }
+
+      if (memory.painUnlocked || memory.topicsCovered['solution_ava']) {
+        return pickAdaptiveReply(memory, [
+          `I hear you on the burst pipes, Luke. But give me the straight bottom-line number: how much does this cost per month?`,
+          `I've got 6 plumbing trucks in Miami. If this doesn't generate positive cash flow in 30 days, I don't want it. Tell me the price and contract terms.`
         ]);
       }
 
