@@ -160,6 +160,14 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .badge-prod-speed{background:rgba(245,158,11,0.15);color:#fde047;border:1px solid rgba(245,158,11,0.3)}
 .badge-prod-aeo{background:rgba(52,211,153,0.15);color:#86efac;border:1px solid rgba(52,211,153,0.3)}
 .badge-prod-bundle{background:linear-gradient(90deg,rgba(245,158,11,0.2),rgba(168,85,247,0.2));color:#fef08a;border:1px solid var(--accent)}
+.badge-pkg-accelerate{background:linear-gradient(135deg,rgba(245,158,11,0.22),rgba(251,191,36,0.12));color:#fef08a;border:1px solid var(--accent);box-shadow:0 0 10px rgba(245,158,11,0.2)}
+.badge-pkg-scale{background:linear-gradient(135deg,rgba(56,189,248,0.22),rgba(168,85,247,0.22));color:#e0e7ff;border:1px solid #38bdf8;box-shadow:0 0 10px rgba(56,189,248,0.2)}
+.badge-pkg-essential{background:rgba(52,211,153,0.18);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4)}
+.badge-prod-sub{padding:2px 6px;border-radius:4px;font-size:10.5px;font-family:var(--font-mono);font-weight:600;display:inline-block}
+.badge-prod-sub-ava{background:rgba(56,189,248,0.12);color:#7dd3fc;border:1px solid rgba(56,189,248,0.25)}
+.badge-prod-sub-website{background:rgba(168,85,247,0.12);color:#d8b4fe;border:1px solid rgba(168,85,247,0.25)}
+.badge-prod-sub-speed{background:rgba(245,158,11,0.12);color:#fde047;border:1px solid rgba(245,158,11,0.25)}
+.badge-prod-sub-aeo{background:rgba(52,211,153,0.12);color:#86efac;border:1px solid rgba(52,211,153,0.25)}
 
 .btn-pitch-lead{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#070a0f;font-weight:800;border:none;border-radius:6px;padding:6px 12px;font-size:11.5px;cursor:pointer;transition:transform 0.1s;display:inline-flex;align-items:center;gap:4px}
 .btn-pitch-lead:hover{transform:scale(1.05);box-shadow:0 0 10px rgba(245,158,11,0.3)}
@@ -676,14 +684,19 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <button class="lead-pill-btn" data-status-filter="called">✅ Already Called (<span id="countStatusCalled">0</span>)</button>
         </div>
 
-        <!-- Product Offer Pills -->
+        <!-- Offer Strategy Pills (Packages first, then Individual Fallbacks) -->
         <div class="lead-pills" id="leadProductFilters">
-          <button class="lead-pill-btn active" data-lead-filter="all">All Offers (250)</button>
-          <button class="lead-pill-btn" data-lead-filter="ava">🤖 Ava Voice (84)</button>
-          <button class="lead-pill-btn" data-lead-filter="website">🌐 Custom Websites (34)</button>
-          <button class="lead-pill-btn" data-lead-filter="speed">⚡ Speed-to-Lead (66)</button>
-          <button class="lead-pill-btn" data-lead-filter="aeo">⭐ AEO &amp; Reviews (45)</button>
-          <button class="lead-pill-btn" data-lead-filter="bundle">🚀 Full Bundle (21)</button>
+          <span style="font-size:11px;font-family:var(--font-mono);color:var(--accent2);text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;margin-right:2px">📦 Packages:</span>
+          <button class="lead-pill-btn active" data-lead-filter="all">All (250)</button>
+          <button class="lead-pill-btn" data-lead-filter="pkg-accelerate">⭐ Accelerate ($697/mo)</button>
+          <button class="lead-pill-btn" data-lead-filter="pkg-scale">🚀 Scale ($1,297/mo)</button>
+          <button class="lead-pill-btn" data-lead-filter="pkg-essential">⚡ Essential ($397/mo)</button>
+          <span style="border-left:1px solid var(--line2);height:18px;margin:0 4px;display:inline-block"></span>
+          <span style="font-size:11px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;margin-right:2px">↳ Fallback:</span>
+          <button class="lead-pill-btn" data-lead-filter="ava">🤖 Ava ($397/mo)</button>
+          <button class="lead-pill-btn" data-lead-filter="website">🌐 Website ($799 flat)</button>
+          <button class="lead-pill-btn" data-lead-filter="speed">⚡ Speed ($197/mo)</button>
+          <button class="lead-pill-btn" data-lead-filter="aeo">⭐ AEO ($297/mo)</button>
         </div>
       </div>
 
@@ -720,7 +733,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <th>Primary Leak Detected</th>
               <th>Annual Leak ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View real-world trade ticket math">ℹ️ Math</span></th>
               <th>Net Saved ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View net profit formula">ℹ️ Math</span></th>
-              <th>Recommended Offer</th>
+              <th style="min-width:185px">Target Package ➔ Fallback Offer</th>
               <th>Outcome &amp; Notes</th>
               <th style="text-align:right">Action</th>
             </tr>
@@ -1800,37 +1813,39 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="lms-lesson-view" id="view-3-1">
           <div class="lms-view-head">
             <div>
-              <div class="lms-breadcrumbs">Day 3 ➔ <span>Lesson 3.1: High-Ticket Packaging</span></div>
-              <div class="lms-view-title">🤝 High-Ticket Packaging ($697 Pro vs. $397 Starter)</div>
+              <div class="lms-breadcrumbs">Day 3 ➔ <span>Lesson 3.1: Package-First Selling &amp; Downselling</span></div>
+              <div class="lms-view-title">🤝 Package-First Selling &amp; The Standalone Product Downsell</div>
             </div>
             <span class="lms-time-pill">⏱️ 15 Mins</span>
           </div>
 
           <div class="lms-text-block">
-            <p>Always pitch the <strong>Pro Bundle ($697/month with $0 Setup Fee)</strong> first. It gives contractors both phone call coverage and website speed-to-lead auto-texting. Only drop to the Starter tier if they are a 1-man operation on a strict budget.</p>
+            <p><strong>The Golden Rule of VantorX Sales:</strong> Always pitch the complete package first — <strong>Accelerate ($697/mo)</strong> or <strong>Scale ($1,297/mo)</strong> with $0 setup fee. It gives contractors complete front-office call coverage, speed-to-lead auto-texting, and mobile web conversion. <strong>If they resist the full package, NEVER discount the package!</strong> Instead, smoothly downsell them to the <strong>individual standalone product</strong> that solves their #1 immediate leak:</p>
 
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0">
               <div style="background:var(--bg);border:2px solid var(--accent);padding:18px;border-radius:12px;position:relative">
                 <span style="position:absolute;top:10px;right:10px;background:var(--accent);color:#000;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px">RECOMMENDED DEFAULT</span>
-                <div style="font-size:13px;color:var(--accent2);font-weight:700">OPTION 1: PRO BUNDLE</div>
+                <div style="font-size:13px;color:var(--accent2);font-weight:700">PRIMARY: ACCELERATE BUNDLE</div>
                 <div style="font-size:24px;font-weight:800;color:#ffffff;margin:4px 0">$697 / month</div>
                 <div style="font-size:12px;color:var(--ok);font-weight:700;margin-bottom:10px">⚡ $0 Setup Fee • Zero Long-Term Contracts</div>
                 <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55">
                   <li>24/7 AI Phone Receptionist (Ava)</li>
-                  <li>Instant 5-Second Speed-to-Lead Website Auto-Texting</li>
-                  <li>Direct Calendar Dispatch Integration</li>
+                  <li>New High-Converting Mobile Website Build</li>
+                  <li>Instant 90-Second Speed-to-Lead SMS</li>
+                  <li>AEO AI Search Ranking Engine</li>
                   <li>Zero Long-Term Contracts (Cancel Anytime)</li>
                 </ul>
               </div>
 
               <div style="background:var(--bg);border:1px solid var(--line);padding:18px;border-radius:12px">
-                <div style="font-size:13px;color:var(--dim);font-weight:700">OPTION 2: STARTER (FALLBACK)</div>
-                <div style="font-size:24px;font-weight:800;color:#ffffff;margin:4px 0">$397 / month</div>
-                <div style="font-size:12px;color:var(--ok);font-weight:700;margin-bottom:10px">⚡ $0 Setup Fee • Zero Long-Term Contracts</div>
+                <div style="font-size:13px;color:var(--dim);font-weight:700">SECONDARY: STANDALONE DOWNSELLS</div>
+                <div style="font-size:16px;font-weight:800;color:var(--accent2);margin:4px 0">Plugs #1 Immediate Leak</div>
+                <div style="font-size:12px;color:var(--ok);font-weight:700;margin-bottom:10px">⚡ $0 Setup Fee • Choose Single Solution</div>
                 <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.55">
-                  <li>After-Hours &amp; Overflow AI Voice Receptionist</li>
-                  <li>SMS Dispatch Lead Notifications</li>
-                  <li>Zero Long-Term Contracts</li>
+                  <li><strong>Ava 24/7 Voice AI:</strong> $397 / month</li>
+                  <li><strong>Custom Website Build:</strong> $799 flat (no monthly fees)</li>
+                  <li><strong>LeadFlow 90s SMS:</strong> $197 / month</li>
+                  <li><strong>AEO Engine (AI Search):</strong> $297 / month</li>
                 </ul>
               </div>
             </div>
@@ -2235,7 +2250,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="active-lead-title">
             <span>🎯 ACTIVE TARGET:</span>
             <span id="activeLeadName" style="color:var(--accent2)">Palm Air Air Conditioning, Inc.</span>
-            <span class="badge-prod badge-prod-ava" id="activeLeadProdBadge">🤖 Ava AI Voice</span>
+            <span class="badge-prod badge-pkg-accelerate" id="activeLeadPkgBadge">⭐ Accelerate ($697/mo)</span>
+            <span class="badge-prod-sub badge-prod-sub-ava" id="activeLeadProdBadge">↳ Fallback: 🤖 Ava ($397/mo)</span>
           </div>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <span class="status-badge status-badge-uncalled" id="prompterStatusBadge">⏳ To Call</span>
@@ -2269,22 +2285,31 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="active-lead-leak-quote" id="activeLeadLeakQuote">
           💡 <strong>Your Opening Leak Hook for Everett:</strong> "Everett, looking at Palm Air in Boca Raton — when an emergency AC call rings after-hours during Florida heat waves, sending it to voicemail leaks an estimated $102,000 a year to competitors. Where does that call ring for you right now?"
         </div>
+
+        <div class="active-lead-strategy-box" id="activeLeadStrategyBox" style="margin-top:12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);padding:10px 14px;border-radius:8px;font-size:13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div>
+            <span style="color:var(--accent2);font-weight:700">📦 STEP 1 (PRIMARY):</span> Pitch the <strong><span id="activeLeadTargetPkg">Accelerate Tier ($697/mo)</span></strong> ($0 setup fee, full phone + web + SMS system).
+            <br>
+            <span style="color:#f87171;font-weight:700">📉 STEP 2 (DOWNSELL):</span> If they push back on budget, downsell to standalone <strong><span id="activeLeadFallbackProd">Ava Voice AI ($397/mo)</span></strong> to fix their immediate leak.
+          </div>
+          <button class="btn btn-ghost btn-sm" id="btnToggleScriptStrategy" style="border:1px solid var(--accent);color:var(--accent2);font-size:12px;font-weight:700;cursor:pointer">🔄 Toggle Package / Fallback Script</button>
+        </div>
       </div>
 
       <!-- Product Script Switcher Bar -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:10px">
         <div style="font-size:12px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase;font-weight:700">
-          SELECT PRODUCT SCRIPT TO PITCH:
+          SELECT SALES SCRIPT: <span style="color:var(--accent2)">PACKAGES FIRST ➔ DOWNSELL TO INDIVIDUAL PRODUCTS</span>
         </div>
         <button class="btn btn-gold btn-sm" id="copyCurrentProductScriptBtn">📋 Copy Active Script</button>
       </div>
 
       <div class="product-switcher-bar">
-        <button class="prod-switch-btn active" data-product="ava">🤖 Ava 24/7 AI Receptionist</button>
-        <button class="prod-switch-btn" data-product="website">🌐 Custom Websites &amp; Mobile</button>
-        <button class="prod-switch-btn" data-product="speed">⚡ 90s Speed-to-Lead SMS</button>
-        <button class="prod-switch-btn" data-product="aeo">⭐ AEO &amp; Google Reviews</button>
-        <button class="prod-switch-btn" data-product="bundle">🚀 Full Digital Infrastructure</button>
+        <button class="prod-switch-btn active" data-product="bundle">📦 ⭐ Accelerate / Scale Package ($697 - $1,297/mo)</button>
+        <button class="prod-switch-btn" data-product="ava">🤖 Fallback: Ava Voice AI ($397/mo)</button>
+        <button class="prod-switch-btn" data-product="website">🌐 Fallback: Custom Website ($799 flat)</button>
+        <button class="prod-switch-btn" data-product="speed">⚡ Fallback: 90s Speed-to-Lead ($197/mo)</button>
+        <button class="prod-switch-btn" data-product="aeo">⭐ Fallback: AEO &amp; Reviews ($297/mo)</button>
       </div>
 
       <!-- ======================================================== -->
@@ -2870,7 +2895,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="obj-acc-head"><span>❌ 1. "I'm interested in everything, but what is the total cost?"</span> <span class="tag">Bundle Price</span></div>
             <div class="obj-acc-body">
               "If you bought this piecemeal from agencies, you'd pay $6,000 for the site, $600/mo for an answering service, $300/mo for SMS tools, and $1,000/mo for SEO—over $2,500 a month.<br><br>
-              Our complete all-in-one Accelerate bundle includes the custom website build, Ava 24/7 Voice AI, 90s Speed-to-Lead, and Google Review / AEO dominance for one simple flat setup and $697/mo with zero long-term contracts. One single emergency ticket covers the entire investment."
+              Our complete all-in-one Accelerate bundle includes the custom website build, Ava 24/7 Voice AI, 90s Speed-to-Lead, and Google Review / AEO dominance for just $697/mo with $0 setup fee and zero long-term contracts. One single emergency ticket covers the entire investment."
               <div class="obj-acc-note">💡 Strategy: Compare $2,500/mo agency retainers with $697/mo all-in-one efficiency.</div>
             </div>
           </div>
@@ -2907,11 +2932,12 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             </div>
           </div>
 
-          <div class="obj-accordion">
-            <div class="obj-acc-head"><span>❌ 6. "Can we start with one thing and add the others later?"</span> <span class="tag">Phased Entry</span></div>
+          <div class="obj-accordion" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06)">
+            <div class="obj-acc-head"><span style="color:var(--accent2)">❌ 6. "I don't need the full bundle right now, can I just get one product?" (The Downsell Protocol)</span> <span class="tag" style="background:var(--accent);color:#000;font-weight:800">Downsell Strategy</span></div>
             <div class="obj-acc-body">
-              "100%! Most guys start with Ava for $397/mo to plug their immediate weekend emergency call leak. Once they see 3 jobs booked in their first week, they roll into the website and AEO upgrade. What's your biggest headache right now—missed calls, or an outdated website?"
-              <div class="obj-acc-note">💡 Strategy: Offer a low-friction entry point, then upsell.</div>
+              "100% yes, <span class="dyn-owner">[Name]</span>! If you don't need the complete infrastructure right now, let's not over-complicate it.<br><br>
+              We can install just the standalone solution—whether that's <strong>Ava 24/7 Voice AI for $397/mo</strong>, a <strong>custom website for $799 flat</strong>, or our <strong>90s Speed-to-Lead SMS for $197/mo</strong>—all with $0 setup fees. That plugs your #1 bleeding leak immediately, and you can always upgrade to the full package later once the extra jobs roll in."
+              <div class="obj-acc-note">💡 Strategy: Never discount the package; downsell to the individual standalone product to secure the initial customer.</div>
             </div>
           </div>
         </div>
@@ -4805,13 +4831,55 @@ window.saveBrainSettings = function() {
     updateBatchDropdownLabels();
   }
 
+  function getLeadOfferStrategy(lead) {
+    let pkgKey = 'accelerate';
+    let pkgBadge = '<span class="badge-prod badge-pkg-accelerate" title="Primary Package: Accelerate Tier ($697/mo with $0 setup fee)">⭐ Accelerate ($697/mo)</span>';
+    let pkgName = 'Accelerate Tier ($697/mo)';
+    let pkgBadgeClass = 'badge-pkg-accelerate';
+
+    const t = (lead.trade || '').toLowerCase();
+    if (lead.annualLoss >= 115000 || t.includes('restoration') || t.includes('commercial') || (lead.product === 'aeo' && lead.annualLoss >= 100000)) {
+      pkgKey = 'scale';
+      pkgBadge = '<span class="badge-prod badge-pkg-scale" title="Primary Package: Scale Enterprise Tier ($1,297/mo)">🚀 Scale ($1,297/mo)</span>';
+      pkgName = 'Scale Enterprise Tier ($1,297/mo)';
+      pkgBadgeClass = 'badge-pkg-scale';
+    } else if (t.includes('handyman') || (lead.monthlyLoss <= 5000 && lead.product === 'ava')) {
+      pkgKey = 'essential';
+      pkgBadge = '<span class="badge-prod badge-pkg-essential" title="Primary Package: Essential Tier ($397/mo)">⚡ Essential ($397/mo)</span>';
+      pkgName = 'Essential Tier ($397/mo)';
+      pkgBadgeClass = 'badge-pkg-essential';
+    }
+
+    const fallbacks = {
+      ava: { key: 'ava', name: 'Ava 24/7 AI Receptionist ($397/mo)', price: '$397/mo', badge: '<span class="badge-prod-sub badge-prod-sub-ava">🤖 Ava ($397/mo)</span>', badgeClass: 'badge-prod-sub-ava' },
+      website: { key: 'website', name: 'Custom Website Design ($799 flat)', price: '$799 flat', badge: '<span class="badge-prod-sub badge-prod-sub-website">🌐 Website ($799 flat)</span>', badgeClass: 'badge-prod-sub-website' },
+      speed: { key: 'speed', name: 'LeadFlow 90s SMS ($197/mo)', price: '$197/mo', badge: '<span class="badge-prod-sub badge-prod-sub-speed">⚡ Speed ($197/mo)</span>', badgeClass: 'badge-prod-sub-speed' },
+      aeo: { key: 'aeo', name: 'AEO Engine™ ($297/mo)', price: '$297/mo', badge: '<span class="badge-prod-sub badge-prod-sub-aeo">⭐ AEO ($297/mo)</span>', badgeClass: 'badge-prod-sub-aeo' },
+      bundle: { key: 'ava', name: 'Ava 24/7 AI Receptionist ($397/mo)', price: '$397/mo', badge: '<span class="badge-prod-sub badge-prod-sub-ava">🤖 Ava ($397/mo)</span>', badgeClass: 'badge-prod-sub-ava' }
+    };
+
+    const fb = fallbacks[lead.product] || fallbacks.ava;
+
+    return {
+      pkgKey,
+      pkgName,
+      pkgBadge,
+      pkgBadgeClass,
+      fallbackKey: fb.key,
+      fallbackName: fb.name,
+      fallbackPrice: fb.price,
+      fallbackBadge: fb.badge,
+      fallbackBadgeClass: fb.badgeClass
+    };
+  }
+
   function getProductBadgeHtml(prod) {
     const map = {
-      ava: '<span class="badge-prod badge-prod-ava">🤖 Ava Voice</span>',
-      website: '<span class="badge-prod badge-prod-website">🌐 Website</span>',
-      speed: '<span class="badge-prod badge-prod-speed">⚡ Speed-to-Lead</span>',
-      aeo: '<span class="badge-prod badge-prod-aeo">⭐ AEO &amp; Reviews</span>',
-      bundle: '<span class="badge-prod badge-prod-bundle">🚀 Full Bundle</span>'
+      ava: '<span class="badge-prod-sub badge-prod-sub-ava">🤖 Ava ($397/mo)</span>',
+      website: '<span class="badge-prod-sub badge-prod-sub-website">🌐 Website ($799 flat)</span>',
+      speed: '<span class="badge-prod-sub badge-prod-sub-speed">⚡ Speed ($197/mo)</span>',
+      aeo: '<span class="badge-prod-sub badge-prod-sub-aeo">⭐ AEO ($297/mo)</span>',
+      bundle: '<span class="badge-prod badge-pkg-accelerate">⭐ Accelerate ($697/mo)</span>'
     };
     return map[prod] || map.ava;
   }
@@ -4909,8 +4977,16 @@ window.saveBrainSettings = function() {
       // 2. State filter
       const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
       if (currentStateFilter !== 'all' && leadState !== currentStateFilter) return false;
-      // 3. Product filter
-      if (currentProductFilter !== 'all' && lead.product !== currentProductFilter) return false;
+      // 3. Package & Fallback Product filter
+      if (currentProductFilter !== 'all') {
+        const strat = getLeadOfferStrategy(lead);
+        if (currentProductFilter.startsWith('pkg-')) {
+          const reqPkg = currentProductFilter.replace('pkg-', '');
+          if (strat.pkgKey !== reqPkg) return false;
+        } else {
+          if (strat.fallbackKey !== currentProductFilter) return false;
+        }
+      }
       // 4. Call status filter
       const isCalled = !!(CALL_RECORDS[lead.id] && CALL_RECORDS[lead.id].called);
       if (currentStatusFilter === 'uncalled' && isCalled) return false;
@@ -4978,6 +5054,7 @@ window.saveBrainSettings = function() {
       const isCalled = !!(CALL_RECORDS[lead.id] && CALL_RECORDS[lead.id].called);
       const rec = CALL_RECORDS[lead.id] || {};
       const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
+      const strat = getLeadOfferStrategy(lead);
       const tr = document.createElement('tr');
       tr.id = `leadRow_${lead.id}`;
       if (isCalled) tr.classList.add('lead-row-called');
@@ -5018,7 +5095,10 @@ window.saveBrainSettings = function() {
           <span class="badge-save" title="Net profit kept after $697/mo VantorX Growth Tier">+$${Math.max(0, lead.annualLoss - 8364).toLocaleString()}/yr</span>
         </td>
         <td>
-          ${getProductBadgeHtml(lead.product)}
+          <div>${strat.pkgBadge}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:4px;display:flex;align-items:center;gap:4px">
+            <span style="color:var(--faint)">↳ Fallback:</span> ${strat.fallbackBadge}
+          </div>
         </td>
         <td>
           <div style="display:flex;align-items:center;gap:6px">
@@ -5386,8 +5466,26 @@ window.saveBrainSettings = function() {
     document.getElementById('activeLeadCallBtn').href = `tel:${lead.phone.replace(/[^0-9]/g, '')}`;
     document.getElementById('activeLeadCallBtn').textContent = `📞 Call ${lead.phone}`;
 
-    const prodNames = { ava: 'Ava 24/7 Voice', website: 'Custom Website', speed: 'Speed-to-Lead', aeo: 'AEO & Reviews', bundle: 'Full Bundle' };
-    document.getElementById('activeLeadProdBadge').textContent = prodNames[lead.product] || 'VantorX';
+    const strat = getLeadOfferStrategy(lead);
+    const pkgBadgeEl = document.getElementById('activeLeadPkgBadge');
+    if (pkgBadgeEl) {
+      pkgBadgeEl.className = `badge-prod ${strat.pkgBadgeClass}`;
+      pkgBadgeEl.textContent = strat.pkgName;
+    }
+    const prodBadgeEl = document.getElementById('activeLeadProdBadge');
+    if (prodBadgeEl) {
+      prodBadgeEl.className = `badge-prod-sub ${strat.fallbackBadgeClass}`;
+      prodBadgeEl.textContent = `↳ Fallback: ${strat.fallbackName}`;
+    }
+    const targetPkgEl = document.getElementById('activeLeadTargetPkg');
+    if (targetPkgEl) targetPkgEl.textContent = strat.pkgName;
+    const fallbackProdEl = document.getElementById('activeLeadFallbackProd');
+    if (fallbackProdEl) fallbackProdEl.textContent = strat.fallbackName;
+
+    const btnToggleStrat = document.getElementById('btnToggleScriptStrategy');
+    if (btnToggleStrat) {
+      btnToggleStrat.textContent = `🔄 Switch to Fallback Script (${strat.fallbackName})`;
+    }
 
     // 3. Dynamic Leak Hook
     let hook = `"${lead.owner}, looking at ${lead.company} in ${lead.city} — ${lead.painPoint.toLowerCase()} is leaking an estimated $${lead.annualLoss.toLocaleString()} a year to competitors. Where does that call ring for you right now?"`;
@@ -5408,8 +5506,8 @@ window.saveBrainSettings = function() {
     document.querySelectorAll('.dyn-trade').forEach(el => el.textContent = lead.trade);
     document.querySelectorAll('.dyn-loss').forEach(el => el.textContent = `$${lead.annualLoss.toLocaleString()}/yr ($${lead.monthlyLoss.toLocaleString()}/mo)`);
 
-    // 6. Switch to Product Script
-    switchProductScript(lead.product);
+    // 6. Switch to Primary Package Script (Accelerate / Scale Bundle)
+    switchProductScript('bundle');
 
     // 7. Switch to Teleprompter Tab & Scroll
     switchTab('tabScript');
@@ -5423,6 +5521,20 @@ window.saveBrainSettings = function() {
     document.getElementById('activeLeadLocation').textContent = '[City, State] · [Trade]';
     document.getElementById('activeLeadLoss').textContent = '-$96,000 / year';
     document.getElementById('activeLeadSavings').textContent = '+$92,412 / year';
+    const pkgBadgeEl = document.getElementById('activeLeadPkgBadge');
+    if (pkgBadgeEl) {
+      pkgBadgeEl.className = 'badge-prod badge-pkg-accelerate';
+      pkgBadgeEl.textContent = '⭐ Accelerate ($697/mo)';
+    }
+    const prodBadgeEl = document.getElementById('activeLeadProdBadge');
+    if (prodBadgeEl) {
+      prodBadgeEl.className = 'badge-prod-sub badge-prod-sub-ava';
+      prodBadgeEl.textContent = '↳ Fallback: 🤖 Ava ($397/mo)';
+    }
+    const targetPkgEl = document.getElementById('activeLeadTargetPkg');
+    if (targetPkgEl) targetPkgEl.textContent = 'Accelerate Tier ($697/mo)';
+    const fallbackProdEl = document.getElementById('activeLeadFallbackProd');
+    if (fallbackProdEl) fallbackProdEl.textContent = 'Ava Voice AI ($397/mo)';
     document.querySelectorAll('.dyn-owner').forEach(el => el.textContent = '[Owner]');
     document.querySelectorAll('.dyn-company').forEach(el => el.textContent = '[Company]');
     document.querySelectorAll('.dyn-city').forEach(el => el.textContent = '[City]');
@@ -5434,6 +5546,26 @@ window.saveBrainSettings = function() {
     }
     showToast('Reset to generic script placeholders.');
   });
+
+  const btnToggleStrat = document.getElementById('btnToggleScriptStrategy');
+  if (btnToggleStrat) {
+    btnToggleStrat.addEventListener('click', () => {
+      if (!activeLead) {
+        showToast('Load a target lead first!');
+        return;
+      }
+      const strat = getLeadOfferStrategy(activeLead);
+      if (currentActiveProduct === 'bundle') {
+        switchProductScript(strat.fallbackKey);
+        btnToggleStrat.textContent = `🔄 Switch to Package Script (${strat.pkgName})`;
+        showToast(`📉 Switched to Standalone Fallback Script: ${strat.fallbackName}`);
+      } else {
+        switchProductScript('bundle');
+        btnToggleStrat.textContent = `🔄 Switch to Fallback Script (${strat.fallbackName})`;
+        showToast(`📦 Switched to Primary Package Script: ${strat.pkgName}`);
+      }
+    });
+  }
 
   // Product Switcher
   const prodSwitchBtns = document.querySelectorAll('.prod-switch-btn');
