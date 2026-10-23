@@ -6791,6 +6791,10 @@ window.saveBrainSettings = function() {
 
     conversationMemory = {
       turns: 0,
+      currentPhase: 'opener',
+      lastBossQuestion: (key === 'gatekeeper') ? 'ask_gatekeeper_what_company' : 'who_is_this',
+      topicsCovered: {},
+      usedReplies: new Set(),
       rapportUnlocked: false,
       painUnlocked: false,
       objectionUnlocked: false,
@@ -6946,168 +6950,416 @@ window.saveBrainSettings = function() {
   });
 
   // ============================================================
-  // 🧠 ADAPTIVE CONVERSATIONAL CONTRACTOR BRAIN ENGINE
+  // 🧠 ELITE ADAPTIVE CONVERSATIONAL CONTRACTOR BRAIN ENGINE (V3.0)
+  // State Machine, Contextual Recall, Zero Repetition & Multi-Intent Parsing
   // ============================================================
   let activeBrainMode = localStorage.getItem('vantorx_rpg_brain_mode') || 'adaptive';
   let llmProvider = localStorage.getItem('vantorx_rpg_llm_provider') || 'groq';
   let llmApiKey = localStorage.getItem('vantorx_rpg_llm_key') || '';
 
+  // Anti-Repetition Selector: guarantees a boss NEVER repeats the same phrase in a match
+  function pickAdaptiveReply(memory, pool, fallback) {
+    if (!Array.isArray(pool)) pool = [pool];
+    if (!memory.usedReplies) memory.usedReplies = new Set();
+    const fresh = pool.filter(text => !memory.usedReplies.has(text));
+    const chosen = (fresh.length > 0) ? fresh[Math.floor(Math.random() * fresh.length)] : (fallback || pool[0]);
+    memory.usedReplies.add(chosen);
+    return chosen;
+  }
 
   function parseSalesSpeech(text) {
     const t = text.toLowerCase().trim();
     return {
       t: t,
       greeting: /^(hey|hi|hello|good\s+morning|good\s+afternoon|howdy|what'?s\s+up|how\s+are\s+you|how's\s+it\s+going)/i.test(t),
-      permission: /(20\s*sec|30\s*sec|quick\s*(question|sec|call|minute)|hang\s*up|expecting\s*my\s*call|won'?t\s*keep\s*you|catch\s*you\s*at\s*a\s*bad\s*time|bad\s*time|timebox)/i.test(t),
-      identity: /(luke|vantorx|local\s*in|calling\s*out\s*of|florida|tampa|orlando|miami|palm\s*beach)/i.test(t),
+      permission_opener: /(20\s*sec|30\s*sec|got\s*20\s*seconds|should\s*i\s*hang\s*up|expecting\s*my\s*call|quick\s*(question|sec|call|minute)|won'?t\s*keep\s*you|catch\s*you\s*at\s*a\s*bad\s*time|bad\s*time|timebox)/i.test(t),
+      identity_luke: /(luke|vantorx|calling\s*out\s*of|local\s*in|florida|tampa|orlando|miami|palm\s*beach)/i.test(t),
+      
+      // Trade Leaks & Revenue Pain
+      after_hours_leak: /(after\s*hours|after\s*5|5\s*pm|6\s*pm|weekend|saturday|sunday|night|dinner|at\s*8\s*pm|9\s*pm|emergency|leak|flood|burst|outage|power\s*out|storm)/i.test(t),
+      direct_leak_question: /(where\s*does\s*(that|the)\s*(call|lead|job)\s*(go|ring)|who\s*answers|do\s*you\s*pick\s*up|does\s*someone\s*pick\s*up|does\s*it\s*go\s*to\s*voicemail|what\s*happens\s*to\s*(incoming|customer)\s*calls)/i.test(t),
+      lost_competitor_pain: /(competitor|next\s*(guy|contractor|roofer|plumber|electrician)|google|lost\s*(job|lead|money|revenue)|drywall|ceiling|panic|call\s*the\s*next)/i.test(t),
+      dollar_anchor: /(8\,?000|8k|10\,?000|10k|5\,?000|5k|6\,?000|6k|12\,?000|12k|15\,?000|15k|100\,?000|100k|high\s*ticket|thousand|\$)/i.test(t),
       trade_mention: /(roof|shingle|tile|flat\s*roof|hvac|a\/?c|air\s*condition|plumb|water\s*heater|drain|pipe|electr|panel|breaker|amp|contractor|job\s*site|crew|trailer|tpo|slab\s*leak)/i.test(t),
-      pain_missed_calls: /(miss|missed|voicemail|answering\s*machine|ring|after\s*hours|night|weekend|saturday|sunday|8\s*pm|9\s*pm|dinner|emergency|leak|flood|burst|outage|power\s*out)/i.test(t),
-      pain_lost_competitor: /(competitor|next\s*(guy|contractor|roofer|plumber)|google|lost\s*(job|lead|money|revenue)|drywall|ceiling|panic)/i.test(t),
-      dollar_anchor: /(8\,?000|8k|10\,?000|10k|5\,?000|5k|12\,?000|12k|15\,?000|15k|high\s*ticket|thousand|\$)/i.test(t),
-      solution_ava: /(ava|ai|receptionist|voice\s*(agent|bot|assistant)|phone\s*system|first\s*ring|picks\s*up|answer|24\/7|dispatch|bilingual|triage)/i.test(t),
-      agreement_shield: /(agree|completely\s*agree|100%|i\s*hear\s*you|makes\s*(total\s*)?sense|you'?re\s*right|fair\s*enough|understand|i'?d\s*feel\s*the\s*same|that'?s\s*(exactly\s*)?why)/i.test(t),
-      demo_challenge: /(561[\s\-\.]*813[\s\-\.]*8602|813[\s\-\.]*8602|punch\s*in|dial|call\s*(it|her|this|the\s*number)|test\s*her|demo\s*line|listen\s*to\s*her|sounds?\s*like\s*a\s*robot|lose\s*my\s*number|speakerphone)/i.test(t),
-      pricing_terms: /(397|697|299|price|cost|how\s*much|month|flat|no\s*contract|cancel\s*anytime|month\s*to\s*month|guarantee|pays?\s*for\s*itself|roi)/i.test(t),
-      closing_action: /(text|shoot\s*me\s*a\s*text|send\s*a\s*text|link|calendar|book|schedule|tomorrow|zoom|morning|afternoon|patch\s*through|transfer|cell\s*number)/i.test(t),
-      objection_answering_service: /(answering\s*service|front\s*desk|secretary|receptionist|wife\s*(answers|handles)|on\s*call)/i.test(t),
-      objection_ai_doubt: /(robot|fake|automated|computer|siri|alexa|press\s*1|hate\s*ai|broken\s*microwave)/i.test(t),
-      objection_busy: /(busy|slammed|on\s*a\s*job|email|send\s*an\s*email|send\s*info|driving)/i.test(t),
-      hesitation: /^(uh|um|er|idk|i\s*don'?t\s*know|wait)/i.test(t) || t.length < 5,
-      spam_pitch: /(buy|cheap\s*software|special\s*deal|special\s*promotion|pitch\s*you|are\s*you\s*the\s*decision\s*maker|do\s*you\s*have\s*15\s*minutes)/i.test(t),
+      
+      // Solution & Technology
+      solution_ava: /(ava|ai\s*receptionist|voice\s*ai|phone\s*system|front\s*desk\s*ai|1\s*ring|first\s*ring|24\/7|dispatch|bilingual|triage|calendar|books?\s*(into|appointments)|texts?\s*(your\s*)?crew)/i.test(t),
+      carrier_tech_71: /(\*71|star\s*71|conditional\s*forwarding|call\s*forwarding|don'?t\s*change\s*(your\s*)?number|keep\s*(your\s*)?number|no\s*porting|never\s*port|verizon|at&t|t\-mobile|carrier)/i.test(t),
+      setup_speed: /(48\s*hours|2\s*days|done\s*for\s*you|fast\s*setup|live\s*by\s*the\s*weekend|quick\s*setup|ready\s*in\s*48)/i.test(t),
+      
+      // Agreement Shield
+      agreement_shield: /(agree|completely\s*agree|100%|i\s*hear\s*you|makes\s*(total\s*)?sense|you'?re\s*(totally\s*)?right|fair\s*enough|understand|i'?d\s*feel\s*the\s*same|that'?s\s*(exactly\s*)?why|most\s*ai\s*sounds?\s*(awful|fake|robotic|garbage|clunky|telemarketer)|hate\s*(ai|robots?))/i.test(t),
+      
+      // Demo Challenge & Friction Killer
+      demo_challenge: /(561[\s\-\.]*813[\s\-\.]*8602|813[\s\-\.]*8602|punch\s*in|dial|call\s*(it|her|this|the\s*number|our\s*ai)|test\s*her|demo\s*line|live\s*ai\s*test|sounds?\s*like\s*a\s*robot|sounds?\s*robotic|never\s*talk\s*to\s*me\s*again|lose\s*my\s*number|speakerphone)/i.test(t),
+      
+      // Luke's Signature Takeaway Close & Time Lock
+      takeaway_close: /(sick\s*of\s*losing\s*money|losing\s*money|quick\s*(5|10|5\-10|5\s*to\s*10)\s*min|tailored\s*to\s*your\s*business|exactly\s*tailored|show\s*you\s*exactly\s*what\s*we\s*do|meeting\s*so\s*i\s*can\s*show|hop\s*on\s*a\s*quick)/i.test(t),
+      alternative_choice_time: /(morning\s*(or|before)|afternoon|4[\:\.]?30|4\s*pm|5\s*pm|9\s*am|tomorrow\s*(morning|afternoon)|easier\s*to\s*catch|before\s*crews\s*roll|later\s*in\s*the\s*afternoon)/i.test(t),
+      
+      // Pricing & Packages & Downsell
+      pricing_terms: /(397|697|1\,?297|799|price|cost|how\s*much|month|flat|no\s*contract|cancel\s*anytime|month\s*to\s*month|guarantee|pays?\s*for\s*itself|roi|no\s*setup|zero\s*setup)/i.test(t),
+      packages_pitch: /(accelerate|scale|essential|basic\s*package|full\s*package|front\-office|bundle|downsell|standalone|just\s*ava|just\s*the\s*website|799\s*flat|custom\s*website|speed\s*to\s*lead)/i.test(t),
+      
+      // Gatekeeper Reframe
+      dispatcher_praise: /(running\s*the\s*show|running\s*things|he'?s\s*out\s*(in\s*the\s*field|on\s*jobs)|turning\s*wrenches|deal\s*with\s*(all\s*the\s*)?chaos|quick\s*operational\s*question|personal\s*cell|best\s*direct\s*cell|direct\s*mobile|what\s*time\s*does\s*he\s*check\s*in)/i.test(t),
+      answering_service_flaws: /(answering\s*service|front\s*desk|4\s*minute\s*hold|wait\s*time|\$2\s*(a|\/)\s*min|misspell|notes\s*(sent\s*)?2\s*hours\s*late|lost\s*to\s*competitor|secretary)/i.test(t),
+      
+      // Objections Rebuttals
+      email_rebuttal: /(sit\s*in\s*your\s*inbox|behind\s*50\s*supply\s*receipts|supply\s*receipts|get\s*buried|shoot\s*a\s*(quick\s*)?text\s*instead|text\s*you\s*our\s*calendar|send\s*an\s*email)/i.test(t),
+      driving_rebuttal: /(eyes\s*on\s*the\s*road|keep\s*your\s*eyes|when\s*you\s*park|wrap\s*up|park\s*your\s*truck|tap\s*it\s*when\s*you|slammed|driving)/i.test(t),
+      
+      hesitation: /^(uh|um|er|idk|i\s*don'?t\s*know|wait)/i.test(t) || t.length < 4,
+      spam_pitch: /(cheap\s*software|special\s*deal|special\s*promotion|pitch\s*you|are\s*you\s*the\s*decision\s*maker|do\s*you\s*have\s*15\s*minutes)/i.test(t),
       curiosity_question: /\?|what\s+do\s+you|how\s+do\s+you|where\s+do|who\s+handles|do\s+you\s+guys/i.test(t)
     };
   }
 
   function generateAdaptiveContractorReply(bossKey, userText, memory, intents) {
+    if (!memory.topicsCovered) memory.topicsCovered = {};
+    if (!memory.usedReplies) memory.usedReplies = new Set();
     const turns = memory.turns;
 
+    // Detect if user is repeating an intent already resolved
+    if (memory.topicsCovered['demo_challenge'] && intents.demo_challenge && !intents.takeaway_close && !intents.alternative_choice_time) {
+      return pickAdaptiveReply(memory, [
+        `Yeah Luke, you already gave me the (561) 813-8602 number. What I'm asking is: when are we doing this quick meeting?`,
+        `I got the demo line written down right here, man. Tell me what time tomorrow you want to do this walkthrough.`
+      ]);
+    }
+    if (memory.topicsCovered['permission'] && intents.permission_opener && turns > 2) {
+      return pickAdaptiveReply(memory, [
+        `You already asked for 20 seconds, Luke! You got the floor -- tell me how you fix my after-hours calls.`,
+        `I already said I'm listening, man. Get to the point before I have to hop out of the truck.`
+      ]);
+    }
+
+    // ==========================================================
+    // BOSS 1: RICK "THE ROAD RAGER" (Tampa Roofer)
+    // ==========================================================
     if (bossKey === 'roofer') {
-      if (intents.spam_pitch) {
-        return "Look kid, I get 20 telemarketers a week calling my cell while I'm trying to work. I don't buy 'software promotions'. If you're a real human with a real service for roofing guys, tell me in plain English or lose my number.";
-      }
       if (intents.hesitation) {
-        return "Hey Luke, you still there? I don't get paid to sit here listening to dead air while I'm backing up a trailer. Speak up or I'm hanging up.";
+        return pickAdaptiveReply(memory, [
+          `Hey Luke, you still there? I don't get paid to sit here listening to dead air while I'm backing up a trailer. Speak up or I'm hanging up.`,
+          `Hello? Did you lose connection or did you freeze up? I got an F-250 idling in Tampa traffic, talk to me.`
+        ]);
       }
-      if (intents.closing_action && memory.demoUnlocked) {
-        return "Holy cow... she actually answered on the first ring and asked if I had active leaks in Hillsborough County. Alright Luke, you won me over. Shoot that text with the link to my cell right now.";
+      if (intents.spam_pitch) {
+        return pickAdaptiveReply(memory, [
+          `Look kid, I get 20 telemarketers a week calling my cell while I'm trying to work. I don't buy 'software promotions'. If you're a real human with a real service for roofing guys, tell me in plain English or lose my number.`,
+          `Stop right there. I don't do 'special promotions'. Tell me what you actually do for roofers or let me get back to my crew.`
+        ]);
       }
+
+      // CLOSE: Luke's Takeaway Close or Alternative-Choice Time Lock
+      if (intents.takeaway_close || intents.alternative_choice_time || (intents.closing_action && memory.demoUnlocked)) {
+        memory.agreementUnlocked = true;
+        memory.currentPhase = 'victory';
+        return pickAdaptiveReply(memory, [
+          `You know what, Luke? You're a straight shooter. I am sick of losing money and watching $8,000 emergency roof jobs roll to the next guy in Tampa. Tomorrow afternoon around 4:30 works perfect -- I'll be off the job site in Clearwater. Shoot that demo link and calendar invite to my cell right now.`,
+          `Fair deal, Luke. That's a no-bullshit offer. I've got 10 minutes tomorrow afternoon around 4:30 right after we wrap our shingle delivery. Send that text to my cell and I'll dial your AI line the second I park.`
+        ]);
+      }
+
+      // DEMO CHALLENGE: Live test line (561) 813-8602 & Friction Killer
       if (intents.demo_challenge) {
-        return "(Sound of truck idling) Alright, smart guy. You're putting your money where your mouth is. I got my speakerphone on right now. 5-6-1... 8-1-3... 8-6-0-2. Ringing it now... let's see how this thing sounds.";
+        memory.demoUnlocked = true;
+        memory.topicsCovered['demo_challenge'] = true;
+        memory.lastBossQuestion = 'ask_closing';
+        return pickAdaptiveReply(memory, [
+          `(Sound of truck idling) Alright, smart guy. You're putting your money where your mouth is. I got my speakerphone on right now. 5-6-1... 8-1-3... 8-6-0-2. Ringing it now... let's see how this thing sounds.`,
+          `(Truck door thuds shut) 'If she sounds robotic, you can never talk to me again.' I respect that bet, Luke. I just tapped (561) 813-8602 into my cell. (Pause) Holy cow... she picked up on the first ring and asked if I had active leaks in Hillsborough County. Alright Luke, she's not a joke. What's the damage and what's next?`,
+          `(Radio chatter) You've got balls putting your reputation on the line like that. I'm saving (561) 813-8602 in my phone right now. When we hang up, I'm dialing her on speaker. If she sounds like a robot, you lose this number forever.`
+        ]);
       }
-      if (intents.pricing_terms) {
-        return "Look, zero contracts and $397 a month is pocket change in roofing — one single $10,000 shingle replacement pays for the entire year. But I've been burned by marketing agencies before. How fast does this actually get set up?";
+
+      // CARRIER *71 & TECHNICAL MASTERY
+      if (intents.carrier_tech_71) {
+        memory.topicsCovered['carrier_tech_71'] = true;
+        memory.lastBossQuestion = 'ask_robot_ai_doubt';
+        return pickAdaptiveReply(memory, [
+          `(Air brake hiss) Wait a second... so I don't have to switch my Verizon carrier or port my business number? You just dial star-7-1 to forward after-hours and busy lines? Okay, that eliminates a massive headache. But look... what happens when an angry homeowner calls with water pouring through their drywall? Does she sound like an annoying computer?`,
+          `(Tools clanking) Conditional forwarding with star-7-1? Okay, that's actually clean. I thought you were gonna try to port my company line like these other clowns. But does she really sound like a live human dispatcher?`
+        ]);
       }
-      if (intents.objection_ai_doubt) {
-        if (intents.agreement_shield) {
-          return "Ha! At least you didn't bullshit me like the other sales reps. So you're saying she doesn't sound like Siri? What happens when an angry homeowner calls with water pouring into their kitchen?";
-        }
-        return "Don't tell me AI is great, kid. My customers in South Tampa are in their 50s and 60s. They hate automated press-1 menus. They want to talk to Rick, not a robot.";
+
+      // TOTAL AGREEMENT SHIELD: Validating skepticism
+      if (intents.agreement_shield) {
+        memory.objectionUnlocked = true;
+        memory.topicsCovered['agreement_shield'] = true;
+        memory.lastBossQuestion = 'ask_demo_challenge';
+        return pickAdaptiveReply(memory, [
+          `(Chuckles) Ha! Finally a tech guy who doesn't blow smoke. Yeah, 99% of AI sounds like an automated telemarketer from India. So how is Ava different? What happens when a commercial warehouse roof is leaking at midnight?`,
+          `(Grins) Well at least you're honest about it. Every other sales rep claims their robot sounds like Morgan Freeman. So how do I test her right now to see if she sounds real?`
+        ]);
       }
-      if (intents.pain_lost_competitor || (intents.pain_missed_calls && intents.dollar_anchor)) {
-        return "Damn it... you're not wrong about that. Homeowners panic when water is leaking through their drywall. If it hits my voicemail, they just tap the next roofer on Google. But what am I supposed to do, pay a full-time girl $4,000 a month to sit in my house at 9 PM on Saturday?";
+
+      // SETUP SPEED & ONBOARDING
+      if (intents.setup_speed) {
+        memory.topicsCovered['setup_speed'] = true;
+        memory.lastBossQuestion = 'ask_pricing';
+        return pickAdaptiveReply(memory, [
+          `48 hours? That's fast. Most tech guys take a month just to send a login. So while my crews are on a roof in Tampa, you guys build and test the whole thing? How much is this actually gonna run me every month?`,
+          `Live in 48 hours with zero work on my end? Alright, that's legit. But what's the catch on pricing? Do you lock me into a 12-month agency contract?`
+        ]);
       }
-      if (intents.pain_missed_calls) {
-        return "Look, my crews knock off at 5 PM. After that, my cell rings to voicemail while I'm eating dinner with my wife. When a thunderstorm rolls through Tampa at 8 PM on a Saturday, calls come in. Most folks leave a message if they really want an estimate... don't they?";
+
+      // PRICING & PACKAGES
+      if (intents.pricing_terms || intents.packages_pitch) {
+        memory.topicsCovered['pricing'] = true;
+        memory.lastBossQuestion = 'ask_setup_speed';
+        return pickAdaptiveReply(memory, [
+          `Look, zero contracts and $397 a month is pocket change in roofing -- literally one $8,000 shingle replacement pays for the entire year. But I've been burned by marketing agencies before. How fast does this actually get set up?`,
+          `Wait, zero setup fees and month-to-month? Most agencies try to hit me with a $2,500 'onboarding' fee before they do anything. So you earn your business 30 days at a time? That's fair.`
+        ]);
       }
-      if (intents.trade_mention) {
-        return "Yeah, we run architectural shingles, modified bitumen, and standing seam metal. 3 crews out today from Brandon to Clearwater. Why, what does that have to do with why you're calling my mobile?";
+
+      // OBJECTION REBUTTALS: Supply receipts & Driving
+      if (intents.email_rebuttal) {
+        memory.topicsCovered['email_rebuttal'] = true;
+        memory.lastBossQuestion = 'ask_demo_challenge';
+        return pickAdaptiveReply(memory, [
+          `(Laughs out loud) Man, you're dead right about that. I got 40 unopened invoices from ABC Supply sitting in my Gmail right now. Alright, fine. Text me the direct demo number right now, let me see what you've got.`,
+          `(Chuckles) Ha! Ain't that the truth. I haven't looked at my email in 3 days. Alright Luke, give me the 20-second punchline -- how does this put money in my pocket?`
+        ]);
       }
-      if (intents.permission) {
-        return "Alright, Luke. I appreciate you not beating around the bush. You got 20 seconds before I have to guide this trailer into the supply yard. What's on your mind?";
+      if (intents.driving_rebuttal) {
+        memory.topicsCovered['driving_rebuttal'] = true;
+        memory.lastBossQuestion = 'ask_closing';
+        return pickAdaptiveReply(memory, [
+          `(Brake hiss) Good call, almost backed into a forklift. Text received on my cell. I'll tap it when I park. Are you calling me at 4:30 or what?`
+        ]);
       }
-      if (intents.greeting && turns <= 1) {
-        return "(Heavy diesel truck idling & horn honk) Sweating through my shirt in Tampa traffic, man. Who is this and what's going on?";
+
+      // AFTER-HOURS REVENUE HOOK
+      if (intents.after_hours_leak || intents.lost_competitor_pain || (intents.dollar_anchor && intents.direct_leak_question)) {
+        memory.painUnlocked = true;
+        memory.currentPhase = 'solution_tech';
+        memory.lastBossQuestion = 'ask_how_it_connects_or_ava';
+        return pickAdaptiveReply(memory, [
+          `(Sound of truck idling) Damn it... you're not wrong about that. Homeowners panic when water is pouring through their drywall during a storm. If it hits voicemail, they just tap the next roofer on Google. But what am I supposed to do, pay a full-time receptionist $4,000 a month to sit in my house at 9 PM on Saturday?`,
+          `(Sighs) Look, you hit the nail right on the head. When storms roll through Tampa at 8 PM on a Saturday, my phone rings while I'm at dinner with my wife. Half of them don't leave a message -- they hire whoever answers live. How does your thing actually fix that without driving me crazy?`,
+          `(Radio chatter) Yeah, that hurts. Lost a $12,000 tile repair last month because I was up on a ladder in Clearwater and didn't check voicemail until 6 PM. By then, another guy was already on their roof. What's your setup?`
+        ]);
       }
-      if (intents.curiosity_question) {
-        return "My biggest headache? Finding reliable labor that shows up on Monday, and trying to return 15 missed calls while I'm standing on a 6/12 pitch roof in 95-degree heat. What's your solution?";
+
+      // PERMISSION OPENER
+      if (intents.permission_opener) {
+        memory.rapportUnlocked = true;
+        memory.currentPhase = 'leak_hook';
+        memory.lastBossQuestion = 'ask_leak_pain';
+        return pickAdaptiveReply(memory, [
+          `(Heavy diesel truck idling) Alright, Luke. I appreciate you not beating around the bush like the other sales clowns. You got 20 seconds before I have to guide this trailer into the supply yard. What's on your mind?`,
+          `(Air brake hiss) Ha, straight shooter. Usually I hang up in 2 seconds, but you got 20 seconds while I sit in this Tampa traffic. What do you have for roofing guys?`,
+          `(Engine rumble) 20 seconds starts right now, man. I got 3 roofing crews out in Hillsborough County and my cell's blowing up. What's this about?`
+        ]);
       }
-      if (memory.bossResistance < 40) {
-        return "Alright, Luke. You actually know how roofing works and you're not wasting my time. What's the next step? How do I hear this Ava thing?";
-      } else if (memory.bossResistance < 70) {
-        return "I hear you, man. But every tech guy who calls me promises the moon. How does this thing actually connect to my current cell phone?";
+
+      if (memory.bossResistance < 45) {
+        return pickAdaptiveReply(memory, [
+          `Alright, Luke. You actually know how roofing works and you're not wasting my time. What's the next step? How do I hear this Ava thing?`,
+          `Look, I'm liking what I'm hearing. If you can show me this live tomorrow, I'm open to it. When do we hop on?`
+        ]);
       }
-      return "Alright, make your point. I got a trailer to unload in about 2 minutes. What do you have for roofing contractors?";
+
+      return pickAdaptiveReply(memory, [
+        `Look Luke, my crews are wrapping up a 40-square architectural shingle job in Tampa right now. I don't have time for a generic sales pitch. What specific problem does this solve for my roofing business?`,
+        `I run 3 crews from Brandon to Clearwater, man. I get 15 cold calls a day. Tell me how you stop me from losing jobs or let me get back to unloading.`,
+        `Alright, I'm listening. But make it plain English -- how does this put more revenue in my pocket this weekend?`
+      ]);
     }
 
+    // ==========================================================
+    // BOSS 2: KAREN "THE IRON GATEKEEPER" (Orlando HVAC Front Desk)
+    // ==========================================================
     if (bossKey === 'gatekeeper') {
-      if (intents.spam_pitch) {
-        return "We do not accept unsolicited sales calls or vendor solicitations. If you'd like to leave your company website, I can pass it along, but Mr. Davis does not take cold calls.";
+      // DISPATCHER REFRAME: Praising her running the show while owner is in the field
+      if (intents.dispatcher_praise) {
+        memory.rapportUnlocked = true;
+        memory.painUnlocked = true;
+        memory.lastBossQuestion = 'ask_gatekeeper_how_it_helps';
+        return pickAdaptiveReply(memory, [
+          `(Typing stops abruptly) Honestly... thank you so much for recognizing that! Nobody realizes how insane it is trying to manage 14 technicians across Orange and Seminole counties while Mike is out turning wrenches on commercial rooftop units. And to answer your question: after 5 PM, calls forward to our third-party answering service, and they are an absolute disaster. They misspelled customer addresses and sent notes two hours late! We lost two whole AC replacements last Friday. What's your direct cell, Luke? Mike really needs to look at this.`,
+          `(Audible sigh of relief) Well, finally a sales rep with some manners. Yes, I run the dispatch board, handle the parts ordering, and deal with all the customer chaos. Right now, weekend calls forward to our on-call tech, but when they're stuck in an attic in 115-degree heat, they can't answer. Callers hang up and call the next contractor. What's your system, Luke?`
+        ]);
       }
-      if (intents.closing_action && memory.demoUnlocked) {
-        return "Mr. Davis has a 10-minute window open tomorrow at 9:15 AM before his team dispatch walk. I'll put you on his calendar, Luke. What email should I send the invite to?";
+
+      // CLOSE / CALENDAR BOOKING
+      if (intents.takeaway_close || intents.alternative_choice_time || (intents.closing_action && memory.painUnlocked)) {
+        memory.agreementUnlocked = true;
+        memory.currentPhase = 'victory';
+        return pickAdaptiveReply(memory, [
+          `Mr. Davis has a 10-minute window open tomorrow morning at 9:15 AM right before his dispatch walk. I'm putting you on his calendar right now, Luke. What email should I send the invite to?`,
+          `You know what? Mike is in his truck heading back from a job in Altamonte right now. His direct mobile number is (407) 848-1920. Give him a call right now and tell him Karen told you to call.`
+        ]);
       }
+
+      // DEMO CHALLENGE ON DESK PHONE
       if (intents.demo_challenge) {
-        return "I'm dialing it right now from our front desk desk phone... (561) 813-8602. Hold on one moment while I listen to the greeting.";
+        memory.demoUnlocked = true;
+        memory.agreementUnlocked = true;
+        memory.currentPhase = 'victory';
+        return pickAdaptiveReply(memory, [
+          `Hold on, I'm dialing it right now from our front desk line on speaker... (561) 813-8602. (Line rings once, clicks) 'Thank you for calling Premier Mechanical...' Oh wow, that answered in literally one ring. And she asked if water was leaking from the air handler! Okay Luke, that is incredible. I'm putting you on Mike's schedule for tomorrow at 9:15 AM.`,
+          `Dialing it now on line 2... 5-6-1... 8-1-3... 8-6-0-2. Wow, she sounds like a real person. She actually asked for the customer's AC unit brand. I'm impressed. I'll patch you through to Mr. Davis's cell right now.`
+        ]);
       }
-      if (intents.objection_answering_service) {
-        return "We used an answering service last summer and it was an absolute nightmare. They misspelled customer addresses and didn't know the difference between a blown capacitor and a compressor.";
+
+      // ANSWERING SERVICE COMPARISON
+      if (intents.answering_service_flaws) {
+        memory.objectionUnlocked = true;
+        return pickAdaptiveReply(memory, [
+          `You hit the nail right on the head! Our current answering service puts callers on hold for 4 minutes and charges us $2 a minute. Callers hang up and call someone else. Does Ava actually book appointments onto our Google Calendar?`,
+          `We fired our last call center because they couldn't even spell evaporator coil. Does your AI actually know HVAC terminology?`
+        ]);
       }
-      if (intents.pain_missed_calls) {
-        return "Well, after 6 PM our calls forward to whoever the on-call technician is. But when they're in an attic in 110-degree heat, they obviously can't answer the phone. That does cause dropped calls.";
+
+      // PERMISSION / GREETING
+      if (intents.greeting || intents.permission_opener) {
+        return pickAdaptiveReply(memory, [
+          `Premier Mechanical, Karen speaking. Mr. Davis is currently tied up in a production meeting. What company are you with and what is this regarding?`,
+          `Good morning, Premier Mechanical. He is out in the field on a job site today. Is this regarding our current dispatch software or a new project?`
+        ]);
       }
-      if (intents.identity && intents.permission) {
-        return "Good morning, Luke. What company did you say you were calling with? Mr. Davis is currently in a production meeting, but is this regarding our current dispatch software?";
-      }
-      if (intents.curiosity_question) {
-        return "We have 14 technicians covering Orange and Seminole counties. We handle residential replacements and commercial rooftop units.";
-      }
-      if (memory.bossResistance < 50) {
-        return "Honestly, if Ava can actually triage service calls and book directly onto our calendar without putting people on hold, Mr. Davis would want to see this.";
-      }
-      return "Mr. Davis is very protective of his schedule. If you can explain in 30 seconds how this helps our dispatching, I might be able to find 10 minutes for you.";
+
+      return pickAdaptiveReply(memory, [
+        `Mr. Davis is very protective of his schedule. If you can explain in 30 seconds how this helps our dispatching, I might be able to find 10 minutes for you.`,
+        `We have 14 technicians covering Orange and Seminole counties. If you're selling generic marketing, we aren't interested. What is this regarding?`
+      ]);
     }
 
+    // ==========================================================
+    // BOSS 3: MIKE "THE ROBOT CRUSHER" (West Palm Master Electrician)
+    // ==========================================================
     if (bossKey === 'skeptic') {
-      if (intents.spam_pitch) {
-        return "Stop right there, son. I'm a master electrician, not a software buyer. Don't give me rehearsed sales talk or I'm hanging up.";
+      if (intents.hesitation) {
+        return pickAdaptiveReply(memory, [
+          `Hey son, you got stage fright? I'm staring into an energized 200-amp service panel in West Palm. Speak up or I'm putting the phone down.`,
+          `Hello? If you don't have something to say, don't waste my battery.`
+        ]);
       }
-      if (intents.closing_action && memory.demoUnlocked) {
-        return "I'll be damned... she answered on the first ring, asked if it was 200A residential or commercial, and scheduled an emergency slot. Alright Luke, you proved your point. Text me your info.";
+
+      // CLOSE: Luke's Takeaway Close or Alternative Choice
+      if (intents.takeaway_close || intents.alternative_choice_time) {
+        memory.agreementUnlocked = true;
+        memory.currentPhase = 'victory';
+        return pickAdaptiveReply(memory, [
+          `Fair deal, Luke. I respect a man who stands behind his work without blowing smoke. I'm sick of watching $5,000 panel cutovers roll to my competitor down in Boynton Beach. Tomorrow morning at 9:00 AM works before my crew rolls. Text me that link right now.`,
+          `You're a straight shooter, Luke. I like that. Put me down for tomorrow morning at 9 AM. If your AI handles electrical dispatching like you say, you've got yourself a new client. Text me the link.`
+        ]);
       }
+
+      // DEMO CHALLENGE: Live Test
       if (intents.demo_challenge) {
-        return "(Tools clanking) Alright, you're pretty confident. Shoot that text to my cell right now with (561) 813-8602. When we hang up, I'm tapping it immediately. If she stumbles or sounds like a robot, you lose this number forever.";
+        memory.demoUnlocked = true;
+        memory.lastBossQuestion = 'ask_closing';
+        return pickAdaptiveReply(memory, [
+          `(Tools clank down) Alright, you've got guts putting your reputation on the line. Shoot that text with (561) 813-8602 to my cell right now. The second I strip this 2/0 copper wire, I'm dialing her on speaker. If she stumbles or sounds like a robot, you lose this number forever.`,
+          `(Sound of breaker clicking) 'If she sounds robotic, you never talk to me again.' Alright Luke, that's a fair bet. I just dialed (561) 813-8602 on speaker... (Pause) Well I'll be damned. She answered in one ring, asked if it was 200-amp residential or commercial, and asked if sparks were actively flying. Alright Luke, you proved your point. What's the pricing and next step?`
+        ]);
       }
-      if (intents.objection_ai_doubt) {
-        if (intents.agreement_shield) {
-          return "Ha! Finally, a tech guy who doesn't lie to my face. Yeah, most AI sounds like robotic telemarketer junk. So how did you train her on electrical terminology?";
-        }
-        return "Every AI I've ever heard sounds like a soulless computer. Homeowners with sparks flying out of their breaker panel want a real human being who understands amperage.";
+
+      // CARRIER *71 & TECHNICAL MASTERY
+      if (intents.carrier_tech_71) {
+        return pickAdaptiveReply(memory, [
+          `Conditional call forwarding with *71? Okay, that's smart -- I'm not switching my business numbers or porting anything. And you trained her to ask about breaker panel sizes and generator transfer switches? How do I hear this thing live?`,
+          `Zero carrier porting? That's relief. I've had my West Palm numbers for 22 years, I'm not giving them up to an app. What's the number to test her?`
+        ]);
       }
-      if (intents.dollar_anchor || intents.pain_missed_calls) {
-        return "Look, standard rewires we're booked out 3 weeks. But emergency panel burnouts or storm generator cutovers? Those are $4,000 to $8,000 cash jobs. Those hurt when they slip through the cracks.";
+
+      // TOTAL AGREEMENT SHIELD
+      if (intents.agreement_shield) {
+        memory.objectionUnlocked = true;
+        return pickAdaptiveReply(memory, [
+          `(Chuckles) Ha! Finally an IT guy who doesn't lie to my face. Yeah, most AI sounds like robotic telemarketer junk. So how did you train her on electrical terminology? What happens when a commercial building loses a phase?`,
+          `At least you admit it! Every other vendor tells me their computer sounds like a real electrician. How does she know a GFCI from a main lug?`
+        ]);
       }
-      if (intents.permission) {
-        return "Luke, is it? Look, I'm staring into an open 200-amp service panel right now. Tell me what you've got in 20 seconds, plain English.";
+
+      // LEAK HOOK ($8k panel burnout / Saturday night outage)
+      if (intents.after_hours_leak || intents.dollar_anchor) {
+        memory.painUnlocked = true;
+        return pickAdaptiveReply(memory, [
+          `Look, standard residential rewires we're booked out 3 weeks. But emergency panel burnouts or storm generator cutovers? Those are $4,000 to $8,000 cash jobs. When that rings at 8 PM on a Saturday and hits voicemail, yeah, they call the 24/7 electrician on Google. But every AI I've ever heard sounds like a soulless computer. Homeowners with sparks flying out of their breaker panel want a real human being who understands amperage.`,
+          `You're not wrong about emergency cutovers. After severe storms in Palm Beach, my phone rings 50 times in two hours. We can't answer them all. But how does a computer know what's a true fire hazard?`
+        ]);
       }
-      if (memory.bossResistance < 50) {
-        return "Alright, I'm listening. If this thing actually knows how to ask about breaker sizes and doesn't sound like a robot, maybe it's worth testing.";
+
+      // PERMISSION OPENER
+      if (intents.permission_opener) {
+        memory.rapportUnlocked = true;
+        return pickAdaptiveReply(memory, [
+          `(Tools clanking) Luke, is it? Look, I'm staring into an open 200-amp service panel right now in West Palm. Tell me what you've got in 20 seconds, plain English.`,
+          `20 seconds, go. Don't tell me about algorithms, tell me how it keeps my trucks busy.`
+        ]);
       }
-      return "We've been in business in Palm Beach for 22 years without fancy software. Why do I need an AI answering my phone?";
+
+      return pickAdaptiveReply(memory, [
+        `We've been in business in Palm Beach for 22 years without fancy software. Why do I need an AI answering my phone?`,
+        `Look son, I'm a master electrician, not a tech investor. If you've got something that actually works for trade contractors, spit it out.`
+      ]);
     }
 
+    // ==========================================================
+    // BOSS 4: DAVE "THE BUDGET DRAGON" (Miami Plumber)
+    // ==========================================================
     if (bossKey === 'price') {
-      if (intents.closing_action && memory.demoUnlocked) {
-        return "Alright Luke, the math is undeniable. $397 with no contract pays for itself on the first water heater changeout. Shoot that link to my cell right now.";
+      // CLOSE: Luke's Takeaway Close or Alternative Choice
+      if (intents.takeaway_close || intents.alternative_choice_time) {
+        memory.agreementUnlocked = true;
+        memory.currentPhase = 'victory';
+        return pickAdaptiveReply(memory, [
+          `Alright Luke, the math is undeniable. $397 with no contract pays for itself on the first water heater changeout. Shoot that link to my cell right now, let's lock down tomorrow morning at 9 AM.`,
+          `You got a deal, Luke. I am sick of losing emergency calls to the franchise rooter down the road. Put me down for tomorrow afternoon at 4:30. Text me the invite.`
+        ]);
       }
+
+      // DEMO CHALLENGE: Live Test
       if (intents.demo_challenge) {
-        return "Let me call it right now while you're on the line. 5-6-1... 8-1-3... 8-6-0-2. Ringing now... let's see what she's got.";
+        memory.demoUnlocked = true;
+        return pickAdaptiveReply(memory, [
+          `Let me call it right now while you're on the line. 5-6-1... 8-1-3... 8-6-0-2. Ringing now... (Pause) 'Thanks for calling...' Holy cow, she picked up on the first ring. And she asked if water was actively flooding the floor. Alright Luke, she's legitimate. What's the setup fee and contract terms?`,
+          `I just called (561) 813-8602 from my desk phone. She answered before the second ring and asked for my zip code in Miami. Alright, you backed it up. How much is the onboarding fee?`
+        ]);
       }
+
+      // PRICING & NO CONTRACTS ($397 / $0 setup)
       if (intents.pricing_terms) {
-        return "Wait, $397 a month flat with zero long-term contract? No setup fee extortion? If she books just one slab leak or water heater ($3,500), she pays for almost the whole year.";
+        memory.topicsCovered['pricing'] = true;
+        return pickAdaptiveReply(memory, [
+          `Wait a minute... $397 a month flat with zero long-term contract? No setup fee extortion? If she books just one slab leak or water heater changeout ($3,500), she pays for almost the whole damn year. But how do I know she actually answers fast enough before they hang up?`,
+          `Zero setup fees and month-to-month? That takes the risk off the table. But does she answer within 1 ring every single time?`
+        ]);
       }
-      if (intents.pain_missed_calls || intents.dollar_anchor) {
-        return "Look, a slab leak or commercial drain backup is $5,000 to $12,000. When that calls at 11 PM on a Sunday and rings to voicemail, yeah, they call the 24/7 rooter guy down the street.";
+
+      // LEAK HOOK (Slab Leaks / Burst Pipes)
+      if (intents.after_hours_leak || intents.dollar_anchor) {
+        memory.painUnlocked = true;
+        return pickAdaptiveReply(memory, [
+          `Look, a slab leak or commercial drain backup is $5,000 to $12,000. When that calls at 11 PM on a Sunday and rings to voicemail, yeah, they call the 24/7 rooter guy down the street. But I'm not looking to spend thousands of dollars on software. What's the damage?`,
+          `Water heater bursts at 2 AM are our bread and butter. If callers hit voicemail, we lose $3,500 instantly. What's the cost to fix this?`
+        ]);
       }
-      if (intents.permission) {
-        return "Alright, 20 seconds. What is it? No fluff, tell me how it puts cash in my pocket.";
+
+      // PERMISSION OPENER
+      if (intents.permission_opener) {
+        memory.rapportUnlocked = true;
+        return pickAdaptiveReply(memory, [
+          `Dave speaking. I get 20 telemarketers a day trying to sell me SEO junk. You got 20 seconds, tell me what you do.`,
+          `20 seconds starts right now. No fluff, tell me how it puts cash in my pocket.`
+        ]);
       }
-      if (memory.bossResistance < 50) {
-        return "Look, I like that there's no 12-month lock-in contract. But how do I know she actually answers fast enough before they hang up?";
-      }
-      return "Dave here. I get 20 telemarketers a day. What's the price and what do you do?";
+
+      return pickAdaptiveReply(memory, [
+        `Cut the sales fluff, Luke. How much is this thing gonna cost me every single month and what's the ROI?`,
+        `I've got 6 plumbing trucks in Miami. If this doesn't generate positive cash flow in 30 days, I don't want it. What's the pitch?`
+      ]);
     }
 
-    return "Alright, I hear you. But make it quick — how does this help my trade business today?";
+    return pickAdaptiveReply(memory, [
+      `Alright, I hear you. But make it quick -- how does this stop my trade business from losing money today?`,
+      `I'm listening Luke, but get straight to the point -- what's the bottom line for my crews?`
+    ]);
   }
 
   function evaluateSalesTurn(userText, memory, currentBoss) {
@@ -7133,8 +7385,8 @@ window.saveBrainSettings = function() {
       return {
         grade: 'F',
         score: 25,
-        critique: 'Fatal telemarketer trap! Words like "buy", "software promotion", or "decision maker" instantly trigger sales defense.',
-        prescription: 'Anchor to their missed emergency calls and lost revenue, never "buying software".',
+        critique: 'Fatal telemarketer trap! Words like "cheap software", "special promotion", or "decision maker" instantly trigger sales defense.',
+        prescription: 'Anchor directly to their missed emergency calls and lost revenue, never "buying software".',
         damage: 0,
         xp: 0,
         healBoss: 15,
@@ -7145,58 +7397,94 @@ window.saveBrainSettings = function() {
     }
 
     let score = 50;
-    let damage = 18;
+    let damage = 20;
     let counterDmg = 0;
     let playerHeal = 0;
     let critique = '';
     let prescription = '';
 
-    if (intents.permission || (intents.greeting && intents.identity)) {
+    // S-RANK: Luke's Takeaway Close
+    if (intents.takeaway_close || (intents.alternative_choice_time && memory.demoUnlocked)) {
+      memory.agreementUnlocked = true;
+      score = 100;
+      damage += 50;
+      playerHeal += 25;
+      critique = '🏆 MASTER RAINMAKER CLOSE! You executed Luke\'s Takeaway Close ("So if you\'re sick of losing money, let\'s hop on a quick 5 to 10-minute meeting..."). Alternative-choice time lock flipped the frame from begging to qualifying!';
+      prescription = 'Close finalized cleanly. Lock the calendar invite and text the demo link immediately!';
+    }
+
+    // S-RANK: Zero-Risk Demo Challenge & Live Test Line
+    else if (intents.demo_challenge) {
+      memory.demoUnlocked = true;
+      score += 45;
+      damage += 35;
+      playerHeal += 20;
+      critique = '🎯 ZERO-RISK CHALLENGE! You challenged the contractor to test Ava on (561) 813-8602 ("if she sounds robotic, you can never talk to me again"). Putting your money where your mouth is completely shattered their skepticism!';
+      prescription = 'Now deliver Luke\'s Takeaway Close: <em>"So if you\'re sick of losing money, let\'s hop on a quick 5-10 minute meeting. Morning or afternoon around 4:30?"</em>';
+    }
+
+    // S-RANK: Carrier *71 Technical Explanation
+    else if (intents.carrier_tech_71) {
+      score += 40;
+      damage += 30;
+      playerHeal += 15;
+      critique = '⚡ TECHNICAL MASTERY! Explaining *71 conditional forwarding without number porting or carrier switching completely destroyed technical hesitation.';
+      prescription = 'Now pivot to the live demo test on (561) 813-8602 so they hear her voice firsthand.';
+    }
+
+    // S-RANK: Dispatcher Reframe (Gatekeeper Praise)
+    else if (intents.dispatcher_praise && currentBoss.key === 'gatekeeper') {
       memory.rapportUnlocked = true;
-      score += 25;
-      damage += 15;
-      critique = 'Excellent disarm! You respected the contractor\'s busy schedule and earned control of the call.';
+      memory.painUnlocked = true;
+      score += 45;
+      damage += 40;
+      playerHeal += 20;
+      critique = '🛡️ FLAWLESS DISPATCHER EXTRACTION! Praising the front desk ("running the show while he\'s out in the field") and asking an operational question completely bypassed gatekeeper resistance!';
+      prescription = 'Now lock in the owner\'s direct cell or secure the 9:15 AM calendar slot!';
+    }
+
+    // A-RANK: Total Agreement Shield
+    else if (intents.agreement_shield) {
+      memory.objectionUnlocked = true;
+      score += 35;
+      damage += 25;
+      playerHeal += 15;
+      critique = 'Masterful Total Agreement Shield! You validated their skepticism ("I agree 100%, most AI sounds robotic"), instantly diffusing emotional resistance.';
+      prescription = 'Now challenge them to the live line: <em>"Dial our live demo line (561) 813-8602. If she sounds like a robot, you never have to talk to me again."</em>';
+    }
+
+    // A-RANK: Trade Pain & After-Hours Leak Hook
+    else if (intents.after_hours_leak || intents.lost_competitor_pain || (intents.dollar_anchor && intents.direct_leak_question)) {
+      memory.painUnlocked = true;
+      score += 35;
+      damage += 25;
+      critique = 'Lethal trade pain hook! You highlighted missed after-hours emergency calls and high-ticket lost revenue.';
+      prescription = 'Explain how Ava solves this in 1 ring with *71 conditional forwarding, or challenge them to test her live.';
+    }
+
+    // A-RANK: Permission Opener
+    else if (intents.permission_opener || (intents.greeting && intents.identity_luke)) {
+      memory.rapportUnlocked = true;
+      score += 30;
+      damage += 20;
+      critique = 'Excellent disarm! You respected the contractor\'s busy schedule with the 20-second permission opener and took control of the call.';
       prescription = 'Now pivot straight to trade pain: <em>"When an emergency leak calls at 8 PM on a Saturday, where does that call ring right now?"</em>';
     }
 
-    if (intents.pain_missed_calls || intents.dollar_anchor || intents.pain_lost_competitor) {
-      memory.painUnlocked = true;
+    // A-RANK: Pricing & Packages ROI
+    else if (intents.pricing_terms || intents.packages_pitch) {
       score += 25;
-      damage += 20;
-      critique = 'Lethal trade pain hook! You highlighted missed after-hours calls and high-ticket lost revenue.';
-      prescription = 'If he pushes back on robots, use the Total Agreement Shield: <em>"I completely agree with you! Most AI sounds fake..."</em>';
+      damage += 18;
+      critique = 'Clear ROI anchoring! Highlighting the $397 flat rate with zero setup fees and no contracts removes financial hesitation.';
+      prescription = 'Remind them that one single caught job pays for the entire year of Ava.';
     }
 
-    if (intents.agreement_shield) {
-      memory.objectionUnlocked = true;
-      score += 20;
-      damage += 15;
-      playerHeal += 15;
-      critique = 'Masterful Total Agreement Shield! You validated his skepticism, instantly diffusing conversational tension.';
-      prescription = 'Now deliver the live demo challenge: <em>"I just texted our live demo line (561) 813-8602 directly to your cell. Tap it on speaker the second you park to hear Ava answer on ring one."</em>';
-    }
-
-    if (intents.demo_challenge) {
-      memory.demoUnlocked = true;
-      score += 30;
-      damage += 25;
-      critique = 'Irresistible zero-risk challenge! You challenged him to catch Ava sounding robotic on (561) 813-8602.';
-      prescription = 'Lock down the close: Offer to text him the link or schedule a 10-minute walkthrough tomorrow.';
-    }
-
-    if (intents.pricing_terms) {
-      score += 15;
-      damage += 10;
-      critique = 'Clear price anchoring! Highlighting the $397 flat rate with zero long-term contracts removes financial hesitation.';
-      prescription = 'Remind him that one single emergency repair pays for the entire year of Ava.';
-    }
-
-    if (intents.closing_action && (memory.demoUnlocked || memory.painUnlocked)) {
-      memory.agreementUnlocked = true;
-      score = 100;
-      damage += 45;
-      critique = '🏆 MASTER RAINMAKER CLOSE! You secured complete agreement with zero friction.';
-      prescription = 'Call closed cleanly. Outstanding demonstration of conversational control!';
+    // Objections Rebuttals
+    else if (intents.email_rebuttal || intents.driving_rebuttal) {
+      score += 25;
+      damage += 18;
+      critique = 'Sharp objection deflection! Using the supply receipts or driving safety rebuttal kept control of the conversation.';
+      prescription = 'Pivot back to the demo text or schedule the 4:30 PM callback.';
     }
 
     score = Math.min(100, score);
