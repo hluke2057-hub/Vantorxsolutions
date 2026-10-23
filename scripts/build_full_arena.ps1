@@ -825,7 +825,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <span class="lms-nav-icon" id="navIcon-2-1">🔒</span>
             </button>
             <button type="button" class="lms-nav-item locked" id="navItem-2-2" onclick="selectLmsUnit('2-2')">
-              <span>🤖 2.2: Total Agreement Shield</span>
+              <span>🛠️ 2.2: Product &amp; Tech Mastery</span>
               <span class="lms-nav-icon" id="navIcon-2-2">🔒</span>
             </button>
             <button type="button" class="lms-nav-item locked" id="navItem-2-3" onclick="selectLmsUnit('2-3')">
@@ -1494,24 +1494,85 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="lms-lesson-view" id="view-2-2">
           <div class="lms-view-head">
             <div>
-              <div class="lms-breadcrumbs">Day 2 ➔ <span>Lesson 2.2: Total Agreement Shield</span></div>
-              <div class="lms-view-title">🤖 Total Agreement Shield vs. "I Hate AI / Robots"</div>
+              <div class="lms-breadcrumbs">Day 2 ➔ <span>Lesson 2.2: Understanding the Products &amp; Technology</span></div>
+              <div class="lms-view-title">🛠️ Understanding the Products &amp; Technology (Under the Hood)</div>
             </div>
             <span class="lms-time-pill">⏱️ 15 Mins</span>
           </div>
 
           <div class="lms-text-block">
-            <p>Contractors hate AI because 99% of "AI bots" sound like Siri reading a dictionary. They also hate human answering services because answering services put callers on hold for 4 minutes, charge $2/min, misspell caller names, and don't know the difference between a capacitor and a compressor.</p>
+            <p><strong>The Core Rule:</strong> You cannot sell what you do not understand. Blue-collar contractors smell generic sales BS in 3 seconds. When an owner asks how Ava connects to his phone carrier, why our websites convert, or how AEO works, your answers must be instant, authoritative, and technically rock-solid.</p>
 
-            <div class="lms-script-box">
-              <strong>The Total Agreement Shield Script:</strong><br>
+            <!-- 4-PRODUCT ARCHITECTURE GRID -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:18px 0">
+              
+              <!-- PRODUCT 1: AVA 24/7 VOICE AI -->
+              <div style="background:var(--bg);border:1px solid rgba(56,189,248,0.3);padding:18px;border-radius:12px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                  <div style="font-size:14px;font-weight:700;color:#7dd3fc">🤖 AVA 24/7 VOICE AI</div>
+                  <span style="font-size:11px;font-family:var(--font-mono);background:rgba(56,189,248,0.15);color:#7dd3fc;padding:2px 6px;border-radius:4px">$397/mo · $0 Setup</span>
+                </div>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.6">
+                  <li><strong>How She Answers:</strong> Live voice answering in under 1 second (1 ring). Natural conversational latency (&lt;600ms) with human breathing and pauses.</li>
+                  <li><strong>Carrier Connection (*71):</strong> Conditional call forwarding. We NEVER port numbers or change carriers. Ava only picks up after 4 rings or after-hours. Zero downtime.</li>
+                  <li><strong>Dispatch &amp; Booking:</strong> Qualifies job urgency, collects customer address/problem, and books directly into Google/Outlook calendar or Jobber/ServiceTitan.</li>
+                  <li><strong>Emergency SMS:</strong> Sends instant SMS alerts to owner's cell phone with caller name, issue, and full audio recording link.</li>
+                </ul>
+              </div>
+
+              <!-- PRODUCT 2: CUSTOM WEBSITES -->
+              <div style="background:var(--bg);border:1px solid rgba(168,85,247,0.3);padding:18px;border-radius:12px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                  <div style="font-size:14px;font-weight:700;color:#d8b4fe">🌐 CUSTOM WEBSITES</div>
+                  <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.15);color:#d8b4fe;padding:2px 6px;border-radius:4px">$799 flat · No Retainers</span>
+                </div>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.6">
+                  <li><strong>Mobile-First Speed:</strong> Over 74% of trade traffic is on smartphones. Our sites load in under 1 second (95+ Google speed score), stopping the 5-second bounce rate.</li>
+                  <li><strong>Conversion Funnel:</strong> Sticky tap-to-call button on every screen, instant emergency estimate request forms, and real trade license badges.</li>
+                  <li><strong>Clean Semantic Code:</strong> Zero bloated WordPress plugins. Handcrafted for Google Core Web Vitals with structured LocalBusiness Schema.org data.</li>
+                  <li><strong>Zero Retainer Extortion:</strong> $799 flat one-time build. The client owns 100% of their code and assets for life.</li>
+                </ul>
+              </div>
+
+              <!-- PRODUCT 3: SPEED-TO-LEAD SMS -->
+              <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:18px;border-radius:12px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                  <div style="font-size:14px;font-weight:700;color:#fde047">⚡ LEADFLOW 90s SMS</div>
+                  <span style="font-size:11px;font-family:var(--font-mono);background:rgba(245,158,11,0.15);color:#fde047;padding:2px 6px;border-radius:4px">$197/mo · $0 Setup</span>
+                </div>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.6">
+                  <li><strong>Instant Webhook Trigger:</strong> The millisecond an estimate form is submitted or a call is missed, our system fires a personalized SMS in under 90 seconds.</li>
+                  <li><strong>The MIT 5-Minute Law:</strong> If a contractor takes more than 5 minutes to respond, close rate drops by 391%. 78% of homeowners hire the first contractor who replies.</li>
+                  <li><strong>Two-Way Automation:</strong> Texts from contractor's verified business number, engages the customer, and qualifies the job before they call competitors.</li>
+                  <li><strong>CRM Compatibility:</strong> Connects seamlessly with Jobber, Housecall Pro, and email dispatch notifications.</li>
+                </ul>
+              </div>
+
+              <!-- PRODUCT 4: AEO ENGINE & REVIEWS -->
+              <div style="background:var(--bg);border:1px solid rgba(52,211,153,0.3);padding:18px;border-radius:12px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                  <div style="font-size:14px;font-weight:700;color:#86efac">⭐ AEO ENGINE™ &amp; REVIEWS</div>
+                  <span style="font-size:11px;font-family:var(--font-mono);background:rgba(52,211,153,0.15);color:#86efac;padding:2px 6px;border-radius:4px">$297/mo · $0 Setup</span>
+                </div>
+                <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.6">
+                  <li><strong>Answer Engine Optimization:</strong> Traditional SEO ranks 10 desktop links. AEO gets you recommended by Siri, ChatGPT, Perplexity, and Apple Intelligence as the #1 answer.</li>
+                  <li><strong>Semantic City Siloing:</strong> Embeds trade keyword markup and geo-coordinates so AI search algorithms treat the contractor as the authoritative local provider.</li>
+                  <li><strong>Review Velocity Funnel:</strong> Automated post-job SMS prompts happy homeowners for a 1-tap Google review, collecting 15–25 fresh 5-star reviews every month.</li>
+                  <li><strong>Negative Review Shield:</strong> Dissatisfied clients are routed privately to the owner's cell phone before public negative reviews can damage the Google profile.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- THE TOTAL AGREEMENT SHIELD SCRIPT -->
+            <div class="lms-script-box" style="margin-top:16px">
+              <strong>The Total Agreement Shield Script (Anti-AI Bias):</strong><br>
               "I agree with you 100%! Most AI sounds like clunky robotic telemarketers and pisses customers off. That's why Ava is built specifically for trade dispatching with natural pauses and zero latency. Let's do this: I'll text you our direct demo line right now while we're talking. As soon as we hang up, dial it for 20 seconds. If she sounds robotic, text me 'lose my number' and I'll never call you again. Fair enough?"
             </div>
 
-            <p><strong>The Operational Contrast:</strong></p>
+            <p style="margin-top:14px"><strong>The Operational Contrast vs. Traditional Call Centers:</strong></p>
             <ul style="font-size:13.5px;color:#e2e8f0;line-height:1.65;padding-left:18px">
-              <li><strong>Old Answering Service:</strong> 4-minute hold times, $2/min overage fees, notes emailed 2 hours late. Homeowner has already hired someone else.</li>
-              <li><strong>Ava:</strong> Answers on Ring 1, triages the emergency, asks for the square footage/tonnage/leak location, and writes directly into their dispatch calendar.</li>
+              <li><strong>Old Answering Services:</strong> 4-minute hold times, $2/minute overage fees, notes emailed 2 hours late. Homeowner has already hired someone else.</li>
+              <li><strong>Ava Voice AI:</strong> Answers on Ring 1, triages the emergency, asks for the square footage/tonnage/leak location, and writes directly into their dispatch calendar.</li>
             </ul>
 
             <!-- ⚔️ BOSS CLASH 2.2 -->
@@ -2315,7 +2376,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <!-- ======================================================== -->
       <!-- PRODUCT 1: AVA 24/7 AI VOICE RECEPTIONIST               -->
       <!-- ======================================================== -->
-      <div id="scriptPanel_ava" class="product-script-panel active">
+      <div id="scriptPanel_ava" class="product-script-panel">
         <div class="script-section-header" style="margin-top:0">
           <h3><span>🛡️</span> Stage 0: Gatekeeper Bypass (If Owner Doesn't Answer)</h3>
         </div>
@@ -2381,7 +2442,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="obj-acc-head"><span>❌ 1. "How much is this going to cost me?"</span> <span class="tag">Price Anchor</span></div>
             <div class="obj-acc-body">
               "Unlike call centers that charge $3,000/mo plus $2 per minute, Ava is just $397 a month with <strong>zero long-term contracts</strong>.<br><br>
-              In <span class="dyn-trade">[Trade]</span>, one single $4,000 to $8,000 emergency replacement job pays for the entire year on day one. Have your cell? Dial <strong>(561) 813-8602</strong> right now and test her."
+              In <span class="dyn-trade">[Trade]</span>, one single $4,000 to $8,000 emergency replacement job pays for the entire year on day one. I'll shoot you our direct test line right now: <strong>(561) 813-8602</strong>. When we hop off, test her for 20 seconds. If she sounds fake, cancel our meeting and you never have to talk to me again."
               <div class="obj-acc-note">💡 Strategy: Anchor the $397 price against their $8,000 ticket price. Zero risk.</div>
             </div>
           </div>
@@ -2485,12 +2546,12 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px">
           <div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px">
-            <div style="font-size:12px;color:var(--ok);font-weight:700">SCENARIO A: CALL NOW</div>
-            <p style="font-size:14px;margin-top:6px">"Awesome! Dial <strong>(561) 813-8602</strong>. Pretend you're a homeowner with an emergency. I'll shoot you a quick text in 5 minutes to see what you thought."</p>
+            <div style="font-size:12px;color:var(--ok);font-weight:700">SCENARIO A: CALL RIGHT AFTER (CELL PHONE)</div>
+            <p style="font-size:14px;margin-top:6px">"Awesome! I just shot you a text with the demo line: <strong>(561) 813-8602</strong>. When we hang up, test her for 20 seconds. If she sounds robotic, cancel our meeting and you never talk to me again."</p>
           </div>
           <div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px">
-            <div style="font-size:12px;color:var(--blue);font-weight:700">SCENARIO B: SEND TEXT</div>
-            <p style="font-size:14px;margin-top:6px">"Perfect. I just texted you the demo line from my cell: <strong>(561) 813-8602</strong>. Tap it whenever you have a free 30 seconds."</p>
+            <div style="font-size:12px;color:var(--blue);font-weight:700">SCENARIO B: ON DESK / LANDLINE</div>
+            <p style="font-size:14px;margin-top:6px">"Perfect. Pull your cell phone out right now and dial <strong>(561) 813-8602</strong> on speaker while I stay right here. Hear how she answers on ring one."</p>
           </div>
           <div style="background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px">
             <div style="font-size:12px;color:var(--accent2);font-weight:700">SCENARIO C: 10-MIN ZOOM</div>
@@ -2872,27 +2933,150 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       </div>
 
       <!-- ======================================================== -->
-      <!-- PRODUCT 5: FULL DIGITAL INFRASTRUCTURE BUNDLE           -->
+      <!-- PRODUCT 5: VANTORX PACKAGES PLAYBOOK                     -->
       <!-- ======================================================== -->
-      <div id="scriptPanel_bundle" class="product-script-panel">
-        <div class="script-section-header" style="margin-top:0">
-          <h3><span>⚡</span> The All-In-One Done-For-You Digital Infrastructure Pitch</h3>
+      <div id="scriptPanel_bundle" class="product-script-panel active">
+        
+        <!-- Package Strategy Banner -->
+        <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(168,85,247,0.12));border:1px solid rgba(245,158,11,0.4);border-radius:12px;padding:16px 20px;margin-bottom:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div style="font-size:14px;font-weight:800;color:var(--accent2);letter-spacing:0.5px">📦 MASTER PACKAGES PLAYBOOK: SELL PACKAGES FIRST ➔ DOWNSELL TO STANDALONE</div>
+            <span style="font-size:11px;font-family:var(--font-mono);background:var(--accent);color:#000;font-weight:800;padding:3px 8px;border-radius:4px">$0 SETUP FEES · MONTH-TO-MONTH</span>
+          </div>
+          <p style="font-size:12.5px;color:#cbd5e1;margin:8px 0 0;line-height:1.5">
+            Always anchor the conversation on the complete front-office machine first. If the contractor hesitates on scope or budget, <strong>never discount</strong> — execute the Downsell Protocol to lock in Ava ($397/mo) or a Custom Website ($799 flat).
+          </p>
         </div>
+
+        <!-- PACKAGE 1: ⭐ THE ACCELERATE PACKAGE ($697/MO) - PRIMARY -->
+        <div class="script-section-header" style="margin-top:0">
+          <h3><span>⭐</span> Primary Pitch: The Accelerate Growth Engine ($697/mo)</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(245,158,11,0.2);color:var(--accent2);padding:2px 8px;border-radius:4px;border:1px solid rgba(245,158,11,0.4)">Most Popular · 2-10 Trucks</span>
+        </div>
+
+        <!-- Stage 0: Gatekeeper Bypass -->
         <div class="script-phase">
-          <div class="phase-tag"><span>The Omni-Channel Infrastructure Pitch</span><span>Complete Hands-Off Machine</span></div>
+          <div class="phase-tag"><span>Stage 0: Gatekeeper Bypass (If Owner Doesn't Answer)</span><span>Casual Local Peer</span></div>
           <div class="script-line">
-            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. Got 20 seconds or should I hang up?<br><br>
-            I'll be super direct: Most trade contractors in Florida have 4 separate digital leaks: their website is slow on mobile, weekend emergency calls go to voicemail, lead forms take hours to reply, and review volume is stagnant. Combined, that leaks over $120,000 a year to competitors.<br><br>
-            We built a complete, done-for-you digital infrastructure specifically for Florida contractors: a 1-second custom website, Ava 24/7 AI voice phone receptionist, 90-second speed-to-lead SMS, and automated Google review dominance. Zero agency retainers, 100% done for you."
+            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and website lead intake in <span class="dyn-city">[City]</span>."
+          </div>
+          <div class="delivery-tip">
+            💡 If she asks <em>"What is this regarding?"</em> ➔ <strong>"Just had a quick operational question regarding after-hours emergency calls and online estimate requests in <span class="dyn-city">[City]</span>. Is he out in the field right now or in later today?"</strong>
           </div>
         </div>
 
+        <!-- Phase 1: Disarming Permission Opener -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 1: Disarming Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
+          <div class="script-line">
+            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you weren't expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle: <em>"Alright, what you got?"</em>
+          </div>
+        </div>
+
+        <!-- Phase 2: The Multi-Leak Revenue Hook -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 2: The Multi-Leak Revenue Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Expose 4 Silent Leaks</span></div>
+          <div class="script-line">
+            "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>. Most contractors in your trade have 3 or 4 silent leaks draining over $100,000 a year: emergency weekend calls rolling to voicemail, a mobile website that takes 5 seconds to load, lead forms sitting un-replied for hours, and competitors ranking above you on Siri and ChatGPT.<br><br>
+            When a $6,000 job calls on a Saturday night or submits a form, <strong>where does that lead go for you right now?</strong>"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>The Golden Pause:</em> Let them answer! They will say "it rolls to voicemail" or "I try to text them when I'm done on a job." You have now identified their exact bleeding wound.
+          </div>
+        </div>
+
+        <!-- Phase 3: The Accelerate Growth Engine Solution -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 3: The Accelerate Growth Engine Solution (0:25 - 0:45)</span><span>Complete Front-Office Machine</span></div>
+          <div class="script-line">
+            "That's exactly why we built our <strong>Accelerate package</strong> specifically for Florida contractors. We deploy the complete front-office machine: <strong>Ava answers every single call in 1 ring 24/7</strong>, our <strong>90-second SMS engine</strong> texts web leads before they call your competitors, and you get a brand-new <strong>1-second custom mobile website</strong> with local AEO search ranking.<br><br>
+            It is 100% done for you, <strong>$0 setup fee</strong>, and zero long-term contracts."
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Value Contrast:</em> Traditional agencies charge $6,000 for a website and $2,000/mo retainers. VantorX is $697/mo all-in with $0 setup fee. One emergency job covers the entire investment.
+          </div>
+        </div>
+
+        <!-- Phase 4: Luke's Takeaway Close & Time Choice Lock -->
+        <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06)">
+          <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Phase 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Closing Reflex</span></div>
+          <div class="script-line" style="font-size:15px;line-height:1.6">
+            "<strong>So if you're sick of losing money, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, exactly tailored to your business.</strong><br><br>
+            Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Alternative Choice:</em> Never ask <em>"Do you have time?"</em> (invites a "No"). Always offer two specific time buckets: early morning or 4:30 PM wrap.
+          </div>
+        </div>
+
+        <!-- Phase 5: The Friction-Killer & Live AI Test Verification -->
+        <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04)">
+          <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Phase 5: The Friction-Killer &amp; Live AI Test (If Skeptical)</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
+          <div class="script-line">
+            "Tell you what: If it's something you're interested in, I can send you a quick text with the demo link right now. And once we get off the phone here, you can also dial our live AI test line: <strong>(561) 813-8602</strong>. If Ava sounds robotic or fake, cancel the meeting and you never have to talk to me again. Fair enough?"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Total Disarmament:</em> This proves 100% confidence. No contractor can say no to "cancel the meeting and never talk to me again."
+          </div>
+        </div>
+
+        <!-- PACKAGE 2: 🚀 THE SCALE PACKAGE ($1,297/MO) - ENTERPRISE -->
         <div class="script-section-header">
-          <h3><span>🛡️</span> Bundle Objections &amp; Total Value Rebuttal</h3>
+          <h3><span>🚀</span> Enterprise Pitch: The Scale Tier ($1,297/mo)</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.2);color:#d8b4fe;padding:2px 8px;border-radius:4px;border:1px solid rgba(168,85,247,0.4)">Market Dominance · 5-20+ Trucks</span>
+        </div>
+        <div class="script-phase">
+          <div class="phase-tag"><span>High-Volume Multi-Crew Pitch</span><span>For $1M - $10M+ Contractors</span></div>
+          <div class="script-line">
+            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. Got 20 seconds or should I hang up?<br><br>
+            I'll be direct: When you're running 5 to 15 trucks across <span class="dyn-city">[City]</span>, missed calls and slow lead response aren't just an annoyance — they leak $25,000 to $40,000 every single month when dispatchers are overwhelmed, second lines roll to voicemail, and competitors capture the top recommendation on Siri and ChatGPT.<br><br>
+            Our <strong>Scale Tier ($1,297/mo, $0 setup)</strong> gives you the full multi-engine infrastructure: unlimited concurrent Ava Voice AI lines with live warm transfers, 90-second SMS speed-to-lead across every channel, an enterprise 1-second mobile website, full Multi-Engine AEO (Google, Apple Intelligence, ChatGPT, Perplexity), and our automated 5-Star Review Funnel Engine generating 15 to 25 verified Google reviews every month on autopilot.<br><br>
+            <strong>So if you're sick of losing high-ticket jobs to second-rate competitors, let's hop on a quick 10-minute strategy call so I can show you how this scales your fleet.</strong> Are you open tomorrow morning at 9 AM, or is 4:30 PM better?"
+          </div>
+        </div>
+
+        <!-- PACKAGE 3: ⚡ THE ESSENTIAL PACKAGE ($397/MO) - ENTRY -->
+        <div class="script-section-header">
+          <h3><span>⚡</span> Entry Pitch: The Essential Tier ($397/mo)</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(52,211,153,0.2);color:#86efac;padding:2px 8px;border-radius:4px;border:1px solid rgba(52,211,153,0.4)">AI Front Desk · Solo &amp; 1-2 Trucks</span>
+        </div>
+        <div class="script-phase">
+          <div class="phase-tag"><span>Entry AI Receptionist Pitch</span><span>Zero-Friction Front Desk</span></div>
+          <div class="script-line">
+            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. Got 20 seconds or should I hang up?<br><br>
+            I know you're in the field with your tools all day. When an emergency call rings while you're on a ladder or under a sink, 85% of homeowners hang up and call the next contractor on Google.<br><br>
+            Our <strong>Essential Tier ($397/mo, $0 setup fee)</strong> gives you Ava, your 24/7 dedicated AI phone receptionist. She answers on ring one, books estimates directly into your calendar, and texts your cell with full audio recordings and customer details immediately. No carrier porting, no contract, cancel anytime.<br><br>
+            <strong>So if you're sick of losing money while your hands are dirty, let's hop on a quick 5-minute meeting so I can show you how she handles your trade.</strong> Do you prefer early morning or late afternoon?"
+          </div>
+        </div>
+
+        <!-- THE NON-NEGOTIABLE DOWNSELL PIVOT PROTOCOL -->
+        <div class="script-section-header">
+          <h3><span>🔄</span> The Downsell Pivot Protocol (When They Resist The Package)</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:var(--accent);color:#000;font-weight:800;padding:2px 8px;border-radius:4px">NEVER DISCOUNT · DOWNSELL STANDALONE</span>
+        </div>
+        <div class="script-phase" style="border:2px solid var(--accent);background:rgba(245,158,11,0.08);border-radius:12px">
+          <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">The Seamless Downsell Bridge</span><span style="color:var(--accent)">Lock The Account</span></div>
+          <div class="script-line" style="font-size:14.5px;line-height:1.6">
+            "I completely respect that, <span class="dyn-owner">[Owner's First Name]</span>. If you don't need the complete front-office infrastructure right now, let's not over-complicate it.<br><br>
+            We can install just the standalone solution—whether that's <strong>Ava 24/7 Voice AI for $397/mo</strong>, or a <strong>custom 1-second mobile website for $799 flat</strong>, with <strong>$0 setup fees</strong>.<br><br>
+            That plugs your number one bleeding leak immediately, and you can always upgrade to the full package down the road once the extra jobs roll in."
+          </div>
+          <div class="delivery-tip" style="border-top:1px solid rgba(245,158,11,0.2);margin-top:10px;padding-top:10px">
+            💡 <strong>Why This Works:</strong> You protect the price integrity of your packages ($697 &amp; $1,297). You never offer a discount. Instead, you gracefully reduce the scope to a single high-ROI product. Once Ava or the Website delivers results, upgrading to the Accelerate package is a natural next step.
+          </div>
+        </div>
+
+        <!-- BUNDLE OBJECTIONS -->
+        <div class="script-section-header">
+          <h3><span>🛡️</span> Package Objections &amp; Total Value Rebuttal</h3>
         </div>
         <div id="objGroup_bundle">
           <div class="obj-accordion">
-            <div class="obj-acc-head"><span>❌ 1. "I'm interested in everything, but what is the total cost?"</span> <span class="tag">Bundle Price</span></div>
+            <div class="obj-acc-head"><span>❌ 1. "I'm interested in everything, but what is the total cost?"</span> <span class="tag">Package Price</span></div>
             <div class="obj-acc-body">
               "If you bought this piecemeal from agencies, you'd pay $6,000 for the site, $600/mo for an answering service, $300/mo for SMS tools, and $1,000/mo for SEO—over $2,500 a month.<br><br>
               Our complete all-in-one Accelerate bundle includes the custom website build, Ava 24/7 Voice AI, 90s Speed-to-Lead, and Google Review / AEO dominance for just $697/mo with $0 setup fee and zero long-term contracts. One single emergency ticket covers the entire investment."
@@ -5570,7 +5754,7 @@ window.saveBrainSettings = function() {
   // Product Switcher
   const prodSwitchBtns = document.querySelectorAll('.prod-switch-btn');
   const prodScriptPanels = document.querySelectorAll('.product-script-panel');
-  let currentActiveProduct = 'ava';
+  let currentActiveProduct = 'bundle';
 
   function switchProductScript(prodKey) {
     currentActiveProduct = prodKey;
