@@ -484,8 +484,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <div class="live-demo-pill" id="copyDemoPill" onclick="copyDemoNumber()" title="Click to copy demo number">
         <span>📞 Demo: (561) 813-8602</span> <span style="font-size:11px">📋</span>
       </div>
-      <button class="btn btn-ghost btn-sm" id="voiceToggleBtn" onclick="toggleVoice()">🗣️ Voice: ON</button>
+      <button class="btn btn-ghost btn-sm" id="voiceToggleBtn" style="color:var(--dim)">🗣️ Voice: OFF (Click to Enable)</button>
       <button class="btn btn-ghost btn-sm" id="soundToggleBtn" onclick="toggleSound()">🔊 Sound: ON</button>
+      <a href="../cold-call-quest/index.html" target="_blank" class="live-demo-pill" style="border-color:rgba(245,158,11,0.5);color:var(--accent2);text-decoration:none" title="Launch dedicated standalone full-screen RPG">⚔️ Standalone Quest RPG ↗</a>
     </div>
   </div>
 </header>
@@ -3540,6 +3541,22 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
   <!-- TAB 2: 🎮 COLD CALL QUEST (SALES RPG GAME 2.0) -->
   <div id="tabRPG" class="tab-panel">
+    <!-- STANDALONE RPG LAUNCHER HERO BANNER -->
+    <div style="background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(15,23,42,0.95));border:2px solid var(--accent);border-radius:16px;padding:22px 26px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 12px 35px rgba(245,158,11,0.18)">
+      <div style="max-width:760px">
+        <div style="font-size:11.5px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">⚡ DEDICATED FULL-SCREEN APP AVAILABLE</div>
+        <h3 style="font-family:var(--font-head);font-size:20px;font-weight:800;color:#ffffff;display:flex;align-items:center;gap:10px">
+          ⚔️ COLD CALL QUEST: STANDALONE RPG (8 BOSSES, ARMORY &amp; HEALTH REGAIN)
+        </h3>
+        <p style="font-size:14px;color:var(--dim);margin-top:6px;line-height:1.5">
+          Want the full dedicated gaming experience? Launch Cold Call Quest as its own standalone application featuring 8 Contractor Bosses (from Rick the Roofer to Vito the 42-Truck Raid Boss), Swords &amp; Armor Armory, Level 1-10 Progression, and Tactical Health Regain ("Take a Breather", Combo Streak Heals &amp; Agreement Shield).
+        </p>
+      </div>
+      <a href="../cold-call-quest/index.html" class="btn btn-gold" style="text-decoration:none;font-weight:800;padding:14px 28px;font-size:15px;display:inline-flex;align-items:center;gap:10px;box-shadow:0 0 25px rgba(245,158,11,0.4)" target="_blank">
+        🚀 Launch Standalone RPG App (New Tab) ➔
+      </a>
+    </div>
+
     <div class="rpg-cockpit">
       <div class="rpg-header">
         <div class="player-card">
@@ -6424,13 +6441,21 @@ window.saveBrainSettings = function() {
   // ============================================================
   // 🎮 RPG GAME ENGINE 2.0 (Cold Call Quest)
   // ============================================================
-  let voiceEnabled = true;
+  let voiceEnabled = false;
+  if (typeof window !== 'undefined' && window.speechSynthesis) {
+    try { window.speechSynthesis.cancel(); } catch(e){}
+  }
   const voiceBtn = document.getElementById('voiceToggleBtn');
   if (voiceBtn) {
+    voiceBtn.textContent = '🗣️ Voice: OFF (Click to Enable)';
+    voiceBtn.style.color = 'var(--dim)';
     voiceBtn.addEventListener('click', () => {
       voiceEnabled = !voiceEnabled;
-      voiceBtn.textContent = voiceEnabled ? '🗣️ Voice: ON' : '🗣️ Voice: MUTED';
+      voiceBtn.textContent = voiceEnabled ? '🗣️ Voice: ON' : '🗣️ Voice: OFF (Click to Enable)';
       voiceBtn.style.color = voiceEnabled ? 'var(--accent2)' : 'var(--dim)';
+      if (!voiceEnabled && window.speechSynthesis) {
+        try { window.speechSynthesis.cancel(); } catch(e){}
+      }
     });
   }
 
@@ -6829,8 +6854,7 @@ window.saveBrainSettings = function() {
     if (sendAttackBtn) sendAttackBtn.innerHTML = '⚔️ Send First Reply ➔';
     if (customAttackInput) customAttackInput.placeholder = 'Send your first reply to start the game and begin the call...';
 
-    speakContractor(currentBoss.dialogue.stage1, currentBoss.key);
-
+    // Autoplay speech removed: speech only triggers when user explicitly sends rebuttal with voice enabled
     updateHUD();
   }
 

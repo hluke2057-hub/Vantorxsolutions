@@ -1,0 +1,1384 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VantorX — Cold Call Quest 3.0 (Standalone Sales RPG &amp; Armory)</title>
+<meta name="description" content="Master trade contractor cold calling in a full-fledged RPG. 8 Contractor Bosses, Swords & Armor Armory, Level 1-10 Progression, and Tactical Health Regain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070a0f;--bg2:#0f1522;--bg3:#151d2f;--card-bg:rgba(15,21,34,0.92);
+  --line:rgba(255,255,255,0.08);--line2:rgba(255,255,255,0.16);
+  --ink:#f1f5f9;--dim:#94a3b8;--faint:#64748b;
+  --accent:#f59e0b;--accent2:#fbbf24;--accent-glow:rgba(245,158,11,0.25);
+  --ok:#34d399;--ok-glow:rgba(52,211,153,0.3);
+  --err:#f87171;--err-glow:rgba(248,113,113,0.3);
+  --blue:#38bdf8;--purple:#a855f7;--gold:#eab308;
+  --font-sans:'Inter',system-ui,sans-serif;--font-head:'Space Grotesk',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:60px}
+.wrap{max-width:1300px;margin:0 auto;padding:0 20px}
+
+/* Top Sticky HUD */
+header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 0;position:sticky;top:0;z-index:60}
+.hud-grid{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.brand{font-family:var(--font-head);font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand span{color:var(--accent)}
+.brand .badge{background:var(--accent-glow);color:var(--accent2);border:1px solid rgba(245,158,11,0.4);font-size:11px;padding:2px 8px;border-radius:6px;font-family:var(--font-mono);font-weight:700}
+
+.hud-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hud-btn{background:var(--bg3);border:1px solid var(--line2);color:var(--ink);padding:7px 14px;border-radius:8px;font-family:var(--font-head);font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.15s;text-decoration:none}
+.hud-btn:hover{background:rgba(245,158,11,0.15);border-color:var(--accent);color:var(--accent2)}
+.hud-btn.gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f;font-weight:800;border:none}
+.hud-btn.gold:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 0 15px var(--accent-glow)}
+
+/* Master Player Status Bar */
+.master-player-bar{background:linear-gradient(135deg,rgba(15,21,34,0.98),rgba(21,29,47,0.98));border:1px solid var(--line2);border-radius:16px;padding:16px 22px;margin:20px 0;box-shadow:0 15px 35px rgba(0,0,0,0.4);display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center}
+@media(max-width:900px){.master-player-bar{grid-template-columns:1fr}}
+
+.player-avatar-card{display:flex;align-items:center;gap:14px}
+.avatar-frame{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,rgba(245,158,11,0.25),rgba(15,21,34,0.9));border:2px solid var(--accent);display:grid;place-content:center;font-size:26px;box-shadow:0 0 20px var(--accent-glow);position:relative}
+.avatar-frame .lvl-tag{position:absolute;bottom:-6px;right:-6px;background:var(--accent);color:#070a0f;font-family:var(--font-mono);font-size:10px;font-weight:900;padding:1px 5px;border-radius:4px}
+.player-meta h2{font-family:var(--font-head);font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
+.player-meta .rank-title{font-size:12.5px;color:var(--accent2);font-weight:600}
+.player-meta .equip-summary{font-size:11.5px;color:var(--dim);font-family:var(--font-mono);margin-top:2px}
+
+.vitals-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.vitals-grid{grid-template-columns:1fr}}
+.vital-box{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.vital-header{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;font-family:var(--font-mono);margin-bottom:6px}
+.bar-track{height:9px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden;position:relative}
+.bar-fill-hp{height:100%;background:linear-gradient(90deg,#ef4444,#10b981);border-radius:999px;transition:width 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 10px rgba(16,185,129,0.3)}
+.bar-fill-xp{height:100%;background:linear-gradient(90deg,#8b5cf6,#38bdf8);border-radius:999px;transition:width 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 10px rgba(56,189,248,0.4)}
+
+.wallet-badge{background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:10px 16px;border-radius:12px;text-align:center;min-width:130px}
+.wallet-badge .gold-val{font-size:20px;font-weight:800;color:var(--accent2);font-family:var(--font-head)}
+.wallet-badge .gold-lbl{font-size:11px;color:var(--dim);font-family:var(--font-mono);text-transform:uppercase}
+
+/* Layout Grid: 8 Boss Gauntlet Sidebar + Battle Arena */
+.arena-layout{display:grid;grid-template-columns:360px 1fr;gap:24px}
+@media(max-width:1050px){.arena-layout{grid-template-columns:1fr}}
+
+/* Boss Gauntlet Sidebar */
+.boss-sidebar{background:var(--card-bg);border:1px solid var(--line2);border-radius:18px;padding:20px;box-shadow:0 20px 40px rgba(0,0,0,0.35);max-height:850px;display:flex;flex-direction:column}
+.sidebar-title{font-family:var(--font-head);font-size:16px;font-weight:800;color:var(--accent2);display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.boss-list{overflow-y:auto;flex:1;padding-right:4px;display:flex;flex-direction:column;gap:10px}
+.boss-card-btn{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;transition:all 0.15s;text-align:left;position:relative;display:flex;align-items:center;gap:12px}
+.boss-card-btn:hover{border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.05);transform:translateX(2px)}
+.boss-card-btn.active{border-color:var(--accent);background:linear-gradient(90deg,rgba(245,158,11,0.18),rgba(15,21,34,0.95));box-shadow:0 0 18px var(--accent-glow)}
+.boss-card-btn.defeated{border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.04)}
+.boss-avatar{width:44px;height:44px;border-radius:10px;background:var(--bg3);border:1px solid var(--line2);display:grid;place-content:center;font-size:22px;flex-shrink:0}
+.boss-meta h4{font-family:var(--font-head);font-size:14px;font-weight:700;color:#ffffff;display:flex;align-items:center;gap:6px}
+.boss-meta p{font-size:11.5px;color:var(--dim);margin-top:2px}
+.boss-hp-tag{font-size:11px;font-family:var(--font-mono);font-weight:700;margin-top:4px;display:flex;align-items:center;gap:6px}
+.boss-status-badge{margin-left:auto;font-size:11px;font-family:var(--font-mono);font-weight:700;padding:2px 7px;border-radius:4px}
+.status-cleared{background:rgba(52,211,153,0.15);color:var(--ok);border:1px solid rgba(52,211,153,0.3)}
+.status-locked{background:rgba(100,116,139,0.15);color:var(--faint);border:1px solid var(--line)}
+.status-ready{background:var(--accent-glow);color:var(--accent2);border:1px solid rgba(245,158,11,0.4)}
+
+/* Main Battle Arena */
+.battle-arena{background:var(--card-bg);border:1px solid var(--line2);border-radius:18px;padding:24px;box-shadow:0 20px 50px rgba(0,0,0,0.4);position:relative;display:flex;flex-direction:column;gap:18px}
+.battle-arena::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent2),#ef4444);border-radius:18px 18px 0 0}
+
+/* Active Boss Stage Header */
+.active-boss-hud{background:linear-gradient(135deg,rgba(26,36,56,0.9),rgba(15,21,34,0.95));border:1px solid var(--line2);border-radius:14px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.active-boss-info{display:flex;align-items:center;gap:16px}
+.active-boss-portrait{width:64px;height:64px;border-radius:14px;background:var(--bg);border:2px solid var(--err);display:grid;place-content:center;font-size:32px;box-shadow:0 0 20px var(--err-glow)}
+.active-boss-title h3{font-family:var(--font-head);font-size:19px;font-weight:800;color:#ffffff;display:flex;align-items:center;gap:8px}
+.active-boss-title p{font-size:13px;color:var(--dim);margin-top:2px}
+.active-boss-badges{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.badge-pill{font-size:11px;font-family:var(--font-mono);background:var(--bg);border:1px solid var(--line2);padding:2px 8px;border-radius:4px;color:var(--accent2)}
+
+.active-boss-hp-box{min-width:240px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.boss-hp-header{display:flex;justify-content:space-between;font-size:12px;font-family:var(--font-mono);font-weight:700;color:var(--dim);margin-bottom:6px}
+.boss-hp-track{height:10px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden}
+.boss-hp-fill{height:100%;width:100%;background:linear-gradient(90deg,#ef4444,#f59e0b);border-radius:999px;transition:width 0.3s cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 12px var(--err-glow)}
+
+/* Combat Terminal / Dialogue Log */
+.combat-terminal{background:#040609;border:1px solid var(--line2);border-radius:14px;height:340px;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;font-family:var(--font-sans);box-shadow:inset 0 4px 20px rgba(0,0,0,0.7)}
+.log-entry{padding:10px 14px;border-radius:10px;font-size:14px;line-height:1.55;animation:fadeIn 0.2s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.log-boss{background:rgba(239,68,68,0.1);border-left:3px solid var(--err);color:#fca5a5}
+.log-boss strong{color:#ffffff}
+.log-player{background:rgba(56,189,248,0.1);border-left:3px solid var(--blue);color:#e0f2fe;align-self:flex-end;max-width:90%}
+.log-player strong{color:#ffffff}
+.log-system{background:rgba(245,158,11,0.1);border-left:3px solid var(--accent);color:var(--accent2);font-family:var(--font-mono);font-size:12.5px}
+.log-heal{background:rgba(52,211,153,0.12);border-left:3px solid var(--ok);color:#a7f3d0;font-weight:600}
+.log-crit{background:linear-gradient(90deg,rgba(245,158,11,0.2),rgba(239,68,68,0.2));border:1px solid var(--accent);color:#fef08a;font-weight:700}
+
+/* Tactical Quick-Strike Dock */
+.tactical-dock{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:800px){.tactical-dock{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.tactical-dock{grid-template-columns:1fr}}
+
+.strike-card{background:var(--bg);border:1px solid var(--line2);border-radius:10px;padding:12px;cursor:pointer;transition:all 0.15s;text-align:left}
+.strike-card:hover{border-color:var(--accent);background:rgba(245,158,11,0.08);transform:translateY(-2px)}
+.strike-card .strike-tag{font-size:10.5px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
+.strike-card .strike-text{font-size:12px;color:var(--ink);line-height:1.4}
+.strike-card.heal-action{border-color:rgba(52,211,153,0.4);background:rgba(52,211,153,0.05)}
+.strike-card.heal-action:hover{border-color:var(--ok);background:rgba(52,211,153,0.12)}
+.strike-card.heal-action .strike-tag{color:var(--ok)}
+.strike-card:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+
+/* Custom Speech / Rebuttal Input Dock */
+.input-dock{display:flex;gap:10px;align-items:center}
+.custom-input{flex:1;background:var(--bg);border:1.5px solid var(--line2);color:#ffffff;padding:14px 18px;border-radius:12px;font-size:15px;font-family:var(--font-sans);outline:none;transition:border-color 0.15s}
+.custom-input:focus{border-color:var(--accent);box-shadow:0 0 15px var(--accent-glow)}
+.custom-input::placeholder{color:var(--faint)}
+
+.dock-btn{padding:14px 22px;border-radius:12px;font-family:var(--font-head);font-size:14.5px;font-weight:800;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.15s}
+.dock-btn.send{background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f}
+.dock-btn.send:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);box-shadow:0 0 20px var(--accent-glow)}
+.dock-btn.mic{background:var(--bg3);border:1.5px solid var(--line2);color:var(--ink)}
+.dock-btn.mic:hover{border-color:var(--accent);color:var(--accent2)}
+.dock-btn.mic.listening{background:rgba(239,68,68,0.2);border-color:var(--err);color:var(--err);animation:pulseMic 1s infinite alternate}
+@keyframes pulseMic{from{box-shadow:0 0 5px var(--err)}to{box-shadow:0 0 20px var(--err)}}
+
+/* Coach Prescription Area */
+.coach-box{background:rgba(21,29,47,0.7);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--dim);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.coach-box strong{color:var(--accent2)}
+
+/* Modals (Armory, Level Up, Victory) */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:100;display:none;place-content:center;padding:20px}
+.modal-overlay.open{display:grid;animation:modalIn 0.2s ease-out}
+@keyframes modalIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}
+.modal-card{background:var(--bg2);border:1.5px solid var(--line2);border-radius:20px;max-width:960px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;box-shadow:0 25px 60px rgba(0,0,0,0.6);position:relative}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.modal-header h2{font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--accent2);display:flex;align-items:center;gap:10px}
+.modal-close{background:none;border:none;color:var(--dim);font-size:24px;cursor:pointer;padding:4px 8px}
+.modal-close:hover{color:#ffffff}
+
+/* Armory Items Grid */
+.armory-section-title{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--accent);margin:16px 0 10px;display:flex;align-items:center;gap:8px}
+.armory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:850px){.armory-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:550px){.armory-grid{grid-template-columns:1fr}}
+
+.gear-card{background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;position:relative;transition:all 0.15s}
+.gear-card:hover{border-color:rgba(245,158,11,0.4);transform:translateY(-2px)}
+.gear-card.equipped{border-color:var(--ok);background:rgba(52,211,153,0.06);box-shadow:0 0 15px rgba(52,211,153,0.2)}
+.gear-card.locked{opacity:0.5;filter:grayscale(0.6)}
+.gear-top{display:flex;align-items:center;gap:12px}
+.gear-icon{width:46px;height:46px;border-radius:10px;background:var(--bg3);border:1px solid var(--line2);display:grid;place-content:center;font-size:24px}
+.gear-meta h4{font-family:var(--font-head);font-size:15px;font-weight:700;color:#ffffff}
+.gear-meta .stat-boost{font-size:12px;font-family:var(--font-mono);font-weight:700;color:var(--ok)}
+.gear-desc{font-size:12px;color:var(--dim);line-height:1.45}
+.gear-passive{font-size:11.5px;color:var(--accent2);background:rgba(245,158,11,0.08);border-radius:6px;padding:6px 8px}
+.gear-btn{margin-top:auto;width:100%;padding:8px 12px;border-radius:8px;font-family:var(--font-head);font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all 0.15s}
+.gear-btn.equip{background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f}
+.gear-btn.equip:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b)}
+.gear-btn.equipped-badge{background:rgba(52,211,153,0.2);color:var(--ok);border:1px solid var(--ok);cursor:default}
+.gear-btn.locked-btn{background:var(--bg3);color:var(--faint);cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<!-- TOP STICKY HUD -->
+<header>
+  <div class="wrap">
+    <div class="hud-grid">
+      <a href="index.html" class="brand">
+        <span>⚔️ VANTORX: COLD CALL QUEST</span>
+        <span class="badge">STANDALONE 3.0</span>
+      </a>
+
+      <div class="hud-actions">
+        <button class="hud-btn" id="voiceToggleBtn" onclick="toggleVoice()">🗣️ Voice: OFF (Click to Enable)</button>
+        <button class="hud-btn" id="soundToggleBtn" onclick="toggleSound()">🔊 SFX: ON</button>
+        <button class="hud-btn gold" onclick="openArmoryModal()">🛡️ Armory (Swords &amp; Armor)</button>
+        <a href="../cold-call-arena/index.html" class="hud-btn" style="border-color:rgba(56,189,248,0.4);color:var(--blue)">📋 Lead Dispatcher &amp; Cockpit ➔</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- MASTER PLAYER STATUS BAR -->
+  <div class="master-player-bar">
+    <div class="player-avatar-card">
+      <div class="avatar-frame">
+        <span id="playerAvatarIcon">🗡️</span>
+        <span class="lvl-tag" id="playerLvlTag">LVL 1</span>
+      </div>
+      <div class="player-meta">
+        <h2 id="playerNameHeader">Luke the Closer <span style="font-size:12px;color:var(--dim)" id="streakHeader">🔥 0 Streak</span></h2>
+        <div class="rank-title" id="playerRankHeader">Novice Dialer</div>
+        <div class="equip-summary" id="playerEquipSummary">⚔️ Lead Gavel · 🛡️ Denim Workshirt</div>
+      </div>
+    </div>
+
+    <div class="vitals-grid">
+      <div class="vital-box">
+        <div class="vital-header">
+          <span style="color:var(--err);font-weight:700">❤️ REJECTION ARMOR (HP)</span>
+          <span id="hpDigits" style="color:#ffffff;font-weight:800">100 / 100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill-hp" id="hpBarFill" style="width:100%"></div></div>
+      </div>
+      <div class="vital-box">
+        <div class="vital-header">
+          <span style="color:var(--blue);font-weight:700">⭐ CLOSING XP</span>
+          <span id="xpDigits" style="color:#ffffff;font-weight:800">0 / 150 XP (0%)</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill-xp" id="xpBarFill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="wallet-badge">
+      <div class="gold-val" id="goldDigits">💰 0 GP</div>
+      <div class="gold-lbl">Earned in Combat</div>
+    </div>
+  </div>
+
+  <!-- ARENA LAYOUT: 8 BOSS GAUNTLET + BATTLE ARENA -->
+  <div class="arena-layout">
+
+    <!-- BOSS GAUNTLET SIDEBAR (8 CONTRACTORS) -->
+    <aside class="boss-sidebar">
+      <div class="sidebar-title">
+        <span>⚔️ 8 CONTRACTOR DUNGEONS</span>
+        <span style="font-size:12px;font-family:var(--font-mono);color:var(--accent)" id="clearedBossRatio">0 / 8 Cleared</span>
+      </div>
+      <div class="boss-list" id="bossListContainer">
+        <!-- Rendered dynamically via JS -->
+      </div>
+    </aside>
+
+    <!-- BATTLE ARENA -->
+    <section class="battle-arena">
+
+      <!-- ACTIVE BOSS STAGE HUD -->
+      <div class="active-boss-hud">
+        <div class="active-boss-info">
+          <div class="active-boss-portrait" id="activeBossPortrait">🔨</div>
+          <div class="active-boss-title">
+            <h3 id="activeBossName">Rick "The Road Rager"</h3>
+            <p id="activeBossSub">Tampa Commercial Roofing Owner · Impatient / Driving</p>
+            <div class="active-boss-badges" id="activeBossBadges">
+              <span class="badge-pill">Roofing</span>
+              <span class="badge-pill">Tampa FL</span>
+              <span class="badge-pill">Tier 1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="active-boss-hp-box">
+          <div class="boss-hp-header">
+            <span>CONTRACTOR SKEPTICISM (HP)</span>
+            <span id="bossHpDigits">100 / 100</span>
+          </div>
+          <div class="boss-hp-track">
+            <div class="boss-hp-fill" id="bossHpFill" style="width:100%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMBAT TERMINAL / DIALOGUE LOG -->
+      <div class="combat-terminal" id="combatLog">
+        <!-- Log entries appear here -->
+      </div>
+
+      <!-- COACH PRESCRIPTION BAR -->
+      <div class="coach-box">
+        <span id="coachPrescription">💡 <strong>Closer Coach:</strong> Acknowledge his busy moment before dropping the $8,000 emergency leak hook.</span>
+        <span id="turnIndicatorBadge" style="font-family:var(--font-mono);font-size:11.5px;color:var(--accent2);font-weight:700">YOUR TURN: SPEAK OR STRIKE</span>
+      </div>
+
+      <!-- TACTICAL QUICK-STRIKE DOCK (INCLUDES HEALTH REGAIN) -->
+      <div class="tactical-dock">
+        <button class="strike-card" type="button" onclick="executeQuickStrike('permission')">
+          <div class="strike-tag">⚡ Permission Opener <span>+Crit</span></div>
+          <div class="strike-text">"Hey Rick, I know you're in the field — you got 30 seconds before you hang up?"</div>
+        </button>
+
+        <button class="strike-card" type="button" onclick="executeQuickStrike('leak')">
+          <div class="strike-tag">🎯 $8,000 Leak Hook <span>+Bleed</span></div>
+          <div class="strike-text">"Where does an emergency $8,000 leak call ring when you're 3 stories up?"</div>
+        </button>
+
+        <button class="strike-card" type="button" onclick="executeQuickStrike('demo')">
+          <div class="strike-tag">🛡️ Test Ava Live <span>(561) 813-8602</span></div>
+          <div class="strike-text">"Don't take my word for it. Dial (561) 813-8602 right now from your truck."</div>
+        </button>
+
+        <button class="strike-card heal-action" type="button" id="breatherBtn" onclick="executeTakeABreather()">
+          <div class="strike-tag">☕ Take a Breather <span id="breatherCooldownText">+30 HP</span></div>
+          <div class="strike-text">Take a tactical breath, calibrate vocal pitch, and restore +30 HP (2T CD).</div>
+        </button>
+      </div>
+
+      <!-- CUSTOM SPEECH / REBUTTAL INPUT DOCK -->
+      <div class="input-dock">
+        <button class="dock-btn mic" id="micBtn" type="button" onclick="toggleSpeechRecognition()" title="Speak with microphone">
+          🎙️ <span id="micLabel">Speak</span>
+        </button>
+        <input type="text" class="custom-input" id="playerCustomInput" placeholder="Speak into mic or type your custom rebuttal here..." onkeydown="handleInputKey(event)">
+        <button class="dock-btn send" id="sendBtn" type="button" onclick="submitRebuttal()">
+          ⚔️ Attack Rebuttal ➔
+        </button>
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+<!-- ARMORY MODAL (SWORDS & ARMOR) -->
+<div class="modal-overlay" id="armoryModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h2>🛡️ VANTORX ARMORY — SWORDS &amp; ARMOR</h2>
+      <button class="modal-close" onclick="closeArmoryModal()">✕</button>
+    </div>
+
+    <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">
+      Equip your Cold Caller with legendary weapons and defensive gear. Weapons boost objection penetration and critical strikes; armor shields you against contractor rejection damage and restores health.
+    </p>
+
+    <!-- WEAPONS SECTION -->
+    <div class="armory-section-title">⚔️ OFFENSIVE SWORDS &amp; WEAPONS</div>
+    <div class="armory-grid" id="weaponsGrid">
+      <!-- Injected via JS -->
+    </div>
+
+    <!-- ARMOR SECTION -->
+    <div class="armory-section-title" style="margin-top:24px">🛡️ DEFENSIVE SUITS &amp; SHIELDS</div>
+    <div class="armory-grid" id="armorGrid">
+      <!-- Injected via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- LEVEL UP CELEBRATION MODAL -->
+<div class="modal-overlay" id="levelUpModal">
+  <div class="modal-card" style="max-width:540px;text-align:center">
+    <div style="font-size:54px;margin-bottom:10px">🎉</div>
+    <h2 style="font-family:var(--font-head);font-size:26px;color:var(--accent2);margin-bottom:6px" id="levelUpTitle">LEVEL UP!</h2>
+    <div style="font-size:16px;color:#ffffff;font-weight:700;margin-bottom:14px" id="levelUpRank">Appointment Slayer (Level 5)</div>
+    <p style="color:var(--dim);font-size:14px;line-height:1.5;margin-bottom:20px" id="levelUpDesc">
+      Your cold call authority has expanded! Max HP increased and higher tier weapons are unlocked in the Armory.
+    </p>
+    <button class="hud-btn gold" style="width:100%;padding:12px;font-size:15px;justify-content:center" onclick="closeLevelUpModal()">
+      ⚔️ Continue The Gauntlet ➔
+    </button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// 🎮 STANDALONE COLD CALL QUEST 3.0 JAVASCRIPT ENGINE
+// ============================================================
+
+(function() {
+  'use strict';
+
+  // 1. SOUND & VOICE STATE (Defaults to OFF to prevent unprompted autoplay)
+  let voiceEnabled = false;
+  let sfxEnabled = true;
+  let audioCtx = null;
+
+  if (typeof window !== 'undefined' && window.speechSynthesis) {
+    try { window.speechSynthesis.cancel(); } catch(e){}
+  }
+
+  function getAudioContext() {
+    if (!audioCtx) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) audioCtx = new AudioContextClass();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  function playSynth(type) {
+    if (!sfxEnabled) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      const now = ctx.currentTime;
+
+      if (type === 'slash') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(80, now + 0.15);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      } else if (type === 'crit') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.setValueAtTime(880, now + 0.08);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === 'heal') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.12);
+        osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.25);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      } else if (type === 'level') {
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(392, now);
+        osc.frequency.setValueAtTime(523.25, now + 0.1);
+        osc.frequency.setValueAtTime(659.25, now + 0.2);
+        osc.frequency.setValueAtTime(783.99, now + 0.3);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.45);
+        osc.start(now);
+        osc.stop(now + 0.45);
+      } else if (type === 'hit') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(120, now);
+        osc.frequency.exponentialRampToValueAtTime(40, now + 0.18);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.18);
+        osc.start(now);
+        osc.stop(now + 0.18);
+      }
+    } catch(e) {
+      console.warn('Synth error:', e);
+    }
+  }
+
+  function speakContractor(text, bossKey) {
+    if (!voiceEnabled || !window.speechSynthesis) return;
+    try {
+      window.speechSynthesis.cancel();
+      const clean = text.replace(/\([^)]*\)/g, '').trim();
+      if (!clean) return;
+      const utt = new SpeechSynthesisUtterance(clean);
+      if (bossKey === 'gatekeeper') {
+        utt.pitch = 1.15; utt.rate = 1.0;
+      } else if (bossKey === 'skeptic') {
+        utt.pitch = 0.82; utt.rate = 0.98;
+      } else if (bossKey === 'price') {
+        utt.pitch = 0.95; utt.rate = 1.12;
+      } else if (bossKey === 'vito') {
+        utt.pitch = 0.8; utt.rate = 0.95;
+      } else {
+        utt.pitch = 0.88; utt.rate = 1.02;
+      }
+      window.speechSynthesis.speak(utt);
+    } catch(e){}
+  }
+
+  window.toggleVoice = function() {
+    voiceEnabled = !voiceEnabled;
+    const btn = document.getElementById('voiceToggleBtn');
+    if (btn) {
+      btn.textContent = voiceEnabled ? '🗣️ Voice: ON' : '🗣️ Voice: OFF (Click to Enable)';
+      btn.style.color = voiceEnabled ? 'var(--accent2)' : 'var(--dim)';
+    }
+    if (!voiceEnabled && window.speechSynthesis) {
+      try { window.speechSynthesis.cancel(); } catch(e){}
+    }
+  };
+
+  window.toggleSound = function() {
+    sfxEnabled = !sfxEnabled;
+    const btn = document.getElementById('soundToggleBtn');
+    if (btn) {
+      btn.textContent = sfxEnabled ? '🔊 SFX: ON' : '🔇 SFX: MUTED';
+      btn.style.color = sfxEnabled ? 'var(--ink)' : 'var(--dim)';
+    }
+  };
+
+  // 2. PLAYER DATA & ARMORY DEFINITIONS
+  const WEAPONS = [
+    { id: 'gavel', name: 'Lead Gavel', icon: '🔨', lvl: 1, cost: 0, dmgBonus: 0, desc: 'Standard rookie dialer tool. Simple and reliable.', passiveName: 'First Call Courage', passiveDesc: 'Baseline cold calling attack.' },
+    { id: 'blade', name: 'Iron Rebuttal Shortsword', icon: '🗡️', lvl: 2, cost: 100, dmgBonus: 15, desc: 'Honed with early objection battlecards.', passiveName: 'Permission Slice', passiveDesc: '20% chance to land +25 extra Critical Hit damage on permission openers.' },
+    { id: 'cleaver', name: 'Trade-Pain Cleaver', icon: '🪓', lvl: 4, cost: 250, dmgBonus: 30, desc: 'Forged from missed call contractor agony.', passiveName: 'Revenue Bleed', passiveDesc: 'Applying trade math inflicts +10 bleeding damage over 2 consecutive turns.' },
+    { id: 'rapier', name: 'Carrier *71 Rapier', icon: '🤺', lvl: 6, cost: 450, dmgBonus: 45, desc: 'Direct carrier-level precision with zero ring delay.', passiveName: 'Zero-Ring Piercing', passiveDesc: 'Penetrates boss armor; boss counterattack damage is reduced by 15%.' },
+    { id: 'scythe', name: 'Total Agreement Scythe', icon: '🌾', lvl: 8, cost: 750, dmgBonus: 65, desc: 'Reaps contractor skepticism by validating their anger.', passiveName: 'Skepticism Reaper', passiveDesc: 'Validating boss objections doubles your attack damage on the following turn.' },
+    { id: 'excalibur', name: 'Mythic Rainmaker Excalibur', icon: '👑', lvl: 10, cost: 1200, dmgBonus: 100, desc: 'Legendary blade held only by master agency closers.', passiveName: 'Live Transfer Stun', passiveDesc: '35% chance to instantly stun the boss into booking an immediate demo test!' }
+  ];
+
+  const ARMORS = [
+    { id: 'workshirt', name: 'Rookie Denim Workshirt', icon: '👕', lvl: 1, cost: 0, maxHp: 100, dmgReduct: 0, desc: 'Clean denim workshirt. Provides baseline protection against cold call hang-ups.', passiveName: 'Fresh Start', passiveDesc: '100 Max HP base pool.' },
+    { id: 'vest', name: 'Heavy Tradesman Vest', icon: '🦺', lvl: 2, cost: 100, maxHp: 115, dmgReduct: 10, desc: 'Reinforced utility pockets for notes and scripts.', passiveName: 'Field Toughness', passiveDesc: '115 Max HP, absorbs 10% rejection damage.' },
+    { id: 'plate', name: 'Steel-Toed Plate Carrier', icon: '🛡️', lvl: 4, cost: 250, maxHp: 135, dmgReduct: 20, desc: 'Heavy protection against rude contractor barks.', passiveName: 'Hang-up Deflection', passiveDesc: '135 Max HP, absorbs 20% damage, 15% chance to deflect boss counter to 0.' },
+    { id: 'aegis', name: 'Titan Agreement Aegis', icon: '🔰', lvl: 6, cost: 450, maxHp: 160, dmgReduct: 30, desc: 'Absorbs extreme frustration and transforms it into rapport.', passiveName: 'Tone Dampener', passiveDesc: '160 Max HP, absorbs 30% damage, cuts impatience timer penalties by 50%.' },
+    { id: 'cuirass', name: 'Diamond Frame Cuirass', icon: '💎', lvl: 8, cost: 750, maxHp: 190, dmgReduct: 40, desc: 'Impenetrable reputation armor tested across 1,000 live dials.', passiveName: 'Reputation Bastion', passiveDesc: '190 Max HP, absorbs 40% damage, heals +10 HP on Grade A/S rebuttals.' },
+    { id: 'cloak', name: 'Obsidian Rainmaker Cloak', icon: '🥋', lvl: 10, cost: 1200, maxHp: 230, dmgReduct: 50, desc: 'Mythic woven shroud that makes contractor rejections bounce off harmlessly.', passiveName: 'Contractor Whisperer', passiveDesc: '230 Max HP, 50% rejection damage reduction, +5 HP auto-regen every combat turn.' }
+  ];
+
+  const RANKS = [
+    { lvl: 1, title: 'Novice Dialer', xpReq: 150 },
+    { lvl: 2, title: 'Lead Qualifier', xpReq: 300 },
+    { lvl: 3, title: 'Objection Dodger', xpReq: 500 },
+    { lvl: 4, title: 'Pipeline Builder', xpReq: 750 },
+    { lvl: 5, title: 'Appointment Slayer', xpReq: 1050 },
+    { lvl: 6, title: 'Leak Hunter', xpReq: 1400 },
+    { lvl: 7, title: 'Closer Apprentice', xpReq: 1850 },
+    { lvl: 8, title: 'Enterprise Negotiator', xpReq: 2400 },
+    { lvl: 9, title: 'Master Pitchman', xpReq: 3100 },
+    { lvl: 10, title: 'Mythic Rainmaker', xpReq: 4000 }
+  ];
+
+  // 3. 8 CONTRACTOR BOSS GAUNTLET DEFINITIONS
+  const BOSSES = [
+    {
+      key: 'roofer',
+      name: 'Rick "The Road Rager"',
+      title: 'Tampa Commercial Roofing Owner',
+      trade: 'Roofing & Storm Repair',
+      location: 'Tampa, FL',
+      portrait: '🔨',
+      hp: 100,
+      maxHp: 100,
+      tier: 'Tier 1',
+      badges: ['Roofing', 'Tampa FL', '100 HP'],
+      dialogue: {
+        stage1: "VantorX? Never heard of ya. I'm three stories up on a roof in Tampa with a nail gun in 95-degree heat. What the hell do you want?",
+        victory: "Alright Luke, you won me over. Shoot me a text with Ava's setup info."
+      }
+    },
+    {
+      key: 'gatekeeper',
+      name: 'Karen "The Iron Gatekeeper"',
+      title: 'Orlando HVAC Premier Gatekeeper',
+      trade: 'Residential HVAC Dispatch',
+      location: 'Winter Park, FL',
+      portrait: '📋',
+      hp: 120,
+      maxHp: 120,
+      tier: 'Tier 1',
+      badges: ['HVAC Gatekeeper', 'Orlando FL', '120 HP'],
+      dialogue: {
+        stage1: "Gary is out in the field and doesn't take unscheduled vendor calls. Send your marketing brochure to info@orlandopremiac.com.",
+        victory: "Okay Luke, I'll put Gary directly on the phone for 5 minutes. That $8k leak stat got my attention."
+      }
+    },
+    {
+      key: 'skeptic',
+      name: 'Mike "The Robot Crusher"',
+      title: 'West Palm Beach Master Electrician',
+      trade: 'Commercial Electrical & Generator Retrofit',
+      location: 'West Palm Beach, FL',
+      portrait: '⚡',
+      hp: 150,
+      maxHp: 150,
+      tier: 'Tier 2',
+      badges: ['Electrician', 'West Palm FL', '150 HP'],
+      dialogue: {
+        stage1: "Hold on. Is this a damn robot? I swear to God if another tech bro sends an AI bot to waste my morning, I'm smashing this phone.",
+        victory: "Damn, I just dialed (561) 813-8602... Ava answered in half a second and booked a test panel. Let's do this."
+      }
+    },
+    {
+      key: 'price',
+      name: 'Dave "The Budget Dragon"',
+      title: 'Miami Luxury Plumbing & Trenchless',
+      trade: 'Emergency Plumbing & Sewer',
+      location: 'Miami / Brickell, FL',
+      portrait: '🔧',
+      hp: 180,
+      maxHp: 180,
+      tier: 'Tier 2',
+      badges: ['Plumbing', 'Miami FL', '180 HP'],
+      dialogue: {
+        stage1: "Look, I don't care how fancy it is. I got burned for $3,000 by some marketing clown last year. How much is this going to bleed out of my account?",
+        victory: "Fair enough. $300 a month pays for itself if it catches even one emergency repipe while I'm sleeping. Send the contract."
+      }
+    },
+    {
+      key: 'sal',
+      name: 'Sal "The Storm Chaser"',
+      title: 'Fort Myers Restoration King',
+      trade: 'Water Mitigation & Mold Remediation',
+      location: 'Fort Myers, FL',
+      portrait: '🌊',
+      hp: 210,
+      maxHp: 210,
+      tier: 'Tier 3',
+      badges: ['Restoration', 'Fort Myers FL', '210 HP'],
+      dialogue: {
+        stage1: "Kid, hurricane season starts soon. When a tropical depression hits, I get 40 flooded calls between midnight and 5 AM. How does your little toy handle 10 panicked homeowners at the same second without crashing?",
+        victory: "Wait, Ava can handle 10 calls simultaneously with zero busy signals? That alone saves my entire storm season. Set up my Carrier *71 rollover now."
+      }
+    },
+    {
+      key: 'brad',
+      name: 'Brad "The Angi Addict"',
+      title: 'Jacksonville Residential AC & Heating',
+      trade: 'Residential Air Conditioning',
+      location: 'Jacksonville, FL',
+      portrait: '❄️',
+      hp: 240,
+      maxHp: 240,
+      tier: 'Tier 3',
+      badges: ['AC / HVAC', 'Jacksonville FL', '240 HP'],
+      dialogue: {
+        stage1: "I already spend $1,800 a month on Angi and Thumbtack. My phone rings plenty. Why would I change anything when HomeAdvisor gives me all my jobs?",
+        victory: "You're dead right about Angi selling that same replacement lead to 4 other contractors. I lost three $9k changeouts last month because of that. Hook up Ava to my inbound lines."
+      }
+    },
+    {
+      key: 'gary',
+      name: 'Gary "The Yellow Pad Veteran"',
+      title: 'Ocala Septic & Excavation Veteran',
+      trade: 'Septic Pumping & Drainfields (38 Yrs)',
+      location: 'Ocala / Marion County, FL',
+      portrait: '🚜',
+      hp: 270,
+      maxHp: 270,
+      tier: 'Tier 4',
+      badges: ['Septic / Dirt', 'Ocala FL', '270 HP'],
+      dialogue: {
+        stage1: "I've been in the dirt since 1986. I don't use 'apps', I don't have a computer, and I write every job on this yellow legal pad. You're talking Chinese to me, son.",
+        victory: "So Ava just acts like a polite southern girl answering my office phone, and texts my flip phone the address? Hell, even I can handle that. Let's try it for 30 days."
+      }
+    },
+    {
+      key: 'vito',
+      name: 'Vito "The Enterprise Titan"',
+      title: 'Texas & Florida Fleet President',
+      trade: 'Commercial Mechanical (42 Service Trucks)',
+      location: 'Dallas / Houston / Orlando',
+      portrait: '🏢',
+      hp: 350,
+      maxHp: 350,
+      tier: 'Tier 5 RAID BOSS',
+      badges: ['42 Trucks', 'Enterprise Fleet', '350 HP RAID BOSS'],
+      dialogue: {
+        stage1: "I run 42 service vans across Texas and Florida with an internal dispatch center in Houston. Unless your AI does bilingual Spanish rollover, connects to ServiceTitan via webhook, and does Carrier *71 without rewiring my PBX, don't waste my breath. Convince me.",
+        victory: "Impressive. You know enterprise dispatch math, Carrier *71 rollover logic, and ServiceTitan webhooks cold. I want Ava tested on my 12 Orlando vans starting Monday morning."
+      }
+    }
+  ];
+
+  // 4. PERSISTENT PLAYER STATE
+  let player = {
+    name: 'Luke the Closer',
+    lvl: 1,
+    xp: 0,
+    nextLvlXp: 150,
+    hp: 100,
+    maxHp: 100,
+    gold: 0,
+    equippedWeapon: 'gavel',
+    equippedArmor: 'workshirt',
+    unlockedWeapons: ['gavel'],
+    unlockedArmors: ['workshirt'],
+    defeatedBosses: [],
+    streak: 0,
+    breatherCooldown: 0,
+    bleedTurns: 0,
+    skepticismReaperActive: false
+  };
+
+  function loadSavedPlayer() {
+    try {
+      const saved = localStorage.getItem('vantorx_cold_call_quest_save_v3');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        player = Object.assign(player, parsed);
+      }
+    } catch(e){}
+    recalcPlayerStats();
+  }
+
+  function savePlayer() {
+    try {
+      localStorage.setItem('vantorx_cold_call_quest_save_v3', JSON.stringify(player));
+    } catch(e){}
+  }
+
+  function recalcPlayerStats() {
+    const armor = ARMORS.find(a => a.id === player.equippedArmor) || ARMORS[0];
+    player.maxHp = armor.maxHp;
+    if (player.hp > player.maxHp) player.hp = player.maxHp;
+    if (player.hp <= 0) player.hp = player.maxHp;
+  }
+
+  // 5. CURRENT MATCH STATE
+  let currentBossIndex = 0;
+  let currentBoss = BOSSES[0];
+  let bossHp = 100;
+  let matchHistory = [];
+  let usedReplies = new Set();
+  let currentPhase = 'opener';
+  let speechRec = null;
+  let isListening = false;
+
+  // 6. UI UPDATE HELPERS
+  function updateHUD() {
+    // Player Vitals
+    const hpDigits = document.getElementById('hpDigits');
+    const hpBar = document.getElementById('hpBarFill');
+    const xpDigits = document.getElementById('xpDigits');
+    const xpBar = document.getElementById('xpBarFill');
+    const goldDigits = document.getElementById('goldDigits');
+    const playerLvlTag = document.getElementById('playerLvlTag');
+    const playerRankHeader = document.getElementById('playerRankHeader');
+    const streakHeader = document.getElementById('streakHeader');
+    const playerEquipSummary = document.getElementById('playerEquipSummary');
+
+    const hpPct = Math.max(0, Math.min(100, Math.round((player.hp / player.maxHp) * 100)));
+    const xpPct = Math.max(0, Math.min(100, Math.round((player.xp / player.nextLvlXp) * 100)));
+
+    if (hpDigits) hpDigits.textContent = `${player.hp} / ${player.maxHp}`;
+    if (hpBar) hpBar.style.width = `${hpPct}%`;
+    if (xpDigits) xpDigits.textContent = `${player.xp} / ${player.nextLvlXp} XP (${xpPct}%)`;
+    if (xpBar) xpBar.style.width = `${xpPct}%`;
+    if (goldDigits) goldDigits.textContent = `💰 ${player.gold} GP`;
+    if (playerLvlTag) playerLvlTag.textContent = `LVL ${player.lvl}`;
+    if (streakHeader) streakHeader.textContent = `🔥 ${player.streak} Streak`;
+
+    const rankObj = RANKS.find(r => r.lvl === player.lvl) || RANKS[0];
+    if (playerRankHeader) playerRankHeader.textContent = rankObj.title;
+
+    const curW = WEAPONS.find(w => w.id === player.equippedWeapon) || WEAPONS[0];
+    const curA = ARMORS.find(a => a.id === player.equippedArmor) || ARMORS[0];
+    if (playerEquipSummary) playerEquipSummary.textContent = `${curW.icon} ${curW.name} · ${curA.icon} ${curA.name}`;
+
+    // Boss Vitals
+    const bossHpDigits = document.getElementById('bossHpDigits');
+    const bossHpFill = document.getElementById('bossHpFill');
+    const bHpPct = Math.max(0, Math.min(100, Math.round((bossHp / currentBoss.maxHp) * 100)));
+    if (bossHpDigits) bossHpDigits.textContent = `${bossHp} / ${currentBoss.maxHp}`;
+    if (bossHpFill) bossHpFill.style.width = `${bHpPct}%`;
+
+    // Cleared ratio
+    const cleared = document.getElementById('clearedBossRatio');
+    if (cleared) cleared.textContent = `${player.defeatedBosses.length} / 8 Cleared`;
+
+    // Breather button cooldown
+    const breatherBtn = document.getElementById('breatherBtn');
+    const breatherText = document.getElementById('breatherCooldownText');
+    if (breatherBtn && breatherText) {
+      if (player.breatherCooldown > 0) {
+        breatherBtn.disabled = true;
+        breatherText.textContent = `(${player.breatherCooldown}T Cooldown)`;
+      } else {
+        breatherBtn.disabled = false;
+        breatherText.textContent = `+30 HP (Ready)`;
+      }
+    }
+  }
+
+  function appendLog(msg, type) {
+    const terminal = document.getElementById('combatLog');
+    if (!terminal) return;
+    const div = document.createElement('div');
+    div.className = `log-entry log-${type}`;
+    div.innerHTML = msg;
+    terminal.appendChild(div);
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  function renderBossGauntletList() {
+    const container = document.getElementById('bossListContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    BOSSES.forEach((b, idx) => {
+      const isDefeated = player.defeatedBosses.includes(b.key);
+      const isActive = idx === currentBossIndex;
+      const btn = document.createElement('div');
+      btn.className = `boss-card-btn ${isActive ? 'active' : ''} ${isDefeated ? 'defeated' : ''}`;
+      btn.onclick = () => selectBoss(idx);
+
+      btn.innerHTML = `
+        <div class="boss-avatar">${b.portrait}</div>
+        <div class="boss-meta">
+          <h4>${b.name}</h4>
+          <p>${b.title}</p>
+          <div class="boss-hp-tag">
+            <span style="color:${isDefeated ? 'var(--ok)' : 'var(--err)'}">❤️ ${isDefeated ? 'DEFEATED' : b.hp + ' HP'}</span>
+            <span style="color:var(--faint)">· ${b.tier}</span>
+          </div>
+        </div>
+        <div class="boss-status-badge ${isDefeated ? 'status-cleared' : (isActive ? 'status-ready' : 'status-locked')}">
+          ${isDefeated ? '✓ CLEARED' : (isActive ? '⚔️ READY' : 'STAGE ' + (idx + 1))}
+        </div>
+      `;
+      container.appendChild(btn);
+    });
+  }
+
+  function selectBoss(idx) {
+    currentBossIndex = idx;
+    currentBoss = BOSSES[idx];
+    bossHp = currentBoss.maxHp;
+    usedReplies.clear();
+    currentPhase = 'opener';
+    matchHistory = [];
+
+    // Update active HUD
+    const portrait = document.getElementById('activeBossPortrait');
+    const nameEl = document.getElementById('activeBossName');
+    const subEl = document.getElementById('activeBossSub');
+    const badgesEl = document.getElementById('activeBossBadges');
+
+    if (portrait) portrait.textContent = currentBoss.portrait;
+    if (nameEl) nameEl.textContent = currentBoss.name;
+    if (subEl) subEl.textContent = `${currentBoss.title} · ${currentBoss.trade}`;
+    if (badgesEl) {
+      badgesEl.innerHTML = currentBoss.badges.map(b => `<span class="badge-pill">${b}</span>`).join('');
+    }
+
+    renderBossGauntletList();
+    updateHUD();
+
+    // Reset log
+    const terminal = document.getElementById('combatLog');
+    if (terminal) terminal.innerHTML = '';
+
+    appendLog(`⚔️ <strong>ENTERED STAGE ${idx + 1}:</strong> Confronting ${currentBoss.name} (${currentBoss.trade})!`, 'system');
+    appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.stage1}"`, 'boss');
+    matchHistory.push({ role: 'assistant', content: currentBoss.dialogue.stage1 });
+
+    // Voice speaks ONLY if voice is actively ON
+    if (voiceEnabled) {
+      speakContractor(currentBoss.dialogue.stage1, currentBoss.key);
+    }
+  }
+
+  // 7. HEALTH REGAIN MECHANICS
+  window.executeTakeABreather = function() {
+    if (player.breatherCooldown > 0) return;
+    const healAmount = 30;
+    const oldHp = player.hp;
+    player.hp = Math.min(player.maxHp, player.hp + healAmount);
+    const healed = player.hp - oldHp;
+    player.breatherCooldown = 2; // 2 turn cooldown
+
+    playSynth('heal');
+    appendLog(`☕ <strong>TAKE A BREATHER (+${healed} HP)!</strong> Luke took a tactical sip of coffee, relaxed his vocal tone, and recovered <strong>+${healed} HP</strong> (HP: ${player.hp}/${player.maxHp}).`, 'heal');
+    updateHUD();
+    savePlayer();
+  };
+
+  // 8. ADAPTIVE CONVERSATIONAL BRAIN 3.0 (Anti-Repetition & Multi-Dimensional Scoring)
+  function evaluateTurn(userInput) {
+    const text = (userInput || '').toLowerCase();
+    const curWeapon = WEAPONS.find(w => w.id === player.equippedWeapon) || WEAPONS[0];
+    const curArmor = ARMORS.find(a => a.id === player.equippedArmor) || ARMORS[0];
+
+    let damage = 22;
+    let grade = 'B';
+    let feedback = '';
+    let counterDmg = 12;
+    let contractorReply = '';
+    let isCrit = false;
+    let agreementHeal = 0;
+
+    // Pattern Recognition
+    const hasPermission = /30 seconds|hang up|catch you|busy|bad time|quick question/i.test(text);
+    const hasLeakHook = /leak|missed call|emergency|8,?000|roof|leak|after hours|midnight|sleeping|repiping|changeout/i.test(text);
+    const hasAgreement = /hear you|agree|100%|completely|understand|you're right|fair enough|totally/i.test(text);
+    const hasDemoNumber = /561|813|8602|test number|demo|call it right now/i.test(text);
+    const hasPackageMath = /300|1,?200|package|cost|per month|investment|setup/i.test(text);
+    const hasTradeContext = /roof|shingle|hvac|duct|septic|tank|pump|service ?titan|carrier|\*71|rollover|flood|storm/i.test(text);
+
+    // Agreement Psychological Jiu-Jitsu Heal
+    if (hasAgreement) {
+      agreementHeal = 18;
+      player.hp = Math.min(player.maxHp, player.hp + agreementHeal);
+      feedback += ` [Defused Tension: +${agreementHeal} HP]`;
+    }
+
+    // Scoring & Grade assignment
+    if ((hasPermission || hasAgreement) && hasLeakHook && (hasDemoNumber || hasTradeContext)) {
+      grade = 'S';
+      damage = 44;
+      counterDmg = 0;
+      feedback = '🔥 LEGENDARY MOVE! Validated contractor friction, deployed the trade revenue leak hook, and offered the live test proof!';
+    } else if (hasLeakHook && (hasAgreement || hasDemoNumber || hasTradeContext)) {
+      grade = 'A';
+      damage = 32;
+      counterDmg = 4;
+      feedback = '✨ EXCELLENT! Connected Ava directly to lost job revenue and proved zero risk.';
+    } else if (hasPermission || hasAgreement || hasLeakHook || hasDemoNumber) {
+      grade = 'B';
+      damage = 22;
+      counterDmg = 10;
+      feedback = 'Solid response, but make sure to anchor the exact dollar cost of a missed call.';
+    } else if (text.length > 10) {
+      grade = 'C';
+      damage = 12;
+      counterDmg = 18;
+      feedback = 'A bit hesitant. Contractor smelled a sales pitch and pushed back.';
+    } else {
+      grade = 'F';
+      damage = 0;
+      counterDmg = 26;
+      feedback = 'Pitch slap / hesitation! The contractor tore into your opening.';
+    }
+
+    // Weapon Modifiers
+    damage = Math.round(damage * (1 + curWeapon.dmgBonus / 100));
+
+    // Passive: Permission Slice Crit
+    if (curWeapon.id === 'blade' && hasPermission && Math.random() < 0.35) {
+      isCrit = true;
+      damage += 25;
+      feedback += ' ⚔️ CRITICAL HIT! Permission Slice triggered!';
+    }
+
+    // Passive: Skepticism Reaper
+    if (curWeapon.id === 'scythe' && player.skepticismReaperActive) {
+      damage = Math.round(damage * 2.0);
+      feedback += ' 🌾 SKEPTICISM REAPER ACTIVATED: 2X DAMAGE!';
+      player.skepticismReaperActive = false;
+    }
+    if (curWeapon.id === 'scythe' && hasAgreement) {
+      player.skepticismReaperActive = true;
+    }
+
+    // Armor Modifiers (Damage Reduction)
+    const rawCounter = counterDmg;
+    counterDmg = Math.round(counterDmg * (1 - curArmor.dmgReduct / 100));
+
+    // Passive: Hang-up Deflection
+    if (curArmor.id === 'plate' && Math.random() < 0.2) {
+      counterDmg = 0;
+      feedback += ' 🛡️ DEFLECTED! Steel plate completely deflected contractor counterattack!';
+    }
+
+    // Passive: Reputation Bastion Heal on Grade A/S
+    if (curArmor.id === 'cuirass' && (grade === 'S' || grade === 'A')) {
+      player.hp = Math.min(player.maxHp, player.hp + 10);
+      feedback += ' [Reputation Bastion Heal: +10 HP]';
+    }
+
+    // Passive: Obsidian Cloak Regen
+    if (curArmor.id === 'cloak') {
+      player.hp = Math.min(player.maxHp, player.hp + 5);
+      feedback += ' [Obsidian Regen: +5 HP]';
+    }
+
+    // Passive: Revenue Bleed (cleaver)
+    if (curWeapon.id === 'cleaver' && hasLeakHook) {
+      player.bleedTurns = 2;
+    }
+
+    // Generate Adaptive Contractor Reply (Zero Repetition)
+    contractorReply = generateContractorSpeech(currentBoss.key, grade, hasDemoNumber, hasPackageMath);
+
+    return { grade, damage, counterDmg, feedback, contractorReply, isCrit, agreementHeal };
+  }
+
+  function generateContractorSpeech(bossKey, grade, hasDemo, hasMath) {
+    const pools = {
+      roofer: {
+        S: ["Damn, you actually get it. Look, I lost an entire $12k flat roof job last Tuesday because I was spraying poly on another job and couldn't grab the phone. If this Ava thing answers on the first ring, text me the details right now."],
+        A: ["Alright, you're not wrong about the $8,000 leak. Half my day is climbing down ladders just to talk to spam callers. If this demo really sounds like a human girl, give me the number again."],
+        B: ["Look, my wife handles the QuickBooks and I handle the roofs. How complicated is it to hook this up to my cell phone?"],
+        C: ["I still think you're just another lead gen clown trying to sell me shared Angi leads. Prove you're not."],
+        F: ["I told you I'm on a roof! Stop rambling your script and get to the point or I'm hanging up."]
+      },
+      gatekeeper: {
+        S: ["You know what, that's fair. Gary is drowning in dispatch calls every morning and we miss after-hours calls constantly. I'll put Gary directly on the line."],
+        A: ["We do have an answering service right now, but they sound like a bored call center in the Philippines and customers complain. Does this Ava actually know Florida HVAC terms?"],
+        B: ["Send me the one-page breakdown. If it integrates with our schedule, I'll show it to Gary at our 4 PM dispatch meeting."],
+        C: ["Gary told me not to forward any software vendors today. What makes you different from the other 5 calls I got this morning?"],
+        F: ["I'm not putting you through to the owner without a clear reason. Send an email or don't call back."]
+      },
+      skeptic: {
+        S: ["Holy hell. I just put you on speaker and dialed (561) 813-8602... She answered instantly and answered my question about 200-amp panel upgrades without a single robotic pause. I'm sold."],
+        A: ["Okay, you sound human enough. But AI usually sounds robotic with that awkward 2-second pause. How does this thing handle someone with a heavy Florida or southern accent?"],
+        B: ["Look, my guys are commercial electricians. We don't have time to fiddle with complicated software dashboards. Does this work automatically?"],
+        C: ["You're still dodging my question. Are you going to record my calls and sell my customer data?"],
+        F: ["That's it, you sound like a scripted telemarketer. Stop wasting my working hours."]
+      },
+      price: {
+        S: ["Wait, so for $300 a month it answers all my emergency sewer and repipe calls 24/7 with zero per-minute overages? If it saves just one $6k trenchless job, it pays for the whole year. Let's do it."],
+        A: ["Okay, the math makes sense compared to paying an answering service $1,400 a month. What is the upfront setup fee to train it on my plumbing business?"],
+        B: ["I hear you on the missed calls, but money is tight this quarter. Do you have a trial or month-to-month agreement?"],
+        C: ["$300 is still $300. I need to see proof that my local Miami customers won't just hang up when they hear an automated voice."],
+        F: ["No way, I'm not giving a stranger my credit card. Give me a straight price or hang up."]
+      },
+      sal: {
+        S: ["Kid, you hit the nail right on the head. When hurricane season floods Cape Coral, my phone rings 50 times an hour and my guys are in crawl spaces. Infinite call concurrency is exactly what I need."],
+        A: ["Restoration is life or death for insurance claims. If a homeowner has 3 inches of sewage in their living room, they call the next guy if we don't answer in 2 rings. Does Ava dispatch emergency texts to my on-call crew?"],
+        B: ["How fast can you set this up before the next tropical depression rolls through the Gulf?"],
+        C: ["Sounds too good to be true. Most call centers crash when volume spikes."],
+        F: ["I don't have time for a tech pitch when I have 3 crews waiting on drywall demo. Goodbye."]
+      },
+      brad: {
+        S: ["Man, you're so right about Angi. I spent $2,200 last month and four of those AC replacement leads told me three other companies had already called them! Having Ava close my exclusive inbound leads is ten times smarter."],
+        A: ["So instead of paying $95 per shared lead, this turns all the missed calls from my own Google profile and truck wraps into booked appointments?"],
+        B: ["My dispatch girl handles calls during the day. Can this just turn on automatically between 6 PM and 8 AM?"],
+        C: ["I've been on HomeAdvisor for 6 years, it's hard to just walk away from that lead stream."],
+        F: ["Look buddy, my phone is ringing, Angi works fine for me. Stop telling me how to run my HVAC business."]
+      },
+      gary: {
+        S: ["Well son, I appreciate you not trying to sell me some high-tech nonsense. If Ava just talks like a polite southern receptionist and texts my flip phone the address and tank size, that actually solves my headache."],
+        A: ["So when I'm digging a drainfield 6 feet deep with my excavator, I don't have to shut off the diesel engine to answer the phone? She just takes the name and job?"],
+        B: ["My customers are old folks in Marion County. They don't like robots. Does she sound natural?"],
+        C: ["I still don't trust modern tech companies. You're going to try to lock me into a 3-year contract."],
+        F: ["I told you, I write everything on my yellow pad! I don't need no silicon valley software."]
+      },
+      vito: {
+        S: ["Alright Luke. You know enterprise dispatch, Carrier *71 conditional forwarding, and ServiceTitan CRM webhooks cold. That's rare for an outbound agency. I want a pilot on my 12 Orlando commercial mechanical vans starting next week."],
+        A: ["We do 200 calls a day across Texas and Florida. If your system can seamlessly warm-transfer high-priority commercial contract calls to my Houston dispatch office while handling routine calls autonomously, we have a deal."],
+        B: ["What is your SLA on carrier uptime and latency when calls rollover from our primary PBX?"],
+        C: ["We have an in-house team of 6 dispatchers. Convince me this won't create chaos in our dispatch queues."],
+        F: ["You're out of your league. Enterprise commercial fleets don't buy generic small-business phone tools. Good day."]
+      }
+    };
+
+    const bossPool = pools[bossKey] || pools['roofer'];
+    const candidates = bossPool[grade] || bossPool['B'];
+
+    for (let c of candidates) {
+      if (!usedReplies.has(c)) {
+        usedReplies.add(c);
+        return c;
+      }
+    }
+    return candidates[0];
+  }
+
+  // 9. TURN EXECUTION
+  window.executeQuickStrike = function(strikeType) {
+    let text = '';
+    if (strikeType === 'permission') {
+      text = `Hey ${currentBoss.name.split(' ')[0]}, I know you're busy in the field — you got 30 seconds before you hang up on me?`;
+    } else if (strikeType === 'leak') {
+      text = `Where does an emergency $8,000 replacement call go right now when you're on a job or asleep at 8 PM?`;
+    } else if (strikeType === 'demo') {
+      text = `Don't take my word for it. Dial our live Florida test line on (561) 813-8602 right now from your truck and hear Ava with zero delay.`;
+    }
+    const input = document.getElementById('playerCustomInput');
+    if (input) input.value = text;
+    submitRebuttal();
+  };
+
+  window.handleInputKey = function(e) {
+    if (e.key === 'Enter') {
+      submitRebuttal();
+    }
+  };
+
+  window.submitRebuttal = function() {
+    const input = document.getElementById('playerCustomInput');
+    const userText = input ? input.value.trim() : '';
+    if (!userText) return;
+    if (input) input.value = '';
+
+    // Log player attack
+    appendLog(`<strong>Luke:</strong> "${userText}"`, 'player');
+    matchHistory.push({ role: 'user', content: userText });
+
+    // Decrement Breather cooldown
+    if (player.breatherCooldown > 0) player.breatherCooldown--;
+
+    // Evaluate Turn
+    const evalRes = evaluateTurn(userText);
+
+    // Apply Boss Damage
+    bossHp = Math.max(0, bossHp - evalRes.damage);
+
+    // Sound effect
+    if (evalRes.isCrit) {
+      playSynth('crit');
+    } else if (evalRes.damage > 0) {
+      playSynth('slash');
+    }
+
+    // Bleed effect
+    if (player.bleedTurns > 0 && bossHp > 0) {
+      const bleedDmg = 10;
+      bossHp = Math.max(0, bossHp - bleedDmg);
+      player.bleedTurns--;
+      appendLog(`🩸 <strong>REVENUE BLEED:</strong> Missed call revenue leak dealt <strong>+${bleedDmg} Bleed Damage</strong> to ${currentBoss.name}!`, 'crit');
+    }
+
+    // Combo streak tracking
+    if (evalRes.grade === 'S' || evalRes.grade === 'A') {
+      player.streak++;
+      if (player.streak % 2 === 0) {
+        // Flow State Combo Heal (+20 HP)
+        const comboHeal = 20;
+        player.hp = Math.min(player.maxHp, player.hp + comboHeal);
+        playSynth('heal');
+        appendLog(`🔥 <strong>FLOW STATE COMBO (${player.streak}X STREAK)!</strong> Smooth cadence recovered <strong>+${comboHeal} HP</strong>!`, 'heal');
+      }
+    } else {
+      player.streak = 0;
+    }
+
+    // Apply Player Rejection Damage
+    if (evalRes.counterDmg > 0) {
+      player.hp = Math.max(0, player.hp - evalRes.counterDmg);
+      playSynth('hit');
+    }
+
+    // Log combat feedback
+    appendLog(`🎯 <strong>TURN GRADE: [${evalRes.grade}]</strong> Dealt <strong>${evalRes.damage} DMG</strong> to ${currentBoss.name}.${evalRes.counterDmg > 0 ? ` Contractor counterattacked for <span style="color:var(--err)">-${evalRes.counterDmg} HP</span>.` : ''} ${evalRes.feedback}`, 'system');
+
+    updateHUD();
+
+    // Check Victory
+    if (bossHp <= 0) {
+      handleBossDefeat();
+      return;
+    }
+
+    // Check Player Knockout
+    if (player.hp <= 0) {
+      handlePlayerKnockout();
+      return;
+    }
+
+    // Contractor Replies
+    setTimeout(() => {
+      appendLog(`<strong>${currentBoss.name}:</strong> "${evalRes.contractorReply}"`, 'boss');
+      matchHistory.push({ role: 'assistant', content: evalRes.contractorReply });
+      if (voiceEnabled) {
+        speakContractor(evalRes.contractorReply, currentBoss.key);
+      }
+    }, 450);
+
+    savePlayer();
+  };
+
+  function handleBossDefeat() {
+    playSynth('level');
+    const xpReward = 150 + currentBossIndex * 50;
+    const goldReward = 80 + currentBossIndex * 35;
+
+    player.xp += xpReward;
+    player.gold += goldReward;
+
+    if (!player.defeatedBosses.includes(currentBoss.key)) {
+      player.defeatedBosses.push(currentBoss.key);
+    }
+
+    appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.victory}"`, 'boss');
+    appendLog(`🏆 <strong>VICTORY! ${currentBoss.name} AGREED TO TEST AVA!</strong> Earned <strong>+${xpReward} XP</strong> and <strong>+${goldReward} GP</strong>!`, 'crit');
+
+    if (voiceEnabled) {
+      speakContractor(currentBoss.dialogue.victory, currentBoss.key);
+    }
+
+    // Check Level Up
+    checkLevelUp();
+    updateHUD();
+    renderBossGauntletList();
+    savePlayer();
+  }
+
+  function handlePlayerKnockout() {
+    playSynth('hit');
+    appendLog(`💀 <strong>KNOCKED OUT!</strong> Contractor rejection overwhelmed your armor. Luke stepped out to recalibrate. Restoring HP to 100% to try again...`, 'system');
+    player.hp = player.maxHp;
+    player.streak = 0;
+    updateHUD();
+    savePlayer();
+  }
+
+  function checkLevelUp() {
+    if (player.xp >= player.nextLvlXp && player.lvl < 10) {
+      player.xp -= player.nextLvlXp;
+      player.lvl++;
+      const nextRank = RANKS.find(r => r.lvl === player.lvl);
+      if (nextRank) {
+        player.nextLvlXp = nextRank.xpReq;
+      } else {
+        player.nextLvlXp = Math.round(player.nextLvlXp * 1.5);
+      }
+
+      // Unlock gear based on level
+      WEAPONS.forEach(w => {
+        if (player.lvl >= w.lvl && !player.unlockedWeapons.includes(w.id)) {
+          player.unlockedWeapons.push(w.id);
+        }
+      });
+      ARMORS.forEach(a => {
+        if (player.lvl >= a.lvl && !player.unlockedArmors.includes(a.id)) {
+          player.unlockedArmors.push(a.id);
+        }
+      });
+
+      recalcPlayerStats();
+      showLevelUpModal(player.lvl);
+    }
+  }
+
+  function showLevelUpModal(lvl) {
+    const rankObj = RANKS.find(r => r.lvl === lvl) || RANKS[0];
+    const modal = document.getElementById('levelUpModal');
+    const title = document.getElementById('levelUpTitle');
+    const rank = document.getElementById('levelUpRank');
+    const desc = document.getElementById('levelUpDesc');
+
+    if (title) title.textContent = `LEVEL UP! LEVEL ${lvl}`;
+    if (rank) rank.textContent = rankObj.title;
+    if (desc) desc.textContent = `Your cold call objection mastery is expanding! Max HP increased and higher tier weapons are unlocked in the Armory.`;
+    if (modal) modal.classList.add('open');
+  }
+
+  window.closeLevelUpModal = function() {
+    const modal = document.getElementById('levelUpModal');
+    if (modal) modal.classList.remove('open');
+  };
+
+  // 10. ARMORY MODAL (SWORDS & ARMOR)
+  window.openArmoryModal = function() {
+    renderArmory();
+    const modal = document.getElementById('armoryModal');
+    if (modal) modal.classList.add('open');
+  };
+
+  window.closeArmoryModal = function() {
+    const modal = document.getElementById('armoryModal');
+    if (modal) modal.classList.remove('open');
+  };
+
+  function renderArmory() {
+    const wGrid = document.getElementById('weaponsGrid');
+    const aGrid = document.getElementById('armorGrid');
+    if (!wGrid || !aGrid) return;
+
+    wGrid.innerHTML = WEAPONS.map(w => {
+      const isEquipped = player.equippedWeapon === w.id;
+      const isUnlocked = player.unlockedWeapons.includes(w.id);
+      return `
+        <div class="gear-card ${isEquipped ? 'equipped' : ''} ${!isUnlocked ? 'locked' : ''}">
+          <div class="gear-top">
+            <div class="gear-icon">${w.icon}</div>
+            <div class="gear-meta">
+              <h4>${w.name}</h4>
+              <div class="stat-boost">+${w.dmgBonus}% Objection Damage</div>
+            </div>
+          </div>
+          <p class="gear-desc">${w.desc}</p>
+          <div class="gear-passive"><strong>Perk: ${w.passiveName}</strong> — ${w.passiveDesc}</div>
+          <button class="gear-btn ${isEquipped ? 'equipped-badge' : (isUnlocked ? 'equip' : 'locked-btn')}"
+            ${!isUnlocked || isEquipped ? 'disabled' : ''} onclick="equipWeapon('${w.id}')">
+            ${isEquipped ? '✓ EQUIPPED' : (isUnlocked ? '⚔️ Equip Weapon' : '🔒 Unlocks at Level ' + w.lvl)}
+          </button>
+        </div>
+      `;
+    }).join('');
+
+    aGrid.innerHTML = ARMORS.map(a => {
+      const isEquipped = player.equippedArmor === a.id;
+      const isUnlocked = player.unlockedArmors.includes(a.id);
+      return `
+        <div class="gear-card ${isEquipped ? 'equipped' : ''} ${!isUnlocked ? 'locked' : ''}">
+          <div class="gear-top">
+            <div class="gear-icon">${a.icon}</div>
+            <div class="gear-meta">
+              <h4>${a.name}</h4>
+              <div class="stat-boost">${a.maxHp} Max HP · ${a.dmgReduct}% Absorb</div>
+            </div>
+          </div>
+          <p class="gear-desc">${a.desc}</p>
+          <div class="gear-passive"><strong>Perk: ${a.passiveName}</strong> — ${a.passiveDesc}</div>
+          <button class="gear-btn ${isEquipped ? 'equipped-badge' : (isUnlocked ? 'equip' : 'locked-btn')}"
+            ${!isUnlocked || isEquipped ? 'disabled' : ''} onclick="equipArmor('${a.id}')">
+            ${isEquipped ? '✓ EQUIPPED' : (isUnlocked ? '🛡️ Equip Armor' : '🔒 Unlocks at Level ' + a.lvl)}
+          </button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.equipWeapon = function(weaponId) {
+    if (!player.unlockedWeapons.includes(weaponId)) return;
+    player.equippedWeapon = weaponId;
+    playSynth('slash');
+    savePlayer();
+    updateHUD();
+    renderArmory();
+  };
+
+  window.equipArmor = function(armorId) {
+    if (!player.unlockedArmors.includes(armorId)) return;
+    player.equippedArmor = armorId;
+    recalcPlayerStats();
+    playSynth('heal');
+    savePlayer();
+    updateHUD();
+    renderArmory();
+  };
+
+  // 11. SPEECH-TO-TEXT MICROPHONE INPUT
+  window.toggleSpeechRecognition = function() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert('Speech recognition is not supported in this browser. Please use Chrome or Edge.');
+      return;
+    }
+
+    const micBtn = document.getElementById('micBtn');
+    const micLabel = document.getElementById('micLabel');
+
+    if (isListening && speechRec) {
+      speechRec.stop();
+      isListening = false;
+      if (micBtn) micBtn.classList.remove('listening');
+      if (micLabel) micLabel.textContent = 'Speak';
+      return;
+    }
+
+    try {
+      speechRec = new SpeechRecognition();
+      speechRec.continuous = false;
+      speechRec.interimResults = false;
+      speechRec.lang = 'en-US';
+
+      speechRec.onstart = () => {
+        isListening = true;
+        if (micBtn) micBtn.classList.add('listening');
+        if (micLabel) micLabel.textContent = 'Listening...';
+      };
+
+      speechRec.onresult = (e) => {
+        const transcript = e.results[0][0].transcript;
+        const input = document.getElementById('playerCustomInput');
+        if (input) input.value = transcript;
+        submitRebuttal();
+      };
+
+      speechRec.onerror = (e) => {
+        console.warn('Speech recognition error:', e.error);
+        isListening = false;
+        if (micBtn) micBtn.classList.remove('listening');
+        if (micLabel) micLabel.textContent = 'Speak';
+      };
+
+      speechRec.onend = () => {
+        isListening = false;
+        if (micBtn) micBtn.classList.remove('listening');
+        if (micLabel) micLabel.textContent = 'Speak';
+      };
+
+      speechRec.start();
+    } catch(e) {
+      console.warn('SpeechRec start failed:', e);
+    }
+  };
+
+  // INITIALIZATION ON PAGE LOAD
+  loadSavedPlayer();
+  selectBoss(0);
+  updateHUD();
+
+})();
+</script>
+</body>
+</html>
