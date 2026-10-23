@@ -99,6 +99,21 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .status-badge{font-size:11px;font-family:var(--font-mono);font-weight:700;padding:2px 7px;border-radius:5px;display:inline-flex;align-items:center;gap:4px}
 .status-badge-uncalled{background:rgba(148,163,184,0.12);color:var(--dim);border:1px solid rgba(148,163,184,0.25)}
 .status-badge-called{background:rgba(52,211,153,0.15);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4)}
+.status-badge-success{background:rgba(34,197,94,0.18);color:#86efac;border:1px solid rgba(34,197,94,0.45);cursor:pointer}
+.status-badge-callback{background:rgba(245,158,11,0.18);color:#fde047;border:1px solid rgba(245,158,11,0.45);cursor:pointer}
+.status-badge-noluck{background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.35);cursor:pointer}
+.call-log-btn{background:var(--bg3);border:1.5px solid var(--line);color:var(--ink);border-radius:10px;padding:12px 10px;cursor:pointer;transition:all 0.15s;text-align:center}
+.call-log-btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+.call-log-btn.active{border-width:2px;transform:scale(1.02);box-shadow:0 0 16px rgba(245,158,11,0.3)}
+.call-log-btn.btn-outcome-success.active{border-color:#22c55e;background:rgba(34,197,94,0.22);color:#86efac;box-shadow:0 0 16px rgba(34,197,94,0.4)}
+.call-log-btn.btn-outcome-callback.active{border-color:var(--accent);background:rgba(245,158,11,0.22);color:#fde047;box-shadow:0 0 16px rgba(245,158,11,0.4)}
+.call-log-btn.btn-outcome-noluck.active{border-color:#ef4444;background:rgba(239,68,68,0.2);color:#fca5a5;box-shadow:0 0 16px rgba(239,68,68,0.35)}
+.quick-chip-btn{background:rgba(255,255,255,0.06);border:1px solid var(--line2);color:var(--dim);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;transition:all 0.15s}
+.quick-chip-btn:hover{color:var(--ink);border-color:var(--accent);background:rgba(245,158,11,0.12)}
+.call-note-tag{font-size:11px;color:var(--accent2);cursor:pointer;background:rgba(245,158,11,0.08);border:1px dashed rgba(245,158,11,0.35);padding:3px 6px;border-radius:4px;margin-top:3px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:all 0.15s}
+.call-note-tag:hover{border-color:var(--accent);background:rgba(245,158,11,0.16)}
+.btn-note-add{background:none;border:1px dashed var(--line2);color:var(--dim);font-size:10.5px;padding:2px 6px;border-radius:4px;cursor:pointer;margin-top:3px;transition:all 0.15s}
+.btn-note-add:hover{border-color:var(--accent);color:var(--accent2)}
 .outcome-select{background:var(--bg2);border:1px solid var(--line);color:var(--ink);font-size:11.5px;border-radius:5px;padding:2px 6px;cursor:pointer;outline:none;max-width:145px}
 .outcome-select:focus{border-color:var(--accent)}
 .caller-tag{font-size:10px;color:var(--ok);font-family:var(--font-mono);margin-top:2px}
@@ -2366,11 +2381,13 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       </div>
 
       <div class="product-switcher-bar">
-        <button class="prod-switch-btn active" data-product="bundle">📦 ⭐ Accelerate / Scale Package ($697 - $1,297/mo)</button>
-        <button class="prod-switch-btn" data-product="ava">🤖 Fallback: Ava Voice AI ($397/mo)</button>
-        <button class="prod-switch-btn" data-product="website">🌐 Fallback: Custom Website ($799 flat)</button>
-        <button class="prod-switch-btn" data-product="speed">⚡ Fallback: 90s Speed-to-Lead ($197/mo)</button>
-        <button class="prod-switch-btn" data-product="aeo">⭐ Fallback: AEO &amp; Reviews ($297/mo)</button>
+        <button class="prod-switch-btn active" data-product="bundle">📦 ⭐ Accelerate Package ($697/mo · Primary)</button>
+        <button class="prod-switch-btn" data-product="basic">📦 ⚡ Basic Package: AI Front Desk ($397/mo)</button>
+        <button class="prod-switch-btn" data-product="scale">📦 🚀 Scale Package ($1,297/mo · Enterprise)</button>
+        <button class="prod-switch-btn" data-product="ava">🤖 Standalone: Ava Voice AI ($397/mo)</button>
+        <button class="prod-switch-btn" data-product="website">🌐 Standalone: Custom Website ($799 flat)</button>
+        <button class="prod-switch-btn" data-product="speed">⚡ Standalone: 90s Speed-to-Lead ($197/mo)</button>
+        <button class="prod-switch-btn" data-product="aeo">⭐ Standalone: AEO &amp; Reviews ($297/mo)</button>
       </div>
 
       <!-- ======================================================== -->
@@ -2401,6 +2418,26 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
           <div class="delivery-tip">
             💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle: <em>"Alright, what you got?"</em>
+          </div>
+        </div>
+
+        <!-- 🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN" -->
+        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
+            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
+          </div>
+          <p style="font-size:12px;color:#cbd5e1;margin:0 0 8px;line-height:1.5">
+            Never hang up or freeze! Treat the dispatcher with high respect as the person running the operation, and bridge smoothly to extract the owner's direct mobile number:
+          </p>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
+            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
+            "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field.<br><br>
+            Quick question for you then: when customers call in after 5 PM or on weekends with an emergency, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell or do they just roll to voicemail?"
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
+            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
+            "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when you're closed or busy. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
           </div>
         </div>
 
@@ -2588,6 +2625,23 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
         </div>
 
+        <!-- 🛑 CRITICAL BRANCH: IF NOT THE OWNER -->
+        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
+            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
+            <strong>Praise The Assistant &amp; Ask Operational Question:</strong><br>
+            "Oh gotcha, no problem! You're the one actually running the show and handling client inquiries while he's out.<br><br>
+            Quick question for you: when homeowners in <span class="dyn-city">[City]</span> fill out quote forms on your website, do those come straight to your inbox, or does <span class="dyn-owner">[Owner's First Name]</span> check them on his phone?"
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
+            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
+            "Understood! I noticed an error on your mobile site that is making visitors bounce. What's the best direct cell to text <span class="dyn-owner">[Owner's First Name]</span> a quick 2-minute video audit of the issue so he can see it between jobs?"
+          </div>
+        </div>
+
         <div class="script-phase">
           <div class="phase-tag"><span>Phase 2: The Mobile Bounce &amp; Lost Bids Leak Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ $15k-$35k/mo Bleed</span></div>
           <div class="script-line">
@@ -2736,6 +2790,23 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
         </div>
 
+        <!-- 🛑 CRITICAL BRANCH: IF NOT THE OWNER -->
+        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
+            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
+            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
+            "Oh gotcha, no problem! You're the one actually running the show and keeping up with the customer leads while he's out.<br><br>
+            Quick question for you: when leads submit quote requests on your website while you're swamped on other calls, how many hours usually pass before someone can text them back?"
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
+            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
+            "Got it. We build 90-second SMS speed-to-lead engines so you guys don't lose jobs to the first guy who replies. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on, or when does he usually check in with you?"
+          </div>
+        </div>
+
         <div class="script-phase">
           <div class="phase-tag"><span>Phase 2: The 78% First-Responder Statistic (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Ghosted Leads Leak</span></div>
           <div class="script-line">
@@ -2851,6 +2922,23 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="phase-tag"><span>Phase 1: Disarming Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
           <div class="script-line">
             "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you were not expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
+          </div>
+        </div>
+
+        <!-- 🛑 CRITICAL BRANCH: IF NOT THE OWNER -->
+        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
+            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
+            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
+            "Oh gotcha, no problem! You're the one actually running the show and handling all the incoming customer calls.<br><br>
+            Quick question for you: when homeowners in <span class="dyn-city">[City]</span> ask Siri or ChatGPT for emergency service, your top competitors get recommended first. Does <span class="dyn-owner">[Owner's First Name]</span> manage your Google reviews and online listings, or do you handle that?"
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
+            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
+            "Got it. We optimize Florida trade contractors for Siri and ChatGPT so you get the top spot. What's the best direct cell to text <span class="dyn-owner">[Owner's First Name]</span> a 1-page search visibility audit, or when does he usually check in with the office?"
           </div>
         </div>
 
@@ -2976,6 +3064,26 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
         </div>
 
+        <!-- 🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN" -->
+        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
+            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
+          </div>
+          <p style="font-size:12px;color:#cbd5e1;margin:0 0 8px;line-height:1.5">
+            Never hang up or freeze! Treat the dispatcher with high respect as the person running the operation, and bridge smoothly to extract the owner's direct mobile number:
+          </p>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
+            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
+            "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field.<br><br>
+            Quick question for you then: when customers call in after 5 PM or on weekends with an emergency, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell or do they just roll to voicemail?"
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
+            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
+            "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when you're closed or busy. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
+          </div>
+        </div>
+
         <!-- Phase 2: The Multi-Leak Revenue Hook -->
         <div class="script-phase">
           <div class="phase-tag"><span>Phase 2: The Multi-Leak Revenue Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Expose 4 Silent Leaks</span></div>
@@ -3020,36 +3128,6 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
           <div class="delivery-tip">
             💡 <em>Total Disarmament:</em> This proves 100% confidence. No contractor can say no to "cancel the meeting and never talk to me again."
-          </div>
-        </div>
-
-        <!-- PACKAGE 2: 🚀 THE SCALE PACKAGE ($1,297/MO) - ENTERPRISE -->
-        <div class="script-section-header">
-          <h3><span>🚀</span> Enterprise Pitch: The Scale Tier ($1,297/mo)</h3>
-          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.2);color:#d8b4fe;padding:2px 8px;border-radius:4px;border:1px solid rgba(168,85,247,0.4)">Market Dominance · 5-20+ Trucks</span>
-        </div>
-        <div class="script-phase">
-          <div class="phase-tag"><span>High-Volume Multi-Crew Pitch</span><span>For $1M - $10M+ Contractors</span></div>
-          <div class="script-line">
-            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. Got 20 seconds or should I hang up?<br><br>
-            I'll be direct: When you're running 5 to 15 trucks across <span class="dyn-city">[City]</span>, missed calls and slow lead response aren't just an annoyance — they leak $25,000 to $40,000 every single month when dispatchers are overwhelmed, second lines roll to voicemail, and competitors capture the top recommendation on Siri and ChatGPT.<br><br>
-            Our <strong>Scale Tier ($1,297/mo, $0 setup)</strong> gives you the full multi-engine infrastructure: unlimited concurrent Ava Voice AI lines with live warm transfers, 90-second SMS speed-to-lead across every channel, an enterprise 1-second mobile website, full Multi-Engine AEO (Google, Apple Intelligence, ChatGPT, Perplexity), and our automated 5-Star Review Funnel Engine generating 15 to 25 verified Google reviews every month on autopilot.<br><br>
-            <strong>So if you're sick of losing high-ticket jobs to second-rate competitors, let's hop on a quick 10-minute strategy call so I can show you how this scales your fleet.</strong> Are you open tomorrow morning at 9 AM, or is 4:30 PM better?"
-          </div>
-        </div>
-
-        <!-- PACKAGE 3: ⚡ THE ESSENTIAL PACKAGE ($397/MO) - ENTRY -->
-        <div class="script-section-header">
-          <h3><span>⚡</span> Entry Pitch: The Essential Tier ($397/mo)</h3>
-          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(52,211,153,0.2);color:#86efac;padding:2px 8px;border-radius:4px;border:1px solid rgba(52,211,153,0.4)">AI Front Desk · Solo &amp; 1-2 Trucks</span>
-        </div>
-        <div class="script-phase">
-          <div class="phase-tag"><span>Entry AI Receptionist Pitch</span><span>Zero-Friction Front Desk</span></div>
-          <div class="script-line">
-            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. Got 20 seconds or should I hang up?<br><br>
-            I know you're in the field with your tools all day. When an emergency call rings while you're on a ladder or under a sink, 85% of homeowners hang up and call the next contractor on Google.<br><br>
-            Our <strong>Essential Tier ($397/mo, $0 setup fee)</strong> gives you Ava, your 24/7 dedicated AI phone receptionist. She answers on ring one, books estimates directly into your calendar, and texts your cell with full audio recordings and customer details immediately. No carrier porting, no contract, cancel anytime.<br><br>
-            <strong>So if you're sick of losing money while your hands are dirty, let's hop on a quick 5-minute meeting so I can show you how she handles your trade.</strong> Do you prefer early morning or late afternoon?"
           </div>
         </div>
 
@@ -3122,6 +3200,337 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               "100% yes, <span class="dyn-owner">[Name]</span>! If you don't need the complete infrastructure right now, let's not over-complicate it.<br><br>
               We can install just the standalone solution—whether that's <strong>Ava 24/7 Voice AI for $397/mo</strong>, a <strong>custom website for $799 flat</strong>, or our <strong>90s Speed-to-Lead SMS for $197/mo</strong>—all with $0 setup fees. That plugs your #1 bleeding leak immediately, and you can always upgrade to the full package later once the extra jobs roll in."
               <div class="obj-acc-note">💡 Strategy: Never discount the package; downsell to the individual standalone product to secure the initial customer.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- PRODUCT 6: BASIC PACKAGE: AI FRONT DESK ($397/MO)         -->
+      <!-- ======================================================== -->
+      <div id="scriptPanel_basic" class="product-script-panel">
+        
+        <!-- Package Strategy Banner -->
+        <div style="background:linear-gradient(135deg,rgba(56,189,248,0.12),rgba(52,211,153,0.12));border:1px solid rgba(56,189,248,0.4);border-radius:12px;padding:16px 20px;margin-bottom:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div style="font-size:14px;font-weight:800;color:#38bdf8;letter-spacing:0.5px">📦 BASIC PACKAGE PLAYBOOK: AI FRONT DESK ($397/MO · $0 SETUP FEE)</div>
+            <span style="font-size:11px;font-family:var(--font-mono);background:#38bdf8;color:#000;font-weight:800;padding:3px 8px;border-radius:4px">ENTRY TIER · 1-3 TRUCKS · NO CONTRACTS</span>
+          </div>
+          <p style="font-size:12.5px;color:#cbd5e1;margin:8px 0 0;line-height:1.5">
+            Designed for solo contractors and 1–3 truck operators who strictly need 24/7 missed call capture, live calendar booking, and instant SMS emergency dispatch without buying website or SEO services. Uses <strong>*71 conditional call forwarding</strong> on their existing business number.
+          </p>
+        </div>
+
+        <!-- Section Header -->
+        <div class="script-section-header" style="margin-top:0">
+          <h3><span>⚡</span> Primary Pitch: The AI Front Desk Engine ($397/mo)</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(56,189,248,0.2);color:#38bdf8;padding:2px 8px;border-radius:4px;border:1px solid rgba(56,189,248,0.4)">Captures $8k Missed Emergency Calls</span>
+        </div>
+
+        <!-- Stage 0: Gatekeeper Bypass -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Stage 0: Gatekeeper Bypass (If Owner Doesn't Answer)</span><span>Casual Local Peer</span></div>
+          <div class="script-line">
+            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend emergency call routing in <span class="dyn-city">[City]</span>."
+          </div>
+          <div class="delivery-tip">
+            💡 If she asks <em>"What is this regarding?"</em> ➔ <strong>"Just had a quick operational question regarding after-hours emergency calls in <span class="dyn-city">[City]</span>. Is he out in the field right now or in later today?"</strong>
+          </div>
+        </div>
+
+        <!-- 🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN" -->
+        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
+            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
+          </div>
+          <p style="font-size:12px;color:#cbd5e1;margin:0 0 8px;line-height:1.5">
+            Never hang up or freeze! Treat the dispatcher with high respect as the person running the operation, and bridge smoothly to extract the owner's direct mobile number:
+          </p>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
+            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
+            "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field.<br><br>
+            Quick question for you then: when customers call in after 5 PM or on weekends with an emergency, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell or do they just roll to voicemail?"
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
+            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
+            "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when you're closed or busy. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
+          </div>
+        </div>
+
+        <!-- Phase 1: Disarming Permission Opener -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 1: Disarming Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
+          <div class="script-line">
+            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you weren't expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle: <em>"Alright, what you got?"</em>
+          </div>
+        </div>
+
+        <!-- Phase 2: The Missed Call Revenue Hook -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 2: The Missed Call Revenue Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ High-Ticket Bleed</span></div>
+          <div class="script-line">
+            "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>.<br><br>
+            When you or your guys are up on a ladder, driving between jobs, or running tools after 5 PM, what happens to incoming customer calls? <strong>Do they go to voicemail, or does someone pick up live every single time?</strong>"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>The Golden Pause:</em> Let them answer! 85% of homeowners with emergency trade problems hang up on voicemail and call the next competitor on Google.
+          </div>
+        </div>
+
+        <!-- Phase 3: The Basic Package AI Front Desk Solution -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 3: The Basic Package: AI Front Desk Solution (0:25 - 0:45)</span><span>$397/mo · $0 Setup Fee</span></div>
+          <div class="script-line">
+            "That's exactly why we built our <strong>Basic Package: AI Front Desk</strong> for just <strong>$397 a month with $0 setup fee</strong>.<br><br>
+            You keep your exact phone number. You just dial <strong>*71</strong> on your phone to forward missed or after-hours calls. Ava answers instantly in 1 ring, speaks like a human dispatcher, qualifies the homeowner, books them straight into your calendar, and texts your cell with the job details in 10 seconds.<br><br>
+            It pays for itself with literally <strong>one caught job</strong> all month, and there are zero contracts."
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Simplicity Focus:</em> Emphasize $0 setup fee, no phone number changes, and month-to-month flexibility.
+          </div>
+        </div>
+
+        <!-- Phase 4: Luke's Takeaway Close & Alternative-Choice Time Lock -->
+        <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06)">
+          <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Phase 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Closing Reflex</span></div>
+          <div class="script-line" style="font-size:15px;line-height:1.6">
+            "<strong>So if you're sick of losing money and watching $5,000 to $8,000 jobs roll to your competitor down the road, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, exactly tailored to your business.</strong><br><br>
+            Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Alternative Choice:</em> Never ask <em>"Do you have time?"</em>. Always offer two distinct time slots: morning or 4:30 PM.
+          </div>
+        </div>
+
+        <!-- Phase 5: The Friction-Killer & Live AI Test Verification -->
+        <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04)">
+          <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Phase 5: The Friction-Killer &amp; Live AI Test (If Skeptical)</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
+          <div class="script-line">
+            "Tell you what: If it's something you're interested in, I can send you a quick text with the demo link right now. And once we get off the phone here, you can also dial our live AI test line: <strong>(561) 813-8602</strong>. If Ava sounds robotic or fake, cancel the meeting and you never have to talk to me again. Fair enough?"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Total Disarmament:</em> No contractor can reject this. It removes all perceived risk and proves 100% confidence.
+          </div>
+        </div>
+
+        <!-- UPGRADE PATH BANNER -->
+        <div class="script-section-header">
+          <h3><span>🚀</span> The Natural Upsell Path: When They Want More Growth</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:var(--accent);color:#000;font-weight:800;padding:2px 8px;border-radius:4px">UPGRADE TO ACCELERATE ($697/MO)</span>
+        </div>
+        <div class="script-phase" style="border:1.5px solid rgba(245,158,11,0.3);background:rgba(245,158,11,0.04);border-radius:10px">
+          <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Upsell Bridge Script</span><span>Full Front Office</span></div>
+          <div class="script-line">
+            "If you also want a brand new 1-second custom website and our 90-second SMS speed-to-lead engine to dominate local Google search, we can upgrade you to our complete <strong>Accelerate Growth Package for $697/mo</strong> with $0 setup fee. But if you just want your phone answered 24/7 right now, the <strong>Basic $397/mo package</strong> is your fastest win."
+          </div>
+        </div>
+
+        <!-- BASIC PACKAGE OBJECTIONS ACCORDION -->
+        <div class="script-section-header">
+          <h3><span>🛡️</span> Basic Package Objections &amp; Battlecards</h3>
+        </div>
+        <div id="objGroup_basic">
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 1. "We already have an office lady / someone who answers the phone."</span> <span class="tag">Office Staff</span></div>
+            <div class="obj-acc-body">
+              "That's awesome, <span class="dyn-owner">[Name]</span>! Ava isn't here to replace your office manager—she's her backup safety net.<br><br>
+              What happens when your office lady is on line 1, at lunch, or sick? And what happens to emergency calls from 5 PM to 8 AM and all weekend long? Ava only picks up when your office is busy or closed. She stops the $8,000 emergency jobs from slipping away while your team rests."
+              <div class="obj-acc-note">💡 Strategy: Never compete with their office lady; position Ava as her after-hours & overflow insurance.</div>
+            </div>
+          </div>
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 2. "Does Ava sound robotic or fake?"</span> <span class="tag">AI Voice Quality</span></div>
+            <div class="obj-acc-body">
+              "I completely agree with you—99% of phone bots sound like horrible robotic telemarketers and piss contractors off.<br><br>
+              That's why we built Ava specifically for the trades with natural conversational latency under 600 milliseconds, real human breathing, and industry slang.<br><br>
+              Call our live demo line right now on <strong>(561) 813-8602</strong>. If she sounds robotic, tell me to jump in a lake and never talk to me again."
+              <div class="obj-acc-note">💡 Strategy: Radical agreement disarms skepticism; the live phone test closes the argument instantly.</div>
+            </div>
+          </div>
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 3. "$397 a month is too much for me right now."</span> <span class="tag">Budget / Price</span></div>
+            <div class="obj-acc-body">
+              "I hear you, <span class="dyn-owner">[Name]</span>. But let's look at the math: what's your average ticket on one single emergency job in <span class="dyn-city">[City]</span>? About $3,000 to $8,000, right?<br><br>
+              Ava is $13 a day with $0 setup fee. If she catches just <strong>ONE job every three months</strong> that would have bounced to your competitor's voicemail, she paid for herself and put thousands in pure profit in your pocket. Can you really afford to keep donating $8,000 jobs to your competitors?"
+              <div class="obj-acc-note">💡 Strategy: Contrast $13/day against a $5,000 ticket. One caught call covers 12 months of service.</div>
+            </div>
+          </div>
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 4. "We don't miss that many calls."</span> <span class="tag">Denial</span></div>
+            <div class="obj-acc-body">
+              "Most contractors tell me the exact same thing—until we put a test tracker on their line. Industry data proves Florida trade contractors miss 22% of inbound calls between driving, loud job sites, and after-hours.<br><br>
+              And 85% of homeowners with an active emergency won't leave a voicemail—they hang up in 4 seconds and hire the next guy who picks up. Even if it's only 2 calls a month, that's $10,000 in lost revenue."
+              <div class="obj-acc-note">💡 Strategy: Homeowners never leave voicemails for emergencies; silent leaks are invisible without data.</div>
+            </div>
+          </div>
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 5. "Just send me an email with the information."</span> <span class="tag">Brush-Off</span></div>
+            <div class="obj-acc-body">
+              "I can definitely send an email, <span class="dyn-owner">[Name]</span>—but honestly, it's just going to get buried under supply invoices.<br><br>
+              I'm texting your cell right now with our direct test line: <strong>(561) 813-8602</strong>. When you have 30 seconds between jobs today, dial it. If it's not the most impressive thing you've heard this year, text me 'stop' and I'll never bother you again. Fair enough?"
+              <div class="obj-acc-note">💡 Strategy: Bridge email brush-off to a 30-second cell text with the live test line.</div>
+            </div>
+          </div>
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 6. "Do I have to change my phone number or switch carriers?"</span> <span class="tag">Technical Setup</span></div>
+            <div class="obj-acc-body">
+              "Zero carrier changes! You keep your exact business phone number, your Verizon, AT&amp;T, or T-Mobile plan, and all your existing devices.<br><br>
+              We simply give you a private routing code like <strong>*71</strong>. When you're on a job or closed for the night, missed calls route to Ava. If you answer, you take the call normally. It takes 2 minutes to set up and zero downtime."
+              <div class="obj-acc-note">💡 Strategy: Absolute reassurance that their existing phone number and workflow remain 100% untouched.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- PRODUCT 7: SCALE PACKAGE: ENTERPRISE FLEETS ($1,297/MO)   -->
+      <!-- ======================================================== -->
+      <div id="scriptPanel_scale" class="product-script-panel">
+        
+        <!-- Package Strategy Banner -->
+        <div style="background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(245,158,11,0.15));border:1px solid rgba(168,85,247,0.4);border-radius:12px;padding:16px 20px;margin-bottom:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div style="font-size:14px;font-weight:800;color:#c084fc;letter-spacing:0.5px">📦 SCALE PACKAGE PLAYBOOK: COMPLETE AUTONOMOUS INFRASTRUCTURE ($1,297/MO)</div>
+            <span style="font-size:11px;font-family:var(--font-mono);background:#c084fc;color:#000;font-weight:800;padding:3px 8px;border-radius:4px">ENTERPRISE TIER · 10+ TRUCKS · FLEET DOMINANCE</span>
+          </div>
+          <p style="font-size:12.5px;color:#cbd5e1;margin:8px 0 0;line-height:1.5">
+            Designed for established trade fleets ($2M–$10M+ gross). Multi-line concurrent Ava Voice AI with bilingual Spanish/English dispatch, custom 1-second mobile website ($799 value included), 90s Speed-to-Lead SMS across all web forms, full Multi-Engine AEO (Google, Siri, ChatGPT, Perplexity), automated 5-star review funnel (15-25 reviews/mo), and direct ServiceTitan/Jobber CRM integration.
+          </p>
+        </div>
+
+        <!-- Section Header -->
+        <div class="script-section-header" style="margin-top:0">
+          <h3><span>🚀</span> Enterprise Pitch: Autonomous Fleet Infrastructure ($1,297/mo)</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.2);color:#c084fc;padding:2px 8px;border-radius:4px;border:1px solid rgba(168,85,247,0.4)">10+ Trucks · Stops $30k/mo Latency Bleed</span>
+        </div>
+
+        <!-- Stage 0: Gatekeeper Bypass -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Stage 0: Executive Gatekeeper Bypass</span><span>Executive Peer</span></div>
+          <div class="script-line">
+            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> in the office? It's Luke — quick question regarding your dispatch capacity and after-hours emergency volume in <span class="dyn-city">[City]</span>."
+          </div>
+          <div class="delivery-tip">
+            💡 If she asks <em>"What is this regarding?"</em> ➔ <strong>"It's regarding commercial dispatch overflow and multi-truck lead routing in <span class="dyn-city">[City]</span>. Does he manage fleet operations directly or is there a general manager I should sync with?"</strong>
+          </div>
+        </div>
+
+        <!-- 🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN" -->
+        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
+            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
+            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
+          </div>
+          <p style="font-size:12px;color:#cbd5e1;margin:0 0 8px;line-height:1.5">
+            Never hang up or freeze! Treat the dispatcher with high respect as the person running the operation, and bridge smoothly to extract the owner's direct mobile number:
+          </p>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
+            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
+            "Oh gotcha, no problem at all! You're the one actually running the show and keeping 10+ trucks rolling while he's out in the field.<br><br>
+            Quick question for you then: when 3 calls hit the dispatch desk at the exact same time during storms or heat waves, do callers get put on hold or does overflow roll to voicemail?"
+          </div>
+          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
+            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
+            "Got it. That's why I'm reaching out — we deploy multi-line concurrent AI dispatch lines so your dispatch desk never drops emergency calls. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
+          </div>
+        </div>
+
+        <!-- Phase 1: Disarming Permission Opener -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 1: Disarming Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
+          <div class="script-line">
+            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you weren't expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING.
+          </div>
+        </div>
+
+        <!-- Phase 2: Enterprise Capacity Hook -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 2: Enterprise Capacity Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ $30k/mo Fleet Bleed</span></div>
+          <div class="script-line">
+            "I'll be direct: When you're running 10+ trucks across <span class="dyn-city">[City]</span>, your bottleneck isn't getting leads—it's front-office latency. When storm surges or peak hours hit, dispatch lines tie up, web forms wait 45 minutes for a callback, and competitors capture the top spoken recommendation on Siri and ChatGPT.<br><br>
+            When 4 emergency calls hit your line at the exact same time, <strong>how many of those callers actually speak to a live dispatcher within 1 ring?</strong>"
+          </div>
+          <div class="delivery-tip">
+            💡 <em>The Golden Pause:</em> Let them admit that hold times or voicemails cause lost commercial tickets.
+          </div>
+        </div>
+
+        <!-- Phase 3: The Scale Enterprise Infrastructure Solution -->
+        <div class="script-phase">
+          <div class="phase-tag"><span>Phase 3: The Scale Enterprise Infrastructure Solution (0:25 - 0:45)</span><span>Autonomous Fleet Machine</span></div>
+          <div class="script-line">
+            "That's exactly why enterprise contractors deploy our <strong>Scale Tier ($1,297/mo, $0 setup fee)</strong>. We install complete autonomous front-office infrastructure:<br><br>
+            Unlimited concurrent Ava Voice AI lines handling multiple simultaneous callers with zero wait time, Spanish/English bilingual routing, 90-second SMS speed-to-lead across all web forms, a custom 1-second mobile website, full Multi-Engine AEO (Google, Siri, ChatGPT, Perplexity), and an automated review engine pumping 15 to 25 verified 5-star reviews every month.<br><br>
+            Everything syncs directly to your CRM, and it's 100% month-to-month."
+          </div>
+          <div class="delivery-tip">
+            💡 <em>Enterprise ROI:</em> One commercial job or two residential replacements covers the entire $1,297/mo fee immediately.
+          </div>
+        </div>
+
+        <!-- Phase 4: Luke's Takeaway Close -->
+        <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06)">
+          <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Phase 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Closing Reflex</span></div>
+          <div class="script-line" style="font-size:15px;line-height:1.6">
+            "<strong>So if you're sick of losing high-ticket commercial and residential jobs to latency, let's hop on a quick 10-minute executive briefing so I can show you exactly how this plugs into your fleet.</strong><br><br>
+            Are you easier to catch tomorrow morning around 9 AM, or is 4:30 PM better?"
+          </div>
+        </div>
+
+        <!-- Phase 5: Live Test Line -->
+        <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04)">
+          <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Phase 5: The Live Voice Demo Verification</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
+          <div class="script-line">
+            "Tell you what: I'll text you our live demo line right now: <strong>(561) 813-8602</strong>. When we get off the phone here, dial it from your cell. Hear how Ava handles multi-trade dispatching with zero robotic lag. If she sounds fake, cancel the meeting and you never talk to me again. Fair enough?"
+          </div>
+        </div>
+
+        <!-- DOWNSELL TO ACCELERATE / BASIC -->
+        <div class="script-section-header">
+          <h3><span>🔄</span> Downsell Protocol: If Scale Is Too Big</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:var(--accent);color:#000;font-weight:800;padding:2px 8px;border-radius:4px">DOWNSELL TO ACCELERATE ($697) OR AVA ($397)</span>
+        </div>
+        <div class="script-phase" style="border:2px solid var(--accent);background:rgba(245,158,11,0.08);border-radius:12px">
+          <div class="script-line" style="font-size:14.5px;line-height:1.6">
+            "I completely understand, <span class="dyn-owner">[Name]</span>. If you don't need multi-engine AEO and fleet review automation right away, let's scale it back.<br><br>
+            We can deploy our primary <strong>Accelerate Package for $697/mo</strong> (Ava Voice AI + custom website + 90s SMS speed-to-lead), or just <strong>Ava Standalone for $397/mo</strong> with $0 setup fee. That solves your after-hours call leak immediately, and you can upgrade to Scale down the road."
+          </div>
+        </div>
+
+        <!-- SCALE OBJECTIONS ACCORDION -->
+        <div class="script-section-header">
+          <h3><span>🛡️</span> Scale Package Objections &amp; Battlecards</h3>
+        </div>
+        <div id="objGroup_scale">
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 1. "We already use ServiceTitan / Housecall Pro with full-time dispatchers."</span> <span class="tag">Existing Software</span></div>
+            <div class="obj-acc-body">
+              "We love ServiceTitan and Housecall Pro! VantorX isn't a replacement for your dispatch software—Ava connects directly into it via API webhook.<br><br>
+              When your dispatchers go home at 5 PM, or when all lines are jammed during extreme weather, Ava steps in, qualifies the caller, and drops the booked job directly on your ServiceTitan board with audio recording attached."
+              <div class="obj-acc-note">💡 Strategy: Coexist and augment their enterprise CRM; solve their after-hours and overflow blind spots.</div>
+            </div>
+          </div>
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 2. "We already spend $10,000/month on Google Ads."</span> <span class="tag">Ad Spend</span></div>
+            <div class="obj-acc-body">
+              "That is the single biggest reason you need this! If you're paying $80 to $150 per click on Google Local Services and Ads, every single missed phone call or 5-minute delayed form response is literally flushing $150 of ad cash down the toilet.<br><br>
+              Our 90s speed-to-lead and 1-second site doubles the conversion rate on the exact same ad spend you're already paying for. It pays for itself in week one."
+              <div class="obj-acc-note">💡 Strategy: Protect their existing $10k ad spend from leaking away due to slow response times.</div>
+            </div>
+          </div>
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 3. "Can Ava handle Spanish-speaking callers and multi-trade routing?"</span> <span class="tag">Bilingual / Routing</span></div>
+            <div class="obj-acc-body">
+              "Yes, 100%! In Florida, bilingual call handling is essential. Ava detects Spanish within 2 seconds and switches seamlessly, qualifies the emergency, and tags the dispatcher in either English or Spanish.<br><br>
+              She also handles complex trade branching—routing commercial HVAC differently from residential plumbing calls."
+              <div class="obj-acc-note">💡 Strategy: Highlight Florida-specific bilingual capability and advanced routing logic.</div>
             </div>
           </div>
         </div>
@@ -3545,6 +3954,78 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     <div style="display:flex;justify-content:flex-end;gap:10px">
       <button class="btn btn-ghost btn-sm" onclick="closeBrainSettingsModal()">Cancel</button>
       <button class="btn btn-gold btn-sm" onclick="saveBrainSettings()">Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- 📞 QUICK CALL OUTCOME & NOTE LOGGER MODAL -->
+<div class="modal-overlay" id="callLogModal">
+  <div class="modal-box" style="max-width:520px;border:1.5px solid var(--accent);box-shadow:0 0 40px rgba(245,158,11,0.25)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <h3 style="font-family:var(--font-head);font-size:19px;color:var(--accent2);display:flex;align-items:center;gap:8px;margin:0">
+        <span>📞</span> Log Call Result: <span id="callLogModalLeadName" style="color:#ffffff">Contractor</span>
+      </h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeCallLogModal()" style="font-size:16px;padding:4px 10px">✕</button>
+    </div>
+
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:6px;border:1px solid var(--line2)" id="callLogModalLeadSub">
+      ID: #1 · Trade · City · Owner
+    </div>
+
+    <!-- 1. Outcome Choice -->
+    <div style="font-size:11px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);text-transform:uppercase;margin-bottom:8px">
+      1. SELECT CALL OUTCOME:
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
+      <button type="button" class="call-log-btn btn-outcome-success active" id="btnCallOutcomeSuccess" onclick="selectCallLogOutcome('Success')">
+        <div style="font-size:24px;margin-bottom:4px">🎉</div>
+        <div style="font-weight:800;font-size:13.5px">Success</div>
+        <div style="font-size:10.5px;color:var(--dim);margin-top:2px">Booked Demo / Meeting</div>
+      </button>
+
+      <button type="button" class="call-log-btn btn-outcome-callback" id="btnCallOutcomeCallback" onclick="selectCallLogOutcome('Call Back')">
+        <div style="font-size:24px;margin-bottom:4px">⏳</div>
+        <div style="font-weight:800;font-size:13.5px">Call Back</div>
+        <div style="font-size:10.5px;color:var(--dim);margin-top:2px">Scheduled Time / Busy</div>
+      </button>
+
+      <button type="button" class="call-log-btn btn-outcome-noluck" id="btnCallOutcomeNoLuck" onclick="selectCallLogOutcome('No Luck')">
+        <div style="font-size:24px;margin-bottom:4px">❌</div>
+        <div style="font-weight:800;font-size:13.5px">No Luck</div>
+        <div style="font-size:10.5px;color:var(--dim);margin-top:2px">VM / No Answer / Not Int</div>
+      </button>
+    </div>
+
+    <!-- 2. Note Why -->
+    <div style="font-size:11px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);text-transform:uppercase;margin-bottom:6px">
+      2. WHY? / CALL NOTE:
+    </div>
+    <textarea id="callLogModalNotes" rows="3" placeholder="Enter why or specifics (e.g. Owner on roof, callback at 4:30 PM, agreed to 10 AM Thursday demo, etc.)..." style="width:100%;background:var(--bg2);border:1px solid var(--line2);color:var(--ink);padding:10px 12px;border-radius:8px;font-family:inherit;font-size:13px;resize:vertical;outline:none;margin-bottom:8px"></textarea>
+
+    <!-- 1-Click Quick Reason Chips -->
+    <div style="margin-bottom:18px">
+      <div style="font-size:11px;color:var(--dim);margin-bottom:6px">⚡ 1-Click Quick Chips:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Demo booked - sent calendar invite for 10 AM')">🎉 Demo Booked</button>
+        <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Owner in field - call back at 4:30 PM')">⏳ Call back 4:30 PM</button>
+        <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Left VM - text sent with (561) 813-8602 test line')">📱 VM + Texted Test Line</button>
+        <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Spoke with dispatcher - got direct owner cell')">👩‍💼 Spoke with Dispatcher</button>
+        <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Not interested right now - happy with current setup')">❌ Not Interested</button>
+        <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Voicemail box full / no answer')">📞 VM Full / No Answer</button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--line2);padding-top:14px">
+      <button type="button" class="btn btn-ghost btn-sm" id="btnUnmarkCallRecord" onclick="unmarkActiveCallRecord()" style="color:#f87171;border-color:rgba(239,68,68,0.3)">
+        🗑️ Unmark (To Call)
+      </button>
+      <div style="display:flex;gap:10px">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="closeCallLogModal()">Cancel</button>
+        <button type="button" class="btn btn-gold btn-sm" id="btnSaveCallLog" onclick="saveCallLogFromModal()" style="font-weight:800;padding:8px 18px">
+          💾 Save Call Result
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -5243,12 +5724,21 @@ window.saveBrainSettings = function() {
       tr.id = `leadRow_${lead.id}`;
       if (isCalled) tr.classList.add('lead-row-called');
 
+      const isSuccess = rec.outcome === 'Success' || rec.outcome === 'Booked Demo';
+      const isCallback = rec.outcome === 'Call Back' || rec.outcome === 'Callback Scheduled';
+      const isNoLuck = rec.outcome === 'No Luck' || rec.outcome === 'Left Voicemail' || rec.outcome === 'Not Interested' || rec.outcome === 'Gatekeeper / No Answer';
+
       tr.innerHTML = `
         <td>
           <div class="lead-status-box">
-            <input type="checkbox" class="call-checkbox" data-id="${lead.id}" ${isCalled ? 'checked' : ''} title="Check off when called">
+            <input type="checkbox" class="call-checkbox" data-id="${lead.id}" ${isCalled ? 'checked' : ''} title="Click to log or update call result">
             <div>
-              ${isCalled ? '<span class="status-badge status-badge-called">✓ Called</span>' : '<span class="status-badge status-badge-uncalled">⏳ To Call</span>'}
+              ${isCalled ? 
+                (isSuccess ? `<span class="status-badge status-badge-success" onclick="openCallLogModal('${lead.id}')" title="Click to edit: Success (Booked Demo)">🎉 Success</span>` :
+                 isCallback ? `<span class="status-badge status-badge-callback" onclick="openCallLogModal('${lead.id}')" title="Click to edit: Call Back">⏳ Call Back</span>` :
+                 `<span class="status-badge status-badge-noluck" onclick="openCallLogModal('${lead.id}')" title="Click to edit: No Luck">❌ No Luck</span>`) :
+                `<span class="status-badge status-badge-uncalled" onclick="openCallLogModal('${lead.id}')" title="Click to log call">⏳ To Call</span>`
+              }
               ${isCalled && rec.caller ? `<div class="caller-tag">By ${rec.caller} · ${rec.timestamp || ''}</div>` : ''}
             </div>
           </div>
@@ -5287,15 +5777,13 @@ window.saveBrainSettings = function() {
         <td>
           <div style="display:flex;align-items:center;gap:6px">
             <select class="outcome-select" data-id="${lead.id}">
-              <option value="Left Voicemail" ${rec.outcome==='Left Voicemail'?'selected':''}>📞 Left Voicemail</option>
-              <option value="Booked Demo" ${rec.outcome==='Booked Demo'?'selected':''}>🎉 Booked Demo</option>
-              <option value="Callback Scheduled" ${rec.outcome==='Callback Scheduled'?'selected':''}>⏳ Callback</option>
-              <option value="Not Interested" ${rec.outcome==='Not Interested'?'selected':''}>❌ Not Interested</option>
-              <option value="Gatekeeper / No Answer" ${rec.outcome==='Gatekeeper / No Answer'?'selected':''}>🚫 Gatekeeper</option>
+              <option value="Success" ${isSuccess ? 'selected' : ''}>🎉 Success</option>
+              <option value="Call Back" ${isCallback ? 'selected' : ''}>⏳ Call Back</option>
+              <option value="No Luck" ${(isNoLuck || (!isSuccess && !isCallback)) ? 'selected' : ''}>❌ No Luck</option>
             </select>
-            <button class="btn-note" data-id="${lead.id}" title="${rec.notes ? rec.notes : 'Click to add note'}">📝</button>
+            <button class="btn-note" data-id="${lead.id}" onclick="openCallLogModal('${lead.id}')" title="${rec.notes ? rec.notes : 'Click to add/edit call note'}">📝</button>
           </div>
-          ${rec.notes ? `<div style="font-size:11px;color:var(--accent2);max-width:145px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px" title="${rec.notes}">"${rec.notes}"</div>` : ''}
+          ${rec.notes ? `<div class="call-note-tag" onclick="openCallLogModal('${lead.id}')" title="Click to edit: ${rec.notes}">📝 Why: "${rec.notes}"</div>` : `<button type="button" class="btn-note-add" onclick="openCallLogModal('${lead.id}')">+ Add Note Why</button>`}
         </td>
         <td style="text-align:right">
           <button class="btn-pitch-lead" data-id="${lead.id}">📞 Pitch Lead ➔</button>
@@ -5304,39 +5792,12 @@ window.saveBrainSettings = function() {
       leadTableBody.appendChild(tr);
     });
 
-    // Wire Checkboxes
+    // Wire Checkboxes: clicking checkbox opens the Call Log Modal immediately
     document.querySelectorAll('.call-checkbox').forEach(cb => {
-      cb.addEventListener('change', (e) => {
+      cb.addEventListener('click', (e) => {
+        e.preventDefault();
         const id = cb.dataset.id;
-        if (cb.checked) {
-          const lead = LEADS_DATA.find(l => l.id === id);
-          const prevOutcome = CALL_RECORDS[id]?.outcome || 'Left Voicemail';
-          const prevNotes = CALL_RECORDS[id]?.notes || '';
-          CALL_RECORDS[id] = {
-            called: true,
-            caller: activeCaller,
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-            outcome: prevOutcome,
-            notes: prevNotes
-          };
-          const u = getActiveUser();
-          u.dailyDials = (u.dailyDials || 0) + 1;
-          saveUserProfiles();
-          updateDailyGoalsUI();
-          showToast(`✓ Marked ${lead?.company || 'Lead'} as Called by ${activeCaller}!`);
-        } else {
-          if (CALL_RECORDS[id]) {
-            CALL_RECORDS[id].called = false;
-          }
-          const u = getActiveUser();
-          u.dailyDials = Math.max(0, (u.dailyDials || 1) - 1);
-          saveUserProfiles();
-          updateDailyGoalsUI();
-          showToast('Unmarked call status.');
-        }
-        saveCallRecords();
-        renderLeadsTable();
-        updateQuotaHUD();
+        openCallLogModal(id);
       });
     });
 
@@ -5345,6 +5806,7 @@ window.saveBrainSettings = function() {
       sel.addEventListener('change', (e) => {
         const id = sel.dataset.id;
         const outcome = sel.value;
+        const wasCalled = !!(CALL_RECORDS[id]?.called);
         if (!CALL_RECORDS[id]) {
           CALL_RECORDS[id] = {
             called: true,
@@ -5357,31 +5819,17 @@ window.saveBrainSettings = function() {
           CALL_RECORDS[id].called = true;
           CALL_RECORDS[id].outcome = outcome;
         }
+        if (!wasCalled) {
+          const u = getActiveUser();
+          u.dailyDials = (u.dailyDials || 0) + 1;
+          saveUserProfiles();
+          updateDailyGoalsUI();
+        }
         saveCallRecords();
         renderLeadsTable();
         updateQuotaHUD();
+        if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
         showToast(`Outcome logged: ${outcome}`);
-      });
-    });
-
-    // Wire Notes
-    document.querySelectorAll('.btn-note').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const id = btn.dataset.id;
-        const currentNote = CALL_RECORDS[id]?.notes || '';
-        const lead = LEADS_DATA.find(l => l.id === id);
-        const note = prompt(`Add a quick call note for ${lead?.company || 'this contractor'}:`, currentNote);
-        if (note !== null) {
-          if (!CALL_RECORDS[id]) {
-            CALL_RECORDS[id] = { called: true, caller: activeCaller, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), outcome: 'Left Voicemail', notes: note.trim() };
-          } else {
-            CALL_RECORDS[id].notes = note.trim();
-          }
-          saveCallRecords();
-          renderLeadsTable();
-          showToast('✓ Note saved!');
-        }
       });
     });
 
@@ -5395,6 +5843,135 @@ window.saveBrainSettings = function() {
 
     updateQuotaHUD();
   }
+
+  // ============================================================
+  // 📞 CALL LOG MODAL CONTROLLER (SUCCESS / CALL BACK / NO LUCK + WHY)
+  // ============================================================
+  let activeLogLeadId = null;
+  let selectedCallOutcome = 'Success';
+
+  window.openCallLogModal = function(leadId) {
+    const lead = LEADS_DATA.find(l => l.id === leadId);
+    if (!lead) return;
+    activeLogLeadId = leadId;
+    const rec = CALL_RECORDS[leadId] || {};
+
+    const nameEl = document.getElementById('callLogModalLeadName');
+    const subEl = document.getElementById('callLogModalLeadSub');
+    const notesEl = document.getElementById('callLogModalNotes');
+    const unmarkBtn = document.getElementById('btnUnmarkCallRecord');
+
+    if (nameEl) nameEl.textContent = lead.company;
+    if (subEl) subEl.textContent = `ID #${lead.id} · ${lead.owner} (${lead.title}) · ${lead.city} · ${lead.phone}`;
+    if (notesEl) notesEl.value = rec.notes || '';
+
+    let currentOutcome = 'Success';
+    if (rec.outcome === 'Call Back' || rec.outcome === 'Callback Scheduled') {
+      currentOutcome = 'Call Back';
+    } else if (rec.outcome === 'No Luck' || rec.outcome === 'Left Voicemail' || rec.outcome === 'Not Interested' || rec.outcome === 'Gatekeeper / No Answer') {
+      currentOutcome = 'No Luck';
+    } else if (rec.outcome === 'Success' || rec.outcome === 'Booked Demo') {
+      currentOutcome = 'Success';
+    } else {
+      currentOutcome = rec.called ? 'No Luck' : 'Success';
+    }
+
+    selectCallLogOutcome(currentOutcome);
+
+    if (unmarkBtn) {
+      unmarkBtn.style.display = rec.called ? 'inline-flex' : 'none';
+    }
+
+    const modal = document.getElementById('callLogModal');
+    if (modal) modal.style.display = 'flex';
+    if (notesEl) setTimeout(() => notesEl.focus(), 80);
+  };
+
+  window.closeCallLogModal = function() {
+    const modal = document.getElementById('callLogModal');
+    if (modal) modal.style.display = 'none';
+    activeLogLeadId = null;
+  };
+
+  window.selectCallLogOutcome = function(outcome) {
+    selectedCallOutcome = outcome;
+    const btnS = document.getElementById('btnCallOutcomeSuccess');
+    const btnC = document.getElementById('btnCallOutcomeCallback');
+    const btnN = document.getElementById('btnCallOutcomeNoLuck');
+
+    if (btnS) btnS.classList.toggle('active', outcome === 'Success');
+    if (btnC) btnC.classList.toggle('active', outcome === 'Call Back');
+    if (btnN) btnN.classList.toggle('active', outcome === 'No Luck');
+  };
+
+  window.appendCallLogChip = function(chipText) {
+    const notesEl = document.getElementById('callLogModalNotes');
+    if (!notesEl) return;
+    if (notesEl.value.trim().length > 0) {
+      notesEl.value = `${notesEl.value.trim()} — ${chipText}`;
+    } else {
+      notesEl.value = chipText;
+    }
+    if (chipText.toLowerCase().includes('demo')) selectCallLogOutcome('Success');
+    else if (chipText.toLowerCase().includes('call back')) selectCallLogOutcome('Call Back');
+    else if (chipText.toLowerCase().includes('not interested') || chipText.toLowerCase().includes('no answer') || chipText.toLowerCase().includes('vm')) selectCallLogOutcome('No Luck');
+  };
+
+  window.saveCallLogFromModal = function() {
+    if (!activeLogLeadId) return;
+    const id = activeLogLeadId;
+    const lead = LEADS_DATA.find(l => l.id === id);
+    const notesEl = document.getElementById('callLogModalNotes');
+    const note = notesEl ? notesEl.value.trim() : '';
+    const wasCalled = !!(CALL_RECORDS[id]?.called);
+
+    CALL_RECORDS[id] = {
+      called: true,
+      caller: activeCaller,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      outcome: selectedCallOutcome,
+      notes: note
+    };
+
+    const u = getActiveUser();
+    if (!wasCalled) {
+      u.dailyDials = (u.dailyDials || 0) + 1;
+    }
+    if (selectedCallOutcome === 'Success') {
+      u.dailyDemos = (u.dailyDemos || 0) + 1;
+    }
+    saveUserProfiles();
+    updateDailyGoalsUI();
+    saveCallRecords();
+
+    closeCallLogModal();
+    renderLeadsTable();
+    updateQuotaHUD();
+    if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
+
+    showToast(`✓ Logged ${selectedCallOutcome} for ${lead?.company || 'Contractor'}!`);
+  };
+
+  window.unmarkActiveCallRecord = function() {
+    if (!activeLogLeadId) return;
+    const id = activeLogLeadId;
+    const lead = LEADS_DATA.find(l => l.id === id);
+    if (CALL_RECORDS[id]) {
+      CALL_RECORDS[id].called = false;
+    }
+    const u = getActiveUser();
+    u.dailyDials = Math.max(0, (u.dailyDials || 1) - 1);
+    saveUserProfiles();
+    updateDailyGoalsUI();
+    saveCallRecords();
+
+    closeCallLogModal();
+    renderLeadsTable();
+    updateQuotaHUD();
+    if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
+
+    showToast(`Unmarked ${lead?.company || 'Lead'} as to-call.`);
+  };
 
   function updateQuotaHUD() {
     const activeLimit = getActiveQueueLimit();
@@ -5414,7 +5991,7 @@ window.saveBrainSettings = function() {
 
     const totalInBatch = batchLeads.length;
     const calledInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called).length;
-    const demosInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called && CALL_RECORDS[l.id]?.outcome === 'Booked Demo').length;
+    const demosInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called && (CALL_RECORDS[l.id]?.outcome === 'Success' || CALL_RECORDS[l.id]?.outcome === 'Booked Demo')).length;
     const uncalledInBatch = Math.max(0, totalInBatch - calledInBatch);
     const pct = totalInBatch > 0 ? Math.round((calledInBatch / totalInBatch) * 100) : 0;
 
@@ -5586,45 +6163,37 @@ window.saveBrainSettings = function() {
     if (!statusBadge || !toggleBtn) return;
 
     if (rec && rec.called) {
-      statusBadge.className = 'status-badge status-badge-called';
-      statusBadge.textContent = `✓ Called by ${rec.caller || 'Rep'} (${rec.outcome || 'Logged'})`;
-      toggleBtn.textContent = '✕ Mark as Uncalled';
-      toggleBtn.style.color = '#f87171';
-      toggleBtn.style.borderColor = 'rgba(248,113,113,0.5)';
+      if (rec.outcome === 'Success' || rec.outcome === 'Booked Demo') {
+        statusBadge.className = 'status-badge status-badge-success';
+        statusBadge.textContent = `🎉 Success (by ${rec.caller || 'Rep'})`;
+      } else if (rec.outcome === 'Call Back' || rec.outcome === 'Callback Scheduled') {
+        statusBadge.className = 'status-badge status-badge-callback';
+        statusBadge.textContent = `⏳ Call Back (by ${rec.caller || 'Rep'})`;
+      } else {
+        statusBadge.className = 'status-badge status-badge-noluck';
+        statusBadge.textContent = `❌ No Luck (by ${rec.caller || 'Rep'})`;
+      }
+      statusBadge.title = 'Click to edit call log outcome and notes';
+      statusBadge.onclick = () => openCallLogModal(leadId);
+      toggleBtn.textContent = '📝 Edit Call Log / Why';
+      toggleBtn.style.color = 'var(--accent2)';
+      toggleBtn.style.borderColor = 'var(--accent)';
     } else {
       statusBadge.className = 'status-badge status-badge-uncalled';
       statusBadge.textContent = '⏳ To Call';
-      toggleBtn.textContent = '✓ Mark as Called';
+      statusBadge.onclick = () => openCallLogModal(leadId);
+      toggleBtn.textContent = '✓ Log Call Result (Success / Call Back / No Luck)';
       toggleBtn.style.color = '#6ee7b7';
       toggleBtn.style.borderColor = 'rgba(52,211,153,0.5)';
     }
   }
 
-  // In-prompter Mark as Called Button Listener
+  // In-prompter Mark as Called Button Listener -> opens Call Log Modal
   const prompterToggleBtnEl = document.getElementById('prompterToggleCallBtn');
   if (prompterToggleBtnEl) {
     prompterToggleBtnEl.addEventListener('click', () => {
       if (!activeLead) return;
-      const id = activeLead.id;
-      const isCalled = !!(CALL_RECORDS[id] && CALL_RECORDS[id].called);
-      if (isCalled) {
-        CALL_RECORDS[id].called = false;
-        showToast(`Unmarked ${activeLead.company} as called.`);
-      } else {
-        const prevOutcome = CALL_RECORDS[id]?.outcome || 'Left Voicemail';
-        const prevNotes = CALL_RECORDS[id]?.notes || '';
-        CALL_RECORDS[id] = {
-          called: true,
-          caller: activeCaller,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          outcome: prevOutcome,
-          notes: prevNotes
-        };
-        showToast(`✓ Marked ${activeLead.company} as CALLED by ${activeCaller}!`);
-      }
-      saveCallRecords();
-      updatePrompterCallStatus(activeLead.id);
-      renderLeadsTable();
+      openCallLogModal(activeLead.id);
     });
   }
 
@@ -5690,8 +6259,14 @@ window.saveBrainSettings = function() {
     document.querySelectorAll('.dyn-trade').forEach(el => el.textContent = lead.trade);
     document.querySelectorAll('.dyn-loss').forEach(el => el.textContent = `$${lead.annualLoss.toLocaleString()}/yr ($${lead.monthlyLoss.toLocaleString()}/mo)`);
 
-    // 6. Switch to Primary Package Script (Accelerate / Scale Bundle)
-    switchProductScript('bundle');
+    // 6. Switch to Primary Package Script (Accelerate / Scale / Basic)
+    if (strat.pkgKey === 'scale') {
+      switchProductScript('scale');
+    } else if (strat.pkgKey === 'essential') {
+      switchProductScript('basic');
+    } else {
+      switchProductScript('bundle');
+    }
 
     // 7. Switch to Teleprompter Tab & Scroll
     switchTab('tabScript');
@@ -5799,6 +6374,8 @@ window.saveBrainSettings = function() {
         else if (parentPanel.id.includes('speed')) cat = 'speed';
         else if (parentPanel.id.includes('aeo')) cat = 'aeo';
         else if (parentPanel.id.includes('bundle')) cat = 'bundle';
+        else if (parentPanel.id.includes('basic')) cat = 'basic';
+        else if (parentPanel.id.includes('scale')) cat = 'scale';
       }
 
       if (filterCategory !== 'all' && filterCategory !== cat) return;
