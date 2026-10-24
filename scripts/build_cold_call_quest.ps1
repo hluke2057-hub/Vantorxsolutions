@@ -377,9 +377,36 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   </div>
 </div>
 
+<!-- CALL TERMINATED / DEFEAT MODAL -->
+<div class="modal-overlay" id="defeatModal">
+  <div class="modal-card" style="max-width:540px;text-align:center;border-color:rgba(239,68,68,0.7);box-shadow:0 0 50px rgba(239,68,68,0.3)">
+    <div style="font-size:56px;margin-bottom:8px">📵💀</div>
+    <div style="font-size:12px;font-family:var(--font-mono);font-weight:700;color:#ef4444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">CALL DISCONNECTED · CONTRACTOR HUNG UP</div>
+    <h2 style="font-family:var(--font-head);font-size:26px;color:#ffffff;margin-bottom:8px" id="defeatTitle">YOU GOT HUNG UP ON!</h2>
+    <div style="font-size:14.5px;color:#fca5a5;font-weight:700;margin-bottom:16px;font-style:italic" id="defeatBossBark">
+      "Stop wasting my time with generic telemarketer pitch crap. Lose my number!"
+    </div>
+    
+    <div style="background:var(--bg3);border:1px solid rgba(239,68,68,0.35);border-radius:12px;padding:16px;text-align:left;margin-bottom:20px">
+      <div style="font-size:12px;font-weight:700;color:#ef4444;margin-bottom:4px;font-family:var(--font-mono)">❌ FATAL MISTAKE:</div>
+      <div style="font-size:13.5px;color:#ffffff;line-height:1.5;margin-bottom:12px" id="defeatMistakeDesc">
+        Sounded like an amateur script-reading telemarketer without establishing trade pain or asking permission.
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:4px;font-family:var(--font-mono)">💡 COACH VANCE CLOSING REMEDY:</div>
+      <div style="font-size:13px;color:var(--dim);line-height:1.5" id="defeatRemedyDesc">
+        Next time, lead with the 20-second permission opener, agree with his skepticism first, and quote the $397 flat rate with zero long-term contracts.
+      </div>
+    </div>
+
+    <button class="hud-btn gold" style="width:100%;padding:14px;font-size:16px;justify-content:center;box-shadow:0 0 25px rgba(245,158,11,0.4)" onclick="redialAfterDefeat()">
+      🔄 Redial Contractor &amp; Try Again ➔
+    </button>
+  </div>
+</div>
+
 <script>
 // ============================================================
-// 🎮 STANDALONE COLD CALL QUEST 4.0 JAVASCRIPT ENGINE
+// 🎮 STANDALONE COLD CALL QUEST 5.0 JAVASCRIPT ENGINE
 // ============================================================
 
 (function() {
@@ -459,6 +486,15 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         gain.gain.linearRampToValueAtTime(0.01, now + 0.18);
         osc.start(now);
         osc.stop(now + 0.18);
+      } else if (type === 'hangup') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(480, now);
+        osc.frequency.setValueAtTime(620, now + 0.12);
+        osc.frequency.setValueAtTime(480, now + 0.24);
+        gain.gain.setValueAtTime(0.28, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.36);
+        osc.start(now);
+        osc.stop(now + 0.36);
       }
     } catch(e) {
       console.warn('Synth error:', e);
@@ -547,6 +583,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       name: 'Rick "The Road Rager"',
       title: 'Tampa Commercial Roofing Owner',
       trade: 'Roofing',
+      company: 'Tampa Apex Commercial Roofing',
       location: 'Tampa, FL',
       portrait: '🔨',
       hp: 100,
@@ -558,7 +595,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       avgLeak: 'A standard shingle or tile replacement job',
       dialogue: {
         stage1: "VantorX? Never heard of ya. I'm three stories up on a roof in Tampa with a nail gun in 95-degree heat. What the hell do you want?",
-        victory: "Alright Luke, you won me over. Shoot me a text with Ava's setup info."
+        victory: "Alright Luke, you won me over. Shoot me a text with Ava's setup info.",
+        defeat: "I don't have time for this amateur nonsense while my crews are sweating on a 12-pitch roof in Tampa heat. Lose my number! *[SLAMS RECEIVER]*"
       }
     },
     {
@@ -566,6 +604,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       name: 'Karen "The Iron Gatekeeper"',
       title: 'Orlando HVAC Premier Gatekeeper',
       trade: 'HVAC Dispatch',
+      company: 'Orlando Premier Air Solutions',
       location: 'Winter Park, FL',
       portrait: '📋',
       hp: 120,
@@ -577,7 +616,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       avgLeak: 'A full emergency AC changeout',
       dialogue: {
         stage1: "Gary is out in the field and doesn't take unscheduled vendor calls. Send your marketing brochure to info@orlandopremiac.com.",
-        victory: "Okay Luke, I'll put Gary directly on the phone for 5 minutes. That $8k leak stat got my attention."
+        victory: "Okay Luke, I'll put Gary directly on the phone for 5 minutes. That $8k leak stat got my attention.",
+        defeat: "Mr. Hamilton, you are wasting our emergency dispatch line. I am placing your company on our vendor blacklist. *[CLICK]*"
       }
     },
     {
@@ -585,6 +625,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       name: 'Mike "The Robot Crusher"',
       title: 'West Palm Beach Master Electrician',
       trade: 'Electrical',
+      company: 'Mike\'s Master Commercial Electric',
       location: 'West Palm Beach, FL',
       portrait: '⚡',
       hp: 150,
@@ -596,7 +637,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       avgLeak: 'An emergency panel upgrade or commercial generator install',
       dialogue: {
         stage1: "Hold on. Is this a damn robot? I swear to God if another tech bro sends an AI bot to waste my morning, I'm smashing this phone.",
-        victory: "Damn, I just dialed (561) 813-8602... Ava answered in half a second and booked a test panel. Let's do this."
+        victory: "Damn, I just dialed (561) 813-8602... Ava answered in half a second and booked a test panel. Let's do this.",
+        defeat: "Another fast-talking pitch clown who dodges simple questions. Don't call my cell again. *[CLICK]*"
       }
     },
     {
@@ -604,6 +646,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       name: 'Dave "The Budget Dragon"',
       title: 'Miami Luxury Plumbing & Trenchless',
       trade: 'Plumbing',
+      company: 'Brickell Trenchless Plumbing Pros',
       location: 'Miami / Brickell, FL',
       portrait: '🔧',
       hp: 180,
@@ -615,7 +658,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       avgLeak: 'An emergency sewer line trenchless repipe',
       dialogue: {
         stage1: "Look, I don't care how fancy it is. I got burned for $3,000 by some marketing clown last year. How much is this going to bleed out of my account?",
-        victory: "Fair enough. $300 a month pays for itself if it catches even one emergency repipe while I'm sleeping. Send the contract."
+        victory: "Fair enough. $300 a month pays for itself if it catches even one emergency repipe while I'm sleeping. Send the contract.",
+        defeat: "I knew it -- another snake oil telemarketer trying to bleed my business account. Lose my number. *[CLICK]*"
       }
     },
     {
@@ -623,6 +667,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       name: 'Sal "The Storm Chaser"',
       title: 'Fort Myers Restoration King',
       trade: 'Water Mitigation',
+      company: 'Gulf Coast 24/7 Flood Mitigation',
       location: 'Fort Myers, FL',
       portrait: '🌊',
       hp: 210,
@@ -634,7 +679,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       avgLeak: 'A category-3 black water flood dryout',
       dialogue: {
         stage1: "Kid, hurricane season starts soon. When a tropical depression hits, I get 40 flooded calls between midnight and 5 AM. How does your little toy handle 10 panicked homeowners at the same second without crashing?",
-        victory: "Wait, Ava can handle 10 calls simultaneously with zero busy signals? That alone saves my entire storm season. Set up my Carrier *71 rollover now."
+        victory: "Wait, Ava can handle 10 calls simultaneously with zero busy signals? That alone saves my entire storm season. Set up my Carrier *71 rollover now.",
+        defeat: "I got 10 flooded basements waiting on sump pumps and you're wasting my phone battery. Call terminated. *[CLICK]*"
       }
     },
     {
@@ -642,6 +688,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       name: 'Brad "The Angi Addict"',
       title: 'Jacksonville Residential AC & Heating',
       trade: 'Residential HVAC',
+      company: 'Jacksonville Air Champions',
       location: 'Jacksonville, FL',
       portrait: '❄️',
       hp: 240,
@@ -653,7 +700,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       avgLeak: 'A complete heat pump and ductwork replacement',
       dialogue: {
         stage1: "I already spend $1,800 a month on Angi and Thumbtack. My phone rings plenty. Why would I change anything when HomeAdvisor gives me all my jobs?",
-        victory: "You're dead right about Angi selling that same replacement lead to 4 other contractors. I lost three $9k changeouts last month because of that. Hook up Ava to my inbound lines."
+        victory: "You're dead right about Angi selling that same replacement lead to 4 other contractors. I lost three $9k changeouts last month because of that. Hook up Ava to my inbound lines.",
+        defeat: "I'm sticking with Angi and my yellow pad. Stop calling my personal mobile line. *[CLICK]*"
       }
     },
     {
@@ -661,6 +709,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       name: 'Gary "The Yellow Pad Veteran"',
       title: 'Ocala Septic & Excavation Veteran',
       trade: 'Septic & Excavation',
+      company: 'Marion County Septic & Dirt',
       location: 'Ocala / Marion County, FL',
       portrait: '🚜',
       hp: 270,
@@ -672,7 +721,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       avgLeak: 'A complete drainfield excavation and tank pump',
       dialogue: {
         stage1: "I've been in the dirt since 1986. I don't use 'apps', I don't have a computer, and I write every job on this yellow legal pad. You're talking Chinese to me, son.",
-        victory: "So Ava just acts like a polite southern girl answering my office phone, and texts my flip phone the address? Hell, even I can handle that. Let's try it for 30 days."
+        victory: "So Ava just acts like a polite southern girl answering my office phone, and texts my flip phone the address? Hell, even I can handle that. Let's try it for 30 days.",
+        defeat: "I don't know who taught you how to talk to working folks, son, but don't dial this number again. *[CLICK]*"
       }
     },
     {
@@ -680,6 +730,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       name: 'Vito "The Enterprise Titan"',
       title: 'Texas & Florida Fleet President',
       trade: 'Commercial Mechanical Fleet',
+      company: 'Sunbelt Fleet Mechanical Systems',
       location: 'Dallas / Houston / Orlando',
       portrait: '🏢',
       hp: 350,
@@ -691,7 +742,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       avgLeak: 'A commercial chiller or supermarket refrigeration contract',
       dialogue: {
         stage1: "I run 42 service vans across Texas and Florida with an internal dispatch center in Houston. Unless your AI does bilingual Spanish rollover, connects to ServiceTitan via webhook, and does Carrier *71 without rewiring my PBX, don't waste my breath. Convince me.",
-        victory: "Impressive. You know enterprise dispatch math, Carrier *71 rollover logic, and ServiceTitan webhooks cold. I want Ava tested on my 12 Orlando vans starting Monday morning."
+        victory: "Impressive. You know enterprise dispatch math, Carrier *71 rollover logic, and ServiceTitan webhooks cold. I want Ava tested on my 12 Orlando vans starting Monday morning.",
+        defeat: "You are completely out of your league. My executive team does not entertain amateur cold call pitches. Call terminated. *[CLICK]*"
       }
     }
   ];
@@ -750,15 +802,20 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
   let matchMemory = {
     turns: 0,
-    stage: 'opener', // opener -> pain -> mechanism -> objection -> proof -> carrier -> close -> victory
+    stage: 'opener', // opener -> pain -> mechanism -> price -> proof -> carrier -> close -> victory
     lastBossQuestion: 'who_are_you',
     answeredQuestions: new Set(),
     usedReplies: new Set(),
     topicsCovered: {},
     demoUnlocked: false,
     priceCovered: false,
-    carrierCovered: false
+    carrierCovered: false,
+    mechanismCovered: false,
+    consecutiveHesitation: 0,
+    dodgedCount: 0
   };
+  window.player = player;
+  window.matchMemory = matchMemory;
 
   function resetMatchMemory() {
     matchMemory = {
@@ -770,8 +827,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       topicsCovered: {},
       demoUnlocked: false,
       priceCovered: false,
-      carrierCovered: false
+      carrierCovered: false,
+      mechanismCovered: false,
+      consecutiveHesitation: 0,
+      dodgedCount: 0
     };
+    window.matchMemory = matchMemory;
   }
 
   // 6. UI UPDATE HELPERS
@@ -867,6 +928,18 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   }
 
   function selectBoss(idx) {
+    const modal = document.getElementById('defeatModal');
+    if (modal) modal.classList.remove('open');
+
+    const input = document.getElementById('playerCustomInput');
+    const sendBtn = document.getElementById('sendBtn');
+    if (input) {
+      input.disabled = false;
+      input.placeholder = `Speak or type your pitch to ${BOSSES[idx].name}...`;
+      input.value = '';
+    }
+    if (sendBtn) sendBtn.disabled = false;
+
     currentBossIndex = idx;
     currentBoss = BOSSES[idx];
     bossHp = currentBoss.maxHp;
@@ -902,7 +975,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
   // 7. HEALTH REGAIN MECHANICS
   window.executeTakeABreather = function() {
-    if (player.breatherCooldown > 0) return;
+    const input = document.getElementById('playerCustomInput');
+    if (!input || input.disabled || player.breatherCooldown > 0) return;
     const healAmount = 30;
     const oldHp = player.hp;
     player.hp = Math.min(player.maxHp, player.hp + healAmount);
@@ -915,11 +989,16 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     savePlayer();
   };
 
-  // 8. ADAPTIVE CONVERSATIONAL BRAIN 4.0 (Stateful, Contextual & Anti-Repetitive)
+  // 8. ADAPTIVE CONVERSATIONAL BRAIN 5.0 (Stateful, Fatal Signals & Anti-Repetitive)
 
   function analyzeSpeech(rawText, memory, currentBoss) {
     const t = (rawText || '').trim();
     const low = t.toLowerCase();
+
+    // FATAL SIGNALS (Saying the Wrong Stuff):
+    const isFatalRude = /\b(shut\s*up|idiot|stupid|fuck|bitch|asshole|bullshit|dumbass|moron|loser|piece\s*of\s*shit|scam(mer)?|fraud|hate\s*you|screw\s*you|go\s*to\s*hell)\b/i.test(low);
+    const isFatalSpam = /\b(synerg(y|ies|istic)|paradigm|cutting\s*edge\s*digital|transform\s*your\s*business|bespoke\s*solutions|scale\s*your\s*agency|marketing\s*funnel|sales\s*deck|powerpoint|b2b\s*solutions|partnership\s*opportunity|special\s*promotion\s*today|pitch\s*you|software\s*demo\s*presentation)\b/i.test(low);
+    const isFatalPrice = /\b(5000|10000|5,000|10,000|20,000|100,000|million)\b/i.test(low) || /\b(very\s*expensive|costs\s*a\s*lot|thousands\s*of\s*dollars\s*a\s*month)\b/i.test(low) || /\b(100%\s*free\s*forever|costs\s*nothing|completely\s*free)\b/i.test(low);
 
     const has20Sec = /(20|30)\s*(sec|second)/i.test(low);
     const hasHangUp = /hang\s*up|catch\s*you|bad\s*time|busy/i.test(low);
@@ -930,10 +1009,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const hasLeakHook = /leak|missed\s*call|emergency|after\s*hours|after\s*5|weekend|night|dinner|at\s*8\s*pm|sleeping|voicemail|next\s*(guy|contractor|roofer|plumber)/i.test(low);
     const hasDollarMath = /\$?\s*([0-9]+,?([0-9]{3})*)\s*(k|thousand|dollar|bucks)?/i.test(low) || /8,?000|12,?000|6,?000|9,?000|300|397|1,?200/i.test(low);
     
-    const hasAvaMechanism = /ava|ai|receptionist|phone|call|instant|one\s*ring|first\s*ring|text|notify|dispatch|answers\s*(24\/7|automatically|live)/i.test(low);
+    const hasAvaMechanism = /ava|ai|receptionist|phone|call|instant|one\s*ring|first\s*ring|text|notify|dispatch|answers\s*(24\/7|automatically|live)|qualif|calendar|schedule/i.test(low);
     
     const hasDemoNumber = /(561)\s*813-8602|813-8602|5618138602|live\s*demo|test\s*number|dial\s*(this|it|her)/i.test(low);
-    const hasSoundHuman = /sound|human|robot|robotic|delay|latency|natural|real\s*person|cadence/i.test(low);
+    const hasSoundHuman = /sound|human|robot|robotic|delay|latency|natural|real\s*person|cadence|accent/i.test(low);
     
     const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*forwarding|forward|port|switch|verizon|at&t|t-mobile|existing\s*number/i.test(low);
     
@@ -945,15 +1024,35 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const asksWhoAnswers = /who\s*answers|where\s*does\s*(that|the)\s*call\s*go|what\s*happens\s*to\s*calls|how\s*do\s*you\s*handle/i.test(low);
     const asksHowMuchLost = /how\s*much\s*(do\s*you\s*lose|is\s*a\s*job|is\s*an\s*average)|ticket\s*size|worth/i.test(low);
 
-    const isRepeatingPermission = memory.topicsCovered['permission'] && hasPermission && !hasLeakHook && !hasAvaMechanism;
-    const isRepeatingDemo = memory.topicsCovered['demo'] && hasDemoNumber && !hasTimeProposal;
-    const isRepeatingPrice = memory.topicsCovered['price'] && hasPricingAnswer && !hasAvaMechanism && !hasCarrier71;
+    const isRepeatingPermission = memory.topicsCovered['permission'] && hasPermission && !hasLeakHook && !hasAvaMechanism && !hasPricingAnswer && !hasDemoNumber;
+    const isRepeatingDemo = memory.topicsCovered['demo'] && hasDemoNumber && !hasCarrier71 && !hasTimeProposal;
+    const isRepeatingPrice = memory.topicsCovered['price'] && hasPricingAnswer && !hasDemoNumber && !hasCarrier71 && !hasTimeProposal;
+    const isRepeatingMechanism = memory.topicsCovered['mechanism'] && hasAvaMechanism && !hasPricingAnswer && !hasDemoNumber && !hasCarrier71 && !hasTimeProposal;
 
-    const isHesitant = low.length < 5 || /^(uh|um|hello\??|can\s*you\s*hear\s*me\??|are\s*you\s*there\??)$/i.test(low);
+    const isHesitant = low.length < 4 || /^(uh|um|hello\??|can\s*you\s*hear\s*me\??|are\s*you\s*there\??|wait|hold\s*on)$/i.test(low);
+
+    // Evasion / Dodging when contractor explicitly asked a direct question:
+    let isDodgingQuestion = false;
+    if (memory.lastBossQuestion === 'how_much_does_it_cost' && !hasPricingAnswer && !hasDollarMath) {
+      isDodgingQuestion = true;
+    }
+    if (memory.lastBossQuestion === 'proof_demo_line' && !hasDemoNumber && !hasSoundHuman && !hasAgreement) {
+      isDodgingQuestion = true;
+    }
+    if (memory.lastBossQuestion === 'carrier_rollover_setup' && !hasCarrier71 && !hasAgreement) {
+      isDodgingQuestion = true;
+    }
+    if (memory.lastBossQuestion === 'meeting_time_close' && !hasTimeProposal && !hasAgreement) {
+      isDodgingQuestion = true;
+    }
 
     return {
       raw: t,
       low: low,
+      isFatalRude,
+      isFatalSpam,
+      isFatalPrice,
+      isDodgingQuestion,
       hasPermission,
       hasAgreement,
       hasLeakHook,
@@ -970,6 +1069,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       isRepeatingPermission,
       isRepeatingDemo,
       isRepeatingPrice,
+      isRepeatingMechanism,
       isHesitant
     };
   }
@@ -985,12 +1085,91 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   function generateContractorTurn(analysis, memory, boss) {
     memory.turns++;
 
+    // 0. FATAL SIGNALS (Immediate Contractor Reaction to Wrong Stuff)
+    if (analysis.isFatalRude) {
+      return pickUnique(memory, [
+        `(Snarls into phone) Who the hell do you think you're talking to? Don't you ever dial my business number again, you clown. *[SLAMS PHONE DOWN]*`,
+        `You got some mouth on you for someone calling MY cell phone uninvited. Take a hike and lose my number. *[CLICK - CALL TERMINATED]*`
+      ], 'fatal_rude');
+    }
+
+    if (analysis.isFatalSpam) {
+      return pickUnique(memory, [
+        `(Heavy sigh) Stop right there. I get 15 spam telemarketers a day reading script buzzwords. I work with my hands, kid. Lose my number. *[CLICK]*`,
+        `Synergies? Digital solutions? Man, I'm spraying poly on a hot roof. Talk like a real human being or get off my phone. *[CLICK]*`
+      ], 'fatal_spam');
+    }
+
+    if (analysis.isFatalPrice) {
+      return pickUnique(memory, [
+        `(Scoffs into receiver) Thousands of dollars a month? Are you out of your mind? I'm a contractor, not Wall Street. Get off my phone. *[CLICK]*`,
+        `Nobody gives away high-end voice AI for free, son. Cut the scam pitch and tell me the real price or I'm hanging up. *[CLICK]*`
+      ], 'fatal_price');
+    }
+
+    if (analysis.isDodgingQuestion && (memory.dodgedCount || 0) >= 2) {
+      return pickUnique(memory, [
+        `I asked you twice for a straight answer and you're dodging me like a slick used car salesman. Call terminated. *[CLICK]*`,
+        `You refuse to give me the actual numbers. I don't do business with evasive salespeople. Goodbye. *[CLICK]*`
+      ], 'fatal_dodge');
+    }
+
+    if (analysis.isHesitant && (memory.consecutiveHesitation || 0) >= 2) {
+      return pickUnique(memory, [
+        `I don't have time to sit here in 95-degree heat waiting for you to figure out what you're saying. Call someone else. *[CLICK]*`,
+        `Dead air again? I'm backing up a trailer, man. Goodbye. *[CLICK]*`
+      ], 'fatal_hesitation');
+    }
+
+    // Single Dodge Warnings (Contractor notices evasion):
+    if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'how_much_does_it_cost') {
+      return pickUnique(memory, [
+        `Hold on Luke -- I asked you a direct question: how much does this cost per month? Don't dodge me, give me the actual number.`,
+        `Wait a second, Luke. Cut through the pitch and answer me: what is the monthly investment?`
+      ], 'dodge_price_warning');
+    }
+
+    if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'proof_demo_line') {
+      return pickUnique(memory, [
+        `You dodged my question, Luke. What number can I dial from my truck right now on speaker to hear Ava's voice?`,
+        `Answer my question first: how do I hear her live before we talk about anything else?`
+      ], 'dodge_demo_warning');
+    }
+
+    if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'carrier_rollover_setup') {
+      return pickUnique(memory, [
+        `You dodged my question about my phone number, Luke. Do I have to switch carriers or port my number? Tell me how it hooks up.`,
+        `Answer me straight: how does this connect to my existing company lines without messing up my phones?`
+      ], 'dodge_carrier_warning');
+    }
+
+    if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'meeting_time_close') {
+      return pickUnique(memory, [
+        `I asked you for a specific time tomorrow, Luke. What time works for this walkthrough?`,
+        `Give me a time tomorrow afternoon or let's wrap this up.`
+      ], 'dodge_close_warning');
+    }
+
     // 1. REPETITION HANDLING
     if (analysis.isRepeatingPermission) {
       return pickUnique(memory, [
         `Luke, you already asked me for 20 seconds and I gave it to you! Stop asking for permission and tell me what you actually do!`,
         `I already said I'm listening, man. Get to the point before I have to climb up this ladder.`
       ], 'repetition_permission');
+    }
+
+    if (analysis.isRepeatingMechanism) {
+      return pickUnique(memory, [
+        `You already told me she answers in one ring, Luke! I heard you. What I asked is: how much does this cost per month?`,
+        `I understand she texts my cell. Cut to the bottom line: what's the monthly investment?`
+      ], 'repetition_mechanism');
+    }
+
+    if (analysis.isRepeatingPrice) {
+      return pickUnique(memory, [
+        `I already know she's $300 a month, man. What I want to know is does she sound like a robot? Give me the test line.`,
+        `You already gave me the price, Luke! How do I hear her voice before I agree to anything?`
+      ], 'repetition_price');
     }
 
     if (analysis.isRepeatingDemo) {
@@ -1000,7 +1179,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'repetition_demo');
     }
 
-    // 2. HESITATION & DEAD AIR HANDLING
+    // 2. HESITATION / FIRST WARNING
     if (analysis.isHesitant) {
       return pickUnique(memory, [
         `Hey, you still there? I don't get paid to sit here listening to static while my truck is idling. Speak up or I'm hanging up.`,
@@ -1021,42 +1200,42 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     if (analysis.asksHowMuchLost) {
       memory.topicsCovered['asked_ticket'] = true;
-      memory.lastBossQuestion = 'explain_how_you_fix_it';
+      memory.lastBossQuestion = 'explain_solution_ava';
       return pickUnique(memory, [
         `In my trade? ${boss.avgLeak || 'A standard job'} runs around ${boss.ticket}. Losing even one a week hurts like hell. What's your angle?`,
         `Average ticket is ${boss.ticket}. Missing one emergency call is a massive chunk of profit. Tell me how you fix that.`
       ], 'answer_ticket');
     }
 
-    // 4. DIALOGUE STATE ADVANCEMENT (Contextual Reactions)
+    // 4. DIALOGUE STATE ADVANCEMENT (Forward-Only State Machine)
 
-    // STAGE 1: Opener Reaction
+    // STAGE 1: Opener -> Pain
     if (memory.lastBossQuestion === 'who_are_you') {
       if (analysis.hasPermission || analysis.hasAgreement || analysis.hasLeakHook) {
         memory.stage = 'pain';
-        memory.lastBossQuestion = 'explain_pain_or_cost';
+        memory.lastBossQuestion = 'explain_solution_ava';
         memory.topicsCovered['permission'] = true;
         if (analysis.hasLeakHook) memory.topicsCovered['leak'] = true;
 
         if (boss.key === 'roofer') {
           return pickUnique(memory, [
-            `(Nail gun stops) Fair point, kid. Honestly? When I'm up on a 12-pitch roof spraying poly, calls go straight to voicemail. By the time I climb down at 5 PM, they've hired someone else. But what are you proposing? How much is this going to cost me?`,
-            `(Heavy diesel truck idles) Ha, you're not wrong about that. If an $8k emergency leak call rings while I'm tying off shingles, I can't grab it. But I'm not hiring a full-time receptionist for $3k a month. What's your setup?`
+            `(Nail gun stops) Fair point, kid. Honestly? When I'm up on a 12-pitch roof spraying poly, calls go straight to voicemail. By the time I climb down at 5 PM, they've hired someone else. But what are you proposing? What does your setup actually do?`,
+            `(Heavy diesel truck idles) Ha, you're not wrong about that. If an $8k emergency leak call rings while I'm tying off shingles, I can't grab it. But I'm not hiring a full-time receptionist for $3k a month. How does your tool catch those calls?`
           ], 'roofer_pain_ack');
         } else if (boss.key === 'gatekeeper') {
           return pickUnique(memory, [
-            `(Typing pauses) Honestly... thank you for recognizing that. Gary is out turning wrenches and I handle 40 incoming dispatch calls a day. After 5 PM, our answering service is a complete disaster. They lost two $9k AC changeouts last Friday. What's your direct cell, Luke?`,
-            `(Audible sigh) You're dead right about after-hours. When our technicians are stuck in a 115-degree attic on a Saturday, they can't answer. Callers hang up and hire the next company. What is your system?`
+            `(Typing pauses) Honestly... thank you for recognizing that. Gary is out turning wrenches and I handle 40 incoming dispatch calls a day. After 5 PM, our answering service is a complete disaster. They lost two $9k AC changeouts last Friday. How does your system fix after-hours calls?`,
+            `(Audible sigh) You're dead right about after-hours. When our technicians are stuck in a 115-degree attic on a Saturday, they can't answer. Callers hang up and hire the next company. What is your software?`
           ], 'gatekeeper_pain_ack');
         } else if (boss.key === 'skeptic') {
           return pickUnique(memory, [
-            `(Wire strippers snap) Look, when I'm inside a 480-volt commercial electrical panel with insulated rubber gloves, I physically cannot touch a phone. So emergency calls roll to voicemail and hire the next guy. But hold on -- is this an automated AI robot calling me? I hate robots.`,
+            `(Wire strippers snap) Look, when I'm inside a 480-volt commercial electrical panel with insulated rubber gloves, I physically cannot touch a phone. So emergency calls roll to voicemail and hire the next guy. But hold on -- how does your setup catch calls without me touching a screen?`,
             `(Generator hums) You hit a nerve there. Lost an $8k generator install last week because I was running conduit. But tell me the truth: are you trying to sell me some computerized AI gimmick?`
           ], 'skeptic_pain_ack');
         } else if (boss.key === 'price') {
           return pickUnique(memory, [
-            `(Pipe wrench clangs) Yeah, emergency sewer backups happen at 11 PM and by 11:05 PM they've hired another Miami plumber. But look, I got burned by a marketing clown for $3,000 last year. Cut the fluff: how much does this cost per month?`,
-            `(Scoffs into receiver) Missing emergency repipes hurts, obviously. But I'm not getting trapped in another $2,500 monthly agency retainer. What's the bottom line price?`
+            `(Pipe wrench clangs) Yeah, emergency sewer backups happen at 11 PM and by 11:05 PM they've hired another Miami plumber. But look, I got burned by a marketing clown for $3,000 last year. What does this Ava thing actually do?`,
+            `(Scoffs into receiver) Missing emergency repipes hurts, obviously. But I'm not getting trapped in another $2,500 retainer. What is this tool?`
           ], 'price_pain_ack');
         } else if (boss.key === 'sal') {
           return pickUnique(memory, [
@@ -1065,8 +1244,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           ], 'sal_pain_ack');
         } else if (boss.key === 'brad') {
           return pickUnique(memory, [
-            `(Condenser fan spins) Look, I already spend $1,800 a month on Angi and HomeAdvisor. My phone rings enough. Why would I change anything when shared leads give me my work?`,
-            `(Gulp of sweet tea) Angi brings me jobs every week. Why on earth would I pay for another phone tool?`
+            `(Condenser fan spins) Look, I already spend $1,800 a month on Angi and HomeAdvisor. My phone rings enough. How does your software capture exclusive callers before Angi sells them to 4 competitors?`,
+            `(Gulp of sweet tea) Angi brings me jobs every week, but shared leads are cutthroat. How does Ava get me calls directly from Google?`
           ], 'brad_pain_ack');
         } else if (boss.key === 'gary') {
           return pickUnique(memory, [
@@ -1082,23 +1261,75 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       }
     }
 
-    // STAGE 2: Pricing Reaction
+    // STAGE 2: Mechanism / Ava Features Reaction -> Advances to Price
+    if (analysis.hasAvaMechanism && !memory.mechanismCovered) {
+      memory.mechanismCovered = true;
+      memory.topicsCovered['mechanism'] = true;
+      memory.stage = 'price';
+      memory.lastBossQuestion = 'how_much_does_it_cost';
+
+      if (boss.key === 'roofer') {
+        return pickUnique(memory, [
+          `(Nail gun clicks) Wait, she answers in one ring, books directly into my schedule, and texts my cell so I don't have to check voicemails between jobs? That saves hours on ladders. But cut the fluff: how much is this going to cost me per month?`,
+          `(Rooftop wind blowing) Direct calendar booking and instant SMS job dispatch? That would keep homeowners from calling my competitor. But what's the monthly damage to my bank account?`
+        ], 'roofer_mech_ack');
+      } else if (boss.key === 'gatekeeper') {
+        return pickUnique(memory, [
+          `(Keyboard clatter stops) She texts the customer name, address, and equipment symptoms directly to our on-call tech? That eliminates our offshore answering service errors completely. What is the monthly rate?`,
+          `(Sigh of relief) Instant SMS dispatch and zero hold time? Our technicians could actually respond immediately. What do you charge for this monthly?`
+        ], 'gatekeeper_mech_ack');
+      } else if (boss.key === 'skeptic') {
+        return pickUnique(memory, [
+          `(Strips copper wire) She asks the homeowner for panel amperage and breaker trip details and texts me? That's actually useful. How much does this service run every month?`,
+          `(Generator hum) So she actually collects trade details and texts my phone instead of making them leave a voicemail? Alright, what's this cost?`
+        ], 'skeptic_mech_ack');
+      } else if (boss.key === 'price') {
+        return pickUnique(memory, [
+          `(Pipe wrench tightens) She pre-qualifies trenchless repipes and books emergency slots? Alright, you got my attention. How much does it cost? Give me the bottom line dollar amount.`,
+          `(Taps clipboard) Automatic intake and calendar booking without an offshore call center? Cut to the chase: how much is the monthly retainer?`
+        ], 'price_mech_ack');
+      } else if (boss.key === 'sal') {
+        return pickUnique(memory, [
+          `(Pump humming) Infinite simultaneous call concurrency so nobody gets a busy signal during a storm? Kid, that saves $50k in flood claims. What's the monthly investment?`,
+          `(Water sloshing) Ten callers at the exact same second with zero busy signals? What does that cost per month?`
+        ], 'sal_mech_ack');
+      } else if (boss.key === 'brad') {
+        return pickUnique(memory, [
+          `(AC fan spins) She answers inbound calls from my Google profile before they ever tap an Angi ad? That pays for itself. How much do you charge per month?`,
+          `Exclusive inbound conversion with instant missed-call text back? That beats shared leads. What's the cost?`
+        ], 'brad_mech_ack');
+      } else if (boss.key === 'gary') {
+        return pickUnique(memory, [
+          `(Chuckles) She just talks polite like a real southern girl and sends a simple text to my flip phone with the tank size? Hell, I don't even need a computer for that. How much do I owe you every month?`,
+          `Simple text dispatch to my flip phone with name and address? That's clean. What's the price, son?`
+        ], 'gary_mech_ack');
+      } else if (boss.key === 'vito') {
+        return pickUnique(memory, [
+          `(Authoritative breath) Instant dispatch webhook to our Houston CRM with bilingual intake? That's enterprise-grade. What is your monthly van tier pricing?`,
+          `ServiceTitan API sync with sub-second call transfer? What is the enterprise pricing structure?`
+        ], 'vito_mech_ack');
+      }
+    }
+
+    // STAGE 3: Pricing Reaction -> Demands Proof / Demo Line
     if (analysis.hasPricingAnswer && !memory.priceCovered) {
       memory.priceCovered = true;
       memory.topicsCovered['price'] = true;
-      memory.lastBossQuestion = 'does_it_sound_robotic_or_proof';
+      memory.stage = 'proof';
+      memory.lastBossQuestion = 'proof_demo_line';
 
       return pickUnique(memory, [
-        `Wait, $300 a month with zero setup fee? Honestly, that's pocket change -- one ${boss.avgLeak || 'emergency job'} pays for the entire year. But hold on: does this Ava thing sound like a robot? Florida homeowners with an emergency want a real person, not an automated machine.`,
-        `$300 a month and no long-term contracts? That's actually fair compared to the $1,400 answering services charge. But how do I know she doesn't sound computerized with that awkward 2-second delay?`
+        `Wait, $300 a month with zero setup fee and no contract? Honestly, that's pocket change -- one ${boss.avgLeak || 'emergency job'} pays for the entire year. But hold on: does this Ava thing sound like a robot? Florida homeowners with an emergency want a real person, not an automated machine. How do I hear her?`,
+        `$397 a month and no long-term contracts? That's actually fair compared to the $1,400 answering services charge. But how do I know she doesn't sound computerized with that awkward 2-second delay? What's the number to test her?`
       ], 'price_reaction');
     }
 
-    // STAGE 3: Live Demo Test Line (561) 813-8602 Reaction
-    if (analysis.hasDemoNumber || (analysis.hasSoundHuman && analysis.hasAgreement)) {
+    // STAGE 4: Live Demo Test Line (561) 813-8602 Reaction -> Asks About Carrier Setup
+    if ((analysis.hasDemoNumber || (analysis.hasSoundHuman && analysis.hasAgreement)) && !memory.demoUnlocked) {
       memory.demoUnlocked = true;
       memory.topicsCovered['demo'] = true;
-      memory.lastBossQuestion = 'carrier_connection_setup';
+      memory.stage = 'carrier';
+      memory.lastBossQuestion = 'carrier_rollover_setup';
 
       return pickUnique(memory, [
         `(Truck door thuds shut) 'If she sounds robotic, you can never talk to me again.' I respect that bet, Luke. I just tapped (561) 813-8602 into my cell... (Pause) Holy cow... she answered on the first ring, asked if I had active emergencies in ${boss.location}, and sounded like a real girl sitting in an office. Okay Luke, that's legitimately impressive. But how do I hook this up without switching carriers?`,
@@ -1106,10 +1337,11 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'demo_live_reaction');
     }
 
-    // STAGE 4: Carrier *71 Rollover Reaction
+    // STAGE 5: Carrier *71 Rollover Reaction -> Asks for Walkthrough / Close
     if (analysis.hasCarrier71 && !memory.carrierCovered) {
       memory.carrierCovered = true;
       memory.topicsCovered['carrier'] = true;
+      memory.stage = 'close';
       memory.lastBossQuestion = 'meeting_time_close';
 
       return pickUnique(memory, [
@@ -1118,7 +1350,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'carrier_reaction');
     }
 
-    // STAGE 5: Meeting Time Proposal / Final Close
+    // STAGE 6: Meeting Time Proposal / Final Close -> VICTORY!
     if (analysis.hasTimeProposal || (memory.demoUnlocked && memory.carrierCovered)) {
       memory.stage = 'victory';
       memory.lastBossQuestion = 'completed';
@@ -1139,7 +1371,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
 
     if (boss.key === 'gary' && (analysis.low.includes('yellow pad') || analysis.low.includes('text') || analysis.low.includes('flip phone') || analysis.low.includes('computer') || analysis.low.includes('simple') || analysis.low.includes('sms'))) {
-      memory.lastBossQuestion = 'does_it_sound_robotic_or_proof';
+      memory.lastBossQuestion = 'proof_demo_line';
       return pickUnique(memory, [
         `(Chuckles in southern drawl) Well son, I appreciate you not trying to sell me some high-tech silicon valley nonsense. If Ava just acts like a polite southern receptionist and texts my flip phone the address and tank size, that actually solves my headache. Does she sound natural or like a machine?`,
         `So she just answers my office line and texts my flip phone the customer name, address, and emergency level? Hell, even an old timer like me can handle that. But how do I hear what she sounds like?`
@@ -1147,7 +1379,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
 
     if (boss.key === 'sal' && (analysis.low.includes('concurrent') || analysis.low.includes('simultaneous') || analysis.low.includes('flood') || analysis.low.includes('storm') || analysis.low.includes('lines') || analysis.low.includes('busy'))) {
-      memory.lastBossQuestion = 'does_it_sound_robotic_or_proof';
+      memory.lastBossQuestion = 'proof_demo_line';
       return pickUnique(memory, [
         `(Dehumidifier roar fades) Infinite simultaneous call concurrency? That means 10 flooded homeowners can call at 2 AM and nobody gets a busy signal? Kid, that alone saves my entire hurricane season. But do insurance callers think she's a real person?`,
         `Handling 10 emergency flood calls at the exact same second with zero busy signals? That would have saved me $40,000 during the last tropical depression. Prove to me she doesn't sound like a computerized phone tree.`
@@ -1162,11 +1394,39 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'vito_enterprise_reaction');
     }
 
-    // CONVERSATIONAL FALLBACK (Specific to this trade & location)
+    // STAGE-PRESERVING IN-CHARACTER PROMPTS (Never regresses!):
+    if (memory.lastBossQuestion === 'how_much_does_it_cost') {
+      return pickUnique(memory, [
+        `I hear what you're saying, Luke, but I need the bottom line number. How many dollars a month is this? Give me the price.`,
+        `Don't dance around the cost, kid. How much does Ava run per month? What's the investment?`
+      ], 'prompt_price');
+    }
+
+    if (memory.lastBossQuestion === 'proof_demo_line') {
+      return pickUnique(memory, [
+        `Talk is cheap, Luke. Every salesperson says their software sounds human. What is the phone number I can dial right now on speaker to hear her voice?`,
+        `Give me the live demo number. If she sounds like a real person, we'll talk business. What's the test line?`
+      ], 'prompt_demo');
+    }
+
+    if (memory.lastBossQuestion === 'carrier_rollover_setup') {
+      return pickUnique(memory, [
+        `I'm not signing anything until I know what happens to my company phone number. Do I have to switch carriers or port my number? Tell me how it connects.`,
+        `How does this Ava tool actually connect to my business line without messing up my phones? Give me the setup details.`
+      ], 'prompt_carrier');
+    }
+
+    if (memory.lastBossQuestion === 'meeting_time_close') {
+      return pickUnique(memory, [
+        `I'm ready for the walkthrough, Luke. Give me a specific time tomorrow afternoon and let's get it on the calendar.`,
+        `What time tomorrow can you walk me through the backend? Name a time.`
+      ], 'prompt_close');
+    }
+
+    // General trade context fallback (Only on turn 1 if off-topic)
     return pickUnique(memory, [
       `Look Luke, I'm out in ${boss.location} dealing with ${boss.trade.toLowerCase()} jobs right now. Tell me the bottom line: how does this stop me from losing ${boss.avgLeak || 'jobs'} when my crews are working?`,
-      `I'm listening, Luke, but make it plain English -- when a high-dollar ${boss.trade.toLowerCase()} customer calls after hours, how does Ava turn that into money in my bank account?`,
-      `You know the trade, Luke. But I've been burned by tech promises before. Give me the straight facts on cost and setup or let me get back to my crew.`
+      `I'm listening, Luke, but make it plain English -- when a high-dollar ${boss.trade.toLowerCase()} customer calls after hours, how does Ava turn that into money in my bank account?`
     ], 'general_trade_context');
   }
 
@@ -1176,6 +1436,19 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     const analysis = analyzeSpeech(userInput, matchMemory, currentBoss);
 
+    // Track consecutive hesitations and dodging in matchMemory
+    if (analysis.isHesitant) {
+      matchMemory.consecutiveHesitation = (matchMemory.consecutiveHesitation || 0) + 1;
+    } else {
+      matchMemory.consecutiveHesitation = 0;
+    }
+
+    if (analysis.isDodgingQuestion) {
+      matchMemory.dodgedCount = (matchMemory.dodgedCount || 0) + 1;
+    } else if (analysis.hasPricingAnswer || analysis.hasDemoNumber || analysis.hasCarrier71) {
+      matchMemory.dodgedCount = 0;
+    }
+
     let damage = 24;
     let grade = 'B';
     let feedback = '';
@@ -1183,88 +1456,173 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     let isCrit = false;
     let agreementHeal = 0;
 
-    if (analysis.hasAgreement) {
-      agreementHeal = 18;
-      player.hp = Math.min(player.maxHp, player.hp + agreementHeal);
-      feedback += ` [Defused Tension: +${agreementHeal} HP]`;
-    }
+    let isHangup = false;
+    let hangupReason = '';
+    let defeatMistake = '';
+    let defeatRemedy = '';
 
-    // Grading logic based on real conversational responsiveness
-    if ((analysis.hasPermission || analysis.hasAgreement) && (analysis.hasLeakHook || analysis.hasDollarMath) && (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer)) {
-      grade = 'S';
-      damage = 45;
-      counterDmg = 0;
-      feedback = '🔥 MASTERFUL REBUTTAL! Fully addressed the contractor\'s concern, anchored trade math, and delivered proof!';
-    } else if (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer || analysis.hasTimeProposal) {
-      grade = 'A';
-      damage = 34;
-      counterDmg = 4;
-      feedback = '✨ EXCELLENT! Direct, substantive answer with zero fluff.';
-    } else if (analysis.hasLeakHook || analysis.hasPermission || analysis.hasAgreement || analysis.isUserAskingQuestion) {
-      grade = 'B';
-      damage = 22;
-      counterDmg = 8;
-      feedback = 'Solid move. Now give them concrete numbers or challenge them to the live line.';
-    } else if (!analysis.isHesitant) {
-      grade = 'C';
-      damage = 12;
-      counterDmg = 16;
-      feedback = 'A bit vague. Anchor directly to their missed call revenue.';
-    } else {
+    // 1. FATAL STRIKES & BLUNDERS (Instant Defeat / Rejection Disconnect)
+    if (analysis.isFatalRude) {
       grade = 'F';
       damage = 0;
-      counterDmg = 24;
-      feedback = 'Fatal hesitation or pitch trap! Speak with calm authority.';
+      counterDmg = 100;
+      isHangup = true;
+      hangupReason = 'Contractor Disrespect / Aggression';
+      defeatMistake = 'Insulted, cursed at, or attacked the business owner on their active business line.';
+      defeatRemedy = 'Contractors have zero tolerance for disrespect. Lead with extreme deference and use the Total Agreement Shield: "You are 100% right."';
+      feedback = '🚨 FATAL BLUNDER: Hostility detected! Contractor hung up immediately.';
+    } else if (analysis.isFatalSpam) {
+      grade = 'F';
+      damage = 0;
+      counterDmg = 100;
+      isHangup = true;
+      hangupReason = 'Corporate Buzzword Telemarketer Spam';
+      defeatMistake = 'Used corporate marketing buzzwords ("synergies", "omnichannel pipeline", "sales deck") that scream telemarketer spam to a blue-collar tradesman.';
+      defeatRemedy = 'Contractors work with their hands. Speak plain job site English: missed calls, lost $8,000 emergency jobs, and instant SMS dispatch.';
+      feedback = '🚨 FATAL BLUNDER: Corporate buzzword pitch trap! Contractor slammed the phone down.';
+    } else if (analysis.isFatalPrice) {
+      grade = 'F';
+      damage = 0;
+      counterDmg = 100;
+      isHangup = true;
+      hangupReason = 'Absurd / Scam Pricing Trap';
+      defeatMistake = 'Quoted unrealistic enterprise fees ($5,000 - $10,000/mo) or claimed enterprise AI receptionist service is "100% free".';
+      defeatRemedy = 'Tradesmen immediately recognize free as a scam or thousands as price gouging. Quote $397/mo flat with zero contracts and zero setup fee.';
+      feedback = '🚨 FATAL BLUNDER: Quoted absurd/scam pricing! Contractor hung up.';
+    } else if (analysis.isDodgingQuestion && (matchMemory.dodgedCount || 0) >= 2) {
+      grade = 'F';
+      damage = 0;
+      counterDmg = 100;
+      isHangup = true;
+      hangupReason = 'Evasive Sales Rep / Dodged Contractor Question Twice';
+      defeatMistake = 'Dodged the contractor\'s direct question twice in a row instead of giving a straight answer.';
+      defeatRemedy = 'Never dodge pricing or proof questions. When a contractor asks "how much?", answer directly ($397/mo flat) before asking for a walkthrough.';
+      feedback = '🚨 FATAL BLUNDER: Dodged contractor questions twice! Contractor terminated call.';
+    } else if (analysis.isHesitant && (matchMemory.consecutiveHesitation || 0) >= 2) {
+      grade = 'F';
+      damage = 0;
+      counterDmg = 100;
+      isHangup = true;
+      hangupReason = 'Dead Air & Freezing on the Phone';
+      defeatMistake = 'Left awkward dead air and stuttered ("uh", "um", empty text) two turns in a row while contractor was waiting.';
+      defeatRemedy = 'Contractors have zero patience for awkward pauses while working on job sites. Maintain vocal momentum and keep sentences punchy.';
+      feedback = '🚨 FATAL BLUNDER: Dead air twice in a row! Contractor hung up.';
+    } else if (analysis.isDodgingQuestion) {
+      grade = 'D';
+      damage = 6;
+      counterDmg = 25;
+      feedback = '⚠️ CONTRACTOR NOTICED DODGING: They asked a direct question. Answer it immediately or they will hang up!';
+    } else if (analysis.isHesitant) {
+      grade = 'D';
+      damage = 4;
+      counterDmg = 20;
+      feedback = '⚠️ HESITATION WARNING: Stuttering or dead air on a business line. Contractor is losing patience!';
+    } else {
+      // 2. NORMAL ADAPTIVE BRAIN EVALUATION
+      if (analysis.hasAgreement) {
+        agreementHeal = 18;
+        player.hp = Math.min(player.maxHp, player.hp + agreementHeal);
+        feedback += ` [Defused Tension: +${agreementHeal} HP]`;
+      }
+
+      if ((analysis.hasPermission || analysis.hasAgreement) && (analysis.hasLeakHook || analysis.hasDollarMath) && (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer)) {
+        grade = 'S';
+        damage = 45;
+        counterDmg = 0;
+        feedback = '🔥 MASTERFUL REBUTTAL! Fully addressed the contractor\'s concern, anchored trade math, and delivered proof!';
+      } else if (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer || analysis.hasTimeProposal) {
+        grade = 'A';
+        damage = 34;
+        counterDmg = 4;
+        feedback = '✨ EXCELLENT! Direct, substantive answer with zero fluff.';
+      } else if (analysis.hasLeakHook || analysis.hasPermission || analysis.hasAgreement || analysis.hasAvaMechanism || analysis.isUserAskingQuestion) {
+        grade = 'B';
+        damage = 22;
+        counterDmg = 8;
+        feedback = 'Solid move. Kept the conversation moving forward without triggering skepticism.';
+      } else {
+        grade = 'C';
+        damage = 12;
+        counterDmg = 16;
+        feedback = 'A bit vague. Anchor directly to their missed call revenue.';
+      }
     }
 
-    // Weapon Modifiers
-    damage = Math.round(damage * (1 + curWeapon.dmgBonus / 100));
+    // 3. WEAPON & ARMOR MODIFIERS
+    if (grade !== 'F') {
+      damage = Math.round(damage * (1 + curWeapon.dmgBonus / 100));
 
-    if (curWeapon.id === 'blade' && analysis.hasPermission && Math.random() < 0.35) {
-      isCrit = true;
-      damage += 25;
-      feedback += ' ⚔️ CRITICAL HIT! Permission Slice triggered!';
+      if (curWeapon.id === 'blade' && analysis.hasPermission && Math.random() < 0.35) {
+        isCrit = true;
+        damage += 25;
+        feedback += ' ⚔️ CRITICAL HIT! Permission Slice triggered!';
+      }
+
+      if (curWeapon.id === 'scythe' && player.skepticismReaperActive) {
+        damage = Math.round(damage * 2.0);
+        feedback += ' 🌾 SKEPTICISM REAPER: 2X DAMAGE!';
+        player.skepticismReaperActive = false;
+      }
+      if (curWeapon.id === 'scythe' && analysis.hasAgreement) {
+        player.skepticismReaperActive = true;
+      }
+
+      counterDmg = Math.round(counterDmg * (1 - curArmor.dmgReduct / 100));
+
+      if (curArmor.id === 'plate' && Math.random() < 0.2) {
+        counterDmg = 0;
+        feedback += ' 🛡️ DEFLECTED! Steel plate deflected contractor counterattack!';
+      }
+
+      if (curArmor.id === 'cuirass' && (grade === 'S' || grade === 'A')) {
+        player.hp = Math.min(player.maxHp, player.hp + 10);
+        feedback += ' [Reputation Bastion: +10 HP]';
+      }
+
+      if (curArmor.id === 'cloak') {
+        player.hp = Math.min(player.maxHp, player.hp + 5);
+        feedback += ' [Obsidian Regen: +5 HP]';
+      }
+
+      if (curWeapon.id === 'cleaver' && analysis.hasLeakHook) {
+        player.bleedTurns = 2;
+      }
     }
 
-    if (curWeapon.id === 'scythe' && player.skepticismReaperActive) {
-      damage = Math.round(damage * 2.0);
-      feedback += ' 🌾 SKEPTICISM REAPER: 2X DAMAGE!';
-      player.skepticismReaperActive = false;
-    }
-    if (curWeapon.id === 'scythe' && analysis.hasAgreement) {
-      player.skepticismReaperActive = true;
-    }
-
-    // Armor Modifiers
-    counterDmg = Math.round(counterDmg * (1 - curArmor.dmgReduct / 100));
-
-    if (curArmor.id === 'plate' && Math.random() < 0.2) {
-      counterDmg = 0;
-      feedback += ' 🛡️ DEFLECTED! Steel plate deflected contractor counterattack!';
-    }
-
-    if (curArmor.id === 'cuirass' && (grade === 'S' || grade === 'A')) {
-      player.hp = Math.min(player.maxHp, player.hp + 10);
-      feedback += ' [Reputation Bastion: +10 HP]';
-    }
-
-    if (curArmor.id === 'cloak') {
-      player.hp = Math.min(player.maxHp, player.hp + 5);
-      feedback += ' [Obsidian Regen: +5 HP]';
-    }
-
-    if (curWeapon.id === 'cleaver' && analysis.hasLeakHook) {
-      player.bleedTurns = 2;
+    // Check if counter-damage drops player HP to 0
+    if (player.hp - counterDmg <= 0 && !isHangup) {
+      isHangup = true;
+      hangupReason = 'Emotional Rejection Armor Depleted';
+      defeatMistake = 'Contractor objections broke through your armor after multiple weak or off-target rebuttals.';
+      defeatRemedy = 'Equip higher tier armor (Steel Plate / Reputation Bastion) in the Armory and use the +18 HP Total Agreement defuse ("You are 100% right").';
     }
 
     // Generate Adaptive Contractor Reply
-    const contractorReply = generateContractorTurn(analysis, matchMemory, currentBoss);
+    let contractorReply = generateContractorTurn(analysis, matchMemory, currentBoss);
 
-    return { grade, damage, counterDmg, feedback, contractorReply, isCrit, agreementHeal };
+    if (player.hp - counterDmg <= 0 && !contractorReply.includes('*[')) {
+      contractorReply = currentBoss.dialogue.defeat || contractorReply;
+    }
+
+    return {
+      grade,
+      damage,
+      counterDmg,
+      feedback,
+      contractorReply,
+      isCrit,
+      agreementHeal,
+      isHangup,
+      hangupReason,
+      defeatMistake,
+      defeatRemedy
+    };
   }
 
   // 9. TURN EXECUTION
   window.executeQuickStrike = function(strikeType) {
+    const input = document.getElementById('playerCustomInput');
+    if (!input || input.disabled) return;
     let text = '';
     if (strikeType === 'permission') {
       text = `Hey ${currentBoss.name.split(' ')[0]}, I know you're busy in the field — you got 30 seconds before you hang up on me?`;
@@ -1273,8 +1631,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     } else if (strikeType === 'demo') {
       text = `Don't take my word for it. Dial our live Florida test line on (561) 813-8602 right now from your truck and hear Ava with zero delay.`;
     }
-    const input = document.getElementById('playerCustomInput');
-    if (input) input.value = text;
+    input.value = text;
     submitRebuttal();
   };
 
@@ -1286,6 +1643,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
   window.submitRebuttal = function() {
     const input = document.getElementById('playerCustomInput');
+    const sendBtn = document.getElementById('sendBtn');
     const userText = input ? input.value.trim() : '';
     if (!userText) return;
     if (input) input.value = '';
@@ -1333,13 +1691,13 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     updateHUD();
 
-    if (bossHp <= 0 || matchMemory.stage === 'victory') {
-      handleBossDefeat();
+    if (evalRes.isHangup || player.hp <= 0) {
+      handlePlayerKnockout(evalRes);
       return;
     }
 
-    if (player.hp <= 0) {
-      handlePlayerKnockout();
+    if (bossHp <= 0 || matchMemory.stage === 'victory') {
+      handleBossDefeat();
       return;
     }
 
@@ -1379,14 +1737,99 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     savePlayer();
   }
 
-  function handlePlayerKnockout() {
-    playSynth('hit');
-    appendLog(`💀 <strong>KNOCKED OUT!</strong> Contractor rejection overwhelmed your armor. Luke stepped out to recalibrate. Restoring HP to 100% to try again...`, 'system');
-    player.hp = player.maxHp;
-    player.streak = 0;
-    updateHUD();
+  function handlePlayerKnockout(evalRes) {
+    playSynth('hangup');
+
+    const input = document.getElementById('playerCustomInput');
+    const sendBtn = document.getElementById('sendBtn');
+    if (input) {
+      input.disabled = true;
+      input.placeholder = '📵 CALL DISCONNECTED. Click Redial to try again...';
+    }
+    if (sendBtn) sendBtn.disabled = true;
+
+    const reply = (evalRes && evalRes.contractorReply)
+      ? evalRes.contractorReply
+      : (currentBoss.dialogue && currentBoss.dialogue.defeat
+          ? currentBoss.dialogue.defeat
+          : `Lose my number and stop calling my business! *[CLICK]*`);
+
+    appendLog(`<strong>${currentBoss.name}:</strong> "${reply}"`, 'boss');
+    appendLog(`📵 <strong>CALL TERMINATED!</strong> ${currentBoss.name} hung up on you.`, 'system');
+
+    if (voiceEnabled) {
+      speakContractor(reply, currentBoss.key);
+    }
+
+    // Populate Defeat Modal
+    const modal = document.getElementById('defeatModal');
+    const title = document.getElementById('defeatTitle');
+    const bossBark = document.getElementById('defeatBossBark');
+    const mistakeDesc = document.getElementById('defeatMistakeDesc');
+    const remedyDesc = document.getElementById('defeatRemedyDesc');
+
+    if (title) {
+      title.textContent = (evalRes && evalRes.hangupReason)
+        ? `LOST CALL: ${evalRes.hangupReason.toUpperCase()}`
+        : `${currentBoss.name.toUpperCase()} HUNG UP!`;
+    }
+    if (bossBark) {
+      bossBark.textContent = `"${reply}"`;
+    }
+    if (mistakeDesc) {
+      mistakeDesc.textContent = (evalRes && evalRes.defeatMistake)
+        ? evalRes.defeatMistake
+        : 'Contractor objection counter-damage broke through your armor.';
+    }
+    if (remedyDesc) {
+      remedyDesc.textContent = (evalRes && evalRes.defeatRemedy)
+        ? evalRes.defeatRemedy
+        : 'Next time, lead with the 20-second permission opener, agree with his skepticism first, and quote the $397 flat rate with zero long-term contracts.';
+    }
+
+    if (modal) modal.classList.add('open');
+
     savePlayer();
   }
+
+  window.redialAfterDefeat = function() {
+    const modal = document.getElementById('defeatModal');
+    if (modal) modal.classList.remove('open');
+
+    // Restore player HP and reset fight state
+    player.hp = player.maxHp;
+    player.streak = 0;
+    bossHp = currentBoss.maxHp;
+    resetMatchMemory();
+
+    // Re-enable text input and send button
+    const input = document.getElementById('playerCustomInput');
+    const sendBtn = document.getElementById('sendBtn');
+    if (input) {
+      input.disabled = false;
+      input.placeholder = `Speak or type your pitch to ${currentBoss.name}...`;
+      input.value = '';
+    }
+    if (sendBtn) sendBtn.disabled = false;
+
+    // Clear log and re-dial
+    const terminal = document.getElementById('combatLog');
+    if (terminal) terminal.innerHTML = '';
+
+    appendLog(`📞 <strong>REDIALING:</strong> Connecting to ${currentBoss.name} (${currentBoss.company}) in ${currentBoss.location}...`, 'system');
+
+    setTimeout(() => {
+      const opener = currentBoss.dialogue.stage1 || currentBoss.dialogue.opener;
+      appendLog(`<strong>${currentBoss.name}:</strong> "${opener}"`, 'boss');
+      if (voiceEnabled) {
+        speakContractor(opener, currentBoss.key);
+      }
+      if (input) input.focus();
+    }, 450);
+
+    updateHUD();
+    savePlayer();
+  };
 
   function checkLevelUp() {
     if (player.xp >= player.nextLvlXp && player.lvl < 10) {
