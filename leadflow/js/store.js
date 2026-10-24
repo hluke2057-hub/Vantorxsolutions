@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    VANTORX LEADFLOW — store.js (FULL COMMERCIAL CRM ENGINE)
    Hybrid Cloud & Local Persistent Engine.
    - Live Supabase cloud write-through when logged in.
@@ -240,7 +240,24 @@ let state = {
       read: false
     }
   ],
-  settings: null,
+  settings: {
+    business: {
+      name: 'Florida Premier Trades & Roofing',
+      website: 'https://www.vantorxsolutions.com',
+      phone: '(561) 813-8602',
+      email: 'dispatch@vantorxsolutions.com',
+      timeZone: 'America/New_York'
+    },
+    ownerName: 'Luke Hamilton (Closer)',
+    team: [
+      { name: 'Luke Hamilton', role: 'Closer / Dispatch Admin', initials: 'LH' },
+      { name: 'Ava Voice AI', role: '24/7 Phone Receptionist', initials: 'AV' }
+    ],
+    leadSettings: { defaultOwner: 'Luke Hamilton', defaultStatus: 'New', quietHours: { enabled: false, from: '21:00', to: '08:00' } },
+    pipeline: { stages: ['New', 'Contacted', 'Responded', 'Booked', 'Lost'] },
+    notifications: { newLead: true, reply: true, booking: true, followupDue: true },
+    branding: { accent: '#f59e0b', displayName: 'VantorX LeadFlow CRM' }
+  },
   selectedLeadIds: [],
   search: ''
 };

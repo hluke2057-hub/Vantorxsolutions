@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    VANTORX LEADFLOW — pages/pipeline.js
    Commercial Opportunity Kanban & Follow-Up Revenue Board.
    Includes Live Dollar Totals, Ava Voice AI Intake, and Drag & Drop.
@@ -14,7 +14,7 @@ import { openFollowUpModal, openNoteModal } from './profile.js';
    ============================================================ */
 export function renderPipeline(root) {
   const s = getState();
-  const stages = s.settings.pipeline.stages;
+  const stages = (s.settings && s.settings.pipeline && s.settings.pipeline.stages) || STATUSES;
   const view = { compact: false, search: '', sort: 'score' };
 
   // Calculate overall pipeline value

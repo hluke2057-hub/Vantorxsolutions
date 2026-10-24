@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -931,7 +931,24 @@ let state = {
       read: false
     }
   ],
-  settings: null,
+  settings: {
+    business: {
+      name: 'Florida Premier Trades & Roofing',
+      website: 'https://www.vantorxsolutions.com',
+      phone: '(561) 813-8602',
+      email: 'dispatch@vantorxsolutions.com',
+      timeZone: 'America/New_York'
+    },
+    ownerName: 'Luke Hamilton (Closer)',
+    team: [
+      { name: 'Luke Hamilton', role: 'Closer / Dispatch Admin', initials: 'LH' },
+      { name: 'Ava Voice AI', role: '24/7 Phone Receptionist', initials: 'AV' }
+    ],
+    leadSettings: { defaultOwner: 'Luke Hamilton', defaultStatus: 'New', quietHours: { enabled: false, from: '21:00', to: '08:00' } },
+    pipeline: { stages: ['New', 'Contacted', 'Responded', 'Booked', 'Lost'] },
+    notifications: { newLead: true, reply: true, booking: true, followupDue: true },
+    branding: { accent: '#f59e0b', displayName: 'VantorX LeadFlow CRM' }
+  },
   selectedLeadIds: [],
   search: ''
 };
@@ -2726,7 +2743,7 @@ async function openBookingModal(leadId, onDone) {
    ============================================================ */
 function renderPipeline(root) {
   const s = getState();
-  const stages = s.settings.pipeline.stages;
+  const stages = (s.settings && s.settings.pipeline && s.settings.pipeline.stages) || STATUSES;
   const view = { compact: false, search: '', sort: 'score' };
 
   // Calculate overall pipeline value
