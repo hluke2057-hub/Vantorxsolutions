@@ -1,4 +1,4 @@
-﻿# scripts/test_simulation.ps1
+# scripts/test_simulation.ps1
 $ErrorActionPreference = "Stop"
 
 $htmlSource = Join-Path $PSScriptRoot "..\website\cold-call-quest\index.html"
@@ -104,6 +104,40 @@ $testScript = @'
     executeTakeABreather();
     assert("Take A Breather recovers +30 HP", player.hp === 80);
     assert("Take A Breather sets 2-turn cooldown", player.breatherCooldown === 2);
+
+    // TEST 9: Boss Execute Threshold & Finisher Overkill
+    selectBoss(0);
+    bossHp = 30; // 30% HP <= 35% threshold
+    updateHUD();
+    const bossCardEl = document.querySelector('.active-boss-hud');
+    assert("Execute threshold class applied to boss card", bossCardEl && bossCardEl.classList.contains('execute-threshold'));
+
+    inputEl.value = "Let's do a 10-minute walkthrough tomorrow at 4:30 PM.";
+    const evalResFinisher = evaluateTurn(inputEl.value);
+    assert("Finisher triggers overkill bonus (+50 DMG)", evalResFinisher.damage >= 50 && evalResFinisher.feedback.indexOf('EXECUTE') !== -1);
+
+    // TEST 10: Mystery Loot Chest Modal & Relic Rewards
+    handleBossDefeat();
+    const lootModal = document.getElementById('lootModal');
+    assert("Boss defeat opens mystery loot modal", lootModal && lootModal.classList.contains('open'));
+
+    crackLootChest(true);
+    // After cracking, pending rewards apply
+    assert("Player has earned gold from loot", player.gold > 0);
+    assert("Player has unlocked at least 1 contractor relic", player.unlockedRelics && player.unlockedRelics.length > 0);
+
+    // TEST 11: Armory Relics Grid Rendering
+    renderArmory();
+    const relicsGrid = document.getElementById('relicsGrid');
+    assert("Armory relics grid rendered 6 trade relics", relicsGrid && relicsGrid.children.length === 6);
+    assert("Unlocked relic shows active status", relicsGrid.innerHTML.indexOf('Permanent Passive Active') !== -1);
+
+    // TEST 12: Fire Streak & Multiplier in Top HUD
+    player.streak = 4;
+    updateHUD();
+    const streakHeaderEl = document.getElementById('streakHeader');
+    assert("Streak header has streak-on-fire class", streakHeaderEl && streakHeaderEl.classList.contains('streak-on-fire'));
+    assert("Streak header displays loot multiplier", streakHeaderEl && streakHeaderEl.textContent.indexOf('Loot') !== -1);
 
   } catch(e) {
     assert("Execution Error: " + e.message, false);
