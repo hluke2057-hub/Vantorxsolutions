@@ -44,7 +44,9 @@ Write-Host "   VANTORX SOLUTIONS -- 1-CLICK PHYSICAL OUTBOUND DISPATCHER        
 Write-Host "==============================================================================" -ForegroundColor Cyan
 Write-Host ("Sender:         Luke <" + $senderEmail + ">") -ForegroundColor White
 Write-Host ("Demo Line:      " + $demoPhone) -ForegroundColor White
-Write-Host ("Mode:           " + $(if ($DryRun) { "DRY RUN (Preview Only)" } else { "LIVE RESEND DISPATCH" })) -ForegroundColor $(if ($DryRun) { "Yellow" } else { "Green" })
+$modeStr = if ($DryRun) { "DRY RUN (Preview Only)" } else { "LIVE RESEND DISPATCH" }
+$modeColor = if ($DryRun) { "Yellow" } else { "Green" }
+Write-Host ("Mode:           " + $modeStr) -ForegroundColor $modeColor
 Write-Host ("Batch Size:     " + $BatchSize) -ForegroundColor White
 Write-Host ""
 
@@ -54,7 +56,7 @@ if (-not (Test-Path $queueFile)) {
 }
 
 $queue = Get-Content $queueFile -Raw | ConvertFrom-Json
-$pending = @($queue | Where-Object { $_.status -eq 'pending' })
+$pending = @($queue | Where-Object { $_.status -eq 'pending' } | Sort-Object -Property touch -Descending)
 
 Write-Host ("Total Queue:    " + $queue.Count + " verified contractors") -ForegroundColor Gray
 Write-Host ("Pending Ready:  " + $pending.Count + " uncontacted contractors") -ForegroundColor Yellow
@@ -83,7 +85,12 @@ function Get-EmailPayload {
     $service = if ($target.service) { $target.service } else { "AEO Engine & 24/7 Voice AI" }
 
     if ($touch -eq 2) {
-        $subject = "Re: " + (if ($target.subject) { $target.subject } else { "Quick question for " + $target.owner + " regarding " + $target.company })
+        $baseSubject = if ($target.subject) { $target.subject } else { "Quick question for " + $target.owner + " regarding " + $target.company }
+        if (-not ($baseSubject -match '^Re:\s*')) {
+            $subject = "Re: " + $baseSubject
+        } else {
+            $subject = $baseSubject
+        }
         $body = @"
 Hi $($target.owner),
 

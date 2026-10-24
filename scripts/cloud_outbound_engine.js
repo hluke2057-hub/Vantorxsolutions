@@ -219,16 +219,38 @@ Website: ${WEBSITE_URL}`
  * Pulls from master verified dataset and advances non-responders into multi-touch sequences.
  */
 function autoReplenishQueue(queue) {
-  const pending = queue.filter(t => t.status === "pending");
-  if (pending.length >= 15) {
-    return { added: 0, advanced: 0 };
-  }
-
   let added = 0;
   let advanced = 0;
+  const now = Date.now();
+  const twoDaysMs = 48 * 60 * 60 * 1000;
+  const threeDaysMs = 72 * 60 * 60 * 1000;
 
-  // 1. Ingest unqueued leads from normalized_lead_targets.json
-  if (fs.existsSync(TARGETS_FILE)) {
+  // 1. Multi-Touch Sequence Escalation (48-Hour & 72-Hour Rules) - ALWAYS EVALUATES EVERY CYCLE
+  for (const item of queue) {
+    if (item.status === "sent" && item.sentAt) {
+      const sentTime = new Date(item.sentAt).getTime();
+      const ageMs = now - sentTime;
+
+      // 48-Hour Rule: Elevate Touch 1 to Touch 2 (Re: Bump & Phone Demo)
+      if ((item.touch || 1) === 1 && ageMs >= twoDaysMs) {
+        item.status = "pending";
+        item.touch = 2;
+        item.resendMessageId = null;
+        advanced++;
+      }
+      // 72-Hour Rule: Elevate Touch 2 to Touch 3 (Final Note & Case Study)
+      else if (item.touch === 2 && ageMs >= threeDaysMs) {
+        item.status = "pending";
+        item.touch = 3;
+        item.resendMessageId = null;
+        advanced++;
+      }
+    }
+  }
+
+  // 2. Ingest unqueued leads from master dataset only if pending cold leads are low (< 15)
+  const pending = queue.filter(t => t.status === "pending" && (t.touch || 1) === 1);
+  if (pending.length < 15 && fs.existsSync(TARGETS_FILE)) {
     const masterTargets = readJsonSafe(TARGETS_FILE);
     const queuedIds = new Set(queue.map(q => q.id));
 
@@ -260,31 +282,6 @@ function autoReplenishQueue(queue) {
         if (queue.filter(t => t.status === "pending").length >= 25) break;
       }
     }
-  }
-
-  // 2. Multi-Touch Sequence Escalation (Touch 2 & Touch 3)
-  const now = Date.now();
-  const twoDaysMs = 48 * 60 * 60 * 1000;
-  const threeDaysMs = 72 * 60 * 60 * 1000;
-
-  for (const item of queue) {
-    if (item.status === "sent" && item.sentAt) {
-      const sentTime = new Date(item.sentAt).getTime();
-      const ageMs = now - sentTime;
-
-      if ((item.touch || 1) === 1 && ageMs >= twoDaysMs) {
-        item.status = "pending";
-        item.touch = 2;
-        item.resendMessageId = null;
-        advanced++;
-      } else if (item.touch === 2 && ageMs >= threeDaysMs) {
-        item.status = "pending";
-        item.touch = 3;
-        item.resendMessageId = null;
-        advanced++;
-      }
-    }
-    if (queue.filter(t => t.status === "pending").length >= 25) break;
   }
 
   // 3. Fallback: Recycle oldest sent leads (> 14 days old) to guarantee queue is never dry
@@ -356,6 +353,16 @@ async function runAutonomousEngine() {
   }
 
   const pendingTargets = queue.filter(t => t.status === "pending");
+
+  // Multi-Touch Priority: 48-Hour & 72-Hour follow-ups (Touch 2 & 3) dispatch before Touch 1 cold leads
+  pendingTargets.sort((a, b) => {
+    const touchA = a.touch || 1;
+    const touchB = b.touch || 1;
+    if (touchB !== touchA) {
+      return touchB - touchA;
+    }
+    return 0;
+  });
 
   console.log(`Verified Queue:     ${queue.length} Total Verified Contractors`);
   console.log(`Pending Uncontacted:${pendingTargets.length} Ready for Dispatch\n`);
