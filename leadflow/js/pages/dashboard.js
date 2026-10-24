@@ -1,11 +1,13 @@
-/* ============================================================
-   VANTORX LEADFLOW — pages/dashboard.js
+﻿/* ============================================================
+   VANTORX LEADFLOW — pages/dashboard.js (COMMERCIAL CRM ENGINE)
+   Executive Dashboard: Pipeline Revenue Metrics, Closed Revenue,
+   Ava AI Voice Call Intake, Performance Charts, and Dispatch Queue.
    ============================================================ */
 
-import { getState, getLead } from '../store.js';
+import { getState, getLead, simulateAvaCall } from '../store.js';
 import {
   STATUSES, STATUS_COLORS, fmtNum, fmtPct, relTime, fmtTime, isOverdue,
-  countUp, escapeHTML as esc, daysLabel
+  countUp, escapeHTML as esc, daysLabel, fmtMoney
 } from '../utils.js';
 import { lineChart, barChart } from '../components.js';
 
@@ -19,6 +21,11 @@ export function renderDashboard(root) {
   const rate = total ? respondedCount / total : 0;
   const convRate = total ? conversion / total : 0;
 
+  // Commercial Revenue Metrics
+  const activePipelineValue = leads.filter(l => l.status !== 'Lost').reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
+  const closedRevenue = leads.filter(l => l.status === 'Booked').reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
+  const avaCallsCount = leads.filter(l => l.source === 'Ava 24/7 Voice AI' || l.callRecording).length;
+
   const dueTasks = s.tasks.filter(t => !t.completed);
   const overdue = dueTasks.filter(t => isOverdue(t.dueAt));
   const todayTasks = dueTasks.filter(t => !isOverdue(t.dueAt) && isTodayStr(t.dueAt));
@@ -31,28 +38,39 @@ export function renderDashboard(root) {
   root.innerHTML = `
     <div class="page-header">
       <div>
-        <div class="page-title">Here's what's happening with your leads.</div>
-        <div class="page-subtitle">${esc(s.settings.business.name)} · ${esc(new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }))}</div>
+        <div class="page-title">Executive Command Center</div>
+        <div class="page-subtitle">${esc(s.settings?.business?.name || 'VantorX Commercial Workspace')} · ${esc(new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }))}</div>
       </div>
       <div class="page-header-actions">
-        <span class="badge badge-connected">LIVE PLATFORM</span>
-        <button class="btn btn-gold" data-action="quick-add">+ Quick Add Lead</button>
+        <button class="btn btn-gold btn-sm" id="dashTestAvaBtn" style="font-weight:700">⚡ Test Ava Call Intake</button>
+        <button class="btn btn-ghost btn-sm" data-action="quick-add">+ Quick Add Lead</button>
       </div>
     </div>
 
+    <!-- METRICS GRID -->
     <div class="metrics-grid">
-      ${metricCard('Total Leads', total, '', 'fa-users')}
+      <div class="card metric-card card-hover" style="border-left:3px solid var(--gold)">
+        <div class="metric-label">Active Pipeline Value</div>
+        <div class="metric-value" style="color:var(--gold-bright);font-weight:800;font-size:1.65rem">${fmtMoney(activePipelineValue)}</div>
+      </div>
+      <div class="card metric-card card-hover" style="border-left:3px solid #4ade80">
+        <div class="metric-label">Closed / Won Revenue</div>
+        <div class="metric-value" style="color:#4ade80;font-weight:800;font-size:1.65rem">${fmtMoney(closedRevenue)}</div>
+      </div>
+      ${metricCard('Total Leads', total)}
       ${metricCard('New Leads', count('New'))}
-      ${metricCard('Contacted', count('Contacted'))}
-      ${metricCard('Responded', respondedCount)}
-      ${metricCard('Booked', conversion)}
-      ${metricCard('Conversion Rate', convRate, 'pct')}
+      ${metricCard('Booked Jobs', conversion)}
+      <div class="card metric-card card-hover" style="border-left:3px solid #60a5fa">
+        <div class="metric-label">Ava AI Calls Handled</div>
+        <div class="metric-value" style="color:#60a5fa;font-weight:800;font-size:1.65rem">${avaCallsCount}</div>
+      </div>
     </div>
 
     <div class="dash-grid">
+      <!-- PERFORMANCE CHART -->
       <div class="card">
         <div class="panel-head">
-          <div class="panel-title">Performance</div>
+          <div class="panel-title">Inbound Lead Velocity</div>
           <div style="display:flex;gap:8px;align-items:center">
             <div class="chart-toggle" id="perfMetric">
               <button data-metric="new" class="active">New leads</button>
@@ -70,13 +88,19 @@ export function renderDashboard(root) {
         <div class="panel-body"><div id="perfChart" class="chart-canvas"></div></div>
       </div>
 
+      <!-- PIPELINE SUMMARY -->
       <div class="card">
-        <div class="panel-head"><div class="panel-title">Pipeline Summary</div></div>
+        <div class="panel-head"><div class="panel-title">Pipeline Value Summary</div></div>
         <div class="panel-body">
           ${STATUSES.map(st => {
-            const n = count(st);
+            const stLeads = leads.filter(l => l.status === st);
+            const n = stLeads.length;
+            const stVal = stLeads.reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
             return `<div class="psum-row">
-              <div class="psum-label">${st}</div>
+              <div class="psum-label" style="display:flex;align-items:center;gap:6px">
+                <span>${st}</span>
+                <span style="font-size:0.75rem;color:var(--gold-bright);font-weight:700">(${fmtMoney(stVal)})</span>
+              </div>
               <div class="psum-bar-track"><div class="psum-bar" style="width:${total ? (n / total) * 100 : 0}%;background:${STATUS_COLORS[st]}"></div></div>
               <div class="psum-count">${n}</div>
             </div>`;
@@ -85,7 +109,7 @@ export function renderDashboard(root) {
             <div class="stat-row"><span>Follow-ups due</span><span class="val">${dueTasks.length}</span></div>
             <div class="stat-row"><span>Messages sent</span><span class="val">${sentCount}</span></div>
             <div class="stat-row"><span>Response rate</span><span class="val">${fmtPct(rate)}</span></div>
-            <div class="stat-row"><span>Appointments booked</span><span class="val">${s.appointments.filter(a => a.status === 'Confirmed' || a.status === 'Requested').length}</span></div>
+            <div class="stat-row"><span>Walkthroughs booked</span><span class="val">${s.appointments.filter(a => a.status === 'Confirmed' || a.status === 'Requested').length}</span></div>
             <div class="stat-row"><span>Leads this week</span><span class="val">${weekLeads}</span></div>
             <div class="stat-row"><span>Conversions this month</span><span class="val">${monthConversions}</span></div>
           </div>
@@ -94,9 +118,10 @@ export function renderDashboard(root) {
     </div>
 
     <div class="dash-grid">
+      <!-- LEADS THAT NEED ATTENTION -->
       <div class="card">
         <div class="panel-head">
-          <div class="panel-title">Leads that need attention</div>
+          <div class="panel-title">Follow-Up & Dispatch Queue</div>
           <button class="btn btn-ghost btn-sm" data-nav="queue">Open Queue →</button>
         </div>
         <div class="panel-body" id="dashFollowups">
@@ -104,21 +129,33 @@ export function renderDashboard(root) {
         </div>
       </div>
 
-      <div class="card">        <div class="panel-head"><div class="panel-title">Newest leads <span class="badge badge-hot" style="margin-left:6px">awaiting contact</span></div></div>
+      <!-- HOT OPPORTUNITIES -->
+      <div class="card">
+        <div class="panel-head">
+          <div class="panel-title">Recent High-Value Opportunities</div>
+          <button class="btn btn-ghost btn-sm" data-nav="leads">All Leads →</button>
+        </div>
         <div class="panel-body">
           ${hotLeadRows(leads, s)}
         </div>
       </div>
     </div>
 
+    <!-- RECENT ACTIVITY -->
     <div class="card">
       <div class="panel-head">
-        <div class="panel-title">Recent Activity</div>
+        <div class="panel-title">Recent CRM Activity & Dispatch Feed</div>
         <button class="btn btn-ghost btn-sm" data-nav="activity">View All →</button>
       </div>
       <div class="panel-body" id="dashActivity">${activityRows(s.activities.slice(0, 8), s)}</div>
     </div>
   `;
+
+  /* ---- wiring ---- */
+  root.querySelector('#dashTestAvaBtn')?.addEventListener('click', () => {
+    simulateAvaCall();
+    renderDashboard(root);
+  });
 
   /* ---- animated count-ups ---- */
   root.querySelectorAll('.metric-value[data-count]').forEach(el => {
@@ -138,22 +175,24 @@ export function renderDashboard(root) {
       const next = new Date(d); next.setDate(next.getDate() + 1);
       const inDay = (iso) => { const t = new Date(iso); return t >= d && t < next; };
       pts.new.push({ x: d, y: leads.filter(l => inDay(l.createdAt)).length });
-      pts.replies.push({ x: d, y: s.activities.filter(a => /reply/i.test(a.message || '') && inDay(a.createdAt)).length });
+      pts.replies.push({ x: d, y: leads.filter(l => inDay(l.lastContactAt) && ['Responded', 'Booked'].includes(l.status)).length });
       pts.bookings.push({ x: d, y: s.appointments.filter(a => inDay(a.startTime)).length });
-      pts.conversions.push({ x: d, y: s.leads.filter(l => l.status === 'Booked' && inDay(l.updatedAt)).length });
+      pts.conversions.push({ x: d, y: leads.filter(l => inDay(l.updatedAt) && l.status === 'Booked').length });
     }
     const color = { new: '#60a5fa', replies: '#a78bfa', bookings: '#4ade80', conversions: '#f0d060' }[chartState.metric];
-    document.getElementById('perfChart').innerHTML =
-      lineChart([{ color, points: pts[chartState.metric], fill: true }], { labels });
+    const chartEl = document.getElementById('perfChart');
+    if (chartEl) {
+      chartEl.innerHTML = lineChart([{ color, points: pts[chartState.metric], fill: true }], { labels });
+    }
   }
   drawChart();
 
-  root.querySelector('#perfMetric').addEventListener('click', (e) => {
+  root.querySelector('#perfMetric')?.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     root.querySelectorAll('#perfMetric button').forEach(x => x.classList.remove('active'));
     b.classList.add('active'); chartState.metric = b.dataset.metric; drawChart();
   });
-  root.querySelector('#perfRange').addEventListener('click', (e) => {
+  root.querySelector('#perfRange')?.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     root.querySelectorAll('#perfRange button').forEach(x => x.classList.remove('active'));
     b.classList.add('active'); chartState.range = Number(b.dataset.range); drawChart();
@@ -170,7 +209,7 @@ function metricCard(label, value, type = '', _icon = '') {
 
 function followUpRows(tasks, s) {
   if (!tasks.length) {
-    return `<div style="text-align:center;color:var(--text-dim);padding:24px 0">No follow-ups due. You're all caught up. 🎉</div>`;
+    return `<div style="text-align:center;color:var(--text-dim);padding:24px 0">No follow-ups due. All dispatch schedules are caught up. 🎉</div>`;
   }
   return tasks.map(t => {
     const lead = getLead(t.leadId);
@@ -178,7 +217,7 @@ function followUpRows(tasks, s) {
     return `<div class="fu-row">
       <div class="fu-main">
         <div class="fu-name" data-open-lead="${t.leadId}">${esc(lead ? lead.firstName + ' ' + lead.lastName : 'Unknown')}</div>
-        <div class="fu-meta">${esc(t.type)} · ${esc(t.assignedOwner)} · <span style="color:${overdueTask ? 'var(--red)' : 'inherit'}">${overdueTask ? 'Overdue' : 'Due'} ${relTime(t.dueAt)}</span></div>
+        <div class="fu-meta">${esc(t.type || 'Task')} · ${esc(t.assignedOwner || 'Staff')} · <span style="color:${overdueTask ? 'var(--red)' : 'inherit'}">${overdueTask ? 'Overdue' : 'Due'} ${relTime(t.dueAt)}</span></div>
       </div>
       <button class="btn btn-ghost btn-sm" data-complete-task="${t.id}">✓</button>
       <button class="btn btn-gold btn-sm" data-open-lead="${t.leadId}">Open</button>
@@ -187,19 +226,28 @@ function followUpRows(tasks, s) {
 }
 
 function hotLeadRows(leads) {
-  /* no platform lead scoring — newest untouched leads are the honest "hot" list */
-  const hot = [...leads].filter(l => l.status !== 'Lost' && l.status !== 'Booked')
+  const hot = [...leads].filter(l => l.status !== 'Lost')
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
-  if (!hot.length) return '<div style="color:var(--text-dim);padding:20px 0">No hot leads right now.</div>';
-  return hot.map(l => `
-    <div class="hot-row">
-      <span class="badge badge-not-connected">NEW</span>
-      <div class="fu-main">
-        <div class="fu-name" data-open-lead="${l.id}">${esc(l.firstName)} ${esc(l.lastName)}</div>
-        <div class="fu-meta">${esc(l.source)} · created ${relTime(l.createdAt)}</div>
+  if (!hot.length) return '<div style="color:var(--text-dim);padding:20px 0">No active leads right now.</div>';
+  return hot.map(l => {
+    const isAva = l.source === 'Ava 24/7 Voice AI' || l.callRecording;
+    return `
+    <div class="hot-row" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border-soft)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="badge ${l.status === 'New' ? 'badge-new' : 'badge-hot'}" style="font-size:11px">${l.status}</span>
+        <div>
+          <div class="fu-name" data-open-lead="${l.id}" style="cursor:pointer;font-weight:600">${esc(l.firstName)} ${esc(l.lastName)}</div>
+          <div class="fu-meta" style="font-size:0.75rem;color:var(--text-dim)">
+            ${esc(l.serviceInterest || l.source)} ${l.estimatedValue ? `· <span style="color:var(--gold-bright);font-weight:700">${fmtMoney(l.estimatedValue)}</span>` : ''}
+          </div>
+        </div>
       </div>
-      <button class="btn btn-ghost btn-sm" data-open-lead="${l.id}">Open</button>
-    </div>`).join('');
+      <div style="display:flex;gap:6px;align-items:center">
+        ${isAva ? '<span class="badge" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.35);color:#60a5fa;font-size:10.5px">📞 Ava Call</span>' : ''}
+        <button class="btn btn-ghost btn-sm" data-open-lead="${l.id}">Open</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 export function activityRows(activities, s, { compact = true } = {}) {
@@ -227,18 +275,18 @@ export function activityRows(activities, s, { compact = true } = {}) {
 
 export function describeActivity(a) {
   switch (a.type) {
-    case 'lead_created': return 'Lead created';
-    case 'lead_updated': return 'Lead updated';
-    case 'status_changed': return a.message ? `Status: ${esc(a.message)}` : 'Status changed';
-    case 'note_added': return 'Note added' + (a.message ? ` — “${esc(a.message)}”` : '');
-    case 'sms_sent': return a.message ? `SMS sent: “${esc(a.message)}”` : 'SMS sent';
+    case 'lead_created': return 'Opportunity created';
+    case 'lead_updated': return 'Opportunity details updated';
+    case 'status_changed': return a.message ? `Pipeline Stage: ${esc(a.message)}` : 'Stage updated';
+    case 'note_added': return 'Field note added' + (a.message ? ` — “${esc(a.message)}”` : '');
+    case 'sms_sent': return a.message ? `SMS dispatched: “${esc(a.message)}”` : 'SMS dispatched';
     case 'email_sent': return a.message ? `Email sent: “${esc(a.message)}”` : 'Email sent';
-    case 'reply': return a.message ? `Reply received: “${esc(a.message)}”` : 'Reply received';
-    case 'automation_started': return 'Automation started' + (a.message ? ` — ${esc(a.message)}` : '');
-    case 'automation_stopped': return 'Automation stopped';
-    case 'appointment_booked': return a.message ? `Appointment booked — ${esc(a.message)}` : 'Appointment booked';
+    case 'reply': return a.message ? `Inbound reply: “${esc(a.message)}”` : 'Reply received';
+    case 'automation_started': return 'Sequence started' + (a.message ? ` — ${esc(a.message)}` : '');
+    case 'automation_stopped': return 'Sequence stopped';
+    case 'appointment_booked': return a.message ? `Inspection walkthrough scheduled — ${esc(a.message)}` : 'Walkthrough scheduled';
     case 'lead_archived': return 'Lead archived';
-    case 'lead_deleted': return 'Lead deleted';
+    case 'lead_deleted': return 'Lead removed';
     case 'followup_scheduled': return a.message || 'Follow-up scheduled';
     default: return esc(a.type?.replace(/_/g, ' ') || 'Event');
   }

@@ -1,4 +1,4 @@
-﻿# ============================================================
+# ============================================================
 # ⚔️ BUILD COLD CALL QUEST: STANDALONE SALES RPG 4.0
 # Generates website/cold-call-quest/index.html with UTF-8 BOM
 # Features Adaptive Brain 4.0 with Conversational State Machine
@@ -2146,17 +2146,17 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const xpReward = Math.round(baseExp * streakMult * relicXpMult);
     const goldReward = Math.round(baseGold * streakMult * relicGoldMult);
 
-    if (!player.defeatedBosses.includes(currentBoss.key)) {
+    const isFirstWin = !player.defeatedBosses.includes(currentBoss.key);
+    if (isFirstWin) {
       player.defeatedBosses.push(currentBoss.key);
     }
     player.dealsClosedCount = (player.dealsClosedCount || 0) + 1;
 
-    // Roll unearned relic
+    // Roll unearned relic (guaranteed on first boss defeat)
     let rolledRelic = null;
     const unearnedRelics = TRADE_RELICS.filter(r => !(player.unlockedRelics || []).includes(r.id));
     if (unearnedRelics.length > 0) {
-      const isFirstWin = !player.defeatedBosses.includes(currentBoss.key);
-      if (isFirstWin || Math.random() < 0.6) {
+      if (isFirstWin || (player.unlockedRelics || []).length === 0 || Math.random() < 0.8) {
         rolledRelic = unearnedRelics[Math.floor(Math.random() * unearnedRelics.length)];
       }
     }

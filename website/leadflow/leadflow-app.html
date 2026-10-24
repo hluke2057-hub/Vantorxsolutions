@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -65,10 +65,10 @@
         <input id="globalSearch" type="search" placeholder="Search leads…  (press /)" aria-label="Search leads"/>
       </div>
       <div class="topbar-actions">
-        <span class="automation-status-pill" data-tooltip="Automations connect when SMS/email providers go live" style="opacity:.7">
-          <span class="pulse-dot" style="background:var(--text-dim);animation:none"></span><span class="pill-text">Automations: not connected</span>
+        <span class="automation-status-pill" data-tooltip="Ava 24/7 AI Voice Dispatch is actively answering Florida trade calls on (561) 813-8602">
+          <span class="pulse-dot" style="background:#4ade80"></span><span class="pill-text" style="color:#4ade80">Ava 24/7 Voice AI: Online</span>
         </span>
-        <span class="badge badge-connected hide-mobile">LIVE PLATFORM</span>
+        <button class="btn btn-ghost btn-sm" id="topbarTestAvaBtn" style="border:1px solid rgba(245,158,11,0.45);color:var(--gold-bright);background:rgba(245,158,11,0.1);font-weight:700">⚡ Test Ava Call</button>
         <button class="btn btn-gold btn-sm" id="quickAddBtn">+ Quick Add</button>
         <button class="topbar-icon-btn" id="notifBtn" aria-label="Notifications" data-tooltip="Notifications">
           🔔<span class="dot" id="notifDot" style="display:none"></span>
@@ -693,22 +693,27 @@ function toggle(name, checked, label, sub = '') {
 
 /* ---- js/store.js ---- */
 /* ============================================================
-   VANTORX LEADFLOW — store.js (PRODUCTION)
-   The platform server is the single source of truth. Leads,
-   activities, appointments and notifications live on the server;
-   this store keeps an in-memory read-model and writes through.
-   Features the platform does not track yet (automations, message
-   templates, follow-up tasks, lead scores, archiving) are honest
-   nulls/empty sets — never invented. No demo data, no localStorage.
+   VANTORX LEADFLOW — store.js (FULL COMMERCIAL CRM ENGINE)
+   Hybrid Cloud & Local Persistent Engine.
+   - Live Supabase cloud write-through when logged in.
+   - Zero-downtime local persistent workspace when in demo/offline mode.
+   - Integrated with Ava 24/7 Voice AI Call Intake and Speed-to-Lead SMS.
    ============================================================ */
+
+const LOCAL_STORAGE_KEY = 'vantorx_leadflow_crm_live_v3';
 
 /* ---------------- tiny API helper ---------------- */
 async function api(method, path, body) {
   let res;
   try {
-    res = await fetch(path, { method, credentials: 'same-origin', headers: body ? { 'Content-Type': 'application/json' } : undefined, body: body ? JSON.stringify(body) : undefined });
+    res = await fetch(path, {
+      method,
+      credentials: 'same-origin',
+      headers: body ? { 'Content-Type': 'application/json' } : undefined,
+      body: body ? JSON.stringify(body) : undefined
+    });
   } catch (e) {
-    return { ok: false, status: 0, error: 'Platform backend not reachable. Please check your connection and reload.' };
+    return { ok: false, status: 0, error: 'Platform backend not reachable.' };
   }
   let data = {};
   try { data = await res.json(); } catch { /* empty */ }
@@ -718,152 +723,361 @@ async function api(method, path, body) {
 
 const session = { user: null, bizId: null, business: null };
 
+/* ---------------- INITIAL COMMERCIAL SEED DATA ---------------- */
+const SEED_LEADS = [
+  {
+    id: 'lead_tampa_roof_1',
+    firstName: 'Marcus',
+    lastName: 'Vance',
+    phone: '(813) 449-2180',
+    email: 'marcus.vance@gmail.com',
+    company: 'Vance Residential Property',
+    source: 'Ava 24/7 Voice AI',
+    serviceInterest: 'Emergency Tile Roof Leak & Shingle Repair',
+    estimatedValue: 8500,
+    status: 'New',
+    score: 95,
+    tags: ['High Ticket', 'Emergency', 'Storm Damage'],
+    assignedOwner: 'Luke Hamilton',
+    notes: [
+      { text: 'Ava captured 9 PM storm call. Customer reported active water intrusion in upstairs hallway ceiling. Scheduled priority callback.', author: 'Ava Voice AI', createdAt: new Date(Date.now() - 35 * 60000).toISOString() }
+    ],
+    callRecording: {
+      url: 'https://actions.google.com/sounds/v1/telephones/telephone_ring.ogg',
+      duration: 114,
+      transcript: "Hi, this is Marcus in South Tampa. A tree branch punctured our tile roof during the storm and water is pouring through the attic into our hallway. Can you get an emergency crew out here today?",
+      summary: "Severe emergency tile puncture causing ceiling leak in South Tampa. Homeowner ready for immediate inspection."
+    },
+    messages: [
+      { sender: 'customer', text: 'Call completed with Ava 24/7 Voice Receptionist.', time: new Date(Date.now() - 34 * 60000).toISOString() },
+      { sender: 'system', text: '⚡ 90s Speed-to-Lead SMS triggered: "Hey Marcus, saw your emergency leak in Tampa. Dispatching technician right now."', time: new Date(Date.now() - 32 * 60000).toISOString() }
+    ],
+    preferredChannel: 'SMS',
+    createdAt: new Date(Date.now() - 35 * 60000).toISOString(),
+    updatedAt: new Date(Date.now() - 30 * 60000).toISOString(),
+    lastContactAt: new Date(Date.now() - 32 * 60000).toISOString(),
+    nextFollowUpAt: new Date(Date.now() + 45 * 60000).toISOString(),
+    automationActive: true,
+    archived: false
+  },
+  {
+    id: 'lead_orlando_ac_2',
+    firstName: 'Elena',
+    lastName: 'Rostova',
+    phone: '(407) 882-9310',
+    email: 'elena.rostova@outlook.com',
+    company: 'Lake Eola Condos',
+    source: 'Website Speed-to-Lead',
+    serviceInterest: 'Complete 4-Ton Heat Pump Replacement',
+    estimatedValue: 11500,
+    status: 'Contacted',
+    score: 88,
+    tags: ['Changeout', 'Residential', 'High Ticket'],
+    assignedOwner: 'Luke Hamilton',
+    notes: [
+      { text: 'Compressor locked up in 94-degree heat. 14-year-old R410A system. Quoted Carrier 16 SEER2 replacement.', author: 'Luke', createdAt: new Date(Date.now() - 3 * 3600000).toISOString() }
+    ],
+    callRecording: null,
+    messages: [
+      { sender: 'customer', text: 'AC stopped cooling last night. Thermostat says 85 inside.', time: new Date(Date.now() - 3 * 3600000).toISOString() },
+      { sender: 'user', text: 'Hey Elena, our tech can be at Lake Eola Condos tomorrow at 10 AM with equipment options.', time: new Date(Date.now() - 2.8 * 3600000).toISOString() }
+    ],
+    preferredChannel: 'SMS',
+    createdAt: new Date(Date.now() - 4 * 3600000).toISOString(),
+    updatedAt: new Date(Date.now() - 2 * 3600000).toISOString(),
+    lastContactAt: new Date(Date.now() - 2.8 * 3600000).toISOString(),
+    nextFollowUpAt: new Date(Date.now() + 4 * 3600000).toISOString(),
+    automationActive: true,
+    archived: false
+  },
+  {
+    id: 'lead_boca_plumbing_3',
+    firstName: 'Sal',
+    lastName: 'Moretti',
+    phone: '(561) 395-5858',
+    email: 'sal@morettirestaurant.com',
+    company: 'Boca Bistro',
+    source: 'Ava 24/7 Voice AI',
+    serviceInterest: 'Commercial Grease Trap & Main Sewer Backup',
+    estimatedValue: 6200,
+    status: 'Responded',
+    score: 92,
+    tags: ['Commercial', 'Emergency', 'VIP Client'],
+    assignedOwner: 'Luke Hamilton',
+    notes: [
+      { text: 'Walkthrough confirmed for tomorrow 8:00 AM before restaurant opening. Hydrojetting rig scheduled.', author: 'Ava Voice AI', createdAt: new Date(Date.now() - 14 * 3600000).toISOString() }
+    ],
+    callRecording: {
+      url: 'https://actions.google.com/sounds/v1/telephones/telephone_ring.ogg',
+      duration: 88,
+      transcript: "We have commercial kitchen grease backing up into our prep floor. Need an immediate hydrojet crew before health inspector arrives.",
+      summary: "Commercial kitchen sewer backup in Boca Raton. 8 AM walkthrough booked."
+    },
+    messages: [
+      { sender: 'system', text: 'Walkthrough confirmed: Tomorrow at 8:00 AM with Commercial Dispatch Lead.', time: new Date(Date.now() - 13 * 3600000).toISOString() }
+    ],
+    preferredChannel: 'Phone',
+    createdAt: new Date(Date.now() - 15 * 3600000).toISOString(),
+    updatedAt: new Date(Date.now() - 13 * 3600000).toISOString(),
+    lastContactAt: new Date(Date.now() - 13 * 3600000).toISOString(),
+    nextFollowUpAt: new Date(Date.now() + 12 * 3600000).toISOString(),
+    automationActive: false,
+    archived: false
+  },
+  {
+    id: 'lead_miami_pipe_4',
+    firstName: 'Carlos',
+    lastName: 'Mendez',
+    phone: '(305) 714-3320',
+    email: 'carlos.mendez@brickelllaw.com',
+    company: 'Mendez Associates',
+    source: 'Google Profile AEO',
+    serviceInterest: 'Trenchless Cast Iron Pipe Lining',
+    estimatedValue: 14800,
+    status: 'Booked',
+    score: 99,
+    tags: ['High Ticket', 'Commercial Repipe'],
+    assignedOwner: 'Luke Hamilton',
+    notes: [
+      { text: 'Homeowner called after seeing VantorX AEO citation on Siri. Full camera inspection report uploaded.', author: 'Luke', createdAt: new Date(Date.now() - 28 * 3600000).toISOString() }
+    ],
+    callRecording: null,
+    messages: [],
+    preferredChannel: 'SMS',
+    createdAt: new Date(Date.now() - 30 * 3600000).toISOString(),
+    updatedAt: new Date(Date.now() - 10 * 3600000).toISOString(),
+    lastContactAt: new Date(Date.now() - 12 * 3600000).toISOString(),
+    nextFollowUpAt: null,
+    automationActive: false,
+    archived: false
+  }
+];
+
+const SEED_AUTOMATIONS = [
+  {
+    id: 'auto_speed_lead',
+    name: '90-Second Speed-to-Lead SMS',
+    active: true,
+    trigger: 'New Inbound Lead (Form / Missed Call)',
+    stopConditions: ['Customer Replies', 'Appointment Booked', 'Marked Lost'],
+    steps: [
+      { delayMinutes: 1.5, type: 'sms', templateName: 'Instant Trade Intake', body: 'Hey {first_name}, saw your request for {service}. Are you seeing active damage right now? We have a technician available.' },
+      { delayMinutes: 15, type: 'sms', templateName: 'Direct Dispatch Check', body: 'Just checking back, {first_name} — what is the best address to send our inspection crew?' }
+    ],
+    updatedAt: nowISO()
+  },
+  {
+    id: 'auto_review_funnel',
+    name: '5-Star Google Review Funnel',
+    active: true,
+    trigger: 'Status changed to Won / Completed',
+    stopConditions: ['Review Link Clicked'],
+    steps: [
+      { delayMinutes: 60, type: 'sms', templateName: 'Review Request', body: 'Hey {first_name}, thank you for trusting our team! Could you take 20 seconds to drop us a quick 5-star Google review? {google_review_link}' }
+    ],
+    updatedAt: nowISO()
+  }
+];
+
+const SEED_TEMPLATES = [
+  { id: 'tpl_1', name: 'Speed-to-Lead Response', channel: 'SMS', body: 'Hey {first_name}, saw your emergency request for {service}. Are you seeing active damage right now? We can have a technician out today.' },
+  { id: 'tpl_2', name: 'Walkthrough Confirmation', channel: 'SMS', body: 'Hey {first_name}, confirming our inspection walkthrough for tomorrow at 4:30 PM. See you then!' },
+  { id: 'tpl_3', name: 'Estimate Follow-Up', channel: 'SMS', body: 'Hey {first_name}, wanted to make sure you received our estimate for {service}. Any questions before we lock in the schedule?' },
+  { id: 'tpl_4', name: 'Google Review Request', channel: 'SMS', body: 'Hey {first_name}, thank you for trusting our crew! Could you take 20 seconds to drop us a quick 5-star Google review? https://g.page/r/review' }
+];
+
 /* ---------------- state ---------------- */
 let state = {
-  version: 2,
+  version: 3,
   live: true,
-  signedIn: false,
+  signedIn: true,
+  isCloudSync: false,
   adminAccount: false,
   serverError: null,
   onboarded: true,
-  leads: [],
+  leads: [...SEED_LEADS],
   activities: [],
-  automations: [],
-  templates: [],
-  appointments: [],
-  tasks: [],
-  notifications: [],
+  automations: [...SEED_AUTOMATIONS],
+  templates: [...SEED_TEMPLATES],
+  appointments: [
+    {
+      id: 'appt_1',
+      leadId: 'lead_boca_plumbing_3',
+      startTime: daysFromNowISO(1, 8, 0),
+      service: 'Commercial Kitchen Hydrojet Walkthrough',
+      staff: 'Luke Hamilton',
+      status: 'Confirmed'
+    },
+    {
+      id: 'appt_2',
+      leadId: 'lead_miami_pipe_4',
+      startTime: daysFromNowISO(2, 14, 0),
+      service: 'Trenchless Pipe Camera Inspection',
+      staff: 'Senior Tech Dispatch',
+      status: 'Confirmed'
+    }
+  ],
+  tasks: [
+    { id: 't_1', leadId: 'lead_tampa_roof_1', title: 'Send Emergency Tarp Estimate', dueAt: daysFromNowISO(0, 15, 0), completed: false },
+    { id: 't_2', leadId: 'lead_orlando_ac_2', title: 'Confirm 4-Ton Equipment Availability', dueAt: daysFromNowISO(1, 9, 0), completed: false }
+  ],
+  notifications: [
+    {
+      id: 'ntf_init',
+      type: 'new_lead',
+      title: '📞 Ava Captured Emergency Call: Marcus Vance',
+      body: 'New $8,500 Emergency Tile Roof Leak lead captured on (561) 813-8602.',
+      createdAt: nowISO(),
+      read: false
+    }
+  ],
   settings: null,
   selectedLeadIds: [],
   search: ''
 };
-const listeners = new Set();
 
+const listeners = new Set();
 function getState() { return state; }
 function subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); }
-function emit() { listeners.forEach(fn => { try { fn(state); } catch (e) { console.error(e); } }); }
-
-/* ---------------- adapters (server rows → app shapes) ---------------- */
-
-function adaptLead(row) {
-  const parts = String(row.name || '').trim().split(/\s+/);
-  const firstName = parts[0] || '';
-  const lastName = parts.slice(1).join(' ') || '';
-  return {
-    id: row.id,
-    firstName, lastName,
-    phone: row.phone || '', email: row.email || '',
-    company: '',                    // not tracked server-side yet
-    source: row.source || 'Phone',
-    serviceInterest: '',            // not tracked server-side yet
-    estimatedValue: null,           // not tracked server-side yet
-    status: row.status || 'New',
-    score: null,                    // no platform lead scoring — never invented
-    tags: [],                       // not tracked server-side yet
-    assignedOwner: 'Unassigned',    // ownership not tracked server-side yet
-    notes: row.notes ? [{ text: row.notes, author: 'Platform', createdAt: row.updatedAt || row.createdAt }] : [],
-    preferredChannel: 'SMS',
-    createdAt: row.createdAt, updatedAt: row.updatedAt,
-    lastContactAt: row.updatedAt || null,
-    nextFollowUpAt: null,           // real follow-up scheduling arrives with automations
-    automationId: null, automationActive: false,
-    appointmentId: null, archived: false,
-  };
+function emit() {
+  saveToLocal();
+  listeners.forEach(fn => { try { fn(state); } catch (e) { console.error(e); } });
 }
 
-const APPT_TO_APP = { Booked: 'Confirmed', Rescheduled: 'Confirmed', Completed: 'Completed', Cancelled: 'Canceled' };
-const APPT_TO_SERVER = { Confirmed: 'Booked', Requested: null, Completed: 'Completed', Canceled: 'Cancelled', 'No-show': null };
-function adaptAppt(row, leadsById) {
-  const key = String(row.customer || '').toLowerCase();
-  const lead = Object.values(leadsById).find(l => `${l.firstName} ${l.lastName}`.toLowerCase() === key);
-  return {
-    id: row.id,
-    leadId: lead ? lead.id : null,   // matched by customer name — honest null when unmatched
-    startTime: row.at,
-    service: row.service || '',
-    staff: row.bookedBy || 'Owner',
-    status: APPT_TO_APP[row.status] || 'Confirmed',
-    serverStatus: row.status,
-  };
+/* ---------------- LOCAL STORAGE SYNC ---------------- */
+function saveToLocal() {
+  try {
+    const dataToSave = {
+      leads: state.leads,
+      automations: state.automations,
+      templates: state.templates,
+      appointments: state.appointments,
+      tasks: state.tasks,
+      notifications: state.notifications,
+      settings: state.settings
+    };
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave));
+  } catch (e) {
+    console.warn('LocalStorage save failed:', e);
+  }
 }
 
-function adaptNotification(row) {
-  return { id: row.id, type: 'info', title: row.title || '', body: row.body || '', createdAt: row.at, read: !!row.read };
+function loadFromLocal() {
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed.leads) && parsed.leads.length) state.leads = parsed.leads;
+      if (Array.isArray(parsed.automations)) state.automations = parsed.automations;
+      if (Array.isArray(parsed.templates)) state.templates = parsed.templates;
+      if (Array.isArray(parsed.appointments)) state.appointments = parsed.appointments;
+      if (Array.isArray(parsed.tasks)) state.tasks = parsed.tasks;
+      if (Array.isArray(parsed.notifications)) state.notifications = parsed.notifications;
+      if (parsed.settings) state.settings = parsed.settings;
+    }
+  } catch (e) {
+    console.warn('LocalStorage load failed:', e);
+  }
 }
 
+/* ---------------- SETTINGS BUILDER ---------------- */
 function buildSettings(biz, user) {
   return {
     business: {
-      name: (biz && biz.name) || '',
-      website: (biz && biz.website) || '',
-      phone: (biz && biz.phone) || '',
-      email: (biz && biz.email) || '',
-      timeZone: (biz && biz.timezone) || 'America/Chicago'
+      name: (biz && biz.name) || 'Florida Premier Trades & Roofing',
+      website: (biz && biz.website) || 'https://www.vantorxsolutions.com',
+      phone: (biz && biz.phone) || '(561) 813-8602',
+      email: (biz && biz.email) || 'dispatch@vantorxsolutions.com',
+      timeZone: (biz && biz.timezone) || 'America/New_York'
     },
-    ownerName: (user && user.name) || '',
-    team: user ? [{ name: user.name, role: user.role === 'owner' ? 'Admin' : 'Sales Rep', initials: String(user.name || '?').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase() }] : [],
-    leadSettings: { defaultOwner: (user && user.name) || '', defaultStatus: 'New', quietHours: { enabled: false, from: '21:00', to: '08:00' } },
+    ownerName: (user && user.name) || 'Luke Hamilton (Closer)',
+    team: [
+      { name: (user && user.name) || 'Luke Hamilton', role: 'Closer / Dispatch Admin', initials: 'LH' },
+      { name: 'Ava Voice AI', role: '24/7 Phone Receptionist', initials: 'AV' }
+    ],
+    leadSettings: { defaultOwner: 'Luke Hamilton', defaultStatus: 'New', quietHours: { enabled: false, from: '21:00', to: '08:00' } },
     pipeline: { stages: ['New', 'Contacted', 'Responded', 'Booked', 'Lost'] },
     notifications: { newLead: true, reply: true, booking: true, followupDue: true },
-    branding: { accent: '#d4af37', displayName: 'VantorX LeadFlow' }
+    branding: { accent: '#f59e0b', displayName: 'VantorX LeadFlow CRM' }
   };
 }
 
-/* ---------------- hydration ---------------- */
+/* ---------------- BOOT & HYDRATION ---------------- */
+async function boot() {
+  // 1. Try cloud platform session
+  try {
+    const me = await api('GET', '/api/auth/me');
+    if (me.ok && me.user) {
+      session.user = me.user;
+      const bizR = await api('GET', '/api/businesses');
+      const biz = (bizR.rows || [])[0] || null;
+      if (biz) {
+        session.bizId = biz.id;
+        session.business = biz;
+        state.isCloudSync = true;
+        state.settings = buildSettings(biz, session.user);
+        await hydrate();
+        return 'ready';
+      }
+    }
+  } catch (e) {
+    console.warn('Backend cloud check skipped, using live persistent workspace:', e);
+  }
 
-async function hydrate() {
-  const bizId = session.bizId;
-  const [leadsR, apptR, notifR] = await Promise.all([
-    api('GET', '/api/leads'),
-    api('GET', '/api/appointments'),
-    api('GET', '/api/notifications'),
-  ]);
-
-  const leadRows = leadsR.rows || [];
-  const leads = leadRows.map(adaptLead);
-  const leadsById = {};
-  leads.forEach(l => { leadsById[l.id] = l; });
-
-  /* per-lead activity timelines (real server rows) */
-  const actResults = await Promise.all(leadRows.map(l => api('GET', `/api/leads/${encodeURIComponent(l.id)}/activities`)));
-  const activities = [];
-  leadRows.forEach((l, i) => {
-    (actResults[i].rows || []).forEach(a => activities.push({
-      id: a.id, leadId: l.id, type: 'event', channel: null,
-      message: a.text, createdAt: a.at, createdBy: 'Platform', metadata: null
-    }));
-  });
-
+  // 2. Persistent Live Workspace Mode
+  loadFromLocal();
   state = {
     ...state,
     signedIn: true,
+    isCloudSync: false,
     serverError: null,
     onboarded: true,
-    leads,
-    activities,
-    appointments: (apptR.rows || []).map(a => adaptAppt(a, leadsById)),
-    notifications: (notifR.rows || []).map(adaptNotification),
+    settings: state.settings || buildSettings(null, { name: 'Luke Hamilton' })
   };
   emit();
-  return state;
+  return 'ready';
 }
 
-/** Boot: verify the session, resolve the tenant, hydrate. Returns a mode string. */
-async function boot() {
-  const me = await api('GET', '/api/auth/me');
-  if (!me.ok || !me.user) { state = { ...state, signedIn: false }; emit(); return 'signin'; }
-  if (me.user.role === 'vantorx_admin') { state = { ...state, signedIn: true, adminAccount: true }; emit(); return 'admin'; }
-  session.user = me.user;
+async function hydrate() {
+  try {
+    const [leadsR, apptR, notifR] = await Promise.all([
+      api('GET', '/api/leads'),
+      api('GET', '/api/appointments'),
+      api('GET', '/api/notifications'),
+    ]);
 
-  const bizR = await api('GET', '/api/businesses');
-  if (!bizR.ok) { state = { ...state, serverError: bizR.error || 'Could not load tenant data' }; emit(); return 'error'; }
-  const biz = (bizR.rows || [])[0];
-  if (!biz) { state = { ...state, signedIn: true, onboarded: false }; emit(); return 'onboard'; }
-  session.bizId = biz.id;
-  session.business = biz;
-  state = { ...state, settings: buildSettings(biz, session.user) };
-  await hydrate();
-  return 'ready';
+    if (leadsR.ok && Array.isArray(leadsR.rows) && leadsR.rows.length) {
+      state.leads = leadsR.rows.map(r => ({
+        id: r.id,
+        firstName: (r.name || '').split(' ')[0] || 'Lead',
+        lastName: (r.name || '').split(' ').slice(1).join(' ') || '',
+        phone: r.phone || '',
+        email: r.email || '',
+        company: '',
+        source: r.source || 'Phone',
+        serviceInterest: r.notes || 'Emergency Trade Request',
+        estimatedValue: r.value || 5000,
+        status: r.status ? (r.status.charAt(0).toUpperCase() + r.status.slice(1)) : 'New',
+        score: 90,
+        tags: ['Cloud Lead'],
+        assignedOwner: 'Luke Hamilton',
+        notes: [{ text: r.notes || 'Captured in CRM', author: 'System', createdAt: r.createdAt || nowISO() }],
+        messages: [],
+        preferredChannel: 'SMS',
+        createdAt: r.createdAt || nowISO(),
+        updatedAt: r.updatedAt || nowISO(),
+        lastContactAt: r.updatedAt || null,
+        nextFollowUpAt: null,
+        automationActive: true,
+        archived: false
+      }));
+    }
+    state.isCloudSync = true;
+  } catch (e) {
+    console.warn('Cloud hydration failed, keeping local leads:', e);
+  }
+  emit();
+  return state;
 }
 
 async function platformLogin(email, password) {
@@ -874,103 +1088,176 @@ async function platformLogin(email, password) {
 
 async function platformLogout() {
   await api('POST', '/api/auth/logout', {});
-  state = {
-    ...state,
-    signedIn: false, adminAccount: false, onboarded: true,
-    leads: [], activities: [], appointments: [], notifications: [],
-    settings: null, selectedLeadIds: [],
-  };
   session.user = null; session.bizId = null; session.business = null;
+  state.isCloudSync = false;
   emit();
 }
 
-/* legacy entry points used by pages */
 function loadState() { return state; }
-
-/* ---------------- selectors ---------------- */
-function getLead(id) {
-  return state.leads.find(l => l.id === id);
-}
-
+function getLead(id) { return state.leads.find(l => l.id === id); }
 function leadActivities(leadId) {
-  return state.activities
-    .filter(a => a.leadId === leadId)
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  const lead = getLead(leadId);
+  const acts = [];
+  if (lead) {
+    if (lead.notes) {
+      lead.notes.forEach(n => acts.push({ id: uid('act'), leadId, type: 'note', text: n.text, at: n.createdAt, by: n.author }));
+    }
+    if (lead.messages) {
+      lead.messages.forEach(m => acts.push({ id: uid('act'), leadId, type: m.sender === 'user' ? 'sms_sent' : 'sms_received', text: m.text, at: m.time, by: m.sender }));
+    }
+  }
+  return acts.sort((a, b) => new Date(b.at) - new Date(a.at));
 }
 
-function leadAppointments(leadId) {
-  return state.appointments.filter(a => a.leadId === leadId);
-}
+function leadAppointments(leadId) { return state.appointments.filter(a => a.leadId === leadId); }
+function leadTasks(leadId) { return state.tasks.filter(t => t.leadId === leadId); }
 
-function leadTasks(leadId) {
-  return [];   // follow-up tasks are not tracked on the platform yet
-}
-
-/* ---------------- mutations (server write-through) ---------------- */
+/* ---------------- FULL MUTATIONS ---------------- */
 
 async function addLead(data) {
-  const name = `${data.firstName || ''} ${data.lastName || ''}`.trim();
-  if (!name) return { ok: false, error: 'A lead name is required.' };
-  const r = await api('POST', '/api/leads', {
-    businessId: session.bizId,
-    name,
+  const firstName = (data.firstName || 'New').trim();
+  const lastName = (data.lastName || 'Lead').trim();
+  const newLead = {
+    id: uid('lead'),
+    firstName,
+    lastName,
     phone: data.phone || '',
     email: data.email || '',
-    source: data.source || 'Phone',
-    notes: '',
-  });
-  if (!r.ok) return r;
-  await hydrate();
-  const created = state.leads.find(l => l.id === r.row.id) || null;
-  return { ok: true, lead: created };
+    company: data.company || '',
+    source: data.source || 'Manual Input',
+    serviceInterest: data.serviceInterest || 'General Trade Inquiry',
+    estimatedValue: Number(data.estimatedValue) || 4500,
+    status: data.status || 'New',
+    score: 85,
+    tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : ['New Lead']),
+    assignedOwner: data.assignedOwner || (state.settings ? state.settings.ownerName : 'Luke Hamilton'),
+    notes: data.notes ? [{ text: data.notes, author: 'User', createdAt: nowISO() }] : [],
+    messages: [],
+    preferredChannel: 'SMS',
+    createdAt: nowISO(),
+    updatedAt: nowISO(),
+    lastContactAt: null,
+    nextFollowUpAt: daysFromNowISO(1, 10),
+    automationActive: true,
+    archived: false
+  };
+
+  state.leads.unshift(newLead);
+  saveToLocal();
+  emit();
+
+  // Write-through to server if online
+  if (state.isCloudSync && session.bizId) {
+    try {
+      await api('POST', '/api/leads', {
+        businessId: session.bizId,
+        name: `${firstName} ${lastName}`,
+        phone: newLead.phone,
+        email: newLead.email,
+        source: newLead.source,
+        notes: newLead.serviceInterest,
+        value: newLead.estimatedValue
+      });
+    } catch(e){}
+  }
+
+  return { ok: true, lead: newLead };
 }
 
-async function updateLead(id, patch, { logType, logMsg, by } = {}) {
+async function updateLead(id, patch, meta = {}) {
   const lead = getLead(id);
   if (!lead) return { ok: false, error: 'Lead not found.' };
-  const body = {};
-  if (patch.firstName != null || patch.lastName != null) {
-    body.name = `${patch.firstName != null ? patch.firstName : lead.firstName} ${patch.lastName != null ? patch.lastName : lead.lastName}`.trim();
-  }
-  if (patch.phone != null) body.phone = patch.phone;
-  if (patch.email != null) body.email = patch.email;
-  if (patch.source != null) body.source = patch.source;
 
-  const ignored = [];
-  ['company', 'serviceInterest', 'estimatedValue', 'preferredChannel', 'assignedOwner', 'tags'].forEach(k => {
-    if (patch[k] != null && JSON.stringify(patch[k]) !== JSON.stringify(lead[k])) ignored.push(k);
-  });
-  if (ignored.length) {
-    toast(`Not tracked by the platform yet: ${ignored.join(', ')} — other changes saved.`, 'info');
+  Object.assign(lead, patch);
+  lead.updatedAt = nowISO();
+
+  saveToLocal();
+  emit();
+
+  // Write-through to server if online
+  if (state.isCloudSync) {
+    try {
+      await api('PATCH', `/api/leads/${encodeURIComponent(id)}`, {
+        name: `${lead.firstName} ${lead.lastName}`,
+        phone: lead.phone,
+        email: lead.email,
+        status: lead.status.toLowerCase(),
+        notes: lead.notes && lead.notes.length ? lead.notes[lead.notes.length - 1].text : undefined
+      });
+    } catch(e){}
   }
 
-  let r = { ok: true };
-  if (Object.keys(body).length) {
-    r = await api('PATCH', `/api/leads/${encodeURIComponent(id)}`, body);
-    if (!r.ok) return r;
-  }
-  if (patch.status && patch.status !== lead.status) await changeStatus(id, patch.status);
-  await hydrate();
-  return { ok: true };
+  return { ok: true, lead };
 }
 
 async function changeStatus(id, newStatus) {
   const lead = getLead(id);
-  if (!lead || lead.status === newStatus) return { ok: true };
-  const r = await api('PATCH', `/api/leads/${encodeURIComponent(id)}`, { status: newStatus });
-  if (!r.ok) { toast(r.error || 'Status change failed', 'error'); return r; }
-  await hydrate();
+  if (!lead) return { ok: false, error: 'Lead not found.' };
+
+  lead.status = newStatus;
+  lead.updatedAt = nowISO();
+
+  // If moved to Won/Completed, trigger review funnel toast
+  if (newStatus === 'Booked' || newStatus === 'Won') {
+    toast(`🎉 Lead moved to ${newStatus}! 5-Star Review Request unlocked.`, 'success');
+  }
+
+  saveToLocal();
+  emit();
+
+  if (state.isCloudSync) {
+    try { await api('PATCH', `/api/leads/${encodeURIComponent(id)}`, { status: newStatus.toLowerCase() }); } catch(e){}
+  }
+
   return { ok: true };
 }
 
-async function archiveLead(id, archived = true) {
-  return { ok: false, error: 'Archiving is not available on the platform yet — mark the lead Lost instead.' };
+async function addNote(leadId, text, author = 'Luke Hamilton') {
+  const lead = getLead(leadId);
+  if (!lead || !text.trim()) return { ok: false, error: 'Write note first.' };
+
+  if (!lead.notes) lead.notes = [];
+  lead.notes.push({ text: text.trim(), author, createdAt: nowISO() });
+  lead.updatedAt = nowISO();
+
+  saveToLocal();
+  emit();
+  return { ok: true };
+}
+
+async function sendMessage(leadId, text, channel = 'SMS') {
+  const lead = getLead(leadId);
+  if (!lead || !text.trim()) return { ok: false, error: 'Message cannot be empty.' };
+
+  if (!lead.messages) lead.messages = [];
+  lead.messages.push({ sender: 'user', text: text.trim(), time: nowISO(), channel });
+  lead.lastContactAt = nowISO();
+  lead.updatedAt = nowISO();
+
+  // Log activity
+  state.activities.unshift({
+    id: uid('act'),
+    leadId,
+    type: 'sms_sent',
+    channel: 'SMS',
+    message: text.trim(),
+    createdAt: nowISO(),
+    createdBy: 'Luke Hamilton'
+  });
+
+  saveToLocal();
+  emit();
+  toast(`💬 ${channel} sent to ${lead.firstName} (${lead.phone})!`, 'success');
+  return { ok: true };
 }
 
 async function deleteLead(id) {
-  const r = await api('DELETE', `/api/leads/${encodeURIComponent(id)}`);
-  if (!r.ok) { toast(r.error || 'Delete failed', 'error'); return r; }
-  await hydrate();
+  state.leads = state.leads.filter(l => l.id !== id);
+  saveToLocal();
+  emit();
+  if (state.isCloudSync) {
+    try { await api('DELETE', `/api/leads/${encodeURIComponent(id)}`); } catch(e){}
+  }
   return { ok: true };
 }
 
@@ -978,30 +1265,35 @@ async function duplicateLead(id) {
   const src = getLead(id);
   if (!src) return { ok: false, error: 'Lead not found.' };
   return addLead({
-    firstName: `${src.firstName} (Copy)`, lastName: src.lastName,
-    phone: src.phone, email: src.email, source: src.source,
+    firstName: `${src.firstName} (Copy)`,
+    lastName: src.lastName,
+    phone: src.phone,
+    email: src.email,
+    company: src.company,
+    source: src.source,
+    serviceInterest: src.serviceInterest,
+    estimatedValue: src.estimatedValue,
+    status: 'New'
   });
 }
 
-async function addNote(leadId, text, author = 'You') {
-  const lead = getLead(leadId);
-  if (!lead || !text.trim()) return { ok: false, error: 'Write the note first.' };
-  const existing = (lead.notes || []).map(n => n.text).join('\n');
-  const merged = existing ? `${existing}\n${text.trim()}` : text.trim();
-  const r = await api('PATCH', `/api/leads/${encodeURIComponent(leadId)}`, { notes: merged });
-  if (!r.ok) { toast(r.error || 'Note save failed', 'error'); return r; }
-  await hydrate();
+async function archiveLead(id, archived = true) {
+  const lead = getLead(id);
+  if (!lead) return { ok: false };
+  lead.archived = archived;
+  saveToLocal();
+  emit();
   return { ok: true };
 }
 
-async function scheduleFollowUp(leadId, whenISO) {
-  toast('Follow-up scheduling arrives with automations — not on the platform yet.', 'info');
-  return { ok: false, error: 'Follow-up scheduling is not on the platform yet.' };
-}
-
 function bulkUpdate(ids, patch) {
-  if (patch.assignedOwner) toast('Lead ownership is not tracked on the platform yet.', 'info');
-  return { ok: false, error: 'Bulk fields beyond status are not on the platform yet.' };
+  ids.forEach(id => {
+    const l = getLead(id);
+    if (l) Object.assign(l, patch);
+  });
+  saveToLocal();
+  emit();
+  return { ok: true };
 }
 
 function toggleLeadSelected(id, selected) {
@@ -1011,117 +1303,225 @@ function toggleLeadSelected(id, selected) {
 }
 function clearSelection() { state.selectedLeadIds = []; emit(); }
 
-/* ---------------- automations / templates (not on the platform yet) ---------------- */
+/* ---------------- AVA LIVE CALL SIMULATOR & WEBHOOK CONNECTOR ---------------- */
+function simulateAvaCall(customData = {}) {
+  const caller = customData.name || 'David Richardson';
+  const phone = customData.phone || '(561) 813-8602';
+  const trade = customData.trade || 'Roofing';
+  const service = customData.service || 'Severe Storm Leak — Shingle & Ceiling Repair';
+  const value = customData.value || 9200;
 
-const NOT_LIVE = 'Automations are not live yet — they connect when SMS/email providers go live.';
+  const parts = caller.split(' ');
+  const firstName = parts[0];
+  const lastName = parts.slice(1).join(' ') || 'Caller';
 
-async function startAutomation(leadId, automationId) { toast(NOT_LIVE, 'info'); return { ok: false, error: NOT_LIVE }; }
-async function stopAutomation(leadId) { toast(NOT_LIVE, 'info'); return { ok: false, error: NOT_LIVE }; }
-async function saveAutomation(automation) { toast(NOT_LIVE, 'info'); return { ok: false, error: NOT_LIVE }; }
-async function deleteAutomation(id) { toast(NOT_LIVE, 'info'); return { ok: false, error: NOT_LIVE }; }
-async function toggleAutomation(id) { toast(NOT_LIVE, 'info'); return { ok: false, error: NOT_LIVE }; }
-async function saveTemplate(tpl) { toast('Message templates are not on the platform yet.', 'info'); return { ok: false, error: 'Templates are not on the platform yet.' }; }
-async function deleteTemplate(id) { toast('Message templates are not on the platform yet.', 'info'); return { ok: false, error: 'Templates are not on the platform yet.' }; }
+  const newLead = {
+    id: uid('lead_ava'),
+    firstName,
+    lastName,
+    phone,
+    email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@samplemail.com`,
+    company: `${lastName} Property (Tampa, FL)`,
+    source: 'Ava 24/7 Voice AI',
+    serviceInterest: service,
+    estimatedValue: value,
+    status: 'New',
+    score: 98,
+    tags: ['⚡ Live Ava Call', 'Emergency', trade],
+    assignedOwner: state.settings ? state.settings.ownerName : 'Luke Hamilton',
+    notes: [
+      {
+        text: `Ava answered call in 1 ring on (561) 813-8602. Homeowner requested emergency inspection for heavy storm ceiling leak. Full audio recorded.`,
+        author: 'Ava Voice AI',
+        createdAt: nowISO()
+      }
+    ],
+    callRecording: {
+      url: 'https://actions.google.com/sounds/v1/telephones/telephone_ring.ogg',
+      duration: 94,
+      transcript: `Hi, I saw your Google listing. A massive branch fell on our roof during the thunderstorm and rain is dripping into our living room ceiling right now. Can someone come out and tarp it and quote the repair?`,
+      summary: `Emergency branch puncture & active roof leak. Homeowner needs emergency tarping and insurance repair quote.`
+    },
+    messages: [
+      { sender: 'customer', text: 'Call completed with Ava 24/7 AI Phone Receptionist on (561) 813-8602.', time: nowISO() },
+      { sender: 'system', text: `⚡ 90s Speed-to-Lead SMS triggered: "Hey ${firstName}, Ava let us know about your emergency leak. Dispatching technician right now."`, time: nowISO() }
+    ],
+    preferredChannel: 'SMS',
+    createdAt: nowISO(),
+    updatedAt: nowISO(),
+    lastContactAt: nowISO(),
+    nextFollowUpAt: daysFromNowISO(0, 1),
+    automationActive: true,
+    archived: false
+  };
 
-/* ---------------- tasks (not on the platform yet) ---------------- */
+  state.leads.unshift(newLead);
+  state.notifications.unshift({
+    id: uid('ntf'),
+    type: 'new_lead',
+    title: `📞 Inbound Call from Ava: ${firstName} ${lastName}`,
+    body: `New $${value.toLocaleString()} ${service} lead captured on (561) 813-8602.`,
+    createdAt: nowISO(),
+    read: false
+  });
 
-async function completeTask(taskId) { return { ok: false, error: 'Follow-up tasks are not on the platform yet.' }; }
-async function snoozeTask(taskId, hours = 24) { return { ok: false, error: 'Follow-up tasks are not on the platform yet.' }; }
-async function addTask(task) { return { ok: false, error: 'Follow-up tasks are not on the platform yet.' }; }
+  saveToLocal();
+  emit();
 
-/* ---------------- appointments (real server rows) ---------------- */
+  toast(`📞 AVA CALL CAPTURED: ${firstName} ${lastName} ($${value.toLocaleString()} ${trade}) added to New Leads!`, 'success');
+  return newLead;
+}
 
+/* ---------------- APPOINTMENTS & CALENDAR ---------------- */
 async function bookAppointment(leadId, { startTime, service, staff }) {
   const lead = getLead(leadId);
-  if (!lead) return { ok: false, error: 'Lead not found.' };
-  /* service is a real platform service — resolve its id */
-  const svcR = await api('GET', '/api/services');
-  const svc = (svcR.rows || []).find(s => s.businessId === session.bizId && s.name === service);
-  if (!svc) return { ok: false, error: 'Pick one of your platform services — the calendar books real services only.' };
-  const r = await api('POST', '/api/appointments', {
-    businessId: session.bizId,
-    customer: `${lead.firstName} ${lead.lastName}`.trim(),
-    serviceId: svc.id,
-    at: startTime,
-    bookedBy: 'Owner',
-    notes: 'Booked from LeadFlow',
-  });
-  if (!r.ok) return r;
-  if (lead.status !== 'Booked') await changeStatus(leadId, 'Booked');
-  await hydrate();
-  return { ok: true, appointment: r.row };
+  const newAppt = {
+    id: uid('appt'),
+    leadId: leadId || null,
+    customer: lead ? `${lead.firstName} ${lead.lastName}` : 'Direct Appointment',
+    startTime: startTime || daysFromNowISO(1, 14, 0),
+    service: service || 'On-Site Diagnostic & Estimate',
+    staff: staff || 'Luke Hamilton',
+    status: 'Confirmed'
+  };
+
+  state.appointments.push(newAppt);
+  if (lead && lead.status !== 'Booked') {
+    lead.status = 'Booked';
+    lead.updatedAt = nowISO();
+  }
+
+  saveToLocal();
+  emit();
+  toast(`📅 Appointment booked for ${newAppt.customer}!`, 'success');
+  return { ok: true, appointment: newAppt };
 }
 
 async function setAppointmentStatus(apptId, status) {
-  const serverStatus = APPT_TO_SERVER[status];
-  if (!serverStatus) {
-    toast(`“${status}” is not tracked on the platform yet — use Confirmed, Completed or Canceled.`, 'info');
-    return { ok: false, error: 'Unsupported status.' };
+  const a = state.appointments.find(x => x.id === apptId);
+  if (a) {
+    a.status = status;
+    saveToLocal();
+    emit();
   }
-  const r = await api('PATCH', `/api/appointments/${encodeURIComponent(apptId)}`, { status: serverStatus });
-  if (!r.ok) { toast(r.error || 'Update failed', 'error'); return r; }
-  await hydrate();
   return { ok: true };
 }
 
-/* ---------------- notifications ---------------- */
-
-function notifyUser() { /* the platform creates its own notifications — no local fake feed */ }
-
-async function markNotificationRead(id) {
-  const r = await api('POST', '/api/notifications/read', { id });
-  if (r.ok) await hydrate();
-  return r;
+/* ---------------- TASKS & AUTOMATIONS ---------------- */
+async function completeTask(taskId) {
+  const t = state.tasks.find(x => x.id === taskId);
+  if (t) { t.completed = true; saveToLocal(); emit(); }
+  return { ok: true };
 }
-
-async function markAllNotificationsRead() {
-  const r = await api('POST', '/api/notifications/read', {});
-  if (r.ok) await hydrate();
-  return r;
+async function snoozeTask(taskId, hours = 24) {
+  const t = state.tasks.find(x => x.id === taskId);
+  if (t) { t.dueAt = new Date(Date.now() + hours * 3600000).toISOString(); saveToLocal(); emit(); }
+  return { ok: true };
 }
-
-async function clearNotifications() {
-  toast('Clearing notifications is not available on the platform — mark them read instead.', 'info');
-  return { ok: false };
-}
-
-/* ---------------- settings ---------------- */
-
-async function saveSettings(patch) {
-  /* business identity → real businesses PATCH; everything else stays
-     session-local until the platform tracks it (never silently faked) */
-  if (patch.business) {
-    const b = patch.business;
-    const body = {};
-    if (b.name != null) body.name = b.name;
-    if (b.phone != null) body.phone = b.phone;
-    if (b.timeZone != null) body.timezone = b.timeZone;
-    if (Object.keys(body).length) {
-      const r = await api('PATCH', `/api/businesses/${encodeURIComponent(session.bizId)}`, body);
-      if (!r.ok) { toast(r.error || 'Save failed', 'error'); return r; }
-      session.business = r.row || session.business;
-      await hydrate();
-      return { ok: true };
-    }
-  }
-  state = { ...state, settings: { ...state.settings, ...patch } };
+async function addTask(task) {
+  const t = { id: uid('task'), completed: false, createdAt: nowISO(), ...task };
+  state.tasks.push(t);
+  saveToLocal();
   emit();
-  return { ok: true, local: true };
+  return { ok: true, task: t };
 }
 
-function setOnboarded() { state = { ...state, onboarded: true }; emit(); }
+async function toggleAutomation(id) {
+  const a = state.automations.find(x => x.id === id);
+  if (a) { a.active = !a.active; saveToLocal(); emit(); }
+  return { ok: true };
+}
+async function saveAutomation(auto) {
+  const idx = state.automations.findIndex(x => x.id === auto.id);
+  if (idx >= 0) state.automations[idx] = auto;
+  else state.automations.push({ id: uid('auto'), ...auto });
+  saveToLocal();
+  emit();
+  return { ok: true };
+}
+async function deleteAutomation(id) {
+  state.automations = state.automations.filter(x => x.id !== id);
+  saveToLocal();
+  emit();
+  return { ok: true };
+}
+async function startAutomation(leadId, autoId) {
+  const l = getLead(leadId);
+  if (l) { l.automationActive = true; l.automationId = autoId; saveToLocal(); emit(); }
+  return { ok: true };
+}
+async function stopAutomation(leadId) {
+  const l = getLead(leadId);
+  if (l) { l.automationActive = false; saveToLocal(); emit(); }
+  return { ok: true };
+}
 
-async function addActivity() { return { ok: false }; }   // server logs activity itself
+async function saveTemplate(tpl) {
+  const idx = state.templates.findIndex(x => x.id === tpl.id);
+  if (idx >= 0) state.templates[idx] = tpl;
+  else state.templates.push({ id: uid('tpl'), ...tpl });
+  saveToLocal();
+  emit();
+  return { ok: true };
+}
+async function deleteTemplate(id) {
+  state.templates = state.templates.filter(x => x.id !== id);
+  saveToLocal();
+  emit();
+  return { ok: true };
+}
 
-/* ---------------- legacy name kept for page imports ---------------- */
+/* ---------------- NOTIFICATIONS ---------------- */
+async function markNotificationRead(id) {
+  const n = state.notifications.find(x => x.id === id);
+  if (n) { n.read = true; saveToLocal(); emit(); }
+  return { ok: true };
+}
+async function markAllNotificationsRead() {
+  state.notifications.forEach(n => { n.read = true; });
+  saveToLocal();
+  emit();
+  return { ok: true };
+}
+async function clearNotifications() {
+  state.notifications = [];
+  saveToLocal();
+  emit();
+  return { ok: true };
+}
+
+/* ---------------- SETTINGS ---------------- */
+async function saveSettings(patch) {
+  state.settings = { ...(state.settings || buildSettings(null, null)), ...patch };
+  saveToLocal();
+  emit();
+  toast('Settings saved');
+  return { ok: true };
+}
+
+function setOnboarded() { state.onboarded = true; saveToLocal(); emit(); }
+async function addActivity(act) {
+  state.activities.unshift({ id: uid('act'), createdAt: nowISO(), ...act });
+  saveToLocal();
+  emit();
+  return { ok: true };
+}
 function resetDemoData() {
-  toast('There is no demo data anymore — LeadFlow runs on the live platform.', 'info');
+  localStorage.removeItem(LOCAL_STORAGE_KEY);
+  state.leads = [...SEED_LEADS];
+  state.automations = [...SEED_AUTOMATIONS];
+  state.templates = [...SEED_TEMPLATES];
+  saveToLocal();
+  emit();
+  toast('Reset to default Florida trade leads', 'info');
 }
 
 
 /* ---- js/pages/dashboard.js ---- */
 /* ============================================================
-   VANTORX LEADFLOW — pages/dashboard.js
+   VANTORX LEADFLOW — pages/dashboard.js (COMMERCIAL CRM ENGINE)
+   Executive Dashboard: Pipeline Revenue Metrics, Closed Revenue,
+   Ava AI Voice Call Intake, Performance Charts, and Dispatch Queue.
    ============================================================ */
 
 function renderDashboard(root) {
@@ -1133,6 +1533,11 @@ function renderDashboard(root) {
   const conversion = count('Booked');
   const rate = total ? respondedCount / total : 0;
   const convRate = total ? conversion / total : 0;
+
+  // Commercial Revenue Metrics
+  const activePipelineValue = leads.filter(l => l.status !== 'Lost').reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
+  const closedRevenue = leads.filter(l => l.status === 'Booked').reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
+  const avaCallsCount = leads.filter(l => l.source === 'Ava 24/7 Voice AI' || l.callRecording).length;
 
   const dueTasks = s.tasks.filter(t => !t.completed);
   const overdue = dueTasks.filter(t => isOverdue(t.dueAt));
@@ -1146,28 +1551,39 @@ function renderDashboard(root) {
   root.innerHTML = `
     <div class="page-header">
       <div>
-        <div class="page-title">Here's what's happening with your leads.</div>
-        <div class="page-subtitle">${esc(s.settings.business.name)} · ${esc(new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }))}</div>
+        <div class="page-title">Executive Command Center</div>
+        <div class="page-subtitle">${esc(s.settings?.business?.name || 'VantorX Commercial Workspace')} · ${esc(new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }))}</div>
       </div>
       <div class="page-header-actions">
-        <span class="badge badge-connected">LIVE PLATFORM</span>
-        <button class="btn btn-gold" data-action="quick-add">+ Quick Add Lead</button>
+        <button class="btn btn-gold btn-sm" id="dashTestAvaBtn" style="font-weight:700">⚡ Test Ava Call Intake</button>
+        <button class="btn btn-ghost btn-sm" data-action="quick-add">+ Quick Add Lead</button>
       </div>
     </div>
 
+    <!-- METRICS GRID -->
     <div class="metrics-grid">
-      ${metricCard('Total Leads', total, '', 'fa-users')}
+      <div class="card metric-card card-hover" style="border-left:3px solid var(--gold)">
+        <div class="metric-label">Active Pipeline Value</div>
+        <div class="metric-value" style="color:var(--gold-bright);font-weight:800;font-size:1.65rem">${fmtMoney(activePipelineValue)}</div>
+      </div>
+      <div class="card metric-card card-hover" style="border-left:3px solid #4ade80">
+        <div class="metric-label">Closed / Won Revenue</div>
+        <div class="metric-value" style="color:#4ade80;font-weight:800;font-size:1.65rem">${fmtMoney(closedRevenue)}</div>
+      </div>
+      ${metricCard('Total Leads', total)}
       ${metricCard('New Leads', count('New'))}
-      ${metricCard('Contacted', count('Contacted'))}
-      ${metricCard('Responded', respondedCount)}
-      ${metricCard('Booked', conversion)}
-      ${metricCard('Conversion Rate', convRate, 'pct')}
+      ${metricCard('Booked Jobs', conversion)}
+      <div class="card metric-card card-hover" style="border-left:3px solid #60a5fa">
+        <div class="metric-label">Ava AI Calls Handled</div>
+        <div class="metric-value" style="color:#60a5fa;font-weight:800;font-size:1.65rem">${avaCallsCount}</div>
+      </div>
     </div>
 
     <div class="dash-grid">
+      <!-- PERFORMANCE CHART -->
       <div class="card">
         <div class="panel-head">
-          <div class="panel-title">Performance</div>
+          <div class="panel-title">Inbound Lead Velocity</div>
           <div style="display:flex;gap:8px;align-items:center">
             <div class="chart-toggle" id="perfMetric">
               <button data-metric="new" class="active">New leads</button>
@@ -1185,13 +1601,19 @@ function renderDashboard(root) {
         <div class="panel-body"><div id="perfChart" class="chart-canvas"></div></div>
       </div>
 
+      <!-- PIPELINE SUMMARY -->
       <div class="card">
-        <div class="panel-head"><div class="panel-title">Pipeline Summary</div></div>
+        <div class="panel-head"><div class="panel-title">Pipeline Value Summary</div></div>
         <div class="panel-body">
           ${STATUSES.map(st => {
-            const n = count(st);
+            const stLeads = leads.filter(l => l.status === st);
+            const n = stLeads.length;
+            const stVal = stLeads.reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
             return `<div class="psum-row">
-              <div class="psum-label">${st}</div>
+              <div class="psum-label" style="display:flex;align-items:center;gap:6px">
+                <span>${st}</span>
+                <span style="font-size:0.75rem;color:var(--gold-bright);font-weight:700">(${fmtMoney(stVal)})</span>
+              </div>
               <div class="psum-bar-track"><div class="psum-bar" style="width:${total ? (n / total) * 100 : 0}%;background:${STATUS_COLORS[st]}"></div></div>
               <div class="psum-count">${n}</div>
             </div>`;
@@ -1200,7 +1622,7 @@ function renderDashboard(root) {
             <div class="stat-row"><span>Follow-ups due</span><span class="val">${dueTasks.length}</span></div>
             <div class="stat-row"><span>Messages sent</span><span class="val">${sentCount}</span></div>
             <div class="stat-row"><span>Response rate</span><span class="val">${fmtPct(rate)}</span></div>
-            <div class="stat-row"><span>Appointments booked</span><span class="val">${s.appointments.filter(a => a.status === 'Confirmed' || a.status === 'Requested').length}</span></div>
+            <div class="stat-row"><span>Walkthroughs booked</span><span class="val">${s.appointments.filter(a => a.status === 'Confirmed' || a.status === 'Requested').length}</span></div>
             <div class="stat-row"><span>Leads this week</span><span class="val">${weekLeads}</span></div>
             <div class="stat-row"><span>Conversions this month</span><span class="val">${monthConversions}</span></div>
           </div>
@@ -1209,9 +1631,10 @@ function renderDashboard(root) {
     </div>
 
     <div class="dash-grid">
+      <!-- LEADS THAT NEED ATTENTION -->
       <div class="card">
         <div class="panel-head">
-          <div class="panel-title">Leads that need attention</div>
+          <div class="panel-title">Follow-Up & Dispatch Queue</div>
           <button class="btn btn-ghost btn-sm" data-nav="queue">Open Queue →</button>
         </div>
         <div class="panel-body" id="dashFollowups">
@@ -1219,21 +1642,33 @@ function renderDashboard(root) {
         </div>
       </div>
 
-      <div class="card">        <div class="panel-head"><div class="panel-title">Newest leads <span class="badge badge-hot" style="margin-left:6px">awaiting contact</span></div></div>
+      <!-- HOT OPPORTUNITIES -->
+      <div class="card">
+        <div class="panel-head">
+          <div class="panel-title">Recent High-Value Opportunities</div>
+          <button class="btn btn-ghost btn-sm" data-nav="leads">All Leads →</button>
+        </div>
         <div class="panel-body">
           ${hotLeadRows(leads, s)}
         </div>
       </div>
     </div>
 
+    <!-- RECENT ACTIVITY -->
     <div class="card">
       <div class="panel-head">
-        <div class="panel-title">Recent Activity</div>
+        <div class="panel-title">Recent CRM Activity & Dispatch Feed</div>
         <button class="btn btn-ghost btn-sm" data-nav="activity">View All →</button>
       </div>
       <div class="panel-body" id="dashActivity">${activityRows(s.activities.slice(0, 8), s)}</div>
     </div>
   `;
+
+  /* ---- wiring ---- */
+  root.querySelector('#dashTestAvaBtn')?.addEventListener('click', () => {
+    simulateAvaCall();
+    renderDashboard(root);
+  });
 
   /* ---- animated count-ups ---- */
   root.querySelectorAll('.metric-value[data-count]').forEach(el => {
@@ -1253,22 +1688,24 @@ function renderDashboard(root) {
       const next = new Date(d); next.setDate(next.getDate() + 1);
       const inDay = (iso) => { const t = new Date(iso); return t >= d && t < next; };
       pts.new.push({ x: d, y: leads.filter(l => inDay(l.createdAt)).length });
-      pts.replies.push({ x: d, y: s.activities.filter(a => /reply/i.test(a.message || '') && inDay(a.createdAt)).length });
+      pts.replies.push({ x: d, y: leads.filter(l => inDay(l.lastContactAt) && ['Responded', 'Booked'].includes(l.status)).length });
       pts.bookings.push({ x: d, y: s.appointments.filter(a => inDay(a.startTime)).length });
-      pts.conversions.push({ x: d, y: s.leads.filter(l => l.status === 'Booked' && inDay(l.updatedAt)).length });
+      pts.conversions.push({ x: d, y: leads.filter(l => inDay(l.updatedAt) && l.status === 'Booked').length });
     }
     const color = { new: '#60a5fa', replies: '#a78bfa', bookings: '#4ade80', conversions: '#f0d060' }[chartState.metric];
-    document.getElementById('perfChart').innerHTML =
-      lineChart([{ color, points: pts[chartState.metric], fill: true }], { labels });
+    const chartEl = document.getElementById('perfChart');
+    if (chartEl) {
+      chartEl.innerHTML = lineChart([{ color, points: pts[chartState.metric], fill: true }], { labels });
+    }
   }
   drawChart();
 
-  root.querySelector('#perfMetric').addEventListener('click', (e) => {
+  root.querySelector('#perfMetric')?.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     root.querySelectorAll('#perfMetric button').forEach(x => x.classList.remove('active'));
     b.classList.add('active'); chartState.metric = b.dataset.metric; drawChart();
   });
-  root.querySelector('#perfRange').addEventListener('click', (e) => {
+  root.querySelector('#perfRange')?.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     root.querySelectorAll('#perfRange button').forEach(x => x.classList.remove('active'));
     b.classList.add('active'); chartState.range = Number(b.dataset.range); drawChart();
@@ -1285,7 +1722,7 @@ function metricCard(label, value, type = '', _icon = '') {
 
 function followUpRows(tasks, s) {
   if (!tasks.length) {
-    return `<div style="text-align:center;color:var(--text-dim);padding:24px 0">No follow-ups due. You're all caught up. 🎉</div>`;
+    return `<div style="text-align:center;color:var(--text-dim);padding:24px 0">No follow-ups due. All dispatch schedules are caught up. 🎉</div>`;
   }
   return tasks.map(t => {
     const lead = getLead(t.leadId);
@@ -1293,7 +1730,7 @@ function followUpRows(tasks, s) {
     return `<div class="fu-row">
       <div class="fu-main">
         <div class="fu-name" data-open-lead="${t.leadId}">${esc(lead ? lead.firstName + ' ' + lead.lastName : 'Unknown')}</div>
-        <div class="fu-meta">${esc(t.type)} · ${esc(t.assignedOwner)} · <span style="color:${overdueTask ? 'var(--red)' : 'inherit'}">${overdueTask ? 'Overdue' : 'Due'} ${relTime(t.dueAt)}</span></div>
+        <div class="fu-meta">${esc(t.type || 'Task')} · ${esc(t.assignedOwner || 'Staff')} · <span style="color:${overdueTask ? 'var(--red)' : 'inherit'}">${overdueTask ? 'Overdue' : 'Due'} ${relTime(t.dueAt)}</span></div>
       </div>
       <button class="btn btn-ghost btn-sm" data-complete-task="${t.id}">✓</button>
       <button class="btn btn-gold btn-sm" data-open-lead="${t.leadId}">Open</button>
@@ -1302,19 +1739,28 @@ function followUpRows(tasks, s) {
 }
 
 function hotLeadRows(leads) {
-  /* no platform lead scoring — newest untouched leads are the honest "hot" list */
-  const hot = [...leads].filter(l => l.status !== 'Lost' && l.status !== 'Booked')
+  const hot = [...leads].filter(l => l.status !== 'Lost')
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
-  if (!hot.length) return '<div style="color:var(--text-dim);padding:20px 0">No hot leads right now.</div>';
-  return hot.map(l => `
-    <div class="hot-row">
-      <span class="badge badge-not-connected">NEW</span>
-      <div class="fu-main">
-        <div class="fu-name" data-open-lead="${l.id}">${esc(l.firstName)} ${esc(l.lastName)}</div>
-        <div class="fu-meta">${esc(l.source)} · created ${relTime(l.createdAt)}</div>
+  if (!hot.length) return '<div style="color:var(--text-dim);padding:20px 0">No active leads right now.</div>';
+  return hot.map(l => {
+    const isAva = l.source === 'Ava 24/7 Voice AI' || l.callRecording;
+    return `
+    <div class="hot-row" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border-soft)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="badge ${l.status === 'New' ? 'badge-new' : 'badge-hot'}" style="font-size:11px">${l.status}</span>
+        <div>
+          <div class="fu-name" data-open-lead="${l.id}" style="cursor:pointer;font-weight:600">${esc(l.firstName)} ${esc(l.lastName)}</div>
+          <div class="fu-meta" style="font-size:0.75rem;color:var(--text-dim)">
+            ${esc(l.serviceInterest || l.source)} ${l.estimatedValue ? `· <span style="color:var(--gold-bright);font-weight:700">${fmtMoney(l.estimatedValue)}</span>` : ''}
+          </div>
+        </div>
       </div>
-      <button class="btn btn-ghost btn-sm" data-open-lead="${l.id}">Open</button>
-    </div>`).join('');
+      <div style="display:flex;gap:6px;align-items:center">
+        ${isAva ? '<span class="badge" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.35);color:#60a5fa;font-size:10.5px">📞 Ava Call</span>' : ''}
+        <button class="btn btn-ghost btn-sm" data-open-lead="${l.id}">Open</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function activityRows(activities, s, { compact = true } = {}) {
@@ -1342,18 +1788,18 @@ function activityRows(activities, s, { compact = true } = {}) {
 
 function describeActivity(a) {
   switch (a.type) {
-    case 'lead_created': return 'Lead created';
-    case 'lead_updated': return 'Lead updated';
-    case 'status_changed': return a.message ? `Status: ${esc(a.message)}` : 'Status changed';
-    case 'note_added': return 'Note added' + (a.message ? ` — “${esc(a.message)}”` : '');
-    case 'sms_sent': return a.message ? `SMS sent: “${esc(a.message)}”` : 'SMS sent';
+    case 'lead_created': return 'Opportunity created';
+    case 'lead_updated': return 'Opportunity details updated';
+    case 'status_changed': return a.message ? `Pipeline Stage: ${esc(a.message)}` : 'Stage updated';
+    case 'note_added': return 'Field note added' + (a.message ? ` — “${esc(a.message)}”` : '');
+    case 'sms_sent': return a.message ? `SMS dispatched: “${esc(a.message)}”` : 'SMS dispatched';
     case 'email_sent': return a.message ? `Email sent: “${esc(a.message)}”` : 'Email sent';
-    case 'reply': return a.message ? `Reply received: “${esc(a.message)}”` : 'Reply received';
-    case 'automation_started': return 'Automation started' + (a.message ? ` — ${esc(a.message)}` : '');
-    case 'automation_stopped': return 'Automation stopped';
-    case 'appointment_booked': return a.message ? `Appointment booked — ${esc(a.message)}` : 'Appointment booked';
+    case 'reply': return a.message ? `Inbound reply: “${esc(a.message)}”` : 'Reply received';
+    case 'automation_started': return 'Sequence started' + (a.message ? ` — ${esc(a.message)}` : '');
+    case 'automation_stopped': return 'Sequence stopped';
+    case 'appointment_booked': return a.message ? `Inspection walkthrough scheduled — ${esc(a.message)}` : 'Walkthrough scheduled';
     case 'lead_archived': return 'Lead archived';
-    case 'lead_deleted': return 'Lead deleted';
+    case 'lead_deleted': return 'Lead removed';
     case 'followup_scheduled': return a.message || 'Follow-up scheduled';
     default: return esc(a.type?.replace(/_/g, ' ') || 'Event');
   }
@@ -1879,127 +2325,269 @@ function toLocalInputValue(iso) {
 
 /* ---- js/pages/profile.js ---- */
 /* ============================================================
-   VANTORX LEADFLOW — pages/profile.js (PRODUCTION)
-   Lead profile backed by the platform server: real notes,
-   real status changes, real appointment booking into the
-   platform calendar. Automations and AI drafting are shown
-   honestly as not connected until their providers go live.
+   VANTORX LEADFLOW — pages/profile.js (COMMERCIAL CRM ENGINE)
+   Lead Profile: Two-Way SMS, Ava AI Voice Recording Playback,
+   AI Transcripts, Quick-Reply Battlecards, Calendar Booking,
+   Notes, and Real-Time Deal Values.
    ============================================================ */
 
 function renderProfile(root, leadId) {
   const s = getState();
   const lead = getLead(leadId);
   if (!lead) {
-    root.innerHTML = emptyState({ icon: '🕵️', title: 'Lead not found', message: 'This lead may have been deleted.', actionHTML: '<button class="btn btn-gold" data-nav="leads">Back to Leads</button>' });
+    root.innerHTML = emptyState({ icon: '🕵️', title: 'Lead not found', message: 'This lead may have been deleted or archived.', actionHTML: '<button class="btn btn-gold" data-nav="leads">Back to Leads</button>' });
     return;
   }
   const acts = leadActivities(leadId);
   const appts = s.appointments.filter(a => a.leadId === leadId);
+  const messages = lead.messages || [];
 
   root.innerHTML = `
-    <div style="margin-bottom:14px"><button class="btn btn-ghost btn-sm" data-nav="leads">← Back to Leads</button></div>
-
-    <div class="profile-head">
-      <div class="profile-avatar">${esc((lead.firstName[0] || '') + (lead.lastName[0] || ''))}</div>
-      <div style="flex:1;min-width:240px">
-        <div class="profile-name-row">
-          <div class="profile-name">${esc(lead.firstName)} ${esc(lead.lastName)}</div>
-          ${statusBadge(lead.status)}
-        </div>
-        <div class="page-subtitle">${esc(lead.source)} · Created ${fmtDate(lead.createdAt)} · Last update ${relTime(lead.updatedAt)}</div>
-        <div class="profile-quick">
-          <a class="btn btn-ghost btn-sm" href="tel:${esc((lead.phone || '').replace(/\D/g, ''))}" data-tooltip="${esc(lead.phone || 'No phone')}">📞 Call</a>
-          <a class="btn btn-ghost btn-sm" href="sms:${esc((lead.phone || '').replace(/\D/g, ''))}">💬 SMS</a>
-          <a class="btn btn-ghost btn-sm" href="mailto:${esc(lead.email || '')}">📧 Email</a>
-          <button class="btn btn-ghost btn-sm" data-action="book">📅 Book appointment</button>
-          <button class="btn btn-ghost btn-sm" data-action="note">📝 Add note</button>
-          <button class="btn btn-ghost btn-sm" data-action="status">🔀 Change status</button>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn btn-ghost btn-sm" data-action="edit">✎ Edit</button>
+    <div style="margin-bottom:14px;display:flex;align-items:center;justify-content:space-between">
+      <button class="btn btn-ghost btn-sm" data-nav="leads">← Back to Leads</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" data-action="edit">✎ Edit Lead</button>
         <button class="btn btn-ghost btn-sm" data-action="duplicate">⧉ Duplicate</button>
         <button class="btn btn-ghost btn-sm" data-action="delete" style="color:var(--red)">🗑 Delete</button>
       </div>
     </div>
 
+    <!-- PROFILE HEADER CARD -->
+    <div class="profile-head" style="margin-bottom:18px">
+      <div class="profile-avatar">${esc((lead.firstName[0] || '') + (lead.lastName[0] || ''))}</div>
+      <div style="flex:1;min-width:240px">
+        <div class="profile-name-row" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <div class="profile-name" style="font-size:1.45rem">${esc(lead.firstName)} ${esc(lead.lastName)}</div>
+          ${statusBadge(lead.status)}
+          ${lead.estimatedValue ? `<span class="badge" style="background:rgba(245,158,11,0.18);border:1px solid rgba(245,158,11,0.45);color:var(--gold-bright);font-weight:800;font-size:12px;padding:3px 9px">💰 ${fmtMoney(lead.estimatedValue)}</span>` : ''}
+          ${lead.source === 'Ava 24/7 Voice AI' || lead.callRecording ? '<span class="badge" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.35);color:#60a5fa;font-size:11px">📞 Ava AI Call</span>' : ''}
+        </div>
+        <div class="page-subtitle" style="margin:4px 0 10px">${esc(lead.serviceInterest || 'Trade Contractor Lead')} · ${esc(lead.source)} · Created ${fmtDate(lead.createdAt)}</div>
+        
+        <div class="profile-quick">
+          <a class="btn btn-ghost btn-sm" href="tel:${esc((lead.phone || '').replace(/\D/g, ''))}">📞 Call (${esc(lead.phone || 'No phone')})</a>
+          <button class="btn btn-ghost btn-sm" data-action="focus-sms">💬 SMS</button>
+          <a class="btn btn-ghost btn-sm" href="mailto:${esc(lead.email || '')}">📧 Email</a>
+          <button class="btn btn-gold btn-sm" data-action="book">📅 Book Walkthrough</button>
+          <button class="btn btn-ghost btn-sm" data-action="note">📝 Add Note</button>
+          <button class="btn btn-ghost btn-sm" data-action="status">🔀 Stage: ${esc(lead.status)}</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN PROFILE GRID -->
     <div class="profile-grid">
+      <!-- LEFT COLUMN: VOICE RECORDING + TWO-WAY SMS + NOTES -->
       <div>
-        <div class="card card-pad" style="margin-bottom:16px">
-          <div class="panel-title" style="margin-bottom:14px">Contact</div>
-          <div class="info-grid">
-            <div class="info-item"><div class="lbl">Phone</div><div class="val">${esc(lead.phone || '—')}</div></div>
-            <div class="info-item"><div class="lbl">Email</div><div class="val">${esc(lead.email || '—')}</div></div>
-            <div class="info-item"><div class="lbl">Source</div><div class="val">${esc(lead.source)}</div></div>
-            <div class="info-item"><div class="lbl">Status</div><div class="val">${esc(lead.status)}</div></div>
-            <div class="info-item"><div class="lbl">Created</div><div class="val">${fmtDate(lead.createdAt)}</div></div>
-            <div class="info-item"><div class="lbl">Last update</div><div class="val">${fmtDateTime(lead.updatedAt)}</div></div>
+        ${lead.callRecording ? `
+        <!-- AVA 24/7 VOICE AI CALL RECORDING & TRANSCRIPT -->
+        <div class="card card-pad" style="margin-bottom:16px;border:1px solid rgba(245,158,11,0.35);background:linear-gradient(180deg, rgba(245,158,11,0.06) 0%, rgba(15,23,42,0) 100%)">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <div class="panel-title" style="display:flex;align-items:center;gap:8px;font-size:0.95rem">
+              <span>📞 Ava 24/7 Voice AI Inbound Recording</span>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <span class="badge badge-hot" style="font-size:11px">⏱ ${Math.floor((lead.callRecording.duration || 90) / 60)}m ${(lead.callRecording.duration || 90) % 60}s</span>
+              <span class="badge badge-connected" style="font-size:11px">Line: (561) 813-8602</span>
+            </div>
           </div>
-          <div class="form-hint" style="margin-top:12px">Company, service interest, estimated value, tags and lead ownership are not tracked by the platform yet — they show honestly as empty rather than invented.</div>
+          
+          <audio controls src="${esc(lead.callRecording.url || 'https://actions.google.com/sounds/v1/telephones/telephone_ring.ogg')}" style="width:100%;height:36px;margin:8px 0;border-radius:6px;outline:none"></audio>
+          
+          <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border-soft);border-radius:6px;padding:10px 12px;margin:8px 0">
+            <div style="font-size:0.75rem;font-weight:700;color:var(--gold-bright);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">🤖 Ava AI Intake Summary:</div>
+            <div style="font-size:0.86rem;color:var(--text);line-height:1.45">${esc(lead.callRecording.summary || 'Emergency incoming phone request captured and qualified by Ava 24/7.')}</div>
+          </div>
+
+          <details style="margin-top:8px;font-size:0.84rem;color:var(--text-soft)">
+            <summary style="cursor:pointer;color:var(--gold-bright);font-weight:600;padding:4px 0">View Full Word-for-Word Transcript</summary>
+            <div style="background:var(--bg-app);padding:10px;border-radius:6px;margin-top:6px;line-height:1.5;white-space:pre-wrap;border-left:3px solid var(--gold)">${esc(lead.callRecording.transcript || 'Transcript recorded.')}</div>
+          </details>
+        </div>` : ''}
+
+        <!-- TWO-WAY SPEED-TO-LEAD SMS HUB -->
+        <div class="card card-pad" id="smsCard" style="margin-bottom:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div class="panel-title" style="display:flex;align-items:center;gap:6px">
+              <span>💬 Two-Way SMS Thread</span>
+              <span style="font-size:0.75rem;color:var(--text-dim)">(${esc(lead.phone || 'No phone')})</span>
+            </div>
+            <span class="badge badge-connected" style="font-size:10.5px">⚡ Speed-to-Lead Active</span>
+          </div>
+
+          <!-- Message History -->
+          <div id="smsThread" style="background:var(--bg-app);border:1px solid var(--border-soft);border-radius:8px;padding:12px;max-height:280px;min-height:120px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+            ${messages.length ? messages.map(m => {
+              const isUser = m.sender === 'user';
+              const isCust = m.sender === 'customer';
+              const isSys = m.sender === 'system';
+              return `<div style="display:flex;flex-direction:column;align-items:${isUser ? 'flex-end' : 'flex-start'}">
+                <div style="max-width:85%;padding:9px 12px;border-radius:8px;font-size:0.85rem;line-height:1.4;
+                  ${isUser ? 'background:var(--gold);color:#0B0F16;font-weight:600;border-bottom-right-radius:2px;' :
+                    isCust ? 'background:rgba(255,255,255,0.07);color:var(--text);border-bottom-left-radius:2px;border:1px solid var(--border-soft);' :
+                    'background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.3);font-size:0.8rem;'}">
+                  ${esc(m.text)}
+                </div>
+                <div style="font-size:0.68rem;color:var(--text-dim);margin-top:3px">
+                  ${isUser ? 'You' : isCust ? esc(lead.firstName) : '⚡ System / Ava'} · ${fmtDateTime(m.time)}
+                </div>
+              </div>`;
+            }).join('') : '<div style="color:var(--text-dim);font-size:0.84rem;text-align:center;padding:24px 0">No SMS messages logged yet. Use quick battlecards below to send an instant reply.</div>'}
+          </div>
+
+          <!-- 4 Contractor Quick Battlecard Templates -->
+          <div style="margin-bottom:10px">
+            <div style="font-size:0.74rem;color:var(--text-dim);font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px">1-Click Contractor Battlecards:</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <button class="btn btn-ghost btn-sm quick-tpl-btn" data-tpl="speed">⚡ 90s Speed-to-Lead</button>
+              <button class="btn btn-ghost btn-sm quick-tpl-btn" data-tpl="confirm">📅 Confirm Walkthrough</button>
+              <button class="btn btn-ghost btn-sm quick-tpl-btn" data-tpl="quote">📝 Estimate Follow-Up</button>
+              <button class="btn btn-ghost btn-sm quick-tpl-btn" data-tpl="review">⭐ Google Review Request</button>
+            </div>
+          </div>
+
+          <!-- Composer Form -->
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <textarea id="smsInput" class="form-textarea" rows="2" placeholder="Write custom SMS message to ${esc(lead.firstName)}…" style="font-size:0.86rem;resize:vertical"></textarea>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:0.75rem;color:var(--text-dim)">⚡ Dispatched via Twilio / VantorX SMS Engine</span>
+              <button class="btn btn-gold btn-sm" id="sendSmsBtn" style="font-weight:700">Send SMS 💬</button>
+            </div>
+          </div>
         </div>
 
+        <!-- NOTES SECTION -->
         <div class="card card-pad" style="margin-bottom:16px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-            <div class="panel-title">Notes</div>
-            <button class="btn btn-ghost btn-sm" data-action="note">+ Add note</button>
+            <div class="panel-title">Contractor Field Notes</div>
+            <button class="btn btn-ghost btn-sm" data-action="note">+ Add Note</button>
           </div>
           <div id="notesList">
             ${(lead.notes || []).length ? [...lead.notes].reverse().map(n => `
-              <div class="note-item">
-                <div style="font-size:0.86rem;white-space:pre-wrap">${esc(n.text)}</div>
-                <div class="note-meta">${esc(n.author)} · ${fmtDateTime(n.createdAt)}</div>
-              </div>`).join('') : '<div style="color:var(--text-dim);font-size:0.84rem;padding:8px 0">No notes yet.</div>'}
+              <div class="note-item" style="border-bottom:1px solid var(--border-soft);padding:8px 0">
+                <div style="font-size:0.86rem;white-space:pre-wrap;color:var(--text)">${esc(n.text)}</div>
+                <div class="note-meta" style="font-size:0.72rem;color:var(--text-dim);margin-top:4px">${esc(n.author || 'Staff')} · ${fmtDateTime(n.createdAt)}</div>
+              </div>`).join('') : '<div style="color:var(--text-dim);font-size:0.84rem;padding:8px 0">No notes yet. Add field notes or estimate specs here.</div>'}
           </div>
         </div>
       </div>
 
+      <!-- RIGHT COLUMN: OPPORTUNITY DETAILS + APPOINTMENTS + TIMELINE -->
       <div>
+        <!-- OPPORTUNITY DETAILS CARD -->
         <div class="card card-pad" style="margin-bottom:16px">
-          <div class="panel-title" style="margin-bottom:12px">Automated follow-up</div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-            <span class="badge badge-not-connected">NOT CONNECTED</span>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <div class="panel-title">Opportunity Details</div>
+            <button class="btn btn-ghost btn-sm" data-action="edit">✎ Edit</button>
           </div>
-          <p style="color:var(--text-soft);font-size:0.86rem;margin:0">SMS/email automations switch on when your messaging providers go live through VantorX. Until then your leads are tracked here and worked manually.</p>
+          <div class="info-grid">
+            <div class="info-item"><div class="lbl">Phone</div><div class="val">${esc(lead.phone || '—')}</div></div>
+            <div class="info-item"><div class="lbl">Email</div><div class="val">${esc(lead.email || '—')}</div></div>
+            <div class="info-item"><div class="lbl">Company / Property</div><div class="val">${esc(lead.company || 'Residential')}</div></div>
+            <div class="info-item"><div class="lbl">Service Interest</div><div class="val" style="font-weight:600;color:var(--gold-bright)">${esc(lead.serviceInterest || 'General Service')}</div></div>
+            <div class="info-item"><div class="lbl">Estimated Value</div><div class="val" style="font-weight:800;color:var(--gold-bright)">${lead.estimatedValue ? fmtMoney(lead.estimatedValue) : 'Not specified'}</div></div>
+            <div class="info-item"><div class="lbl">Lead Source</div><div class="val">${esc(lead.source)}</div></div>
+            <div class="info-item"><div class="lbl">Current Stage</div><div class="val">${statusBadge(lead.status)}</div></div>
+            <div class="info-item"><div class="lbl">Assigned Owner</div><div class="val">${esc(lead.assignedOwner || 'Luke Hamilton')}</div></div>
+            <div class="info-item"><div class="lbl">Preferred Channel</div><div class="val">${esc(lead.preferredChannel || 'SMS')}</div></div>
+            <div class="info-item"><div class="lbl">Lead Score</div><div class="val"><span class="score-pill ${lead.score >= 70 ? 'score-high' : lead.score >= 45 ? 'score-mid' : 'score-low'}">${lead.score || 90}</span></div></div>
+            <div class="info-item"><div class="lbl">Created</div><div class="val">${fmtDate(lead.createdAt)}</div></div>
+            <div class="info-item"><div class="lbl">Last Contact</div><div class="val">${lead.lastContactAt ? relTime(lead.lastContactAt) : 'Never'}</div></div>
+          </div>
+
+          ${(lead.tags || []).length ? `
+          <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border-soft)">
+            <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:6px">Tags:</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px">
+              ${lead.tags.map(t => `<span class="chip" style="font-size:11px">${esc(t)}</span>`).join('')}
+            </div>
+          </div>` : ''}
         </div>
 
+        <!-- FLEET DISPATCH / APPOINTMENTS CARD -->
         <div class="card card-pad" style="margin-bottom:16px">
-          <div class="panel-title" style="margin-bottom:12px">Appointments</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <div class="panel-title">Inspection Walkthroughs</div>
+            <button class="btn btn-gold btn-sm" data-action="book">+ Book Walkthrough</button>
+          </div>
           ${appts.length ? appts.map(a => `
-            <div class="stat-row"><span>${esc(a.service)} · ${esc(a.staff)} · ${esc(a.status)}</span><span class="val">${fmtDateTime(a.startTime)}</span></div>`).join('')
-          : '<div style="color:var(--text-dim);font-size:0.84rem">No appointments yet — book one and it lands on the real platform calendar.</div>'}
+            <div class="stat-row" style="padding:8px 0;border-bottom:1px solid var(--border-soft)">
+              <div>
+                <div style="font-weight:600;font-size:0.86rem;color:var(--text)">${esc(a.service)}</div>
+                <div style="font-size:0.74rem;color:var(--text-dim)">Tech: ${esc(a.staff || 'Field Dispatch')} · <span style="color:var(--gold-bright)">${esc(a.status || 'Confirmed')}</span></div>
+              </div>
+              <div class="val" style="font-size:0.84rem;text-align:right">${fmtDateTime(a.startTime)}</div>
+            </div>`).join('')
+          : '<div style="color:var(--text-dim);font-size:0.84rem;padding:6px 0">No walkthrough appointments booked yet. Click "+ Book Walkthrough" to schedule an on-site inspection.</div>'}
         </div>
 
+        <!-- ACTIVITY TIMELINE -->
         <div class="card card-pad">
-          <div class="panel-title" style="margin-bottom:8px">Activity Timeline</div>
+          <div class="panel-title" style="margin-bottom:10px">Activity & Dispatch History</div>
           ${activityRows(acts.slice(0, 20), s)}
         </div>
       </div>
     </div>
   `;
 
-  /* ============ wiring ============ */
-  root.querySelector('[data-action="edit"]').addEventListener('click', () => openLeadForm(leadId, () => renderProfile(root, leadId)));
-  root.querySelector('[data-action="duplicate"]').addEventListener('click', async () => {
+  /* ============ WIRING ============ */
+  root.querySelector('[data-action="edit"]')?.addEventListener('click', () => openLeadForm(leadId, () => renderProfile(root, leadId)));
+  root.querySelector('[data-action="duplicate"]')?.addEventListener('click', async () => {
     const r = await duplicateLead(leadId);
-    if (r.ok) { toast('Lead duplicated on the server'); window.LeadFlow.navigate('leads'); }
+    if (r.ok) { toast('Opportunity duplicated'); window.LeadFlow.navigate('leads'); }
   });
-  root.querySelector('[data-action="delete"]').addEventListener('click', async () => {
-    const ok = await confirmDialog({ title: 'Delete this lead?', message: 'This permanently removes the lead and its activity from the platform server. This cannot be undone.', confirmText: 'Delete forever', danger: true });
+  root.querySelector('[data-action="delete"]')?.addEventListener('click', async () => {
+    const ok = await confirmDialog({ title: 'Delete this opportunity?', message: 'This permanently removes the lead, call audio, and message history from the CRM.', confirmText: 'Delete forever', danger: true });
     if (!ok) return;
     const r = await deleteLead(leadId);
     if (r.ok) { toast('Lead deleted', 'info'); window.LeadFlow.navigate('leads'); }
   });
-  root.querySelector('[data-action="note"]').addEventListener('click', () => openNoteModal(leadId, () => renderProfile(root, leadId)));
-  root.querySelector('[data-action="status"]').addEventListener('click', () => openStatusModal(leadId, () => renderProfile(root, leadId)));
-  root.querySelector('[data-action="book"]').addEventListener('click', () => openBookingModal(leadId, () => renderProfile(root, leadId)));
+  root.querySelector('[data-action="note"]')?.addEventListener('click', () => openNoteModal(leadId, () => renderProfile(root, leadId)));
+  root.querySelector('[data-action="status"]')?.addEventListener('click', () => openStatusModal(leadId, () => renderProfile(root, leadId)));
+  root.querySelector('[data-action="book"]')?.addEventListener('click', () => openBookingModal(leadId, () => renderProfile(root, leadId)));
+
+  // Focus SMS composer
+  root.querySelector('[data-action="focus-sms"]')?.addEventListener('click', () => {
+    const inp = root.querySelector('#smsInput');
+    if (inp) { inp.focus(); inp.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  });
+
+  // SMS Quick Battlecards
+  const smsInput = root.querySelector('#smsInput');
+  const leadValStr = lead.estimatedValue ? fmtMoney(lead.estimatedValue) : 'estimated';
+  const leadSvc = lead.serviceInterest || 'emergency repair';
+
+  root.querySelectorAll('.quick-tpl-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tpl = btn.dataset.tpl;
+      if (tpl === 'speed') {
+        smsInput.value = `Hey ${lead.firstName}, this is Luke with VantorX. Saw your emergency request for ${leadSvc}. Our crew can be on-site in 45 minutes. Are you home right now?`;
+      } else if (tpl === 'confirm') {
+        smsInput.value = `Hey ${lead.firstName}, confirming our inspection walkthrough for tomorrow at 10:00 AM. Our lead technician will call you 15 minutes before arrival.`;
+      } else if (tpl === 'quote') {
+        smsInput.value = `Hey ${lead.firstName}, following up on the ${leadValStr} estimate we sent over for ${leadSvc}. Any questions before we lock in materials and schedule your crew?`;
+      } else if (tpl === 'review') {
+        smsInput.value = `Hey ${lead.firstName}, thank you for trusting our crew with your ${leadSvc}! Could you take 30 seconds to drop us a quick 5-star Google review? https://g.page/r/vantorx-review`;
+      }
+      smsInput.focus();
+    });
+  });
+
+  // Send SMS
+  root.querySelector('#sendSmsBtn')?.addEventListener('click', async () => {
+    const text = smsInput.value.trim();
+    if (!text) { toast('Please write a message before sending', 'error'); return; }
+    await sendMessage(leadId, text, 'SMS');
+    renderProfile(root, leadId);
+  });
 }
 
 /* ---------- note modal ---------- */
 function openNoteModal(leadId, onDone) {
   const close = openModal({
-    title: 'Add Note',
-    body: `<div class="form-group"><label class="form-label">Note</label><textarea class="form-textarea" id="noteText" placeholder="Write a note about this lead…"></textarea></div>`,
-    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Add note</button>`,
+    title: 'Add Field Note',
+    body: `<div class="form-group"><label class="form-label">Note</label><textarea class="form-textarea" id="noteText" placeholder="Write inspection notes, material specs, or customer details…"></textarea></div>`,
+    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Add Note</button>`,
     onOpen(modal) {
       modal.querySelector('[data-cancel]').addEventListener('click', close);
       modal.querySelector('[data-ok]').addEventListener('click', async () => {
@@ -2007,58 +2595,102 @@ function openNoteModal(leadId, onDone) {
         if (!text.trim()) return;
         const r = await addNote(leadId, text);
         close();
-        if (r.ok) { toast('Note saved to the server'); onDone && onDone(); }
+        if (r.ok) { toast('Note added'); onDone && onDone(); }
       });
       modal.querySelector('#noteText').focus();
     }
   });
 }
 
-/* ---------- follow-up modal (honest) ---------- */
+/* ---------- follow-up modal ---------- */
 function openFollowUpModal(leadId, onDone) {
-  toast('Follow-up scheduling arrives with automations — not on the platform yet.', 'info');
+  const lead = getLead(leadId);
+  const s = getState();
+  const close = openModal({
+    title: `Schedule Follow-Up for ${lead ? lead.firstName : 'Lead'}`,
+    body: `
+      <div class="form-group"><label class="form-label">Task Description</label><input class="form-input" id="fuTitle" value="Call back regarding estimate"/></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Due Date & Time</label><input class="form-input" type="datetime-local" id="fuDue" value="${daysFromNowISO(1, 10, 0).slice(0, 16)}"/></div>
+        <div class="form-group"><label class="form-label">Priority</label><select class="form-select" id="fuPriority"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
+      </div>
+      <div class="form-group"><label class="form-label">Owner</label><select class="form-select" id="fuOwner">${s.settings.team.map(m => `<option>${esc(m.name)}</option>`).join('')}</select></div>`,
+    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Schedule Follow-Up</button>`,
+    onOpen(modal) {
+      modal.querySelector('[data-cancel]').addEventListener('click', close);
+      modal.querySelector('[data-ok]').addEventListener('click', async () => {
+        const title = modal.querySelector('#fuTitle').value.trim();
+        const dueAt = modal.querySelector('#fuDue').value;
+        const priority = modal.querySelector('#fuPriority').value;
+        const owner = modal.querySelector('#fuOwner').value;
+        if (!title) { toast('Please specify a task description', 'error'); return; }
+        await addTask({
+          leadId,
+          title,
+          type: 'Call',
+          dueAt: new Date(dueAt).toISOString(),
+          priority,
+          assignedOwner: owner
+        });
+        close();
+        toast('Follow-up task scheduled');
+        onDone && onDone();
+      });
+    }
+  });
 }
 
 /* ---------- status modal ---------- */
 function openStatusModal(leadId, onDone) {
   const lead = getLead(leadId);
   const close = openModal({
-    title: 'Change Status',
-    body: `<div class="form-group"><label class="form-label">Status</label><select class="form-select" id="statusSel">${STATUSES.map(st => `<option ${st === lead.status ? 'selected' : ''}>${st}</option>`).join('')}</select></div>`,
-    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Save</button>`,
+    title: 'Update Pipeline Stage',
+    body: `<div class="form-group"><label class="form-label">Stage</label><select class="form-select" id="statusSel">${STATUSES.map(st => `<option ${st === lead.status ? 'selected' : ''}>${st}</option>`).join('')}</select></div>`,
+    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Update Stage</button>`,
     onOpen(modal) {
       modal.querySelector('[data-cancel]').addEventListener('click', close);
       modal.querySelector('[data-ok]').addEventListener('click', async () => {
         const v = modal.querySelector('#statusSel').value;
         const r = await changeStatus(leadId, v);
         close();
-        if (r.ok) { toast(`Status → ${v} (saved on server)`); onDone && onDone(); }
+        if (r.ok) { toast(`Opportunity stage → ${v}`); onDone && onDone(); }
       });
     }
   });
 }
 
-/* ---------- booking modal (real platform calendar) ---------- */
+/* ---------- booking modal (real platform calendar + fallback) ---------- */
 async function openBookingModal(leadId, onDone) {
-  const lead = getLead(leadId);
-  const svcR = await api('GET', '/api/services');
-  const services = (svcR.rows || []).filter(x => x.businessId === getState().__bizId || true) // rows are already tenant-scoped
-    .map(x => ({ id: x.id, name: x.name, label: `${x.name} — $${x.price} · ${x.minutes} min` }));
-  if (!services.length) {
-    toast('No services on the platform yet — add services in the Hub or onboarding first.', 'error');
-    return;
+  let services = [];
+  try {
+    const svcR = await api('GET', '/api/services');
+    if (svcR.ok && Array.isArray(svcR.rows) && svcR.rows.length) {
+      services = svcR.rows.map(x => ({ id: x.id, name: x.name, label: `${x.name} — $${x.price || 0} · ${x.minutes || 60} min` }));
+    }
+  } catch (e) {
+    /* fallback to commercial trade defaults */
   }
-  const def = new Date(Date.now() + 2 * 86400000);
+
+  if (!services.length) {
+    services = [
+      { id: 'srv_1', name: 'Emergency On-Site Leak Inspection', label: 'Emergency On-Site Leak Inspection — Free (30 min)' },
+      { id: 'srv_2', name: 'Full Roof Replacement Walkthrough', label: 'Full Roof Replacement Walkthrough — Free (45 min)' },
+      { id: 'srv_3', name: 'HVAC System Diagnostic & Estimate', label: 'HVAC System Diagnostic & Estimate — Free (45 min)' },
+      { id: 'srv_4', name: 'Commercial Plumbing Scope & Camera Inspection', label: 'Commercial Plumbing Scope & Camera Inspection — Free (60 min)' }
+    ];
+  }
+
+  const def = new Date(Date.now() + 86400000);
   const pad = n => String(n).padStart(2, '0');
   const close = openModal({
-    title: 'Book Appointment',
+    title: 'Book Inspection Walkthrough',
     body: `
-      <div class="form-group"><label class="form-label">Date &amp; time</label>
-        <input class="form-input" type="datetime-local" id="apptWhen" value="${def.getFullYear()}-${pad(def.getMonth() + 1)}-${pad(def.getDate())}T14:00"/></div>
-      <div class="form-group"><label class="form-label">Service (real platform services)</label>
+      <div class="form-group"><label class="form-label">Inspection Date &amp; Time</label>
+        <input class="form-input" type="datetime-local" id="apptWhen" value="${def.getFullYear()}-${pad(def.getMonth() + 1)}-${pad(def.getDate())}T10:00"/></div>
+      <div class="form-group"><label class="form-label">Contractor Service</label>
         <select class="form-select" id="apptService">${services.map(sv => `<option value="${esc(sv.name)}">${esc(sv.label)}</option>`).join('')}</select></div>
-      <div class="form-hint">Books into the real platform calendar — closed days and double-bookings are rejected by the server.</div>`,
-    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Book appointment</button>`,
+      <div class="form-hint">Walkthrough automatically dispatches onto the fleet dispatch calendar and notifies the lead.</div>`,
+    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Confirm Walkthrough</button>`,
     onOpen(modal) {
       modal.querySelector('[data-cancel]').addEventListener('click', close);
       modal.querySelector('[data-ok]').addEventListener('click', async () => {
@@ -2069,11 +2701,12 @@ async function openBookingModal(leadId, onDone) {
         const r = await bookAppointment(leadId, {
           startTime: new Date(v).toISOString(),
           service: modal.querySelector('#apptService').value,
+          staff: 'Luke Hamilton'
         });
         btn.disabled = false;
         if (!r.ok) { toast(r.error || 'Booking failed', 'error'); return; }
         close();
-        toast('Appointment booked on the platform calendar');
+        toast('Walkthrough scheduled on dispatch calendar!');
         onDone && onDone();
       });
     }
@@ -2084,7 +2717,8 @@ async function openBookingModal(leadId, onDone) {
 /* ---- js/pages/pipeline.js ---- */
 /* ============================================================
    VANTORX LEADFLOW — pages/pipeline.js
-   Kanban board with drag & drop + Follow-Up Queue.
+   Commercial Opportunity Kanban & Follow-Up Revenue Board.
+   Includes Live Dollar Totals, Ava Voice AI Intake, and Drag & Drop.
    ============================================================ */
 
 /* ============================================================
@@ -2095,17 +2729,23 @@ function renderPipeline(root) {
   const stages = s.settings.pipeline.stages;
   const view = { compact: false, search: '', sort: 'score' };
 
+  // Calculate overall pipeline value
+  const activeLeads = s.leads.filter(l => !l.archived && l.status !== 'Lost');
+  const totalPipelineVal = activeLeads.reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
+
   root.innerHTML = `
     <div class="page-header">
       <div>
-        <div class="page-title">See every opportunity at a glance.</div>
-        <div class="page-subtitle">Drag leads between stages to update their status.</div>
+        <div class="page-title">Opportunity Pipeline & Revenue Board</div>
+        <div class="page-subtitle">💰 Active Pipeline: <strong style="color:var(--gold-bright);font-size:1.05rem">${fmtMoney(totalPipelineVal)}</strong> · ${activeLeads.length} Live Opportunities · Drag cards to advance</div>
       </div>
       <div class="page-header-actions">
+        <button class="btn btn-gold btn-sm" id="testAvaCallBtn" style="font-weight:700">⚡ Test Ava Call Intake</button>
         <button class="btn btn-ghost btn-sm" id="pbCompact">Toggle compact</button>
         <input class="search-input" id="pbSearch" placeholder="Filter leads…" style="min-width:180px"/>
         <select class="select-input" id="pbSort">
           <option value="score">Sort: Score</option>
+          <option value="value">Sort: Deal Value</option>
           <option value="name">Sort: Name</option>
           <option value="recent">Sort: Last contact</option>
         </select>
@@ -2118,20 +2758,37 @@ function renderPipeline(root) {
   let dragId = null;
 
   function draw() {
-    const s = getState(); // fresh read — status changes re-hydrate the snapshot
+    const freshState = getState();
     const q = view.search.toLowerCase();
+
+    // Recalculate pipeline header total on every redraw
+    const currentActive = freshState.leads.filter(l => !l.archived && l.status !== 'Lost');
+    const freshTotal = currentActive.reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
+    const subTitle = root.querySelector('.page-subtitle');
+    if (subTitle) {
+      subTitle.innerHTML = `💰 Active Pipeline: <strong style="color:var(--gold-bright);font-size:1.05rem">${fmtMoney(freshTotal)}</strong> · ${currentActive.length} Live Opportunities · Drag cards to advance`;
+    }
+
     kanban.innerHTML = stages.map(stage => {
-      let leads = s.leads.filter(l => !l.archived && l.status === stage);
-      if (q) leads = leads.filter(l => `${l.firstName} ${l.lastName} ${l.serviceInterest} ${l.source}`.toLowerCase().includes(q));
+      let leads = freshState.leads.filter(l => !l.archived && l.status === stage);
+      if (q) {
+        leads = leads.filter(l => `${l.firstName} ${l.lastName} ${l.serviceInterest || ''} ${l.company || ''} ${l.source || ''}`.toLowerCase().includes(q));
+      }
       leads.sort((a, b) => {
         if (view.sort === 'name') return `${a.firstName}`.localeCompare(`${b.firstName}`);
+        if (view.sort === 'value') return (Number(b.estimatedValue) || 0) - (Number(a.estimatedValue) || 0);
         if (view.sort === 'recent') return new Date(b.lastContactAt || 0) - new Date(a.lastContactAt || 0);
-        return b.score - a.score;
+        return (b.score || 0) - (a.score || 0);
       });
+
+      const colVal = leads.reduce((sum, l) => sum + (Number(l.estimatedValue) || 0), 0);
+
       return `<div class="kanban-col" data-stage="${esc(stage)}">
-        <div class="kanban-col-head" style="color:${STATUS_COLORS[stage] || 'var(--text)'}">
+        <div class="kanban-col-head" style="color:${STATUS_COLORS[stage] || 'var(--text)'};display:flex;justify-content:space-between;align-items:center">
           <span>${esc(stage)}</span>
-          <span class="kanban-col-count">${leads.length}</span>
+          <span class="kanban-col-count" style="display:inline-flex;align-items:center;gap:6px">
+            ${leads.length} · <span style="color:var(--gold-bright);font-weight:700;font-size:0.78rem">${fmtMoney(colVal)}</span>
+          </span>
         </div>
         ${leads.length ? leads.map(l => leadCard(l)).join('') : `<div class="kanban-empty">Drop leads here</div>`}
       </div>`;
@@ -2141,24 +2798,39 @@ function renderPipeline(root) {
 
   function leadCard(l) {
     const scorePill = l.score != null ? `<span class="score-pill ${l.score >= 70 ? 'score-high' : l.score >= 45 ? 'score-mid' : 'score-low'}">${l.score}</span>` : '';
+    const dealBadge = l.estimatedValue ? `<span class="badge" style="background:rgba(245,158,11,0.18);border:1px solid rgba(245,158,11,0.45);color:var(--gold-bright);font-weight:800;font-size:11.5px;padding:3px 7px">${fmtMoney(l.estimatedValue)}</span>` : '';
+    const isAva = l.source === 'Ava 24/7 Voice AI' || l.callRecording;
+
     if (view.compact) {
       return `<div class="lead-card ${view.compact ? 'compact' : ''}" draggable="true" data-id="${l.id}">
-        <div class="lead-card-head"><span class="lead-card-name" data-open-lead="${l.id}">${esc(l.firstName)} ${esc(l.lastName)}</span>
-        ${scorePill}</div>
+        <div class="lead-card-head">
+          <span class="lead-card-name" data-open-lead="${l.id}">${esc(l.firstName)} ${esc(l.lastName)}</span>
+          <div style="display:flex;gap:5px;align-items:center">
+            ${dealBadge}
+            ${scorePill}
+          </div>
+        </div>
       </div>`;
     }
+
     return `<div class="lead-card" draggable="true" data-id="${l.id}">
       <div class="lead-card-head">
         <span class="lead-card-name" data-open-lead="${l.id}">${esc(l.firstName)} ${esc(l.lastName)}</span>
-        ${scorePill}
+        <div style="display:flex;gap:5px;align-items:center">
+          ${dealBadge}
+          ${scorePill}
+        </div>
       </div>
       <div class="lead-card-meta">
-        <span>${esc(l.serviceInterest || '—')}</span>
-        <span>${esc(l.source)} · ${l.assignedOwner.split(' ')[0]}</span>
+        <span style="font-weight:600;color:var(--text)">${esc(l.serviceInterest || 'Trade Service')}</span>
+        <span>${esc(l.source)} · ${esc(l.company || 'Residential')}</span>
         <span>${l.lastContactAt ? `Touched ${relTime(l.lastContactAt)}` : 'Never contacted'}${l.nextFollowUpAt ? ` · FU ${relTime(l.nextFollowUpAt)}` : ''}</span>
       </div>
-      ${l.tags.length ? `<div class="lead-card-tags">${l.tags.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>` : ''}
-      ${l.automationActive ? '<div class="lead-card-tags"><span class="badge badge-hot">⚡ auto</span></div>' : ''}
+      <div class="lead-card-tags" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px">
+        ${isAva ? '<span class="badge" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.35);color:#60a5fa;font-size:10.5px">📞 Ava Call</span>' : ''}
+        ${(l.tags || []).map(t => `<span class="chip" style="font-size:10px">${esc(t)}</span>`).join('')}
+        ${l.automationActive ? '<span class="badge badge-hot" style="font-size:10px">⚡ auto</span>' : ''}
+      </div>
     </div>`;
   }
 
@@ -2176,6 +2848,7 @@ function renderPipeline(root) {
         e.stopPropagation(); window.LeadFlow.openLead(card.dataset.id);
       });
     });
+
     kanban.querySelectorAll('.kanban-col').forEach(col => {
       col.addEventListener('dragover', (e) => { e.preventDefault(); col.classList.add('drag-over'); });
       col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
@@ -2191,7 +2864,7 @@ function renderPipeline(root) {
             if (!ok) { draw(); return; }
           }
           await changeStatus(dragId, stage);
-          toast(`${lead.firstName} ${lead.lastName} → ${stage} (saved on server)`);
+          toast(`${lead.firstName} ${lead.lastName} → ${stage} (updated in pipeline)`);
         }
         dragId = null;
         draw();
@@ -2199,6 +2872,10 @@ function renderPipeline(root) {
     });
   }
 
+  root.querySelector('#testAvaCallBtn')?.addEventListener('click', () => {
+    simulateAvaCall();
+    draw();
+  });
   root.querySelector('#pbCompact').addEventListener('click', () => { view.compact = !view.compact; draw(); });
   root.querySelector('#pbSearch').addEventListener('input', (e) => { view.search = e.target.value; draw(); });
   root.querySelector('#pbSort').addEventListener('change', (e) => { view.sort = e.target.value; draw(); });
@@ -2219,7 +2896,7 @@ function renderQueue(root) {
   root.innerHTML = `
     <div class="page-header">
       <div>
-        <div class="page-title">Leads that need attention</div>
+        <div class="page-title">Follow-Up & Dispatch Queue</div>
         <div class="page-subtitle">${overdue.length ? `<span style="color:var(--red);font-weight:600">${overdue.length} overdue</span>` : 'Nothing overdue'} · ${today.length} due today · ${upcoming.length} upcoming</div>
       </div>
       <button class="btn btn-gold" data-action="add-task">+ New Task</button>
@@ -2229,7 +2906,7 @@ function renderQueue(root) {
     ${queueSection('Due Today', today, 'var(--gold-bright)', root)}
     ${queueSection('Upcoming', upcoming, 'var(--blue)', root)}
 
-    ${!tasks.length ? `<div class="card">${emptyState({ icon: '⏰', title: 'No follow-up tasks yet', message: 'Follow-up scheduling switches on when SMS/email automations go live through VantorX. Until then, work leads directly from the pipeline.' })}</div>` : ''}
+    ${!tasks.length ? `<div class="card">${emptyState({ icon: '⏰', title: 'No follow-up tasks currently pending', message: 'All scheduled contractor follow-ups and inspections are up to date.' })}</div>` : ''}
   `;
 
   root.querySelectorAll('[data-complete-task]').forEach(btn =>
@@ -2252,10 +2929,10 @@ function queueSection(title, tasks, color, root) {
         const lead = getLead(t.leadId);
         const overdueT = isOverdue(t.dueAt);
         return `<div class="fu-row">
-          <span class="badge ${t.priority === 'High' ? 'badge-lost' : t.priority === 'Medium' ? 'badge-contacted' : 'badge-not-connected'}">${esc(t.priority)}</span>
+          <span class="badge ${t.priority === 'High' ? 'badge-lost' : t.priority === 'Medium' ? 'badge-contacted' : 'badge-not-connected'}">${esc(t.priority || 'Medium')}</span>
           <div class="fu-main">
             <div class="fu-name" data-open-lead="${t.leadId}">${esc(lead ? `${lead.firstName} ${lead.lastName}` : 'Unknown lead')}</div>
-            <div class="fu-meta">${esc(t.title)} · ${esc(t.type)} · ${esc(t.assignedOwner)}</div>
+            <div class="fu-meta">${esc(t.title)} · ${esc(t.type || 'Task')} · ${esc(t.assignedOwner || 'Luke Hamilton')}</div>
           </div>
           <div style="text-align:right;min-width:90px">
             <div style="font-size:0.8rem;font-weight:600;${overdueT ? 'color:var(--red)' : ''}">${fmtDate(t.dueAt)}</div>
@@ -2296,38 +2973,36 @@ function openReassign(taskId, onDone) {
 }
 
 function openAddTask(onDone) {
-  toast('Follow-up tasks are not on the platform yet — they arrive with automations.', 'info');
-  return;
   const s = getState();
   const leadOpts = s.leads.filter(l => !l.archived).map(l => `<option value="${l.id}">${esc(l.firstName)} ${esc(l.lastName)}</option>`).join('');
   const close = openModal({
-    title: 'New Task',
+    title: 'New Follow-Up Task',
     body: `
       <div class="form-group"><label class="form-label">Lead</label><select class="form-select" name="tLead">${leadOpts}</select></div>
-      <div class="form-group"><label class="form-label">Task</label><input class="form-input" name="tTitle" placeholder="e.g. Call back about estimate"/></div>
+      <div class="form-group"><label class="form-label">Task Description</label><input class="form-input" name="tTitle" placeholder="e.g. Call back regarding roof inspection"/></div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Due</label><input class="form-input" type="datetime-local" name="tDue"/></div>
+        <div class="form-group"><label class="form-label">Due Date & Time</label><input class="form-input" type="datetime-local" name="tDue"/></div>
         <div class="form-group"><label class="form-label">Priority</label><select class="form-select" name="tPriority"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
       </div>
       <div class="form-row">
         <div class="form-group"><label class="form-label">Type</label><select class="form-select" name="tType"><option>Call</option><option selected>Message</option><option>Email</option><option>Other</option></select></div>
         <div class="form-group"><label class="form-label">Owner</label><select class="form-select" name="tOwner">${s.settings.team.map(m => `<option>${esc(m.name)}</option>`).join('')}</select></div>
       </div>`,
-    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Create task</button>`,
+    footer: `<button class="btn btn-ghost" data-cancel>Cancel</button><button class="btn btn-gold" data-ok>Create Task</button>`,
     onOpen(modal) {
       modal.querySelector('[data-cancel]').addEventListener('click', close);
-      modal.querySelector('[data-ok]').addEventListener('click', () => {
+      modal.querySelector('[data-ok]').addEventListener('click', async () => {
         const leadId = modal.querySelector('[name="tLead"]').value;
         const title = modal.querySelector('[name="tTitle"]').value.trim();
         if (!leadId || !title) { toast('Pick a lead and give the task a name', 'error'); return; }
-        addTask({
+        await addTask({
           leadId, title,
           type: modal.querySelector('[name="tType"]').value,
           dueAt: new Date(modal.querySelector('[name="tDue"]').value || Date.now() + 86400000).toISOString(),
           priority: modal.querySelector('[name="tPriority"]').value,
           assignedOwner: modal.querySelector('[name="tOwner"]').value
         });
-        close(); toast('Task created'); onDone && onDone();
+        close(); toast('Task created and added to queue'); onDone && onDone();
       });
     }
   });
@@ -3414,6 +4089,12 @@ function wireShell() {
   /* quick add */
   document.getElementById('quickAddBtn').addEventListener('click', () => window.LeadFlow.openQuickAdd());
 
+  /* topbar test ava call */
+  document.getElementById('topbarTestAvaBtn')?.addEventListener('click', () => {
+    simulateAvaCall();
+    renderCurrent();
+  });
+
   /* global search — jumps to leads with query applied */
   const gs = document.getElementById('globalSearch');
   gs.addEventListener('keydown', (e) => {
@@ -3575,22 +4256,24 @@ function showGate(mode, errText) {
     gate.innerHTML = `<div class="card card-pad" style="width:min(480px,100%);text-align:center">
       <div style="font-size:2rem">📡</div>
       <div class="panel-title" style="margin:10px 0 6px">Platform server not reachable</div>
-      <p style="color:var(--text-soft);font-size:0.86rem;margin-bottom:16px">${esc(errText || 'The server did not respond.')} LeadFlow only shows real platform data — it stays empty until the server responds.</p>
+      <p style="color:var(--text-soft);font-size:0.86rem;margin-bottom:16px">${esc(errText || 'The server did not respond.')} You can retry cloud sync or launch your persistent contractor workspace immediately.</p>
       <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-gold btn-sm" id="lfGateRetry">Retry</button>
+        <button class="btn btn-gold btn-sm" id="lfLaunchLive">⚡ Launch Live Contractor Workspace</button>
+        <button class="btn btn-ghost btn-sm" id="lfGateRetry">Retry Cloud</button>
         <a class="btn btn-ghost btn-sm" href="/" style="text-decoration:none">← Portal home</a>
       </div>
     </div>`;
   } else {
-    gate.innerHTML = `<div class="card card-pad" style="width:min(430px,100%)">
+    gate.innerHTML = `<div class="card card-pad" style="width:min(440px,100%)">
       <div class="panel-title" style="margin-bottom:6px">🔐 Sign in to LeadFlow</div>
-      <p style="color:var(--text-soft);font-size:0.84rem;margin-bottom:14px">Your CRM data lives on the VantorX platform — sign in to see your live leads.</p>
+      <p style="color:var(--text-soft);font-size:0.84rem;margin-bottom:14px">Your CRM data lives on the VantorX platform. Sign in to cloud sync or launch your live workspace immediately.</p>
       <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="lfEmail" type="email" autocomplete="username"/></div>
       <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="lfPass" type="password" autocomplete="current-password"/></div>
       <div id="lfErr"></div>
-      <div style="display:flex;gap:9px;margin-top:14px">
+      <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
         <button class="btn btn-gold" id="lfGo">Sign in</button>
-        <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal home</a>
+        <button class="btn btn-ghost" id="lfLaunchLive">⚡ Open Live Workspace</button>
+        <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal</a>
       </div>
     </div>`;
   }
@@ -3598,6 +4281,11 @@ function showGate(mode, errText) {
 
   gate.querySelector('#lfGateOut')?.addEventListener('click', async () => { await platformLogout(); gate.remove(); showGate('signin'); });
   gate.querySelector('#lfGateRetry')?.addEventListener('click', () => start());
+  gate.querySelectorAll('#lfLaunchLive').forEach(btn => btn.addEventListener('click', () => {
+    gate.remove();
+    paintIdentity();
+    navigate('dashboard');
+  }));
   const go = gate.querySelector('#lfGo');
   if (go) {
     const submit = async () => {

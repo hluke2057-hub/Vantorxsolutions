@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VantorX — Cold Call Quest 4.0 (Standalone Sales RPG &amp; Armory)</title>
+<title>VantorX â€” Cold Call Quest 4.0 (Standalone Sales RPG &amp; Armory)</title>
 <meta name="description" content="Master trade contractor cold calling in a full-fledged RPG. 8 Contractor Bosses, Conversational Brain 4.0, Swords & Armor Armory, Level 1-10 Progression, and Tactical Health Regain.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -256,18 +256,18 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   <div class="wrap">
     <div class="hud-grid">
       <a href="index.html" class="brand">
-        <span>⚔️ VANTORX: COLD CALL QUEST</span>
+        <span>âš”ï¸ VANTORX: COLD CALL QUEST</span>
         <span class="badge">DOPAMINE 5.0</span>
       </a>
 
       <div class="hud-actions">
         <div style="display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid rgba(245,158,11,0.3);padding:6px 14px;border-radius:10px;font-family:var(--font-mono);font-size:12px;color:var(--accent2)">
-          <span>🏆 Deals Won:</span> <strong id="sessionDealsWon" style="color:#ffffff;font-size:13px">0 / 8</strong>
+          <span>ðŸ† Deals Won:</span> <strong id="sessionDealsWon" style="color:#ffffff;font-size:13px">0 / 8</strong>
         </div>
-        <button class="hud-btn" id="voiceToggleBtn" onclick="toggleVoice()">🗣️ Voice: OFF (Click to Enable)</button>
-        <button class="hud-btn" id="soundToggleBtn" onclick="toggleSound()">🔊 SFX: ON</button>
-        <button class="hud-btn gold" onclick="openArmoryModal()">🛡️ Armory (Swords &amp; Armor)</button>
-        <a href="../cold-call-arena/index.html" class="hud-btn" style="border-color:rgba(56,189,248,0.4);color:var(--blue)">📋 Lead Dispatcher &amp; Cockpit ➔</a>
+        <button class="hud-btn" id="voiceToggleBtn" onclick="toggleVoice()">ðŸ—£ï¸ Voice: OFF (Click to Enable)</button>
+        <button class="hud-btn" id="soundToggleBtn" onclick="toggleSound()">ðŸ”Š SFX: ON</button>
+        <button class="hud-btn gold" onclick="openArmoryModal()">ðŸ›¡ï¸ Armory (Swords &amp; Armor)</button>
+        <a href="../cold-call-arena/index.html" class="hud-btn" style="border-color:rgba(56,189,248,0.4);color:var(--blue)">ðŸ“‹ Lead Dispatcher &amp; Cockpit âž”</a>
       </div>
     </div>
   </div>
@@ -279,27 +279,27 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   <div class="master-player-bar">
     <div class="player-avatar-card">
       <div class="avatar-frame">
-        <span id="playerAvatarIcon">🗡️</span>
+        <span id="playerAvatarIcon">ðŸ—¡ï¸</span>
         <span class="lvl-tag" id="playerLvlTag">LVL 1</span>
       </div>
       <div class="player-meta">
-        <h2 id="playerNameHeader">Luke the Closer <span class="streak-badge" id="streakHeader">🔥 0 Streak</span></h2>
+        <h2 id="playerNameHeader">Luke the Closer <span class="streak-badge" id="streakHeader">ðŸ”¥ 0 Streak</span></h2>
         <div class="rank-title" id="playerRankHeader">Novice Dialer</div>
-        <div class="equip-summary" id="playerEquipSummary">⚔️ Lead Gavel · 🛡️ Denim Workshirt</div>
+        <div class="equip-summary" id="playerEquipSummary">âš”ï¸ Lead Gavel Â· ðŸ›¡ï¸ Denim Workshirt</div>
       </div>
     </div>
 
     <div class="vitals-grid">
       <div class="vital-box">
         <div class="vital-header">
-          <span style="color:var(--err);font-weight:700">❤️ REJECTION ARMOR (HP)</span>
+          <span style="color:var(--err);font-weight:700">â¤ï¸ REJECTION ARMOR (HP)</span>
           <span id="hpDigits" style="color:#ffffff;font-weight:800">100 / 100</span>
         </div>
         <div class="bar-track"><div class="bar-fill-hp" id="hpBarFill" style="width:100%"></div></div>
       </div>
       <div class="vital-box">
         <div class="vital-header">
-          <span style="color:var(--blue);font-weight:700">⭐ CLOSING XP</span>
+          <span style="color:var(--blue);font-weight:700">â­ CLOSING XP</span>
           <span id="xpDigits" style="color:#ffffff;font-weight:800">0 / 150 XP (0%)</span>
         </div>
         <div class="bar-track"><div class="bar-fill-xp" id="xpBarFill" style="width:0%"></div></div>
@@ -307,7 +307,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     </div>
 
     <div class="wallet-badge">
-      <div class="gold-val" id="goldDigits">💰 0 GP</div>
+      <div class="gold-val" id="goldDigits">ðŸ’° 0 GP</div>
       <div class="gold-lbl">Earned in Combat</div>
     </div>
   </div>
@@ -318,7 +318,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     <!-- BOSS GAUNTLET SIDEBAR (8 CONTRACTORS) -->
     <aside class="boss-sidebar">
       <div class="sidebar-title">
-        <span>⚔️ 8 CONTRACTOR DUNGEONS</span>
+        <span>âš”ï¸ 8 CONTRACTOR DUNGEONS</span>
         <span style="font-size:12px;font-family:var(--font-mono);color:var(--accent)" id="clearedBossRatio">0 / 8 Cleared</span>
       </div>
       <div class="boss-list" id="bossListContainer">
@@ -332,10 +332,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       <!-- ACTIVE BOSS STAGE HUD -->
       <div class="active-boss-hud">
         <div class="active-boss-info">
-          <div class="active-boss-portrait" id="activeBossPortrait">🔨</div>
+          <div class="active-boss-portrait" id="activeBossPortrait">ðŸ”¨</div>
           <div class="active-boss-title">
             <h3 id="activeBossName">Rick "The Road Rager"</h3>
-            <p id="activeBossSub">Tampa Commercial Roofing Owner · Impatient / Driving</p>
+            <p id="activeBossSub">Tampa Commercial Roofing Owner Â· Impatient / Driving</p>
             <div class="active-boss-badges" id="activeBossBadges">
               <span class="badge-pill">Roofing</span>
               <span class="badge-pill">Tampa FL</span>
@@ -362,29 +362,29 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
       <!-- COACH PRESCRIPTION BAR -->
       <div class="coach-box">
-        <span id="coachPrescription">💡 <strong>Closer Coach:</strong> Acknowledge his situation before dropping the $8,000 emergency leak hook.</span>
+        <span id="coachPrescription">ðŸ’¡ <strong>Closer Coach:</strong> Acknowledge his situation before dropping the $8,000 emergency leak hook.</span>
         <span id="turnIndicatorBadge" style="font-family:var(--font-mono);font-size:11.5px;color:var(--accent2);font-weight:700">YOUR TURN: SPEAK OR STRIKE</span>
       </div>
 
       <!-- TACTICAL QUICK-STRIKE DOCK (INCLUDES HEALTH REGAIN) -->
       <div class="tactical-dock">
         <button class="strike-card" type="button" onclick="executeQuickStrike('permission')">
-          <div class="strike-tag">⚡ Permission Opener <span>+Crit</span></div>
-          <div class="strike-text">"Hey Rick, I know you're in the field — you got 30 seconds before you hang up?"</div>
+          <div class="strike-tag">âš¡ Permission Opener <span>+Crit</span></div>
+          <div class="strike-text">"Hey Rick, I know you're in the field â€” you got 30 seconds before you hang up?"</div>
         </button>
 
         <button class="strike-card" type="button" onclick="executeQuickStrike('leak')">
-          <div class="strike-tag">🎯 $8,000 Leak Hook <span>+Bleed</span></div>
+          <div class="strike-tag">ðŸŽ¯ $8,000 Leak Hook <span>+Bleed</span></div>
           <div class="strike-text">"Where does an emergency $8,000 leak call ring when you're 3 stories up?"</div>
         </button>
 
         <button class="strike-card" type="button" onclick="executeQuickStrike('demo')">
-          <div class="strike-tag">🛡️ Test Ava Live <span>(561) 813-8602</span></div>
+          <div class="strike-tag">ðŸ›¡ï¸ Test Ava Live <span>(561) 813-8602</span></div>
           <div class="strike-text">"Don't take my word for it. Dial (561) 813-8602 right now from your truck."</div>
         </button>
 
         <button class="strike-card heal-action" type="button" id="breatherBtn" onclick="executeTakeABreather()">
-          <div class="strike-tag">☕ Take a Breather <span id="breatherCooldownText">+30 HP</span></div>
+          <div class="strike-tag">â˜• Take a Breather <span id="breatherCooldownText">+30 HP</span></div>
           <div class="strike-text">Take a tactical breath, calibrate vocal pitch, and restore +30 HP (2T CD).</div>
         </button>
       </div>
@@ -392,11 +392,11 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       <!-- CUSTOM SPEECH / REBUTTAL INPUT DOCK -->
       <div class="input-dock">
         <button class="dock-btn mic" id="micBtn" type="button" onclick="toggleSpeechRecognition()" title="Speak with microphone">
-          🎙️ <span id="micLabel">Speak</span>
+          ðŸŽ™ï¸ <span id="micLabel">Speak</span>
         </button>
         <input type="text" class="custom-input" id="playerCustomInput" placeholder="Speak into mic or type your custom rebuttal here..." onkeydown="handleInputKey(event)">
         <button class="dock-btn send" id="sendBtn" type="button" onclick="submitRebuttal()">
-          ⚔️ Attack Rebuttal ➔
+          âš”ï¸ Attack Rebuttal âž”
         </button>
       </div>
 
@@ -410,8 +410,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 <div class="modal-overlay" id="armoryModal">
   <div class="modal-card">
     <div class="modal-header">
-      <h2>🛡️ VANTORX ARMORY — SWORDS &amp; ARMOR</h2>
-      <button class="modal-close" onclick="closeArmoryModal()">✕</button>
+      <h2>ðŸ›¡ï¸ VANTORX ARMORY â€” SWORDS &amp; ARMOR</h2>
+      <button class="modal-close" onclick="closeArmoryModal()">âœ•</button>
     </div>
 
     <p style="color:var(--dim);font-size:13.5px;margin-bottom:16px">
@@ -419,19 +419,19 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     </p>
 
     <!-- WEAPONS SECTION -->
-    <div class="armory-section-title">⚔️ OFFENSIVE SWORDS &amp; WEAPONS</div>
+    <div class="armory-section-title">âš”ï¸ OFFENSIVE SWORDS &amp; WEAPONS</div>
     <div class="armory-grid" id="weaponsGrid">
       <!-- Injected via JS -->
     </div>
 
     <!-- ARMOR SECTION -->
-    <div class="armory-section-title" style="margin-top:24px">🛡️ DEFENSIVE SUITS &amp; SHIELDS</div>
+    <div class="armory-section-title" style="margin-top:24px">ðŸ›¡ï¸ DEFENSIVE SUITS &amp; SHIELDS</div>
     <div class="armory-grid" id="armorGrid">
       <!-- Injected via JS -->
     </div>
 
     <!-- RELICS SECTION -->
-    <div class="armory-section-title" style="margin-top:24px">🏆 CONTRACTOR RELICS &amp; PERKS</div>
+    <div class="armory-section-title" style="margin-top:24px">ðŸ† CONTRACTOR RELICS &amp; PERKS</div>
     <div class="armory-grid" id="relicsGrid">
       <!-- Injected via JS -->
     </div>
@@ -441,14 +441,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 <!-- LEVEL UP CELEBRATION MODAL -->
 <div class="modal-overlay" id="levelUpModal">
   <div class="modal-card" style="max-width:540px;text-align:center">
-    <div style="font-size:54px;margin-bottom:10px">🎉</div>
+    <div style="font-size:54px;margin-bottom:10px">ðŸŽ‰</div>
     <h2 style="font-family:var(--font-head);font-size:26px;color:var(--accent2);margin-bottom:6px" id="levelUpTitle">LEVEL UP!</h2>
     <div style="font-size:16px;color:#ffffff;font-weight:700;margin-bottom:14px" id="levelUpRank">Appointment Slayer (Level 5)</div>
     <p style="color:var(--dim);font-size:14px;line-height:1.5;margin-bottom:20px" id="levelUpDesc">
       Your cold call authority has expanded! Max HP increased and higher tier weapons are unlocked in the Armory.
     </p>
     <button class="hud-btn gold" style="width:100%;padding:12px;font-size:15px;justify-content:center" onclick="closeLevelUpModal()">
-      ⚔️ Continue The Gauntlet ➔
+      âš”ï¸ Continue The Gauntlet âž”
     </button>
   </div>
 </div>
@@ -456,26 +456,26 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 <!-- CALL TERMINATED / DEFEAT MODAL -->
 <div class="modal-overlay" id="defeatModal">
   <div class="modal-card" style="max-width:540px;text-align:center;border-color:rgba(239,68,68,0.7);box-shadow:0 0 50px rgba(239,68,68,0.3)">
-    <div style="font-size:56px;margin-bottom:8px">📵💀</div>
-    <div style="font-size:12px;font-family:var(--font-mono);font-weight:700;color:#ef4444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">CALL DISCONNECTED · CONTRACTOR HUNG UP</div>
+    <div style="font-size:56px;margin-bottom:8px">ðŸ“µðŸ’€</div>
+    <div style="font-size:12px;font-family:var(--font-mono);font-weight:700;color:#ef4444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px">CALL DISCONNECTED Â· CONTRACTOR HUNG UP</div>
     <h2 style="font-family:var(--font-head);font-size:26px;color:#ffffff;margin-bottom:8px" id="defeatTitle">YOU GOT HUNG UP ON!</h2>
     <div style="font-size:14.5px;color:#fca5a5;font-weight:700;margin-bottom:16px;font-style:italic" id="defeatBossBark">
       "Stop wasting my time with generic telemarketer pitch crap. Lose my number!"
     </div>
     
     <div style="background:var(--bg3);border:1px solid rgba(239,68,68,0.35);border-radius:12px;padding:16px;text-align:left;margin-bottom:20px">
-      <div style="font-size:12px;font-weight:700;color:#ef4444;margin-bottom:4px;font-family:var(--font-mono)">❌ FATAL MISTAKE:</div>
+      <div style="font-size:12px;font-weight:700;color:#ef4444;margin-bottom:4px;font-family:var(--font-mono)">âŒ FATAL MISTAKE:</div>
       <div style="font-size:13.5px;color:#ffffff;line-height:1.5;margin-bottom:12px" id="defeatMistakeDesc">
         Sounded like an amateur script-reading telemarketer without establishing trade pain or asking permission.
       </div>
-      <div style="font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:4px;font-family:var(--font-mono)">💡 COACH VANCE CLOSING REMEDY:</div>
+      <div style="font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:4px;font-family:var(--font-mono)">ðŸ’¡ COACH VANCE CLOSING REMEDY:</div>
       <div style="font-size:13px;color:var(--dim);line-height:1.5" id="defeatRemedyDesc">
         Next time, lead with the 20-second permission opener, agree with his skepticism first, and quote the $397 flat rate with zero long-term contracts.
       </div>
     </div>
 
     <button class="hud-btn gold" style="width:100%;padding:14px;font-size:16px;justify-content:center;box-shadow:0 0 25px rgba(245,158,11,0.4)" onclick="redialAfterDefeat()">
-      🔄 Redial Contractor &amp; Try Again ➔
+      ðŸ”„ Redial Contractor &amp; Try Again âž”
     </button>
   </div>
 </div>
@@ -483,23 +483,23 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 <!-- MYSTERY LOOT DROP MODAL (DOPAMINE REWARD) -->
 <div class="modal-overlay" id="lootModal">
   <div class="modal-card" style="max-width:540px;text-align:center;border-color:rgba(245,158,11,0.8);box-shadow:0 0 60px rgba(245,158,11,0.35);background:radial-gradient(circle at 50% 20%, rgba(245,158,11,0.18), rgba(15,21,34,0.98))">
-    <div style="font-size:12px;font-family:var(--font-mono);font-weight:800;color:var(--accent2);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px">CONTRACT SIGNED · VICTORY SPOILS</div>
+    <div style="font-size:12px;font-family:var(--font-mono);font-weight:800;color:var(--accent2);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px">CONTRACT SIGNED Â· VICTORY SPOILS</div>
     <h2 style="font-family:var(--font-head);font-size:26px;color:#ffffff;margin-bottom:8px" id="lootBossName">CONTRACTOR AGREED TO WALKTHROUGH!</h2>
     <div style="font-size:14px;color:#94a3b8;margin-bottom:20px" id="lootSubtitle">You broke through the contractor's skepticism and secured the demo. Crack your mystery loot chest!</div>
 
     <!-- Loot Chest Interactive Graphic -->
     <div id="chestContainer" style="cursor:pointer;padding:15px;margin-bottom:16px;user-select:none" onclick="crackLootChest()">
-      <div id="chestIcon" style="font-size:80px;display:inline-block;transition:transform 0.2s" class="bouncing-chest">🎁</div>
-      <div id="chestPrompt" style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--accent2);margin-top:8px">✨ CLICK TO CRACK LOOT CHEST ✨</div>
+      <div id="chestIcon" style="font-size:80px;display:inline-block;transition:transform 0.2s" class="bouncing-chest">ðŸŽ</div>
+      <div id="chestPrompt" style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--accent2);margin-top:8px">âœ¨ CLICK TO CRACK LOOT CHEST âœ¨</div>
     </div>
 
     <!-- Loot Revealed Container (Hidden until cracked) -->
     <div id="lootRewardsBox" style="display:none;background:var(--bg3);border:1px solid rgba(245,158,11,0.35);border-radius:14px;padding:18px;text-align:left;margin-bottom:20px;animation:zoomIn 0.3s ease-out">
-      <div style="font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:10px;font-family:var(--font-mono)">🎉 VICTORY BOUNTY UNLOCKED:</div>
+      <div style="font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:10px;font-family:var(--font-mono)">ðŸŽ‰ VICTORY BOUNTY UNLOCKED:</div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg);padding:10px 14px;border-radius:10px;border:1px solid var(--line)">
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-size:24px">💰</span>
+            <span style="font-size:24px">ðŸ’°</span>
             <div>
               <div style="font-size:13px;font-weight:700;color:#ffffff">Contractor Retainer Bounty</div>
               <div style="font-size:11.5px;color:var(--dim)">Instant cash commission</div>
@@ -510,7 +510,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
         <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg);padding:10px 14px;border-radius:10px;border:1px solid var(--line)">
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-size:24px">⭐</span>
+            <span style="font-size:24px">â­</span>
             <div>
               <div style="font-size:13px;font-weight:700;color:#ffffff">Closer Mastery Experience</div>
               <div style="font-size:11.5px;color:var(--dim)">Progress towards next rank</div>
@@ -521,7 +521,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
         <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg);padding:10px 14px;border-radius:10px;border:1px solid rgba(168,85,247,0.3)" id="lootRelicRow">
           <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-size:24px" id="lootRelicIcon">⚡</span>
+            <span style="font-size:24px" id="lootRelicIcon">âš¡</span>
             <div>
               <div style="font-size:13px;font-weight:700;color:#d8b4fe" id="lootRelicName">Titanium Earbuds</div>
               <div style="font-size:11.5px;color:var(--dim)" id="lootRelicDesc">+15 Max HP permanent base pool</div>
@@ -533,14 +533,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     </div>
 
     <button id="lootClaimBtn" class="hud-btn gold" style="display:none;width:100%;padding:14px;font-size:16px;justify-content:center;box-shadow:0 0 25px rgba(245,158,11,0.4)" onclick="claimLootAndAdvance()">
-      ⚔️ Claim Spoils &amp; Battle Next Boss ➔
+      âš”ï¸ Claim Spoils &amp; Battle Next Boss âž”
     </button>
   </div>
 </div>
 
 <script>
 // ============================================================
-// 🎮 STANDALONE COLD CALL QUEST 5.0 JAVASCRIPT ENGINE
+// ðŸŽ® STANDALONE COLD CALL QUEST 5.0 JAVASCRIPT ENGINE
 // ============================================================
 
 (function() {
@@ -833,7 +833,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     voiceEnabled = !voiceEnabled;
     const btn = document.getElementById('voiceToggleBtn');
     if (btn) {
-      btn.textContent = voiceEnabled ? '🗣️ Voice: ON' : '🗣️ Voice: OFF (Click to Enable)';
+      btn.textContent = voiceEnabled ? 'ðŸ—£ï¸ Voice: ON' : 'ðŸ—£ï¸ Voice: OFF (Click to Enable)';
       btn.style.color = voiceEnabled ? 'var(--accent2)' : 'var(--dim)';
     }
     if (!voiceEnabled && window.speechSynthesis) {
@@ -845,28 +845,28 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     sfxEnabled = !sfxEnabled;
     const btn = document.getElementById('soundToggleBtn');
     if (btn) {
-      btn.textContent = sfxEnabled ? '🔊 SFX: ON' : '🔇 SFX: MUTED';
+      btn.textContent = sfxEnabled ? 'ðŸ”Š SFX: ON' : 'ðŸ”‡ SFX: MUTED';
       btn.style.color = sfxEnabled ? 'var(--ink)' : 'var(--dim)';
     }
   };
 
   // 2. PLAYER DATA & ARMORY DEFINITIONS
   const WEAPONS = [
-    { id: 'gavel', name: 'Lead Gavel', icon: '🔨', lvl: 1, cost: 0, dmgBonus: 0, desc: 'Standard rookie dialer tool. Simple and reliable.', passiveName: 'First Call Courage', passiveDesc: 'Baseline cold calling attack.' },
-    { id: 'blade', name: 'Iron Rebuttal Shortsword', icon: '🗡️', lvl: 2, cost: 100, dmgBonus: 15, desc: 'Honed with early objection battlecards.', passiveName: 'Permission Slice', passiveDesc: '20% chance to land +25 extra Critical Hit damage on permission openers.' },
-    { id: 'cleaver', name: 'Trade-Pain Cleaver', icon: '🪓', lvl: 4, cost: 250, dmgBonus: 30, desc: 'Forged from missed call contractor agony.', passiveName: 'Revenue Bleed', passiveDesc: 'Applying trade math inflicts +10 bleeding damage over 2 consecutive turns.' },
-    { id: 'rapier', name: 'Carrier *71 Rapier', icon: '🤺', lvl: 6, cost: 450, dmgBonus: 45, desc: 'Direct carrier-level precision with zero ring delay.', passiveName: 'Zero-Ring Piercing', passiveDesc: 'Penetrates boss armor; boss counterattack damage is reduced by 15%.' },
-    { id: 'scythe', name: 'Total Agreement Scythe', icon: '🌾', lvl: 8, cost: 750, dmgBonus: 65, desc: 'Reaps contractor skepticism by validating their anger.', passiveName: 'Skepticism Reaper', passiveDesc: 'Validating boss objections doubles your attack damage on the following turn.' },
-    { id: 'excalibur', name: 'Mythic Rainmaker Excalibur', icon: '👑', lvl: 10, cost: 1200, dmgBonus: 100, desc: 'Legendary blade held only by master agency closers.', passiveName: 'Live Transfer Stun', passiveDesc: '35% chance to instantly stun the boss into booking an immediate demo test!' }
+    { id: 'gavel', name: 'Lead Gavel', icon: 'ðŸ”¨', lvl: 1, cost: 0, dmgBonus: 0, desc: 'Standard rookie dialer tool. Simple and reliable.', passiveName: 'First Call Courage', passiveDesc: 'Baseline cold calling attack.' },
+    { id: 'blade', name: 'Iron Rebuttal Shortsword', icon: 'ðŸ—¡ï¸', lvl: 2, cost: 100, dmgBonus: 15, desc: 'Honed with early objection battlecards.', passiveName: 'Permission Slice', passiveDesc: '20% chance to land +25 extra Critical Hit damage on permission openers.' },
+    { id: 'cleaver', name: 'Trade-Pain Cleaver', icon: 'ðŸª“', lvl: 4, cost: 250, dmgBonus: 30, desc: 'Forged from missed call contractor agony.', passiveName: 'Revenue Bleed', passiveDesc: 'Applying trade math inflicts +10 bleeding damage over 2 consecutive turns.' },
+    { id: 'rapier', name: 'Carrier *71 Rapier', icon: 'ðŸ¤º', lvl: 6, cost: 450, dmgBonus: 45, desc: 'Direct carrier-level precision with zero ring delay.', passiveName: 'Zero-Ring Piercing', passiveDesc: 'Penetrates boss armor; boss counterattack damage is reduced by 15%.' },
+    { id: 'scythe', name: 'Total Agreement Scythe', icon: 'ðŸŒ¾', lvl: 8, cost: 750, dmgBonus: 65, desc: 'Reaps contractor skepticism by validating their anger.', passiveName: 'Skepticism Reaper', passiveDesc: 'Validating boss objections doubles your attack damage on the following turn.' },
+    { id: 'excalibur', name: 'Mythic Rainmaker Excalibur', icon: 'ðŸ‘‘', lvl: 10, cost: 1200, dmgBonus: 100, desc: 'Legendary blade held only by master agency closers.', passiveName: 'Live Transfer Stun', passiveDesc: '35% chance to instantly stun the boss into booking an immediate demo test!' }
   ];
 
   const ARMORS = [
-    { id: 'workshirt', name: 'Rookie Denim Workshirt', icon: '👕', lvl: 1, cost: 0, maxHp: 100, dmgReduct: 0, desc: 'Clean denim workshirt. Provides baseline protection against cold call hang-ups.', passiveName: 'Fresh Start', passiveDesc: '100 Max HP base pool.' },
-    { id: 'vest', name: 'Heavy Tradesman Vest', icon: '🦺', lvl: 2, cost: 100, maxHp: 115, dmgReduct: 10, desc: 'Reinforced utility pockets for notes and scripts.', passiveName: 'Field Toughness', passiveDesc: '115 Max HP, absorbs 10% rejection damage.' },
-    { id: 'plate', name: 'Steel-Toed Plate Carrier', icon: '🛡️', lvl: 4, cost: 250, maxHp: 135, dmgReduct: 20, desc: 'Heavy protection against rude contractor barks.', passiveName: 'Hang-up Deflection', passiveDesc: '135 Max HP, absorbs 20% damage, 15% chance to deflect boss counter to 0.' },
-    { id: 'aegis', name: 'Titan Agreement Aegis', icon: '🔰', lvl: 6, cost: 450, maxHp: 160, dmgReduct: 30, desc: 'Absorbs extreme frustration and transforms it into rapport.', passiveName: 'Tone Dampener', passiveDesc: '160 Max HP, absorbs 30% damage, cuts impatience timer penalties by 50%.' },
-    { id: 'cuirass', name: 'Diamond Frame Cuirass', icon: '💎', lvl: 8, cost: 750, maxHp: 190, dmgReduct: 40, desc: 'Impenetrable reputation armor tested across 1,000 live dials.', passiveName: 'Reputation Bastion', passiveDesc: '190 Max HP, absorbs 40% damage, heals +10 HP on Grade A/S rebuttals.' },
-    { id: 'cloak', name: 'Obsidian Rainmaker Cloak', icon: '🥋', lvl: 10, cost: 1200, maxHp: 230, dmgReduct: 50, desc: 'Mythic woven shroud that makes contractor rejections bounce off harmlessly.', passiveName: 'Contractor Whisperer', passiveDesc: '230 Max HP, 50% rejection damage reduction, +5 HP auto-regen every combat turn.' }
+    { id: 'workshirt', name: 'Rookie Denim Workshirt', icon: 'ðŸ‘•', lvl: 1, cost: 0, maxHp: 100, dmgReduct: 0, desc: 'Clean denim workshirt. Provides baseline protection against cold call hang-ups.', passiveName: 'Fresh Start', passiveDesc: '100 Max HP base pool.' },
+    { id: 'vest', name: 'Heavy Tradesman Vest', icon: 'ðŸ¦º', lvl: 2, cost: 100, maxHp: 115, dmgReduct: 10, desc: 'Reinforced utility pockets for notes and scripts.', passiveName: 'Field Toughness', passiveDesc: '115 Max HP, absorbs 10% rejection damage.' },
+    { id: 'plate', name: 'Steel-Toed Plate Carrier', icon: 'ðŸ›¡ï¸', lvl: 4, cost: 250, maxHp: 135, dmgReduct: 20, desc: 'Heavy protection against rude contractor barks.', passiveName: 'Hang-up Deflection', passiveDesc: '135 Max HP, absorbs 20% damage, 15% chance to deflect boss counter to 0.' },
+    { id: 'aegis', name: 'Titan Agreement Aegis', icon: 'ðŸ”°', lvl: 6, cost: 450, maxHp: 160, dmgReduct: 30, desc: 'Absorbs extreme frustration and transforms it into rapport.', passiveName: 'Tone Dampener', passiveDesc: '160 Max HP, absorbs 30% damage, cuts impatience timer penalties by 50%.' },
+    { id: 'cuirass', name: 'Diamond Frame Cuirass', icon: 'ðŸ’Ž', lvl: 8, cost: 750, maxHp: 190, dmgReduct: 40, desc: 'Impenetrable reputation armor tested across 1,000 live dials.', passiveName: 'Reputation Bastion', passiveDesc: '190 Max HP, absorbs 40% damage, heals +10 HP on Grade A/S rebuttals.' },
+    { id: 'cloak', name: 'Obsidian Rainmaker Cloak', icon: 'ðŸ¥‹', lvl: 10, cost: 1200, maxHp: 230, dmgReduct: 50, desc: 'Mythic woven shroud that makes contractor rejections bounce off harmlessly.', passiveName: 'Contractor Whisperer', passiveDesc: '230 Max HP, 50% rejection damage reduction, +5 HP auto-regen every combat turn.' }
   ];
 
   const RANKS = [
@@ -883,12 +883,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   ];
 
   const TRADE_RELICS = [
-    { id: 'earbuds', name: 'Titanium Hands-Free Earbuds', icon: '🎧', desc: '+20 Max HP permanent base pool', perk: '+20 Max HP' },
-    { id: 'battlecard', name: 'Laminated Objection Battlecard', icon: '📜', desc: '+10% Objection Damage on all weapons', perk: '+10% Damage' },
-    { id: 'simcard', name: 'Florida Carrier 5G SIM', icon: '📶', desc: '+15% Critical Hit Chance on permission & trade math', perk: '+15% Crit' },
-    { id: 'thermos', name: 'Contractor Thermos', icon: '☕', desc: 'Reduces Take A Breather cooldown to 1 turn', perk: '1-Turn Breather' },
-    { id: 'rolodex', name: 'Rolodex of Master Tradesmen', icon: '📇', desc: '+25% Gold commissions from closed contracts', perk: '+25% Gold' },
-    { id: 'aviators', name: 'Rainmaker Aviator Sunglasses', icon: '🕶️', desc: '+20% Mastery XP from all closed contracts', perk: '+20% XP' }
+    { id: 'earbuds', name: 'Titanium Hands-Free Earbuds', icon: 'ðŸŽ§', desc: '+20 Max HP permanent base pool', perk: '+20 Max HP' },
+    { id: 'battlecard', name: 'Laminated Objection Battlecard', icon: 'ðŸ“œ', desc: '+10% Objection Damage on all weapons', perk: '+10% Damage' },
+    { id: 'simcard', name: 'Florida Carrier 5G SIM', icon: 'ðŸ“¶', desc: '+15% Critical Hit Chance on permission & trade math', perk: '+15% Crit' },
+    { id: 'thermos', name: 'Contractor Thermos', icon: 'â˜•', desc: 'Reduces Take A Breather cooldown to 1 turn', perk: '1-Turn Breather' },
+    { id: 'rolodex', name: 'Rolodex of Master Tradesmen', icon: 'ðŸ“‡', desc: '+25% Gold commissions from closed contracts', perk: '+25% Gold' },
+    { id: 'aviators', name: 'Rainmaker Aviator Sunglasses', icon: 'ðŸ•¶ï¸', desc: '+20% Mastery XP from all closed contracts', perk: '+20% XP' }
   ];
 
   // 3. 8 CONTRACTOR BOSS GAUNTLET DEFINITIONS
@@ -900,7 +900,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       trade: 'Roofing',
       company: 'Tampa Apex Commercial Roofing',
       location: 'Tampa, FL',
-      portrait: '🔨',
+      portrait: 'ðŸ”¨',
       hp: 100,
       maxHp: 100,
       tier: 'Tier 1',
@@ -921,7 +921,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       trade: 'HVAC Dispatch',
       company: 'Orlando Premier Air Solutions',
       location: 'Winter Park, FL',
-      portrait: '📋',
+      portrait: 'ðŸ“‹',
       hp: 120,
       maxHp: 120,
       tier: 'Tier 1',
@@ -942,7 +942,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       trade: 'Electrical',
       company: 'Mike\'s Master Commercial Electric',
       location: 'West Palm Beach, FL',
-      portrait: '⚡',
+      portrait: 'âš¡',
       hp: 150,
       maxHp: 150,
       tier: 'Tier 2',
@@ -963,7 +963,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       trade: 'Plumbing',
       company: 'Brickell Trenchless Plumbing Pros',
       location: 'Miami / Brickell, FL',
-      portrait: '🔧',
+      portrait: 'ðŸ”§',
       hp: 180,
       maxHp: 180,
       tier: 'Tier 2',
@@ -984,7 +984,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       trade: 'Water Mitigation',
       company: 'Gulf Coast 24/7 Flood Mitigation',
       location: 'Fort Myers, FL',
-      portrait: '🌊',
+      portrait: 'ðŸŒŠ',
       hp: 210,
       maxHp: 210,
       tier: 'Tier 3',
@@ -1005,7 +1005,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       trade: 'Residential HVAC',
       company: 'Jacksonville Air Champions',
       location: 'Jacksonville, FL',
-      portrait: '❄️',
+      portrait: 'â„ï¸',
       hp: 240,
       maxHp: 240,
       tier: 'Tier 3',
@@ -1026,7 +1026,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       trade: 'Septic & Excavation',
       company: 'Marion County Septic & Dirt',
       location: 'Ocala / Marion County, FL',
-      portrait: '🚜',
+      portrait: 'ðŸšœ',
       hp: 270,
       maxHp: 270,
       tier: 'Tier 4',
@@ -1047,7 +1047,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       trade: 'Commercial Mechanical Fleet',
       company: 'Sunbelt Fleet Mechanical Systems',
       location: 'Dallas / Houston / Orlando',
-      portrait: '🏢',
+      portrait: 'ðŸ¢',
       hp: 350,
       maxHp: 350,
       tier: 'Tier 5 RAID BOSS',
@@ -1197,7 +1197,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (hpBar) hpBar.style.width = `${hpPct}%`;
     if (xpDigits) xpDigits.textContent = `${player.xp} / ${player.nextLvlXp} XP (${xpPct}%)`;
     if (xpBar) xpBar.style.width = `${xpPct}%`;
-    if (goldDigits) goldDigits.textContent = `💰 ${player.gold} GP`;
+    if (goldDigits) goldDigits.textContent = `ðŸ’° ${player.gold} GP`;
     if (playerLvlTag) playerLvlTag.textContent = `LVL ${player.lvl}`;
 
     // Streak Multiplier & Flame Visual
@@ -1205,10 +1205,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       if (player.streak >= 2) {
         streakHeader.classList.add('streak-on-fire');
         const mult = (1 + Math.min(1.0, player.streak * 0.2)).toFixed(1);
-        streakHeader.innerHTML = `🔥 ${player.streak} Streak <span style="font-size:11px;opacity:0.9">(${mult}x Loot)</span>`;
+        streakHeader.innerHTML = `ðŸ”¥ ${player.streak} Streak <span style="font-size:11px;opacity:0.9">(${mult}x Loot)</span>`;
       } else {
         streakHeader.classList.remove('streak-on-fire');
-        streakHeader.textContent = `🔥 ${player.streak} Streak`;
+        streakHeader.textContent = `ðŸ”¥ ${player.streak} Streak`;
       }
     }
 
@@ -1223,7 +1223,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const curA = ARMORS.find(a => a.id === player.equippedArmor) || ARMORS[0];
     const relicCount = (player.unlockedRelics || []).length;
     if (playerEquipSummary) {
-      playerEquipSummary.textContent = `${curW.icon} ${curW.name} · ${curA.icon} ${curA.name}${relicCount > 0 ? ` · 🏆 ${relicCount} Relics` : ''}`;
+      playerEquipSummary.textContent = `${curW.icon} ${curW.name} Â· ${curA.icon} ${curA.name}${relicCount > 0 ? ` Â· ðŸ† ${relicCount} Relics` : ''}`;
     }
 
     const bossHpDigits = document.getElementById('bossHpDigits');
@@ -1286,12 +1286,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           <h4>${b.name}</h4>
           <p>${b.title}</p>
           <div class="boss-hp-tag">
-            <span style="color:${isDefeated ? 'var(--ok)' : 'var(--err)'}">❤️ ${isDefeated ? 'DEFEATED' : b.hp + ' HP'}</span>
-            <span style="color:var(--faint)">· ${b.tier}</span>
+            <span style="color:${isDefeated ? 'var(--ok)' : 'var(--err)'}">â¤ï¸ ${isDefeated ? 'DEFEATED' : b.hp + ' HP'}</span>
+            <span style="color:var(--faint)">Â· ${b.tier}</span>
           </div>
         </div>
         <div class="boss-status-badge ${isDefeated ? 'status-cleared' : (isActive ? 'status-ready' : 'status-locked')}">
-          ${isDefeated ? '✓ CLEARED' : (isActive ? '⚔️ READY' : 'STAGE ' + (idx + 1))}
+          ${isDefeated ? 'âœ“ CLEARED' : (isActive ? 'âš”ï¸ READY' : 'STAGE ' + (idx + 1))}
         </div>
       `;
       container.appendChild(btn);
@@ -1326,7 +1326,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     if (portrait) portrait.textContent = currentBoss.portrait;
     if (nameEl) nameEl.textContent = currentBoss.name;
-    if (subEl) subEl.textContent = `${currentBoss.title} · ${currentBoss.trade}`;
+    if (subEl) subEl.textContent = `${currentBoss.title} Â· ${currentBoss.trade}`;
     if (badgesEl) {
       badgesEl.innerHTML = currentBoss.badges.map(b => `<span class="badge-pill">${b}</span>`).join('');
     }
@@ -1337,7 +1337,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const terminal = document.getElementById('combatLog');
     if (terminal) terminal.innerHTML = '';
 
-    appendLog(`⚔️ <strong>ENTERED STAGE ${idx + 1}:</strong> Confronting ${currentBoss.name} (${currentBoss.trade})!`, 'system');
+    appendLog(`âš”ï¸ <strong>ENTERED STAGE ${idx + 1}:</strong> Confronting ${currentBoss.name} (${currentBoss.trade})!`, 'system');
     appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.stage1}"`, 'boss');
     matchHistory.push({ role: 'assistant', content: currentBoss.dialogue.stage1 });
 
@@ -1359,7 +1359,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     playSynth('heal');
     spawnFloatingNumber(`+${healed} HP BREATHER`, 'heal');
-    appendLog(`☕ <strong>TAKE A BREATHER (+${healed} HP)!</strong> Luke took a tactical sip of coffee, relaxed his vocal tone, and recovered <strong>+${healed} HP</strong> (HP: ${player.hp}/${player.maxHp}).`, 'heal');
+    appendLog(`â˜• <strong>TAKE A BREATHER (+${healed} HP)!</strong> Luke took a tactical sip of coffee, relaxed his vocal tone, and recovered <strong>+${healed} HP</strong> (HP: ${player.hp}/${player.maxHp}).`, 'heal');
     updateHUD();
     savePlayer();
   };
@@ -1845,7 +1845,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hangupReason = 'Contractor Disrespect / Aggression';
       defeatMistake = 'Insulted, cursed at, or attacked the business owner on their active business line.';
       defeatRemedy = 'Contractors have zero tolerance for disrespect. Lead with extreme deference and use the Total Agreement Shield: "You are 100% right."';
-      feedback = '🚨 FATAL BLUNDER: Hostility detected! Contractor hung up immediately.';
+      feedback = 'ðŸš¨ FATAL BLUNDER: Hostility detected! Contractor hung up immediately.';
     } else if (analysis.isFatalSpam) {
       grade = 'F';
       damage = 0;
@@ -1854,7 +1854,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hangupReason = 'Corporate Buzzword Telemarketer Spam';
       defeatMistake = 'Used corporate marketing buzzwords ("synergies", "omnichannel pipeline", "sales deck") that scream telemarketer spam to a blue-collar tradesman.';
       defeatRemedy = 'Contractors work with their hands. Speak plain job site English: missed calls, lost $8,000 emergency jobs, and instant SMS dispatch.';
-      feedback = '🚨 FATAL BLUNDER: Corporate buzzword pitch trap! Contractor slammed the phone down.';
+      feedback = 'ðŸš¨ FATAL BLUNDER: Corporate buzzword pitch trap! Contractor slammed the phone down.';
     } else if (analysis.isFatalPrice) {
       grade = 'F';
       damage = 0;
@@ -1863,7 +1863,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hangupReason = 'Absurd / Scam Pricing Trap';
       defeatMistake = 'Quoted unrealistic enterprise fees ($5,000 - $10,000/mo) or claimed enterprise AI receptionist service is "100% free".';
       defeatRemedy = 'Tradesmen immediately recognize free as a scam or thousands as price gouging. Quote $397/mo flat with zero contracts and zero setup fee.';
-      feedback = '🚨 FATAL BLUNDER: Quoted absurd/scam pricing! Contractor hung up.';
+      feedback = 'ðŸš¨ FATAL BLUNDER: Quoted absurd/scam pricing! Contractor hung up.';
     } else if (analysis.isDodgingQuestion && (matchMemory.dodgedCount || 0) >= 2) {
       grade = 'F';
       damage = 0;
@@ -1872,7 +1872,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hangupReason = 'Evasive Sales Rep / Dodged Contractor Question Twice';
       defeatMistake = 'Dodged the contractor\'s direct question twice in a row instead of giving a straight answer.';
       defeatRemedy = 'Never dodge pricing or proof questions. When a contractor asks "how much?", answer directly ($397/mo flat) before asking for a walkthrough.';
-      feedback = '🚨 FATAL BLUNDER: Dodged contractor questions twice! Contractor terminated call.';
+      feedback = 'ðŸš¨ FATAL BLUNDER: Dodged contractor questions twice! Contractor terminated call.';
     } else if (analysis.isHesitant && (matchMemory.consecutiveHesitation || 0) >= 2) {
       grade = 'F';
       damage = 0;
@@ -1881,17 +1881,17 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hangupReason = 'Dead Air & Freezing on the Phone';
       defeatMistake = 'Left awkward dead air and stuttered ("uh", "um", empty text) two turns in a row while contractor was waiting.';
       defeatRemedy = 'Contractors have zero patience for awkward pauses while working on job sites. Maintain vocal momentum and keep sentences punchy.';
-      feedback = '🚨 FATAL BLUNDER: Dead air twice in a row! Contractor hung up.';
+      feedback = 'ðŸš¨ FATAL BLUNDER: Dead air twice in a row! Contractor hung up.';
     } else if (analysis.isDodgingQuestion) {
       grade = 'D';
       damage = 6;
       counterDmg = 25;
-      feedback = '⚠️ CONTRACTOR NOTICED DODGING: They asked a direct question. Answer it immediately or they will hang up!';
+      feedback = 'âš ï¸ CONTRACTOR NOTICED DODGING: They asked a direct question. Answer it immediately or they will hang up!';
     } else if (analysis.isHesitant) {
       grade = 'D';
       damage = 4;
       counterDmg = 20;
-      feedback = '⚠️ HESITATION WARNING: Stuttering or dead air on a business line. Contractor is losing patience!';
+      feedback = 'âš ï¸ HESITATION WARNING: Stuttering or dead air on a business line. Contractor is losing patience!';
     } else {
       // 2. NORMAL ADAPTIVE BRAIN EVALUATION
       if (analysis.hasAgreement) {
@@ -1904,12 +1904,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         grade = 'S';
         damage = 45;
         counterDmg = 0;
-        feedback = '🔥 MASTERFUL REBUTTAL! Fully addressed the contractor\'s concern, anchored trade math, and delivered proof!';
+        feedback = 'ðŸ”¥ MASTERFUL REBUTTAL! Fully addressed the contractor\'s concern, anchored trade math, and delivered proof!';
       } else if (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer || analysis.hasTimeProposal) {
         grade = 'A';
         damage = 34;
         counterDmg = 4;
-        feedback = '✨ EXCELLENT! Direct, substantive answer with zero fluff.';
+        feedback = 'âœ¨ EXCELLENT! Direct, substantive answer with zero fluff.';
       } else if (analysis.hasLeakHook || analysis.hasPermission || analysis.hasAgreement || analysis.hasAvaMechanism || analysis.isUserAskingQuestion) {
         grade = 'B';
         damage = 22;
@@ -1939,23 +1939,23 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       if (curWeapon.id === 'blade' && analysis.hasPermission && Math.random() < critChance) {
         isCrit = true;
         damage += 25;
-        feedback += ' ⚔️ CRITICAL HIT! Permission Slice triggered!';
+        feedback += ' âš”ï¸ CRITICAL HIT! Permission Slice triggered!';
       } else if (player.unlockedRelics && player.unlockedRelics.includes('simcard') && (analysis.hasPermission || analysis.hasLeakHook) && Math.random() < 0.2) {
         isCrit = true;
         damage += 20;
-        feedback += ' 📶 5G CARRIER CRIT! Instant connection bonus!';
+        feedback += ' ðŸ“¶ 5G CARRIER CRIT! Instant connection bonus!';
       }
 
       // Execute Finisher Overkill (<35% Boss HP)
       if (bossHp > 0 && bossHp <= currentBoss.maxHp * 0.35 && (analysis.hasTimeProposal || (analysis.hasDemoNumber && analysis.hasCarrier71))) {
         damage += 50;
         isCrit = true;
-        feedback += ' ⚡ EXECUTE FINISHER OVERKILL (+50 DMG)!';
+        feedback += ' âš¡ EXECUTE FINISHER OVERKILL (+50 DMG)!';
       }
 
       if (curWeapon.id === 'scythe' && player.skepticismReaperActive) {
         damage = Math.round(damage * 2.0);
-        feedback += ' 🌾 SKEPTICISM REAPER: 2X DAMAGE!';
+        feedback += ' ðŸŒ¾ SKEPTICISM REAPER: 2X DAMAGE!';
         player.skepticismReaperActive = false;
       }
       if (curWeapon.id === 'scythe' && analysis.hasAgreement) {
@@ -1966,7 +1966,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
       if (curArmor.id === 'plate' && Math.random() < 0.2) {
         counterDmg = 0;
-        feedback += ' 🛡️ DEFLECTED! Steel plate deflected contractor counterattack!';
+        feedback += ' ðŸ›¡ï¸ DEFLECTED! Steel plate deflected contractor counterattack!';
       }
 
       if (curArmor.id === 'cuirass' && (grade === 'S' || grade === 'A')) {
@@ -2020,7 +2020,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (!input || input.disabled) return;
     let text = '';
     if (strikeType === 'permission') {
-      text = `Hey ${currentBoss.name.split(' ')[0]}, I know you're busy in the field — you got 30 seconds before you hang up on me?`;
+      text = `Hey ${currentBoss.name.split(' ')[0]}, I know you're busy in the field â€” you got 30 seconds before you hang up on me?`;
     } else if (strikeType === 'leak') {
       text = `Where does an emergency $8,000 replacement call go right now when you're on a job or asleep at 8 PM?`;
     } else if (strikeType === 'demo') {
@@ -2056,11 +2056,11 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (evalRes.damage >= 50 && evalRes.feedback.includes('EXECUTE')) {
       playSynth('execute');
       triggerArenaShake(true);
-      spawnFloatingNumber('⚡ +50 EXECUTE OVERKILL!', 'execute');
+      spawnFloatingNumber('âš¡ +50 EXECUTE OVERKILL!', 'execute');
     } else if (evalRes.isCrit) {
       playSynth('crit');
       triggerArenaShake(true);
-      spawnFloatingNumber(`⚔️ CRIT -${evalRes.damage}!`, 'crit');
+      spawnFloatingNumber(`âš”ï¸ CRIT -${evalRes.damage}!`, 'crit');
     } else if (evalRes.damage > 0) {
       playSynth('slash');
       spawnFloatingNumber(`-${evalRes.damage} DMG`, 'damage');
@@ -2074,20 +2074,20 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       const bleedDmg = 10;
       bossHp = Math.max(0, bossHp - bleedDmg);
       player.bleedTurns--;
-      spawnFloatingNumber(`🩸 -${bleedDmg} BLEED`, 'damage');
-      appendLog(`🩸 <strong>REVENUE BLEED:</strong> Missed call revenue leak dealt <strong>+${bleedDmg} Bleed Damage</strong> to ${currentBoss.name}!`, 'crit');
+      spawnFloatingNumber(`ðŸ©¸ -${bleedDmg} BLEED`, 'damage');
+      appendLog(`ðŸ©¸ <strong>REVENUE BLEED:</strong> Missed call revenue leak dealt <strong>+${bleedDmg} Bleed Damage</strong> to ${currentBoss.name}!`, 'crit');
     }
 
     if (evalRes.grade === 'S' || evalRes.grade === 'A') {
       player.streak++;
       playSynth('combo', player.streak);
-      spawnFloatingNumber(`🔥 ${player.streak}X COMBO!`, 'combo');
+      spawnFloatingNumber(`ðŸ”¥ ${player.streak}X COMBO!`, 'combo');
       if (player.streak % 2 === 0) {
         const comboHeal = 20;
         player.hp = Math.min(player.maxHp, player.hp + comboHeal);
         playSynth('heal');
         spawnFloatingNumber(`+${comboHeal} HP FLOW`, 'heal');
-        appendLog(`🔥 <strong>FLOW STATE COMBO (${player.streak}X STREAK)!</strong> Smooth cadence recovered <strong>+${comboHeal} HP</strong>!`, 'heal');
+        appendLog(`ðŸ”¥ <strong>FLOW STATE COMBO (${player.streak}X STREAK)!</strong> Smooth cadence recovered <strong>+${comboHeal} HP</strong>!`, 'heal');
       }
     } else {
       player.streak = 0;
@@ -2099,7 +2099,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       spawnFloatingNumber(`-${evalRes.counterDmg} HP`, 'deflect');
     }
 
-    appendLog(`🎯 <strong>TURN GRADE: [${evalRes.grade}]</strong> Dealt <strong>${evalRes.damage} DMG</strong> to ${currentBoss.name}.${evalRes.counterDmg > 0 ? ` Contractor counterattacked for <span style="color:var(--err)">-${evalRes.counterDmg} HP</span>.` : ''} ${evalRes.feedback}`, 'system');
+    appendLog(`ðŸŽ¯ <strong>TURN GRADE: [${evalRes.grade}]</strong> Dealt <strong>${evalRes.damage} DMG</strong> to ${currentBoss.name}.${evalRes.counterDmg > 0 ? ` Contractor counterattacked for <span style="color:var(--err)">-${evalRes.counterDmg} HP</span>.` : ''} ${evalRes.feedback}`, 'system');
 
     updateHUD();
 
@@ -2139,17 +2139,17 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const xpReward = Math.round(baseExp * streakMult * relicXpMult);
     const goldReward = Math.round(baseGold * streakMult * relicGoldMult);
 
-    if (!player.defeatedBosses.includes(currentBoss.key)) {
+    const isFirstWin = !player.defeatedBosses.includes(currentBoss.key);
+    if (isFirstWin) {
       player.defeatedBosses.push(currentBoss.key);
     }
     player.dealsClosedCount = (player.dealsClosedCount || 0) + 1;
 
-    // Roll unearned relic
+    // Roll unearned relic (guaranteed on first boss defeat)
     let rolledRelic = null;
     const unearnedRelics = TRADE_RELICS.filter(r => !(player.unlockedRelics || []).includes(r.id));
     if (unearnedRelics.length > 0) {
-      const isFirstWin = !player.defeatedBosses.includes(currentBoss.key);
-      if (isFirstWin || Math.random() < 0.6) {
+      if (isFirstWin || (player.unlockedRelics || []).length === 0 || Math.random() < 0.8) {
         rolledRelic = unearnedRelics[Math.floor(Math.random() * unearnedRelics.length)];
       }
     }
@@ -2162,7 +2162,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     };
 
     appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.victory}"`, 'boss');
-    appendLog(`🏆 <strong>VICTORY! ${currentBoss.name} AGREED TO TEST AVA!</strong> Earned <strong>+${xpReward} XP</strong> and <strong>+${goldReward} GP</strong> (${streakMult.toFixed(1)}x Streak Multiplier)!`, 'crit');
+    appendLog(`ðŸ† <strong>VICTORY! ${currentBoss.name} AGREED TO TEST AVA!</strong> Earned <strong>+${xpReward} XP</strong> and <strong>+${goldReward} GP</strong> (${streakMult.toFixed(1)}x Streak Multiplier)!`, 'crit');
 
     if (voiceEnabled) {
       speakContractor(currentBoss.dialogue.victory, currentBoss.key);
@@ -2190,9 +2190,9 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (chestContainer) chestContainer.style.display = 'block';
     if (chestIcon) {
       chestIcon.className = 'bouncing-chest';
-      chestIcon.textContent = '🎁';
+      chestIcon.textContent = 'ðŸŽ';
     }
-    if (chestPrompt) chestPrompt.textContent = '✨ CLICK TO CRACK LOOT CHEST ✨';
+    if (chestPrompt) chestPrompt.textContent = 'âœ¨ CLICK TO CRACK LOOT CHEST âœ¨';
     if (rewardsBox) rewardsBox.style.display = 'none';
     if (claimBtn) claimBtn.style.display = 'none';
 
@@ -2205,7 +2205,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (chestIcon) {
       chestIcon.className = 'chest-cracking';
     }
-    if (chestPrompt) chestPrompt.textContent = '✨ CRACKING CHEST... ✨';
+    if (chestPrompt) chestPrompt.textContent = 'âœ¨ CRACKING CHEST... âœ¨';
     playSynth('chest');
 
     const revealSpoils = () => {
@@ -2240,7 +2240,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           if (relicIcon) relicIcon.textContent = pendingLoot.relic.icon;
           if (relicName) relicName.textContent = pendingLoot.relic.name;
           if (relicDesc) relicDesc.textContent = pendingLoot.relic.desc;
-          appendLog(`🎁 <strong>RELIC FOUND:</strong> Unlocked <strong>${pendingLoot.relic.name}</strong> (${pendingLoot.relic.desc})!`, 'heal');
+          appendLog(`ðŸŽ <strong>RELIC FOUND:</strong> Unlocked <strong>${pendingLoot.relic.name}</strong> (${pendingLoot.relic.desc})!`, 'heal');
         } else {
           if (relicRow) relicRow.style.display = 'none';
         }
@@ -2284,7 +2284,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const sendBtn = document.getElementById('sendBtn');
     if (input) {
       input.disabled = true;
-      input.placeholder = '📵 CALL DISCONNECTED. Click Redial to try again...';
+      input.placeholder = 'ðŸ“µ CALL DISCONNECTED. Click Redial to try again...';
     }
     if (sendBtn) sendBtn.disabled = true;
 
@@ -2295,7 +2295,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           : `Lose my number and stop calling my business! *[CLICK]*`);
 
     appendLog(`<strong>${currentBoss.name}:</strong> "${reply}"`, 'boss');
-    appendLog(`📵 <strong>CALL TERMINATED!</strong> ${currentBoss.name} hung up on you.`, 'system');
+    appendLog(`ðŸ“µ <strong>CALL TERMINATED!</strong> ${currentBoss.name} hung up on you.`, 'system');
 
     if (voiceEnabled) {
       speakContractor(reply, currentBoss.key);
@@ -2356,7 +2356,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const terminal = document.getElementById('combatLog');
     if (terminal) terminal.innerHTML = '';
 
-    appendLog(`📞 <strong>REDIALING:</strong> Connecting to ${currentBoss.name} (${currentBoss.company}) in ${currentBoss.location}...`, 'system');
+    appendLog(`ðŸ“ž <strong>REDIALING:</strong> Connecting to ${currentBoss.name} (${currentBoss.company}) in ${currentBoss.location}...`, 'system');
 
     setTimeout(() => {
       const opener = currentBoss.dialogue.stage1 || currentBoss.dialogue.opener;
@@ -2446,10 +2446,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
             </div>
           </div>
           <p class="gear-desc">${w.desc}</p>
-          <div class="gear-passive"><strong>Perk: ${w.passiveName}</strong> — ${w.passiveDesc}</div>
+          <div class="gear-passive"><strong>Perk: ${w.passiveName}</strong> â€” ${w.passiveDesc}</div>
           <button class="gear-btn ${isEquipped ? 'equipped-badge' : (isUnlocked ? 'equip' : 'locked-btn')}"
             ${!isUnlocked || isEquipped ? 'disabled' : ''} onclick="equipWeapon('${w.id}')">
-            ${isEquipped ? '✓ EQUIPPED' : (isUnlocked ? '⚔️ Equip Weapon' : '🔒 Unlocks at Level ' + w.lvl)}
+            ${isEquipped ? 'âœ“ EQUIPPED' : (isUnlocked ? 'âš”ï¸ Equip Weapon' : 'ðŸ”’ Unlocks at Level ' + w.lvl)}
           </button>
         </div>
       `;
@@ -2464,14 +2464,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
             <div class="gear-icon">${a.icon}</div>
             <div class="gear-meta">
               <h4>${a.name}</h4>
-              <div class="stat-boost">${a.maxHp} Max HP · ${a.dmgReduct}% Absorb</div>
+              <div class="stat-boost">${a.maxHp} Max HP Â· ${a.dmgReduct}% Absorb</div>
             </div>
           </div>
           <p class="gear-desc">${a.desc}</p>
-          <div class="gear-passive"><strong>Perk: ${a.passiveName}</strong> — ${a.passiveDesc}</div>
+          <div class="gear-passive"><strong>Perk: ${a.passiveName}</strong> â€” ${a.passiveDesc}</div>
           <button class="gear-btn ${isEquipped ? 'equipped-badge' : (isUnlocked ? 'equip' : 'locked-btn')}"
             ${!isUnlocked || isEquipped ? 'disabled' : ''} onclick="equipArmor('${a.id}')">
-            ${isEquipped ? '✓ EQUIPPED' : (isUnlocked ? '🛡️ Equip Armor' : '🔒 Unlocks at Level ' + a.lvl)}
+            ${isEquipped ? 'âœ“ EQUIPPED' : (isUnlocked ? 'ðŸ›¡ï¸ Equip Armor' : 'ðŸ”’ Unlocks at Level ' + a.lvl)}
           </button>
         </div>
       `;
@@ -2491,7 +2491,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
               </div>
             </div>
             <p class="gear-desc">${r.desc}</p>
-            <div class="gear-passive"><strong>Status:</strong> ${isUnlocked ? '✓ Permanent Passive Active' : '🔒 Drop from Mystery Loot Chests'}</div>
+            <div class="gear-passive"><strong>Status:</strong> ${isUnlocked ? 'âœ“ Permanent Passive Active' : 'ðŸ”’ Drop from Mystery Loot Chests'}</div>
           </div>
         `;
       }).join('');

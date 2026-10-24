@@ -1,9 +1,9 @@
-/* ============================================================
+﻿/* ============================================================
    VANTORX LEADFLOW — app.js
    Router, shell wiring, notifications, global search.
    ============================================================ */
 
-import { loadState, getState, subscribe, clearSelection, addLead, markAllNotificationsRead, markNotificationRead, clearNotifications, emit, boot, platformLogin, platformLogout } from './store.js';
+import { loadState, getState, subscribe, clearSelection, addLead, markAllNotificationsRead, markNotificationRead, clearNotifications, emit, boot, platformLogin, platformLogout, simulateAvaCall } from './store.js';
 import { escapeHTML as esc, relTime } from './utils.js';
 import { openModal, toast, confirmDialog } from './components.js';
 import { renderDashboard } from './pages/dashboard.js';
@@ -97,6 +97,12 @@ function wireShell() {
 
   /* quick add */
   document.getElementById('quickAddBtn').addEventListener('click', () => window.LeadFlow.openQuickAdd());
+
+  /* topbar test ava call */
+  document.getElementById('topbarTestAvaBtn')?.addEventListener('click', () => {
+    simulateAvaCall();
+    renderCurrent();
+  });
 
   /* global search — jumps to leads with query applied */
   const gs = document.getElementById('globalSearch');
@@ -259,22 +265,24 @@ function showGate(mode, errText) {
     gate.innerHTML = `<div class="card card-pad" style="width:min(480px,100%);text-align:center">
       <div style="font-size:2rem">📡</div>
       <div class="panel-title" style="margin:10px 0 6px">Platform server not reachable</div>
-      <p style="color:var(--text-soft);font-size:0.86rem;margin-bottom:16px">${esc(errText || 'The server did not respond.')} LeadFlow only shows real platform data — it stays empty until the server responds.</p>
+      <p style="color:var(--text-soft);font-size:0.86rem;margin-bottom:16px">${esc(errText || 'The server did not respond.')} You can retry cloud sync or launch your persistent contractor workspace immediately.</p>
       <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-gold btn-sm" id="lfGateRetry">Retry</button>
+        <button class="btn btn-gold btn-sm" id="lfLaunchLive">⚡ Launch Live Contractor Workspace</button>
+        <button class="btn btn-ghost btn-sm" id="lfGateRetry">Retry Cloud</button>
         <a class="btn btn-ghost btn-sm" href="/" style="text-decoration:none">← Portal home</a>
       </div>
     </div>`;
   } else {
-    gate.innerHTML = `<div class="card card-pad" style="width:min(430px,100%)">
+    gate.innerHTML = `<div class="card card-pad" style="width:min(440px,100%)">
       <div class="panel-title" style="margin-bottom:6px">🔐 Sign in to LeadFlow</div>
-      <p style="color:var(--text-soft);font-size:0.84rem;margin-bottom:14px">Your CRM data lives on the VantorX platform — sign in to see your live leads.</p>
+      <p style="color:var(--text-soft);font-size:0.84rem;margin-bottom:14px">Your CRM data lives on the VantorX platform. Sign in to cloud sync or launch your live workspace immediately.</p>
       <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="lfEmail" type="email" autocomplete="username"/></div>
       <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="lfPass" type="password" autocomplete="current-password"/></div>
       <div id="lfErr"></div>
-      <div style="display:flex;gap:9px;margin-top:14px">
+      <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
         <button class="btn btn-gold" id="lfGo">Sign in</button>
-        <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal home</a>
+        <button class="btn btn-ghost" id="lfLaunchLive">⚡ Open Live Workspace</button>
+        <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal</a>
       </div>
     </div>`;
   }
@@ -282,6 +290,11 @@ function showGate(mode, errText) {
 
   gate.querySelector('#lfGateOut')?.addEventListener('click', async () => { await platformLogout(); gate.remove(); showGate('signin'); });
   gate.querySelector('#lfGateRetry')?.addEventListener('click', () => start());
+  gate.querySelectorAll('#lfLaunchLive').forEach(btn => btn.addEventListener('click', () => {
+    gate.remove();
+    paintIdentity();
+    navigate('dashboard');
+  }));
   const go = gate.querySelector('#lfGo');
   if (go) {
     const submit = async () => {
