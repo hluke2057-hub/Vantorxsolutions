@@ -130,6 +130,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 .strike-card.heal-action:hover{border-color:var(--ok);background:rgba(52,211,153,0.12)}
 .strike-card.heal-action .strike-tag{color:var(--ok)}
 .strike-card:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.strike-card.pulse-card{border-color:var(--accent)!important;background:rgba(245,158,11,0.12)!important;box-shadow:0 0 14px var(--accent-glow);animation:cardGlow 1.8s infinite alternate}
+@keyframes cardGlow{from{box-shadow:0 0 6px var(--accent-glow);border-color:rgba(245,158,11,0.6)}to{box-shadow:0 0 20px var(--accent-glow);border-color:var(--accent2)}}
+.speaker-anim{animation:speakerPulse 0.45s infinite alternate}
+@keyframes speakerPulse{from{transform:scale(1)}to{transform:scale(1.12);filter:drop-shadow(0 0 14px var(--accent))}}
 
 /* Custom Speech / Rebuttal Input Dock */
 .input-dock{display:flex;gap:10px;align-items:center}
@@ -374,7 +378,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       </div>
 
       <!-- TACTICAL QUICK-STRIKE DOCK (INCLUDES HEALTH REGAIN) -->
-      <div class="tactical-dock">
+      <div class="tactical-dock" id="tacticalDock">
         <button class="strike-card" type="button" onclick="executeQuickStrike('permission')">
           <div class="strike-tag">⚡ Permission Opener <span>+Crit</span></div>
           <div class="strike-text">"Hey Rick, I know you're in the field — you got 30 seconds before you hang up?"</div>
@@ -814,13 +818,30 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
   }
 
+  window._activeUtts = [];
   function speakContractor(text, bossKey) {
     if (!voiceEnabled || !window.speechSynthesis) return;
     try {
       window.speechSynthesis.cancel();
-      const clean = text.replace(/\([^)]*\)/g, '').trim();
+      window._activeUtts = [];
+      const clean = text.replace(/\([^)]*\)/g, '').replace(/\*\[[^\]]*\]\*/g, '').replace(/https?:\/\/\S+/g, '').trim();
       if (!clean) return;
       const utt = new SpeechSynthesisUtterance(clean);
+      window._activeUtts.push(utt);
+      utt.onstart = () => {
+        const p = document.getElementById('activeBossPortrait');
+        if (p) p.classList.add('speaker-anim');
+      };
+      utt.onend = () => {
+        window._activeUtts = window._activeUtts.filter(u => u !== utt);
+        const p = document.getElementById('activeBossPortrait');
+        if (p) p.classList.remove('speaker-anim');
+      };
+      utt.onerror = () => {
+        window._activeUtts = window._activeUtts.filter(u => u !== utt);
+        const p = document.getElementById('activeBossPortrait');
+        if (p) p.classList.remove('speaker-anim');
+      };
       if (bossKey === 'gatekeeper') {
         utt.pitch = 1.15; utt.rate = 1.0;
       } else if (bossKey === 'skeptic') {
@@ -1263,6 +1284,93 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         breatherText.textContent = `+30 HP (Ready)`;
       }
     }
+
+    // Dynamic Closer Coach Prescription & Turn Status
+    const coachEl = document.getElementById('coachPrescription');
+    const turnBadge = document.getElementById('turnIndicatorBadge');
+    if (coachEl) {
+      const stage = (matchMemory && matchMemory.stage) || 'intro';
+      const lastQ = (matchMemory && matchMemory.lastBossQuestion) || '';
+      if (bossHp > 0 && bossHp <= currentBoss.maxHp * 0.35) {
+        coachEl.innerHTML = `⚡ <strong>Closer Coach:</strong> BOSS IN EXECUTE RANGE (&lt;35% HP)! Propose the 4:30 PM walkthrough close for +50 Overkill bonus!`;
+      } else if (stage === 'price' || lastQ === 'how_much_does_it_cost') {
+        coachEl.innerHTML = `💰 <strong>Closer Coach:</strong> Contractor asked about cost! Quote $397/mo flat with zero contracts — never dodge price questions!`;
+      } else if (stage === 'proof' || lastQ === 'proof_demo_line') {
+        coachEl.innerHTML = `📱 <strong>Closer Coach:</strong> Contractor wants proof! Tell him to dial (561) 813-8602 right now from his truck on speaker!`;
+      } else if (stage === 'carrier' || lastQ === 'carrier_rollover_setup') {
+        coachEl.innerHTML = `📶 <strong>Closer Coach:</strong> Contractor is worried about his phones! Explain Carrier *71 conditional rollover (keep existing number).`;
+      } else if (stage === 'close' || lastQ === 'meeting_time_close' || stage === 'victory') {
+        coachEl.innerHTML = `📅 <strong>Closer Coach:</strong> He's ready! Lock in a 10-minute Zoom walkthrough tomorrow at 4:30 PM!`;
+      } else if (stage === 'pain') {
+        coachEl.innerHTML = `🎯 <strong>Closer Coach:</strong> Acknowledge his trade pain before dropping the $8,000 emergency leak hook.`;
+      } else {
+        coachEl.innerHTML = `💡 <strong>Closer Coach:</strong> Ask for 30 seconds before dropping the $8,000 emergency leak hook.`;
+      }
+    }
+    if (turnBadge) {
+      turnBadge.textContent = 'YOUR TURN: CLICK BATTLECARD OR SPEAK';
+    }
+
+    renderTacticalDock();
+  }
+
+  function renderTacticalDock() {
+    const dock = document.getElementById('tacticalDock');
+    if (!dock) return;
+    const stage = (matchMemory && matchMemory.stage) || 'intro';
+    const lastQ = (matchMemory && matchMemory.lastBossQuestion) || '';
+    const bossFirst = (currentBoss.name || 'Contractor').split(' ')[0];
+
+    const cdText = player.breatherCooldown > 0 ? `(${player.breatherCooldown}T Cooldown)` : `+30 HP (Ready)`;
+    const cdDisabled = player.breatherCooldown > 0 ? 'disabled' : '';
+    const breatherCard = `
+      <button class="strike-card heal-action" type="button" id="breatherBtn" ${cdDisabled} onclick="executeTakeABreather()">
+        <div class="strike-tag">☕ Take a Breather <span id="breatherCooldownText">${cdText}</span></div>
+        <div class="strike-text">Take a tactical breath, calibrate vocal pitch, and restore +30 HP.</div>
+      </button>
+    `;
+
+    let cards = [];
+    if (stage === 'intro' || stage === 'pain') {
+      cards = [
+        { type: 'permission', tag: '⚡ 30s Permission Opener', bonus: '+Crit', text: `"Hey ${bossFirst}, I know you're in the field — you got 30 seconds before you hang up?"` },
+        { type: 'leak', tag: '🎯 $8,000 Leak Hook', bonus: '+Bleed', text: `"Where does an emergency $8,000 leak call ring when you're 3 stories up?"` },
+        { type: 'demo', tag: '🛡️ Test Ava Live', bonus: '(561) 813-8602', text: `"Don't take my word for it. Dial (561) 813-8602 right now from your truck."` }
+      ];
+    } else if (stage === 'price' || lastQ === 'how_much_does_it_cost') {
+      cards = [
+        { type: 'price', tag: '💰 $397/mo Flat Pricing', bonus: '🔥 Direct Answer', text: `"It is a flat 300 a month with zero setup fee and zero contract. One shingle repair pays for the entire year."`, pulse: true },
+        { type: 'leak', tag: '🎯 $8,000 Loss Math', bonus: '+Bleed', text: `"Missing just 2-3 emergency calls a week costs you roughly $8,000 in lost jobs."` },
+        { type: 'demo', tag: '📱 Dial (561) 813-8602 Live', bonus: 'Proof', text: `"Dial our live Florida demo line right now on (561) 813-8602 from your truck and hear Ava."` }
+      ];
+    } else if (stage === 'proof' || lastQ === 'proof_demo_line') {
+      cards = [
+        { type: 'demo', tag: '🛡️ Test Ava Live (561) 813-8602', bonus: '🔥 Proof Line', text: `"Dial our live Florida demo line right now on (561) 813-8602 from your truck and hear how natural Ava sounds."`, pulse: true },
+        { type: 'defuse', tag: '🛡️ Total Agreement Defuse', bonus: '+18 HP', text: `"You are 100% right. Every contractor has been burned by telemarketers, which is why we do zero contracts."` },
+        { type: 'price', tag: '💰 $397/mo Flat Rate', bonus: 'No Contract', text: `"It is a flat 300 a month with zero setup fee and zero contract. One shingle repair pays for the year."` }
+      ];
+    } else if (stage === 'carrier' || lastQ === 'carrier_rollover_setup') {
+      cards = [
+        { type: 'carrier', tag: '📶 Carrier *71 Rollover', bonus: '🔥 No Porting', text: `"We hook it up via Carrier *71 conditional call forwarding so your company number stays with your provider."`, pulse: true },
+        { type: 'demo', tag: '📱 (561) 813-8602 Demo', bonus: 'Proof', text: `"Dial our live Florida test line on (561) 813-8602 right now from your truck."` },
+        { type: 'close', tag: '📅 4:30 PM Tomorrow Walkthrough', bonus: 'Close', text: `"Let's do a quick 10-minute walkthrough tomorrow afternoon at 4:30 PM."` }
+      ];
+    } else {
+      cards = [
+        { type: 'close', tag: '📅 4:30 PM Tomorrow Walkthrough', bonus: '🔥 Lock-in', text: `"Let's do a quick 10-minute walkthrough tomorrow afternoon at 4:30 PM."`, pulse: true },
+        { type: 'execute', tag: '⚡ Execute Finisher', bonus: '+50 Overkill', text: `"Let's do a 10-minute walkthrough tomorrow at 4:30 PM and plug that $8,000 leak together."`, pulse: true },
+        { type: 'carrier', tag: '📶 Carrier *71 Rollover', bonus: 'Setup', text: `"We hook it up via Carrier *71 conditional call forwarding so your company number stays with your provider."` }
+      ];
+    }
+
+    const cardsHtml = cards.map(c => `
+      <button class="strike-card ${c.pulse ? 'pulse-card' : ''}" type="button" onclick="executeQuickStrike('${c.type}')">
+        <div class="strike-tag">${c.tag} <span>${c.bonus}</span></div>
+        <div class="strike-text">${c.text}</div>
+      </button>
+    `).join('');
+
+    dock.innerHTML = cardsHtml + breatherCard;
   }
 
   function appendLog(msg, type) {
@@ -1396,11 +1504,11 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const hasDemoNumber = /(561)\s*813-8602|813-8602|5618138602|live\s*demo|test\s*number|dial\s*(this|it|her)/i.test(low);
     const hasSoundHuman = /sound|human|robot|robotic|delay|latency|natural|real\s*person|cadence|accent/i.test(low);
     
-    const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*forwarding|forward|port|switch|verizon|at&t|t-mobile|existing\s*number/i.test(low);
+    const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*forwarding|conditional\s*call\s*forwarding|forward|rollover|port|switch|verizon|at&t|att|t-mobile|existing\s*number|keep\s*your\s*number/i.test(low);
     
-    const hasPricingAnswer = /300|397|dollar|month|cheap|cost|investment|setup\s*fee|zero\s*contract|month-to-month|roi|pays\s*for\s*itself/i.test(low);
+    const hasPricingAnswer = /300|397|299|400|\$?\s*\d+|dollar|bucks|month|cheap|cost|investment|setup\s*fee|zero\s*contract|no\s*contract|cancel\s*anytime|month-to-month|flat\s*rate|flat|roi|pays\s*for\s*itself/i.test(low);
     
-    const hasTimeProposal = /tomorrow|4:30|morning|afternoon|10\s*min|walkthrough|meeting|calendar|invite|zoom|call\s*you/i.test(low);
+    const hasTimeProposal = /tomorrow|4:30|morning|afternoon|10\s*min|walkthrough|meeting|calendar|invite|zoom|screen\s*share|schedule|book|call\s*you/i.test(low);
 
     const isUserAskingQuestion = /\?|who\s*answers|what\s*happens|how\s*many|where\s*does|do\s*you\s*get|what\s*do\s*you\s*do/i.test(low);
     const asksWhoAnswers = /who\s*answers|where\s*does\s*(that|the)\s*call\s*go|what\s*happens\s*to\s*calls|how\s*do\s*you\s*handle/i.test(low);
@@ -2025,13 +2133,28 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   window.executeQuickStrike = function(strikeType) {
     const input = document.getElementById('playerCustomInput');
     if (!input || input.disabled) return;
+    const bossFirst = (currentBoss.name || 'Contractor').split(' ')[0];
     let text = '';
     if (strikeType === 'permission') {
-      text = `Hey ${currentBoss.name.split(' ')[0]}, I know you're busy in the field — you got 30 seconds before you hang up on me?`;
+      text = `Hey ${bossFirst}, I know you're busy in the field — you got 30 seconds before you hang up on me?`;
     } else if (strikeType === 'leak') {
       text = `Where does an emergency $8,000 replacement call go right now when you're on a job or asleep at 8 PM?`;
+    } else if (strikeType === 'mechanism') {
+      text = `Ava answers in one ring on the first ring, qualifies the emergency job, and texts your cell phone immediately.`;
+    } else if (strikeType === 'price') {
+      text = `It is a flat 300 a month with zero setup fee and zero contract. One shingle repair pays for the entire year.`;
     } else if (strikeType === 'demo') {
       text = `Don't take my word for it. Dial our live Florida test line on (561) 813-8602 right now from your truck and hear Ava with zero delay.`;
+    } else if (strikeType === 'carrier') {
+      text = `We hook it up via Carrier *71 conditional call forwarding so your company number stays with your provider.`;
+    } else if (strikeType === 'close') {
+      text = `Let's do a quick 10-minute walkthrough tomorrow afternoon at 4:30 PM.`;
+    } else if (strikeType === 'defuse') {
+      text = `You are 100% right. Every contractor has been burned by telemarketers, which is why we do zero contracts.`;
+    } else if (strikeType === 'execute') {
+      text = `Let's do a 10-minute walkthrough tomorrow at 4:30 PM and plug that $8,000 leak together.`;
+    } else {
+      text = strikeType;
     }
     input.value = text;
     submitRebuttal();
