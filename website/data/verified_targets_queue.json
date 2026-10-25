@@ -412,12 +412,12 @@
     "service": "LeadFlow 90-Second SMS Speed-to-Lead",
     "estLoss": "$8,400/mo",
     "painPoint": "Online water filtration requests sitting uncontacted for 4+ hours",
-    "subject": "Question for Sal - capturing Boca Raton Plumbing Pros quote requests in 90 seconds",
-    "status": "pending",
+    "subject": "Re: Question for Sal - capturing Boca Raton Plumbing Pros quote requests in 90 seconds",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-23T20:19:10.771Z",
-    "body": "Hi Sal,\n\nQuick question regarding Boca Raton Plumbing Pros's customer response speed:\n\nWhen homeowners in Boca Raton, FL fill out an online estimate request or call while your field crew is tied up on an active job, what is your average follow-up time?\n\nHarvard Business Review research shows that contractors who respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Plumbing, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\nâ€¢ Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\nâ€¢ Follows up with online estimate requests in under 90 seconds\nâ€¢ Rescues up to $8,400/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10â€“15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "resendMessageId": "01a17520-e8e8-73f9-a37b-3e9908bd7219",
+    "sentAt": "2026-10-25T22:14:13.545Z",
+    "body": "Hi Sal,\n\nFollowing up on my note from earlier this week — I know you're busy running field crews at Boca Raton Plumbing Pros.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent Plumbing emergencies, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "pb_022",
@@ -432,12 +432,12 @@
     "service": "24/7 AI Phone Receptionist (Ava)",
     "estLoss": "$14,500/mo",
     "painPoint": "Flood and pipe burst insurance jobs lost when midnight emergency calls go to voicemail",
-    "subject": "Quick question for Scott regarding Atlantic Coast Water & Restoration emergency calls",
+    "subject": "Re: Quick question for Scott regarding Atlantic Coast Water & Restoration emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a16aa3-a682-72bc-8602-044c7e120d06",
-    "sentAt": "2026-10-23T21:21:12.418Z",
-    "body": "Hi Scott,\n\nSaw your solid reputation in Delray Beach, FL â€” congrats on building a trusted local brand.\n\nI was auditing local Restoration providers in Delray Beach, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn emergency Restoration, homeowners needing immediate help almost never wait for a callback â€” they hang up and call the next competitor who answers. We calculated that missing just 2â€“3 emergency calls a week costs the average local contractor roughly $14,500/mo in lost jobs.\n\nWe built Ava, an AI phone receptionist designed specifically for trade contractors:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages true emergencies vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call crew\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you how Ava handles a live emergency call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a17520-e950-711e-b4cc-abd8e030bfb5",
+    "sentAt": "2026-10-25T22:14:13.644Z",
+    "body": "Hi Scott,\n\nFollowing up on my note from earlier this week — I know you're busy running field crews at Atlantic Coast Water & Restoration.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent Restoration emergencies, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "pb_023",
@@ -452,12 +452,12 @@
     "service": "High-Converting Webflow Website",
     "estLoss": "$8,900/mo",
     "painPoint": "Old WordPress website failing to capture mobile estimate requests on smartphones",
-    "subject": "Quick question for Roger regarding Molsbee Roofing Inc. emergency calls",
+    "subject": "Re: Quick question for Roger regarding Molsbee Roofing Inc. emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a16aa3-a72f-737b-9bdb-b60e0a3faca7",
-    "sentAt": "2026-10-23T21:21:12.575Z",
-    "body": "Hi Roger,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Boynton Beach, FL.\n\nWhile Molsbee Roofing Inc. has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you â€” they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Boynton Beach, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a17520-e99b-7ae4-aaa8-40b0b20ccef5",
+    "sentAt": "2026-10-25T22:14:13.711Z",
+    "body": "Hi Roger,\n\nFollowing up on my note from earlier this week — I know you're busy running field crews at Molsbee Roofing Inc..\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent Roofing emergencies, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "pb_024",
@@ -472,12 +472,12 @@
     "service": "Full Digital Infrastructure Bundle",
     "estLoss": "$15,000/mo",
     "painPoint": "Weekend emergency calls bouncing to competitors because office staff is off-duty",
-    "subject": "Quick question for John regarding Cousins Air Conditioning emergency calls",
+    "subject": "Re: Quick question for John regarding Cousins Air Conditioning emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a16aa3-a7bb-7d1b-8dd0-022ea1bd843d",
-    "sentAt": "2026-10-23T21:21:12.714Z",
-    "body": "Hi John,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Boca Raton, FL.\n\nWhile Cousins Air Conditioning has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you â€” they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Boca Raton, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a17520-e9df-7be3-b7a8-5a1a6c464a6d",
+    "sentAt": "2026-10-25T22:14:13.782Z",
+    "body": "Hi John,\n\nFollowing up on my note from earlier this week — I know you're busy running field crews at Cousins Air Conditioning.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent HVAC emergencies, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "pb_025",
@@ -492,12 +492,12 @@
     "service": "AEO Engine (ChatGPT & Apple Search Optimization)",
     "estLoss": "$9,200/mo",
     "painPoint": "Zero presence on ChatGPT when high-net-worth Jupiter residents search for EV chargers",
-    "subject": "Question for Ken regarding Elite Electric & Solar Solutions ranking on ChatGPT",
+    "subject": "Re: Question for Ken regarding Elite Electric & Solar Solutions ranking on ChatGPT",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a16aa3-a838-7713-a4ec-4d02874d8f40",
-    "sentAt": "2026-10-23T21:21:12.840Z",
-    "body": "Hi Ken,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Electrical contractors in Jupiter, FL.\n\nWhile Elite Electric & Solar Solutions has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Electrical contractor near me?', the AI search engines aren't recommending you â€” they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Electrical in Jupiter, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a17520-ea26-70c0-af23-c6f6c334dbe6",
+    "sentAt": "2026-10-25T22:14:13.863Z",
+    "body": "Hi Ken,\n\nFollowing up on my note from earlier this week — I know you're busy running field crews at Elite Electric & Solar Solutions.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent Electrical emergencies, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "bw_026",
@@ -553,9 +553,9 @@
     "estLoss": "$16,000/mo",
     "painPoint": "Multi-line callers placed on hold during morning dispatch rushes, causing hang-ups",
     "subject": "Quick question for Rick regarding Paradise Plumbing, AC & Electrical emergency calls",
-    "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a16aa3-a8ba-76df-973a-c2497dd8b55b",
+    "status": "pending",
+    "touch": 2,
+    "resendMessageId": null,
     "sentAt": "2026-10-23T21:21:12.977Z",
     "body": "Hi Rick,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Plumbing contractors in Fort Lauderdale, FL.\n\nWhile Paradise Plumbing, AC & Electrical has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Plumbing contractor near me?', the AI search engines aren't recommending you â€” they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Plumbing in Fort Lauderdale, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
