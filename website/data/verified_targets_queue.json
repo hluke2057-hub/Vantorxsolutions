@@ -1311,11 +1311,12 @@
     "service": "24/7 AI Phone Receptionist (Ava)",
     "estLoss": "$8,600/mo",
     "painPoint": "Commercial electrical outage calls missed while crew is in the field",
-    "subject": "Generator quote speed-to-lead for Leo at Pioneer Electric",
-    "status": "pending",
+    "subject": "Re: Generator quote speed-to-lead for Leo at Pioneer Electric",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-21T18:22:52.896Z"
+    "resendMessageId": "01a1733b-ee68-7653-a049-2ace71d8891f",
+    "sentAt": "2026-10-25T13:24:29.992Z",
+    "body": "Hi Eduardo,\n\nFollowing up on my note from earlier this week — I know you're busy running field crews at Pioneer Electric of South FL.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent Electrical emergencies, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "md_067",
@@ -1370,11 +1371,12 @@
     "service": "Scale Enterprise Tier (,297/mo)",
     "estLoss": "$24,500/mo",
     "painPoint": "Residential tile roof inquiries dropping off due to delayed intake follow-up",
-    "subject": "Quick question for Louis regarding T&S Roofing weekend emergency calls",
-    "status": "pending",
+    "subject": "Re: Quick question for Louis regarding T&S Roofing weekend emergency calls",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-20T21:22:24.394Z"
+    "resendMessageId": "01a1733b-eed5-7f23-aeb5-513366cc0876",
+    "sentAt": "2026-10-25T13:24:30.093Z",
+    "body": "Hi Danny,\n\nFollowing up on my note from earlier this week — I know you're busy running field crews at T&S Roofing Systems.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent Roofing emergencies, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "md_070",
@@ -1870,10 +1872,11 @@
     "estLoss": "$8,000/mo",
     "painPoint": "Emergency drain form submissions delayed while plumbers drive between job sites",
     "subject": "Question for Sonny - capturing Sonny's Transfer Plumbing quote requests in 90 seconds",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1733b-ef60-7ba5-aa6d-175909d0b9be",
+    "sentAt": "2026-10-25T13:24:30.227Z",
+    "body": "Hi Sonny,\n\nQuick question regarding Sonny's Transfer Plumbing's customer response speed:\n\nWhen homeowners in Tampa, FL fill out an online estimate request or call while your field crew is tied up on an active job, what is your average follow-up time?\n\nHarvard Business Review research shows that contractors who respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Plumbing, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $8,000/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "tb_095",
@@ -1889,10 +1892,11 @@
     "estLoss": "$12,800/mo",
     "painPoint": "Commercial flat roof leak inquiries lost during heavy summer downpours",
     "subject": "Quick question for Joe regarding Bay to Bay Roofing emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1733b-ef9f-732b-9eb1-ff34c3bea5d0",
+    "sentAt": "2026-10-25T13:24:30.287Z",
+    "body": "Hi Joe,\n\nSaw your solid reputation in Tampa, FL — congrats on building a trusted local brand.\n\nI was auditing local Roofing providers in Tampa, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn emergency Roofing, homeowners needing immediate help almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 emergency calls a week costs the average local contractor roughly $12,800/mo in lost jobs.\n\nWe built Ava, an AI phone receptionist designed specifically for trade contractors:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages true emergencies vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call crew\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live emergency call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "tb_096",
@@ -2040,11 +2044,12 @@
     "service": "Scale Enterprise Tier (,297/mo)",
     "estLoss": "$26,000/mo",
     "painPoint": "Large regional fleet losing after-hours replacement calls on long automated phone trees",
-    "subject": "Quick question for Rick regarding Del-Air estimate response speed",
-    "status": "pending",
+    "subject": "Re: Quick question for Rick regarding Del-Air estimate response speed",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-20T19:26:20.544Z"
+    "resendMessageId": "01a1733b-ef19-7711-8912-a6a403972056",
+    "sentAt": "2026-10-25T13:24:30.162Z",
+    "body": "Hi Bob,\n\nFollowing up on my note from earlier this week — I know you're busy running field crews at Del-Air Heating, Air Conditioning & Plumbing.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent HVAC emergencies, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "cf_104",
