@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 # ⚔️ BUILD COLD CALL QUEST: STANDALONE SALES RPG 4.0
 # Generates website/cold-call-quest/index.html with UTF-8 BOM
 # Features Adaptive Brain 4.0 with Conversational State Machine

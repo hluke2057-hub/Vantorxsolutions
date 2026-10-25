@@ -514,8 +514,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     <div class="caller-bar-buttons">
       <span style="font-size:12px;color:var(--dim)">Quick Switch:</span>
       <button type="button" class="caller-switch-pill active" id="quickPillLuke" onclick="quickSwitchCaller('luke')">👑 Luke (Founder)</button>
-      <button type="button" class="caller-switch-pill" id="quickPillBuddy" onclick="quickSwitchCaller('buddy')">⚔️ Buddy (Rep 2)</button>
-      <button type="button" class="caller-switch-pill" style="border-color:rgba(239,68,68,0.45);color:#fca5a5" id="quickPillResetBuddy" onclick="resetBuddyProgress()" title="Wipe Buddy progress back to Day 1, Lesson 1.1">🔄 Reset Buddy to 0</button>
+      <button type="button" class="caller-switch-pill" id="quickPillBuddy" onclick="quickSwitchCaller('buddy')">⚔️ Buddy 2 (Auto-Pass 🏆)</button>
+      <button type="button" class="caller-switch-pill" style="border-color:rgba(52,211,153,0.45);color:#6ee7b7" id="quickPillAutoPass" onclick="autoPassActiveUser()" title="Auto-pass the full course for active rep">🎓 Auto-Pass Course</button>
       <button type="button" class="caller-switch-pill add-rep" onclick="openAccountModal()">➕ Sign In / Add Rep</button>
     </div>
   </div>
@@ -630,7 +630,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">REP:</span>
               <select id="callerSelect" class="custom-select" style="max-width:140px">
                 <option value="Luke">Luke (Founder)</option>
-                <option value="Buddy (Rep 2)">Buddy (Rep 2)</option>
+                <option value="Buddy 2 (Rep 2)">Buddy 2 (Rep 2)</option>
                 <option value="Sales Rep 3">Sales Rep 3</option>
                 <option value="Guest Caller">Guest Caller</option>
               </select>
@@ -786,8 +786,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Course Certification Progress</div>
           <div style="font-size:18px;font-weight:700;color:var(--accent2)"><span id="academyDaysCount">0</span> / 3 Days Passed</div>
           <div style="font-size:11.5px;color:#6ee7b7;margin-top:2px" id="academyStatusText">🔒 Leads Locked (Reach Level 5)</div>
-          <div style="margin-top:8px">
-            <button class="btn btn-secondary btn-sm" style="font-size:11.5px;padding:3px 8px;border-color:rgba(239,68,68,0.4);color:#fca5a5" type="button" onclick="resetBuddyProgress()">🔄 Reset Buddy to 0</button>
+          <div style="margin-top:8px;display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap">
+            <button class="btn btn-gold btn-sm" style="font-size:11.5px;padding:3px 10px;font-weight:700" type="button" onclick="autoPassActiveUser()">🎓 Auto-Pass Course (Level 5 🏆)</button>
+            <button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:3px 8px;color:var(--dim)" type="button" onclick="resetBuddyProgress()" title="Reset back to Day 1, Lesson 1.1">🔄 Reset</button>
           </div>
         </div>
       </div>
@@ -3911,10 +3912,11 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <select id="newRepRole" class="custom-select" style="width:100%">
           <option value="Outbound Closer">Outbound Closer</option>
           <option value="Appointment Setter">Appointment Setter</option>
-          <option value="Sales Rep (Buddy)">Sales Rep (Buddy)</option>
+          <option value="Sales Rep (Buddy 2)">Sales Rep (Buddy 2)</option>
           <option value="Guest Caller">Guest Caller</option>
         </select>
       </div>
+      <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#34d399;margin-bottom:12px;cursor:pointer"><input type="checkbox" id="newRepAutoPass" style="accent-color:#34d399"> 🎓 Auto-Pass Course (Instantly grant Level 5 &amp; unlock all leads)</label>
       <button class="btn btn-gold" id="btnCreateAccount" onclick="createNewAccountFromModal()" style="width:100%;font-weight:700">Create Rep Account &amp; Start Academy ➔</button>
     </div>
   </div>
@@ -8819,23 +8821,39 @@ window.closeLeakMathModal = function() {
     },
     buddy: {
       id: 'buddy',
-      name: 'Buddy (Rep 2)',
-      role: 'Outbound Closer',
+      name: 'Buddy 2 (Rep 2)',
+      role: 'Outbound Closer · Certified',
       avatar: '⚔️',
-      level: 1,
-      xp: 0,
+      level: 5,
+      xp: 1500,
       isFounder: false,
-      founderBypass: false,
-      completedUnits: [],
-      unitActivitiesDone: [],
-      flashcardsRevealed: [],
-      daysPassed: [],
-      modulesPassed: [],
-      bossesDefeated: 0,
+      founderBypass: true,
+      autoPassed: true,
+      completedUnits: ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'],
+      unitActivitiesDone: ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'],
+      flashcardsRevealed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      daysPassed: [1, 2, 3],
+      modulesPassed: [1, 2, 3, 4, 5],
+      bossesDefeated: 8,
       dailyDials: 0,
       dailySims: 0
     }
   };
+
+  // Helper to grant complete automatic pass for the course (Level 5 + all certification)
+  function grantCoursePass(u) {
+    if (!u) return;
+    u.level = 5;
+    u.xp = 1500;
+    u.autoPassed = true;
+    u.founderBypass = true;
+    u.completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
+    u.unitActivitiesDone = ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'];
+    u.flashcardsRevealed = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    u.daysPassed = [1, 2, 3];
+    u.modulesPassed = [1, 2, 3, 4, 5];
+    u.bossesDefeated = Math.max(8, u.bossesDefeated || 0);
+  }
 
   let USER_PROFILES = {};
   try {
@@ -8844,30 +8862,40 @@ window.closeLeakMathModal = function() {
     USER_PROFILES = DEFAULT_PROFILES;
   }
   if (!USER_PROFILES.luke) USER_PROFILES.luke = DEFAULT_PROFILES.luke;
+  if (!USER_PROFILES.buddy) USER_PROFILES.buddy = DEFAULT_PROFILES.buddy;
 
-  // Always reset Buddy to fresh Day 1 / 0 progress so Luke can test the course from scratch
-  USER_PROFILES.buddy = JSON.parse(JSON.stringify(DEFAULT_PROFILES.buddy));
+  // Always ensure Buddy 2 is automatically passed for the course
+  grantCoursePass(USER_PROFILES.buddy);
+  USER_PROFILES.buddy.name = 'Buddy 2 (Rep 2)';
 
-  // Migration for existing saved profiles:
+  // Migration for all profiles: ensure all arrays and fields exist, auto-pass any buddy account
   Object.keys(USER_PROFILES).forEach(k => {
-    if (k === 'buddy') return;
     const u = USER_PROFILES[k];
-    if (!u.unitActivitiesDone) {
-      u.unitActivitiesDone = u.isFounder ? ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'] : [];
+    if (k.toLowerCase().includes('buddy') || (u.name && u.name.toLowerCase().includes('buddy'))) {
+      grantCoursePass(u);
     }
-    if (!u.daysPassed) u.daysPassed = (u.isFounder || (u.modulesPassed && u.modulesPassed.length >= 5)) ? [1, 2, 3] : [];
+    if (!u.unitActivitiesDone) {
+      u.unitActivitiesDone = (u.isFounder || u.autoPassed) ? ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'] : [];
+    }
+    if (!u.daysPassed) u.daysPassed = (u.isFounder || u.autoPassed || (u.modulesPassed && u.modulesPassed.length >= 5)) ? [1, 2, 3] : [];
     if (!u.completedUnits) {
-      if (u.isFounder || (u.daysPassed && u.daysPassed.length >= 3)) {
+      if (u.isFounder || u.autoPassed || (u.daysPassed && u.daysPassed.length >= 3)) {
         u.completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
       } else {
         u.completedUnits = [];
       }
     }
     if (!u.flashcardsRevealed) {
-      u.flashcardsRevealed = (u.isFounder || (u.daysPassed && u.daysPassed.includes(1))) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [];
+      u.flashcardsRevealed = (u.isFounder || u.autoPassed || (u.daysPassed && u.daysPassed.includes(1))) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [];
     }
-    if (u.isFounder) { u.xp = 1500; u.level = 5; }
+    if (!u.quizAnswers) u.quizAnswers = {};
+    if (u.isFounder || u.autoPassed) { u.xp = 1500; u.level = 5; }
   });
+
+  // Persist updated profiles
+  try {
+    localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(USER_PROFILES));
+  } catch(e) {}
 
   let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
   if (!USER_PROFILES[activeUserId]) activeUserId = 'luke';
@@ -8879,16 +8907,40 @@ window.closeLeakMathModal = function() {
     try {
       localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(USER_PROFILES));
       localStorage.setItem('vantorx_active_user_id_v2', activeUserId);
-    } catch(e) {}
+    } catch(e) {
+      console.error('Error saving user profiles:', e);
+    }
   }
 
-  window.resetBuddyProgress = function() {
-    USER_PROFILES.buddy = JSON.parse(JSON.stringify(DEFAULT_PROFILES.buddy));
-    activeUserId = 'buddy';
+  window.autoPassActiveUser = function() {
+    const user = getActiveUser();
+    grantCoursePass(user);
     saveUserProfiles();
     updateUserUI();
+    updateAcademyUI();
+    playSound('levelup');
+    showToast(`🏆 Course Auto-Passed for ${user.name}! Level 5 Certified & Leads Unlocked!`);
+  };
+
+  window.resetBuddyProgress = function() {
+    const u = getActiveUser();
+    u.level = 1;
+    u.xp = 0;
+    u.isFounder = false;
+    u.founderBypass = false;
+    u.autoPassed = false;
+    u.completedUnits = [];
+    u.unitActivitiesDone = [];
+    u.flashcardsRevealed = [];
+    u.quizAnswers = {};
+    u.daysPassed = [];
+    u.modulesPassed = [];
+    u.bossesDefeated = 0;
+    saveUserProfiles();
+    updateUserUI();
+    updateAcademyUI();
     if (window.selectLmsUnit) window.selectLmsUnit('1-1');
-    showToast('✓ Reset Buddy to Level 1 (Day 1 Lesson 1.1)! Ready for full test run.');
+    showToast(`✓ Reset ${u.name} to Level 1 (Day 1 Lesson 1.1)! Ready for test run.`);
     playSound('levelup');
   };
 
@@ -9591,6 +9643,37 @@ window.closeLeakMathModal = function() {
       b3.style.borderColor = 'rgba(52,211,153,0.4)';
       b3.style.color = '#34d399';
     }
+
+    // 7. Restore or sync quiz exam answers
+    const allQuizBoxes = document.querySelectorAll('.quiz-options');
+    allQuizBoxes.forEach(qBox => {
+      const d = parseInt(qBox.getAttribute('data-day'));
+      const q = parseInt(qBox.getAttribute('data-q'));
+      const qKey = `${d}-${q}`;
+      const btns = qBox.querySelectorAll('.quiz-opt-btn');
+
+      if (user.quizAnswers && user.quizAnswers[qKey] !== undefined) {
+        const chosen = user.quizAnswers[qKey];
+        btns.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === chosen) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.remove('correct', 'wrong');
+          }
+        });
+      } else if (user.daysPassed && user.daysPassed.includes(d)) {
+        btns.forEach(btn => {
+          btn.disabled = true;
+          const oc = btn.getAttribute('onclick') || '';
+          if (oc.includes('true')) {
+            btn.classList.add('correct');
+          } else {
+            btn.classList.remove('correct', 'wrong');
+          }
+        });
+      }
+    });
   }
 
   function updateDailyGoalsUI() {
@@ -9629,6 +9712,10 @@ window.closeLeakMathModal = function() {
     });
 
     if (!isCorrect) return;
+
+    if (!user.quizAnswers) user.quizAnswers = {};
+    user.quizAnswers[`${dayNum}-${qNum}`] = optIndex;
+    saveUserProfiles();
 
     // Check completion for this day
     const dayQBoxes = document.querySelectorAll(`.quiz-options[data-day="${dayNum}"]`);
@@ -9801,8 +9888,10 @@ window.closeLeakMathModal = function() {
   window.createNewAccountFromModal = function() {
     const nameInput = document.getElementById('newRepName');
     const roleSelect = document.getElementById('newRepRole');
+    const autoPassCheck = document.getElementById('newRepAutoPass');
     const name = nameInput ? nameInput.value.trim() : '';
     const role = roleSelect ? roleSelect.value : 'Outbound Closer';
+    const shouldAutoPass = (autoPassCheck && autoPassCheck.checked) || name.toLowerCase().includes('buddy');
 
     if (!name) {
       showToast('Please enter a name for the new sales rep account.');
@@ -9823,7 +9912,9 @@ window.closeLeakMathModal = function() {
       isFounder: false,
       founderBypass: false,
       completedUnits: [],
+      unitActivitiesDone: [],
       flashcardsRevealed: [],
+      quizAnswers: {},
       daysPassed: [],
       modulesPassed: [],
       bossesDefeated: 0,
@@ -9831,16 +9922,22 @@ window.closeLeakMathModal = function() {
       dailySims: 0
     };
 
+    if (shouldAutoPass) {
+      grantCoursePass(USER_PROFILES[uid]);
+    }
+
     activeUserId = uid;
     if (nameInput) nameInput.value = '';
+    if (autoPassCheck) autoPassCheck.checked = false;
     saveUserProfiles();
     if (window.selectLmsUnit) window.selectLmsUnit('1-1');
     updateUserUI();
+    if (window.updateAcademyUI) window.updateAcademyUI();
     playSound('levelup');
-    showToast(`✓ Account created for ${name}! Welcome to the Closer Academy.`);
+    showToast(`✓ Account created for ${name}! ${shouldAutoPass ? '🎓 Course Auto-Passed (Level 5)!' : 'Welcome to Closer Academy.'}`);
     const accountModal = document.getElementById('accountModal');
     if (accountModal) accountModal.classList.remove('active');
-    window.switchTab('tabAcademy');
+    window.switchTab(shouldAutoPass ? 'tabLeads' : 'tabAcademy');
   };
 
   const btnToggleFounderBypass = document.getElementById('btnToggleFounderBypass');
