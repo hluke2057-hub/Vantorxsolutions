@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -52,6 +52,23 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .script-line em{color:var(--accent2);font-style:normal;background:rgba(245,158,11,0.12);padding:1px 6px;border-radius:4px}
 .script-line strong{color:var(--blue);font-weight:700}
 .delivery-tip{font-size:13px;color:var(--dim);margin-top:10px;display:flex;align-items:center;gap:6px}
+
+/* Split-Down-The-Middle Teleprompter Grid */
+.script-split-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+@media(max-width:980px){.script-split-grid{grid-template-columns:1fr}}
+
+.script-col{background:rgba(15,21,34,0.7);border:1.5px solid var(--line2);border-radius:16px;padding:20px;position:relative;display:flex;flex-direction:column;gap:14px}
+.script-col-owner{border-color:rgba(52,211,153,0.35);background:linear-gradient(180deg,rgba(52,211,153,0.06),rgba(15,21,34,0.7))}
+.script-col-not-owner{border-color:rgba(245,158,11,0.35);background:linear-gradient(180deg,rgba(245,158,11,0.06),rgba(15,21,34,0.7))}
+
+.script-col-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1.5px solid var(--line);margin-bottom:4px}
+.script-col-header h4{font-family:var(--font-head);font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px;margin:0}
+.script-col-header .col-badge{font-size:11px;font-family:var(--font-mono);font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:0.04em}
+
+.split-view-selector{display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--line2);padding:4px;border-radius:10px}
+.split-view-btn{background:none;border:none;color:var(--dim);font-family:var(--font-head);font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all 0.15s}
+.split-view-btn.active{background:var(--accent);color:#070a0f}
+.split-view-btn:hover:not(.active){color:#ffffff;background:rgba(255,255,255,0.06)}
 
 /* Objection Accordions */
 .obj-accordion{border:1px solid var(--line);border-radius:12px;background:var(--bg);margin-bottom:10px;overflow:hidden;transition:border-color 0.15s}
@@ -2389,79 +2406,139 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <!-- PRODUCT 1: AVA 24/7 AI VOICE RECEPTIONIST               -->
       <!-- ======================================================== -->
       <div id="scriptPanel_ava" class="product-script-panel">
-        <div class="script-section-header" style="margin-top:0">
-          <h3><span>🛡️</span> Stage 0: Gatekeeper Bypass (If Owner Doesn't Answer)</h3>
-        </div>
-        <div class="script-phase">
-          <div class="phase-tag"><span>Gatekeeper Opener</span><span>Casual Local Peer</span></div>
-          <div class="script-line">
-            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing."
+        <!-- Split View Controls Fork -->
+        <div class="split-view-controls" style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 18px;flex-wrap:wrap;gap:10px;background:rgba(15,21,34,0.6);border:1px solid var(--line2);padding:10px 16px;border-radius:12px">
+          <div style="font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent2);font-size:16px">⚡</span>
+            <span>CALL ROUTING FORK:</span>
+            <span style="color:var(--dim);font-size:12px;font-weight:400">Split down the middle for instant reaction (Ava Voice AI $397/mo)</span>
           </div>
-          <div class="delivery-tip">
-            💡 If she asks <em>"What is this regarding?"</em> ➔ <strong>"Just had a quick operational question about your after-hours emergency call routing in <span class="dyn-city">[City]</span>. Is he out on a job site right now or in later today?"</strong>
-          </div>
-        </div>
-
-        <div class="script-section-header">
-          <h3><span>⚡</span> Stage 1: The Core Pitch (When Owner Answers)</h3>
-        </div>
-
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 1: Disarming Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
-          <div class="script-line">
-            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you were not expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle: <em>"Alright, what you got?"</em>
+          <div class="split-view-selector">
+            <button class="split-view-btn active" type="button" onclick="setSplitView('split', this)">👁️ Split View 50/50</button>
+            <button class="split-view-btn" type="button" onclick="setSplitView('owner', this)">🟢 Yes: It's The Owner</button>
+            <button class="split-view-btn" type="button" onclick="setSplitView('not-owner', this)">🟡 No: Not The Owner</button>
           </div>
         </div>
 
-        <!-- 🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN" -->
-        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
-            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
-            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
-          </div>
-          <p style="font-size:12px;color:#cbd5e1;margin:0 0 8px;line-height:1.5">
-            Never hang up or freeze! Treat the dispatcher with high respect as the person running the operation, and bridge smoothly to extract the owner's direct mobile number:
-          </p>
-          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
-            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
-            "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field.<br><br>
-            Quick question for you then: when customers call in after 5 PM or on weekends with an emergency, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell or do they just roll to voicemail?"
-          </div>
-          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
-            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
-            "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when you're closed or busy. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
-          </div>
-        </div>
+        <!-- SPLIT-DOWN-THE-MIDDLE GRID -->
+        <div class="script-split-grid">
+          <!-- LEFT COLUMN: YES — IT'S THE OWNER -->
+          <div class="script-col script-col-owner col-owner-track">
+            <div class="script-col-header">
+              <h4 style="color:#6ee7b7"><span>🟢</span> YES — IT'S THE OWNER</h4>
+              <span class="col-badge" style="background:rgba(52,211,153,0.15);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4)">Direct Decision Maker Track</span>
+            </div>
 
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 2: The $8,000 Emergency Weekend Leak Hook (0:08 - 0:20)</span><span style="color:var(--ok)">✓ High-Ticket Bleed</span></div>
-          <div class="script-line">
-            "I'll be super quick: I was looking at your Google profile in <span class="dyn-city">[City]</span>. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose the $8,000 job to the next competitor on Google.<br><br>
-            <strong>Where does that call ring for you right now?</strong>"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Delivery Tip:</em> BITE YOUR TONGUE UNTIL HE SPEAKS. Let him admit he misses calls or answers dinner calls from his cell.
-          </div>
-        </div>
+            <!-- Step 1: Permission Opener -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 1: Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
+              <div class="script-line">
+                "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you were not expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Delivery Tip:</em> Lower pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle: <em>"Alright, what you got?"</em>
+              </div>
+            </div>
 
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 3: The Ava Solution (0:20 - 0:35)</span><span>1-Ring AI Receptionist</span></div>
-          <div class="script-line">
-            "That's exactly why I'm calling. We built <em>Ava</em> — she's a 24/7 AI voice phone receptionist trained specifically for Florida trade contractors that answers in 1 ring, triages emergencies, and books calendar jobs."
-          </div>
-        </div>
+            <!-- Step 2: The $8,000 Emergency Weekend Leak Hook -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 2: $8,000 Emergency Weekend Leak (0:08 - 0:20)</span><span style="color:var(--ok)">✓ High-Ticket Bleed</span></div>
+              <div class="script-line">
+                "I'll be super quick: I was looking at your Google profile in <span class="dyn-city">[City]</span>. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose the $8,000 job to the next competitor on Google.<br><br>
+                <strong>Where does that call ring for you right now?</strong>"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Delivery Tip:</em> BITE YOUR TONGUE UNTIL HE SPEAKS. Let him admit he misses calls or answers dinner calls from his cell.
+              </div>
+            </div>
 
-        <div class="script-phase" style="border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.06)">
-          <div class="phase-tag"><span style="color:var(--accent2)">Phase 4: Luke's Takeaway Close &amp; Time Choice</span><span>High-Confidence Close</span></div>
-          <div class="script-line">
-            "So if you're sick of losing money, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, tailored to your business.<br><br>
-            Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
+            <!-- Step 3: The Ava Solution -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 3: The Ava Solution (0:20 - 0:35)</span><span>$397/mo · $0 Setup</span></div>
+              <div class="script-line">
+                "That's exactly why I'm calling. We built <em>Ava</em> — she's a 24/7 AI voice phone receptionist trained specifically for Florida trade contractors that answers in 1 ring, triages emergencies, and books calendar jobs.<br><br>
+                You keep your exact same number via <strong>*71 rollover</strong>, and it pays for itself with literally one single emergency job all month."
+              </div>
+            </div>
+
+            <!-- Step 4: Luke's Takeaway Close -->
+            <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06);margin-bottom:0">
+              <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Step 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Close</span></div>
+              <div class="script-line" style="font-size:15px;line-height:1.6">
+                "<strong>So if you're sick of losing money, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, tailored to your business.</strong><br><br>
+                Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
+              </div>
+            </div>
+
+            <!-- Step 5: Test Line Challenge -->
+            <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04);margin-bottom:0">
+              <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Step 5: Friction-Killer Live Test Line</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
+              <div class="script-line">
+                "Tell you what: I'll text you our live demo line right now: <strong>(561) 813-8602</strong>. When we get off the phone here, dial it for 20 seconds. If Ava sounds robotic or fake, cancel the meeting and you never have to talk to me again. Fair enough?"
+              </div>
+            </div>
           </div>
-          <div class="delivery-tip">
-            💡 <em>Why This Works:</em> Direct, high-confidence takeaway close that pivots immediately to an alternative-choice calendar slot. If they want to test Ava first, you shoot a text with the meeting link and the live demo line: <strong>(561) 813-8602</strong>.
+
+          <!-- RIGHT COLUMN: NO — NOT THE OWNER -->
+          <div class="script-col script-col-not-owner col-not-owner-track">
+            <div class="script-col-header">
+              <h4 style="color:#fde047"><span>🟡</span> NO — NOT THE OWNER</h4>
+              <span class="col-badge" style="background:rgba(245,158,11,0.15);color:#fde047;border:1px solid rgba(245,158,11,0.4)">Dispatcher / Gatekeeper Track</span>
+            </div>
+
+            <!-- Step 1: Casual Peer Opener -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and emergency calls in <span class="dyn-city">[City]</span>."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
+              </div>
+            </div>
+
+            <!-- Step 2: Praise The Dispatcher Reframe -->
+            <div class="script-phase" style="margin-bottom:0;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.05)">
+              <div class="phase-tag"><span style="color:var(--accent2)">Step 2: The Dispatcher Praise Reframe</span><span>When told he's out/busy</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field turning wrenches."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Why This Works:</em> Elevates them from an adversary gatekeeper to a respected manager. Guard drops immediately.
+              </div>
+            </div>
+
+            <!-- Step 3: Operational Dispatch Question -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 3: Operational Dispatch Question</span><span>Expose The Leak</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Quick question for you then: when emergency calls come in after 5 PM or on weekends, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell, or do they just roll to voicemail?"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Listen Closely:</em> Dispatchers vent: <em>"He tries to answer, but if he's driving or off the clock it rolls to voicemail."</em>
+              </div>
+            </div>
+
+            <!-- Step 4: Extract Owner's Direct Mobile -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span style="color:#6ee7b7">Step 4: Extract Direct Cell Phone</span><span style="color:var(--ok)">Key Objective</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when the office is closed.<br><br>
+                <strong>What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?</strong>"
+              </div>
+            </div>
+
+            <!-- Step 5: Handling "Can I take a message?" or "Send an email" -->
+            <div class="script-phase" style="margin-bottom:0;border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05)">
+              <div class="phase-tag"><span style="color:#fca5a5">Step 5: When Asked "Can I Take a Message / Send Email?"</span><span>Bypass</span></div>
+              <div class="script-line" style="font-size:14.5px;line-height:1.5">
+                "Paper notes and emails get buried behind 50 supply receipts. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it from his truck for 20 seconds.<br><br>
+                What's his cell number so I can send that over?"
+              </div>
+              <div class="delivery-tip">
+                💡 If she still insists on an email: <em>"What's the direct email he actually opens on his cell phone?"</em>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -3037,92 +3114,145 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <span style="font-size:11px;font-family:var(--font-mono);background:rgba(245,158,11,0.2);color:var(--accent2);padding:2px 8px;border-radius:4px;border:1px solid rgba(245,158,11,0.4)">Most Popular · 2-10 Trucks</span>
         </div>
 
-        <!-- Stage 0: Gatekeeper Bypass -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Stage 0: Gatekeeper Bypass (If Owner Doesn't Answer)</span><span>Casual Local Peer</span></div>
-          <div class="script-line">
-            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and website lead intake in <span class="dyn-city">[City]</span>."
+        <!-- Split View Controls Fork -->
+        <div class="split-view-controls" style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 18px;flex-wrap:wrap;gap:10px;background:rgba(15,21,34,0.6);border:1px solid var(--line2);padding:10px 16px;border-radius:12px">
+          <div style="font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent2);font-size:16px">⚡</span>
+            <span>CALL ROUTING FORK:</span>
+            <span style="color:var(--dim);font-size:12px;font-weight:400">Split down the middle for instant reaction (Accelerate $697/mo)</span>
           </div>
-          <div class="delivery-tip">
-            💡 If she asks <em>"What is this regarding?"</em> ➔ <strong>"Just had a quick operational question regarding after-hours emergency calls and online estimate requests in <span class="dyn-city">[City]</span>. Is he out in the field right now or in later today?"</strong>
-          </div>
-        </div>
-
-        <!-- Phase 1: Disarming Permission Opener -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 1: Disarming Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
-          <div class="script-line">
-            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you weren't expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle: <em>"Alright, what you got?"</em>
+          <div class="split-view-selector">
+            <button class="split-view-btn active" type="button" onclick="setSplitView('split', this)">👁️ Split View 50/50</button>
+            <button class="split-view-btn" type="button" onclick="setSplitView('owner', this)">🟢 Yes: It's The Owner</button>
+            <button class="split-view-btn" type="button" onclick="setSplitView('not-owner', this)">🟡 No: Not The Owner</button>
           </div>
         </div>
 
-        <!-- 🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN" -->
-        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
-            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
-            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
-          </div>
-          <p style="font-size:12px;color:#cbd5e1;margin:0 0 8px;line-height:1.5">
-            Never hang up or freeze! Treat the dispatcher with high respect as the person running the operation, and bridge smoothly to extract the owner's direct mobile number:
-          </p>
-          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
-            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
-            "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field.<br><br>
-            Quick question for you then: when customers call in after 5 PM or on weekends with an emergency, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell or do they just roll to voicemail?"
-          </div>
-          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
-            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
-            "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when you're closed or busy. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
-          </div>
-        </div>
+        <!-- SPLIT-DOWN-THE-MIDDLE GRID -->
+        <div class="script-split-grid">
+          <!-- LEFT COLUMN: YES — IT'S THE OWNER -->
+          <div class="script-col script-col-owner col-owner-track">
+            <div class="script-col-header">
+              <h4 style="color:#6ee7b7"><span>🟢</span> YES — IT'S THE OWNER</h4>
+              <span class="col-badge" style="background:rgba(52,211,153,0.15);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4)">Direct Decision Maker Track</span>
+            </div>
 
-        <!-- Phase 2: The Multi-Leak Revenue Hook -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 2: The Multi-Leak Revenue Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Expose 4 Silent Leaks</span></div>
-          <div class="script-line">
-            "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>. Most contractors in your trade have 3 or 4 silent leaks draining over $100,000 a year: emergency weekend calls rolling to voicemail, a mobile website that takes 5 seconds to load, lead forms sitting un-replied for hours, and competitors ranking above you on Siri and ChatGPT.<br><br>
-            When a $6,000 job calls on a Saturday night or submits a form, <strong>where does that lead go for you right now?</strong>"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>The Golden Pause:</em> Let them answer! They will say "it rolls to voicemail" or "I try to text them when I'm done on a job." You have now identified their exact bleeding wound.
-          </div>
-        </div>
+            <!-- Step 1: Permission Opener -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 1: Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
+              <div class="script-line">
+                "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you weren't expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle: <em>"Alright, what you got?"</em>
+              </div>
+            </div>
 
-        <!-- Phase 3: The Accelerate Growth Engine Solution -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 3: The Accelerate Growth Engine Solution (0:25 - 0:45)</span><span>Complete Front-Office Machine</span></div>
-          <div class="script-line">
-            "That's exactly why we built our <strong>Accelerate package</strong> specifically for Florida contractors. We deploy the complete front-office machine: <strong>Ava answers every single call in 1 ring 24/7</strong>, our <strong>90-second SMS engine</strong> texts web leads before they call your competitors, and you get a brand-new <strong>1-second custom mobile website</strong> with local AEO search ranking.<br><br>
-            It is 100% done for you, <strong>$0 setup fee</strong>, and zero long-term contracts."
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Value Contrast:</em> Traditional agencies charge $6,000 for a website and $2,000/mo retainers. VantorX is $697/mo all-in with $0 setup fee. One emergency job covers the entire investment.
-          </div>
-        </div>
+            <!-- Step 2: The Multi-Leak Revenue Hook -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 2: $8,000 Leak Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Expose 4 Leaks</span></div>
+              <div class="script-line">
+                "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>. Most contractors in your trade have 3 or 4 silent leaks draining over $100,000 a year: emergency weekend calls rolling to voicemail, a mobile website that takes 5 seconds to load, lead forms sitting un-replied for hours, and competitors ranking above you on Siri and ChatGPT.<br><br>
+                When a $6,000 job calls on a Saturday night or submits a form, <strong>where does that lead go for you right now? Does someone answer live, or does it hit voicemail?</strong>"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>The Golden Pause:</em> Let them answer! They will say: <em>"It goes to voicemail"</em> or <em>"I try to text them when I'm done on a job."</em>
+              </div>
+            </div>
 
-        <!-- Phase 4: Luke's Takeaway Close & Time Choice Lock -->
-        <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06)">
-          <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Phase 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Closing Reflex</span></div>
-          <div class="script-line" style="font-size:15px;line-height:1.6">
-            "<strong>So if you're sick of losing money, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, exactly tailored to your business.</strong><br><br>
-            Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Alternative Choice:</em> Never ask <em>"Do you have time?"</em> (invites a "No"). Always offer two specific time buckets: early morning or 4:30 PM wrap.
-          </div>
-        </div>
+            <!-- Step 3: The Accelerate Growth Engine Solution -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 3: Accelerate Growth Engine (0:25 - 0:45)</span><span>$697/mo · $0 Setup</span></div>
+              <div class="script-line">
+                "That's exactly why we built our <strong>Accelerate package</strong> specifically for Florida contractors. We deploy the complete front-office machine: <strong>Ava answers every single call in 1 ring 24/7</strong>, our <strong>90-second SMS engine</strong> texts web leads before they call your competitors, and you get a brand-new <strong>1-second custom mobile website</strong> with local AEO search ranking.<br><br>
+                It is 100% done for you, <strong>$0 setup fee</strong>, and zero long-term contracts."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Value Contrast:</em> Traditional agencies charge $6,000 for a website and $2,000/mo retainers. VantorX is $697/mo all-in with $0 setup fee.
+              </div>
+            </div>
 
-        <!-- Phase 5: The Friction-Killer & Live AI Test Verification -->
-        <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04)">
-          <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Phase 5: The Friction-Killer &amp; Live AI Test (If Skeptical)</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
-          <div class="script-line">
-            "Tell you what: If it's something you're interested in, I can send you a quick text with the demo link right now. And once we get off the phone here, you can also dial our live AI test line: <strong>(561) 813-8602</strong>. If Ava sounds robotic or fake, cancel the meeting and you never have to talk to me again. Fair enough?"
+            <!-- Step 4: Luke's Takeaway Close & Time Choice Lock -->
+            <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06);margin-bottom:0">
+              <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Step 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Close</span></div>
+              <div class="script-line" style="font-size:15px;line-height:1.6">
+                "<strong>So if you're sick of losing money, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, exactly tailored to your business.</strong><br><br>
+                Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Alternative Choice:</em> Never ask <em>"Do you have time?"</em>. Offer two specific buckets: early morning or 4:30 PM wrap.
+              </div>
+            </div>
+
+            <!-- Step 5: The Friction-Killer & Live AI Test Verification -->
+            <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04);margin-bottom:0">
+              <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Step 5: Friction-Killer Live Test Line</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
+              <div class="script-line">
+                "Tell you what: I'll text you our live demo line right now: <strong>(561) 813-8602</strong>. When we get off the phone here, dial it for 20 seconds. If Ava sounds robotic or fake, cancel the meeting and you never have to talk to me again. Fair enough?"
+              </div>
+            </div>
           </div>
-          <div class="delivery-tip">
-            💡 <em>Total Disarmament:</em> This proves 100% confidence. No contractor can say no to "cancel the meeting and never talk to me again."
+
+          <!-- RIGHT COLUMN: NO — NOT THE OWNER -->
+          <div class="script-col script-col-not-owner col-not-owner-track">
+            <div class="script-col-header">
+              <h4 style="color:#fde047"><span>🟡</span> NO — NOT THE OWNER</h4>
+              <span class="col-badge" style="background:rgba(245,158,11,0.15);color:#fde047;border:1px solid rgba(245,158,11,0.4)">Dispatcher / Gatekeeper Track</span>
+            </div>
+
+            <!-- Step 1: Casual Peer Opener -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and emergency calls in <span class="dyn-city">[City]</span>."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
+              </div>
+            </div>
+
+            <!-- Step 2: Praise The Dispatcher Reframe -->
+            <div class="script-phase" style="margin-bottom:0;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.05)">
+              <div class="phase-tag"><span style="color:var(--accent2)">Step 2: The Dispatcher Praise Reframe</span><span>When told he's out/busy</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field turning wrenches."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Why This Works:</em> Elevates them from an adversary gatekeeper to a respected manager. Guard drops immediately.
+              </div>
+            </div>
+
+            <!-- Step 3: Operational Dispatch Question -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 3: Operational Dispatch Question</span><span>Expose The Leak</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Quick question for you then: when emergency calls come in after 5 PM or on weekends, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell, or do they just roll to voicemail?"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Listen Closely:</em> Dispatchers vent: <em>"He tries to answer, but if he's driving or off the clock it rolls to voicemail."</em>
+              </div>
+            </div>
+
+            <!-- Step 4: Extract Owner's Direct Mobile -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span style="color:#6ee7b7">Step 4: Extract Direct Cell Phone</span><span style="color:var(--ok)">Key Objective</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when the office is closed.<br><br>
+                <strong>What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?</strong>"
+              </div>
+            </div>
+
+            <!-- Step 5: Handling "Can I take a message?" or "Send an email" -->
+            <div class="script-phase" style="margin-bottom:0;border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05)">
+              <div class="phase-tag"><span style="color:#fca5a5">Step 5: When Asked "Can I Take a Message / Send Email?"</span><span>Bypass</span></div>
+              <div class="script-line" style="font-size:14.5px;line-height:1.5">
+                "Paper notes and emails get buried behind 50 supply receipts. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it from his truck for 20 seconds.<br><br>
+                What's his cell number so I can send that over?"
+              </div>
+              <div class="delivery-tip">
+                💡 If she still insists on an email: <em>"What's the direct email he actually opens on his cell phone?"</em>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -3222,93 +3352,140 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <span style="font-size:11px;font-family:var(--font-mono);background:rgba(56,189,248,0.2);color:#38bdf8;padding:2px 8px;border-radius:4px;border:1px solid rgba(56,189,248,0.4)">Captures $8k Missed Emergency Calls</span>
         </div>
 
-        <!-- Stage 0: Gatekeeper Bypass -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Stage 0: Gatekeeper Bypass (If Owner Doesn't Answer)</span><span>Casual Local Peer</span></div>
-          <div class="script-line">
-            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend emergency call routing in <span class="dyn-city">[City]</span>."
+        <!-- Split View Controls Fork -->
+        <div class="split-view-controls" style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 18px;flex-wrap:wrap;gap:10px;background:rgba(15,21,34,0.6);border:1px solid var(--line2);padding:10px 16px;border-radius:12px">
+          <div style="font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent2);font-size:16px">⚡</span>
+            <span>CALL ROUTING FORK:</span>
+            <span style="color:var(--dim);font-size:12px;font-weight:400">Split down the middle for instant reaction (AI Front Desk $397/mo)</span>
           </div>
-          <div class="delivery-tip">
-            💡 If she asks <em>"What is this regarding?"</em> ➔ <strong>"Just had a quick operational question regarding after-hours emergency calls in <span class="dyn-city">[City]</span>. Is he out in the field right now or in later today?"</strong>
-          </div>
-        </div>
-
-        <!-- 🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN" -->
-        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
-            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
-            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
-          </div>
-          <p style="font-size:12px;color:#cbd5e1;margin:0 0 8px;line-height:1.5">
-            Never hang up or freeze! Treat the dispatcher with high respect as the person running the operation, and bridge smoothly to extract the owner's direct mobile number:
-          </p>
-          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
-            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
-            "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field.<br><br>
-            Quick question for you then: when customers call in after 5 PM or on weekends with an emergency, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell or do they just roll to voicemail?"
-          </div>
-          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
-            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
-            "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when you're closed or busy. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
+          <div class="split-view-selector">
+            <button class="split-view-btn active" type="button" onclick="setSplitView('split', this)">👁️ Split View 50/50</button>
+            <button class="split-view-btn" type="button" onclick="setSplitView('owner', this)">🟢 Yes: It's The Owner</button>
+            <button class="split-view-btn" type="button" onclick="setSplitView('not-owner', this)">🟡 No: Not The Owner</button>
           </div>
         </div>
 
-        <!-- Phase 1: Disarming Permission Opener -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 1: Disarming Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
-          <div class="script-line">
-            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you weren't expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING. 90% of contractors chuckle: <em>"Alright, what you got?"</em>
-          </div>
-        </div>
+        <!-- SPLIT-DOWN-THE-MIDDLE GRID -->
+        <div class="script-split-grid">
+          <!-- LEFT COLUMN: YES — IT'S THE OWNER -->
+          <div class="script-col script-col-owner col-owner-track">
+            <div class="script-col-header">
+              <h4 style="color:#6ee7b7"><span>🟢</span> YES — IT'S THE OWNER</h4>
+              <span class="col-badge" style="background:rgba(52,211,153,0.15);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4)">Direct Decision Maker Track</span>
+            </div>
 
-        <!-- Phase 2: The Missed Call Revenue Hook -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 2: The Missed Call Revenue Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ High-Ticket Bleed</span></div>
-          <div class="script-line">
-            "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>.<br><br>
-            When you or your guys are up on a ladder, driving between jobs, or running tools after 5 PM, what happens to incoming customer calls? <strong>Do they go to voicemail, or does someone pick up live every single time?</strong>"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>The Golden Pause:</em> Let them answer! 85% of homeowners with emergency trade problems hang up on voicemail and call the next competitor on Google.
-          </div>
-        </div>
+            <!-- Step 1: Permission Opener -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 1: Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
+              <div class="script-line">
+                "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you were not expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING.
+              </div>
+            </div>
 
-        <!-- Phase 3: The Basic Package AI Front Desk Solution -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 3: The Basic Package: AI Front Desk Solution (0:25 - 0:45)</span><span>$397/mo · $0 Setup Fee</span></div>
-          <div class="script-line">
-            "That's exactly why we built our <strong>Basic Package: AI Front Desk</strong> for just <strong>$397 a month with $0 setup fee</strong>.<br><br>
-            You keep your exact phone number. You just dial <strong>*71</strong> on your phone to forward missed or after-hours calls. Ava answers instantly in 1 ring, speaks like a human dispatcher, qualifies the homeowner, books them straight into your calendar, and texts your cell with the job details in 10 seconds.<br><br>
-            It pays for itself with literally <strong>one caught job</strong> all month, and there are zero contracts."
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Simplicity Focus:</em> Emphasize $0 setup fee, no phone number changes, and month-to-month flexibility.
-          </div>
-        </div>
+            <!-- Step 2: The Missed Call Revenue Hook -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 2: The Missed Call Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Emergency Bleed</span></div>
+              <div class="script-line">
+                "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>.<br><br>
+                When you or your guys are up on a ladder, driving between job sites, or running tools after 5 PM, what happens to incoming customer calls? <strong>Do they go to voicemail, or does someone pick up live every single time?</strong>"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Pause:</em> 85% of homeowners with an emergency hang up on voicemail and call the next contractor on Google.
+              </div>
+            </div>
 
-        <!-- Phase 4: Luke's Takeaway Close & Alternative-Choice Time Lock -->
-        <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06)">
-          <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Phase 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Closing Reflex</span></div>
-          <div class="script-line" style="font-size:15px;line-height:1.6">
-            "<strong>So if you're sick of losing money and watching $5,000 to $8,000 jobs roll to your competitor down the road, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, exactly tailored to your business.</strong><br><br>
-            Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Alternative Choice:</em> Never ask <em>"Do you have time?"</em>. Always offer two distinct time slots: morning or 4:30 PM.
-          </div>
-        </div>
+            <!-- Step 3: The AI Front Desk Solution -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 3: The AI Front Desk Solution (0:25 - 0:45)</span><span>$397/mo · $0 Setup</span></div>
+              <div class="script-line">
+                "That's exactly why we built our <strong>Basic Package: AI Front Desk for just $397 a month with $0 setup fee</strong>.<br><br>
+                You keep your exact phone number. You just dial <strong>*71</strong> on your phone to forward missed or after-hours calls. Ava answers instantly in 1 ring, speaks like a human dispatcher, qualifies the homeowner, books them straight into your calendar, and texts your cell with the job details in 10 seconds.<br><br>
+                It pays for itself with literally <strong>one single caught job all month</strong>, and there are zero contracts."
+              </div>
+            </div>
 
-        <!-- Phase 5: The Friction-Killer & Live AI Test Verification -->
-        <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04)">
-          <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Phase 5: The Friction-Killer &amp; Live AI Test (If Skeptical)</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
-          <div class="script-line">
-            "Tell you what: If it's something you're interested in, I can send you a quick text with the demo link right now. And once we get off the phone here, you can also dial our live AI test line: <strong>(561) 813-8602</strong>. If Ava sounds robotic or fake, cancel the meeting and you never have to talk to me again. Fair enough?"
+            <!-- Step 4: Luke's Takeaway Close -->
+            <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06);margin-bottom:0">
+              <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Step 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Close</span></div>
+              <div class="script-line" style="font-size:15px;line-height:1.6">
+                "<strong>So if you're sick of losing money and watching $5,000 to $8,000 jobs roll to your competitor down the road, let's hop on a quick 5 to 10-minute meeting so I can show you exactly what we do, exactly tailored to your business.</strong><br><br>
+                Are you usually easier to catch in the morning before crews roll out, or later in the afternoon around 4:30?"
+              </div>
+            </div>
+
+            <!-- Step 5: Test Line Challenge -->
+            <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04);margin-bottom:0">
+              <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Step 5: Friction-Killer Live Test Line</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
+              <div class="script-line">
+                "Tell you what: I'll text you our live demo line right now: <strong>(561) 813-8602</strong>. When we get off the phone here, dial it for 20 seconds. If Ava sounds robotic or fake, cancel the meeting and you never have to talk to me again. Fair enough?"
+              </div>
+            </div>
           </div>
-          <div class="delivery-tip">
-            💡 <em>Total Disarmament:</em> No contractor can reject this. It removes all perceived risk and proves 100% confidence.
+
+          <!-- RIGHT COLUMN: NO — NOT THE OWNER -->
+          <div class="script-col script-col-not-owner col-not-owner-track">
+            <div class="script-col-header">
+              <h4 style="color:#fde047"><span>🟡</span> NO — NOT THE OWNER</h4>
+              <span class="col-badge" style="background:rgba(245,158,11,0.15);color:#fde047;border:1px solid rgba(245,158,11,0.4)">Dispatcher / Gatekeeper Track</span>
+            </div>
+
+            <!-- Step 1: Casual Peer Opener -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and emergency calls in <span class="dyn-city">[City]</span>."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
+              </div>
+            </div>
+
+            <!-- Step 2: Praise The Dispatcher Reframe -->
+            <div class="script-phase" style="margin-bottom:0;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.05)">
+              <div class="phase-tag"><span style="color:var(--accent2)">Step 2: The Dispatcher Praise Reframe</span><span>When told he's out/busy</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field turning wrenches."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Why This Works:</em> Elevates them from an adversary gatekeeper to a respected manager. Guard drops immediately.
+              </div>
+            </div>
+
+            <!-- Step 3: Operational Dispatch Question -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 3: Operational Dispatch Question</span><span>Expose The Leak</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Quick question for you then: when emergency calls come in after 5 PM or on weekends, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell, or do they just roll to voicemail?"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Listen Closely:</em> Dispatchers vent: <em>"He tries to answer, but if he's driving or off the clock it rolls to voicemail."</em>
+              </div>
+            </div>
+
+            <!-- Step 4: Extract Owner's Direct Mobile -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span style="color:#6ee7b7">Step 4: Extract Direct Cell Phone</span><span style="color:var(--ok)">Key Objective</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when the office is closed.<br><br>
+                <strong>What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?</strong>"
+              </div>
+            </div>
+
+            <!-- Step 5: Handling "Can I take a message?" or "Send an email" -->
+            <div class="script-phase" style="margin-bottom:0;border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05)">
+              <div class="phase-tag"><span style="color:#fca5a5">Step 5: When Asked "Can I Take a Message / Send Email?"</span><span>Bypass</span></div>
+              <div class="script-line" style="font-size:14.5px;line-height:1.5">
+                "Paper notes and emails get buried behind 50 supply receipts. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it from his truck for 20 seconds.<br><br>
+                What's his cell number so I can send that over?"
+              </div>
+              <div class="delivery-tip">
+                💡 If she still insists on an email: <em>"What's the direct email he actually opens on his cell phone?"</em>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -3403,87 +3580,143 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.2);color:#c084fc;padding:2px 8px;border-radius:4px;border:1px solid rgba(168,85,247,0.4)">10+ Trucks · Stops $30k/mo Latency Bleed</span>
         </div>
 
-        <!-- Stage 0: Gatekeeper Bypass -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Stage 0: Executive Gatekeeper Bypass</span><span>Executive Peer</span></div>
-          <div class="script-line">
-            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> in the office? It's Luke — quick question regarding your dispatch capacity and after-hours emergency volume in <span class="dyn-city">[City]</span>."
+        <!-- Split View Controls Fork -->
+        <div class="split-view-controls" style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 18px;flex-wrap:wrap;gap:10px;background:rgba(15,21,34,0.6);border:1px solid var(--line2);padding:10px 16px;border-radius:12px">
+          <div style="font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px">
+            <span style="color:var(--accent2);font-size:16px">⚡</span>
+            <span>CALL ROUTING FORK:</span>
+            <span style="color:var(--dim);font-size:12px;font-weight:400">Split down the middle for instant reaction (Scale $1,297/mo Enterprise)</span>
           </div>
-          <div class="delivery-tip">
-            💡 If she asks <em>"What is this regarding?"</em> ➔ <strong>"It's regarding commercial dispatch overflow and multi-truck lead routing in <span class="dyn-city">[City]</span>. Does he manage fleet operations directly or is there a general manager I should sync with?"</strong>
-          </div>
-        </div>
-
-        <!-- 🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN" -->
-        <div class="not-owner-branch" style="background:rgba(239,68,68,0.08);border:1.5px solid rgba(239,68,68,0.35);border-radius:10px;padding:12px 16px;margin:12px 0">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px">
-            <strong style="color:#f87171;font-size:12.5px">🛑 CRITICAL BRANCH: IF THEY SAY "NO, THIS ISN'T THE OWNER / I JUST TAKE CALLS / HE'S NOT IN"</strong>
-            <span style="font-size:10px;font-family:var(--font-mono);background:rgba(239,68,68,0.2);color:#fca5a5;padding:2px 6px;border-radius:4px">Dispatcher Handling</span>
-          </div>
-          <p style="font-size:12px;color:#cbd5e1;margin:0 0 8px;line-height:1.5">
-            Never hang up or freeze! Treat the dispatcher with high respect as the person running the operation, and bridge smoothly to extract the owner's direct mobile number:
-          </p>
-          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
-            <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
-            "Oh gotcha, no problem at all! You're the one actually running the show and keeping 10+ trucks rolling while he's out in the field.<br><br>
-            Quick question for you then: when 3 calls hit the dispatch desk at the exact same time during storms or heat waves, do callers get put on hold or does overflow roll to voicemail?"
-          </div>
-          <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
-            <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
-            "Got it. That's why I'm reaching out — we deploy multi-line concurrent AI dispatch lines so your dispatch desk never drops emergency calls. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
+          <div class="split-view-selector">
+            <button class="split-view-btn active" type="button" onclick="setSplitView('split', this)">👁️ Split View 50/50</button>
+            <button class="split-view-btn" type="button" onclick="setSplitView('owner', this)">🟢 Yes: It's The Owner</button>
+            <button class="split-view-btn" type="button" onclick="setSplitView('not-owner', this)">🟡 No: Not The Owner</button>
           </div>
         </div>
 
-        <!-- Phase 1: Disarming Permission Opener -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 1: Disarming Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
-          <div class="script-line">
-            "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you weren't expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING.
-          </div>
-        </div>
+        <!-- SPLIT-DOWN-THE-MIDDLE GRID -->
+        <div class="script-split-grid">
+          <!-- LEFT COLUMN: YES — IT'S THE OWNER -->
+          <div class="script-col script-col-owner col-owner-track">
+            <div class="script-col-header">
+              <h4 style="color:#6ee7b7"><span>🟢</span> YES — IT'S THE OWNER</h4>
+              <span class="col-badge" style="background:rgba(52,211,153,0.15);color:#6ee7b7;border:1px solid rgba(52,211,153,0.4)">Executive Decision Maker Track</span>
+            </div>
 
-        <!-- Phase 2: Enterprise Capacity Hook -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 2: Enterprise Capacity Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ $30k/mo Fleet Bleed</span></div>
-          <div class="script-line">
-            "I'll be direct: When you're running 10+ trucks across <span class="dyn-city">[City]</span>, your bottleneck isn't getting leads—it's front-office latency. When storm surges or peak hours hit, dispatch lines tie up, web forms wait 45 minutes for a callback, and competitors capture the top spoken recommendation on Siri and ChatGPT.<br><br>
-            When 4 emergency calls hit your line at the exact same time, <strong>how many of those callers actually speak to a live dispatcher within 1 ring?</strong>"
-          </div>
-          <div class="delivery-tip">
-            💡 <em>The Golden Pause:</em> Let them admit that hold times or voicemails cause lost commercial tickets.
-          </div>
-        </div>
+            <!-- Step 1: Permission Opener -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 1: Executive Permission Opener (0:00 - 0:08)</span><span style="color:var(--ok)">✓ 70% Win Rate</span></div>
+              <div class="script-line">
+                "Hey <span class="dyn-owner">[Owner's First Name]</span>, Luke from VantorX. I know you weren't expecting my call — <strong>got 20 seconds or should I hang up?</strong>"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Delivery Tip:</em> Lower your pitch, speak calmly, and STOP TALKING.
+              </div>
+            </div>
 
-        <!-- Phase 3: The Scale Enterprise Infrastructure Solution -->
-        <div class="script-phase">
-          <div class="phase-tag"><span>Phase 3: The Scale Enterprise Infrastructure Solution (0:25 - 0:45)</span><span>Autonomous Fleet Machine</span></div>
-          <div class="script-line">
-            "That's exactly why enterprise contractors deploy our <strong>Scale Tier ($1,297/mo, $0 setup fee)</strong>. We install complete autonomous front-office infrastructure:<br><br>
-            Unlimited concurrent Ava Voice AI lines handling multiple simultaneous callers with zero wait time, Spanish/English bilingual routing, 90-second SMS speed-to-lead across all web forms, a custom 1-second mobile website, full Multi-Engine AEO (Google, Siri, ChatGPT, Perplexity), and an automated review engine pumping 15 to 25 verified 5-star reviews every month.<br><br>
-            Everything syncs directly to your CRM, and it's 100% month-to-month."
-          </div>
-          <div class="delivery-tip">
-            💡 <em>Enterprise ROI:</em> One commercial job or two residential replacements covers the entire $1,297/mo fee immediately.
-          </div>
-        </div>
+            <!-- Step 2: Enterprise Capacity Hook -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 2: Enterprise Capacity Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ $30k/mo Fleet Bleed</span></div>
+              <div class="script-line">
+                "I'll be direct: When you're running 10+ trucks across <span class="dyn-city">[City]</span>, your bottleneck isn't getting leads—it's front-office latency. When storm surges or peak hours hit, dispatch lines tie up, web forms wait 45 minutes for a callback, and competitors capture the top spoken recommendation on Siri and ChatGPT.<br><br>
+                When 4 emergency calls hit your line at the exact same time, <strong>how many of those callers actually speak to a live dispatcher within 1 ring?</strong>"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>The Golden Pause:</em> Let them admit that hold times or voicemails cause lost commercial tickets.
+              </div>
+            </div>
 
-        <!-- Phase 4: Luke's Takeaway Close -->
-        <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06)">
-          <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Phase 4: Luke's Takeaway Close &amp; Time Choice</span><span style="color:var(--accent)">★ Master Closing Reflex</span></div>
-          <div class="script-line" style="font-size:15px;line-height:1.6">
-            "<strong>So if you're sick of losing high-ticket commercial and residential jobs to latency, let's hop on a quick 10-minute executive briefing so I can show you exactly how this plugs into your fleet.</strong><br><br>
-            Are you easier to catch tomorrow morning around 9 AM, or is 4:30 PM better?"
-          </div>
-        </div>
+            <!-- Step 3: Scale Solution -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 3: Autonomous Fleet Infrastructure (0:25 - 0:45)</span><span>$1,297/mo · $0 Setup</span></div>
+              <div class="script-line">
+                "That's exactly why enterprise contractors deploy our <strong>Scale Tier ($1,297/mo, $0 setup fee)</strong>. We install complete autonomous front-office infrastructure:<br><br>
+                Unlimited concurrent Ava Voice AI lines handling multiple simultaneous callers with zero wait time, Spanish/English bilingual routing, 90-second SMS speed-to-lead across all web forms, a custom 1-second mobile website, full Multi-Engine AEO (Google, Siri, ChatGPT, Perplexity), and an automated review engine pumping 15 to 25 verified 5-star reviews every month.<br><br>
+                Everything syncs directly to your CRM, and it's 100% month-to-month."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Enterprise ROI:</em> One commercial job or two residential replacements covers the entire $1,297/mo fee immediately.
+              </div>
+            </div>
 
-        <!-- Phase 5: Live Test Line -->
-        <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04)">
-          <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Phase 5: The Live Voice Demo Verification</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
-          <div class="script-line">
-            "Tell you what: I'll text you our live demo line right now: <strong>(561) 813-8602</strong>. When we get off the phone here, dial it from your cell. Hear how Ava handles multi-trade dispatching with zero robotic lag. If she sounds fake, cancel the meeting and you never talk to me again. Fair enough?"
+            <!-- Step 4: Takeaway Close -->
+            <div class="script-phase" style="border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.06);margin-bottom:0">
+              <div class="phase-tag"><span style="color:var(--accent2);font-weight:800">Step 4: Executive Briefing Close</span><span style="color:var(--accent)">★ Master Close</span></div>
+              <div class="script-line" style="font-size:15px;line-height:1.6">
+                "<strong>So if you're sick of losing high-ticket commercial and residential jobs to latency, let's hop on a quick 10-minute executive briefing so I can show you exactly how this plugs into your fleet.</strong><br><br>
+                Are you easier to catch tomorrow morning around 9 AM, or is 4:30 PM better?"
+              </div>
+            </div>
+
+            <!-- Step 5: Test Line -->
+            <div class="script-phase" style="border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.04);margin-bottom:0">
+              <div class="phase-tag"><span style="color:#7dd3fc;font-weight:700">Step 5: Live Voice Demo Verification</span><span style="color:#7dd3fc">Zero Risk Proof</span></div>
+              <div class="script-line">
+                "Tell you what: I'll text you our live demo line right now: <strong>(561) 813-8602</strong>. When we get off the phone here, dial it from your cell. Hear how Ava handles multi-trade dispatching with zero robotic lag. If she sounds fake, cancel the meeting and you never talk to me again. Fair enough?"
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: NO — NOT THE OWNER -->
+          <div class="script-col script-col-not-owner col-not-owner-track">
+            <div class="script-col-header">
+              <h4 style="color:#fde047"><span>🟡</span> NO — NOT THE OWNER</h4>
+              <span class="col-badge" style="background:rgba(245,158,11,0.15);color:#fde047;border:1px solid rgba(245,158,11,0.4)">Dispatcher / Gatekeeper Track</span>
+            </div>
+
+            <!-- Step 1: Casual Peer Opener -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and emergency calls in <span class="dyn-city">[City]</span>."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
+              </div>
+            </div>
+
+            <!-- Step 2: Praise The Dispatcher Reframe -->
+            <div class="script-phase" style="margin-bottom:0;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.05)">
+              <div class="phase-tag"><span style="color:var(--accent2)">Step 2: The Dispatcher Praise Reframe</span><span>When told he's out/busy</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field turning wrenches."
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Why This Works:</em> Elevates them from an adversary gatekeeper to a respected manager. Guard drops immediately.
+              </div>
+            </div>
+
+            <!-- Step 3: Operational Dispatch Question -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span>Step 3: Operational Dispatch Question</span><span>Expose The Leak</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Quick question for you then: when emergency calls come in after 5 PM or on weekends, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell, or do they just roll to voicemail?"
+              </div>
+              <div class="delivery-tip">
+                💡 <em>Listen Closely:</em> Dispatchers vent: <em>"He tries to answer, but if he's driving or off the clock it rolls to voicemail."</em>
+              </div>
+            </div>
+
+            <!-- Step 4: Extract Owner's Direct Mobile -->
+            <div class="script-phase" style="margin-bottom:0">
+              <div class="phase-tag"><span style="color:#6ee7b7">Step 4: Extract Direct Cell Phone</span><span style="color:var(--ok)">Key Objective</span></div>
+              <div class="script-line" style="font-size:16px">
+                "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when the office is closed.<br><br>
+                <strong>What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?</strong>"
+              </div>
+            </div>
+
+            <!-- Step 5: Handling "Can I take a message?" or "Send an email" -->
+            <div class="script-phase" style="margin-bottom:0;border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05)">
+              <div class="phase-tag"><span style="color:#fca5a5">Step 5: When Asked "Can I Take a Message / Send Email?"</span><span>Bypass</span></div>
+              <div class="script-line" style="font-size:14.5px;line-height:1.5">
+                "Paper notes and emails get buried behind 50 supply receipts. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it from his truck for 20 seconds.<br><br>
+                What's his cell number so I can send that over?"
+              </div>
+              <div class="delivery-tip">
+                💡 If she still insists on an email: <em>"What's the direct email he actually opens on his cell phone?"</em>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -10579,6 +10812,34 @@ window.closeLeakMathModal = function() {
       }
     });
   }
+
+  // Split View Controller: Split 50/50, Owner Only, Not Owner Only
+  window.setSplitView = function(mode, clickedBtn) {
+    const parentPanel = clickedBtn ? clickedBtn.closest('.product-script-panel') : document.querySelector('.product-script-panel.active');
+    if (!parentPanel) return;
+
+    const btns = parentPanel.querySelectorAll('.split-view-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    if (clickedBtn) clickedBtn.classList.add('active');
+
+    const grid = parentPanel.querySelector('.script-split-grid');
+    const colOwner = parentPanel.querySelector('.col-owner-track');
+    const colNotOwner = parentPanel.querySelector('.col-not-owner-track');
+
+    if (mode === 'owner') {
+      if (colOwner) colOwner.style.display = 'flex';
+      if (colNotOwner) colNotOwner.style.display = 'none';
+      if (grid) grid.style.gridTemplateColumns = '1fr';
+    } else if (mode === 'not-owner') {
+      if (colOwner) colOwner.style.display = 'none';
+      if (colNotOwner) colNotOwner.style.display = 'flex';
+      if (grid) grid.style.gridTemplateColumns = '1fr';
+    } else {
+      if (colOwner) colOwner.style.display = 'flex';
+      if (colNotOwner) colNotOwner.style.display = 'flex';
+      if (grid) grid.style.gridTemplateColumns = window.innerWidth > 980 ? '1fr 1fr' : '1fr';
+    }
+  };
 
   // Product Switcher
   const prodSwitchBtns = document.querySelectorAll('.prod-switch-btn');
