@@ -288,6 +288,22 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
 .boss-card-btn.bounty-target{border-color:rgba(245,158,11,0.7);background:linear-gradient(90deg,rgba(245,158,11,0.14),rgba(15,21,34,0.95));box-shadow:0 0 15px rgba(245,158,11,0.25)}
 .bounty-chip{background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f;font-size:10px;font-family:var(--font-mono);font-weight:900;padding:2px 6px;border-radius:4px;margin-left:6px;display:inline-block;box-shadow:0 0 8px rgba(245,158,11,0.4)}
+
+/* Tactical Combat Belt */
+.combat-belt-container{background:rgba(15,21,34,0.92);border:1px solid rgba(245,158,11,0.25);border-radius:14px;padding:12px 16px;margin-bottom:14px;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.belt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:11.5px;font-family:var(--font-mono);font-weight:700}
+.belt-header span:first-child{color:var(--accent2);letter-spacing:0.06em}
+.belt-sub{color:var(--dim);font-size:10.5px}
+.belt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:800px){.belt-grid{grid-template-columns:1fr}}
+.belt-item-btn{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:10px;text-align:left;position:relative}
+.belt-item-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(245,158,11,0.08);transform:translateY(-2px);box-shadow:0 0 14px var(--accent-glow)}
+.belt-item-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.belt-icon{font-size:22px;flex-shrink:0}
+.belt-info{flex:1;min-width:0}
+.belt-name{font-family:var(--font-head);font-size:12.5px;font-weight:700;color:#ffffff;display:flex;align-items:center;justify-content:space-between}
+.belt-badge{font-size:10px;font-family:var(--font-mono);font-weight:800;background:rgba(245,158,11,0.2);color:var(--accent2);padding:1px 6px;border-radius:4px;border:1px solid rgba(245,158,11,0.3)}
+.belt-desc{font-size:11px;color:var(--dim);margin-top:2px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body>
@@ -304,11 +320,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
       <div class="hud-actions">
         <div style="display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid rgba(245,158,11,0.3);padding:6px 14px;border-radius:10px;font-family:var(--font-mono);font-size:12px;color:var(--accent2)">
-          <span>🏆 Deals Won:</span> <strong id="sessionDealsWon" style="color:#ffffff;font-size:13px">0 / 8</strong>
+          <span>🏆 Deals Won:</span> <strong id="sessionDealsWon" style="color:#ffffff;font-size:13px">0 / 10</strong>
         </div>
         <button class="hud-btn" id="voiceToggleBtn" onclick="toggleVoice()">🗣️ Voice: OFF (Click to Enable)</button>
         <button class="hud-btn" id="soundToggleBtn" onclick="toggleSound()">🔊 SFX: ON</button>
         <button class="hud-btn gold" onclick="openArmoryModal()">🛡️ Armory (Swords &amp; Armor)</button>
+        <button class="hud-btn" onclick="openDossierModal()" style="border-color:rgba(168,85,247,0.4);color:var(--purple)">📊 Closer Dossier</button>
         <a href="../cold-call-arena/index.html" class="hud-btn" style="border-color:rgba(56,189,248,0.4);color:var(--blue)">📋 Lead Dispatcher &amp; Cockpit ➔</a>
       </div>
     </div>
@@ -405,14 +422,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     </div>
   </div>
 
-  <!-- ARENA LAYOUT: 8 BOSS GAUNTLET + BATTLE ARENA -->
+  <!-- ARENA LAYOUT: 10 BOSS GAUNTLET + BATTLE ARENA -->
   <div class="arena-layout">
 
-    <!-- BOSS GAUNTLET SIDEBAR (8 CONTRACTORS) -->
+    <!-- BOSS GAUNTLET SIDEBAR (10 CONTRACTORS) -->
     <aside class="boss-sidebar">
       <div class="sidebar-title">
-        <span>⚔️ 8 CONTRACTOR DUNGEONS</span>
-        <span style="font-size:12px;font-family:var(--font-mono);color:var(--accent)" id="clearedBossRatio">0 / 8 Cleared</span>
+        <span>⚔️ 10 CONTRACTOR DUNGEONS</span>
+        <span style="font-size:12px;font-family:var(--font-mono);color:var(--accent)" id="clearedBossRatio">0 / 10 Cleared</span>
       </div>
       <div class="boss-list" id="bossListContainer">
         <!-- Rendered dynamically via JS -->
@@ -457,6 +474,37 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       <div class="coach-box">
         <span id="coachPrescription">💡 <strong>Closer Coach:</strong> Acknowledge his situation before dropping the $8,000 emergency leak hook.</span>
         <span id="turnIndicatorBadge" style="font-family:var(--font-mono);font-size:11.5px;color:var(--accent2);font-weight:700">YOUR TURN: SPEAK OR STRIKE</span>
+      </div>
+
+      <!-- TACTICAL CONSUMABLES BELT (MID-COMBAT FIELD GEAR) -->
+      <div class="combat-belt-container">
+        <div class="belt-header">
+          <span>🎒 TACTICAL COMBAT BELT</span>
+          <span class="belt-sub">MID-COMBAT POWER-UPS · BUY RESTOCKS IN ARMORY</span>
+        </div>
+        <div class="belt-grid">
+          <button class="belt-item-btn" id="beltEspressoBtn" type="button" onclick="useCombatItem('espresso')" title="Drink Espresso to restore HP and focus cadence">
+            <div class="belt-icon">☕</div>
+            <div class="belt-info">
+              <div class="belt-name">Double-Shot Thermos <span class="belt-badge" id="espressoCount">x3</span></div>
+              <div class="belt-desc">+35 HP · Clears Hesitation · +20% Next Turn DMG</div>
+            </div>
+          </button>
+          <button class="belt-item-btn" id="beltFlashbangBtn" type="button" onclick="useCombatItem('flashbang')" title="Fire (561) 813-8602 Demo Flashbang">
+            <div class="belt-icon">⚡</div>
+            <div class="belt-info">
+              <div class="belt-name">Demo Flashbang <span class="belt-badge" id="flashbangCount">x2</span></div>
+              <div class="belt-desc">(561) 813-8602 Demo Stun · 40 DMG · Stuns Boss</div>
+            </div>
+          </button>
+          <button class="belt-item-btn" id="beltShieldBtn" type="button" onclick="useCombatItem('shield')" title="Deploy Carrier *71 Smoke Screen">
+            <div class="belt-icon">🛡️</div>
+            <div class="belt-info">
+              <div class="belt-name">Zero-Downtime Screen <span class="belt-badge" id="shieldCount">x2</span></div>
+              <div class="belt-desc">Carrier *71 Shield · Deflects 100% Counter DMG</div>
+            </div>
+          </button>
+        </div>
       </div>
 
       <!-- TACTICAL QUICK-STRIKE DOCK (INCLUDES HEALTH REGAIN) -->
@@ -526,6 +574,15 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     <!-- RELICS SECTION -->
     <div class="armory-section-title" style="margin-top:24px">🏆 CONTRACTOR RELICS &amp; PERKS</div>
     <div class="armory-grid" id="relicsGrid">
+      <!-- Injected via JS -->
+    </div>
+
+    <!-- TACTICAL CONSUMABLES & RESTOCKS SECTION -->
+    <div class="armory-section-title" style="margin-top:24px">🎒 TACTICAL CONSUMABLES &amp; RESTOCKS</div>
+    <p style="color:var(--dim);font-size:13px;margin-bottom:14px">
+      Replenish mid-combat tactical power-ups using your GP earned in duels. Keep charges handy to turn the tide against stubborn commercial titans!
+    </p>
+    <div class="armory-grid" id="consumablesShopGrid">
       <!-- Injected via JS -->
     </div>
   </div>
@@ -690,6 +747,64 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   </div>
 </div>
 
+<!-- 📊 CLOSER CAREER DOSSIER & COMBAT TELEMETRY MODAL -->
+<div class="modal-overlay" id="dossierModal">
+  <div class="modal-card" style="max-width:620px">
+    <div class="modal-header">
+      <h2>📊 Closer Dossier &amp; Combat Telemetry</h2>
+      <button class="modal-close" onclick="closeDossierModal()">✕</button>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(15,21,34,0.95));border:1px solid rgba(168,85,247,0.3);border-radius:14px;padding:16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:14px">
+        <span style="font-size:36px" id="dossierAvatar">👑</span>
+        <div>
+          <div style="font-size:17px;font-weight:800;color:#ffffff" id="dossierName">Luke the Closer</div>
+          <div style="font-size:12px;color:var(--purple);font-family:var(--font-mono)" id="dossierRank">Mythic Rainmaker · Rank 10</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:22px;font-weight:900;color:var(--accent2);font-family:var(--font-head)" id="dossierWinRate">100%</div>
+        <div style="font-size:10.5px;color:var(--dim);font-family:var(--font-mono)">WIN RATE</div>
+      </div>
+    </div>
+
+    <!-- Telemetry Metric Grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--dim);font-family:var(--font-mono);text-transform:uppercase">Bosses Cleared</div>
+        <div style="font-size:18px;font-weight:800;color:#ffffff;margin-top:4px" id="dossierBossesCleared">0 / 10</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--dim);font-family:var(--font-mono);text-transform:uppercase">Total Rebuttals</div>
+        <div style="font-size:18px;font-weight:800;color:var(--blue);margin-top:4px" id="dossierTotalTurns">0</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--dim);font-family:var(--font-mono);text-transform:uppercase">S-Grade Precision</div>
+        <div style="font-size:18px;font-weight:800;color:var(--ok);margin-top:4px" id="dossierSGradePct">0%</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--dim);font-family:var(--font-mono);text-transform:uppercase">Longest Streak</div>
+        <div style="font-size:18px;font-weight:800;color:var(--accent2);margin-top:4px" id="dossierMaxStreak">0🔥</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--dim);font-family:var(--font-mono);text-transform:uppercase">Damage Inflicted</div>
+        <div style="font-size:18px;font-weight:800;color:#fca5a5;margin-top:4px" id="dossierTotalDmg">0</div>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--dim);font-family:var(--font-mono);text-transform:uppercase">Leaks Diagnosed</div>
+        <div style="font-size:18px;font-weight:800;color:var(--gold);margin-top:4px" id="dossierLeaksVal">$0</div>
+      </div>
+    </div>
+
+    <!-- Closer Combat Ribbons / Badges -->
+    <div style="font-size:12.5px;font-weight:700;color:#ffffff;margin-bottom:10px;font-family:var(--font-mono)">🎖️ CLOSER BATTLEFIELD RIBBONS:</div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-height:160px;overflow-y:auto" id="dossierRibbonsList">
+      <!-- Injected via JS -->
+    </div>
+  </div>
+</div>
+
 <script>
 // ============================================================
 // 🎮 STANDALONE COLD CALL QUEST 5.0 JAVASCRIPT ENGINE
@@ -832,6 +947,24 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         gain.gain.linearRampToValueAtTime(0.01, now + 0.5);
         osc.start(now);
         osc.stop(now + 0.5);
+      } else if (type === 'belt') {
+        // High-tech tactical power-up whoosh
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(330, now);
+        osc.frequency.exponentialRampToValueAtTime(990, now + 0.2);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } else if (type === 'shield') {
+        // Resonant barrier deflect gong
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(260, now);
+        osc.frequency.exponentialRampToValueAtTime(520, now + 0.12);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.28);
+        osc.start(now);
+        osc.stop(now + 0.28);
       }
     } catch(e) {
       console.warn('Synth error:', e);
@@ -1229,6 +1362,48 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         victory: "Impressive. You know enterprise dispatch math, Carrier *71 rollover logic, and ServiceTitan webhooks cold. I want Ava tested on my 12 Orlando vans starting Monday morning.",
         defeat: "You are completely out of your league. My executive team does not entertain amateur cold call pitches. Call terminated. *[CLICK]*"
       }
+    },
+    {
+      key: 'marco',
+      name: 'Marco "The Asphalt King"',
+      title: 'South Florida Paving & Heavy Concrete',
+      trade: 'Commercial Paving & Concrete',
+      company: 'Valenti Paving & Heavy Infra',
+      location: 'Fort Lauderdale / Miami, FL',
+      portrait: '🚜',
+      hp: 450,
+      maxHp: 450,
+      tier: 'Tier 4 Heavy Titan',
+      badges: ['Commercial Paving', 'Fort Lauderdale', '450 HP'],
+      ticket: '$25,000 to $80,000',
+      currentSetup: 'I am running a 15-ton vibratory asphalt roller on 300-degree steaming asphalt in 98-degree heat. The machine is 110 decibels loud so I literally cannot hear calls, and commercial municipal paving bids get missed.',
+      avgLeak: 'A commercial parking lot resurface or municipal paving bid',
+      dialogue: {
+        stage1: "Valenti here, owner. Talk fast -- I'm operating a 15-ton roller on 300-degree steaming asphalt in Fort Lauderdale. What the hell is this call about?",
+        victory: "Alright Luke, you proved Ava can take municipal and commercial bid specs over the phone without missing job dimensions. Let's do that 10-minute walkthrough tomorrow at 4:30 PM. Send the invite to marco@valentipaving.com.",
+        defeat: "I got 100 tons of asphalt curing in this Florida heat and you're wasting my battery with corporate pitch garbage. Call terminated! *[CLICK]*"
+      }
+    },
+    {
+      key: 'rex',
+      name: 'Rex "The PE Buyer" Sterling',
+      title: 'National Home Services Aggregator & PE Chairman',
+      trade: 'Multi-Location Trade Conglomerate',
+      company: 'Apex Home Services Equity Holdings (40 Brands)',
+      location: 'Palm Beach / New York',
+      portrait: '🏛️',
+      hp: 550,
+      maxHp: 550,
+      tier: 'Tier 5 MYTHIC RAID BOSS',
+      badges: ['40 Brands', 'PE Sovereign', '550 HP PINNACLE'],
+      ticket: '$50,000 to $250,000+',
+      currentSetup: 'Across 40 Southeast trade locations, offshore call centers bleed $180,000 a month in wages and still drop 12% of after-hours calls, dragging down platform EBITDA.',
+      avgLeak: 'Multi-location commercial mechanical contracts and brand equity',
+      dialogue: {
+        stage1: "Rex Sterling. I chair Apex Holdings -- we own 40 residential and commercial trade platforms across the Southeast. Unless you're calling with scalable EBITDA margin expansion or carrier-level redundancy, you have 20 seconds. Make your case.",
+        victory: "Remarkable pitch, Luke. You understand EBITDA leakage, Carrier *71 multi-trunk routing, and ServiceTitan enterprise webhooks better than 99% of tech vendors. I'm having my VP of Operations join our walkthrough tomorrow at 4:30 PM for a 5-location rollout pilot. Send the executive calendar invite.",
+        defeat: "You have no concept of enterprise EBITDA or multi-location dispatch. My portfolio companies don't waste time on amateur cold calls. *[CLICK]*"
+      }
     }
   ];
 
@@ -1246,6 +1421,21 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     unlockedWeapons: ['gavel'],
     unlockedArmors: ['workshirt'],
     unlockedRelics: [],
+    consumables: {
+      espresso: 3,
+      flashbang: 2,
+      shield: 2
+    },
+    stats: {
+      totalTurns: 0,
+      sGrades: 0,
+      aGrades: 0,
+      maxStreak: 0,
+      totalDmgDealt: 0,
+      revenueLeaksDiagnosed: 0
+    },
+    shieldActive: false,
+    focusedToneActive: false,
     dealsClosedCount: 0,
     defeatedBosses: [],
     streak: 0,
@@ -1263,6 +1453,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         const parsed = JSON.parse(saved);
         player = Object.assign(player, parsed);
         if (!Array.isArray(player.unlockedRelics)) player.unlockedRelics = [];
+        if (!player.consumables) player.consumables = { espresso: 3, flashbang: 2, shield: 2 };
+        if (!player.stats) player.stats = { totalTurns: 0, sGrades: 0, aGrades: 0, maxStreak: 0, totalDmgDealt: 0, revenueLeaksDiagnosed: 0 };
         if (typeof player.dealsClosedCount !== 'number') player.dealsClosedCount = player.defeatedBosses ? player.defeatedBosses.length : 0;
       }
     } catch(e){}
@@ -1629,7 +1821,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   function getDailyBountyBossIndex() {
     const d = new Date();
     const daySeed = (d.getFullYear() * 372) + (d.getMonth() * 31) + d.getDate();
-    return Math.abs(daySeed) % BOSSES.length;
+    const bountyPool = Math.min(8, BOSSES.length);
+    return Math.abs(daySeed) % bountyPool;
   }
 
   function getTodayMutator() {
@@ -1856,7 +2049,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
 
     if (sessionDealsWon) {
-      sessionDealsWon.textContent = `${player.dealsClosedCount || player.defeatedBosses.length} / 8`;
+      sessionDealsWon.textContent = `${player.dealsClosedCount || player.defeatedBosses.length} / ${BOSSES.length}`;
     }
 
     const rankObj = RANKS.find(r => r.lvl === player.lvl) || RANKS[0];
@@ -1886,7 +2079,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
 
     const cleared = document.getElementById('clearedBossRatio');
-    if (cleared) cleared.textContent = `${player.defeatedBosses.length} / 8 Cleared`;
+    if (cleared) cleared.textContent = `${player.defeatedBosses.length} / ${BOSSES.length} Cleared`;
 
     const todayDay = new Date().getDay();
     const breatherHealAmount = (todayDay === 0 || todayDay === 3) ? 45 : 30;
@@ -1933,6 +2126,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     updateDailyUI();
     renderTacticalDock();
+    renderTacticalBelt();
   }
 
   function renderTacticalDock() {
@@ -2506,6 +2700,16 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
             `20 seconds? That's direct. You have 20 seconds before my dispatch briefing starts. Pitch.`,
             `20 seconds on the clock. Make it count, Luke.`
           ], 'vito_permission_grant');
+        } else if (boss.key === 'marco') {
+          return pickUnique(memory, [
+            `(15-ton roller engine roars) 20 seconds? Alright kid, talk fast before this asphalt cures. What does your company do?`,
+            `(Wipes sweat) 20 seconds on the clock. What can you do for a commercial paving outfit?`
+          ], 'marco_permission_grant');
+        } else if (boss.key === 'rex') {
+          return pickUnique(memory, [
+            `(Pen taps executive mahogany desk) 20 seconds on the clock, Luke. Make it count. Pitch.`,
+            `(Paper shuffle) 20 seconds. Talk numbers, operational scale, and EBITDA leverage.`
+          ], 'rex_permission_grant');
         }
       }
     }
@@ -2558,6 +2762,16 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
             `(Mahogany desk creaks) We run 42 service vans across Texas and Florida with an internal dispatch center in Houston. Unless your AI integrates directly with ServiceTitan, handles bilingual Spanish dispatch, and works over Carrier *71 without rewiring my PBX, you're out of your league. Convince me.`,
             `(Deep authoritative breath) I have 14 commercial mechanical vans in Orlando alone. Most AI phone tools crash under enterprise call volume. What makes you think you can handle 200 calls a day?`
           ], 'vito_pain_ack');
+        } else if (boss.key === 'marco') {
+          return pickUnique(memory, [
+            `(15-ton roller vibrates) You hit the nail on the head. When my roller is laying hot asphalt at 110 decibels, I can't touch my phone. We missed a $65k shopping center parking lot bid last Tuesday because it went to voicemail and they hired another paving company. What's your setup?`,
+            `(Asphalt steam hisses) Missing commercial paving bids hurts like hell. How does your software catch emergency calls when heavy machinery is screaming?`
+          ], 'marco_pain_ack');
+        } else if (boss.key === 'rex') {
+          return pickUnique(memory, [
+            `(Leans back in executive chair) You understand unit economics. Across our 40 HVAC and plumbing brands, missed emergency calls cost us roughly $4.2M in annual top-line revenue and depress platform EBITDA. But offshore answering services are terrible. How does Ava handle multi-location dispatch without hallucinating?`,
+            `(Nods slowly) Revenue leakage is our primary operational bottleneck. Walk me through how your system captures multi-location calls without hiring a call center.`
+          ], 'rex_pain_ack');
         }
       }
     }
@@ -2615,6 +2829,16 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           `(Authoritative breath) Instant dispatch webhook to our Houston CRM with bilingual intake? That's enterprise-grade. What is your monthly van tier pricing?`,
           `ServiceTitan API sync with sub-second call transfer? What is the enterprise pricing structure?`
         ], 'vito_mech_ack');
+      } else if (boss.key === 'marco') {
+        return pickUnique(memory, [
+          `(Roller engine idles) She answers in 1 ring, collects square footage and commercial address, and texts my superintendent's cell immediately? That's huge for paving bids. How much does this cost per month?`,
+          `Instant SMS dispatch with customer lot dimensions? That beats scribbled notes. What's the price?`
+        ], 'marco_mech_ack');
+      } else if (boss.key === 'rex') {
+        return pickUnique(memory, [
+          `(Checks executive dashboard) Sub-second intake, zero queue latency, and instant ServiceTitan CRM webhook injection across multiple dispatch boards? That's enterprise-grade. What is your fleet/multi-location pricing?`,
+          `Enterprise multi-trunk routing with automated job ticket creation? What's your corporate fee structure?`
+        ], 'rex_mech_ack');
       }
     }
 
@@ -2677,6 +2901,16 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
             `(Authoritative tone) Enterprise website, CRM lead routing, and 24/7 AI dispatch. What is the turnkey fleet package price and what's the test line?`,
             `What is the full enterprise bundle rate and where do I dial to test Ava?`
           ], 'vito_package_ack');
+        } else if (boss.key === 'marco') {
+          return pickUnique(memory, [
+            `(Wipes grease) A commercial paving website that ranks on Google Maps plus Ava intake? That would lock up municipal bids. What's the full bundle price and how do I hear Ava?`,
+            `Tell me the package rate for the website and Ava intake, and give me the test line.`
+          ], 'marco_package_ack');
+        } else if (boss.key === 'rex') {
+          return pickUnique(memory, [
+            `(High-roller nod) High-converting web redesigns across 40 brand domains, centralized LeadFlow CRM, and 24/7 AI dispatch? That's an institutional package. What is the multi-location enterprise rate and what's the test line?`,
+            `Institutional bundle for 40 brand domains and AI receptionist intake. What is the enterprise pricing structure and test line?`
+          ], 'rex_package_ack');
         }
       }
 
@@ -3075,6 +3309,25 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         player.bleedTurns = 2;
       }
 
+      // Tactical Belt Modifiers: Focused Tone, Boss Stun, Zero-Downtime Shield
+      if (player.focusedToneActive) {
+        damage = Math.round(damage * 1.20);
+        feedback += ' ☕ [Focused Tone: +20% DMG]';
+        player.focusedToneActive = false;
+      }
+
+      if (matchMemory.bossStunnedTurns > 0) {
+        counterDmg = 0;
+        matchMemory.bossStunnedTurns--;
+        feedback += ' ⚡ [Contractor Stunned: 0 Counter DMG]';
+      }
+
+      if (player.shieldActive) {
+        counterDmg = 0;
+        player.shieldActive = false;
+        feedback += ' 🛡️ [Zero-Downtime Shield: Counterattack 100% Deflected]';
+      }
+
       // 4. DAILY TACTICAL MUTATOR DAMAGE BONUS
       const todayMutator = getTodayMutator();
       if (todayMutator && todayMutator.apply && grade !== 'F') {
@@ -3235,6 +3488,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       player.streak = 0;
     }
 
+    // Stats Tracking
+    if (!player.stats) player.stats = { totalTurns: 0, sGrades: 0, aGrades: 0, maxStreak: 0, totalDmgDealt: 0, revenueLeaksDiagnosed: 0 };
+    player.stats.totalTurns++;
+    player.stats.totalDmgDealt += evalRes.damage;
+    if (evalRes.grade === 'S') player.stats.sGrades++;
+    if (evalRes.grade === 'A') player.stats.aGrades++;
+    if (player.streak > (player.stats.maxStreak || 0)) player.stats.maxStreak = player.streak;
+
     if (evalRes.counterDmg > 0) {
       player.hp = Math.max(0, player.hp - evalRes.counterDmg);
       playSynth('hit');
@@ -3290,6 +3551,11 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       player.defeatedBosses.push(currentBoss.key);
     }
     player.dealsClosedCount = (player.dealsClosedCount || 0) + 1;
+
+    // Track Revenue Leaks Diagnosed
+    const ticketVal = parseInt((currentBoss.ticket || '$8,000').replace(/[^0-9]/g, '')) || 8000;
+    if (!player.stats) player.stats = { totalTurns: 0, sGrades: 0, aGrades: 0, maxStreak: 0, totalDmgDealt: 0, revenueLeaksDiagnosed: 0 };
+    player.stats.revenueLeaksDiagnosed = (player.stats.revenueLeaksDiagnosed || 0) + ticketVal;
 
     dailyState.dealsClosedToday = (dailyState.dealsClosedToday || 0) + 1;
     if (isBounty) {
@@ -3750,6 +4016,190 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         `;
       }).join('');
     }
+
+    const cGrid = document.getElementById('consumablesShopGrid');
+    if (cGrid) {
+      const shopItems = [
+        { id: 'espresso', name: 'Contractor Thermos Brew', icon: '☕', cost: 50, qty: 2, desc: '+35 HP, clears dead air, +20% Next Turn DMG.', tag: '+2 Brews' },
+        { id: 'flashbang', name: '(561) 813-8602 Demo Flashbang', icon: '⚡', cost: 80, qty: 1, desc: 'Guaranteed 40 DMG, unlocks Demo Proof, stuns boss counter.', tag: '+1 Flashbang' },
+        { id: 'shield', name: 'Zero-Downtime Smoke Screen', icon: '🛡️', cost: 100, qty: 1, desc: 'Deflects 100% of next contractor rejection damage.', tag: '+1 Shield' }
+      ];
+
+      cGrid.innerHTML = shopItems.map(item => {
+        const canAfford = player.gold >= item.cost;
+        const curCount = (player.consumables && player.consumables[item.id]) || 0;
+        return `
+          <div class="gear-card">
+            <div class="gear-top">
+              <div class="gear-icon">${item.icon}</div>
+              <div class="gear-meta">
+                <h4>${item.name}</h4>
+                <div class="stat-boost" style="color:var(--accent2)">💰 ${item.cost} GP · Own: x${curCount}</div>
+              </div>
+            </div>
+            <p class="gear-desc">${item.desc}</p>
+            <div class="gear-passive"><strong>Effect:</strong> ${item.tag}</div>
+            <button class="gear-btn ${canAfford ? 'equip' : 'locked-btn'}" ${!canAfford ? 'disabled' : ''} onclick="buyConsumable('${item.id}', ${item.cost}, ${item.qty})">
+              ${canAfford ? `🛒 Purchase for ${item.cost} GP` : `🔒 Need ${item.cost - player.gold} More GP`}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  // 10b. TACTICAL COMBAT BELT & CONSUMABLES
+  function renderTacticalBelt() {
+    if (!player.consumables) {
+      player.consumables = { espresso: 3, flashbang: 2, shield: 2 };
+    }
+    const eCount = document.getElementById('espressoCount');
+    const fCount = document.getElementById('flashbangCount');
+    const sCount = document.getElementById('shieldCount');
+    const eBtn = document.getElementById('beltEspressoBtn');
+    const fBtn = document.getElementById('beltFlashbangBtn');
+    const sBtn = document.getElementById('beltShieldBtn');
+
+    if (eCount) eCount.textContent = `x${player.consumables.espresso || 0}`;
+    if (fCount) fCount.textContent = `x${player.consumables.flashbang || 0}`;
+    if (sCount) sCount.textContent = `x${player.consumables.shield || 0}`;
+
+    if (eBtn) eBtn.disabled = (player.consumables.espresso || 0) <= 0 || player.hp <= 0;
+    if (fBtn) fBtn.disabled = (player.consumables.flashbang || 0) <= 0 || player.hp <= 0;
+    if (sBtn) sBtn.disabled = (player.consumables.shield || 0) <= 0 || player.hp <= 0;
+  }
+
+  window.useCombatItem = function(type) {
+    if (!player.consumables) player.consumables = { espresso: 3, flashbang: 2, shield: 2 };
+    if ((player.consumables[type] || 0) <= 0) {
+      showToast('⚠️ Out of charges! Restock in the Armory with your GP commissions.');
+      return;
+    }
+
+    if (type === 'espresso') {
+      player.consumables.espresso--;
+      const oldHp = player.hp;
+      player.hp = Math.min(player.maxHp, player.hp + 35);
+      const healed = player.hp - oldHp;
+      matchMemory.consecutiveHesitation = 0;
+      matchMemory.dodgedCount = 0;
+      player.focusedToneActive = true;
+      playSynth('heal');
+      spawnFloatingNumber(`+${healed} HP FOCUS`, 'heal');
+      appendLog(`☕ <strong>ADRENALINE ESPRESSO USED!</strong> Luke took a hot sip of double-shot espresso, restored <strong>+${healed} HP</strong> (HP: ${player.hp}/${player.maxHp}), cleared dead air hesitation, and gained <strong>Focused Tone (+20% Next Turn DMG)</strong>!`, 'heal');
+    } else if (type === 'flashbang') {
+      player.consumables.flashbang--;
+      const flashDmg = 40;
+      bossHp = Math.max(1, bossHp - flashDmg);
+      matchMemory.demoUnlocked = true;
+      matchMemory.topicsCovered['demo'] = true;
+      matchMemory.bossStunnedTurns = 1;
+      playSynth('belt');
+      triggerArenaShake(true);
+      spawnFloatingNumber(`⚡ -${flashDmg} FLASHBANG`, 'crit');
+      appendLog(`⚡ <strong>DEMO FLASHBANG DETONATED!</strong> Luke fired off the live (561) 813-8602 test line. ${currentBoss.name} dialed in shock, heard sub-second latency, and took <strong>${flashDmg} Damage</strong> while getting stunned for 1 turn!`, 'crit');
+    } else if (type === 'shield') {
+      player.consumables.shield--;
+      player.shieldActive = true;
+      playSynth('shield');
+      spawnFloatingNumber(`🛡️ SHIELD DEPLOYED`, 'deflect');
+      appendLog(`🛡️ <strong>ZERO-DOWNTIME SHIELD DEPLOYED!</strong> Total Carrier *71 failover guarantee active: 100% of next contractor counterattack will be deflected!`, 'system');
+    }
+
+    updateHUD();
+    savePlayer();
+  };
+
+  window.buyConsumable = function(id, cost, qty) {
+    if (player.gold < cost) {
+      showToast('Not enough GP! Win more cold call duels to earn gold.');
+      return;
+    }
+    player.gold -= cost;
+    if (!player.consumables) player.consumables = { espresso: 3, flashbang: 2, shield: 2 };
+    player.consumables[id] = (player.consumables[id] || 0) + qty;
+    playSynth('cash');
+    spawnFloatingNumber(`+${qty} ${id.toUpperCase()}`, 'combo');
+    savePlayer();
+    updateHUD();
+    renderArmory();
+    renderTacticalBelt();
+    showToast(`✓ Purchased ${qty}x ${id}! Restocked in tactical belt.`);
+  };
+
+  // 10c. CLOSER DOSSIER & COMBAT TELEMETRY
+  window.openDossierModal = function() {
+    renderDossier();
+    const modal = document.getElementById('dossierModal');
+    if (modal) modal.classList.add('open');
+  };
+
+  window.closeDossierModal = function() {
+    const modal = document.getElementById('dossierModal');
+    if (modal) modal.classList.remove('open');
+  };
+
+  function renderDossier() {
+    if (!player.stats) {
+      player.stats = { totalTurns: 0, sGrades: 0, aGrades: 0, maxStreak: 0, totalDmgDealt: 0, revenueLeaksDiagnosed: 0 };
+    }
+    const avEl = document.getElementById('dossierAvatar');
+    const nameEl = document.getElementById('dossierName');
+    const rankEl = document.getElementById('dossierRank');
+    const winRateEl = document.getElementById('dossierWinRate');
+    const clearedEl = document.getElementById('dossierBossesCleared');
+    const turnsEl = document.getElementById('dossierTotalTurns');
+    const sGradePctEl = document.getElementById('dossierSGradePct');
+    const maxStreakEl = document.getElementById('dossierMaxStreak');
+    const totalDmgEl = document.getElementById('dossierTotalDmg');
+    const leaksValEl = document.getElementById('dossierLeaksVal');
+    const ribbonsList = document.getElementById('dossierRibbonsList');
+
+    const rankObj = RANKS.find(r => r.lvl === player.lvl) || RANKS[0];
+    if (avEl) avEl.textContent = player.avatar || '👑';
+    if (nameEl) nameEl.textContent = player.name || 'Luke the Closer';
+    if (rankEl) rankEl.textContent = `${rankObj.title} · Level ${player.lvl}`;
+
+    const defeatedCount = (player.defeatedBosses || []).length;
+    const winRate = defeatedCount > 0 ? Math.min(100, Math.round((defeatedCount / Math.max(1, (player.dealsClosedCount || defeatedCount))) * 100)) : 100;
+    if (winRateEl) winRateEl.textContent = `${winRate}%`;
+    if (clearedEl) clearedEl.textContent = `${defeatedCount} / ${BOSSES.length}`;
+    if (turnsEl) turnsEl.textContent = `${player.stats.totalTurns || 0}`;
+
+    const totalGraded = (player.stats.sGrades || 0) + (player.stats.aGrades || 0);
+    const sPct = totalGraded > 0 ? Math.round(((player.stats.sGrades || 0) / Math.max(1, player.stats.totalTurns)) * 100) : 0;
+    if (sGradePctEl) sGradePctEl.textContent = `${sPct}%`;
+    if (maxStreakEl) maxStreakEl.textContent = `${player.stats.maxStreak || player.streak || 0}🔥`;
+    if (totalDmgEl) totalDmgEl.textContent = `${player.stats.totalDmgDealt || 0}`;
+
+    const leakFmt = (player.stats.revenueLeaksDiagnosed || (defeatedCount * 8500)).toLocaleString();
+    if (leaksValEl) leaksValEl.textContent = `$${leakFmt}`;
+
+    if (ribbonsList) {
+      const ribbons = [
+        { id: 'first_blood', name: 'First Call Courage', desc: 'Defeated your first contractor boss', earned: defeatedCount >= 1, icon: '🔨' },
+        { id: 'gatekeeper', name: 'Gatekeeper Whisperer', desc: 'Successfully bypassed Karen and dispatch', earned: (player.defeatedBosses || []).includes('gatekeeper'), icon: '📋' },
+        { id: 'demo_god', name: 'Proof Slinger (561) 813-8602', desc: 'Unlocked the live demo proof test line', earned: true, icon: '📱' },
+        { id: 'carrier_vet', name: 'Carrier *71 Master', desc: 'Closed using Carrier conditional call forwarding', earned: defeatedCount >= 2, icon: '📶' },
+        { id: 'streak_master', name: 'Flow State Phenom', desc: 'Achieved a 5x combo streak without hesitation', earned: (player.stats.maxStreak || 0) >= 5, icon: '🔥' },
+        { id: 'apex_predator', name: 'Mythic Rainmaker', desc: 'Defeated the Pinnacle PE Buyer Rex Sterling', earned: (player.defeatedBosses || []).includes('rex'), icon: '👑' }
+      ];
+
+      ribbonsList.innerHTML = ribbons.map(r => `
+        <div style="display:flex;align-items:center;justify-content:space-between;background:${r.earned ? 'rgba(168,85,247,0.1)' : 'var(--bg)'};border:1px solid ${r.earned ? 'rgba(168,85,247,0.3)' : 'var(--line)'};padding:8px 12px;border-radius:8px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:20px">${r.icon}</span>
+            <div>
+              <div style="font-size:12.5px;font-weight:700;color:${r.earned ? '#d8b4fe' : 'var(--faint)'}">${r.name}</div>
+              <div style="font-size:11px;color:var(--dim)">${r.desc}</div>
+            </div>
+          </div>
+          <span style="font-size:10px;font-family:var(--font-mono);font-weight:700;padding:2px 7px;border-radius:4px;background:${r.earned ? 'rgba(52,211,153,0.15)' : 'rgba(100,116,139,0.15)'};color:${r.earned ? 'var(--ok)' : 'var(--faint)'}">
+            ${r.earned ? '✓ UNLOCKED' : '🔒 LOCKED'}
+          </span>
+        </div>
+      `).join('');
+    }
   }
 
   window.equipWeapon = function(weaponId) {
@@ -3873,6 +4323,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   window.selectDailyBountyBoss = selectDailyBountyBoss;
   window.updateDailyUI = updateDailyUI;
   window.DAILY_MUTATORS = DAILY_MUTATORS;
+  window.useCombatItem = useCombatItem;
+  window.buyConsumable = buyConsumable;
+  window.openDossierModal = openDossierModal;
+  window.closeDossierModal = closeDossierModal;
+  window.renderTacticalBelt = renderTacticalBelt;
+  window.renderDossier = renderDossier;
   Object.defineProperty(window, 'dailyState', {
     get() { return dailyState; },
     set(v) { dailyState = v; },
