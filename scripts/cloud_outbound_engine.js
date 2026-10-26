@@ -93,13 +93,13 @@ function generateEmailBody(target) {
       subject: `Re: ${target.subject || `Quick question for ${target.owner} regarding ${target.company}`}`,
       body: `Hi ${target.owner},
 
-Following up on my note from earlier this week — I know you're busy running field crews at ${target.company}.
+Following up on my note from earlier this week — I know you're busy managing operations at ${target.company}.
 
 I wanted to leave you our direct demo line: ${DEMO_PHONE}.
 
-If you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages urgent ${target.trade} emergencies, and books directly into your calendar without putting callers on hold.
+If you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.
 
-Would you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other trade contractors?
+Would you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?
 
 Best,
 Luke
@@ -115,14 +115,14 @@ Website: ${WEBSITE_URL}`
       subject: `Final note regarding ${target.company} call capture`,
       body: `Hi ${target.owner},
 
-I haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped in the field right now.
+I haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.
 
-Before I close out your audit file for ${target.city}, I wanted to share the live pricing and technical architecture we use for trade contractors:
+Before I close out your audit file for ${target.city}, I wanted to share the live pricing and technical architecture we use for service businesses:
 -> ${WEBSITE_URL}#pricing
 
 If you ever want to plug the ${target.estLoss || "$8,500/mo"} leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at ${DEMO_PHONE} or grab 15 minutes on my calendar.
 
-Wishing you and the crew at ${target.company} a great season.
+Wishing you and the team at ${target.company} a great season.
 
 Best,
 Luke
@@ -135,22 +135,22 @@ Website: ${WEBSITE_URL}`
   // TOUCH 1 (Initial Pitch)
   if (service.includes("AI Receptionist") || service.includes("Ava")) {
     return {
-      subject: target.subject || `Quick question for ${target.owner} regarding ${target.company} after-hours emergency calls`,
+      subject: target.subject || `Quick question for ${target.owner} regarding ${target.company} after-hours calls`,
       body: `Hi ${target.owner},
 
 Saw your solid reputation in ${target.city} — congrats on building a trusted local brand.
 
 I was auditing local ${target.trade} providers in ${target.city} and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.
 
-In emergency ${target.trade}, homeowners needing immediate help almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 emergency calls a week costs the average local contractor roughly ${target.estLoss || "$8,500/mo"} in lost jobs.
+In ${target.trade}, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs the average business roughly ${target.estLoss || "$8,500/mo"} in lost jobs.
 
-We built Ava, an AI phone receptionist designed specifically for trade contractors:
+We built Ava, an AI phone receptionist designed specifically for service businesses:
 1. Answers in 1 ring, 24/7/365, with natural human conversation
-2. Triages true emergencies vs. general inquiries
+2. Triages urgent requests vs. general inquiries
 3. Books appointments directly into your Google / Outlook calendar
-4. Sends priority SMS alerts directly to your on-call crew
+4. Sends priority SMS alerts directly to your on-call team or cell phone
 
-Could we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live emergency call test?
+Could we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?
 
 You can also test Ava live right now from your cell phone at ${DEMO_PHONE}.
 
@@ -164,14 +164,14 @@ Website: ${WEBSITE_URL}`
 
   if (service.includes("Speed-to-Lead") || service.includes("Missed-Call")) {
     return {
-      subject: target.subject || `Quick question for ${target.owner} regarding ${target.company} estimate requests`,
+      subject: target.subject || `Quick question for ${target.owner} regarding ${target.company} quote requests`,
       body: `Hi ${target.owner},
 
 Quick question regarding ${target.company}'s customer response speed:
 
-When homeowners in ${target.city} fill out an online estimate request or call while your field crew is tied up on an active job, what is your average follow-up time?
+When customers in ${target.city} fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?
 
-Harvard Business Review research shows that contractors who respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In ${target.trade}, speed is everything.
+Harvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In ${target.trade}, speed is everything.`
 
 We deploy LeadFlow specifically for local trade contractors:
 • Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed

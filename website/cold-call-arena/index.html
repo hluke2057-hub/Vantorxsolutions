@@ -515,7 +515,6 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <span style="font-size:12px;color:var(--dim)">Quick Switch:</span>
       <button type="button" class="caller-switch-pill active" id="quickPillLuke" onclick="quickSwitchCaller('luke')">👑 Luke (Founder)</button>
       <button type="button" class="caller-switch-pill" id="quickPillBuddy" onclick="quickSwitchCaller('buddy')">⚔️ Buddy 2 (Auto-Pass 🏆)</button>
-      <button type="button" class="caller-switch-pill" style="border-color:rgba(52,211,153,0.45);color:#6ee7b7" id="quickPillAutoPass" onclick="autoPassActiveUser()" title="Auto-pass the full course for active rep">🎓 Auto-Pass Course</button>
       <button type="button" class="caller-switch-pill add-rep" onclick="openAccountModal()">➕ Sign In / Add Rep</button>
     </div>
   </div>
@@ -787,8 +786,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div style="font-size:18px;font-weight:700;color:var(--accent2)"><span id="academyDaysCount">0</span> / 3 Days Passed</div>
           <div style="font-size:11.5px;color:#6ee7b7;margin-top:2px" id="academyStatusText">🔒 Leads Locked (Reach Level 5)</div>
           <div style="margin-top:8px;display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap">
-            <button class="btn btn-gold btn-sm" style="font-size:11.5px;padding:3px 10px;font-weight:700" type="button" onclick="autoPassActiveUser()">🎓 Auto-Pass Course (Level 5 🏆)</button>
-            <button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:3px 8px;color:var(--dim)" type="button" onclick="resetBuddyProgress()" title="Reset back to Day 1, Lesson 1.1">🔄 Reset</button>
+            <button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:3px 8px;color:var(--dim)" type="button" onclick="resetBuddyProgress()" title="Reset back to Day 1, Lesson 1.1">🔄 Reset Progress</button>
           </div>
         </div>
       </div>
@@ -2491,7 +2489,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
               <div class="script-line" style="font-size:16px">
-                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and emergency calls in <span class="dyn-city">[City]</span>."
+                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your incoming calls and after-hours routing in <span class="dyn-city">[City]</span>."
               </div>
               <div class="delivery-tip">
                 💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
@@ -2502,7 +2500,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.05)">
               <div class="phase-tag"><span style="color:var(--accent2)">Step 2: The Dispatcher Praise Reframe</span><span>When told he's out/busy</span></div>
               <div class="script-line" style="font-size:16px">
-                "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field turning wrenches."
+                "Oh gotcha, no problem at all! You're the one actually running the front office and keeping the business moving while he's out on jobs."
               </div>
               <div class="delivery-tip">
                 💡 <em>Why This Works:</em> Elevates them from an adversary gatekeeper to a respected manager. Guard drops immediately.
@@ -2513,7 +2511,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 3: Operational Dispatch Question</span><span>Expose The Leak</span></div>
               <div class="script-line" style="font-size:16px">
-                "Quick question for you then: when emergency calls come in after 5 PM or on weekends, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell, or do they just roll to voicemail?"
+                "Quick question for you then: when new customer calls come in after 5 PM, on weekends, or when lines are tied up, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his cell, or do they just roll to voicemail?"
               </div>
               <div class="delivery-tip">
                 💡 <em>Listen Closely:</em> Dispatchers vent: <em>"He tries to answer, but if he's driving or off the clock it rolls to voicemail."</em>
@@ -2524,7 +2522,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span style="color:#6ee7b7">Step 4: Extract Direct Cell Phone</span><span style="color:var(--ok)">Key Objective</span></div>
               <div class="script-line" style="font-size:16px">
-                "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when the office is closed.<br><br>
+                "Got it. That's why I'm reaching out — we deploy 24/7 AI answering and dispatch lines so you guys don't lose high-ticket jobs when lines are tied up or the office is closed.<br><br>
                 <strong>What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?</strong>"
               </div>
             </div>
@@ -2533,7 +2531,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0;border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05)">
               <div class="phase-tag"><span style="color:#fca5a5">Step 5: When Asked "Can I Take a Message / Send Email?"</span><span>Bypass</span></div>
               <div class="script-line" style="font-size:14.5px;line-height:1.5">
-                "Paper notes and emails get buried behind 50 supply receipts. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it from his truck for 20 seconds.<br><br>
+                "Paper notes and emails get buried behind dozens of messages. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it firsthand for 20 seconds.<br><br>
                 What's his cell number so I can send that over?"
               </div>
               <div class="delivery-tip">
@@ -2596,7 +2594,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="obj-accordion">
             <div class="obj-acc-head"><span>❌ 6. "I'm slammed on a jobsite right now / can't talk."</span> <span class="tag">Jobsite Rush</span></div>
             <div class="obj-acc-body">
-              "Understood! I'll text you our direct demo line — <strong>(561) 813-8602</strong> — right now. When you park your truck, tap it and hear her for 20 seconds. Are you wrapping up around 5 today to do a quick 5-minute call?"
+              "Understood! I'll text you our direct demo line — <strong>(561) 813-8602</strong> — right now. When you catch a breather or wrap up today, tap it and hear her firsthand for 20 seconds. Are you wrapping up around 5 today to do a quick 5-minute call?"
               <div class="obj-acc-note">💡 Strategy: Respect their time. Get permission to send a text.</div>
             </div>
           </div>
@@ -3011,7 +3009,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
           <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
             <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
-            "Got it. We optimize Florida trade contractors for Siri and ChatGPT so you get the top spot. What's the best direct cell to text <span class="dyn-owner">[Owner's First Name]</span> a 1-page search visibility audit, or when does he usually check in with the office?"
+            "Got it. We optimize local companies and contractors for Google, Siri, and ChatGPT so you get the top spot. What's the best direct cell to text <span class="dyn-owner">[Owner's First Name]</span> a 1-page search visibility audit, or when does he usually check in with the office?"
           </div>
         </div>
 
@@ -3153,8 +3151,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 2: $8,000 Leak Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Expose 4 Leaks</span></div>
               <div class="script-line">
-                "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>. Most contractors in your trade have 3 or 4 silent leaks draining over $100,000 a year: emergency weekend calls rolling to voicemail, a mobile website that takes 5 seconds to load, lead forms sitting un-replied for hours, and competitors ranking above you on Siri and ChatGPT.<br><br>
-                When a $6,000 job calls on a Saturday night or submits a form, <strong>where does that lead go for you right now? Does someone answer live, or does it hit voicemail?</strong>"
+                "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>. Most businesses in your market have 3 or 4 silent leaks draining tens of thousands a year: after-hours and weekend calls rolling to voicemail, a mobile website that takes 5 seconds to load, quote requests sitting un-replied for hours, and competitors ranking above you on Google and ChatGPT.<br><br>
+                When a high-value customer calls after hours or submits an online quote, <strong>where does that lead go for you right now? Does someone answer live, or does it hit voicemail?</strong>"
               </div>
               <div class="delivery-tip">
                 💡 <em>The Golden Pause:</em> Let them answer! They will say: <em>"It goes to voicemail"</em> or <em>"I try to text them when I'm done on a job."</em>
@@ -3165,7 +3163,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 3: Accelerate Growth Engine (0:25 - 0:45)</span><span>$697/mo · $0 Setup</span></div>
               <div class="script-line">
-                "That's exactly why we built our <strong>Accelerate package</strong> specifically for Florida contractors. We deploy the complete front-office machine: <strong>Ava answers every single call in 1 ring 24/7</strong>, our <strong>90-second SMS engine</strong> texts web leads before they call your competitors, and you get a brand-new <strong>1-second custom mobile website</strong> with local AEO search ranking.<br><br>
+                "That's exactly why we built our <strong>Accelerate package</strong>. We deploy the complete front-office machine: <strong>Ava answers every single call in 1 ring 24/7</strong>, our <strong>90-second SMS engine</strong> texts web leads before they call your competitors, and you get a brand-new <strong>1-second custom mobile website</strong> with local AEO search ranking.<br><br>
                 It is 100% done for you, <strong>$0 setup fee</strong>, and zero long-term contracts."
               </div>
               <div class="delivery-tip">
@@ -3205,7 +3203,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
               <div class="script-line" style="font-size:16px">
-                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and emergency calls in <span class="dyn-city">[City]</span>."
+                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your incoming calls and after-hours routing in <span class="dyn-city">[City]</span>."
               </div>
               <div class="delivery-tip">
                 💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
@@ -3216,7 +3214,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.05)">
               <div class="phase-tag"><span style="color:var(--accent2)">Step 2: The Dispatcher Praise Reframe</span><span>When told he's out/busy</span></div>
               <div class="script-line" style="font-size:16px">
-                "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field turning wrenches."
+                "Oh gotcha, no problem at all! You're the one actually running the front office and keeping the business moving while he's out on jobs."
               </div>
               <div class="delivery-tip">
                 💡 <em>Why This Works:</em> Elevates them from an adversary gatekeeper to a respected manager. Guard drops immediately.
@@ -3227,7 +3225,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 3: Operational Dispatch Question</span><span>Expose The Leak</span></div>
               <div class="script-line" style="font-size:16px">
-                "Quick question for you then: when emergency calls come in after 5 PM or on weekends, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell, or do they just roll to voicemail?"
+                "Quick question for you then: when new customer calls come in after 5 PM, on weekends, or when lines are tied up, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his cell, or do they just roll to voicemail?"
               </div>
               <div class="delivery-tip">
                 💡 <em>Listen Closely:</em> Dispatchers vent: <em>"He tries to answer, but if he's driving or off the clock it rolls to voicemail."</em>
@@ -3238,7 +3236,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span style="color:#6ee7b7">Step 4: Extract Direct Cell Phone</span><span style="color:var(--ok)">Key Objective</span></div>
               <div class="script-line" style="font-size:16px">
-                "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when the office is closed.<br><br>
+                "Got it. That's why I'm reaching out — we deploy 24/7 AI answering and dispatch lines so you guys don't lose high-ticket jobs when lines are tied up or the office is closed.<br><br>
                 <strong>What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?</strong>"
               </div>
             </div>
@@ -3247,7 +3245,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0;border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05)">
               <div class="phase-tag"><span style="color:#fca5a5">Step 5: When Asked "Can I Take a Message / Send Email?"</span><span>Bypass</span></div>
               <div class="script-line" style="font-size:14.5px;line-height:1.5">
-                "Paper notes and emails get buried behind 50 supply receipts. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it from his truck for 20 seconds.<br><br>
+                "Paper notes and emails get buried behind dozens of messages. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it firsthand for 20 seconds.<br><br>
                 What's his cell number so I can send that over?"
               </div>
               <div class="delivery-tip">
@@ -3438,7 +3436,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
               <div class="script-line" style="font-size:16px">
-                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and emergency calls in <span class="dyn-city">[City]</span>."
+                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your incoming calls and after-hours routing in <span class="dyn-city">[City]</span>."
               </div>
               <div class="delivery-tip">
                 💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
@@ -3449,7 +3447,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.05)">
               <div class="phase-tag"><span style="color:var(--accent2)">Step 2: The Dispatcher Praise Reframe</span><span>When told he's out/busy</span></div>
               <div class="script-line" style="font-size:16px">
-                "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field turning wrenches."
+                "Oh gotcha, no problem at all! You're the one actually running the front office and keeping the business moving while he's out on jobs."
               </div>
               <div class="delivery-tip">
                 💡 <em>Why This Works:</em> Elevates them from an adversary gatekeeper to a respected manager. Guard drops immediately.
@@ -3460,7 +3458,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 3: Operational Dispatch Question</span><span>Expose The Leak</span></div>
               <div class="script-line" style="font-size:16px">
-                "Quick question for you then: when emergency calls come in after 5 PM or on weekends, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell, or do they just roll to voicemail?"
+                "Quick question for you then: when new customer calls come in after 5 PM, on weekends, or when lines are tied up, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his cell, or do they just roll to voicemail?"
               </div>
               <div class="delivery-tip">
                 💡 <em>Listen Closely:</em> Dispatchers vent: <em>"He tries to answer, but if he's driving or off the clock it rolls to voicemail."</em>
@@ -3471,7 +3469,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span style="color:#6ee7b7">Step 4: Extract Direct Cell Phone</span><span style="color:var(--ok)">Key Objective</span></div>
               <div class="script-line" style="font-size:16px">
-                "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when the office is closed.<br><br>
+                "Got it. That's why I'm reaching out — we deploy 24/7 AI answering and dispatch lines so you guys don't lose high-ticket jobs when lines are tied up or the office is closed.<br><br>
                 <strong>What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?</strong>"
               </div>
             </div>
@@ -3480,7 +3478,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0;border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05)">
               <div class="phase-tag"><span style="color:#fca5a5">Step 5: When Asked "Can I Take a Message / Send Email?"</span><span>Bypass</span></div>
               <div class="script-line" style="font-size:14.5px;line-height:1.5">
-                "Paper notes and emails get buried behind 50 supply receipts. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it from his truck for 20 seconds.<br><br>
+                "Paper notes and emails get buried behind dozens of messages. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it firsthand for 20 seconds.<br><br>
                 What's his cell number so I can send that over?"
               </div>
               <div class="delivery-tip">
@@ -3568,17 +3566,17 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div style="background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(245,158,11,0.15));border:1px solid rgba(168,85,247,0.4);border-radius:12px;padding:16px 20px;margin-bottom:18px">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
             <div style="font-size:14px;font-weight:800;color:#c084fc;letter-spacing:0.5px">📦 SCALE PACKAGE PLAYBOOK: COMPLETE AUTONOMOUS INFRASTRUCTURE ($1,297/MO)</div>
-            <span style="font-size:11px;font-family:var(--font-mono);background:#c084fc;color:#000;font-weight:800;padding:3px 8px;border-radius:4px">ENTERPRISE TIER · 10+ TRUCKS · FLEET DOMINANCE</span>
+            <span style="font-size:11px;font-family:var(--font-mono);background:#c084fc;color:#000;font-weight:800;padding:3px 8px;border-radius:4px">SCALE ENTERPRISE TIER · MULTI-CREW &amp; GROWING OPERATIONS · MARKET DOMINANCE</span>
           </div>
           <p style="font-size:12.5px;color:#cbd5e1;margin:8px 0 0;line-height:1.5">
-            Designed for established trade fleets ($2M–$10M+ gross). Multi-line concurrent Ava Voice AI with bilingual Spanish/English dispatch, custom 1-second mobile website ($799 value included), 90s Speed-to-Lead SMS across all web forms, full Multi-Engine AEO (Google, Siri, ChatGPT, Perplexity), automated 5-star review funnel (15-25 reviews/mo), and direct ServiceTitan/Jobber CRM integration.
+            Designed for high-growth operations and established service businesses. Multi-line concurrent Ava Voice AI with bilingual Spanish/English dispatch, custom 1-second mobile website ($799 value included), 90s Speed-to-Lead SMS across all web forms, full Multi-Engine AEO (Google, Siri, ChatGPT, Perplexity), automated 5-star review funnel (15-25 reviews/mo), and direct CRM integration.
           </p>
         </div>
 
         <!-- Section Header -->
         <div class="script-section-header" style="margin-top:0">
-          <h3><span>🚀</span> Enterprise Pitch: Autonomous Fleet Infrastructure ($1,297/mo)</h3>
-          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.2);color:#c084fc;padding:2px 8px;border-radius:4px;border:1px solid rgba(168,85,247,0.4)">10+ Trucks · Stops $30k/mo Latency Bleed</span>
+          <h3><span>🚀</span> Enterprise Pitch: Full Front-Office Infrastructure ($1,297/mo)</h3>
+          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.2);color:#c084fc;padding:2px 8px;border-radius:4px;border:1px solid rgba(168,85,247,0.4)">All Business Sizes · Stops Inbound Lead Bleed</span>
         </div>
 
         <!-- Split View Controls Fork -->
@@ -3617,13 +3615,13 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
             <!-- Step 2: Enterprise Capacity Hook -->
             <div class="script-phase" style="margin-bottom:0">
-              <div class="phase-tag"><span>Step 2: Enterprise Capacity Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ $30k/mo Fleet Bleed</span></div>
+              <div class="phase-tag"><span>Step 2: Universal Capacity Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Stops Inbound Revenue Bleed</span></div>
               <div class="script-line">
-                "I'll be direct: When you're running 10+ trucks across <span class="dyn-city">[City]</span>, your bottleneck isn't getting leads—it's front-office latency. When storm surges or peak hours hit, dispatch lines tie up, web forms wait 45 minutes for a callback, and competitors capture the top spoken recommendation on Siri and ChatGPT.<br><br>
-                When 4 emergency calls hit your line at the exact same time, <strong>how many of those callers actually speak to a live dispatcher within 1 ring?</strong>"
+                "I'll be direct: When you're running a business in <span class="dyn-city">[City]</span>, your bottleneck usually isn't getting leads—it's front-office latency. When you and your team are tied up on jobs, with clients, or after hours, incoming calls roll to voicemail, online quote forms wait 45 minutes for a callback, and competitors capture the top recommendation on Google and ChatGPT.<br><br>
+                When high-value customer calls come in while lines are busy, <strong>how many of those callers actually speak to someone live within 1 or 2 rings?</strong>"
               </div>
               <div class="delivery-tip">
-                💡 <em>The Golden Pause:</em> Let them admit that hold times or voicemails cause lost commercial tickets.
+                💡 <em>The Golden Pause:</em> Let them admit that hold times, busy lines, or voicemails cause lost customer tickets.
               </div>
             </div>
 
@@ -3669,7 +3667,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
               <div class="script-line" style="font-size:16px">
-                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your weekend dispatch routing and emergency calls in <span class="dyn-city">[City]</span>."
+                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your incoming calls and after-hours routing in <span class="dyn-city">[City]</span>."
               </div>
               <div class="delivery-tip">
                 💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
@@ -3680,7 +3678,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.05)">
               <div class="phase-tag"><span style="color:var(--accent2)">Step 2: The Dispatcher Praise Reframe</span><span>When told he's out/busy</span></div>
               <div class="script-line" style="font-size:16px">
-                "Oh gotcha, no problem at all! You're the one actually running the show and dealing with all the chaos while he's out in the field turning wrenches."
+                "Oh gotcha, no problem at all! You're the one actually running the front office and keeping the business moving while he's out on jobs."
               </div>
               <div class="delivery-tip">
                 💡 <em>Why This Works:</em> Elevates them from an adversary gatekeeper to a respected manager. Guard drops immediately.
@@ -3691,7 +3689,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 3: Operational Dispatch Question</span><span>Expose The Leak</span></div>
               <div class="script-line" style="font-size:16px">
-                "Quick question for you then: when emergency calls come in after 5 PM or on weekends, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his personal cell, or do they just roll to voicemail?"
+                "Quick question for you then: when new customer calls come in after 5 PM, on weekends, or when lines are tied up, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his cell, or do they just roll to voicemail?"
               </div>
               <div class="delivery-tip">
                 💡 <em>Listen Closely:</em> Dispatchers vent: <em>"He tries to answer, but if he's driving or off the clock it rolls to voicemail."</em>
@@ -3702,7 +3700,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span style="color:#6ee7b7">Step 4: Extract Direct Cell Phone</span><span style="color:var(--ok)">Key Objective</span></div>
               <div class="script-line" style="font-size:16px">
-                "Got it. That's why I'm reaching out — we deploy 24/7 AI dispatch lines so you guys don't lose $8,000 emergency jobs when the office is closed.<br><br>
+                "Got it. That's why I'm reaching out — we deploy 24/7 AI answering and dispatch lines so you guys don't lose high-ticket jobs when lines are tied up or the office is closed.<br><br>
                 <strong>What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?</strong>"
               </div>
             </div>
@@ -3711,7 +3709,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0;border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05)">
               <div class="phase-tag"><span style="color:#fca5a5">Step 5: When Asked "Can I Take a Message / Send Email?"</span><span>Bypass</span></div>
               <div class="script-line" style="font-size:14.5px;line-height:1.5">
-                "Paper notes and emails get buried behind 50 supply receipts. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it from his truck for 20 seconds.<br><br>
+                "Paper notes and emails get buried behind dozens of messages. Let me shoot his cell a quick 1-line text with our live demo line: <strong>(561) 813-8602</strong> so he can test it firsthand for 20 seconds.<br><br>
                 What's his cell number so I can send that over?"
               </div>
               <div class="delivery-tip">
@@ -3916,7 +3914,6 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <option value="Guest Caller">Guest Caller</option>
         </select>
       </div>
-      <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#34d399;margin-bottom:12px;cursor:pointer"><input type="checkbox" id="newRepAutoPass" style="accent-color:#34d399"> 🎓 Auto-Pass Course (Instantly grant Level 5 &amp; unlock all leads)</label>
       <button class="btn btn-gold" id="btnCreateAccount" onclick="createNewAccountFromModal()" style="width:100%;font-weight:700">Create Rep Account &amp; Start Academy ➔</button>
     </div>
   </div>
@@ -8871,7 +8868,7 @@ window.closeLeakMathModal = function() {
   // Migration for all profiles: ensure all arrays and fields exist, auto-pass any buddy account
   Object.keys(USER_PROFILES).forEach(k => {
     const u = USER_PROFILES[k];
-    if (k.toLowerCase().includes('buddy') || (u.name && u.name.toLowerCase().includes('buddy'))) {
+    if (k === 'buddy') {
       grantCoursePass(u);
     }
     if (!u.unitActivitiesDone) {
@@ -9888,10 +9885,8 @@ window.closeLeakMathModal = function() {
   window.createNewAccountFromModal = function() {
     const nameInput = document.getElementById('newRepName');
     const roleSelect = document.getElementById('newRepRole');
-    const autoPassCheck = document.getElementById('newRepAutoPass');
     const name = nameInput ? nameInput.value.trim() : '';
     const role = roleSelect ? roleSelect.value : 'Outbound Closer';
-    const shouldAutoPass = (autoPassCheck && autoPassCheck.checked) || name.toLowerCase().includes('buddy');
 
     if (!name) {
       showToast('Please enter a name for the new sales rep account.');
@@ -9911,6 +9906,7 @@ window.closeLeakMathModal = function() {
       xp: 0,
       isFounder: false,
       founderBypass: false,
+      autoPassed: false,
       completedUnits: [],
       unitActivitiesDone: [],
       flashcardsRevealed: [],
@@ -9922,22 +9918,17 @@ window.closeLeakMathModal = function() {
       dailySims: 0
     };
 
-    if (shouldAutoPass) {
-      grantCoursePass(USER_PROFILES[uid]);
-    }
-
     activeUserId = uid;
     if (nameInput) nameInput.value = '';
-    if (autoPassCheck) autoPassCheck.checked = false;
     saveUserProfiles();
     if (window.selectLmsUnit) window.selectLmsUnit('1-1');
     updateUserUI();
     if (window.updateAcademyUI) window.updateAcademyUI();
     playSound('levelup');
-    showToast(`✓ Account created for ${name}! ${shouldAutoPass ? '🎓 Course Auto-Passed (Level 5)!' : 'Welcome to Closer Academy.'}`);
+    showToast(`✓ Account created for ${name}! Welcome to Closer Academy. Complete the 3-day course to earn Level 5.`);
     const accountModal = document.getElementById('accountModal');
     if (accountModal) accountModal.classList.remove('active');
-    window.switchTab(shouldAutoPass ? 'tabLeads' : 'tabAcademy');
+    window.switchTab('tabAcademy');
   };
 
   const btnToggleFounderBypass = document.getElementById('btnToggleFounderBypass');

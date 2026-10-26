@@ -3396,7 +3396,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div style="background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(245,158,11,0.15));border:1px solid rgba(168,85,247,0.4);border-radius:12px;padding:16px 20px;margin-bottom:18px">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
             <div style="font-size:14px;font-weight:800;color:#c084fc;letter-spacing:0.5px">📦 SCALE PACKAGE PLAYBOOK: COMPLETE AUTONOMOUS INFRASTRUCTURE ($1,297/MO)</div>
-            <span style="font-size:11px;font-family:var(--font-mono);background:#c084fc;color:#000;font-weight:800;padding:3px 8px;border-radius:4px">ENTERPRISE TIER · 10+ TRUCKS · FLEET DOMINANCE</span>
+            <span style="font-size:11px;font-family:var(--font-mono);background:#c084fc;color:#000;font-weight:800;padding:3px 8px;border-radius:4px">SCALE ENTERPRISE TIER Â· MULTI-CREW & GROWING OPERATIONS Â· MARKET DOMINANCE</span>
           </div>
           <p style="font-size:12.5px;color:#cbd5e1;margin:8px 0 0;line-height:1.5">
             Designed for established trade fleets ($2M–$10M+ gross). Multi-line concurrent Ava Voice AI with bilingual Spanish/English dispatch, custom 1-second mobile website ($799 value included), 90s Speed-to-Lead SMS across all web forms, full Multi-Engine AEO (Google, Siri, ChatGPT, Perplexity), automated 5-star review funnel (15-25 reviews/mo), and direct ServiceTitan/Jobber CRM integration.
@@ -3406,7 +3406,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <!-- Section Header -->
         <div class="script-section-header" style="margin-top:0">
           <h3><span>🚀</span> Enterprise Pitch: Autonomous Fleet Infrastructure ($1,297/mo)</h3>
-          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.2);color:#c084fc;padding:2px 8px;border-radius:4px;border:1px solid rgba(168,85,247,0.4)">10+ Trucks · Stops $30k/mo Latency Bleed</span>
+          <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.2);color:#c084fc;padding:2px 8px;border-radius:4px;border:1px solid rgba(168,85,247,0.4)">All Business Sizes Â· Stops Inbound Lead Bleed</span>
         </div>
 
         <!-- Stage 0: Gatekeeper Bypass -->
@@ -3431,12 +3431,12 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </p>
           <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px;margin-bottom:8px">
             <strong>Praise The Dispatcher &amp; Ask Operational Question:</strong><br>
-            "Oh gotcha, no problem at all! You're the one actually running the show and keeping 10+ trucks rolling while he's out in the field.<br><br>
-            Quick question for you then: when 3 calls hit the dispatch desk at the exact same time during storms or heat waves, do callers get put on hold or does overflow roll to voicemail?"
+            "Oh gotcha, no problem at all! You're the one actually running the front office and keeping the business moving while he's out on jobs.<br><br>
+            Quick question for you then: when new customer calls come in after 5 PM, on weekends, or when lines are tied up, does <span class="dyn-owner">[Owner's First Name]</span> take those calls on his cell, or do they just roll to voicemail?"
           </div>
           <div class="script-line" style="font-size:13.5px;background:rgba(15,23,42,0.85);border-left:3px solid #f87171;padding:10px 14px;border-radius:6px">
             <strong>To Extract The Owner's Direct Mobile Number:</strong><br>
-            "Got it. That's why I'm reaching out — we deploy multi-line concurrent AI dispatch lines so your dispatch desk never drops emergency calls. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
+            "Got it. That's why I'm reaching out — we deploy 24/7 AI answering and dispatch lines so you guys don't lose high-ticket jobs when lines are tied up or the office is closed. What's the best direct cell to reach <span class="dyn-owner">[Owner's First Name]</span> on between jobs, or what time does he usually check in with you?"
           </div>
         </div>
 
@@ -3455,8 +3455,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="script-phase">
           <div class="phase-tag"><span>Phase 2: Enterprise Capacity Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ $30k/mo Fleet Bleed</span></div>
           <div class="script-line">
-            "I'll be direct: When you're running 10+ trucks across <span class="dyn-city">[City]</span>, your bottleneck isn't getting leads—it's front-office latency. When storm surges or peak hours hit, dispatch lines tie up, web forms wait 45 minutes for a callback, and competitors capture the top spoken recommendation on Siri and ChatGPT.<br><br>
-            When 4 emergency calls hit your line at the exact same time, <strong>how many of those callers actually speak to a live dispatcher within 1 ring?</strong>"
+            "I'll be direct: When you're running a business in <span class="dyn-city">[City]</span>, your bottleneck usually isn't getting leadsâ€”it's front-office latency. When you and your team are tied up on jobs, with clients, or after hours, incoming calls roll to voicemail, online quote forms wait 45 minutes for a callback, and competitors capture the top recommendation on Google and ChatGPT.<br><br>
+            When high-value customer calls come in while lines are busy, <strong>how many of those callers actually speak to someone live within 1 or 2 rings?</strong>"
           </div>
           <div class="delivery-tip">
             💡 <em>The Golden Pause:</em> Let them admit that hold times or voicemails cause lost commercial tickets.
