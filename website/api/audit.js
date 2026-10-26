@@ -159,89 +159,9 @@ async function handleRepSync(req, res) {
     }).catch(err => console.warn("[Supabase Rep Sync Log Warning]", err.message));
   } catch (_) {}
 
-  // Background Milestone Alert Email to Luke
-  if (milestone && milestone !== "silent_heartbeat") {
-    let alertSubject = `👤 [Rep Progress] ${existing.name}: ${milestoneDetail || milestone}`;
-    let alertBadge = "⚡ ACTIVITY UPDATE";
-    let alertColor = "#c7a468";
-
-    if (milestone === "account_created") {
-      alertSubject = `🚨 [New Closer Hired] ${existing.name} (${existing.email}) joined as ${existing.role}`;
-      alertBadge = "🎉 NEW TEAM MEMBER";
-      alertColor = "#38bdf8";
-    } else if (milestone === "certified") {
-      alertSubject = `🏆 [REP CERTIFIED] ${existing.name} completed Closer Academy (Level 5)!`;
-      alertBadge = "🏆 CERTIFIED CLOSER";
-      alertColor = "#4ade80";
-    } else if (milestone === "boss_defeated") {
-      alertSubject = `⚔️ [Boss Defeated] ${existing.name} crushed ${milestoneDetail || "Contractor Boss"}!`;
-      alertBadge = "🔥 COMBAT VICTORY";
-      alertColor = "#f59e0b";
-    } else if (milestone === "day_passed") {
-      alertSubject = `🎓 [Course Milestone] ${existing.name} passed ${milestoneDetail || "Academy Exam"}!`;
-      alertBadge = "📜 EXAM PASSED";
-      alertColor = "#a855f7";
-    } else if (milestone === "lesson_completed") {
-      alertSubject = `📚 [Lesson Completed] ${existing.name} finished ${milestoneDetail || "Closer Academy Lesson"}!`;
-      alertBadge = "📖 LESSON COMPLETED";
-      alertColor = "#818cf8";
-    } else if (milestone === "dials_logged") {
-      alertSubject = `📞 [Call Telemetry] ${existing.name} logged live outbound calls!`;
-      alertBadge = "📞 OUTBOUND DIALS";
-      alertColor = "#38bdf8";
-    }
-
-    const emailHtml = `
-      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1e293b; max-width: 620px; margin: 0 auto; padding: 22px; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff;">
-        <div style="background: #0b0f16; padding: 18px 24px; border-radius: 8px; margin-bottom: 20px;">
-          <div style="font-size: 11px; font-weight: 800; color: ${alertColor}; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;">${alertBadge}</div>
-          <h2 style="color: #ffffff; margin: 0; font-size: 21px;">${existing.name} · ${existing.role}</h2>
-          <p style="color: #94a3b8; margin: 4px 0 0 0; font-size: 13.5px;">Accountability Tracker · ${new Date().toLocaleString("en-US", { timeZone: "America/New_York" })} ET</p>
-        </div>
-
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
-          <div style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 8px;">LATEST ACTIVITY:</div>
-          <div style="font-size: 16px; font-weight: 700; color: #0f172a;">${milestoneDetail || existing.lastAction}</div>
-        </div>
-
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14.5px;">
-          <tr>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; width: 150px;"><strong>Email:</strong></td>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-weight: 600;"><a href="mailto:${existing.email}" style="color: #2563eb; text-decoration: none;">${existing.email}</a></td>
-          </tr>
-          <tr>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b;"><strong>🎓 Course Status:</strong></td>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-weight: 700; color: #059669;">
-              ${existing.course.status || "In Progress"} (${existing.course.percent || 0}% Complete · ${existing.course.xp || 0} XP)
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b;"><strong>⚔️ Video Game RPG:</strong></td>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-weight: 600; color: #0f172a;">
-              Level ${existing.game.level || 1} · ${existing.game.bossesDefeated || 0} Bosses Beaten · 🔥 ${existing.game.streak || 0} Streak (${existing.game.xp || 0} Combat XP)
-            </td>
-          </tr>
-          <tr>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b;"><strong>📞 Total Dials:</strong></td>
-            <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-weight: 600; color: #0f172a;">
-              ${existing.game.totalDials || 0} Dials · ${existing.game.dealsClosed || 0} Deals Closed
-            </td>
-          </tr>
-        </table>
-
-        <div style="text-align: center; margin-top: 24px;">
-          <a href="https://www.vantorxsolutions.com/cold-call-arena/" style="display: inline-block; background: #c7a468; color: #0b0f16; font-weight: 700; padding: 11px 22px; border-radius: 6px; text-decoration: none; margin-right: 8px;">View Closer Academy</a>
-          <a href="https://www.vantorxsolutions.com/cold-call-quest/" style="display: inline-block; background: #0f172a; color: #ffffff; font-weight: 600; padding: 11px 22px; border-radius: 6px; text-decoration: none;">View Cold Call RPG</a>
-        </div>
-      </div>
-    `;
-
-    sendEmail({
-      to: ["hluke2057@gmail.com", "luke@vantorxsolutions.com"],
-      subject: alertSubject,
-      html: emailHtml,
-    }).catch(err => console.warn("[Rep Sync Email Alert Failed]", err.message));
-  }
+  // Per-action email spam disabled per Luke's instruction.
+  // All milestone events (account_created, lesson_completed, day_passed, certified, boss_defeated, dials_logged)
+  // are logged to the cloud roster and Supabase, and delivered cleanly in the 3 daily digest emails (12 PM, 3 PM, 8 PM ET).
 
   return res.status(200).json({
     ok: true,
