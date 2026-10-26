@@ -63,7 +63,11 @@ foreach ($f in $files) {
 }
 
 $js = $combined.ToString()
-$html = Get-Content (Join-Path $root 'index.html') -Raw -Encoding UTF8
+$skeletonPath = Join-Path $root 'index.skeleton.html'
+if (-not (Test-Path $skeletonPath)) {
+  $skeletonPath = Join-Path $root 'index.html'
+}
+$html = Get-Content $skeletonPath -Raw -Encoding UTF8
 
 # Replace the module script tag with the bundled inline script (classic, no modules)
 # Use literal .Replace (no regex) because the JS code contains $ chars.
@@ -71,9 +75,18 @@ $pattern = '<script type="module" src="js/app.js"></script>'
 $replacement = '<script>' + $js + '</script>'
 $newHtml = $html.Replace($pattern, $replacement)
 
-if ($newHtml -eq $html) { throw "Bundle failed: module script tag not found in index.html" }
+if ($newHtml -eq $html) { throw "Bundle failed: module script tag not found in skeleton HTML" }
 
-$outPath = Join-Path $root 'leadflow-app.html'
-# Use UTF8 without BOM issues; Set-Content default is fine for browsers
-[System.IO.File]::WriteAllText($outPath, $newHtml, (New-Object System.Text.UTF8Encoding($false)))
-Write-Host "Bundled $($files.Count) modules -> leadflow-app.html ($([math]::Round((Get-Item $outPath).Length/1kb)) KB)"
+$targets = @(
+  (Join-Path $root 'leadflow-app.html'),
+  (Join-Path $root 'index.html'),
+  (Join-Path (Resolve-Path (Join-Path $root '..\website\leadflow')).Path 'leadflow-app.html'),
+  (Join-Path (Resolve-Path (Join-Path $root '..\website\leadflow')).Path 'index.html')
+)
+
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+foreach ($t in $targets) {
+  [System.IO.File]::WriteAllText($t, $newHtml, $utf8NoBom)
+  Write-Host "Bundled -> $t ($([math]::Round((Get-Item $t).Length/1kb)) KB)"
+}
+

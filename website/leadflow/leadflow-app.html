@@ -12,7 +12,7 @@
   <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
-      <a href="/" title="Back to VantorX portal" style="text-decoration:none;color:inherit;display:flex;gap:10px;align-items:center">
+      <a href="#dashboard" onclick="if(window.LeadFlow){window.LeadFlow.navigate('dashboard');}return false;" title="LeadFlow CRM Dashboard" style="text-decoration:none;color:inherit;display:flex;gap:10px;align-items:center">
       <span class="brand-mark">V</span>
       <div>
       <div class="brand-name">VantorX <span class="gold">LeadFlow</span></div>
@@ -52,6 +52,7 @@
           <div id="lfUserRole" style="font-size:0.68rem;color:var(--text-dim)">Owner</div>
         </div>
       </div>
+      <a href="/" style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-dim);text-decoration:none;padding:6px 10px;margin-top:8px;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)" title="Return to main VantorX website"><span>←</span> Return to Main Website</a>
     </div>
   </aside>
   <div class="mobile-overlay" id="mobileOverlay" style="display:none"></div>

@@ -2,8 +2,9 @@
 $ErrorActionPreference = "Stop"
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
-$crmAppHtml = Join-Path $repoRoot "website/leadflow/leadflow-app.html"
+$crmAppHtml = Join-Path $repoRoot "website/leadflow/index.html"
 $content = [System.IO.File]::ReadAllText((Resolve-Path $crmAppHtml).Path, [System.Text.Encoding]::UTF8)
+
 
 $testScript = @'
 <div id="testResultsBox" style="padding:20px;background:#000;color:#fff;font-family:monospace">

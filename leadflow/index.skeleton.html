@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VantorX LeadFlow — AI Lead Follow-Up System</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="app">
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <a href="#dashboard" onclick="if(window.LeadFlow){window.LeadFlow.navigate('dashboard');}return false;" title="LeadFlow CRM Dashboard" style="text-decoration:none;color:inherit;display:flex;gap:10px;align-items:center">
+      <span class="brand-mark">V</span>
+      <div>
+      <div class="brand-name">VantorX <span class="gold">LeadFlow</span></div>
+      <div class="brand-desc">AI Lead Follow-Up System</div>
+      </div>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav" id="sideNav" aria-label="Main navigation">
+      <button class="nav-item active" data-page="dashboard"><span class="nav-icon">▦</span> Dashboard</button>
+      <button class="nav-item" data-page="leads"><span class="nav-icon">👥</span> Leads <span class="nav-badge" id="badgeLeads">0</span></button>
+      <button class="nav-item" data-page="pipeline"><span class="nav-icon">📊</span> Pipeline</button>
+      <button class="nav-item" data-page="queue"><span class="nav-icon">⏰</span> Follow-Up Queue <span class="nav-badge urgent" id="badgeQueue">0</span></button>
+      <button class="nav-item" data-page="automations"><span class="nav-icon">⚡</span> Automations</button>
+      <button class="nav-item" data-page="templates"><span class="nav-icon">📝</span> Templates</button>
+      <button class="nav-item" data-page="appointments"><span class="nav-icon">📅</span> Appointments</button>
+      <button class="nav-item" data-page="activity"><span class="nav-icon">🕘</span> Activity</button>
+      <button class="nav-item" data-page="analytics"><span class="nav-icon">📈</span> Analytics</button>
+      <button class="nav-item" data-page="integrations"><span class="nav-icon">🔌</span> Integrations</button>
+      <button class="nav-item" data-page="settings"><span class="nav-icon">⚙️</span> Settings</button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="biz-switcher" id="bizSwitcher" data-tooltip="Business switcher">
+        <span class="biz-avatar">VX</span>
+        <span style="flex:1;text-align:left;overflow:hidden">
+          <span id="bizName" style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">…</span>
+          <small>Live workspace</small>
+        </span>
+        <span style="color:var(--text-dim)">⌄</span>
+      </button>
+      <button class="sidebar-help" id="helpBtn"><span>?</span> Help & shortcuts</button>
+      <div class="sidebar-user">
+        <span class="user-avatar" id="lfUserInitials">…</span>
+        <div style="flex:1;min-width:0">
+          <div id="lfUserName" style="color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">…</div>
+          <div id="lfUserRole" style="font-size:0.68rem;color:var(--text-dim)">Owner</div>
+        </div>
+      </div>
+      <a href="/" style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-dim);text-decoration:none;padding:6px 10px;margin-top:8px;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)" title="Return to main VantorX website"><span>←</span> Return to Main Website</a>
+    </div>
+  </aside>
+  <div class="mobile-overlay" id="mobileOverlay" style="display:none"></div>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+    <header class="topbar">
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">☰</button>
+      <div class="topbar-search">
+        <span class="search-ico">🔍</span>
+        <input id="globalSearch" type="search" placeholder="Search leads…  (press /)" aria-label="Search leads"/>
+      </div>
+      <div class="topbar-actions">
+        <span class="automation-status-pill" data-tooltip="Ava 24/7 AI Voice Dispatch is actively answering Florida trade calls on (561) 813-8602">
+          <span class="pulse-dot" style="background:#4ade80"></span><span class="pill-text" style="color:#4ade80">Ava 24/7 Voice AI: Online</span>
+        </span>
+        <button class="btn btn-ghost btn-sm" id="topbarTestAvaBtn" style="border:1px solid rgba(245,158,11,0.45);color:var(--gold-bright);background:rgba(245,158,11,0.1);font-weight:700">⚡ Test Ava Call</button>
+        <button class="btn btn-gold btn-sm" id="quickAddBtn">+ Quick Add</button>
+        <button class="topbar-icon-btn" id="notifBtn" aria-label="Notifications" data-tooltip="Notifications">
+          🔔<span class="dot" id="notifDot" style="display:none"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page" id="pageRoot">
+      <div class="page-view" id="viewRoot"></div>
+    </main>
+  </div>
+</div>
+
+<div class="toast-container" id="toastRoot"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
