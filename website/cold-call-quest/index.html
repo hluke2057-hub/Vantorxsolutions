@@ -349,8 +349,9 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         <div class="rank-title" id="playerRankHeader">Novice Dialer</div>
         <div class="equip-summary" id="playerEquipSummary">⚔️ Lead Gavel · 🛡️ Denim Workshirt</div>
         <div style="margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-          <button class="btn btn-ghost btn-sm" onclick="openRepModal()" style="font-size:11px;padding:3px 9px;border:1px solid rgba(245,158,11,0.4);color:var(--accent2);display:inline-flex;align-items:center;gap:4px;cursor:pointer">👤 Switch / Add Rep</button>
-          <button class="btn btn-ghost btn-sm" onclick="triggerFounderDigest()" title="Send live team roster report to Luke's email" style="font-size:11px;padding:3px 9px;border:1px solid rgba(59,130,246,0.4);color:#60a5fa;display:inline-flex;align-items:center;gap:4px;cursor:pointer">📧 Email Progress Digest</button>
+          <button class="btn btn-ghost btn-sm" id="btnQuestRepAction" onclick="openRepModal()" style="font-size:11px;padding:3px 9px;border:1px solid rgba(245,158,11,0.4);color:var(--accent2);display:inline-flex;align-items:center;gap:4px;cursor:pointer">👤 Switch / Add Rep</button>
+          <button class="btn btn-ghost btn-sm" id="btnQuestEmailDigest" onclick="triggerFounderDigest()" title="Send live team roster report to Luke's email" style="display:none;font-size:11px;padding:3px 9px;border:1px solid rgba(59,130,246,0.4);color:#60a5fa;display:inline-flex;align-items:center;gap:4px;cursor:pointer">📧 Email Progress Digest</button>
+          <button class="btn btn-ghost btn-sm" id="btnQuestSignOut" onclick="logoutQuestCloser()" style="display:none;font-size:11px;padding:3px 9px;border:1px solid rgba(239,68,68,0.3);color:#f87171;display:inline-flex;align-items:center;gap:4px;cursor:pointer">🚪 Log Out</button>
         </div>
       </div>
     </div>
@@ -677,6 +678,48 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     <button id="lootClaimBtn" class="hud-btn gold" style="display:none;width:100%;padding:14px;font-size:16px;justify-content:center;box-shadow:0 0 25px rgba(245,158,11,0.4)" onclick="claimLootAndAdvance()">
       ⚔️ Claim Spoils &amp; Review Contractor Reply ➔
     </button>
+  <!-- 🚪 Quest Closer Sign In Gate Modal -->
+<div class="modal-overlay" id="questSignInModal" style="z-index:99999;background:rgba(5,8,14,0.94);backdrop-filter:blur(14px)">
+  <div class="modal-card" style="max-width:440px;border:1px solid rgba(245,158,11,0.4);box-shadow:0 0 50px rgba(0,0,0,0.9),0 0 25px rgba(245,158,11,0.18)">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="width:56px;height:56px;margin:0 auto 12px;border-radius:14px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.4);display:flex;align-items:center;justify-content:center;font-size:28px">⚔️</div>
+      <h2 style="font-family:var(--font-head);font-size:22px;color:#ffffff;margin:0 0 6px">Sign In to Cold Call RPG</h2>
+      <p style="font-size:13px;color:var(--dim);margin:0">Enter your name and personal email to access your RPG combat track and sync progress.</p>
+    </div>
+
+    <form id="questSignInGateForm" onsubmit="handleQuestSignInGateSubmit(event)">
+      <div style="margin-bottom:14px">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Your Full Name</label>
+        <input type="text" id="questGateNameInput" placeholder="e.g. Roman Vance" class="custom-input" style="width:100%;font-size:14px;padding:10px 14px" required autocomplete="name">
+      </div>
+
+      <div style="margin-bottom:14px">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Your Personal Email</label>
+        <input type="email" id="questGateEmailInput" placeholder="e.g. roman@gmail.com" class="custom-input" style="width:100%;font-size:14px;padding:10px 14px" required autocomplete="email">
+      </div>
+
+      <div style="margin-bottom:18px">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Role Track</label>
+        <select id="questGateRoleSelect" class="custom-input" style="width:100%;font-size:13.5px;padding:10px 14px;background:var(--bg)">
+          <option value="Outbound Closer">Outbound Closer (RPG Combat Track)</option>
+          <option value="Appointment Setter">Appointment Setter (Speed-to-Lead)</option>
+          <option value="Sales Rep (Commission)">Sales Rep (Commission)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="hud-btn gold" id="btnQuestGateSignIn" style="width:100%;padding:12px;font-size:14.5px;font-weight:700;justify-content:center;box-shadow:0 0 15px rgba(245,158,11,0.25);margin-bottom:12px">
+        Enter Cold Call RPG ➔
+      </button>
+
+      <div style="text-align:center;padding-top:10px;border-top:1px solid var(--line)">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="promptFounderQuestLogin()" style="font-size:11.5px;color:var(--dim)">
+          👑 Founder Sign In (Luke)
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
   <!-- 👤 SALES REP ACCOUNT & TELEMETRY ROSTER MODAL -->
 <div class="modal-overlay" id="repModal">
   <div class="modal-card" style="max-width:560px">
@@ -702,14 +745,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     <!-- Switch Existing Rep Profile -->
     <div style="margin-bottom:18px">
-      <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);margin-bottom:8px;font-family:var(--font-mono);text-transform:uppercase">Switch Active Caller / Rep:</label>
+      <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);margin-bottom:8px;font-family:var(--font-mono);text-transform:uppercase" id="questRepListLabel">Switch Active Caller / Rep:</label>
       <div id="questRepList" style="display:flex;flex-direction:column;gap:8px;max-height:160px;overflow-y:auto">
         <!-- Rendered dynamically -->
       </div>
     </div>
 
-    <!-- Create New Rep Form -->
-    <div style="border-top:1px solid var(--line);padding-top:16px;margin-bottom:18px">
+    <!-- Create New Rep Form (Founder Only) -->
+    <div id="questFounderCreateRepContainer" style="border-top:1px solid var(--line);padding-top:16px;margin-bottom:18px">
       <div style="font-size:13px;font-weight:700;color:#ffffff;margin-bottom:10px">➕ Hire / Register New Sales Rep</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
         <input type="text" id="questNewRepName" placeholder="Full Name (e.g. Jason Miller)" class="custom-input" style="width:100%;font-size:13px;padding:8px 12px" required>
@@ -728,8 +771,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       </button>
     </div>
 
-    <!-- Manual Email Digest Trigger -->
-    <div style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:12px;display:flex;align-items:center;justify-content:space-between">
+    <!-- Manual Email Digest Trigger (Founder Only) -->
+    <div id="questFounderDigestContainer" style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:12px;display:flex;align-items:center;justify-content:space-between">
       <div>
         <div style="font-size:12.5px;font-weight:700;color:#93c5fd">Founder Accountability Telemetry</div>
         <div style="font-size:11px;color:var(--dim)">Dispatches instant team progress report to Luke's inbox</div>
@@ -1567,6 +1610,9 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       }
     } catch(e){}
     recalcPlayerStats();
+    if (typeof initQuestProfile === 'function') {
+      initQuestProfile();
+    }
   }
 
   let _questCloudSyncTimer = null;
@@ -1739,6 +1785,155 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
   };
 
+  window.openQuestSignInGate = function() {
+    const modal = document.getElementById('questSignInModal');
+    if (modal) modal.classList.add('open');
+  };
+
+  window.closeQuestSignInGate = function() {
+    const modal = document.getElementById('questSignInModal');
+    if (modal) modal.classList.remove('open');
+  };
+
+  window.handleQuestSignInGateSubmit = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const nameInput = document.getElementById('questGateNameInput');
+    const emailInput = document.getElementById('questGateEmailInput');
+    const roleSelect = document.getElementById('questGateRoleSelect');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const role = roleSelect ? roleSelect.value : 'Outbound Closer';
+
+    if (!name) {
+      showToast('Please enter your full name.');
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Please enter a valid personal email.');
+      return;
+    }
+
+    const emailLower = email.toLowerCase();
+    if (emailLower === 'luke@vantorxsolutions.com' || name.toLowerCase() === 'luke the closer' || name.toLowerCase() === 'luke hamilton') {
+      const code = prompt('Founder account detected. Please enter master passcode:');
+      if (code && (code.trim().toLowerCase() === 'vantorx2026' || code.trim().toLowerCase() === 'founder' || code.trim().toLowerCase() === 'luke')) {
+        localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+        window.closeQuestSignInGate();
+        initQuestProfile();
+        showToast('👑 Welcome back, Luke! Master Founder Cockpit active.');
+        return;
+      } else {
+        showToast('❌ Founder authentication failed.');
+        return;
+      }
+    }
+
+    let profiles = {};
+    try {
+      profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
+    } catch(e) {}
+
+    let foundUid = null;
+    Object.keys(profiles).forEach(uid => {
+      const p = profiles[uid];
+      if (p && ((p.email && p.email.toLowerCase() === emailLower) || (p.name && p.name.toLowerCase() === name.toLowerCase()))) {
+        if (uid !== 'luke' && uid !== 'buddy') foundUid = uid;
+      }
+    });
+
+    let uid = foundUid;
+    if (!uid) {
+      uid = 'rep_' + Date.now().toString(36);
+      const avatars = ['⚔️', '⚡', '🎯', '🔥', '🛡️', '🚀'];
+      const avatar = avatars[Math.floor(Math.random() * avatars.length)];
+      profiles[uid] = {
+        id: uid,
+        name: name,
+        email: email,
+        role: role,
+        avatar: avatar,
+        level: 1,
+        xp: 0,
+        completedUnits: [],
+        daysPassed: [],
+        bossesDefeated: 0,
+        streak: 0,
+        createdAt: new Date().toISOString(),
+        lastActive: new Date().toISOString(),
+        lastAction: 'Joined Sales Team · Cold Call RPG'
+      };
+      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
+      syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role}`);
+    }
+
+    localStorage.setItem('vantorx_active_user_id_v2', uid);
+    window.closeQuestSignInGate();
+    selectActiveQuestRep(uid, profiles[uid]);
+    showToast(`✓ Welcome, ${name}! Your closer combat track is active.`);
+  };
+
+  window.promptFounderQuestLogin = function() {
+    const code = prompt('Enter Founder Master Passcode (or founder email):');
+    if (!code) return;
+    const clean = code.trim().toLowerCase();
+    if (clean === 'vantorx2026' || clean === 'luke' || clean === 'luke@vantorxsolutions.com' || clean === 'founder') {
+      localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+      window.closeQuestSignInGate();
+      initQuestProfile();
+      showToast('👑 Welcome back, Luke! Master Founder Cockpit active.');
+    } else {
+      showToast('❌ Incorrect founder passcode.');
+    }
+  };
+
+  window.logoutQuestCloser = function() {
+    localStorage.removeItem('vantorx_active_user_id_v2');
+    window.openQuestSignInGate();
+    showToast('✓ Signed out of Cold Call RPG.');
+  };
+
+  function initQuestProfile() {
+    const activeRepId = localStorage.getItem('vantorx_active_user_id_v2');
+    if (!activeRepId) {
+      window.openQuestSignInGate();
+      return;
+    }
+    let profiles = {};
+    try {
+      profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
+    } catch(e) {}
+    if (!profiles[activeRepId]) {
+      if (activeRepId === 'luke') {
+        profiles.luke = { id: 'luke', name: 'Luke the Closer', role: 'Founder & Master Closer', email: 'luke@vantorxsolutions.com', avatar: '👑' };
+      } else {
+        window.openQuestSignInGate();
+        return;
+      }
+    }
+    const cur = profiles[activeRepId];
+    player.name = cur.name;
+    const nameHdr = document.getElementById('playerNameHeader');
+    if (nameHdr) {
+      nameHdr.innerHTML = `${cur.name} <span class="streak-badge" id="streakHeader">🔥 ${player.streak || 0} Streak</span>`;
+    }
+    const avIcon = document.getElementById('playerAvatarIcon');
+    if (avIcon) avIcon.textContent = cur.avatar || '🗡️';
+
+    const isFounder = activeRepId === 'luke';
+    const digestBtn = document.getElementById('btnQuestEmailDigest');
+    const signOutBtn = document.getElementById('btnQuestSignOut');
+    const repActionBtn = document.getElementById('btnQuestRepAction');
+    const founderHireBox = document.getElementById('questFounderCreateRepContainer');
+    const founderDigestBox = document.getElementById('questFounderDigestContainer');
+
+    if (digestBtn) digestBtn.style.display = isFounder ? 'inline-flex' : 'none';
+    if (signOutBtn) signOutBtn.style.display = 'inline-flex';
+    if (repActionBtn) repActionBtn.textContent = isFounder ? '👤 Switch / Add Rep' : '👤 My Profile';
+    if (founderHireBox) founderHireBox.style.display = isFounder ? 'block' : 'none';
+    if (founderDigestBox) founderDigestBox.style.display = isFounder ? 'flex' : 'none';
+  }
+
   window.openRepModal = function() {
     const modal = document.getElementById('repModal');
     if (!modal) return;
@@ -1759,26 +1954,57 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
     } catch(e){}
 
-    if (!profiles.luke) {
-      profiles.luke = { id: 'luke', name: 'Luke the Closer', role: 'Founder & Closer', email: 'luke@vantorxsolutions.com', avatar: '👑' };
-    }
-    if (!profiles.buddy) {
-      profiles.buddy = { id: 'buddy', name: 'Sales Rep (Buddy 2)', role: 'Outbound Closer', email: 'buddy2@vantorxsolutions.com', avatar: '⚔️' };
+    const curId = localStorage.getItem('vantorx_active_user_id_v2') || null;
+    const isFounder = curId === 'luke';
+
+    if (isFounder || !curId) {
+      if (!profiles.luke) {
+        profiles.luke = { id: 'luke', name: 'Luke the Closer', role: 'Founder & Closer', email: 'luke@vantorxsolutions.com', avatar: '👑' };
+      }
+      if (isFounder && !profiles.buddy) {
+        profiles.buddy = { id: 'buddy', name: 'Sales Rep (Buddy 2)', role: 'Outbound Closer', email: 'buddy2@vantorxsolutions.com', avatar: '⚔️' };
+      }
     }
 
-    const curId = localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
-    const cur = profiles[curId] || profiles.luke;
+    const cur = (curId && profiles[curId]) ? profiles[curId] : (isFounder ? profiles.luke : null);
 
     const nameEl = document.getElementById('questActiveName');
     const roleEl = document.getElementById('questActiveRole');
     const avEl = document.getElementById('questActiveAvatar');
-    if (nameEl) nameEl.textContent = cur.name;
-    if (roleEl) roleEl.textContent = cur.role + (cur.email ? ' · ' + cur.email : '');
-    if (avEl) avEl.textContent = cur.avatar || '🗡️';
+    if (cur) {
+      if (nameEl) nameEl.textContent = cur.name;
+      if (roleEl) roleEl.textContent = cur.role + (cur.email ? ' · ' + cur.email : '');
+      if (avEl) avEl.textContent = cur.avatar || '🗡️';
+    } else {
+      if (nameEl) nameEl.textContent = 'Sign In Required';
+      if (roleEl) roleEl.textContent = 'Closer Cockpit';
+      if (avEl) avEl.textContent = '👤';
+    }
+
+    const lbl = document.getElementById('questRepListLabel');
+    if (lbl) {
+      lbl.textContent = isFounder || !curId ? 'ALL SALES TEAM ROSTER:' : 'YOUR CLOSER PROFILE:';
+    }
+    const founderHireBox = document.getElementById('questFounderCreateRepContainer');
+    const founderDigestBox = document.getElementById('questFounderDigestContainer');
+    if (founderHireBox) founderHireBox.style.display = (isFounder || !curId) ? 'block' : 'none';
+    if (founderDigestBox) founderDigestBox.style.display = isFounder ? 'flex' : 'none';
 
     list.innerHTML = '';
-    Object.keys(profiles).forEach(id => {
+
+    // Non-founders ONLY see their own profile. Buddy 2 and Luke are strictly hidden!
+    let uidsToRender = [];
+    if (isFounder || !curId) {
+      uidsToRender = Object.keys(profiles);
+    } else if (curId && profiles[curId]) {
+      uidsToRender = [curId];
+    }
+
+    uidsToRender.forEach(id => {
       const p = profiles[id];
+      if (!p) return;
+      if (!isFounder && (id === 'buddy' || id === 'rep_buddy_2' || (curId && id === 'luke') || id === 'founder_luke')) return;
+
       const isCur = id === curId;
       const row = document.createElement('div');
       row.style.display = 'flex';
@@ -1788,7 +2014,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       row.style.border = isCur ? '1.5px solid var(--accent)' : '1px solid var(--line)';
       row.style.borderRadius = '8px';
       row.style.padding = '8px 12px';
-      row.style.cursor = 'pointer';
+      row.style.cursor = isFounder ? 'pointer' : 'default';
 
       row.innerHTML = `
         <div style="display:flex;align-items:center;gap:10px">
@@ -1798,17 +2024,27 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
             <div style="font-size:11px;color:var(--dim)">${p.role} · ${p.email || 'No email'}</div>
           </div>
         </div>
-        <button class="btn btn-ghost btn-sm" style="font-size:11px;padding:3px 8px">${isCur ? '✓ Using' : 'Select ➔'}</button>
+        ${isFounder ? `<button class="btn btn-ghost btn-sm" style="font-size:11px;padding:3px 8px">${isCur ? '✓ Using' : 'Select ➔'}</button>` : `<span style="font-size:11px;color:var(--ok);font-weight:700">✓ Your Account</span>`}
       `;
 
-      row.addEventListener('click', () => {
-        selectActiveQuestRep(id, p);
-      });
+      if (isFounder) {
+        row.addEventListener('click', () => {
+          selectActiveQuestRep(id, p);
+        });
+      }
       list.appendChild(row);
     });
   }
 
+
+
   function selectActiveQuestRep(id, profile) {
+    const curId = localStorage.getItem('vantorx_active_user_id_v2');
+    const isFounder = curId === 'luke';
+    if (!isFounder && curId && id !== curId) {
+      showToast('⚠️ Restricted: You can only view your own closer profile.');
+      return;
+    }
     localStorage.setItem('vantorx_active_user_id_v2', id);
     player.name = profile.name;
     const nameHdr = document.getElementById('playerNameHeader');
@@ -1823,6 +2059,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     syncQuestToCloud('progress_update', `Switched active caller to ${profile.name}`);
     showToast(`✓ Switched caller profile to ${profile.name}`);
     closeRepModal();
+    initQuestProfile();
   }
   window.selectActiveQuestRep = selectActiveQuestRep;
 
@@ -4712,6 +4949,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   selectBoss(0);
   updateHUD();
   updateDailyUI();
+  initQuestProfile();
 
 })();
 </script>

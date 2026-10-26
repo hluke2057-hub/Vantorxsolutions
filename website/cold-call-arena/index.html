@@ -522,12 +522,14 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <span class="caller-name-highlight" id="callerBarCurrent">👑 Luke (Founder)</span>
       <span class="caller-level-pill" id="callerBarLevel">Lvl 5 · Unlocked 🔓</span>
     </div>
-    <div class="caller-bar-buttons">
-      <span style="font-size:12px;color:var(--dim)">Quick Switch:</span>
+    <div class="caller-bar-buttons" id="callerBarButtons">
+      <span style="font-size:12px;color:var(--dim)" id="callerBarSwitchLabel">Closer Account:</span>
       <button type="button" class="caller-switch-pill active" id="quickPillLuke" onclick="quickSwitchCaller('luke')">👑 Luke (Founder)</button>
       <button type="button" class="caller-switch-pill" id="quickPillBuddy" onclick="quickSwitchCaller('buddy')">⚔️ Buddy 2 (Auto-Pass 🏆)</button>
-      <button type="button" class="caller-switch-pill add-rep" onclick="openAccountModal()">➕ Sign In / Add Rep</button>
-      <button type="button" class="caller-switch-pill" onclick="triggerFounderDigest()" title="Dispatches team accountability leaderboard email to Luke" style="border-color:rgba(56,189,248,0.4);color:#7dd3fc">📧 Email Digest</button>
+      <button type="button" class="caller-switch-pill active" id="quickPillSelf" style="display:none"></button>
+      <button type="button" class="caller-switch-pill add-rep" id="btnCallerAccountAction" onclick="openAccountModal()">➕ Switch / Profile</button>
+      <button type="button" class="caller-switch-pill" id="btnCallerEmailDigest" onclick="triggerFounderDigest()" title="Dispatches team accountability leaderboard email to Luke" style="border-color:rgba(56,189,248,0.4);color:#7dd3fc">📧 Email Digest</button>
+      <button type="button" class="caller-switch-pill" id="btnCallerSignOut" onclick="logoutCloser()" style="display:none;border-color:rgba(239,68,68,0.3);color:#f87171">🚪 Log Out</button>
     </div>
   </div>
 
@@ -4471,6 +4473,48 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   <button class="btn btn-gold" id="btnClaimLicense" onclick="claimLicenseAndGoToLeads()" style="width:100%">Open Nationwide Leads Dispatcher ➔</button>
 </div>
 
+<!-- 🚪 Closer Sign In & Welcome Gate Modal -->
+<div class="modal-overlay" id="signInGateModal" style="z-index:99999;background:rgba(5,8,14,0.94);backdrop-filter:blur(14px)">
+  <div class="modal-box" style="max-width:440px;border:1px solid rgba(245,158,11,0.4);box-shadow:0 0 50px rgba(0,0,0,0.9),0 0 25px rgba(245,158,11,0.18)">
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="width:56px;height:56px;margin:0 auto 12px;border-radius:14px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.4);display:flex;align-items:center;justify-content:center;font-size:28px">⚔️</div>
+      <h2 style="font-family:var(--font-head);font-size:22px;color:#ffffff;margin:0 0 6px">Sign In to Closer Cockpit</h2>
+      <p style="font-size:13px;color:var(--dim);margin:0">Enter your name and personal email to access your training track, call queue, and RPG combat.</p>
+    </div>
+
+    <form id="signInGateForm" onsubmit="handleSignInGateSubmit(event)">
+      <div style="margin-bottom:14px">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Your Full Name</label>
+        <input type="text" id="gateNameInput" placeholder="e.g. Roman Vance" class="custom-select" style="width:100%;font-size:14px;padding:10px 14px" required autocomplete="name">
+      </div>
+
+      <div style="margin-bottom:14px">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Your Personal Email</label>
+        <input type="email" id="gateEmailInput" placeholder="e.g. roman@gmail.com" class="custom-select" style="width:100%;font-size:14px;padding:10px 14px" required autocomplete="email">
+      </div>
+
+      <div style="margin-bottom:18px">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Role Track</label>
+        <select id="gateRoleSelect" class="custom-select" style="width:100%;font-size:13.5px;padding:10px 14px">
+          <option value="Outbound Closer">Outbound Closer (3-Day Certification Track)</option>
+          <option value="Appointment Setter">Appointment Setter (Speed-to-Lead)</option>
+          <option value="Sales Rep (Commission)">Sales Rep (Commission)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-gold" id="btnGateSignIn" style="width:100%;padding:12px;font-size:14.5px;font-weight:700;margin-bottom:12px">
+        Enter Closer Cockpit ➔
+      </button>
+
+      <div style="text-align:center;padding-top:10px;border-top:1px solid var(--line)">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="promptFounderLogin()" style="font-size:11.5px;color:var(--dim)">
+          👑 Founder Sign In (Luke)
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- 👤 Account Switcher / Sign Up Modal -->
 <div class="modal-overlay" id="accountModal">
   <div class="modal-box">
@@ -4497,7 +4541,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     </div>
 
     <!-- Founder God Mode / Bypass Toggle -->
-    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+    <div id="founderBypassContainer" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
       <div>
         <div style="font-size:13px;font-weight:700;color:var(--accent2)">👑 Founder Lead Bypass (God Mode)</div>
         <div style="font-size:11.5px;color:var(--dim)">Instantly unlocks leads queue regardless of level</div>
@@ -4508,8 +4552,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     <!-- Switch Existing Account -->
     <div style="margin-bottom:20px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <label style="display:block;font-size:12.5px;font-weight:600;color:var(--dim);margin:0;font-family:var(--font-mono)">SWITCH ACTIVE CALLER PROFILE:</label>
-        <button class="btn btn-ghost btn-sm" onclick="triggerFounderDigest()" style="font-size:11.5px;padding:3px 8px;color:var(--accent2);border-color:rgba(245,158,11,0.3)">📧 Email Digest</button>
+        <label style="display:block;font-size:12.5px;font-weight:600;color:var(--dim);margin:0;font-family:var(--font-mono)" id="accountModalListLabel">CALLER PROFILE:</label>
+        <button class="btn btn-ghost btn-sm" id="btnModalEmailDigest" onclick="triggerFounderDigest()" style="font-size:11.5px;padding:3px 8px;color:var(--accent2);border-color:rgba(245,158,11,0.3)">📧 Email Digest</button>
       </div>
       <div id="accountProfileList" style="display:flex;flex-direction:column;gap:8px;max-height:160px;overflow-y:auto">
         <!-- Rendered dynamically -->
@@ -4754,6 +4798,13 @@ window.copyDemoNumber = function() {
 
 window.openAccountModal = function() {
   try {
+    if (typeof getActiveUser === 'function') {
+      const u = getActiveUser();
+      if (!u || u.id === 'guest' || !activeUserId) {
+        if (typeof window.openSignInGate === 'function') window.openSignInGate();
+        return;
+      }
+    }
     const modal = document.getElementById('accountModal');
     if (modal) {
       modal.classList.add('active');
@@ -9512,11 +9563,165 @@ window.closeLeakMathModal = function() {
     localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(USER_PROFILES));
   } catch(e) {}
 
-  let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
-  if (!USER_PROFILES[activeUserId]) activeUserId = 'luke';
+  let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || null;
+  if (activeUserId && !USER_PROFILES[activeUserId]) {
+    activeUserId = null;
+  }
 
-  let activeCaller = localStorage.getItem('vantorx_active_caller') || 'Luke (Founder)';
+  let activeCaller = activeUserId && USER_PROFILES[activeUserId] ? USER_PROFILES[activeUserId].name : 'Sign In Required';
   let callerSelectEl = null;
+
+  const GUEST_PROFILE = {
+    id: 'guest',
+    name: 'Sign In Required',
+    email: '',
+    role: 'Outbound Closer',
+    avatar: '⚔️',
+    level: 1,
+    xp: 0,
+    isFounder: false,
+    founderBypass: false,
+    autoPassed: false,
+    completedUnits: [],
+    unitActivitiesDone: [],
+    flashcardsRevealed: [],
+    quizAnswers: {},
+    daysPassed: [],
+    modulesPassed: [],
+    bossesDefeated: 0,
+    dailyDials: 0,
+    dailySims: 0
+  };
+
+  window.openSignInGate = function() {
+    const modal = document.getElementById('signInGateModal');
+    if (modal) modal.classList.add('active');
+  };
+
+  window.closeSignInGate = function() {
+    const modal = document.getElementById('signInGateModal');
+    if (modal) modal.classList.remove('active');
+  };
+
+  window.handleSignInGateSubmit = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const nameInput = document.getElementById('gateNameInput');
+    const emailInput = document.getElementById('gateEmailInput');
+    const roleSelect = document.getElementById('gateRoleSelect');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const role = roleSelect ? roleSelect.value : 'Outbound Closer';
+
+    if (!name) {
+      showToast('Please enter your full name.');
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Please enter a valid personal email.');
+      return;
+    }
+
+    const emailLower = email.toLowerCase();
+    if (emailLower === 'luke@vantorxsolutions.com' || name.toLowerCase() === 'luke hamilton') {
+      const code = prompt('Founder account detected. Please enter your master passcode to access Founder Cockpit:');
+      if (code && (code.trim().toLowerCase() === 'vantorx2026' || code.trim().toLowerCase() === 'founder' || code.trim().toLowerCase() === 'luke')) {
+        activeUserId = 'luke';
+        localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+        saveUserProfiles();
+        window.closeSignInGate();
+        updateUserUI();
+        playSound('levelup');
+        showToast('👑 Welcome back, Luke! Founder Cockpit & God Mode active.');
+        return;
+      } else {
+        showToast('❌ Founder authentication failed.');
+        return;
+      }
+    }
+
+    // Match existing rep by email or name if already in USER_PROFILES
+    let foundUid = null;
+    Object.keys(USER_PROFILES).forEach(uid => {
+      const u = USER_PROFILES[uid];
+      if (u && ((u.email && u.email.toLowerCase() === emailLower) || (u.name && u.name.toLowerCase() === name.toLowerCase()))) {
+        if (uid !== 'luke' && uid !== 'buddy' && uid !== 'founder_luke') {
+          foundUid = uid;
+        }
+      }
+    });
+
+    let uid = foundUid;
+    if (!uid) {
+      uid = 'rep_' + Date.now().toString(36);
+      const avatars = ['⚔️', '⚡', '🎯', '🔥', '🛡️', '🚀'];
+      const chosenAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+      USER_PROFILES[uid] = {
+        id: uid,
+        name: name,
+        email: email,
+        role: role,
+        avatar: chosenAvatar,
+        level: 1,
+        xp: 0,
+        isFounder: false,
+        founderBypass: false,
+        autoPassed: false,
+        completedUnits: [],
+        unitActivitiesDone: [],
+        flashcardsRevealed: [],
+        quizAnswers: {},
+        daysPassed: [],
+        modulesPassed: [],
+        bossesDefeated: 0,
+        dailyDials: 0,
+        dailySims: 0,
+        createdAt: new Date().toISOString(),
+        lastActive: new Date().toISOString(),
+        lastAction: 'Registered via Closer Sign In Gate'
+      };
+      syncRepToCloud(USER_PROFILES[uid], 'account_created', `New closer account registered: ${name} (${email}) as ${role}`);
+    } else {
+      USER_PROFILES[uid].email = email;
+      USER_PROFILES[uid].lastActive = new Date().toISOString();
+      USER_PROFILES[uid].lastAction = 'Signed in via Closer Gate';
+      syncRepToCloud(USER_PROFILES[uid], 'progress_update', `Closer logged in: ${name} (${email})`);
+    }
+
+    activeUserId = uid;
+    localStorage.setItem('vantorx_active_user_id_v2', uid);
+    saveUserProfiles();
+    window.closeSignInGate();
+    updateUserUI();
+    if (window.selectLmsUnit) window.selectLmsUnit('1-1');
+    playSound('levelup');
+    showToast(`✓ Welcome, ${name}! Your account is active. Complete Day 1 to level up!`);
+  };
+
+  window.promptFounderLogin = function() {
+    const code = prompt('Enter Founder Master Passcode (or founder email):');
+    if (!code) return;
+    const clean = code.trim().toLowerCase();
+    if (clean === 'vantorx2026' || clean === 'luke' || clean === 'luke@vantorxsolutions.com' || clean === 'founder') {
+      activeUserId = 'luke';
+      localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+      saveUserProfiles();
+      window.closeSignInGate();
+      updateUserUI();
+      playSound('levelup');
+      showToast('👑 Welcome back, Luke! Founder Cockpit & God Mode active.');
+    } else {
+      showToast('❌ Incorrect founder passcode.');
+    }
+  };
+
+  window.logoutCloser = function() {
+    localStorage.removeItem('vantorx_active_user_id_v2');
+    activeUserId = null;
+    updateUserUI();
+    window.openSignInGate();
+    showToast('✓ Signed out of Closer Cockpit.');
+  };
 
   let _syncDebounceTimer = null;
   function syncRepToCloud(user, milestone = 'progress_update', detail = '') {
@@ -9681,7 +9886,10 @@ window.closeLeakMathModal = function() {
   };
 
   function getActiveUser() {
-    return USER_PROFILES[activeUserId] || USER_PROFILES.luke;
+    if (activeUserId && USER_PROFILES[activeUserId]) {
+      return USER_PROFILES[activeUserId];
+    }
+    return GUEST_PROFILE;
   }
 
   function getRankTitle(lvl) {
@@ -9697,30 +9905,92 @@ window.closeLeakMathModal = function() {
 
   function updateUserUI() {
     try {
+      const storedId = localStorage.getItem('vantorx_active_user_id_v2');
+      if (storedId && USER_PROFILES[storedId]) {
+        activeUserId = storedId;
+      } else if (!storedId) {
+        activeUserId = null;
+      }
       const user = getActiveUser();
-      // 1. Header Badge
+      const isLoggedOut = !activeUserId || activeUserId === 'guest' || !USER_PROFILES[activeUserId];
+      const isFounder = !isLoggedOut && (user.isFounder === true || activeUserId === 'luke');
+
+      if (isLoggedOut) {
+        window.openSignInGate();
+      } else {
+        window.closeSignInGate();
+      }
+
+      // 1. Header Badge - Shows Roman's name for Roman, Luke Founder for Luke
       const hAvatar = document.getElementById('headerUserAvatar');
       const hName = document.getElementById('headerUserName');
       const hRank = document.getElementById('headerUserRank');
-      if (hAvatar) hAvatar.textContent = user.avatar || '👤';
-      if (hName) hName.textContent = user.name;
-      if (hRank) hRank.textContent = `Lvl ${user.level} · ${getRankTitle(user.level)}`;
+      if (hAvatar) hAvatar.textContent = isLoggedOut ? '👤' : (user.avatar || '⚔️');
+      if (hName) hName.textContent = isLoggedOut ? 'Sign In Required' : user.name;
+      if (hRank) hRank.textContent = isLoggedOut ? 'Closer Academy' : `Lvl ${user.level} · ${getRankTitle(user.level)}`;
 
       // 2. Caller Bar Update
       const barCurrent = document.getElementById('callerBarCurrent');
       const barLevel = document.getElementById('callerBarLevel');
-      if (barCurrent) barCurrent.textContent = `${user.avatar || '👤'} ${user.name}`;
+      if (barCurrent) barCurrent.textContent = isLoggedOut ? 'Sign In Required' : `${user.avatar || '⚔️'} ${user.name}`;
       if (barLevel) {
-        const isUnlocked = user.level >= 5 || user.founderBypass === true;
-        barLevel.textContent = `Lvl ${user.level} · ${isUnlocked ? 'Unlocked 🔓' : 'Academy Gated 🔒'}`;
+        const isUnlocked = !isLoggedOut && (user.level >= 5 || user.founderBypass === true);
+        barLevel.textContent = `Lvl ${user.level || 1} · ${isUnlocked ? 'Unlocked 🔓' : 'Academy Gated 🔒'}`;
         barLevel.style.color = isUnlocked ? 'var(--ok)' : 'var(--accent2)';
         barLevel.style.borderColor = isUnlocked ? 'rgba(52,211,153,0.4)' : 'rgba(245,158,11,0.4)';
       }
 
       const pillLuke = document.getElementById('quickPillLuke');
       const pillBuddy = document.getElementById('quickPillBuddy');
-      if (pillLuke) pillLuke.classList.toggle('active', activeUserId === 'luke');
-      if (pillBuddy) pillBuddy.classList.toggle('active', activeUserId === 'buddy');
+      const pillSelf = document.getElementById('quickPillSelf');
+      const btnAccountAction = document.getElementById('btnCallerAccountAction');
+      const btnEmailDigest = document.getElementById('btnCallerEmailDigest');
+      const btnSignOut = document.getElementById('btnCallerSignOut');
+
+      if (isFounder) {
+        // Luke Founder view: Luke, Buddy 2, Email Digest, Switch/Profile
+        if (pillLuke) {
+          pillLuke.style.display = 'inline-block';
+          pillLuke.classList.toggle('active', activeUserId === 'luke');
+        }
+        if (pillBuddy) {
+          pillBuddy.style.display = 'inline-block';
+          pillBuddy.classList.toggle('active', activeUserId === 'buddy');
+        }
+        if (pillSelf) pillSelf.style.display = 'none';
+        if (btnAccountAction) {
+          btnAccountAction.style.display = 'inline-block';
+          btnAccountAction.textContent = '➕ Switch / Profile';
+        }
+        if (btnEmailDigest) btnEmailDigest.style.display = 'inline-block';
+        if (btnSignOut) btnSignOut.style.display = 'inline-block';
+      } else if (!isLoggedOut) {
+        // Logged-in closer view (e.g. Roman): Buddy 2 and Luke are strictly HIDDEN!
+        if (pillLuke) pillLuke.style.display = 'none';
+        if (pillBuddy) pillBuddy.style.display = 'none';
+        if (pillSelf) {
+          pillSelf.style.display = 'inline-block';
+          pillSelf.textContent = `${user.avatar || '⚔️'} ${user.name} (You)`;
+          pillSelf.classList.add('active');
+        }
+        if (btnAccountAction) {
+          btnAccountAction.style.display = 'inline-block';
+          btnAccountAction.textContent = '👤 My Profile';
+        }
+        if (btnEmailDigest) btnEmailDigest.style.display = 'none';
+        if (btnSignOut) btnSignOut.style.display = 'inline-block';
+      } else {
+        // Logged out / Gated view
+        if (pillLuke) pillLuke.style.display = 'none';
+        if (pillBuddy) pillBuddy.style.display = 'none';
+        if (pillSelf) pillSelf.style.display = 'none';
+        if (btnAccountAction) {
+          btnAccountAction.style.display = 'inline-block';
+          btnAccountAction.textContent = '🔑 Sign In';
+        }
+        if (btnEmailDigest) btnEmailDigest.style.display = 'none';
+        if (btnSignOut) btnSignOut.style.display = 'none';
+      }
 
       // 3. Caller Select in Leads Table
       callerSelectEl = callerSelectEl || document.getElementById('callerSelect');
@@ -9729,7 +9999,7 @@ window.closeLeakMathModal = function() {
         for (let i = 0; i < callerSelectEl.options.length; i++) {
           if (callerSelectEl.options[i].value === user.name) found = true;
         }
-        if (!found) {
+        if (!found && !isLoggedOut) {
           const o = document.createElement('option');
           o.value = user.name;
           o.textContent = user.name;
@@ -9752,12 +10022,18 @@ window.closeLeakMathModal = function() {
       if (mLevel) mLevel.textContent = `Level ${user.level} · ${getRankTitle(user.level)}`;
       if (mXp) mXp.textContent = `${user.xp} / 1,500 XP`;
 
-      // 5. Founder bypass button
+      // 5. Founder bypass card & Digest buttons
+      const fbContainer = document.getElementById('founderBypassContainer');
+      if (fbContainer) fbContainer.style.display = isFounder ? 'flex' : 'none';
       const btnBypass = document.getElementById('btnToggleFounderBypass');
       if (btnBypass) {
         btnBypass.textContent = user.founderBypass ? 'Bypass: ON' : 'Bypass: OFF';
         btnBypass.className = user.founderBypass ? 'btn btn-gold btn-sm' : 'btn btn-ghost btn-sm';
       }
+      const btnModalDigest = document.getElementById('btnModalEmailDigest');
+      const btnArenaDigest = document.getElementById('btnArenaDigest');
+      if (btnModalDigest) btnModalDigest.style.display = isFounder ? 'inline-block' : 'none';
+      if (btnArenaDigest) btnArenaDigest.style.display = isFounder ? 'block' : 'none';
 
       // 6. Update components
       updateLeadGateVisibility();
@@ -9768,6 +10044,7 @@ window.closeLeakMathModal = function() {
       console.warn('updateUserUI error:', err);
     }
   }
+  window.updateUserUI = updateUserUI;
 
   function updateLeadGateVisibility() {
     const user = getActiveUser();
@@ -10618,8 +10895,15 @@ window.closeLeakMathModal = function() {
 
   window.renderAccountProfileList = renderAccountProfileList;
   window.quickSwitchCaller = function(uid) {
+    const cur = getActiveUser();
+    const isFounder = cur && (cur.isFounder === true || activeUserId === 'luke');
+    if (!isFounder && uid !== activeUserId) {
+      showToast('⚠️ Restricted: You can only view and manage your own closer profile.');
+      return;
+    }
     if (!USER_PROFILES[uid]) {
-      activeUserId = 'luke';
+      if (isFounder) activeUserId = 'luke';
+      else return;
     } else {
       activeUserId = uid;
     }
@@ -10727,8 +11011,26 @@ window.closeLeakMathModal = function() {
     const list = document.getElementById('accountProfileList');
     if (!list) return;
     list.innerHTML = '';
-    Object.keys(USER_PROFILES).forEach(uid => {
+    const activeU = getActiveUser();
+    const isFounder = activeU && (activeU.isFounder === true || activeUserId === 'luke');
+
+    const lbl = document.getElementById('accountModalListLabel');
+    if (lbl) {
+      lbl.textContent = isFounder ? 'ALL SALES TEAM ROSTER:' : 'YOUR CLOSER PROFILE:';
+    }
+
+    let uidsToRender = [];
+    if (isFounder) {
+      uidsToRender = Object.keys(USER_PROFILES);
+    } else if (activeUserId && USER_PROFILES[activeUserId]) {
+      uidsToRender = [activeUserId];
+    }
+
+    uidsToRender.forEach(uid => {
       const u = USER_PROFILES[uid];
+      if (!u) return;
+      if (!isFounder && (uid === 'buddy' || uid === 'rep_buddy_2' || uid === 'luke' || uid === 'founder_luke')) return;
+
       const isCur = uid === activeUserId;
       const row = document.createElement('div');
       row.style.display = 'flex';
@@ -10738,7 +11040,7 @@ window.closeLeakMathModal = function() {
       row.style.border = isCur ? '1.5px solid var(--accent)' : '1px solid var(--line)';
       row.style.borderRadius = '8px';
       row.style.padding = '8px 12px';
-      row.style.cursor = 'pointer';
+      row.style.cursor = isFounder ? 'pointer' : 'default';
 
       const isCert = (u.daysPassed && u.daysPassed.length >= 3) || u.autoPassed || u.isFounder || u.level >= 5;
       const pct = Math.min(100, Math.round(((u.completedUnits || []).length / 15) * 100));
@@ -10753,13 +11055,16 @@ window.closeLeakMathModal = function() {
             </div>
           </div>
         </div>
-        <button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:4px 8px">${isCur ? '✓ Using' : 'Switch ➔'}</button>
+        ${isFounder ? `<button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:4px 8px">${isCur ? '✓ Using' : 'Switch ➔'}</button>` : `<span style="font-size:11.5px;color:var(--ok);font-weight:700">✓ Your Account</span>`}
       `;
 
-      row.addEventListener('click', () => {
-        window.quickSwitchCaller(uid);
-        if (accountModal) accountModal.classList.remove('active');
-      });
+      if (isFounder) {
+        row.addEventListener('click', () => {
+          window.quickSwitchCaller(uid);
+          const accountModal = document.getElementById('accountModal');
+          if (accountModal) accountModal.classList.remove('active');
+        });
+      }
 
       list.appendChild(row);
     });
