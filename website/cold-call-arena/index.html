@@ -9615,6 +9615,12 @@ window.closeLeakMathModal = function() {
               updated = true;
             }
           });
+          const serverIds = new Set(data.roster.map(r => r.id));
+          Object.values(USER_PROFILES).forEach(localRep => {
+            if (localRep && localRep.name && localRep.email && !serverIds.has(localRep.id) && localRep.id !== 'luke' && localRep.id !== 'founder_luke') {
+              syncRepToCloud(localRep, 'account_created', `Restoring closer profile to cloud roster: ${localRep.name} (${localRep.email})`);
+            }
+          });
           if (updated) {
             saveUserProfiles();
             updateUserUI();

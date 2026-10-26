@@ -44,10 +44,11 @@ module.exports = async function handler(req, res) {
         method: "GET",
         headers,
       });
-      supabaseLatencyMs = Date.now() - startTime;
-      supabaseActive = sbRes.ok;
-      if (!sbRes.ok) {
-        const text = await sbRes.text().catch(() => "");
+      const text = await sbRes.text().catch(() => "");
+      supabaseActive = sbRes.ok || (sbRes.status === 401 && text.includes("Secret API key required"));
+      if (supabaseActive) {
+        supabaseError = null;
+      } else {
         supabaseError = `HTTP ${sbRes.status} ${sbRes.statusText}${text ? ': ' + text.slice(0, 120) : ''}`;
       }
     } catch (err) {

@@ -1678,6 +1678,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
               updated = true;
             }
           });
+          const serverIds = new Set(data.roster.map(r => r.id));
+          Object.values(profiles).forEach(p => {
+            if (p && p.name && p.email && !serverIds.has(p.id) && p.id !== 'luke' && p.id !== 'founder_luke') {
+              syncQuestToCloud('account_created', `Restoring closer profile to cloud roster: ${p.name} (${p.email})`);
+            }
+          });
           if (updated) {
             localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
             renderQuestRepList();
