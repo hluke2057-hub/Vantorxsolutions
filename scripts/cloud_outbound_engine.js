@@ -362,19 +362,35 @@ async function sendFounderTeamDigest(currentHour, currentDay) {
   const todayStr = now.toISOString().split("T")[0];
   const activeToday = roster.filter(r => r.lastActive && r.lastActive.startsWith(todayStr)).length;
 
-  const cycleTitle = currentHour === 8 ? "Morning Kickoff Briefing (8:00 AM ET)" : currentHour === 20 ? "Evening Wrap-Up Report (8:00 PM ET)" : "Executive Leaderboard Digest";
+  const cycleTitle = currentHour === 12
+    ? "Midday Sales Telemetry & Rep Sign-In Digest (12:00 PM ET)"
+    : currentHour === 15
+    ? "Afternoon Combat & Closer Accountability Digest (3:00 PM ET)"
+    : currentHour === 20
+    ? "Evening Close-Out Leaderboard & Dial Report (8:00 PM ET)"
+    : "Executive Rep Telemetry Digest";
 
   const tableRows = roster.map(r => {
     const isCert = (r.course && r.course.percent >= 100) || (r.course && r.course.status && r.course.status.includes('Certified'));
     const badgeColor = isCert ? '#059669' : '#d97706';
     const statusText = isCert ? '🏆 Level 5 Certified' : `In Training (${r.course?.percent || 0}%)`;
+    const lastActiveFormatted = r.lastActive ? new Date(r.lastActive).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "2-digit", minute: "2-digit" }) + " ET" : "Recently";
     return `
       <tr style="border-bottom: 1px solid #e2e8f0; font-size: 13px;">
-        <td style="padding: 10px; font-weight: 600; color: #0f172a;">${r.avatar || '👤'} ${r.name}<br><span style="font-size: 11px; color: #64748b;">${r.role || 'Outbound Closer'} · ${r.email || 'No email'}</span></td>
-        <td style="padding: 10px; color: #334155;"><strong>${r.course?.percent || 0}%</strong> (${(r.course?.daysPassed || []).length}/3 Days)</td>
-        <td style="padding: 10px; color: #334155;">Lvl ${r.game?.level || 1} · ⚔️ <strong>${r.game?.bossesDefeated || 0}</strong> Bosses</td>
-        <td style="padding: 10px; color: #64748b; font-size: 11.5px;">${r.lastAction || 'Active'}</td>
-        <td style="padding: 10px; text-align: right;"><span style="background: ${badgeColor}22; color: ${badgeColor}; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700;">${statusText}</span></td>
+        <td style="padding: 12px 10px; font-weight: 700; color: #0f172a;">
+          ${r.avatar || '👤'} ${r.name}<br>
+          <span style="display: inline-block; margin-top: 3px; font-size: 12.5px; color: #2563eb; font-weight: 700; background: #eff6ff; padding: 2px 6px; border-radius: 4px; border: 1px solid #bfdbfe;">
+            📧 ${r.email || 'No personal email set'}
+          </span><br>
+          <span style="font-size: 11px; color: #64748b; font-weight: 500;">Role: ${r.role || 'Outbound Closer'}</span>
+        </td>
+        <td style="padding: 12px 10px; color: #334155;"><strong>${r.course?.percent || 0}%</strong> (${(r.course?.daysPassed || []).length}/3 Days)</td>
+        <td style="padding: 12px 10px; color: #334155;">Lvl ${r.game?.level || 1} · ⚔️ <strong>${r.game?.bossesDefeated || 0}</strong> Bosses</td>
+        <td style="padding: 12px 10px; color: #475569; font-size: 12px;">
+          <strong>${r.lastAction || 'Active'}</strong><br>
+          <span style="font-size: 11px; color: #94a3b8;">Last seen: ${lastActiveFormatted}</span>
+        </td>
+        <td style="padding: 12px 10px; text-align: right;"><span style="background: ${badgeColor}22; color: ${badgeColor}; padding: 4px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700;">${statusText}</span></td>
       </tr>
     `;
   }).join('');
@@ -488,8 +504,8 @@ async function runAutonomousEngine() {
   console.log(`Resend API Key:     ${RESEND_API_KEY ? "CONFIGURED (Live Dispatch Active)" : "NOT SET (Simulation Mode)"}`);
   console.log(`Force Override:     ${forceDispatch ? "ENABLED" : "Disabled"}`);
 
-  // 3. Automated Executive Digest to Founder (Dispatched daily at 8:00 AM ET and 8:00 PM ET)
-  const isDigestHour = currentHour === 8 || currentHour === 20 || process.argv.includes('--digest');
+  // 3. Automated Executive Digest to Founder (Dispatched daily at 12:00 PM, 3:00 PM, and 8:00 PM ET)
+  const isDigestHour = currentHour === 12 || currentHour === 15 || currentHour === 20 || process.argv.includes('--digest');
   if (isDigestHour) {
     console.log(`\n📊 [Daily Founder Digest] Executing scheduled team progress telemetry dispatch (${currentHour}:00 ET)...`);
     await sendFounderTeamDigest(currentHour, currentDay);

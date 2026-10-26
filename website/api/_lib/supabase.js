@@ -45,14 +45,18 @@ function clearSessionCookies(res) {
 
 async function supabaseRequest(path, options = {}) {
   const { url, key } = config();
-  const response = await fetch(url + path, {
+  const fetchOptions = {
     ...options,
     headers: {
       apikey: key,
       "Content-Type": "application/json",
       ...(options.headers || {}),
     },
-  });
+  };
+  if (fetchOptions.body && typeof fetchOptions.body === "object") {
+    fetchOptions.body = JSON.stringify(fetchOptions.body);
+  }
+  const response = await fetch(url + path, fetchOptions);
   const text = await response.text();
   let data = {};
   try { data = text ? JSON.parse(text) : {}; } catch (_) { data = { message: "Invalid response from authentication service" }; }

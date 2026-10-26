@@ -1332,12 +1332,12 @@
     "service": "LeadFlow 90-Second SMS Speed-to-Lead",
     "estLoss": "$7,800/mo",
     "painPoint": "Commercial contractor bid requests sitting uncontacted for 24+ hours",
-    "subject": "Question for Hector - capturing Miami Power & Electric quote requests in 90 seconds",
-    "status": "pending",
+    "subject": "Re: Question for Hector - capturing Miami Power & Electric quote requests in 90 seconds",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-24T16:18:10.893Z",
-    "body": "Hi Hector,\n\nQuick question regarding Miami Power & Electric's customer response speed:\n\nWhen homeowners in Miami, FL fill out an online estimate request or call while your field crew is tied up on an active job, what is your average follow-up time?\n\nHarvard Business Review research shows that contractors who respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Electrical, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\nâ€¢ Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\nâ€¢ Follows up with online estimate requests in under 90 seconds\nâ€¢ Rescues up to $7,800/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10â€“15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "resendMessageId": "01a1792d-fefd-7f16-89ee-f0663a25fc8b",
+    "sentAt": "2026-10-26T17:07:00.563Z",
+    "body": "Hi Hector,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Miami Power & Electric.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "md_068",
@@ -2533,10 +2533,11 @@
     "estLoss": "$24,000/mo",
     "painPoint": "Large commercial fleet missing after-hours facility emergencies on unmonitored lines",
     "subject": "Quick question for Dan regarding All Weather Contractors emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1792d-ff78-758d-a958-c5f263cf86e2",
+    "sentAt": "2026-10-26T17:07:00.701Z",
+    "body": "Hi Dan,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Jacksonville, FL.\n\nWhile All Weather Contractors has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Jacksonville, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_128",
@@ -2552,10 +2553,11 @@
     "estLoss": "$16,500/mo",
     "painPoint": "Online estimate requests sitting in an inbox for 3 hours while homeowners call competitors",
     "subject": "Quick question for Brian regarding Buehler Air Conditioning & Plumbing emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1792d-fff7-7bc7-a18c-f675acf82bfb",
+    "sentAt": "2026-10-26T17:07:00.811Z",
+    "body": "Hi Brian,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Jacksonville, FL.\n\nWhile Buehler Air Conditioning & Plumbing has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Jacksonville, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_129",
@@ -2571,10 +2573,11 @@
     "estLoss": "$28,000/mo",
     "painPoint": "Major commercial mechanical contractor losing emergency tenant service requests",
     "subject": "Quick question for Ken regarding B&I Contractors, Inc. emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1792e-0064-775d-b810-e2899f619c4e",
+    "sentAt": "2026-10-26T17:07:01.096Z",
+    "body": "Hi Ken,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Fort Myers, FL.\n\nWhile B&I Contractors, Inc. has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Fort Myers, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_130",
@@ -2590,10 +2593,11 @@
     "estLoss": "$27,000/mo",
     "painPoint": "Combined roofing and AC emergencies flooding office lines after Gulf hurricane alerts",
     "subject": "Quick question for Lee regarding Crowther Roofing & Cooling emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1792e-0188-7831-b96d-7080feff9415",
+    "sentAt": "2026-10-26T17:07:01.207Z",
+    "body": "Hi Lee,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Fort Myers, FL.\n\nWhile Crowther Roofing & Cooling has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Fort Myers, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_131",

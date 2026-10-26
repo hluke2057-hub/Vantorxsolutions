@@ -279,8 +279,13 @@ async function handleRepDigest(req, res) {
           <div style="display: flex; align-items: center; gap: 8px;">
             <span style="font-size: 18px;">${r.avatar || "👤"}</span>
             <div>
-              <div>${r.name}</div>
-              <div style="font-size: 11.5px; color: #64748b; font-weight: normal;">${r.role} · <a href="mailto:${r.email}" style="color: #2563eb; text-decoration: none;">${r.email}</a></div>
+              <div style="font-size: 14px; font-weight: 700; color: #0f172a;">${r.name}</div>
+              <div style="margin-top: 2px;">
+                <span style="display: inline-block; font-size: 12px; color: #2563eb; font-weight: 700; background: #eff6ff; padding: 2px 6px; border-radius: 4px; border: 1px solid #bfdbfe;">
+                  📧 ${r.email || "No email set"}
+                </span>
+              </div>
+              <div style="font-size: 11px; color: #64748b; margin-top: 2px;">${r.role || "Outbound Closer"}</div>
             </div>
           </div>
         </td>
