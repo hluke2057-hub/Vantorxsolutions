@@ -110,10 +110,13 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 .log-heal{background:rgba(52,211,153,0.12);border-left:3px solid var(--ok);color:#a7f3d0;font-weight:600}
 .log-crit{background:linear-gradient(90deg,rgba(245,158,11,0.2),rgba(239,68,68,0.2));border:1px solid var(--accent);color:#fef08a;font-weight:700}
 
-/* Tactical Quick-Strike Dock */
-.tactical-dock{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:800px){.tactical-dock{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.tactical-dock{grid-template-columns:1fr}}
+/* Tactical Script Recall & Mission Intel Dock */
+.tactical-dock{display:grid;grid-template-columns:1fr 280px;gap:12px;align-items:stretch}
+@media(max-width:850px){.tactical-dock{grid-template-columns:1fr}}
+
+.intel-directive-card{background:var(--bg);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,rgba(15,21,34,0.96),rgba(245,158,11,0.06));border-left:3px solid var(--accent)}
+.intel-directive-tag{font-size:11px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
+.intel-directive-text{font-size:13px;color:var(--ink);line-height:1.45}
 
 .strike-card{background:var(--bg);border:1px solid var(--line2);border-radius:10px;padding:12px;cursor:pointer;transition:all 0.15s;text-align:left}
 .strike-card:hover{border-color:var(--accent);background:rgba(245,158,11,0.08);transform:translateY(-2px)}
@@ -507,23 +510,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         </div>
       </div>
 
-      <!-- TACTICAL QUICK-STRIKE DOCK (INCLUDES HEALTH REGAIN) -->
+      <!-- TACTICAL SCRIPT RECALL & MISSION INTEL DOCK -->
       <div class="tactical-dock" id="tacticalDock">
-        <button class="strike-card" type="button" onclick="executeQuickStrike('permission')">
-          <div class="strike-tag">⚡ Permission Opener <span>+Crit</span></div>
-          <div class="strike-text">"Hey Rick, I know you're in the field — you got 30 seconds before you hang up?"</div>
-        </button>
-
-        <button class="strike-card" type="button" onclick="executeQuickStrike('leak')">
-          <div class="strike-tag">🎯 $8,000 Leak Hook <span>+Bleed</span></div>
-          <div class="strike-text">"Where does an emergency $8,000 leak call ring when you're 3 stories up?"</div>
-        </button>
-
-        <button class="strike-card" type="button" onclick="executeQuickStrike('demo')">
-          <div class="strike-tag">🛡️ Test Ava Live <span>(561) 813-8602</span></div>
-          <div class="strike-text">"Don't take my word for it. Dial (561) 813-8602 right now from your truck."</div>
-        </button>
-
+        <div class="intel-directive-card" id="scriptDirectiveCard">
+          <div class="intel-directive-tag" id="scriptDirectiveTag">🎯 MISSION OBJECTIVE: PERMISSION OPENER <span>ON-THE-SPOT SALES</span></div>
+          <div class="intel-directive-text" id="scriptDirectiveText">Deliver your 20-30s permission opener from memory. Speak into the microphone or type below. No multiple-choice shortcuts allowed!</div>
+        </div>
         <button class="strike-card heal-action" type="button" id="breatherBtn" onclick="executeTakeABreather()">
           <div class="strike-tag">☕ Take a Breather <span id="breatherCooldownText">+30 HP</span></div>
           <div class="strike-text">Take a tactical breath, calibrate vocal pitch, and restore +30 HP (2T CD).</div>
@@ -1159,7 +1151,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     { id: 'cleaver', name: 'Trade-Pain Cleaver', icon: '🪓', lvl: 4, cost: 250, dmgBonus: 30, desc: 'Forged from missed call contractor agony.', passiveName: 'Revenue Bleed', passiveDesc: 'Applying trade math inflicts +10 bleeding damage over 2 consecutive turns.' },
     { id: 'rapier', name: 'Carrier *71 Rapier', icon: '🤺', lvl: 6, cost: 450, dmgBonus: 45, desc: 'Direct carrier-level precision with zero ring delay.', passiveName: 'Zero-Ring Piercing', passiveDesc: 'Penetrates boss armor; boss counterattack damage is reduced by 15%.' },
     { id: 'scythe', name: 'Total Agreement Scythe', icon: '🌾', lvl: 8, cost: 750, dmgBonus: 65, desc: 'Reaps contractor skepticism by validating their anger.', passiveName: 'Skepticism Reaper', passiveDesc: 'Validating boss objections doubles your attack damage on the following turn.' },
-    { id: 'excalibur', name: 'Mythic Rainmaker Excalibur', icon: '👑', lvl: 10, cost: 1200, dmgBonus: 100, desc: 'Legendary blade held only by master agency closers.', passiveName: 'Live Transfer Stun', passiveDesc: '35% chance to instantly stun the boss into booking an immediate demo test!' }
+    { id: 'excalibur', name: 'Mythic Rainmaker Excalibur', icon: '👑', lvl: 10, cost: 1200, dmgBonus: 100, desc: 'Legendary blade held only by master agency closers.', passiveName: 'Live Transfer Stun', passiveDesc: '35% chance to instantly stun the boss into booking an immediate demo test!' },
+    { id: 'warhammer', name: 'LeadFlow Webhook Warhammer', icon: '⚡', lvl: 12, cost: 1800, dmgBonus: 130, desc: 'Forged from automated speed-to-lead and sub-90s webhook triggers.', passiveName: 'Sub-90s Pipeline Blast', passiveDesc: 'Plugs ghosted bids instantly; +30% bonus damage on CRM & speed-to-lead scripts.' },
+    { id: 'claymore', name: 'Conversion Engine Claymore', icon: '🗡️', lvl: 14, cost: 2200, dmgBonus: 155, desc: 'Forged from sub-second contractor landing pages with zero bounce latency.', passiveName: 'Zero Bounce Sever', passiveDesc: 'Stops commercial traffic from bouncing; +35% bonus damage on website explanations.' },
+    { id: 'scepter', name: 'AEO Sovereign Scepter', icon: '🪄', lvl: 15, cost: 2600, dmgBonus: 185, desc: 'Commands ChatGPT, Perplexity, and Apple Intelligence local search authority.', passiveName: 'AEO Sovereign Authority', passiveDesc: 'All contractor objections are immediately defused; heals +25 HP on S-Grade explanations.' }
   ];
 
   const ARMORS = [
@@ -1168,7 +1163,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     { id: 'plate', name: 'Steel-Toed Plate Carrier', icon: '🛡️', lvl: 4, cost: 250, maxHp: 135, dmgReduct: 20, desc: 'Heavy protection against rude contractor barks.', passiveName: 'Hang-up Deflection', passiveDesc: '135 Max HP, absorbs 20% damage, 15% chance to deflect boss counter to 0.' },
     { id: 'aegis', name: 'Titan Agreement Aegis', icon: '🔰', lvl: 6, cost: 450, maxHp: 160, dmgReduct: 30, desc: 'Absorbs extreme frustration and transforms it into rapport.', passiveName: 'Tone Dampener', passiveDesc: '160 Max HP, absorbs 30% damage, cuts impatience timer penalties by 50%.' },
     { id: 'cuirass', name: 'Diamond Frame Cuirass', icon: '💎', lvl: 8, cost: 750, maxHp: 190, dmgReduct: 40, desc: 'Impenetrable reputation armor tested across 1,000 live dials.', passiveName: 'Reputation Bastion', passiveDesc: '190 Max HP, absorbs 40% damage, heals +10 HP on Grade A/S rebuttals.' },
-    { id: 'cloak', name: 'Obsidian Rainmaker Cloak', icon: '🥋', lvl: 10, cost: 1200, maxHp: 230, dmgReduct: 50, desc: 'Mythic woven shroud that makes contractor rejections bounce off harmlessly.', passiveName: 'Contractor Whisperer', passiveDesc: '230 Max HP, 50% rejection damage reduction, +5 HP auto-regen every combat turn.' }
+    { id: 'cloak', name: 'Obsidian Rainmaker Cloak', icon: '🥋', lvl: 10, cost: 1200, maxHp: 230, dmgReduct: 50, desc: 'Mythic woven shroud that makes contractor rejections bounce off harmlessly.', passiveName: 'Contractor Whisperer', passiveDesc: '230 Max HP, 50% rejection damage reduction, +5 HP auto-regen every combat turn.' },
+    { id: 'exoskeleton', name: 'Carrier-Grade Carbon Exoskeleton', icon: '🦾', lvl: 12, cost: 1800, maxHp: 280, dmgReduct: 60, desc: 'Engineered for high-frequency cold calling marathons with zero vocal fatigue.', passiveName: 'Zero-Lag Core', passiveDesc: '280 Max HP, 60% rejection damage reduction, eliminates hesitation penalties.' },
+    { id: 'carapace', name: 'Titanium Pipeline Carapace', icon: '🛡️', lvl: 14, cost: 2200, maxHp: 320, dmgReduct: 65, desc: 'Hardened against aggressive contractor pushback across multi-trade verticals.', passiveName: 'Kinetic Deflection', passiveDesc: '320 Max HP, 65% damage reduction, 25% chance to deflect boss counterattack to 0.' },
+    { id: 'sovereign', name: 'Apex Sovereign Golden Tuxedo Plate', icon: '👑', lvl: 15, cost: 2600, maxHp: 380, dmgReduct: 70, desc: 'Forged from multi-million dollar trade conglomerate exits. Rejection is completely impossible.', passiveName: 'Sovereign Bastion', passiveDesc: '380 Max HP, 70% damage reduction, auto-restores +15 HP every turn.' }
   ];
 
   const RANKS = [
@@ -1181,7 +1179,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     { lvl: 7, title: 'Closer Apprentice', xpReq: 1850 },
     { lvl: 8, title: 'Enterprise Negotiator', xpReq: 2400 },
     { lvl: 9, title: 'Master Pitchman', xpReq: 3100 },
-    { lvl: 10, title: 'Mythic Rainmaker', xpReq: 4000 }
+    { lvl: 10, title: 'Mythic Rainmaker', xpReq: 4000 },
+    { lvl: 11, title: 'SaaS Agency Strategist', xpReq: 5200 },
+    { lvl: 12, title: 'Platform Infrastructure Closer', xpReq: 6600 },
+    { lvl: 13, title: 'EBITDA Multiple Expansionist', xpReq: 8200 },
+    { lvl: 14, title: 'VantorX Partner Principal', xpReq: 10000 },
+    { lvl: 15, title: 'Apex Sovereign Dealmaker', xpReq: 12500 }
   ];
 
   const TRADE_RELICS = [
@@ -1403,6 +1406,111 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         stage1: "Rex Sterling. I chair Apex Holdings -- we own 40 residential and commercial trade platforms across the Southeast. Unless you're calling with scalable EBITDA margin expansion or carrier-level redundancy, you have 20 seconds. Make your case.",
         victory: "Remarkable pitch, Luke. You understand EBITDA leakage, Carrier *71 multi-trunk routing, and ServiceTitan enterprise webhooks better than 99% of tech vendors. I'm having my VP of Operations join our walkthrough tomorrow at 4:30 PM for a 5-location rollout pilot. Send the executive calendar invite.",
         defeat: "You have no concept of enterprise EBITDA or multi-location dispatch. My portfolio companies don't waste time on amateur cold calls. *[CLICK]*"
+      }
+    },
+    {
+      key: 'elena',
+      name: 'Elena "The Broken Pixel" Cruz',
+      title: 'Boca Raton Custom Pools & Hardscaping',
+      trade: 'Custom Pools & Outdoor Living',
+      company: 'Tropical Oasis Pools & Hardscaping',
+      location: 'Boca Raton / Delray Beach, FL',
+      portrait: '🏊',
+      hp: 360,
+      maxHp: 360,
+      tier: 'Tier 3 Specialist',
+      badges: ['Custom Pools', 'Boca Raton FL', 'Website Focus', '360 HP'],
+      ticket: '$40,000 to $120,000',
+      currentSetup: 'Our website is a 10-year-old WordPress site that takes 8 seconds to load on mobile. High-end Boca homeowners click our Google ad, see broken buttons and pixelated gallery images, and bounce immediately to our competitors.',
+      avgLeak: 'A luxury gunite pool and travertine patio build',
+      dialogue: {
+        stage1: "Yeah, Elena Cruz here, owner of Tropical Oasis. Look, we're shooting gunite on a $95k pool in Boca right now. If this is another SEO clown promising page 1 on Google, save your breath. What do you want?",
+        victory: "You're 100% right about mobile bounce rates. When someone wants an $80k pool, an 8-second slow site makes us look like amateurs. Let's do the 10-minute walkthrough tomorrow at 4:30 PM to review the custom contractor website design. Send the invite to elena@tropicaloasispools.com.",
+        defeat: "I'm pouring 30 yards of concrete right now and you're wasting my phone battery. Call terminated! *[CLICK]*"
+      }
+    },
+    {
+      key: 'travis',
+      name: 'Travis "The DIY Wixer" Vance',
+      title: 'Southwest Florida Commercial Glazing Owner',
+      trade: 'Commercial Glass & Architectural Glazing',
+      company: 'Vance Hurricane Glass & Storefronts',
+      location: 'Fort Myers / Naples, FL',
+      portrait: '🪟',
+      hp: 420,
+      maxHp: 420,
+      tier: 'Tier 3 Master',
+      badges: ['Commercial Glass', 'Fort Myers FL', 'EXPLAIN: Website', '420 HP'],
+      ticket: '$15,000 to $65,000',
+      currentSetup: 'My buddy says you can make a free website on Wix or Squarespace in 20 minutes. I don\'t see why I should pay someone when Wix is free, but I get zero commercial builder bids from it.',
+      avgLeak: 'A commercial impact storefront glazing contract',
+      dialogue: {
+        stage1: "Travis Vance speaking, owner. We're hoisting 400-pound impact glass on a commercial building in Fort Myers. Make it quick. What's this about?",
+        victory: "Damn... when you break down that 8-second mobile bounce rate on a $60,000 storefront bid, that free Wix site is literally costing me tens of thousands. Let's do the walkthrough tomorrow at 4:30 PM. Send the invite to travis@vanceglass.com.",
+        defeat: "My free website is fine and you're just trying to upsell marketing garbage. Lose my number! *[CLICK]*"
+      }
+    },
+    {
+      key: 'mitch',
+      name: 'Mitch "The Ghosted Bid" Callahan',
+      title: 'Naples Luxury Remodeling & Cabinetry Principal',
+      trade: 'High-End Remodeling & Design-Build',
+      company: 'Callahan Luxury Living & Design',
+      location: 'Naples / Marco Island, FL',
+      portrait: '🔨',
+      hp: 480,
+      maxHp: 480,
+      tier: 'Tier 4 Specialist',
+      badges: ['Luxury Remodel', 'Naples FL', 'LeadFlow CRM', '480 HP'],
+      ticket: '$35,000 to $85,000',
+      currentSetup: 'We have over $300,000 in open estimates sitting in Jobber from the last 6 months. By the time my project managers remember to follow up 4 days later, the homeowner already hired another general contractor.',
+      avgLeak: 'A luxury kitchen and master suite remodel',
+      dialogue: {
+        stage1: "Callahan here, owner. Talk fast -- I'm measuring a $75,000 custom master bath in Port Royal. What is this call about?",
+        victory: "You nailed our exact bottleneck. Having automated 5-touch estimate follow-ups and instant 90-second missed call text-backs without my project managers having to type manual texts will revive thousands in lost bids. Put us down for tomorrow at 4:30 PM. Send the invite to mitch@callahanluxury.com.",
+        defeat: "I have 5 client walk-throughs today and no time for software sales pitches. Goodbye. *[CLICK]*"
+      }
+    },
+    {
+      key: 'wayne',
+      name: 'Wayne "The Pipeline Skeptic" Miller',
+      title: 'North Florida Industrial Roofing & Metal Decking',
+      trade: 'Commercial Metal Roofing & Sheet Metal',
+      company: 'First Coast Industrial Metal Roofing',
+      location: 'Jacksonville / St. Augustine, FL',
+      portrait: '🏭',
+      hp: 520,
+      maxHp: 520,
+      tier: 'Tier 4 Master',
+      badges: ['Industrial Metal', 'Jacksonville FL', 'EXPLAIN: LeadFlow', '520 HP'],
+      ticket: '$45,000 to $150,000',
+      currentSetup: 'We use a paper whiteboard and clipboards. Every software company says they have a CRM, but it sounds like silicon valley fluff. Nobody has ever explained how software actually turns cold bids into money.',
+      avgLeak: 'A commercial standing seam metal roof installation',
+      dialogue: {
+        stage1: "Wayne Miller. Been bending metal since 1991. You're talking to the owner, son. We're running a CNC sheet metal folder right now in Jacksonville. What's this about?",
+        victory: "Now that's a real explanation. 90-second missed call text-back plus automated 5-touch bid follow-up without my office girl typing manually. That's worth way more than $197/mo. Let's do the walkthrough tomorrow at 4:30 PM. Send the invite to wayne@firstcoastroof.com.",
+        defeat: "More software buzzwords that don't mean a damn thing to a roofing contractor. Call terminated. *[CLICK]*"
+      }
+    },
+    {
+      key: 'victor',
+      name: 'Victor "The Call Center Hostage" Vance',
+      title: 'Central Florida Industrial HVAC & Chiller Systems',
+      trade: 'Industrial Chiller & Emergency Mechanical',
+      company: 'Central Florida Chiller & Mechanical Systems',
+      location: 'Orlando / Tampa / Daytona, FL',
+      portrait: '❄️',
+      hp: 600,
+      maxHp: 600,
+      tier: 'Tier 5 MYTHIC APEX RAID BOSS',
+      badges: ['Industrial Chiller', 'Orlando FL', 'EXPLAIN: Ava AI', '600 HP APEX'],
+      ticket: '$30,000 to $120,000',
+      currentSetup: 'I pay an answering service in Tampa $1,800/mo. They take 20 minutes to relay emergency chiller calls, misspell compressor model numbers, and drop calls during peak load, putting hospital server rooms at risk.',
+      avgLeak: 'An emergency 500-ton hospital chiller compressor failure',
+      dialogue: {
+        stage1: "Victor Vance, CEO. We service 500-ton centrifugal chillers for hospital data centers across Central Florida. Unless you're calling about an active mechanical emergency, you have 20 seconds. Make your pitch.",
+        victory: "That is the cleanest technical breakdown of an AI voice dispatcher I've ever heard. 1-ring pickup, intelligent emergency intake, immediate SMS tech dispatch with full transcripts, and Carrier *71 so our hospital dispatch numbers never change. Set up the 10-minute walkthrough tomorrow at 4:30 PM for our service directors. Send the executive calendar invite to vvance@centralfloridachillers.com.",
+        defeat: "You don't understand mission-critical industrial HVAC dispatch. My engineering teams don't waste time on amateur telemarketers. *[CLICK]*"
       }
     }
   ];
@@ -1994,6 +2102,9 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   });
   window.BOSSES = BOSSES;
   window.TRADE_RELICS = TRADE_RELICS;
+  window.WEAPONS = WEAPONS;
+  window.ARMORS = ARMORS;
+  window.RANKS = RANKS;
 
   function resetMatchMemory() {
     matchMemory = {
@@ -2121,7 +2232,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       }
     }
     if (turnBadge) {
-      turnBadge.textContent = 'YOUR TURN: CLICK BATTLECARD OR SPEAK';
+      turnBadge.textContent = 'YOUR TURN: SPEAK OR TYPE FROM MEMORY';
     }
 
     updateDailyUI();
@@ -2147,55 +2258,51 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       </button>
     `;
 
-    let cards = [];
-    if (stage === 'intro' || stage === 'pain' || stage === 'opener') {
-      if (currentBoss && currentBoss.key === 'gatekeeper') {
-        cards = [
-          { type: 'gk_site', tag: '🎯 Job Site Check', bonus: '+Disarm', text: `"Hey Karen, is Gary around or is he out on a job site right now?"` },
-          { type: 'gk_dispatch', tag: '⚡ After-Hours Dispatch', bonus: '+Pain', text: `"Reason I called was regarding your emergency dispatch after 5 PM and on weekends."` },
-          { type: 'demo', tag: '🛡️ Test Ava Live', bonus: '(561) 813-8602', text: `"Don't take my word for it. Dial (561) 813-8602 right now and hear how Ava handles calls."` }
-        ];
-      } else {
-        cards = [
-          { type: 'permission', tag: '⚡ 30s Permission Opener', bonus: '+Crit', text: `"Hey ${bossFirst}, I know you're in the field — you got 30 seconds before you hang up?"` },
-          { type: 'leak', tag: '🎯 $8,000 Leak Hook', bonus: '+Bleed', text: `"Where does an emergency $8,000 leak call ring when you're 3 stories up?"` },
-          { type: 'demo', tag: '🛡️ Test Ava Live', bonus: '(561) 813-8602', text: `"Don't take my word for it. Dial (561) 813-8602 right now from your truck."` }
-        ];
+    let directiveTag = '🎯 SCRIPT RECALL: PERMISSION OPENER';
+    let directiveText = `Speak or type your 20-30s permission opener from memory. Acknowledge ${bossFirst}'s job site reality before asking for 20 seconds. No multiple-choice shortcuts!`;
+
+    if (stage === 'explain' || lastQ.startsWith('explain_')) {
+      if (lastQ === 'explain_website' || (currentBoss && currentBoss.key === 'travis')) {
+        directiveTag = '🌐 SCRIPT RECALL: EXPLAIN CONTRACTOR WEBSITES';
+        directiveText = `Explain why custom contractor sites beat free Wix: Sub-second mobile speed, instant project quote calculators, portfolio proof, and eliminating high-ticket bounce rates!`;
+      } else if (lastQ === 'explain_leadflow' || (currentBoss && currentBoss.key === 'wayne')) {
+        directiveTag = '⚡ SCRIPT RECALL: EXPLAIN LEADFLOW CRM';
+        directiveText = `Explain LeadFlow step-by-step: 90-second missed call SMS text-back, automated 5-touch estimate follow-up sequence, and database reactivation for dead bids!`;
+      } else if (lastQ === 'explain_ava' || (currentBoss && currentBoss.key === 'victor')) {
+        directiveTag = '🎙️ SCRIPT RECALL: EXPLAIN AVA AI DISPATCH';
+        directiveText = `Explain Ava's technical workflow: 1-ring pickup 24/7, emergency triage, instant SMS dispatch with audio & transcript to tech cell, and Carrier *71 rollover!`;
       }
+    } else if (stage === 'intro' || stage === 'opener') {
+      directiveTag = `🎯 SCRIPT RECALL: 20-30s PERMISSION OPENER`;
+      directiveText = `Deliver your permission opener from memory for ${bossFirst}. Acknowledge their field reality and ask for 20-30 seconds before they hang up.`;
+    } else if (stage === 'pain') {
+      directiveTag = `🎯 SCRIPT RECALL: REVENUE LEAK DIAGNOSTIC HOOK`;
+      directiveText = `Anchor directly to their missed call pain. Ask where emergency ${currentBoss.ticket || '$8,000'} calls ring when crews are busy or after hours.`;
     } else if (stage === 'price' || lastQ === 'how_much_does_it_cost') {
-      cards = [
-        { type: 'price', tag: '💰 $397/mo Flat Pricing', bonus: '🔥 Direct Answer', text: `"It is a flat 300 a month with zero setup fee and zero contract. One shingle repair pays for the entire year."`, pulse: true },
-        { type: 'package', tag: '📦 $594/mo Full Bundle', bonus: '+Website & CRM', text: `"Ava is $397 flat with no contract, and we also offer a package bundle with a modern website and LeadFlow CRM for $594/mo."` },
-        { type: 'demo', tag: '📱 Dial (561) 813-8602 Live', bonus: 'Proof', text: `"Dial our live Florida demo line right now on (561) 813-8602 from your truck and hear Ava."` }
-      ];
+      directiveTag = `💰 SCRIPT RECALL: DIRECT PRICING QUOTE`;
+      directiveText = `Quote $397/mo flat with zero contracts and zero setup fee (or $594/mo bundle). Never dance around price questions!`;
     } else if (stage === 'proof' || lastQ === 'proof_demo_line') {
-      cards = [
-        { type: 'demo', tag: '🛡️ Test Ava Live (561) 813-8602', bonus: '🔥 Proof Line', text: `"Dial our live Florida demo line right now on (561) 813-8602 from your truck and hear how natural Ava sounds."`, pulse: true },
-        { type: 'package', tag: '📦 $594/mo Full Bundle', bonus: '+Website & CRM', text: `"Ava is $397 flat, and we also bundle high-converting contractor websites and LeadFlow CRM."` },
-        { type: 'defuse', tag: '🛡️ Total Agreement Defuse', bonus: '+18 HP', text: `"You are 100% right. Every contractor has been burned by telemarketers, which is why we do zero contracts."` }
-      ];
+      directiveTag = `📱 SCRIPT RECALL: LIVE FLORIDA TEST PROOF`;
+      directiveText = `Instruct ${bossFirst} to dial our Florida test line on (561) 813-8602 right now from their truck on speaker to hear Ava live.`;
     } else if (stage === 'carrier' || lastQ === 'carrier_rollover_setup') {
-      cards = [
-        { type: 'carrier', tag: '📶 Carrier *71 Rollover', bonus: '🔥 No Porting', text: `"We hook it up via Carrier *71 conditional call forwarding so your company number stays with your provider."`, pulse: true },
-        { type: 'demo', tag: '📱 (561) 813-8602 Demo', bonus: 'Proof', text: `"Dial our live Florida test line on (561) 813-8602 right now from your truck."` },
-        { type: 'close', tag: '📅 4:30 PM Tomorrow Walkthrough', bonus: 'Close', text: `"Let's do a quick 10-minute walkthrough tomorrow afternoon at 4:30 PM."` }
-      ];
+      directiveTag = `📶 SCRIPT RECALL: CARRIER *71 ROLLOVER SETUP`;
+      directiveText = `Explain Carrier *71 conditional call forwarding so their company number stays with their current carrier with zero porting.`;
+    } else if (stage === 'close' || lastQ === 'meeting_time_close' || stage === 'victory') {
+      directiveTag = `📅 SCRIPT RECALL: 4:30 PM WALKTHROUGH CLOSE`;
+      directiveText = `Lock in a definitive 10-minute walkthrough tomorrow afternoon at 4:30 PM. Secure their email for the calendar invite!`;
     } else {
-      cards = [
-        { type: 'close', tag: '📅 4:30 PM Tomorrow Walkthrough', bonus: '🔥 Lock-in', text: `"Let's do a quick 10-minute walkthrough tomorrow afternoon at 4:30 PM."`, pulse: true },
-        { type: 'execute', tag: '⚡ Execute Finisher', bonus: '+50 Overkill', text: `"Let's do a 10-minute walkthrough tomorrow at 4:30 PM and plug that $8,000 leak together."`, pulse: true },
-        { type: 'carrier', tag: '📶 Carrier *71 Rollover', bonus: 'Setup', text: `"We hook it up via Carrier *71 conditional call forwarding so your company number stays with your provider."` }
-      ];
+      directiveTag = `⚔️ SCRIPT RECALL: ON-THE-SPOT REBUTTAL`;
+      directiveText = `Speak or type your rebuttal from memory. Rely on your objection battlecard training and keep momentum!`;
     }
 
-    const cardsHtml = cards.map(c => `
-      <button class="strike-card ${c.pulse ? 'pulse-card' : ''}" type="button" onclick="executeQuickStrike('${c.type}')">
-        <div class="strike-tag">${c.tag} <span>${c.bonus}</span></div>
-        <div class="strike-text">${c.text}</div>
-      </button>
-    `).join('');
+    const directiveCard = `
+      <div class="intel-directive-card" id="scriptDirectiveCard">
+        <div class="intel-directive-tag" id="scriptDirectiveTag">${directiveTag} <span>ON-THE-SPOT SALES</span></div>
+        <div class="intel-directive-text" id="scriptDirectiveText">${directiveText}</div>
+      </div>
+    `;
 
-    dock.innerHTML = cardsHtml + breatherCard;
+    dock.innerHTML = directiveCard + breatherCard;
   }
 
   function appendLog(msg, type) {
@@ -2342,7 +2449,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     
     const hasAgreement = /hear\s*you|agree|100%|completely|understand|you're\s*right|fair\s*enough|totally|makes\s*sense/i.test(low);
     
-    const hasLeakHook = /leak|missed\s*call|emergency|after\s*hours|after\s*5|weekend|night|dinner|at\s*8\s*pm|sleeping|voicemail|next\s*(guy|contractor|roofer|plumber)/i.test(low);
+    const hasLeakHook = /leak|missed\s*call|emergency|after\s*hours|after\s*5|weekend|night|dinner|at\s*8\s*pm|sleeping|voicemail|next\s*(guy|contractor|roofer|plumber)|competitor|whiteboard|dead\s*(bids?|estimates?|quotes?)|unclosed|open\s*estimates?|slow\s*(site|website)|bounce|cold\s*bids?/i.test(low);
     const hasDollarMath = /\$\s*\d+/i.test(low) || /\b\d+\s*(k|grand|thousand|dollars?|bucks)\b/i.test(low) || /\b(8,?000|10,?000|12,?000|15,?000|16,?000|20,?000|25,?000|50,?000|6,?000|7,?000|9,?000|8k|10k|12k|15k|20k|50k)\b/i.test(low);
     
     const hasAvaMechanism = /\b(ava|voice\s*ai|ai\s*receptionist|ai\s*dispatcher?|answers?\s*(in\s*)?(1|one)\s*ring|answers?\s*(24\/7|every\s*call|instantly|automatically|live)|(texts?|sms)\s*(your|my|the)?\s*cell|sms\s*dispatch|books?\s*(directly\s*)?(into|on)\s*(your|the)?\s*(calendar|schedule)|pre-?qualif(y|ies|ication)|intake\s*the\s*caller)\b/i.test(low);
@@ -2350,7 +2457,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const hasDemoNumber = /(561)\s*813-8602|813-8602|5618138602|live\s*demo|test\s*(line|number|her)|dial\s*(this|it|her|(561))|call\s*(this|her|(561))/i.test(low);
     const hasSoundHuman = /sound|human|robot|robotic|delay|latency|natural|real\s*person|cadence|accent/i.test(low);
     
-    const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*forwarding|conditional\s*call\s*forwarding|forward|rollover|port|switch|verizon|at&t|att|t-mobile|existing\s*number|keep\s*your\s*number/i.test(low);
+    const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*(call\s*)?forwarding|\bforward(ing)?\b|\brollover\b|\bports?\b|\bporting\b|\bswitch(ing)?\b|verizon|at&t|att|t-mobile|existing\s*number|keep\s*your\s*number/i.test(low);
     
     const hasPricingAnswer = /\b(197|297|300|397|400|497|500|594|600|697|700|997|1,?297)\b/i.test(low) ||
       /\$\s*(197|297|300|397|400|497|500|594|600|697|700|997|1,?297)\b/i.test(low) ||
@@ -2384,6 +2491,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     const isHesitant = low.length < 4 || /^(uh|um|hello\??|can\s*you\s*hear\s*me\??|are\s*you\s*there\??|wait|hold\s*on)$/i.test(low);
 
+    const hasWebsiteExplanation = /\b(mobile|load\s*time|speed|fast|quote\s*calculator|before\s*and\s*after|portfolio|convert|conversion|bounce|bounce\s*rate|capture|ranking|google|leads?|wix|wordpress|broken|redesign|799|sub-?second)\b/i.test(low);
+    const hasLeadFlowExplanation = /\b(90\s*seconds?|text-?back|auto-?text|database\s*reactivation|dead\s*(bids?|estimates?|quotes?)|follow-?up\s*(sequence|touches?)|5\s*touch(es)?|pipeline|jobber|servicetitan|197|revive|past\s*customers?)\b/i.test(low);
+    const hasAvaExplanation = /\b(one\s*ring|1\s*ring|24\/7|qualif(y|ies|ication)|emergency|texts?\s*(your|my)?\s*cell|sms|caller\s*(name|address|details|info)|carrier\s*\*71|\*71|conditional\s*(call\s*)?forwarding|keep\s*(your\s*)?number|397|zero\s*contracts?|transcript|triage)\b/i.test(low);
+
     // Evasion / Dodging when contractor explicitly asked a direct question:
     let isDodgingQuestion = false;
     if (memory.lastBossQuestion === 'how_much_does_it_cost' && !hasPricingAnswer && !hasDollarMath) {
@@ -2396,6 +2507,15 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       isDodgingQuestion = true;
     }
     if (memory.lastBossQuestion === 'meeting_time_close' && !hasTimeProposal && !hasAgreement) {
+      isDodgingQuestion = true;
+    }
+    if (memory.lastBossQuestion === 'explain_website' && !hasWebsiteExplanation && !hasWebsiteMention) {
+      isDodgingQuestion = true;
+    }
+    if (memory.lastBossQuestion === 'explain_leadflow' && !hasLeadFlowExplanation && !hasCrmMention) {
+      isDodgingQuestion = true;
+    }
+    if (memory.lastBossQuestion === 'explain_ava' && !hasAvaExplanation && !hasAvaMechanism) {
       isDodgingQuestion = true;
     }
 
@@ -2417,6 +2537,9 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hasPricingAnswer,
       hasPackageMention,
       hasWebsiteMention,
+      hasWebsiteExplanation,
+      hasLeadFlowExplanation,
+      hasAvaExplanation,
       hasTimeProposal,
       isUserAskingQuestion,
       asksWhoAnswers,
@@ -2514,6 +2637,27 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'dodge_close_warning');
     }
 
+    if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'explain_website') {
+      return pickUnique(memory, [
+        `Don't dance around the question, Luke. My buddy says Wix is free. Explain to me what makes your contractor website different and why it's worth paying for!`,
+        `Answer my question first: why should a commercial glazing contractor pay you to build a website when free website builders exist? Explain the difference.`
+      ], 'dodge_explain_website');
+    }
+
+    if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'explain_leadflow') {
+      return pickUnique(memory, [
+        `You're dodging me, Luke. I asked for a step-by-step explanation of what LeadFlow actually does when a lead goes cold. Explain the machine!`,
+        `Don't use software sales buzzwords. Explain exactly what happens when a missed call happens or an estimate sits on my whiteboard.`
+      ], 'dodge_explain_leadflow');
+    }
+
+    if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'explain_ava') {
+      return pickUnique(memory, [
+        `You dodged the technical breakdown, Luke. How does Ava answer, qualify an emergency chiller call, and text my technician? Explain the workflow!`,
+        `Answer my question: walk me through the exact call flow from ring 1 to technician dispatch.`
+      ], 'dodge_explain_ava');
+    }
+
     // 1. REPETITION HANDLING
     if (analysis.isRepeatingPermission) {
       return pickUnique(memory, [
@@ -2553,7 +2697,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
 
     // 3. QUESTIONS ASKED BY USER TO BOSS
-    if (analysis.asksWhoAnswers) {
+    if (analysis.asksWhoAnswers && memory.lastBossQuestion !== 'deliver_hook' && memory.stage !== 'explain') {
       memory.topicsCovered['asked_current_setup'] = true;
       memory.lastBossQuestion = 'explain_solution_ava';
       return pickUnique(memory, [
@@ -2562,7 +2706,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'answer_who_answers');
     }
 
-    if (analysis.asksHowMuchLost) {
+    if (analysis.asksHowMuchLost && memory.lastBossQuestion !== 'deliver_hook' && memory.stage !== 'explain') {
       memory.topicsCovered['asked_ticket'] = true;
       memory.lastBossQuestion = 'explain_solution_ava';
       return pickUnique(memory, [
@@ -2592,7 +2736,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'email_pivot_success');
     }
 
-    if (analysis.hasAnsweringServiceCompare) {
+    if (analysis.hasAnsweringServiceCompare && memory.lastBossQuestion !== 'deliver_hook' && memory.stage !== 'explain') {
       memory.stage = 'price';
       memory.lastBossQuestion = 'how_much_does_it_cost';
       return pickUnique(memory, [
@@ -2610,7 +2754,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'bilingual_reaction');
     }
 
-    if (analysis.hasCrmMention && !analysis.hasPermission && !analysis.hasDemoNumber && !analysis.hasTimeProposal && memory.stage !== 'close') {
+    if (analysis.hasCrmMention && !analysis.hasPermission && !analysis.hasDemoNumber && !analysis.hasTimeProposal && memory.stage !== 'close' && memory.lastBossQuestion !== 'deliver_hook' && memory.stage !== 'explain') {
       if (analysis.hasPricingAnswer) {
         memory.stage = 'proof';
         memory.lastBossQuestion = 'proof_demo_line';
@@ -2710,13 +2854,38 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
             `(Pen taps executive mahogany desk) 20 seconds on the clock, Luke. Make it count. Pitch.`,
             `(Paper shuffle) 20 seconds. Talk numbers, operational scale, and EBITDA leverage.`
           ], 'rex_permission_grant');
+        } else if (boss.key === 'elena') {
+          return pickUnique(memory, [
+            `(Concrete boom pump chugs) 20 seconds? Alright, we're pouring a $95k gunite pool in Boca right now. Talk fast before this concrete sets.`,
+            `20 seconds on the clock. What can you do for a custom pool builder?`
+          ], 'elena_permission_grant');
+        } else if (boss.key === 'travis') {
+          return pickUnique(memory, [
+            `(Glass suction lifter clangs) 20 seconds? Make it quick, we're hoisting 400-lb curtain wall impact glass in Fort Myers heat. What is this call about?`,
+            `20 seconds on the clock. What's this about commercial storefront glass?`
+          ], 'travis_permission_grant');
+        } else if (boss.key === 'mitch') {
+          return pickUnique(memory, [
+            `(Laser measure beeps) 20 seconds? Alright, I'm measuring a $75,000 custom master bath in Port Royal. Talk.`,
+            `20 seconds on the clock. What's this regarding for our remodeling company?`
+          ], 'mitch_permission_grant');
+        } else if (boss.key === 'wayne') {
+          return pickUnique(memory, [
+            `(Hydraulic sheet metal bender whirs) 20 seconds on the clock, son. We're fabricating metal roof panels in Jacksonville. What do you got?`,
+            `20 seconds? Fair enough. Clock is ticking, talk.`
+          ], 'wayne_permission_grant');
+        } else if (boss.key === 'victor') {
+          return pickUnique(memory, [
+            `(Chiller compressor hums) 20 seconds. We service 500-ton centrifugal chillers for hospital data centers in Orlando. What do you have?`,
+            `20 seconds on the clock. Make it concise and technical.`
+          ], 'victor_permission_grant');
         }
       }
     }
 
     // STAGE 1b: Hook -> Pain Confession
-    if (memory.lastBossQuestion === 'deliver_hook' || (memory.lastBossQuestion === 'who_are_you' && (analysis.hasLeakHook || analysis.hasGatekeeperPivot || analysis.hasEmailPivot))) {
-      if (analysis.hasLeakHook || analysis.asksWhoAnswers || analysis.asksHowMuchLost || analysis.hasAgreement || analysis.hasGatekeeperPivot || analysis.hasEmailPivot) {
+    if (memory.lastBossQuestion === 'deliver_hook' || (memory.lastBossQuestion === 'who_are_you' && (analysis.hasLeakHook || analysis.hasGatekeeperPivot || analysis.hasEmailPivot || analysis.hasWebsiteMention || analysis.hasCrmMention))) {
+      if (analysis.hasLeakHook || analysis.asksWhoAnswers || analysis.asksHowMuchLost || analysis.hasAgreement || analysis.hasGatekeeperPivot || analysis.hasEmailPivot || analysis.hasWebsiteMention || analysis.hasCrmMention) {
         memory.stage = 'pain';
         memory.lastBossQuestion = 'explain_solution_ava';
         memory.topicsCovered['permission'] = true;
@@ -2772,16 +2941,87 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
             `(Leans back in executive chair) You understand unit economics. Across our 40 HVAC and plumbing brands, missed emergency calls cost us roughly $4.2M in annual top-line revenue and depress platform EBITDA. But offshore answering services are terrible. How does Ava handle multi-location dispatch without hallucinating?`,
             `(Nods slowly) Revenue leakage is our primary operational bottleneck. Walk me through how your system captures multi-location calls without hiring a call center.`
           ], 'rex_pain_ack');
+        } else if (boss.key === 'elena') {
+          return pickUnique(memory, [
+            `(Gunite pump hisses) You hit on our exact problem. High-end Boca homeowners click our Google ad on their iPhone, our 10-year-old WordPress site takes 8 seconds to load, and they bounce to our competitor. We lost an $80k pool build last month because of that. How does your website fix that?`,
+            `An 8-second slow mobile website makes us look like amateurs on high-end pool builds. How does your contractor website setup work?`
+          ], 'elena_pain_ack');
+        } else if (boss.key === 'travis') {
+          memory.stage = 'explain';
+          memory.lastBossQuestion = 'explain_website';
+          return pickUnique(memory, [
+            `(Snorts into receiver) Hold on right there, Luke. My buddy says you can make a free website on Wix or Squarespace in 20 minutes. I don't see why I should pay anyone. Explain to me what your contractor website actually does differently and why the hell it's worth paying for.`,
+            `Explain it to me straight: Wix is free, so why would a commercial glazing contractor pay you to build a website? What makes it different?`
+          ], 'travis_explain_demand');
+        } else if (boss.key === 'mitch') {
+          return pickUnique(memory, [
+            `(Taps blueprint) You hit the nail on the head. We have $300,000 in open kitchen and bath remodel estimates sitting in Jobber right now. By the time my project managers follow up 4 days later, the client already signed with another contractor. How does LeadFlow stop that leakage?`,
+            `Open bids sitting cold in Jobber is our biggest revenue leak. How does your LeadFlow CRM catch those estimates?`
+          ], 'mitch_pain_ack');
+        } else if (boss.key === 'wayne') {
+          memory.stage = 'explain';
+          memory.lastBossQuestion = 'explain_leadflow';
+          return pickUnique(memory, [
+            `(Metal shears rattle) Look Luke, I hear the word CRM all day long and it sounds like corporate buzzword garbage. We've got $400k in unclosed bids on a whiteboard. Explain to me step-by-step what LeadFlow actually does when a missed call happens or when an estimate goes cold. Break down the machine for me.`,
+            `Explain the mechanics: what does LeadFlow actually do when a commercial roofing lead goes cold? Break it down step-by-step.`
+          ], 'wayne_explain_demand');
+        } else if (boss.key === 'victor') {
+          memory.stage = 'explain';
+          memory.lastBossQuestion = 'explain_ava';
+          return pickUnique(memory, [
+            `(Chiller hums) I pay an answering service in Tampa $1,800 a month right now, and they constantly misspell compressor model numbers and take 20 minutes to relay emergency calls. Explain to me exactly how Ava handles an incoming emergency call: how does she answer, what does she say, how does she qualify the job, and how does my on-call tech get the dispatch info without latency?`,
+            `Break down the exact technical workflow: how does Ava answer in 1 ring, qualify an industrial compressor emergency, and dispatch to our techs without dropping calls?`
+          ], 'victor_explain_demand');
         }
       }
     }
 
-    if (memory.lastBossQuestion === 'deliver_hook') {
+    // PRODUCT EXPLANATION STAGE RECOGNITION:
+    if (analysis.hasWebsiteExplanation && (memory.lastBossQuestion === 'explain_website' || boss.key === 'travis')) {
+      memory.stage = 'close';
+      memory.lastBossQuestion = 'meeting_time_close';
       return pickUnique(memory, [
-        `You asked for 20 seconds, kid, and the clock is ticking. What does your company actually do for contractors?`,
-        `You got 10 seconds left on the clock. What's the reason for this call?`
-      ], 'prompt_deliver_hook');
+        `(Stares at phone) Damn... when you break down that 8-second mobile bounce rate on a $60,000 storefront bid, that free Wix site is literally costing me tens of thousands. What's the turnaround time and when can we walk through the design?`,
+        `Sub-second load times and an instant project calculator that captures the contractor lead in 3 seconds? That blows my free Wix site away. When can we do a quick 10-minute walkthrough?`
+      ], 'travis_explain_ack');
     }
+
+    if (analysis.hasLeadFlowExplanation && (memory.lastBossQuestion === 'explain_leadflow' || boss.key === 'wayne')) {
+      memory.stage = 'close';
+      memory.lastBossQuestion = 'meeting_time_close';
+      return pickUnique(memory, [
+        `(Bender engine cuts off) Automated 5-touch follow-ups on dead bids plus a 90-second missed call text without my office staff lifting a finger? That would close 3 extra metal roofs a month. What time tomorrow are we reviewing this?`,
+        `Sub-90-second missed call text back and automated database reactivation? Now that's a real tool that makes sense. What time tomorrow works for the walkthrough?`
+      ], 'wayne_explain_ack');
+    }
+
+    if (analysis.hasAvaExplanation && (memory.lastBossQuestion === 'explain_ava' || boss.key === 'victor')) {
+      memory.stage = 'close';
+      memory.lastBossQuestion = 'meeting_time_close';
+      return pickUnique(memory, [
+        `(Nods approvingly) 1-ring pickup, audio transcript sent directly to my technician's phone via SMS, and Carrier *71 so our hospital dispatch numbers never change. That blows our $1,800 call center out of the water. When can my service directors see the live backend tomorrow?`,
+        `Zero latency triage and immediate SMS dispatch without porting our carrier line? That's bulletproof. What time tomorrow afternoon works for the walkthrough?`
+      ], 'victor_explain_ack');
+    }
+
+    if ((analysis.hasWebsiteMention || analysis.hasWebsiteExplanation) && boss.key === 'elena' && !memory.priceCovered) {
+      memory.stage = 'price';
+      memory.lastBossQuestion = 'how_much_does_it_cost';
+      return pickUnique(memory, [
+        `(Concrete pump idles) Sub-second mobile speeds and instant project calculators on our pool builds? That would stop Boca homeowners from bouncing. How much is the website setup and when can we see a mockup?`,
+        `A high-speed mobile contractor website with before/after pool portfolios? What does that cost per month?`
+      ], 'elena_web_ack');
+    }
+
+    if ((analysis.hasCrmMention || analysis.hasLeadFlowExplanation) && boss.key === 'mitch' && !memory.priceCovered) {
+      memory.stage = 'price';
+      memory.lastBossQuestion = 'how_much_does_it_cost';
+      return pickUnique(memory, [
+        `(Puts down laser measure) 90-second automated missed-call text-backs and automated 5-touch estimate follow-ups? That would revive $100k of those dead Jobber bids this month alone. What does this cost per month?`,
+        `Automated estimate follow-up that revives cold bids without my project managers typing? What's the price?`
+      ], 'mitch_crm_ack');
+    }
+
     // STAGE 2: Mechanism / Ava Features Reaction -> Advances to Price
     if (analysis.hasAvaMechanism && !memory.mechanismCovered) {
       memory.mechanismCovered = true;
@@ -3015,6 +3255,34 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
 
     // STAGE-PRESERVING IN-CHARACTER PROMPTS (Never regresses!):
+    if (memory.lastBossQuestion === 'deliver_hook') {
+      return pickUnique(memory, [
+        `You asked for 20 seconds, kid, and the clock is ticking. What does your company actually do for contractors?`,
+        `You got 10 seconds left on the clock. What's the reason for this call?`
+      ], 'prompt_deliver_hook');
+    }
+
+    if (memory.lastBossQuestion === 'explain_website') {
+      return pickUnique(memory, [
+        `I'm waiting, Luke. Explain to me why your contractor website beats a free Wix or Squarespace site for high-ticket trade jobs.`,
+        `Break down your website system: how does it stop homeowners from bouncing and capture booked jobs?`
+      ], 'prompt_explain_website');
+    }
+
+    if (memory.lastBossQuestion === 'explain_leadflow') {
+      return pickUnique(memory, [
+        `Break down the LeadFlow machine for me, Luke. What happens in the first 90 seconds and how does it follow up on open bids?`,
+        `Explain how LeadFlow revives dead bids from my whiteboard step-by-step.`
+      ], 'prompt_explain_leadflow');
+    }
+
+    if (memory.lastBossQuestion === 'explain_ava') {
+      return pickUnique(memory, [
+        `Explain Ava's emergency call flow to me, Luke: how does she answer on ring 1, triage the chiller failure, and alert my on-call tech?`,
+        `Walk me through the technical dispatch workflow: ring 1 pickup, caller intake, SMS dispatch, and Carrier *71.`
+      ], 'prompt_explain_ava');
+    }
+
     if (memory.lastBossQuestion === 'how_much_does_it_cost') {
       return pickUnique(memory, [
         `I hear what you're saying, Luke, but I need the bottom line number. How many dollars a month is this? Give me the price.`,
@@ -3145,7 +3413,32 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         feedback += ` [Defused Tension: +${agreementHeal} HP]`;
       }
 
-      if (analysis.hasGatekeeperPivot && currentBoss && currentBoss.key === 'gatekeeper') {
+      if (matchMemory.lastBossQuestion === 'explain_website' && analysis.hasWebsiteExplanation) {
+        grade = 'S';
+        damage = 50;
+        counterDmg = 0;
+        feedback = '🌟 MASTERFUL WEBSITE EXPLANATION! You articulated mobile speed, speed-to-lead calculators, and eliminating high-ticket bounce rates!';
+      } else if (matchMemory.lastBossQuestion === 'explain_leadflow' && analysis.hasLeadFlowExplanation) {
+        grade = 'S';
+        damage = 52;
+        counterDmg = 0;
+        feedback = '🌟 MASTERFUL LEADFLOW EXPLANATION! You broke down the 90-second missed-call text-back and 5-touch estimate follow-up machine!';
+      } else if (matchMemory.lastBossQuestion === 'explain_ava' && analysis.hasAvaExplanation) {
+        grade = 'S';
+        damage = 55;
+        counterDmg = 0;
+        feedback = '🌟 MASTERFUL AVA ARCHITECTURE EXPLANATION! You explained 1-ring answering, emergency triage, instant SMS tech dispatch, and Carrier *71 rollover!';
+      } else if (currentBoss && currentBoss.key === 'elena' && (analysis.hasWebsiteMention || analysis.hasWebsiteExplanation) && !analysis.hasPermission) {
+        grade = 'S';
+        damage = 46;
+        counterDmg = 0;
+        feedback = '🏊 LUXURY POOL WEBSITE HOOK! Anchored sub-second mobile speeds and project estimate calculators against $80k pool build loss!';
+      } else if (currentBoss && currentBoss.key === 'mitch' && (analysis.hasCrmMention || analysis.hasLeadFlowExplanation) && !analysis.hasPermission) {
+        grade = 'S';
+        damage = 48;
+        counterDmg = 0;
+        feedback = '🔨 DEAD BID REVIVAL! Anchored LeadFlow 90s speed-to-lead and automated 5-touch follow-ups against $300k open Jobber estimates!';
+      } else if (analysis.hasGatekeeperPivot && currentBoss && currentBoss.key === 'gatekeeper') {
         grade = 'S';
         damage = 44;
         counterDmg = 0;
@@ -3303,6 +3596,33 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       if (curArmor.id === 'cloak') {
         player.hp = Math.min(player.maxHp, player.hp + 5);
         feedback += ' [Obsidian Regen: +5 HP]';
+      }
+
+      if (curArmor.id === 'exoskeleton') {
+        counterDmg = Math.round(counterDmg * 0.40);
+        feedback += ' 🦾 [Exoskeleton Core: 60% Absorb]';
+      }
+      if (curArmor.id === 'carapace' && Math.random() < 0.25) {
+        counterDmg = 0;
+        feedback += ' 🛡️ [Kinetic Deflection: Counterattack Deflected to 0]';
+      }
+      if (curArmor.id === 'sovereign') {
+        player.hp = Math.min(player.maxHp, player.hp + 15);
+        counterDmg = Math.round(counterDmg * 0.30);
+        feedback += ' 👑 [Sovereign Bastion: +15 HP Auto-Regen]';
+      }
+
+      if (curWeapon.id === 'warhammer' && (analysis.hasCrmMention || analysis.hasLeadFlowExplanation)) {
+        damage = Math.round(damage * 1.30);
+        feedback += ' ⚡ [Pipeline Blast: +30% CRM DMG]';
+      }
+      if (curWeapon.id === 'claymore' && (analysis.hasWebsiteMention || analysis.hasWebsiteExplanation)) {
+        damage = Math.round(damage * 1.35);
+        feedback += ' 🗡️ [Zero Bounce Sever: +35% Web DMG]';
+      }
+      if (curWeapon.id === 'scepter' && grade === 'S') {
+        player.hp = Math.min(player.maxHp, player.hp + 25);
+        feedback += ' 🪄 [AEO Authority: +25 HP Healed]';
       }
 
       if (curWeapon.id === 'cleaver' && analysis.hasLeakHook) {
@@ -3526,6 +3846,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }, 450);
 
     savePlayer();
+    return evalRes;
   };
 
   function handleBossDefeat(evalRes) {
@@ -3892,7 +4213,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   };
 
   function checkLevelUp() {
-    if (player.xp >= player.nextLvlXp && player.lvl < 10) {
+    if (player.xp >= player.nextLvlXp && player.lvl < 15) {
       player.xp -= player.nextLvlXp;
       player.lvl++;
       const nextRank = RANKS.find(r => r.lvl === player.lvl);
@@ -4181,8 +4502,11 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         { id: 'gatekeeper', name: 'Gatekeeper Whisperer', desc: 'Successfully bypassed Karen and dispatch', earned: (player.defeatedBosses || []).includes('gatekeeper'), icon: '📋' },
         { id: 'demo_god', name: 'Proof Slinger (561) 813-8602', desc: 'Unlocked the live demo proof test line', earned: true, icon: '📱' },
         { id: 'carrier_vet', name: 'Carrier *71 Master', desc: 'Closed using Carrier conditional call forwarding', earned: defeatedCount >= 2, icon: '📶' },
+        { id: 'web_architect', name: 'Web Conversion Architect', desc: 'Mastered contractor websites & eliminated bounce rates', earned: (player.defeatedBosses || []).includes('elena') || (player.defeatedBosses || []).includes('travis'), icon: '🌐' },
+        { id: 'pipeline_reviver', name: 'LeadFlow Pipeline Reviver', desc: 'Revived cold bids with 90s speed-to-lead & 5-touch sequences', earned: (player.defeatedBosses || []).includes('mitch') || (player.defeatedBosses || []).includes('wayne'), icon: '⚡' },
         { id: 'streak_master', name: 'Flow State Phenom', desc: 'Achieved a 5x combo streak without hesitation', earned: (player.stats.maxStreak || 0) >= 5, icon: '🔥' },
-        { id: 'apex_predator', name: 'Mythic Rainmaker', desc: 'Defeated the Pinnacle PE Buyer Rex Sterling', earned: (player.defeatedBosses || []).includes('rex'), icon: '👑' }
+        { id: 'apex_predator', name: 'Mythic Rainmaker', desc: 'Defeated the Pinnacle PE Buyer Rex Sterling', earned: (player.defeatedBosses || []).includes('rex'), icon: '👑' },
+        { id: 'apex_sovereign', name: 'Apex Sovereign Dealmaker', desc: 'Conquered Victor Vance & mastered all 15 contractor gauntlet tiers', earned: (player.defeatedBosses || []).includes('victor') || defeatedCount >= 15, icon: '💎' }
       ];
 
       ribbonsList.innerHTML = ribbons.map(r => `
@@ -4314,6 +4638,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   window.evaluateTurn = evaluateTurn;
   window.handleBossDefeat = handleBossDefeat;
   window.renderArmory = renderArmory;
+  window.checkLevelUp = checkLevelUp;
   window.getIsListening = function() { return isListening; };
   window.advanceToNextBossNow = advanceToNextBossNow;
   window.getVictoryTimerSeconds = function() { return victoryTimerSeconds; };
