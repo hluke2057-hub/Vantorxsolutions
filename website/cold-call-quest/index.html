@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -537,7 +537,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     </div>
 
     <button id="lootClaimBtn" class="hud-btn gold" style="display:none;width:100%;padding:14px;font-size:16px;justify-content:center;box-shadow:0 0 25px rgba(245,158,11,0.4)" onclick="claimLootAndAdvance()">
-      ⚔️ Claim Spoils &amp; Battle Next Boss ➔
+      ⚔️ Claim Spoils &amp; Review Contractor Reply ➔
     </button>
   </div>
 </div>
@@ -1145,6 +1145,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   let matchHistory = [];
   let speechRec = null;
   let isListening = false;
+  let victoryCountdownInterval = null;
+  let victoryTimerSeconds = 120;
 
   let matchMemory = {
     turns: 0,
@@ -1415,6 +1417,13 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   }
 
   function selectBoss(idx) {
+    if (victoryCountdownInterval) {
+      clearInterval(victoryCountdownInterval);
+      victoryCountdownInterval = null;
+    }
+    const banner = document.getElementById('victoryChatBanner');
+    if (banner) banner.remove();
+
     const modal = document.getElementById('defeatModal');
     if (modal) modal.classList.remove('open');
     const lootModal = document.getElementById('lootModal');
@@ -1474,7 +1483,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   // 7. HEALTH REGAIN MECHANICS
   window.executeTakeABreather = function() {
     const input = document.getElementById('playerCustomInput');
-    if (!input || input.disabled || player.breatherCooldown > 0) return;
+    if (!input || player.hp <= 0 || player.breatherCooldown > 0) return;
     const healAmount = 30;
     const oldHp = player.hp;
     player.hp = Math.min(player.maxHp, player.hp + healAmount);
@@ -1516,7 +1525,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     
     const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*forwarding|conditional\s*call\s*forwarding|forward|rollover|port|switch|verizon|at&t|att|t-mobile|existing\s*number|keep\s*your\s*number/i.test(low);
     
-    const hasPricingAnswer = /\b(397|300|299|400|697|1,?297)\b/i.test(low) || /\$\s*\d+/i.test(low) || /\b\d+\s*(a|per|\/)\s*month\b/i.test(low) || /\b(flat\s*rate|zero\s*setup(\s*fee)?|no\s*contracts?|zero\s*contracts?|cancel\s*anytime|month-to-month|pays\s*for\s*itself|monthly\s*rate|monthly\s*investment)\b/i.test(low);
+    const hasPricingAnswer = /\b(197|397|300|299|400|697|1,?297)\b/i.test(low) || /\$\s*\d+/i.test(low) || /\b\d+\s*(a|per|\/)\s*month\b/i.test(low) || /\b(flat\s*rate|zero\s*setup(\s*fee)?|no\s*contracts?|zero\s*contracts?|cancel\s*anytime|month-to-month|pays\s*for\s*itself|monthly\s*rate|monthly\s*investment)\b/i.test(low);
     
     const hasTimeProposal = /tomorrow|4:30|morning|afternoon|10\s*min|walkthrough|meeting|calendar|invite|zoom|screen\s*share|schedule|book|call\s*you/i.test(low);
 
@@ -1533,6 +1542,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const hasNoContractGuarantee = /\b(zero\s*contracts?|no\s*contracts?|month\s*to\s*month|cancel\s*anytime|no\s*lock-in)\b/i.test(low);
     const hasBilingualFeature = /\b(spanish|bilingual|espanol|two\s*languages|fluent)\b/i.test(low);
     const hasFailoverLogic = /\b(carrier\s*level|telecom|verizon|at&t|power\s*out|internet\s*down|hurricane\s*failover|cloud\s*routing)\b/i.test(low);
+    const hasCrmMention = /\b(crm|leadflow|servicetitan|service\s*titan|jobber|housecall(\s*pro)?|dispatch\s*board|pipeline|clipboard|yellow\s*pad|whiteboard|track\s*leads|missed-call\s*text|speed\s*to\s*lead|90\s*second)\b/i.test(low);
 
     const isRepeatingPermission = memory.topicsCovered['permission'] && hasPermission && !hasLeakHook && !hasAvaMechanism && !hasPricingAnswer && !hasDemoNumber;
     const isRepeatingDemo = memory.topicsCovered['demo'] && hasDemoNumber && !hasCarrier71 && !hasTimeProposal;
@@ -1584,6 +1594,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hasNoContractGuarantee,
       hasBilingualFeature,
       hasFailoverLogic,
+      hasCrmMention,
       isRepeatingPermission,
       isRepeatingDemo,
       isRepeatingPrice,
@@ -1762,6 +1773,21 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         `Wait, she speaks fluent Spanish and detects the language automatically? Down here in Florida, half our emergency service calls are Spanish-speaking. That's a massive competitive edge. What's the monthly investment for that?`,
         `Automatic bilingual English and Spanish intake? That alone stops us from losing calls in South Florida. What does your setup cost per month?`
       ], 'bilingual_reaction');
+    }
+
+    if (analysis.hasCrmMention && !analysis.hasPermission) {
+      memory.stage = 'price';
+      memory.lastBossQuestion = 'how_much_does_it_cost';
+      if (boss.key === 'vito') {
+        return pickUnique(memory, [
+          `(Deep breath) Webhook integration with our Houston dispatch CRM and bilingual intake? That's enterprise-grade. What is your monthly van tier pricing?`,
+          `ServiceTitan API sync with sub-second call transfer? What is your monthly rate?`
+        ], 'vito_crm_ack');
+      }
+      return pickUnique(memory, [
+        `(Nodding slowly) Integrating with our existing dispatch so tickets don't get lost in the shuffle? That's huge. Most outbound guys want me to scrap my whole system. How much does your LeadFlow CRM setup cost per month?`,
+        `(Chuckles) Man, half our bids fall through the cracks because guys in the field scribble notes on cardboard. Having a real contractor CRM that auto-texts missed calls would save us thousands. What does that cost per month?`
+      ], 'contractor_crm_ack');
     }
 
     if (analysis.hasOwnerCheck) {
@@ -2163,6 +2189,11 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         damage = 42;
         counterDmg = 0;
         feedback = '🔥 ELITE EMAIL PIVOT! Prevented deal death in the spam folder and anchored emergency call pain!';
+      } else if (analysis.hasCrmMention && !analysis.hasPermission) {
+        grade = 'S';
+        damage = 42;
+        counterDmg = 0;
+        feedback = '🔥 MASTERFUL CRM SYNERGY! Anchored LeadFlow 90s speed-to-lead and seamless dispatch integration!';
       } else if (analysis.hasAnsweringServiceCompare) {
         grade = 'A';
         damage = 36;
@@ -2337,6 +2368,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       text = `Let's do a quick 10-minute walkthrough tomorrow afternoon at 4:30 PM.`;
     } else if (strikeType === 'defuse') {
       text = `You are 100% right. Every contractor has been burned by telemarketers, which is why we do zero contracts.`;
+    } else if (strikeType === 'crm') {
+      text = `LeadFlow is our contractor CRM. It plugs into Jobber or ServiceTitan, auto-texts missed calls in 90 seconds, and tracks your pipeline for $197/mo.`;
     } else if (strikeType === 'execute') {
       text = `Let's do a 10-minute walkthrough tomorrow at 4:30 PM and plug that $8,000 leak together.`;
     } else {
@@ -2358,6 +2391,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const userText = input ? input.value.trim() : '';
     if (!userText) return;
     if (input) input.value = '';
+
+    if (isListening && speechRec) {
+      try {
+        speechRec.abort(); // Clear speech buffer for next utterance without turning mic off
+      } catch(e){}
+    }
 
     appendLog(`<strong>Luke:</strong> "${userText}"`, 'player');
     matchHistory.push({ role: 'user', content: userText });
@@ -2425,7 +2464,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
 
     if (bossHp <= 0 || matchMemory.stage === 'victory') {
-      handleBossDefeat();
+      handleBossDefeat(evalRes);
       return;
     }
 
@@ -2440,7 +2479,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     savePlayer();
   };
 
-  function handleBossDefeat() {
+  function handleBossDefeat(evalRes) {
     playSynth('victory');
     triggerArenaShake(false);
     fireConfetti(85);
@@ -2477,21 +2516,115 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       boss: currentBoss
     };
 
-    appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.victory}"`, 'boss');
+    const victoryLine = (evalRes && evalRes.contractorReply) ? evalRes.contractorReply : currentBoss.dialogue.victory;
+    appendLog(`<strong>${currentBoss.name}:</strong> "${victoryLine}"`, 'boss');
+    matchHistory.push({ role: 'assistant', content: victoryLine });
     appendLog(`🏆 <strong>VICTORY! ${currentBoss.name} AGREED TO TEST AVA!</strong> Earned <strong>+${xpReward} XP</strong> and <strong>+${goldReward} GP</strong> (${streakMult.toFixed(1)}x Streak Multiplier)!`, 'crit');
 
     if (voiceEnabled) {
-      speakContractor(currentBoss.dialogue.victory, currentBoss.key);
+      speakContractor(victoryLine, currentBoss.key);
     }
 
     renderBossGauntletList();
     updateHUD();
+
+    // Disable attack input dock while reviewing won call
+    const input = document.getElementById('playerCustomInput');
+    const sendBtn = document.getElementById('sendBtn');
+    if (input) {
+      input.disabled = true;
+      input.placeholder = `🏆 Boss Defeated! Reviewing call transcript (auto-clears in 2:00)...`;
+    }
+    if (sendBtn) sendBtn.disabled = true;
+
+    // Start 2-minute (120-second) chat preservation countdown
+    startVictoryChatPreservation();
 
     // Open Mystery Loot Modal immediately for instant dopamine feedback
     openLootModal();
 
     savePlayer();
   }
+
+  function startVictoryChatPreservation() {
+    if (victoryCountdownInterval) clearInterval(victoryCountdownInterval);
+    victoryTimerSeconds = 120; // 2 minutes
+
+    renderVictoryBanner();
+
+    victoryCountdownInterval = setInterval(() => {
+      victoryTimerSeconds--;
+      updateVictoryCountdownDisplay();
+
+      if (victoryTimerSeconds <= 0) {
+        clearInterval(victoryCountdownInterval);
+        victoryCountdownInterval = null;
+        advanceToNextBossNow();
+      }
+    }, 1000);
+  }
+
+  function renderVictoryBanner() {
+    let banner = document.getElementById('victoryChatBanner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'victoryChatBanner';
+      banner.className = 'victory-chat-banner';
+      banner.style.cssText = 'background:rgba(16,185,129,0.12);border:1.5px solid #10b981;border-radius:10px;padding:12px 16px;margin:12px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;';
+      const terminal = document.getElementById('combatLog');
+      if (terminal) {
+        terminal.appendChild(banner);
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+    }
+    updateVictoryCountdownDisplay();
+  }
+
+  function updateVictoryCountdownDisplay() {
+    const banner = document.getElementById('victoryChatBanner');
+    if (!banner) return;
+    const mins = Math.floor(victoryTimerSeconds / 60);
+    const secs = victoryTimerSeconds % 60;
+    const formatted = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    banner.innerHTML = `
+      <div>
+        <div style="font-weight:700;color:#10b981;font-size:13.5px;display:flex;align-items:center;gap:6px">
+          <span>🏆 CALL WON — FULL CHAT SAVED</span>
+          <span style="font-size:11.5px;color:var(--dim);font-weight:400">(Preserved for 2:00 to review contractor reply)</span>
+        </div>
+        <div style="font-size:12px;color:#e2e8f0;margin-top:2px">
+          Review the contractor's responses above before the terminal resets.
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-family:var(--font-mono);font-size:13px;font-weight:700;color:#fde047;background:rgba(0,0,0,0.4);padding:4px 8px;border-radius:4px;border:1px solid rgba(245,158,11,0.3)">
+          ⏱️ Auto-clears in: <span id="victoryCountdown">${formatted}</span>
+        </span>
+        <button type="button" class="btn-advance-now" onclick="advanceToNextBossNow()" style="background:#10b981;color:#0b0f17;border:none;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;transition:transform 0.15s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          Start Next Boss Now ➔
+        </button>
+      </div>
+    `;
+  }
+
+  window.advanceToNextBossNow = function() {
+    if (victoryCountdownInterval) {
+      clearInterval(victoryCountdownInterval);
+      victoryCountdownInterval = null;
+    }
+    const banner = document.getElementById('victoryChatBanner');
+    if (banner) banner.remove();
+
+    let nextIdx = (currentBossIndex + 1) % BOSSES.length;
+    for (let i = 0; i < BOSSES.length; i++) {
+      const idx = (currentBossIndex + 1 + i) % BOSSES.length;
+      if (!player.defeatedBosses.includes(BOSSES[idx].key)) {
+        nextIdx = idx;
+        break;
+      }
+    }
+    selectBoss(nextIdx);
+  };
 
   function openLootModal() {
     const modal = document.getElementById('lootModal');
@@ -2582,15 +2715,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const modal = document.getElementById('lootModal');
     if (modal) modal.classList.remove('open');
 
-    let nextIdx = (currentBossIndex + 1) % BOSSES.length;
-    for (let i = 0; i < BOSSES.length; i++) {
-      const idx = (currentBossIndex + 1 + i) % BOSSES.length;
-      if (!player.defeatedBosses.includes(BOSSES[idx].key)) {
-        nextIdx = idx;
-        break;
-      }
-    }
-    selectBoss(nextIdx);
+    // Keep chat open for 2 minutes! Do NOT clear out the chat immediately.
+    // The player can review the contractor's concession and replies, or click "Start Next Boss Now ➔"
+    const terminal = document.getElementById('combatLog');
+    if (terminal) terminal.scrollTop = terminal.scrollHeight;
   };
 
   function handlePlayerKnockout(evalRes) {
@@ -2841,60 +2969,90 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     renderArmory();
   };
 
-  // 11. SPEECH-TO-TEXT MICROPHONE INPUT
+  // 11. SPEECH-TO-TEXT MICROPHONE INPUT (CONTINUOUS UNTIL USER CLICKS OFF)
   window.toggleSpeechRecognition = function() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      alert('Speech recognition is not supported in this browser. Please use Chrome or Edge.');
-      return;
-    }
-
     const micBtn = document.getElementById('micBtn');
     const micLabel = document.getElementById('micLabel');
 
-    if (isListening && speechRec) {
-      speechRec.stop();
+    if (isListening) {
+      // User clicked it OFF
       isListening = false;
+      if (speechRec) {
+        try { speechRec.stop(); } catch(e){}
+      }
       if (micBtn) micBtn.classList.remove('listening');
       if (micLabel) micLabel.textContent = 'Speak';
       return;
     }
 
+    if (!SpeechRecognition) {
+      alert('Speech recognition is not supported in this browser. Please use Chrome or Edge.');
+      return;
+    }
+
     try {
-      speechRec = new SpeechRecognition();
-      speechRec.continuous = false;
-      speechRec.interimResults = false;
+      if (!speechRec) {
+        speechRec = new SpeechRecognition();
+      }
+      speechRec.continuous = true;
+      speechRec.interimResults = true;
       speechRec.lang = 'en-US';
 
       speechRec.onstart = () => {
         isListening = true;
         if (micBtn) micBtn.classList.add('listening');
-        if (micLabel) micLabel.textContent = 'Listening...';
+        if (micLabel) micLabel.textContent = 'Listening (Click to Stop)';
       };
 
       speechRec.onresult = (e) => {
-        const transcript = e.results[0][0].transcript;
+        let fullTranscript = '';
+        for (let i = 0; i < e.results.length; i++) {
+          fullTranscript += e.results[i][0].transcript;
+        }
         const input = document.getElementById('playerCustomInput');
-        if (input) input.value = transcript;
-        submitRebuttal();
+        if (input && fullTranscript.trim()) {
+          input.value = fullTranscript;
+        }
       };
 
       speechRec.onerror = (e) => {
-        console.warn('Speech recognition error:', e.error);
-        isListening = false;
-        if (micBtn) micBtn.classList.remove('listening');
-        if (micLabel) micLabel.textContent = 'Speak';
+        console.warn('Speech recognition notice:', e.error);
+        if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+          isListening = false;
+          if (micBtn) micBtn.classList.remove('listening');
+          if (micLabel) micLabel.textContent = 'Speak';
+        }
       };
 
       speechRec.onend = () => {
-        isListening = false;
-        if (micBtn) micBtn.classList.remove('listening');
-        if (micLabel) micLabel.textContent = 'Speak';
+        // Continuous mode: if isListening is still true, the user did NOT click it off!
+        // Automatically restart so browser silence timeouts don't turn off the mic!
+        if (isListening) {
+          try {
+            speechRec.start();
+          } catch(e) {
+            setTimeout(() => {
+              if (isListening) {
+                try { speechRec.start(); } catch(err){}
+              }
+            }, 250);
+          }
+        } else {
+          if (micBtn) micBtn.classList.remove('listening');
+          if (micLabel) micLabel.textContent = 'Speak';
+        }
       };
 
+      isListening = true;
+      if (micBtn) micBtn.classList.add('listening');
+      if (micLabel) micLabel.textContent = 'Listening (Click to Stop)';
       speechRec.start();
     } catch(e) {
       console.warn('SpeechRec start failed:', e);
+      isListening = true;
+      if (micBtn) micBtn.classList.add('listening');
+      if (micLabel) micLabel.textContent = 'Listening (Click to Stop)';
     }
   };
 
@@ -2904,6 +3062,9 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   window.evaluateTurn = evaluateTurn;
   window.handleBossDefeat = handleBossDefeat;
   window.renderArmory = renderArmory;
+  window.getIsListening = function() { return isListening; };
+  window.advanceToNextBossNow = advanceToNextBossNow;
+  window.getVictoryTimerSeconds = function() { return victoryTimerSeconds; };
 
   // INITIALIZATION ON PAGE LOAD
   loadSavedPlayer();

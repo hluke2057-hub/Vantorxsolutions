@@ -1550,17 +1550,17 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 </ul>
               </div>
 
-              <!-- PRODUCT 3: SPEED-TO-LEAD SMS -->
+              <!-- PRODUCT 3: CONTRACTOR CRM & SPEED-TO-LEAD -->
               <div style="background:var(--bg);border:1px solid rgba(245,158,11,0.3);padding:18px;border-radius:12px">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-                  <div style="font-size:14px;font-weight:700;color:#fde047">⚡ LEADFLOW 90s SMS</div>
+                  <div style="font-size:14px;font-weight:700;color:#fde047">⚡ LEADFLOW CONTRACTOR CRM &amp; 90s SPEED-TO-LEAD</div>
                   <span style="font-size:11px;font-family:var(--font-mono);background:rgba(245,158,11,0.15);color:#fde047;padding:2px 6px;border-radius:4px">$197/mo · $0 Setup</span>
                 </div>
                 <ul style="font-size:12.5px;color:#e2e8f0;padding-left:16px;line-height:1.6">
-                  <li><strong>Instant Webhook Trigger:</strong> The millisecond an estimate form is submitted or a call is missed, our system fires a personalized SMS in under 90 seconds.</li>
-                  <li><strong>The MIT 5-Minute Law:</strong> If a contractor takes more than 5 minutes to respond, close rate drops by 391%. 78% of homeowners hire the first contractor who replies.</li>
-                  <li><strong>Two-Way Automation:</strong> Texts from contractor's verified business number, engages the customer, and qualifies the job before they call competitors.</li>
-                  <li><strong>CRM Compatibility:</strong> Connects seamlessly with Jobber, Housecall Pro, and email dispatch notifications.</li>
+                  <li><strong>Contractor CRM Pipeline:</strong> LeadFlow IS our dedicated trade CRM platform. Houses your visual job pipeline (New Inquiry ➔ Scheduled Estimate ➔ Quote Sent ➔ Won Job) directly on your mobile device.</li>
+                  <li><strong>Instant 90s Speed-to-Lead:</strong> The millisecond an estimate form is submitted or an incoming call is missed, LeadFlow fires a personalized SMS in under 90 seconds from your verified business line.</li>
+                  <li><strong>The MIT 5-Minute Law:</strong> Contractors responding within 5 minutes are 21x more likely to qualify the lead; 78% of homeowners buy from the first contractor who responds.</li>
+                  <li><strong>Two-Way Automation &amp; CRM Sync:</strong> Syncs seamlessly into Jobber, ServiceTitan, or Housecall Pro via webhook, or acts as a complete standalone replacement for paper clipboards and lost dispatch notes.</li>
                 </ul>
               </div>
 
@@ -2836,10 +2836,18 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           </div>
 
           <div class="obj-accordion">
-            <div class="obj-acc-head"><span>❌ 2. "We already use Jobber / Housecall Pro / ServiceTitan."</span> <span class="tag">CRM Overlap</span></div>
+            <div class="obj-acc-head"><span>❌ 2. "We already use Jobber / Housecall Pro / ServiceTitan."</span> <span class="tag">CRM Integration</span></div>
             <div class="obj-acc-body">
-              "Jobber and Housecall Pro are fantastic field management tools for dispatching trucks and invoicing! But they don't do real-time 90-second conversational speed-to-lead triage or missed-call recovery. Our system integrates directly into your existing software—we just plug the lead leak at the front door."
-              <div class="obj-acc-note">💡 Strategy: Complement their software, don't replace it.</div>
+              "Jobber, Housecall Pro, and ServiceTitan are fantastic field management tools for dispatching trucks, GPS routing, and invoicing! But they don't do real-time 90-second conversational speed-to-lead triage or missed-call recovery. LeadFlow CRM connects directly into your existing software via API webhook—we plug the lead leak at the front door before dispatch even opens the ticket."
+              <div class="obj-acc-note">💡 Strategy: LeadFlow complements enterprise CRMs; it doesn't replace their dispatch software.</div>
+            </div>
+          </div>
+
+          <div class="obj-accordion">
+            <div class="obj-acc-head"><span>❌ 3. "We don't use a CRM. We just write jobs on paper clipboards / dispatch boards."</span> <span class="tag">No CRM / Paper</span></div>
+            <div class="obj-acc-body">
+              "Honestly, half the contractors we work with started that exact way! But when you're driving between jobs or on a roof, paper notes get lost, voicemails sit unreturned, and homeowners hire the first contractor who replies. LeadFlow is your turnkey Contractor CRM: it gives you a clean pipeline right on your phone that auto-texts missed calls in under 5 seconds and organizes every estimate for $197/mo. One saved job pays for the entire year."
+              <div class="obj-acc-note">💡 Strategy: Validate their manual hustle, then show how a simple $197/mo mobile CRM stops lost paper notes.</div>
             </div>
           </div>
 
