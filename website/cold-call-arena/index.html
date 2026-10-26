@@ -425,7 +425,17 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .lms-boss-clash-card.defeated .boss-hp-fill{background:linear-gradient(90deg,#10b981,#34d399);width:0%}
 .boss-speech-bubble{background:rgba(0,0,0,0.5);border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 10px 10px 0;margin-bottom:16px;font-size:13.5px;line-height:1.6;color:#fee2e2}
 .lms-boss-clash-card.defeated .boss-speech-bubble{border-left-color:#34d399;color:#d1fae5}
-.lms-boss-clash-card.clash-shake{animation:actShake 0.4s ease;border-color:#ef4444 !important}
+/* 📚 Field Manual Tabs & Knowledge Center */
+.field-manual-wrap{margin-bottom:20px}
+.manual-nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:16px;border-bottom:1px solid var(--line)}
+.manual-tab-btn{background:var(--bg);border:1px solid var(--line);color:var(--dim);font-family:var(--font-head);font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all 0.15s}
+.manual-tab-btn:hover{color:var(--ink);border-color:var(--accent)}
+.manual-tab-btn.active{background:rgba(245,158,11,0.18);border-color:var(--accent);color:var(--accent2);box-shadow:0 0 10px rgba(245,158,11,0.2)}
+.manual-panel{display:none;animation:fadeIn 0.2s ease}
+.manual-panel.active{display:block}
+.manual-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0}
+.manual-table th{background:rgba(245,158,11,0.12);color:var(--accent2);text-align:left;padding:8px 12px;font-family:var(--font-head);font-size:12px;border:1px solid var(--line)}
+.manual-table td{padding:8px 12px;border:1px solid var(--line);color:#e2e8f0;background:rgba(0,0,0,0.25)}
 
 /* Lesson Bottom Action */
 .lms-stage-footer{border-top:1px solid var(--line);padding-top:20px;margin-top:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
@@ -804,6 +814,266 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       </div>
     </div>
 
+    <!-- 📚 ADVANCED FIELD MANUAL & EXECUTIVE KNOWLEDGE ENCYCLOPEDIA (EXPANDABLE) -->
+    <div class="field-manual-wrap" style="background:var(--bg2);border:1px solid rgba(245,158,11,0.35);border-radius:16px;padding:18px 20px;margin-bottom:20px;box-shadow:0 12px 36px rgba(0,0,0,0.4)">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:26px">📚</span>
+          <div>
+            <h3 style="font-family:var(--font-head);font-size:17.5px;color:#ffffff;display:flex;align-items:center;gap:8px">
+              Executive Field Manual &amp; Closer Knowledge Engine
+              <span style="font-size:10.5px;font-family:var(--font-mono);background:rgba(245,158,11,0.18);color:var(--accent2);padding:2px 8px;border-radius:6px;border:1px solid rgba(245,158,11,0.3)">HIGH-TICKET REPOSITORY</span>
+            </h3>
+            <p style="font-size:12.5px;color:var(--dim);margin-top:2px">Instant on-demand technical reference for outbound reps: Carrier routing codes, full product architectures, 3-minute onboarding runbook, trade economics, and 15 hardcore objection battlecards.</p>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="btnToggleManual" type="button" onclick="toggleFieldManual()" style="border-color:rgba(245,158,11,0.4);color:var(--accent2);padding:6px 14px">📖 Open Knowledge Base ▾</button>
+      </div>
+
+      <!-- Field Manual Collapsible Body -->
+      <div id="fieldManualBody" style="display:none;border-top:1px solid var(--line);padding-top:16px;margin-top:14px">
+        <div class="manual-nav">
+          <button class="manual-tab-btn active" type="button" onclick="switchManualTab('tabCarrier')" id="mTabBtn-tabCarrier">🛠️ Carrier Telephony &amp; *71 Routing</button>
+          <button class="manual-tab-btn" type="button" onclick="switchManualTab('tabProducts')" id="mTabBtn-tabProducts">🤖 Complete Product Architecture</button>
+          <button class="manual-tab-btn" type="button" onclick="switchManualTab('tabOnboarding')" id="mTabBtn-tabOnboarding">📑 3-Min Onboarding Runbook</button>
+          <button class="manual-tab-btn" type="button" onclick="switchManualTab('tabEconomics')" id="mTabBtn-tabEconomics">💰 Trade Economics &amp; ROI Calculator</button>
+          <button class="manual-tab-btn" type="button" onclick="switchManualTab('tabBattlecards')" id="mTabBtn-tabBattlecards">🛡️ 15-Objection Battlecard Matrix</button>
+        </div>
+
+        <!-- TAB 1: CARRIER TELEPHONY -->
+        <div class="manual-panel active" id="mPanel-tabCarrier">
+          <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.3);border-radius:10px;padding:12px 16px;margin-bottom:14px">
+            <strong style="color:#6ee7b7;font-size:13.5px">⚡ The Zero-Carrier Disruption Guarantee — We NEVER Port Numbers</strong>
+            <p style="font-size:12.5px;color:#e2e8f0;margin-top:4px;line-height:1.5">Reps must memorize this rule: Contractors fear losing control of their phone numbers or experiencing phone downtime. We <strong>never</strong> port numbers or alter their cellular contracts. Ava operates via standard conditional call forwarding (*71) so she only triggers when lines ring 4 times unanswered or after 5 PM. The contractor remains in 100% control.</p>
+          </div>
+
+          <table class="manual-table">
+            <thead>
+              <tr>
+                <th>Carrier / System</th>
+                <th>Activation Code / Method</th>
+                <th>Deactivation / Cancel Code</th>
+                <th>Behavior &amp; Technical Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Verizon Wireless</strong></td>
+                <td><code>*71[AvaNumber]</code></td>
+                <td><code>*73</code></td>
+                <td>Forwards calls on no-answer (after 3–4 rings) or when line is busy. Cell remains with Verizon.</td>
+              </tr>
+              <tr>
+                <td><strong>AT&amp;T Mobility</strong></td>
+                <td><code>*71[AvaNumber]</code> or <code>*004*[Number]*11*20#</code></td>
+                <td><code>*73</code> or <code>##004#</code></td>
+                <td>Conditional call forwarding. GSM string allows exact 20-second ring delay before Ava picks up.</td>
+              </tr>
+              <tr>
+                <td><strong>T-Mobile / Metro</strong></td>
+                <td><code>**61*[AvaNumber]**20#</code></td>
+                <td><code>##61#</code></td>
+                <td>Standard GSM conditional routing. 20-second timeout allows dispatch desk to answer first.</td>
+              </tr>
+              <tr>
+                <td><strong>Spectrum / Charter VoIP</strong></td>
+                <td><code>*92[AvaNumber]</code></td>
+                <td><code>*93</code></td>
+                <td>Call Forward No Answer. Works on digital voice lines and business landlines.</td>
+              </tr>
+              <tr>
+                <td><strong>Comcast Business Voice</strong></td>
+                <td>Portal / <code>*92[AvaNumber]</code></td>
+                <td><code>*93</code></td>
+                <td>Can be configured via Comcast Business Voice portal or dialed directly from landline.</td>
+              </tr>
+              <tr>
+                <td><strong>Cloud PBX (RingCentral, etc.)</strong></td>
+                <td>Inbound Rule: Ring Desk 15s ➔ Forward to Ava DID</td>
+                <td>Remove forwarding rule</td>
+                <td>Works with Vonage, Nextiva, 8x8, RingCentral, Grasshopper. Zero carrier lock-in.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="lms-script-box" style="margin-top:12px">
+            <strong>Word-for-Word Closer Script for Carrier Skepticism:</strong><br>
+            <em>"Dave, we don't touch your phone contract and we NEVER port your numbers. You keep your exact same phone carrier and your number stays 100% in your hands. You just dial *71 followed by your dedicated Ava routing line. If you or Karen answer within 3 rings, nothing changes. But if you're up on a roof or it's 8 PM on a Saturday, Ava catches the call in 1 ring so you don't lose an $8,000 job. If you ever want to turn it off, you just dial *73 and it immediately shuts off. Zero risk, zero downtime."</em>
+          </div>
+        </div>
+
+        <!-- TAB 2: COMPLETE PRODUCT ARCHITECTURE -->
+        <div class="manual-panel" id="mPanel-tabProducts">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:14px">
+            <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(56,189,248,0.3);border-radius:12px;padding:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <strong style="color:#7dd3fc;font-size:14px">🤖 Ava 24/7 Voice AI</strong>
+                <span style="font-size:11px;font-family:var(--font-mono);background:rgba(56,189,248,0.15);color:#7dd3fc;padding:2px 6px;border-radius:4px">$397/mo · $0 Setup</span>
+              </div>
+              <ul style="font-size:12px;color:#e2e8f0;line-height:1.6;padding-left:14px">
+                <li><strong>&lt;600ms Latency:</strong> Conversational speed matches human reflexes without robotic delays.</li>
+                <li><strong>Natural Acoustic Pauses:</strong> Employs breath sounds and conversational fillers ("let me check that", "gotcha").</li>
+                <li><strong>Bilingual Spanish / English:</strong> Automatically detects Spanish callers and seamlessly switches language.</li>
+                <li><strong>Live Tech Emergency Patch:</strong> Bridges active catastrophic leaks or HVAC fires live to on-call tech cell.</li>
+                <li><strong>Instant SMS Dispatch:</strong> Fires SMS payload with name, phone, address, issue, and audio link within 3s.</li>
+              </ul>
+            </div>
+
+            <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <strong style="color:#fde047;font-size:14px">⚡ LeadFlow CRM &amp; Speed SMS</strong>
+                <span style="font-size:11px;font-family:var(--font-mono);background:rgba(245,158,11,0.15);color:#fde047;padding:2px 6px;border-radius:4px">$197/mo · $0 Setup</span>
+              </div>
+              <ul style="font-size:12px;color:#e2e8f0;line-height:1.6;padding-left:14px">
+                <li><strong>5-Stage Kanban:</strong> New Leads ➔ Contacted ➔ Estimate Booked ➔ Proposal Sent ➔ Won.</li>
+                <li><strong>&lt;3-Sec Missed-Call Auto-Text:</strong> "Sorry I missed your call, I'm on a job site. How can I help?"</li>
+                <li><strong>2-Way Live SMS Console:</strong> Shared desktop/mobile messaging thread from verified business number.</li>
+                <li><strong>The 5-Min MIT Law:</strong> Responding in &lt;5 mins boosts qualification 21x; 78% buy from first responder.</li>
+                <li><strong>Two-Way Webhook Sync:</strong> Integrates directly with Jobber, ServiceTitan, Housecall Pro, Google Sheets.</li>
+              </ul>
+            </div>
+
+            <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(168,85,247,0.3);border-radius:12px;padding:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <strong style="color:#d8b4fe;font-size:14px">🌐 Custom Trade Websites</strong>
+                <span style="font-size:11px;font-family:var(--font-mono);background:rgba(168,85,247,0.15);color:#d8b4fe;padding:2px 6px;border-radius:4px">$799 flat · No Retainers</span>
+              </div>
+              <ul style="font-size:12px;color:#e2e8f0;line-height:1.6;padding-left:14px">
+                <li><strong>95+ PageSpeed Score:</strong> Loads in &lt;1s on mobile devices, preventing the 5-second bounce rate.</li>
+                <li><strong>Above-the-Fold Conversion:</strong> Sticky tap-to-call, 24/7 emergency badge, 60s emergency estimate form.</li>
+                <li><strong>Schema.org LocalBusiness:</strong> Structured JSON-LD markup optimized for local Google pack ranking.</li>
+                <li><strong>100% Code Ownership:</strong> Client owns their website files and domain for life with zero monthly retainers.</li>
+              </ul>
+            </div>
+
+            <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <strong style="color:#86efac;font-size:14px">⭐ AEO Engine™ &amp; Reviews</strong>
+                <span style="font-size:11px;font-family:var(--font-mono);background:rgba(52,211,153,0.15);color:#86efac;padding:2px 6px;border-radius:4px">$297/mo · $0 Setup</span>
+              </div>
+              <ul style="font-size:12px;color:#e2e8f0;line-height:1.6;padding-left:14px">
+                <li><strong>AI Search Optimization:</strong> Positions business as #1 recommendation on Siri, ChatGPT, Perplexity, Gemini.</li>
+                <li><strong>Review Velocity Engine:</strong> Automated post-service SMS collecting 15–25 fresh 5-star Google reviews monthly.</li>
+                <li><strong>Negative Review Shield:</strong> Dissatisfied customers are routed to the owner's cell phone before posting 1-star reviews.</li>
+                <li><strong>Semantic City Siloing:</strong> Embeds trade keyword markup and geo-coordinates across all local service areas.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);padding:12px 16px;border-radius:10px">
+            <strong style="color:var(--accent2);font-size:13.5px">⭐ Primary Core Pitch: Accelerate Tier ($697/mo) — Saves $493/mo!</strong>
+            <p style="font-size:12.5px;color:#e2e8f0;margin-top:4px;line-height:1.5">Always pitch Accelerate first. It combines Ava ($397) + Website ($799 build amortized) + LeadFlow ($197) + AEO Engine ($297) for $697/mo flat with $0 setup fee and zero long-term contracts. Buying standalone costs over $1,190/mo, giving contractors an immediate $500/mo savings.</p>
+          </div>
+        </div>
+
+        <!-- TAB 3: ONBOARDING RUNBOOK -->
+        <div class="manual-panel" id="mPanel-tabOnboarding">
+          <div style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.3);border-radius:10px;padding:12px 16px;margin-bottom:14px">
+            <strong style="color:#7dd3fc;font-size:13.5px">🚀 The 3-Minute Frictionless Client Onboarding Workflow</strong>
+            <p style="font-size:12.5px;color:#e2e8f0;margin-top:4px;line-height:1.5">Direct onboarding URL: <a href="https://www.vantorxsolutions.com/vantorx-onboarding/" target="_blank" style="color:var(--accent2);text-decoration:underline">https://www.vantorxsolutions.com/vantorx-onboarding/</a>. As soon as a client agrees, the sales rep shoots this link via text or guides them through it in 3 minutes.</p>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;font-size:12.5px">
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:12px">
+              <strong style="color:var(--accent2)">1. Company Profile</strong>
+              <p style="color:var(--dim);margin-top:4px">Legal business name, primary business phone, website address, and owner email.</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:12px">
+              <strong style="color:var(--accent2)">2. Emergency Dispatch Rules</strong>
+              <p style="color:var(--dim);margin-top:4px">On-call technician cell phone, after-hours hours (e.g. 5 PM–8 AM &amp; weekends), and emergency diagnostic fee policy ($89–$149).</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:12px">
+              <strong style="color:var(--accent2)">3. Call Handling Protocols</strong>
+              <p style="color:var(--dim);margin-top:4px">Live tech call transfer preferences vs automated booking, Spanish bilingual handling toggle.</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:12px">
+              <strong style="color:var(--accent2)">4. 48-Hour SLA Activation</strong>
+              <p style="color:var(--dim);margin-top:4px">Our engineers calibrate Ava within 48 hours, run a live audio QA test call, and provide the contractor with their *71 routing number.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: TRADE ECONOMICS -->
+        <div class="manual-panel" id="mPanel-tabEconomics">
+          <table class="manual-table">
+            <thead>
+              <tr>
+                <th>Trade Vertical</th>
+                <th>Average Emergency Ticket</th>
+                <th>Standard Replacement Margin</th>
+                <th>Voicemail Loss Impact</th>
+                <th>VantorX ROI Break-Even</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Roofing</strong></td>
+                <td>$8,500 – $18,000</td>
+                <td>35% – 45% ($3k–$8k profit)</td>
+                <td>85% of storm leak callers hang up on voicemail</td>
+                <td><strong>1 job pays for 24 months</strong></td>
+              </tr>
+              <tr>
+                <td><strong>HVAC</strong></td>
+                <td>$6,500 – $14,000</td>
+                <td>45% – 55% ($3.5k–$7k profit)</td>
+                <td>Weekend heatwave callers dial down Google in &lt;90s</td>
+                <td><strong>1 job pays for 18 months</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Plumbing</strong></td>
+                <td>$2,800 – $6,500</td>
+                <td>50% – 65% ($1.5k–$4k profit)</td>
+                <td>Active flooding emergencies hang up on Ring 4</td>
+                <td><strong>1 job pays for 12 months</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Electrical</strong></td>
+                <td>$3,200 – $7,500</td>
+                <td>55% – 70% ($2k–$5k profit)</td>
+                <td>Panel fires/outages require immediate live triage</td>
+                <td><strong>1 job pays for 14 months</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="background:rgba(0,0,0,0.3);border-left:3px solid var(--ok);padding:10px 14px;border-radius:0 8px 8px 0;margin-top:12px;font-size:12.5px;color:#d1fae5">
+            <strong>Harvard &amp; MIT Lead Response Law:</strong> Responding to an online lead within 5 minutes results in a <strong>21x higher qualification rate</strong> than waiting 30 minutes. 78% of homeowners buy from the very first company that responds to them. LeadFlow auto-texts in under 3 seconds.
+          </div>
+        </div>
+
+        <!-- TAB 5: BATTLECARDS -->
+        <div class="manual-panel" id="mPanel-tabBattlecards">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;font-size:12px">
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:10px">
+              <strong style="color:#f87171">1. "Just email me info"</strong>
+              <p style="color:#e2e8f0;margin-top:4px">"Happy to Mike, but so I don't send 10 pages of garbage, take 20 seconds on speaker right now: dial (561) 813-8602. If she sounds like a robot, tell me to lose your number."</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:10px">
+              <strong style="color:#f87171">2. "We already use an answering service"</strong>
+              <p style="color:#e2e8f0;margin-top:4px">"I completely get that! But answering services charge $1,200/mo, put emergency callers on hold for 4 minutes, and just email a scribbled note 2 hours later after the homeowner already hired someone else. Ava answers on Ring 1 and live-books."</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:10px">
+              <strong style="color:#f87171">3. "My customers hate robots"</strong>
+              <p style="color:#e2e8f0;margin-top:4px">"I agree 100%! Most AI bots sound like clunky telemarketers. That's why Ava has sub-600ms latency, natural breathing, and trade inflection. Put your phone on speaker right now and test (561) 813-8602."</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:10px">
+              <strong style="color:#f87171">4. "I'm driving / On a job site"</strong>
+              <p style="color:#e2e8f0;margin-top:4px">"Keep your eyes on the road Mike. I've got 15 seconds: we stop you from losing $8,000 emergency jobs while on-site. Can I text you our live demo line so when you park you can test her out, or let's do 5 minutes around 5 PM?"</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:10px">
+              <strong style="color:#f87171">5. "I don't sign contracts"</strong>
+              <p style="color:#e2e8f0;margin-top:4px">"There are zero long-term contracts — it's month-to-month, cancel anytime with $0 setup fee. We earn our business every 30 days."</p>
+            </div>
+            <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:8px;padding:10px">
+              <strong style="color:#f87171">6. "Will this mess up my phones?"</strong>
+              <p style="color:#e2e8f0;margin-top:4px">"We NEVER touch your carrier and NEVER port your number. You keep your carrier and keep 100% control. Simple *71 conditional forwarding only answers after 4 rings or after-hours. Zero downtime."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 🎓 TWO-COLUMN LMS INTERFACE -->
     <div class="lms-container">
       <!-- LEFT COLUMN: SYLLABUS NAVIGATOR -->
@@ -937,6 +1207,33 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
             <p><strong>The Core Psychological Rule:</strong> You must speak in a calm, grounded, slow cadence. Your voice must drop in pitch at the end of sentences (downward inflection), signaling status and authority. Never apologize for calling. You are a trade operations specialist diagnosing lost revenue.</p>
 
+            <!-- 4 CONTRACTOR PERSONA PLAYBOOKS -->
+            <h4 style="color:#ffffff;font-size:15px;margin:18px 0 10px">1. The 4 Blue-Collar Contractor Personas You Will Face</h4>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:18px">
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:var(--accent2);font-size:13px">🔨 The Weary Field Boss (1–3 Trucks)</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5"><strong>Reality:</strong> Answers his cell while working with tools. Excluded from sleep, stressed, swamped. Voicemail is full of lost customer jobs.<br><strong>Closer Key:</strong> Be concise, acknowledge his job site, and deliver the 20-second permission disarm immediately.</p>
+              </div>
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:#6ee7b7;font-size:13px">🚚 The Growing Fleet Owner (4–15 Trucks)</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5"><strong>Reality:</strong> Has an office manager (Karen) handling 9-to-5 calls, but nights and weekends are an unmonitored revenue leak costing thousands.<br><strong>Closer Key:</strong> Highlight after-hours overflow triage and live emergency technician patches (*71).</p>
+              </div>
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:#f87171;font-size:13px">🛡️ The Agency Burn Victim</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5"><strong>Reality:</strong> Paid marketing agencies $2,000/mo on 12-month retainers for worthless "leads". Aggressively cynical of tech jargon.<br><strong>Closer Key:</strong> Emphasize $0 setup fee, month-to-month terms, and zero long-term contracts. Challenge him to test the live line on speaker.</p>
+              </div>
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:#7dd3fc;font-size:13px">🏢 The Commercial Titan</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5"><strong>Reality:</strong> Manages rooftop units (RTUs), commercial chillers, and hospital facilities. Emergency tickets exceed $15,000.<br><strong>Closer Key:</strong> Property managers demand 24/7 SLA responsiveness. If calls hit voicemail, facility directors call the next vendor.</p>
+              </div>
+            </div>
+
+            <!-- JOB SITE ENVIRONMENTAL MATRIX -->
+            <div style="background:rgba(239,68,68,0.08);border-left:4px solid #ef4444;padding:12px 16px;border-radius:0 10px 10px 0;margin-bottom:18px">
+              <strong style="color:#f87171;font-size:13.5px">⚠️ The Environmental Reality Matrix: Why Telemarketers Die in 3 Seconds</strong>
+              <p style="font-size:12.5px;color:#e2e8f0;margin-top:4px;line-height:1.55">When a contractor's phone rings, they may be balancing on a 12-pitch roof in 98°F Florida sun, inside a 135°F attic, or running a 90dB hammer drill. Any high-pitched, enthusiastic sales pitch (<em>"Hi good morning! Hope you're having an awesome day!"</em>) causes physical irritation and an instant hang-up. You must sound like a calm, grounded subcontractor asking a routine dispatch question.</p>
+            </div>
+
             <!-- ⚔️ BOSS CLASH 1.1 -->
             <div class="lms-boss-clash-card" id="activity-box-1-1">
               <div class="boss-clash-top">
@@ -1023,6 +1320,23 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                   <strong>Elite Closer:</strong> "It's Luke — quick operational question about your weekend emergency call routing in Tampa. Does he check his cell or should I catch him at the shop around 4:30?"<br>
                   <strong>Dispatcher:</strong> "Try his cell, it's (813) 555-0192."
                 </div>
+              </div>
+            </div>
+
+            <!-- GATEKEEPER TACTICAL PLAYBOOK -->
+            <h4 style="color:#ffffff;font-size:15px;margin:18px 0 10px">2. The 3 Gatekeeper Personas &amp; Counter-Tactics</h4>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:18px">
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:var(--accent2);font-size:13px">🛡️ The Protective Office Manager (Karen)</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5"><strong>Fear:</strong> Getting chewed out by the boss for passing marketing junk.<br><strong>Tactic:</strong> Acknowledge her dispatch reality. If she resists, issue the Live Desk Test Challenge: <em>"Karen, dial (561) 813-8602 from your desk phone right now on speaker for 20 seconds. If Ava can't triage an emergency call, tell Mike I called and you rejected us."</em></p>
+              </div>
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:#6ee7b7;font-size:13px">🔧 The Junior Tech in the Truck</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5"><strong>Fear:</strong> Getting in trouble for speaking on behalf of the company.<br><strong>Tactic:</strong> Treat him with blue-collar camaraderie: <em>"Hey man, won't keep you with tools in your hand. Is Dave running another truck or at the supply house right now?"</em></p>
+              </div>
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:#7dd3fc;font-size:13px">📋 The Family Co-Owner</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5"><strong>Fear:</strong> Losing family time to vendor sales pitches.<br><strong>Tactic:</strong> Focus on after-hours peace of mind: <em>"We build after-hours emergency call routing so calls don't ring the family dinner table at 8 PM on a Saturday."</em></p>
               </div>
             </div>
 
@@ -1127,6 +1441,23 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             </div>
 
             <p style="margin-top:12px"><strong>The Psychology:</strong> By offering to hang up, you grant total autonomy. Telemarketers cling to the line desperately. When you offer to hang up, you subvert their expectation of a high-pressure sales pitch. 90% of contractors reply: <em>"Alright, 20 seconds. What do you got?"</em></p>
+
+            <!-- ACOUSTIC PACING & THE SILENT VOID -->
+            <h4 style="color:#ffffff;font-size:15px;margin:18px 0 10px">3. The Acoustic Rules &amp; The Silent 2-Second Void</h4>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:18px">
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:var(--accent2);font-size:13px">⏱️ Cadence: 130 WPM (Not 180 WPM)</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5">Telemarketers speak at 180+ words per minute because they are terrified of getting interrupted. Elite closers speak slowly and deliberately at 130 words per minute, dropping pitch at the end of sentences.</p>
+              </div>
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:#6ee7b7;font-size:13px">🤫 The Silent 2-Second Void</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5">The moment you finish saying <em>"...got 20 seconds or should I hang up?"</em> you must go <strong>completely silent</strong>. Never speak over the silence. He who speaks first loses frame. Wait for the contractor to respond.</p>
+              </div>
+              <div style="background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:10px;padding:12px">
+                <strong style="color:#7dd3fc;font-size:13px">🔄 The 3 Branching Replies</strong>
+                <p style="font-size:12px;color:#e2e8f0;margin-top:4px;line-height:1.5"><strong>1. "Yeah, 20 seconds. Go."</strong> ➔ Deliver Leak Hook.<br><strong>2. "What's this about?"</strong> ➔ Deliver 15-second dispatch question.<br><strong>3. "I'm swamped right now."</strong> ➔ Timebox: <em>"Gotcha Mike, do you wrap around 4:30 or 5 PM today?"</em></p>
+              </div>
+            </div>
 
             <!-- ⚔️ BOSS CLASH 1.3 -->
             <div class="lms-boss-clash-card" id="activity-box-1-3">
@@ -1266,6 +1597,31 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <div class="fc-cue">10. "What is this about? Make it fast."</div>
                 <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(10)">Reveal Rebuttal ➔</button>
                 <div class="fc-ans">"Luke from VantorX. Got 20 seconds or should I hang up?"</div>
+              </div>
+              <div class="fc-card" id="fc-11" onclick="revealLmsFlashcard(11)">
+                <div class="fc-cue">11. "We already use an answering service."</div>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(11)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"I completely get that! But answering services charge $1,200/mo, put emergency callers on hold for 4 minutes, and just email a scribbled note 2 hours later after the homeowner already hired someone else. Ava answers on Ring 1, triages symptoms, quotes diagnostic fees, and live-books directly into your calendar."</div>
+              </div>
+              <div class="fc-card" id="fc-12" onclick="revealLmsFlashcard(12)">
+                <div class="fc-cue">12. "My customers hate robots / want a real human."</div>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(12)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"I agree with you 100%! Most AI bots sound like clunky telemarketers and piss trade customers off. That's why Ava has sub-600ms latency, natural breathing, and trade inflection. Put your phone on speaker right now and dial (561) 813-8602 for 20 seconds. If she sounds like a robot, hang up and tell me to lose your number."</div>
+              </div>
+              <div class="fc-card" id="fc-13" onclick="revealLmsFlashcard(13)">
+                <div class="fc-cue">13. "I've been burned by marketing agencies before."</div>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(13)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"I don't blame you at all — 90% of agencies lock you into 12-month $2,000 contracts and deliver zero booked jobs. We have zero long-term contracts. It's month-to-month, cancel anytime with $0 setup fees. We earn our business every 30 days."</div>
+              </div>
+              <div class="fc-card" id="fc-14" onclick="revealLmsFlashcard(14)">
+                <div class="fc-cue">14. "We only do commercial work, no residential."</div>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(14)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"Commercial rooftop units (RTUs) and chiller breakdowns are $15,000+ jobs. Facility managers have strict SLAs — if your after-hours line hits voicemail at 9 PM on a Friday, they immediately call the next contractor on their emergency vendor list."</div>
+              </div>
+              <div class="fc-card" id="fc-15" onclick="revealLmsFlashcard(15)">
+                <div class="fc-cue">15. "I don't want my phones messed up or ported."</div>
+                <button class="fc-reveal-btn" type="button" onclick="event.stopPropagation(); revealLmsFlashcard(15)">Reveal Rebuttal ➔</button>
+                <div class="fc-ans">"We NEVER touch your carrier and NEVER port your number. You keep your carrier and keep 100% control. We just turn on conditional forwarding (*71) so Ava only answers after 4 unanswered rings or after 5 PM. Zero downtime, zero disruption."</div>
               </div>
             </div>
 
@@ -1446,6 +1802,21 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <div style="font-size:22px;font-weight:700;color:var(--accent2)">$4,800 Avg</div>
                 <div style="font-size:11.5px;color:var(--dim);margin-top:4px">Under-slab pipe rupture on Sunday night</div>
               </div>
+              <div style="background:var(--bg);border:1px solid rgba(52,211,153,0.3);padding:14px;border-radius:10px">
+                <div style="font-size:11px;color:var(--dim);text-transform:uppercase">Electrical Panel Blowout</div>
+                <div style="font-size:22px;font-weight:700;color:#6ee7b7">$4,200 Avg</div>
+                <div style="font-size:11.5px;color:var(--dim);margin-top:4px">200A service upgrade &amp; generator switch</div>
+              </div>
+            </div>
+
+            <!-- HARVARD LEAD SPEED DATA -->
+            <div style="background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.3);border-radius:10px;padding:14px 18px;margin-bottom:16px">
+              <strong style="color:#6ee7b7;font-size:13.5px">📊 The Harvard &amp; MIT Speed-to-Lead Scientific Reality</strong>
+              <ul style="font-size:12.5px;color:#e2e8f0;margin-top:6px;line-height:1.6;padding-left:16px">
+                <li><strong>The 5-Minute Cliff:</strong> The odds of qualifying a lead drop by <strong>21x</strong> between 5 minutes and 30 minutes.</li>
+                <li><strong>The First Responder Monopolization:</strong> <strong>78% of homeowners</strong> hire the very first contractor who answers live or texts back.</li>
+                <li><strong>The Voicemail Abyss:</strong> <strong>Over 85% of emergency callers hang up</strong> without leaving a voicemail. When water is flooding a floor or AC is dead in 95° heat, homeowners do not wait for a callback. They tap the next contractor on Google Maps.</li>
+              </ul>
             </div>
 
             <div class="lms-script-box">
@@ -1543,6 +1914,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                   <li><strong>How She Answers:</strong> Live voice answering in under 1 second (1 ring). Natural conversational latency (&lt;600ms) with human breathing and pauses.</li>
                   <li><strong>Carrier Connection (*71):</strong> Conditional call forwarding. We NEVER port numbers or change carriers. Ava only picks up after 4 rings or after-hours. Zero downtime.</li>
                   <li><strong>Dispatch &amp; Booking:</strong> Qualifies job urgency, collects customer address/problem, and books directly into Google/Outlook calendar or Jobber/ServiceTitan.</li>
+                  <li><strong>Bilingual Spanish / English:</strong> Automatically detects Spanish callers and seamlessly switches language without confusing IVR menus.</li>
+                  <li><strong>Live Tech Emergency Patch:</strong> For catastrophic leaks or electrical fires, Ava puts the caller on a 3-second hold, calls the on-call tech's cell, and bridges the call live.</li>
                   <li><strong>Emergency SMS:</strong> Sends instant SMS alerts to owner's cell phone with caller name, issue, and full audio recording link.</li>
                 </ul>
               </div>
@@ -2002,6 +2375,18 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               "We never port your numbers or touch your existing carrier. We set up simple conditional call forwarding (*71) so when your lines ring 4 times unanswered or after 5 PM, Ava picks up seamlessly. You have zero downtime and full control."
             </div>
 
+            <!-- ONBOARDING PROTOCOL BOX -->
+            <div style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.3);border-radius:10px;padding:14px 18px;margin:16px 0">
+              <strong style="color:#7dd3fc;font-size:13.5px">📑 The 3-Minute Frictionless Client Onboarding Runbook</strong>
+              <p style="font-size:12.5px;color:#e2e8f0;margin-top:6px;line-height:1.55">The instant a client says YES, the rep texts them the direct onboarding link: <a href="https://www.vantorxsolutions.com/vantorx-onboarding/" target="_blank" style="color:var(--accent2);text-decoration:underline">https://www.vantorxsolutions.com/vantorx-onboarding/</a>. The contractor fills out 5 simple inputs on their phone in 3 minutes:</p>
+              <ul style="font-size:12px;color:#e2e8f0;line-height:1.6;margin-top:6px;padding-left:16px">
+                <li><strong>1. Business Profile:</strong> Company name, owner mobile, and primary office phone number.</li>
+                <li><strong>2. On-Call Tech Mobile:</strong> Cell phone number of the emergency technician on duty for live call patches.</li>
+                <li><strong>3. Diagnostic Fee Policy:</strong> The contractor's emergency dispatch fee ($89–$149) that Ava quotes upfront.</li>
+                <li><strong>4. 48-Hour SLA Guarantee:</strong> Our engineers calibrate Ava within 48 hours, run a live audio QA test call, and text the contractor their *71 routing number.</li>
+              </ul>
+            </div>
+
             <!-- ⚔️ BOSS CLASH 3.2 -->
             <div class="lms-boss-clash-card" id="activity-box-3-2">
               <div class="boss-clash-top">
@@ -2072,10 +2457,12 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <strong style="color:var(--accent2)">0:45 – 1:30 (The Live Demo Drop):</strong> "I just shot a direct text with our live line — (561) 813-8602 — to this cell. Tap it on speaker when you wrap."
               </div>
               <div style="background:var(--bg);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
-                <strong style="color:var(--accent2)">1:30 – 2:30 (The Objection Shield):</strong> Agree, pivot, and anchor the $397/$697 ROI against one single emergency job.
+                <strong style="color:var(--accent2)">1:30 – 2:30 (The Objection Shield &amp; Answering Service Contrast):</strong> Agree 100%, deploy the Total Agreement Shield, dismantle traditional 4-minute answering services, and anchor $397/$697 ROI against one single emergency job.
               </div>
               <div style="background:var(--bg);border-left:3px solid var(--ok);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px">
-                <strong style="color:#6ee7b7">2:30 – 4:00 (The Close):</strong> "Should I send the setup link to your cell, or let's lock in 10 minutes on your calendar tomorrow morning?"
+                <strong style="color:#6ee7b7">2:30 – 4:00 (The Assumptive Choice Close &amp; 3-Minute Onboarding):</strong><br>
+                <em>"Dave, should I text the 3-minute setup link to this cell right now, or let's lock in 10 minutes on your calendar tomorrow morning around 8:30 before your crews dispatch?"</em><br>
+                <span style="font-size:12px;color:var(--dim);margin-top:4px;display:block">Once they select the link, guide them directly to <strong>vantorxsolutions.com/vantorx-onboarding/</strong>. Confirm zero setup fee, zero carrier porting, and 48-hour live launch.</span>
               </div>
             </div>
 
@@ -9140,6 +9527,27 @@ window.closeLeakMathModal = function() {
   }
 
   // ============================================================
+  // 📚 EXECUTIVE FIELD MANUAL TOGGLE & TAB SWITCHER
+  // ============================================================
+  window.toggleFieldManual = function() {
+    const b = document.getElementById('fieldManualBody');
+    const btn = document.getElementById('btnToggleManual');
+    if (!b) return;
+    const isHidden = b.style.display === 'none' || !b.style.display;
+    b.style.display = isHidden ? 'block' : 'none';
+    if (btn) btn.textContent = isHidden ? '✕ Close Knowledge Base ▴' : '📖 Open Knowledge Base ▾';
+  };
+
+  window.switchManualTab = function(tabId) {
+    document.querySelectorAll('.manual-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.manual-tab-btn').forEach(b => b.classList.remove('active'));
+    const targetPanel = document.getElementById('mPanel-' + tabId);
+    const targetBtn = document.getElementById('mTabBtn-' + tabId);
+    if (targetPanel) targetPanel.classList.add('active');
+    if (targetBtn) targetBtn.classList.add('active');
+  };
+
+  // ============================================================
   // 🎓 TWO-COLUMN LMS ENGINE & LINEAR MASTERY CONTROLLER
   // ============================================================
   const LMS_UNITS = [
@@ -9410,13 +9818,13 @@ window.closeLeakMathModal = function() {
     const lmsFcEl = document.getElementById('lmsFcRevealedCount');
     if (lmsFcEl) lmsFcEl.textContent = count;
     const countEl14 = document.getElementById('fcMasteryCount');
-    if (countEl14) countEl14.textContent = `${count} / 10 Mastered`;
+    if (countEl14) countEl14.textContent = `${count} / 15 Mastered`;
 
     updateAcademyUI();
 
     if (user.flashcardsRevealed.length >= 10) {
       playSound('hit');
-      showToast('🎉 All 10 Objection Flashcards Mastered! Lesson 1.5 Exam Unlocked!');
+      showToast(`🎉 ${count} Objection Flashcards Mastered! Lesson 1.5 Exam Unlocked!`);
     }
   };
 
@@ -9500,9 +9908,9 @@ window.closeLeakMathModal = function() {
     const lmsFcEl = document.getElementById('lmsFcRevealedCount');
     if (lmsFcEl) lmsFcEl.textContent = cardCount;
     const countEl14 = document.getElementById('fcMasteryCount');
-    if (countEl14) countEl14.textContent = `${cardCount} / 10 Mastered`;
+    if (countEl14) countEl14.textContent = `${cardCount} / 15 Mastered`;
 
-    for (let c = 1; c <= 10; c++) {
+    for (let c = 1; c <= 15; c++) {
       const card = document.getElementById('fc-' + c);
       if (card) {
         if (user.flashcardsRevealed.includes(c)) {
