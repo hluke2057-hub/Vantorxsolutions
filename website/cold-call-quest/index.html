@@ -1649,6 +1649,45 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   }
   window.syncQuestToCloud = syncQuestToCloud;
 
+  async function loadQuestRosterFromCloud() {
+    try {
+      const res = await fetch('/api/reps/rep-roster');
+      if (res.ok) {
+        const data = await res.json();
+        if (data && Array.isArray(data.roster)) {
+          let profiles = {};
+          try {
+            profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
+          } catch(e){}
+          let updated = false;
+          data.roster.forEach(r => {
+            const uid = r.id;
+            if (!profiles[uid]) {
+              profiles[uid] = {
+                id: uid,
+                name: r.name,
+                email: r.email || '',
+                role: r.role || 'Outbound Closer',
+                avatar: r.avatar || '⚔️',
+                level: (r.game && r.game.level) || 1,
+                xp: (r.game && r.game.xp) || 0,
+                bossesDefeated: (r.game && r.game.bossesDefeated) || 0,
+                dealsClosed: (r.game && r.game.dealsClosed) || 0,
+                lastAction: r.lastAction || 'Active'
+              };
+              updated = true;
+            }
+          });
+          if (updated) {
+            localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
+            renderQuestRepList();
+          }
+        }
+      }
+    } catch(e) {}
+  }
+  loadQuestRosterFromCloud();
+
   function showToast(msg) {
     let t = document.getElementById('questToastEl');
     if (!t) {

@@ -35,23 +35,29 @@ Assert-True "audit.js contains handleRepSync" ($auditCode.Contains("handleRepSyn
 Assert-True "audit.js contains handleRepDigest" ($auditCode.Contains("handleRepDigest"))
 Assert-True "audit.js targets luke@vantorxsolutions.com and hluke2057@gmail.com" ($auditCode.Contains("luke@vantorxsolutions.com") -and $auditCode.Contains("hluke2057@gmail.com"))
 Assert-True "audit.js supports rep-roster, rep-sync, and rep-digest actions" ($auditCode.Contains("rep-roster") -and $auditCode.Contains("rep-sync") -and $auditCode.Contains("rep-digest"))
+Assert-True "audit.js has Supabase audit_log cloud persistence" ($auditCode.Contains("/rest/v1/audit_log"))
+Assert-True "audit.js supports lesson_completed milestone" ($auditCode.Contains("lesson_completed"))
 
 # TEST 3: vercel.json contains /api/reps routing rewrites
 $vercelJson = Get-Content (Join-Path $repoRoot "website/vercel.json") -Raw -Encoding UTF8
 Assert-True "vercel.json has /api/reps rewrite" ($vercelJson.Contains('"/api/reps"'))
 Assert-True "vercel.json has /api/reps/:action rewrite" ($vercelJson.Contains('"/api/reps/:action"'))
 
-# TEST 4: cold-call-arena account creation modal has email input & cloud sync
+# TEST 4: cold-call-arena account creation modal has email input, cloud sync & digest
 $arenaHtml = Get-Content $arenaHtmlPath -Raw -Encoding UTF8
 Assert-True "cold-call-arena has newRepEmail input" ($arenaHtml.Contains('id="newRepEmail"'))
 Assert-True "cold-call-arena has syncRepToCloud function" ($arenaHtml.Contains("function syncRepToCloud"))
+Assert-True "cold-call-arena has loadRosterFromCloud function" ($arenaHtml.Contains("function loadRosterFromCloud"))
+Assert-True "cold-call-arena has triggerFounderDigest function" ($arenaHtml.Contains("triggerFounderDigest"))
+Assert-True "cold-call-arena has Email Digest button in caller bar" ($arenaHtml.Contains("Email Digest") -and $arenaHtml.Contains("triggerFounderDigest()"))
 Assert-True "cold-call-arena calls syncRepToCloud on account creation" ($arenaHtml.Contains("account_created"))
 
-# TEST 5: cold-call-quest has repModal, switch button, and cloud sync hooks
+# TEST 5: cold-call-quest has repModal, switch button, cloud roster and sync hooks
 $questHtml = Get-Content $questHtmlPath -Raw -Encoding UTF8
 Assert-True "cold-call-quest has repModal" ($questHtml.Contains('id="repModal"'))
 Assert-True "cold-call-quest has Switch / Add Rep button" ($questHtml.Contains("openRepModal()"))
 Assert-True "cold-call-quest has Email Progress Digest button" ($questHtml.Contains("triggerFounderDigest()"))
+Assert-True "cold-call-quest has loadQuestRosterFromCloud function" ($questHtml.Contains("function loadQuestRosterFromCloud"))
 Assert-True "cold-call-quest has syncQuestToCloud function" ($questHtml.Contains("function syncQuestToCloud"))
 Assert-True "cold-call-quest triggers cloud sync on boss defeat" ($questHtml.Contains("syncQuestToCloud('boss_defeated'"))
 

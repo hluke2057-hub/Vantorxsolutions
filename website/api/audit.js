@@ -3,15 +3,16 @@ const path = require("path");
 const { supabaseRequest, jsonError, methodNotAllowed } = require("./_lib/supabase");
 const { sendEmail } = require("./_lib/email");
 
-const REPO_ROOT = path.resolve(__dirname, "..");
-const ROSTER_FILES = [
-  path.join(REPO_ROOT, "data", "rep_roster.json"),
-  path.join(REPO_ROOT, "website", "data", "rep_roster.json"),
-  path.join(__dirname, "data", "rep_roster.json"),
-  path.join(__dirname, "..", "data", "rep_roster.json"),
+const REPO_ROOT = path.resolve(__dirname, "..", "..");
+const CANDIDATE_ROSTER_FILES = [
+  path.join("/tmp", "rep_roster.json"),
+  path.resolve(REPO_ROOT, "data", "rep_roster.json"),
+  path.resolve(REPO_ROOT, "website", "data", "rep_roster.json"),
+  path.resolve(__dirname, "..", "data", "rep_roster.json"),
   path.resolve(process.cwd(), "data", "rep_roster.json"),
   path.resolve(process.cwd(), "website", "data", "rep_roster.json"),
 ];
+const ROSTER_FILES = Array.from(new Set(CANDIDATE_ROSTER_FILES.map(p => path.normalize(p))));
 
 function getRoster() {
   for (const fp of ROSTER_FILES) {
@@ -60,8 +61,11 @@ function saveRoster(roster) {
   for (const fp of ROSTER_FILES) {
     try {
       const dir = path.dirname(fp);
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(fp, JSON.stringify(roster, null, 2), "utf8");
+      const isTmp = fp.startsWith("/tmp") || fp.startsWith("\\tmp");
+      if (isTmp || fs.existsSync(dir)) {
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        fs.writeFileSync(fp, JSON.stringify(roster, null, 2), "utf8");
+      }
     } catch (_) {}
   }
 }
@@ -134,6 +138,27 @@ async function handleRepSync(req, res) {
 
   saveRoster(roster);
 
+  // Background cloud persistence & Supabase keepalive
+  try {
+    supabaseRequest("/rest/v1/audit_log", {
+      method: "POST",
+      body: {
+        action: `rep_${milestone}`,
+        entity_type: "sales_rep",
+        entity_id: existing.id,
+        payload: {
+          name: existing.name,
+          email: existing.email,
+          role: existing.role,
+          course: existing.course,
+          game: existing.game,
+          milestoneDetail: milestoneDetail || existing.lastAction,
+          timestamp: nowIso
+        }
+      }
+    }).catch(err => console.warn("[Supabase Rep Sync Log Warning]", err.message));
+  } catch (_) {}
+
   // Background Milestone Alert Email to Luke
   if (milestone && milestone !== "silent_heartbeat") {
     let alertSubject = `👤 [Rep Progress] ${existing.name}: ${milestoneDetail || milestone}`;
@@ -156,6 +181,14 @@ async function handleRepSync(req, res) {
       alertSubject = `🎓 [Course Milestone] ${existing.name} passed ${milestoneDetail || "Academy Exam"}!`;
       alertBadge = "📜 EXAM PASSED";
       alertColor = "#a855f7";
+    } else if (milestone === "lesson_completed") {
+      alertSubject = `📚 [Lesson Completed] ${existing.name} finished ${milestoneDetail || "Closer Academy Lesson"}!`;
+      alertBadge = "📖 LESSON COMPLETED";
+      alertColor = "#818cf8";
+    } else if (milestone === "dials_logged") {
+      alertSubject = `📞 [Call Telemetry] ${existing.name} logged live outbound calls!`;
+      alertBadge = "📞 OUTBOUND DIALS";
+      alertColor = "#38bdf8";
     }
 
     const emailHtml = `
