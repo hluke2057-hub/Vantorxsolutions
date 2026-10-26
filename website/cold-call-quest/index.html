@@ -2900,7 +2900,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'proof_demo_line') {
       return pickUnique(memory, [
-        `You dodged my question, Luke. What number can I dial from my truck right now on speaker to hear Ava's voice?`,
+        `You dodged my question, Luke. What number can I dial from my truck right now on speaker to hear her voice?`,
         `Answer my question first: how do I hear her live before we talk about anything else?`
       ], 'dodge_demo_warning');
     }
@@ -2928,14 +2928,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'explain_leadflow') {
       return pickUnique(memory, [
-        `You're dodging me, Luke. I asked for a step-by-step explanation of what LeadFlow actually does when a lead goes cold. Explain the machine!`,
+        `You're dodging me, Luke. I asked for a step-by-step explanation of what your CRM actually does when a lead goes cold. Explain the machine!`,
         `Don't use software sales buzzwords. Explain exactly what happens when a missed call happens or an estimate sits on my whiteboard.`
       ], 'dodge_explain_leadflow');
     }
 
     if (analysis.isDodgingQuestion && memory.lastBossQuestion === 'explain_ava') {
       return pickUnique(memory, [
-        `You dodged the technical breakdown, Luke. How does Ava answer, qualify an emergency chiller call, and text my technician? Explain the workflow!`,
+        `You dodged the technical breakdown, Luke. How does your voice system answer, qualify an emergency chiller call, and text my technician? Explain the workflow!`,
         `Answer my question: walk me through the exact call flow from ring 1 to technician dispatch.`
       ], 'dodge_explain_ava');
     }
@@ -3013,8 +3013,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       memory.lastBossQuestion = 'explain_solution_ava';
       memory.topicsCovered['permission'] = true;
       return pickUnique(memory, [
-        `(Chuckles into receiver) Ha, fair enough -- most salespeople just dump 15 brochures into my spam folder. Honestly, the biggest headache is after 5 PM and on weekends when emergency calls come in and we're at dinner with our families. How does Ava handle those without us staring at our phones?`,
-        `I appreciate you being straight up instead of clogging my inbox. It's after-hours and weekend storm calls that hurt the most. Tell me how Ava catches those.`
+        `(Chuckles into receiver) Ha, fair enough -- most salespeople just dump 15 brochures into my spam folder. Honestly, the biggest headache is after 5 PM and on weekends when emergency calls come in and we're at dinner with our families. How does your setup handle those without us staring at our phones?`,
+        `I appreciate you being straight up instead of clogging my inbox. It's after-hours and weekend storm calls that hurt the most. Tell me how your system catches those.`
       ], 'email_pivot_success');
     }
 
@@ -3047,7 +3047,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       }
       if (boss.key === 'gatekeeper') {
         return pickUnique(memory, [
-          `(Typing slows) Gary's dispatch board is a mess of missed calls. If your LeadFlow CRM automatically texts back missed calls and routes them to Ava, that would fix our afternoon rush. What is the monthly rate for that?`,
+          `(Typing slows) Gary's dispatch board is a mess of missed calls. If your CRM automatically texts back missed calls and routes them to on-call dispatch, that would fix our afternoon rush. What is the monthly rate for that?`,
           `A contractor CRM that integrates with emergency dispatch? What does that cost per month?`
         ], 'gk_crm_ack');
       }
@@ -3058,7 +3058,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         ], 'vito_crm_ack');
       }
       return pickUnique(memory, [
-        `(Nodding slowly) Integrating with our existing dispatch so tickets don't get lost in the shuffle? That's huge. Most outbound guys want me to scrap my whole system. How much does your LeadFlow CRM setup cost per month?`,
+        `(Nodding slowly) Integrating with our existing dispatch so tickets don't get lost in the shuffle? That's huge. Most outbound guys want me to scrap my whole system. How much does your contractor CRM setup cost per month?`,
         `(Chuckles) Man, half our bids fall through the cracks because guys in the field scribble notes on cardboard. Having a real contractor CRM that auto-texts missed calls would save us thousands. What does that cost per month?`
       ], 'contractor_crm_ack');
     }
@@ -3190,7 +3190,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           ], 'skeptic_pain_ack');
         } else if (boss.key === 'price') {
           return pickUnique(memory, [
-            `(Pipe wrench clangs) Yeah, emergency sewer backups happen at 11 PM and by 11:05 PM they've hired another Miami plumber. But look, I got burned by a marketing clown for $3,000 last year. What does this Ava thing actually do?`,
+            `(Pipe wrench clangs) Yeah, emergency sewer backups happen at 11 PM and by 11:05 PM they've hired another Miami plumber. But look, I got burned by a marketing clown for $3,000 last year. What does your service actually do?`,
             `(Scoffs into receiver) Missing emergency repipes hurts, obviously. But I'm not getting trapped in another $2,500 retainer. What is this tool?`
           ], 'price_pain_ack');
         } else if (boss.key === 'sal') {
@@ -3201,7 +3201,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         } else if (boss.key === 'brad') {
           return pickUnique(memory, [
             `(Condenser fan spins) Look, I already spend $1,800 a month on Angi and HomeAdvisor. My phone rings enough. How does your software capture exclusive callers before Angi sells them to 4 competitors?`,
-            `(Gulp of sweet tea) Angi brings me jobs every week, but shared leads are cutthroat. How does Ava get me calls directly from Google?`
+            `(Gulp of sweet tea) Angi brings me jobs every week, but shared leads are cutthroat. How does your setup get me calls directly from Google?`
           ], 'brad_pain_ack');
         } else if (boss.key === 'gary') {
           return pickUnique(memory, [
@@ -3220,7 +3220,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           ], 'marco_pain_ack');
         } else if (boss.key === 'rex') {
           return pickUnique(memory, [
-            `(Leans back in executive chair) You understand unit economics. Across our 40 HVAC and plumbing brands, missed emergency calls cost us roughly $4.2M in annual top-line revenue and depress platform EBITDA. But offshore answering services are terrible. How does Ava handle multi-location dispatch without hallucinating?`,
+            `(Leans back in executive chair) You understand unit economics. Across our 40 HVAC and plumbing brands, missed emergency calls cost us roughly $4.2M in annual top-line revenue and depress platform EBITDA. But offshore answering services are terrible. How does your system handle multi-location dispatch without hallucinating?`,
             `(Nods slowly) Revenue leakage is our primary operational bottleneck. Walk me through how your system captures multi-location calls without hiring a call center.`
           ], 'rex_pain_ack');
         } else if (boss.key === 'elena') {
@@ -3237,22 +3237,22 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           ], 'travis_explain_demand');
         } else if (boss.key === 'mitch') {
           return pickUnique(memory, [
-            `(Taps blueprint) You hit the nail on the head. We have $300,000 in open kitchen and bath remodel estimates sitting in Jobber right now. By the time my project managers follow up 4 days later, the client already signed with another contractor. How does LeadFlow stop that leakage?`,
-            `Open bids sitting cold in Jobber is our biggest revenue leak. How does your LeadFlow CRM catch those estimates?`
+            `(Taps blueprint) You hit the nail on the head. We have $300,000 in open kitchen and bath remodel estimates sitting in Jobber right now. By the time my project managers follow up 4 days later, the client already signed with another contractor. How does your software stop that leakage?`,
+            `Open bids sitting cold in Jobber is our biggest revenue leak. How does your CRM catch those estimates?`
           ], 'mitch_pain_ack');
         } else if (boss.key === 'wayne') {
           memory.stage = 'explain';
           memory.lastBossQuestion = 'explain_leadflow';
           return pickUnique(memory, [
-            `(Metal shears rattle) Look Luke, I hear the word CRM all day long and it sounds like corporate buzzword garbage. We've got $400k in unclosed bids on a whiteboard. Explain to me step-by-step what LeadFlow actually does when a missed call happens or when an estimate goes cold. Break down the machine for me.`,
-            `Explain the mechanics: what does LeadFlow actually do when a commercial roofing lead goes cold? Break it down step-by-step.`
+            `(Metal shears rattle) Look Luke, I hear the word CRM all day long and it sounds like corporate buzzword garbage. We've got $400k in unclosed bids on a whiteboard. Explain to me step-by-step what your CRM actually does when a missed call happens or when an estimate goes cold. Break down the machine for me.`,
+            `Explain the mechanics: what does your CRM actually do when a commercial roofing lead goes cold? Break it down step-by-step.`
           ], 'wayne_explain_demand');
         } else if (boss.key === 'victor') {
           memory.stage = 'explain';
           memory.lastBossQuestion = 'explain_ava';
           return pickUnique(memory, [
-            `(Chiller hums) I pay an answering service in Tampa $1,800 a month right now, and they constantly misspell compressor model numbers and take 20 minutes to relay emergency calls. Explain to me exactly how Ava handles an incoming emergency call: how does she answer, what does she say, how does she qualify the job, and how does my on-call tech get the dispatch info without latency?`,
-            `Break down the exact technical workflow: how does Ava answer in 1 ring, qualify an industrial compressor emergency, and dispatch to our techs without dropping calls?`
+            `(Chiller hums) I pay an answering service in Tampa $1,800 a month right now, and they constantly misspell compressor model numbers and take 20 minutes to relay emergency calls. Explain to me exactly how your AI dispatcher handles an incoming emergency call: how does it answer, what does it say, how does it qualify the job, and how does my on-call tech get the dispatch info without latency?`,
+            `Break down the exact technical workflow: how does your system answer in 1 ring, qualify an industrial compressor emergency, and dispatch to our techs without dropping calls?`
           ], 'victor_explain_demand');
         }
       }
@@ -3437,7 +3437,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       }
 
       return pickUnique(memory, [
-        `Wait, $300 a month with zero setup fee and no contract? Honestly, that's pocket change -- one ${boss.avgLeak || 'emergency job'} pays for the entire year. But hold on: does this Ava thing sound like a robot? Florida homeowners with an emergency want a real person, not an automated machine. How do I hear her?`,
+        `Wait, $300 a month with zero setup fee and no contract? Honestly, that's pocket change -- one ${boss.avgLeak || 'emergency job'} pays for the entire year. But hold on: does your AI receptionist sound like a robot? Florida homeowners with an emergency want a real person, not an automated machine. How do I hear her?`,
         `$397 a month and no long-term contracts? That's actually fair compared to the $1,400 answering services charge. But how do I know she doesn't sound computerized with that awkward 2-second delay? What's the number to test her?`
       ], 'price_reaction');
     }
@@ -3507,15 +3507,15 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (boss.key === 'brad' && (analysis.low.includes('angi') || analysis.low.includes('shared') || analysis.low.includes('exclusive') || analysis.low.includes('90') || analysis.hasLeakHook)) {
       memory.lastBossQuestion = 'how_much_does_it_cost';
       return pickUnique(memory, [
-        `Man, you're dead right about Angi selling the same AC replacement lead to 4 competitors. I lost three $9k changeouts last month because two other guys called them while I was driving! How much does this Ava setup cost compared to Angi?`,
-        `Damn... that shared lead bloodbath is too real. I paid $90 for a lead yesterday and the homeowner said four contractors already blew up their phone. How does Ava capture exclusive calls from my own Google profile?`
+        `Man, you're dead right about Angi selling the same AC replacement lead to 4 competitors. I lost three $9k changeouts last month because two other guys called them while I was driving! How much does your setup cost compared to Angi?`,
+        `Damn... that shared lead bloodbath is too real. I paid $90 for a lead yesterday and the homeowner said four contractors already blew up their phone. How does your setup capture exclusive calls from my own Google profile?`
       ], 'brad_angi_reaction');
     }
 
     if (boss.key === 'gary' && (analysis.low.includes('yellow pad') || analysis.low.includes('text') || analysis.low.includes('flip phone') || analysis.low.includes('computer') || analysis.low.includes('simple') || analysis.low.includes('sms'))) {
       memory.lastBossQuestion = 'proof_demo_line';
       return pickUnique(memory, [
-        `(Chuckles in southern drawl) Well son, I appreciate you not trying to sell me some high-tech silicon valley nonsense. If Ava just acts like a polite southern receptionist and texts my flip phone the address and tank size, that actually solves my headache. Does she sound natural or like a machine?`,
+        `(Chuckles in southern drawl) Well son, I appreciate you not trying to sell me some high-tech silicon valley nonsense. If your receptionist just acts like a polite southern girl and texts my flip phone the address and tank size, that actually solves my headache. Does she sound natural or like a machine?`,
         `So she just answers my office line and texts my flip phone the customer name, address, and emergency level? Hell, even an old timer like me can handle that. But how do I hear what she sounds like?`
       ], 'gary_pad_reaction');
     }
@@ -3553,14 +3553,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     if (memory.lastBossQuestion === 'explain_leadflow') {
       return pickUnique(memory, [
-        `Break down the LeadFlow machine for me, Luke. What happens in the first 90 seconds and how does it follow up on open bids?`,
-        `Explain how LeadFlow revives dead bids from my whiteboard step-by-step.`
+        `Break down your CRM machine for me, Luke. What happens in the first 90 seconds and how does it follow up on open bids?`,
+        `Explain how your CRM revives dead bids from my whiteboard step-by-step.`
       ], 'prompt_explain_leadflow');
     }
 
     if (memory.lastBossQuestion === 'explain_ava') {
       return pickUnique(memory, [
-        `Explain Ava's emergency call flow to me, Luke: how does she answer on ring 1, triage the chiller failure, and alert my on-call tech?`,
+        `Explain your AI's emergency call flow to me, Luke: how does she answer on ring 1, triage the chiller failure, and alert my on-call tech?`,
         `Walk me through the technical dispatch workflow: ring 1 pickup, caller intake, SMS dispatch, and Carrier *71.`
       ], 'prompt_explain_ava');
     }
@@ -3568,7 +3568,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (memory.lastBossQuestion === 'how_much_does_it_cost') {
       return pickUnique(memory, [
         `I hear what you're saying, Luke, but I need the bottom line number. How many dollars a month is this? Give me the price.`,
-        `Don't dance around the cost, kid. How much does Ava run per month? What's the investment?`
+        `Don't dance around the cost, kid. How much does your service run per month? What's the investment?`
       ], 'prompt_price');
     }
 
@@ -3582,7 +3582,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (memory.lastBossQuestion === 'carrier_rollover_setup') {
       return pickUnique(memory, [
         `I'm not signing anything until I know what happens to my company phone number. Do I have to switch carriers or port my number? Tell me how it connects.`,
-        `How does this Ava tool actually connect to my business line without messing up my phones? Give me the setup details.`
+        `How does your setup actually connect to my business line without messing up my phones? Give me the setup details.`
       ], 'prompt_carrier');
     }
 
@@ -3596,7 +3596,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     // General trade context fallback (Only on turn 1 if off-topic)
     return pickUnique(memory, [
       `Look Luke, I'm out in ${boss.location} dealing with ${boss.trade.toLowerCase()} jobs right now. Tell me the bottom line: how does this stop me from losing ${boss.avgLeak || 'jobs'} when my crews are working?`,
-      `I'm listening, Luke, but make it plain English -- when a high-dollar ${boss.trade.toLowerCase()} customer calls after hours, how does Ava turn that into money in my bank account?`
+      `I'm listening, Luke, but make it plain English -- when a high-dollar ${boss.trade.toLowerCase()} customer calls after hours, how does your service turn that into money in my bank account?`
     ], 'general_trade_context');
   }
 
@@ -3759,7 +3759,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         grade = 'S';
         damage = 36;
         counterDmg = 0;
-        feedback = '\uD83D\uDD25 REVENUE LEAK HOOK LANDED! Contractor admitted calls roll to voicemail. Now pitch Ava and explain how she answers in 1 ring 24/7!';
+        feedback = '\uD83D\uDD25 REVENUE LEAK HOOK LANDED! Contractor admitted calls roll to voicemail. Now pitch your 24/7 AI receptionist (Ava) and explain how she answers in 1 ring!';
       } else if ((analysis.hasPackageMention || analysis.hasWebsiteMention) && (analysis.hasPricingAnswer || analysis.hasDemoNumber)) {
         grade = 'S';
         damage = 44;
