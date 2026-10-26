@@ -36,17 +36,19 @@ module.exports = async function handler(req, res) {
     const startTime = Date.now();
     try {
       const targetUrl = supabaseUrl.replace(/\/+$/, "") + "/rest/v1/";
+      const headers = { apikey: publishableKey };
+      if (publishableKey.startsWith("ey")) {
+        headers.Authorization = `Bearer ${publishableKey}`;
+      }
       const sbRes = await fetch(targetUrl, {
         method: "GET",
-        headers: {
-          apikey: publishableKey,
-          Authorization: `Bearer ${publishableKey}`,
-        },
+        headers,
       });
       supabaseLatencyMs = Date.now() - startTime;
       supabaseActive = sbRes.ok;
       if (!sbRes.ok) {
-        supabaseError = `HTTP ${sbRes.status} ${sbRes.statusText}`;
+        const text = await sbRes.text().catch(() => "");
+        supabaseError = `HTTP ${sbRes.status} ${sbRes.statusText}${text ? ': ' + text.slice(0, 120) : ''}`;
       }
     } catch (err) {
       supabaseLatencyMs = Date.now() - startTime;
