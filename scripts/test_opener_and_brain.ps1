@@ -65,6 +65,26 @@ $testScript = @'
     submitRebuttal();
     assert("Owner verification prompt handled without hangup", inputEl.disabled === false);
 
+    // TEST 8: Luke's 20-second permission opener receives realistic 20-second grant and Grade A
+    selectBoss(0); // Rick
+    inputEl.value = "Hey man, it's Luke from Vantorax. I was wondering if you got 20 seconds or should I hang up?";
+    const evalOpener = evaluateTurn(inputEl.value);
+    assert("Turn 1 20-sec opener grade is A (not false S)", evalOpener.grade === 'A');
+    assert("Turn 1 damage is 20 (not false 45 DMG)", evalOpener.damage === 20);
+    assert("Turn 1 feedback guides to revenue leak hook", evalOpener.feedback.indexOf('CLEAN PERMISSION OPENER') !== -1);
+    assert("Rick grants 20 seconds instead of premature roof confession", evalOpener.contractorReply.indexOf('20 seconds') !== -1 && evalOpener.contractorReply.indexOf('12-pitch roof') === -1);
+    submitRebuttal();
+    assert("Turn 1 advances to permission_granted", matchMemory.stage === 'permission_granted');
+
+    // TEST 9: Turn 2 Revenue Leak Hook lands Grade S and triggers Rick's roof confession
+    inputEl.value = "Where do your emergency calls go when you're up on a roof? Straight to voicemail, right?";
+    const evalHook = evaluateTurn(inputEl.value);
+    assert("Turn 2 Leak Hook grade is S", evalHook.grade === 'S');
+    assert("Turn 2 feedback confirms leak hook landed", evalHook.feedback.indexOf('REVENUE LEAK HOOK LANDED') !== -1);
+    assert("Rick confesses leak pain after hook is delivered", evalHook.contractorReply.indexOf('voicemail') !== -1 || evalHook.contractorReply.indexOf('shingles') !== -1 || evalHook.contractorReply.indexOf('roof') !== -1);
+    submitRebuttal();
+    assert("Turn 2 advances to pain stage", matchMemory.stage === 'pain');
+
     const passed = tests.filter(t => t.pass).length;
     const total = tests.length;
     document.getElementById('openerTestOutput').innerHTML = `<h3>OPENER_TESTS_RESULT: ${passed}/${total} PASSED</h3>` +
@@ -73,7 +93,7 @@ $testScript = @'
     window.__OPENER_TESTS_PASSED__ = (passed === total);
   } catch(err) {
     console.error('Test runner exception:', err);
-    document.getElementById('openerTestOutput').innerHTML = `<h3>ERROR: ${err.message}</h3>`;
+    document.getElementById('openerTestOutput').innerHTML = `<h3>ERROR: ${err.message} | STACK: ${err.stack}</h3>`;
     window.__OPENER_TESTS_DONE__ = true;
     window.__OPENER_TESTS_PASSED__ = false;
   }
@@ -116,6 +136,9 @@ if ($domOutput -match '<h3>OPENER_TESTS_RESULT: (\d+)/(\d+) PASSED</h3>') {
         Write-Host "`nSOME OPENER TESTS FAILED!`n" -ForegroundColor Red
         exit 1
     }
+} elseif ($domOutput -match '<h3>ERROR: ([^<]+)</h3>') {
+    Write-Host "Test Runner Exception in Headless DOM: $($matches[1])" -ForegroundColor Red
+    exit 1
 } else {
     Write-Host "Could not retrieve test results from headless DOM."
     Write-Host ($domOutput.Substring(0, [Math]::Min(500, $domOutput.Length)))

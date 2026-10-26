@@ -1155,7 +1155,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
   let matchMemory = {
     turns: 0,
-    stage: 'opener', // opener -> pain -> mechanism -> price -> proof -> carrier -> close -> victory
+    stage: 'opener', // opener -> permission_granted -> pain -> mechanism -> price -> proof -> carrier -> close -> victory
     lastBossQuestion: 'who_are_you',
     answeredQuestions: new Set(),
     usedReplies: new Set(),
@@ -1514,16 +1514,16 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const hasAgreement = /hear\s*you|agree|100%|completely|understand|you're\s*right|fair\s*enough|totally|makes\s*sense/i.test(low);
     
     const hasLeakHook = /leak|missed\s*call|emergency|after\s*hours|after\s*5|weekend|night|dinner|at\s*8\s*pm|sleeping|voicemail|next\s*(guy|contractor|roofer|plumber)/i.test(low);
-    const hasDollarMath = /\$?\s*([0-9]+,?([0-9]{3})*)\s*(k|thousand|dollar|bucks)?/i.test(low) || /8,?000|12,?000|6,?000|9,?000|300|397|1,?200/i.test(low);
+    const hasDollarMath = /\$\s*\d+/i.test(low) || /\b\d+\s*(k|grand|thousand|dollars?|bucks)\b/i.test(low) || /\b(8,?000|10,?000|12,?000|15,?000|16,?000|20,?000|25,?000|50,?000|6,?000|7,?000|9,?000|8k|10k|12k|15k|20k|50k)\b/i.test(low);
     
-    const hasAvaMechanism = /ava|ai|receptionist|phone|call|instant|one\s*ring|first\s*ring|text|notify|dispatch|answers\s*(24\/7|automatically|live)|qualif|calendar|schedule/i.test(low);
+    const hasAvaMechanism = /\b(ava|voice\s*ai|ai\s*receptionist|ai\s*dispatcher?|answers?\s*(in\s*)?(1|one)\s*ring|answers?\s*(24\/7|every\s*call|instantly|automatically|live)|(texts?|sms)\s*(your|my|the)?\s*cell|sms\s*dispatch|books?\s*(directly\s*)?(into|on)\s*(your|the)?\s*(calendar|schedule)|pre-?qualif(y|ies|ication)|intake\s*the\s*caller)\b/i.test(low);
     
     const hasDemoNumber = /(561)\s*813-8602|813-8602|5618138602|live\s*demo|test\s*number|dial\s*(this|it|her)/i.test(low);
     const hasSoundHuman = /sound|human|robot|robotic|delay|latency|natural|real\s*person|cadence|accent/i.test(low);
     
     const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*forwarding|conditional\s*call\s*forwarding|forward|rollover|port|switch|verizon|at&t|att|t-mobile|existing\s*number|keep\s*your\s*number/i.test(low);
     
-    const hasPricingAnswer = /300|397|299|400|\$?\s*\d+|dollar|bucks|month|cheap|cost|investment|setup\s*fee|zero\s*contract|no\s*contract|cancel\s*anytime|month-to-month|flat\s*rate|flat|roi|pays\s*for\s*itself/i.test(low);
+    const hasPricingAnswer = /\b(397|300|299|400|697|1,?297)\b/i.test(low) || /\$\s*\d+/i.test(low) || /\b\d+\s*(a|per|\/)\s*month\b/i.test(low) || /\b(flat\s*rate|zero\s*setup(\s*fee)?|no\s*contracts?|zero\s*contracts?|cancel\s*anytime|month-to-month|pays\s*for\s*itself|monthly\s*rate|monthly\s*investment)\b/i.test(low);
     
     const hasTimeProposal = /tomorrow|4:30|morning|afternoon|10\s*min|walkthrough|meeting|calendar|invite|zoom|screen\s*share|schedule|book|call\s*you/i.test(low);
 
@@ -1787,13 +1787,64 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     // 4. DIALOGUE STATE ADVANCEMENT (Forward-Only State Machine)
 
-    // STAGE 1: Opener -> Pain
+    // STAGE 1: Opener -> Permission Granted
     if (memory.lastBossQuestion === 'who_are_you') {
-      if (analysis.hasPermission || analysis.hasAgreement || analysis.hasLeakHook || analysis.hasGatekeeperPivot || analysis.hasEmailPivot) {
+      if (analysis.hasPermission && !analysis.hasLeakHook) {
+        memory.stage = 'permission_granted';
+        memory.lastBossQuestion = 'deliver_hook';
+        memory.topicsCovered['permission'] = true;
+
+        if (boss.key === 'roofer') {
+          return pickUnique(memory, [
+            `(Nail gun pauses) ...20 seconds? (Sighs) Alright kid, you got 20 seconds on the clock. Make it count, what do you got?`,
+            `(Wipes sweat) 20 seconds or hang up? Ha, fair enough. 20 seconds starts right now, talk.`
+          ], 'roofer_permission_grant');
+        } else if (boss.key === 'gatekeeper') {
+          return pickUnique(memory, [
+            `(Typing slows) 20 seconds? Fine, you got 20 seconds before I have to dispatch our lead tech. What is this call regarding?`,
+            `(Sigh) 20 seconds. Make it fast, our emergency lines are ringing today. What do you need?`
+          ], 'gatekeeper_permission_grant');
+        } else if (boss.key === 'skeptic') {
+          return pickUnique(memory, [
+            `(Wire strippers pause) 20 seconds or hang up? At least you're not an automated recording. You got 20 seconds, talk.`,
+            `20 seconds on the clock, kid. Start talking before I climb this ladder.`
+          ], 'skeptic_permission_grant');
+        } else if (boss.key === 'price') {
+          return pickUnique(memory, [
+            `(Pipe wrench rests) 20 seconds on the clock. Make your pitch before I get back under this commercial sink.`,
+            `20 seconds? Fair enough. Clock is ticking, what do you have for my plumbing company?`
+          ], 'price_permission_grant');
+        } else if (boss.key === 'sal') {
+          return pickUnique(memory, [
+            `(Pump humming in background) 20 seconds? Alright kid, talk fast. What does your company do?`,
+            `20 seconds on the clock. I got 5 crews out in Fort Myers, tell me why you called.`
+          ], 'sal_permission_grant');
+        } else if (boss.key === 'brad') {
+          return pickUnique(memory, [
+            `(Sip of sweet tea) 20 seconds? Sure, I got 20 seconds before my next service call. What's on your mind?`,
+            `20 seconds or hang up? I like directness. You got 20 seconds, shoot.`
+          ], 'brad_permission_grant');
+        } else if (boss.key === 'gary') {
+          return pickUnique(memory, [
+            `(Diesel backhoe idles) 20 seconds? Fair enough son, go ahead and speak your piece.`,
+            `20 seconds on the clock. What can you do for an old septic contractor?`
+          ], 'gary_permission_grant');
+        } else if (boss.key === 'vito') {
+          return pickUnique(memory, [
+            `20 seconds? That's direct. You have 20 seconds before my dispatch briefing starts. Pitch.`,
+            `20 seconds on the clock. Make it count, Luke.`
+          ], 'vito_permission_grant');
+        }
+      }
+    }
+
+    // STAGE 1b: Hook -> Pain Confession
+    if (memory.lastBossQuestion === 'deliver_hook' || (memory.lastBossQuestion === 'who_are_you' && (analysis.hasLeakHook || analysis.hasGatekeeperPivot || analysis.hasEmailPivot))) {
+      if (analysis.hasLeakHook || analysis.asksWhoAnswers || analysis.asksHowMuchLost || analysis.hasAgreement || analysis.hasGatekeeperPivot || analysis.hasEmailPivot) {
         memory.stage = 'pain';
         memory.lastBossQuestion = 'explain_solution_ava';
         memory.topicsCovered['permission'] = true;
-        if (analysis.hasLeakHook) memory.topicsCovered['leak'] = true;
+        memory.topicsCovered['leak'] = true;
 
         if (boss.key === 'roofer') {
           return pickUnique(memory, [
@@ -1802,7 +1853,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           ], 'roofer_pain_ack');
         } else if (boss.key === 'gatekeeper') {
           return pickUnique(memory, [
-            `(Typing pauses) Honestly... thank you for recognizing that. Gary is out turning wrenches and I handle 40 incoming dispatch calls a day. After 5 PM, our answering service is a complete disaster. They lost two $9k AC changeouts last Friday. How does your system fix after-hours calls?`,
+            `(Typing pauses) Honestly... thank you for recognizing that. Gary is out in the field and I handle 40 incoming dispatch calls a day. After 5 PM, our answering service is a complete disaster. They lost two $9k AC changeouts last Friday. How does your system fix after-hours calls?`,
             `(Audible sigh) You're dead right about after-hours. When our technicians are stuck in a 115-degree attic on a Saturday, they can't answer. Callers hang up and hire the next company. What is your software?`
           ], 'gatekeeper_pain_ack');
         } else if (boss.key === 'skeptic') {
@@ -1827,7 +1878,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           ], 'brad_pain_ack');
         } else if (boss.key === 'gary') {
           return pickUnique(memory, [
-            `(Diesel excavator purrs) I've been pumping septic tanks in Marion County for 38 years. I write every job on this yellow legal pad in my truck. I don't use 'apps' and I don't have a computer. How could I even use your service?`,
+            `(Diesel excavator purrs) I've been pumping septic tanks in Marion County for 38 years. I write every job on this yellow legal pad in my truck. When I'm 6 feet deep in the dirt on a backhoe, I can't answer. But I don't use 'apps' and I don't have a computer. How could I even use your service?`,
             `(Slow southern drawl) When I'm 6 feet deep in the dirt on a backhoe, I can't answer. But I don't do computers or technology. You're talking Chinese to an old timer, son.`
           ], 'gary_pain_ack');
         } else if (boss.key === 'vito') {
@@ -1839,6 +1890,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       }
     }
 
+    if (memory.lastBossQuestion === 'deliver_hook') {
+      return pickUnique(memory, [
+        `You asked for 20 seconds, kid, and the clock is ticking. What does your company actually do for contractors?`,
+        `You got 10 seconds left on the clock. What's the reason for this call?`
+      ], 'prompt_deliver_hook');
+    }
     // STAGE 2: Mechanism / Ava Features Reaction -> Advances to Price
     if (analysis.hasAvaMechanism && !memory.mechanismCovered) {
       memory.mechanismCovered = true;
@@ -2123,16 +2180,41 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         damage = 45;
         counterDmg = 0;
         feedback = '🌴 BILINGUAL FLORIDA EDGE! Locked down Spanish emergency dispatch advantage!';
-      } else if ((analysis.hasPermission || analysis.hasAgreement) && (analysis.hasLeakHook || analysis.hasDollarMath) && (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer)) {
+      } else if ((analysis.hasPermission || analysis.hasAgreement) && (analysis.hasLeakHook && analysis.hasDollarMath) && (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer)) {
         grade = 'S';
         damage = 45;
         counterDmg = 0;
-        feedback = '🔥 MASTERFUL REBUTTAL! Fully addressed the contractor\'s concern, anchored trade math, and delivered proof!';
-      } else if (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer || analysis.hasTimeProposal) {
+        feedback = '\uD83D\uDD25 MASTERFUL REBUTTAL! Fully addressed the contractor\'s concern, anchored trade math, and delivered proof!';
+      } else if (analysis.hasPermission && !analysis.hasLeakHook && !analysis.hasAvaMechanism && !analysis.hasPricingAnswer) {
+        grade = 'A';
+        damage = 20;
+        counterDmg = 0;
+        feedback = '\u2713 CLEAN PERMISSION OPENER! Contractor gave you 20 seconds. Now drop your revenue leak hook \u2014 ask where calls go when lines are busy or after hours!';
+      } else if (analysis.hasLeakHook && !analysis.hasAvaMechanism && !analysis.hasPricingAnswer) {
+        grade = 'S';
+        damage = 36;
+        counterDmg = 0;
+        feedback = '\uD83D\uDD25 REVENUE LEAK HOOK LANDED! Contractor admitted calls roll to voicemail. Now pitch Ava and explain how she answers in 1 ring 24/7!';
+      } else if (analysis.hasAvaMechanism && !analysis.hasPricingAnswer) {
+        grade = 'A';
+        damage = 32;
+        counterDmg = 2;
+        feedback = '\u26A1 MECHANISM DELIVERED! Contractor understands 1-ring response and instant SMS dispatch. Now answer pricing ($397/mo) and offer the live demo!';
+      } else if ((analysis.hasPricingAnswer || analysis.hasDemoNumber) && !analysis.hasTimeProposal) {
+        grade = 'S';
+        damage = 38;
+        counterDmg = 0;
+        feedback = '\uD83C\uDFAF DIRECT ANSWER & LIVE PROOF! Quoted $397/mo flat with zero contracts and gave (561) 813-8602 test line. Now lock in a 10-minute walkthrough!';
+      } else if (analysis.hasTimeProposal) {
+        grade = 'S';
+        damage = 45;
+        counterDmg = 0;
+        feedback = '\uD83C\uDFC6 DEFINITIVE CLOSE PROPOSAL! Locked down a 10-minute walkthrough without hesitation!';
+      } else if (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer) {
         grade = 'A';
         damage = 34;
         counterDmg = 4;
-        feedback = '✨ EXCELLENT! Direct, substantive answer with zero fluff.';
+        feedback = '\u2728 EXCELLENT! Direct, substantive answer with zero fluff.';
       } else if (analysis.hasLeakHook || analysis.hasPermission || analysis.hasAgreement || analysis.hasAvaMechanism || analysis.isUserAskingQuestion || analysis.hasOwnerCheck) {
         grade = 'B';
         damage = 22;
@@ -2145,7 +2227,6 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         feedback = 'A bit vague. Anchor directly to their missed call revenue.';
       }
     }
-
     // 3. WEAPON & ARMOR & RELIC MODIFIERS
     if (grade !== 'F') {
       damage = Math.round(damage * (1 + curWeapon.dmgBonus / 100));

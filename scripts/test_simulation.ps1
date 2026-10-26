@@ -54,7 +54,7 @@ $testScript = @'
     redialAfterDefeat();
     inputEl.value = "Hey Rick, I know you're busy in Tampa -- you got 30 seconds before you hang up?";
     submitRebuttal();
-    assert("Turn 1 Opener advances to pain", matchMemory.stage === 'pain');
+    assert("Turn 1 Opener advances to permission_granted", matchMemory.stage === 'permission_granted');
 
     inputEl.value = "Ava answers in one ring, books directly into your calendar, and texts your cell phone immediately.";
     submitRebuttal();
@@ -82,10 +82,14 @@ $testScript = @'
     assert("Hesitation 2 terminates call", inputEl.disabled === true);
     assert("Defeat Title shows dead air", defeatTitle.textContent.indexOf('DEAD AIR') !== -1);
 
-    // TEST 7: 6-Stage Perfect Pitch Sequence advances to Victory
+    // TEST 7: 7-Stage Perfect Pitch Sequence advances to Victory
     redialAfterDefeat();
     inputEl.value = "Hey Rick, you got 20 seconds before you hang up on me?";
     submitRebuttal();
+    assert("Turn 1 Opener grants permission", matchMemory.stage === 'permission_granted');
+    inputEl.value = "Where do your emergency calls go when you are on a roof? Straight to voicemail, right?";
+    submitRebuttal();
+    assert("Turn 2 Leak Hook advances to pain", matchMemory.stage === 'pain');
     inputEl.value = "Ava answers inbound calls on the first ring, qualifies the shingle job, and texts your phone.";
     submitRebuttal();
     inputEl.value = "It is a flat 300 a month with zero setup fee and zero contract. One shingle repair pays for the entire year.";
