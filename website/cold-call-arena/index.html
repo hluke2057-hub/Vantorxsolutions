@@ -3915,12 +3915,15 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     <div style="border-top:1px solid var(--line);padding-top:16px">
       <div style="font-size:13px;font-weight:700;color:#ffffff;margin-bottom:10px">➕ Create New Sales Rep Account</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-        <input type="text" id="newRepName" placeholder="Rep Name (e.g. Jason)" class="custom-select" style="width:100%">
+        <input type="text" id="newRepName" placeholder="Full Name (e.g. Jason Miller)" class="custom-select" style="width:100%" required>
+        <input type="email" id="newRepEmail" placeholder="Email (e.g. jason@gmail.com)" class="custom-select" style="width:100%" required>
+      </div>
+      <div style="margin-bottom:10px">
         <select id="newRepRole" class="custom-select" style="width:100%">
-          <option value="Outbound Closer">Outbound Closer</option>
-          <option value="Appointment Setter">Appointment Setter</option>
-          <option value="Sales Rep (Buddy 2)">Sales Rep (Buddy 2)</option>
-          <option value="Guest Caller">Guest Caller</option>
+          <option value="Outbound Closer">Outbound Closer (3-Day Certification Track)</option>
+          <option value="Appointment Setter">Appointment Setter (Speed-to-Lead)</option>
+          <option value="Sales Rep (Commission)">Sales Rep (Commission)</option>
+          <option value="Junior Trainee">Junior Trainee</option>
         </select>
       </div>
       <button class="btn btn-gold" id="btnCreateAccount" onclick="createNewAccountFromModal()" style="width:100%;font-weight:700">Create Rep Account &amp; Start Academy ➔</button>
@@ -8909,10 +8912,62 @@ window.closeLeakMathModal = function() {
   let activeCaller = localStorage.getItem('vantorx_active_caller') || 'Luke (Founder)';
   let callerSelectEl = null;
 
+  let _syncDebounceTimer = null;
+  function syncRepToCloud(user, milestone = 'progress_update', detail = '') {
+    if (!user || !user.name) return;
+    try {
+      const payload = {
+        rep: {
+          id: user.id,
+          name: user.name,
+          email: user.email || (user.id === 'luke' ? 'luke@vantorxsolutions.com' : `${user.name.toLowerCase().replace(/[^a-z0-9]/g, '')}@vantorxsolutions.com`),
+          role: user.role || 'Outbound Closer',
+          avatar: user.avatar || '⚔️',
+          course: {
+            completedUnits: user.completedUnits || [],
+            daysPassed: user.daysPassed || [],
+            percent: Math.min(100, Math.round(((user.completedUnits || []).length / 15) * 100)),
+            level: user.level || 1,
+            xp: user.xp || 0,
+            status: (user.daysPassed || []).length >= 3 || user.autoPassed ? '🏆 Level 5 Certified' : `Day ${(user.daysPassed || []).length + 1} in Progress`
+          },
+          game: {
+            level: user.level || 1,
+            xp: user.xp || 0,
+            streak: user.streak || 0,
+            bossesDefeated: user.bossesDefeated || 0,
+            bossList: user.bossList || [],
+            totalDials: user.dailyDials || 0,
+            dealsClosed: user.dealsClosed || 0,
+            gold: user.gold || 0
+          }
+        },
+        milestone: milestone,
+        milestoneDetail: detail
+      };
+
+      fetch('/api/reps/rep-sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(e => console.warn('[Rep Cloud Sync Error]', e));
+    } catch(err) {
+      console.warn('[Rep Cloud Sync Exception]', err);
+    }
+  }
+  window.syncRepToCloud = syncRepToCloud;
+
   function saveUserProfiles() {
     try {
       localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(USER_PROFILES));
       localStorage.setItem('vantorx_active_user_id_v2', activeUserId);
+      const activeU = getActiveUser();
+      if (activeU && activeU.name) {
+        clearTimeout(_syncDebounceTimer);
+        _syncDebounceTimer = setTimeout(() => {
+          syncRepToCloud(activeU, 'progress_update', activeU.lastAction || 'Active in Closer Academy');
+        }, 1200);
+      }
     } catch(e) {
       console.error('Error saving user profiles:', e);
     }
@@ -8922,6 +8977,7 @@ window.closeLeakMathModal = function() {
     const user = getActiveUser();
     grantCoursePass(user);
     saveUserProfiles();
+    syncRepToCloud(user, 'certified', 'Passed 3-Day Closer Academy · Level 5 Certified');
     updateUserUI();
     updateAcademyUI();
     playSound('levelup');
@@ -9893,12 +9949,18 @@ window.closeLeakMathModal = function() {
 
   window.createNewAccountFromModal = function() {
     const nameInput = document.getElementById('newRepName');
+    const emailInput = document.getElementById('newRepEmail');
     const roleSelect = document.getElementById('newRepRole');
     const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
     const role = roleSelect ? roleSelect.value : 'Outbound Closer';
 
     if (!name) {
       showToast('Please enter a name for the new sales rep account.');
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Please enter a valid email address so Luke can track your progress.');
       return;
     }
 
@@ -9909,6 +9971,7 @@ window.closeLeakMathModal = function() {
     USER_PROFILES[uid] = {
       id: uid,
       name: name,
+      email: email,
       role: role,
       avatar: chosenAvatar,
       level: 1,
@@ -9924,12 +9987,17 @@ window.closeLeakMathModal = function() {
       modulesPassed: [],
       bossesDefeated: 0,
       dailyDials: 0,
-      dailySims: 0
+      dailySims: 0,
+      createdAt: new Date().toISOString(),
+      lastActive: new Date().toISOString(),
+      lastAction: 'Account Created · Starting Day 1 of Closer Academy'
     };
 
     activeUserId = uid;
     if (nameInput) nameInput.value = '';
+    if (emailInput) emailInput.value = '';
     saveUserProfiles();
+    syncRepToCloud(USER_PROFILES[uid], 'account_created', `New closer account registered: ${name} (${email}) as ${role}`);
     if (window.selectLmsUnit) window.selectLmsUnit('1-1');
     updateUserUI();
     if (window.updateAcademyUI) window.updateAcademyUI();

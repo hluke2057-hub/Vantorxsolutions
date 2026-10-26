@@ -26,6 +26,9 @@ const TARGETS_FILE = path.join(REPO_ROOT, 'data', 'normalized_lead_targets.json'
 const INTEL_FILE = path.join(REPO_ROOT, 'data', 'outbound_intelligence.json');
 const WEB_INTEL_FILE = path.join(REPO_ROOT, 'website', 'data', 'outbound_intelligence.json');
 const CSV_FILE = path.join(REPO_ROOT, 'data', 'outbound_cloud_campaign.csv');
+const ROSTER_FILE = path.join(REPO_ROOT, 'data', 'rep_roster.json');
+const WEB_ROSTER_FILE = path.join(REPO_ROOT, 'website', 'data', 'rep_roster.json');
+
 
 // Resend API Key resolution: Environment -> .env file
 let RESEND_API_KEY = process.env.RESEND_API_KEY || null;
@@ -444,7 +447,26 @@ async function runAutonomousEngine() {
     writeJsonSafe(WEB_INTEL_FILE, intel);
   }
 
-  // 6. Append to CSV Campaign Log
+  // 6. Ingest Sales Rep Roster Telemetry for Founder Accountability
+  let teamRoster = [];
+  if (fs.existsSync(ROSTER_FILE)) {
+    try {
+      teamRoster = readJsonSafe(ROSTER_FILE);
+      if (fs.existsSync(INTEL_FILE)) {
+        const intel = readJsonSafe(INTEL_FILE);
+        intel.teamRoster = {
+          totalReps: teamRoster.length,
+          certifiedLevel5: teamRoster.filter(r => r.course && (r.course.percent >= 100 || (r.course.status && r.course.status.includes('Certified')))).length,
+          totalBossesDefeated: teamRoster.reduce((sum, r) => sum + (r.game?.bossesDefeated || 0), 0),
+          lastRosterUpdate: new Date().toISOString()
+        };
+        writeJsonSafe(INTEL_FILE, intel);
+        writeJsonSafe(WEB_INTEL_FILE, intel);
+      }
+    } catch(e){}
+  }
+
+  // 7. Append to CSV Campaign Log
   let csvExists = fs.existsSync(CSV_FILE);
   let csvRow = "";
   if (!csvExists) {
@@ -458,7 +480,12 @@ async function runAutonomousEngine() {
   console.log("==============================================================================");
   console.log(`   CYCLE COMPLETE: ${newlyDispatched.filter(d => d.status === "sent").length} Verified Emails Dispatched Successfully.`);
   console.log(`   Pending Queue Remaining: ${queue.filter(t => t.status === "pending").length} contractors`);
+  console.log(`   TEAM ROSTER STATUS:     ${teamRoster.length} Sales Reps Monitored (${teamRoster.filter(r => r.course && r.course.percent >= 100).length} Level 5 Certified)`);
+  teamRoster.forEach(r => {
+    console.log(`      • ${r.avatar || '👤'} ${r.name} (${r.email}): Course ${r.course?.percent || 0}% (${r.course?.status || 'In Progress'}) | RPG: Lvl ${r.game?.level || 1} (${r.game?.bossesDefeated || 0} Bosses, Streak: ${r.game?.streak || 0})`);
+  });
   console.log("==============================================================================");
+
 }
 
 runAutonomousEngine().catch(err => {

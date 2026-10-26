@@ -10,6 +10,8 @@
     { "source": "/api/notifications/:action", "destination": "/api/notifications?action=:action" },
     { "source": "/api/change-requests/:id", "destination": "/api/change-requests?id=:id" },
     { "source": "/api/admin/inquiries", "destination": "/api/change-requests?action=inquiries" },
+    { "source": "/api/reps", "destination": "/api/audit?action=rep-roster" },
+    { "source": "/api/reps/:action", "destination": "/api/audit?action=:action" },
     { "source": "/.well-known/llms.txt", "destination": "/llms.txt" },
     { "source": "/.well-known/llms-full.txt", "destination": "/llms-full.txt" }
   ],
