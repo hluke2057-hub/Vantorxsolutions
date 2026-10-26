@@ -113,8 +113,8 @@ p.sub{color:var(--dim);font-size:14.5px;margin-bottom:24px;line-height:1.5}
     <p class="sub">Your feedback is important to us. Please let our management team know what went wrong so we can resolve it immediately.</p>
 
     <div class="shield-notice">
-      <span>🔒</span>
-      <span><strong>Private Owner Shield:</strong> This goes directly to the business owner and management, not public Google.</span>
+      <span>🤝</span>
+      <span><strong>Direct Resolution Channel:</strong> Send private feedback directly to ownership for immediate resolution, or post publicly on Google below.</span>
     </div>
 
     <form id="negativeFeedbackForm">
@@ -131,8 +131,9 @@ p.sub{color:var(--dim);font-size:14.5px;margin-bottom:24px;line-height:1.5}
         <textarea id="fbMsg" rows="3" required placeholder="Tell us what happened..."></textarea>
       </div>
 
-      <button type="submit" class="btn btn-gold" id="sendFeedbackBtn">Send Private Feedback Directly to Owner</button>
-      <button type="button" class="btn btn-ghost" id="editRatingBtn2">Change Rating</button>
+      <button type="submit" class="btn btn-gold" id="sendFeedbackBtn">Send Feedback to Owner</button>
+      <a id="negativeGoogleReviewBtn" class="btn btn-ghost" href="#" target="_blank" rel="noopener">⭐ Post Publicly to Google Reviews</a>
+      <button type="button" class="btn btn-ghost" id="editRatingBtn2" style="font-size:12px;border:none;background:none;color:var(--dim)">Change Rating</button>
     </form>
   </div>
 
@@ -164,6 +165,8 @@ p.sub{color:var(--dim);font-size:14.5px;margin-bottom:24px;line-height:1.5}
 
   document.getElementById('bizNameText').textContent = bizName;
   document.getElementById('googleReviewBtn').href = activeGoogleUrl;
+  const negBtn = document.getElementById('negativeGoogleReviewBtn');
+  if (negBtn) negBtn.href = activeGoogleUrl;
   document.getElementById('thanksOwnerName').textContent = ownerName;
 
   // Custom trade draft text

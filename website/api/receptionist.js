@@ -35,6 +35,19 @@ module.exports = async function handler(req, res) {
       if (action === "turn") {
         const text = (body.text || "").toLowerCase();
         let reply = "I'd be glad to help you schedule that service. What day and time works best for you?";
+
+        // 1. Critical Life Safety: Self-Harm & Suicide Crisis Interceptor (CRISIS_INTERCEPTOR - National 988 Lifeline)
+        if (text.includes("suicide") || text.includes("kill myself") || text.includes("hurt myself") || text.includes("end my life") || text.includes("want to die") || text.includes("self harm") || text.includes("overdose") || text.includes("hang myself")) {
+          reply = "If you are in distress or thinking about self-harm, please know that you are not alone. Please dial, call, or text 988 immediately to connect with the 988 Suicide & Crisis Lifeline for free, confidential support 24/7. People care and help is available right now.";
+          return res.status(200).json({ ok: true, sessionId: body.sessionId || "crisis_session", reply, crisisAlert: true, hotline: "988", interceptor: "CRISIS_INTERCEPTOR" });
+        }
+
+        // 2. Critical Life Safety: 911 Life-Threatening Emergency Guardrail (EMERGENCY_INTERCEPTOR)
+        if (text.includes("heart attack") || text.includes("cannot breathe") || text.includes("can't breathe") || text.includes("unconscious") || text.includes("house fire") || text.includes("building fire") || text.includes("call 911") || text.includes("intruder") || text.includes("active shooter")) {
+          reply = "Ava cannot dispatch 911 emergency services. If you or someone nearby is in immediate physical danger, please hang up immediately and dial 911.";
+          return res.status(200).json({ ok: true, sessionId: body.sessionId || "emergency_session", reply, emergency911: true, interceptor: "EMERGENCY_INTERCEPTOR" });
+        }
+
         if (text.includes("transfer") || text.includes("human") || text.includes("person") || text.includes("speak with") || text.includes("talk to") || text.includes("manager") || text.includes("luke")) {
           reply = "I'd be glad to connect you. Hold on just a moment while I transfer your call directly to our line at (561) 813-8602.";
           return res.status(200).json({ ok: true, sessionId: body.sessionId || "test_session", reply, action: "transfer", transferNumber: "(561) 813-8602" });
@@ -46,11 +59,11 @@ module.exports = async function handler(req, res) {
         return res.status(200).json({ ok: true, sessionId: body.sessionId || "test_session", reply });
       }
 
-      // Default start
+      // Default start with two-party recording disclosure
       return res.status(200).json({
         ok: true,
         sessionId: `sess_${Date.now()}`,
-        reply: "Hi! Thanks for calling. I'm Ava, your 24/7 AI receptionist. How can I help you today?",
+        reply: "Hi! Thank you for calling. This call may be recorded for quality and training. I'm Ava, your 24/7 AI receptionist. How can I help you today?",
       });
     }
 
@@ -79,8 +92,8 @@ module.exports = async function handler(req, res) {
           business_id: bizId,
           enabled: true,
           agent_name: "Ava",
-          greeting: "Hello, thank you for calling. How can I help you today?",
-          instructions: "Help customers book appointments, answer pricing questions, and dispatch emergency calls. Transfer to Luke at (561) 813-8602 when requested.",
+          greeting: "Hello, thank you for calling. This call is recorded for quality assurance. How can I help you today?",
+          instructions: "Help customers book appointments, answer pricing questions, and dispatch emergency calls. Transfer to Luke at (561) 813-8602 when requested. In case of mental health crisis or self-harm, immediately provide the 988 Suicide & Crisis Lifeline. In case of life-threatening physical emergency, instruct to hang up and call 911 immediately.",
           voice: "alloy",
           transfer_number: "(561) 813-8602",
           allow_transfer: true,

@@ -563,6 +563,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
         <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: LeadFlow CRM ($197/mo)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
       </div>
     </div>
+    <div style="margin-top:24px;text-align:center;font-size:13px;color:var(--dim);line-height:1.6;max-width:820px;margin-inline:auto">
+      <span style="color:var(--ok)">✓ <b>No Long-Term Contracts:</b></span> Subscriptions automatically renew on a month-to-month basis at the stated rate until cancelled. You may cancel anytime with a single click in your <a href="/client-hub/" style="color:var(--accent2);text-decoration:underline">Client Hub</a> or by contacting billing at <a href="mailto:support@vantorx.com" style="color:var(--accent2);text-decoration:underline">support@vantorx.com</a>. See our <a href="/terms/" style="color:var(--accent2);text-decoration:underline">Terms of Service</a> &amp; <a href="/privacy/" style="color:var(--accent2);text-decoration:underline">Privacy Policy</a>.
+    </div>
   </div>
 </div></section>
 
@@ -605,12 +608,13 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
       <div class="full"><label for="fMsg">Anything we should know?</label><textarea id="fMsg" placeholder="Do you have a website today? What’s your biggest headache — missed calls, no online presence, follow-up?"></textarea></div>
     </div>
     <div style="margin-top:18px"><button class="btn btn-gold" type="submit" id="fBtn" style="padding:14px 28px;font-size:16px">Book My Demo →</button></div>
+    <p style="margin-top:12px;font-size:11px;color:var(--dim);line-height:1.5">By clicking "Book My Demo", you agree to our <a href="/terms/" style="color:var(--accent2);text-decoration:underline">Terms of Service</a> and <a href="/privacy/" style="color:var(--accent2);text-decoration:underline">Privacy Policy</a> and provide express written consent under the TCPA to receive automated service communications and follow-ups from VantorX Solutions at the number provided. Consent is not a condition of purchase. Message and data rates may apply. Reply STOP to cancel anytime.</p>
     <p id="fmsg" role="status" aria-live="polite"></p>
   </form>
 </div></section>
 </main>
 
-<footer><div class="wrap"><span>© <span id="yr"></span> VantorX. Websites · AI Receptionist · AEO Engine™ · LeadFlow · Client Hub · Automation.</span><span><a href="tel:5618138602">📞 (561) 813-8602</a> · <a href="/leadflow/">📊 LeadFlow CRM</a> · <a href="/cold-call-arena/">🥊 Call Arena</a> · <a href="/cold-call-quest/">⚔️ Cold Call RPG</a> · <a href="/client-hub/">Client Portal</a> · <a href="/vantorx-onboarding/">🔒 Client Onboarding</a> · <a href="/aeo-tool/">🧠 AEO Tool</a> · <a href="/review-tool/">🛡️ Review Shield</a> · <a href="/review/">⭐ Review Us</a> · <a href="/outbound-agent/">🎯 Lead Scout</a> · <a href="#pricing">Pricing</a> · <a href="#contact">Contact</a></span></div></footer>
+<footer><div class="wrap"><span>© <span id="yr"></span> VantorX Solutions LLC. Websites · AI Receptionist · AEO Engine™ · LeadFlow · Client Hub · Automation.</span><span><a href="tel:5618138602">📞 (561) 813-8602</a> · <a href="/leadflow/">📊 LeadFlow CRM</a> · <a href="/cold-call-arena/">🥊 Call Arena</a> · <a href="/cold-call-quest/">⚔️ Cold Call RPG</a> · <a href="/client-hub/">Client Portal</a> · <a href="/vantorx-onboarding/">🔒 Client Onboarding</a> · <a href="/aeo-tool/">🧠 AEO Tool</a> · <a href="/review-tool/">🛡️ Review Shield</a> · <a href="/review/">⭐ Review Us</a> · <a href="/outbound-agent/">🎯 Lead Scout</a> · <a href="#pricing">Pricing</a> · <a href="#contact">Contact</a> · <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a></span></div></footer>
 
 <script>
 (function(){
@@ -721,5 +725,41 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
   <a href="tel:5618138602" class="m-btn m-btn-call">📞 Call Demo Line</a>
   <a href="#contact" class="m-btn m-btn-demo">⚡ Book Demo</a>
 </aside>
+
+<!-- Privacy & Cookie Notice Banner -->
+<div id="cookieConsentBanner" style="display:none;position:fixed;bottom:24px;left:24px;right:24px;max-width:520px;background:#0d131f;border:1px solid rgba(199,164,104,0.35);box-shadow:0 16px 40px rgba(0,0,0,0.65);border-radius:12px;padding:16px 20px;z-index:99999;font-size:13px;color:#cbd5e1;line-height:1.5">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+    <div>
+      <div style="font-weight:700;color:#fff;margin-bottom:4px;display:flex;align-items:center;gap:6px">
+        <span>🛡️</span> Privacy &amp; Data Notice
+      </div>
+      <div>
+        We use essential local storage to remember your preferences and optimize our AI voice services. By continuing, you agree to our <a href="/privacy/" style="color:var(--accent2);text-decoration:underline">Privacy Policy</a> and <a href="/terms/" style="color:var(--accent2);text-decoration:underline">Terms of Service</a>.
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+      <button id="acceptCookieConsent" style="background:var(--accent);color:#070a10;border:none;border-radius:6px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Accept</button>
+      <button id="dismissCookieConsent" style="background:transparent;color:#94a3b8;border:1px solid #334155;border-radius:6px;padding:6px 12px;font-size:11px;cursor:pointer">Dismiss</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  try {
+    if(!localStorage.getItem('vantorx_privacy_consent_dismissed')){
+      var banner = document.getElementById('cookieConsentBanner');
+      if(banner){
+        banner.style.display = 'block';
+        var dismiss = function(){
+          localStorage.setItem('vantorx_privacy_consent_dismissed', 'true');
+          banner.style.display = 'none';
+        };
+        document.getElementById('acceptCookieConsent').addEventListener('click', dismiss);
+        document.getElementById('dismissCookieConsent').addEventListener('click', dismiss);
+      }
+    }
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
