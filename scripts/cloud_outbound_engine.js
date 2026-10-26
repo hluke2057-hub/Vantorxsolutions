@@ -345,6 +345,120 @@ async function pingSupabaseKeepAlive() {
   }
 }
 
+async function sendFounderTeamDigest(currentHour, currentDay) {
+  let roster = [];
+  if (fs.existsSync(ROSTER_FILE)) {
+    try { roster = readJsonSafe(ROSTER_FILE); } catch(_) {}
+  }
+  if ((!roster || !roster.length) && fs.existsSync(WEB_ROSTER_FILE)) {
+    try { roster = readJsonSafe(WEB_ROSTER_FILE); } catch(_) {}
+  }
+  if (!Array.isArray(roster) || roster.length === 0) return;
+
+  const totalReps = roster.length;
+  const certifiedReps = roster.filter(r => r.course && (r.course.percent >= 100 || (r.course.status && r.course.status.includes('Certified')))).length;
+  const totalBossesBeaten = roster.reduce((sum, r) => sum + (r.game?.bossesDefeated || 0), 0);
+  const now = new Date();
+  const todayStr = now.toISOString().split("T")[0];
+  const activeToday = roster.filter(r => r.lastActive && r.lastActive.startsWith(todayStr)).length;
+
+  const cycleTitle = currentHour === 8 ? "Morning Kickoff Briefing (8:00 AM ET)" : currentHour === 20 ? "Evening Wrap-Up Report (8:00 PM ET)" : "Executive Leaderboard Digest";
+
+  const tableRows = roster.map(r => {
+    const isCert = (r.course && r.course.percent >= 100) || (r.course && r.course.status && r.course.status.includes('Certified'));
+    const badgeColor = isCert ? '#059669' : '#d97706';
+    const statusText = isCert ? '🏆 Level 5 Certified' : `In Training (${r.course?.percent || 0}%)`;
+    return `
+      <tr style="border-bottom: 1px solid #e2e8f0; font-size: 13px;">
+        <td style="padding: 10px; font-weight: 600; color: #0f172a;">${r.avatar || '👤'} ${r.name}<br><span style="font-size: 11px; color: #64748b;">${r.role || 'Outbound Closer'} · ${r.email || 'No email'}</span></td>
+        <td style="padding: 10px; color: #334155;"><strong>${r.course?.percent || 0}%</strong> (${(r.course?.daysPassed || []).length}/3 Days)</td>
+        <td style="padding: 10px; color: #334155;">Lvl ${r.game?.level || 1} · ⚔️ <strong>${r.game?.bossesDefeated || 0}</strong> Bosses</td>
+        <td style="padding: 10px; color: #64748b; font-size: 11.5px;">${r.lastAction || 'Active'}</td>
+        <td style="padding: 10px; text-align: right;"><span style="background: ${badgeColor}22; color: ${badgeColor}; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700;">${statusText}</span></td>
+      </tr>
+    `;
+  }).join('');
+
+  const digestHtml = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 680px; margin: 0 auto; padding: 24px 16px; color: #1e293b; background: #ffffff;">
+      <div style="background: linear-gradient(135deg, #0b0f16 0%, #1e293b 100%); color: #ffffff; padding: 24px; border-radius: 12px; margin-bottom: 24px; border-top: 4px solid #c7a468;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #c7a468; font-weight: 800;">VantorX Solutions · 24/7 Founder Telemetry</div>
+        <h1 style="margin: 6px 0 4px; font-size: 22px; font-weight: 800;">${cycleTitle}</h1>
+        <div style="font-size: 13px; color: #94a3b8;">${currentDay} · Automated Founder Digest dispatched to Luke</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center;"><div style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase;">Total Reps</div><div style="font-size: 20px; font-weight: 800; color: #0f172a;">${totalReps}</div></div>
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center;"><div style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase;">Certified</div><div style="font-size: 20px; font-weight: 800; color: #059669;">${certifiedReps}</div></div>
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center;"><div style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase;">Active Today</div><div style="font-size: 20px; font-weight: 800; color: #2563eb;">${activeToday}</div></div>
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center;"><div style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase;">Bosses Beaten</div><div style="font-size: 20px; font-weight: 800; color: #d97706;">${totalBossesBeaten}</div></div>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <thead>
+          <tr style="background: #f1f5f9; text-align: left; font-size: 11px; color: #475569; text-transform: uppercase;">
+            <th style="padding: 10px;">Rep Profile</th>
+            <th style="padding: 10px;">Course</th>
+            <th style="padding: 10px;">Combat</th>
+            <th style="padding: 10px;">Last Action</th>
+            <th style="padding: 10px; text-align: right;">Status</th>
+          </tr>
+        </thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; text-align: center;">
+        <a href="https://www.vantorxsolutions.com/cold-call-arena/" style="display: inline-block; background: #c7a468; color: #0b0f16; font-weight: 700; padding: 8px 16px; border-radius: 6px; text-decoration: none; margin-right: 8px; font-size: 12px;">Open Closer Academy</a>
+        <a href="https://www.vantorxsolutions.com/cold-call-quest/" style="display: inline-block; background: #0f172a; color: #ffffff; font-weight: 600; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 12px;">Open Cold Call RPG</a>
+      </div>
+    </div>
+  `;
+
+  const recipients = ["hluke2057@gmail.com", "luke@vantorxsolutions.com"];
+  const subject = `📊 [VantorX Leaderboard] ${cycleTitle} (${totalReps} Reps Monitored, ${certifiedReps} Certified)`;
+
+  if (!RESEND_API_KEY) {
+    console.log(`[Founder Digest] Simulation mode (No RESEND_API_KEY) — ${cycleTitle} ready for dispatch.`);
+    return;
+  }
+
+  try {
+    const payload = {
+      from: "Luke <luke@vantorxsolutions.com>",
+      to: recipients,
+      subject,
+      html: digestHtml
+    };
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+    const d = await res.json();
+    if (res.ok) {
+      console.log(`[Founder Digest] ✅ Successfully dispatched ${cycleTitle} to Luke! Delivery ID: ${d.id}`);
+    } else {
+      console.warn(`[Founder Digest] Primary sender notice (${d.message}). Retrying with onboarding@resend.dev...`);
+      payload.from = "VantorX Notifications <onboarding@resend.dev>";
+      payload.to = ["hluke2057@gmail.com"];
+      const retryRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${RESEND_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+      const retryData = await retryRes.json();
+      if (retryRes.ok) {
+        console.log(`[Founder Digest] ✅ Fallback digest dispatched to hluke2057@gmail.com! Delivery ID: ${retryData.id}`);
+      }
+    }
+  } catch(err) {
+    console.error(`[Founder Digest] Exception sending digest:`, err.message);
+  }
+}
+
 async function runAutonomousEngine() {
   console.log("==============================================================================");
   console.log("   VANTORX SOLUTIONS — 24/7 AUTONOMOUS CLOUD OUTBOUND ENGINE                   ");
@@ -373,6 +487,13 @@ async function runAutonomousEngine() {
   console.log(`Sender:             ${SENDER_NAME} <${SENDER_EMAIL}>`);
   console.log(`Resend API Key:     ${RESEND_API_KEY ? "CONFIGURED (Live Dispatch Active)" : "NOT SET (Simulation Mode)"}`);
   console.log(`Force Override:     ${forceDispatch ? "ENABLED" : "Disabled"}`);
+
+  // 3. Automated Executive Digest to Founder (Dispatched daily at 8:00 AM ET and 8:00 PM ET)
+  const isDigestHour = currentHour === 8 || currentHour === 20 || process.argv.includes('--digest');
+  if (isDigestHour) {
+    console.log(`\n📊 [Daily Founder Digest] Executing scheduled team progress telemetry dispatch (${currentHour}:00 ET)...`);
+    await sendFounderTeamDigest(currentHour, currentDay);
+  }
 
   // Operational window: 7 days a week, 8:00 AM to 8:00 PM Eastern Time
   const isOperationalHours = currentHour >= 8 && currentHour < 20;
