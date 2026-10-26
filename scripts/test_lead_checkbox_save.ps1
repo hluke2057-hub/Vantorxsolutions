@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 
 $arenaHtml = Join-Path $PSScriptRoot "..\website\cold-call-arena\index.html"
 $content = [System.IO.File]::ReadAllText((Resolve-Path $arenaHtml).Path, [System.Text.Encoding]::UTF8)
+$content = $content.Replace("<head>", "<head><script>try{localStorage.setItem('vantorx_active_user_id_v2', 'luke');}catch(e){}</script>")
 
 # Inject automated headless test runner
 $testScript = @'
@@ -19,6 +20,10 @@ setTimeout(function() {
   }
 
   try {
+    // Ensure logged in as Luke to bypass gate and have valid profile
+    if (window.bypassToFounder) window.bypassToFounder();
+    else if (window.quickSwitchCaller) window.quickSwitchCaller('luke');
+
     // Dynamically identify the first rendered lead
     const firstCb = document.querySelector('.call-checkbox');
     const testLeadId = firstCb ? firstCb.dataset.id : 'pb_001';

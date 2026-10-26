@@ -18,13 +18,13 @@ $activeBatch = (($dayOfYear - 1) % 10) + 1
 Write-Host "=========================================================="
 Write-Host "VANTORX AUTOMATED DAILY LEAD ROTATION ENGINE"
 Write-Host "Date: $($today.ToString('yyyy-MM-dd'))"
-Write-Host "Active Daily Batch: Batch #$activeBatch (25 Target Leads)"
+Write-Host "Active Daily Batch: Batch #$activeBatch (75 Target Leads)"
 Write-Host "Total Nationwide Leads Available: $($leads.Count)"
 Write-Host "=========================================================="
 
-# Display Today's 25 Leads Summary
+# Display Today's 75 Leads Summary
 $todaysLeads = $leads | Where-Object { $_.batch -eq $activeBatch }
-Write-Host "Todays 25 Target Queue:"
+Write-Host "Todays 75 Target Queue:"
 $i = 1
 foreach ($l in $todaysLeads) {
     Write-Host "[$i] $($l.company) - $($l.city) - $($l.phone) - Leak: `$$($l.annualLoss)/yr"
@@ -40,7 +40,6 @@ Write-Host "  Average Net Savings per Client: `$$avgSavingsToday / year"
 
 if ($GenerateNewBatch) {
     Write-Host "Running On-Demand Nationwide Lead Generator..."
-    & powershell -ExecutionPolicy Bypass -File "$PSScriptRoot/build_nationwide_dataset.ps1"
-    & powershell -ExecutionPolicy Bypass -File "$PSScriptRoot/build_full_arena.ps1"
-    Write-Host "Refreshed and rebuilt web cockpit with fresh targets."
+    & powershell -ExecutionPolicy Bypass -File "$PSScriptRoot/generate_all_leads.ps1"
+    Write-Host "Refreshed and rebuilt nationwide dataset with fresh targets."
 }
