@@ -149,6 +149,7 @@ try {
   ) -NoNewWindow -PassThru -RedirectStandardOutput $dumpFile
 
   $p.WaitForExit(10000)
+  Start-Sleep -Milliseconds 300
 
   if (Test-Path $dumpFile) {
     $dom = [System.IO.File]::ReadAllText($dumpFile, [System.Text.Encoding]::UTF8)
