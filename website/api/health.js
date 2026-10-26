@@ -28,16 +28,46 @@ module.exports = async function handler(req, res) {
   }
 
   const configured = Boolean(validUrl && publishableKey);
+  let supabaseActive = false;
+  let supabaseLatencyMs = null;
+  let supabaseError = null;
+
+  if (validUrl && publishableKey) {
+    const startTime = Date.now();
+    try {
+      const targetUrl = supabaseUrl.replace(/\/+$/, "") + "/rest/v1/";
+      const sbRes = await fetch(targetUrl, {
+        method: "GET",
+        headers: {
+          apikey: publishableKey,
+          Authorization: `Bearer ${publishableKey}`,
+        },
+      });
+      supabaseLatencyMs = Date.now() - startTime;
+      supabaseActive = sbRes.ok;
+      if (!sbRes.ok) {
+        supabaseError = `HTTP ${sbRes.status} ${sbRes.statusText}`;
+      }
+    } catch (err) {
+      supabaseLatencyMs = Date.now() - startTime;
+      supabaseActive = false;
+      supabaseError = err.message;
+    }
+  }
+
   const payload = {
     ok: configured,
     service: "vantorx-api",
     checks: {
       supabase_url_configured: validUrl,
       supabase_publishable_key_configured: Boolean(publishableKey),
+      supabase_active: supabaseActive,
+      supabase_latency_ms: supabaseLatencyMs,
+      supabase_error: supabaseError,
       resend_api_key_configured: Boolean(process.env.RESEND_API_KEY),
     },
     message: configured
-      ? "Backend environment is configured."
+      ? (supabaseActive ? "Backend environment and Supabase database are fully operational." : "Backend configured; Supabase database may be sleeping or restoring.")
       : "Set SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY in Vercel Project Settings.",
   };
 

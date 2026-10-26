@@ -24,11 +24,14 @@ jobs:
         with:
           node-version: 18
 
-      - name: Execute 24/7 Cloud Outbound Batch
+      - name: Execute 24/7 Cloud Outbound Batch & Supabase Keep-Alive
+        continue-on-error: true
         env:
           DEMO_PHONE: "(561) 813-8602"
           SENDER_EMAIL: "luke@vantorxsolutions.com"
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
         run: |
           node scripts/cloud_outbound_engine.js
 

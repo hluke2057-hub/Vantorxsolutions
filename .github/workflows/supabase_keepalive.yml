@@ -1,0 +1,31 @@
+name: Supabase 24/7 Keep-Alive & Health Sentinel
+
+on:
+  schedule:
+    # Runs twice every day (every 12 hours) at 04:00 and 16:00 UTC
+    # Guarantees Supabase free-tier database never pauses due to 7 days of inactivity
+    - cron: '0 4,16 * * *'
+  workflow_dispatch: # Allows 1-click manual health probe from GitHub Actions tab anytime
+
+jobs:
+  supabase-sentinel:
+    name: Supabase Inactivity Prevention & Health Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Execute Supabase Keep-Alive Heartbeat
+        continue-on-error: true
+        env:
+          SUPABASE_PROJECT_ID: "rjbcqamvxrtikgkfbtzi"
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://rjbcqamvxrtikgkfbtzi.supabase.co' }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+          WEBSITE_URL: "https://www.vantorxsolutions.com"
+        run: |
+          node scripts/supabase_keepalive.js

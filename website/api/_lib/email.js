@@ -41,6 +41,9 @@ async function sendEmail({ to, subject, html, text, from = "Luke <luke@vantorxso
       if (from !== "onboarding@resend.dev" && (errMsg.includes("domain") || errMsg.includes("verify") || errMsg.includes("from"))) {
         console.warn("[VantorX Email] Retrying dispatch with fallback verified sender onboarding@resend.dev...");
         payload.from = "VantorX Notifications <onboarding@resend.dev>";
+        const fallbackTo = (Array.isArray(payload.to) ? payload.to : [payload.to])
+          .filter(addr => addr.toLowerCase().includes("hluke2057@gmail.com"));
+        payload.to = fallbackTo.length ? fallbackTo : ["hluke2057@gmail.com"];
         try {
           const retryRes = await fetch("https://api.resend.com/emails", {
             method: "POST",
