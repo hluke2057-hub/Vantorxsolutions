@@ -937,7 +937,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       currentSetup: 'My cell phone forwards to my wife when I am up on a ladder, and half the time she is busy with the kids so calls hit voicemail.',
       avgLeak: 'A standard shingle or tile replacement job',
       dialogue: {
-        stage1: "VantorX? Never heard of ya. I'm three stories up on a roof in Tampa with a nail gun in 95-degree heat. What the hell do you want?",
+        stage1: "Yeah, this is Rick, I own the outfit. Make it fast, I'm three stories up on a roof in Tampa with a nail gun in 95-degree heat. What the hell do you want?",
         victory: "Alright Luke, you won me over. Shoot me a text with Ava's setup info.",
         defeat: "I don't have time for this amateur nonsense while my crews are sweating on a 12-pitch roof in Tampa heat. Lose my number! *[SLAMS RECEIVER]*"
       }
@@ -958,7 +958,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       currentSetup: 'Daytime calls hit my front desk, but after 5 PM and on weekends it forwards to an offshore answering service that constantly botches customer names and notes.',
       avgLeak: 'A full emergency AC changeout',
       dialogue: {
-        stage1: "Gary is out in the field and doesn't take unscheduled vendor calls. Send your marketing brochure to info@orlandopremiac.com.",
+        stage1: "No, this is Karen at dispatch. Gary is the owner, but he's out in the field and doesn't take unscheduled vendor calls. Send your marketing brochure to info@orlandopremiac.com.",
         victory: "Okay Luke, I'll put Gary directly on the phone for 5 minutes. That $8k leak stat got my attention.",
         defeat: "Mr. Hamilton, you are wasting our emergency dispatch line. I am placing your company on our vendor blacklist. *[CLICK]*"
       }
@@ -979,7 +979,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       currentSetup: 'I am inside 480-volt commercial electrical panels with insulated rubber gloves. I physically cannot touch a phone, so emergency calls roll to voicemail and hire someone else.',
       avgLeak: 'An emergency panel upgrade or commercial generator install',
       dialogue: {
-        stage1: "Hold on. Is this a damn robot? I swear to God if another tech bro sends an AI bot to waste my morning, I'm smashing this phone.",
+        stage1: "Yeah, this is Mike, I own the company. Hold on -- are you a damn robot? I swear to God if another tech bro sends an AI bot to waste my morning, I'm smashing this phone.",
         victory: "Damn, I just dialed (561) 813-8602... Ava answered in half a second and booked a test panel. Let's do this.",
         defeat: "Another fast-talking pitch clown who dodges simple questions. Don't call my cell again. *[CLICK]*"
       }
@@ -1000,7 +1000,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       currentSetup: 'I pay an answering service in Coral Gables $1,400 a month and they still miss calls and send me scribbled messages three hours late.',
       avgLeak: 'An emergency sewer line trenchless repipe',
       dialogue: {
-        stage1: "Look, I don't care how fancy it is. I got burned for $3,000 by some marketing clown last year. How much is this going to bleed out of my account?",
+        stage1: "Yeah, Dave here, I own it. Look, I don't care how fancy it is, I got burned for $3,000 by some marketing clown last year. How much is this going to bleed out of my account?",
         victory: "Fair enough. $300 a month pays for itself if it catches even one emergency repipe while I'm sleeping. Send the contract.",
         defeat: "I knew it -- another snake oil telemarketer trying to bleed my business account. Lose my number. *[CLICK]*"
       }
@@ -1021,7 +1021,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       currentSetup: 'During storm season my phone gets 40 calls a night between midnight and 5 AM. We drop calls because standard phone lines can only take one caller at a time.',
       avgLeak: 'A category-3 black water flood dryout',
       dialogue: {
-        stage1: "Kid, hurricane season starts soon. When a tropical depression hits, I get 40 flooded calls between midnight and 5 AM. How does your little toy handle 10 panicked homeowners at the same second without crashing?",
+        stage1: "Yeah, Sal speaking, owner. Kid, hurricane season starts soon. When a tropical depression hits, I get 40 flood calls a night. How does your little toy handle 10 panicked homeowners at the same second without crashing?",
         victory: "Wait, Ava can handle 10 calls simultaneously with zero busy signals? That alone saves my entire storm season. Set up my Carrier *71 rollover now.",
         defeat: "I got 10 flooded basements waiting on sump pumps and you're wasting my phone battery. Call terminated. *[CLICK]*"
       }
@@ -1042,7 +1042,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       currentSetup: 'I buy shared leads on Angi and Thumbtack for $90 each, but by the time I call them back, three other HVAC contractors already quoted them.',
       avgLeak: 'A complete heat pump and ductwork replacement',
       dialogue: {
-        stage1: "I already spend $1,800 a month on Angi and Thumbtack. My phone rings plenty. Why would I change anything when HomeAdvisor gives me all my jobs?",
+        stage1: "Yeah, I'm Brad, owner of Jacksonville Air. Look, I already spend $1,800 a month on Angi and Thumbtack. My phone rings plenty. Why would I change anything when HomeAdvisor gives me all my jobs?",
         victory: "You're dead right about Angi selling that same replacement lead to 4 other contractors. I lost three $9k changeouts last month because of that. Hook up Ava to my inbound lines.",
         defeat: "I'm sticking with Angi and my yellow pad. Stop calling my personal mobile line. *[CLICK]*"
       }
@@ -1063,7 +1063,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       currentSetup: 'I write every customer name and tank location on this yellow legal pad in my truck. When I am on the backhoe, I cannot answer.',
       avgLeak: 'A complete drainfield excavation and tank pump',
       dialogue: {
-        stage1: "I've been in the dirt since 1986. I don't use 'apps', I don't have a computer, and I write every job on this yellow legal pad. You're talking Chinese to me, son.",
+        stage1: "Yeah, Gary here, been owning this pump truck since 1986. You're talking to the owner, son. What's this about? I'm 6 feet deep in the dirt on a backhoe.",
         victory: "So Ava just acts like a polite southern girl answering my office phone, and texts my flip phone the address? Hell, even I can handle that. Let's try it for 30 days.",
         defeat: "I don't know who taught you how to talk to working folks, son, but don't dial this number again. *[CLICK]*"
       }
@@ -1084,7 +1084,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       currentSetup: 'We have 42 vans and an internal dispatch team in Houston, but after-hours rollover to our third-party call center costs a fortune and does not integrate into ServiceTitan.',
       avgLeak: 'A commercial chiller or supermarket refrigeration contract',
       dialogue: {
-        stage1: "I run 42 service vans across Texas and Florida with an internal dispatch center in Houston. Unless your AI does bilingual Spanish rollover, connects to ServiceTitan via webhook, and does Carrier *71 without rewiring my PBX, don't waste my breath. Convince me.",
+        stage1: "Vito speaking, owner and president. We run 42 service vans across Texas and Florida. You have 30 seconds before my dispatch meeting. Talk.",
         victory: "Impressive. You know enterprise dispatch math, Carrier *71 rollover logic, and ServiceTitan webhooks cold. I want Ava tested on my 12 Orlando vans starting Monday morning.",
         defeat: "You are completely out of your league. My executive team does not entertain amateur cold call pitches. Call terminated. *[CLICK]*"
       }
@@ -1331,12 +1331,20 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     `;
 
     let cards = [];
-    if (stage === 'intro' || stage === 'pain') {
-      cards = [
-        { type: 'permission', tag: '⚡ 30s Permission Opener', bonus: '+Crit', text: `"Hey ${bossFirst}, I know you're in the field — you got 30 seconds before you hang up?"` },
-        { type: 'leak', tag: '🎯 $8,000 Leak Hook', bonus: '+Bleed', text: `"Where does an emergency $8,000 leak call ring when you're 3 stories up?"` },
-        { type: 'demo', tag: '🛡️ Test Ava Live', bonus: '(561) 813-8602', text: `"Don't take my word for it. Dial (561) 813-8602 right now from your truck."` }
-      ];
+    if (stage === 'intro' || stage === 'pain' || stage === 'opener') {
+      if (currentBoss && currentBoss.key === 'gatekeeper') {
+        cards = [
+          { type: 'gk_site', tag: '🎯 Job Site Check', bonus: '+Disarm', text: `"Hey Karen, is Gary around or is he out on a job site right now?"` },
+          { type: 'gk_dispatch', tag: '⚡ After-Hours Dispatch', bonus: '+Pain', text: `"Reason I called was regarding your emergency dispatch after 5 PM and on weekends."` },
+          { type: 'demo', tag: '🛡️ Test Ava Live', bonus: '(561) 813-8602', text: `"Don't take my word for it. Dial (561) 813-8602 right now and hear how Ava handles calls."` }
+        ];
+      } else {
+        cards = [
+          { type: 'permission', tag: '⚡ 30s Permission Opener', bonus: '+Crit', text: `"Hey ${bossFirst}, I know you're in the field — you got 30 seconds before you hang up?"` },
+          { type: 'leak', tag: '🎯 $8,000 Leak Hook', bonus: '+Bleed', text: `"Where does an emergency $8,000 leak call ring when you're 3 stories up?"` },
+          { type: 'demo', tag: '🛡️ Test Ava Live', bonus: '(561) 813-8602', text: `"Don't take my word for it. Dial (561) 813-8602 right now from your truck."` }
+        ];
+      }
     } else if (stage === 'price' || lastQ === 'how_much_does_it_cost') {
       cards = [
         { type: 'price', tag: '💰 $397/mo Flat Pricing', bonus: '🔥 Direct Answer', text: `"It is a flat 300 a month with zero setup fee and zero contract. One shingle repair pays for the entire year."`, pulse: true },
@@ -1452,12 +1460,21 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const terminal = document.getElementById('combatLog');
     if (terminal) terminal.innerHTML = '';
 
-    appendLog(`⚔️ <strong>ENTERED STAGE ${idx + 1}:</strong> Confronting ${currentBoss.name} (${currentBoss.trade})!`, 'system');
-    appendLog(`<strong>${currentBoss.name}:</strong> "${currentBoss.dialogue.stage1}"`, 'boss');
-    matchHistory.push({ role: 'assistant', content: currentBoss.dialogue.stage1 });
+    const bossFirst = (currentBoss.name || 'Contractor').split(' ')[0].replace(/"/g, '');
+    const playerOpeningLine = (currentBoss.key === 'gatekeeper')
+      ? `Hey, Luke with VantorX — is this the owner?`
+      : `Hey ${bossFirst}? Luke with VantorX — is this the owner?`;
+
+    appendLog(`📞 <strong>DIALING:</strong> Connected to ${currentBoss.name} (${currentBoss.company}) in ${currentBoss.location}...`, 'system');
+    appendLog(`<strong>Luke:</strong> "${playerOpeningLine}"`, 'player');
+    matchHistory.push({ role: 'user', content: playerOpeningLine });
+
+    const bossOpeningReply = currentBoss.dialogue.stage1 || currentBoss.dialogue.opener;
+    appendLog(`<strong>${currentBoss.name}:</strong> "${bossOpeningReply}"`, 'boss');
+    matchHistory.push({ role: 'assistant', content: bossOpeningReply });
 
     if (voiceEnabled) {
-      speakContractor(currentBoss.dialogue.stage1, currentBoss.key);
+      speakContractor(bossOpeningReply, currentBoss.key);
     }
   }
 
@@ -1514,6 +1531,16 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const asksWhoAnswers = /who\s*answers|where\s*does\s*(that|the)\s*call\s*go|what\s*happens\s*to\s*calls|how\s*do\s*you\s*handle/i.test(low);
     const asksHowMuchLost = /how\s*much\s*(do\s*you\s*lose|is\s*a\s*job|is\s*an\s*average)|ticket\s*size|worth/i.test(low);
 
+    // Enhanced Split-Track Signals (Owner vs Gatekeeper & Advanced Objections):
+    const hasOwnerCheck = /\b(owner|decision\s*maker|boss|run\s*the\s*place|in\s*charge|foreman|am\s*i\s*talking\s*to\s*the\s*owner|is\s*this\s*the\s*owner|you\s*the\s*owner)\b/i.test(low);
+    const hasGatekeeperPivot = /\b(is\s*gary\s*around|out\s*on\s*a\s*job\s*site|in\s*the\s*field|come\s*in\s*off\s*the\s*truck|transfer\s*me|direct\s*cell|cell\s*number|dispatch\s*after\s*5|after-hours\s*calls|emergency\s*dispatch)\b/i.test(low);
+    const hasEmailPivot = /\b(shoot\s*an\s*email|send\s*(you\s*)?an\s*email|happy\s*to\s*email|before\s*i\s*send|so\s*i\s*don't\s*send\s*(10\s*pages|garbage|spam)|what\s*specific|lose\s*more\s*calls)\b/i.test(low);
+    const hasAnsweringServiceCompare = /\b(answering\s*service|call\s*center|live\s*operator|offshore|botch|miss\s*notes|scribble|15\s*minutes|relay|in\s*one\s*ring)\b/i.test(low);
+    const hasNumberSource = /\b(public|dbpr|license|google\s*maps|florida\s*license|registry|reason\s*i\s*called|reached\s*out)\b/i.test(low);
+    const hasNoContractGuarantee = /\b(zero\s*contracts?|no\s*contracts?|month\s*to\s*month|cancel\s*anytime|no\s*lock-in)\b/i.test(low);
+    const hasBilingualFeature = /\b(spanish|bilingual|espanol|two\s*languages|fluent)\b/i.test(low);
+    const hasFailoverLogic = /\b(carrier\s*level|telecom|verizon|at&t|power\s*out|internet\s*down|hurricane\s*failover|cloud\s*routing)\b/i.test(low);
+
     const isRepeatingPermission = memory.topicsCovered['permission'] && hasPermission && !hasLeakHook && !hasAvaMechanism && !hasPricingAnswer && !hasDemoNumber;
     const isRepeatingDemo = memory.topicsCovered['demo'] && hasDemoNumber && !hasCarrier71 && !hasTimeProposal;
     const isRepeatingPrice = memory.topicsCovered['price'] && hasPricingAnswer && !hasDemoNumber && !hasCarrier71 && !hasTimeProposal;
@@ -1556,6 +1583,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       isUserAskingQuestion,
       asksWhoAnswers,
       asksHowMuchLost,
+      hasOwnerCheck,
+      hasGatekeeperPivot,
+      hasEmailPivot,
+      hasAnsweringServiceCompare,
+      hasNumberSource,
+      hasNoContractGuarantee,
+      hasBilingualFeature,
+      hasFailoverLogic,
       isRepeatingPermission,
       isRepeatingDemo,
       isRepeatingPrice,
@@ -1697,11 +1732,64 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       ], 'answer_ticket');
     }
 
+    // 3b. SPLIT-TRACK & REALISTIC CONTRACTOR OBJECTION RESPONSES
+    if (analysis.hasGatekeeperPivot && boss.key === 'gatekeeper') {
+      memory.stage = 'pain';
+      memory.lastBossQuestion = 'explain_solution_ava';
+      memory.topicsCovered['permission'] = true;
+      return pickUnique(memory, [
+        `(Typing pauses) Gary usually pulls into the shop around 4:30 PM. Honestly, he was just venting this morning because our after-hours answering service botched a $9,000 AC changeout message over the weekend. How does your system notify our technicians?`,
+        `(Audible sigh) If Gary's out on a job, his hands are full. But if your tool actually catches after-hours emergencies and texts our on-call tech directly without an answering service making errors, he would want to hear about it. Tell me what it does.`
+      ], 'gatekeeper_site_pivot');
+    }
+
+    if (analysis.hasEmailPivot) {
+      memory.stage = 'pain';
+      memory.lastBossQuestion = 'explain_solution_ava';
+      memory.topicsCovered['permission'] = true;
+      return pickUnique(memory, [
+        `(Chuckles into receiver) Ha, fair enough -- most salespeople just dump 15 brochures into my spam folder. Honestly, the biggest headache is after 5 PM and on weekends when emergency calls come in and we're at dinner with our families. How does Ava handle those without us staring at our phones?`,
+        `I appreciate you being straight up instead of clogging my inbox. It's after-hours and weekend storm calls that hurt the most. Tell me how Ava catches those.`
+      ], 'email_pivot_success');
+    }
+
+    if (analysis.hasAnsweringServiceCompare) {
+      memory.stage = 'price';
+      memory.lastBossQuestion = 'how_much_does_it_cost';
+      return pickUnique(memory, [
+        `(Snorts) You hit the nail on the head. Our answering service charges $1,400 a month and half the time they can't even spell the customer's street name right. But how does an AI answer faster without sounding like an automated phone tree? And what does it cost?`,
+        `Don't get me started on answering services -- they put callers on hold for 3 minutes and the homeowner hangs up. How much is your tool compared to their $1,400 monthly bill?`
+      ], 'answering_service_reaction');
+    }
+
+    if (analysis.hasBilingualFeature && (boss.key === 'price' || boss.key === 'vito' || boss.key === 'sal')) {
+      memory.stage = 'price';
+      memory.lastBossQuestion = 'how_much_does_it_cost';
+      return pickUnique(memory, [
+        `Wait, she speaks fluent Spanish and detects the language automatically? Down here in Florida, half our emergency service calls are Spanish-speaking. That's a massive competitive edge. What's the monthly investment for that?`,
+        `Automatic bilingual English and Spanish intake? That alone stops us from losing calls in South Florida. What does your setup cost per month?`
+      ], 'bilingual_reaction');
+    }
+
+    if (analysis.hasOwnerCheck) {
+      if (boss.key === 'gatekeeper') {
+        return pickUnique(memory, [
+          `No, like I told you, Gary is the owner and he's out on a job site right now. I run the front desk and dispatch. Tell me why you're calling or send an email to info@orlandopremiac.com.`,
+          `You reached dispatch. Gary owns the company and his hands are full with tools today. What is this call regarding?`
+        ], 'gk_owner_status');
+      } else {
+        return pickUnique(memory, [
+          `Yeah, I already told you I'm the owner! What's this about, kid? Make it fast before I get back on this job.`,
+          `I own the outfit, Luke. Stop verifying and tell me why you called my business line.`
+        ], 'owner_verified');
+      }
+    }
+
     // 4. DIALOGUE STATE ADVANCEMENT (Forward-Only State Machine)
 
     // STAGE 1: Opener -> Pain
     if (memory.lastBossQuestion === 'who_are_you') {
-      if (analysis.hasPermission || analysis.hasAgreement || analysis.hasLeakHook) {
+      if (analysis.hasPermission || analysis.hasAgreement || analysis.hasLeakHook || analysis.hasGatekeeperPivot || analysis.hasEmailPivot) {
         memory.stage = 'pain';
         memory.lastBossQuestion = 'explain_solution_ava';
         memory.topicsCovered['permission'] = true;
@@ -2015,7 +2103,27 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         feedback += ` [Defused Tension: +${agreementHeal} HP]`;
       }
 
-      if ((analysis.hasPermission || analysis.hasAgreement) && (analysis.hasLeakHook || analysis.hasDollarMath) && (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer)) {
+      if (analysis.hasGatekeeperPivot && currentBoss && currentBoss.key === 'gatekeeper') {
+        grade = 'S';
+        damage = 44;
+        counterDmg = 0;
+        feedback = '🎯 MASTERFUL GATEKEEPER BYPASS! You targeted after-hours dispatch breakdown and job site reality!';
+      } else if (analysis.hasEmailPivot) {
+        grade = 'S';
+        damage = 42;
+        counterDmg = 0;
+        feedback = '🔥 ELITE EMAIL PIVOT! Prevented deal death in the spam folder and anchored emergency call pain!';
+      } else if (analysis.hasAnsweringServiceCompare) {
+        grade = 'A';
+        damage = 36;
+        counterDmg = 2;
+        feedback = '🛡️ ANSWERING SERVICE REBUTTAL: Exposed the $1,400 call center flaw and anchored 1-ring instant response!';
+      } else if (analysis.hasBilingualFeature && currentBoss && (currentBoss.key === 'price' || currentBoss.key === 'vito' || currentBoss.key === 'sal')) {
+        grade = 'S';
+        damage = 45;
+        counterDmg = 0;
+        feedback = '🌴 BILINGUAL FLORIDA EDGE! Locked down Spanish emergency dispatch advantage!';
+      } else if ((analysis.hasPermission || analysis.hasAgreement) && (analysis.hasLeakHook || analysis.hasDollarMath) && (analysis.hasDemoNumber || analysis.hasCarrier71 || analysis.hasPricingAnswer)) {
         grade = 'S';
         damage = 45;
         counterDmg = 0;
@@ -2025,7 +2133,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         damage = 34;
         counterDmg = 4;
         feedback = '✨ EXCELLENT! Direct, substantive answer with zero fluff.';
-      } else if (analysis.hasLeakHook || analysis.hasPermission || analysis.hasAgreement || analysis.hasAvaMechanism || analysis.isUserAskingQuestion) {
+      } else if (analysis.hasLeakHook || analysis.hasPermission || analysis.hasAgreement || analysis.hasAvaMechanism || analysis.isUserAskingQuestion || analysis.hasOwnerCheck) {
         grade = 'B';
         damage = 22;
         counterDmg = 8;
@@ -2137,6 +2245,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     let text = '';
     if (strikeType === 'permission') {
       text = `Hey ${bossFirst}, I know you're busy in the field — you got 30 seconds before you hang up on me?`;
+    } else if (strikeType === 'gk_site') {
+      text = `Hey Karen, is Gary around or is he out on a job site right now?`;
+    } else if (strikeType === 'gk_dispatch') {
+      text = `Reason I called was regarding your emergency dispatch after 5 PM and on weekends when calls slip through.`;
     } else if (strikeType === 'leak') {
       text = `Where does an emergency $8,000 replacement call go right now when you're on a job or asleep at 8 PM?`;
     } else if (strikeType === 'mechanism') {
@@ -2486,11 +2598,19 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const terminal = document.getElementById('combatLog');
     if (terminal) terminal.innerHTML = '';
 
+    const bossFirst = (currentBoss.name || 'Contractor').split(' ')[0].replace(/"/g, '');
+    const playerOpeningLine = (currentBoss.key === 'gatekeeper')
+      ? `Hey, Luke with VantorX — is this the owner?`
+      : `Hey ${bossFirst}? Luke with VantorX — is this the owner?`;
+
     appendLog(`📞 <strong>REDIALING:</strong> Connecting to ${currentBoss.name} (${currentBoss.company}) in ${currentBoss.location}...`, 'system');
+    appendLog(`<strong>Luke:</strong> "${playerOpeningLine}"`, 'player');
+    matchHistory.push({ role: 'user', content: playerOpeningLine });
 
     setTimeout(() => {
       const opener = currentBoss.dialogue.stage1 || currentBoss.dialogue.opener;
       appendLog(`<strong>${currentBoss.name}:</strong> "${opener}"`, 'boss');
+      matchHistory.push({ role: 'assistant', content: opener });
       if (voiceEnabled) {
         speakContractor(opener, currentBoss.key);
       }
