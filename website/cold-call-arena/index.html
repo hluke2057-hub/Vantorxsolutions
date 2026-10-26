@@ -9992,6 +9992,14 @@ window.closeLeakMathModal = function() {
   } catch(e) {
     CALL_RECORDS = {};
   }
+  Object.defineProperty(window, 'CALL_RECORDS', {
+    get() { return CALL_RECORDS; },
+    set(v) { CALL_RECORDS = v; },
+    configurable: true
+  });
+  window.getActiveUser = getActiveUser;
+  window.renderLeadsTable = renderLeadsTable;
+  window.saveCallRecords = saveCallRecords;
   function saveCallRecords() {
     try {
       localStorage.setItem('vantorx_lead_calls_v1', JSON.stringify(CALL_RECORDS));
@@ -10367,12 +10375,50 @@ window.closeLeakMathModal = function() {
       leadTableBody.appendChild(tr);
     });
 
-    // Wire Checkboxes: clicking checkbox opens the Call Log Modal immediately
+    // Wire Checkboxes: clicking checkbox directly toggles called state and saves to localStorage
     document.querySelectorAll('.call-checkbox').forEach(cb => {
-      cb.addEventListener('click', (e) => {
-        e.preventDefault();
+      cb.addEventListener('change', (e) => {
         const id = cb.dataset.id;
-        openCallLogModal(id);
+        const lead = LEADS_DATA.find(l => l.id === id);
+        const isChecked = cb.checked;
+        const u = getActiveUser();
+        const wasCalled = !!(CALL_RECORDS[id]?.called);
+
+        if (isChecked) {
+          const prevOutcome = CALL_RECORDS[id]?.outcome;
+          const defaultOutcome = (prevOutcome && prevOutcome !== 'Uncalled') ? prevOutcome : 'Called';
+          CALL_RECORDS[id] = {
+            called: true,
+            caller: activeCaller,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            outcome: defaultOutcome,
+            notes: CALL_RECORDS[id]?.notes || ''
+          };
+          if (!wasCalled) {
+            u.dailyDials = (u.dailyDials || 0) + 1;
+          }
+          saveUserProfiles();
+          updateDailyGoalsUI();
+          saveCallRecords();
+          renderLeadsTable();
+          updateQuotaHUD();
+          if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
+          showToast(`✓ Checked off ${lead?.company || 'Lead'} as Called! Saved.`);
+        } else {
+          if (CALL_RECORDS[id]) {
+            CALL_RECORDS[id].called = false;
+          }
+          if (wasCalled) {
+            u.dailyDials = Math.max(0, (u.dailyDials || 1) - 1);
+          }
+          saveUserProfiles();
+          updateDailyGoalsUI();
+          saveCallRecords();
+          renderLeadsTable();
+          updateQuotaHUD();
+          if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
+          showToast(`Unchecked ${lead?.company || 'Lead'} as to-call. Saved.`);
+        }
       });
     });
 
