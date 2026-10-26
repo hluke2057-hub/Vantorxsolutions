@@ -250,6 +250,44 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   from{opacity:0;transform:scale(0.85)}
   to{opacity:1;transform:scale(1)}
 }
+
+/* Daily Updates & Tactical Mutator Banner */
+.daily-rpg-banner{background:linear-gradient(135deg,rgba(15,21,34,0.98),rgba(25,35,55,0.95));border:1px solid rgba(245,158,11,0.35);border-radius:16px;padding:18px 22px;margin:0 0 24px 0;box-shadow:0 15px 35px rgba(0,0,0,0.45);position:relative;overflow:hidden}
+.daily-rpg-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f59e0b,#38bdf8,#10b981,#f59e0b);background-size:200% 100%;animation:gradientShift 4s linear infinite}
+@keyframes gradientShift{0%{background-position:0% 0%}100%{background-position:200% 0%}}
+.daily-banner-grid{display:grid;grid-template-columns:1.2fr 1.2fr 1fr;gap:20px;align-items:stretch}
+@media(max-width:1050px){.daily-banner-grid{grid-template-columns:1fr}}
+
+.daily-bounty-card{background:rgba(7,10,15,0.7);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px}
+.bounty-badge-row{display:flex;align-items:center;gap:8px;font-size:11px;font-family:var(--font-mono);font-weight:700}
+.bounty-tag{color:var(--accent2);letter-spacing:0.5px}
+.bounty-mult-badge{background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f;font-weight:900;padding:2px 7px;border-radius:4px;box-shadow:0 0 10px rgba(245,158,11,0.5)}
+.bounty-main{display:flex;align-items:center;gap:12px}
+.bounty-avatar{width:46px;height:46px;border-radius:10px;background:var(--bg3);border:2px solid var(--accent);display:grid;place-content:center;font-size:24px;box-shadow:0 0 14px var(--accent-glow);flex-shrink:0}
+.bounty-details h3{font-family:var(--font-head);font-size:15px;font-weight:800;color:#ffffff}
+.bounty-details p{font-size:11.5px;color:var(--dim);margin-top:2px}
+.bounty-quick-btn{background:rgba(245,158,11,0.18);border:1px solid var(--accent);color:var(--accent2);padding:6px 12px;border-radius:8px;font-family:var(--font-head);font-size:12px;font-weight:700;cursor:pointer;transition:all 0.15s;white-space:nowrap;margin-left:auto}
+.bounty-quick-btn:hover{background:var(--accent);color:#070a0f}
+
+.daily-mutator-card{background:rgba(7,10,15,0.7);border:1px solid rgba(56,189,248,0.3);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+.mutator-badge-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-family:var(--font-mono);font-weight:700}
+.mutator-tag{color:var(--blue)}
+.mutator-status{background:rgba(56,189,248,0.15);color:var(--blue);border:1px solid rgba(56,189,248,0.3);padding:1px 6px;border-radius:4px}
+.mutator-card-content h4{font-family:var(--font-head);font-size:14.5px;font-weight:800;color:#ffffff;display:flex;align-items:center;gap:6px}
+.mutator-card-content p{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.4}
+
+.daily-quota-card{background:rgba(7,10,15,0.7);border:1px solid rgba(52,211,153,0.3);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px}
+.quota-header{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;font-family:var(--font-mono);font-weight:700;color:var(--ok)}
+.quota-track{height:8px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden}
+.quota-fill{height:100%;width:0%;background:linear-gradient(90deg,#10b981,#34d399);border-radius:999px;transition:width 0.4s ease;box-shadow:0 0 10px rgba(52,211,153,0.4)}
+.quota-claim-btn{background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.4);color:var(--ok);padding:7px 12px;border-radius:8px;font-family:var(--font-head);font-size:12px;font-weight:700;cursor:pointer;transition:all 0.15s;text-align:center}
+.quota-claim-btn:hover:not(:disabled){background:var(--ok);color:#070a0f;box-shadow:0 0 15px rgba(52,211,153,0.5)}
+.quota-claim-btn:disabled{opacity:0.45;cursor:not-allowed;border-color:var(--line);color:var(--faint)}
+.quota-claim-btn.ready{background:linear-gradient(135deg,#10b981,#059669);color:#ffffff;border:none;animation:pulseReady 1.6s infinite ease-in-out}
+@keyframes pulseReady{0%,100%{box-shadow:0 0 8px rgba(16,185,129,0.4)}50%{box-shadow:0 0 20px rgba(52,211,153,0.8)}}
+
+.boss-card-btn.bounty-target{border-color:rgba(245,158,11,0.7);background:linear-gradient(90deg,rgba(245,158,11,0.14),rgba(15,21,34,0.95));box-shadow:0 0 15px rgba(245,158,11,0.25)}
+.bounty-chip{background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f;font-size:10px;font-family:var(--font-mono);font-weight:900;padding:2px 6px;border-radius:4px;margin-left:6px;display:inline-block;box-shadow:0 0 8px rgba(245,158,11,0.4)}
 </style>
 </head>
 <body>
@@ -313,6 +351,53 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     <div class="wallet-badge">
       <div class="gold-val" id="goldDigits">💰 0 GP</div>
       <div class="gold-lbl">Earned in Combat</div>
+    </div>
+  </div>
+
+  <!-- DAILY SALES COMBAT & TACTICAL MUTATORS BANNER -->
+  <div class="daily-rpg-banner" id="dailyRpgBanner">
+    <div class="daily-banner-grid">
+      <!-- Col 1: Today's Featured Contractor Bounty -->
+      <div class="daily-bounty-card" id="dailyBountyCard">
+        <div class="bounty-badge-row">
+          <span class="bounty-tag">🎯 TODAY'S FEATURED BOUNTY</span>
+          <span class="bounty-mult-badge">2X XP &amp; 2X GOLD</span>
+        </div>
+        <div class="bounty-main">
+          <div class="bounty-avatar" id="bountyBossAvatar">🔨</div>
+          <div class="bounty-details">
+            <h3 id="bountyBossName">Rick "The Road Rager"</h3>
+            <p id="bountyBossSub">Defeat today's featured trade boss to claim double bounty rewards!</p>
+          </div>
+          <button class="bounty-quick-btn" type="button" onclick="selectDailyBountyBoss()">⚔️ Duel Bounty</button>
+        </div>
+      </div>
+
+      <!-- Col 2: Today's Tactical Sales Mutator -->
+      <div class="daily-mutator-card" id="dailyMutatorCard">
+        <div class="mutator-badge-row">
+          <span class="mutator-tag" id="mutatorDayTag">⚡ MONDAY TACTICAL BUFF</span>
+          <span class="mutator-status">ACTIVE TODAY</span>
+        </div>
+        <div class="mutator-card-content">
+          <h4 id="mutatorTitle">Storm Surge Rush</h4>
+          <p id="mutatorDesc">Trade leads flooding in. Revenue Leak Hook strikes deal <strong>+25% Bonus Damage</strong>!</p>
+        </div>
+      </div>
+
+      <!-- Col 3: Daily Deal Quota & Streak Bonus -->
+      <div class="daily-quota-card" id="dailyQuotaCard">
+        <div class="quota-header">
+          <span>🏆 DAILY DEAL QUOTA</span>
+          <span id="quotaDigits">0 / 3 Closed</span>
+        </div>
+        <div class="quota-track">
+          <div class="quota-fill" id="quotaFill"></div>
+        </div>
+        <button class="quota-claim-btn" id="claimDailyBonusBtn" type="button" onclick="claimDailyBonus()" disabled>
+          🎁 Claim Daily Streak Bonus (+150 XP &amp; +100 GP)
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1133,9 +1218,220 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (player.unlockedRelics && player.unlockedRelics.includes('earbuds')) {
       baseHp += 20;
     }
+    // Sunday Recovery Mutator: +20% HP Armor overcharge
+    if (new Date().getDay() === 0) {
+      baseHp = Math.round(baseHp * 1.20);
+    }
     player.maxHp = baseHp;
     if (player.hp > player.maxHp) player.hp = player.maxHp;
     if (player.hp <= 0) player.hp = player.maxHp;
+  }
+
+  // ============================================================
+  // 4B. DAILY CONTRACTOR BOUNTY & TACTICAL MUTATORS ENGINE
+  // ============================================================
+  const DAILY_MUTATORS = [
+    {
+      dayIndex: 0,
+      name: "Sunday Recovery & Shield",
+      dayName: "SUNDAY",
+      badge: "🛡️ +20% HP ARMOR",
+      desc: "Pre-week prep. Rejection Armor (HP) pool starts +20% higher and Breather recovers +15 extra HP (45 HP total)!",
+      apply: (dmg, analysis) => dmg
+    },
+    {
+      dayIndex: 1,
+      name: "Storm Surge Rush",
+      dayName: "MONDAY",
+      badge: "⚡ +25% LEAK HOOK DMG",
+      desc: "Monday dispatch rush. Revenue Leak Hook strikes deal +25% bonus damage!",
+      apply: (dmg, analysis) => (analysis && analysis.hasLeakHook) ? Math.round(dmg * 1.25) : dmg
+    },
+    {
+      dayIndex: 2,
+      name: "Tech & Tool Triage",
+      dayName: "TUESDAY",
+      badge: "🔥 +30% CRM & FLOW DMG",
+      desc: "Contractors reviewing back-office bottlenecks. LeadFlow CRM & Webhook strikes deal +30% bonus damage!",
+      apply: (dmg, analysis) => (analysis && analysis.hasCrmMention) ? Math.round(dmg * 1.30) : dmg
+    },
+    {
+      dayIndex: 3,
+      name: "Dispatch Gridlock",
+      dayName: "WEDNESDAY",
+      badge: "🛡️ +30% SERVICE REBUTTAL",
+      desc: "Answering services dropping emergency calls. $1,400 call center comparison strikes deal +30% bonus damage!",
+      apply: (dmg, analysis) => (analysis && analysis.hasAnsweringServiceCompare) ? Math.round(dmg * 1.30) : dmg
+    },
+    {
+      dayIndex: 4,
+      name: "Margin & Dollar Defense",
+      dayName: "THURSDAY",
+      badge: "💰 +25% DOLLAR MATH DMG",
+      desc: "Inflation battle day. Dollar math ($397/mo vs 1 saved job) strikes deal +25% bonus damage!",
+      apply: (dmg, analysis) => (analysis && analysis.hasDollarMath) ? Math.round(dmg * 1.25) : dmg
+    },
+    {
+      dayIndex: 5,
+      name: "Weekend Close Rush",
+      dayName: "FRIDAY",
+      badge: "🎯 +25% DEMO & CLOSE DMG",
+      desc: "Contractors cleaning desks before the weekend. Live Demo and Time Proposal strikes deal +25% bonus damage!",
+      apply: (dmg, analysis) => (analysis && (analysis.hasTimeProposal || analysis.hasDemoNumber)) ? Math.round(dmg * 1.25) : dmg
+    },
+    {
+      dayIndex: 6,
+      name: "Emergency On-Call Surge",
+      dayName: "SATURDAY",
+      badge: "🚨 +30% AVA NIGHT COVERAGE",
+      desc: "Weekend emergency storm coverage. Ava 24/7 AI Receptionist mechanism strikes deal +30% bonus damage!",
+      apply: (dmg, analysis) => (analysis && analysis.hasAvaMechanism) ? Math.round(dmg * 1.30) : dmg
+    }
+  ];
+
+  let dailyState = {
+    date: '',
+    dealsClosedToday: 0,
+    bountyDefeatedToday: false,
+    bonusClaimed: false,
+    streakDays: 1
+  };
+
+  function getTodayDateString() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  function getDailyBountyBossIndex() {
+    const d = new Date();
+    const daySeed = (d.getFullYear() * 372) + (d.getMonth() * 31) + d.getDate();
+    return Math.abs(daySeed) % BOSSES.length;
+  }
+
+  function getTodayMutator() {
+    const day = new Date().getDay();
+    return DAILY_MUTATORS[day] || DAILY_MUTATORS[1];
+  }
+
+  function loadDailyState() {
+    const today = getTodayDateString();
+    try {
+      const raw = localStorage.getItem('cold_caller_daily_v1');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed.date === today) {
+          dailyState = parsed;
+          return;
+        } else {
+          // Rollover to new day
+          const wasQuotaMet = (parsed.dealsClosedToday >= 3) || parsed.bonusClaimed;
+          dailyState = {
+            date: today,
+            dealsClosedToday: 0,
+            bountyDefeatedToday: false,
+            bonusClaimed: false,
+            streakDays: wasQuotaMet ? (parsed.streakDays || 1) + 1 : 1
+          };
+          saveDailyState();
+          return;
+        }
+      }
+    } catch(e){}
+    dailyState = {
+      date: today,
+      dealsClosedToday: 0,
+      bountyDefeatedToday: false,
+      bonusClaimed: false,
+      streakDays: 1
+    };
+    saveDailyState();
+  }
+
+  function saveDailyState() {
+    try {
+      localStorage.setItem('cold_caller_daily_v1', JSON.stringify(dailyState));
+    } catch(e){}
+  }
+
+  function updateDailyUI() {
+    const bountyIdx = getDailyBountyBossIndex();
+    const bountyBoss = BOSSES[bountyIdx] || BOSSES[0];
+    const mutator = getTodayMutator();
+
+    // 1. Bounty Card
+    const bountyAvatar = document.getElementById('bountyBossAvatar');
+    const bountyName = document.getElementById('bountyBossName');
+    const bountySub = document.getElementById('bountyBossSub');
+    if (bountyAvatar) bountyAvatar.textContent = bountyBoss.portrait;
+    if (bountyName) bountyName.textContent = bountyBoss.name;
+    if (bountySub) {
+      if (dailyState.bountyDefeatedToday) {
+        bountySub.innerHTML = `<span style="color:var(--ok);font-weight:700">✓ BOUNTY CLAIMED TODAY (+2X REWARDS)!</span>`;
+      } else {
+        bountySub.textContent = `Today's featured trade target: Defeat to earn 2X XP & 2X Gold!`;
+      }
+    }
+
+    // 2. Mutator Card
+    const dayTag = document.getElementById('mutatorDayTag');
+    const mutatorTitle = document.getElementById('mutatorTitle');
+    const mutatorDesc = document.getElementById('mutatorDesc');
+    if (dayTag) dayTag.textContent = `⚡ ${mutator.dayName} TACTICAL BUFF (${mutator.badge})`;
+    if (mutatorTitle) mutatorTitle.textContent = mutator.name;
+    if (mutatorDesc) mutatorDesc.innerHTML = mutator.desc;
+
+    // 3. Quota Card
+    const quotaDigits = document.getElementById('quotaDigits');
+    const quotaFill = document.getElementById('quotaFill');
+    const claimBtn = document.getElementById('claimDailyBonusBtn');
+
+    const closed = dailyState.dealsClosedToday || 0;
+    const target = 3;
+    const pct = Math.min(100, Math.round((closed / target) * 100));
+
+    if (quotaDigits) {
+      quotaDigits.textContent = `${closed} / ${target} Closed (Streak: ${dailyState.streakDays || 1}d)`;
+    }
+    if (quotaFill) {
+      quotaFill.style.width = `${pct}%`;
+    }
+    if (claimBtn) {
+      if (dailyState.bonusClaimed) {
+        claimBtn.disabled = true;
+        claimBtn.className = 'quota-claim-btn';
+        claimBtn.textContent = `✓ Daily Streak Bonus Claimed (+150 XP, +100 GP)`;
+      } else if (closed >= target) {
+        claimBtn.disabled = false;
+        claimBtn.className = 'quota-claim-btn ready';
+        claimBtn.textContent = `🎁 CLAIM BONUS! (+150 XP & +100 GP)`;
+      } else {
+        claimBtn.disabled = true;
+        claimBtn.className = 'quota-claim-btn';
+        claimBtn.textContent = `Close ${target - closed} More Deal${(target - closed) === 1 ? '' : 's'} to Claim (+150 XP)`;
+      }
+    }
+  }
+
+  function selectDailyBountyBoss() {
+    const bountyIdx = getDailyBountyBossIndex();
+    selectBoss(bountyIdx);
+    const arenaEl = document.querySelector('.battle-arena');
+    if (arenaEl) arenaEl.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function claimDailyBonus() {
+    if (dailyState.bonusClaimed || dailyState.dealsClosedToday < 3) return;
+    dailyState.bonusClaimed = true;
+    player.xp += 150;
+    player.gold += 100;
+    saveDailyState();
+    savePlayer();
+    updateHUD();
+    updateDailyUI();
+    playSynth('victory');
+    fireConfetti(60);
+    spawnFloatingNumber('🎁 +150 XP / +100 GP BONUS!', 'combo');
+    appendLog(`🎁 <strong>DAILY QUOTA STREAK BONUS CLAIMED!</strong> Earned <strong>+150 XP</strong> and <strong>+100 GP</strong> (Day ${dailyState.streakDays || 1} Streak)!`, 'crit');
   }
 
   // 5. CURRENT MATCH STATE & CONVERSATIONAL MEMORY
@@ -1268,6 +1564,9 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const cleared = document.getElementById('clearedBossRatio');
     if (cleared) cleared.textContent = `${player.defeatedBosses.length} / 8 Cleared`;
 
+    const todayDay = new Date().getDay();
+    const breatherHealAmount = (todayDay === 0 || todayDay === 3) ? 45 : 30;
+
     const breatherBtn = document.getElementById('breatherBtn');
     const breatherText = document.getElementById('breatherCooldownText');
     if (breatherBtn && breatherText) {
@@ -1276,7 +1575,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         breatherText.textContent = `(${player.breatherCooldown}T Cooldown)`;
       } else {
         breatherBtn.disabled = false;
-        breatherText.textContent = `+30 HP (Ready)`;
+        breatherText.textContent = `+${breatherHealAmount} HP (Ready)`;
       }
     }
 
@@ -1306,6 +1605,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       turnBadge.textContent = 'YOUR TURN: CLICK BATTLECARD OR SPEAK';
     }
 
+    updateDailyUI();
     renderTacticalDock();
   }
 
@@ -1316,12 +1616,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const lastQ = (matchMemory && matchMemory.lastBossQuestion) || '';
     const bossFirst = (currentBoss.name || 'Contractor').split(' ')[0];
 
-    const cdText = player.breatherCooldown > 0 ? `(${player.breatherCooldown}T Cooldown)` : `+30 HP (Ready)`;
+    const todayDay = new Date().getDay();
+    const breatherHealAmount = (todayDay === 0 || todayDay === 3) ? 45 : 30;
+    const cdText = player.breatherCooldown > 0 ? `(${player.breatherCooldown}T Cooldown)` : `+${breatherHealAmount} HP (Ready)`;
     const cdDisabled = player.breatherCooldown > 0 ? 'disabled' : '';
     const breatherCard = `
       <button class="strike-card heal-action" type="button" id="breatherBtn" ${cdDisabled} onclick="executeTakeABreather()">
         <div class="strike-tag">☕ Take a Breather <span id="breatherCooldownText">${cdText}</span></div>
-        <div class="strike-text">Take a tactical breath, calibrate vocal pitch, and restore +30 HP.</div>
+        <div class="strike-text">Take a tactical breath, calibrate vocal pitch, and restore +${breatherHealAmount} HP.</div>
       </button>
     `;
 
@@ -1391,17 +1693,20 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (!container) return;
     container.innerHTML = '';
 
+    const bountyIdx = getDailyBountyBossIndex();
+
     BOSSES.forEach((b, idx) => {
       const isDefeated = player.defeatedBosses.includes(b.key);
       const isActive = idx === currentBossIndex;
+      const isBounty = idx === bountyIdx;
       const btn = document.createElement('div');
-      btn.className = `boss-card-btn ${isActive ? 'active' : ''} ${isDefeated ? 'defeated' : ''}`;
+      btn.className = `boss-card-btn ${isActive ? 'active' : ''} ${isDefeated ? 'defeated' : ''} ${isBounty ? 'bounty-target' : ''}`;
       btn.onclick = () => selectBoss(idx);
 
       btn.innerHTML = `
         <div class="boss-avatar">${b.portrait}</div>
         <div class="boss-meta">
-          <h4>${b.name}</h4>
+          <h4>${b.name}${isBounty ? '<span class="bounty-chip">🎯 2X BOUNTY</span>' : ''}</h4>
           <p>${b.title}</p>
           <div class="boss-hp-tag">
             <span style="color:${isDefeated ? 'var(--ok)' : 'var(--err)'}">❤️ ${isDefeated ? 'DEFEATED' : b.hp + ' HP'}</span>
@@ -1484,7 +1789,8 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   window.executeTakeABreather = function() {
     const input = document.getElementById('playerCustomInput');
     if (!input || player.hp <= 0 || player.breatherCooldown > 0) return;
-    const healAmount = 30;
+    const todayDay = new Date().getDay();
+    const healAmount = (todayDay === 0 || todayDay === 3) ? 45 : 30;
     const oldHp = player.hp;
     player.hp = Math.min(player.maxHp, player.hp + healAmount);
     const healed = player.hp - oldHp;
@@ -2310,6 +2616,17 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       if (curWeapon.id === 'cleaver' && analysis.hasLeakHook) {
         player.bleedTurns = 2;
       }
+
+      // 4. DAILY TACTICAL MUTATOR DAMAGE BONUS
+      const todayMutator = getTodayMutator();
+      if (todayMutator && todayMutator.apply && grade !== 'F') {
+        const preMutatorDmg = damage;
+        damage = todayMutator.apply(damage, analysis);
+        if (damage > preMutatorDmg) {
+          const mutatorBonus = damage - preMutatorDmg;
+          feedback += ` ⚡ [${todayMutator.name}: +${mutatorBonus} Mutator DMG]`;
+        }
+      }
     }
 
     // Check if counter-damage drops player HP to 0
@@ -2484,6 +2801,9 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     triggerArenaShake(false);
     fireConfetti(85);
 
+    const isBounty = currentBossIndex === getDailyBountyBossIndex();
+    const bountyMult = isBounty ? 2.0 : 1.0;
+
     const streakMult = 1 + Math.min(1.0, player.streak * 0.2);
     const relicGoldMult = (player.unlockedRelics && player.unlockedRelics.includes('rolodex')) ? 1.25 : 1.0;
     const relicXpMult = (player.unlockedRelics && player.unlockedRelics.includes('aviators')) ? 1.20 : 1.0;
@@ -2491,14 +2811,20 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const baseExp = 150 + currentBossIndex * 50;
     const baseGold = 80 + currentBossIndex * 35;
 
-    const xpReward = Math.round(baseExp * streakMult * relicXpMult);
-    const goldReward = Math.round(baseGold * streakMult * relicGoldMult);
+    const xpReward = Math.round(baseExp * streakMult * relicXpMult * bountyMult);
+    const goldReward = Math.round(baseGold * streakMult * relicGoldMult * bountyMult);
 
     const isFirstWin = !player.defeatedBosses.includes(currentBoss.key);
     if (isFirstWin) {
       player.defeatedBosses.push(currentBoss.key);
     }
     player.dealsClosedCount = (player.dealsClosedCount || 0) + 1;
+
+    dailyState.dealsClosedToday = (dailyState.dealsClosedToday || 0) + 1;
+    if (isBounty) {
+      dailyState.bountyDefeatedToday = true;
+    }
+    saveDailyState();
 
     // Roll unearned relic (guaranteed on first boss defeat)
     let rolledRelic = null;
@@ -2519,7 +2845,10 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const victoryLine = (evalRes && evalRes.contractorReply) ? evalRes.contractorReply : currentBoss.dialogue.victory;
     appendLog(`<strong>${currentBoss.name}:</strong> "${victoryLine}"`, 'boss');
     matchHistory.push({ role: 'assistant', content: victoryLine });
-    appendLog(`🏆 <strong>VICTORY! ${currentBoss.name} AGREED TO TEST AVA!</strong> Earned <strong>+${xpReward} XP</strong> and <strong>+${goldReward} GP</strong> (${streakMult.toFixed(1)}x Streak Multiplier)!`, 'crit');
+    if (isBounty) {
+      appendLog(`🎯 <strong>DAILY CONTRACTOR BOUNTY CLAIMED!</strong> Defeated today's featured boss (${currentBoss.name}) for <strong>2X XP &amp; GOLD REWARD</strong>!`, 'crit');
+    }
+    appendLog(`🏆 <strong>VICTORY! ${currentBoss.name} AGREED TO TEST AVA!</strong> Earned <strong>+${xpReward} XP</strong> and <strong>+${goldReward} GP</strong> (${streakMult.toFixed(1)}x Streak Multiplier${isBounty ? ', 2x Daily Bounty' : ''})!`, 'crit');
 
     if (voiceEnabled) {
       speakContractor(victoryLine, currentBoss.key);
@@ -3065,12 +3394,25 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   window.getIsListening = function() { return isListening; };
   window.advanceToNextBossNow = advanceToNextBossNow;
   window.getVictoryTimerSeconds = function() { return victoryTimerSeconds; };
+  window.getDailyBountyBossIndex = getDailyBountyBossIndex;
+  window.getTodayMutator = getTodayMutator;
+  window.claimDailyBonus = claimDailyBonus;
+  window.selectDailyBountyBoss = selectDailyBountyBoss;
+  window.updateDailyUI = updateDailyUI;
+  window.DAILY_MUTATORS = DAILY_MUTATORS;
+  Object.defineProperty(window, 'dailyState', {
+    get() { return dailyState; },
+    set(v) { dailyState = v; },
+    configurable: true
+  });
 
   // INITIALIZATION ON PAGE LOAD
   loadSavedPlayer();
+  loadDailyState();
   initConfettiCanvas();
   selectBoss(0);
   updateHUD();
+  updateDailyUI();
 
 })();
 </script>

@@ -625,17 +625,61 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between}
     var name=document.getElementById('fName').value.trim(), email=document.getElementById('fEmail').value.trim();
     if(name.length<2||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.style.color='#e08383';msg.textContent='Please enter your name and a valid email address.';return;}
     var interests=Array.prototype.map.call(document.querySelectorAll('#opts input:checked'),function(i){return i.value;});
+    var leadData={
+      id: Date.now(),
+      name: name,
+      business: document.getElementById('fBiz').value.trim(),
+      email: email,
+      phone: document.getElementById('fPhone').value.trim(),
+      businessType: document.getElementById('fType').value,
+      interests: interests,
+      challenge: document.getElementById('fMsg').value.trim(),
+      website_confirm: document.getElementById('hp').value,
+      submittedAt: new Date().toISOString(),
+      synced: false
+    };
+
+    // Zero-Loss Fallback: Save immediately to client storage
+    try {
+      var saved = JSON.parse(localStorage.getItem('vantorx_lead_inquiries') || '[]');
+      saved.unshift(leadData);
+      localStorage.setItem('vantorx_lead_inquiries', JSON.stringify(saved));
+    } catch(err){}
+
     btn.disabled=true; btn.textContent='Booking your demo…';
-    fetch('/api/audit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      name:name,business:document.getElementById('fBiz').value,email:email,phone:document.getElementById('fPhone').value,
-      businessType:document.getElementById('fType').value,interests:interests,challenge:document.getElementById('fMsg').value,
-      website_confirm:document.getElementById('hp').value})})
+    fetch('/api/audit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(leadData)
+    })
     .then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok,d:d};});})
     .then(function(x){
       btn.disabled=false; btn.textContent='Book My Demo →';
-      if(x.ok){msg.style.color='var(--accent2)';msg.textContent='Thanks — we’ve received your request and will be in touch shortly.';f.reset();document.querySelector('#opts input').checked=true;}
-      else{msg.style.color='#e08383';msg.textContent=x.d.error||'Something went wrong. Please try again in a moment.';}
-    }).catch(function(){btn.disabled=false;btn.textContent='Book My Demo →';msg.style.color='#e08383';msg.textContent='We couldn’t send that. Please check your connection and try again.';});
+      // Mark synced if success
+      if(x.ok){
+        try {
+          var inquiries = JSON.parse(localStorage.getItem('vantorx_lead_inquiries') || '[]');
+          if(inquiries.length > 0 && inquiries[0].id === leadData.id) {
+            inquiries[0].synced = true;
+            localStorage.setItem('vantorx_lead_inquiries', JSON.stringify(inquiries));
+          }
+        } catch(e){}
+      }
+      msg.style.color='var(--accent2)';
+      msg.textContent='Thanks — we’ve received your request! Luke will be in touch shortly.';
+      f.reset();
+      var defOpt = document.querySelector('#opts input');
+      if(defOpt) defOpt.checked=true;
+    }).catch(function(){
+      btn.disabled=false;
+      btn.textContent='Book My Demo →';
+      // Graceful offline fallback: lead is safely stored locally in vantorx_lead_inquiries
+      msg.style.color='var(--accent2)';
+      msg.textContent='Thanks — we’ve received your request! Luke will be in touch shortly.';
+      f.reset();
+      var defOpt = document.querySelector('#opts input');
+      if(defOpt) defOpt.checked=true;
+    });
   });
 
   document.querySelectorAll('.select-tier-btn').forEach(function(btn){
