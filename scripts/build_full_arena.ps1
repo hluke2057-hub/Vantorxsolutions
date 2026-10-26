@@ -1858,7 +1858,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <div class="quiz-q-title">Q6: Owner says: <em>"I need to run this past my business partner / wife before I spend any money."</em> What is the elite closer play?</div>
               <div class="quiz-options" data-day="2" data-q="6">
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 0, false)">A) Challenge his decision-making authority: "Are you not the primary owner who signs the checks for this company?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 1, true)">B) Arm him with the demo tool instead of forcing him to explain software: "100%. Don't try to explain AI to them. Put your phone on speaker with them tonight and dial (561) 813-8602 for 20 seconds. Let Ava sell herself."</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 1, true)">B) Arm him with the demo tool instead of forcing him to explain software: "100%. Don't try to explain AI to them. Put your phone on speaker with them tonight and dial (561) 813-8602 for 20 seconds to check out our demo line and see if she sounds robotic at all. Let Ava sell herself."</button>
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 2, false)">C) Schedule a 3-way conference call 10 days out when both partners might have 45 minutes of free time.</button>
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(2, 6, 3, false)">D) Offer to waive the setup fee if he signs an agreement before hanging up today.</button>
               </div>
@@ -2532,8 +2532,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="obj-accordion">
             <div class="obj-acc-head"><span>❌ 7. "I need to talk to my partner / wife first."</span> <span class="tag">Decision Partner</span></div>
             <div class="obj-acc-body">
-              "100%. Don't pitch them on software — put the phone on speaker in front of your partner and dial <strong>(561) 813-8602</strong>. Ask her: 'How much for an emergency call in <span class="dyn-city">[City]</span>?' When they hear how human she sounds, the decision makes itself."
-              <div class="obj-acc-note">💡 Strategy: Arm them with the live demo line to show their partner.</div>
+              "100%. Don't pitch them on software — put the phone on speaker in front of your partner and dial <strong>(561) 813-8602</strong>. Check out our live demo line to see if she sounds robotic at all, or test how fast and naturally she answers on ring one. When they hear firsthand that she doesn't sound like a clunky robot, the decision makes itself."
+              <div class="obj-acc-note">💡 Strategy: Arm them with the live demo line so their partner can verify she doesn't sound robotic.</div>
             </div>
           </div>
 
@@ -3463,7 +3463,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="script-phase">
           <div class="phase-tag"><span>Phase 2: Enterprise Capacity Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ $30k/mo Fleet Bleed</span></div>
           <div class="script-line">
-            "I'll be direct: When you're running a business in <span class="dyn-city">[City]</span>, your bottleneck usually isn't getting leadsâ€”it's front-office latency. When you and your team are tied up on jobs, with clients, or after hours, incoming calls roll to voicemail, online quote forms wait 45 minutes for a callback, and competitors capture the top recommendation on Google and ChatGPT.<br><br>
+            "I'll be direct: When you're running a business in <span class="dyn-city">[City]</span>, your bottleneck usually isn't getting leads — it's front-office latency. When you and your team are tied up on jobs, with clients, or after hours, incoming calls roll to voicemail, online quote forms wait 45 minutes for a callback, and competitors capture the top recommendation on Google and ChatGPT.<br><br>
             When high-value customer calls come in while lines are busy, <strong>how many of those callers actually speak to someone live within 1 or 2 rings?</strong>"
           </div>
           <div class="delivery-tip">
