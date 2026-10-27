@@ -159,6 +159,14 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 .modal-close{background:none;border:none;color:var(--dim);font-size:24px;cursor:pointer;padding:4px 8px}
 .modal-close:hover{color:#ffffff}
 
+/* ⚔️ Fullscreen Pre-Dungeon Briefing Gatekeeper */
+#dungeonBriefingModal{position:fixed!important;inset:0!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;background:radial-gradient(circle at 50% 15%,rgba(15,23,42,0.96),rgba(5,8,14,0.98))!important;backdrop-filter:blur(24px) saturate(190%)!important;-webkit-backdrop-filter:blur(24px) saturate(190%)!important;z-index:999999!important;display:none;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
+#dungeonBriefingModal.open{display:flex!important;animation:dungeonGateIn 0.25s cubic-bezier(0.16,1,0.3,1)}
+@keyframes dungeonGateIn{from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)}}
+.dungeon-briefing-card{background:linear-gradient(180deg,#0d131f 0%,#080c14 100%)!important;border:1.5px solid rgba(245,158,11,0.5)!important;border-radius:20px!important;box-shadow:0 0 60px rgba(245,158,11,0.22),0 30px 80px rgba(0,0,0,0.85)!important;max-width:920px;width:100%;max-height:92vh;display:flex;flex-direction:column;padding:24px;position:relative;box-sizing:border-box}
+.dungeon-briefing-body{overflow-y:auto;flex:1 1 auto;padding-right:6px}
+.dungeon-briefing-footer{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(245,158,11,0.25);padding-top:14px;margin-top:14px;flex-wrap:wrap;gap:12px}
+
 /* Armory Items Grid */
 .armory-section-title{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--accent);margin:16px 0 10px;display:flex;align-items:center;gap:8px}
 .armory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -844,12 +852,12 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
   </div>
 </div>
 
-<!-- ⚔️ PRE-DUNGEON TACTICAL BRIEFING & PRODUCT INTEL MODAL -->
-<div class="modal-overlay" id="dungeonBriefingModal" style="z-index:99990;background:rgba(5,8,14,0.92);backdrop-filter:blur(12px)">
-  <div class="modal-card" style="max-width:880px;border-color:rgba(245,158,11,0.4);background:linear-gradient(180deg,#0d131f 0%,#080c14 100%);box-shadow:0 0 50px rgba(245,158,11,0.15)">
-    <div class="modal-header" style="border-bottom:1px solid rgba(245,158,11,0.25);margin-bottom:14px;padding-bottom:12px">
+<!-- ⚔️ PRE-DUNGEON TACTICAL BRIEFING & PRODUCT INTEL FULLSCREEN GATE -->
+<div class="modal-overlay" id="dungeonBriefingModal">
+  <div class="dungeon-briefing-card modal-card">
+    <div class="modal-header" style="border-bottom:1px solid rgba(245,158,11,0.25);margin-bottom:14px;padding-bottom:12px;flex-shrink:0">
       <div style="display:flex;align-items:center;gap:12px">
-        <span style="font-size:32px" id="briefingAvatar">⚡</span>
+        <span style="font-size:36px;padding:6px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);border-radius:12px" id="briefingAvatar">⚡</span>
         <div>
           <div style="font-size:11px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);letter-spacing:1px;text-transform:uppercase" id="briefingFloorTag">DUNGEON FLOOR · LEVEL 3 OF 15</div>
           <h2 style="font-size:22px;margin:2px 0 0;color:#ffffff" id="briefingBossName">Mike "The Robot Crusher"</h2>
@@ -859,105 +867,107 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       <button class="modal-close" onclick="closeDungeonBriefingModal()" title="Close Briefing">✕</button>
     </div>
 
-    <!-- Quick Stats Bar -->
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px;background:rgba(15,21,34,0.8);border:1px solid var(--line);border-radius:10px;padding:10px 14px">
-      <div>
-        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Contractor HP</div>
-        <div style="font-size:16px;font-weight:800;color:var(--err)" id="briefingHpVal">❤️ 250 HP</div>
-      </div>
-      <div>
-        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Avg Job Ticket</div>
-        <div style="font-size:16px;font-weight:800;color:var(--ok)" id="briefingTicketVal">$4k - $8k</div>
-      </div>
-      <div>
-        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Target Trade</div>
-        <div style="font-size:16px;font-weight:800;color:var(--blue)" id="briefingTradeVal">Electrical</div>
-      </div>
-      <div>
-        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Starting Price</div>
-        <div style="font-size:14.5px;font-weight:800;color:var(--accent2)" id="briefingPriceVal">$397/mo + $497 setup</div>
-      </div>
-      <div>
-        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Boss Tier</div>
-        <div style="font-size:16px;font-weight:800;color:var(--gold)" id="briefingTierVal">Tier 2 Skeptic</div>
-      </div>
-    </div>
-
-    <!-- 2-Column Tactical Grid -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
-      
-      <!-- LEFT: TARGET INTEL & WEAKNESSES -->
-      <div style="background:rgba(15,21,34,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px">
-        <div style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px">
-          🎯 TARGET INTEL &amp; ACTIVE LEAK
-        </div>
-
+    <!-- Scrollable Body with stats and intel -->
+    <div class="dungeon-briefing-body">
+      <!-- Quick Stats Bar -->
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px;background:rgba(15,21,34,0.8);border:1px solid var(--line);border-radius:10px;padding:10px 14px">
         <div>
-          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">CURRENT REALITY &amp; PAIN POINT:</div>
-          <div style="font-size:12.5px;color:var(--ink);line-height:1.45;background:rgba(0,0,0,0.3);padding:8px 10px;border-radius:6px;border-left:3px solid var(--err)" id="briefingSituation">
-            Inside 480-volt commercial panels with insulated rubber gloves. Cannot physically touch phone. Emergency calls roll to voicemail and hire competitors.
+          <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Contractor HP</div>
+          <div style="font-size:16px;font-weight:800;color:var(--err)" id="briefingHpVal">❤️ 250 HP</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Avg Job Ticket</div>
+          <div style="font-size:16px;font-weight:800;color:var(--ok)" id="briefingTicketVal">$4k - $8k</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Target Trade</div>
+          <div style="font-size:16px;font-weight:800;color:var(--blue)" id="briefingTradeVal">Electrical</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Starting Price</div>
+          <div style="font-size:14.5px;font-weight:800;color:var(--accent2)" id="briefingPriceVal">$397/mo + $497 setup</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Boss Tier</div>
+          <div style="font-size:16px;font-weight:800;color:var(--gold)" id="briefingTierVal">Tier 2 Skeptic</div>
+        </div>
+      </div>
+
+      <!-- 2-Column Tactical Grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px">
+        
+        <!-- LEFT: TARGET INTEL & WEAKNESSES -->
+        <div style="background:rgba(15,21,34,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px">
+            🎯 TARGET INTEL &amp; ACTIVE LEAK
           </div>
-        </div>
 
-        <div>
-          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">ESTIMATED REVENUE LEAK:</div>
-          <div style="font-size:12.5px;font-weight:600;color:#fca5a5" id="briefingLeakVal">
-            💸 Emergency panel upgrade or commercial generator install ($4,000 - $8,000)
-          </div>
-        </div>
-
-        <div>
-          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px">KNOWN WEAKNESSES (USE THESE!):</div>
-          <div style="display:flex;flex-direction:column;gap:6px;font-size:12px" id="briefingWeaknesses">
-            <!-- Injected via JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT: WHAT YOU ARE SELLING (THE VANTORX OFFER) -->
-      <div style="background:rgba(15,21,34,0.6);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px">
-        <div style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px">
-          📦 WHAT YOU ARE SELLING (VANTORX ARSENAL)
-        </div>
-
-        <div>
-          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">PRIMARY SOLUTION TO PITCH:</div>
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
-            <div style="font-size:13.5px;font-weight:700;color:#ffffff" id="briefingProductTitle">Ava 24/7 AI Phone Receptionist</div>
-            <div id="briefingProductPrice" style="font-family:var(--font-mono);font-size:11.5px;font-weight:800;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.45);color:var(--accent2);padding:3px 8px;border-radius:6px">
-              💰 $397/mo + $497 setup
+          <div>
+            <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">CURRENT REALITY &amp; PAIN POINT:</div>
+            <div style="font-size:12.5px;color:var(--ink);line-height:1.45;background:rgba(0,0,0,0.3);padding:8px 10px;border-radius:6px;border-left:3px solid var(--err)" id="briefingSituation">
+              Inside 480-volt commercial panels with insulated rubber gloves. Cannot physically touch phone. Emergency calls roll to voicemail and hire competitors.
             </div>
           </div>
-          <div style="font-size:12px;color:var(--dim);line-height:1.4;margin-top:4px" id="briefingProductDesc">
-            Answers in 1 ring 24/7 with zero robotic delay, pre-qualifies trade emergencies, books directly into calendar, and texts tech's cell immediately via Carrier *71 rollover.
+
+          <div>
+            <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">ESTIMATED REVENUE LEAK:</div>
+            <div style="font-size:12.5px;font-weight:600;color:#fca5a5" id="briefingLeakVal">
+              💸 Emergency panel upgrade or commercial generator install ($4,000 - $8,000)
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px">KNOWN WEAKNESSES (USE THESE!):</div>
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:12px" id="briefingWeaknesses">
+              <!-- Injected via JS -->
+            </div>
           </div>
         </div>
 
-        <div>
-          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px">PRICING PACKAGES &amp; UPFRONT SETUP FEES:</div>
-          <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;font-family:var(--font-mono)" id="briefingPackages">
-            <!-- Injected via JS -->
+        <!-- RIGHT: WHAT YOU ARE SELLING (THE VANTORX OFFER) -->
+        <div style="background:rgba(15,21,34,0.6);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px">
+            📦 WHAT YOU ARE SELLING (VANTORX ARSENAL)
+          </div>
+
+          <div>
+            <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">PRIMARY SOLUTION TO PITCH:</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+              <div style="font-size:13.5px;font-weight:700;color:#ffffff" id="briefingProductTitle">Ava 24/7 AI Phone Receptionist</div>
+              <div id="briefingProductPrice" style="font-family:var(--font-mono);font-size:11.5px;font-weight:800;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.45);color:var(--accent2);padding:3px 8px;border-radius:6px">
+                💰 $397/mo + $497 setup
+              </div>
+            </div>
+            <div style="font-size:12px;color:var(--dim);line-height:1.4;margin-top:4px" id="briefingProductDesc">
+              Answers in 1 ring 24/7 with zero robotic delay, pre-qualifies trade emergencies, books directly into calendar, and texts tech's cell immediately via Carrier *71 rollover.
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px">PRICING PACKAGES &amp; UPFRONT SETUP FEES:</div>
+            <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;font-family:var(--font-mono)" id="briefingPackages">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <div style="margin-top:auto;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:8px;padding:8px 10px">
+            <div style="font-size:10.5px;font-family:var(--font-mono);color:var(--accent2);font-weight:700">🏆 MISSION WIN CONDITION:</div>
+            <div style="font-size:12px;color:var(--ink);margin-top:2px" id="briefingWinCondition">
+              Lock in a <strong>10-minute live walkthrough tomorrow at 4:30 PM</strong> (or get him to request the setup link to his cell).
+            </div>
           </div>
         </div>
 
-        <div style="margin-top:auto;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:8px;padding:8px 10px">
-          <div style="font-size:10.5px;font-family:var(--font-mono);color:var(--accent2);font-weight:700">🏆 MISSION WIN CONDITION:</div>
-          <div style="font-size:12px;color:var(--ink);margin-top:2px" id="briefingWinCondition">
-            Lock in a <strong>10-minute live walkthrough tomorrow at 4:30 PM</strong> (or get him to request the setup link to his cell).
-          </div>
-        </div>
       </div>
-
     </div>
 
-    <!-- Modal Footer Controls -->
-    <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px;flex-wrap:wrap;gap:12px">
-      <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim);cursor:pointer">
-        <input type="checkbox" id="chkAutoBriefing" onchange="toggleAutoBriefing(this.checked)" checked style="accent-color:var(--accent)">
-        Show briefing before entering each dungeon level
-      </label>
-      <button class="btn btn-primary" onclick="closeDungeonBriefingModal()" style="padding:10px 24px;font-size:14px;font-weight:800;letter-spacing:0.5px">
-        ⚔️ ENTER DUNGEON &amp; START CALL
+    <!-- Modal Sticky Footer Controls -->
+    <div class="dungeon-briefing-footer">
+      <div style="font-size:12px;color:var(--dim);display:flex;align-items:center;gap:8px">
+        <span>📋 Review intel above. Ready to pitch?</span>
+      </div>
+      <button class="btn btn-primary" id="btnEnterDungeon" onclick="enterDungeonAndStartCall()" style="padding:12px 30px;font-size:15px;font-weight:800;letter-spacing:0.5px;box-shadow:0 0 25px rgba(245,158,11,0.45);cursor:pointer">
+        ⚔️ ENTER THE DUNGEON &amp; START CALL ➔
       </button>
     </div>
   </div>
@@ -1443,7 +1453,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       currentSetup: 'I pay an answering service in Coral Gables $1,400 a month and they still miss calls and send me scribbled messages three hours late.',
       avgLeak: 'An emergency sewer line trenchless repipe',
       dialogue: {
-        stage1: "Yeah, Dave here, I own it. Look, I don't care how fancy it is, I got burned for $3,000 by some marketing clown last year. How much is this going to bleed out of my account?",
+        stage1: "Yeah, Dave here, I own the company. What's this regarding? Make it quick, I'm reviewing supply invoices.",
         victory: "Fair enough. $397 a month plus the $497 setup pays for itself three times over if it catches even one emergency repipe while I'm sleeping. Send the setup link and let's do 4:30 PM tomorrow.",
         defeat: "I knew it -- another snake oil telemarketer trying to bleed my business account. Lose my number. *[CLICK]*"
       }
@@ -1464,7 +1474,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       currentSetup: 'During storm season my phone gets 40 calls a night between midnight and 5 AM. We drop calls because standard phone lines can only take one caller at a time.',
       avgLeak: 'A category-3 black water flood dryout',
       dialogue: {
-        stage1: "Yeah, Sal speaking, owner. Kid, hurricane season starts soon. When a tropical depression hits, I get 40 flood calls a night. How does your little toy handle 10 panicked homeowners at the same second without crashing?",
+        stage1: "Yeah, Sal speaking, owner. Talk fast, kid -- we're prepping emergency gear for hurricane season. What's VantorX?",
         victory: "Wait, Ava can handle 10 calls simultaneously with zero busy signals? That alone saves my entire storm season. Set up my Carrier *71 rollover now.",
         defeat: "I got 10 flooded basements waiting on sump pumps and you're wasting my phone battery. Call terminated. *[CLICK]*"
       }
@@ -1485,7 +1495,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       currentSetup: 'I buy shared leads on Angi and Thumbtack for $90 each, but by the time I call them back, three other HVAC contractors already quoted them.',
       avgLeak: 'A complete heat pump and ductwork replacement',
       dialogue: {
-        stage1: "Yeah, I'm Brad, owner of Jacksonville Air. Look, I already spend $1,800 a month on Angi and Thumbtack. My phone rings plenty. Why would I change anything when HomeAdvisor gives me all my jobs?",
+        stage1: "Yeah, I'm Brad, owner of Jacksonville Air. What's this about? I'm loading up the truck for a service call.",
         victory: "You're dead right about Angi selling that same replacement lead to 4 other contractors. I lost three $9k changeouts last month because of that. Hook up Ava to my inbound lines.",
         defeat: "I'm sticking with Angi and my yellow pad. Stop calling my personal mobile line. *[CLICK]*"
       }
@@ -1590,7 +1600,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       currentSetup: 'Our website is a 10-year-old WordPress site that takes 8 seconds to load on mobile. High-end Boca homeowners click our Google ad, see broken buttons and pixelated gallery images, and bounce immediately to our competitors.',
       avgLeak: 'A luxury gunite pool and travertine patio build',
       dialogue: {
-        stage1: "Yeah, Elena Cruz here, owner of Tropical Oasis. Look, we're shooting gunite on a $95k pool in Boca right now. If this is another SEO clown promising page 1 on Google, save your breath. What do you want?",
+        stage1: "Yeah, Elena Cruz here, owner of Tropical Oasis. What's this regarding? We're shooting gunite on a $95k pool in Boca right now, so make it quick.",
         victory: "You're 100% right about mobile bounce rates. When someone wants an $80k pool, an 8-second slow site makes us look like amateurs. Let's do the 10-minute walkthrough tomorrow at 4:30 PM to review the custom contractor website design. Send the invite to elena@tropicaloasispools.com.",
         defeat: "I'm pouring 30 yards of concrete right now and you're wasting my phone battery. Call terminated! *[CLICK]*"
       }
@@ -2823,14 +2833,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     appendLog(`<strong>${currentBoss.name}:</strong> "${bossOpeningReply}"`, 'boss');
     matchHistory.push({ role: 'assistant', content: bossOpeningReply });
 
-    if (voiceEnabled) {
-      speakContractor(bossOpeningReply, currentBoss.key);
-    }
-
-    // Auto-display Dungeon Tactical Briefing unless user unchecked auto-show
-    if (localStorage.getItem('vantorx_hide_boss_briefing') !== 'true') {
-      openDungeonBriefingModal(idx);
-    }
+    // Auto-display Fullscreen Dungeon Tactical Briefing before starting combat
+    openDungeonBriefingModal(idx);
   }
 
   // 6B. PRE-DUNGEON TACTICAL BRIEFING & PRODUCT INTEL SYSTEM
@@ -2843,22 +2847,44 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const modal = document.getElementById('dungeonBriefingModal');
     if (!modal) return;
     renderBriefingDetails(b);
+
+    const btn = document.getElementById('btnEnterDungeon');
+    if (btn) {
+      if (matchHistory && matchHistory.length > 2) {
+        btn.innerHTML = '⚔️ RESUME BATTLE &amp; RETURN TO CALL ➔';
+      } else {
+        btn.innerHTML = '⚔️ ENTER THE DUNGEON &amp; START CALL ➔';
+      }
+    }
+
     modal.classList.add('open');
   };
 
   window.closeDungeonBriefingModal = function() {
     const modal = document.getElementById('dungeonBriefingModal');
     if (modal) modal.classList.remove('open');
+
+    // Trigger contractor audio only when user enters the dungeon / closes briefing
+    if (voiceEnabled && currentBoss) {
+      const bossOpeningReply = currentBoss.dialogue.stage1 || currentBoss.dialogue.opener;
+      speakContractor(bossOpeningReply, currentBoss.key);
+    }
+
     const input = document.getElementById('playerCustomInput');
-    if (input) input.focus();
+    if (input) {
+      input.disabled = false;
+      input.focus();
+    }
+  };
+
+  window.enterDungeonAndStartCall = function() {
+    window.closeDungeonBriefingModal();
+    const arenaEl = document.querySelector('.battle-arena') || document.getElementById('combatLog');
+    if (arenaEl) arenaEl.scrollIntoView({ behavior: 'smooth' });
   };
 
   window.toggleAutoBriefing = function(isChecked) {
-    if (isChecked) {
-      localStorage.removeItem('vantorx_hide_boss_briefing');
-    } else {
-      localStorage.setItem('vantorx_hide_boss_briefing', 'true');
-    }
+    // Kept for backward compatibility
   };
 
   function renderBriefingDetails(boss) {
@@ -2961,6 +2987,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       `;
       if (boss.key === 'skeptic') {
         wHtml += `<div style="color:#fca5a5">⚠️ <strong>Boss Trap:</strong> Hates robot delay. Offer the test number early so he hears her live!</div>`;
+      } else if (boss.key === 'price') {
+        wHtml += `<div style="color:#fca5a5">⚠️ <strong>Boss Trap:</strong> Burned for $3,000 by marketing clowns. Quote $397/mo + $497 setup directly with ZERO contracts &amp; prove with (561) 813-8602!</div>`;
       } else if (boss.key === 'gatekeeper') {
         wHtml += `<div style="color:#fca5a5">⚠️ <strong>Boss Trap:</strong> Don't sell marketing brochures. Focus on solving Gary's after-hours dispatch errors!</div>`;
       } else if (boss.key === 'sal') {
@@ -3484,7 +3512,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
         } else if (boss.key === 'price') {
           return pickUnique(memory, [
             `(Pipe wrench clangs) Yeah, emergency sewer backups happen at 11 PM and by 11:05 PM they've hired another Miami plumber. But look, I got burned by a marketing clown for $3,000 last year. What does your service actually do?`,
-            `(Scoffs into receiver) Missing emergency repipes hurts, obviously. But I'm not getting trapped in another $2,500 retainer. What is this tool?`
+            `(Scoffs into receiver) Look, I don't care how fancy it sounds, I got burned for $3,000 by some marketing clown last year. How much is this going to bleed out of my account?`
           ], 'price_pain_ack');
         } else if (boss.key === 'sal') {
           return pickUnique(memory, [
