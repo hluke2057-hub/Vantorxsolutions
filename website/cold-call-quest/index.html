@@ -160,9 +160,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 .modal-close:hover{color:#ffffff}
 
 /* ⚔️ Fullscreen Pre-Dungeon Briefing Gatekeeper */
-#dungeonBriefingModal{position:fixed!important;inset:0!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;background:radial-gradient(circle at 50% 15%,rgba(15,23,42,0.96),rgba(5,8,14,0.98))!important;backdrop-filter:blur(24px) saturate(190%)!important;-webkit-backdrop-filter:blur(24px) saturate(190%)!important;z-index:999999!important;display:none;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}
-#dungeonBriefingModal.open{display:flex!important;animation:dungeonGateIn 0.25s cubic-bezier(0.16,1,0.3,1)}
-@keyframes dungeonGateIn{from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)}}
+#dungeonBriefingModal{position:fixed!important;inset:0!important;top:0!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;background:rgba(5,8,14,0.92)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;z-index:999999!important;display:none;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;opacity:1!important;visibility:visible!important}
+#dungeonBriefingModal.open{display:flex!important;opacity:1!important;visibility:visible!important}
 .dungeon-briefing-card{background:linear-gradient(180deg,#0d131f 0%,#080c14 100%)!important;border:1.5px solid rgba(245,158,11,0.5)!important;border-radius:20px!important;box-shadow:0 0 60px rgba(245,158,11,0.22),0 30px 80px rgba(0,0,0,0.85)!important;max-width:920px;width:100%;max-height:92vh;display:flex;flex-direction:column;padding:24px;position:relative;box-sizing:border-box}
 .dungeon-briefing-body{overflow-y:auto;flex:1 1 auto;padding-right:6px}
 .dungeon-briefing-footer{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(245,158,11,0.25);padding-top:14px;margin-top:14px;flex-wrap:wrap;gap:12px}
@@ -737,6 +736,9 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     <button id="lootClaimBtn" class="hud-btn gold" style="display:none;width:100%;padding:14px;font-size:16px;justify-content:center;box-shadow:0 0 25px rgba(245,158,11,0.4)" onclick="claimLootAndAdvance()">
       ⚔️ Claim Spoils &amp; Review Contractor Reply ➔
     </button>
+  </div>
+</div>
+
   <!-- 🚪 Quest Closer Sign In Gate Modal -->
 <div class="modal-overlay" id="questSignInModal" style="z-index:99999;background:rgba(5,8,14,0.94);backdrop-filter:blur(14px)">
   <div class="modal-card" style="max-width:440px;border:1px solid rgba(245,158,11,0.4);box-shadow:0 0 50px rgba(0,0,0,0.9),0 0 25px rgba(245,158,11,0.18)">
@@ -5505,7 +5507,20 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
   loadSavedPlayer();
   loadDailyState();
   initConfettiCanvas();
-  selectBoss(0);
+
+  let initialBossIdx = 0;
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const bossParam = urlParams.get('boss') || window.location.hash.replace('#', '');
+    if (bossParam) {
+      const lowParam = bossParam.toLowerCase();
+      const foundIdx = BOSSES.findIndex(b => b.key.toLowerCase() === lowParam || b.name.toLowerCase().includes(lowParam));
+      if (foundIdx >= 0) initialBossIdx = foundIdx;
+      else if (!isNaN(parseInt(bossParam))) initialBossIdx = Math.max(0, Math.min(BOSSES.length - 1, parseInt(bossParam)));
+    }
+  } catch(e){}
+
+  selectBoss(initialBossIdx);
   updateHUD();
   updateDailyUI();
   initQuestProfile();
