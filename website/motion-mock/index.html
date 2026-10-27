@@ -394,12 +394,18 @@ header {
   position: relative;
   border-radius: 18px;
   overflow: hidden;
-  background: #000;
+  background: radial-gradient(circle at 50% 40%, #151d2d 0%, #070a0f 100%);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+  aspect-ratio: 16 / 9;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .hero-mockup-img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
   transform: scale(1.01);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -408,11 +414,11 @@ header {
   transform: scale(1.03);
 }
 
-/* Floating Glass Badges on Hero Showcase */
+/* Floating Glass Badges on Hero Showcase - Guaranteed Non-colliding Geometry */
 .floating-badge {
   position: absolute;
   z-index: 10;
-  background: rgba(14, 19, 30, 0.88);
+  background: rgba(14, 19, 30, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -423,29 +429,38 @@ header {
   align-items: center;
   gap: 12px;
   text-align: left;
-  animation: floatBadge 6s ease-in-out infinite alternate;
+  white-space: nowrap;
+  pointer-events: none;
 }
 .badge-top-left {
-  top: -24px;
+  top: -20px;
   left: 24px;
   border-left: 3px solid var(--accent);
+  animation: floatBadge 6s ease-in-out infinite alternate;
 }
 .badge-top-right {
   top: -20px;
   right: 24px;
   border-left: 3px solid var(--ok);
+  animation: floatBadge 6s ease-in-out infinite alternate;
   animation-delay: -3s;
 }
-.badge-bottom-left {
-  bottom: -20px;
-  left: 32px;
+.badge-bottom-center {
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
   border-left: 3px solid var(--cyan);
+  animation: floatBadgeCenter 6s ease-in-out infinite alternate;
   animation-delay: -1.5s;
 }
 
 @keyframes floatBadge {
   0% { transform: translateY(0); }
   100% { transform: translateY(-8px); }
+}
+@keyframes floatBadgeCenter {
+  0% { transform: translate(-50%, 0); }
+  100% { transform: translate(-50%, -8px); }
 }
 
 .fb-val { font-size: 15px; font-weight: 800; color: #fff; font-family: var(--font-heading); }
@@ -673,6 +688,163 @@ section { padding: 90px 0; position: relative; }
   border-radius: 6px;
 }
 
+/* ========================================================
+   SOLUTION HUB: Sleek Compact Segmented Control & Panels
+   ======================================================== */
+.hub-nav-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 36px;
+}
+.hub-nav-pills {
+  display: inline-flex;
+  background: rgba(14, 19, 30, 0.92);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 6px;
+  gap: 6px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hub-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--dim);
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 13.5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.hub-tab-btn:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.05);
+}
+.hub-tab-btn.active {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(217, 119, 6, 0.15));
+  border-color: rgba(245, 158, 11, 0.55);
+  color: var(--accent2);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.22);
+}
+.hub-panel {
+  display: none;
+  animation: hubFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hub-panel.active {
+  display: block;
+}
+@keyframes hubFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hub-card-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+/* AEO Prompt Selector Buttons */
+.aeo-prompt-pills {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.aeo-prompt-btn {
+  background: var(--bg2);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 11.5px;
+  color: var(--dim);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.aeo-prompt-btn:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+.aeo-prompt-btn.active {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--purple);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Speed-to-Lead Live CRM Pipeline Grid */
+.crm-pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.crm-pipe-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.crm-pipe-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-accent);
+}
+.crm-pipe-step {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.crm-pipe-val {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.crm-pipe-sub {
+  font-size: 11px;
+  color: var(--dim);
+  line-height: 1.4;
+}
+
+/* 4-Pillar Quick Summary Strip Below Hub */
+.hub-quick-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+.hub-quick-col {
+  background: rgba(14, 19, 30, 0.6);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.hub-quick-col:hover {
+  border-color: var(--accent);
+  background: rgba(20, 27, 42, 0.85);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.hub-quick-col .qc-icon { font-size: 26px; margin-bottom: 8px; }
+.hub-quick-col .qc-title { font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+.hub-quick-col .qc-desc { font-size: 12px; color: var(--dim); line-height: 1.4; }
+
 /* Pricing Section */
 .price-grid {
   display: grid;
@@ -770,17 +942,24 @@ body.motion-disabled .btn-gold::after { display: none !important; }
 
 /* Responsive Adjustments */
 @media(max-width: 980px) {
+  .hero-mockup-img-wrap { min-height: 260px; }
+  .floating-badge { position: static; margin: 8px auto; transform: none !important; animation: none !important; }
+  .badge-bottom-center { left: auto; transform: none; }
+  .hub-card-split { grid-template-columns: 1fr; gap: 24px; }
+  .hub-quick-strip { grid-template-columns: 1fr 1fr; }
   .grid-services { grid-template-columns: 1fr; }
   .col-12, .col-8, .col-7, .col-6, .col-5, .col-4 { grid-column: span 1; }
   .feat-web-card, .ava-card-split { grid-template-columns: 1fr; }
   .price-grid { grid-template-columns: 1fr; }
   .pricing-card.featured { transform: none; }
   .metrics-strip { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .floating-badge { position: static; margin-bottom: 12px; }
 }
 @media(max-width: 640px) {
+  .hub-quick-strip { grid-template-columns: 1fr; }
+  .crm-pipeline-grid { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .metrics-strip { grid-template-columns: 1fr; }
+  .hub-tab-btn { padding: 8px 14px; font-size: 12.5px; }
 }
 </style>
 </head>
@@ -876,7 +1055,7 @@ body.motion-disabled .btn-gold::after { display: none !important; }
       </div>
     </div>
 
-    <div class="floating-badge badge-bottom-left">
+    <div class="floating-badge badge-bottom-center">
       <div style="font-size:22px">📈</div>
       <div>
         <div class="fb-val">38s Speed-to-Lead</div>
@@ -885,7 +1064,7 @@ body.motion-disabled .btn-gold::after { display: none !important; }
     </div>
 
     <div class="hero-mockup-img-wrap">
-      <img src="assets/dashboard_3d_mockup.jpg" onerror="this.src='C:/Users/hungr/.gemini/antigravity/scratch/Vantorxsolutions/website/motion-mock/assets/dashboard_3d_mockup.jpg'" alt="VantorX Contractor Operations Dashboard on 3D Titanium MacBook and Tablet" class="hero-mockup-img">
+      <img src="assets/dashboard_3d_mockup.jpg" onerror="this.onerror=null; if(window.DASH_B64){this.src=window.DASH_B64;} else {this.src='C:/Users/hungr/.gemini/antigravity/scratch/Vantorxsolutions/website/motion-mock/assets/dashboard_3d_mockup.jpg';}" alt="VantorX Contractor Operations Dashboard on 3D Titanium MacBook and Tablet" class="hero-mockup-img">
     </div>
   </div>
 
@@ -910,31 +1089,47 @@ body.motion-disabled .btn-gold::after { display: none !important; }
   </div>
 </div></section>
 
-<!-- Services Showcase Grid -->
+<!-- Services Showcase: Interactive Solution Hub -->
 <section id="services"><div class="wrap">
   <div class="section-hdr">
-    <div class="eyebrow">Six services · One team · Zero software hassle</div>
+    <div class="eyebrow">Interactive Contractor OS · Zero Software Clutter</div>
     <h2>Everything your contracting business needs to capture and close every job.</h2>
-    <p>Every system shares one business record. Form leads, phone calls, review generation, and appointment dispatch flow seamlessly into your Client Hub.</p>
+    <p>Explore our four core pillars below. Every system communicates in real-time under one shared record.</p>
   </div>
 
-  <div class="grid-services">
-    
-    <!-- 1. Custom Website Showcase with Interactive Calculator -->
-    <div class="card-glass col-12 feat-web-card" id="website-design">
+  <!-- Segmented Control Pills -->
+  <div class="hub-nav-wrapper">
+    <div class="hub-nav-pills" role="tablist">
+      <button class="hub-tab-btn active" id="tabBtn-website" onclick="switchHubTab('website')" role="tab" aria-selected="true">
+        <span>⚡</span> Custom Websites &amp; Calculator
+      </button>
+      <button class="hub-tab-btn" id="tabBtn-ava" onclick="switchHubTab('ava')" role="tab" aria-selected="false">
+        <span>🎙️</span> Ava 24/7 Voice AI
+      </button>
+      <button class="hub-tab-btn" id="tabBtn-aeo" onclick="switchHubTab('aeo')" role="tab" aria-selected="false">
+        <span>🧠</span> AEO Search Ranking
+      </button>
+      <button class="hub-tab-btn" id="tabBtn-crm" onclick="switchHubTab('crm')" role="tab" aria-selected="false">
+        <span>📈</span> LeadFlow CRM
+      </button>
+    </div>
+  </div>
+
+  <!-- HUB PANEL 1: Websites & Calculator -->
+  <div class="hub-panel active" id="hubPanel-website" role="tabpanel">
+    <div class="card-glass hub-card-split" id="website-design">
       <div class="card-glare"></div>
       <div>
         <div class="tag" style="background:var(--accent);color:#000;font-weight:700;display:inline-block;padding:4px 10px;border-radius:6px;font-size:11px;font-family:var(--font-mono);margin-bottom:12px">CORE SERVICE · HIGHEST ROI</div>
-        <h3>High-Converting Custom Contractor Websites</h3>
-        <p>Built from the ground up for trade contractors. Sub-second loading speed, mobile-first appointment booking, and interactive repair price calculators that convert cold homeowners before they look at your competitors.</p>
+        <h3 style="font-size:clamp(24px, 3vw, 32px);margin-bottom:12px">High-Converting Custom Contractor Websites</h3>
+        <p style="color:var(--dim);font-size:15px;margin-bottom:18px">Built exclusively for trade contractors. Sub-second loading speed, mobile-first appointment booking, and interactive repair price calculators that convert cold homeowners before they look at your competitors.</p>
         <ul class="feat-list">
-          <li>Custom branding engineered for your local service area</li>
-          <li>Sub-second mobile speed eliminating the 8-second bounce rate</li>
+          <li>Custom branding engineered for your local service area with sub-second mobile loading</li>
           <li>Interactive ballpark price calculator capturing homeowner phone numbers 24/7</li>
           <li>Direct integration with LeadFlow CRM &amp; Ava Phone Rollover</li>
           <li>Fully managed hosting, security updates, and photo updates</li>
         </ul>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:20px">
           <a class="btn btn-gold btn-sm" href="#contact">Get a Website Quote ($799 flat upfront)</a>
           <a class="btn btn-ghost btn-sm" href="#pricing">See Bundle Savings</a>
         </div>
@@ -961,26 +1156,28 @@ body.motion-disabled .btn-gold::after { display: none !important; }
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- 2. Ava Voice AI 3D Showcase Card -->
-    <div class="card-glass col-12 ava-card-split" id="ava-voice">
+  <!-- HUB PANEL 2: Ava 24/7 Voice AI -->
+  <div class="hub-panel" id="hubPanel-ava" role="tabpanel">
+    <div class="card-glass hub-card-split" id="ava-voice">
       <div class="card-glare"></div>
       <div>
         <div class="tag" style="background:rgba(56,189,248,0.18);border:1px solid rgba(56,189,248,0.4);color:var(--cyan);font-weight:700;display:inline-block;padding:4px 10px;border-radius:6px;font-size:11px;font-family:var(--font-mono);margin-bottom:12px">24/7/365 VOICE INTELLIGENCE</div>
-        <h3 style="font-size:32px;margin-bottom:12px">Ava 24/7 AI Phone Receptionist</h3>
-        <p style="color:var(--dim);font-size:15.5px">Answers in 1 ring 24/7/365 with zero awkward latency. Pre-qualifies trade emergencies, schedules appointments directly to your Google or Outlook calendar, and texts priority job dossiers directly to on-call technicians.</p>
+        <h3 style="font-size:clamp(24px, 3vw, 32px);margin-bottom:12px">Ava 24/7 AI Phone Receptionist</h3>
+        <p style="color:var(--dim);font-size:15px;margin-bottom:16px">Answers in 1 ring 24/7/365 with zero awkward latency. Pre-qualifies trade emergencies, schedules appointments directly to your Google or Outlook calendar, and texts priority job dossiers directly to on-call technicians.</p>
         
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0;font-family:var(--font-mono);font-size:12.5px">
-          <div style="background:var(--bg);border:1px solid var(--line);padding:10px 14px;border-radius:8px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;font-family:var(--font-mono);font-size:12px">
+          <div style="background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px">
             <span style="color:var(--accent2)">• Bilingual:</span> English &amp; Spanish
           </div>
-          <div style="background:var(--bg);border:1px solid var(--line);padding:10px 14px;border-radius:8px">
+          <div style="background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:8px">
             <span style="color:var(--ok)">• Setup:</span> Carrier *71 Rollover
           </div>
         </div>
 
         <!-- Simulated Call Player -->
-        <div class="call-simulator-box">
+        <div class="call-simulator-box" style="margin-top:0">
           <div class="sim-controls">
             <button class="sim-btn" id="playCallSimBtn" onclick="toggleCallSimulation()">
               <span>▶ Play Call Simulation</span>
@@ -995,54 +1192,129 @@ body.motion-disabled .btn-gold::after { display: none !important; }
 
       <!-- 3D Phone Mockup Display -->
       <div class="ava-mockup-frame">
-        <img src="assets/ava_phone_mockup.jpg" onerror="this.src='C:/Users/hungr/.gemini/antigravity/scratch/Vantorxsolutions/website/motion-mock/assets/ava_phone_mockup.jpg'" alt="Ava 24/7 AI Voice Phone Receptionist Mobile Interface" class="ava-mockup-img">
+        <img src="assets/ava_phone_mockup.jpg" onerror="this.onerror=null; if(window.AVA_B64){this.src=window.AVA_B64;} else {this.src='C:/Users/hungr/.gemini/antigravity/scratch/Vantorxsolutions/website/motion-mock/assets/ava_phone_mockup.jpg';}" alt="Ava 24/7 AI Voice Phone Receptionist Mobile Interface" class="ava-mockup-img">
       </div>
     </div>
+  </div>
 
-    <!-- 3. AEO Engine AI Search -->
-    <div class="card-glass col-6">
+  <!-- HUB PANEL 3: AEO Search Ranking -->
+  <div class="hub-panel" id="hubPanel-aeo" role="tabpanel">
+    <div class="card-glass hub-card-split">
       <div class="card-glare"></div>
-      <div style="font-size:32px;margin-bottom:12px">🧠</div>
-      <div class="tag" style="background:rgba(168,85,247,0.18);border:1px solid rgba(168,85,247,0.4);color:var(--purple);font-weight:700;display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-family:var(--font-mono);margin-bottom:8px">AEO ENGINE™</div>
-      <h3 style="font-size:24px;margin-bottom:8px">AI Search &amp; Recommendation Ranking</h3>
-      <p style="color:var(--dim);font-size:14.5px">When homeowners ask ChatGPT, Perplexity, Claude, or Siri for the best contractor near them, our engineered <code>llms.txt</code> standard and Schema.org knowledge graph puts your company as the #1 recommended answer.</p>
+      <div>
+        <div class="tag" style="background:rgba(168,85,247,0.18);border:1px solid rgba(168,85,247,0.4);color:var(--purple);font-weight:700;display:inline-block;padding:4px 10px;border-radius:6px;font-size:11px;font-family:var(--font-mono);margin-bottom:12px">AEO ENGINE™ · AI SEARCH OPTIMIZATION</div>
+        <h3 style="font-size:clamp(24px, 3vw, 32px);margin-bottom:12px">Rank #1 on ChatGPT, Siri &amp; Perplexity</h3>
+        <p style="color:var(--dim);font-size:15px;margin-bottom:18px">When homeowners ask ChatGPT, Perplexity, Claude, or Siri for the top contractor near them, our engineered <code>llms.txt</code> standard and Schema.org knowledge graph puts your company as the #1 recommended answer.</p>
+        <ul class="feat-list">
+          <li>Engineered <code>llms.txt</code> protocol feeding AI bots verified credentials and service zones</li>
+          <li>Automated Schema.org knowledge graph establishing local contractor authority</li>
+          <li>Cites your emergency phone number &amp; 1-ring guarantee directly in AI answers</li>
+          <li>Zero paid ad spend required — permanent organic AI search prominence</li>
+        </ul>
+        <div style="margin-top:20px">
+          <a class="btn btn-gold btn-sm" href="#pricing">Included in Pro &amp; Enterprise Tiers</a>
+        </div>
+      </div>
 
-      <div class="aeo-query-box">
+      <!-- Interactive AI Search Simulation Card -->
+      <div class="aeo-query-box" style="margin-top:0">
+        <div style="font-size:12px;font-family:var(--font-mono);color:var(--dim);margin-bottom:10px">SELECT AI SEARCH SIMULATION:</div>
+        <div class="aeo-prompt-pills">
+          <button class="aeo-prompt-btn active" onclick="setAeoPrompt('ac')">❄️ Emergency AC Repair</button>
+          <button class="aeo-prompt-btn" onclick="setAeoPrompt('sewer')">🔧 Trenchless Sewer</button>
+        </div>
         <div class="aeo-input-line">
           <span>🔍</span>
-          <span>Prompt: "Find the top-rated emergency AC repair in Boca Raton"</span>
+          <span id="aeoPromptQuery">Prompt: "Find the top-rated emergency AC repair in Boca Raton"</span>
         </div>
-        <div class="aeo-response-line">
+        <div class="aeo-response-line" id="aeoResponseOutput">
           <strong>Perplexity / ChatGPT:</strong> "Recommended: Titan HVAC Services. 24/7 verified 1-ring emergency dispatch, FL Lic #CAC1818921, 4.9★ rating across 84 reviews."
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- 4. LeadFlow CRM -->
-    <div class="card-glass col-6">
+  <!-- HUB PANEL 4: LeadFlow CRM & Speed-to-Lead -->
+  <div class="hub-panel" id="hubPanel-crm" role="tabpanel">
+    <div class="card-glass hub-card-split">
       <div class="card-glare"></div>
-      <div style="font-size:32px;margin-bottom:12px">📈</div>
-      <div class="tag" style="background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.4);color:var(--ok);font-weight:700;display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-family:var(--font-mono);margin-bottom:8px">LEADFLOW CRM</div>
-      <h3 style="font-size:24px;margin-bottom:8px">45-Second Speed-to-Lead &amp; Kanban</h3>
-      <p style="color:var(--dim);font-size:14.5px">Stop letting open quotes die on whiteboards. Every inbound web lead and phone call flows into a live 5-stage Kanban CRM with automated 2-way SMS follow-ups and past customer seasonal reactivation.</p>
+      <div>
+        <div class="tag" style="background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.4);color:var(--ok);font-weight:700;display:inline-block;padding:4px 10px;border-radius:6px;font-size:11px;font-family:var(--font-mono);margin-bottom:12px">LEADFLOW CRM · SPEED-TO-LEAD</div>
+        <h3 style="font-size:clamp(24px, 3vw, 32px);margin-bottom:12px">45-Second Speed-to-Lead &amp; Live Pipeline</h3>
+        <p style="color:var(--dim);font-size:15px;margin-bottom:18px">Stop letting open quotes die on whiteboards. Every inbound web lead and phone call flows into a live 5-stage Kanban CRM with automated 2-way SMS follow-ups and past customer seasonal reactivation.</p>
+        <ul class="feat-list">
+          <li>Automated missed-call text-back triggers in &lt;3 seconds</li>
+          <li>Integrated 2-way SMS chat syncing directly to Google &amp; Outlook calendar</li>
+          <li>Automated 5-star Google review requests sent upon job completion</li>
+          <li>Quarterly HVAC/Plumbing seasonal database reactivation campaigns</li>
+        </ul>
+        <div style="margin-top:20px">
+          <a class="btn btn-gold btn-sm" href="#pricing">See Core &amp; Growth Bundles</a>
+        </div>
+      </div>
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;font-family:var(--font-mono);font-size:11px">
-        <div style="background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;text-align:center">
-          <div style="color:var(--accent2);font-weight:700">1. Missed Call</div>
-          <div style="color:var(--dim)">Auto-SMS in 3s</div>
+      <!-- Live Speed-to-Lead Pipeline Board -->
+      <div class="crm-pipeline-grid">
+        <div class="crm-pipe-card">
+          <div class="crm-pipe-step" style="color:var(--accent2)">
+            <span>1. Missed Call</span>
+            <span style="color:var(--accent)">3s Auto-SMS</span>
+          </div>
+          <div class="crm-pipe-val">Homeowner (561) 813-8602</div>
+          <div class="crm-pipe-sub">"Hey, saw you called! Are you having an AC emergency?"</div>
         </div>
-        <div style="background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;text-align:center">
-          <div style="color:var(--ok);font-weight:700">2. Scheduled</div>
-          <div style="color:var(--dim)">Calendar Synced</div>
+        <div class="crm-pipe-card">
+          <div class="crm-pipe-step" style="color:var(--cyan)">
+            <span>2. Qualified Lead</span>
+            <span style="color:var(--ok)">Urgent</span>
+          </div>
+          <div class="crm-pipe-val">Master Ceiling Leak</div>
+          <div class="crm-pipe-sub">Contractor alert dispatched to on-call tech in &lt;45s</div>
         </div>
-        <div style="background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;text-align:center">
-          <div style="color:var(--cyan);font-weight:700">3. Won ($6.5k)</div>
-          <div style="color:var(--dim)">Review Requested</div>
+        <div class="crm-pipe-card">
+          <div class="crm-pipe-step" style="color:var(--purple)">
+            <span>3. Walkthrough Booked</span>
+            <span style="color:var(--purple)">Calendar Synced</span>
+          </div>
+          <div class="crm-pipe-val">Tomorrow @ 4:30 PM</div>
+          <div class="crm-pipe-sub">Titan HVAC emergency slot reserved on technician phone</div>
+        </div>
+        <div class="crm-pipe-card">
+          <div class="crm-pipe-step" style="color:var(--ok)">
+            <span>4. Job Won ($8,200)</span>
+            <span style="color:var(--ok)">5★ Review Dispatched</span>
+          </div>
+          <div class="crm-pipe-val">Full System Installed</div>
+          <div class="crm-pipe-sub">Automated review text sent + invoice paid via Stripe</div>
         </div>
       </div>
     </div>
-
   </div>
+
+  <!-- Complete 4-Pillar Summary Strip Below Hub -->
+  <div class="hub-quick-strip">
+    <div class="hub-quick-col" onclick="switchHubTab('website')">
+      <div class="qc-icon">⚡</div>
+      <div class="qc-title">Sub-Second Websites</div>
+      <div class="qc-desc">Instant estimates &amp; 100/100 Core Web Vitals speed.</div>
+    </div>
+    <div class="hub-quick-col" onclick="switchHubTab('ava')">
+      <div class="qc-icon">🎙️</div>
+      <div class="qc-title">Ava Voice AI</div>
+      <div class="qc-desc">1-ring pickup 24/7/365 with live emergency dispatch.</div>
+    </div>
+    <div class="hub-quick-col" onclick="switchHubTab('aeo')">
+      <div class="qc-icon">🧠</div>
+      <div class="qc-title">AEO Engine™</div>
+      <div class="qc-desc">#1 verified contractor recommendation on AI search.</div>
+    </div>
+    <div class="hub-quick-col" onclick="switchHubTab('crm')">
+      <div class="qc-icon">📈</div>
+      <div class="qc-title">LeadFlow CRM</div>
+      <div class="qc-desc">&lt;45s speed-to-lead auto-SMS &amp; visual Kanban.</div>
+    </div>
+  </div>
+
 </div></section>
 
 <!-- Pricing Section with Upfront Fees -->
@@ -1255,6 +1527,57 @@ body.motion-disabled .btn-gold::after { display: none !important; }
       card.style.setProperty('--mouse-y', y + 'px');
     });
   });
+
+  // Solution Hub Tab Switcher
+  window.switchHubTab = function(tabName) {
+    var tabs = ['website', 'ava', 'aeo', 'crm'];
+    tabs.forEach(function(t){
+      var btn = document.getElementById('tabBtn-' + t);
+      var panel = document.getElementById('hubPanel-' + t);
+      if(btn) {
+        if(t === tabName) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+        } else {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        }
+      }
+      if(panel) {
+        if(t === tabName) {
+          panel.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+        }
+      }
+    });
+  };
+
+  // Interactive AEO Search Prompt Switcher
+  window.setAeoPrompt = function(type) {
+    var btns = document.querySelectorAll('.aeo-prompt-btn');
+    btns.forEach(function(b){ b.classList.remove('active'); });
+    if(event && event.currentTarget) event.currentTarget.classList.add('active');
+    
+    var promptEl = document.getElementById('aeoPromptQuery');
+    var respEl = document.getElementById('aeoResponseOutput');
+    if(type === 'ac') {
+      if(promptEl) promptEl.textContent = 'Prompt: "Find the top-rated emergency AC repair in Boca Raton"';
+      if(respEl) respEl.innerHTML = '<strong>Perplexity / ChatGPT:</strong> "Recommended: Titan HVAC Services. 24/7 verified 1-ring emergency dispatch, FL Lic #CAC1818921, 4.9★ rating across 84 reviews."';
+    } else {
+      if(promptEl) promptEl.textContent = 'Prompt: "Who does trenchless sewer repiping in Palm Beach County?"';
+      if(respEl) respEl.innerHTML = '<strong>Perplexity / ChatGPT:</strong> "Recommended: Titan HVAC & Plumbing Services. Verified trenchless sewer specialists, zero-dig technology, FL Lic #CFC1428591, 10-year warranty."';
+    }
+  };
+
+  // Handle hash navigation directly to tabs
+  window.addEventListener('hashchange', function(){
+    var hash = window.location.hash;
+    if(hash === '#website-design' || hash === '#demo-calculator') switchHubTab('website');
+    if(hash === '#ava-voice') switchHubTab('ava');
+  });
+  if(window.location.hash === '#website-design' || window.location.hash === '#demo-calculator') switchHubTab('website');
+  if(window.location.hash === '#ava-voice') switchHubTab('ava');
 
   // 3. Interactive Contractor Ballpark Price Calculator Demo
   window.setCalcTrade = function(trade, minPrice, maxPrice) {
