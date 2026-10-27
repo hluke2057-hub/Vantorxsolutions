@@ -33,6 +33,8 @@ Assert-True "onboarding-app.html contains Review & Go-Live screen" ($htmlContent
 
 # 2. Node Backend API Tests
 $nodeTestScript = @"
+process.env.VANTORX_TEST_MODE = '1';
+process.env.NODE_ENV = 'test';
 const onboarding = require('./website/api/onboarding.js');
 
 async function run() {
@@ -86,12 +88,13 @@ async function run() {
   }, mockRes);
   assert('Draft endpoint serves guest sessions gracefully', status === 200 && json.ok === true && json.guest === true);
 
-  // Test D: Submit / Golive endpoint
+  // Test D: Submit / Golive endpoint (Simulation with test flag)
   await onboarding({
     method: 'POST',
     url: '/api/onboarding/golive',
     query: { action: 'golive' },
     body: {
+      isTest: true,
       name: 'Titan HVAC Services',
       contact: 'Marcus Vance',
       phone: '(561) 555-0199',
@@ -112,7 +115,9 @@ run();
 "@
 
 $nodeOut = & $nodeExe -e "$nodeTestScript"
-$apiResults = $nodeOut | ConvertFrom-Json
+$jsonMatch = ($nodeOut | Where-Object { $_ -match '^\s*\[.*\]\s*$' }) | Select-Object -Last 1
+if (-not $jsonMatch) { $jsonMatch = $nodeOut }
+$apiResults = $jsonMatch | ConvertFrom-Json
 foreach ($r in $apiResults) {
     Assert-True $r.name $r.pass
 }

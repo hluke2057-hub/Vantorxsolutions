@@ -209,16 +209,30 @@ module.exports = async function handler(req, res) {
         const clientEmail = (d.email || "").trim();
         const clientPhone = (d.phone || "").trim();
 
-        // 1. Dispatch Instant Alert Email to Luke
-        const emailHtml = buildOnboardingEmailHtml(d);
-        await sendEmail({
-          to: ["luke@vantorxsolutions.com", "hluke2057@gmail.com"],
-          subject: `🚀 New Client Onboarding Dossier: ${clientName} (${d.industry || "Contractor"})`,
-          html: emailHtml,
-          text: `New Client Onboarding Dossier for ${clientName}\nOwner: ${d.contact || "—"}\nPhone: ${clientPhone}\nEmail: ${clientEmail}\nCity: ${d.city || "—"}\nAva Name: ${d.ai?.name || "Ava"}\nTransfer: ${d.ai?.transferNumber || clientPhone}\n\nFull details available in VantorX Admin.`,
-        }).catch((err) => {
-          console.warn("[Onboarding Email Warning]", err.message);
-        });
+        // 1. Dispatch Instant Alert Email to Luke (Suppressed during tests and mock submissions)
+        const isSimulatedTest = Boolean(
+          d.isTest ||
+          process.env.VANTORX_TEST_MODE === "1" ||
+          process.env.NODE_ENV === "test" ||
+          (d.email && d.email.toLowerCase().includes("titanhvac.com")) ||
+          (d.email && d.email.toLowerCase().includes("example.com")) ||
+          (d.name && d.name.toLowerCase().includes("titan hvac")) ||
+          (d.name && d.name.toLowerCase().includes("test"))
+        );
+
+        if (!isSimulatedTest) {
+          const emailHtml = buildOnboardingEmailHtml(d);
+          await sendEmail({
+            to: ["luke@vantorxsolutions.com", "hluke2057@gmail.com"],
+            subject: `🚀 New Client Onboarding Dossier: ${clientName} (${d.industry || "Contractor"})`,
+            html: emailHtml,
+            text: `New Client Onboarding Dossier for ${clientName}\nOwner: ${d.contact || "—"}\nPhone: ${clientPhone}\nEmail: ${clientEmail}\nCity: ${d.city || "—"}\nAva Name: ${d.ai?.name || "Ava"}\nTransfer: ${d.ai?.transferNumber || clientPhone}\n\nFull details available in VantorX Admin.`,
+          }).catch((err) => {
+            console.warn("[Onboarding Email Warning]", err.message);
+          });
+        } else if (process.env.NODE_ENV !== "test") {
+          console.log(`[Onboarding] Simulated test submission detected (${clientName}) — skipped live founder email dispatch.`);
+        }
 
         // 2. If authenticated, update Supabase records
         if (session && bizId) {
