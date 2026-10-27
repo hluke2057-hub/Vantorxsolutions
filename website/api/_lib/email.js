@@ -1,9 +1,28 @@
-/**
- * Resend Email Dispatch Helper for VantorX Solutions
- */
+const fs = require("fs");
+const path = require("path");
+
+function getResendKey() {
+  if (process.env.RESEND_API_KEY) return process.env.RESEND_API_KEY.trim();
+  const candidateDirs = [
+    process.cwd(),
+    path.resolve(__dirname, "..", ".."),
+    path.resolve(__dirname, "..", "..", ".."),
+  ];
+  for (const dir of candidateDirs) {
+    const envFile = path.join(dir, ".env");
+    if (fs.existsSync(envFile)) {
+      try {
+        const content = fs.readFileSync(envFile, "utf8");
+        const match = content.match(/RESEND_API_KEY\s*=\s*([^\r\n]+)/);
+        if (match && match[1]) return match[1].trim();
+      } catch (_) {}
+    }
+  }
+  return null;
+}
 
 async function sendEmail({ to, subject, html, text, from = "Luke <luke@vantorxsolutions.com>", replyTo = null }) {
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = getResendKey();
   if (!apiKey) {
     console.warn("[VantorX Email] RESEND_API_KEY environment variable is not configured. Email not sent.");
     return { ok: false, error: "RESEND_API_KEY not configured" };

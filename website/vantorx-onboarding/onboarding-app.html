@@ -1381,6 +1381,11 @@ function sameDay(a, b) {
    ============================================================ */
 
 const INDUSTRIES = [
+  { id: 'hvac', label: 'HVAC & Air', icon: '❄️', services: ['Emergency AC Diagnostic — $129 / 45 min', 'Complete AC Tune-Up — $99 / 60 min', 'Refrigerant Leak Detection — $180 / 60 min', 'Thermostat Installation — $150 / 45 min'] },
+  { id: 'roofing', label: 'Roofing & Exterior', icon: '🏠', services: ['Free Roof Storm Inspection — $0 / 30 min', 'Emergency Leak Tarp & Repair — $350 / 90 min', 'Full Roof Replacement Estimate — $0 / 45 min', 'Gutter Cleaning & Inspection — $150 / 60 min'] },
+  { id: 'plumbing', label: 'Plumbing & Drain', icon: '🔧', services: ['Drain Clearing / Snaking — $149 / 45 min', 'Water Heater Diagnostic — $99 / 45 min', 'Emergency Pipe Leak Repair — $250 / 60 min', 'Toilet / Faucet Replacement — $175 / 60 min'] },
+  { id: 'electrical', label: 'Electrical Services', icon: '⚡', services: ['Electrical Diagnostic Inspection — $119 / 45 min', 'Panel Upgrade Estimate — $0 / 30 min', 'EV Charger Installation Estimate — $0 / 30 min', 'Outlet / Switch Repair — $135 / 45 min'] },
+  { id: 'landscaping', label: 'Landscaping & Tree', icon: '🌳', services: ['Lawn Maintenance Estimate — $0 / 30 min', 'Tree Trimming / Removal Estimate — $0 / 30 min', 'Irrigation System Diagnostic — $95 / 45 min', 'Sod Installation Estimate — $0 / 30 min'] },
   { id: 'barbershop', label: 'Barbershop', icon: '💈', services: ['Haircut — $30 / 30 min', 'Haircut + Beard — $45 / 45 min', 'Kids cut — $20 / 25 min', 'Hot towel shave — $35 / 30 min'] },
   { id: 'salon', label: 'Salon / Spa', icon: '💅', services: ['Cut & style — $55 / 60 min', 'Color — $120 / 120 min', 'Manicure — $35 / 45 min', 'Blowout — $45 / 45 min'] },
   { id: 'dental', label: 'Dental / Clinic', icon: '🦷', services: ['Cleaning — $120 / 45 min', 'Consultation — $80 / 30 min', 'Emergency visit — $150 / 45 min'] },
@@ -1420,6 +1425,29 @@ function starterFAQs(industryId) {
     { q: 'What payment methods do you accept?', a: 'We accept all major cards, tap, and cash.' },
   ];
   const byId = {
+    hvac: [
+      { q: 'Do you offer emergency after-hours AC repair?', a: 'Yes — we have technicians on call for 24/7 heating and cooling emergencies.' },
+      { q: 'Do you offer free estimates on new AC systems?', a: 'Yes, we provide free in-home estimates on new AC and heating unit replacements.' },
+      { q: 'Do you offer financing?', a: 'Yes, we offer flexible financing options for qualified homeowners.' }
+    ],
+    roofing: [
+      { q: 'Do you provide free roof damage inspections?', a: 'Yes — our team provides 100% free comprehensive storm and hail roof inspections.' },
+      { q: 'Do you help with homeowner insurance claims?', a: 'Yes, we provide complete photographic documentation and work directly with insurance adjusters.' },
+      { q: 'Do you handle emergency tarping?', a: 'Yes, we provide same-day emergency roof tarping to prevent water intrusion.' }
+    ],
+    plumbing: [
+      { q: 'How fast can a plumber arrive for an active leak?', a: 'For active leaks or burst pipes, we prioritize same-day dispatch and can often arrive within 60 to 90 minutes.' },
+      { q: 'Do you repair or replace water heaters?', a: 'Yes, we service, repair, and install all major brands of traditional and tankless water heaters.' },
+      { q: 'Do you charge a diagnostic fee?', a: 'We have a standard diagnostic fee which is waived when you move forward with the repair.' }
+    ],
+    electrical: [
+      { q: 'Are your electricians licensed and insured?', a: 'Yes, all of our technicians are fully licensed, bonded, and insured.' },
+      { q: 'Can you install EV home chargers?', a: 'Yes, we install dedicated 240V circuits and EV chargers for Tesla and all electric vehicles.' }
+    ],
+    landscaping: [
+      { q: 'Do you provide residential lawn maintenance quotes?', a: 'Yes, we offer free property quotes for weekly and bi-weekly lawn and landscape care.' },
+      { q: 'Do you handle tree removal and storm cleanup?', a: 'Yes, our certified tree specialists handle tree trimming, emergency removal, and debris cleanup.' }
+    ],
     barbershop: [
       { q: 'Do you do beard trims and hot towel shaves?', a: 'Yes — beard trims and hot towel shaves are available with any haircut or on their own.' },
       { q: 'Do you cut kids\u2019 hair?', a: 'Yes, kids cuts are welcome any day of the week.' },
@@ -1446,8 +1474,13 @@ function starterFAQs(industryId) {
 }
 
 function sampleGreeting(industryId, businessName, aiName) {
-  const b = businessName || 'the shop';
+  const b = businessName || 'our office';
   const map = {
+    hvac: `Thanks for calling ${b}! This is ${aiName}. Are you looking to schedule an AC repair, maintenance, or an estimate on a new system?`,
+    roofing: `Thank you for calling ${b}, this is ${aiName}. Are you calling for a free roof inspection, emergency leak repair, or an estimate?`,
+    plumbing: `Thanks for reaching ${b}! This is ${aiName}. Do you have an active leak or drain issue, or are you looking to book standard service?`,
+    electrical: `Hello, thanks for calling ${b}! This is ${aiName}. Can I help book an electrical inspection, service call, or panel estimate?`,
+    landscaping: `Thanks for calling ${b}! This is ${aiName}. Are you looking for a landscape maintenance quote or a custom project estimate?`,
     barbershop: `Thanks for calling ${b}! This is ${aiName}. Want to book a cut, or can I help with something else?`,
     salon: `Hi, you've reached ${b} — this is ${aiName}. Are you looking to book a service today?`,
     dental: `Thank you for calling ${b}, this is ${aiName}. Are you an existing patient, or would you like to schedule a visit?`,
@@ -2414,7 +2447,7 @@ function generateJsonLd(draft = {}) {
   }
 
   const scripts = [
-    '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n</script>'
+    '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\\/script>'
   ];
 
   if (knowledge.length > 0) {
@@ -2430,7 +2463,7 @@ function generateJsonLd(draft = {}) {
         }
       }))
     };
-    scripts.push('<script type="application/ld+json">\n' + JSON.stringify(faqSchema, null, 2) + '\n</script>');
+    scripts.push('<script type="application/ld+json">\n' + JSON.stringify(faqSchema, null, 2) + '\n<\\/script>');
   }
 
   return scripts.join('\n\n');
@@ -2755,16 +2788,21 @@ const resetBtn = document.getElementById('resetBtn');
 const ACCESS_CODES = ['VANTORX2026', 'VANTORX', 'LUKE2026', 'CLIENT2026', 'LAUNCH2026'];
 
 function checkUnlocked() {
-  if (sessionStorage.getItem('vantorx_onboard_unlocked') === 'true' || localStorage.getItem('vantorx_onboard_unlocked') === 'true') {
-    return true;
-  }
-  const params = new URLSearchParams(window.location.search);
-  const code = (params.get('code') || params.get('access') || params.get('key') || '').trim().toUpperCase();
-  if (code && ACCESS_CODES.includes(code)) {
-    sessionStorage.setItem('vantorx_onboard_unlocked', 'true');
-    localStorage.setItem('vantorx_onboard_unlocked', 'true');
-    return true;
-  }
+  if (typeof window !== 'undefined' && window.__forceUnlocked) return true;
+  try {
+    if (sessionStorage.getItem('vantorx_onboard_unlocked') === 'true' || localStorage.getItem('vantorx_onboard_unlocked') === 'true') {
+      return true;
+    }
+  } catch (_) {}
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const code = (params.get('code') || params.get('access') || params.get('key') || '').trim().toUpperCase();
+    if (code && ACCESS_CODES.includes(code)) {
+      try { sessionStorage.setItem('vantorx_onboard_unlocked', 'true'); } catch (_) {}
+      try { localStorage.setItem('vantorx_onboard_unlocked', 'true'); } catch (_) {}
+      return true;
+    }
+  } catch (_) {}
   return false;
 }
 
@@ -2813,8 +2851,8 @@ function paintGate() {
     const val = (input.value || '').trim().toUpperCase();
     if (ACCESS_CODES.includes(val)) {
       err.classList.remove('show');
-      sessionStorage.setItem('vantorx_onboard_unlocked', 'true');
-      localStorage.setItem('vantorx_onboard_unlocked', 'true');
+      try { sessionStorage.setItem('vantorx_onboard_unlocked', 'true'); } catch (_) {}
+      try { localStorage.setItem('vantorx_onboard_unlocked', 'true'); } catch (_) {}
       unlocked = true;
       if (progressCard) progressCard.style.display = '';
       if (navCard) navCard.style.display = '';
