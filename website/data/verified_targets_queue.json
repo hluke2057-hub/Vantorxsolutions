@@ -1872,12 +1872,12 @@
     "service": "LeadFlow 90-Second SMS Speed-to-Lead",
     "estLoss": "$8,000/mo",
     "painPoint": "Emergency drain form submissions delayed while plumbers drive between job sites",
-    "subject": "Question for Sonny - capturing Sonny's Transfer Plumbing quote requests in 90 seconds",
+    "subject": "Re: Question for Sonny - capturing Sonny's Transfer Plumbing quote requests in 90 seconds",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a1733b-ef60-7ba5-aa6d-175909d0b9be",
-    "sentAt": "2026-10-25T13:24:30.227Z",
-    "body": "Hi Sonny,\n\nQuick question regarding Sonny's Transfer Plumbing's customer response speed:\n\nWhen homeowners in Tampa, FL fill out an online estimate request or call while your field crew is tied up on an active job, what is your average follow-up time?\n\nHarvard Business Review research shows that contractors who respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Plumbing, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $8,000/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a17d99-3294-7095-8bd9-90a595d7b080",
+    "sentAt": "2026-10-27T13:42:34.476Z",
+    "body": "Hi Sonny,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Sonny's Transfer Plumbing.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "tb_095",
@@ -1892,12 +1892,12 @@
     "service": "24/7 AI Phone Receptionist (Ava)",
     "estLoss": "$12,800/mo",
     "painPoint": "Commercial flat roof leak inquiries lost during heavy summer downpours",
-    "subject": "Quick question for Joe regarding Bay to Bay Roofing emergency calls",
+    "subject": "Re: Quick question for Joe regarding Bay to Bay Roofing emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a1733b-ef9f-732b-9eb1-ff34c3bea5d0",
-    "sentAt": "2026-10-25T13:24:30.287Z",
-    "body": "Hi Joe,\n\nSaw your solid reputation in Tampa, FL — congrats on building a trusted local brand.\n\nI was auditing local Roofing providers in Tampa, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn emergency Roofing, homeowners needing immediate help almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 emergency calls a week costs the average local contractor roughly $12,800/mo in lost jobs.\n\nWe built Ava, an AI phone receptionist designed specifically for trade contractors:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages true emergencies vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call crew\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live emergency call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a17d99-3336-7971-9048-a833c82a4c2b",
+    "sentAt": "2026-10-27T13:42:34.661Z",
+    "body": "Hi Joe,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Bay to Bay Roofing.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "tb_096",
@@ -2913,10 +2913,11 @@
     "estLoss": "$9,000/mo",
     "painPoint": "Emergency slab leak calls in Cape Coral lost to competitors who answer on 1 ring",
     "subject": "Quick question for Adam regarding Next Level Plumbing emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a17d99-33d6-7b1b-b23b-2b78c686aa97",
+    "sentAt": "2026-10-27T13:42:34.827Z",
+    "body": "Hi Adam,\n\nSaw your solid reputation in Cape Coral, FL — congrats on building a trusted local brand.\n\nI was auditing local Plumbing providers in Cape Coral, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Plumbing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs the average business roughly $9,000/mo in lost jobs.\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "pb_147",
@@ -2932,10 +2933,11 @@
     "estLoss": "$8,200/mo",
     "painPoint": "Automated gate and security breakdown requests waiting 24 hours for callback",
     "subject": "Question for George - capturing Action Automatic Door & Gate quote requests in 90 seconds",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a17d99-3499-7b27-8746-38fe346a678b",
+    "sentAt": "2026-10-27T13:42:35.041Z",
+    "body": "Hi George,\n\nQuick question regarding Action Automatic Door & Gate's customer response speed:\n\nWhen customers in Naples, FL fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Electrical, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $8,200/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "pb_148",
@@ -2951,10 +2953,11 @@
     "estLoss": "$16,200/mo",
     "painPoint": "Burst pipe and flood water mitigation calls going to voicemail over the weekend",
     "subject": "Quick question for Dave regarding Service Team of Professionals (STOP Restoration Fort Myers) emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a17d99-3555-75da-8dd3-c1b8170a87d2",
+    "sentAt": "2026-10-27T13:42:35.220Z",
+    "body": "Hi Dave,\n\nSaw your solid reputation in Fort Myers, FL — congrats on building a trusted local brand.\n\nI was auditing local Restoration providers in Fort Myers, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Restoration, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs the average business roughly $16,200/mo in lost jobs.\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "pb_149",
