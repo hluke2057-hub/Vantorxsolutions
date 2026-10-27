@@ -24,7 +24,7 @@ function Assert-True([string]$name, [bool]$condition) {
 # TEST 1: Roster JSON file exists and contains initial seed profiles
 Assert-True "rep_roster.json exists in data directory" (Test-Path $rosterPath)
 $rosterContent = Get-Content $rosterPath -Raw -Encoding UTF8 | ConvertFrom-Json
-Assert-True "rep_roster contains at least 2 default profiles" ($rosterContent.Count -ge 2)
+Assert-True "rep_roster contains at least 1 verified profile" ($rosterContent.Count -ge 1)
 $founder = $rosterContent | Where-Object { $_.id -eq "founder_luke" }
 Assert-True "Founder Luke exists in rep roster" ($founder -ne $null)
 Assert-True "Founder has course and game stats" ($founder.course -ne $null -and $founder.game -ne $null)

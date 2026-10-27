@@ -19,7 +19,18 @@ async function getRoster() {
 
   // 1. Live Cloud Ingestion: Fetch real sales rep registrations from Supabase audit_log
   try {
-    const logs = await supabaseRequest("/rest/v1/audit_log?or=(entity_type.eq.sales_rep,entity_type.eq.lead_inquiry)&select=*&order=created_at.asc");
+    let logs = [];
+    try {
+      const rpcLogs = await supabaseRequest("/rest/v1/rpc/get_sales_reps", { method: "POST" });
+      if (Array.isArray(rpcLogs) && rpcLogs.length > 0) {
+        logs = rpcLogs;
+      }
+    } catch (_) {}
+
+    if (!Array.isArray(logs) || logs.length === 0) {
+      logs = await supabaseRequest("/rest/v1/audit_log?or=(entity_type.eq.sales_rep,entity_type.eq.lead_inquiry)&select=*&order=created_at.asc");
+    }
+
     if (Array.isArray(logs) && logs.length > 0) {
       for (const entry of logs) {
         let p = entry.payload || {};
@@ -251,6 +262,7 @@ async function handleRepSync(req, res) {
 
   saveRoster(roster);
 
+  // Supported milestones: account_created, lesson_completed, day_passed, certified, boss_defeated, dials_logged
   // 1. Guaranteed Cloud Persistence to Supabase (Awaited so Vercel serverless does not freeze before completion)
   try {
     await supabaseRequest("/rest/v1/audit_log", {
@@ -530,7 +542,10 @@ module.exports = async function handler(req, res) {
   }
 
   if (action === "scan-emails") {
-    const results = { audit_log: [], profiles: [], leads: [], appointments: [], businesses: [], errors: {} };
+    const results = { audit_log: [], profiles: [], leads: [], appointments: [], businesses: [], rpc_reps: [], errors: {} };
+    try {
+      results.rpc_reps = await supabaseRequest("/rest/v1/rpc/get_sales_reps", { method: "POST" });
+    } catch(e) { results.errors.rpc_reps = e.message; }
     try {
       results.audit_log = await supabaseRequest("/rest/v1/audit_log?select=*&order=id.asc");
     } catch(e) { results.errors.audit_log = e.message; }
