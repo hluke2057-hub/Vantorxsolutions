@@ -1626,16 +1626,16 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     } catch(e){}
   }
 
-  function syncQuestToCloud(milestone = 'progress_update', detail = '') {
+  function syncQuestToCloud(milestone = 'progress_update', detail = '', explicitProfile = null) {
     try {
-      const activeRepId = localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
+      const activeRepId = (explicitProfile && explicitProfile.id) || localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
       const userProfilesRaw = localStorage.getItem('vantorx_user_profiles_v2');
-      let repName = player.name || 'Luke the Closer';
-      let repEmail = 'luke@vantorxsolutions.com';
-      let repRole = 'Founder & Closer';
-      let courseData = { percent: 100, status: '🏆 Level 5 Certified' };
+      let repName = (explicitProfile && explicitProfile.name) || player.name || 'Luke the Closer';
+      let repEmail = (explicitProfile && explicitProfile.email) || 'luke@vantorxsolutions.com';
+      let repRole = (explicitProfile && explicitProfile.role) || 'Founder & Closer';
+      let courseData = (explicitProfile && explicitProfile.course) || { percent: 100, status: '🏆 Level 5 Certified' };
 
-      if (userProfilesRaw) {
+      if (!explicitProfile && userProfilesRaw) {
         try {
           const profiles = JSON.parse(userProfilesRaw);
           if (profiles[activeRepId]) {
@@ -1660,25 +1660,28 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         } catch(e){}
       }
 
+      const avatar = (explicitProfile && explicitProfile.avatar) || player.avatar || '🗡️';
+      const gameData = (explicitProfile && explicitProfile.game) || {
+        level: player.lvl || (explicitProfile && explicitProfile.level) || 1,
+        xp: player.xp || (explicitProfile && explicitProfile.xp) || 0,
+        streak: player.streak || 0,
+        bossesDefeated: (player.defeatedBosses ? player.defeatedBosses.length : 0) || (explicitProfile && explicitProfile.bossesDefeated) || 0,
+        bossList: player.defeatedBosses || [],
+        totalDials: ((player.defeatedBosses ? player.defeatedBosses.length * 3 : 0) + (player.streak || 0)) || (explicitProfile && explicitProfile.totalDials) || 0,
+        dealsClosed: player.dealsClosedCount || (explicitProfile && explicitProfile.dealsClosed) || 0,
+        bestGrade: player.bestGrade || 'S',
+        gold: player.gold || (explicitProfile && explicitProfile.gold) || 0
+      };
+
       const payload = {
         rep: {
           id: activeRepId,
           name: repName,
           email: repEmail,
           role: repRole,
-          avatar: player.avatar || '🗡️',
+          avatar: avatar,
           course: courseData,
-          game: {
-            level: player.lvl || 1,
-            xp: player.xp || 0,
-            streak: player.streak || 0,
-            bossesDefeated: player.defeatedBosses ? player.defeatedBosses.length : 0,
-            bossList: player.defeatedBosses || [],
-            totalDials: (player.defeatedBosses ? player.defeatedBosses.length * 3 : 0) + (player.streak || 0),
-            dealsClosed: player.dealsClosedCount || 0,
-            bestGrade: player.bestGrade || 'S',
-            gold: player.gold || 0
-          }
+          game: gameData
         },
         milestone: milestone,
         milestoneDetail: detail || player.lastAction || 'Active in Cold Call Combat'
@@ -1727,7 +1730,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
           const serverIds = new Set(data.roster.map(r => r.id));
           Object.values(profiles).forEach(p => {
             if (p && p.name && p.email && !serverIds.has(p.id) && p.id !== 'luke' && p.id !== 'founder_luke') {
-              syncQuestToCloud('account_created', `Restoring closer profile to cloud roster: ${p.name} (${p.email})`);
+              syncQuestToCloud('account_created', `Restoring closer profile to cloud roster: ${p.name} (${p.email})`, p);
             }
           });
           if (updated) {
@@ -1864,7 +1867,14 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         lastAction: 'Joined Sales Team · Cold Call RPG'
       };
       localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
-      syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role}`);
+      localStorage.setItem('vantorx_active_user_id_v2', uid);
+      syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role}`, profiles[uid]);
+    } else {
+      profiles[uid].lastActive = new Date().toISOString();
+      profiles[uid].lastAction = 'Signed in to Cold Call RPG';
+      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
+      localStorage.setItem('vantorx_active_user_id_v2', uid);
+      syncQuestToCloud('progress_update', `Sales closer signed in: ${name} (${email})`, profiles[uid]);
     }
 
     localStorage.setItem('vantorx_active_user_id_v2', uid);
@@ -2114,7 +2124,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     if (emailInput) emailInput.value = '';
 
     selectActiveQuestRep(uid, profiles[uid]);
-    syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role}`);
+    syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role}`, profiles[uid]);
     showToast(`✓ Closer account created for ${name}! Added to Luke's roster.`);
   };
 
