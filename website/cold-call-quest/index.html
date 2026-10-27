@@ -264,10 +264,36 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
 /* Daily Updates & Tactical Mutator Banner */
 .daily-rpg-banner{background:linear-gradient(135deg,rgba(15,21,34,0.98),rgba(25,35,55,0.95));border:1px solid rgba(245,158,11,0.35);border-radius:16px;padding:18px 22px;margin:0 0 24px 0;box-shadow:0 15px 35px rgba(0,0,0,0.45);position:relative;overflow:hidden}
-.daily-rpg-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f59e0b,#38bdf8,#10b981,#f59e0b);background-size:200% 100%;animation:gradientShift 4s linear infinite}
+.daily-rpg-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f59e0b,#38bdf8,#a855f7,#10b981,#f59e0b);background-size:200% 100%;animation:gradientShift 4s linear infinite}
 @keyframes gradientShift{0%{background-position:0% 0%}100%{background-position:200% 0%}}
-.daily-banner-grid{display:grid;grid-template-columns:1.2fr 1.2fr 1fr;gap:20px;align-items:stretch}
-@media(max-width:1050px){.daily-banner-grid{grid-template-columns:1fr}}
+.daily-banner-grid{display:grid;grid-template-columns:1.3fr 1.1fr 1.1fr 1fr;gap:16px;align-items:stretch}
+@media(max-width:1250px){.daily-banner-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.daily-banner-grid{grid-template-columns:1fr}}
+
+/* Daily System Updates Card */
+.daily-updates-card{background:rgba(7,10,15,0.75);border:1px solid rgba(168,85,247,0.35);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+.updates-badge-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-family:var(--font-mono);font-weight:700}
+.updates-tag{color:#c084fc;letter-spacing:0.5px}
+.updates-version-badge{background:rgba(168,85,247,0.22);color:#e9d5ff;border:1px solid rgba(168,85,247,0.45);font-weight:900;padding:2px 7px;border-radius:4px}
+.updates-card-content h4{font-family:var(--font-head);font-size:13.5px;font-weight:800;color:#ffffff;margin-bottom:4px}
+.updates-list{list-style:none;display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--dim)}
+.updates-list li{display:flex;align-items:flex-start;gap:6px;line-height:1.35}
+.updates-list li::before{content:'✦';color:var(--purple);font-size:11px;margin-top:1px}
+.updates-list strong{color:var(--ink)}
+.updates-quick-btn{background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.4);color:#d8b4fe;padding:6px 12px;border-radius:8px;font-family:var(--font-head);font-size:12px;font-weight:700;cursor:pointer;transition:all 0.15s;text-align:center}
+.updates-quick-btn:hover{background:var(--purple);color:#ffffff;box-shadow:0 0 15px rgba(168,85,247,0.5)}
+
+/* Interactive Call Check-Off System */
+.call-check-wrapper{display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 6px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid var(--line);transition:all 0.15s;flex-shrink:0}
+.call-check-wrapper:hover{background:rgba(52,211,153,0.12);border-color:var(--ok)}
+.call-checkbox{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--line2);display:grid;place-content:center;font-size:12px;font-weight:900;color:transparent;transition:all 0.15s}
+.call-checkbox.checked{background:linear-gradient(135deg,#10b981,#059669);border-color:var(--ok);color:#ffffff;box-shadow:0 0 10px rgba(52,211,153,0.5)}
+.call-check-label{font-size:10px;font-family:var(--font-mono);font-weight:800;color:var(--faint);letter-spacing:0.5px}
+.call-check-wrapper.checked .call-check-label{color:var(--ok)}
+
+/* Checked-off Boss Card Highlight */
+.boss-card-btn.call-checked{border-color:rgba(52,211,153,0.45);background:linear-gradient(90deg,rgba(52,211,153,0.08),rgba(15,21,34,0.95))}
+.call-won-badge{background:rgba(52,211,153,0.2);color:var(--ok);border:1px solid rgba(52,211,153,0.4);font-size:10px;font-family:var(--font-mono);font-weight:800;padding:2px 6px;border-radius:4px;display:inline-block}
 
 .daily-bounty-card{background:rgba(7,10,15,0.7);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;gap:10px}
 .bounty-badge-row{display:flex;align-items:center;gap:8px;font-size:11px;font-family:var(--font-mono);font-weight:700}
@@ -337,6 +363,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
         <button class="hud-btn" id="soundToggleBtn" onclick="toggleSound()">🔊 SFX: ON</button>
         <button class="hud-btn gold" onclick="openArmoryModal()">🛡️ Armory (Swords &amp; Armor)</button>
         <button class="hud-btn" onclick="openDossierModal()" style="border-color:rgba(168,85,247,0.4);color:var(--purple)">📊 Closer Dossier</button>
+        <button class="hud-btn" onclick="openDailyUpdatesModal()" style="border-color:rgba(168,85,247,0.5);color:#d8b4fe;background:rgba(168,85,247,0.12)">📢 Daily Updates (v5.1)</button>
         <a href="../cold-call-arena/index.html" class="hud-btn" style="border-color:rgba(56,189,248,0.4);color:var(--blue)">📋 Lead Dispatcher &amp; Cockpit ➔</a>
       </div>
     </div>
@@ -390,7 +417,24 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
   <!-- DAILY SALES COMBAT & TACTICAL MUTATORS BANNER -->
   <div class="daily-rpg-banner" id="dailyRpgBanner">
     <div class="daily-banner-grid">
-      <!-- Col 1: Today's Featured Contractor Bounty -->
+      <!-- Col 1: System Daily Updates & Patch Notes (v5.1) -->
+      <div class="daily-updates-card" id="dailyUpdatesCard">
+        <div class="updates-badge-row">
+          <span class="updates-tag">📢 DAILY SYSTEM UPDATES</span>
+          <span class="updates-version-badge">v5.1 LIVE</span>
+        </div>
+        <div class="updates-card-content">
+          <h4>Recent System Upgrades:</h4>
+          <ul class="updates-list">
+            <li><strong>Pre-Dungeon Briefing:</strong> Boss weaknesses, HP &amp; product fees shown before dialing</li>
+            <li><strong>Natural Openers:</strong> Realistic owner greetings replace premature objections</li>
+            <li><strong>Call Check-Off:</strong> Mark contractors called &amp; track 10-minute walkthroughs won</li>
+          </ul>
+        </div>
+        <button class="updates-quick-btn" type="button" onclick="openDailyUpdatesModal()">📋 View Patch Notes &amp; Pricing</button>
+      </div>
+
+      <!-- Col 2: Today's Featured Contractor Bounty -->
       <div class="daily-bounty-card" id="dailyBountyCard">
         <div class="bounty-badge-row">
           <span class="bounty-tag">🎯 TODAY'S FEATURED BOUNTY</span>
@@ -468,6 +512,9 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
           <button type="button" class="btn btn-sm btn-ghost" id="hudBossIntelBtn" onclick="openDungeonBriefingModal()" style="border-color:rgba(245,158,11,0.5);color:var(--accent2);font-size:11.5px;padding:4px 12px;font-family:var(--font-mono);font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;background:rgba(245,158,11,0.1)">
             📋 BOSS INTEL &amp; WHAT TO SELL
+          </button>
+          <button type="button" class="btn btn-sm btn-ghost" id="hudCallCheckBtn" onclick="toggleBossCallCheck(currentBoss.key)" style="border-color:var(--line2);color:var(--dim);font-size:11.5px;padding:4px 12px;font-family:var(--font-mono);font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;background:rgba(255,255,255,0.06);border-radius:6px;transition:all 0.15s">
+            ☐ CHECK OFF CALL
           </button>
           <div class="active-boss-hp-box">
             <div class="boss-hp-header">
@@ -869,6 +916,10 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
     <!-- Scrollable Body with stats and intel -->
     <div class="dungeon-briefing-body">
+      <!-- Call Check-off Status Banner -->
+      <div id="briefingCallStatus" style="display:none;background:rgba(52,211,153,0.14);border:1px solid rgba(52,211,153,0.4);border-radius:8px;padding:8px 12px;margin-bottom:14px;color:var(--ok);font-size:12px;font-family:var(--font-mono);font-weight:700">
+      </div>
+
       <!-- Quick Stats Bar -->
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px;background:rgba(15,21,34,0.8);border:1px solid var(--line);border-radius:10px;padding:10px 14px">
         <div>
@@ -968,6 +1019,99 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       </div>
       <button class="btn btn-primary" id="btnEnterDungeon" onclick="enterDungeonAndStartCall()" style="padding:12px 30px;font-size:15px;font-weight:800;letter-spacing:0.5px;box-shadow:0 0 25px rgba(245,158,11,0.45);cursor:pointer">
         ⚔️ ENTER THE DUNGEON &amp; START CALL ➔
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 📢 DAILY SYSTEM UPDATES & PATCH NOTES MODAL (v5.1) -->
+<div class="modal-overlay" id="dailyUpdatesModal" style="z-index:99999">
+  <div class="modal-card" style="max-width:720px;max-height:90vh;display:flex;flex-direction:column;padding:0;overflow:hidden">
+    <div class="modal-header" style="padding:16px 20px;border-bottom:1px solid var(--line);background:rgba(15,21,34,0.96);display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:22px">📢</span>
+        <div>
+          <h2 style="font-size:17px;font-family:var(--font-head);font-weight:800;color:#ffffff;margin:0">Daily System Updates &amp; Combat Patch Notes</h2>
+          <div style="font-size:11.5px;color:var(--dim);font-family:var(--font-mono)">Build v5.1 · Live Sales Intelligence &amp; Pacing Updates</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeDailyUpdatesModal()" style="font-size:18px;cursor:pointer;background:none;border:none;color:var(--dim)">✕</button>
+    </div>
+
+    <div style="padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:18px;background:var(--bg)">
+      <!-- Update 1: Pre-Dungeon Briefing -->
+      <div style="background:rgba(15,21,34,0.7);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="background:rgba(245,158,11,0.2);color:var(--accent2);font-size:10.5px;font-family:var(--font-mono);font-weight:800;padding:2px 8px;border-radius:4px">NEW FEATURE</span>
+          <h3 style="font-size:14.5px;color:#ffffff;font-weight:700;margin:0">🎯 Pre-Dungeon Tactical Briefing Screen</h3>
+        </div>
+        <p style="font-size:12.5px;color:var(--dim);line-height:1.5;margin-bottom:10px">
+          Before dialing any contractor boss, a full-screen tactical briefing now reveals their exact skepticism HP, trade ticket value ($5k–$25k), current phone/website vulnerabilities, and the precise product package you should pitch. Review intel at any time during battle with the <code>📋 BOSS INTEL &amp; WHAT TO SELL</code> HUD button.
+        </p>
+        <div style="font-size:11.5px;color:var(--ink);background:rgba(0,0,0,0.35);padding:8px 12px;border-radius:6px;font-family:var(--font-mono)">
+          ✓ Weaknesses &amp; Trap alerts for all 10 contractor archetypes (Dave, Brad, Sal, Elena, Wayne, etc.)
+        </div>
+      </div>
+
+      <!-- Update 2: Transparent Pricing & Upfront Fees -->
+      <div style="background:rgba(15,21,34,0.7);border:1px solid rgba(56,189,248,0.3);border-radius:10px;padding:16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="background:rgba(56,189,248,0.2);color:var(--blue);font-size:10.5px;font-family:var(--font-mono);font-weight:800;padding:2px 8px;border-radius:4px">PRICING UPGRADE</span>
+          <h3 style="font-size:14.5px;color:#ffffff;font-weight:700;margin:0">💰 Upfront Setup Fees &amp; Tiered Monthly Pricing</h3>
+        </div>
+        <p style="font-size:12.5px;color:var(--dim);line-height:1.5;margin-bottom:12px">
+          All boss combat evaluations and Closer Coach tips now enforce our transparent pricing structure with upfront setup fees:
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11.5px;font-family:var(--font-mono)">
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--line);border-radius:8px;padding:10px">
+            <div style="color:var(--accent2);font-weight:800">⚡ Essential Tier</div>
+            <div style="color:#ffffff;font-size:13px;font-weight:900;margin:3px 0">$497 setup + $397/mo</div>
+            <div style="color:var(--faint)">Ava 24/7 AI Phone Receptionist, 1-ring pickup, Carrier *71 rollover</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(245,158,11,0.4);border-radius:8px;padding:10px">
+            <div style="color:var(--gold);font-weight:800">⭐ Accelerate (Best Value)</div>
+            <div style="color:#ffffff;font-size:13px;font-weight:900;margin:3px 0">$997 setup + $697/mo</div>
+            <div style="color:var(--faint)">Ava AI + Custom High-Speed Website + LeadFlow CRM &amp; Speed-to-Lead</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(168,85,247,0.4);border-radius:8px;padding:10px">
+            <div style="color:#c084fc;font-weight:800">🚀 Scale Dominance</div>
+            <div style="color:#ffffff;font-size:13px;font-weight:900;margin:3px 0">$1,997 setup + $1,297/mo</div>
+            <div style="color:var(--faint)">Full fleet multi-trunk AI dispatch + ServiceTitan webhooks + AEO Search</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid rgba(52,211,153,0.4);border-radius:8px;padding:10px">
+            <div style="color:var(--ok);font-weight:800">🌐 Website Standalone</div>
+            <div style="color:#ffffff;font-size:13px;font-weight:900;margin:3px 0">$799 flat upfront</div>
+            <div style="color:var(--faint)">Sub-second speed, interactive repair calculators, 0 monthly software fees</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Update 3: Realistic Opener Pacing -->
+      <div style="background:rgba(15,21,34,0.7);border:1px solid rgba(52,211,153,0.3);border-radius:10px;padding:16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="background:rgba(52,211,153,0.2);color:var(--ok);font-size:10.5px;font-family:var(--font-mono);font-weight:800;padding:2px 8px;border-radius:4px">AI PACING FIX</span>
+          <h3 style="font-size:14.5px;color:#ffffff;font-weight:700;margin:0">🗣️ Realistic Owner Openers &amp; Natural Dialog Flow</h3>
+        </div>
+        <p style="font-size:12.5px;color:var(--dim);line-height:1.5;margin-bottom:8px">
+          Fixed premature combat objections! Contractors like Dave now answer realistically (<em>"Yeah, Dave here, I own it. What's this regarding?"</em>) instead of immediately complaining about marketing burns before you even introduce yourself. Objections now trigger dynamically in direct response to your pitch.
+        </p>
+      </div>
+
+      <!-- Update 4: Interactive Call Check-Off -->
+      <div style="background:rgba(15,21,34,0.7);border:1px solid rgba(168,85,247,0.3);border-radius:10px;padding:16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="background:rgba(168,85,247,0.2);color:#d8b4fe;font-size:10.5px;font-family:var(--font-mono);font-weight:800;padding:2px 8px;border-radius:4px">CALL MANAGEMENT</span>
+          <h3 style="font-size:14.5px;color:#ffffff;font-weight:700;margin:0">✅ Interactive Contractor Call Check-Off</h3>
+        </div>
+        <p style="font-size:12.5px;color:var(--dim);line-height:1.5;margin-bottom:8px">
+          Keep track of your real sales hit list! Every contractor card now has a clickable <code>[✓ CALL CLOSED]</code> checkbox. Winning a battle automatically checks them off, and you can also manually check or uncheck contractors right from the roster or the active combat HUD.
+        </p>
+      </div>
+    </div>
+
+    <div style="padding:14px 20px;border-top:1px solid var(--line);background:rgba(15,21,34,0.96);display:flex;justify-content:flex-end">
+      <button class="btn btn-primary" onclick="closeDailyUpdatesModal()" style="padding:10px 24px;font-size:13px;font-weight:700;cursor:pointer">
+        ✓ GOT IT · RETURN TO QUEST
       </button>
     </div>
   </div>
@@ -1722,6 +1866,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     focusedToneActive: false,
     dealsClosedCount: 0,
     defeatedBosses: [],
+    checkedCalls: [],
     streak: 0,
     breatherCooldown: 0,
     bleedTurns: 0,
@@ -1737,6 +1882,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
         const parsed = JSON.parse(saved);
         player = Object.assign(player, parsed);
         if (!Array.isArray(player.unlockedRelics)) player.unlockedRelics = [];
+        if (!Array.isArray(player.checkedCalls)) player.checkedCalls = [...(player.defeatedBosses || [])];
         if (!player.consumables) player.consumables = { espresso: 3, flashbang: 2, shield: 2 };
         if (!player.stats) player.stats = { totalTurns: 0, sGrades: 0, aGrades: 0, maxStreak: 0, totalDmgDealt: 0, revenueLeaksDiagnosed: 0 };
         if (typeof player.dealsClosedCount !== 'number') player.dealsClosedCount = player.defeatedBosses ? player.defeatedBosses.length : 0;
@@ -2615,7 +2761,26 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     }
 
     const cleared = document.getElementById('clearedBossRatio');
-    if (cleared) cleared.textContent = `${player.defeatedBosses.length} / ${BOSSES.length} Cleared`;
+    const checkedCount = (player.checkedCalls && player.checkedCalls.length) || player.defeatedBosses.length;
+    if (cleared) cleared.textContent = `${checkedCount} / ${BOSSES.length} Calls Won`;
+
+    // Active Boss Call Check-off Button
+    const callCheckBtn = document.getElementById('hudCallCheckBtn');
+    if (callCheckBtn && currentBoss) {
+      const isCallChecked = (player.defeatedBosses && player.defeatedBosses.includes(currentBoss.key)) ||
+                            (player.checkedCalls && player.checkedCalls.includes(currentBoss.key));
+      if (isCallChecked) {
+        callCheckBtn.innerHTML = `✓ CALL CLOSED`;
+        callCheckBtn.style.background = 'rgba(52,211,153,0.18)';
+        callCheckBtn.style.borderColor = 'rgba(52,211,153,0.5)';
+        callCheckBtn.style.color = 'var(--ok)';
+      } else {
+        callCheckBtn.innerHTML = `☐ CHECK OFF CALL`;
+        callCheckBtn.style.background = 'rgba(255,255,255,0.06)';
+        callCheckBtn.style.borderColor = 'var(--line2)';
+        callCheckBtn.style.color = 'var(--dim)';
+      }
+    }
 
     const todayDay = new Date().getDay();
     const breatherHealAmount = (todayDay === 0 || todayDay === 3) ? 45 : 30;
@@ -2748,25 +2913,32 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const bountyIdx = getDailyBountyBossIndex();
 
     BOSSES.forEach((b, idx) => {
-      const isDefeated = player.defeatedBosses.includes(b.key);
+      const isDefeated = (player.defeatedBosses && player.defeatedBosses.includes(b.key));
+      const isCallChecked = isDefeated || (player.checkedCalls && player.checkedCalls.includes(b.key));
       const isActive = idx === currentBossIndex;
       const isBounty = idx === bountyIdx;
       const btn = document.createElement('div');
-      btn.className = `boss-card-btn ${isActive ? 'active' : ''} ${isDefeated ? 'defeated' : ''} ${isBounty ? 'bounty-target' : ''}`;
+      btn.className = `boss-card-btn ${isActive ? 'active' : ''} ${isDefeated ? 'defeated' : ''} ${isCallChecked ? 'call-checked' : ''} ${isBounty ? 'bounty-target' : ''}`;
       btn.onclick = () => selectBoss(idx);
 
       btn.innerHTML = `
         <div class="boss-avatar">${b.portrait}</div>
         <div class="boss-meta">
-          <h4>${b.name}${isBounty ? '<span class="bounty-chip">🎯 2X BOUNTY</span>' : ''}</h4>
+          <h4>${b.name}${isBounty ? '<span class="bounty-chip">🎯 2X BOUNTY</span>' : ''}${isCallChecked ? ' <span class="call-won-badge">✓ CALL WON</span>' : ''}</h4>
           <p>${b.title}</p>
           <div class="boss-hp-tag">
             <span style="color:${isDefeated ? 'var(--ok)' : 'var(--err)'}">❤️ ${isDefeated ? 'DEFEATED' : b.hp + ' HP'}</span>
             <span style="color:var(--faint)">· ${b.tier}</span>
           </div>
         </div>
-        <div class="boss-status-badge ${isDefeated ? 'status-cleared' : (isActive ? 'status-ready' : 'status-locked')}">
-          ${isDefeated ? '✓ CLEARED' : (isActive ? '⚔️ READY' : 'STAGE ' + (idx + 1))}
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <div class="boss-status-badge ${isDefeated ? 'status-cleared' : (isActive ? 'status-ready' : 'status-locked')}">
+            ${isDefeated ? '✓ CLEARED' : (isActive ? '⚔️ READY' : 'STAGE ' + (idx + 1))}
+          </div>
+          <div class="call-check-wrapper ${isCallChecked ? 'checked' : ''}" onclick="event.stopPropagation(); window.toggleBossCallCheck('${b.key}')" title="Toggle Call Walkthrough Closed for ${b.name.replace(/"/g, '')}">
+            <div class="call-checkbox ${isCallChecked ? 'checked' : ''}">${isCallChecked ? '✓' : ''}</div>
+            <span class="call-check-label">${isCallChecked ? 'CALL CLOSED' : 'CHECK CALL'}</span>
+          </div>
         </div>
       `;
       container.appendChild(btn);
@@ -3004,7 +3176,63 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       }
       weakEl.innerHTML = wHtml;
     }
+
+    // Call Check-off Status in Briefing Modal
+    const callStatusBanner = document.getElementById('briefingCallStatus');
+    const isCallChecked = (player.defeatedBosses && player.defeatedBosses.includes(boss.key)) ||
+                          (player.checkedCalls && player.checkedCalls.includes(boss.key));
+    if (callStatusBanner) {
+      if (isCallChecked) {
+        callStatusBanner.style.display = 'flex';
+        callStatusBanner.style.alignItems = 'center';
+        callStatusBanner.style.justifyContent = 'space-between';
+        callStatusBanner.innerHTML = `
+          <span>✓ CALL CLOSED &amp; WALKTHROUGH WON FOR THIS CONTRACTOR</span>
+          <button type="button" class="btn btn-sm btn-ghost" onclick="window.toggleBossCallCheck('${boss.key}')" style="font-size:11px;padding:2px 8px;border-color:rgba(52,211,153,0.5);color:var(--ok);cursor:pointer;background:rgba(52,211,153,0.1)">Uncheck</button>
+        `;
+      } else {
+        callStatusBanner.style.display = 'none';
+      }
+    }
   }
+
+  // 6C. DAILY UPDATES & CALL CHECK-OFF CONTROLS
+  window.openDailyUpdatesModal = function() {
+    const m = document.getElementById('dailyUpdatesModal');
+    if (m) m.classList.add('open');
+  };
+
+  window.closeDailyUpdatesModal = function() {
+    const m = document.getElementById('dailyUpdatesModal');
+    if (m) m.classList.remove('open');
+  };
+
+  window.toggleBossCallCheck = function(bossKey) {
+    if (!bossKey) bossKey = (currentBoss && currentBoss.key) || 'gatekeeper';
+    if (!Array.isArray(player.checkedCalls)) {
+      player.checkedCalls = [...(player.defeatedBosses || [])];
+    }
+    const idx = player.checkedCalls.indexOf(bossKey);
+    const targetBoss = BOSSES.find(b => b.key === bossKey);
+    const bossName = targetBoss ? targetBoss.name : bossKey;
+
+    if (idx >= 0) {
+      player.checkedCalls.splice(idx, 1);
+      playSynth('shield');
+      showToast(`Unchecked call for ${bossName}`);
+    } else {
+      player.checkedCalls.push(bossKey);
+      playSynth('cash');
+      spawnFloatingNumber(`✓ CALL WON`, 'heal');
+      showToast(`✓ Checked off call for ${bossName}! 10-Min Walkthrough Won.`);
+    }
+    savePlayer();
+    updateHUD();
+    renderBossGauntletList();
+    if (currentBoss && currentBoss.key === bossKey) {
+      renderBriefingDetails(currentBoss);
+    }
+  };
 
   // 7. HEALTH REGAIN MECHANICS
   window.executeTakeABreather = function() {
@@ -4479,6 +4707,10 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const isFirstWin = !player.defeatedBosses.includes(currentBoss.key);
     if (isFirstWin) {
       player.defeatedBosses.push(currentBoss.key);
+    }
+    if (!Array.isArray(player.checkedCalls)) player.checkedCalls = [];
+    if (!player.checkedCalls.includes(currentBoss.key)) {
+      player.checkedCalls.push(currentBoss.key);
     }
     player.dealsClosedCount = (player.dealsClosedCount || 0) + 1;
 
