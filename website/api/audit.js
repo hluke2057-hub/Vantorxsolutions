@@ -54,7 +54,7 @@ async function getRoster() {
         const nameLower = name.toLowerCase();
 
         // Strictly exclude legacy fabricated mock personas & fake vantorx domain emails
-        const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") ||
+        const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") || key.includes("test@") || key.includes("verify") ||
                        nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe") || nameLower.includes("buddy") ||
                        (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com");
 
@@ -95,7 +95,7 @@ async function getRoster() {
               const key = (email || rep.id).toLowerCase();
               const nameLower = (rep.name || "").toLowerCase();
               // Filter out fabricated mock personas
-              const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") ||
+              const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") || key.includes("test@") || key.includes("verify") ||
                              nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe") || nameLower.includes("buddy") ||
                              (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com");
 
