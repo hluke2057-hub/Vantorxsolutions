@@ -529,6 +529,26 @@ module.exports = async function handler(req, res) {
     return handleRepDigest(req, res);
   }
 
+  if (action === "scan-emails") {
+    const results = { audit_log: [], profiles: [], leads: [], appointments: [], businesses: [], errors: {} };
+    try {
+      results.audit_log = await supabaseRequest("/rest/v1/audit_log?select=*&order=id.asc");
+    } catch(e) { results.errors.audit_log = e.message; }
+    try {
+      results.profiles = await supabaseRequest("/rest/v1/profiles?select=*");
+    } catch(e) { results.errors.profiles = e.message; }
+    try {
+      results.leads = await supabaseRequest("/rest/v1/leads?select=*");
+    } catch(e) { results.errors.leads = e.message; }
+    try {
+      results.appointments = await supabaseRequest("/rest/v1/appointments?select=*");
+    } catch(e) { results.errors.appointments = e.message; }
+    try {
+      results.businesses = await supabaseRequest("/rest/v1/businesses?select=*");
+    } catch(e) { results.errors.businesses = e.message; }
+    return res.status(200).json({ ok: true, data: results });
+  }
+
   // 2. Standard Public Website Inbound Audit / Demo Request
   if (req.method !== "POST") {
     return methodNotAllowed(res, ["POST", "GET"]);
