@@ -457,14 +457,18 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
             </div>
           </div>
         </div>
-
-        <div class="active-boss-hp-box">
-          <div class="boss-hp-header">
-            <span>CONTRACTOR SKEPTICISM (HP)</span>
-            <span id="bossHpDigits">100 / 100</span>
-          </div>
-          <div class="boss-hp-track">
-            <div class="boss-hp-fill" id="bossHpFill" style="width:100%"></div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <button type="button" class="btn btn-sm btn-ghost" id="hudBossIntelBtn" onclick="openDungeonBriefingModal()" style="border-color:rgba(245,158,11,0.5);color:var(--accent2);font-size:11.5px;padding:4px 12px;font-family:var(--font-mono);font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;background:rgba(245,158,11,0.1)">
+            📋 BOSS INTEL &amp; WHAT TO SELL
+          </button>
+          <div class="active-boss-hp-box">
+            <div class="boss-hp-header">
+              <span>CONTRACTOR SKEPTICISM (HP)</span>
+              <span id="bossHpDigits">100 / 100</span>
+            </div>
+            <div class="boss-hp-track">
+              <div class="boss-hp-fill" id="bossHpFill" style="width:100%"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -836,6 +840,116 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     <div style="font-size:12.5px;font-weight:700;color:#ffffff;margin-bottom:10px;font-family:var(--font-mono)">🎖️ CLOSER BATTLEFIELD RIBBONS:</div>
     <div style="display:flex;flex-direction:column;gap:8px;max-height:160px;overflow-y:auto" id="dossierRibbonsList">
       <!-- Injected via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ⚔️ PRE-DUNGEON TACTICAL BRIEFING & PRODUCT INTEL MODAL -->
+<div class="modal-overlay" id="dungeonBriefingModal" style="z-index:99990;background:rgba(5,8,14,0.92);backdrop-filter:blur(12px)">
+  <div class="modal-card" style="max-width:880px;border-color:rgba(245,158,11,0.4);background:linear-gradient(180deg,#0d131f 0%,#080c14 100%);box-shadow:0 0 50px rgba(245,158,11,0.15)">
+    <div class="modal-header" style="border-bottom:1px solid rgba(245,158,11,0.25);margin-bottom:14px;padding-bottom:12px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:32px" id="briefingAvatar">⚡</span>
+        <div>
+          <div style="font-size:11px;font-family:var(--font-mono);font-weight:700;color:var(--accent2);letter-spacing:1px;text-transform:uppercase" id="briefingFloorTag">DUNGEON FLOOR · LEVEL 3 OF 15</div>
+          <h2 style="font-size:22px;margin:2px 0 0;color:#ffffff" id="briefingBossName">Mike "The Robot Crusher"</h2>
+          <div style="font-size:12.5px;color:var(--dim)" id="briefingBossSub">West Palm Beach Master Electrician · Mike's Master Commercial Electric</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeDungeonBriefingModal()" title="Close Briefing">✕</button>
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;background:rgba(15,21,34,0.8);border:1px solid var(--line);border-radius:10px;padding:10px 14px">
+      <div>
+        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Contractor HP</div>
+        <div style="font-size:16px;font-weight:800;color:var(--err)" id="briefingHpVal">❤️ 250 HP</div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Avg Job Ticket</div>
+        <div style="font-size:16px;font-weight:800;color:var(--ok)" id="briefingTicketVal">$4k - $8k</div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Target Trade</div>
+        <div style="font-size:16px;font-weight:800;color:var(--blue)" id="briefingTradeVal">Electrical</div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Boss Tier</div>
+        <div style="font-size:16px;font-weight:800;color:var(--accent2)" id="briefingTierVal">Tier 2 Skeptic</div>
+      </div>
+    </div>
+
+    <!-- 2-Column Tactical Grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+      
+      <!-- LEFT: TARGET INTEL & WEAKNESSES -->
+      <div style="background:rgba(15,21,34,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px">
+          🎯 TARGET INTEL &amp; ACTIVE LEAK
+        </div>
+
+        <div>
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">CURRENT REALITY &amp; PAIN POINT:</div>
+          <div style="font-size:12.5px;color:var(--ink);line-height:1.45;background:rgba(0,0,0,0.3);padding:8px 10px;border-radius:6px;border-left:3px solid var(--err)" id="briefingSituation">
+            Inside 480-volt commercial panels with insulated rubber gloves. Cannot physically touch phone. Emergency calls roll to voicemail and hire competitors.
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">ESTIMATED REVENUE LEAK:</div>
+          <div style="font-size:12.5px;font-weight:600;color:#fca5a5" id="briefingLeakVal">
+            💸 Emergency panel upgrade or commercial generator install ($4,000 - $8,000)
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px">KNOWN WEAKNESSES (USE THESE!):</div>
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:12px" id="briefingWeaknesses">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: WHAT YOU ARE SELLING (THE VANTORX OFFER) -->
+      <div style="background:rgba(15,21,34,0.6);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px">
+          📦 WHAT YOU ARE SELLING (VANTORX ARSENAL)
+        </div>
+
+        <div>
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">PRIMARY SOLUTION TO PITCH:</div>
+          <div style="font-size:13px;font-weight:700;color:#ffffff" id="briefingProductTitle">Ava 24/7 AI Phone Receptionist</div>
+          <div style="font-size:12px;color:var(--dim);line-height:1.4;margin-top:2px" id="briefingProductDesc">
+            Answers in 1 ring 24/7 with zero robotic delay, pre-qualifies trade emergencies, books directly into calendar, and texts tech's cell immediately via Carrier *71 rollover.
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px">PRICING PACKAGES TO QUOTE:</div>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;font-family:var(--font-mono)" id="briefingPackages">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <div style="margin-top:auto;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:8px;padding:8px 10px">
+          <div style="font-size:10.5px;font-family:var(--font-mono);color:var(--accent2);font-weight:700">🏆 MISSION WIN CONDITION:</div>
+          <div style="font-size:12px;color:var(--ink);margin-top:2px" id="briefingWinCondition">
+            Lock in a <strong>10-minute live walkthrough tomorrow at 4:30 PM</strong> (or get him to request the setup link to his cell).
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Modal Footer Controls -->
+    <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px;flex-wrap:wrap;gap:12px">
+      <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim);cursor:pointer">
+        <input type="checkbox" id="chkAutoBriefing" onchange="toggleAutoBriefing(this.checked)" checked style="accent-color:var(--accent)">
+        Show briefing before entering each dungeon level
+      </label>
+      <button class="btn btn-primary" onclick="closeDungeonBriefingModal()" style="padding:10px 24px;font-size:14px;font-weight:800;letter-spacing:0.5px">
+        ⚔️ ENTER DUNGEON &amp; START CALL
+      </button>
     </div>
   </div>
 </div>
@@ -2703,6 +2817,148 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (voiceEnabled) {
       speakContractor(bossOpeningReply, currentBoss.key);
     }
+
+    // Auto-display Dungeon Tactical Briefing unless user unchecked auto-show
+    if (localStorage.getItem('vantorx_hide_boss_briefing') !== 'true') {
+      openDungeonBriefingModal(idx);
+    }
+  }
+
+  // 6B. PRE-DUNGEON TACTICAL BRIEFING & PRODUCT INTEL SYSTEM
+  window.openDungeonBriefingModal = function(idx) {
+    if (typeof idx === 'number' && BOSSES[idx]) {
+      currentBossIndex = idx;
+      currentBoss = BOSSES[idx];
+    }
+    const b = currentBoss || BOSSES[0];
+    const modal = document.getElementById('dungeonBriefingModal');
+    if (!modal) return;
+    renderBriefingDetails(b);
+    modal.classList.add('open');
+  };
+
+  window.closeDungeonBriefingModal = function() {
+    const modal = document.getElementById('dungeonBriefingModal');
+    if (modal) modal.classList.remove('open');
+    const input = document.getElementById('playerCustomInput');
+    if (input) input.focus();
+  };
+
+  window.toggleAutoBriefing = function(isChecked) {
+    if (isChecked) {
+      localStorage.removeItem('vantorx_hide_boss_briefing');
+    } else {
+      localStorage.setItem('vantorx_hide_boss_briefing', 'true');
+    }
+  };
+
+  function renderBriefingDetails(boss) {
+    if (!boss) return;
+    const bIdx = BOSSES.indexOf(boss);
+    const floorNum = (bIdx >= 0) ? bIdx + 1 : (currentBossIndex + 1);
+
+    const avatar = document.getElementById('briefingAvatar');
+    const floorTag = document.getElementById('briefingFloorTag');
+    const nameEl = document.getElementById('briefingBossName');
+    const subEl = document.getElementById('briefingBossSub');
+    const hpVal = document.getElementById('briefingHpVal');
+    const ticketVal = document.getElementById('briefingTicketVal');
+    const tradeVal = document.getElementById('briefingTradeVal');
+    const tierVal = document.getElementById('briefingTierVal');
+    const sitEl = document.getElementById('briefingSituation');
+    const leakEl = document.getElementById('briefingLeakVal');
+    const weakEl = document.getElementById('briefingWeaknesses');
+    const prodTitle = document.getElementById('briefingProductTitle');
+    const prodDesc = document.getElementById('briefingProductDesc');
+    const pkgsEl = document.getElementById('briefingPackages');
+    const winCond = document.getElementById('briefingWinCondition');
+    const autoChk = document.getElementById('chkAutoBriefing');
+
+    if (autoChk) {
+      autoChk.checked = localStorage.getItem('vantorx_hide_boss_briefing') !== 'true';
+    }
+
+    if (avatar) avatar.textContent = boss.portrait || '🔨';
+    if (floorTag) floorTag.textContent = `DUNGEON FLOOR · LEVEL ${floorNum} OF ${BOSSES.length}`;
+    if (nameEl) nameEl.textContent = boss.name;
+    if (subEl) subEl.textContent = `${boss.title} · ${boss.company || boss.location}`;
+    if (hpVal) hpVal.textContent = `❤️ ${boss.maxHp || boss.hp} HP`;
+    if (ticketVal) ticketVal.textContent = boss.ticket || '$5,000+';
+    if (tradeVal) tradeVal.textContent = boss.trade || 'Trade Contractor';
+    if (tierVal) tierVal.textContent = boss.tier || 'Contractor Boss';
+    if (sitEl) sitEl.textContent = boss.currentSetup || 'Calls go to voicemail while working on site.';
+    if (leakEl) leakEl.textContent = `💸 ${boss.avgLeak || 'Standard emergency job'} (${boss.ticket || '$5,000+'})`;
+
+    // Determine specific product & packages based on boss archetype
+    let pTitle = 'Ava 24/7 AI Phone Receptionist';
+    let pDesc = 'Answers on ring 1 24/7 with zero robotic delay, pre-qualifies trade emergencies, books appointments directly, and texts tech cell phone immediately via Carrier *71 rollover.';
+    let win = `Lock down a <strong>10-minute live walkthrough tomorrow at 4:30 PM</strong> with ${boss.name.split(' ')[0]}.`;
+
+    if (boss.key === 'elena' || boss.key === 'travis') {
+      pTitle = 'High-Converting Contractor Website + Local AEO';
+      pDesc = 'Sub-second mobile loading speed, instant project quote calculator, before/after proof portfolio, and local Google Maps search architecture.';
+      win = `Lock in a <strong>10-minute walkthrough tomorrow at 4:30 PM</strong> to review custom contractor website designs.`;
+    } else if (boss.key === 'mitch' || boss.key === 'wayne') {
+      pTitle = 'LeadFlow Contractor CRM & 90s Speed-to-Lead';
+      pDesc = 'Sub-90-second automated missed call SMS text-back, automated 5-touch estimate follow-up on open quotes, and past customer database reactivation.';
+      win = `Lock down a <strong>10-minute walkthrough tomorrow at 4:30 PM</strong> to show how automated 5-touch follow-ups revive cold bids.`;
+    } else if (boss.key === 'vito' || boss.key === 'rex' || boss.key === 'marco') {
+      pTitle = 'Enterprise Fleet Suite (Ava AI + LeadFlow CRM + Web)';
+      pDesc = 'Multi-trunk simultaneous AI dispatch, ServiceTitan webhook integration, centralized CRM pipeline, and high-converting commercial brand domains.';
+      win = `Lock down a <strong>10-minute executive walkthrough tomorrow at 4:30 PM</strong> for a fleet rollout pilot.`;
+    }
+
+    if (prodTitle) prodTitle.textContent = pTitle;
+    if (prodDesc) prodDesc.textContent = pDesc;
+    if (winCond) winCond.innerHTML = win;
+
+    // Packages list
+    if (pkgsEl) {
+      if (boss.key === 'elena' || boss.key === 'travis') {
+        pkgsEl.innerHTML = `
+          <div style="color:var(--ink)"><span style="color:var(--accent2)">• Starter Site:</span> $497 setup + $197/mo hosting & AEO</div>
+          <div style="color:var(--ink)"><span style="color:var(--ok)">• Complete Growth:</span> $997 setup + $697/mo (Site + LeadFlow CRM)</div>
+          <div style="color:var(--ink)"><span style="color:var(--purple)">• Apex Dominance:</span> $1,997 setup + $1,297/mo (Site + CRM + Ava AI)</div>
+        `;
+      } else if (boss.key === 'mitch' || boss.key === 'wayne') {
+        pkgsEl.innerHTML = `
+          <div style="color:var(--ink)"><span style="color:var(--accent2)">• LeadFlow Standalone:</span> $197/mo flat (zero contract)</div>
+          <div style="color:var(--ink)"><span style="color:var(--ok)">• Accelerate Tier:</span> $997 setup + $697/mo (LeadFlow CRM + Ava AI)</div>
+          <div style="color:var(--ink)"><span style="color:var(--purple)">• Scale Dominance:</span> $1,997 setup + $1,297/mo (Full Suite)</div>
+        `;
+      } else {
+        pkgsEl.innerHTML = `
+          <div style="color:var(--ink)"><span style="color:var(--accent2)">• Essential Tier:</span> $497 setup + $397/mo (Ava 24/7 AI Receptionist)</div>
+          <div style="color:var(--ink)"><span style="color:var(--ok)">• Accelerate Tier:</span> $997 setup + $697/mo (Ava + LeadFlow CRM)</div>
+          <div style="color:var(--ink)"><span style="color:var(--purple)">• Scale Tier:</span> $1,997 setup + $1,297/mo (Ava + CRM + Custom Site)</div>
+        `;
+      }
+    }
+
+    // Weaknesses list
+    if (weakEl) {
+      let wHtml = `
+        <div style="color:var(--ok)">⚡ <strong>Live Demo:</strong> Offer test line <strong>(561) 813-8602</strong> to prove zero latency & natural tone.</div>
+        <div style="color:var(--blue)">📶 <strong>Carrier Rollover:</strong> Explain <strong>*71</strong> conditional call forwarding (keeps existing number).</div>
+        <div style="color:var(--gold)">💰 <strong>No Contract Math:</strong> State <strong>$397/mo flat</strong> ($13/day) with zero contracts; 1 job pays for the year.</div>
+      `;
+      if (boss.key === 'skeptic') {
+        wHtml += `<div style="color:#fca5a5">⚠️ <strong>Boss Trap:</strong> Hates robot delay. Offer the test number early so he hears her live!</div>`;
+      } else if (boss.key === 'gatekeeper') {
+        wHtml += `<div style="color:#fca5a5">⚠️ <strong>Boss Trap:</strong> Don't sell marketing brochures. Focus on solving Gary's after-hours dispatch errors!</div>`;
+      } else if (boss.key === 'sal') {
+        wHtml += `<div style="color:#fca5a5">🌊 <strong>Key Vulnerability:</strong> Pitch infinite simultaneous call concurrency (10 callers at 2 AM with 0 busy signals).</div>`;
+      } else if (boss.key === 'brad') {
+        wHtml += `<div style="color:#fca5a5">❄️ <strong>Key Vulnerability:</strong> Attack Angi/Thumbtack shared leads — 4 competitors calling the same homeowner.</div>`;
+      } else if (boss.key === 'gary') {
+        wHtml += `<div style="color:#fca5a5">🚜 <strong>Key Vulnerability:</strong> Keep it simple. Ava texts his flip phone without confusing software.</div>`;
+      } else if (boss.key === 'travis' || boss.key === 'elena') {
+        wHtml += `<div style="color:#fca5a5">🪟 <strong>Key Vulnerability:</strong> Attack the 8-second mobile bounce rate on $60k+ bids vs sub-second conversion.</div>`;
+      } else if (boss.key === 'wayne' || boss.key === 'mitch') {
+        wHtml += `<div style="color:#fca5a5">🔨 <strong>Key Vulnerability:</strong> Attack open whiteboard estimates — automated 90s text-back + 5-touch follow-up.</div>`;
+      }
+      weakEl.innerHTML = wHtml;
+    }
   }
 
   // 7. HEALTH REGAIN MECHANICS
@@ -2744,7 +3000,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const hasLeakHook = /leak|missed\s*call|emergency|after\s*hours|after\s*5|weekend|night|dinner|at\s*8\s*pm|sleeping|voicemail|next\s*(guy|contractor|roofer|plumber)|competitor|whiteboard|dead\s*(bids?|estimates?|quotes?)|unclosed|open\s*estimates?|slow\s*(site|website)|bounce|cold\s*bids?/i.test(low);
     const hasDollarMath = /\$\s*\d+/i.test(low) || /\b\d+\s*(k|grand|thousand|dollars?|bucks)\b/i.test(low) || /\b(8,?000|10,?000|12,?000|15,?000|16,?000|20,?000|25,?000|50,?000|6,?000|7,?000|9,?000|8k|10k|12k|15k|20k|50k)\b/i.test(low);
     
-    const hasAvaMechanism = /\b(ava|voice\s*ai|ai\s*receptionist|ai\s*dispatcher?|answers?\s*(in\s*)?(1|one)\s*ring|answers?\s*(24\/7|every\s*call|instantly|automatically|live)|(texts?|sms)\s*(your|my|the)?\s*cell|sms\s*dispatch|books?\s*(directly\s*)?(into|on)\s*(your|the)?\s*(calendar|schedule)|pre-?qualif(y|ies|ication)|intake\s*the\s*caller)\b/i.test(low);
+    const hasAvaMechanism = /\b(ava|voice\s*ai|24\/7\s*ai|ai\s*receptionist|ai\s*dispatcher?|ai\s*(that\s*)?(answers?|picks?\s*up|takes?\s*calls?|books?)|answers?\s*(in\s*)?(1|one)\s*ring|answers?\s*(the\s*)?(phone|call)|answers?\s*(24\/7|every\s*call|instantly|automatically|live)|(texts?|sms)\s*(your|my|the)?\s*cell|sms\s*dispatch|books?\s*(appointments?|jobs?|estimates?)|books?\s*(directly\s*)?(into|on)\s*(your|the)?\s*(calendar|schedule)|pre-?qualif(y|ies|ication)|intake\s*the\s*caller|without\s*(you\s*)?having\s*to\s*lift\s*a\s*finger)\b/i.test(low);
     
     const hasDemoNumber = /(561)\s*813-8602|813-8602|5618138602|live\s*demo|test\s*(line|number|her)|dial\s*(this|it|her|(561))|call\s*(this|her|(561))/i.test(low);
     const hasSoundHuman = /sound|human|robot|robotic|delay|latency|natural|real\s*person|cadence|accent/i.test(low);
@@ -2759,7 +3015,14 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const hasPackageMention = /\b(package|packages|bundle|bundles|all-in-one|tier|suite|full\s*system|both|everything)\b/i.test(low);
     const hasWebsiteMention = /\b(website|web\s*design|redesign|site|seo|aeo|landing\s*page|google\s*rank|online\s*presence)\b/i.test(low);
     
-    const hasTimeProposal = /tomorrow|4:30|morning|afternoon|10\s*min|walkthrough|meeting|calendar|invite|zoom|screen\s*share|schedule|book|call\s*you/i.test(low);
+    // Distinguish AI feature descriptions ("it books appointments into your calendar") from active meeting close proposals:
+    const isFeatureBooking = /\b(she|it|ava|ai|system|receptionist|software)\s*(answers?|books?|schedules?|takes?|dispatches?)\b|\bbooks?\s*(appointments?|jobs?|estimates?|calls?|directly\s*into|on|into)\b|\bschedules?\s*(jobs?|appointments?|estimates?)\b/i.test(low);
+
+    const hasTimeProposal = !isFeatureBooking && (
+      /\b(tomorrow\s*(at|around|\d|afternoon|morning)?|monday|tuesday|wednesday|thursday|friday|saturday)\b/i.test(low) ||
+      /\b(morning\s*or\s*afternoon|4:30(\s*pm)?|10\s*min(ute)?s?(\s*(call|demo|walkthrough|chat))?|quick\s*(10\s*min|walkthrough|zoom|chat|call)|calendar\s*invite|send\s*(you\s*)?(a|the)?\s*calendar|pencil\s*(you|us)\s*in|set\s*aside\s*10\s*min|schedule\s*a\s*(time|call|demo|walkthrough)|book\s*a\s*(time|call|demo|walkthrough)|free\s*(tomorrow|today|this\s*week|later|wednesday|thursday|friday|monday|tuesday)|what\s*time\s*works|what('s|\s+is)\s*(a\s*good\s*time|your\s*schedule|your\s*calendar)|grab\s*10\s*minutes|jump\s*on\s*a\s*(call|zoom|demo)|hop\s*on\s*a\s*(call|zoom|demo)|show\s*you\s*(for\s*10\s*minutes|how\s*it\s*works\s*tomorrow))\b/i.test(low) ||
+      /\b(are\s*you\s*free|do\s*you\s*have\s*(10|a\s*few)\s*min|how\s*does\s*(tomorrow|afternoon|4:30|morning)\s*look)\b/i.test(low)
+    );
 
     const isUserAskingQuestion = /\?|who\s*answers|what\s*happens|how\s*many|where\s*does|do\s*you\s*get|what\s*do\s*you\s*do/i.test(low);
     const asksWhoAnswers = /who\s*answers|where\s*does\s*(that|the)\s*call\s*go|what\s*happens\s*to\s*calls|how\s*do\s*you\s*handle/i.test(low);
@@ -3496,7 +3759,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     }
 
     // STAGE 6: Meeting Time Proposal / Final Close -> VICTORY!
-    if (analysis.hasTimeProposal || (memory.lastBossQuestion === 'meeting_time_close' && analysis.hasAgreement)) {
+    if (analysis.hasTimeProposal || (memory.lastBossQuestion === 'meeting_time_close' && (analysis.hasAgreement || analysis.hasTimeProposal))) {
       memory.stage = 'victory';
       memory.lastBossQuestion = 'completed';
 
@@ -3505,6 +3768,10 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
           `Perfect, Luke. I'm putting Gary down on his Google Calendar for tomorrow at 4:30 PM for a 10-minute walkthrough. I'll have him test Ava beforehand. Send the calendar invite to gary@orlandopremiac.com. You're the first salesperson to actually solve our dispatch problem.`,
           `Locked in for tomorrow at 4:30 PM on Gary's calendar. Send that calendar invite to gary@orlandopremiac.com. You earned this, Luke.`
         ], 'gk_victory_close');
+      }
+
+      if (boss.dialogue && boss.dialogue.victory) {
+        return boss.dialogue.victory;
       }
 
       return pickUnique(memory, [
@@ -4055,6 +4322,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (matchMemory.stage !== 'victory') {
       if (bossHp <= 0) {
         bossHp = 1;
+        matchMemory.stage = 'close';
+        matchMemory.lastBossQuestion = 'meeting_time_close';
         spawnFloatingNumber('⚔️ ON THE ROPES (1 HP)!', 'crit');
       }
     }
