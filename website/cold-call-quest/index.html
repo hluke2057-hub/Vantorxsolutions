@@ -2185,10 +2185,19 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
   };
 
   function initQuestProfile() {
-    const activeRepId = localStorage.getItem('vantorx_active_user_id_v2');
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userParam = urlParams.get('user');
+      if (userParam && (userParam.toLowerCase() === 'luke' || userParam.toLowerCase() === 'founder')) {
+        localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+      }
+    } catch(e){}
+
+    let activeRepId = localStorage.getItem('vantorx_active_user_id_v2');
     if (!activeRepId) {
-      window.openQuestSignInGate();
-      return;
+      // Default to founder Luke for seamless immediate boss play
+      localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+      activeRepId = 'luke';
     }
     let profiles = {};
     try {
