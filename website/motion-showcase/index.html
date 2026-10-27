@@ -1,0 +1,867 @@
+<!-- website/motion-showcase/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VantorX Solutions &mdash; High-Motion Web Experience Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070a0f;
+    --bg-card: rgba(15, 21, 34, 0.75);
+    --border: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(245, 158, 11, 0.4);
+    --amber: #f59e0b;
+    --amber-light: #fbbf24;
+    --blue: #38bdf8;
+    --emerald: #34d399;
+    --ink: #f8fafc;
+    --dim: #94a3b8;
+    --font-head: 'Space Grotesk', sans-serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* 🌌 LAYER 1: AMBIENT BREATHING GRADIENT MESH */
+  .motion-mesh {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .mesh-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.45;
+    animation: drift 14s ease-in-out infinite alternate;
+  }
+  .orb-1 {
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.38) 0%, rgba(217, 119, 6, 0.1) 70%);
+    top: -150px;
+    left: -100px;
+    animation-duration: 16s;
+  }
+  .orb-2 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.28) 0%, rgba(14, 165, 233, 0.05) 70%);
+    bottom: -100px;
+    right: -100px;
+    animation-duration: 20s;
+    animation-direction: alternate-reverse;
+  }
+  .orb-3 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%);
+    top: 40%;
+    left: 45%;
+    animation-duration: 12s;
+  }
+
+  @keyframes drift {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    50% { transform: translate(60px, 40px) scale(1.1) rotate(90deg); }
+    100% { transform: translate(-40px, 80px) scale(0.95) rotate(180deg); }
+  }
+
+  /* Interactive Canvas Background */
+  #particlesCanvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Top Navigation */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(16px);
+    background: rgba(7, 10, 15, 0.7);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: #fff;
+    text-decoration: none;
+  }
+  .brand-logo span { color: var(--amber); }
+  .badge-motion {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid var(--border-glow);
+    color: var(--amber-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .badge-motion::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 8px var(--amber);
+    animation: pulseDot 1.8s infinite;
+  }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* Wrap */
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* 🚀 HERO SECTION */
+  .hero-section {
+    padding: 70px 0 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(15, 21, 34, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 30px;
+    padding: 6px 16px;
+    font-size: 12.5px;
+    font-family: var(--font-mono);
+    color: var(--dim);
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pill-tag:hover {
+    border-color: var(--amber);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+  }
+
+  .hero-title {
+    font-family: var(--font-head);
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    max-width: 900px;
+    margin-bottom: 20px;
+  }
+  .hero-title .gradient-text {
+    background: linear-gradient(135deg, #ffffff 30%, var(--amber) 80%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--dim);
+    max-width: 680px;
+    line-height: 1.6;
+    margin-bottom: 34px;
+  }
+
+  /* ⚡ MAGNETIC CTA BUTTON */
+  .btn-magnetic-wrap {
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+  }
+  .btn-magnetic {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #070a0f;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 16px;
+    padding: 16px 36px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.35);
+    transition: transform 0.15s ease-out, box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+  .btn-magnetic::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(60deg, transparent 40%, rgba(255,255,255,0.4) 50%, transparent 60%);
+    transform: rotate(25deg);
+    animation: shine 4s infinite ease-in-out;
+  }
+  @keyframes shine {
+    0% { transform: translateX(-100%) rotate(25deg); }
+    20%, 100% { transform: translateX(100%) rotate(25deg); }
+  }
+
+  /* 🎙️ INTERACTIVE AVA VOICE AI SIMULATOR HUD */
+  .voice-simulator-card {
+    width: 100%;
+    max-width: 820px;
+    background: rgba(15, 21, 34, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 20px;
+    padding: 24px;
+    margin: 40px auto 60px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(245, 158, 11, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .voice-simulator-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+  }
+  .call-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .status-radar {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--emerald);
+    box-shadow: 0 0 12px var(--emerald);
+    animation: pulseDot 1.2s infinite;
+  }
+
+  /* Audio Waveform Canvas */
+  #waveformCanvas {
+    width: 100%;
+    height: 90px;
+    border-radius: 10px;
+    background: rgba(7, 10, 15, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 16px;
+  }
+
+  .live-dialogue-box {
+    background: rgba(7, 10, 15, 0.8);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    min-height: 85px;
+  }
+  .dialogue-speaker {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 11.5px;
+    letter-spacing: 0.5px;
+  }
+  .speaker-ava { color: var(--amber); }
+  .speaker-caller { color: var(--blue); }
+
+  .sim-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .btn-sim-trigger {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid var(--border-glow);
+    color: var(--amber-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-sim-trigger:hover {
+    background: rgba(245, 158, 11, 0.3);
+    transform: scale(1.03);
+  }
+
+  /* 🃏 3D TILT PRODUCT SUITE CARDS */
+  .section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .section-heading h2 {
+    font-family: var(--font-head);
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .section-heading p {
+    color: var(--dim);
+    margin-top: 8px;
+    font-size: 15px;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    perspective: 1200px;
+    margin-bottom: 80px;
+  }
+  @media(max-width: 900px) {
+    .card-grid { grid-template-columns: 1fr; }
+  }
+
+  .tilt-card {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .tilt-card:hover {
+    border-color: rgba(245, 158, 11, 0.5);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 30px rgba(245, 158, 11, 0.15);
+  }
+
+  /* Specular Glare Layer */
+  .card-glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 18px;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .tilt-card:hover .card-glare {
+    opacity: 1;
+  }
+
+  .card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    display: grid;
+    place-content: center;
+    font-size: 24px;
+    margin-bottom: 18px;
+    transform: translateZ(30px);
+  }
+  .card-title {
+    font-family: var(--font-head);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    transform: translateZ(25px);
+  }
+  .card-desc {
+    color: var(--dim);
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    transform: translateZ(20px);
+  }
+
+  .card-metric {
+    margin-top: auto;
+    background: rgba(7, 10, 15, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateZ(15px);
+  }
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+  .metric-value {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--amber-light);
+  }
+
+  /* Floating Parallax Pills */
+  .parallax-pill {
+    position: absolute;
+    background: rgba(15, 21, 34, 0.9);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    pointer-events: none;
+    z-index: 15;
+  }
+  .pill-pos-1 { top: 20%; left: 4%; transform: translateY(0); }
+  .pill-pos-2 { top: 32%; right: 5%; transform: translateY(0); }
+
+  /* Interactive Speed Controller Bar */
+  .motion-control-dock {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 21, 34, 0.92);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    backdrop-filter: blur(16px);
+    border-radius: 40px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 100;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  }
+  .dock-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+  .dock-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dock-btn.active {
+    background: var(--amber);
+    color: #070a0f;
+    font-weight: 700;
+    border-color: var(--amber);
+  }
+</style>
+</head>
+<body>
+
+  <!-- LAYER 1: AMBIENT BREATHING GRADIENT MESH -->
+  <div class="motion-mesh">
+    <div class="mesh-orb orb-1"></div>
+    <div class="mesh-orb orb-2"></div>
+    <div class="mesh-orb orb-3"></div>
+  </div>
+
+  <!-- LAYER 2: INTERACTIVE PARTICLE CANVAS -->
+  <canvas id="particlesCanvas"></canvas>
+
+  <!-- PARALLAX FLOATING BADGES -->
+  <div class="parallax-pill pill-pos-1" id="floatBadge1">
+    <span style="color:var(--emerald)">● 1-Ring Response</span> · Zero Voicemail Leak
+  </div>
+  <div class="parallax-pill pill-pos-2" id="floatBadge2">
+    <span style="color:var(--amber)">⚡ Carrier *71</span> · No Number Porting
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="/" class="brand-logo">
+      Vantor<span>X</span> <span style="font-size:14px; color:var(--dim); font-weight:400">/ Motion Engine</span>
+    </a>
+    <div class="badge-motion">
+      60 FPS HARDWARE ACCELERATED
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="pill-tag">
+        <span>✨ MOTION ARCHITECTURE</span> · <span>Zero-Downtime Telephony</span>
+      </div>
+
+      <h1 class="hero-title">
+        The Future of Trade Automation <br>
+        <span class="gradient-text">Moves In Real-Time.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Experience how subtle physics, 3D perspective tracking, and fluid audio waveforms elevate VantorX from a standard contractor website into a high-converting enterprise powerhouse.
+      </p>
+
+      <!-- Magnetic Call Button -->
+      <div class="btn-magnetic-wrap" id="magWrap">
+        <button class="btn-magnetic" id="magBtn" onclick="window.location.href='tel:5618138602'">
+          <span>Explore Live Demo Line</span>
+          <span>(561) 813-8602 →</span>
+        </button>
+      </div>
+
+      <!-- 🎙️ LIVE AVA VOICE AI SIMULATOR CARD -->
+      <div class="voice-simulator-card">
+        <div class="voice-simulator-header">
+          <div class="call-status">
+            <div class="status-radar"></div>
+            <strong style="color:#ffffff">AVA ACTIVE VOICE STREAM</strong>
+            <span style="color:var(--dim)">· Florida Line (561) 813-8602</span>
+          </div>
+          <div style="font-family:var(--font-mono); font-size:11.5px; color:var(--emerald)">
+            LATENCY: 380ms (SUB-SECOND)
+          </div>
+        </div>
+
+        <!-- Live Waveform Canvas -->
+        <canvas id="waveformCanvas" width="760" height="90"></canvas>
+
+        <div class="live-dialogue-box">
+          <div><span class="dialogue-speaker speaker-caller">PROSPECT (MARCUS VANCE):</span> <span id="callerLine">"Hey, our 5-ton AC unit just threw error code E4 and water is leaking through the ceiling."</span></div>
+          <div><span class="dialogue-speaker speaker-ava">AVA AI DISPATCHER:</span> <span id="avaLine">"I have Marcus Vance at West Palm Beach down for an emergency dispatch. A tech is en route."</span></div>
+        </div>
+
+        <div class="sim-controls">
+          <button class="btn-sim-trigger" onclick="triggerVoicePulse()">
+            ⚡ Simulate Live Emergency Call Waveform
+          </button>
+          <span style="font-size:12px; font-family:var(--font-mono); color:var(--dim)">
+            Modulation: <strong>Interactive Sine Synthesizer</strong>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🃏 3D TILT PRODUCT CARDS -->
+    <section>
+      <div class="section-heading">
+        <h2>Touch-Responsive 3D Glassmorphism</h2>
+        <p>Hover your cursor across these cards to feel the 3D perspective tracking and specular glare lighting.</p>
+      </div>
+
+      <div class="card-grid">
+
+        <!-- Card 1: Ava Voice AI -->
+        <div class="tilt-card" data-tilt>
+          <div class="card-glare"></div>
+          <div class="card-icon">🎙️</div>
+          <h3 class="card-title">Ava 24/7 Voice AI</h3>
+          <p class="card-desc">
+            Answers inbound calls on ring 1, speaks in natural human cadence, pre-qualifies emergency trade tickets, and texts dispatch details instantly.
+          </p>
+          <div class="card-metric">
+            <span class="metric-label">Answer Rate</span>
+            <span class="metric-value">100% (24/7/365)</span>
+          </div>
+        </div>
+
+        <!-- Card 2: LeadFlow CRM -->
+        <div class="tilt-card" data-tilt>
+          <div class="card-glare"></div>
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">LeadFlow CRM</h3>
+          <p class="card-desc">
+            Sub-90-second automated missed-call SMS text-back and automated 5-touch estimate follow-ups that revive dead quotes without manual typing.
+          </p>
+          <div class="card-metric">
+            <span class="metric-label">Speed to Lead</span>
+            <span class="metric-value">&lt; 90 Seconds</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Contractor Websites & AEO -->
+        <div class="tilt-card" data-tilt>
+          <div class="card-glare"></div>
+          <div class="card-icon">🚀</div>
+          <h3 class="card-title">High-Converting Web &amp; AEO</h3>
+          <p class="card-desc">
+            Sub-second mobile loading speeds, instant project quote calculators, and Google Maps local search dominance built exclusively for trades.
+          </p>
+          <div class="card-metric">
+            <span class="metric-label">Mobile Load Time</span>
+            <span class="metric-value">0.7 Seconds</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOTION CONTROL BAR -->
+  <div class="motion-control-dock">
+    <span class="dock-label">Motion Tuning:</span>
+    <button class="dock-btn active" onclick="setSpeed(1, this)">Smooth (1X)</button>
+    <button class="dock-btn" onclick="setSpeed(2, this)">Dynamic (2X)</button>
+    <button class="dock-btn" onclick="togglePulse()">⚡ Pulse Waveform</button>
+  </div>
+
+  <script>
+    // ============================================================
+    // 1. INTERACTIVE PARTICLE CANVAS BACKGROUND
+    // ============================================================
+    const pCanvas = document.getElementById('particlesCanvas');
+    const pCtx = pCanvas.getContext('2d');
+    let width = pCanvas.width = window.innerWidth;
+    let height = pCanvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = pCanvas.width = window.innerWidth;
+      height = pCanvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const numParticles = 45;
+    let mouse = { x: width / 2, y: height / 2, radius: 140 };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        size: Math.random() * 2 + 1
+      });
+    }
+
+    function renderParticles() {
+      pCtx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        pCtx.beginPath();
+        pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        pCtx.fillStyle = 'rgba(245, 158, 11, 0.25)';
+        pCtx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 110) {
+            pCtx.beginPath();
+            pCtx.moveTo(p.x, p.y);
+            pCtx.lineTo(p2.x, p2.y);
+            pCtx.strokeStyle = `rgba(245, 158, 11, ${0.12 * (1 - dist / 110)})`;
+            pCtx.lineWidth = 0.8;
+            pCtx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(renderParticles);
+    }
+    renderParticles();
+
+    // ============================================================
+    // 2. 3D PERSPECTIVE CARD TILT & SPECULAR GLARE
+    // ============================================================
+    const tiltCards = document.querySelectorAll('[data-tilt]');
+    tiltCards.forEach(card => {
+      const glare = card.querySelector('.card-glare');
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -12;
+        const rotateY = ((x - centerX) / centerX) * 12;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+        if (glare) {
+          glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.2) 0%, transparent 60%)`;
+        }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      });
+    });
+
+    // ============================================================
+    // 3. MAGNETIC BUTTON PHYSICS
+    // ============================================================
+    const magWrap = document.getElementById('magWrap');
+    const magBtn = document.getElementById('magBtn');
+
+    if (magWrap && magBtn) {
+      magWrap.addEventListener('mousemove', (e) => {
+        const rect = magWrap.getBoundingClientRect();
+        const relX = e.clientX - rect.left - rect.width / 2;
+        const relY = e.clientY - rect.top - rect.height / 2;
+        magBtn.style.transform = `translate(${relX * 0.35}px, ${relY * 0.35}px)`;
+      });
+      magWrap.addEventListener('mouseleave', () => {
+        magBtn.style.transform = `translate(0px, 0px)`;
+      });
+    }
+
+    // ============================================================
+    // 4. AVA VOICE SINE WAVEFORM VISUALIZER
+    // ============================================================
+    const waveCanvas = document.getElementById('waveformCanvas');
+    const wCtx = waveCanvas.getContext('2d');
+    let waveStep = 0;
+    let waveMultiplier = 1;
+    let isPulseActive = false;
+
+    function renderWaveform() {
+      wCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+      const w = waveCanvas.width;
+      const h = waveCanvas.height;
+      const centerY = h / 2;
+
+      const waves = [
+        { color: 'rgba(245, 158, 11, 0.8)', amp: 18 * waveMultiplier, freq: 0.02, speed: 0.08 },
+        { color: 'rgba(56, 189, 248, 0.6)', amp: 12 * waveMultiplier, freq: 0.035, speed: 0.06 },
+        { color: 'rgba(52, 211, 153, 0.4)', amp: 8 * waveMultiplier, freq: 0.015, speed: 0.04 }
+      ];
+
+      waves.forEach((wv, i) => {
+        wCtx.beginPath();
+        wCtx.strokeStyle = wv.color;
+        wCtx.lineWidth = 2.5;
+
+        for (let x = 0; x < w; x++) {
+          const y = centerY + Math.sin(x * wv.freq + waveStep * wv.speed + i) * wv.amp * Math.sin(x / w * Math.PI);
+          if (x === 0) wCtx.moveTo(x, y);
+          else wCtx.lineTo(x, y);
+        }
+        wCtx.stroke();
+      });
+
+      waveStep += 1;
+      requestAnimationFrame(renderWaveform);
+    }
+    renderWaveform();
+
+    window.triggerVoicePulse = function() {
+      waveMultiplier = 2.4;
+      const callerLine = document.getElementById('callerLine');
+      const avaLine = document.getElementById('avaLine');
+
+      const dialogues = [
+        { caller: '"Our restaurant walk-in freezer is at 52 degrees right now."', ava: '"Priority dispatch confirmed for commercial refrigeration. Tech notified via SMS."' },
+        { caller: '"We have a broken water main flooding the customer garage."', ava: '"Intake recorded for trenchless repipe team. Transferring emergency ticket to cell."' },
+        { caller: '"Need an immediate panel replacement before city inspection."', ava: '"Commercial permit notes logged. Dispatching Master Electrician team now."' }
+      ];
+      const pick = dialogues[Math.floor(Math.random() * dialogues.length)];
+      if (callerLine) callerLine.textContent = pick.caller;
+      if (avaLine) avaLine.textContent = pick.ava;
+
+      setTimeout(() => {
+        waveMultiplier = 1;
+      }, 2200);
+    };
+
+    window.togglePulse = function() {
+      isPulseActive = !isPulseActive;
+      waveMultiplier = isPulseActive ? 2.2 : 1;
+    };
+
+    window.setSpeed = function(spd, btn) {
+      document.querySelectorAll('.dock-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.mesh-orb').forEach(orb => {
+        orb.style.animationDuration = (14 / spd) + 's';
+      });
+    };
+
+    // Parallax on mouse move
+    window.addEventListener('mousemove', (e) => {
+      const b1 = document.getElementById('floatBadge1');
+      const b2 = document.getElementById('floatBadge2');
+      const xPercent = (e.clientX / window.innerWidth) - 0.5;
+      const yPercent = (e.clientY / window.innerHeight) - 0.5;
+
+      if (b1) b1.style.transform = `translate(${xPercent * 25}px, ${yPercent * 25}px)`;
+      if (b2) b2.style.transform = `translate(${-xPercent * 30}px, ${-yPercent * 30}px)`;
+    });
+  </script>
+</body>
+</html>
