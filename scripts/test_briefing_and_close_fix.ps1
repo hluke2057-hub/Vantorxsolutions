@@ -29,11 +29,22 @@ try {
   const bossName = document.getElementById('briefingBossName');
   const hpVal = document.getElementById('briefingHpVal');
   const prodTitle = document.getElementById('briefingProductTitle');
+  const prodPrice = document.getElementById('briefingProductPrice');
+  const priceVal = document.getElementById('briefingPriceVal');
   const winCond = document.getElementById('briefingWinCondition');
   aAssert("Briefing modal displays Mike's name", bossName && bossName.textContent.includes('Robot Crusher'));
   aAssert("Briefing modal displays 250 HP", hpVal && hpVal.textContent.includes('250 HP'));
   aAssert("Briefing modal displays Ava 24/7 AI Phone Receptionist offer", prodTitle && prodTitle.textContent.includes('Ava'));
+  aAssert("Briefing modal displays product price badge ($397/mo + $497 setup)", prodPrice && prodPrice.textContent.includes('397') && prodPrice.textContent.includes('497'));
+  aAssert("Briefing modal quick stats displays Starting Price ($397/mo + $497 setup)", priceVal && priceVal.textContent.includes('397') && priceVal.textContent.includes('497'));
   aAssert("Briefing modal displays 10-minute walkthrough win condition", winCond && winCond.textContent.includes('10-minute'));
+  window.closeDungeonBriefingModal();
+
+  // Test 2B: Briefing Modal population for Elena Cruz (Website Archetype)
+  selectBoss(10); // Elena
+  window.openDungeonBriefingModal(10);
+  const elenaProdPrice = document.getElementById('briefingProductPrice');
+  aAssert("Briefing modal displays Custom Website price for Elena ($799 flat / Accelerate)", elenaProdPrice && elenaProdPrice.textContent.includes('799'));
   window.closeDungeonBriefingModal();
 
   // Test 3: Rep pitching 'books appointments' is graded as MECHANISM and NOT time proposal close
@@ -45,10 +56,12 @@ try {
   aAssert("Mike asks about monthly cost rather than agreeing to a meeting", resPitch.contractorReply.includes('cost') || resPitch.contractorReply.includes('month'));
   aAssert("Stage transitions to price", matchMemory.stage === 'price');
 
-  // Test 4: Pricing quote -> transitions to demo
-  const resPrice = evaluateTurn('It is 397 a month flat with zero contracts and 497 setup.');
-  aAssert("Direct pricing quote answers cost objection", resPrice.grade === 'S' || resPrice.grade === 'A');
-  aAssert("Mike asks for demo or proof", resPrice.contractorReply.includes('test') || resPrice.contractorReply.includes('sound') || resPrice.contractorReply.includes('robot'));
+  // Test 4: Pricing quote with upfront fee -> transitions to demo with bonus damage
+  const resPrice = evaluateTurn('It is 397 a month with a one-time 497 setup fee and zero contracts.');
+  aAssert("Direct pricing quote answers cost objection with Grade S", resPrice.grade === 'S');
+  aAssert("Feedback awards bonus damage for upfront fee transparency", resPrice.damage >= 42);
+  aAssert("Feedback acknowledges transparent pricing and upfront fee", resPrice.feedback.includes('TRANSPARENCY') || resPrice.feedback.includes('DIRECT PRICING'));
+  aAssert("Mike acknowledges price/setup and asks for demo or proof", resPrice.contractorReply.includes('test') || resPrice.contractorReply.includes('sound') || resPrice.contractorReply.includes('robot'));
 
   // Test 5: Live demo -> transitions to carrier
   const resDemo = evaluateTurn('Dial our Florida test line on (561) 813-8602 right now from your truck.');

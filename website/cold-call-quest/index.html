@@ -860,7 +860,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     </div>
 
     <!-- Quick Stats Bar -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;background:rgba(15,21,34,0.8);border:1px solid var(--line);border-radius:10px;padding:10px 14px">
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px;background:rgba(15,21,34,0.8);border:1px solid var(--line);border-radius:10px;padding:10px 14px">
       <div>
         <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Contractor HP</div>
         <div style="font-size:16px;font-weight:800;color:var(--err)" id="briefingHpVal">❤️ 250 HP</div>
@@ -874,8 +874,12 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
         <div style="font-size:16px;font-weight:800;color:var(--blue)" id="briefingTradeVal">Electrical</div>
       </div>
       <div>
+        <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Starting Price</div>
+        <div style="font-size:14.5px;font-weight:800;color:var(--accent2)" id="briefingPriceVal">$397/mo + $497 setup</div>
+      </div>
+      <div>
         <div style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase">Boss Tier</div>
-        <div style="font-size:16px;font-weight:800;color:var(--accent2)" id="briefingTierVal">Tier 2 Skeptic</div>
+        <div style="font-size:16px;font-weight:800;color:var(--gold)" id="briefingTierVal">Tier 2 Skeptic</div>
       </div>
     </div>
 
@@ -918,14 +922,19 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
         <div>
           <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:3px">PRIMARY SOLUTION TO PITCH:</div>
-          <div style="font-size:13px;font-weight:700;color:#ffffff" id="briefingProductTitle">Ava 24/7 AI Phone Receptionist</div>
-          <div style="font-size:12px;color:var(--dim);line-height:1.4;margin-top:2px" id="briefingProductDesc">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+            <div style="font-size:13.5px;font-weight:700;color:#ffffff" id="briefingProductTitle">Ava 24/7 AI Phone Receptionist</div>
+            <div id="briefingProductPrice" style="font-family:var(--font-mono);font-size:11.5px;font-weight:800;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.45);color:var(--accent2);padding:3px 8px;border-radius:6px">
+              💰 $397/mo + $497 setup
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--dim);line-height:1.4;margin-top:4px" id="briefingProductDesc">
             Answers in 1 ring 24/7 with zero robotic delay, pre-qualifies trade emergencies, books directly into calendar, and texts tech's cell immediately via Carrier *71 rollover.
           </div>
         </div>
 
         <div>
-          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px">PRICING PACKAGES TO QUOTE:</div>
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim);margin-bottom:4px">PRICING PACKAGES &amp; UPFRONT SETUP FEES:</div>
           <div style="display:flex;flex-direction:column;gap:5px;font-size:11.5px;font-family:var(--font-mono)" id="briefingPackages">
             <!-- Injected via JS -->
           </div>
@@ -1435,7 +1444,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       avgLeak: 'An emergency sewer line trenchless repipe',
       dialogue: {
         stage1: "Yeah, Dave here, I own it. Look, I don't care how fancy it is, I got burned for $3,000 by some marketing clown last year. How much is this going to bleed out of my account?",
-        victory: "Fair enough. $300 a month pays for itself if it catches even one emergency repipe while I'm sleeping. Send the contract.",
+        victory: "Fair enough. $397 a month plus the $497 setup pays for itself three times over if it catches even one emergency repipe while I'm sleeping. Send the setup link and let's do 4:30 PM tomorrow.",
         defeat: "I knew it -- another snake oil telemarketer trying to bleed my business account. Lose my number. *[CLICK]*"
       }
     },
@@ -2624,7 +2633,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       } else if (bossHp > 0 && bossHp <= currentBoss.maxHp * 0.35) {
         coachEl.innerHTML = `⚡ <strong>Closer Coach:</strong> BOSS IN EXECUTE RANGE (&lt;35% HP)! Propose the 4:30 PM walkthrough close for +50 Overkill bonus!`;
       } else if (stage === 'price' || lastQ === 'how_much_does_it_cost') {
-        coachEl.innerHTML = `💰 <strong>Closer Coach:</strong> Contractor asked about cost! Quote $397/mo flat with zero contracts — never dodge price questions!`;
+        coachEl.innerHTML = `💰 <strong>Closer Coach:</strong> Contractor asked about cost! Quote $397/mo + $497 setup (or $697/mo Accelerate) with zero long-term contracts — never dodge price questions!`;
       } else if (stage === 'proof' || lastQ === 'proof_demo_line') {
         coachEl.innerHTML = `📱 <strong>Closer Coach:</strong> Contractor wants proof! Tell him to dial (561) 813-8602 right now from his truck on speaker!`;
       } else if (stage === 'carrier' || lastQ === 'carrier_rollover_setup') {
@@ -2685,8 +2694,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       directiveTag = `🎯 SCRIPT RECALL: REVENUE LEAK DIAGNOSTIC HOOK`;
       directiveText = `Anchor directly to their missed call pain. Ask where emergency ${currentBoss.ticket || '$8,000'} calls ring when crews are busy or after hours.`;
     } else if (stage === 'price' || lastQ === 'how_much_does_it_cost') {
-      directiveTag = `💰 SCRIPT RECALL: DIRECT PRICING QUOTE`;
-      directiveText = `Quote $397/mo flat with zero contracts and zero setup fee (or $594/mo bundle). Never dance around price questions!`;
+      directiveTag = `💰 SCRIPT RECALL: DIRECT PRICING & UPFRONT SETUP`;
+      directiveText = `Quote $397/mo + $497 one-time setup (or $697/mo + $997 setup Accelerate bundle) with zero long-term contracts. Anchor that 1 saved emergency job covers setup and the entire year!`;
     } else if (stage === 'proof' || lastQ === 'proof_demo_line') {
       directiveTag = `📱 SCRIPT RECALL: LIVE FLORIDA TEST PROOF`;
       directiveText = `Instruct ${bossFirst} to dial our Florida test line on (561) 813-8602 right now from their truck on speaker to hear Ava live.`;
@@ -2891,24 +2900,32 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
     // Determine specific product & packages based on boss archetype
     let pTitle = 'Ava 24/7 AI Phone Receptionist';
+    let pPrice = '$397/mo + $497 setup';
     let pDesc = 'Answers on ring 1 24/7 with zero robotic delay, pre-qualifies trade emergencies, books appointments directly, and texts tech cell phone immediately via Carrier *71 rollover.';
     let win = `Lock down a <strong>10-minute live walkthrough tomorrow at 4:30 PM</strong> with ${boss.name.split(' ')[0]}.`;
 
     if (boss.key === 'elena' || boss.key === 'travis') {
       pTitle = 'High-Converting Contractor Website + Local AEO';
+      pPrice = '$799 flat (or $697/mo Accelerate)';
       pDesc = 'Sub-second mobile loading speed, instant project quote calculator, before/after proof portfolio, and local Google Maps search architecture.';
       win = `Lock in a <strong>10-minute walkthrough tomorrow at 4:30 PM</strong> to review custom contractor website designs.`;
     } else if (boss.key === 'mitch' || boss.key === 'wayne') {
-      pTitle = 'LeadFlow Contractor CRM & 90s Speed-to-Lead';
-      pDesc = 'Sub-90-second automated missed call SMS text-back, automated 5-touch estimate follow-up on open quotes, and past customer database reactivation.';
+      pTitle = 'LeadFlow Contractor CRM & 45s Speed-to-Lead';
+      pPrice = '$197/mo + $197 setup (or $697/mo bundle)';
+      pDesc = 'Sub-45-second automated missed call SMS text-back, automated 5-touch estimate follow-up on open quotes, and past customer database reactivation.';
       win = `Lock down a <strong>10-minute walkthrough tomorrow at 4:30 PM</strong> to show how automated 5-touch follow-ups revive cold bids.`;
     } else if (boss.key === 'vito' || boss.key === 'rex' || boss.key === 'marco') {
       pTitle = 'Enterprise Fleet Suite (Ava AI + LeadFlow CRM + Web)';
+      pPrice = '$1,297/mo + $1,997 setup';
       pDesc = 'Multi-trunk simultaneous AI dispatch, ServiceTitan webhook integration, centralized CRM pipeline, and high-converting commercial brand domains.';
       win = `Lock down a <strong>10-minute executive walkthrough tomorrow at 4:30 PM</strong> for a fleet rollout pilot.`;
     }
 
     if (prodTitle) prodTitle.textContent = pTitle;
+    const prodPrice = document.getElementById('briefingProductPrice');
+    if (prodPrice) prodPrice.textContent = `💰 ${pPrice}`;
+    const priceVal = document.getElementById('briefingPriceVal');
+    if (priceVal) priceVal.textContent = pPrice;
     if (prodDesc) prodDesc.textContent = pDesc;
     if (winCond) winCond.innerHTML = win;
 
@@ -2916,21 +2933,21 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (pkgsEl) {
       if (boss.key === 'elena' || boss.key === 'travis') {
         pkgsEl.innerHTML = `
-          <div style="color:var(--ink)"><span style="color:var(--accent2)">• Starter Site:</span> $497 setup + $197/mo hosting & AEO</div>
-          <div style="color:var(--ink)"><span style="color:var(--ok)">• Complete Growth:</span> $997 setup + $697/mo (Site + LeadFlow CRM)</div>
-          <div style="color:var(--ink)"><span style="color:var(--purple)">• Apex Dominance:</span> $1,997 setup + $1,297/mo (Site + CRM + Ava AI)</div>
+          <div style="color:var(--ink)"><span style="color:var(--accent2);font-weight:700">• Custom Website Standalone:</span> <strong style="color:#ffffff">$799 flat upfront build</strong> (0 monthly fee, sub-second speed)</div>
+          <div style="color:var(--ink)"><span style="color:var(--ok);font-weight:700">• Accelerate Tier (Best Value):</span> <strong style="color:var(--gold)">$997 setup + $697/mo</strong> (Website + Ava Voice AI + LeadFlow CRM)</div>
+          <div style="color:var(--ink)"><span style="color:var(--purple);font-weight:700">• Scale Dominance:</span> <strong style="color:var(--gold)">$1,997 setup + $1,297/mo</strong> (Website + Ava AI + Omnichannel AEO Search)</div>
         `;
       } else if (boss.key === 'mitch' || boss.key === 'wayne') {
         pkgsEl.innerHTML = `
-          <div style="color:var(--ink)"><span style="color:var(--accent2)">• LeadFlow Standalone:</span> $197/mo flat (zero contract)</div>
-          <div style="color:var(--ink)"><span style="color:var(--ok)">• Accelerate Tier:</span> $997 setup + $697/mo (LeadFlow CRM + Ava AI)</div>
-          <div style="color:var(--ink)"><span style="color:var(--purple)">• Scale Dominance:</span> $1,997 setup + $1,297/mo (Full Suite)</div>
+          <div style="color:var(--ink)"><span style="color:var(--accent2);font-weight:700">• LeadFlow Standalone:</span> <strong style="color:#ffffff">$197 setup + $197/mo</strong> (Kanban + 45s SMS Speed-to-Lead)</div>
+          <div style="color:var(--ink)"><span style="color:var(--ok);font-weight:700">• Accelerate Tier (Best Value):</span> <strong style="color:var(--gold)">$997 setup + $697/mo</strong> (LeadFlow CRM + Ava Voice AI + Website)</div>
+          <div style="color:var(--ink)"><span style="color:var(--purple);font-weight:700">• Scale Dominance:</span> <strong style="color:var(--gold)">$1,997 setup + $1,297/mo</strong> (CRM + AI Dispatch + Fleet Webhooks)</div>
         `;
       } else {
         pkgsEl.innerHTML = `
-          <div style="color:var(--ink)"><span style="color:var(--accent2)">• Essential Tier:</span> $497 setup + $397/mo (Ava 24/7 AI Receptionist)</div>
-          <div style="color:var(--ink)"><span style="color:var(--ok)">• Accelerate Tier:</span> $997 setup + $697/mo (Ava + LeadFlow CRM)</div>
-          <div style="color:var(--ink)"><span style="color:var(--purple)">• Scale Tier:</span> $1,997 setup + $1,297/mo (Ava + CRM + Custom Site)</div>
+          <div style="color:var(--ink)"><span style="color:var(--accent2);font-weight:700">• Essential Tier:</span> <strong style="color:#ffffff">$497 setup + $397/mo</strong> (Ava 24/7 Voice AI, 1-Ring Pickup, SMS Tech Dossier)</div>
+          <div style="color:var(--ink)"><span style="color:var(--ok);font-weight:700">• Accelerate Tier (⭐ Best Value):</span> <strong style="color:var(--gold)">$997 setup + $697/mo</strong> (Ava AI + Custom Website + LeadFlow CRM)</div>
+          <div style="color:var(--ink)"><span style="color:var(--purple);font-weight:700">• Scale Tier (Enterprise):</span> <strong style="color:var(--gold)">$1,997 setup + $1,297/mo</strong> (Ava AI + Web + Multi-Tech Dispatch + AEO Search)</div>
         `;
       }
     }
@@ -2940,7 +2957,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       let wHtml = `
         <div style="color:var(--ok)">⚡ <strong>Live Demo:</strong> Offer test line <strong>(561) 813-8602</strong> to prove zero latency & natural tone.</div>
         <div style="color:var(--blue)">📶 <strong>Carrier Rollover:</strong> Explain <strong>*71</strong> conditional call forwarding (keeps existing number).</div>
-        <div style="color:var(--gold)">💰 <strong>No Contract Math:</strong> State <strong>$397/mo flat</strong> ($13/day) with zero contracts; 1 job pays for the year.</div>
+        <div style="color:var(--gold)">💰 <strong>Upfront ROI Math:</strong> Quote <strong>$397/mo + $497 one-time setup</strong> (or $697/mo Accelerate); 1 emergency ticket ($5,000+) covers setup & year.</div>
       `;
       if (boss.key === 'skeptic') {
         wHtml += `<div style="color:#fca5a5">⚠️ <strong>Boss Trap:</strong> Hates robot delay. Offer the test number early so he hears her live!</div>`;
@@ -3007,11 +3024,13 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     
     const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*(call\s*)?forwarding|\bforward(ing)?\b|\brollover\b|\bports?\b|\bporting\b|\bswitch(ing)?\b|verizon|at&t|att|t-mobile|existing\s*number|keep\s*your\s*number/i.test(low);
     
-    const hasPricingAnswer = /\b(197|297|300|397|400|497|500|594|600|697|700|997|1,?297)\b/i.test(low) ||
-      /\$\s*(197|297|300|397|400|497|500|594|600|697|700|997|1,?297)\b/i.test(low) ||
+    const hasPricingAnswer = /\b(197|297|300|397|400|497|500|594|600|697|700|799|997|1,?297|1,?997)\b/i.test(low) ||
+      /\$\s*(197|297|300|397|400|497|500|594|600|697|700|799|997|1,?297|1,?997)\b/i.test(low) ||
       /\b\d+\s*(a|per|\/)\s*month\b/i.test(low) ||
-      /\b(flat\s*rate|monthly\s*rate|monthly\s*investment|monthly\s*fee|month-to-month|no\s*contracts?|zero\s*contracts?|zero\s*setup(\s*fee)?|cancel\s*anytime|pays\s*for\s*itself)\b/i.test(low);
+      /\b(flat\s*rate|monthly\s*rate|monthly\s*investment|monthly\s*fee|month-to-month|no\s*contracts?|zero\s*contracts?|one-time\s*(setup|fee|onboarding|implementation)|setup\s*fee|onboarding\s*fee|upfront(\s*fee)?|cancel\s*anytime|pays\s*for\s*itself)\b/i.test(low);
     
+    const hasUpfrontFeeMention = /\b(setup|onboarding|implementation|upfront|one-time)\b/i.test(low) && /\b(497|997|1,?997|297|197|799|fee|charge|investment)\b/i.test(low);
+
     const hasPackageMention = /\b(package|packages|bundle|bundles|all-in-one|tier|suite|full\s*system|both|everything)\b/i.test(low);
     const hasWebsiteMention = /\b(website|web\s*design|redesign|site|seo|aeo|landing\s*page|google\s*rank|online\s*presence)\b/i.test(low);
     
@@ -3090,6 +3109,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       hasSoundHuman,
       hasCarrier71,
       hasPricingAnswer,
+      hasUpfrontFeeMention,
       hasPackageMention,
       hasWebsiteMention,
       hasWebsiteExplanation,
@@ -3230,7 +3250,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
     if (analysis.isRepeatingPrice) {
       return pickUnique(memory, [
-        `I already know she's $300 a month, man. What I want to know is does she sound like a robot? Give me the test line.`,
+        `I already know she's $397 a month plus the $497 onboarding, man. What I want to know is does she sound like a robot? Give me the Florida test line to hear her voice.`,
         `You already gave me the price, Luke! How do I hear her voice before I agree to anything?`
       ], 'repetition_price');
     }
@@ -3648,13 +3668,13 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
         if (analysis.hasPackageMention || analysis.hasWebsiteMention) {
           memory.packageAsked = true;
           return pickUnique(memory, [
-            `(Typing pauses) $397 a month flat with no contracts is reasonable — our answering service charges $1,400. But you mentioned packages: Gary was literally screaming yesterday that our website is 10 years old and doesn't convert mobile traffic. What's in your website and CRM package, and what's the number to test Ava right now?`,
-            `(Adjusts headset) $397/mo flat with zero contracts beats our $1,400 bill. But wait, you mentioned packages -- Gary's been wanting a new contractor website and lead tracking CRM. What comes in that bundle and what is the test line to hear Ava?`
+            `(Typing pauses) $397 a month plus the $497 setup with no long-term contracts is reasonable — our answering service charges $1,400. But you mentioned packages: Gary was literally screaming yesterday that our website is 10 years old and doesn't convert mobile traffic. What's in your website and CRM package, and what's the number to test Ava right now?`,
+            `(Adjusts headset) $397/mo plus the $497 setup with zero contracts beats our $1,400 bill. But wait, you mentioned packages -- Gary's been wanting a new contractor website and lead tracking CRM. What comes in that bundle and what is the test line to hear Ava?`
           ], 'gk_package_price_ack');
         } else {
           return pickUnique(memory, [
-            `$397 a month and no long-term contracts? That's actually fair compared to the $1,400 answering services charge. But how do I know she doesn't sound computerized with that awkward 2-second delay? What's the number to test her right now?`,
-            `Flat rate with no contract is fair. But does she sound natural or like a robot? Give me the Florida test line so I can hear her voice.`
+            `$397 a month and a $497 setup with no long-term contracts? That's actually fair compared to the $1,400 answering services charge every month. But how do I know she doesn't sound computerized with that awkward 2-second delay? What's the number to test her right now?`,
+            `Flat rate plus one-time onboarding with no contract is fair. But does she sound natural or like a robot? Give me the Florida test line so I can hear her voice.`
           ], 'gk_price_ack');
         }
       }
@@ -3710,8 +3730,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       }
 
       return pickUnique(memory, [
-        `Wait, $300 a month with zero setup fee and no contract? Honestly, that's pocket change -- one ${boss.avgLeak || 'emergency job'} pays for the entire year. But hold on: does your AI receptionist sound like a robot? Florida homeowners with an emergency want a real person, not an automated machine. How do I hear her?`,
-        `$397 a month and no long-term contracts? That's actually fair compared to the $1,400 answering services charge. But how do I know she doesn't sound computerized with that awkward 2-second delay? What's the number to test her?`
+        `Wait, $397 a month plus a one-time $497 setup fee with zero long-term contracts? Honestly, that's pocket change -- one ${boss.avgLeak || 'emergency job'} pays for the entire setup and year three times over. But hold on: does your AI receptionist sound like a robot? Florida homeowners with an emergency want a real person, not an automated machine. How do I hear her?`,
+        `$397 a month and a $497 onboarding fee with no long-term contracts? That's actually fair compared to the $1,400 answering services charge every month. But how do I know she doesn't sound computerized with that awkward 2-second delay? What's the number to test her right now?`
       ], 'price_reaction');
     }
 
@@ -3934,7 +3954,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       isHangup = true;
       hangupReason = 'Absurd / Scam Pricing Trap';
       defeatMistake = 'Quoted unrealistic enterprise fees ($5,000 - $10,000/mo) or claimed enterprise AI receptionist service is "100% free".';
-      defeatRemedy = 'Tradesmen immediately recognize free as a scam or thousands as price gouging. Quote $397/mo flat with zero contracts and zero setup fee.';
+      defeatRemedy = 'Tradesmen immediately recognize free as a scam or thousands as price gouging. Quote $397/mo + $497 one-time setup (or $697/mo Accelerate) with zero long-term contracts and explain the 1-job ROI.';
       feedback = '🚨 FATAL BLUNDER: Quoted absurd/scam pricing! Contractor hung up.';
     } else if (analysis.isDodgingQuestion && (matchMemory.dodgedCount || 0) >= 2) {
       grade = 'F';
@@ -3943,7 +3963,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       isHangup = true;
       hangupReason = 'Evasive Sales Rep / Dodged Contractor Question Twice';
       defeatMistake = 'Dodged the contractor\'s direct question twice in a row instead of giving a straight answer.';
-      defeatRemedy = 'Never dodge pricing or proof questions. When a contractor asks "how much?", answer directly ($397/mo flat) before asking for a walkthrough.';
+      defeatRemedy = 'Never dodge pricing or proof questions. When a contractor asks "how much?", answer directly ($397/mo + $497 setup) before proposing a walkthrough.';
       feedback = '🚨 FATAL BLUNDER: Dodged contractor questions twice! Contractor terminated call.';
     } else if (analysis.isHesitant && (matchMemory.consecutiveHesitation || 0) >= 2) {
       grade = 'F';
@@ -4044,36 +4064,36 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
         feedback = '\uD83D\uDCE6 PACKAGE & PROOF EXPANSION! Stated monthly rate and introduced website/CRM package bundle!';
       } else if (analysis.hasPricingAnswer && analysis.hasDemoNumber && !analysis.hasTimeProposal) {
         grade = 'S';
-        damage = 44;
+        damage = analysis.hasUpfrontFeeMention ? 48 : 44;
         counterDmg = 0;
-        feedback = '\uD83C\uDFAF DIRECT PRICING & LIVE PROOF! Quoted $397/mo flat with zero contracts and gave (561) 813-8602 test line!';
+        feedback = analysis.hasUpfrontFeeMention ? '🎯 DIRECT PRICING & LIVE PROOF! Quoted transparent rates ($397/mo + $497 setup) and gave (561) 813-8602 test line!' : '🎯 DIRECT PRICING & LIVE PROOF! Quoted $397/mo flat with zero contracts and gave (561) 813-8602 test line!';
       } else if (analysis.hasDemoNumber && !analysis.hasTimeProposal) {
         grade = 'S';
         damage = 40;
         counterDmg = 0;
-        feedback = '\uD83D\uDCF1 LIVE PROOF DELIVERED! Offered (561) 813-8602 test line to prove latency and human tone!';
+        feedback = '📱 LIVE PROOF DELIVERED! Offered (561) 813-8602 test line to prove latency and human tone!';
       } else if (analysis.hasPackageMention || analysis.hasWebsiteMention) {
         grade = 'A';
         damage = 36;
         counterDmg = 0;
-        feedback = '\uD83D\uDCE6 PACKAGE EXPANSION! Introduced high-converting contractor website and LeadFlow CRM package!';
+        feedback = '📦 PACKAGE EXPANSION! Introduced high-converting contractor website and LeadFlow CRM package!';
       } else if (analysis.hasAvaMechanism && !analysis.hasPricingAnswer && !analysis.hasDemoNumber) {
         if (analysis.hasDollarMath) {
           grade = 'S';
           damage = 42;
           counterDmg = 0;
-          feedback = '\u26A1 MECHANISM & LEAK MATH! Anchored 24/7 Ava intake against lost emergency revenue!';
+          feedback = '⚡ MECHANISM & LEAK MATH! Anchored 24/7 Ava intake against lost emergency revenue!';
         } else {
           grade = 'A';
           damage = 32;
           counterDmg = 2;
-          feedback = '\u26A1 MECHANISM DELIVERED! Contractor understands 1-ring response and instant SMS dispatch. Now answer pricing ($397/mo) and offer live demo!';
+          feedback = '⚡ MECHANISM DELIVERED! Contractor understands 1-ring response and instant SMS dispatch. Now answer pricing ($397/mo + $497 setup) and offer live demo!';
         }
       } else if (analysis.hasPricingAnswer && !analysis.hasTimeProposal) {
         grade = 'S';
-        damage = 38;
+        damage = analysis.hasUpfrontFeeMention ? 42 : 38;
         counterDmg = 0;
-        feedback = '\uD83D\uDCB0 DIRECT PRICING QUOTE! Stated $397/mo flat with zero contracts. Now provide (561) 813-8602 test line so they hear Ava live!';
+        feedback = analysis.hasUpfrontFeeMention ? '💰 DIRECT PRICING & UPFRONT TRANSPARENCY! Quoted monthly rate and upfront onboarding fee with zero contracts. Now provide (561) 813-8602 test line!' : '💰 DIRECT PRICING QUOTE! Stated $397/mo with zero contracts. Now provide (561) 813-8602 test line so they hear Ava live!';
       } else if (analysis.hasDemoNumber && !analysis.hasTimeProposal) {
         grade = 'S';
         damage = 40;
@@ -4266,11 +4286,11 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     } else if (strikeType === 'mechanism') {
       text = `Ava answers in one ring on the first ring, qualifies the emergency job, and texts your cell phone immediately.`;
     } else if (strikeType === 'price') {
-      text = `It is a flat 300 a month with zero setup fee and zero contract. One shingle repair pays for the entire year.`;
+      text = `It is $397 a month plus a one-time $497 setup fee with zero long-term contracts. One single emergency repair pays for the setup and the entire year.`;
     } else if (strikeType === 'package') {
-      text = `Ava is $397 a month flat with zero contracts, and we also offer packages with a high-converting website and LeadFlow CRM for $594/mo.`;
+      text = `Ava is $397 a month with $497 setup, and our Accelerate bundle includes custom website, LeadFlow CRM, and Ava for $697 a month plus $997 setup.`;
     } else if (strikeType === 'website') {
-      text = `We also build high-converting contractor websites with mobile speed and Google lead capture from $497 setup.`;
+      text = `We design custom sub-second contractor websites with emergency price calculators for $799 flat upfront, or bundled into Accelerate.`;
     } else if (strikeType === 'demo') {
       text = `Don't take my word for it. Dial our live Florida test line on (561) 813-8602 right now from your truck and hear Ava with zero delay.`;
     } else if (strikeType === 'carrier') {
@@ -4280,7 +4300,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     } else if (strikeType === 'defuse') {
       text = `You are 100% right. Every contractor has been burned by telemarketers, which is why we do zero contracts.`;
     } else if (strikeType === 'crm') {
-      text = `LeadFlow is our contractor CRM. It plugs into Jobber or ServiceTitan, auto-texts missed calls in 90 seconds, and tracks your pipeline for $197/mo.`;
+      text = `LeadFlow is our contractor CRM. It auto-texts missed calls in 45 seconds, revives cold estimates, and runs your pipeline for $197/mo plus $197 setup.`;
     } else if (strikeType === 'execute') {
       text = `Let's do a 10-minute walkthrough tomorrow at 4:30 PM and plug that $8,000 leak together.`;
     } else {
