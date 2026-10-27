@@ -4245,12 +4245,32 @@ function closeMobileNav() {
 }
 
 /* ---------- session gate ---------- */
+const LF_ACCESS_CODES = ['VANTORX2026', 'VANTORX', 'LUKE2026', 'CLIENT2026', 'LAUNCH2026'];
+function checkLfUnlocked() {
+  try {
+    if (sessionStorage.getItem('vantorx_leadflow_unlocked') === 'true' || localStorage.getItem('vantorx_leadflow_unlocked') === 'true') return true;
+    const params = new URLSearchParams(window.location.search);
+    const code = (params.get('code') || params.get('access') || params.get('key') || '').trim().toUpperCase();
+    if (code && LF_ACCESS_CODES.includes(code)) {
+      try { sessionStorage.setItem('vantorx_leadflow_unlocked', 'true'); } catch (_) {}
+      try { localStorage.setItem('vantorx_leadflow_unlocked', 'true'); } catch (_) {}
+      return true;
+    }
+  } catch (_) {}
+  return false;
+}
+
 function showGate(mode, errText) {
+  if (checkLfUnlocked()) {
+    paintIdentity();
+    navigate('dashboard');
+    return;
+  }
   const existing = document.getElementById('lfGate');
   if (existing) existing.remove();
   const gate = document.createElement('div');
   gate.id = 'lfGate';
-  gate.style.cssText = 'position:fixed;inset:0;background:rgba(8,8,10,0.92);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px';
+  gate.style.cssText = 'position:fixed;inset:0;background:rgba(8,8,10,0.94);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px';
   if (mode === 'admin') {
     gate.innerHTML = `<div class="card card-pad" style="width:min(480px,100%);text-align:center">
       <div style="font-size:2rem">🛡️</div>
@@ -4270,28 +4290,38 @@ function showGate(mode, errText) {
         <button class="btn btn-ghost btn-sm" id="lfGateOut" style="color:var(--red)">Sign out</button>
       </div>
     </div>`;
-  } else if (mode === 'error') {
-    gate.innerHTML = `<div class="card card-pad" style="width:min(480px,100%);text-align:center">
-      <div style="font-size:2rem">📡</div>
-      <div class="panel-title" style="margin:10px 0 6px">Platform server not reachable</div>
-      <p style="color:var(--text-soft);font-size:0.86rem;margin-bottom:16px">${esc(errText || 'The server did not respond.')} You can retry cloud sync or launch your persistent contractor workspace immediately.</p>
-      <div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-gold btn-sm" id="lfLaunchLive">⚡ Launch Live Contractor Workspace</button>
-        <button class="btn btn-ghost btn-sm" id="lfGateRetry">Retry Cloud</button>
-        <a class="btn btn-ghost btn-sm" href="/" style="text-decoration:none">← Portal home</a>
-      </div>
-    </div>`;
   } else {
-    gate.innerHTML = `<div class="card card-pad" style="width:min(440px,100%)">
-      <div class="panel-title" style="margin-bottom:6px">🔐 Sign in to LeadFlow</div>
-      <p style="color:var(--text-soft);font-size:0.84rem;margin-bottom:14px">Your CRM data lives on the VantorX platform. Sign in to cloud sync or launch your live workspace immediately.</p>
+    gate.innerHTML = `<div class="card card-pad" style="width:min(450px,100%);border:1.5px solid rgba(245,158,11,0.45);box-shadow:0 12px 40px rgba(0,0,0,0.65)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="font-size:1.6rem">🔒</span>
+        <div>
+          <div class="panel-title" style="margin:0;font-size:1.15rem">Private Client Portal</div>
+          <div style="font-size:0.75rem;color:var(--gold-bright);text-transform:uppercase;letter-spacing:0.06em;font-weight:700">LeadFlow CRM Workspace</div>
+        </div>
+      </div>
+      <p style="color:var(--text-soft);font-size:0.85rem;margin-bottom:16px;line-height:1.5">This CRM pipeline is private and reserved for active VantorX Solutions clients. Enter your Client Access Passcode or sign into your Client Hub account.</p>
+      <div class="form-group" style="margin-bottom:12px">
+        <label class="form-label" style="font-size:0.8rem">Client Access Passcode</label>
+        <div style="display:flex;gap:8px">
+          <input class="form-input" id="lfCode" placeholder="Enter Access Code (e.g. VANTORX2026)" autocomplete="off" style="font-family:monospace;letter-spacing:0.05em;text-transform:uppercase"/>
+          <button class="btn btn-gold btn-sm" id="lfCodeBtn" style="white-space:nowrap">Unlock →</button>
+        </div>
+        <div id="lfCodeErr" style="display:none;color:var(--red);font-size:0.78rem;margin-top:6px">✕ Invalid access code. Please check your welcome email or contact Luke.</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin:16px 0;color:var(--text-dim);font-size:0.78rem">
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.08)"></div>
+        <span>OR SIGN IN</span>
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.08)"></div>
+      </div>
       <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="lfEmail" type="email" autocomplete="username"/></div>
       <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="lfPass" type="password" autocomplete="current-password"/></div>
       <div id="lfErr"></div>
       <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
-        <button class="btn btn-gold" id="lfGo">Sign in</button>
-        <button class="btn btn-ghost" id="lfLaunchLive">⚡ Open Live Workspace</button>
-        <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal</a>
+        <button class="btn btn-ghost" id="lfGo" style="flex:1">Sign in with Account</button>
+        <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Website</a>
+      </div>
+      <div style="margin-top:16px;text-align:center;font-size:0.78rem;color:var(--text-dim)">
+        Need access? Call Luke at <a href="tel:5618138602" style="color:var(--gold-bright);text-decoration:underline"><strong>(561) 813-8602</strong></a> or <a href="/#contact" style="color:var(--gold-bright);text-decoration:underline">Book a Demo</a>.
       </div>
     </div>`;
   }
@@ -4299,11 +4329,25 @@ function showGate(mode, errText) {
 
   gate.querySelector('#lfGateOut')?.addEventListener('click', async () => { await platformLogout(); gate.remove(); showGate('signin'); });
   gate.querySelector('#lfGateRetry')?.addEventListener('click', () => start());
-  gate.querySelectorAll('#lfLaunchLive').forEach(btn => btn.addEventListener('click', () => {
-    gate.remove();
-    paintIdentity();
-    navigate('dashboard');
-  }));
+  const codeInput = gate.querySelector('#lfCode');
+  const codeBtn = gate.querySelector('#lfCodeBtn');
+  const codeErr = gate.querySelector('#lfCodeErr');
+  const tryCodeUnlock = () => {
+    const val = (codeInput?.value || '').trim().toUpperCase();
+    if (LF_ACCESS_CODES.includes(val)) {
+      try { sessionStorage.setItem('vantorx_leadflow_unlocked', 'true'); } catch (_) {}
+      try { localStorage.setItem('vantorx_leadflow_unlocked', 'true'); } catch (_) {}
+      gate.remove();
+      toast('Access verified. Welcome to LeadFlow CRM!', 'success');
+      paintIdentity();
+      navigate('dashboard');
+    } else if (codeErr) {
+      codeErr.style.display = 'block';
+      codeInput?.focus();
+    }
+  };
+  codeBtn?.addEventListener('click', tryCodeUnlock);
+  codeInput?.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryCodeUnlock(); });
   const go = gate.querySelector('#lfGo');
   if (go) {
     const submit = async () => {
@@ -4312,6 +4356,7 @@ function showGate(mode, errText) {
       gate.querySelector('#lfErr').innerHTML = '';
       const r = await platformLogin(email, pass);
       if (!r.ok) { gate.querySelector('#lfErr').innerHTML = `<div class="form-error">✕ ${esc(r.error)}</div>`; return; }
+      try { sessionStorage.setItem('vantorx_leadflow_unlocked', 'true'); } catch (_) {}
       gate.remove();
       if (r.mode !== 'ready') { showGate(r.mode); return; }
       navigate('dashboard');

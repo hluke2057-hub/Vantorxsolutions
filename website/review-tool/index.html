@@ -71,8 +71,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--accent)}
     <a href="/" class="brand">Vantor<span>X</span></a>
     <div class="nav-links">
       <a href="/#services" class="btn btn-ghost btn-sm">Services</a>
-      <a href="/#pricing" class="btn btn-ghost btn-sm">Pricing</a>
-      <a href="/aeo-tool/" class="btn btn-ghost btn-sm">🧠 AEO Tool</a>
+      <a href="/client-hub/" class="btn btn-ghost btn-sm">Client Portal</a>
       <a href="/review/" class="btn btn-ghost btn-sm" target="_blank">⭐ Live Shield</a>
       <a href="/#contact" class="btn btn-gold btn-sm">Book Demo</a>
     </div>
@@ -256,7 +255,68 @@ input:focus,textarea:focus{outline:none;border-color:var(--accent)}
     showToast('Loaded VantorX Solutions');
   });
 
-  updateFunnel();
+  const ACCESS_CODES = ['VANTORX2026', 'VANTORX', 'LUKE2026', 'CLIENT2026', 'LAUNCH2026'];
+  function checkReviewUnlocked() {
+    try {
+      if (sessionStorage.getItem('vantorx_review_unlocked') === 'true' || localStorage.getItem('vantorx_review_unlocked') === 'true') return true;
+      const p = new URLSearchParams(window.location.search);
+      const code = (p.get('code') || p.get('access') || p.get('key') || '').trim().toUpperCase();
+      if (code && ACCESS_CODES.includes(code)) {
+        sessionStorage.setItem('vantorx_review_unlocked', 'true');
+        return true;
+      }
+    } catch (_) {}
+    return false;
+  }
+
+  function paintReviewGate() {
+    const gate = document.createElement('div');
+    gate.id = 'reviewGate';
+    gate.style.cssText = 'position:fixed;inset:0;background:rgba(12,16,23,0.95);backdrop-filter:blur(12px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px';
+    gate.innerHTML = `
+      <div style="background:#121824;border:1.5px solid rgba(245,158,11,0.45);border-radius:18px;max-width:440px;width:100%;padding:32px 28px;box-shadow:0 20px 60px rgba(0,0,0,0.7);text-align:center">
+        <div style="font-size:2.4rem;margin-bottom:12px">🔒</div>
+        <div style="font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:6px">Private Client Portal</div>
+        <div style="font-size:0.75rem;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;margin-bottom:12px">Review Funnel™ Console</div>
+        <p style="color:var(--dim);font-size:0.86rem;line-height:1.5;margin-bottom:20px">This configuration tool is private and reserved for active VantorX Solutions clients. Enter your Client Access Passcode or sign into your Client Hub account.</p>
+        <div style="margin-bottom:14px">
+          <input type="text" id="rfGateCode" placeholder="Enter Access Code (e.g. VANTORX2026)" autocomplete="off" style="width:100%;box-sizing:border-box;background:#0c1017;border:1px solid #2d3a52;border-radius:10px;padding:12px 14px;color:var(--ink);font-size:0.95rem;text-align:center;font-family:monospace;letter-spacing:0.1em;text-transform:uppercase" />
+          <div id="rfGateErr" style="display:none;color:var(--err);font-size:0.8rem;margin-top:8px">✕ Invalid access code. Please check your welcome email or contact Luke.</div>
+        </div>
+        <button id="rfGateUnlockBtn" class="btn btn-gold" style="width:100%;padding:12px;margin-bottom:14px">Unlock Console →</button>
+        <div style="display:flex;gap:10px;justify-content:center">
+          <a href="/client-hub/" class="btn btn-ghost btn-sm">Sign in to Hub</a>
+          <a href="/" class="btn btn-ghost btn-sm">← Website</a>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(gate);
+
+    const input = gate.querySelector('#rfGateCode');
+    const btn = gate.querySelector('#rfGateUnlockBtn');
+    const err = gate.querySelector('#rfGateErr');
+    const tryUnlock = () => {
+      const val = (input?.value || '').trim().toUpperCase();
+      if (ACCESS_CODES.includes(val)) {
+        try { sessionStorage.setItem('vantorx_review_unlocked', 'true'); } catch (_) {}
+        try { localStorage.setItem('vantorx_review_unlocked', 'true'); } catch (_) {}
+        gate.remove();
+        updateFunnel();
+      } else if (err) {
+        err.style.display = 'block';
+        input?.focus();
+      }
+    };
+    btn?.addEventListener('click', tryUnlock);
+    input?.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+    input?.focus();
+  }
+
+  if (checkReviewUnlocked()) {
+    updateFunnel();
+  } else {
+    paintReviewGate();
+  }
 })();
 </script>
 </body>
