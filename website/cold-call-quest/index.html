@@ -2296,9 +2296,6 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       if (!profiles.luke) {
         profiles.luke = { id: 'luke', name: 'Luke the Closer', role: 'Founder & Closer', email: 'luke@vantorxsolutions.com', avatar: '👑' };
       }
-      if (isFounder && !profiles.buddy) {
-        profiles.buddy = { id: 'buddy', name: 'Sales Rep (Buddy 2)', role: 'Outbound Closer', email: 'buddy2@vantorxsolutions.com', avatar: '⚔️' };
-      }
     }
 
     const cur = (curId && profiles[curId]) ? profiles[curId] : (isFounder ? profiles.luke : null);
