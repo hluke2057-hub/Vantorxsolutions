@@ -347,6 +347,37 @@ async function pingSupabaseKeepAlive() {
 
 async function sendFounderTeamDigest(currentHour, currentDay) {
   const mergedMap = new Map();
+
+  // 1. Fetch live production roster (populated from Supabase cloud database)
+  try {
+    const res = await fetch("https://www.vantorxsolutions.com/api/reps/rep-roster", {
+      headers: { "Accept": "application/json" }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && Array.isArray(data.roster)) {
+        data.roster.forEach(rep => {
+          if (rep && (rep.id || rep.email)) {
+            const rawEmail = (rep.email || "").trim();
+            const email = rawEmail.toLowerCase();
+            const key = (email || rep.id).toLowerCase();
+            const nameLower = (rep.name || "").toLowerCase();
+            const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") ||
+                           nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe") || nameLower.includes("buddy") ||
+                           (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com");
+            if (key && !isMock) {
+              mergedMap.set(key, { ...rep, email: rawEmail });
+              if (email) mergedMap.set(email, { ...rep, email: rawEmail });
+            }
+          }
+        });
+      }
+    }
+  } catch (apiErr) {
+    console.warn("[Founder Digest] Remote API fetch notice:", apiErr.message);
+  }
+
+  // 2. Read local roster files as fallback
   [ROSTER_FILE, WEB_ROSTER_FILE].forEach(fp => {
     if (fs.existsSync(fp)) {
       try {
@@ -354,17 +385,18 @@ async function sendFounderTeamDigest(currentHour, currentDay) {
         if (Array.isArray(parsed)) {
           parsed.forEach(rep => {
             if (rep && (rep.id || rep.email)) {
-              const key = (rep.id || (rep.email ? rep.email.toLowerCase() : "")).toLowerCase();
-              if (!mergedMap.has(key)) {
-                mergedMap.set(key, rep);
-              } else {
-                const ex = mergedMap.get(key);
-                mergedMap.set(key, {
-                  ...ex,
-                  ...rep,
-                  course: { ...(ex.course || {}), ...(rep.course || {}) },
-                  game: { ...(ex.game || {}), ...(rep.game || {}) }
-                });
+              const rawEmail = (rep.email || "").trim();
+              const email = rawEmail.toLowerCase();
+              const key = (email || rep.id).toLowerCase();
+              const nameLower = (rep.name || "").toLowerCase();
+              const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") ||
+                             nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe") || nameLower.includes("buddy") ||
+                             (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com");
+              if (key && !isMock) {
+                if (!mergedMap.has(key) && (!email || !mergedMap.has(email))) {
+                  mergedMap.set(key, { ...rep, email: rawEmail });
+                  if (email) mergedMap.set(email, { ...rep, email: rawEmail });
+                }
               }
             }
           });
@@ -373,7 +405,7 @@ async function sendFounderTeamDigest(currentHour, currentDay) {
     }
   });
 
-  const roster = Array.from(mergedMap.values());
+  const roster = Array.from(new Set(mergedMap.values()));
   if (!Array.isArray(roster) || roster.length === 0) return;
 
   const totalReps = roster.length;
@@ -671,7 +703,14 @@ async function runAutonomousEngine() {
   let teamRoster = [];
   if (fs.existsSync(ROSTER_FILE)) {
     try {
-      teamRoster = readJsonSafe(ROSTER_FILE);
+      const rawRoster = readJsonSafe(ROSTER_FILE);
+      teamRoster = Array.isArray(rawRoster) ? rawRoster.filter(r => {
+        if (!r || (!r.id && !r.email)) return false;
+        const key = ((r.email || "") + " " + (r.id || "")).toLowerCase();
+        const nm = (r.name || "").toLowerCase();
+        return !key.includes("marcus") && !key.includes("jake") && !key.includes("tyler") && !key.includes("probe") && !key.includes("buddy") &&
+               !nm.includes("marcus") && !nm.includes("jake") && !nm.includes("tyler") && !nm.includes("probe") && !nm.includes("buddy");
+      }) : [];
       if (fs.existsSync(INTEL_FILE)) {
         const intel = readJsonSafe(INTEL_FILE);
         intel.teamRoster = {

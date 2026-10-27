@@ -14,8 +14,51 @@ const CANDIDATE_ROSTER_FILES = [
 ];
 const ROSTER_FILES = Array.from(new Set(CANDIDATE_ROSTER_FILES.map(p => path.normalize(p))));
 
-function getRoster() {
+async function getRoster() {
   const mergedMap = new Map();
+
+  // 1. Live Cloud Ingestion: Fetch real sales rep registrations from Supabase audit_log
+  try {
+    const logs = await supabaseRequest("/rest/v1/audit_log?entity_type=eq.sales_rep&select=*&order=created_at.asc");
+    if (Array.isArray(logs) && logs.length > 0) {
+      for (const entry of logs) {
+        const p = entry.payload || {};
+        const rawEmail = (p.email || "").trim();
+        const email = rawEmail.toLowerCase();
+        const id = p.id || entry.entity_id;
+        const name = (p.name || "").trim();
+        const key = (email || id).toLowerCase();
+        const nameLower = name.toLowerCase();
+
+        // Strictly exclude legacy fabricated mock personas & fake vantorx domain emails
+        const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") ||
+                       nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe") || nameLower.includes("buddy") ||
+                       (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com");
+
+        if (key && !isMock) {
+          const ex = mergedMap.get(key) || (email ? mergedMap.get(email) : null);
+          const repObj = {
+            id: id || `rep_${Date.now().toString(36)}`,
+            name: name || (ex && ex.name) || "Sales Rep",
+            email: rawEmail || (ex && ex.email) || "", // Retain exact personal email they signed up with
+            role: p.role || (ex && ex.role) || "Outbound Closer",
+            avatar: p.avatar || (ex && ex.avatar) || "⚔️",
+            createdAt: entry.created_at || p.timestamp || (ex && ex.createdAt) || new Date().toISOString(),
+            lastActive: p.timestamp || entry.created_at || (ex && ex.lastActive) || new Date().toISOString(),
+            lastAction: p.milestoneDetail || (ex && ex.lastAction) || "Active in Closer Training",
+            course: { ...(ex?.course || {}), ...(p.course || {}) },
+            game: { ...(ex?.game || {}), ...(p.game || {}) }
+          };
+          mergedMap.set(key, repObj);
+          if (email) mergedMap.set(email, repObj);
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("[Supabase Rep Roster Query Notice]", err.message);
+  }
+
+  // 2. Read local and candidate files
   for (const fp of ROSTER_FILES) {
     if (fs.existsSync(fp)) {
       try {
@@ -24,17 +67,30 @@ function getRoster() {
         if (Array.isArray(parsed) && parsed.length > 0) {
           for (const rep of parsed) {
             if (rep && (rep.id || rep.email)) {
-              const key = (rep.id || (rep.email ? rep.email.toLowerCase() : "")).toLowerCase();
-              if (!mergedMap.has(key)) {
-                mergedMap.set(key, rep);
-              } else {
-                const ex = mergedMap.get(key);
-                mergedMap.set(key, {
-                  ...ex,
-                  ...rep,
-                  course: { ...(ex.course || {}), ...(rep.course || {}) },
-                  game: { ...(ex.game || {}), ...(rep.game || {}) }
-                });
+              const rawEmail = (rep.email || "").trim();
+              const email = rawEmail.toLowerCase();
+              const key = (email || rep.id).toLowerCase();
+              const nameLower = (rep.name || "").toLowerCase();
+              // Filter out fabricated mock personas
+              const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") ||
+                             nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe") || nameLower.includes("buddy") ||
+                             (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com");
+
+              if (key && !isMock) {
+                if (!mergedMap.has(key) && (!email || !mergedMap.has(email))) {
+                  mergedMap.set(key, rep);
+                  if (email) mergedMap.set(email, rep);
+                } else {
+                  const ex = mergedMap.get(key) || (email ? mergedMap.get(email) : null);
+                  if (ex) {
+                    if (rawEmail) ex.email = rawEmail; // Preserve the actual signup email
+                    if (rep.name) ex.name = rep.name;
+                    ex.course = { ...(ex.course || {}), ...(rep.course || {}) };
+                    ex.game = { ...(ex.game || {}), ...(rep.game || {}) };
+                    if (rep.lastAction) ex.lastAction = rep.lastAction;
+                    if (rep.lastActive) ex.lastActive = rep.lastActive;
+                  }
+                }
               }
             }
           }
@@ -42,11 +98,13 @@ function getRoster() {
       } catch (_) {}
     }
   }
-  if (mergedMap.size > 0) {
-    return Array.from(mergedMap.values());
-  }
-  return [
-    {
+
+  const uniqueReps = Array.from(new Set(mergedMap.values()));
+
+  // Ensure Founder Luke profile is present
+  const hasLuke = uniqueReps.some(r => r.id === "founder_luke" || (r.email && r.email.toLowerCase() === "luke@vantorxsolutions.com"));
+  if (!hasLuke) {
+    uniqueReps.unshift({
       id: "founder_luke",
       name: "Luke Hamilton",
       email: "luke@vantorxsolutions.com",
@@ -54,13 +112,13 @@ function getRoster() {
       avatar: "👑",
       createdAt: "2026-10-20T12:00:00.000Z",
       lastActive: new Date().toISOString(),
-      lastAction: "Live Combat Telemetry Monitoring",
+      lastAction: "Founder Cockpit Active · System Telemetry Monitoring",
       course: {
         completedUnits: ["1-1", "1-2", "1-3", "1-4", "1-5", "2-1", "2-2", "2-3", "2-4", "2-5", "3-1", "3-2", "3-3", "3-4", "3-5"],
         daysPassed: ["Day 1: Psychology & Objections", "Day 2: Leak Math & Pricing", "Day 3: Emergency Live Closes"],
         percent: 100,
         level: 5,
-        xp: 1500,
+        xp: 1850,
         status: "🏆 Level 5 Certified"
       },
       game: {
@@ -74,8 +132,10 @@ function getRoster() {
         bestGrade: "S",
         gold: 1420
       }
-    }
-  ];
+    });
+  }
+
+  return uniqueReps;
 }
 
 function saveRoster(roster) {
@@ -106,7 +166,16 @@ async function handleRepSync(req, res) {
     return res.status(400).json({ ok: false, error: "Rep name is required." });
   }
 
-  const roster = getRoster();
+  const keyCheck = (name + " " + email + " " + repId).toLowerCase();
+  if (keyCheck.includes("marcus") || keyCheck.includes("jake") || keyCheck.includes("tyler") || keyCheck.includes("probe") || keyCheck.includes("buddy")) {
+    return res.status(200).json({ ok: true, ignored: true, message: "Legacy mock persona ignored." });
+  }
+
+  if (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com") {
+    return res.status(400).json({ ok: false, error: "Please use your actual personal email address to sign in." });
+  }
+
+  const roster = await getRoster();
   let existing = roster.find(r => r.id === repId || (email && r.email && r.email.toLowerCase() === email));
 
   const nowIso = new Date().toISOString();
@@ -114,7 +183,7 @@ async function handleRepSync(req, res) {
     existing = {
       id: repId,
       name,
-      email: email || `${name.toLowerCase().replace(/[^a-z0-9]/g, "")}@vantorxsolutions.com`,
+      email: email || "", // Preserve the exact email signed up with; never fabricate fake domains
       role,
       avatar: repData.avatar || "⚔️",
       createdAt: nowIso,
@@ -193,7 +262,12 @@ async function handleRepSync(req, res) {
 }
 
 async function handleRepDigest(req, res) {
-  const roster = getRoster();
+  const allReps = await getRoster();
+  // Filter out any mock personas so only real signups appear
+  const roster = allReps.filter(r => {
+    const key = (r.id || r.email || "").toLowerCase();
+    return !key.includes("marcus") && !key.includes("jake") && !key.includes("tyler") && !key.includes("probe") && !key.includes("buddy2");
+  });
   const now = Date.now();
   const oneDayMs = 24 * 60 * 60 * 1000;
 
@@ -352,8 +426,12 @@ module.exports = async function handler(req, res) {
 
   // 1. Rep Roster Ingestion & Progress Sync API
   if (action === "rep-roster") {
-    const roster = getRoster();
-    return res.status(200).json({ ok: true, roster });
+    const allReps = await getRoster();
+    const cleanRoster = allReps.filter(r => {
+      const key = (r.id || r.email || "").toLowerCase();
+      return !key.includes("marcus") && !key.includes("jake") && !key.includes("tyler") && !key.includes("probe") && !key.includes("buddy2");
+    });
+    return res.status(200).json({ ok: true, roster: cleanRoster });
   }
 
   if (action === "rep-sync") {

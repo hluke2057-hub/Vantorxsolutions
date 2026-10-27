@@ -1912,8 +1912,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       const activeRepId = (explicitProfile && explicitProfile.id) || localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
       const userProfilesRaw = localStorage.getItem('vantorx_user_profiles_v2');
       let repName = (explicitProfile && explicitProfile.name) || player.name || 'Luke the Closer';
-      let repEmail = (explicitProfile && explicitProfile.email) || 'luke@vantorxsolutions.com';
-      let repRole = (explicitProfile && explicitProfile.role) || 'Founder & Closer';
+      let repEmail = (explicitProfile && explicitProfile.email) || (activeRepId === 'luke' ? 'luke@vantorxsolutions.com' : '');
+      let repRole = (explicitProfile && explicitProfile.role) || (activeRepId === 'luke' ? 'Founder & Closer' : 'Outbound Closer');
       let courseData = (explicitProfile && explicitProfile.course) || { percent: 100, status: '🏆 Level 5 Certified' };
 
       if (!explicitProfile && userProfilesRaw) {
@@ -1922,7 +1922,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
           if (profiles[activeRepId]) {
             const p = profiles[activeRepId];
             repName = p.name;
-            repEmail = p.email || `${p.name.toLowerCase().replace(/[^a-z0-9]/g, '')}@vantorxsolutions.com`;
+            repEmail = p.email || (activeRepId === 'luke' ? 'luke@vantorxsolutions.com' : '');
             repRole = p.role;
             courseData = {
               completedUnits: p.completedUnits || [],
@@ -1989,9 +1989,36 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
           try {
             profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
           } catch(e){}
+
+          // Strictly purge legacy mock profiles from local cache
+          const mockKeys = ['buddy', 'rep_buddy_2', 'rep_marcus', 'rep_jake', 'rep_tyler', 'rep_mvpib4wi'];
+          Object.keys(profiles).forEach(k => {
+            const kl = k.toLowerCase();
+            const em = (profiles[k]?.email || '').toLowerCase();
+            const nm = (profiles[k]?.name || '').toLowerCase();
+            if (
+              mockKeys.includes(kl) ||
+              kl.includes('marcus') || kl.includes('jake') || kl.includes('tyler') || kl.includes('probe') || kl.includes('buddy') ||
+              nm.includes('marcus') || nm.includes('jake') || nm.includes('tyler') || nm.includes('probe') || nm.includes('buddy') ||
+              (em.endsWith('@vantorxsolutions.com') && kl !== 'luke' && kl !== 'founder_luke')
+            ) {
+              delete profiles[k];
+            }
+          });
+
           let updated = false;
           data.roster.forEach(r => {
             const uid = r.id;
+            const em = (r.email || '').toLowerCase();
+            const nm = (r.name || '').toLowerCase();
+            if (
+              mockKeys.includes(uid.toLowerCase()) ||
+              uid.toLowerCase().includes('marcus') || uid.toLowerCase().includes('jake') || uid.toLowerCase().includes('tyler') || uid.toLowerCase().includes('probe') || uid.toLowerCase().includes('buddy') ||
+              nm.includes('marcus') || nm.includes('jake') || nm.includes('tyler') || nm.includes('probe') || nm.includes('buddy') ||
+              (em.endsWith('@vantorxsolutions.com') && uid !== 'luke' && uid !== 'founder_luke')
+            ) {
+              return;
+            }
             if (!profiles[uid]) {
               profiles[uid] = {
                 id: uid,
@@ -2006,18 +2033,26 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
                 lastAction: r.lastAction || 'Active'
               };
               updated = true;
+            } else if (r.email && profiles[uid].email !== r.email) {
+              profiles[uid].email = r.email;
+              updated = true;
             }
           });
+
           const serverIds = new Set(data.roster.map(r => r.id));
           Object.values(profiles).forEach(p => {
-            if (p && p.name && p.email && !serverIds.has(p.id) && p.id !== 'luke' && p.id !== 'founder_luke') {
+            if (
+              p && p.name && p.email &&
+              !serverIds.has(p.id) &&
+              p.id !== 'luke' && p.id !== 'founder_luke' &&
+              !p.id.includes('marcus') && !p.id.includes('jake') && !p.id.includes('tyler') && !p.id.includes('probe') && !p.id.includes('buddy')
+            ) {
               syncQuestToCloud('account_created', `Restoring closer profile to cloud roster: ${p.name} (${p.email})`, p);
             }
           });
-          if (updated) {
-            localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
-            renderQuestRepList();
-          }
+
+          localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
+          renderQuestRepList();
         }
       }
     } catch(e) {}
@@ -2188,16 +2223,16 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const userParam = urlParams.get('user');
-      if (userParam && (userParam.toLowerCase() === 'luke' || userParam.toLowerCase() === 'founder')) {
+      const founderParam = urlParams.get('founder');
+      if ((userParam && (userParam.toLowerCase() === 'luke' || userParam.toLowerCase() === 'founder')) || founderParam === '1') {
         localStorage.setItem('vantorx_active_user_id_v2', 'luke');
       }
     } catch(e){}
 
     let activeRepId = localStorage.getItem('vantorx_active_user_id_v2');
     if (!activeRepId) {
-      // Default to founder Luke for seamless immediate boss play
-      localStorage.setItem('vantorx_active_user_id_v2', 'luke');
-      activeRepId = 'luke';
+      window.openQuestSignInGate();
+      return;
     }
     let profiles = {};
     try {
