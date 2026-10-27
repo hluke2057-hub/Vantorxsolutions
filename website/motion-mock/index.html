@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VantorX Solutions — 24/7 AI Receptionist, Contractor Websites &amp; AEO (Motion Prototype)</title>
+<meta name="description" content="Done-for-you business systems for trade contractors and local businesses. 24/7 AI Phone Receptionist (Ava), custom high-converting websites, 90-second speed-to-lead SMS, and Answer Engine Optimization (AEO). Zero software to configure.">
+<meta name="keywords" content="AI receptionist for contractors, trade business websites, AEO engine, answer engine optimization, ChatGPT business search, missed-call text-back, roofing contractor websites, HVAC AI answering service, plumbing AI receptionist, local contractor marketing, Boca Raton web design, Palm Beach AI systems">
+<meta name="author" content="VantorX Solutions">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://www.vantorxsolutions.com/">
+
+<!-- OpenGraph / Facebook / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.vantorxsolutions.com/">
+<meta property="og:site_name" content="VantorX Solutions">
+<meta property="og:title" content="VantorX Solutions — Websites, 24/7 AI Receptionist &amp; Lead Systems">
+<meta property="og:description" content="We build your website. We answer your phones. We run your follow-up. Done-for-you digital operations for trade contractors.">
+<meta property="og:locale" content="en_US">
+
+<meta name="theme-color" content="#0B0F16">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0F16'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23F59E0B'%3EV%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   VANTORX BASE STYLING (MATCHING PRODUCTION EXACTLY)
+   ========================================================================== */
+:root {
+  --bg: #0B0F16;
+  --bg2: #10151F;
+  --bg3: #141B27;
+  --ink: #ECEEF2;
+  --dim: #9CA6B4;
+  --faint: #6B7484;
+  --accent: #F59E0B;
+  --accent2: #FBBF24;
+  --soft: rgba(245,158,11,.16);
+  --line: rgba(255,255,255,.08);
+  --line2: rgba(255,255,255,.16);
+  --ok: #5FD97A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { font-family: 'Space Grotesk', Inter, sans-serif; line-height: 1.12; letter-spacing: -.02em; }
+a { color: inherit; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 2; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--accent); color: #111; padding: 8px 14px; border-radius: 8px; z-index: 99; }
+.skip:focus { left: 8px; }
+:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 6px; }
+
+header { position: sticky; top: 0; z-index: 50; background: rgba(11,15,22,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.nav { display: flex; align-items: center; gap: 22px; height: 64px; }
+.logo { font: 700 21px 'Space Grotesk'; text-decoration: none; letter-spacing: -.02em; }
+.logo b { color: var(--accent); }
+.nav nav { display: flex; gap: 22px; margin-left: auto; align-items: center; }
+.nav nav a { color: var(--dim); text-decoration: none; font-size: 14.5px; font-weight: 500; transition: color .15s; }
+.nav nav a:hover { color: var(--ink); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 0; border-radius: 11px; padding: 13px 22px; font: 600 15px Inter;
+  cursor: pointer; text-decoration: none; transition: transform .2s cubic-bezier(0.16, 1, 0.3, 1), background .2s, box-shadow .2s;
+}
+.btn-gold {
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 52%, #D97706 100%);
+  color: #07090E; font-weight: 700; border: 1px solid rgba(255,255,255,.25);
+  box-shadow: 0 4px 18px rgba(245,158,11,.38); letter-spacing: -.01em;
+  position: relative; overflow: hidden;
+}
+.btn-gold:hover {
+  background: linear-gradient(135deg, #FDE68A 0%, #FBBF24 52%, #F59E0B 100%);
+  box-shadow: 0 6px 24px rgba(245,158,11,.55); transform: translateY(-2px); color: #000000;
+}
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line2); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+.btn-sm { padding: 9px 18px; font-size: 14px; font-weight: 700; }
+#menuBtn { display: none; margin-left: auto; background: none; border: 1px solid var(--line2); color: var(--ink); border-radius: 9px; padding: 8px 12px; font-size: 15px; }
+
+section { padding: 84px 0; position: relative; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--accent2); font: 600 12.5px 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+.eyebrow:before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+h2 { font-size: clamp(28px, 4vw, 42px); margin-bottom: 14px; }
+.lead { color: var(--dim); font-size: 18px; max-width: 680px; }
+
+/* Hero */
+.hero { padding: 76px 0 56px; }
+.hero h1 { font-size: clamp(36px, 6vw, 64px); max-width: 900px; }
+.hero h1 em { font-style: normal; color: var(--accent2); position: relative; }
+.hero .lead { margin: 22px 0 30px; font-size: 19px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+.chip { border: 1px solid var(--line2); border-radius: 999px; padding: 7px 14px; font-size: 13.5px; color: var(--dim); background: var(--bg2); }
+.chip b { color: var(--ink); font-weight: 600; }
+
+/* Services */
+.grid { display: grid; gap: 18px; }
+.services { grid-template-columns: repeat(6, 1fr); margin-top: 38px; }
+.card {
+  background: var(--bg2); border: 1px solid var(--line); border-radius: 18px;
+  padding: 26px; transition: border-color .25s, transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s;
+  position: relative;
+}
+.card:hover { border-color: rgba(245,158,11,.4); }
+.card .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--soft); display: grid; place-items: center; font-size: 22px; margin-bottom: 16px; }
+.card h3 { font-size: 21px; margin-bottom: 8px; }
+.card p { color: var(--dim); font-size: 15px; }
+.card ul { margin: 14px 0 0 18px; color: var(--dim); font-size: 14.5px; }
+.card li { margin: 4px 0; }
+.s-web {
+  grid-column: span 6; display: grid; grid-template-columns: 1.15fr 1fr; gap: 34px; align-items: center;
+  background: linear-gradient(135deg, #171d2b, #10151F); border-color: rgba(245,158,11,.38); padding: 36px;
+}
+.s-web h3 { font-size: clamp(26px, 3.4vw, 34px); }
+.tag {
+  display: inline-block; font: 600 11.5px 'JetBrains Mono', monospace; letter-spacing: .1em;
+  text-transform: uppercase; color: #14110a; background: var(--accent); padding: 4px 10px; border-radius: 6px; margin-bottom: 14px;
+}
+.s-2 { grid-column: span 3; }
+.s-3 { grid-column: span 2; }
+.browser { border: 1px solid var(--line2); border-radius: 14px; background: var(--bg); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+.browser .bar { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--bg3); }
+.browser .bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--faint); opacity: .6; }
+.browser .pg { padding: 18px; display: grid; gap: 10px; }
+.browser .ln { height: 10px; border-radius: 5px; background: var(--line2); }
+.browser .ln.g { background: var(--accent); width: 46%; }
+.browser .ln.s { width: 70%; }
+.browser .ln.xs { width: 38%; }
+.browser .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+.browser .row div { height: 54px; border-radius: 9px; background: var(--bg3); border: 1px solid var(--line); }
+.browser .formrow { display: flex; gap: 8px; }
+.browser .formrow div { height: 28px; border-radius: 7px; background: var(--bg3); border: 1px solid var(--line); flex: 1; }
+.browser .formrow div.b { flex: 0 0 74px; background: var(--accent); border: 0; }
+
+/* Steps */
+.steps { grid-template-columns: repeat(5, 1fr); margin-top: 34px; counter-reset: s; }
+.step { background: var(--bg2); border: 1px solid var(--line); border-radius: 16px; padding: 22px; counter-increment: s; }
+.step:before { content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--soft); color: var(--accent2); font: 700 15px 'Space Grotesk'; margin-bottom: 12px; }
+.step h3 { font-size: 17px; margin-bottom: 6px; }
+.step p { color: var(--dim); font-size: 14.5px; }
+
+/* Connected */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
+.flow { background: var(--bg2); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: grid; gap: 12px; position: relative; }
+.node { display: flex; align-items: center; gap: 12px; background: var(--bg3); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 14.5px; position: relative; }
+.node b { color: var(--accent2); }
+.node .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex: none; }
+.hub { background: var(--soft); border-color: rgba(245,158,11,.4); text-align: center; justify-content: center; font-weight: 600; }
+.checks { list-style: none; margin-top: 18px; display: grid; gap: 10px; }
+.checks li { display: flex; gap: 10px; color: var(--dim); }
+.checks li:before { content: '✓'; color: var(--accent2); font-weight: 700; }
+
+/* Industries / Pricing / FAQ */
+.ind { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.ind span { padding: 9px 16px; border: 1px solid var(--line2); border-radius: 999px; background: var(--bg2); font-size: 14.5px; color: var(--dim); }
+.price { grid-template-columns: repeat(3, 1fr); margin-top: 34px; }
+.price .card.hl { border-color: rgba(245,158,11,.45); }
+.amt { font: 700 34px 'Space Grotesk'; margin: 8px 0 2px; }
+.amt small { font: 500 14px Inter; color: var(--dim); }
+details { background: var(--bg2); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-top: 12px; }
+summary { cursor: pointer; font: 600 16.5px 'Space Grotesk'; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary:after { content: '+'; float: right; color: var(--accent2); }
+details[open] summary:after { content: '–'; }
+details p { color: var(--dim); margin-top: 10px; font-size: 15.5px; }
+
+/* Form */
+.formcard { background: var(--bg2); border: 1px solid var(--line2); border-radius: 20px; padding: 30px; }
+.fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.full { grid-column: 1/-1; }
+label { display: block; font-size: 13.5px; color: var(--dim); margin-bottom: 6px; font-weight: 500; }
+input[type=text], input[type=email], input[type=tel], textarea, select {
+  width: 100%; background: var(--bg); color: var(--ink); border: 1px solid var(--line2); border-radius: 10px; padding: 12px 14px; font: 15px Inter;
+}
+textarea { min-height: 100px; resize: vertical; }
+.opts { display: flex; flex-wrap: wrap; gap: 10px; }
+.opts label { display: flex; gap: 8px; align-items: center; margin: 0; padding: 9px 14px; border: 1px solid var(--line2); border-radius: 999px; color: var(--ink); cursor: pointer; font-size: 14px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+#fmsg { margin-top: 14px; font-size: 15px; }
+footer { border-top: 1px solid var(--line); padding: 38px 0; color: var(--faint); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; }
+
+@media(max-width:980px){
+  .services { grid-template-columns: repeat(2, 1fr); }
+  .s-web, .s-2, .s-3 { grid-column: span 2; }
+  .s-web { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .two { grid-template-columns: 1fr; }
+  .price { grid-template-columns: 1fr; }
+}
+@media(max-width:720px){
+  .nav nav { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg2); border-bottom: 1px solid var(--line); flex-direction: column; padding: 16px 22px; gap: 14px; align-items: flex-start; }
+  .nav nav.open { display: flex; }
+  #menuBtn { display: block; }
+  .services, .steps, .fgrid { grid-template-columns: 1fr; }
+  .s-web, .s-2, .s-3 { grid-column: auto; }
+  section { padding: 60px 0; }
+  .hero { padding-top: 44px; }
+}
+
+.mobile-bar { display: none; }
+@media(max-width:768px){
+  body { padding-bottom: 76px; }
+  .mobile-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    padding: 10px 16px; background: rgba(11,15,22,.94);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 -6px 24px rgba(0,0,0,.5);
+  }
+  .m-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 12px 14px; border-radius: 10px; font: 700 14px Inter, sans-serif;
+    text-decoration: none; text-align: center; min-height: 44px;
+  }
+  .m-btn-call { background: rgba(255,255,255,.06); color: #ECEEF2; border: 1px solid rgba(255,255,255,.2); }
+  .m-btn-demo { background: linear-gradient(135deg,#FBBF24 0%,#F59E0B 100%); color: #07090E; font-weight: 700; border: 1px solid rgba(255,255,255,.25); box-shadow: 0 2px 12px rgba(245,158,11,.35); }
+}
+
+/* ==========================================================================
+   CLEAN & TASTEFUL B2B MOTION ARCHITECTURE (MOCK LAYER)
+   ========================================================================== */
+
+/* Top Interactive Controller Banner */
+.motion-hud {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(16, 21, 31, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 8px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--dim);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+.motion-hud-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.motion-hud-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 600;
+}
+.motion-hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(245, 158, 11, 0.14);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: var(--accent2);
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+}
+.motion-hud-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hud-toggle-btn {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  color: #07090E;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 11.5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform .15s, box-shadow .15s;
+}
+.hud-toggle-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4);
+}
+.hud-toggle-btn.is-off {
+  background: #1e2638;
+  color: var(--dim);
+  border: 1px solid var(--line2);
+}
+
+/* 1. Subtle Ambient Fluid Mesh (Hardware-Accelerated) */
+.ambient-mesh-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0.85;
+}
+.mesh-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.085;
+  will-change: transform;
+}
+.mesh-orb-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, #F59E0B 0%, rgba(245, 158, 11, 0) 70%);
+  top: -120px;
+  left: -150px;
+  animation: orbDrift1 22s ease-in-out infinite alternate;
+}
+.mesh-orb-2 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, #38BDF8 0%, rgba(56, 189, 248, 0) 70%);
+  bottom: 10%;
+  right: -200px;
+  animation: orbDrift2 26s ease-in-out infinite alternate;
+}
+.mesh-orb-3 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #FBBF24 0%, rgba(251, 191, 36, 0) 70%);
+  top: 45%;
+  left: 20%;
+  animation: orbDrift3 28s ease-in-out infinite alternate;
+}
+
+@keyframes orbDrift1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(80px, 60px, 0) scale(1.08); }
+  100% { transform: translate3d(40px, 120px, 0) scale(0.96); }
+}
+@keyframes orbDrift2 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-100px, -80px, 0) scale(1.12); }
+  100% { transform: translate3d(-50px, -40px, 0) scale(0.92); }
+}
+@keyframes orbDrift3 {
+  0% { transform: translate3d(0, 0, 0) scale(0.9); }
+  100% { transform: translate3d(60px, -60px, 0) scale(1.1); }
+}
+
+/* 2. Scroll Reveal Effects (Smooth, zero jank) */
+.motion-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.motion-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. Refined 3D Micro-Perspective Card Tilt */
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+}
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245, 158, 11, 0.08), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+.tilt-card:hover .tilt-glare {
+  opacity: 1;
+}
+
+/* 4. Live Ava 24/7 Voice AI Waveform Indicator */
+.ava-voice-wave {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+  padding: 0 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.ava-voice-wave span {
+  width: 2.5px;
+  background: var(--accent2);
+  border-radius: 2px;
+  display: inline-block;
+  animation: voicePulse 1.2s ease-in-out infinite alternate;
+}
+.ava-voice-wave span:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.ava-voice-wave span:nth-child(2) { height: 14px; animation-delay: 0.3s; }
+.ava-voice-wave span:nth-child(3) { height: 10px; animation-delay: 0.15s; }
+.ava-voice-wave span:nth-child(4) { height: 16px; animation-delay: 0.4s; }
+.ava-voice-wave span:nth-child(5) { height: 7px; animation-delay: 0.25s; }
+
+@keyframes voicePulse {
+  0% { transform: scaleY(0.4); opacity: 0.6; }
+  100% { transform: scaleY(1.1); opacity: 1; }
+}
+
+/* 5. Subtle Kinetic Flow Node Pulse */
+.node-active-pulse {
+  position: relative;
+}
+.node-active-pulse::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 3px;
+  opacity: 0.8;
+  box-shadow: 0 0 10px var(--accent);
+  animation: nodeBorderScan 3.5s ease-in-out infinite;
+}
+@keyframes nodeBorderScan {
+  0% { opacity: 0.3; transform: scaleY(0.5); }
+  50% { opacity: 1; transform: scaleY(1); }
+  100% { opacity: 0.3; transform: scaleY(0.5); }
+}
+
+/* 6. Gold Button Subtle Shimmer Sheen */
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  animation: btnSheenSweep 7s ease-in-out infinite;
+}
+@keyframes btnSheenSweep {
+  0%, 75% { transform: translateX(0) rotate(25deg); opacity: 0; }
+  80% { opacity: 1; }
+  100% { transform: translateX(450%) rotate(25deg); opacity: 0; }
+}
+
+/* 7. Subtle Live Radar Status Dot */
+.radar-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #5FD97A;
+  border-radius: 50%;
+  position: relative;
+}
+.radar-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid #5FD97A;
+  animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes radarPing {
+  0% { transform: scale(1); opacity: 0.9; }
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ==========================================================================
+   MOTION-DISABLED MODE (EXACT STATIC REVERT WHEN TOGGLED OFF)
+   ========================================================================== */
+body.motion-disabled .ambient-mesh-canvas,
+body.motion-disabled .mesh-orb {
+  display: none !important;
+  animation: none !important;
+}
+body.motion-disabled .motion-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+body.motion-disabled .tilt-card {
+  transform: none !important;
+  transition: none !important;
+}
+body.motion-disabled .tilt-glare {
+  display: none !important;
+}
+body.motion-disabled .ava-voice-wave span {
+  animation: none !important;
+  height: 8px !important;
+  opacity: 0.7 !important;
+}
+body.motion-disabled .btn-gold::before {
+  display: none !important;
+}
+body.motion-disabled .radar-dot::after {
+  display: none !important;
+}
+body.motion-disabled .node-active-pulse::after {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-mesh-canvas, .mesh-orb { display: none !important; }
+  .motion-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .tilt-card { transform: none !important; }
+  .btn-gold::before { display: none !important; }
+  .ava-voice-wave span { animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient Breathing Fluid Mesh Layer (Zero-Jank GPU Drift) -->
+<div class="ambient-mesh-canvas" aria-hidden="true">
+  <div class="mesh-orb mesh-orb-1"></div>
+  <div class="mesh-orb mesh-orb-2"></div>
+  <div class="mesh-orb mesh-orb-3"></div>
+</div>
+
+<!-- Interactive Motion HUD Controller (For Testing & Comparing) -->
+<div class="motion-hud">
+  <div class="motion-hud-wrap">
+    <div class="motion-hud-title">
+      <span class="motion-hud-pill">✨ MOCK REPLICA</span>
+      <span>VantorX Motion Architecture (Clean B2B)</span>
+      <span style="font-size:11px;color:var(--faint);margin-left:4px">| Production website is 100% untouched</span>
+    </div>
+    <div class="motion-hud-actions">
+      <span style="font-size:11px;color:var(--dim)">Motion State:</span>
+      <button class="hud-toggle-btn" id="motionToggleBtn">
+        <span class="radar-dot" style="width:6px;height:6px"></span>
+        <span id="motionToggleText">Motion: ACTIVE</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<a class="skip" href="#main">Skip to content</a>
+<header><div class="wrap nav">
+  <a class="logo" href="/">Vantor<b>X</b></a>
+  <button id="menuBtn" aria-label="Menu" aria-expanded="false">Menu</button>
+  <nav id="nav" aria-label="Main">
+    <a href="#services">Services</a><a href="#website-design">Website Design</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+    <a class="btn btn-ghost btn-sm" href="tel:5618138602" style="border-color:var(--accent);color:var(--accent2)">
+      📞 (561) 813-8602
+      <span class="ava-voice-wave" title="Live Voice AI Ready"><span></span><span></span><span></span><span></span></span>
+    </a>
+    <a class="btn btn-ghost btn-sm" href="/client-hub/">Client Portal</a>
+    <a class="btn btn-gold btn-sm" href="#contact">Book a Demo</a>
+  </nav>
+</div></header>
+
+<main id="main">
+<!-- Hero Section -->
+<section class="hero motion-reveal"><div class="wrap">
+  <div class="eyebrow">
+    <span class="radar-dot"></span>
+    Done-for-you · Built and run by VantorX
+  </div>
+  <h1>We build your <em>website</em>. We answer your <em>phones</em>. We run your <em>follow-up</em>.</h1>
+  <p class="lead">VantorX designs and builds professional websites for local businesses — and can also run the operations behind them: an AI receptionist that answers every call, lead management, and a client dashboard. You don't set anything up. We do it all.</p>
+  <div class="cta">
+    <a class="btn btn-gold" href="tel:5618138602">
+      📞 Call Ava Live Demo: (561) 813-8602
+      <span class="ava-voice-wave"><span></span><span></span><span></span><span></span><span></span></span>
+    </a>
+    <a class="btn btn-ghost" href="#pricing">View Pricing (From $397/mo)</a>
+    <a class="btn btn-ghost" href="#contact">Request Free Audit</a>
+  </div>
+  <div class="chips">
+    <span class="chip"><b>Website Design</b> &amp; Development</span>
+    <span class="chip"><b>AI</b> Receptionist</span>
+    <span class="chip"><b>AEO Engine™</b> AI Search</span>
+    <span class="chip"><b>LeadFlow</b> lead management</span>
+    <span class="chip"><b>Client Hub</b></span>
+    <span class="chip">Business <b>Automation</b></span>
+  </div>
+</div></section>
+
+<!-- Services Section -->
+<section id="services" class="motion-reveal"><div class="wrap">
+  <div class="eyebrow">What we sell</div>
+  <h2>Six services. One team. Everything done for you.</h2>
+  <p class="lead">Start with a website, rank on ChatGPT, add an AI phone system, or let us run the whole thing. Every service is connected to the same business record, so nothing lives in a silo.</p>
+  
+  <div class="grid services">
+    <!-- Core Website Card -->
+    <article class="card s-web tilt-card" id="website-design">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <span class="tag">Core service</span>
+        <h3>Professional Website Design &amp; Development</h3>
+        <p>We design and build your website from scratch — branding, layout, copy structure, mobile experience — and put your real business on it: services, pricing, photos, hours, contact details. Then we host it, keep it updated, and connect it to your phones and leads.</p>
+        <ul>
+          <li>Custom design and branding that fits your business</li>
+          <li>Your services, pricing, images, hours and contact info added for you</li>
+          <li>Mobile-friendly on every screen size</li>
+          <li>Contact and booking forms that feed straight into LeadFlow</li>
+          <li>Connected to your VantorX business record</li>
+          <li>We manage and update it for you, and deploy it live</li>
+        </ul>
+        <div class="cta" style="margin-top:22px"><a class="btn btn-gold btn-sm" href="#contact">Get a website quote</a></div>
+      </div>
+      <div class="browser" aria-hidden="true" style="position:relative;z-index:2"><div class="bar"><i></i><i></i><i></i></div><div class="pg">
+        <div class="ln g"></div><div class="ln"></div><div class="ln s"></div>
+        <div class="row"><div></div><div></div><div></div></div>
+        <div class="ln xs"></div><div class="formrow"><div></div><div class="b"></div></div>
+      </div></div>
+    </article>
+
+    <!-- Ava Card -->
+    <article class="card s-3 tilt-card">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="ic">☎️</div>
+        <h3>
+          AI Receptionist / Ava
+          <span class="ava-voice-wave"><span></span><span></span><span></span><span></span></span>
+        </h3>
+        <p>Answers every call 24/7 in 1 ring, schedules appointments, answers questions, and alerts you to priority jobs. Call our live demo line right now to test her:</p>
+        <div style="margin-top:14px"><a class="btn btn-gold btn-sm" href="tel:5618138602">📞 Call (561) 813-8602</a></div>
+      </div>
+    </article>
+
+    <!-- AEO Engine Card -->
+    <article class="card s-3 tilt-card">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="ic">🧠</div>
+        <h3>AEO Engine™ — AI Search</h3>
+        <p>Engineered <code>llms.txt</code> standard and Schema.org knowledge graph so ChatGPT, Perplexity, Claude, and Gemini recommend your business as the #1 choice.</p>
+        <div style="margin-top:14px"><a class="btn btn-gold btn-sm" href="#contact">Request AEO Audit →</a></div>
+      </div>
+    </article>
+
+    <!-- LeadFlow Card -->
+    <article class="card s-3 tilt-card">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="ic">📈</div>
+        <h3>LeadFlow CRM &amp; Pipeline</h3>
+        <p>Every inquiry lands in a live 5-stage Kanban CRM with 2-way SMS chat, missed-call text-back, and automatic speed follow-up.</p>
+        <div style="margin-top:14px"><a class="btn btn-ghost btn-sm" href="#contact" style="border-color:rgba(245,158,11,0.4);color:var(--accent2)">Request CRM Demo →</a></div>
+      </div>
+    </article>
+
+    <!-- Client Hub -->
+    <article class="card s-3 tilt-card">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="ic">🏠</div>
+        <h3>Client Hub</h3>
+        <p>Your private dashboard: calls, transcripts, appointments, customers and leads in one place. We set it up and keep it running.</p>
+      </div>
+    </article>
+
+    <!-- Automation -->
+    <article class="card s-3 tilt-card">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="ic">⚙️</div>
+        <h3>Business Automation</h3>
+        <p>Reminders, confirmations, notifications and the day-to-day workflows that eat your time — designed and run for your business.</p>
+      </div>
+    </article>
+
+    <!-- Connected Ecosystem -->
+    <article class="card s-3 tilt-card">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="ic">🔗</div>
+        <h3>All of it connected</h3>
+        <p>Your website, phone line, AI search knowledge graph, and dashboard share one business record — everything stays in sync.</p>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+<!-- How It Works Section -->
+<section id="how" class="motion-reveal" style="background:var(--bg2);border-block:1px solid var(--line)"><div class="wrap">
+  <div class="eyebrow">How it works</div>
+  <h2>You run your business. We do the setup.</h2>
+  <p class="lead">There is no software for you to learn or configure. You tell us about your business — we build, connect and test everything, then hand you a finished system.</p>
+  <div class="grid steps">
+    <div class="step tilt-card"><div class="tilt-glare"></div><div style="position:relative;z-index:2"><h3>We talk</h3><p>A short call about your business, your customers and what you need.</p></div></div>
+    <div class="step tilt-card"><div class="tilt-glare"></div><div style="position:relative;z-index:2"><h3>We build &amp; configure</h3><p>Your website, services, pricing, hours, AI receptionist and lead follow-up — entered and set up by our team.</p></div></div>
+    <div class="step tilt-card"><div class="tilt-glare"></div><div style="position:relative;z-index:2"><h3>We connect it</h3><p>Phone, calendar, notifications and your website forms are wired together under your one business record.</p></div></div>
+    <div class="step tilt-card"><div class="tilt-glare"></div><div style="position:relative;z-index:2"><h3>We test everything</h3><p>We run readiness checks and real test calls. Nothing goes live until it passes.</p></div></div>
+    <div class="step tilt-card"><div class="tilt-glare"></div><div style="position:relative;z-index:2"><h3>You go live</h3><p>You get your finished Client Hub and a system that’s already working — and we keep it maintained.</p></div></div>
+  </div>
+</div></section>
+
+<!-- One Connected System Section -->
+<section class="motion-reveal"><div class="wrap two">
+  <div>
+    <div class="eyebrow">One connected system</div>
+    <h2>Your website is where customers find you. VantorX is what happens next.</h2>
+    <p class="lead">A visitor fills in your site’s form, or calls your number. Either way it becomes a lead, gets answered, gets followed up, and shows up in your Client Hub.</p>
+    <ul class="checks">
+      <li>Website forms flow into LeadFlow automatically</li>
+      <li>Calls are answered, booked and summarized for you</li>
+      <li>Appointments, leads and calls live in one place</li>
+      <li>We manage updates — you never touch the technical side</li>
+    </ul>
+  </div>
+  <div class="flow" aria-label="How VantorX services connect">
+    <div class="node node-active-pulse"><span class="dot"></span><span><b>Your website</b> — forms, services, hours</span></div>
+    <div class="node"><span class="dot"></span><span><b>AI receptionist</b> — answers &amp; books calls <span class="ava-voice-wave"><span></span><span></span><span></span></span></span></div>
+    <div class="node hub">✨ Your Single Business Record</div>
+    <div class="node"><span class="dot"></span><span><b>LeadFlow</b> — pipeline &amp; follow-up</span></div>
+    <div class="node"><span class="dot"></span><span><b>Client Hub</b> — calls, appointments, customers</span></div>
+  </div>
+</div></section>
+
+<!-- Industries -->
+<section class="motion-reveal" style="background:var(--bg2);border-block:1px solid var(--line)"><div class="wrap">
+  <div class="eyebrow">Who it’s for</div>
+  <h2>Built for local, appointment-driven businesses.</h2>
+  <div class="ind"><span>Barbershops</span><span>Salons &amp; spas</span><span>Dental &amp; medical practices</span><span>Auto detailing</span><span>Fitness &amp; wellness</span><span>Home services</span><span>Professional services</span></div>
+</div></section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="motion-reveal"><div class="wrap">
+  <div class="eyebrow">Pricing &amp; Packages</div>
+  <h2>Simple 3-tier pricing. Or buy any service a la carte.</h2>
+  <p class="lead">Pick the tier that fits your growth goals, or choose individual services. Zero contracts, cancel anytime, and everything is 100% done-for-you by our team.</p>
+  
+  <div class="grid price">
+    <!-- Essential Tier -->
+    <div class="card tilt-card">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="tag" style="margin-bottom:8px;background:var(--bg3);color:var(--dim);border:1px solid var(--line2)">⚡ Essential Tier</div>
+        <h3>Essential — AI Front Desk</h3>
+        <div class="amt">$397<small> / month</small></div>
+        <div style="font-size:12px;color:var(--accent2);font-weight:600;margin-top:2px;margin-bottom:8px">+ $497 One-Time Implementation &amp; Onboarding</div>
+        <p>Stop losing $8,000+ emergency jobs to unanswered phones. 24/7 human-grade bilingual voice AI answering in 1 ring with instant technician SMS dossier dispatch.</p>
+        <ul style="margin: 14px 0 20px 18px; color: var(--dim); font-size: 14px; list-style: disc;">
+          <li><b>24/7/365 Instant Voice AI Answering in 1 Ring</b> (Zero Voicemail Abandonment)</li>
+          <li><b>Bilingual English &amp; Spanish Voice Support</b> (Auto-Detects Caller Language)</li>
+          <li><b>Instant Priority SMS Caller Dossier to Techs</b> (Name, Address, Issue &amp; Urgency Score)</li>
+          <li><b>Live Calendar Booking</b> to Google, Outlook, or Direct CRM Schedule</li>
+          <li><b>Client Hub Access:</b> Real-time Call Recordings, Timestamps &amp; Full AI Audio Transcripts</li>
+          <li><b>After-Hours &amp; Weekend Emergency Shield:</b> Captures lucrative high-ticket replacement calls</li>
+          <li><b>300 Live Human-Grade Voice Minutes/Month</b> Included</li>
+          <li><b>Zero Long-Term Contracts:</b> Month-to-month, cancel anytime with 1 click</li>
+        </ul>
+        <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="Essential Tier ($397/mo)" style="width:100%;text-align:center;margin-top:14px">Get Essential ($397/mo) →</a>
+      </div>
+    </div>
+
+    <!-- Accelerate Tier -->
+    <div class="card hl tilt-card" style="border-color:rgba(245,158,11,.6);background:linear-gradient(180deg,rgba(245,158,11,.08),var(--bg2));box-shadow:0 12px 35px rgba(0,0,0,.4)">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="tag" style="margin-bottom:8px">⭐ Most Popular · Best Value</div>
+        <h3>Accelerate — Growth Engine</h3>
+        <div class="amt">$697<small> / month</small></div>
+        <div style="font-size:12px;color:var(--accent2);font-weight:600;margin-top:2px;margin-bottom:8px">+ $997 One-Time Custom Build &amp; Implementation</div>
+        <p>Our complete front-office conversion engine. Combines 24/7 bilingual voice answering, a sub-second custom website, instant repair price calculator, speed-to-lead SMS, and AI search indexing.</p>
+        <ul style="margin: 14px 0 20px 18px; color: var(--dim); font-size: 14px; list-style: disc;">
+          <li><b>Everything in Essential</b> (24/7 Bilingual Voice AI + SMS Caller Dossier + Live Calendar Booking)</li>
+          <li><b>Sub-Second Custom High-Performance Website</b> (&lt;0.8s load time, 100/100 Core Web Vitals)</li>
+          <li><b>Interactive Emergency Repair Price Calculator Widget:</b> Homeowners get instant ballpark ranges while you capture their phone number 24/7</li>
+          <li><b>AI Speed-to-Lead SMS Assistant:</b> Auto-engages web form leads in under 45 seconds to book before competitors answer</li>
+          <li><b>LeadFlow CRM Pipeline:</b> 5-Stage Visual Kanban Board, 2-Way SMS Chat &amp; Missed-Call Auto Text-Back</li>
+          <li><b>AEO Engine™ Multi-Engine Foundation:</b> llms.txt standard &amp; JSON-LD schema for ChatGPT, Perplexity &amp; Apple Intelligence (Siri)</li>
+          <li><b>Automated 5-Star Google Review Accelerator:</b> Generates 15–25 verified 5-star Google reviews/month via post-service SMS filter</li>
+          <li><b>600 Live Voice Minutes/Month</b> Included + Fully Managed Hosting &amp; Content Updates</li>
+        </ul>
+        <a class="btn btn-gold btn-sm select-tier-btn" href="#contact" data-tier="Accelerate Tier ($697/mo)" style="width:100%;text-align:center;margin-top:14px">Get Accelerate ($697/mo) →</a>
+      </div>
+    </div>
+
+    <!-- Scale Tier -->
+    <div class="card tilt-card">
+      <div class="tilt-glare"></div>
+      <div style="position:relative;z-index:2">
+        <div class="tag" style="margin-bottom:8px;background:linear-gradient(135deg,#38bdf8,#818cf8);color:#0a0f1d;font-weight:700">🚀 Enterprise Suite</div>
+        <h3>Scale — Market Dominance</h3>
+        <div class="amt">$1,297<small> / month</small></div>
+        <div style="font-size:12px;color:var(--accent2);font-weight:600;margin-top:2px;margin-bottom:8px">+ $1,997 One-Time Enterprise Setup &amp; Custom Integration</div>
+        <p>Total market domination and automation for high-volume trade contractors, multi-truck operations, and medical/service practices seeking #1 AI search authority.</p>
+        <ul style="margin: 14px 0 20px 18px; color: var(--dim); font-size: 14px; list-style: disc;">
+          <li><b>Everything in Accelerate</b> (Bilingual Voice AI + Sub-Second Website + Price Calculator + LeadFlow CRM + Review Accelerator)</li>
+          <li><b>Full Omnichannel AI Search Dominance:</b> Deep Knowledge Graph schema across ChatGPT, Perplexity Pro, Google Gemini, Anthropic Claude &amp; Apple Intelligence</li>
+          <li><b>Multi-Technician Emergency Dispatch Routing:</b> Smart triage routes high-priority emergency jobs directly to on-call technicians based on trade discipline or territory</li>
+          <li><b>Automated Past-Customer Seasonal Reactivation:</b> Automated SMS campaigns for spring AC tune-ups, fall heating inspections, and seasonal maintenance</li>
+          <li><b>Negative Review Shield &amp; Reputation Defense:</b> Intercepts dissatisfied feedback privately to management before negative public reviews are posted</li>
+          <li><b>Direct Enterprise Integrations:</b> Bi-directional webhook wiring for ServiceTitan, Housecall Pro, Jobber, and custom CRMs</li>
+          <li><b>White-Glove VIP Dedicated Account Director:</b> Same-day priority adjustments, custom prompt engineering &amp; 99.9% uptime SLA</li>
+          <li><b>1,200 Live Voice Minutes/Month</b> Included + Dedicated Performance Reporting</li>
+        </ul>
+        <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="Scale Tier ($1,297/mo)" style="width:100%;text-align:center;margin-top:14px">Get Scale ($1,297/mo) →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- A La Carte Menu -->
+  <div style="margin-top:44px;border-top:1px solid var(--line);padding-top:36px">
+    <div style="text-align:center;max-width:700px;margin:0 auto 26px">
+      <div class="eyebrow" style="margin-bottom:8px">A La Carte Menu</div>
+      <h3 style="font-size:24px;margin-bottom:8px">Need an individual service? Buy separately.</h3>
+      <p style="color:var(--dim);font-size:15px">Every VantorX service is available standalone with zero long-term contracts. Bundle into Accelerate or Scale anytime to save hundreds each month.</p>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+      <div class="card tilt-card" style="padding:22px;text-align:center">
+        <div class="tilt-glare"></div>
+        <div style="position:relative;z-index:2">
+          <div style="font-size:26px;margin-bottom:8px">☎️</div>
+          <h4 style="font-size:17px;margin-bottom:4px">24/7 AI Receptionist</h4>
+          <div class="amt" style="font-size:22px;margin:6px 0">$397<small> / mo</small></div>
+          <p style="font-size:13px;color:var(--dim)">Bilingual English/Spanish voice AI answering in 1 ring, instant technician SMS caller dossier &amp; calendar booking (+ $497 one-time onboarding).</p>
+          <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: AI Receptionist ($397/mo)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
+        </div>
+      </div>
+      <div class="card tilt-card" style="padding:22px;text-align:center">
+        <div class="tilt-glare"></div>
+        <div style="position:relative;z-index:2">
+          <div style="font-size:26px;margin-bottom:8px">💻</div>
+          <h4 style="font-size:17px;margin-bottom:4px">Custom Website Design</h4>
+          <div class="amt" style="font-size:22px;margin:6px 0">$799<small> flat build</small></div>
+          <p style="font-size:13px;color:var(--dim)">Sub-second load speed (&lt;0.8s), interactive emergency price calculator widget, mobile booking &amp; zero monthly lock-in ($799 flat upfront).</p>
+          <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: Custom Website ($799 flat)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
+        </div>
+      </div>
+      <div class="card tilt-card" style="padding:22px;text-align:center">
+        <div class="tilt-glare"></div>
+        <div style="position:relative;z-index:2">
+          <div style="font-size:26px;margin-bottom:8px">🧠</div>
+          <h4 style="font-size:17px;margin-bottom:4px">AEO Engine™ (AI Search)</h4>
+          <div class="amt" style="font-size:22px;margin:6px 0">$297<small> / mo</small></div>
+          <p style="font-size:13px;color:var(--dim)">Multi-engine knowledge graph schema for ChatGPT, Perplexity, Gemini &amp; Siri to cite your business as the #1 recommended answer (+ $297 setup).</p>
+          <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: AEO Engine ($297/mo)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
+        </div>
+      </div>
+      <div class="card tilt-card" style="padding:22px;text-align:center">
+        <div class="tilt-glare"></div>
+        <div style="position:relative;z-index:2">
+          <div style="font-size:26px;margin-bottom:8px">📈</div>
+          <h4 style="font-size:17px;margin-bottom:4px">LeadFlow CRM &amp; Pipeline</h4>
+          <div class="amt" style="font-size:22px;margin:6px 0">$197<small> / mo</small></div>
+          <p style="font-size:13px;color:var(--dim)">5-stage Kanban CRM, 45-second speed-to-lead SMS assistant, missed-call auto text-back &amp; 2-way texting (+ $197 setup).</p>
+          <a class="btn btn-ghost btn-sm select-tier-btn" href="#contact" data-tier="A La Carte: LeadFlow CRM ($197/mo)" style="margin-top:14px;width:100%;font-size:13px">Get Standalone</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ Section -->
+<section id="faq" class="motion-reveal" style="background:var(--bg2);border-block:1px solid var(--line)"><div class="wrap">
+  <div class="eyebrow">FAQ</div><h2>Common questions.</h2>
+  <details><summary>How does the 3-tier pricing work vs. buying a la carte?</summary><p>Our Essential ($397/mo + $497 setup), Accelerate ($697/mo + $997 setup), and Scale ($1,297/mo + $1,997 setup) bundles give you complete business systems at steep bundled savings (saving up to $494/mo). However, if you only need one specific solution, every single service is available standalone a la carte—such as our 24/7 AI Receptionist ($397/mo + $497 setup), Custom Website Design ($799 flat), AEO Engine ($297/mo + $297 setup), or LeadFlow CRM &amp; Pipeline ($197/mo + $197 setup).</p></details>
+  <details><summary>Why is the Accelerate Tier ($697/mo) the most popular choice?</summary><p>Accelerate solves both sides of local business growth: capturing traffic and converting callers. You get a brand-new custom website, AEO Engine to rank on ChatGPT and Perplexity, LeadFlow CRM &amp; missed-call text-back, and our 24/7 AI Receptionist to answer and book every caller. Buying these separately costs over $1,190/mo, so Accelerate saves you nearly $500 every single month.</p></details>
+  <details><summary>What does the One-Time Implementation &amp; Setup Fee cover?</summary><p>The one-time onboarding fee covers complete white-glove engineering: custom voice AI prompt training with your specific services and trade terminology, phone carrier forwarding and Twilio routing, calendar and SMS integration, test calls, and (for Accelerate &amp; Scale) custom website design, architecture, and AEO schema. Everything is 100% white-glove and done-for-you with zero recurring lock-in contracts.</p></details>
+  <details><summary>Can I start with Essential and upgrade later?</summary><p>Yes, absolutely. Many clients start on Essential ($397/mo) to stop losing after-hours calls, then upgrade to Accelerate ($697/mo) or Scale ($1,297/mo) as their lead volume and booking capacity expand. There are zero long-term contracts and you can adjust your plan anytime.</p></details>
+  <details><summary>Do I have to set anything up myself?</summary><p>No. VantorX is 100% done-for-you. Our team builds your website, configures your phone system and lead follow-up, tests everything, and goes live with you. You don't have to learn or manage software.</p></details>
+  <details><summary>Will my website be mobile-friendly and fast?</summary><p>Yes. Every site we build is engineered specifically for phones, tablets and desktops with instant loading and tap-to-call conversion.</p></details>
+  <details><summary>Who updates my website and menu after it launches?</summary><p>We do. We manage and update your site for you — hours, services, pricing, photos and more — so you don’t have to touch it.</p></details>
+  <details><summary>What happens to the leads from my website and calls?</summary><p>Every form submission and phone call flows directly into your private Client Hub with instant SMS alerts to your personal cell, so no customer ever slips through the cracks.</p></details>
+</div></section>
+
+<!-- Contact / Booking Section -->
+<section id="contact" class="motion-reveal"><div class="wrap two" style="align-items:start">
+  <div>
+    <div class="eyebrow">Book a demo</div>
+    <h2>Tell us about your business. We’ll show you what we’d build.</h2>
+    <p class="lead">Pick what you’re interested in — we’ll follow up to schedule a short call and give you a clear plan and price.</p>
+  </div>
+  <form class="formcard" id="leadForm" novalidate>
+    <input class="hp" type="text" id="hp" name="website_confirm" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="fgrid">
+      <div><label for="fName">Your name *</label><input type="text" id="fName" required autocomplete="name"></div>
+      <div><label for="fBiz">Business name</label><input type="text" id="fBiz" autocomplete="organization"></div>
+      <div><label for="fEmail">Email *</label><input type="email" id="fEmail" required autocomplete="email"></div>
+      <div><label for="fPhone">Phone</label><input type="tel" id="fPhone" autocomplete="tel"></div>
+      <div class="full"><label for="fType">Type of business</label><input type="text" id="fType" placeholder="Barbershop, salon, clinic, detailer…"></div>
+      <div class="full"><label>I’m interested in</label>
+        <div class="opts" id="opts">
+          <label><input type="checkbox" value="Accelerate Tier ($697/mo)" checked> ⭐ Accelerate Tier ($697/mo) — Best Value</label>
+          <label><input type="checkbox" value="Essential Tier ($397/mo)"> ⚡ Essential Tier ($397/mo)</label>
+          <label><input type="checkbox" value="Scale Tier ($1,297/mo)"> 🚀 Scale Tier ($1,297/mo)</label>
+          <label><input type="checkbox" value="A La Carte: AI Receptionist ($397/mo)"> AI Receptionist ($397/mo)</label>
+          <label><input type="checkbox" value="A La Carte: Custom Website ($799 flat)"> Website Design ($799 flat)</label>
+          <label><input type="checkbox" value="A La Carte: AEO Engine ($297/mo)"> AEO Engine™ AI Search ($297/mo)</label>
+          <label><input type="checkbox" value="A La Carte: LeadFlow CRM ($197/mo)"> LeadFlow CRM &amp; Pipeline ($197/mo)</label>
+        </div></div>
+      <div class="full"><label for="fMsg">Anything we should know?</label><textarea id="fMsg" placeholder="Do you have a website today? What’s your biggest headache — missed calls, no online presence, follow-up?"></textarea></div>
+    </div>
+    <div style="margin-top:18px"><button class="btn btn-gold" type="submit" id="fBtn" style="padding:14px 28px;font-size:16px">Book My Demo →</button></div>
+    <p style="margin-top:12px;font-size:11px;color:var(--dim);line-height:1.5">By clicking "Book My Demo", you agree to our <a href="/terms/" style="color:var(--accent2);text-decoration:underline">Terms of Service</a> and <a href="/privacy/" style="color:var(--accent2);text-decoration:underline">Privacy Policy</a> and provide express written consent under the TCPA to receive automated service communications and follow-ups from VantorX Solutions at the number provided. Consent is not a condition of purchase. Message and data rates may apply. Reply STOP to cancel anytime.</p>
+    <p id="fmsg" role="status" aria-live="polite"></p>
+  </form>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> VantorX Solutions LLC. Websites · AI Receptionist · AEO Engine™ · LeadFlow · Client Hub · Automation.</span><span><a href="tel:5618138602">📞 (561) 813-8602</a> · <a href="#services">Services</a> · <a href="#pricing">Pricing</a> · <a href="#contact">Book a Demo</a> · <a href="/client-hub/">Client Portal</a> · <a href="/review/">⭐ Review Us</a> · <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a></span></div></footer>
+
+<!-- Motion Engine Controller Script -->
+<script>
+(function(){
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Navigation Mobile Toggle
+  var nav = document.getElementById('nav'), mb = document.getElementById('menuBtn');
+  if(mb && nav) {
+    mb.addEventListener('click', function(){
+      var o = nav.classList.toggle('open');
+      mb.setAttribute('aria-expanded', o ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ nav.classList.remove('open'); });
+    });
+  }
+
+  // Motion Toggle Switch (Allows Luke to switch Motion ON / OFF instantly)
+  var motionBtn = document.getElementById('motionToggleBtn');
+  var motionText = document.getElementById('motionToggleText');
+  var isMotionActive = true;
+
+  function setMotionState(active) {
+    isMotionActive = active;
+    if(active) {
+      document.body.classList.remove('motion-disabled');
+      motionBtn.classList.remove('is-off');
+      motionText.textContent = 'Motion: ACTIVE';
+    } else {
+      document.body.classList.add('motion-disabled');
+      motionBtn.classList.add('is-off');
+      motionText.textContent = 'Motion: STATIC (OFF)';
+    }
+  }
+
+  if(motionBtn) {
+    motionBtn.addEventListener('click', function(){
+      setMotionState(!isMotionActive);
+    });
+  }
+
+  // 1. Intersection Observer for Silky Scroll Reveal
+  if('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.motion-reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.motion-reveal').forEach(function(el) {
+      el.classList.add('is-visible');
+    });
+  }
+
+  // 2. Refined 3D Micro-Perspective Card Tilt (Mouse Tracking)
+  var tiltCards = document.querySelectorAll('.tilt-card');
+  tiltCards.forEach(function(card) {
+    var rect, cx, cy;
+    
+    function updateDimensions() {
+      rect = card.getBoundingClientRect();
+      cx = rect.left + rect.width / 2;
+      cy = rect.top + rect.height / 2;
+    }
+
+    card.addEventListener('mouseenter', updateDimensions);
+    
+    card.addEventListener('mousemove', function(e) {
+      if(!isMotionActive) return;
+      if(!rect) updateDimensions();
+      var x = e.clientX - cx;
+      var y = e.clientY - cy;
+      
+      // Keep tilt very gentle and luxury (Max 5 degrees)
+      var rotateX = (-(y / (rect.height / 2)) * 4.5).toFixed(2);
+      var rotateY = ((x / (rect.width / 2)) * 4.5).toFixed(2);
+      
+      card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-3px)';
+      
+      // Update specular glare position
+      var mouseX = e.clientX - rect.left;
+      var mouseY = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', mouseX + 'px');
+      card.style.setProperty('--mouse-y', mouseY + 'px');
+    });
+
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(function(){ card.style.transition = ''; }, 500);
+    });
+  });
+
+  // Tier selection listener
+  document.querySelectorAll('.select-tier-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      var tier = btn.getAttribute('data-tier');
+      if(!tier) return;
+      var checkboxes = document.querySelectorAll('#opts input[type=checkbox]');
+      var found = false;
+      checkboxes.forEach(function(cb){
+        if(cb.value.indexOf(tier) !== -1 || tier.indexOf(cb.value) !== -1){
+          cb.checked = true;
+          found = true;
+        } else {
+          cb.checked = false;
+        }
+      });
+      var targetInput = document.getElementById('fName');
+      if(targetInput){
+        setTimeout(function(){ targetInput.focus(); }, 350);
+      }
+    });
+  });
+
+  // Demo Lead Form Handling
+  var f = document.getElementById('leadForm'), msg = document.getElementById('fmsg'), btn = document.getElementById('fBtn');
+  if(f) {
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = document.getElementById('fName').value.trim();
+      var email = document.getElementById('fEmail').value.trim();
+      if(name.length < 2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        msg.style.color = '#e08383';
+        msg.textContent = 'Please enter your name and a valid email address.';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Booking your demo…';
+      setTimeout(function(){
+        btn.disabled = false;
+        btn.textContent = 'Book My Demo →';
+        msg.style.color = 'var(--accent2)';
+        msg.textContent = 'Prototype Simulation: Demo request received! Luke will be in touch shortly.';
+        f.reset();
+      }, 700);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
