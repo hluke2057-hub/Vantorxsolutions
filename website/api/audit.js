@@ -312,45 +312,9 @@ async function handleRepSync(req, res) {
     }
   }
 
-  // 2. Real-Time Founder Email Notification on Every Rep Registration
-  // Guarantees Luke immediately receives the exact email & name that the sales rep signed up with
-  if (milestone === "account_created" || !existing.signupAlertSent) {
-    existing.signupAlertSent = true;
-    try {
-      const emailHtml = `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px 16px; color: #1e293b; background: #ffffff;">
-          <div style="background: linear-gradient(135deg, #0b0f16 0%, #1e293b 100%); color: #ffffff; padding: 24px; border-radius: 12px; margin-bottom: 20px; border-top: 4px solid #c7a468;">
-            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #c7a468; font-weight: 800;">VantorX Solutions · Closer Academy Alert</div>
-            <h1 style="margin: 6px 0 4px; font-size: 20px; font-weight: 800; color: #ffffff;">👤 New Sales Rep Registered</h1>
-            <div style="font-size: 13px; color: #94a3b8;">Closer onboarding & telemetry notification</div>
-          </div>
-          <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
-            <div style="font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 14px;">
-              ${existing.avatar || '⚔️'} ${existing.name}
-            </div>
-            <div style="font-size: 13.5px; line-height: 1.9; color: #334155;">
-              <div><strong>Actual Personal Email:</strong> <span style="background: #eff6ff; color: #2563eb; font-weight: 700; padding: 3px 8px; border-radius: 4px; border: 1px solid #bfdbfe; font-size: 14px;">${existing.email}</span></div>
-              <div><strong>Assigned Role:</strong> ${existing.role || 'Outbound Closer'}</div>
-              <div><strong>Registration Time:</strong> ${new Date(nowIso).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "2-digit", minute: "2-digit" })} ET (${nowIso.split("T")[0]})</div>
-              <div><strong>Starting Track:</strong> Day 1 Closer Academy & Cold Call RPG</div>
-            </div>
-          </div>
-          <div style="background: #f1f5f9; border-radius: 8px; padding: 14px; text-align: center;">
-            <a href="https://www.vantorxsolutions.com/cold-call-arena/" style="display: inline-block; background: #c7a468; color: #0b0f16; font-weight: 700; padding: 8px 16px; border-radius: 6px; text-decoration: none; margin-right: 8px; font-size: 12px;">Open Closer Academy</a>
-            <a href="https://www.vantorxsolutions.com/cold-call-quest/" style="display: inline-block; background: #0f172a; color: #ffffff; font-weight: 600; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 12px;">Open Cold Call RPG</a>
-          </div>
-        </div>
-      `;
-
-      await sendEmail({
-        to: ["hluke2057@gmail.com", "luke@vantorxsolutions.com"],
-        subject: `👤 [Closer Academy Signup] ${existing.name} (${existing.email})`,
-        html: emailHtml
-      });
-    } catch (mailErr) {
-      console.warn("[Founder Rep Signup Mail Warning]", mailErr.message);
-    }
-  }
+  // Per Luke's explicit instruction: Individual rep action emails are strictly DISABLED.
+  // Rep milestone events (account_created, lesson_completed, day_passed, certified, boss_defeated, dials_logged)
+  // are persisted cleanly to Supabase and the cloud roster, and delivered ONLY in the 3 scheduled daily digests (12 PM, 3 PM, 8 PM ET).
 
   return res.status(200).json({
     ok: true,
