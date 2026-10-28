@@ -1,4 +1,4 @@
-﻿# ============================================================
+# ============================================================
 # ⚔️ BUILD COLD CALL QUEST: STANDALONE SALES RPG 4.0
 # Generates website/cold-call-quest/index.html with UTF-8 BOM
 # Features Adaptive Brain 4.0 with Conversational State Machine
@@ -1513,19 +1513,45 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     
     const hasAgreement = /hear\s*you|agree|100%|completely|understand|you're\s*right|fair\s*enough|totally|makes\s*sense/i.test(low);
     
-    const hasLeakHook = /leak|missed\s*call|emergency|after\s*hours|after\s*5|weekend|night|dinner|at\s*8\s*pm|sleeping|voicemail|next\s*(guy|contractor|roofer|plumber)/i.test(low);
+    const hasLeakHook = /leak|missed\s*call|emergency|after\s*hours|after\s*5|weekend|night|dinner|at\s*8\s*pm|sleeping|voicemail|next\s*(guy|contractor|roofer|plumber)|competitor|whiteboard|dead\s*(bids?|estimates?|quotes?)|unclosed|open\s*estimates?|slow\s*(site|website)|bounce|cold\s*bids?/i.test(low);
     const hasDollarMath = /\$\s*\d+/i.test(low) || /\b\d+\s*(k|grand|thousand|dollars?|bucks)\b/i.test(low) || /\b(8,?000|10,?000|12,?000|15,?000|16,?000|20,?000|25,?000|50,?000|6,?000|7,?000|9,?000|8k|10k|12k|15k|20k|50k)\b/i.test(low);
     
-    const hasAvaMechanism = /\b(ava|voice\s*ai|ai\s*receptionist|ai\s*dispatcher?|answers?\s*(in\s*)?(1|one)\s*ring|answers?\s*(24\/7|every\s*call|instantly|automatically|live)|(texts?|sms)\s*(your|my|the)?\s*cell|sms\s*dispatch|books?\s*(directly\s*)?(into|on)\s*(your|the)?\s*(calendar|schedule)|pre-?qualif(y|ies|ication)|intake\s*the\s*caller)\b/i.test(low);
+    const hasAvaMechanism = /\b(ava|voice\s*ai|24\/7\s*ai|ai\s*receptionist|ai\s*dispatcher?|ai\s*(that\s*)?(answers?|picks?\s*up|takes?\s*calls?|books?)|answers?\s*(in\s*)?(1|one)\s*ring|answers?\s*(the\s*)?(phone|call)|answers?\s*(24\/7|every\s*call|instantly|automatically|live)|(texts?|sms)\s*(your|my|the)?\s*cell|sms\s*dispatch|books?\s*(appointments?|jobs?|estimates?)|books?\s*(directly\s*)?(into|on)\s*(your|the)?\s*(calendar|schedule)|pre-?qualif(y|ies|ication)|intake\s*the\s*caller|without\s*(you\s*)?having\s*to\s*lift\s*a\s*finger)\b/i.test(low);
     
-    const hasDemoNumber = /(561)\s*813-8602|813-8602|5618138602|live\s*demo|test\s*number|dial\s*(this|it|her)/i.test(low);
-    const hasSoundHuman = /sound|human|robot|robotic|delay|latency|natural|real\s*person|cadence|accent/i.test(low);
+    const hasDemoNumber = /(561)\s*813-8602|813-8602|5618138602|\b561\b|\b813-?8602\b|live\s*demo|test\s*(line|number|her)|dial\s*(this|it|her|(561))|call\s*(this|her|(561)|our\s*number)|demo\s*line|phone\s*number|give\s*you\s*(the|a)\s*number|hear\s*(her|it)\s*(live|yourself|on\s*speaker)?|try\s*(her|it)\s*out/i.test(low);
+    const hasSoundHuman = /sound|human|robot|robotic|delay|latency|natural|real\s*person|cadence|accent|conversational|ai\s*voice|sounds?\s*like|clunky|voice/i.test(low);
     
-    const hasCarrier71 = /\*71|star\s*71|carrier|conditional\s*forwarding|conditional\s*call\s*forwarding|forward|rollover|port|switch|verizon|at&t|att|t-mobile|existing\s*number|keep\s*your\s*number/i.test(low);
+    const hasCarrier71 = /\*71|star\s*71|star\s*seventy\s*one|carrier|conditional\s*(call\s*)?forwarding|\bforward(ing)?\b|\brollover\b|\bports?\b|\bporting\b|\bswitch(ing)?\b|verizon|at&t|att|t-mobile|tmobile|sprint|existing\s*number|keep\s*your\s*number|same\s*number|don't\s*have\s*to\s*(switch|port)|rings?\s*your\s*(phone|cell)|works\s*with\s*your\s*(phone|cell|carrier)/i.test(low);
     
-    const hasPricingAnswer = /\b(397|300|299|400|697|1,?297)\b/i.test(low) || /\$\s*\d+/i.test(low) || /\b\d+\s*(a|per|\/)\s*month\b/i.test(low) || /\b(flat\s*rate|zero\s*setup(\s*fee)?|no\s*contracts?|zero\s*contracts?|cancel\s*anytime|month-to-month|pays\s*for\s*itself|monthly\s*rate|monthly\s*investment)\b/i.test(low);
+    // Comprehensive Natural Pricing Recognition (Digits, Spelled Numbers, Packages, and ROI)
+    const hasSpelledNumbers = /\b(three\s*(hundred\s*)?(and\s*)?ninety\s*seven|three\s*ninety\s*seven|four\s*(hundred\s*)?(and\s*)?ninety\s*seven|four\s*ninety\s*seven|one\s*(hundred\s*)?(and\s*)?ninety\s*seven|two\s*(hundred\s*)?(and\s*)?ninety\s*seven|six\s*(hundred\s*)?(and\s*)?ninety\s*seven|seven\s*(hundred\s*)?(and\s*)?ninety\s*nine|nine\s*(hundred\s*)?(and\s*)?ninety\s*seven|twelve\s*ninety\s*seven|nineteen\s*ninety\s*seven|three\s*hundred|four\s*hundred|five\s*hundred|six\s*hundred|seven\s*hundred|eight\s*hundred|nine\s*hundred)\b/i.test(low);
+    const isJobLeakMath = /\$\s*(3,?000|4,?000|5,?000|6,?000|7,?000|8,?000|9,?000|10,?000|12,?000|15,?000|20,?000|25,?000|50,?000|8000|10000|12000|15000|20000|25000|50000)\b/i.test(low) || /\b(save|lose|lost|losing|worth|cost\s*of\s*a\s*job|average\s*ticket|emergency\s*jobs?)\b/i.test(low);
+    const hasNumericPricing = (
+      /\b(197|297|300|397|400|497|500|594|600|697|700|799|997|1,?297|1,?997|2,?497)\b/i.test(low) ||
+      /\$\s*(197|297|300|397|400|497|500|594|600|697|700|799|997|1,?297|1,?997|2,?497)\b/i.test(low) ||
+      /\b\d{2,4}\s*(a|per|\/)\s*(mo|month|m)\b/i.test(low) ||
+      (/\$\s*\d{2,4}\b/i.test(low) && !isJobLeakMath && /\b(mo|month|flat|rate|charge|fee|cost|price|setup|receptionist|service|system)\b/i.test(low)) ||
+      (/\b\d{2,4}\s*(dollars?|bucks?)\b/i.test(low) && /\b(mo|month|flat|rate|charge|fee|cost|price|setup|a\s*month|per\s*month)\b/i.test(low))
+    );
+    const hasPricingTerms = /\b(flat\s*rate|monthly\s*rate|monthly\s*investment|monthly\s*fee|monthly\s*cost|monthly\s*charge|per\s*month|a\s*month|month-to-month|no\s*contracts?|zero\s*contracts?|cancel\s*anytime|no\s*lock-in|one-time\s*(setup|fee|onboarding|implementation)|setup\s*fee|onboarding\s*fee|upfront(\s*fee)?|implementation\s*fee|pays\s*for\s*itself|covers\s*itself|one\s*job\s*(covers|pays)|one\s*(emergency\s*)?(call|job|service\s*call)\s*(covers|pays)|fraction\s*of\s*(an\s*answering\s*service|a\s*receptionist|an\s*employee|what\s*you\s*pay)|less\s*than\s*(an\s*answering\s*service|a\s*service\s*call|what\s*you're\s*paying)|pricing|cost|costs|price|investment|charge|charges|fee|fees|rate|rates|budget)\b/i.test(low);
+    const hasPackageTiers = /\b(starter(\s*tier|\s*package)?|core(\s*tier|\s*package)?|accelerate(\s*tier|\s*package)?|scale(\s*tier|\s*package)?|growth(\s*tier)?|pro(\s*tier)?)\b/i.test(low);
+
+    const hasPricingAnswer = hasNumericPricing || hasSpelledNumbers || (hasPricingTerms && (/\b(197|297|300|397|400|497|500|594|600|697|700|799|997|1,?297)\b/.test(low) || hasSpelledNumbers || /pays\s*for\s*itself|one\s*job|fraction|contract|flat\s*rate/i.test(low))) || hasPackageTiers;
     
-    const hasTimeProposal = /tomorrow|4:30|morning|afternoon|10\s*min|walkthrough|meeting|calendar|invite|zoom|screen\s*share|schedule|book|call\s*you/i.test(low);
+    const hasUpfrontFeeMention = /\b(setup|onboarding|implementation|upfront|one-time)\b/i.test(low) && /\b(497|997|1,?997|297|197|799|fee|charge|investment|cost)\b/i.test(low);
+
+    const hasPackageMention = /\b(package|packages|bundle|bundles|all-in-one|tier|tiers|suite|full\s*system|both|everything)\b/i.test(low);
+    const hasWebsiteMention = /\b(website|web\s*design|redesign|site|seo|aeo|landing\s*page|google\s*rank|online\s*presence)\b/i.test(low);
+    
+    // Distinguish AI feature descriptions ("it books appointments into your calendar") from active meeting close proposals:
+    const isFeatureBooking = /\b(she|it|ava|ai|system|receptionist|software)\s*(answers?|books?|schedules?|takes?|dispatches?)\b|\bbooks?\s*(appointments?|jobs?|estimates?|calls?|directly\s*into|on|into)\b|\bschedules?\s*(jobs?|appointments?|estimates?)\b/i.test(low);
+
+    const hasTimeProposal = !isFeatureBooking && (
+      /\b(tomorrow\s*(at|around|\d|afternoon|morning)?|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/i.test(low) ||
+      /\b(morning|afternoon|evening|midday|noon|4:30(\s*pm)?|10\s*am|11\s*am|1\s*pm|2\s*pm|3\s*pm|4\s*pm|5\s*pm|at\s*\d{1,2}(:\d{2})?)\b/i.test(low) ||
+      /\b(10\s*min(ute)?s?(\s*(call|demo|walkthrough|chat))?|15\s*min(ute)?s?|quick\s*(10\s*min|walkthrough|zoom|chat|call)|calendar\s*invite|send\s*(you\s*)?(a|the)?\s*calendar|pencil\s*(you|us)\s*in|set\s*aside\s*10\s*min|schedule\s*a\s*(time|call|demo|walkthrough)|book\s*a\s*(time|call|demo|walkthrough)|free\s*(tomorrow|today|this\s*week|later|wednesday|thursday|friday|monday|tuesday)|what\s*time\s*works|what('s|\s+is)\s*(a\s*good\s*time|your\s*schedule|your\s*calendar)|grab\s*10\s*minutes|jump\s*on\s*a\s*(call|zoom|demo)|hop\s*on\s*a\s*(call|zoom|demo)|screen\s*share|show\s*you\s*(for\s*10\s*minutes|how\s*it\s*works|the\s*backend))\b/i.test(low) ||
+      /\b(are\s*you\s*free|do\s*you\s*have\s*(10|a\s*few)\s*min|how\s*does\s*(tomorrow|afternoon|4:30|morning)\s*look)\b/i.test(low)
+    );
 
     const isUserAskingQuestion = /\?|who\s*answers|what\s*happens|how\s*many|where\s*does|do\s*you\s*get|what\s*do\s*you\s*do/i.test(low);
     const asksWhoAnswers = /who\s*answers|where\s*does\s*(that|the)\s*call\s*go|what\s*happens\s*to\s*calls|how\s*do\s*you\s*handle/i.test(low);
@@ -1540,6 +1566,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     const hasNoContractGuarantee = /\b(zero\s*contracts?|no\s*contracts?|month\s*to\s*month|cancel\s*anytime|no\s*lock-in)\b/i.test(low);
     const hasBilingualFeature = /\b(spanish|bilingual|espanol|two\s*languages|fluent)\b/i.test(low);
     const hasFailoverLogic = /\b(carrier\s*level|telecom|verizon|at&t|power\s*out|internet\s*down|hurricane\s*failover|cloud\s*routing)\b/i.test(low);
+    const hasCrmMention = /\b(crm|leadflow|servicetitan|service\s*titan|jobber|housecall(\s*pro)?|dispatch\s*board|pipeline|clipboard|yellow\s*pad|whiteboard|track\s*leads|missed-call\s*text|speed\s*to\s*lead|90\s*second)\b/i.test(low);
 
     const isRepeatingPermission = memory.topicsCovered['permission'] && hasPermission && !hasLeakHook && !hasAvaMechanism && !hasPricingAnswer && !hasDemoNumber;
     const isRepeatingDemo = memory.topicsCovered['demo'] && hasDemoNumber && !hasCarrier71 && !hasTimeProposal;
@@ -1548,19 +1575,46 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
 
     const isHesitant = low.length < 4 || /^(uh|um|hello\??|can\s*you\s*hear\s*me\??|are\s*you\s*there\??|wait|hold\s*on)$/i.test(low);
 
+    const hasWebsiteExplanation = /\b(mobile|load\s*time|speed|fast|quote\s*calculator|before\s*and\s*after|portfolio|convert|conversion|bounce|bounce\s*rate|capture|ranking|google|leads?|wix|squarespace|wordpress|broken|redesign|799|sub-?second|custom|gallery|photos?|seo|aeo|reviews?|reputation|online)\b/i.test(low);
+    const hasLeadFlowExplanation = /\b(90\s*seconds?|text-?back|auto-?text|database\s*reactivation|dead\s*(bids?|estimates?|quotes?)|follow-?up\s*(sequence|touches?)|5\s*touch(es)?|pipeline|jobber|servicetitan|housecall|197|revive|past\s*customers?|whiteboard|unclosed|nurture|sms|re-?engage|bids?|estimates?)\b/i.test(low);
+    const hasAvaExplanation = /\b(one\s*ring|1\s*ring|24\/7|qualif(y|ies|ication)|emergency|texts?\s*(your|my)?\s*cell|sms|caller\s*(name|address|details|info)|carrier\s*\*71|\*71|conditional\s*(call\s*)?forwarding|keep\s*(your\s*)?number|397|zero\s*contracts?|transcript|triage|dispatch|dispatcher|answers?\s*(every|all|inbound)|instant|intake)\b/i.test(low);
+
     // Evasion / Dodging when contractor explicitly asked a direct question:
     let isDodgingQuestion = false;
-    if (memory.lastBossQuestion === 'how_much_does_it_cost' && !hasPricingAnswer && !hasDollarMath) {
-      isDodgingQuestion = true;
+    if (memory.lastBossQuestion === 'how_much_does_it_cost') {
+      if (!hasPricingAnswer && !hasDollarMath && !hasSpelledNumbers && !hasPricingTerms && !hasPackageTiers) {
+        isDodgingQuestion = true;
+      }
     }
-    if (memory.lastBossQuestion === 'proof_demo_line' && !hasDemoNumber && !hasSoundHuman && !hasAgreement) {
-      isDodgingQuestion = true;
+    if (memory.lastBossQuestion === 'proof_demo_line') {
+      if (!hasDemoNumber && !hasSoundHuman && !hasAgreement && !/561|number|dial|call|test/i.test(low)) {
+        isDodgingQuestion = true;
+      }
     }
-    if (memory.lastBossQuestion === 'carrier_rollover_setup' && !hasCarrier71 && !hasAgreement) {
-      isDodgingQuestion = true;
+    if (memory.lastBossQuestion === 'carrier_rollover_setup') {
+      if (!hasCarrier71 && !hasAgreement && !/forward|rollover|number|cell|line|connect/i.test(low)) {
+        isDodgingQuestion = true;
+      }
     }
-    if (memory.lastBossQuestion === 'meeting_time_close' && !hasTimeProposal && !hasAgreement) {
-      isDodgingQuestion = true;
+    if (memory.lastBossQuestion === 'meeting_time_close') {
+      if (!hasTimeProposal && !hasAgreement && !/tomorrow|afternoon|morning|time|call|zoom|meet|calendar|clock/i.test(low)) {
+        isDodgingQuestion = true;
+      }
+    }
+    if (memory.lastBossQuestion === 'explain_website') {
+      if (!hasWebsiteExplanation && !hasWebsiteMention && !hasAgreement && !/site|web|page|design|fast/i.test(low)) {
+        isDodgingQuestion = true;
+      }
+    }
+    if (memory.lastBossQuestion === 'explain_leadflow') {
+      if (!hasLeadFlowExplanation && !hasCrmMention && !hasAgreement && !/crm|text|lead|bid|estimate/i.test(low)) {
+        isDodgingQuestion = true;
+      }
+    }
+    if (memory.lastBossQuestion === 'explain_ava') {
+      if (!hasAvaExplanation && !hasAvaMechanism && !hasAgreement && !/ava|ai|voice|ring|dispatch|call|answer/i.test(low)) {
+        isDodgingQuestion = true;
+      }
     }
 
     return {
@@ -1579,6 +1633,12 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hasSoundHuman,
       hasCarrier71,
       hasPricingAnswer,
+      hasUpfrontFeeMention,
+      hasPackageMention,
+      hasWebsiteMention,
+      hasWebsiteExplanation,
+      hasLeadFlowExplanation,
+      hasAvaExplanation,
       hasTimeProposal,
       isUserAskingQuestion,
       asksWhoAnswers,
@@ -1591,6 +1651,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       hasNoContractGuarantee,
       hasBilingualFeature,
       hasFailoverLogic,
+      hasCrmMention,
       isRepeatingPermission,
       isRepeatingDemo,
       isRepeatingPrice,
@@ -1633,10 +1694,30 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
     }
 
     if (analysis.isDodgingQuestion && (memory.dodgedCount || 0) >= 2) {
-      return pickUnique(memory, [
-        `I asked you twice for a straight answer and you're dodging me like a slick used car salesman. Call terminated. *[CLICK]*`,
-        `You refuse to give me the actual numbers. I don't do business with evasive salespeople. Goodbye. *[CLICK]*`
-      ], 'fatal_dodge');
+      if (memory.lastBossQuestion === 'how_much_does_it_cost') {
+        return pickUnique(memory, [
+          `You refuse to give me the actual numbers. I don't do business with evasive salespeople. Goodbye. *[CLICK]*`,
+          `I asked you twice for the price and you danced around it both times. Call terminated. *[CLICK]*`
+        ], 'fatal_dodge_price');
+      } else if (memory.lastBossQuestion === 'proof_demo_line') {
+        return pickUnique(memory, [
+          `You won't give me the number to test it? Sounds like vaporware to me. I'm done. *[CLICK]*`,
+          `If you can't give me a demo number to hear her, you're full of hot air. Goodbye. *[CLICK]*`
+        ], 'fatal_dodge_demo');
+      } else if (memory.lastBossQuestion === 'carrier_rollover_setup') {
+        return pickUnique(memory, [
+          `You won't explain how my business line connects? I'm not risking my company phone with someone evasive. *[CLICK]*`
+        ], 'fatal_dodge_carrier');
+      } else if (memory.lastBossQuestion === 'meeting_time_close') {
+        return pickUnique(memory, [
+          `I asked for a time twice and you can't even give me a schedule. I'm moving on. *[CLICK]*`
+        ], 'fatal_dodge_close');
+      } else {
+        return pickUnique(memory, [
+          `I asked you twice for a straight answer and you're dodging me like a slick used car salesman. Call terminated. *[CLICK]*`,
+          `You refuse to give me a straight answer. I don't do business with evasive salespeople. Goodbye. *[CLICK]*`
+        ], 'fatal_dodge');
+      }
     }
 
     if (analysis.isHesitant && (memory.consecutiveHesitation || 0) >= 2) {
@@ -2078,11 +2159,21 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       matchMemory.consecutiveHesitation = 0;
     }
 
+    // Only increment dodgedCount if the user dodged the SAME question consecutively:
     if (analysis.isDodgingQuestion) {
-      matchMemory.dodgedCount = (matchMemory.dodgedCount || 0) + 1;
-    } else if (analysis.hasPricingAnswer || analysis.hasDemoNumber || analysis.hasCarrier71) {
+      if (matchMemory.lastDodgedQuestion === matchMemory.lastBossQuestion) {
+        matchMemory.dodgedCount = (matchMemory.dodgedCount || 0) + 1;
+      } else {
+        matchMemory.dodgedCount = 1;
+        matchMemory.lastDodgedQuestion = matchMemory.lastBossQuestion;
+      }
+    } else {
+      // User gave an answer! Reset dodging count immediately
       matchMemory.dodgedCount = 0;
+      matchMemory.lastDodgedQuestion = null;
     }
+
+
 
     let damage = 24;
     let grade = 'B';
@@ -2129,10 +2220,24 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
       damage = 0;
       counterDmg = 100;
       isHangup = true;
-      hangupReason = 'Evasive Sales Rep / Dodged Contractor Question Twice';
-      defeatMistake = 'Dodged the contractor\'s direct question twice in a row instead of giving a straight answer.';
-      defeatRemedy = 'Never dodge pricing or proof questions. When a contractor asks "how much?", answer directly ($397/mo flat) before asking for a walkthrough.';
-      feedback = '🚨 FATAL BLUNDER: Dodged contractor questions twice! Contractor terminated call.';
+      hangupReason = 'Evasive Sales Rep / Dodged Question Twice';
+      if (matchMemory.lastBossQuestion === 'how_much_does_it_cost') {
+        defeatMistake = 'Contractor asked for pricing twice in a row, but you didn\'t state the numbers.';
+        defeatRemedy = 'When a trade contractor asks "how much?", answer directly: $397/mo flat rate + $497 one-time setup with zero long-term contracts before proposing a walkthrough.';
+      } else if (matchMemory.lastBossQuestion === 'proof_demo_line') {
+        defeatMistake = 'Contractor asked for the live test number twice, but you didn\'t provide the phone line.';
+        defeatRemedy = 'Give them the Florida demo line: (561) 813-8602 and tell them to dial it right from their truck on speaker.';
+      } else if (matchMemory.lastBossQuestion === 'carrier_rollover_setup') {
+        defeatMistake = 'Contractor asked how their company phone line connects without getting messed up.';
+        defeatRemedy = 'Explain Carrier *71 rollover: they keep their existing number, no porting needed, and calls only forward when busy or after hours.';
+      } else if (matchMemory.lastBossQuestion === 'meeting_time_close') {
+        defeatMistake = 'Contractor agreed to a walkthrough but asked for a specific time twice.';
+        defeatRemedy = 'Propose a definitive time: "How does tomorrow at 4:30 PM look for a 10-minute screen share?"';
+      } else {
+        defeatMistake = 'Dodged the contractor\'s direct question twice in a row instead of giving a straight answer.';
+        defeatRemedy = 'Never dodge direct contractor questions. Answer them directly before moving to the next pitch point.';
+      }
+      feedback = '🚨 FATAL BLUNDER: Dodged the contractor\'s direct question twice! Contractor terminated call.';
     } else if (analysis.isHesitant && (matchMemory.consecutiveHesitation || 0) >= 2) {
       grade = 'F';
       damage = 0;
@@ -2160,7 +2265,25 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
         feedback += ` [Defused Tension: +${agreementHeal} HP]`;
       }
 
-      if (analysis.hasGatekeeperPivot && currentBoss && currentBoss.key === 'gatekeeper') {
+      if (matchMemory.lastBossQuestion === 'explain_website' && analysis.hasWebsiteExplanation) {
+        grade = 'S';
+        damage = 50;
+        counterDmg = 0;
+        feedback = '🌟 MASTERFUL WEBSITE EXPLANATION! You articulated mobile speed, speed-to-lead calculators, and eliminating high-ticket bounce rates!';
+        matchMemory.lastBossQuestion = null;
+      } else if (matchMemory.lastBossQuestion === 'explain_leadflow' && analysis.hasLeadFlowExplanation) {
+        grade = 'S';
+        damage = 52;
+        counterDmg = 0;
+        feedback = '🌟 MASTERFUL LEADFLOW EXPLANATION! You broke down the 90-second missed-call text-back and 5-touch estimate follow-up machine!';
+        matchMemory.lastBossQuestion = null;
+      } else if (matchMemory.lastBossQuestion === 'explain_ava' && analysis.hasAvaExplanation) {
+        grade = 'S';
+        damage = 55;
+        counterDmg = 0;
+        feedback = '🌟 MASTERFUL AVA ARCHITECTURE EXPLANATION! You explained 1-ring answering, emergency triage, instant SMS tech dispatch, and Carrier *71 rollover!';
+        matchMemory.lastBossQuestion = null;
+      } else if (analysis.hasGatekeeperPivot && currentBoss && currentBoss.key === 'gatekeeper') {
         grade = 'S';
         damage = 44;
         counterDmg = 0;
@@ -2909,6 +3032,7 @@ header{background:rgba(15,21,34,0.94);backdrop-filter:blur(14px);border-bottom:1
   window.selectBoss = selectBoss;
   window.updateHUD = updateHUD;
   window.evaluateTurn = evaluateTurn;
+  window.analyzeSpeech = analyzeSpeech;
   window.handleBossDefeat = handleBossDefeat;
   window.renderArmory = renderArmory;
 
