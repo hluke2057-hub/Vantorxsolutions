@@ -771,9 +771,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <th>City, State &amp; Trade</th>
               <th>Phone (Click to Dial)</th>
               <th>Primary Leak Detected</th>
-              <th>Annual Leak ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View real-world trade ticket math">ℹ️ Math</span></th>
+              <th style="min-width:190px">Exact After-Hours Bleed ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View real-world trade ticket math">ℹ️ Math</span></th>
               <th>Net Saved ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View net profit formula">ℹ️ Math</span></th>
-              <th style="min-width:185px">Target Package ➔ Fallback Offer</th>
+              <th style="min-width:300px">Recommended Offer &amp; Product Description</th>
               <th>Outcome &amp; Notes</th>
               <th style="text-align:right">Action</th>
             </tr>
@@ -2978,13 +2978,22 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           💡 <strong>Your Opening Leak Hook for Everett:</strong> "Everett, looking at Palm Air in Boca Raton — when an emergency AC call rings after-hours during Florida heat waves, sending it to voicemail leaks an estimated $102,000 a year to competitors. Where does that call ring for you right now?"
         </div>
 
-        <div class="active-lead-strategy-box" id="activeLeadStrategyBox" style="margin-top:12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);padding:10px 14px;border-radius:8px;font-size:13px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
-          <div>
-            <span style="color:var(--accent2);font-weight:700">📦 STEP 1 (PRIMARY):</span> Pitch the <strong><span id="activeLeadTargetPkg">Accelerate Tier ($697/mo + $997 Setup)</span></strong> (Full phone + web + SMS system).
-            <br>
-            <span style="color:#f87171;font-weight:700">📉 STEP 2 (DOWNSELL):</span> If they push back on budget, downsell to standalone <strong><span id="activeLeadFallbackProd">Ava Voice AI ($397/mo + $497 Setup)</span></strong> to fix their immediate leak.
+        <div class="active-lead-strategy-box" id="activeLeadStrategyBox" style="margin-top:12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);padding:12px 16px;border-radius:8px;font-size:13px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px">
+          <div style="flex:1;min-width:280px">
+            <div>
+              <span style="color:var(--accent2);font-weight:700">📦 STEP 1 (PRIMARY):</span> Pitch the <strong><span id="activeLeadTargetPkg">Accelerate Tier ($697/mo + $997 Setup)</span></strong>.
+            </div>
+            <div id="activeLeadPkgDescText" style="font-size:12px;color:#e2e8f0;margin-top:4px;padding:6px 10px;background:rgba(0,0,0,0.35);border-radius:6px;border-left:3px solid var(--accent2);line-height:1.4">
+              <strong style="color:var(--accent2)">What this package is:</strong> 24/7 Ava Voice AI Receptionist (&lt;1s instant pickup, emergency triage &amp; tech dispatch) + 90s LeadFlow SMS Speed-to-Lead web responder + Custom ultra-fast (&lt;1s load time) mobile Webflow website + Local AEO &amp; Google ranking setup.
+            </div>
+            <div style="margin-top:8px">
+              <span style="color:#f87171;font-weight:700">📉 STEP 2 (DOWNSELL):</span> If they push back on budget, downsell to standalone <strong><span id="activeLeadFallbackProd">Ava Voice AI ($397/mo + $497 Setup)</span></strong> to fix their immediate leak.
+            </div>
+            <div id="activeLeadFallbackDescText" style="font-size:11.5px;color:#cbd5e1;margin-top:4px;padding:6px 10px;background:rgba(0,0,0,0.35);border-radius:6px;border-left:3px solid #f87171;line-height:1.4">
+              <strong style="color:#f87171">What this product is:</strong> Human-sounding 24/7 Voice AI receptionist answering calls in &lt;1s 24/7/365, diagnosing job emergencies, qualifying callers, and dispatching SMS alerts directly to your technicians.
+            </div>
           </div>
-          <button class="btn btn-ghost btn-sm" id="btnToggleScriptStrategy" style="border:1px solid var(--accent);color:var(--accent2);font-size:12px;font-weight:700;cursor:pointer">🔄 Toggle Package / Fallback Script</button>
+          <button class="btn btn-ghost btn-sm" id="btnToggleScriptStrategy" style="border:1px solid var(--accent);color:var(--accent2);font-size:12px;font-weight:700;cursor:pointer;margin-top:2px">🔄 Toggle Package / Fallback Script</button>
         </div>
       </div>
 
@@ -3044,11 +3053,11 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               </div>
             </div>
 
-            <!-- Step 2: The $8,000 Emergency Weekend Leak Hook -->
+            <!-- Step 2: The Exact Emergency Weekend Leak Hook -->
             <div class="script-phase" style="margin-bottom:0">
-              <div class="phase-tag"><span>Step 2: $8,000 Emergency Weekend Leak (0:08 - 0:20)</span><span style="color:var(--ok)">✓ High-Ticket Bleed</span></div>
+              <div class="phase-tag"><span>Step 2: <span class="dyn-exact-ticket">$8,000</span> Emergency Weekend Leak (<span class="dyn-monthly-loss">$8,500/mo</span>)</span><span style="color:var(--ok)">✓ High-Ticket Bleed</span></div>
               <div class="script-line">
-                "I'll be super quick: I was looking at your Google profile in <span class="dyn-city">[City]</span>. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose the $8,000 job to the next competitor on Google.<br><br>
+                "I'll be super quick: I was looking at your Google profile in <span class="dyn-city">[City]</span>. In your trade, when an emergency job calls at 8 PM on a Saturday, most guys send it to voicemail and lose that <span class="dyn-exact-ticket">$8,000</span> job to the next competitor on Google. Over the year, that's an exact bleed of <span class="dyn-loss">$102,000/yr</span>.<br><br>
                 <strong>Where does that call ring for you right now?</strong>"
               </div>
               <div class="delivery-tip">
@@ -3762,9 +3771,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
             <!-- Step 2: The Multi-Leak Revenue Hook -->
             <div class="script-phase" style="margin-bottom:0">
-              <div class="phase-tag"><span>Step 2: $8,000 Leak Hook (0:08 - 0:25)</span><span style="color:var(--ok)">✓ Expose 4 Leaks</span></div>
+              <div class="phase-tag"><span>Step 2: Exact After-Hours Bleed Hook (<span class="dyn-loss">$102,000/yr</span>)</span><span style="color:var(--ok)">✓ Expose Leaks</span></div>
               <div class="script-line">
-                "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>. Most businesses in your market have 3 or 4 silent leaks draining tens of thousands a year: after-hours and weekend calls rolling to voicemail, a mobile website that takes 5 seconds to load, quote requests sitting un-replied for hours, and competitors ranking above you on Google and ChatGPT.<br><br>
+                "I'll be super direct: I was looking at <span class="dyn-company">[Company]</span> in <span class="dyn-city">[City]</span>. Most businesses in your market have 3 or 4 silent leaks draining an exact estimated <span class="dyn-loss">$102,000 a year ($8,500/mo)</span>: after-hours and weekend calls rolling to voicemail (<span class="dyn-exact-breakdown">1 emergency job + 2 calls/mo</span>), a mobile website that takes 5 seconds to load, quote requests sitting un-replied for hours, and competitors ranking above you on Google and ChatGPT.<br><br>
                 When a high-value customer calls after hours or submits an online quote, <strong>where does that lead go for you right now? Does someone answer live, or does it hit voicemail?</strong>"
               </div>
               <div class="delivery-tip">
@@ -4122,7 +4131,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="obj-acc-head"><span>❌ 1. "We already have an office lady / someone who answers the phone."</span> <span class="tag">Office Staff</span></div>
             <div class="obj-acc-body">
               "That's awesome, <span class="dyn-owner">[Name]</span>! Ava isn't here to replace your office manager—she's her backup safety net.<br><br>
-              What happens when your office lady is on line 1, at lunch, or sick? And what happens to emergency calls from 5 PM to 8 AM and all weekend long? Ava only picks up when your office is busy or closed. She stops the $8,000 emergency jobs from slipping away while your team rests."
+              What happens when your office lady is on line 1, at lunch, or sick? And what happens to emergency calls from 5 PM to 8 AM and all weekend long? Ava only picks up when your office is busy or closed. She stops the <span class="dyn-exact-ticket">$8,000</span> emergency jobs from slipping away while your team rests."
               <div class="obj-acc-note">💡 Strategy: Never compete with their office lady; position Ava as her after-hours & overflow insurance.</div>
             </div>
           </div>
@@ -4138,8 +4147,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="obj-accordion">
             <div class="obj-acc-head"><span>❌ 3. "$397 a month is too much for me right now."</span> <span class="tag">Budget / Price</span></div>
             <div class="obj-acc-body">
-              "I hear you, <span class="dyn-owner">[Name]</span>. But let's look at the math: what's your average ticket on one single emergency job in <span class="dyn-city">[City]</span>? About $3,000 to $8,000, right?<br><br>
-              Ava is $397/mo plus a one-time $497 setup fee—less than $13 a day with zero long-term contracts. If she catches just <strong>ONE job every three months</strong> that would have bounced to your competitor's voicemail, she paid for the setup, the monthly service, and put thousands in pure profit in your pocket. Can you really afford to keep donating $8,000 jobs to your competitors?"
+              "I hear you, <span class="dyn-owner">[Name]</span>. But let's look at the math: what's your average ticket on one single emergency job in <span class="dyn-city">[City]</span>? About <span class="dyn-exact-ticket">$8,000</span>, right?<br><br>
+              Ava is $397/mo plus a one-time $497 setup fee—less than $13 a day with zero long-term contracts. If she catches just <strong>ONE job every three months</strong> that would have bounced to your competitor's voicemail, she paid for the setup, the monthly service, and put thousands in pure profit in your pocket. Can you really afford to keep donating <span class="dyn-exact-ticket">$8,000</span> jobs to your competitors?"
               <div class="obj-acc-note">💡 Strategy: Contrast $13/day against a $5,000 ticket. One caught call covers setup and 12 months of service.</div>
             </div>
           </div>
@@ -7454,7 +7463,25 @@ window.closeLeakMathModal = function() {
   const msPerDay = 1000 * 60 * 60 * 24;
   const now = new Date();
   const daysSinceLaunch = Math.max(0, Math.floor((now.getTime() - LAUNCH_DATE.getTime()) / msPerDay));
-  const autoDailyAdditions = daysSinceLaunch * 75;
+
+  // 1-Week Daily Intake Pause Window (Oct 29, 2026 to Nov 5, 2026):
+  // Freezes queue expansion at exactly 700 stacked leads for 1 week so reps can focus on dialing.
+  const PAUSE_START_DATE = new Date('2026-10-29T00:00:00');
+  const PAUSE_END_DATE = new Date('2026-11-05T23:59:59');
+  const isIntakePaused = (now >= PAUSE_START_DATE && now <= PAUSE_END_DATE);
+
+  // During pause window, lock effectiveDays at 8 (8 * 75 = 600 + 100 = 700 leads)
+  let effectiveDays = daysSinceLaunch;
+  if (now >= PAUSE_START_DATE) {
+    const pauseStartDays = Math.max(0, Math.floor((PAUSE_START_DATE.getTime() - LAUNCH_DATE.getTime()) / msPerDay)); // = 8
+    if (now <= PAUSE_END_DATE) {
+      effectiveDays = pauseStartDays; // Locked at exactly 8 days -> 700 leads
+    } else {
+      const daysDuringPause = Math.floor((PAUSE_END_DATE.getTime() - PAUSE_START_DATE.getTime()) / msPerDay);
+      effectiveDays = Math.max(pauseStartDays, daysSinceLaunch - daysDuringPause);
+    }
+  }
+  const autoDailyAdditions = effectiveDays * 75; // autoDailyAdditions = daysSinceLaunch * 75;
 
   let manualAdditions = 0;
   try {
@@ -7475,6 +7502,7 @@ window.closeLeakMathModal = function() {
   window.LEADS_DATA = LEADS_DATA;
   window.getActiveQueueLimit = getActiveQueueLimit;
   window.getTodayFreshRange = getTodayFreshRange;
+  window.isIntakePaused = isIntakePaused;
 
   let currentBatch = 'activeQueue';
   let currentProductFilter = 'all';
@@ -7493,7 +7521,11 @@ window.closeLeakMathModal = function() {
     const batchSel = document.getElementById('batchSelect');
     if (batchSel) {
       const optActive = batchSel.querySelector('option[value="activeQueue"]');
-      if (optActive) optActive.textContent = `⭐ Active Dial Queue (${activeLimit} Leads · Starts 100 + Daily Growth)`;
+      if (optActive) {
+        optActive.textContent = isIntakePaused
+          ? `⭐ Active Dial Queue (${activeLimit} Leads · 1-Wk Pause Active)`
+          : `⭐ Active Dial Queue (${activeLimit} Leads · Starts 100 + Daily Growth)`;
+      }
     }
   }
 
@@ -7502,14 +7534,22 @@ window.closeLeakMathModal = function() {
     const activeLimit = getActiveQueueLimit();
     if (heading) {
       if (currentBatch === 'activeQueue') {
-        heading.textContent = `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (+75 ADDED DAILY)`;
+        heading.textContent = isIntakePaused
+          ? `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (PAUSED FOR 1 WEEK · 700 STACKED LEADS READY)`
+          : `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (+75 ADDED DAILY)`;
       } else if (currentBatch === 'todayFresh') {
-        heading.textContent = `TODAY'S 75 FRESH UNLOCKED TARGETS`;
+        heading.textContent = isIntakePaused
+          ? `CURRENT 75 FOCUS TARGETS (QUEUE LOCKED AT 700 FOR 1 WEEK)`
+          : `TODAY'S 75 FRESH UNLOCKED TARGETS`;
       } else if (currentBatch === 'all') {
         heading.textContent = `NATIONWIDE MASTER DIRECTORY (750 TARGETS)`;
       } else {
         heading.textContent = `BATCH #${currentBatch}: 75 NATIONWIDE TARGET LEADS`;
       }
+    }
+    const btnAdd = document.getElementById('btnAdd75Leads');
+    if (btnAdd && isIntakePaused) {
+      btnAdd.title = 'Intake paused for 1 week at 700 stacked targets. Click to manually unlock +75 if ready.';
     }
     updateBatchDropdownLabels();
   }
@@ -7519,6 +7559,8 @@ window.closeLeakMathModal = function() {
     let pkgBadge = '<span class="badge-prod badge-pkg-accelerate" title="Primary Package: Accelerate Tier ($697/mo + $997 setup fee)">⭐ Accelerate ($697/mo)</span>';
     let pkgName = 'Accelerate Tier ($697/mo + $997 setup)';
     let pkgBadgeClass = 'badge-pkg-accelerate';
+    let pkgTagline = 'Complete AI Front-Office Infrastructure';
+    let pkgDescription = '24/7 Ava Voice AI Receptionist (<1s instant pickup, emergency triage & tech dispatch) + 90s LeadFlow SMS Speed-to-Lead web responder + Custom ultra-fast (<1s load time) mobile Webflow website + Local AEO & Google ranking setup.';
 
     const t = (lead.trade || '').toLowerCase();
     if (lead.annualLoss >= 115000 || t.includes('restoration') || t.includes('commercial') || (lead.product === 'aeo' && lead.annualLoss >= 100000)) {
@@ -7526,19 +7568,63 @@ window.closeLeakMathModal = function() {
       pkgBadge = '<span class="badge-prod badge-pkg-scale" title="Primary Package: Scale Enterprise Tier ($1,297/mo + $1,997 setup fee)">🚀 Scale ($1,297/mo)</span>';
       pkgName = 'Scale Enterprise Tier ($1,297/mo + $1,997 setup)';
       pkgBadgeClass = 'badge-pkg-scale';
+      pkgTagline = 'Multi-Crew Commercial Revenue Machine';
+      pkgDescription = 'Multi-line & multi-location Ava Voice AI, direct 2-way CRM dispatch (ServiceTitan / Housecall Pro / Jobber), automated review generation, dedicated priority phone lines, and enterprise SLA.';
     } else if (t.includes('handyman') || (lead.monthlyLoss <= 5000 && lead.product === 'ava')) {
       pkgKey = 'essential';
       pkgBadge = '<span class="badge-prod badge-pkg-essential" title="Primary Package: Essential Tier ($397/mo + $497 setup fee)">⚡ Essential ($397/mo)</span>';
       pkgName = 'Essential Tier ($397/mo + $497 setup)';
       pkgBadgeClass = 'badge-pkg-essential';
+      pkgTagline = 'Core AI Phone Receptionist & Emergency Triage';
+      pkgDescription = '24/7 Ava Voice AI answering all incoming after-hours and overflow calls, qualifying emergency vs routine jobs, taking customer details, and dispatching instant SMS to owner.';
     }
 
     const fallbacks = {
-      ava: { key: 'ava', name: 'Ava 24/7 AI Receptionist ($397/mo)', price: '$397/mo', badge: '<span class="badge-prod-sub badge-prod-sub-ava">🤖 Ava ($397/mo)</span>', badgeClass: 'badge-prod-sub-ava' },
-      website: { key: 'website', name: 'Custom Website Design ($799 flat)', price: '$799 flat', badge: '<span class="badge-prod-sub badge-prod-sub-website">🌐 Website ($799 flat)</span>', badgeClass: 'badge-prod-sub-website' },
-      speed: { key: 'speed', name: 'LeadFlow 90s SMS ($197/mo)', price: '$197/mo', badge: '<span class="badge-prod-sub badge-prod-sub-speed">⚡ Speed ($197/mo)</span>', badgeClass: 'badge-prod-sub-speed' },
-      aeo: { key: 'aeo', name: 'AEO Engine™ ($297/mo)', price: '$297/mo', badge: '<span class="badge-prod-sub badge-prod-sub-aeo">⭐ AEO ($297/mo)</span>', badgeClass: 'badge-prod-sub-aeo' },
-      bundle: { key: 'ava', name: 'Ava 24/7 AI Receptionist ($397/mo)', price: '$397/mo', badge: '<span class="badge-prod-sub badge-prod-sub-ava">🤖 Ava ($397/mo)</span>', badgeClass: 'badge-prod-sub-ava' }
+      ava: {
+        key: 'ava',
+        name: 'Ava 24/7 AI Receptionist ($397/mo + $497 setup)',
+        price: '$397/mo',
+        badge: '<span class="badge-prod-sub badge-prod-sub-ava">🤖 Ava ($397/mo)</span>',
+        badgeClass: 'badge-prod-sub-ava',
+        tagline: '24/7 Voice AI Receptionist',
+        description: 'Human-sounding 24/7 Voice AI receptionist answering calls in <1s 24/7/365, diagnosing emergencies, taking caller info, and dispatching SMS alerts directly to your technicians.'
+      },
+      website: {
+        key: 'website',
+        name: 'Custom Website Design ($799 flat upfront)',
+        price: '$799 flat',
+        badge: '<span class="badge-prod-sub badge-prod-sub-website">🌐 Website ($799 flat)</span>',
+        badgeClass: 'badge-prod-sub-website',
+        tagline: 'High-Converting Contractor Website',
+        description: 'Bespoke mobile-first Webflow website engineered for sub-second load times, click-to-call buttons, emergency quote forms, and high visitor-to-phone-call conversion.'
+      },
+      speed: {
+        key: 'speed',
+        name: 'LeadFlow 90s SMS ($197/mo + $197 setup)',
+        price: '$197/mo',
+        badge: '<span class="badge-prod-sub badge-prod-sub-speed">⚡ Speed ($197/mo)</span>',
+        badgeClass: 'badge-prod-sub-speed',
+        tagline: '90-Second SMS Speed-to-Lead',
+        description: 'Automated SMS response engine that texts homeowners within 90 seconds of receiving a web form or missed call, booking the appointment before they call competitors.'
+      },
+      aeo: {
+        key: 'aeo',
+        name: 'AEO Engine™ ($297/mo + $297 setup)',
+        price: '$297/mo',
+        badge: '<span class="badge-prod-sub badge-prod-sub-aeo">⭐ AEO ($297/mo)</span>',
+        badgeClass: 'badge-prod-sub-aeo',
+        tagline: 'AI Answer Engine Optimization & Reviews',
+        description: 'Optimizes Google Business Profile, Apple Maps, and AI search (ChatGPT, Perplexity, Gemini) so your trade business is the #1 recommended answer for local jobs.'
+      },
+      bundle: {
+        key: 'ava',
+        name: 'Ava 24/7 AI Receptionist ($397/mo + $497 setup)',
+        price: '$397/mo',
+        badge: '<span class="badge-prod-sub badge-prod-sub-ava">🤖 Ava ($397/mo)</span>',
+        badgeClass: 'badge-prod-sub-ava',
+        tagline: '24/7 Voice AI Receptionist',
+        description: 'Human-sounding 24/7 Voice AI receptionist answering calls in <1s 24/7/365, diagnosing emergencies, taking caller info, and dispatching SMS alerts directly to your technicians.'
+      }
     };
 
     const fb = fallbacks[lead.product] || fallbacks.ava;
@@ -7548,11 +7634,15 @@ window.closeLeakMathModal = function() {
       pkgName,
       pkgBadge,
       pkgBadgeClass,
+      pkgTagline,
+      pkgDescription,
       fallbackKey: fb.key,
       fallbackName: fb.name,
       fallbackPrice: fb.price,
       fallbackBadge: fb.badge,
-      fallbackBadgeClass: fb.badgeClass
+      fallbackBadgeClass: fb.badgeClass,
+      fallbackTagline: fb.tagline,
+      fallbackDescription: fb.description
     };
   }
 
@@ -7567,23 +7657,71 @@ window.closeLeakMathModal = function() {
     return map[prod] || map.ava;
   }
 
-  function getTradeBreakdown(trade, monthlyLoss) {
-    const t = (trade || '').toLowerCase();
+  function getExactAfterHoursLossDetails(lead) {
+    const annual = Number(lead.annualLoss) || 96000;
+    const monthly = Number(lead.monthlyLoss) || Math.round(annual / 12);
+    const weekly = Math.round(monthly / 4.33);
+    const weekend = Math.round(weekly * 0.65); // Weekend calls make up ~65% of after-hours emergency calls
+
+    const t = (lead.trade || '').toLowerCase();
+    let ticketVal = monthly;
+    let unitDesc = '1 emergency high-ticket replacement + 2 repair calls after hours';
+
     if (t.includes('hvac')) {
-      return '1 AC replacement (~$8,500) + 2 repair calls/mo';
+      ticketVal = (monthly >= 12000) ? Math.round(monthly * 0.7 / 500) * 500 : monthly;
+      const repairs = Math.max(0, Math.round((monthly - ticketVal) / 800));
+      unitDesc = (repairs > 0)
+        ? `1 emergency AC replacement (~$${ticketVal.toLocaleString()}) + ${repairs} repair calls after hours`
+        : `1 emergency AC replacement (~$${ticketVal.toLocaleString()}) after hours`;
     } else if (t.includes('roof')) {
-      return '1 full roof replacement (~$11,500)/mo';
+      ticketVal = monthly;
+      unitDesc = `1 full emergency roof replacement / leak job (~$${ticketVal.toLocaleString()}) after hours`;
     } else if (t.includes('plumb')) {
-      return '1 water heater (~$4,500) + 4 pipe/drain calls/mo';
+      ticketVal = (monthly >= 7500) ? Math.round(monthly * 0.65 / 500) * 500 : monthly;
+      const emergencyDrains = Math.max(0, Math.round((monthly - ticketVal) / 750));
+      unitDesc = (emergencyDrains > 0)
+        ? `1 emergency water heater/repipe (~$${ticketVal.toLocaleString()}) + ${emergencyDrains} urgent leak calls after hours`
+        : `1 emergency water heater/repipe (~$${ticketVal.toLocaleString()}) after hours`;
     } else if (t.includes('electr')) {
-      return '1 200A panel upgrade (~$3,800) + 2 outage calls/mo';
+      ticketVal = (monthly >= 6500) ? Math.round(monthly * 0.65 / 500) * 500 : monthly;
+      const outages = Math.max(0, Math.round((monthly - ticketVal) / 600));
+      unitDesc = (outages > 0)
+        ? `1 panel upgrade / emergency generator job (~$${ticketVal.toLocaleString()}) + ${outages} outage calls after hours`
+        : `1 panel upgrade / emergency generator job (~$${ticketVal.toLocaleString()}) after hours`;
     } else if (t.includes('restor')) {
-      return '1 flood/water claim (~$14,500) every 3 weeks';
+      ticketVal = monthly;
+      unitDesc = `1 flood/water mitigation claim (~$${ticketVal.toLocaleString()}) after hours`;
     } else if (t.includes('solar')) {
-      return '1 residential battery/inverter job (~$11,000)/mo';
+      ticketVal = monthly;
+      unitDesc = `1 residential inverter / battery emergency job (~$${ticketVal.toLocaleString()}) after hours`;
+    } else {
+      ticketVal = monthly;
+      unitDesc = `1 high-ticket contract (~$${ticketVal.toLocaleString()}) after hours`;
     }
-    return '1 high-ticket job + 2 emergency calls/mo';
+
+    return {
+      annual,
+      monthly,
+      weekly,
+      weekend,
+      ticketVal,
+      unitDesc,
+      annualStr: `-$${annual.toLocaleString()}/yr`,
+      monthlyStr: `$${monthly.toLocaleString()}/mo`,
+      weeklyStr: `~$${weekly.toLocaleString()}/wk`,
+      weekendStr: `~$${weekend.toLocaleString()} every weekend`,
+      ticketStr: `$${ticketVal.toLocaleString()}`,
+      exactAnnualLossStr: `$${annual.toLocaleString()}`,
+      exactMonthlyLossStr: `$${monthly.toLocaleString()}`
+    };
   }
+
+  function getTradeBreakdown(trade, monthlyLoss) {
+    return getExactAfterHoursLossDetails({ trade, monthlyLoss, annualLoss: (monthlyLoss || 8000) * 12 }).unitDesc;
+  }
+  window.getLeadOfferStrategy = getLeadOfferStrategy;
+  window.getExactAfterHoursLossDetails = getExactAfterHoursLossDetails;
+  window.getTradeBreakdown = getTradeBreakdown;
 
   // Pagination State & Controls
   let leadPageSize = 50;
@@ -7738,6 +7876,7 @@ window.closeLeakMathModal = function() {
       const rec = CALL_RECORDS[lead.id] || {};
       const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
       const strat = getLeadOfferStrategy(lead);
+      const lossDetails = getExactAfterHoursLossDetails(lead);
       const tr = document.createElement('tr');
       tr.id = `leadRow_${lead.id}`;
       if (isCalled) tr.classList.add('lead-row-called');
@@ -7779,17 +7918,24 @@ window.closeLeakMathModal = function() {
         <td style="max-width:230px;overflow:hidden;text-overflow:ellipsis" title="${lead.painPoint}">
           <span style="font-size:12px;color:#e2e8f0">${lead.painPoint}</span>
         </td>
-        <td>
-          <span class="badge-leak" title="${getTradeBreakdown(lead.trade, lead.monthlyLoss)}">-$${lead.annualLoss.toLocaleString()}/yr</span>
-          <div style="font-size:11px;color:var(--dim);margin-top:2px">$${lead.monthlyLoss.toLocaleString()}/mo</div>
+        <td style="white-space:normal;min-width:190px">
+          <span class="badge-leak" title="Exact after-hours money loss: -$${lead.annualLoss.toLocaleString()}/yr">-$${lead.annualLoss.toLocaleString()}/yr</span>
+          <div style="font-size:11.5px;color:#fca5a5;font-weight:700;margin-top:2px">-$${lead.monthlyLoss.toLocaleString()}/mo <span style="color:var(--dim);font-weight:400">(${lossDetails.weeklyStr})</span></div>
+          <div style="font-size:10.5px;color:var(--dim);margin-top:3px;line-height:1.3" title="Exact After-Hours Bleed: ${lossDetails.unitDesc}">⚡ ${lossDetails.unitDesc}</div>
         </td>
         <td>
           <span class="badge-save" title="Net profit kept after $697/mo VantorX Growth Tier">+$${Math.max(0, lead.annualLoss - 8364).toLocaleString()}/yr</span>
         </td>
-        <td>
+        <td style="white-space:normal;min-width:280px;max-width:360px">
           <div>${strat.pkgBadge}</div>
-          <div style="font-size:11px;color:var(--dim);margin-top:4px;display:flex;align-items:center;gap:4px">
-            <span style="color:var(--faint)">↳ Fallback:</span> ${strat.fallbackBadge}
+          <div class="lead-pkg-desc" style="font-size:11px;color:#e2e8f0;margin-top:4px;line-height:1.35;background:rgba(245,158,11,0.06);border-left:2px solid var(--accent2);padding:4px 8px;border-radius:4px">
+            <strong style="color:var(--accent2)">What it is:</strong> ${strat.pkgDescription}
+          </div>
+          <div style="font-size:11px;color:var(--dim);margin-top:6px;display:flex;align-items:center;gap:4px">
+            <span style="color:var(--faint)">↳ Downsell:</span> ${strat.fallbackBadge}
+          </div>
+          <div class="lead-fallback-desc" style="font-size:10.5px;color:var(--dim);margin-top:2px;line-height:1.3">
+            ${strat.fallbackDescription}
           </div>
         </td>
         <td>
@@ -8268,20 +8414,22 @@ window.closeLeakMathModal = function() {
     navigator.clipboard.writeText(lead.phone);
     showToast(`✓ Copied ${lead.phone} — Loaded ${lead.company}!`);
 
-    // 2. Update Banner
+    // 2. Update Banner & Exact After-Hours Money Loss
+    const strat = getLeadOfferStrategy(lead);
+    const lossDetails = getExactAfterHoursLossDetails(lead);
+
     document.getElementById('activeLeadName').textContent = lead.company;
     document.getElementById('activeLeadOwner').textContent = `${lead.owner} (${lead.title})`;
     const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
     document.getElementById('activeLeadLocation').textContent = `${lead.city} · ${lead.trade}`;
     const netSaved = Math.max(0, lead.annualLoss - 8364);
-    document.getElementById('activeLeadLoss').textContent = `-$${lead.annualLoss.toLocaleString()} / year ($${lead.monthlyLoss.toLocaleString()}/mo)`;
+    document.getElementById('activeLeadLoss').textContent = `${lossDetails.annualStr} (${lossDetails.monthlyStr} · ${lossDetails.weeklyStr})`;
     document.getElementById('activeLeadSavings').textContent = `+$${netSaved.toLocaleString()} / year`;
     const bDown = document.getElementById('activeLeadLeakBreakdown');
-    if (bDown) bDown.textContent = getTradeBreakdown(lead.trade, lead.monthlyLoss);
+    if (bDown) bDown.textContent = `Exact after-hours bleed: ${lossDetails.weekendStr} (${lossDetails.unitDesc})`;
     document.getElementById('activeLeadCallBtn').href = `tel:${lead.phone.replace(/[^0-9]/g, '')}`;
     document.getElementById('activeLeadCallBtn').textContent = `📞 Call ${lead.phone}`;
 
-    const strat = getLeadOfferStrategy(lead);
     const pkgBadgeEl = document.getElementById('activeLeadPkgBadge');
     if (pkgBadgeEl) {
       pkgBadgeEl.className = `badge-prod ${strat.pkgBadgeClass}`;
@@ -8297,17 +8445,26 @@ window.closeLeakMathModal = function() {
     const fallbackProdEl = document.getElementById('activeLeadFallbackProd');
     if (fallbackProdEl) fallbackProdEl.textContent = strat.fallbackName;
 
+    const pkgDescEl = document.getElementById('activeLeadPkgDescText');
+    if (pkgDescEl) {
+      pkgDescEl.innerHTML = `<strong style="color:var(--accent2)">What this package is:</strong> ${strat.pkgDescription}`;
+    }
+    const fallbackDescEl = document.getElementById('activeLeadFallbackDescText');
+    if (fallbackDescEl) {
+      fallbackDescEl.innerHTML = `<strong style="color:#f87171">What this product is:</strong> ${strat.fallbackDescription}`;
+    }
+
     const btnToggleStrat = document.getElementById('btnToggleScriptStrategy');
     if (btnToggleStrat) {
       btnToggleStrat.textContent = `🔄 Switch to Fallback Script (${strat.fallbackName})`;
     }
 
-    // 3. Dynamic Leak Hook
-    let hook = `"${lead.owner}, looking at ${lead.company} in ${lead.city} — ${lead.painPoint.toLowerCase()} is leaking an estimated $${lead.annualLoss.toLocaleString()} a year to competitors. Where does that call ring for you right now?"`;
+    // 3. Dynamic Leak Hook with exact after-hours calculations
+    let hook = `"${lead.owner}, looking at ${lead.company} in ${lead.city} — when emergency calls ring after hours, sending them to voicemail leaks an exact estimated ${lossDetails.exactAnnualLossStr} a year (${lossDetails.exactMonthlyLossStr} every month, or ${lossDetails.weekendStr}) to competitors. Where does that call ring for you right now?"`;
     if (lead.product === 'website') {
-      hook = `"${lead.owner}, looking at ${lead.company}'s mobile site in ${lead.city} — with ${lead.painPoint.toLowerCase()}, that bounce rate is leaking an estimated $${lead.annualLoss.toLocaleString()} a year. Who handles your website right now?"`;
+      hook = `"${lead.owner}, looking at ${lead.company}'s mobile site in ${lead.city} — with ${lead.painPoint.toLowerCase()}, that bounce rate is leaking an exact estimated ${lossDetails.exactAnnualLossStr} a year (${lossDetails.monthlyStr}/mo). Who handles your website right now?"`;
     } else if (lead.product === 'speed') {
-      hook = `"${lead.owner}, 78% of homeowners in ${lead.city} hire the contractor who responds first. When you miss calls on a job site, that response delay is leaking an estimated $${lead.annualLoss.toLocaleString()} a year. How fast do new leads get an SMS right now?"`;
+      hook = `"${lead.owner}, 78% of homeowners in ${lead.city} hire the contractor who responds first. When you miss calls on a job site, that response delay is leaking an exact estimated ${lossDetails.exactAnnualLossStr} a year (${lossDetails.monthlyStr}/mo). How fast do new leads get an SMS right now?"`;
     }
     document.getElementById('activeLeadLeakQuote').innerHTML = `💡 <strong>Your Opening Leak Hook for ${lead.owner}:</strong> ${hook}`;
 
@@ -8320,6 +8477,11 @@ window.closeLeakMathModal = function() {
     document.querySelectorAll('.dyn-city').forEach(el => el.textContent = lead.city);
     document.querySelectorAll('.dyn-trade').forEach(el => el.textContent = lead.trade);
     document.querySelectorAll('.dyn-loss').forEach(el => el.textContent = `$${lead.annualLoss.toLocaleString()}/yr ($${lead.monthlyLoss.toLocaleString()}/mo)`);
+    document.querySelectorAll('.dyn-monthly-loss').forEach(el => el.textContent = lossDetails.monthlyStr);
+    document.querySelectorAll('.dyn-weekly-loss').forEach(el => el.textContent = lossDetails.weeklyStr);
+    document.querySelectorAll('.dyn-weekend-loss').forEach(el => el.textContent = lossDetails.weekendStr);
+    document.querySelectorAll('.dyn-exact-ticket').forEach(el => el.textContent = lossDetails.ticketStr);
+    document.querySelectorAll('.dyn-exact-breakdown').forEach(el => el.textContent = lossDetails.unitDesc);
 
     // 6. Switch to Primary Package Script (Accelerate / Scale / Basic)
     if (strat.pkgKey === 'scale') {
@@ -8334,14 +8496,17 @@ window.closeLeakMathModal = function() {
     switchTab('tabScript');
     window.scrollTo({ top: 120, behavior: 'smooth' });
   }
+  window.loadLeadIntoTeleprompter = loadLeadIntoTeleprompter;
 
   // Clear Active Lead
   document.getElementById('clearActiveLeadBtn').addEventListener('click', () => {
     document.getElementById('activeLeadName').textContent = 'Generic Contractor Target';
     document.getElementById('activeLeadOwner').textContent = '[Owner Name]';
     document.getElementById('activeLeadLocation').textContent = '[City, State] · [Trade]';
-    document.getElementById('activeLeadLoss').textContent = '-$96,000 / year';
+    document.getElementById('activeLeadLoss').textContent = '-$96,000 / year ($8,000/mo · ~$1,848/wk)';
     document.getElementById('activeLeadSavings').textContent = '+$92,412 / year';
+    const bDown = document.getElementById('activeLeadLeakBreakdown');
+    if (bDown) bDown.textContent = 'Exact after-hours bleed: ~$1,200 every weekend (1 emergency job + 2 calls after hours)';
     const pkgBadgeEl = document.getElementById('activeLeadPkgBadge');
     if (pkgBadgeEl) {
       pkgBadgeEl.className = 'badge-prod badge-pkg-accelerate';
@@ -8353,13 +8518,27 @@ window.closeLeakMathModal = function() {
       prodBadgeEl.textContent = '↳ Fallback: 🤖 Ava ($397/mo)';
     }
     const targetPkgEl = document.getElementById('activeLeadTargetPkg');
-    if (targetPkgEl) targetPkgEl.textContent = 'Accelerate Tier ($697/mo)';
+    if (targetPkgEl) targetPkgEl.textContent = 'Accelerate Tier ($697/mo + $997 Setup)';
     const fallbackProdEl = document.getElementById('activeLeadFallbackProd');
-    if (fallbackProdEl) fallbackProdEl.textContent = 'Ava Voice AI ($397/mo)';
+    if (fallbackProdEl) fallbackProdEl.textContent = 'Ava Voice AI ($397/mo + $497 Setup)';
+    const pkgDescEl = document.getElementById('activeLeadPkgDescText');
+    if (pkgDescEl) {
+      pkgDescEl.innerHTML = `<strong style="color:var(--accent2)">What this package is:</strong> 24/7 Ava Voice AI Receptionist (&lt;1s instant pickup, emergency triage &amp; tech dispatch) + 90s LeadFlow SMS Speed-to-Lead web responder + Custom ultra-fast (&lt;1s load time) mobile Webflow website + Local AEO &amp; Google ranking setup.`;
+    }
+    const fallbackDescEl = document.getElementById('activeLeadFallbackDescText');
+    if (fallbackDescEl) {
+      fallbackDescEl.innerHTML = `<strong style="color:#f87171">What this product is:</strong> Human-sounding 24/7 Voice AI receptionist answering calls in &lt;1s 24/7/365, diagnosing job emergencies, qualifying callers, and dispatching SMS alerts directly to your technicians.`;
+    }
     document.querySelectorAll('.dyn-owner').forEach(el => el.textContent = '[Owner]');
     document.querySelectorAll('.dyn-company').forEach(el => el.textContent = '[Company]');
     document.querySelectorAll('.dyn-city').forEach(el => el.textContent = '[City]');
     document.querySelectorAll('.dyn-trade').forEach(el => el.textContent = '[Trade]');
+    document.querySelectorAll('.dyn-loss').forEach(el => el.textContent = '$96,000/yr ($8,000/mo)');
+    document.querySelectorAll('.dyn-monthly-loss').forEach(el => el.textContent = '$8,000/mo');
+    document.querySelectorAll('.dyn-weekly-loss').forEach(el => el.textContent = '~$1,848/wk');
+    document.querySelectorAll('.dyn-weekend-loss').forEach(el => el.textContent = '~$1,200/weekend');
+    document.querySelectorAll('.dyn-exact-ticket').forEach(el => el.textContent = '$8,000');
+    document.querySelectorAll('.dyn-exact-breakdown').forEach(el => el.textContent = '1 emergency job (~$8,000) + 2 repair calls after hours');
     const statusBadge = document.getElementById('prompterStatusBadge');
     if (statusBadge) {
       statusBadge.className = 'status-badge status-badge-uncalled';

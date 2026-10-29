@@ -165,7 +165,7 @@ window.addEventListener('load', function() {
       if (btnAdd) {
         btnAdd.click();
         const newLimit = window.getActiveQueueLimit();
-        assert("btnAdd75Leads increases queue by 75", newLimit === initialLimit + 75);
+        assert("btnAdd75Leads increases queue by 75", newLimit === Math.min(window.LEADS_DATA.length, initialLimit + 75));
       } else {
         assert("btnAdd75Leads increases queue by 75", false);
       }

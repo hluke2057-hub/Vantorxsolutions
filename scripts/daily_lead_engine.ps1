@@ -22,6 +22,16 @@ Write-Host "Active Daily Batch: Batch #$activeBatch (75 Target Leads)"
 Write-Host "Total Nationwide Leads Available: $($leads.Count)"
 Write-Host "=========================================================="
 
+# 1-Week Queue Freeze / Intake Pause: Oct 29, 2026 to Nov 5, 2026
+$pauseStart = [DateTime]"2026-10-29T00:00:00"
+$pauseEnd = [DateTime]"2026-11-05T23:59:59"
+$isPaused = ($today -ge $pauseStart -and $today -le $pauseEnd)
+if ($isPaused) {
+    Write-Host "NOTE: 1-WEEK INTAKE PAUSE ACTIVE (Oct 29 - Nov 5, 2026)."
+    Write-Host "Active Queue locked at 700 stacked leads for dialing focus."
+    Write-Host "----------------------------------------------------------"
+}
+
 # Display Today's 75 Leads Summary
 $todaysLeads = $leads | Where-Object { $_.batch -eq $activeBatch }
 Write-Host "Todays 75 Target Queue:"
