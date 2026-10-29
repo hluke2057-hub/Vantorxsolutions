@@ -2712,12 +2712,12 @@
     "service": "LeadFlow 90-Second SMS Speed-to-Lead",
     "estLoss": "$10,500/mo",
     "painPoint": "Web form leads sitting uncontacted for 2+ hours while homeowners shop other providers",
-    "subject": "Question for Brian - capturing McGowan's Heating & Air Conditioning quote requests in 90 seconds",
-    "status": "pending",
+    "subject": "Re: Question for Brian - capturing McGowan's Heating & Air Conditioning quote requests in 90 seconds",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-26T23:20:05.368Z",
-    "body": "Hi Brian,\n\nQuick question regarding McGowan's Heating & Air Conditioning's customer response speed:\n\nWhen customers in Jacksonville, FL fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In HVAC, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $10,500/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "resendMessageId": "01a187ec-b417-72ee-be66-a6181c20be37",
+    "sentAt": "2026-10-29T13:49:59.267Z",
+    "body": "Hi Brian,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at McGowan's Heating & Air Conditioning.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_137",
@@ -2732,12 +2732,12 @@
     "service": "High-Converting Webflow Website",
     "estLoss": "$8,900/mo",
     "painPoint": "Desktop-oriented template site lacking instant mobile emergency booking trigger",
-    "subject": "Quick question for Jonathan regarding Air McCall Heating & Air Conditioning emergency calls",
-    "status": "pending",
+    "subject": "Re: Quick question for Jonathan regarding Air McCall Heating & Air Conditioning emergency calls",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-26T23:20:05.468Z",
-    "body": "Hi Jonathan,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Jacksonville, FL.\n\nWhile Air McCall Heating & Air Conditioning has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Jacksonville, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "resendMessageId": "01a187ec-b4a9-7105-b104-a128cb76dc3a",
+    "sentAt": "2026-10-29T13:49:59.419Z",
+    "body": "Hi Jonathan,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Air McCall Heating & Air Conditioning.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_138",
@@ -2752,12 +2752,12 @@
     "service": "24/7 AI Phone Receptionist (Ava) and Storm Triage",
     "estLoss": "$13,200/mo",
     "painPoint": "Storm damage roof leak inquiries rolling to voicemail during nor'easters",
-    "subject": "Quick question for Matt regarding First Coast Roofing emergency calls",
-    "status": "pending",
+    "subject": "Re: Quick question for Matt regarding First Coast Roofing emergency calls",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-26T23:20:05.565Z",
-    "body": "Hi Matt,\n\nSaw your solid reputation in Jacksonville, FL — congrats on building a trusted local brand.\n\nI was auditing local Roofing providers in Jacksonville, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Roofing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs the average business roughly $13,200/mo in lost jobs.\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "resendMessageId": "01a187ec-b524-76b1-9cb2-44ee8ae5b028",
+    "sentAt": "2026-10-29T13:49:59.549Z",
+    "body": "Hi Matt,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at First Coast Roofing.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_139",
@@ -2772,12 +2772,12 @@
     "service": "High-Converting Webflow Website",
     "estLoss": "$10,200/mo",
     "painPoint": "High bounce rate on mobile ads due to slow mobile load speed",
-    "subject": "Quick question for Andy regarding Carlson Enterprises Roofing emergency calls",
-    "status": "pending",
+    "subject": "Re: Quick question for Andy regarding Carlson Enterprises Roofing emergency calls",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-26T23:20:05.650Z",
-    "body": "Hi Andy,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Jacksonville, FL.\n\nWhile Carlson Enterprises Roofing has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Jacksonville, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "resendMessageId": "01a187ec-b5ad-74a1-a651-8f210d4407df",
+    "sentAt": "2026-10-29T13:49:59.679Z",
+    "body": "Hi Andy,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Carlson Enterprises Roofing.\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_140",
@@ -2792,12 +2792,12 @@
     "service": "Scale Enterprise Tier (,297/mo)",
     "estLoss": "$24,500/mo",
     "painPoint": "High-volume call center placing luxury Naples homeowners on extended holds",
-    "subject": "Quick question for Chadd regarding Best Home Services (Naples/Fort Myers) emergency calls",
-    "status": "pending",
+    "subject": "Re: Quick question for Chadd regarding Best Home Services (Naples/Fort Myers) emergency calls",
+    "status": "sent",
     "touch": 2,
-    "resendMessageId": null,
-    "sentAt": "2026-10-26T23:20:05.869Z",
-    "body": "Hi Chadd,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Fort Myers, FL.\n\nWhile Best Home Services (Naples/Fort Myers) has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Fort Myers, FL?\n\nYou can also check out our official AI protocols here:\n-> https://www.vantorxsolutions.com#pricing\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "resendMessageId": "01a187ec-b633-7023-9f54-1d066153ec3c",
+    "sentAt": "2026-10-29T13:49:59.805Z",
+    "body": "Hi Chadd,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Best Home Services (Naples/Fort Myers).\n\nI wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "nfl_141",
@@ -2913,9 +2913,9 @@
     "estLoss": "$9,000/mo",
     "painPoint": "Emergency slab leak calls in Cape Coral lost to competitors who answer on 1 ring",
     "subject": "Quick question for Adam regarding Next Level Plumbing emergency calls",
-    "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a17d99-33d6-7b1b-b23b-2b78c686aa97",
+    "status": "pending",
+    "touch": 2,
+    "resendMessageId": null,
     "sentAt": "2026-10-27T13:42:34.827Z",
     "body": "Hi Adam,\n\nSaw your solid reputation in Cape Coral, FL — congrats on building a trusted local brand.\n\nI was auditing local Plumbing providers in Cape Coral, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Plumbing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs the average business roughly $9,000/mo in lost jobs.\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
@@ -2933,9 +2933,9 @@
     "estLoss": "$8,200/mo",
     "painPoint": "Automated gate and security breakdown requests waiting 24 hours for callback",
     "subject": "Question for George - capturing Action Automatic Door & Gate quote requests in 90 seconds",
-    "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a17d99-3499-7b27-8746-38fe346a678b",
+    "status": "pending",
+    "touch": 2,
+    "resendMessageId": null,
     "sentAt": "2026-10-27T13:42:35.041Z",
     "body": "Hi George,\n\nQuick question regarding Action Automatic Door & Gate's customer response speed:\n\nWhen customers in Naples, FL fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Electrical, speed is everything.\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $8,200/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
@@ -2953,9 +2953,9 @@
     "estLoss": "$16,200/mo",
     "painPoint": "Burst pipe and flood water mitigation calls going to voicemail over the weekend",
     "subject": "Quick question for Dave regarding Service Team of Professionals (STOP Restoration Fort Myers) emergency calls",
-    "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a17d99-3555-75da-8dd3-c1b8170a87d2",
+    "status": "pending",
+    "touch": 2,
+    "resendMessageId": null,
     "sentAt": "2026-10-27T13:42:35.220Z",
     "body": "Hi Dave,\n\nSaw your solid reputation in Fort Myers, FL — congrats on building a trusted local brand.\n\nI was auditing local Restoration providers in Fort Myers, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Restoration, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs the average business roughly $16,200/mo in lost jobs.\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
