@@ -4798,22 +4798,20 @@ window.copyDemoNumber = function() {
 
 window.openAccountModal = function() {
   try {
-    if (typeof getActiveUser === 'function') {
-      const u = getActiveUser();
-      if (!u || u.id === 'guest' || !activeUserId) {
-        if (typeof window.openSignInGate === 'function') window.openSignInGate();
-        return;
-      }
-    }
     const modal = document.getElementById('accountModal');
     if (modal) {
       modal.classList.add('active');
-      if (typeof window.renderAccountProfileList === 'function') {
-        window.renderAccountProfileList();
-      }
+    }
+    if (typeof window.updateUserUI === 'function') {
+      window.updateUserUI();
+    }
+    if (typeof window.renderAccountProfileList === 'function') {
+      window.renderAccountProfileList();
     }
   } catch(e) {
     console.error('Error opening account modal:', e);
+    const modal = document.getElementById('accountModal');
+    if (modal) modal.classList.add('active');
   }
 };
 
@@ -5723,7 +5721,7 @@ window.closeLeakMathModal = function() {
       role: 'Founder & Closer',
       avatar: '👑',
       level: 5,
-      xp: 1500,
+      xp: 1850,
       isFounder: true,
       founderBypass: true,
       completedUnits: ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'],
@@ -5731,9 +5729,32 @@ window.closeLeakMathModal = function() {
       flashcardsRevealed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       daysPassed: [1, 2, 3],
       modulesPassed: [1, 2, 3, 4, 5],
-      bossesDefeated: 5,
+      bossesDefeated: 8,
       dailyDials: 0,
       dailySims: 0
+    },
+    carter_mccauliss: {
+      id: 'carter_mccauliss',
+      name: 'Carter McCauliss',
+      email: 'cartermccauliss@gmail.com',
+      role: 'Certified Closer & Phone Warrior',
+      avatar: '⚔️',
+      level: 5,
+      xp: 1850,
+      isFounder: false,
+      founderBypass: true,
+      autoPassed: true,
+      completedUnits: ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'],
+      unitActivitiesDone: ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'],
+      flashcardsRevealed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      daysPassed: [1, 2, 3],
+      modulesPassed: [1, 2, 3, 4, 5],
+      bossesDefeated: 8,
+      dailyDials: 0,
+      dailySims: 0,
+      createdAt: '2026-10-21T14:00:00.000Z',
+      lastActive: new Date().toISOString(),
+      lastAction: '🏆 Level 5 Certified Closer · Carter McCauliss Auto-Pass Active'
     }
   };
 
@@ -5741,7 +5762,7 @@ window.closeLeakMathModal = function() {
   function grantCoursePass(u) {
     if (!u) return;
     u.level = 5;
-    u.xp = 1500;
+    u.xp = 1850;
     u.autoPassed = true;
     u.founderBypass = true;
     u.completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
@@ -5750,6 +5771,7 @@ window.closeLeakMathModal = function() {
     u.daysPassed = [1, 2, 3];
     u.modulesPassed = [1, 2, 3, 4, 5];
     u.bossesDefeated = Math.max(8, u.bossesDefeated || 0);
+    u.lastAction = '🏆 Level 5 Certified Closer · Carter McCauliss Auto-Pass Active';
   }
 
   let USER_PROFILES = {};
@@ -5759,6 +5781,7 @@ window.closeLeakMathModal = function() {
     USER_PROFILES = DEFAULT_PROFILES;
   }
   if (!USER_PROFILES.luke) USER_PROFILES.luke = DEFAULT_PROFILES.luke;
+  if (!USER_PROFILES.carter_mccauliss) USER_PROFILES.carter_mccauliss = DEFAULT_PROFILES.carter_mccauliss;
 
   // Migration for all profiles: purge any legacy mock personas, ensure valid real reps only
   const mockKeys = ['buddy', 'rep_buddy_2', 'rep_marcus', 'rep_jake', 'rep_tyler', 'rep_mvpib4wi'];
@@ -5774,6 +5797,11 @@ window.closeLeakMathModal = function() {
     ) {
       delete USER_PROFILES[k];
       return;
+    }
+
+    // Auto-restore full Level 5 certification for Carter McCauliss across restarts
+    if (kl.includes('carter') || nm.includes('carter') || em.includes('carter')) {
+      grantCoursePass(USER_PROFILES[k]);
     }
     const u = USER_PROFILES[k];
     if (!u.unitActivitiesDone) {
@@ -5932,6 +5960,13 @@ window.closeLeakMathModal = function() {
       syncRepToCloud(USER_PROFILES[uid], 'progress_update', `Closer logged in: ${name} (${email})`);
     }
 
+    // Auto-Pass for Carter McCauliss
+    const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
+    if (isCarter) {
+      grantCoursePass(USER_PROFILES[uid]);
+      syncRepToCloud(USER_PROFILES[uid], 'certified', 'Restored Level 5 Certification for Carter McCauliss');
+    }
+
     activeUserId = uid;
     localStorage.setItem('vantorx_active_user_id_v2', uid);
     saveUserProfiles();
@@ -5939,7 +5974,11 @@ window.closeLeakMathModal = function() {
     updateUserUI();
     if (window.selectLmsUnit) window.selectLmsUnit('1-1');
     playSound('levelup');
-    showToast(`✓ Welcome, ${name}! Your account is active. Complete Day 1 to level up!`);
+    if (isCarter) {
+      showToast(`🏆 Welcome back, Carter! Your Level 5 Certification & Lead Queue Auto-Pass is active!`);
+    } else {
+      showToast(`✓ Welcome, ${name}! Your account is active. Complete Day 1 to level up!`);
+    }
   };
 
   window.promptFounderLogin = function() {
@@ -6169,6 +6208,7 @@ window.closeLeakMathModal = function() {
     }
     return GUEST_PROFILE;
   }
+  window.getActiveUser = getActiveUser;
 
   function getRankTitle(lvl) {
     const titles = {
@@ -7158,16 +7198,28 @@ window.closeLeakMathModal = function() {
   const userProfileBtn = document.getElementById('userProfileBtn');
   const accountModal = document.getElementById('accountModal');
   const closeAccountModalBtn = document.getElementById('closeAccountModalBtn');
+  const btnCallerAccountAction = document.getElementById('btnCallerAccountAction');
 
-  if (userProfileBtn && accountModal) {
+  if (userProfileBtn) {
     userProfileBtn.addEventListener('click', () => {
-      accountModal.classList.add('active');
-      renderAccountProfileList();
+      window.openAccountModal();
     });
   }
-  if (closeAccountModalBtn && accountModal) {
+  if (btnCallerAccountAction) {
+    btnCallerAccountAction.addEventListener('click', () => {
+      window.openAccountModal();
+    });
+  }
+  if (closeAccountModalBtn) {
     closeAccountModalBtn.addEventListener('click', () => {
-      accountModal.classList.remove('active');
+      window.closeAccountModal();
+    });
+  }
+  if (accountModal) {
+    accountModal.addEventListener('click', (e) => {
+      if (e.target === accountModal) {
+        window.closeAccountModal();
+      }
     });
   }
 
@@ -7260,6 +7312,12 @@ window.closeLeakMathModal = function() {
       lastAction: 'Account Created · Starting Day 1 of Closer Academy'
     };
 
+    const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
+    if (isCarter) {
+      grantCoursePass(USER_PROFILES[uid]);
+      syncRepToCloud(USER_PROFILES[uid], 'certified', 'Restored Level 5 Certification for Carter McCauliss');
+    }
+
     activeUserId = uid;
     if (nameInput) nameInput.value = '';
     if (emailInput) emailInput.value = '';
@@ -7269,7 +7327,11 @@ window.closeLeakMathModal = function() {
     updateUserUI();
     if (window.updateAcademyUI) window.updateAcademyUI();
     playSound('levelup');
-    showToast(`✓ Account created for ${name}! Welcome to Closer Academy. Complete the 3-day course to earn Level 5.`);
+    if (isCarter) {
+      showToast(`🏆 Account created for Carter! Level 5 Certification & Lead Queue Auto-Pass is restored!`);
+    } else {
+      showToast(`✓ Account created for ${name}! Welcome to Closer Academy. Complete the 3-day course to earn Level 5.`);
+    }
     const accountModal = document.getElementById('accountModal');
     if (accountModal) accountModal.classList.remove('active');
     window.switchTab('tabAcademy');

@@ -373,7 +373,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
   <!-- MASTER PLAYER STATUS BAR -->
   <div class="master-player-bar">
-    <div class="player-avatar-card">
+    <div class="player-avatar-card" onclick="openRepModal()" title="Click to view stats or switch closer profile" style="cursor:pointer">
       <div class="avatar-frame">
         <span id="playerAvatarIcon">🗡️</span>
         <span class="lvl-tag" id="playerLvlTag">LVL 1</span>
@@ -2247,6 +2247,21 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       }
     }
     const cur = profiles[activeRepId];
+    if (cur) {
+      const isCarter = activeRepId === 'carter_mccauliss' || (cur.name && cur.name.toLowerCase().includes('carter')) || (cur.email && cur.email.toLowerCase().includes('carter'));
+      if (isCarter) {
+        cur.level = 5;
+        cur.xp = 1850;
+        cur.autoPassed = true;
+        cur.founderBypass = true;
+        cur.bossesDefeated = Math.max(8, cur.bossesDefeated || 0);
+        player.lvl = 5;
+        player.xp = 1850;
+        player.streak = Math.max(5, player.streak || 0);
+        player.defeatedBosses = ['rick', 'karen', 'mike', 'dave', 'sal', 'brad', 'gary', 'vito'];
+        savePlayer();
+      }
+    }
     player.name = cur.name;
     const nameHdr = document.getElementById('playerNameHeader');
     if (nameHdr) {
@@ -2295,6 +2310,22 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (isFounder || !curId) {
       if (!profiles.luke) {
         profiles.luke = { id: 'luke', name: 'Luke the Closer', role: 'Founder & Closer', email: 'luke@vantorxsolutions.com', avatar: '👑' };
+      }
+      if (!profiles.carter_mccauliss) {
+        profiles.carter_mccauliss = {
+          id: 'carter_mccauliss',
+          name: 'Carter McCauliss',
+          role: 'Certified Closer & Phone Warrior',
+          email: 'cartermccauliss@gmail.com',
+          avatar: '⚔️',
+          level: 5,
+          xp: 1850,
+          autoPassed: true,
+          founderBypass: true,
+          bossesDefeated: 8,
+          daysPassed: [1, 2, 3],
+          completedUnits: ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5']
+        };
       }
     }
 
@@ -2439,6 +2470,19 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       lastAction: 'Joined Sales Team · Cold Call RPG'
     };
 
+    const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
+    if (isCarter) {
+      profiles[uid].level = 5;
+      profiles[uid].xp = 1850;
+      profiles[uid].autoPassed = true;
+      profiles[uid].founderBypass = true;
+      profiles[uid].bossesDefeated = 8;
+      profiles[uid].streak = 5;
+      profiles[uid].completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
+      profiles[uid].daysPassed = [1, 2, 3];
+      profiles[uid].lastAction = '🏆 Level 5 Certified · Carter McCauliss Auto-Pass Active';
+    }
+
     localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
     localStorage.setItem('vantorx_active_user_id_v2', uid);
 
@@ -2446,8 +2490,12 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (emailInput) emailInput.value = '';
 
     selectActiveQuestRep(uid, profiles[uid]);
-    syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role}`, profiles[uid]);
-    showToast(`✓ Closer account created for ${name}! Added to Luke's roster.`);
+    syncQuestToCloud(isCarter ? 'certified' : 'account_created', isCarter ? `Restored Level 5 Certification for Carter McCauliss` : `New sales closer registered: ${name} (${email}) as ${role}`, profiles[uid]);
+    if (isCarter) {
+      showToast(`🏆 Welcome back, Carter! Level 5 Certification & 8 Bosses Slayed restored!`);
+    } else {
+      showToast(`✓ Closer account created for ${name}! Added to Luke's roster.`);
+    }
   };
 
   function recalcPlayerStats() {
@@ -3303,9 +3351,21 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const low = t.toLowerCase();
 
     // FATAL SIGNALS (Saying the Wrong Stuff):
-    const isFatalRude = /\b(shut\s*up|idiot|stupid|fuck|bitch|asshole|bullshit|dumbass|moron|loser|piece\s*of\s*shit|scam(mer)?|fraud|hate\s*you|screw\s*you|go\s*to\s*hell)\b/i.test(low);
+    // Only direct insults/attacks aimed at the contractor count as rude. Empathizing with scams/spam is NOT rude!
+    const isDirectHostility = /\b(you('re|\s+are)\s+(a\s+)?(idiot|stupid|bitch|asshole|dumbass|moron|loser|scammer|clown|piece\s*of\s*shit)|fuck\s*(you|off)|shut\s*up|screw\s*you|go\s*to\s*hell|hate\s*you)\b/i.test(low);
+    const isUnfilteredProfanity = /\b(fuck\s*you|motherfucker|cunt|dipshit|asshole)\b/i.test(low);
+    const isFatalRude = isDirectHostility || isUnfilteredProfanity;
+
     const isFatalSpam = /\b(synerg(y|ies|istic)|paradigm|cutting\s*edge\s*digital|transform\s*your\s*business|bespoke\s*solutions|scale\s*your\s*agency|marketing\s*funnel|sales\s*deck|powerpoint|b2b\s*solutions|partnership\s*opportunity|special\s*promotion\s*today|pitch\s*you|software\s*demo\s*presentation)\b/i.test(low);
-    const isFatalPrice = /\b(5000|10000|5,000|10,000|20,000|100,000|million)\b/i.test(low) || /\b(very\s*expensive|costs\s*a\s*lot|thousands\s*of\s*dollars\s*a\s*month)\b/i.test(low) || /\b(100%\s*free\s*forever|costs\s*nothing|completely\s*free)\b/i.test(low);
+
+    // Fatal price only triggers if the rep explicitly quotes VantorX at an absurd enterprise price or says it's 100% free with no catch.
+    // Talking about $10,000 lost jobs, $8,000 roof leaks, or $4,000 receptionist costs is elite trade ROI math, NOT fatal pricing!
+    const isQuotingVantorxExpensive = (
+      /\b(we\s*charge|it('s|\s*is)\s*going\s*to\s*be|our\s*(price|fee|cost)\s*is)\s*(\$\s*)?(5,?000|10,?000|20,?000|thousands\s*of\s*dollars)\s*(a|per)?\s*(mo|month)?\b/i.test(low) &&
+      !/\b(save|lost?|losing|leak|worth|job|ticket|employee|receptionist|answering\s*service|competitor|contractor)\b/i.test(low)
+    );
+    const isQuotingVantorxFree = /\b(100%\s*free\s*forever|completely\s*free\s*forever|costs?\s*absolutely\s*nothing)\b/i.test(low);
+    const isFatalPrice = isQuotingVantorxExpensive || isQuotingVantorxFree;
 
     const has20Sec = /(20|30)\s*(sec|second)/i.test(low);
     const hasHangUp = /hang\s*up|catch\s*you|bad\s*time|busy/i.test(low);
@@ -3415,6 +3475,15 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       if (!hasAvaExplanation && !hasAvaMechanism && !hasAgreement && !/ava|ai|voice|ring|dispatch|call|answer/i.test(low)) {
         isDodgingQuestion = true;
       }
+    }
+
+    // INTELLIGENCE OVERRIDE: Operational sales discovery questions are NEVER dodging:
+    if ((asksWhoAnswers || asksHowMuchLost || hasGatekeeperPivot || hasEmailPivot || /who\s*answers|where\s*do(es)?\s*(your\s*)?call|how\s*many\s*call|what\s*happens\s*to\s*(your\s*)?call/i.test(low)) && !hasTimeProposal) {
+      isDodgingQuestion = false;
+    }
+    // Substantive statements (>25 characters with trade context or core mechanism) are NEVER dodging!
+    if (low.length > 25 && (hasAvaMechanism || hasPricingAnswer || hasDemoNumber || hasCarrier71 || hasWebsiteMention || hasCrmMention || hasLeakHook || hasAgreement)) {
+      isDodgingQuestion = false;
     }
 
     return {
@@ -4268,7 +4337,35 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       matchMemory.lastDodgedQuestion = null;
     }
 
-
+    // Auto-clear pending dodging counters when rep addresses the topic:
+    if (analysis.hasPricingAnswer || analysis.hasPackageMention) {
+      matchMemory.dodgedCount = 0;
+      matchMemory.lastDodgedQuestion = null;
+    }
+    if (analysis.hasDemoNumber) {
+      matchMemory.dodgedCount = 0;
+      matchMemory.lastDodgedQuestion = null;
+    }
+    if (analysis.hasCarrier71) {
+      matchMemory.dodgedCount = 0;
+      matchMemory.lastDodgedQuestion = null;
+    }
+    if (analysis.hasTimeProposal) {
+      matchMemory.dodgedCount = 0;
+      matchMemory.lastDodgedQuestion = null;
+    }
+    if (analysis.hasWebsiteExplanation) {
+      matchMemory.dodgedCount = 0;
+      matchMemory.lastDodgedQuestion = null;
+    }
+    if (analysis.hasLeadFlowExplanation) {
+      matchMemory.dodgedCount = 0;
+      matchMemory.lastDodgedQuestion = null;
+    }
+    if (analysis.hasAvaExplanation) {
+      matchMemory.dodgedCount = 0;
+      matchMemory.lastDodgedQuestion = null;
+    }
 
     let damage = 24;
     let grade = 'B';
@@ -4310,26 +4407,27 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       defeatMistake = 'Quoted unrealistic enterprise fees ($5,000 - $10,000/mo) or claimed enterprise AI receptionist service is "100% free".';
       defeatRemedy = 'Tradesmen immediately recognize free as a scam or thousands as price gouging. Quote $397/mo + $497 one-time setup (or $697/mo Accelerate) with zero long-term contracts and explain the 1-job ROI.';
       feedback = '🚨 FATAL BLUNDER: Quoted absurd/scam pricing! Contractor hung up.';
-    } else if (analysis.isDodgingQuestion && (matchMemory.dodgedCount || 0) >= 2) {
+    } else if (analysis.isDodgingQuestion && (matchMemory.dodgedCount || 0) >= 2 && !analysis.isUserAskingQuestion && analysis.low.length < 35) {
       grade = 'F';
       damage = 0;
       counterDmg = 100;
       isHangup = true;
       hangupReason = 'Evasive Sales Rep / Dodged Question Twice';
+      const snippet = (userInput || '').length > 55 ? (userInput || '').slice(0, 52) + '...' : (userInput || '');
       if (matchMemory.lastBossQuestion === 'how_much_does_it_cost') {
-        defeatMistake = 'Contractor asked for pricing twice in a row, but you didn\'t state the numbers.';
-        defeatRemedy = 'When a trade contractor asks "how much?", answer directly: $397/mo flat rate + $497 one-time setup with zero long-term contracts before proposing a walkthrough.';
+        defeatMistake = `You said: "${snippet}". ${currentBoss.name} was waiting for the exact price ($397/mo flat rate + $497 setup).`;
+        defeatRemedy = 'When a trade contractor asks "how much?", answer directly first ($397/mo flat rate + $497 setup with zero contracts) before asking follow-up questions or proposing a walkthrough.';
       } else if (matchMemory.lastBossQuestion === 'proof_demo_line') {
-        defeatMistake = 'Contractor asked for the live test number twice, but you didn\'t provide the phone line.';
-        defeatRemedy = 'Give them the Florida demo line: (561) 813-8602 and tell them to dial it right from their truck on speaker.';
+        defeatMistake = `You said: "${snippet}". ${currentBoss.name} asked for the live Florida demo number to test her voice.`;
+        defeatRemedy = 'Provide the demo line: (561) 813-8602 and tell them to dial it right from their truck on speaker to hear her natural cadence.';
       } else if (matchMemory.lastBossQuestion === 'carrier_rollover_setup') {
-        defeatMistake = 'Contractor asked how their company phone line connects without getting messed up.';
-        defeatRemedy = 'Explain Carrier *71 rollover: they keep their existing number, no porting needed, and calls only forward when busy or after hours.';
+        defeatMistake = `You said: "${snippet}". ${currentBoss.name} was concerned about telephone line disruption.`;
+        defeatRemedy = 'Explain Carrier *71 rollover: they keep their existing Verizon/AT&T number, no porting needed, and calls only forward when busy or after hours.';
       } else if (matchMemory.lastBossQuestion === 'meeting_time_close') {
-        defeatMistake = 'Contractor agreed to a walkthrough but asked for a specific time twice.';
-        defeatRemedy = 'Propose a definitive time: "How does tomorrow at 4:30 PM look for a 10-minute screen share?"';
+        defeatMistake = `You said: "${snippet}". ${currentBoss.name} was open to a meeting, but needed a specific time.`;
+        defeatRemedy = 'Propose a definitive day and time: "How does tomorrow at 4:30 PM look for a 10-minute screen share?"';
       } else {
-        defeatMistake = 'Dodged the contractor\'s direct question twice in a row instead of giving a straight answer.';
+        defeatMistake = `You said: "${snippet}". ${currentBoss.name} felt their question wasn\'t answered directly.`;
         defeatRemedy = 'Never dodge direct contractor questions. Answer them directly before moving to the next pitch point.';
       }
       feedback = '🚨 FATAL BLUNDER: Dodged the contractor\'s direct question twice! Contractor terminated call.';
@@ -4491,6 +4589,10 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
         counterDmg = 16;
         feedback = 'A bit vague. Anchor directly to their missed call revenue.';
       }
+      if (analysis.hasPricingAnswer && matchMemory.lastBossQuestion === 'how_much_does_it_cost') matchMemory.lastBossQuestion = null;
+      if (analysis.hasDemoNumber && matchMemory.lastBossQuestion === 'proof_demo_line') matchMemory.lastBossQuestion = null;
+      if (analysis.hasCarrier71 && matchMemory.lastBossQuestion === 'carrier_rollover_setup') matchMemory.lastBossQuestion = null;
+      if (analysis.hasTimeProposal && matchMemory.lastBossQuestion === 'meeting_time_close') matchMemory.lastBossQuestion = null;
     }
     // 3. WEAPON & ARMOR & RELIC MODIFIERS
     if (grade !== 'F') {
@@ -4614,8 +4716,9 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (player.hp - counterDmg <= 0 && !isHangup) {
       isHangup = true;
       hangupReason = 'Emotional Rejection Armor Depleted';
-      defeatMistake = 'Contractor objections broke through your armor after multiple weak or off-target rebuttals.';
-      defeatRemedy = 'Equip higher tier armor (Steel Plate / Reputation Bastion) in the Armory and use the +18 HP Total Agreement defuse ("You are 100% right").';
+      const snippet = (userInput || '').length > 55 ? (userInput || '').slice(0, 52) + '...' : (userInput || '');
+      defeatMistake = `Your pitch ("${snippet}") took counter-damage from ${currentBoss.name}'s skepticism, depleting your rejection armor.`;
+      defeatRemedy = 'Equip higher tier armor in the Armory and use the +18 HP Total Agreement defuse ("You are 100% right") to absorb friction before quoting pricing.';
     }
 
     // Generate Adaptive Contractor Reply
