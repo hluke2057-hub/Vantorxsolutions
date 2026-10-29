@@ -638,16 +638,21 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <option value="10">Batch 10: Midwest &amp; Industrial (Columbus, Cincinnati, Indy) (75)</option>
               </select>
             </div>
-            <button class="btn btn-gold btn-sm" id="btnAdd75Leads" style="font-weight:700" title="Expand your active queue with +75 fresh leads immediately">âž• Add +75 Leads Now</button>
+            <button class="btn btn-gold btn-sm" id="btnAdd75Leads" style="font-weight:700" title="Expand your active queue with +75 fresh leads immediately">➕ Add +75 Leads Now</button>
             <div style="display:flex;align-items:center;gap:6px">
               <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">REP:</span>
               <select id="callerSelect" class="custom-select" style="max-width:140px">
-                <option value="Luke">Luke (Founder)</option>
+                <option value="Luke Hamilton">Luke (Founder)</option>
+                <option value="Carter McCauliss">Carter McCauliss</option>
                 <option value="Buddy 2 (Rep 2)">Buddy 2 (Rep 2)</option>
                 <option value="Sales Rep 3">Sales Rep 3</option>
                 <option value="Guest Caller">Guest Caller</option>
               </select>
             </div>
+            <button class="btn btn-ghost btn-sm" id="btnSyncTeamCalls" title="Sync live call records with teammates" style="border:1px solid rgba(56,189,248,0.4);color:#38bdf8;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px">
+              <span id="teamCallSyncDot" style="width:8px;height:8px;background:#34d399;border-radius:50%;display:inline-block"></span>
+              🔄 Sync Team (<span id="teamCallSyncCount">Live</span>)
+            </button>
           </div>
         </div>
 
@@ -5700,10 +5705,12 @@ window.closeLeakMathModal = function() {
 
   // Toast
   const toast = document.getElementById('toast');
-  function showToast(msg) {
+  function showToast(msg, duration = 2500) {
+    if (!toast) return;
     toast.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2200);
+    clearTimeout(toast._hideTimeout);
+    toast._hideTimeout = setTimeout(() => toast.classList.remove('show'), duration);
   }
 
   document.getElementById('copyDemoPill').addEventListener('click', () => {
@@ -7447,6 +7454,207 @@ window.closeLeakMathModal = function() {
     } catch(e) {}
   }
 
+  // ============================================================
+  // 🌐 REAL-TIME TEAM CALL SYNC ENGINE (CROSS-DEVICE & CLOUD)
+  // ============================================================
+  let _teamCallChannel = null;
+  try {
+    _teamCallChannel = new BroadcastChannel('vantorx_lead_calls_channel');
+  } catch(_) {}
+
+  let _isSyncingToCloud = false;
+
+  function setTeamSyncStatus(isLive, customText = null) {
+    const dot = document.getElementById('teamCallSyncDot');
+    const countEl = document.getElementById('teamCallSyncCount');
+    if (dot) dot.style.background = isLive ? '#34d399' : '#f59e0b';
+    if (countEl) {
+      if (customText) {
+        countEl.textContent = customText;
+      } else {
+        const totalCalls = Object.values(CALL_RECORDS).filter(c => c && c.called).length;
+        countEl.textContent = `${totalCalls} Synced`;
+      }
+    }
+  }
+  window.setTeamSyncStatus = setTeamSyncStatus;
+
+  function syncCallRecordToCloud(leadId, record) {
+    if (!leadId || !record) return;
+    const nowIso = new Date().toISOString();
+    record.updatedAt = record.updatedAt || nowIso;
+    const callerName = (typeof activeCaller === 'string' && activeCaller.trim() && activeCaller !== 'Sign In Required') 
+      ? activeCaller.trim() 
+      : 'Luke (Founder)';
+    record.caller = record.caller || callerName;
+
+    // 1. Broadcast locally to other tabs/windows immediately
+    try {
+      if (_teamCallChannel) {
+        _teamCallChannel.postMessage({
+          type: 'call_update',
+          leadId: leadId,
+          record: record,
+          caller: callerName,
+          timestamp: Date.now()
+        });
+      }
+      localStorage.setItem('vantorx_lead_calls_sync_ping', `${leadId}_${Date.now()}`);
+    } catch(_) {}
+
+    // 2. Persist to Cloud API (/api/lead-calls/lead-call-sync)
+    const payload = {
+      leadId: leadId,
+      call: record,
+      caller: record.caller || callerName
+    };
+
+    fetch('/api/lead-calls/lead-call-sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(() => {
+      return fetch('/api/audit?action=lead-call-sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }).then(res => {
+      if (res && res.ok) {
+        setTeamSyncStatus(true);
+      }
+    }).catch(err => {
+      console.warn('[Lead Call Cloud Sync Notice]', err);
+    });
+  }
+  window.syncCallRecordToCloud = syncCallRecordToCloud;
+
+  function mergeCallsFromTeammate(incomingCalls, notifyUser = true) {
+    if (!incomingCalls || typeof incomingCalls !== 'object') return false;
+    let hasUpdates = false;
+    let notifyMsg = null;
+    const curCaller = (typeof activeCaller === 'string' && activeCaller.trim()) ? activeCaller.trim() : 'Luke (Founder)';
+
+    for (const [id, inc] of Object.entries(incomingCalls)) {
+      if (!inc || typeof inc !== 'object') continue;
+      const cur = CALL_RECORDS[id];
+      const isNew = !cur;
+      const curOutcome = cur ? cur.outcome : null;
+      const incOutcome = inc.outcome;
+      const curCalled = cur ? !!cur.called : false;
+      const incCalled = !!inc.called;
+      const incCaller = inc.caller || 'Teammate';
+
+      const isDifferent = isNew ||
+        curCalled !== incCalled ||
+        curOutcome !== incOutcome ||
+        (inc.notes && (!cur || inc.notes !== cur.notes));
+
+      if (isDifferent) {
+        CALL_RECORDS[id] = {
+          ...(cur || {}),
+          ...inc
+        };
+        hasUpdates = true;
+
+        if (notifyUser && incCaller !== curCaller && incCalled) {
+          const lead = (window.LEADS_DATA || []).find(l => l.id === id);
+          const leadName = lead ? lead.company : `Lead #${id}`;
+          if (incOutcome === 'Call Back' || incOutcome === 'Callback Scheduled') {
+            notifyMsg = `👥 Team Alert: ${incCaller} marked ${leadName} as "Call Back"!`;
+          } else if (incOutcome === 'Success' || incOutcome === 'Booked Demo') {
+            notifyMsg = `🎉 Team Win: ${incCaller} booked a Demo on ${leadName}!`;
+          } else {
+            notifyMsg = `👥 Team Update: ${incCaller} logged "${incOutcome || 'Called'}" on ${leadName}!`;
+          }
+        }
+      }
+    }
+
+    if (hasUpdates) {
+      try {
+        localStorage.setItem('vantorx_lead_calls_v1', JSON.stringify(CALL_RECORDS));
+      } catch(_) {}
+      renderLeadsTable();
+      updateQuotaHUD();
+      if (activeLead && incomingCalls[activeLead.id]) {
+        updatePrompterCallStatus(activeLead.id);
+      }
+      setTeamSyncStatus(true);
+      if (notifyMsg) {
+        showToast(notifyMsg, 4000);
+      }
+    }
+    return hasUpdates;
+  }
+  window.mergeCallsFromTeammate = mergeCallsFromTeammate;
+
+  async function fetchTeamCallsFromCloud(isBackgroundPoll = false) {
+    if (_isSyncingToCloud) return;
+    _isSyncingToCloud = true;
+    try {
+      let res = await fetch('/api/lead-calls').catch(() => null);
+      if (!res || !res.ok) {
+        res = await fetch('/api/audit?action=lead-calls').catch(() => null);
+      }
+      if (res && res.ok) {
+        const data = await res.json();
+        if (data && data.calls) {
+          mergeCallsFromTeammate(data.calls, isBackgroundPoll);
+          setTeamSyncStatus(true);
+          if (!isBackgroundPoll) {
+            showToast('✓ Live team call records synchronized from cloud!');
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('[Fetch Team Calls Notice]', err);
+      setTeamSyncStatus(false, 'Offline');
+    } finally {
+      _isSyncingToCloud = false;
+    }
+  }
+  window.fetchTeamCallsFromCloud = fetchTeamCallsFromCloud;
+
+  // Listen for BroadcastChannel updates from other tabs
+  if (_teamCallChannel) {
+    _teamCallChannel.onmessage = (e) => {
+      if (e.data && e.data.leadId && e.data.record) {
+        mergeCallsFromTeammate({ [e.data.leadId]: e.data.record }, true);
+      } else if (e.data && e.data.calls) {
+        mergeCallsFromTeammate(e.data.calls, true);
+      }
+    };
+  }
+
+  // Cross-tab fallback via storage event
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'vantorx_lead_calls_v1' || e.key === 'vantorx_lead_calls_sync_ping') {
+      try {
+        const fresh = JSON.parse(localStorage.getItem('vantorx_lead_calls_v1')) || {};
+        mergeCallsFromTeammate(fresh, true);
+      } catch(_) {}
+    }
+  });
+
+  // Start polling loop every 4 seconds for real-time multi-device cloud synchronization
+  setInterval(() => {
+    fetchTeamCallsFromCloud(true);
+  }, 4000);
+
+  // Initial cloud pull
+  setTimeout(() => {
+    fetchTeamCallsFromCloud(false);
+  }, 400);
+
+  // Manual Team Sync Button Listener
+  const btnSyncTeamCallsEl = document.getElementById('btnSyncTeamCalls');
+  if (btnSyncTeamCallsEl) {
+    btnSyncTeamCallsEl.addEventListener('click', () => {
+      fetchTeamCallsFromCloud(false);
+    });
+  }
+
   callerSelectEl = callerSelectEl || document.getElementById('callerSelect');
   if (callerSelectEl) {
     callerSelectEl.value = activeCaller;
@@ -7981,6 +8189,7 @@ window.closeLeakMathModal = function() {
           saveUserProfiles();
           updateDailyGoalsUI();
           saveCallRecords();
+          syncCallRecordToCloud(id, CALL_RECORDS[id]);
           renderLeadsTable();
           updateQuotaHUD();
           if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
@@ -7995,6 +8204,7 @@ window.closeLeakMathModal = function() {
           saveUserProfiles();
           updateDailyGoalsUI();
           saveCallRecords();
+          syncCallRecordToCloud(id, CALL_RECORDS[id]);
           renderLeadsTable();
           updateQuotaHUD();
           if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
@@ -8019,6 +8229,8 @@ window.closeLeakMathModal = function() {
           };
         } else {
           CALL_RECORDS[id].called = true;
+          CALL_RECORDS[id].caller = activeCaller;
+          CALL_RECORDS[id].timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
           CALL_RECORDS[id].outcome = outcome;
         }
         if (!wasCalled) {
@@ -8028,6 +8240,7 @@ window.closeLeakMathModal = function() {
           updateDailyGoalsUI();
         }
         saveCallRecords();
+        syncCallRecordToCloud(id, CALL_RECORDS[id]);
         renderLeadsTable();
         updateQuotaHUD();
         if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
@@ -8145,6 +8358,7 @@ window.closeLeakMathModal = function() {
     saveUserProfiles();
     updateDailyGoalsUI();
     saveCallRecords();
+    syncCallRecordToCloud(id, CALL_RECORDS[id]);
 
     closeCallLogModal();
     renderLeadsTable();
@@ -8166,6 +8380,7 @@ window.closeLeakMathModal = function() {
     saveUserProfiles();
     updateDailyGoalsUI();
     saveCallRecords();
+    syncCallRecordToCloud(id, CALL_RECORDS[id]);
 
     closeCallLogModal();
     renderLeadsTable();

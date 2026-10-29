@@ -14,6 +14,16 @@ const CANDIDATE_ROSTER_FILES = [
 ];
 const ROSTER_FILES = Array.from(new Set(CANDIDATE_ROSTER_FILES.map(p => path.normalize(p))));
 
+const CANDIDATE_CALL_FILES = [
+  path.join("/tmp", "lead_call_records.json"),
+  path.resolve(REPO_ROOT, "data", "lead_call_records.json"),
+  path.resolve(REPO_ROOT, "website", "data", "lead_call_records.json"),
+  path.resolve(__dirname, "..", "data", "lead_call_records.json"),
+  path.resolve(process.cwd(), "data", "lead_call_records.json"),
+  path.resolve(process.cwd(), "website", "data", "lead_call_records.json"),
+];
+const CALL_FILES = Array.from(new Set(CANDIDATE_CALL_FILES.map(p => path.normalize(p))));
+
 async function getRoster() {
   const mergedMap = new Map();
 
@@ -217,6 +227,174 @@ function saveRoster(roster) {
       }
     } catch (_) {}
   }
+}
+
+async function getLeadCallRecords() {
+  const mergedCalls = {};
+
+  // 1. Live Cloud Ingestion: Fetch call logs from Supabase audit_log
+  try {
+    const logs = await supabaseRequest(
+      "/rest/v1/audit_log?entity_type=eq.lead_call&select=*&order=created_at.asc"
+    );
+
+    if (Array.isArray(logs) && logs.length > 0) {
+      for (const entry of logs) {
+        let p = entry.payload || {};
+        if (!p.call && entry.details) {
+          try {
+            const d = typeof entry.details === "string" ? JSON.parse(entry.details) : entry.details;
+            if (d && d.call) p = d;
+          } catch (_) {}
+        }
+        const leadId = p.leadId || entry.entity_id;
+        const callObj = p.call || p;
+        if (leadId && typeof callObj === "object") {
+          mergedCalls[leadId] = {
+            ...(mergedCalls[leadId] || {}),
+            ...callObj,
+            updatedAt: entry.created_at || callObj.updatedAt || new Date().toISOString()
+          };
+        }
+      }
+    }
+  } catch (err) {
+    console.warn("[Supabase Call Records Ingest Notice]", err.message);
+  }
+
+  // 2. Read local and candidate files
+  for (const fp of CALL_FILES) {
+    if (fs.existsSync(fp)) {
+      try {
+        const raw = fs.readFileSync(fp, "utf8");
+        const parsed = JSON.parse(raw.charCodeAt(0) === 0xfeff ? raw.slice(1) : raw);
+        if (parsed && typeof parsed === "object") {
+          for (const [id, rec] of Object.entries(parsed)) {
+            if (rec && typeof rec === "object") {
+              const ex = mergedCalls[id];
+              if (!ex || !ex.updatedAt || (rec.updatedAt && new Date(rec.updatedAt) >= new Date(ex.updatedAt))) {
+                mergedCalls[id] = { ...(ex || {}), ...rec };
+              } else {
+                mergedCalls[id] = { ...rec, ...ex };
+              }
+            }
+          }
+        }
+      } catch (_) {}
+    }
+  }
+
+  return mergedCalls;
+}
+
+function saveLeadCallRecords(callsMap) {
+  for (const fp of CALL_FILES) {
+    try {
+      const dir = path.dirname(fp);
+      const isTmp = fp.startsWith("/tmp") || fp.startsWith("\\tmp");
+      if (isTmp || fs.existsSync(dir)) {
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        fs.writeFileSync(fp, JSON.stringify(callsMap, null, 2), "utf8");
+      }
+    } catch (_) {}
+  }
+}
+
+async function handleLeadCallSync(req, res) {
+  const body = req.body || {};
+  const caller = typeof body.caller === "string" ? body.caller.trim() : "Outbound Closer";
+  const nowIso = new Date().toISOString();
+
+  const masterCalls = await getLeadCallRecords();
+  let updatedCount = 0;
+  const changedLeadIds = [];
+
+  // Support single call update: { leadId, call }
+  if (body.leadId && body.call) {
+    const id = body.leadId;
+    const callData = body.call;
+    masterCalls[id] = {
+      ...(masterCalls[id] || {}),
+      ...callData,
+      caller: callData.caller || caller,
+      updatedAt: nowIso
+    };
+    updatedCount++;
+    changedLeadIds.push(id);
+  }
+
+  // Support batch calls update: { calls: { [id]: callData } }
+  if (body.calls && typeof body.calls === "object") {
+    for (const [id, callData] of Object.entries(body.calls)) {
+      if (callData && typeof callData === "object") {
+        masterCalls[id] = {
+          ...(masterCalls[id] || {}),
+          ...callData,
+          caller: callData.caller || caller,
+          updatedAt: nowIso
+        };
+        updatedCount++;
+        changedLeadIds.push(id);
+      }
+    }
+  }
+
+  saveLeadCallRecords(masterCalls);
+
+  // Cloud persistence to Supabase
+  try {
+    const insertPayloads = changedLeadIds.map(id => ({
+      action: "lead_call_logged",
+      entity_type: "lead_call",
+      entity_id: id,
+      payload: {
+        leadId: id,
+        call: masterCalls[id],
+        caller: masterCalls[id].caller || caller,
+        timestamp: nowIso
+      }
+    }));
+
+    if (insertPayloads.length > 0) {
+      await supabaseRequest("/rest/v1/audit_log", {
+        method: "POST",
+        body: insertPayloads.length === 1 ? insertPayloads[0] : insertPayloads
+      });
+    }
+  } catch (directErr) {
+    console.warn("[Supabase Call Sync Direct Notice]", directErr.message);
+    try {
+      for (const id of changedLeadIds) {
+        const c = masterCalls[id];
+        await supabaseRequest("/rest/v1/rpc/submit_public_inquiry", {
+          method: "POST",
+          body: {
+            inquiry_name: c.caller || caller,
+            inquiry_email: "team@vantorxsolutions.com",
+            inquiry_phone: null,
+            inquiry_business: "VantorX Lead Call Activity",
+            inquiry_type: "lead_call",
+            inquiry_interests: ["cold_call_arena", c.outcome || "Called"],
+            inquiry_challenge: JSON.stringify({
+              leadId: id,
+              call: c,
+              timestamp: nowIso
+            })
+          }
+        });
+      }
+    } catch (rpcErr) {
+      console.warn("[Supabase Call Sync RPC Fallback Notice]", rpcErr.message);
+    }
+  }
+
+  return res.status(200).json({
+    ok: true,
+    updatedCount,
+    changedLeadIds,
+    calls: masterCalls,
+    lastUpdate: nowIso
+  });
 }
 
 async function handleRepSync(req, res) {
@@ -562,6 +740,16 @@ module.exports = async function handler(req, res) {
 
   if (action === "rep-digest") {
     return handleRepDigest(req, res);
+  }
+
+  // 2. Real-Time Shared Lead Call Synchronization across Sales Reps
+  if (action === "lead-calls" || action === "lead-call-roster") {
+    const calls = await getLeadCallRecords();
+    return res.status(200).json({ ok: true, calls });
+  }
+
+  if (action === "lead-call-sync") {
+    return handleLeadCallSync(req, res);
   }
 
   if (action === "scan-emails") {
