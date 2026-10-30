@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>Confidential Trade Operations Audit — VantorX Solutions</title>
+<meta name="description" content="Personalized contractor revenue leak diagnosis, after-hours emergency call capture audit, and live 24/7 Voice AI receptionist test.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070a0f;
+  --bg2: #0f1522;
+  --bg3: #182234;
+  --line: rgba(255,255,255,0.08);
+  --line2: rgba(255,255,255,0.14);
+  --ink: #f1f5f9;
+  --dim: #94a3b8;
+  --accent: #f59e0b;
+  --accent2: #fbbf24;
+  --ok: #34d399;
+  --err: #f87171;
+  --blue: #38bdf8;
+  --purple: #a855f7;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  -webkit-text-size-adjust: 100%!important;
+  text-size-adjust: 100%!important;
+  -moz-text-size-adjust: 100%!important;
+  touch-action: manipulation;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+header {
+  background: rgba(15,21,34,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.head-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.brand {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  text-decoration: none;
+}
+.brand span { color: var(--accent); }
+.badge-confidential {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.35);
+  color: var(--accent2);
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.hero {
+  padding: 36px 0 24px;
+}
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: 32px;
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+.hero p {
+  color: var(--dim);
+  font-size: 15px;
+  max-width: 760px;
+}
+
+/* AUDIT CARD */
+.audit-card {
+  background: var(--bg2);
+  border: 1.5px solid var(--line2);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.audit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--blue), var(--accent2));
+}
+.target-dossier {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.dossier-cell {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+.dossier-label {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.dossier-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* FINANCIAL LEAK METRICS */
+.leak-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.leak-box {
+  background: rgba(15,23,42,0.85);
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid var(--line);
+}
+.leak-box.danger {
+  border-color: rgba(248,113,113,0.35);
+  background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(15,23,42,0.9));
+}
+.leak-box.success {
+  border-color: rgba(52,211,153,0.35);
+  background: linear-gradient(135deg, rgba(52,211,153,0.1), rgba(15,23,42,0.9));
+}
+.leak-box-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.leak-box.danger .leak-box-label { color: #fca5a5; }
+.leak-box.success .leak-box-label { color: #6ee7b7; }
+.leak-box-val {
+  font-family: var(--font-head);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.leak-box.danger .leak-box-val { color: #fca5a5; }
+.leak-box.success .leak-box-val { color: #6ee7b7; }
+.leak-box-sub {
+  font-size: 12px;
+  color: var(--dim);
+}
+
+/* VULNERABILITY CALLOUT */
+.vuln-box {
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.3);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+.vuln-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--accent2);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vuln-desc {
+  font-size: 13.5px;
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+/* COMPARISON TABLE */
+.compare-box {
+  margin-bottom: 28px;
+}
+.compare-box h3 {
+  font-size: 17px;
+  font-family: var(--font-head);
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.compare-card {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+}
+.compare-card.old { border-color: rgba(248,113,113,0.3); }
+.compare-card.new { border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.04); }
+.compare-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.compare-card.old .compare-card-title { color: #fca5a5; }
+.compare-card.new .compare-card-title { color: #6ee7b7; }
+.compare-list {
+  list-style: none;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+.compare-list li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+/* ACTION BUTTONS & DEMO PROOF */
+.action-box {
+  background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(56,189,248,0.08));
+  border: 1.5px solid rgba(245,158,11,0.4);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+.action-box h3 {
+  font-size: 20px;
+  color: #ffffff;
+  margin-bottom: 6px;
+  font-family: var(--font-head);
+}
+.action-box p {
+  color: var(--dim);
+  font-size: 14px;
+  max-width: 600px;
+  margin: 0 auto 18px;
+}
+.action-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #070a0f;
+  box-shadow: 0 4px 18px rgba(245,158,11,0.3);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(245,158,11,0.45);
+}
+.btn-ghost {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--line2);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--accent);
+}
+.footer-note {
+  text-align: center;
+  color: var(--dim);
+  font-size: 12.5px;
+  margin-top: 36px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-grid">
+    <a href="../index.html" class="brand">
+      <span>⚡</span> VantorX Solutions
+    </a>
+    <div class="badge-confidential">
+      🔒 Confidential Operations Audit
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="hero-tag">⚡ Live Trade Diagnostic</div>
+    <h1 id="leadHeadline">Operational Audit for <span id="leadCompanyText" style="color:var(--accent2)">Local Trade Contractor</span></h1>
+    <p>Prepared for <strong id="leadOwnerText" style="color:#ffffff">Business Owner</strong>. This confidential diagnostic reveals silent after-hours call drop-offs, missed-call revenue bleed, and speed-to-lead response benchmarks in your local service territory.</p>
+  </div>
+
+  <div class="audit-card">
+    <div class="target-dossier">
+      <div class="dossier-cell">
+        <div class="dossier-label">Operating Trade</div>
+        <div class="dossier-val" id="dossierTrade">HVAC / Mechanical</div>
+      </div>
+      <div class="dossier-cell">
+        <div class="dossier-label">Service Territory</div>
+        <div class="dossier-val" id="dossierCity">West Palm Beach, FL</div>
+      </div>
+      <div class="dossier-cell">
+        <div class="dossier-label">Decision Maker</div>
+        <div class="dossier-val" id="dossierOwner">Todd Miller · General Manager</div>
+      </div>
+      <div class="dossier-cell">
+        <div class="dossier-label">Audit File Status</div>
+        <div class="dossier-val" style="color:var(--ok)">✓ Active Verification</div>
+      </div>
+    </div>
+
+    <div class="leak-grid">
+      <div class="leak-box danger">
+        <div class="leak-box-label">Estimated Annual Revenue Bleed</div>
+        <div class="leak-box-val" id="lossAnnualText">-$204,000</div>
+        <div class="leak-box-sub" id="lossSubText">~$17,000/mo walking out the door after 5 PM &amp; weekends</div>
+      </div>
+      <div class="leak-box danger">
+        <div class="leak-box-label">Monthly Call Drop-Off Math</div>
+        <div class="leak-box-val" id="lossMonthlyText">-$17,000</div>
+        <div class="leak-box-sub" id="lossWeeklyText">~2 missed emergency replacement jobs every month</div>
+      </div>
+      <div class="leak-box success">
+        <div class="leak-box-label">Projected Net Retained Profit</div>
+        <div class="leak-box-val" id="lossSavingsText">+$195,636</div>
+        <div class="leak-box-sub">Pure profit kept after plugging after-hours leaks</div>
+      </div>
+    </div>
+
+    <div class="vuln-box">
+      <div class="vuln-title">⚠️ Primary Operational Vulnerability Detected:</div>
+      <div class="vuln-desc" id="vulnDescText">
+        Customer calls after 5:00 PM and weekend emergency quote requests are rolling to an office voicemail or third-party answering service with multi-minute hold times. In your trade, 84% of callers needing emergency service hang up immediately and hire the next competitor who answers live.
+      </div>
+    </div>
+
+    <div class="compare-box">
+      <h3>Operational Comparison: Current Setup vs. VantorX Ava AI</h3>
+      <div class="compare-grid">
+        <div class="compare-card old">
+          <div class="compare-card-title">❌ Traditional Answering / Voicemail</div>
+          <ul class="compare-list">
+            <li>• Rings 3–5 times before hitting a generic answering service</li>
+            <li>• Third-party operators lack technical trade knowledge</li>
+            <li>• Can't book appointments directly into your calendar</li>
+            <li>• Urgent calls sit un-notified until the next business morning</li>
+            <li>• Costs $2,500 – $4,500/mo for a full-time human receptionist</li>
+          </ul>
+        </div>
+        <div class="compare-card new">
+          <div class="compare-card-title">✅ VantorX Ava 24/7 Voice AI Engine</div>
+          <ul class="compare-list">
+            <li>• Answers on ring #1 (< 1 second), 24/7/365 with zero hold time</li>
+            <li>• Speaks with natural human cadence, understands trade jargon</li>
+            <li>• Qualifies emergency jobs vs. general estimate requests</li>
+            <li>• Books appointments directly into your Google/Outlook calendar</li>
+            <li>• Sends instant priority SMS alert to your cell or on-call tech</li>
+            <li>• Flat predictable pricing starting at $397/mo — zero long-term contract</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-box">
+      <h3>Experience Ava Live Right Now</h3>
+      <p>Dial our live demo line from your mobile phone. Test her voice naturalness, ask her after-hours questions, or book a mock service run.</p>
+      <div class="action-btns">
+        <a href="tel:5618138602" class="btn btn-gold">
+          <span>📞 Dial Live Demo: (561) 813-8602</span>
+        </a>
+        <a href="../index.html#contact" class="btn btn-ghost">
+          <span>📅 Book 15-Min Walkthrough with Luke</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Confidential Audit prepared by <strong>Luke Hamilton</strong>, Founder &amp; CEO, VantorX Solutions.<br>
+    Direct Line: (561) 813-8602 · <a href="../index.html" style="color:var(--accent2);text-decoration:none">vantorxsolutions.com</a>
+  </div>
+</main>
+
+<script>
+(async function() {
+  const params = new URLSearchParams(window.location.search);
+  let leadId = params.get('id') || params.get('lead') || '';
+
+  // Also check if path has /audit/[id]
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  if (!leadId && pathParts.length >= 2 && pathParts[pathParts.length - 2] === 'audit') {
+    leadId = pathParts[pathParts.length - 1];
+  }
+
+  let lead = null;
+
+  // Try loading from normalized dataset
+  try {
+    const res = await fetch('../data/normalized_lead_targets.json');
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        if (leadId) {
+          lead = data.find(l => l.id.toLowerCase() === leadId.toLowerCase() || (l.company && l.company.toLowerCase().includes(leadId.toLowerCase())));
+        }
+        if (!lead && data.length > 0) {
+          // Default to Service Experts West Palm Beach for demo
+          lead = data.find(l => l.id === 'fl_se_012') || data[0];
+        }
+      }
+    }
+  } catch (_) {}
+
+  // Override with URL query params if provided
+  const company = params.get('company') || (lead ? lead.company : 'Service Experts West Palm Beach');
+  const owner = params.get('owner') || (lead ? (lead.fullOwner || lead.owner) : 'Todd Miller');
+  const title = params.get('title') || (lead ? lead.title : 'General Manager');
+  const trade = params.get('trade') || (lead ? lead.trade : 'HVAC');
+  const city = params.get('city') || (lead ? lead.city : 'West Palm Beach, FL');
+  const lossAnnual = params.get('annualLoss') || (lead ? lead.annualLoss : 204000);
+  const lossMonthly = params.get('monthlyLoss') || (lead ? lead.monthlyLoss : 17000);
+  const pain = params.get('pain') || (lead ? lead.painPoint : 'Holding callers on hold during extreme summer peak demand periods');
+
+  const savings = Math.max(0, lossAnnual - 8364);
+
+  // Populate UI
+  document.getElementById('leadCompanyText').textContent = company;
+  document.getElementById('leadOwnerText').textContent = `${owner} (${title})`;
+  document.getElementById('dossierTrade').textContent = trade;
+  document.getElementById('dossierCity').textContent = city;
+  document.getElementById('dossierOwner').textContent = `${owner} · ${title}`;
+
+  document.getElementById('lossAnnualText').textContent = `-$${Number(lossAnnual).toLocaleString()}/yr`;
+  document.getElementById('lossMonthlyText').textContent = `-$${Number(lossMonthly).toLocaleString()}/mo`;
+  document.getElementById('lossSavingsText').textContent = `+$${Number(savings).toLocaleString()}/yr`;
+  document.getElementById('lossSubText').textContent = `~$${Number(lossMonthly).toLocaleString()}/mo in lost emergency jobs and hold drop-offs`;
+  document.getElementById('lossWeeklyText').textContent = `Over $${Math.round(lossAnnual / 52).toLocaleString()} bleeding out every single week`;
+
+  if (pain) {
+    document.getElementById('vulnDescText').textContent = `${pain}. In your market, trade customers needing emergency service call the next business on Google if they are put on hold or hit voicemail. Ava guarantees 1-ring pickup 24/7.`;
+  }
+})();
+</script>
+</body>
+</html>

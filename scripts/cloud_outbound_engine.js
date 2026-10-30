@@ -98,7 +98,10 @@ function generateEmailBody(target) {
 
 Following up on my note from earlier this week — I know you're busy managing operations at ${target.company}.
 
-I wanted to leave you our direct demo line: ${DEMO_PHONE}.
+I included your shop's live diagnostic audit file here:
+-> ${WEBSITE_URL}/audit/?id=${target.id}
+
+I also wanted to leave you our direct demo line: ${DEMO_PHONE}.
 
 If you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.
 
@@ -120,8 +123,8 @@ Website: ${WEBSITE_URL}`
 
 I haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.
 
-Before I close out your audit file for ${target.city}, I wanted to share the live pricing and technical architecture we use for service businesses:
--> ${WEBSITE_URL}#pricing
+Before I close out your audit file for ${target.city}, I wanted to share your complete diagnostic numbers and live pricing architecture:
+-> ${WEBSITE_URL}/audit/?id=${target.id}
 
 If you ever want to plug the ${target.estLoss || "$8,500/mo"} leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at ${DEMO_PHONE} or grab 15 minutes on my calendar.
 
@@ -145,7 +148,10 @@ Saw your solid reputation in ${target.city} — congrats on building a trusted l
 
 I was auditing local ${target.trade} providers in ${target.city} and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.
 
-In ${target.trade}, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs the average business roughly ${target.estLoss || "$8,500/mo"} in lost jobs.
+In ${target.trade}, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs ${target.company} roughly ${target.estLoss || "$8,500/mo"} in lost jobs.
+
+I put together your confidential live diagnostic file here:
+-> ${WEBSITE_URL}/audit/?id=${target.id}
 
 We built Ava, an AI phone receptionist designed specifically for service businesses:
 1. Answers in 1 ring, 24/7/365, with natural human conversation
@@ -176,6 +182,9 @@ When customers in ${target.city} fill out an online estimate request or call whi
 
 Harvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In ${target.trade}, speed is everything.
 
+I prepared your shop's speed-to-lead audit here:
+-> ${WEBSITE_URL}/audit/?id=${target.id}
+
 We deploy LeadFlow specifically for local trade contractors:
 • Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed
 • Follows up with online estimate requests in under 90 seconds
@@ -202,12 +211,12 @@ While ${target.company} has great local reviews, when homeowners ask ChatGPT or 
 
 Here is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.
 
+I prepared your company's full AI search and operations audit here:
+-> ${WEBSITE_URL}/audit/?id=${target.id}
+
 We built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.
 
 Could we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for ${target.trade} in ${target.city}?
-
-You can also check out our official AI protocols here:
--> ${WEBSITE_URL}#pricing
 
 Best,
 Luke

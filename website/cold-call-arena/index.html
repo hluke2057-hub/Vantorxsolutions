@@ -2966,6 +2966,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <span class="status-badge status-badge-uncalled" id="prompterStatusBadge">⏳ To Call</span>
             <button class="btn btn-ghost btn-sm" id="prompterToggleCallBtn" style="border:1px solid rgba(52,211,153,0.5);color:#6ee7b7">✓ Mark as Called</button>
             <a href="tel:5612031315" class="btn btn-gold btn-sm" id="activeLeadCallBtn">📞 Call (561) 203-1315</a>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnCopyAuditUrl" style="border:1px solid rgba(56,189,248,0.5);color:#7dd3fc" title="Copy live confidential audit URL to text or email prospect">🔗 Copy Audit Link</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnCopyFollowUpSms" style="border:1px solid rgba(245,158,11,0.5);color:var(--accent2)" title="Copy targeted, non-fluff follow-up text referencing this audit">💬 Copy Follow-Up SMS</button>
             <button class="btn btn-ghost btn-sm" id="clearActiveLeadBtn">✕ Clear Lead</button>
           </div>
         </div>
@@ -8622,6 +8624,30 @@ window.closeLeakMathModal = function() {
     prompterToggleBtnEl.addEventListener('click', () => {
       if (!activeLead) return;
       openCallLogModal(activeLead.id);
+    });
+  }
+
+  // Copy Direct Audit URL Listener
+  const btnCopyAuditUrlEl = document.getElementById('btnCopyAuditUrl');
+  if (btnCopyAuditUrlEl) {
+    btnCopyAuditUrlEl.addEventListener('click', () => {
+      if (!activeLead) return;
+      const url = `https://www.vantorxsolutions.com/audit/?id=${activeLead.id}`;
+      navigator.clipboard.writeText(url);
+      showToast(`✓ Copied Live Audit URL for ${activeLead.company}!`);
+    });
+  }
+
+  // Copy Targeted Follow-Up SMS Listener
+  const btnCopyFollowUpSmsEl = document.getElementById('btnCopyFollowUpSms');
+  if (btnCopyFollowUpSmsEl) {
+    btnCopyFollowUpSmsEl.addEventListener('click', () => {
+      if (!activeLead) return;
+      const lossMo = Number(activeLead.monthlyLoss || 8500).toLocaleString();
+      const auditUrl = `https://www.vantorxsolutions.com/audit/?id=${activeLead.id}`;
+      const sms = `Hey ${activeLead.owner}, it's Luke from VantorX here in Florida. Emailed you ${activeLead.company}'s after-hours leak audit this morning (~$${lossMo}/mo in missed emergency calls). You can review your numbers directly here: ${auditUrl} or call my direct line if you have 3 mins.`;
+      navigator.clipboard.writeText(sms);
+      showToast(`✓ Copied Targeted Follow-Up SMS for ${activeLead.owner}!`);
     });
   }
 

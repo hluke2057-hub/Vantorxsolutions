@@ -14,6 +14,7 @@
     { "source": "/api/reps/:action", "destination": "/api/audit?action=:action" },
     { "source": "/api/lead-calls", "destination": "/api/audit?action=lead-calls" },
     { "source": "/api/lead-calls/:action", "destination": "/api/audit?action=:action" },
+    { "source": "/audit/:id", "destination": "/audit/index.html" },
     { "source": "/.well-known/llms.txt", "destination": "/llms.txt" },
     { "source": "/.well-known/llms-full.txt", "destination": "/llms-full.txt" }
   ],
