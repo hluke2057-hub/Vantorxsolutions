@@ -21,12 +21,11 @@ html{
   -webkit-text-size-adjust:100%!important;
   text-size-adjust:100%!important;
   -moz-text-size-adjust:100%!important;
-  font-size:16px!important;
   touch-action:manipulation;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-  background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:14px;line-height:1.5;
+  background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:13px;line-height:1.45;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;min-height:100vh;padding-bottom:70px;
   max-width:100vw;overflow-x:hidden;
 }
@@ -182,9 +181,10 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .btn-reset-filters:hover{background:rgba(239,68,68,0.3);border-color:rgba(239,68,68,0.6);color:#ffffff}
 .search-scope-badge{font-size:11px;font-family:var(--font-mono);font-weight:700;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.35);color:#7dd3fc;padding:2px 8px;border-radius:4px;display:inline-block}
 
-.excel-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left;white-space:nowrap}
-.excel-table th{background:var(--bg3);padding:12px 14px;font-family:var(--font-mono);font-size:11.5px;font-weight:700;color:var(--dim);border-bottom:1px solid var(--line2);position:sticky;top:0;z-index:10;text-transform:uppercase;letter-spacing:0.04em}
-.excel-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.excel-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left;white-space:nowrap}
+.excel-table th{background:var(--bg3);padding:8px 10px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--dim);border-bottom:1px solid var(--line2);position:sticky;top:0;z-index:10;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap}
+.excel-table td{padding:6px 10px;border-bottom:1px solid var(--line);vertical-align:middle;white-space:nowrap;line-height:1.25}
+.excel-table tr{height:36px}
 .excel-table tr:hover td{background:rgba(245,158,11,0.06)}
 .excel-table tr.selected td{background:rgba(245,158,11,0.14)}
 
@@ -519,12 +519,6 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       </div>
       <button class="btn btn-ghost btn-sm" id="voiceToggleBtn" style="color:var(--dim)">🗣️ Voice: OFF (Click to Enable)</button>
       <button class="btn btn-ghost btn-sm" id="soundToggleBtn" onclick="toggleSound()">🔊 Sound: ON</button>
-      <div class="zoom-ctrl-pill" id="displayScaleController" style="display:inline-flex;align-items:center;background:var(--bg3);border:1px solid var(--line2);border-radius:999px;padding:3px 8px;gap:6px" title="Display & Font Scaling (Click 100% to Reset)">
-        <span style="font-size:11px;color:var(--dim);font-family:var(--font-mono)">Scale:</span>
-        <button type="button" class="btn-zoom-step" id="btnZoomOut" onclick="adjustUiZoom(-0.05)" title="Decrease font / zoom (Ctrl + -)" style="background:none;border:none;color:var(--dim);font-weight:700;font-size:12px;cursor:pointer;padding:2px 5px">A−</button>
-        <button type="button" class="btn-zoom-reset" id="btnZoomReset" onclick="resetUiZoom()" title="Reset to standard 100% font scale (Ctrl + 0)" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.4);color:var(--accent2);border-radius:999px;font-size:11px;font-weight:700;padding:2px 8px;cursor:pointer">100%</button>
-        <button type="button" class="btn-zoom-step" id="btnZoomIn" onclick="adjustUiZoom(0.05)" title="Increase font / zoom (Ctrl + +)" style="background:none;border:none;color:var(--dim);font-weight:700;font-size:12px;cursor:pointer;padding:2px 5px">A+</button>
-      </div>
       <a href="../cold-call-quest/index.html" target="_blank" class="live-demo-pill" style="border-color:rgba(245,158,11,0.5);color:var(--accent2);text-decoration:none" title="Launch dedicated standalone full-screen RPG">⚔️ Standalone Quest RPG ↗</a>
       <a href="../../reports/daily_briefing_latest.html" target="_blank" class="live-demo-pill" style="border-color:rgba(52,211,153,0.5);color:var(--ok);text-decoration:none" title="View live executive briefing">📊 Executive Briefing ↗</a>
     </div>
@@ -532,18 +526,6 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 </header>
 
 <main class="wrap">
-  <!-- 🔍 Oversize / Excessive Zoom Emergency Alert (Shown if display scale or DPI is bloated) -->
-  <div id="oversizeAlertBanner" style="display:none;background:rgba(245,158,11,0.14);border:1.5px solid rgba(245,158,11,0.45);border-radius:12px;padding:12px 18px;margin-bottom:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-shadow:0 4px 16px rgba(0,0,0,0.3)">
-    <div style="font-size:13px;color:#fef3c7;display:flex;align-items:center;gap:10px">
-      <span style="font-size:18px">🔍</span>
-      <span><strong>Display scale altered:</strong> If font or elements look massive or difficult to navigate, click Reset to restore normal 100% cockpit view.</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <button type="button" class="btn btn-gold btn-sm" onclick="resetUiZoom()" style="padding:6px 14px;font-size:12px;font-weight:800;border-radius:6px">↺ Reset Standard 100%</button>
-      <button type="button" class="btn btn-ghost btn-sm" onclick="dismissOversizeBanner()" style="padding:6px 12px;font-size:12px;border-radius:6px">✕ Dismiss</button>
-    </div>
-  </div>
-
   <!-- ⚔️ PROMINENT CALLER LOGIN & REP SWITCHER BAR -->
   <div class="caller-bar" id="callerQuickBar">
     <div class="caller-bar-status">
@@ -800,15 +782,15 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <table class="excel-table" id="leadExcelTable">
           <thead>
             <tr>
-              <th style="min-width:130px">Call Status</th>
+              <th style="min-width:120px">Call Status</th>
               <th>Contractor / Company</th>
               <th>Decision Maker</th>
               <th>City, State &amp; Trade</th>
               <th>Phone (Click to Dial)</th>
               <th>Primary Leak Detected</th>
-              <th style="min-width:190px">Exact After-Hours Bleed ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View real-world trade ticket math">ℹ️ Math</span></th>
+              <th>Annual Leak ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View real-world trade ticket math">ℹ️ Math</span></th>
               <th>Net Saved ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View net profit formula">ℹ️ Math</span></th>
-              <th style="min-width:300px">Recommended Offer &amp; Product Description</th>
+              <th style="min-width:180px">Target Package ➔ Fallback Offer</th>
               <th>Outcome &amp; Notes</th>
               <th style="text-align:right">Action</th>
             </tr>
@@ -8153,27 +8135,20 @@ window.closeLeakMathModal = function() {
         <td>
           <a href="tel:${lead.phone.replace(/[^0-9]/g, '')}" style="color:var(--blue);font-family:var(--font-mono);font-weight:700;text-decoration:none">${lead.phone}</a>
         </td>
-        <td style="max-width:230px;overflow:hidden;text-overflow:ellipsis" title="${lead.painPoint}">
-          <span style="font-size:12px;color:#e2e8f0">${lead.painPoint}</span>
+        <td style="max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${lead.painPoint}">
+          <span style="font-size:11.5px;color:#e2e8f0">${lead.painPoint}</span>
         </td>
-        <td style="white-space:normal;min-width:190px">
-          <span class="badge-leak" title="Exact after-hours money loss: -$${lead.annualLoss.toLocaleString()}/yr">-$${lead.annualLoss.toLocaleString()}/yr</span>
-          <div style="font-size:11.5px;color:#fca5a5;font-weight:700;margin-top:2px">-$${lead.monthlyLoss.toLocaleString()}/mo <span style="color:var(--dim);font-weight:400">(${lossDetails.weeklyStr})</span></div>
-          <div style="font-size:10.5px;color:var(--dim);margin-top:3px;line-height:1.3" title="Exact After-Hours Bleed: ${lossDetails.unitDesc}">⚡ ${lossDetails.unitDesc}</div>
+        <td>
+          <span class="badge-leak" title="Exact after-hours money loss: -$${lead.annualLoss.toLocaleString()}/yr (${lossDetails.unitDesc})">-$${lead.annualLoss.toLocaleString()}/yr</span>
+          <div style="font-size:10.5px;color:var(--dim);margin-top:2px">-$${lead.monthlyLoss.toLocaleString()}/mo</div>
         </td>
         <td>
           <span class="badge-save" title="Net profit kept after $697/mo VantorX Growth Tier">+$${Math.max(0, lead.annualLoss - 8364).toLocaleString()}/yr</span>
         </td>
-        <td style="white-space:normal;min-width:280px;max-width:360px">
-          <div>${strat.pkgBadge}</div>
-          <div class="lead-pkg-desc" style="font-size:11px;color:#e2e8f0;margin-top:4px;line-height:1.35;background:rgba(245,158,11,0.06);border-left:2px solid var(--accent2);padding:4px 8px;border-radius:4px">
-            <strong style="color:var(--accent2)">What it is:</strong> ${strat.pkgDescription}
-          </div>
-          <div style="font-size:11px;color:var(--dim);margin-top:6px;display:flex;align-items:center;gap:4px">
-            <span style="color:var(--faint)">↳ Downsell:</span> ${strat.fallbackBadge}
-          </div>
-          <div class="lead-fallback-desc" style="font-size:10.5px;color:var(--dim);margin-top:2px;line-height:1.3">
-            ${strat.fallbackDescription}
+        <td>
+          <div title="${strat.pkgDescription}">${strat.pkgBadge}</div>
+          <div style="font-size:10.5px;color:var(--dim);margin-top:3px;display:flex;align-items:center;gap:4px" title="${strat.fallbackDescription}">
+            <span style="color:var(--faint)">↳ Fallback:</span> ${strat.fallbackBadge}
           </div>
         </td>
         <td>
@@ -8941,102 +8916,32 @@ window.closeLeakMathModal = function() {
   // Cold Call Quest RPG is fully standalone at website/cold-call-quest/index.html
 
   // ============================================================
-  // 🔍 DISPLAY SCALE, FONT SIZE & ZOOM CONTROLLER
+  // 🔍 DISPLAY SCALE & KEYBOARD RESET (Ctrl+0 / Cmd+0)
   // ============================================================
-  let currentUiZoom = 1.0;
   try {
-    const saved = parseFloat(localStorage.getItem('vantorx_ui_zoom') || '1.0');
-    if (!isNaN(saved) && saved >= 0.75 && saved <= 1.35) {
-      currentUiZoom = saved;
-    } else {
-      currentUiZoom = 1.0;
-    }
-  } catch(e) {
-    currentUiZoom = 1.0;
-  }
-
-  function applyUiZoom(scale, persist = true) {
-    const clamped = Math.max(0.75, Math.min(1.35, Math.round(scale * 100) / 100));
-    currentUiZoom = clamped;
-    const mainWrap = document.querySelector('main.wrap') || document.body;
-    if (clamped === 1.0) {
-      mainWrap.style.zoom = '';
-      mainWrap.style.transform = '';
-      mainWrap.style.transformOrigin = '';
-    } else {
-      if ('zoom' in document.body.style) {
-        mainWrap.style.zoom = String(clamped);
-      } else {
-        mainWrap.style.transform = `scale(${clamped})`;
-        mainWrap.style.transformOrigin = 'top center';
-      }
-    }
-
-    const resetBtn = document.getElementById('btnZoomReset');
-    if (resetBtn) {
-      resetBtn.textContent = `${Math.round(clamped * 100)}%`;
-      if (clamped === 1.0) {
-        resetBtn.style.background = 'rgba(245,158,11,0.15)';
-        resetBtn.style.color = 'var(--accent2)';
-        resetBtn.style.borderColor = 'rgba(245,158,11,0.4)';
-      } else {
-        resetBtn.style.background = 'rgba(56,189,248,0.25)';
-        resetBtn.style.color = '#7dd3fc';
-        resetBtn.style.borderColor = '#38bdf8';
-      }
-    }
-
-    if (persist) {
-      try {
-        localStorage.setItem('vantorx_ui_zoom', String(clamped));
-      } catch(e) {}
-    }
-  }
-
-  window.adjustUiZoom = function(delta) {
-    applyUiZoom(currentUiZoom + delta, true);
-    showToast(`Display scale set to ${Math.round(currentUiZoom * 100)}%`);
-  };
+    localStorage.removeItem('vantorx_ui_zoom');
+  } catch(e) {}
 
   window.resetUiZoom = function() {
-    applyUiZoom(1.0, true);
     try {
-      document.body.style.zoom = '1.0';
-      document.documentElement.style.zoom = '1.0';
-    } catch(e) {}
-    const banner = document.getElementById('oversizeAlertBanner');
-    if (banner) banner.style.display = 'none';
-    showToast('✓ Display scale reset to standard 100% (Normal)');
-  };
-
-  window.dismissOversizeBanner = function() {
-    const banner = document.getElementById('oversizeAlertBanner');
-    if (banner) banner.style.display = 'none';
-    try {
-      sessionStorage.setItem('vantorx_dismiss_oversize_banner', 'true');
+      const mainWrap = document.querySelector('main.wrap') || document.body;
+      if (mainWrap) {
+        mainWrap.style.zoom = '';
+        mainWrap.style.transform = '';
+      }
+      document.body.style.zoom = '';
+      document.documentElement.style.zoom = '';
+      showToast('✓ Display reset to standard 100% view');
     } catch(e) {}
   };
 
-  // Keyboard shortcut Ctrl+0 or Cmd+0 resets display scale
+  // Keyboard shortcut Ctrl+0 or Cmd+0 instantly snaps browser view to standard 100%
   window.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && (e.key === '0' || e.code === 'Digit0' || e.code === 'Numpad0')) {
       e.preventDefault();
       window.resetUiZoom();
     }
   });
-
-  // Check if browser is abnormally zoomed in on refresh
-  try {
-    const dismissed = sessionStorage.getItem('vantorx_dismiss_oversize_banner');
-    if (!dismissed) {
-      if (window.devicePixelRatio >= 1.5 || currentUiZoom > 1.05) {
-        const banner = document.getElementById('oversizeAlertBanner');
-        if (banner) banner.style.display = 'flex';
-      }
-    }
-  } catch(e) {}
-
-  applyUiZoom(currentUiZoom, false);
 
   if (window.selectLmsUnit) window.selectLmsUnit('1-1');
   updateUserUI();

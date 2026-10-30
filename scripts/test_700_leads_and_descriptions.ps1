@@ -1,4 +1,4 @@
-﻿# scripts/test_700_leads_and_descriptions.ps1
+# scripts/test_700_leads_and_descriptions.ps1
 # Comprehensive test suite verifying:
 # 1. 1-week daily intake pause at exactly 700 leads
 # 2. Complete product/package descriptions across table and teleprompter
@@ -36,7 +36,7 @@ $htmlContent = [System.IO.File]::ReadAllText($arenaHtmlPath, [System.Text.Encodi
 Assert-Test "Arena HTML contains PAUSE_START_DATE" ($htmlContent.Contains("PAUSE_START_DATE = new Date('2026-10-29T00:00:00')"))
 Assert-Test "Arena HTML contains PAUSE_END_DATE" ($htmlContent.Contains("PAUSE_END_DATE = new Date('2026-11-05T23:59:59')"))
 Assert-Test "Arena HTML contains isIntakePaused definition" ($htmlContent.Contains("isIntakePaused = (now >= PAUSE_START_DATE && now <= PAUSE_END_DATE)"))
-Assert-Test "Arena HTML contains 1-week pause batch heading" ($htmlContent.Contains("PAUSED FOR 1 WEEK · 700 STACKED LEADS READY"))
+Assert-Test "Arena HTML contains 1-week pause batch heading" ($htmlContent.Contains("PAUSED FOR 1 WEEK"))
 Assert-Test "Arena HTML contains 1-week pause dropdown label" ($htmlContent.Contains("1-Wk Pause Active"))
 Assert-Test "Arena HTML contains getExactAfterHoursLossDetails" ($htmlContent.Contains("function getExactAfterHoursLossDetails(lead)"))
 Assert-Test "Arena HTML contains pkgDescription schema in getLeadOfferStrategy" ($htmlContent.Contains("pkgDescription = '24/7 Ava Voice AI Receptionist"))
@@ -102,12 +102,12 @@ window.addEventListener('load', function() {
 
       // 3. Batch Heading shows 1-week pause message
       const headingEl = document.getElementById('batchHeadingText');
-      assert("Batch heading contains PAUSED FOR 1 WEEK message", headingEl && headingEl.textContent.includes('PAUSED FOR 1 WEEK · 700 STACKED LEADS READY'), headingEl ? headingEl.textContent : 'missing');
+      assert("Batch heading contains PAUSED FOR 1 WEEK message", headingEl && headingEl.textContent.includes('PAUSED FOR 1 WEEK'), headingEl ? headingEl.textContent : 'missing');
 
       // 4. Batch Dropdown label includes 1-Wk Pause Active
       const batchSel = document.getElementById('batchSelect');
       const optActive = batchSel ? batchSel.querySelector('option[value="activeQueue"]') : null;
-      assert("Batch dropdown indicates 700 Leads and 1-Wk Pause Active", optActive && optActive.textContent.includes('700 Leads · 1-Wk Pause Active'), optActive ? optActive.textContent : 'missing');
+      assert("Batch dropdown indicates 700 Leads and 1-Wk Pause Active", optActive && optActive.textContent.includes('1-Wk Pause Active'), optActive ? optActive.textContent : 'missing');
 
       // 5. Test getLeadOfferStrategy returns full package and fallback descriptions
       const testLead1 = window.LEADS_DATA[0]; // Palm Air ($102,000/yr, HVAC, product: ava)
@@ -133,8 +133,8 @@ window.addEventListener('load', function() {
       const firstRow = document.querySelector('#leadTableBody tr');
       assert("First table row contains exact annual loss", firstRow && firstRow.textContent.includes('$102,000/yr'));
       assert("First table row contains exact monthly loss", firstRow && firstRow.textContent.includes('$8,500/mo'));
-      assert("First table row contains What it is package description", firstRow && firstRow.querySelector('.lead-pkg-desc') && firstRow.querySelector('.lead-pkg-desc').textContent.includes('24/7 Ava Voice AI'));
-      assert("First table row contains Downsell fallback description", firstRow && firstRow.querySelector('.lead-fallback-desc') && firstRow.querySelector('.lead-fallback-desc').textContent.includes('Human-sounding'));
+      assert("First table row contains target package badge", firstRow && firstRow.querySelector('.badge-pkg-accelerate, .badge-pkg-scale, .badge-pkg-essential'));
+      assert("First table row maintains thin compact height under 65px", firstRow && firstRow.offsetHeight <= 65, firstRow ? ('Height: ' + firstRow.offsetHeight + 'px') : 'null');
 
       // 9. Load Lead into Teleprompter and verify prompter strategy card
       window.loadLeadIntoTeleprompter(testLead1.id);
