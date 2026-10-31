@@ -27,13 +27,13 @@ $testScript = @'
     const logEntries = logEl.querySelectorAll('.log-entry');
     assert("Chat starts with at least 3 initial log entries", logEntries.length >= 3);
     assert("First speaker is Luke", logEntries[1].textContent.indexOf('Luke:') !== -1);
-    assert("Luke opener contains 'is this the owner?'", logEntries[1].textContent.indexOf('is this the owner?') !== -1);
+    assert("Luke opener contains 'wondering if the owner is around'", logEntries[1].textContent.indexOf('wondering if the owner is around') !== -1);
     assert("Rick responds to opener", logEntries[2].textContent.indexOf('Rick') !== -1 && logEntries[2].textContent.indexOf('own the outfit') !== -1);
 
     // TEST 2: Karen (Gatekeeper Boss 1) starts with Luke opener and Karen gatekeeper status
     selectBoss(1);
     const logEntriesK = logEl.querySelectorAll('.log-entry');
-    assert("Gatekeeper chat has Luke opener", logEntriesK[1].textContent.indexOf('is this the owner?') !== -1);
+    assert("Gatekeeper chat has Luke opener", logEntriesK[1].textContent.indexOf('wondering if the owner is around') !== -1);
     assert("Karen affirms dispatch role", logEntriesK[2].textContent.indexOf('Karen at dispatch') !== -1);
 
     // TEST 3: Gatekeeper clever pivot moves Karen to pain

@@ -3122,9 +3122,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (terminal) terminal.innerHTML = '';
 
     const bossFirst = (currentBoss.name || 'Contractor').split(' ')[0].replace(/"/g, '');
-    const playerOpeningLine = (currentBoss.key === 'gatekeeper')
-      ? `Hey, Luke with VantorX — is this the owner?`
-      : `Hey ${bossFirst}? Luke with VantorX — is this the owner?`;
+    const playerOpeningLine = "Hey, I was just wondering if the owner is around?";
 
     appendLog(`📞 <strong>DIALING:</strong> Connected to ${currentBoss.name} (${currentBoss.company}) in ${currentBoss.location}...`, 'system');
     appendLog(`<strong>Luke:</strong> "${playerOpeningLine}"`, 'player');
@@ -3457,7 +3455,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
     // Enhanced Split-Track Signals (Owner vs Gatekeeper & Advanced Objections):
     const hasOwnerCheck = /\b(owner|decision\s*maker|boss|run\s*the\s*place|in\s*charge|foreman|am\s*i\s*talking\s*to\s*the\s*owner|is\s*this\s*the\s*owner|you\s*the\s*owner)\b/i.test(low);
-    const hasGatekeeperPivot = /\b(is\s*gary\s*around|out\s*on\s*a\s*job\s*site|in\s*the\s*field|come\s*in\s*off\s*the\s*truck|transfer\s*me|direct\s*cell|cell\s*number|dispatch\s*after\s*5|after-hours\s*calls|emergency\s*dispatch)\b/i.test(low);
+    const hasGatekeeperPivot = /\b(owner\s*is\s*around|wondering\s*if\s*the\s*owner|is\s*the\s*owner\s*around|owner\s*around|is\s*gary\s*around|out\s*on\s*a\s*job\s*site|in\s*the\s*field|come\s*in\s*off\s*the\s*truck|transfer\s*me|direct\s*cell|cell\s*number|dispatch\s*after\s*5|after-hours\s*calls|emergency\s*dispatch)\b/i.test(low);
     const hasEmailPivot = /\b(shoot\s*an\s*email|send\s*(you\s*)?an\s*email|happy\s*to\s*email|before\s*i\s*send|so\s*i\s*don't\s*send\s*(10\s*pages|garbage|spam)|what\s*specific|lose\s*more\s*calls)\b/i.test(low);
     const hasAnsweringServiceCompare = /\b(answering\s*service|call\s*center|live\s*operator|offshore|botch|miss\s*notes|scribble|15\s*minutes|relay|in\s*one\s*ring)\b/i.test(low);
     const hasNumberSource = /\b(public|dbpr|license|google\s*maps|florida\s*license|registry|reason\s*i\s*called|reached\s*out)\b/i.test(low);
@@ -5287,9 +5285,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (terminal) terminal.innerHTML = '';
 
     const bossFirst = (currentBoss.name || 'Contractor').split(' ')[0].replace(/"/g, '');
-    const playerOpeningLine = (currentBoss.key === 'gatekeeper')
-      ? `Hey, Luke with VantorX — is this the owner?`
-      : `Hey ${bossFirst}? Luke with VantorX — is this the owner?`;
+    const playerOpeningLine = "Hey, I was just wondering if the owner is around?";
 
     appendLog(`📞 <strong>REDIALING:</strong> Connecting to ${currentBoss.name} (${currentBoss.company}) in ${currentBoss.location}...`, 'system');
     appendLog(`<strong>Luke:</strong> "${playerOpeningLine}"`, 'player');

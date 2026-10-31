@@ -1480,7 +1480,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <div class="lms-call-hdr">✓ Elite Closer Owner Extraction (Cell Captured)</div>
                 <div class="lms-call-body">
                   <strong>Dispatcher:</strong> "Gulf Coast Plumbing, this is Karen."<br>
-                  <strong>Elite Closer:</strong> "Hey Karen, is Mike around or is he out on a job site right now?"<br>
+                  <strong>Elite Closer:</strong> "Hey, I was just wondering if the owner is around?"<br>
                   <strong>Dispatcher:</strong> "He's in the field all day. What is this regarding?"<br>
                   <strong>Elite Closer:</strong> "It's Luke — quick operational question about your weekend emergency call routing in Tampa. Does he check his cell or should I catch him at the shop around 4:30?"<br>
                   <strong>Dispatcher:</strong> "Try his cell, it's (813) 555-0192."
@@ -1546,8 +1546,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                   <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 0, false, 'Pitching the company name and software demonstration to a front-desk dispatcher violates the Iron Law. Karen replies: &quot;We are not interested, please remove us from your list&quot; *CLICK*. (-25 HP Rep)')">
                     A) "Hi Karen! I'm calling from VantorX Solutions to schedule a 15-minute demonstration with the business owner regarding your missed emergency call volume."
                   </button>
-                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 1, true, 'DIRECT HIT (50 DMG)! Subcontractor Peer Tonality executed! Casual, low vocal pitch, first names only, sounds like an existing trade partner or supplier. Karen does not flag you as a salesperson.')">
-                    B) "Hey Karen, is Mike around or is he out on a job site right now?"
+                  <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 1, true, 'DIRECT HIT (50 DMG)! Natural Peer Tonality executed! Casual, disarming, sounds like a straightforward customer or local contractor. Karen does not flag you as an aggressive salesperson.')">
+                    B) "Hey, I was just wondering if the owner is around?"
                   </button>
                   <button class="act-opt-btn" type="button" onclick="submitUnitActivity('1-2', 1, 2, false, 'Asking for &quot;the owner&quot; by title immediately screams cold caller. Dispatchers are trained to screen anyone who doesn\'t know the owner\'s first name. (-25 HP Rep)')">
                     C) "Good morning ma'am, may I speak with whoever makes executive decisions regarding your phone system?"
@@ -1881,7 +1881,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <div class="quiz-q-title">Q2: You call a roofing company's office line. A receptionist answers: <em>"Thanks for calling Gulf Coast Roofing, this is Sarah, how can I direct your call?"</em> How do you reach the owner without triggering a gatekeeper block?</div>
               <div class="quiz-options" data-day="1" data-q="2">
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 0, false)">A) "Hi Sarah, I'm calling from VantorX regarding your website and AI phone systems. Can I speak to the person in charge of technology?"</button>
-                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 1, true)">B) "Hey Sarah, is Mike around or is he out on a job site right now?"</button>
+                <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 1, true)">B) "Hey, I was just wondering if the owner is around?"</button>
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 2, false)">C) "Sarah, tell Mike it's an urgent regulatory matter regarding his Florida state contractor license."</button>
                 <button class="quiz-opt-btn" type="button" onclick="checkDayAnswer(1, 2, 3, false)">D) "I need to speak to the owner right now about the thousands in emergency repair calls you're missing on weekends."</button>
               </div>
@@ -2992,6 +2992,12 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="active-lead-val" style="color:#6ee7b7" id="activeLeadSavings">+$93,636 / year</div>
             <div style="font-size:11px;color:var(--ok);margin-top:3px" id="activeLeadSavingsSub">Net profit kept after $697/mo VantorX investment</div>
           </div>
+        <div class="active-lead-opening-card" id="activeLeadOpeningLineCard" style="margin-top:10px;background:rgba(245,158,11,0.12);border:1.5px solid var(--accent);border-radius:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+          <div>
+            <div style="font-size:11px;font-family:var(--font-mono);color:var(--accent2);text-transform:uppercase;letter-spacing:0.05em;font-weight:700">📞 YOUR OPENING LINE (WHEN ANYONE PICKS UP):</div>
+            <div style="font-size:16px;font-weight:700;color:#ffffff;margin-top:3px" id="activeLeadOpeningLine">"Hey, I was just wondering if the owner is around?"</div>
+          </div>
+          <span style="font-size:11.5px;color:var(--dim);font-style:italic">Natural &amp; non-salesy · Disarms gatekeepers</span>
         </div>
 
         <div class="active-lead-leak-quote" id="activeLeadLeakQuote">
@@ -3123,7 +3129,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
               <div class="script-line" style="font-size:16px">
-                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your incoming calls and after-hours routing in <span class="dyn-city">[City]</span>."
+                "Hey, I was just wondering if the owner is around?"
               </div>
               <div class="delivery-tip">
                 💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
@@ -3312,7 +3318,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="script-phase">
           <div class="phase-tag"><span>Gatekeeper Opener</span><span>Website Issue Notice</span></div>
           <div class="script-line">
-            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — had a quick question about a mobile loading error on your website for <span class="dyn-city">[City]</span> customers. Is he in?"
+            "Hey, I was just wondering if the owner is around?"
           </div>
           <div class="delivery-tip">
             💡 <em>Delivery Tip:</em> Framing as a mobile loading question gets past front-desk screeners 85% of the time.
@@ -3480,7 +3486,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="script-phase">
           <div class="phase-tag"><span>Gatekeeper Opener</span><span>Quote Response Check</span></div>
           <div class="script-line">
-            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your online quote follow-up speed for emergency requests in <span class="dyn-city">[City]</span>."
+            "Hey, I was just wondering if the owner is around?"
           </div>
         </div>
 
@@ -3623,7 +3629,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="script-phase">
           <div class="phase-tag"><span>Gatekeeper Opener</span><span>Google Map Pack Question</span></div>
           <div class="script-line">
-            "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question regarding your Google Map Pack ranking and review velocity in <span class="dyn-city">[City]</span>."
+            "Hey, I was just wondering if the owner is around?"
           </div>
         </div>
 
@@ -3845,7 +3851,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
               <div class="script-line" style="font-size:16px">
-                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your incoming calls and after-hours routing in <span class="dyn-city">[City]</span>."
+                "Hey, I was just wondering if the owner is around?"
               </div>
               <div class="delivery-tip">
                 💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
@@ -4078,7 +4084,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
               <div class="script-line" style="font-size:16px">
-                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your incoming calls and after-hours routing in <span class="dyn-city">[City]</span>."
+                "Hey, I was just wondering if the owner is around?"
               </div>
               <div class="delivery-tip">
                 💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
@@ -4309,7 +4315,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div class="script-phase" style="margin-bottom:0">
               <div class="phase-tag"><span>Step 1: Casual Local Peer Opener</span><span>0:00 - 0:05</span></div>
               <div class="script-line" style="font-size:16px">
-                "Hey! Is <span class="dyn-owner">[Owner's First Name]</span> around? It's Luke — quick question about your incoming calls and after-hours routing in <span class="dyn-city">[City]</span>."
+                "Hey, I was just wondering if the owner is around?"
               </div>
               <div class="delivery-tip">
                 💡 <em>Tone:</em> Sound like an authoritative local contractor or trade partner, not an overseas telemarketer.
