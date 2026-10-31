@@ -111,6 +111,7 @@ try {
   renderAccountProfileList();
   testAssert("Luke's roster view includes Roman Vance", accountList.textContent.includes('Roman Vance'));
   testAssert("Luke's roster view includes Carter McCauliss", accountList.textContent.includes('Carter McCauliss'));
+  testAssert("Luke's roster view includes Lucas", accountList.textContent.includes('Lucas'));
 
 } catch(err) {
   testAssert("Exception in isolation test: " + err.message, false);

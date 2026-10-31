@@ -43,6 +43,17 @@ window.addEventListener('DOMContentLoaded', () => {
       assert("Carter has autoPassed set to true", profiles['carter_mccauliss'].autoPassed === true);
     }
 
+    // 6. Test Lucas profile in default profiles
+    const hasLucas = !!profiles['lucas'];
+    assert("Lucas exists in profiles", hasLucas);
+    if (hasLucas) {
+      assert("Lucas is Level 5", profiles['lucas'].level === 5);
+      assert("Lucas has 8 bosses defeated", profiles['lucas'].bossesDefeated === 8);
+      assert("Lucas has autoPassed set to true", profiles['lucas'].autoPassed === true);
+      assert("Lucas has 15 completedUnits", profiles['lucas'].completedUnits.length === 15);
+      assert("Lucas has 3 daysPassed", profiles['lucas'].daysPassed.length === 3);
+    }
+
     const passed = tests.filter(t => t.pass).length;
     const total = tests.length;
     document.body.innerHTML = '<div id="profileTestResult" data-passed="' + passed + '" data-total="' + total + '">' +

@@ -2007,7 +2007,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
               mockKeys.includes(kl) ||
               kl.includes('marcus') || kl.includes('jake') || kl.includes('tyler') || kl.includes('probe') || kl.includes('buddy') ||
               nm.includes('marcus') || nm.includes('jake') || nm.includes('tyler') || nm.includes('probe') || nm.includes('buddy') ||
-              (em.endsWith('@vantorxsolutions.com') && kl !== 'luke' && kl !== 'founder_luke')
+              (em.endsWith('@vantorxsolutions.com') && kl !== 'luke' && kl !== 'founder_luke' && kl !== 'lucas' && !kl.includes('lucas'))
             ) {
               delete profiles[k];
             }
@@ -2022,7 +2022,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
               mockKeys.includes(uid.toLowerCase()) ||
               uid.toLowerCase().includes('marcus') || uid.toLowerCase().includes('jake') || uid.toLowerCase().includes('tyler') || uid.toLowerCase().includes('probe') || uid.toLowerCase().includes('buddy') ||
               nm.includes('marcus') || nm.includes('jake') || nm.includes('tyler') || nm.includes('probe') || nm.includes('buddy') ||
-              (em.endsWith('@vantorxsolutions.com') && uid !== 'luke' && uid !== 'founder_luke')
+              (em.endsWith('@vantorxsolutions.com') && uid !== 'luke' && uid !== 'founder_luke' && uid !== 'lucas' && !uid.includes('lucas'))
             ) {
               return;
             }
@@ -2042,6 +2042,17 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
               updated = true;
             } else if (r.email && profiles[uid].email !== r.email) {
               profiles[uid].email = r.email;
+              updated = true;
+            }
+            if (uid.includes('carter') || nm.includes('carter') || em.includes('carter') || uid.includes('lucas') || nm.includes('lucas') || em.includes('lucas')) {
+              profiles[uid].level = 5;
+              profiles[uid].xp = 1850;
+              profiles[uid].autoPassed = true;
+              profiles[uid].founderBypass = true;
+              profiles[uid].bossesDefeated = Math.max(8, profiles[uid].bossesDefeated || 0);
+              profiles[uid].completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
+              profiles[uid].daysPassed = [1, 2, 3];
+              profiles[uid].lastAction = `🏆 Level 5 Certified · ${profiles[uid].name || (uid.includes('carter') ? 'Carter McCauliss' : 'Lucas')} Auto-Pass Active`;
               updated = true;
             }
           });
@@ -2256,7 +2267,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const cur = profiles[activeRepId];
     if (cur) {
       const isCarter = activeRepId === 'carter_mccauliss' || (cur.name && cur.name.toLowerCase().includes('carter')) || (cur.email && cur.email.toLowerCase().includes('carter'));
-      if (isCarter) {
+      const isLucas = activeRepId === 'lucas' || (cur.name && cur.name.toLowerCase().includes('lucas')) || (cur.email && cur.email.toLowerCase().includes('lucas'));
+      if (isCarter || isLucas) {
         cur.level = 5;
         cur.xp = 1850;
         cur.autoPassed = true;
@@ -2325,6 +2337,22 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
           role: 'Certified Closer & Phone Warrior',
           email: 'cartermccauliss@gmail.com',
           avatar: '⚔️',
+          level: 5,
+          xp: 1850,
+          autoPassed: true,
+          founderBypass: true,
+          bossesDefeated: 8,
+          daysPassed: [1, 2, 3],
+          completedUnits: ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5']
+        };
+      }
+      if (!profiles.lucas) {
+        profiles.lucas = {
+          id: 'lucas',
+          name: 'Lucas',
+          role: 'Certified Closer & Phone Warrior',
+          email: 'lucas@vantorxsolutions.com',
+          avatar: '🎯',
           level: 5,
           xp: 1850,
           autoPassed: true,
@@ -2478,7 +2506,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     };
 
     const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
-    if (isCarter) {
+    const isLucas = (name + ' ' + email).toLowerCase().includes('lucas');
+    if (isCarter || isLucas) {
       profiles[uid].level = 5;
       profiles[uid].xp = 1850;
       profiles[uid].autoPassed = true;
@@ -2487,7 +2516,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       profiles[uid].streak = 5;
       profiles[uid].completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
       profiles[uid].daysPassed = [1, 2, 3];
-      profiles[uid].lastAction = '🏆 Level 5 Certified · Carter McCauliss Auto-Pass Active';
+      profiles[uid].lastAction = `🏆 Level 5 Certified · ${name || (isCarter ? 'Carter McCauliss' : 'Lucas')} Auto-Pass Active`;
     }
 
     localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
@@ -2497,9 +2526,11 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (emailInput) emailInput.value = '';
 
     selectActiveQuestRep(uid, profiles[uid]);
-    syncQuestToCloud(isCarter ? 'certified' : 'account_created', isCarter ? `Restored Level 5 Certification for Carter McCauliss` : `New sales closer registered: ${name} (${email}) as ${role}`, profiles[uid]);
+    syncQuestToCloud((isCarter || isLucas) ? 'certified' : 'account_created', (isCarter || isLucas) ? `Restored Level 5 Certification for ${name}` : `New sales closer registered: ${name} (${email}) as ${role}`, profiles[uid]);
     if (isCarter) {
       showToast(`🏆 Welcome back, Carter! Level 5 Certification & 8 Bosses Slayed restored!`);
+    } else if (isLucas) {
+      showToast(`🏆 Welcome back, Lucas! Level 5 Certification & 8 Bosses Slayed restored!`);
     } else {
       showToast(`✓ Closer account created for ${name}! Added to Luke's roster.`);
     }
