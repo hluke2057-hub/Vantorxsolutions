@@ -755,6 +755,19 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       <p style="font-size:13px;color:var(--dim);margin:0">Enter your name and personal email to access your RPG combat track and sync progress.</p>
     </div>
 
+    <!-- ⚡ Fast-Track 1-Click Closer Logins -->
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px;margin-bottom:16px;text-align:center">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--accent2);text-transform:uppercase;margin-bottom:8px">⚡ Fast-Track 1-Click Login</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button type="button" class="hud-btn gold" id="btnQuestLoginCarter" onclick="window.loginAsQuestRep('carter_mccauliss')" style="width:100%;font-weight:700;padding:10px;justify-content:center;box-shadow:0 0 15px rgba(245,158,11,0.25)">
+          ⚔️ Log In as Carter McCauliss (Level 5 Auto-Pass 🏆)
+        </button>
+        <button type="button" class="hud-btn" id="btnQuestLoginLucas" onclick="window.loginAsQuestRep('lucas')" style="width:100%;font-weight:600;padding:8px;border-color:rgba(52,211,153,0.4);color:#6ee7b7;justify-content:center">
+          🎯 Log In as Lucas (Level 5 Auto-Pass 🏆)
+        </button>
+      </div>
+    </div>
+
     <form id="questSignInGateForm" onsubmit="handleQuestSignInGateSubmit(event)">
       <div style="margin-bottom:14px">
         <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Your Full Name</label>
@@ -2132,6 +2145,74 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (modal) modal.classList.remove('open');
   };
 
+  window.loginAsQuestRep = function(uid) {
+    if (uid === 'luke') {
+      window.promptFounderQuestLogin();
+      return;
+    }
+    let profiles = {};
+    try {
+      profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
+    } catch(e) {}
+    if (uid === 'carter_mccauliss' || uid === 'carter') {
+      uid = 'carter_mccauliss';
+      if (!profiles.carter_mccauliss) {
+        profiles.carter_mccauliss = {
+          id: 'carter_mccauliss',
+          name: 'Carter McCauliss',
+          role: 'Certified Closer & Phone Warrior',
+          email: 'cartermccauliss@gmail.com',
+          avatar: '⚔️'
+        };
+      }
+      profiles.carter_mccauliss.level = 5;
+      profiles.carter_mccauliss.xp = 1850;
+      profiles.carter_mccauliss.autoPassed = true;
+      profiles.carter_mccauliss.founderBypass = true;
+      profiles.carter_mccauliss.bossesDefeated = 8;
+      profiles.carter_mccauliss.streak = 5;
+      profiles.carter_mccauliss.completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
+      profiles.carter_mccauliss.daysPassed = [1, 2, 3];
+      profiles.carter_mccauliss.lastAction = '🏆 Level 5 Certified · Carter McCauliss Auto-Pass Active';
+      profiles.carter_mccauliss.lastActive = new Date().toISOString();
+      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
+      localStorage.setItem('vantorx_active_user_id_v2', 'carter_mccauliss');
+      window.closeQuestSignInGate();
+      initQuestProfile();
+      syncQuestToCloud('certified', 'Restored Level 5 Certification for Carter McCauliss', profiles.carter_mccauliss);
+      showToast('🏆 Welcome back, Carter! Level 5 Certification & 8 Bosses Slayed restored!');
+      return;
+    }
+    if (uid === 'lucas') {
+      if (!profiles.lucas) {
+        profiles.lucas = {
+          id: 'lucas',
+          name: 'Lucas',
+          role: 'Certified Closer & Phone Warrior',
+          email: 'lucas@vantorxsolutions.com',
+          avatar: '🎯'
+        };
+      }
+      profiles.lucas.level = 5;
+      profiles.lucas.xp = 1850;
+      profiles.lucas.autoPassed = true;
+      profiles.lucas.founderBypass = true;
+      profiles.lucas.bossesDefeated = 8;
+      profiles.lucas.streak = 5;
+      profiles.lucas.completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
+      profiles.lucas.daysPassed = [1, 2, 3];
+      profiles.lucas.lastAction = '🏆 Level 5 Certified · Lucas Auto-Pass Active';
+      profiles.lucas.lastActive = new Date().toISOString();
+      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
+      localStorage.setItem('vantorx_active_user_id_v2', 'lucas');
+      window.closeQuestSignInGate();
+      initQuestProfile();
+      syncQuestToCloud('certified', 'Restored Level 5 Certification for Lucas', profiles.lucas);
+      showToast('🏆 Welcome back, Lucas! Level 5 Certification & 8 Bosses Slayed restored!');
+      return;
+    }
+  };
+
   window.handleQuestSignInGateSubmit = function(e) {
     if (e && e.preventDefault) e.preventDefault();
     const nameInput = document.getElementById('questGateNameInput');
@@ -2152,7 +2233,19 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     }
 
     const emailLower = email.toLowerCase();
-    if (emailLower === 'luke@vantorxsolutions.com' || name.toLowerCase() === 'luke the closer' || name.toLowerCase() === 'luke hamilton') {
+    const nameLower = name.toLowerCase();
+
+    // 1-Click Fast path for Carter McCauliss
+    if (nameLower.includes('carter') || emailLower.includes('carter')) {
+      return window.loginAsQuestRep('carter_mccauliss');
+    }
+
+    // 1-Click Fast path for Lucas
+    if (nameLower.includes('lucas') || emailLower.includes('lucas')) {
+      return window.loginAsQuestRep('lucas');
+    }
+
+    if (emailLower === 'luke@vantorxsolutions.com' || nameLower === 'luke the closer' || nameLower === 'luke hamilton') {
       const code = prompt('Founder account detected. Please enter master passcode:');
       if (code && (code.trim().toLowerCase() === 'vantorx2026' || code.trim().toLowerCase() === 'founder' || code.trim().toLowerCase() === 'luke')) {
         localStorage.setItem('vantorx_active_user_id_v2', 'luke');
@@ -2244,6 +2337,10 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       const founderParam = urlParams.get('founder');
       if ((userParam && (userParam.toLowerCase() === 'luke' || userParam.toLowerCase() === 'founder')) || founderParam === '1') {
         localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+      } else if (userParam && userParam.toLowerCase().includes('carter')) {
+        localStorage.setItem('vantorx_active_user_id_v2', 'carter_mccauliss');
+      } else if (userParam && userParam.toLowerCase().includes('lucas')) {
+        localStorage.setItem('vantorx_active_user_id_v2', 'lucas');
       }
     } catch(e){}
 
@@ -2259,6 +2356,10 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (!profiles[activeRepId]) {
       if (activeRepId === 'luke') {
         profiles.luke = { id: 'luke', name: 'Luke the Closer', role: 'Founder & Master Closer', email: 'luke@vantorxsolutions.com', avatar: '👑' };
+      } else if (activeRepId === 'carter_mccauliss') {
+        profiles.carter_mccauliss = { id: 'carter_mccauliss', name: 'Carter McCauliss', role: 'Certified Closer & Phone Warrior', email: 'cartermccauliss@gmail.com', avatar: '⚔️', level: 5, xp: 1850, autoPassed: true, founderBypass: true, bossesDefeated: 8, streak: 5 };
+      } else if (activeRepId === 'lucas') {
+        profiles.lucas = { id: 'lucas', name: 'Lucas', role: 'Certified Closer & Phone Warrior', email: 'lucas@vantorxsolutions.com', avatar: '🎯', level: 5, xp: 1850, autoPassed: true, founderBypass: true, bossesDefeated: 8, streak: 5 };
       } else {
         window.openQuestSignInGate();
         return;
@@ -2437,6 +2538,12 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
 
   function selectActiveQuestRep(id, profile) {
+    if (id === 'carter_mccauliss' || id === 'carter') {
+      return window.loginAsQuestRep('carter_mccauliss');
+    }
+    if (id === 'lucas') {
+      return window.loginAsQuestRep('lucas');
+    }
     const curId = localStorage.getItem('vantorx_active_user_id_v2');
     const isFounder = curId === 'luke';
     if (!isFounder && curId && id !== curId) {
@@ -2479,14 +2586,16 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       return;
     }
 
-    const uid = 'rep_' + Date.now().toString(36);
+    const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
+    const isLucas = (name + ' ' + email).toLowerCase().includes('lucas');
+    const uid = isCarter ? 'carter_mccauliss' : (isLucas ? 'lucas' : ('rep_' + Date.now().toString(36)));
     let profiles = {};
     try {
       profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
     } catch(e){}
 
     const avatars = ['⚡', '⚔️', '🎯', '🔥', '🛡️', '🚀'];
-    const avatar = avatars[Math.floor(Math.random() * avatars.length)];
+    const avatar = isCarter ? '⚔️' : (isLucas ? '🎯' : avatars[Math.floor(Math.random() * avatars.length)]);
 
     profiles[uid] = {
       id: uid,
@@ -2505,8 +2614,6 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       lastAction: 'Joined Sales Team · Cold Call RPG'
     };
 
-    const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
-    const isLucas = (name + ' ' + email).toLowerCase().includes('lucas');
     if (isCarter || isLucas) {
       profiles[uid].level = 5;
       profiles[uid].xp = 1850;

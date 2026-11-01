@@ -537,6 +537,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
     <div class="caller-bar-buttons" id="callerBarButtons">
       <span style="font-size:12px;color:var(--dim)" id="callerBarSwitchLabel">Closer Account:</span>
       <button type="button" class="caller-switch-pill active" id="quickPillLuke" onclick="quickSwitchCaller('luke')">👑 Luke (Founder)</button>
+      <button type="button" class="caller-switch-pill" id="quickPillCarter" onclick="quickSwitchCaller('carter_mccauliss')">⚔️ Carter McCauliss (Auto-Pass 🏆)</button>
+      <button type="button" class="caller-switch-pill" id="quickPillLucas" onclick="quickSwitchCaller('lucas')">🎯 Lucas (Auto-Pass 🏆)</button>
       <button type="button" class="caller-switch-pill" id="quickPillBuddy" onclick="quickSwitchCaller('buddy')">⚔️ Buddy 2 (Auto-Pass 🏆)</button>
       <button type="button" class="caller-switch-pill active" id="quickPillSelf" style="display:none"></button>
       <button type="button" class="caller-switch-pill add-rep" id="btnCallerAccountAction" onclick="openAccountModal()">➕ Switch / Profile</button>
@@ -4517,6 +4519,19 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <p style="font-size:13px;color:var(--dim);margin:0">Enter your name and personal email to access your training track, call queue, and RPG combat.</p>
     </div>
 
+    <!-- ⚡ Fast-Track 1-Click Closer Logins -->
+    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px;margin-bottom:16px;text-align:center">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--accent2);text-transform:uppercase;margin-bottom:8px">⚡ Fast-Track 1-Click Login</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button type="button" class="btn btn-gold btn-sm" id="btnGateLoginCarter" onclick="loginAsRep('carter_mccauliss')" style="width:100%;font-weight:700;padding:10px;display:flex;align-items:center;justify-content:center;gap:6px">
+          ⚔️ Log In as Carter McCauliss (Auto-Pass 🏆)
+        </button>
+        <button type="button" class="btn btn-ghost btn-sm" id="btnGateLoginLucas" onclick="loginAsRep('lucas')" style="width:100%;font-weight:600;padding:8px;border-color:rgba(52,211,153,0.4);color:#6ee7b7;display:flex;align-items:center;justify-content:center;gap:6px">
+          🎯 Log In as Lucas (Auto-Pass 🏆)
+        </button>
+      </div>
+    </div>
+
     <form id="signInGateForm" onsubmit="handleSignInGateSubmit(event)">
       <div style="margin-bottom:14px">
         <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Your Full Name</label>
@@ -5948,6 +5963,55 @@ window.closeLeakMathModal = function() {
     if (modal) modal.classList.remove('active');
   };
 
+  window.loginAsRep = function(uid) {
+    if (uid === 'luke') {
+      window.promptFounderLogin();
+      return;
+    }
+    if (uid === 'carter_mccauliss' || uid === 'carter') {
+      if (!USER_PROFILES.carter_mccauliss) {
+        USER_PROFILES.carter_mccauliss = JSON.parse(JSON.stringify(DEFAULT_PROFILES.carter_mccauliss));
+      }
+      grantCoursePass(USER_PROFILES.carter_mccauliss);
+      activeUserId = 'carter_mccauliss';
+      localStorage.setItem('vantorx_active_user_id_v2', 'carter_mccauliss');
+      saveUserProfiles();
+      window.closeSignInGate();
+      updateUserUI();
+      if (window.selectLmsUnit) window.selectLmsUnit('1-1');
+      playSound('levelup');
+      showToast('🏆 Welcome back, Carter! Your Level 5 Certification & Lead Queue Auto-Pass is active!');
+      syncRepToCloud(USER_PROFILES.carter_mccauliss, 'certified', 'Direct login as Carter McCauliss (Auto-Pass verified)');
+      return;
+    }
+    if (uid === 'lucas') {
+      if (!USER_PROFILES.lucas) {
+        USER_PROFILES.lucas = JSON.parse(JSON.stringify(DEFAULT_PROFILES.lucas));
+      }
+      grantCoursePass(USER_PROFILES.lucas);
+      activeUserId = 'lucas';
+      localStorage.setItem('vantorx_active_user_id_v2', 'lucas');
+      saveUserProfiles();
+      window.closeSignInGate();
+      updateUserUI();
+      if (window.selectLmsUnit) window.selectLmsUnit('1-1');
+      playSound('levelup');
+      showToast('🏆 Welcome back, Lucas! Your Level 5 Certification & Lead Queue Auto-Pass is active!');
+      syncRepToCloud(USER_PROFILES.lucas, 'certified', 'Direct login as Lucas (Auto-Pass verified)');
+      return;
+    }
+    if (USER_PROFILES[uid]) {
+      activeUserId = uid;
+      localStorage.setItem('vantorx_active_user_id_v2', uid);
+      saveUserProfiles();
+      window.closeSignInGate();
+      updateUserUI();
+      if (window.selectLmsUnit) window.selectLmsUnit('1-1');
+      playSound('click');
+      showToast(`✓ Switched to closer: ${USER_PROFILES[uid].name}`);
+    }
+  };
+
   window.handleSignInGateSubmit = function(e) {
     if (e && e.preventDefault) e.preventDefault();
     const nameInput = document.getElementById('gateNameInput');
@@ -5968,7 +6032,19 @@ window.closeLeakMathModal = function() {
     }
 
     const emailLower = email.toLowerCase();
-    if (emailLower === 'luke@vantorxsolutions.com' || name.toLowerCase() === 'luke hamilton') {
+    const nameLower = name.toLowerCase();
+
+    // 1-Click Fast path for Carter McCauliss
+    if (nameLower.includes('carter') || emailLower.includes('carter')) {
+      return window.loginAsRep('carter_mccauliss');
+    }
+
+    // 1-Click Fast path for Lucas
+    if (nameLower.includes('lucas') || emailLower.includes('lucas')) {
+      return window.loginAsRep('lucas');
+    }
+
+    if (emailLower === 'luke@vantorxsolutions.com' || nameLower === 'luke hamilton') {
       const code = prompt('Founder account detected. Please enter your master passcode to access Founder Cockpit:');
       if (code && (code.trim().toLowerCase() === 'vantorx2026' || code.trim().toLowerCase() === 'founder' || code.trim().toLowerCase() === 'luke')) {
         activeUserId = 'luke';
@@ -6343,6 +6419,8 @@ window.closeLeakMathModal = function() {
       }
 
       const pillLuke = document.getElementById('quickPillLuke');
+      const pillCarter = document.getElementById('quickPillCarter');
+      const pillLucas = document.getElementById('quickPillLucas');
       const pillBuddy = document.getElementById('quickPillBuddy');
       const pillSelf = document.getElementById('quickPillSelf');
       const btnAccountAction = document.getElementById('btnCallerAccountAction');
@@ -6350,10 +6428,18 @@ window.closeLeakMathModal = function() {
       const btnSignOut = document.getElementById('btnCallerSignOut');
 
       if (isFounder) {
-        // Luke Founder view: Luke, Buddy 2, Email Digest, Switch/Profile
+        // Luke Founder view: Luke, Carter, Lucas, Buddy 2, Email Digest, Switch/Profile
         if (pillLuke) {
           pillLuke.style.display = 'inline-block';
           pillLuke.classList.toggle('active', activeUserId === 'luke');
+        }
+        if (pillCarter) {
+          pillCarter.style.display = 'inline-block';
+          pillCarter.classList.toggle('active', activeUserId === 'carter_mccauliss');
+        }
+        if (pillLucas) {
+          pillLucas.style.display = 'inline-block';
+          pillLucas.classList.toggle('active', activeUserId === 'lucas');
         }
         if (pillBuddy) {
           pillBuddy.style.display = 'inline-block';
@@ -6367,13 +6453,31 @@ window.closeLeakMathModal = function() {
         if (btnEmailDigest) btnEmailDigest.style.display = 'inline-block';
         if (btnSignOut) btnSignOut.style.display = 'inline-block';
       } else if (!isLoggedOut) {
-        // Logged-in closer view (e.g. Roman): Buddy 2 and Luke are strictly HIDDEN!
+        // Logged-in closer view (e.g. Carter, Lucas, or Roman Vance)
         if (pillLuke) pillLuke.style.display = 'none';
         if (pillBuddy) pillBuddy.style.display = 'none';
-        if (pillSelf) {
-          pillSelf.style.display = 'inline-block';
-          pillSelf.textContent = `${user.avatar || '⚔️'} ${user.name} (You)`;
-          pillSelf.classList.add('active');
+        if (activeUserId === 'carter_mccauliss') {
+          if (pillCarter) {
+            pillCarter.style.display = 'inline-block';
+            pillCarter.classList.add('active');
+          }
+          if (pillLucas) pillLucas.style.display = 'none';
+          if (pillSelf) pillSelf.style.display = 'none';
+        } else if (activeUserId === 'lucas') {
+          if (pillLucas) {
+            pillLucas.style.display = 'inline-block';
+            pillLucas.classList.add('active');
+          }
+          if (pillCarter) pillCarter.style.display = 'none';
+          if (pillSelf) pillSelf.style.display = 'none';
+        } else {
+          if (pillCarter) pillCarter.style.display = 'none';
+          if (pillLucas) pillLucas.style.display = 'none';
+          if (pillSelf) {
+            pillSelf.style.display = 'inline-block';
+            pillSelf.textContent = `${user.avatar || '⚔️'} ${user.name} (You)`;
+            pillSelf.classList.add('active');
+          }
         }
         if (btnAccountAction) {
           btnAccountAction.style.display = 'inline-block';
@@ -6385,6 +6489,8 @@ window.closeLeakMathModal = function() {
         // Logged out / Gated view
         if (pillLuke) pillLuke.style.display = 'none';
         if (pillBuddy) pillBuddy.style.display = 'none';
+        if (pillCarter) pillCarter.style.display = 'none';
+        if (pillLucas) pillLucas.style.display = 'none';
         if (pillSelf) pillSelf.style.display = 'none';
         if (btnAccountAction) {
           btnAccountAction.style.display = 'inline-block';
@@ -7310,10 +7416,17 @@ window.closeLeakMathModal = function() {
   window.renderAccountProfileList = renderAccountProfileList;
   window.quickSwitchCaller = function(uid) {
     const cur = getActiveUser();
+    const isLoggedOut = !cur || cur.id === 'guest' || !activeUserId;
     const isFounder = cur && (cur.isFounder === true || activeUserId === 'luke');
-    if (!isFounder && uid !== activeUserId) {
+    if (!isFounder && !isLoggedOut && uid !== activeUserId) {
       showToast('⚠️ Restricted: You can only view and manage your own closer profile.');
       return;
+    }
+    if (uid === 'carter_mccauliss' || uid === 'carter') {
+      return window.loginAsRep('carter_mccauliss');
+    }
+    if (uid === 'lucas') {
+      return window.loginAsRep('lucas');
     }
     if (!USER_PROFILES[uid]) {
       if (isFounder) activeUserId = 'luke';
@@ -7367,11 +7480,13 @@ window.closeLeakMathModal = function() {
       return;
     }
 
-    const uid = 'rep_' + Date.now().toString(36);
+    const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
+    const isLucas = (name + ' ' + email).toLowerCase().includes('lucas');
+    const uid = isCarter ? 'carter_mccauliss' : (isLucas ? 'lucas' : ('rep_' + Date.now().toString(36)));
     const avatars = ['⚡', '⚔️', '🎯', '🔥', '🛡️', '🚀'];
-    const chosenAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+    const chosenAvatar = isCarter ? '⚔️' : (isLucas ? '🎯' : avatars[Math.floor(Math.random() * avatars.length)]);
 
-    USER_PROFILES[uid] = {
+    USER_PROFILES[uid] = USER_PROFILES[uid] || {
       id: uid,
       name: name,
       email: email,
@@ -7395,9 +7510,9 @@ window.closeLeakMathModal = function() {
       lastActive: new Date().toISOString(),
       lastAction: 'Account Created · Starting Day 1 of Closer Academy'
     };
+    USER_PROFILES[uid].name = isCarter ? 'Carter McCauliss' : (isLucas ? 'Lucas' : name);
+    USER_PROFILES[uid].email = email;
 
-    const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
-    const isLucas = (name + ' ' + email).toLowerCase().includes('lucas');
     if (isCarter) {
       grantCoursePass(USER_PROFILES[uid]);
       syncRepToCloud(USER_PROFILES[uid], 'certified', 'Restored Level 5 Certification for Carter McCauliss');
