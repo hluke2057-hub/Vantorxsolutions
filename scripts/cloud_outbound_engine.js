@@ -12,6 +12,33 @@
 
 const fs = require('fs');
 const path = require('path');
+const dns = require('dns').promises;
+
+/**
+ * Pre-flight DNS Shield: Verifies recipient domain has valid MX or A records
+ * before sending to Resend API. Eliminates SMTP 421 4.4.0 transient failures.
+ */
+async function verifyRecipientDns(email) {
+  if (!email || typeof email !== 'string') return false;
+  const match = email.trim().match(/^[^\s@]+@([^\s@]+\.[a-zA-Z]{2,})$/);
+  if (!match) return false;
+  const domain = match[1].toLowerCase();
+
+  // Guard against common corrupted/truncated domain extensions
+  if (domain.endsWith('.con') || domain.endsWith('.coom') || domain.endsWith('roofin.com') || domain.endsWith('constructi.com')) {
+    return false;
+  }
+
+  try {
+    const mx = await dns.resolveMx(domain).catch(() => null);
+    if (mx && mx.length > 0) return true;
+    const a = await dns.resolve4(domain).catch(() => null);
+    if (a && a.length > 0) return true;
+    return false;
+  } catch (err) {
+    return false;
+  }
+}
 
 const DEMO_PHONE = process.env.DEMO_PHONE || "(561) 813-8602";
 const SENDER_EMAIL = process.env.SENDER_EMAIL || "luke@vantorxsolutions.com";
@@ -59,6 +86,14 @@ async function sendPhysicalEmail(lead) {
     console.warn(`[Resend Engine] Skipping physical send for ${lead.email} — RESEND_API_KEY not configured.`);
     return null;
   }
+
+  // Pre-flight recipient DNS verification to prevent 421 4.4.0 transient SMTP errors
+  const isResolvable = await verifyRecipientDns(lead.email);
+  if (!isResolvable) {
+    console.warn(`[DNS Shield] Skipping Resend delivery for ${lead.company} (${lead.email}) — Recipient domain has no valid MX or A records.`);
+    return { skipped: true, error: "Recipient domain has no valid MX or A DNS records" };
+  }
+
   try {
     const payload = {
       from: `${SENDER_NAME} <${SENDER_EMAIL}>`,
@@ -653,18 +688,23 @@ async function runAutonomousEngine() {
     console.log(`   Inbox:          ${target.email}`);
     console.log(`   Subject:        "${target.subject}"`);
 
-    let resendId = null;
+    let resendResult = null;
     if (RESEND_API_KEY) {
-      resendId = await sendPhysicalEmail(target);
+      resendResult = await sendPhysicalEmail(target);
     } else {
-      resendId = `sim_${Date.now()}_${i}`;
+      resendResult = `sim_${Date.now()}_${i}`;
     }
 
-    if (resendId) {
+    if (resendResult && typeof resendResult === 'string') {
       target.status = "sent";
-      target.resendMessageId = resendId;
+      target.resendMessageId = resendResult;
       target.sentAt = new Date().toISOString();
-      console.log(`   ✅ DISPATCHED via Resend! Delivery ID: ${resendId}\n`);
+      console.log(`   ✅ DISPATCHED via Resend! Delivery ID: ${resendResult}\n`);
+    } else if (resendResult && resendResult.skipped) {
+      target.status = "skipped_dns";
+      target.dnsError = resendResult.error;
+      target.verifiedAt = new Date().toISOString();
+      console.log(`   🛡️ SKIPPED (Invalid Recipient DNS). Resend delivery avoided to protect domain reputation.\n`);
     } else {
       console.log(`   ⚠️ Failed to dispatch via Resend.\n`);
     }

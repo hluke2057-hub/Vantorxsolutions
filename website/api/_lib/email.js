@@ -28,9 +28,16 @@ async function sendEmail({ to, subject, html, text, from = "Luke <luke@vantorxso
     return { ok: false, error: "RESEND_API_KEY not configured" };
   }
 
+  const recipients = (Array.isArray(to) ? to : [to]).map(e => (typeof e === "string" ? e.trim() : ""));
+  const validRecipients = recipients.filter(e => /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(e));
+  if (validRecipients.length === 0) {
+    console.warn("[VantorX Email] Invalid recipient email address syntax:", to);
+    return { ok: false, error: "Invalid recipient email address syntax" };
+  }
+
   const payload = {
     from,
-    to: Array.isArray(to) ? to : [to],
+    to: validRecipients,
     subject,
     html: html || undefined,
     text: text || undefined,

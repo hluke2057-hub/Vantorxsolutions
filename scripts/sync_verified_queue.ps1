@@ -36,9 +36,7 @@ function Get-ContractorEmailDomain {
     $slug = $slug -replace 'incorporation|incorporated|inc|llc|corp|co$', ''
     $slug = $slug.Trim()
 
-    if ($slug.Length -gt 24) {
-        $slug = $slug.Substring(0, 24)
-    }
+    # Do not truncate words mid-syllable, preserving valid domain grammar
 
     if ([string]::IsNullOrWhiteSpace($slug)) {
         $slug = "contractor"
