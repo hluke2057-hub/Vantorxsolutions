@@ -7669,7 +7669,7 @@ window.closeLeakMathModal = function() {
   }
   window.setTeamSyncStatus = setTeamSyncStatus;
 
-  function syncCallRecordToCloud(leadId, record) {
+  async function syncCallRecordToCloud(leadId, record) {
     if (!leadId || !record) return;
     const nowIso = new Date().toISOString();
     record.updatedAt = record.updatedAt || nowIso;
@@ -7692,30 +7692,42 @@ window.closeLeakMathModal = function() {
       localStorage.setItem('vantorx_lead_calls_sync_ping', `${leadId}_${Date.now()}`);
     } catch(_) {}
 
-    // 2. Persist to Cloud API (/api/lead-calls/lead-call-sync)
+    // 2. Persist to Cloud API (/api/lead-calls/lead-call-sync) with robust HTTP fallback
     const payload = {
-      leadId: leadId,
+      leadId: String(leadId),
       call: record,
-      caller: record.caller || callerName
+      caller: record.caller || callerName,
+      calls: { [String(leadId)]: record }
     };
 
-    fetch('/api/lead-calls/lead-call-sync', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(() => {
-      return fetch('/api/audit?action=lead-call-sync', {
+    try {
+      let res = await fetch('/api/lead-calls/lead-call-sync', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      });
-    }).then(res => {
-      if (res && res.ok) {
-        setTeamSyncStatus(true);
+      }).catch(() => null);
+
+      if (!res || !res.ok) {
+        res = await fetch('/api/audit?action=lead-call-sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(() => null);
       }
-    }).catch(err => {
+
+      if (res && res.ok) {
+        const data = await res.json().catch(() => null);
+        if (data && data.calls) {
+          mergeCallsFromTeammate(data.calls, false);
+        }
+        setTeamSyncStatus(true);
+      } else {
+        setTeamSyncStatus(false, 'Sync pending');
+      }
+    } catch (err) {
       console.warn('[Lead Call Cloud Sync Notice]', err);
-    });
+      setTeamSyncStatus(false, 'Offline');
+    }
   }
   window.syncCallRecordToCloud = syncCallRecordToCloud;
 
@@ -7738,7 +7750,8 @@ window.closeLeakMathModal = function() {
       const isDifferent = isNew ||
         curCalled !== incCalled ||
         curOutcome !== incOutcome ||
-        (inc.notes && (!cur || inc.notes !== cur.notes));
+        (inc.notes && (!cur || inc.notes !== cur.notes)) ||
+        (inc.caller && (!cur || inc.caller !== cur.caller));
 
       if (isDifferent) {
         CALL_RECORDS[id] = {
@@ -7748,7 +7761,7 @@ window.closeLeakMathModal = function() {
         hasUpdates = true;
 
         if (notifyUser && incCaller !== curCaller && incCalled) {
-          const lead = (window.LEADS_DATA || []).find(l => l.id === id);
+          const lead = (window.LEADS_DATA || []).find(l => String(l.id) === String(id));
           const leadName = lead ? lead.company : `Lead #${id}`;
           if (incOutcome === 'Call Back' || incOutcome === 'Callback Scheduled') {
             notifyMsg = `👥 Team Alert: ${incCaller} marked ${leadName} as "Call Back"!`;
@@ -7788,7 +7801,7 @@ window.closeLeakMathModal = function() {
         res = await fetch('/api/audit?action=lead-calls').catch(() => null);
       }
       if (res && res.ok) {
-        const data = await res.json();
+        const data = await res.json().catch(() => null);
         if (data && data.calls) {
           mergeCallsFromTeammate(data.calls, isBackgroundPoll);
           setTeamSyncStatus(true);

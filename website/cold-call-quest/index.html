@@ -1557,7 +1557,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       avgLeak: 'A standard shingle or tile replacement job',
       dialogue: {
         stage1: "Yeah, this is Rick, I own the outfit. Make it fast, I'm three stories up on a roof in Tampa with a nail gun in 95-degree heat. What the hell do you want?",
-        victory: "Tomorrow at 4:30 PM works perfect -- I'll be off the roof by then. Shoot the calendar invite and Ava setup info to my cell right now. You earned this one, Luke.",
+        victory: "Tomorrow at 4:30 PM works perfect -- I'll be off the roof by then. Shoot the calendar invite and Ava setup info to my cell right now. You earned this one, {rep}.",
         defeat: "I don't have time for this amateur nonsense while my crews are sweating on a 12-pitch roof in Tampa heat. Lose my number! *[SLAMS RECEIVER]*"
       }
     },
@@ -1578,8 +1578,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       avgLeak: 'A full emergency AC changeout',
       dialogue: {
         stage1: "No, this is Karen at dispatch. Gary is the owner, but he's out in the field and doesn't take unscheduled vendor calls. Send your marketing brochure to info@orlandopremiac.com.",
-        victory: "Perfect, Luke. I'm putting Gary on his Google Calendar for tomorrow at 4:30 PM for a 10-minute walkthrough. Send the invite to gary@orlandopremiac.com. You're the first salesperson to actually solve our dispatch problem.",
-        defeat: "Mr. Hamilton, you are wasting our emergency dispatch line. I am placing your company on our vendor blacklist. *[CLICK]*"
+        victory: "Perfect, {rep}. I'm putting Gary on his Google Calendar for tomorrow at 4:30 PM for a 10-minute walkthrough. Send the invite to gary@orlandopremiac.com. You're the first salesperson to actually solve our dispatch problem.",
+        defeat: "You are wasting our emergency dispatch line. I am placing your company on our vendor blacklist. *[CLICK]*"
       }
     },
     {
@@ -1725,7 +1725,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       avgLeak: 'A commercial parking lot resurface or municipal paving bid',
       dialogue: {
         stage1: "Valenti here, owner. Talk fast -- I'm operating a 15-ton roller on 300-degree steaming asphalt in Fort Lauderdale. What the hell is this call about?",
-        victory: "Alright Luke, you proved Ava can take municipal and commercial bid specs over the phone without missing job dimensions. Let's do that 10-minute walkthrough tomorrow at 4:30 PM. Send the invite to marco@valentipaving.com.",
+        victory: "Alright {rep}, you proved Ava can take municipal and commercial bid specs over the phone without missing job dimensions. Let's do that 10-minute walkthrough tomorrow at 4:30 PM. Send the invite to marco@valentipaving.com.",
         defeat: "I got 100 tons of asphalt curing in this Florida heat and you're wasting my battery with corporate pitch garbage. Call terminated! *[CLICK]*"
       }
     },
@@ -1746,7 +1746,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       avgLeak: 'Multi-location commercial mechanical contracts and brand equity',
       dialogue: {
         stage1: "Rex Sterling. I chair Apex Holdings -- we own 40 residential and commercial trade platforms across the Southeast. Unless you're calling with scalable EBITDA margin expansion or carrier-level redundancy, you have 20 seconds. Make your case.",
-        victory: "Remarkable pitch, Luke. You understand EBITDA leakage, Carrier *71 multi-trunk routing, and ServiceTitan enterprise webhooks better than 99% of tech vendors. I'm having my VP of Operations join our walkthrough tomorrow at 4:30 PM for a 5-location rollout pilot. Send the executive calendar invite.",
+        victory: "Remarkable pitch, {rep}. You understand EBITDA leakage, Carrier *71 multi-trunk routing, and ServiceTitan enterprise webhooks better than 99% of tech vendors. I'm having my VP of Operations join our walkthrough tomorrow at 4:30 PM for a 5-location rollout pilot. Send the executive calendar invite.",
         defeat: "You have no concept of enterprise EBITDA or multi-location dispatch. My portfolio companies don't waste time on amateur cold calls. *[CLICK]*"
       }
     },
@@ -3231,11 +3231,13 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const bossFirst = (currentBoss.name || 'Contractor').split(' ')[0].replace(/"/g, '');
     const playerOpeningLine = "Hey, I was just wondering if the owner is around?";
 
+    const callerDispName = (typeof getCallerName === 'function') ? getCallerName() : 'Luke';
     appendLog(`📞 <strong>DIALING:</strong> Connected to ${currentBoss.name} (${currentBoss.company}) in ${currentBoss.location}...`, 'system');
-    appendLog(`<strong>Luke:</strong> "${playerOpeningLine}"`, 'player');
+    appendLog(`<strong>${callerDispName}:</strong> "${playerOpeningLine}"`, 'player');
     matchHistory.push({ role: 'user', content: playerOpeningLine });
 
-    const bossOpeningReply = currentBoss.dialogue.stage1 || currentBoss.dialogue.opener;
+    const rawOpeningReply = currentBoss.dialogue.stage1 || currentBoss.dialogue.opener;
+    const bossOpeningReply = (typeof formatContractorLine === 'function') ? formatContractorLine(rawOpeningReply, currentBoss) : rawOpeningReply;
     appendLog(`<strong>${currentBoss.name}:</strong> "${bossOpeningReply}"`, 'boss');
     matchHistory.push({ role: 'assistant', content: bossOpeningReply });
 
@@ -3561,7 +3563,7 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const asksHowMuchLost = /how\s*much\s*(do\s*you\s*lose|is\s*a\s*job|is\s*an\s*average)|ticket\s*size|worth/i.test(low);
 
     // Enhanced Split-Track Signals (Owner vs Gatekeeper & Advanced Objections):
-    const hasOwnerCheck = /\b(owner|decision\s*maker|boss|run\s*the\s*place|in\s*charge|foreman|am\s*i\s*talking\s*to\s*the\s*owner|is\s*this\s*the\s*owner|you\s*the\s*owner)\b/i.test(low);
+    const hasOwnerCheck = /\b(owner|decision\s*maker|boss|run\s*the\s*place|in\s*charge|foreman|am\s*i\s*talking\s*to\s*the\s*owner|is\s*this\s*the\s*owner|you\s*the\s*owner|owner\s*(is\s*)?around|wondering\s*if\s*the\s*owner|is\s*the\s*owner\s*around)\b/i.test(low);
     const hasGatekeeperPivot = /\b(owner\s*is\s*around|wondering\s*if\s*the\s*owner|is\s*the\s*owner\s*around|owner\s*around|is\s*gary\s*around|out\s*on\s*a\s*job\s*site|in\s*the\s*field|come\s*in\s*off\s*the\s*truck|transfer\s*me|direct\s*cell|cell\s*number|dispatch\s*after\s*5|after-hours\s*calls|emergency\s*dispatch)\b/i.test(low);
     const hasEmailPivot = /\b(shoot\s*an\s*email|send\s*(you\s*)?an\s*email|happy\s*to\s*email|before\s*i\s*send|so\s*i\s*don't\s*send\s*(10\s*pages|garbage|spam)|what\s*specific|lose\s*more\s*calls)\b/i.test(low);
     const hasAnsweringServiceCompare = /\b(answering\s*service|call\s*center|live\s*operator|offshore|botch|miss\s*notes|scribble|15\s*minutes|relay|in\s*one\s*ring)\b/i.test(low);
@@ -3672,12 +3674,41 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     };
   }
 
-  function pickUnique(memory, pool, tag) {
+  function getCallerName() {
+    if (window.activeQuestRep && window.activeQuestRep.name) return window.activeQuestRep.name;
+    if (typeof activeCaller === 'string' && activeCaller.trim() && activeCaller !== 'Sign In Required') return activeCaller.trim();
+    if (typeof player === 'object' && player && player.name) {
+      if (player.name === 'Luke the Closer' || player.name.startsWith('Luke')) return 'Luke';
+      return player.name;
+    }
+    return 'Luke';
+  }
+  window.getCallerName = getCallerName;
+
+  function getCallerFirstName() {
+    const full = getCallerName();
+    const clean = (full || 'Luke').split(' ')[0].replace(/[^a-zA-Z]/g, '');
+    return clean || 'Luke';
+  }
+  window.getCallerFirstName = getCallerFirstName;
+
+  function formatContractorLine(text, boss) {
+    if (!text || typeof text !== 'string') return text || '';
+    const repFirst = getCallerFirstName();
+    let res = text.replace(/\{rep\}/g, repFirst);
+    if (repFirst.toLowerCase() !== 'luke') {
+      res = res.replace(/\bLuke\b/g, repFirst);
+    }
+    return res;
+  }
+  window.formatContractorLine = formatContractorLine;
+
+  function pickUnique(memory, pool, tag, boss) {
     if (!Array.isArray(pool)) pool = [pool];
     const fresh = pool.filter(text => !memory.usedReplies.has(text));
     const chosen = (fresh.length > 0) ? fresh[Math.floor(Math.random() * fresh.length)] : pool[0];
     memory.usedReplies.add(chosen);
-    return chosen;
+    return formatContractorLine(chosen, boss);
   }
 
   function generateContractorTurn(analysis, memory, boss) {
@@ -3914,15 +3945,23 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
     if (analysis.hasOwnerCheck) {
       if (boss.key === 'gatekeeper') {
+        memory.stage = 'gatekeeper_opener';
+        memory.lastBossQuestion = 'who_are_you';
         return pickUnique(memory, [
-          `No, like I told you, Gary is the owner and he's out on a job site right now. I run the front desk and dispatch. Tell me why you're calling or send an email to info@orlandopremiac.com.`,
-          `You reached dispatch. Gary owns the company and his hands are full with tools today. What is this call regarding?`
-        ], 'gk_owner_status');
+          `Gary's out on a job site with the crew right now. I manage the dispatch desk and phones here. What's this regarding?`,
+          `He's out in the field on a commercial call. I'm Karen, his office and dispatch manager. What can I help you with?`,
+          `Gary is on a job site today with his hands full. I handle all the dispatch and scheduling for Orlando Premier. What is this call about?`
+        ], 'gk_owner_status', boss);
       } else {
+        memory.stage = 'opener_answered';
+        memory.lastBossQuestion = 'deliver_hook';
+        const bossFirstName = (boss.name || 'Contractor').split(' ')[0].replace(/"/g, '');
         return pickUnique(memory, [
-          `Yeah, I already told you I'm the owner! What's this about, kid? Make it fast before I get back on this job.`,
-          `I own the outfit, Luke. Stop verifying and tell me why you called my business line.`
-        ], 'owner_verified');
+          `(Nail gun pauses) Yeah, you're talking to ${bossFirstName}. I own the outfit. Make it fast though, what's going on, {rep}?`,
+          `Speaking, this is ${bossFirstName}, owner. What can I do for you today?`,
+          `You got him. ${bossFirstName} here, owner and operator. Make it fast before I get back on this job. What's this regarding?`,
+          `Yeah, I'm the owner. What's on your mind, {rep}? What does your company do?`
+        ], 'owner_verified', boss);
       }
     }
 
@@ -4946,7 +4985,8 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       } catch(e){}
     }
 
-    appendLog(`<strong>Luke:</strong> "${userText}"`, 'player');
+    const curSpeaker = (typeof getCallerName === 'function') ? getCallerName() : 'Luke';
+    appendLog(`<strong>${curSpeaker}:</strong> "${userText}"`, 'player');
     matchHistory.push({ role: 'user', content: userText });
 
     if (player.breatherCooldown > 0) player.breatherCooldown--;

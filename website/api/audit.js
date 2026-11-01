@@ -270,26 +270,61 @@ async function getLeadCallRecords() {
   // 1. Live Cloud Ingestion: Fetch call logs from Supabase audit_log
   try {
     const logs = await supabaseRequest(
-      "/rest/v1/audit_log?entity_type=eq.lead_call&select=*&order=created_at.asc"
+      "/rest/v1/audit_log?or=(entity_type.eq.lead_call,action.eq.lead_call_logged,entity_type.eq.lead_inquiry)&select=*&order=created_at.asc"
     );
 
     if (Array.isArray(logs) && logs.length > 0) {
       for (const entry of logs) {
-        let p = entry.payload || {};
-        if (!p.call && entry.details) {
-          try {
-            const d = typeof entry.details === "string" ? JSON.parse(entry.details) : entry.details;
-            if (d && d.call) p = d;
-          } catch (_) {}
+        let d = entry.details;
+        if (typeof d === "string") {
+          try { d = JSON.parse(d); } catch (_) {}
         }
-        const leadId = p.leadId || entry.entity_id;
-        const callObj = p.call || p;
-        if (leadId && typeof callObj === "object") {
-          mergedCalls[leadId] = {
-            ...(mergedCalls[leadId] || {}),
-            ...callObj,
-            updatedAt: entry.created_at || callObj.updatedAt || new Date().toISOString()
-          };
+        let p = entry.payload;
+        if (typeof p === "string") {
+          try { p = JSON.parse(p); } catch (_) {}
+        }
+
+        // Case A: Fallback saved via submit_public_inquiry
+        if (d && (d.business === "VantorX Lead Call Activity" || d.businessType === "lead_call" || (Array.isArray(d.interests) && d.interests.includes("cold_call_arena")))) {
+          let chal = {};
+          if (d.challenge) {
+            try {
+              chal = typeof d.challenge === "string" ? JSON.parse(d.challenge) : d.challenge;
+            } catch (_) {}
+          }
+          const leadId = chal.leadId || entry.entity_id;
+          const callObj = chal.call || chal;
+          if (leadId && typeof callObj === "object") {
+            const ex = mergedCalls[leadId];
+            const upTime = chal.timestamp || d.submittedAt || entry.created_at || new Date().toISOString();
+            if (!ex || !ex.updatedAt || new Date(upTime) >= new Date(ex.updatedAt)) {
+              mergedCalls[leadId] = {
+                ...(ex || {}),
+                ...callObj,
+                caller: callObj.caller || chal.caller || d.name || "Outbound Closer",
+                updatedAt: upTime
+              };
+            }
+          }
+        }
+
+        // Case B: Direct audit_log entry (in details or legacy payload)
+        const directObj = (d && (d.call || d.outcome !== undefined || d.called !== undefined)) ? d : (p && (p.call || p.outcome !== undefined || p.called !== undefined)) ? p : null;
+        if (directObj) {
+          const leadId = directObj.leadId || entry.entity_id;
+          const callObj = directObj.call || directObj;
+          if (leadId && typeof callObj === "object") {
+            const ex = mergedCalls[leadId];
+            const upTime = directObj.timestamp || entry.created_at || callObj.updatedAt || new Date().toISOString();
+            if (!ex || !ex.updatedAt || new Date(upTime) >= new Date(ex.updatedAt)) {
+              mergedCalls[leadId] = {
+                ...(ex || {}),
+                ...callObj,
+                caller: callObj.caller || directObj.caller || "Outbound Closer",
+                updatedAt: upTime
+              };
+            }
+          }
         }
       }
     }
@@ -336,7 +371,11 @@ function saveLeadCallRecords(callsMap) {
 }
 
 async function handleLeadCallSync(req, res) {
-  const body = req.body || {};
+  let body = req.body;
+  if (typeof body === "string") {
+    try { body = JSON.parse(body); } catch (_) { body = {}; }
+  }
+  body = body || {};
   const caller = typeof body.caller === "string" ? body.caller.trim() : "Outbound Closer";
   const nowIso = new Date().toISOString();
 
@@ -346,7 +385,7 @@ async function handleLeadCallSync(req, res) {
 
   // Support single call update: { leadId, call }
   if (body.leadId && body.call) {
-    const id = body.leadId;
+    const id = String(body.leadId);
     const callData = body.call;
     masterCalls[id] = {
       ...(masterCalls[id] || {}),
@@ -362,14 +401,15 @@ async function handleLeadCallSync(req, res) {
   if (body.calls && typeof body.calls === "object") {
     for (const [id, callData] of Object.entries(body.calls)) {
       if (callData && typeof callData === "object") {
-        masterCalls[id] = {
-          ...(masterCalls[id] || {}),
+        const sid = String(id);
+        masterCalls[sid] = {
+          ...(masterCalls[sid] || {}),
           ...callData,
           caller: callData.caller || caller,
           updatedAt: nowIso
         };
         updatedCount++;
-        changedLeadIds.push(id);
+        changedLeadIds.push(sid);
       }
     }
   }
@@ -381,9 +421,9 @@ async function handleLeadCallSync(req, res) {
     const insertPayloads = changedLeadIds.map(id => ({
       action: "lead_call_logged",
       entity_type: "lead_call",
-      entity_id: id,
-      payload: {
-        leadId: id,
+      entity_id: String(id),
+      details: {
+        leadId: String(id),
         call: masterCalls[id],
         caller: masterCalls[id].caller || caller,
         timestamp: nowIso
@@ -411,8 +451,9 @@ async function handleLeadCallSync(req, res) {
             inquiry_type: "lead_call",
             inquiry_interests: ["cold_call_arena", c.outcome || "Called"],
             inquiry_challenge: JSON.stringify({
-              leadId: id,
+              leadId: String(id),
               call: c,
+              caller: c.caller || caller,
               timestamp: nowIso
             })
           }
@@ -754,11 +795,14 @@ module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
+  let body = req.body;
+  if (typeof body === "string") {
+    try { body = JSON.parse(body); } catch (_) { body = {}; }
   }
+  body = body || {};
+  req.body = body;
 
-  const action = req.query?.action || req.body?.action || null;
+  const action = req.query?.action || body?.action || null;
 
   // 1. Rep Roster Ingestion & Progress Sync API
   if (action === "rep-roster") {
