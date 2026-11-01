@@ -4373,10 +4373,11 @@
     "estLoss": "$8,800/mo",
     "painPoint": "Commercial contractor estimate forms sitting uncontacted for 24+ hours",
     "subject": "Question for Gary - capturing Mr. Electric of Atlanta quote requests in 90 seconds",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a197b6-9cb1-77f4-ab75-b3688b2f8e1b",
+    "sentAt": "2026-11-01T15:24:49.772Z",
+    "body": "Hi Gary,\n\nQuick question regarding Mr. Electric of Atlanta's customer response speed:\n\nWhen customers in Atlanta, GA fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Electrical, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_219\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $8,800/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "ga_220",
@@ -4392,10 +4393,11 @@
     "estLoss": "$9,500/mo",
     "painPoint": "Weekend sewer backups rolling to voicemail while competitors take ,500 repairs",
     "subject": "Quick question for Steve regarding A-Action Emergency Plumbers emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a197b6-9d37-7a81-9814-f139d0c75114",
+    "sentAt": "2026-11-01T15:24:49.903Z",
+    "body": "Hi Steve,\n\nSaw your solid reputation in Kennesaw, GA — congrats on building a trusted local brand.\n\nI was auditing local Plumbing providers in Kennesaw, GA and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Plumbing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs A-Action Emergency Plumbers roughly $9,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_220\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "ga_221",
@@ -4411,10 +4413,11 @@
     "estLoss": "$16,500/mo",
     "painPoint": "Flood drying insurance claims lost when callers hang up on unanswered lines",
     "subject": "Quick question for Keith regarding Southeast Water & Mold Restoration emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a197b6-9d92-71fb-9a8f-e974e481646d",
+    "sentAt": "2026-11-01T15:24:50.007Z",
+    "body": "Hi Keith,\n\nSaw your solid reputation in Atlanta, GA — congrats on building a trusted local brand.\n\nI was auditing local Restoration providers in Atlanta, GA and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Restoration, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Southeast Water & Mold Restoration roughly $16,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_221\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "ga_222",
@@ -4430,10 +4433,11 @@
     "estLoss": "$21,000/mo",
     "painPoint": "Midnight commercial flood drying jobs rolling to voicemail costing ,000 per claim",
     "subject": "Quick question for Mark regarding All Phase Restoration emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a197b6-9e01-7690-8376-d239a90adb79",
+    "sentAt": "2026-11-01T15:24:50.105Z",
+    "body": "Hi Mark,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Restoration contractors in Atlanta, GA.\n\nWhile All Phase Restoration has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Restoration contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_222\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Restoration in Atlanta, GA?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "ga_223",
@@ -4449,10 +4453,11 @@
     "estLoss": "$9,200/mo",
     "painPoint": "Competitors showing up as recommended AI answers for Gwinnett heat pump repair",
     "subject": "Question for Scott regarding Comfort Control Heating & Air ranking on ChatGPT",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a197b6-9e5b-7f17-b3a8-c0079c3c7a53",
+    "sentAt": "2026-11-01T15:24:50.204Z",
+    "body": "Hi Scott,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Buford, GA.\n\nWhile Comfort Control Heating & Air has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_223\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Buford, GA?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "ga_224",
