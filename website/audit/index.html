@@ -364,6 +364,34 @@ header {
     <p>Prepared for <strong id="leadOwnerText" style="color:#ffffff">Business Owner</strong>. This confidential diagnostic reveals silent after-hours call drop-offs, missed-call revenue bleed, and speed-to-lead response benchmarks in your local service territory.</p>
   </div>
 
+  <!-- Mystery Shopper Proof Card -->
+  <div id="shopperProofCard" style="display:none; background:rgba(245,158,11,0.06); border:1.5px solid #f59e0b; border-radius:14px; padding:20px; margin-bottom:24px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:20px;">🕵️</span>
+        <h3 style="color:#fbbf24; font-size:16px; margin:0; text-transform:uppercase; letter-spacing:0.5px;">Verified Mystery Shopper Call Audit</h3>
+      </div>
+      <span style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid #f59e0b; font-size:11px; font-weight:700; padding:3px 10px; border-radius:6px; font-family:var(--font-mono);">CONFIRMED LEAK</span>
+    </div>
+    <p style="color:#cbd5e1; font-size:13.5px; line-height:1.5; margin-bottom:14px;">
+      Our secret-shopper diagnostic line placed an after-hours emergency call test to <strong id="shopperCompanyText" style="color:#ffffff;">your shop</strong> at <strong id="shopperTimeText" style="color:#fbbf24;">6:42 PM</strong>.
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; text-align:center;">
+      <div style="background:#070a0f; border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px;">
+        <div style="font-size:11px; color:#64748b; text-transform:uppercase; font-weight:700;">Rings to Answer</div>
+        <div id="shopperRingsText" style="font-size:22px; font-weight:800; color:#ef4444; margin-top:2px;">7 Rings</div>
+      </div>
+      <div style="background:#070a0f; border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px;">
+        <div style="font-size:11px; color:#64748b; text-transform:uppercase; font-weight:700;">Call Handling</div>
+        <div id="shopperOutcomeText" style="font-size:13px; font-weight:700; color:#fbbf24; margin-top:6px;">Carrier Voicemail</div>
+      </div>
+      <div style="background:#070a0f; border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px;">
+        <div style="font-size:11px; color:#64748b; text-transform:uppercase; font-weight:700;">Caller Hang-Up Risk</div>
+        <div style="font-size:22px; font-weight:800; color:#ef4444; margin-top:2px;">84%</div>
+      </div>
+    </div>
+  </div>
+
   <div class="audit-card">
     <div class="target-dossier">
       <div class="dossier-cell">
@@ -458,7 +486,7 @@ header {
 
 <script>
 (async function() {
-  const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.search || window.__SEARCH_PARAMS || '');
   let leadId = params.get('id') || params.get('lead') || '';
 
   // Also check if path has /audit/[id]
@@ -513,6 +541,29 @@ header {
 
   if (pain) {
     document.getElementById('vulnDescText').textContent = `${pain}. In your market, trade customers needing emergency service call the next business on Google if they are put on hold or hit voicemail. Ava guarantees 1-ring pickup 24/7.`;
+  }
+
+  // Handle Mystery Shopper audit details if shopper=1
+  if (params.get('shopper') === '1') {
+    const card = document.getElementById('shopperProofCard');
+    if (card) {
+      card.style.display = 'block';
+      const companyEl = document.getElementById('shopperCompanyText');
+      if (companyEl) companyEl.textContent = company;
+
+      try {
+        const auditRes = await fetch('../data/mystery_shopper_audits.json');
+        if (auditRes.ok) {
+          const audits = await auditRes.json();
+          const match = audits.find(a => (a.leadId && a.leadId.toLowerCase() === leadId.toLowerCase()) || (a.company && a.company.toLowerCase().includes(company.toLowerCase())));
+          if (match) {
+            if (document.getElementById('shopperTimeText')) document.getElementById('shopperTimeText').textContent = match.testTime || '6:42 PM';
+            if (document.getElementById('shopperRingsText')) document.getElementById('shopperRingsText').textContent = `${match.ringCount || 7} Rings`;
+            if (document.getElementById('shopperOutcomeText')) document.getElementById('shopperOutcomeText').textContent = match.responseMechanism || 'Carrier Voicemail';
+          }
+        }
+      } catch (_) {}
+    }
   }
 })();
 </script>

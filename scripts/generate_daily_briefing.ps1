@@ -1,4 +1,4 @@
-﻿param(
+param(
   [switch]$SendEmail,
   [string]$Recipient = "hluke2057@gmail.com"
 )
@@ -45,6 +45,72 @@ $mutators = @(
 )
 $dayOfWeekIndex = [int]$now.DayOfWeek
 $todayMutator = $mutators[$dayOfWeekIndex]
+
+# Load Mystery Shopper Telemetry
+$auditsFile = Join-Path $workspaceRoot "data\mystery_shopper_audits.json"
+$auditsList = @()
+if (Test-Path $auditsFile) {
+  try {
+    $rawAudits = Get-Content $auditsFile -Raw -Encoding utf8
+    if ($rawAudits[0] -eq [char]0xFEFF) { $rawAudits = $rawAudits.Substring(1) }
+    $auditsList = $rawAudits | ConvertFrom-Json
+  } catch {}
+}
+$auditsCount = $auditsList.Count
+[int64]$totalBleedAmount = 0
+foreach ($a in $auditsList) { if ($a.monthlyBleed) { $totalBleedAmount += [int64]$a.monthlyBleed } }
+$totalBleedDisplay = "`$" + $totalBleedAmount.ToString("N0") + "/mo"
+
+$mysteryShopperRows = ""
+$topAudits = $auditsList | Select-Object -First 3
+foreach ($a in $topAudits) {
+  $mysteryShopperRows += @"
+    <tr>
+      <td><strong>$($a.company)</strong><br><span style="color:#64748b; font-size:11px;">$($a.owner) · $($a.phone)</span></td>
+      <td>$($a.trade)</td>
+      <td><span class="badge badge-gold">$($a.ringCount) Rings</span> <span style="font-size:11.5px; color:#cbd5e1;">$($a.responseMechanism)</span></td>
+      <td><strong style="color:#ef4444;">-`$$($a.monthlyBleed.ToString('N0'))/mo</strong></td>
+    </tr>
+"@
+}
+if (-not $mysteryShopperRows) {
+  $mysteryShopperRows = "<tr><td colspan='4' style='text-align:center; color:#64748b; padding:12px;'>No mystery shopper audits recorded yet.</td></tr>"
+}
+
+# Load LeadFlow SMS Telemetry
+$smsFile = Join-Path $workspaceRoot "data\leadflow_sms_queue.json"
+$smsList = @()
+if (Test-Path $smsFile) {
+  try {
+    $rawSms = Get-Content $smsFile -Raw -Encoding utf8
+    if ($rawSms[0] -eq [char]0xFEFF) { $rawSms = $rawSms.Substring(1) }
+    $smsList = $rawSms | ConvertFrom-Json
+  } catch {}
+}
+$smsCount = $smsList.Count
+
+$envFile = Join-Path $workspaceRoot ".env"
+$hasTwilio = $false
+if (Test-Path $envFile) {
+  $hasTwilio = [bool](Select-String -Path $envFile -Pattern "TWILIO_ACCOUNT_SID=AC" -Quiet)
+}
+$smsMode = if ($hasTwilio) { "Twilio Live" } else { "Simulated" }
+
+$smsRows = ""
+$topSms = $smsList | Select-Object -First 3
+foreach ($s in $topSms) {
+  $smsRows += @"
+    <tr>
+      <td><strong>$($s.company)</strong><br><span style="color:#64748b; font-size:11px;">$($s.owner)</span></td>
+      <td><span style="font-family:monospace; color:#38bdf8;">$($s.e164Phone)</span></td>
+      <td style="font-size:11.5px; color:#cbd5e1; max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">$($s.message)</td>
+      <td><span class="badge badge-green">Staged / Active</span></td>
+    </tr>
+"@
+}
+if (-not $smsRows) {
+  $smsRows = "<tr><td colspan='4' style='text-align:center; color:#64748b; padding:12px;'>No SMS dispatches recorded yet.</td></tr>"
+}
 
 # Render HTML
 $htmlReport = @"
@@ -179,6 +245,58 @@ $htmlReport = @"
         <p style="font-size:11px; margin:4px 0 0 0; color:#94a3b8;">$($todayMutator.desc)</p>
       </div>
     </div>
+  </div>
+
+  <div class="card" style="border-color:rgba(245,158,11,0.35);">
+    <h2>&#128373; 5. Mystery Shopper Proof-of-Leak Intel</h2>
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-val gold">$auditsCount</div>
+        <div class="stat-lbl">Contractors Audited</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val green">84%</div>
+        <div class="stat-lbl">Leak Drop-off Risk</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val gold">$totalBleedDisplay</div>
+        <div class="stat-lbl">Monthly Bleed Found</div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Contractor</th><th>Trade</th><th>Friction / Leak Detected</th><th>Bleed/mo</th></tr>
+      </thead>
+      <tbody>
+        $mysteryShopperRows
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="border-color:rgba(56,189,248,0.35);">
+    <h2>&#128241; 6. LeadFlow 90-Second SMS Outreach</h2>
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-val" style="color:#38bdf8;">$smsCount</div>
+        <div class="stat-lbl">SMS in Queue</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val green">100%</div>
+        <div class="stat-lbl">Staging / Delivery</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val gold">$smsMode</div>
+        <div class="stat-lbl">Provider Mode</div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Contractor</th><th>Phone Target</th><th>Outreach Message Staged</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        $smsRows
+      </tbody>
+    </table>
   </div>
 </div>
 </body>

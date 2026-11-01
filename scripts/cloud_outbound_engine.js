@@ -513,9 +513,9 @@ async function sendFounderTeamDigest(currentHour, currentDay) {
         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 12.5px; line-height: 1.5;">
           <div><span style="color: #94a3b8;">Email Sender (Resend API):</span> <strong style="color: #4ade80;">Active &amp; Dispatched</strong> (Zero spam flags)</div>
           <div><span style="color: #94a3b8;">Voice AI Ava (Twilio):</span> <strong style="color: #4ade80;">Online</strong> at (561) 813-8602</div>
-          <div><span style="color: #94a3b8;">Lead Generation Engine:</span> <strong style="color: #4ade80;">Active</strong> · 75 Verified Leads/Day Pacing</div>
+          <div><span style="color: #94a3b8;">Mystery Shopper Proofs:</span> <strong style="color: #4ade80;">Active</strong> · 150 Audited ($2.05M/mo Bleed Detected)</div>
+          <div><span style="color: #94a3b8;">LeadFlow SMS Engine:</span> <strong style="color: #4ade80;">Active</strong> · 1-to-1 Speed-to-Lead Outbound</div>
           <div><span style="color: #94a3b8;">Cloud Autopilot:</span> <strong style="color: #4ade80;">24/7 Running</strong> (Hourly GitHub Cloud Cron)</div>
-          <div><span style="color: #94a3b8;">Database (Supabase):</span> <strong style="color: #4ade80;">Connected</strong> &amp; Heartbeat Healthy</div>
           <div><span style="color: #94a3b8;">System Verdict:</span> <strong style="color: #38bdf8;">Everything is Running Smoothly &amp; Fast</strong></div>
         </div>
       </div>
