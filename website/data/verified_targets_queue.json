@@ -4975,10 +4975,11 @@
     "estLoss": "$8,800/mo",
     "painPoint": "Commercial electrical outage and generator installation inquiries missed after 5 PM",
     "subject": "Quick question for Shane regarding Turn It On Electric emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a19901-0fa7-7366-a0f0-e466168de0ec",
+    "sentAt": "2026-11-01T21:25:46.099Z",
+    "body": "Hi Shane,\n\nSaw your solid reputation in Phoenix, AZ — congrats on building a trusted local brand.\n\nI was auditing local Electrical providers in Phoenix, AZ and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Electrical, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Turn It On Electric roughly $8,800/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=az_249\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "az_250",
@@ -4994,10 +4995,13 @@
     "estLoss": "$8,200/mo",
     "painPoint": "Residential EV charger quote leads delayed by 24 hours while competitors text",
     "subject": "Question for Mark - capturing Econolight Electricians quote requests in 90 seconds",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Mark,\n\nQuick question regarding Econolight Electricians's customer response speed:\n\nWhen customers in Mesa, AZ fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Electrical, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=az_250\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $8,200/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-01T21:25:46.199Z"
   },
   {
     "id": "fl_se_001",
@@ -5013,10 +5017,13 @@
     "estLoss": "$8,500/mo",
     "painPoint": "After-hours voicemail on emergency AC calls during Florida heat waves",
     "subject": "Quick question for Everett regarding Palm Air Air Conditioning, Inc. emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Everett,\n\nSaw your solid reputation in Boca Raton, FL — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Boca Raton, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Palm Air Air Conditioning, Inc. roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_001\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-01T21:25:46.268Z"
   },
   {
     "id": "fl_se_002",
@@ -5032,10 +5039,13 @@
     "estLoss": "$7,800/mo",
     "painPoint": "Online estimate forms waiting hours over the weekend before getting a response",
     "subject": "Quick question for Chris regarding Air-Ref Co. Inc. emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Chris,\n\nQuick question regarding Air-Ref Co. Inc.'s customer response speed:\n\nWhen customers in Boca Raton, FL fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In HVAC, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_002\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $7,800/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-01T21:25:46.300Z"
   },
   {
     "id": "fl_se_003",
@@ -5051,10 +5061,13 @@
     "estLoss": "$14,200/mo",
     "painPoint": "Large multi-line dispatch desk dropping calls during summer afternoon heat spikes",
     "subject": "Quick question for Bob regarding Del-Air Heating & Air Conditioning emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Bob,\n\nSaw your solid reputation in Boca Raton, FL — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Boca Raton, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Del-Air Heating & Air Conditioning roughly $14,200/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_003\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-01T21:25:46.334Z"
   },
   {
     "id": "fl_se_004",
