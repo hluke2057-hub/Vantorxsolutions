@@ -4002,12 +4002,12 @@
     "service": "24/7 AI Phone Receptionist (Ava)",
     "estLoss": "$9,500/mo",
     "painPoint": "Weekend emergency breakdown inquiries unanswered while office staff is away",
-    "subject": "Quick question for Ray regarding Custom Comfort Air emergency calls",
+    "subject": "Re: Quick question for Ray regarding Custom Comfort Air emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a193a1-225d-72cc-905c-47a7e20a6c9e",
-    "sentAt": "2026-10-31T20:22:53.383Z",
-    "body": "Hi Ray,\n\nSaw your solid reputation in Rosenberg, TX — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Rosenberg, TX and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Custom Comfort Air roughly $9,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_199\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a19dfa-c508-709a-ab88-cd7895dbf989",
+    "sentAt": "2026-11-02T20:36:59.866Z",
+    "body": "Hi Ray,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Custom Comfort Air.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_199\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "hou_200",
@@ -4022,12 +4022,12 @@
     "service": "Full Digital Infrastructure Bundle",
     "estLoss": "$15,000/mo",
     "painPoint": "High lead acquisition costs on Google Ads leaking away due to slow phone intake",
-    "subject": "Quick question for Randy regarding Morrow Mechanical emergency calls",
+    "subject": "Re: Quick question for Randy regarding Morrow Mechanical emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a193a1-230e-70a2-a809-8aa66a902e15",
-    "sentAt": "2026-10-31T20:22:53.526Z",
-    "body": "Hi Randy,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Spring, TX.\n\nWhile Morrow Mechanical has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_200\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Spring, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a19dfa-c65c-760c-9ad6-af609f4e797a",
+    "sentAt": "2026-11-02T20:37:00.215Z",
+    "body": "Hi Randy,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Morrow Mechanical.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_200\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "ga_201",
@@ -4042,12 +4042,14 @@
     "service": "Scale Enterprise Tier (,297/mo)",
     "estLoss": "$28,000/mo",
     "painPoint": "Massive Atlanta fleet; summer peak call surges cause callers to hang up on hold",
-    "subject": "Quick question for Randy regarding Shumate Heating, Air & Plumbing emergency calls",
-    "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a193a1-2376-7b4f-b261-b019c29abdf0",
+    "subject": "Re: Quick question for Randy regarding Shumate Heating, Air & Plumbing emergency calls",
+    "status": "skipped_dns",
+    "touch": 2,
+    "resendMessageId": null,
     "sentAt": "2026-10-31T20:22:53.628Z",
-    "body": "Hi Randy,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Duluth, GA.\n\nWhile Shumate Heating, Air & Plumbing has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_201\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Duluth, GA?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "body": "Hi Randy,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Shumate Heating, Air & Plumbing.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_201\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-02T20:37:00.321Z"
   },
   {
     "id": "ga_202",
@@ -4062,12 +4064,14 @@
     "service": "24/7 AI Phone Receptionist (Ava)",
     "estLoss": "$11,800/mo",
     "painPoint": "Emergency drain clogs and pipe burst inquiries rolling to voicemail after 6 PM",
-    "subject": "Quick question for Dennis regarding E Dennis Plumbing & AC emergency calls",
-    "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a193a1-23e4-7e72-9c9c-218b47d07ce3",
+    "subject": "Re: Quick question for Dennis regarding E Dennis Plumbing & AC emergency calls",
+    "status": "skipped_dns",
+    "touch": 2,
+    "resendMessageId": null,
     "sentAt": "2026-10-31T20:22:53.757Z",
-    "body": "Hi Dennis,\n\nSaw your solid reputation in Dallas, GA — congrats on building a trusted local brand.\n\nI was auditing local Plumbing providers in Dallas, GA and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Plumbing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs E Dennis Plumbing & AC roughly $11,800/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_202\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "body": "Hi Dennis,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at E Dennis Plumbing & AC.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_202\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-02T20:37:00.360Z"
   },
   {
     "id": "ga_203",
@@ -4082,12 +4086,12 @@
     "service": "24/7 AI Phone Receptionist (Ava) and Storm Triage",
     "estLoss": "$14,000/mo",
     "painPoint": "Severe hail and fallen tree roof damage calls lost to competitors when lines ring out",
-    "subject": "Quick question for David regarding Georgia In Home Services emergency calls",
+    "subject": "Re: Quick question for David regarding Georgia In Home Services emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a193a1-2460-79ec-b257-db6570712de7",
-    "sentAt": "2026-10-31T20:22:53.900Z",
-    "body": "Hi David,\n\nSaw your solid reputation in Atlanta, GA — congrats on building a trusted local brand.\n\nI was auditing local Roofing providers in Atlanta, GA and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Roofing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Georgia In Home Services roughly $14,000/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_203\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a19dfa-c7ff-7126-a3a7-769ec59686fd",
+    "sentAt": "2026-11-02T20:37:00.622Z",
+    "body": "Hi David,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Georgia In Home Services.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=ga_203\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "ga_204",
