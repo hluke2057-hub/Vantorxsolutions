@@ -5469,10 +5469,13 @@
     "estLoss": "$14,500/mo",
     "painPoint": "Flood and pipe burst insurance jobs lost when midnight emergency calls go to voicemail",
     "subject": "Quick question for Scott regarding Delray Beach Restoration Company emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Scott,\n\nSaw your solid reputation in Delray Beach, FL — congrats on building a trusted local brand.\n\nI was auditing local Restoration providers in Delray Beach, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Restoration, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Delray Beach Restoration Company roughly $14,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_022\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-02T14:56:49.908Z"
   },
   {
     "id": "fl_se_023",
@@ -5488,10 +5491,11 @@
     "estLoss": "$8,900/mo",
     "painPoint": "Old WordPress website failing to capture mobile estimate requests on smartphones",
     "subject": "Quick question for Roger regarding Molsbee Roofing Inc. emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a19cc3-5770-79c9-b515-cf58958033d2",
+    "sentAt": "2026-11-02T14:56:50.088Z",
+    "body": "Hi Roger,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Boynton Beach, FL.\n\nWhile Molsbee Roofing Inc. has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_023\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Boynton Beach, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_se_024",
@@ -5507,10 +5511,13 @@
     "estLoss": "$15,000/mo",
     "painPoint": "Weekend emergency calls bouncing to competitors because office staff is off-duty",
     "subject": "Quick question for John regarding Cousin's Air, Inc. emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi John,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Boca Raton, FL.\n\nWhile Cousin's Air, Inc. has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_024\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Boca Raton, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-02T14:56:50.157Z"
   },
   {
     "id": "fl_se_025",
@@ -5526,10 +5533,13 @@
     "estLoss": "$9,200/mo",
     "painPoint": "Zero presence on ChatGPT when high-net-worth Jupiter residents search for EV chargers",
     "subject": "Quick question for Ken regarding Elite Electric, Plumbing & Air emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Ken,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Electrical contractors in Jupiter, FL.\n\nWhile Elite Electric, Plumbing & Air has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Electrical contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_025\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Electrical in Jupiter, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-02T14:56:50.226Z"
   },
   {
     "id": "fl_se_026",
@@ -5545,10 +5555,13 @@
     "estLoss": "$22,000/mo",
     "painPoint": "Massive commercial and residential call volume overflowing into voicemail during heat waves",
     "subject": "Quick question for Jeff regarding Lindstrom Air Conditioning & Plumbing emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Jeff,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Pompano Beach, FL.\n\nWhile Lindstrom Air Conditioning & Plumbing has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_026\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Pompano Beach, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-02T14:56:50.300Z"
   },
   {
     "id": "fl_se_027",
