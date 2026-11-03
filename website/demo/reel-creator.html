@@ -6,7 +6,7 @@
 <title>VantorX Reel Studio — Automated Viral Reel Generator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800;900&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #07090e;
@@ -30,7 +30,7 @@
   }
   header {
     text-align: center;
-    max-width: 700px;
+    max-width: 760px;
     margin-bottom: 24px;
   }
   .badge {
@@ -50,7 +50,7 @@
   }
   h1 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 8px;
@@ -73,7 +73,7 @@
     align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 1100px;
+    max-width: 1140px;
     width: 100%;
   }
 
@@ -107,7 +107,7 @@
     z-index: 10;
   }
   .stage-pill {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 4px 10px;
@@ -138,8 +138,8 @@
   /* Studio Control Panel */
   .control-panel {
     flex: 1;
-    min-width: 320px;
-    max-width: 520px;
+    min-width: 340px;
+    max-width: 560px;
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 20px;
@@ -159,7 +159,7 @@
     gap: 8px;
   }
   .timeline-bar-container {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
     border-radius: 8px;
     padding: 12px;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -192,13 +192,13 @@
   .scenes-grid {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
   .scene-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
-    padding: 10px 14px;
+    padding: 8px 12px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -214,8 +214,8 @@
     color: #000;
   }
   .scene-idx {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
@@ -229,7 +229,7 @@
     flex: 1;
   }
   .scene-name {
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 700;
     color: #f1f5f9;
   }
@@ -241,6 +241,128 @@
     font-size: 11px;
     font-family: 'JetBrains Mono', monospace;
     color: var(--accent);
+  }
+
+  /* Voice & Audio Production Box */
+  .audio-studio-box {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .voice-mode-tabs {
+    display: flex;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+    border-radius: 8px;
+  }
+  .voice-tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .voice-tab-btn.active {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--accent);
+  }
+
+  .voice-selector-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .voice-selector-row select {
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .audio-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+    color: #94a3b8;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .audio-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  /* Mic Recording Box */
+  .mic-record-panel {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px dashed rgba(239, 68, 68, 0.4);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .btn-mic-record {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .mic-teleprompter {
+    font-size: 12px;
+    color: #fca5a5;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 10px;
+    border-radius: 6px;
+    line-height: 1.4;
+  }
+
+  /* Audio Upload Panel */
+  .upload-audio-panel {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .upload-dropzone {
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+    font-size: 12px;
+    color: #94a3b8;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .upload-dropzone:hover {
+    border-color: var(--accent);
+    color: #fff;
   }
 
   /* Action Buttons */
@@ -287,23 +409,6 @@
   .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.14);
   }
-  .voice-selector {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    font-size: 12px;
-    color: #94a3b8;
-  }
-  .voice-selector select {
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-  }
   .download-status {
     font-size: 12px;
     color: var(--green);
@@ -321,7 +426,7 @@
 <header>
   <div class="badge">🔥 Autonomous Content Production</div>
   <h1>VantorX <span>Viral Reel Studio</span></h1>
-  <p class="subtitle">100% automated 9:16 vertical video engine reproducing the viral Taskless AI formula (Cosmic Laser Hook → Speed-to-Lead Agitation → Ava Voice AI Live Demo → ManyChat DM Trap).</p>
+  <p class="subtitle">Complete 9:16 vertical video engine with studio neural voiceover, background beat, and sound effects reproducing the viral Taskless AI speed-to-lead formula.</p>
 </header>
 
 <div class="studio-layout">
@@ -340,7 +445,7 @@
   <!-- Control & Customization Panel -->
   <div class="control-panel">
     <div>
-      <div class="panel-section-title">⏱️ Reel Timeline & Audio Sync</div>
+      <div class="panel-section-title">⏱️ Reel Timeline &amp; Audio Sync</div>
       <div class="timeline-bar-container" style="margin-top:10px">
         <div class="timeline-labels">
           <span id="currentTimeLabel">00:00</span>
@@ -353,9 +458,71 @@
       </div>
     </div>
 
+    <!-- Audio & Voice Production Engine -->
+    <div class="audio-studio-box">
+      <div class="panel-section-title">🎙️ Studio Voiceover &amp; Audio Mastering</div>
+      
+      <!-- Voice Mode Switcher -->
+      <div class="voice-mode-tabs">
+        <button class="voice-tab-btn active" id="tabAiVoice" onclick="setVoiceMode('ai')">⚡ Neural Studio AI</button>
+        <button class="voice-tab-btn" id="tabMicRecord" onclick="setVoiceMode('mic')">🎤 Record My Voice</button>
+        <button class="voice-tab-btn" id="tabUploadAudio" onclick="setVoiceMode('upload')">📂 Upload Audio</button>
+      </div>
+
+      <!-- Mode 1: High-Definition AI Voices -->
+      <div id="aiVoicePanel">
+        <div class="voice-selector-row">
+          <select id="voiceModelSelect" onchange="onVoiceModelChange()">
+            <option value="christopher" selected>🔥 Deep Tech Narrator (Christopher Natural — ElevenLabs Style)</option>
+            <option value="guy">🎙️ Conversational Creator (Guy Natural)</option>
+            <option value="eric">⚡ High-Energy Commercial (Eric Natural)</option>
+            <option value="andrew">📻 Deep Radio Host (Andrew Natural)</option>
+            <option value="jenny">💎 Studio Female (Jenny Natural)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Mode 2: Live Mic Recording -->
+      <div class="mic-record-panel" id="micRecordPanel">
+        <div style="font-size:12px;font-weight:700;color:#f87171">Record with Luke's or Carter's Microphone:</div>
+        <div class="mic-teleprompter" id="micTeleprompter">
+          "8 billion lasers pointed at Uranus... 6 hours round trip."
+        </div>
+        <button class="btn-mic-record" id="btnStartMicRec" onclick="toggleMicRecording()">
+          <span>🔴</span> <span id="micRecBtnText">Start Live Mic Recording</span>
+        </button>
+      </div>
+
+      <!-- Mode 3: Custom Upload -->
+      <div class="upload-audio-panel" id="uploadAudioPanel">
+        <div class="upload-dropzone" onclick="document.getElementById('customAudioFileInput').click()">
+          📁 Click to upload your ElevenLabs MP3/WAV voiceover file
+          <input type="file" id="customAudioFileInput" accept="audio/*" style="display:none" onchange="handleAudioUpload(event)">
+        </div>
+        <div id="customAudioName" style="font-size:11px;color:var(--accent);display:none"></div>
+      </div>
+
+      <!-- Master Audio Toggles -->
+      <div class="audio-controls-row">
+        <label class="audio-toggle-label">
+          <input type="checkbox" id="chkEnableMusic" checked>
+          <span>🎵 Background Lofi Beat</span>
+        </label>
+        <label class="audio-toggle-label">
+          <input type="checkbox" id="chkEnableSfx" checked>
+          <span>🔊 Sound Effects &amp; Impacts</span>
+        </label>
+        <label class="audio-toggle-label">
+          <input type="checkbox" id="chkMasterCompressor" checked>
+          <span>🎚️ Broadcast EQ &amp; Limiter</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Scenes List -->
     <div>
       <div class="panel-section-title">🎬 Video Scenes (Taskless Formula)</div>
-      <div class="scenes-grid" style="margin-top:10px">
+      <div class="scenes-grid" style="margin-top:8px">
         <div class="scene-card active" onclick="jumpToScene(0)">
           <div class="scene-idx">1</div>
           <div class="scene-meta">
@@ -368,14 +535,14 @@
           <div class="scene-idx">2</div>
           <div class="scene-meta">
             <div class="scene-name">Brutal Contractor Lead Reality</div>
-            <div class="scene-desc">Voicemail ring out • $7,800 emergency loss</div>
+            <div class="scene-desc">Voicemail ring out • -$7,800 emergency loss</div>
           </div>
           <div class="scene-time">00:05</div>
         </div>
         <div class="scene-card" onclick="jumpToScene(11)">
           <div class="scene-idx">3</div>
           <div class="scene-meta">
-            <div class="scene-name">Ava Voice AI & Speed-to-Lead</div>
+            <div class="scene-name">Ava Voice AI &amp; Speed-to-Lead</div>
             <div class="scene-desc">0.8s pickup • Golden audio wave • SMS dispatch</div>
           </div>
           <div class="scene-time">00:11</div>
@@ -391,24 +558,16 @@
       </div>
     </div>
 
-    <div class="voice-selector">
-      <span>🎙️ Voice Narration:</span>
-      <select id="voiceModelSelect">
-        <option value="auto">Natural AI Narrator (Auto)</option>
-        <option value="david">Deep Confident (David)</option>
-        <option value="zira">Clean Professional (Zira)</option>
-      </select>
-    </div>
-
+    <!-- Action Buttons -->
     <div class="actions-group">
       <button class="btn-primary" id="btnPlayPause" onclick="togglePlay()">
-        <span>▶️</span> Play &amp; Preview Reel
+        <span>▶️</span> Play &amp; Preview Reel (With Studio Audio)
       </button>
       <button class="btn-secondary" id="btnRecordExport" onclick="recordAndExportVideo()">
-        <span>🎥</span> Render &amp; Download Video (.webm / .mp4)
+        <span>🎥</span> Render &amp; Download Video with Audio (.webm / .mp4)
       </button>
       <div class="download-status" id="downloadStatus">
-        🎉 Video rendered! Downloading to your device now...
+        🎉 Video &amp; Studio Audio rendered! Downloading to your device now...
       </div>
       <a href="/demo/" style="text-align:center;color:#94a3b8;font-size:12px;text-decoration:none;margin-top:4px">
         ← Back to Interactive Website Demo
@@ -431,34 +590,175 @@
   let lastTimestamp = 0;
   let animationFrameId = null;
 
-  // Sound Engine (Web Audio API)
+  // Active Voice Mode: 'ai' | 'mic' | 'upload'
+  let currentVoiceMode = 'ai';
+  let uploadedAudioElement = null;
+  let recordedMicAudioBlob = null;
+  let recordedMicAudioUrl = null;
+
+  // Web Audio Mastering Graph
   let audioCtx = null;
-  function initAudio() {
+  let masterCompressor = null;
+  let bassEQ = null;
+  let presenceEQ = null;
+  let masterGain = null;
+  let musicGainNode = null;
+  let mediaStreamDestination = null;
+
+  function initAudioGraph() {
     if (!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
     if (audioCtx.state === 'suspended') {
       audioCtx.resume();
     }
+
+    if (!masterCompressor) {
+      // 1. Broadcast Compressor
+      masterCompressor = audioCtx.createDynamicsCompressor();
+      masterCompressor.threshold.setValueAtTime(-14, audioCtx.currentTime);
+      masterCompressor.knee.setValueAtTime(6, audioCtx.currentTime);
+      masterCompressor.ratio.setValueAtTime(4.5, audioCtx.currentTime);
+      masterCompressor.attack.setValueAtTime(0.003, audioCtx.currentTime);
+      masterCompressor.release.setValueAtTime(0.18, audioCtx.currentTime);
+
+      // 2. Bass EQ (+4dB at 135Hz for deep vocal warmth)
+      bassEQ = audioCtx.createBiquadFilter();
+      bassEQ.type = 'lowshelf';
+      bassEQ.frequency.setValueAtTime(135, audioCtx.currentTime);
+      bassEQ.gain.setValueAtTime(4, audioCtx.currentTime);
+
+      // 3. Presence EQ (+2.5dB at 3.2kHz for vocal clarity)
+      presenceEQ = audioCtx.createBiquadFilter();
+      presenceEQ.type = 'peaking';
+      presenceEQ.frequency.setValueAtTime(3200, audioCtx.currentTime);
+      presenceEQ.Q.setValueAtTime(1.2, audioCtx.currentTime);
+      presenceEQ.gain.setValueAtTime(2.5, audioCtx.currentTime);
+
+      // 4. Master Output Gain
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.9, audioCtx.currentTime);
+
+      // 5. MediaStream Destination (For baking audio into downloaded video!)
+      mediaStreamDestination = audioCtx.createMediaStreamDestination();
+
+      // Connect Mastering Chain
+      bassEQ.connect(presenceEQ);
+      presenceEQ.connect(masterCompressor);
+      masterCompressor.connect(masterGain);
+      masterGain.connect(audioCtx.destination);
+      masterGain.connect(mediaStreamDestination);
+
+      // Background Beat Gain
+      musicGainNode = audioCtx.createGain();
+      musicGainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      musicGainNode.connect(masterGain);
+    }
   }
 
-  function playTone(freq, type, duration, vol=0.1) {
-    if (!audioCtx) return;
+  // Sound Effects Synthesis with Web Audio
+  function playSfx(type) {
+    if (!audioCtx || !document.getElementById('chkEnableSfx').checked) return;
     try {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
+      const t = audioCtx.currentTime;
+      if (type === 'laser') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(1200, t);
+        osc.frequency.exponentialRampToValueAtTime(180, t + 0.35);
+        gain.gain.setValueAtTime(0.25, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+        osc.connect(gain);
+        gain.connect(bassEQ);
+        osc.start(t);
+        osc.stop(t + 0.35);
+      } else if (type === 'subdrop') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(160, t);
+        osc.frequency.exponentialRampToValueAtTime(35, t + 0.7);
+        gain.gain.setValueAtTime(0.5, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.7);
+        osc.connect(gain);
+        gain.connect(bassEQ);
+        osc.start(t);
+        osc.stop(t + 0.7);
+      } else if (type === 'phone_ring') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(440, t);
+        gain.gain.setValueAtTime(0.15, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.4);
+        osc.connect(gain);
+        gain.connect(bassEQ);
+        osc.start(t);
+        osc.stop(t + 0.4);
+      } else if (type === 'ios_ping') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(987.77, t); // B5
+        osc.frequency.setValueAtTime(1318.51, t + 0.08); // E6
+        gain.gain.setValueAtTime(0.3, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
+        osc.connect(gain);
+        gain.connect(presenceEQ);
+        osc.start(t);
+        osc.stop(t + 0.45);
+      }
     } catch(e) {}
   }
 
-  // Voice Narration Script & Timeline Cues
+  // Synthesized Ambient Trap Beat
+  let beatTimer = null;
+  function startBackgroundBeat() {
+    if (!audioCtx || !document.getElementById('chkEnableMusic').checked) return;
+    stopBackgroundBeat();
+
+    let step = 0;
+    beatTimer = setInterval(() => {
+      if (!isPlaying) return;
+      const t = audioCtx.currentTime;
+      // Kick on 1 and 3
+      if (step % 4 === 0) {
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.frequency.setValueAtTime(110, t);
+        osc.frequency.exponentialRampToValueAtTime(40, t + 0.15);
+        g.gain.setValueAtTime(0.22, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+        osc.connect(g);
+        g.connect(musicGainNode);
+        osc.start(t);
+        osc.stop(t + 0.15);
+      }
+      // Hi-hat on every step
+      const hatOsc = audioCtx.createOscillator();
+      const hatGain = audioCtx.createGain();
+      hatOsc.type = 'square';
+      hatOsc.frequency.setValueAtTime(8000, t);
+      hatGain.gain.setValueAtTime(0.02, t);
+      hatGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+      hatOsc.connect(hatGain);
+      hatGain.connect(musicGainNode);
+      hatOsc.start(t);
+      hatOsc.stop(t + 0.04);
+
+      step++;
+    }, 280);
+  }
+
+  function stopBackgroundBeat() {
+    if (beatTimer) {
+      clearInterval(beatTimer);
+      beatTimer = null;
+    }
+  }
+
+  // Script Cues with Timestamps
   const SCRIPT_CUES = [
     { start: 0.2, end: 4.8, text: "8 billion lasers pointed at Uranus... 6 hours round trip." },
     { start: 5.2, end: 10.5, text: "Still faster than most contractors reply to a new lead. Missing that call costs $7,800." },
@@ -491,8 +791,13 @@
     });
   }
 
-  // Waveform heights for Ava speech
   const waveHeights = [15, 30, 50, 85, 110, 75, 95, 120, 60, 45, 80, 105, 50, 25];
+
+  // SFX Trigger States
+  let playedLaserSfx = false;
+  let playedSubdropSfx = false;
+  let playedPhoneSfx = false;
+  let playedIosPingSfx = false;
 
   // Main Render Loop
   function renderFrame(time) {
@@ -514,7 +819,13 @@
       ctx.fill();
     });
 
-    // Determine Active Scene
+    // SFX Trigger Checks
+    if (time >= 0.5 && !playedLaserSfx) { playSfx('laser'); playedLaserSfx = true; }
+    if (time >= 5.0 && !playedSubdropSfx) { playSfx('subdrop'); playedSubdropSfx = true; }
+    if (time >= 6.0 && !playedPhoneSfx) { playSfx('phone_ring'); playedPhoneSfx = true; }
+    if (time >= 15.0 && !playedIosPingSfx) { playSfx('ios_ping'); playedIosPingSfx = true; }
+
+    // Render Active Scene
     if (time < 5.0) {
       renderScene1_CosmicLaser(time);
     } else if (time < 11.0) {
@@ -525,10 +836,10 @@
       renderScene4_ManyChatCTA(time);
     }
 
-    // Render Kinetic Word Subtitles
+    // Render Subtitles
     renderCaptions(time);
 
-    // Subtle Vignette Frame
+    // Vignette
     const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.2, W / 2, H / 2, H * 0.6);
     vig.addColorStop(0, 'rgba(0,0,0,0)');
     vig.addColorStop(1, 'rgba(0,0,0,0.65)');
@@ -536,12 +847,10 @@
     ctx.fillRect(0, 0, W, H);
   }
 
-  // SCENE 1: Cosmic Laser Hook
   function renderScene1_CosmicLaser(t) {
     const pX = W * 0.5;
     const pY = H * 0.38;
 
-    // Glowing Uranus Planet
     ctx.save();
     const planetGlow = ctx.createRadialGradient(pX, pY, 10, pX, pY, 140);
     planetGlow.addColorStop(0, 'rgba(56, 189, 248, 0.9)');
@@ -552,7 +861,6 @@
     ctx.arc(pX, pY, 140, 0, Math.PI * 2);
     ctx.fill();
 
-    // Planet Sphere
     const sphereGrad = ctx.createRadialGradient(pX - 25, pY - 25, 10, pX, pY, 65);
     sphereGrad.addColorStop(0, '#7dd3fc');
     sphereGrad.addColorStop(0.7, '#0284c7');
@@ -562,7 +870,6 @@
     ctx.arc(pX, pY, 65, 0, Math.PI * 2);
     ctx.fill();
 
-    // Ring around Uranus
     ctx.strokeStyle = 'rgba(186, 230, 253, 0.4)';
     ctx.lineWidth = 4;
     ctx.beginPath();
@@ -570,7 +877,6 @@
     ctx.stroke();
     ctx.restore();
 
-    // Firing Neon Lasers
     laserBeams.forEach(b => {
       b.progress += b.speed;
       if (b.progress > 1) b.progress = 0;
@@ -592,35 +898,28 @@
       ctx.restore();
     });
 
-    // Top Brand Tag
     renderTopPill("⚡ SPEED-TO-LEAD REALITY CHECK");
   }
 
-  // SCENE 2: Brutal Lead Leak & Voicemail
   function renderScene2_BrutalLeadLeak(t) {
     const relT = t - 5.0;
-
     renderTopPill("❌ THE CONTRACTOR VOICEMAIL GRAVEYARD");
 
-    // Phone Mockup (Call Screen)
     const phoneW = 280;
     const phoneH = 420;
     const phoneX = (W - phoneW) / 2;
     const phoneY = 220;
 
-    // Red warning ambient flash
     const pulseAlpha = Math.sin(relT * 6) * 0.15 + 0.15;
     ctx.fillStyle = `rgba(239, 68, 68, ${pulseAlpha})`;
     ctx.fillRect(0, 0, W, H);
 
-    // Phone Body
     ctx.save();
     ctx.fillStyle = '#0f172a';
     ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
     ctx.lineWidth = 2;
     roundRect(ctx, phoneX, phoneY, phoneW, phoneH, 24, true, true);
 
-    // Caller Details
     ctx.fillStyle = '#94a3b8';
     ctx.font = '600 13px Inter';
     ctx.textAlign = 'center';
@@ -630,7 +929,6 @@
     ctx.font = '800 20px Space Grotesk';
     ctx.fillText('Palm Beach Emergency AC', W / 2, phoneY + 80);
 
-    // Ringing Animation / Voicemail text
     if (relT < 2.5) {
       ctx.fillStyle = '#38bdf8';
       ctx.font = '700 14px JetBrains Mono';
@@ -644,7 +942,6 @@
       ctx.fillText('"Please leave a message after the tone..."', W / 2, phoneY + 150);
     }
 
-    // Huge Red Loss Card Pop-up
     if (relT > 2.0) {
       const cardY = phoneY + 190;
       ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
@@ -667,10 +964,8 @@
     ctx.restore();
   }
 
-  // SCENE 3: Ava Voice AI Live Demo
   function renderScene3_AvaDemo(t) {
     const relT = t - 11.0;
-
     renderTopPill("⚡ AVA 24/7 VOICE AI • ANSWERED IN 0.8s");
 
     const phoneW = 300;
@@ -678,7 +973,6 @@
     const phoneX = (W - phoneW) / 2;
     const phoneY = 200;
 
-    // Glowing Golden Card
     ctx.save();
     ctx.fillStyle = '#0b0f19';
     ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
@@ -688,7 +982,6 @@
     roundRect(ctx, phoneX, phoneY, phoneW, phoneH, 24, true, true);
     ctx.restore();
 
-    // Ava Header
     ctx.fillStyle = '#F59E0B';
     ctx.font = '800 13px JetBrains Mono';
     ctx.textAlign = 'center';
@@ -698,7 +991,6 @@
     ctx.font = '700 15px Space Grotesk';
     ctx.fillText('Titan HVAC Emergency Dispatch', W / 2, phoneY + 70);
 
-    // Audio Waveform Animation
     const waveY = phoneY + 120;
     const barW = 8;
     const gap = 6;
@@ -714,7 +1006,6 @@
     });
     ctx.shadowBlur = 0;
 
-    // Live Transcript Chat
     const chatY = phoneY + 180;
     ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
     roundRect(ctx, phoneX + 16, chatY, phoneW - 32, 140, 12, true, false);
@@ -737,7 +1028,6 @@
     ctx.font = '500 12px Inter';
     ctx.fillText('"Yes! The unit died and it is 89° inside."', phoneX + 26, chatY + 106);
 
-    // Slide-in SMS Notification Card
     if (relT > 4.0) {
       const notifY = phoneY + 340;
       ctx.fillStyle = '#10B981';
@@ -762,7 +1052,6 @@
     }
   }
 
-  // SCENE 4: ManyChat CTA & Phone Call
   function renderScene4_ManyChatCTA(t) {
     renderTopPill("🚀 TEST AVA LIVE ON YOUR PHONE");
 
@@ -780,7 +1069,6 @@
     roundRect(ctx, boxX, boxY, boxW, boxH, 24, true, true);
     ctx.restore();
 
-    // Instagram DM Header
     ctx.fillStyle = '#ffffff';
     ctx.font = '800 18px Space Grotesk';
     ctx.textAlign = 'center';
@@ -790,7 +1078,6 @@
     ctx.font = '500 12px Inter';
     ctx.fillText('Automated instant DM sent to your inbox:', W / 2, boxY + 74);
 
-    // Mock Instagram DM Bubble
     const dmY = boxY + 105;
     ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
     roundRect(ctx, boxX + 18, dmY, boxW - 36, 110, 14, true, false);
@@ -807,9 +1094,7 @@
     ctx.font = '600 12px JetBrains Mono';
     ctx.fillText('vantorxsolutions.com/demo', boxX + 32, dmY + 72);
 
-    // Giant Call CTA Card
     const ctaY = boxY + 240;
-    ctx.fillStyle = 'linear-gradient(135deg, #F59E0B, #D97706)';
     ctx.fillStyle = '#F59E0B';
     roundRect(ctx, boxX + 18, ctaY, boxW - 36, 80, 14, true, false);
 
@@ -822,7 +1107,6 @@
     ctx.font = '900 24px JetBrains Mono';
     ctx.fillText('(561) 813-8602', W / 2, ctaY + 62);
 
-    // Bottom Comment Prompt
     ctx.fillStyle = '#ffffff';
     ctx.font = '800 15px Space Grotesk';
     ctx.fillText('👇 COMMENT "AVA" BELOW', W / 2, boxY + 370);
@@ -832,7 +1116,6 @@
     ctx.fillText('Our automation will DM you the live link!', W / 2, boxY + 395);
   }
 
-  // Top Category Pill Helper
   function renderTopPill(text) {
     ctx.save();
     ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
@@ -847,7 +1130,6 @@
     ctx.restore();
   }
 
-  // Kinetic Bold Word Subtitles
   function renderCaptions(t) {
     let activeCue = SCRIPT_CUES.find(c => t >= c.start && t <= c.end);
     if (!activeCue) return;
@@ -856,17 +1138,14 @@
     const captionY = H * 0.86;
     ctx.textAlign = 'center';
 
-    // Shadow & Stroke
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
-    ctx.shadowBlur = 12;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+    ctx.shadowBlur = 14;
     ctx.strokeStyle = '#000000';
     ctx.lineWidth = 6;
     ctx.lineJoin = 'round';
 
-    ctx.font = '900 20px Space Grotesk';
-
-    // Word wrap
-    wrapText(ctx, activeCue.text.toUpperCase(), W / 2, captionY, 440, 26);
+    ctx.font = '900 21px Space Grotesk';
+    wrapText(ctx, activeCue.text.toUpperCase(), W / 2, captionY, 440, 28);
     ctx.restore();
   }
 
@@ -889,9 +1168,7 @@
 
     const startY = y - ((lines.length - 1) * lineHeight) / 2;
     lines.forEach((l, i) => {
-      // Stroke
       context.strokeText(l.trim(), x, startY + i * lineHeight);
-      // Yellow highlight on keywords
       if (l.includes('URANUS') || l.includes('FASTER') || l.includes('AVA') || l.includes('$7,800') || l.includes('(561)')) {
         context.fillStyle = '#F59E0B';
       } else {
@@ -917,7 +1194,7 @@
     if (stroke) ctx.stroke();
   }
 
-  // Animation & Playback Engine
+  // Animation Loop
   function loop(timestamp) {
     if (!lastTimestamp) lastTimestamp = timestamp;
     const delta = (timestamp - lastTimestamp) / 1000;
@@ -927,32 +1204,46 @@
       currentTime += delta;
       if (currentTime >= TOTAL_DURATION) {
         currentTime = 0;
+        resetSfxFlags();
       }
       updateUI();
+      triggerAudioForCurrentTime();
     }
 
     renderFrame(currentTime);
     animationFrameId = requestAnimationFrame(loop);
   }
 
+  function resetSfxFlags() {
+    playedLaserSfx = false;
+    playedSubdropSfx = false;
+    playedPhoneSfx = false;
+    playedIosPingSfx = false;
+  }
+
   function togglePlay() {
-    initAudio();
+    initAudioGraph();
     isPlaying = !isPlaying;
     const btn = document.getElementById('btnPlayPause');
+
     if (isPlaying) {
       btn.innerHTML = '<span>⏸️</span> Pause Reel';
-      speakCurrentCue();
+      startBackgroundBeat();
+      triggerAudioForCurrentTime();
     } else {
       btn.innerHTML = '<span>▶️</span> Play &amp; Preview Reel';
+      stopBackgroundBeat();
       if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (uploadedAudioElement) uploadedAudioElement.pause();
     }
   }
 
   function jumpToScene(targetTime) {
     currentTime = targetTime;
+    resetSfxFlags();
     updateUI();
     renderFrame(currentTime);
-    if (isPlaying) speakCurrentCue();
+    if (isPlaying) triggerAudioForCurrentTime();
   }
 
   function updateUI() {
@@ -962,45 +1253,177 @@
     const curSec = Math.floor(currentTime);
     document.getElementById('currentTimeLabel').textContent = '00:' + (curSec < 10 ? '0' : '') + curSec;
 
-    // Update active scene highlight
     const cards = document.querySelectorAll('.scene-card');
     cards.forEach(c => c.classList.remove('active'));
     if (currentTime < 5) cards[0].classList.add('active');
     else if (currentTime < 11) cards[1].classList.add('active');
     else if (currentTime < 20) cards[2].classList.add('active');
     else cards[3].classList.add('active');
+
+    // Update Mic Teleprompter
+    const cue = SCRIPT_CUES.find(c => currentTime >= c.start && currentTime <= c.end);
+    if (cue) {
+      document.getElementById('micTeleprompter').textContent = `"${cue.text}"`;
+    }
   }
 
-  // Speech Synthesizer Voiceover
-  let currentUtterance = null;
-  function speakCurrentCue() {
-    if (!('speechSynthesis' in window)) return;
-    const cue = SCRIPT_CUES.find(c => currentTime >= c.start && currentTime <= c.end);
-    if (!cue) return;
+  // Smart Speech Narration with Neural Online Voices
+  let lastSpokenCueIdx = -1;
+  function triggerAudioForCurrentTime() {
+    if (currentVoiceMode === 'upload' && uploadedAudioElement) {
+      if (Math.abs(uploadedAudioElement.currentTime - currentTime) > 0.4) {
+        uploadedAudioElement.currentTime = currentTime;
+      }
+      if (uploadedAudioElement.paused && isPlaying) {
+        uploadedAudioElement.play().catch(e => {});
+      }
+      return;
+    }
 
+    if (currentVoiceMode === 'mic' && recordedMicAudioUrl) {
+      // Play back recorded mic audio
+      return;
+    }
+
+    if (currentVoiceMode === 'ai') {
+      const cueIdx = SCRIPT_CUES.findIndex(c => currentTime >= c.start && currentTime <= c.end);
+      if (cueIdx !== -1 && cueIdx !== lastSpokenCueIdx) {
+        lastSpokenCueIdx = cueIdx;
+        speakCueNeural(SCRIPT_CUES[cueIdx].text);
+      } else if (cueIdx === -1) {
+        lastSpokenCueIdx = -1;
+      }
+    }
+  }
+
+  function speakCueNeural(text) {
+    if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(cue.text);
-    utter.rate = 1.05;
+
+    const utter = new SpeechSynthesisUtterance(text);
+    // Faster, punchier cadence typical of viral reels
+    utter.rate = 1.15;
     utter.pitch = 0.95;
 
     const voices = window.speechSynthesis.getVoices();
     const sel = document.getElementById('voiceModelSelect').value;
-    if (sel === 'david') {
-      const v = voices.find(v => v.name.includes('David') || v.name.includes('Guy') || v.name.includes('Male'));
-      if (v) utter.voice = v;
-    } else if (sel === 'zira') {
-      const v = voices.find(v => v.name.includes('Zira') || v.name.includes('Jenny') || v.name.includes('Female'));
-      if (v) utter.voice = v;
+
+    // Strict priority: Online Natural voices -> High Quality -> Fallback
+    let bestVoice = null;
+
+    if (sel === 'christopher') {
+      bestVoice = voices.find(v => v.name.includes('Christopher') && (v.name.includes('Natural') || v.name.includes('Online'))) ||
+                  voices.find(v => v.name.includes('Guy') && v.name.includes('Natural')) ||
+                  voices.find(v => v.name.includes('David') || v.name.includes('Male'));
+    } else if (sel === 'guy') {
+      bestVoice = voices.find(v => v.name.includes('Guy') && (v.name.includes('Natural') || v.name.includes('Online'))) ||
+                  voices.find(v => v.name.includes('Christopher') || v.name.includes('Male'));
+    } else if (sel === 'eric') {
+      bestVoice = voices.find(v => v.name.includes('Eric') && (v.name.includes('Natural') || v.name.includes('Online'))) ||
+                  voices.find(v => v.name.includes('Male'));
+    } else if (sel === 'andrew') {
+      bestVoice = voices.find(v => v.name.includes('Andrew') && (v.name.includes('Natural') || v.name.includes('Online'))) ||
+                  voices.find(v => v.name.includes('Male'));
+    } else if (sel === 'jenny') {
+      bestVoice = voices.find(v => v.name.includes('Jenny') && (v.name.includes('Natural') || v.name.includes('Online'))) ||
+                  voices.find(v => v.name.includes('Aria') || v.name.includes('Female'));
     }
+
+    if (bestVoice) {
+      utter.voice = bestVoice;
+    }
+
+    // Sidechain Ducking: Dip music volume while voice speaks
+    if (musicGainNode) {
+      musicGainNode.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      utter.onend = () => {
+        if (musicGainNode) musicGainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      };
+    }
+
     window.speechSynthesis.speak(utter);
   }
 
-  // 1-Click Video Recording & Export (MediaRecorder API)
-  let mediaRecorder = null;
-  let recordedChunks = [];
+  function onVoiceModelChange() {
+    lastSpokenCueIdx = -1;
+    if (isPlaying) triggerAudioForCurrentTime();
+  }
+
+  // Voice Modes (AI / Mic / Upload)
+  function setVoiceMode(mode) {
+    currentVoiceMode = mode;
+    document.querySelectorAll('.voice-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('aiVoicePanel').style.display = (mode === 'ai') ? 'block' : 'none';
+    document.getElementById('micRecordPanel').style.display = (mode === 'mic') ? 'flex' : 'none';
+    document.getElementById('uploadAudioPanel').style.display = (mode === 'upload') ? 'flex' : 'none';
+
+    if (mode === 'ai') document.getElementById('tabAiVoice').classList.add('active');
+    if (mode === 'mic') document.getElementById('tabMicRecord').classList.add('active');
+    if (mode === 'upload') document.getElementById('tabUploadAudio').classList.add('active');
+  }
+
+  // Mode 2: Live Mic Recording
+  let micMediaRecorder = null;
+  let micChunks = [];
+  let isMicRecording = false;
+
+  async function toggleMicRecording() {
+    initAudioGraph();
+    const btn = document.getElementById('btnStartMicRec');
+    const txt = document.getElementById('micRecBtnText');
+
+    if (!isMicRecording) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        micChunks = [];
+        micMediaRecorder = new MediaRecorder(stream);
+        micMediaRecorder.ondataavailable = e => { if (e.data.size > 0) micChunks.push(e.data); };
+        micMediaRecorder.onstop = () => {
+          recordedMicAudioBlob = new Blob(micChunks, { type: 'audio/webm' });
+          recordedMicAudioUrl = URL.createObjectURL(recordedMicAudioBlob);
+          uploadedAudioElement = new Audio(recordedMicAudioUrl);
+          txt.textContent = '✅ Recorded! Play Reel to Hear';
+          btn.style.background = '#10B981';
+        };
+
+        micMediaRecorder.start();
+        isMicRecording = true;
+        txt.textContent = '⏹️ Stop Recording';
+        btn.style.background = '#b91c1c';
+
+        // Auto play reel from start during mic recording
+        currentTime = 0;
+        isPlaying = true;
+      } catch(err) {
+        alert('Could not access microphone: ' + err.message);
+      }
+    } else {
+      if (micMediaRecorder && micMediaRecorder.state === 'recording') {
+        micMediaRecorder.stop();
+      }
+      isMicRecording = false;
+      isPlaying = false;
+    }
+  }
+
+  // Mode 3: Custom ElevenLabs Audio Upload
+  function handleAudioUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const url = URL.createObjectURL(file);
+    uploadedAudioElement = new Audio(url);
+    document.getElementById('customAudioName').style.display = 'block';
+    document.getElementById('customAudioName').textContent = `✅ Active: ${file.name}`;
+    setVoiceMode('upload');
+  }
+
+  // 1-Click Video + Audio Recording & Export (MediaRecorder with Web Audio Stream)
+  let videoRecorder = null;
+  let videoChunks = [];
 
   function recordAndExportVideo() {
-    initAudio();
+    initAudioGraph();
     if (!('MediaRecorder' in window)) {
       alert('MediaRecorder is not supported in this browser. Please use Chrome or Edge.');
       return;
@@ -1011,32 +1434,42 @@
     const exportBtn = document.getElementById('btnRecordExport');
     const statusBox = document.getElementById('downloadStatus');
 
-    // Reset to start
     currentTime = 0;
+    resetSfxFlags();
     isPlaying = true;
-    recordedChunks = [];
+    startBackgroundBeat();
+    videoChunks = [];
 
-    // Capture 60 FPS stream from Canvas
-    const stream = canvas.captureStream(60);
+    // Capture 60 FPS video stream from Canvas
+    const canvasStream = canvas.captureStream(60);
 
-    const options = { mimeType: 'video/webm;codecs=vp9' };
-    try {
-      mediaRecorder = new MediaRecorder(stream, options);
-    } catch(e) {
-      mediaRecorder = new MediaRecorder(stream);
+    // Merge Audio from Web Audio destination stream so video has full sound!
+    let combinedStream = canvasStream;
+    if (mediaStreamDestination && mediaStreamDestination.stream.getAudioTracks().length > 0) {
+      combinedStream = new MediaStream([
+        ...canvasStream.getVideoTracks(),
+        ...mediaStreamDestination.stream.getAudioTracks()
+      ]);
     }
 
-    mediaRecorder.ondataavailable = function(e) {
-      if (e.data.size > 0) recordedChunks.push(e.data);
+    const options = { mimeType: 'video/webm;codecs=vp9,opus' };
+    try {
+      videoRecorder = new MediaRecorder(combinedStream, options);
+    } catch(e) {
+      videoRecorder = new MediaRecorder(combinedStream);
+    }
+
+    videoRecorder.ondataavailable = function(e) {
+      if (e.data.size > 0) videoChunks.push(e.data);
     };
 
-    mediaRecorder.onstop = function() {
+    videoRecorder.onstop = function() {
       recText.textContent = 'READY';
       recPill.style.color = 'var(--accent)';
       exportBtn.disabled = false;
-      exportBtn.innerHTML = '<span>🎥</span> Render &amp; Download Video (.webm / .mp4)';
+      exportBtn.innerHTML = '<span>🎥</span> Render &amp; Download Video with Audio (.webm / .mp4)';
 
-      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      const blob = new Blob(videoChunks, { type: 'video/webm' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.style.display = 'none';
@@ -1053,17 +1486,17 @@
       setTimeout(() => { statusBox.style.display = 'none'; }, 6000);
     };
 
-    mediaRecorder.start();
-    recText.textContent = 'RECORDING 60FPS...';
+    videoRecorder.start();
+    recText.textContent = 'RECORDING HD AUDIO+VIDEO...';
     recPill.style.color = '#ef4444';
     exportBtn.disabled = true;
-    exportBtn.innerHTML = '<span>⏳</span> Rendering Video... (26s)';
+    exportBtn.innerHTML = '<span>⏳</span> Rendering Video &amp; Audio... (26s)';
 
-    // Stop recording automatically when reel finishes
     setTimeout(() => {
-      if (mediaRecorder && mediaRecorder.state === 'recording') {
-        mediaRecorder.stop();
+      if (videoRecorder && videoRecorder.state === 'recording') {
+        videoRecorder.stop();
         isPlaying = false;
+        stopBackgroundBeat();
         document.getElementById('btnPlayPause').innerHTML = '<span>▶️</span> Play &amp; Preview Reel';
       }
     }, TOTAL_DURATION * 1000);
@@ -1074,9 +1507,17 @@
     const rect = e.currentTarget.getBoundingClientRect();
     const pos = (e.clientX - rect.left) / rect.width;
     currentTime = pos * TOTAL_DURATION;
+    resetSfxFlags();
     updateUI();
     renderFrame(currentTime);
   });
+
+  // Ensure voices are loaded
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      // Re-trigger voice query if needed
+    };
+  }
 
   // Start Animation
   requestAnimationFrame(loop);
