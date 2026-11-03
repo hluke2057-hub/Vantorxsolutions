@@ -563,37 +563,38 @@
         <div class="scene-card active" onclick="jumpToScene(0)">
           <div class="scene-idx">1</div>
           <div class="scene-meta">
-            <div class="scene-name">Cosmic Laser Pattern Interrupt</div>
-            <div class="scene-desc">8 Billion Lasers at Uranus • 6 hrs round trip</div>
+            <div class="scene-name">🌌 Extended Story Hook: The Cosmic Ads Anomaly</div>
+            <div class="scene-desc">$4,200 ad spend • 8 Billion Lasers at Uranus • 6 hrs round trip</div>
           </div>
           <div class="scene-time">00:00</div>
         </div>
-        <div class="scene-card" onclick="jumpToScene(5)">
+        <div class="scene-card" onclick="jumpToScene(8.5)">
           <div class="scene-idx">2</div>
           <div class="scene-meta">
-            <div class="scene-name">Brutal Contractor Lead Reality</div>
-            <div class="scene-desc">Voicemail ring out • -$7,800 emergency loss</div>
+            <div class="scene-name">❌ Brutal Contrast: The Voicemail Graveyard</div>
+            <div class="scene-desc">34 weekend calls dropped to voicemail • -$7,800 lost jobs</div>
           </div>
-          <div class="scene-time">00:05</div>
+          <div class="scene-time">00:08</div>
         </div>
-        <div class="scene-card" onclick="jumpToScene(11)">
+        <div class="scene-card" onclick="jumpToScene(15)">
           <div class="scene-idx">3</div>
           <div class="scene-meta">
-            <div class="scene-name">Ava Voice AI &amp; Speed-to-Lead</div>
-            <div class="scene-desc">0.8s pickup • Golden audio wave • SMS dispatch</div>
+            <div class="scene-name">⚡ Ava 24/7 Voice AI Speed-to-Lead</div>
+            <div class="scene-desc">0.8s pickup • Golden audio wave • 24s SMS tech dispatch</div>
           </div>
-          <div class="scene-time">00:11</div>
+          <div class="scene-time">00:15</div>
         </div>
-        <div class="scene-card" onclick="jumpToScene(20)">
+        <div class="scene-card" onclick="jumpToScene(23.5)">
           <div class="scene-idx">4</div>
           <div class="scene-meta">
-            <div class="scene-name">ManyChat DM Inbound Trap</div>
-            <div class="scene-desc">Comment "AVA" • Live Phone: (561) 813-8602</div>
+            <div class="scene-name">💬 Direct-Response Ad Conversion Trap</div>
+            <div class="scene-desc">Comment "DEMO" • Live Demo Phone: (561) 813-8602</div>
           </div>
-          <div class="scene-time">00:20</div>
+          <div class="scene-time">00:23</div>
         </div>
       </div>
     </div>
+
 
     <!-- Action Buttons -->
     <div class="actions-group">
@@ -620,8 +621,9 @@
   const W = canvas.width;  // 540
   const H = canvas.height; // 960
 
-  // Total Reel Duration: 26 seconds
-  const TOTAL_DURATION = 26;
+  // Total Reel Duration: 30 seconds (Standard High-Retention Ad Format)
+  const TOTAL_DURATION = 30;
+
   let currentTime = 0;
   let isPlaying = false;
   let lastTimestamp = 0;
@@ -795,12 +797,12 @@
     }
   }
 
-  // Script Cues with Timestamps
+  // Script Cues with Timestamps (Extended Story Hook for Maximum Ad Retention)
   const SCRIPT_CUES = [
-    { start: 0.2, end: 4.8, text: "8 billion lasers pointed at Uranus... 6 hours round trip." },
-    { start: 5.2, end: 10.5, text: "Still faster than most contractors reply to a new lead. Missing that call costs $7,800." },
-    { start: 11.0, end: 19.5, text: "Ava answers in 0.8 seconds, qualifies the emergency, and texts your on-call tech automatically." },
-    { start: 20.2, end: 25.5, text: "Comment AVA below to test the simulator, or call (561) 813-8602 to test her live." }
+    { start: 0.2, end: 8.2, text: "A Florida trade company spent $4,200 on Google ads... but their targeting was bouncing off satellites near Uranus. 8 billion lasers taking 6 hours round trip." },
+    { start: 8.5, end: 14.8, text: "And that 6-hour space trip was STILL faster than their office answering the phone. 34 emergency calls dropped to voicemail... leaking $7,800." },
+    { start: 15.0, end: 23.0, text: "We plugged in Ava, our 24/7 Voice AI. Every incoming emergency answered in 0.8 seconds and dispatched to the tech's phone automatically." },
+    { start: 23.5, end: 29.8, text: "Stop bleeding thousands on dead voicemails. Comment DEMO or text (561) 813-8602 to deploy Ava in 48 hours." }
   ];
 
   // Particle System for Cosmic Lasers
@@ -821,7 +823,7 @@
       startX: Math.random() * W,
       startY: H + Math.random() * 200,
       targetX: W * 0.5 + (Math.random() - 0.5) * 80,
-      targetY: H * 0.38 + (Math.random() - 0.5) * 60,
+      targetY: H * 0.42 + (Math.random() - 0.5) * 60,
       progress: Math.random(),
       speed: Math.random() * 0.04 + 0.02,
       color: Math.random() > 0.3 ? '#10B981' : '#F59E0B'
@@ -858,16 +860,16 @@
 
     // SFX Trigger Checks
     if (time >= 0.5 && !playedLaserSfx) { playSfx('laser'); playedLaserSfx = true; }
-    if (time >= 5.0 && !playedSubdropSfx) { playSfx('subdrop'); playedSubdropSfx = true; }
-    if (time >= 6.0 && !playedPhoneSfx) { playSfx('phone_ring'); playedPhoneSfx = true; }
-    if (time >= 15.0 && !playedIosPingSfx) { playSfx('ios_ping'); playedIosPingSfx = true; }
+    if (time >= 8.5 && !playedSubdropSfx) { playSfx('subdrop'); playedSubdropSfx = true; }
+    if (time >= 9.8 && !playedPhoneSfx) { playSfx('phone_ring'); playedPhoneSfx = true; }
+    if (time >= 18.0 && !playedIosPingSfx) { playSfx('ios_ping'); playedIosPingSfx = true; }
 
-    // Render Active Scene
-    if (time < 5.0) {
+    // Render Active Scene (Extended Story Hook: 0 to 8.5s)
+    if (time < 8.5) {
       renderScene1_CosmicLaser(time);
-    } else if (time < 11.0) {
+    } else if (time < 15.0) {
       renderScene2_BrutalLeadLeak(time);
-    } else if (time < 20.0) {
+    } else if (time < 23.5) {
       renderScene3_AvaDemo(time);
     } else {
       renderScene4_ManyChatCTA(time);
@@ -886,7 +888,7 @@
 
   function renderScene1_CosmicLaser(t) {
     const pX = W * 0.5;
-    const pY = H * 0.38;
+    const pY = H * 0.42;
 
     ctx.save();
     const planetGlow = ctx.createRadialGradient(pX, pY, 10, pX, pY, 140);
@@ -935,17 +937,56 @@
       ctx.restore();
     });
 
-    renderTopPill("⚡ SPEED-TO-LEAD REALITY CHECK");
+    // Storytelling Telemetry HUD Overlays
+    ctx.save();
+    const boxW = 440;
+    const boxH = 95;
+    const boxX = (W - boxW) / 2;
+    const boxY = 110;
+
+    ctx.fillStyle = 'rgba(11, 15, 25, 0.88)';
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+    ctx.lineWidth = 1.5;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+    ctx.shadowBlur = 18;
+    roundRect(ctx, boxX, boxY, boxW, boxH, 12, true, true);
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = '700 11px JetBrains Mono';
+    ctx.fillText('📡 GOOGLE ADS TARGETING ANOMALY • AUDIT #104', boxX + 16, boxY + 24);
+
+    if (t < 4.2) {
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 16px Space Grotesk';
+      ctx.fillText('FLORIDA TRADE CO. SPENT $4,200', boxX + 16, boxY + 50);
+
+      ctx.fillStyle = '#f87171';
+      ctx.font = '600 12px Inter';
+      ctx.fillText('⚠️ Targeting radius accidentally set to 1.8 BILLION MILES', boxX + 16, boxY + 74);
+    } else {
+      ctx.fillStyle = '#F59E0B';
+      ctx.font = '800 16px Space Grotesk';
+      ctx.fillText('8 BILLION LASERS AIMED AT URANUS', boxX + 16, boxY + 50);
+
+      ctx.fillStyle = '#a7f3d0';
+      ctx.font = '700 11.5px JetBrains Mono';
+      ctx.fillText('⚡ 6-HOUR SPACE TRIP STILL FASTER THAN VOICEMAIL', boxX + 16, boxY + 74);
+    }
+    ctx.restore();
+
+    renderTopPill("⚡ SPEED-TO-LEAD AD HOOK • 00:00–00:08");
   }
 
   function renderScene2_BrutalLeadLeak(t) {
-    const relT = t - 5.0;
+    const relT = t - 8.5;
     renderTopPill("❌ THE CONTRACTOR VOICEMAIL GRAVEYARD");
 
     const phoneW = 280;
     const phoneH = 420;
     const phoneX = (W - phoneW) / 2;
     const phoneY = 220;
+
 
     const pulseAlpha = Math.sin(relT * 6) * 0.15 + 0.15;
     ctx.fillStyle = `rgba(239, 68, 68, ${pulseAlpha})`;
@@ -1002,8 +1043,9 @@
   }
 
   function renderScene3_AvaDemo(t) {
-    const relT = t - 11.0;
+    const relT = t - 15.0;
     renderTopPill("⚡ AVA 24/7 VOICE AI • ANSWERED IN 0.8s");
+
 
     const phoneW = 300;
     const phoneH = 460;
@@ -1292,10 +1334,11 @@
 
     const cards = document.querySelectorAll('.scene-card');
     cards.forEach(c => c.classList.remove('active'));
-    if (currentTime < 5) cards[0].classList.add('active');
-    else if (currentTime < 11) cards[1].classList.add('active');
-    else if (currentTime < 20) cards[2].classList.add('active');
+    if (currentTime < 8.5) cards[0].classList.add('active');
+    else if (currentTime < 15.0) cards[1].classList.add('active');
+    else if (currentTime < 23.5) cards[2].classList.add('active');
     else cards[3].classList.add('active');
+
 
     // Update Mic Teleprompter
     const cue = SCRIPT_CUES.find(c => currentTime >= c.start && currentTime <= c.end);
@@ -1518,16 +1561,17 @@
   }
 
   function copyElevenLabsScript() {
-    const script = `This plumbing company was literally targeting customers on Uranus.
+    const script = `A Florida trade company spent $4,200 on Google ads last month... but their targeting was set so wide, their ads were literally bouncing off satellites near Uranus. Eight billion lasers traveling 1.8 billion miles into deep space... taking 6 hours round trip.
 
-Their Google ads drove 34 calls on Saturday... and all 34 went straight to voicemail. That's seventy-eight hundred dollars gone.
+And that 6-hour space trip was STILL faster than how long it took their office to answer the phone. On Saturday, 34 emergency calls dropped straight to a dead voicemail... leaking seventy-eight hundred dollars in cash handed directly to competitors.
 
-We plugged in Ava, our 24/7 Voice AI. Every emergency answered in zero-point-eight seconds and booked into Housecall Pro.
+So we plugged in Ava, our 24/7 Voice AI. Every incoming emergency answered in zero-point-eight seconds, qualified on the spot, and dispatched to the on-call technician's phone automatically.
 
-Comment DEMO or text our Florida team at (561) 813-8602 to deploy this in 48 hours.`;
+If you run an HVAC, plumbing, or roofing company in Florida, stop bleeding thousands on dead voicemails. Comment DEMO or text (561) 813-8602 to deploy Ava in 48 hours.`;
     navigator.clipboard.writeText(script);
-    alert('✓ Copied script with natural pauses! Open elevenlabs.io, select the Adam voice, generate the MP3, and drag it into the Upload Audio tab.');
+    alert('✓ Copied 30-second extended story script! Open elevenlabs.io, select the Adam voice, generate the MP3, and drag it into the Upload Audio tab.');
   }
+
 
 
   // Mode 2: Live Mic Recording
