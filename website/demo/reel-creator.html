@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VantorX Reel Studio — Automated Viral Reel Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800;900&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090e;
+    --card: #0d121d;
+    --accent: #F59E0B;
+    --accent-glow: rgba(245, 158, 11, 0.4);
+    --green: #10B981;
+    --red: #EF4444;
+    --line: rgba(255, 255, 255, 0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: #fff;
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 48px;
+  }
+  header {
+    text-align: center;
+    max-width: 700px;
+    margin-bottom: 24px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  h1 span {
+    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #F43F5E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  p.subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+
+  /* Studio Workspace */
+  .studio-layout {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  /* Reel Canvas Frame (9:16 aspect ratio) */
+  .video-stage {
+    position: relative;
+    width: 360px;
+    height: 640px;
+    background: #000;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.15), 0 0 40px -10px var(--accent-glow);
+    flex-shrink: 0;
+  }
+  #reelCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Overlay HUD over video */
+  .stage-overlay {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .stage-pill {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+  }
+  .rec-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ef4444;
+  }
+  .rec-dot {
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: pulse 1s infinite alternate;
+  }
+  @keyframes pulse {
+    from { opacity: 0.3; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1.1); }
+  }
+
+  /* Studio Control Panel */
+  .control-panel {
+    flex: 1;
+    min-width: 320px;
+    max-width: 520px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .panel-section-title {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .timeline-bar-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .progress-track {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #F59E0B, #10B981);
+    transition: width 0.1s linear;
+  }
+
+  /* Scenes List */
+  .scenes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .scene-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .scene-card:hover, .scene-card.active {
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.4);
+  }
+  .scene-card.active .scene-idx {
+    background: var(--accent);
+    color: #000;
+  }
+  .scene-idx {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .scene-meta {
+    flex: 1;
+  }
+  .scene-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #f1f5f9;
+  }
+  .scene-desc {
+    font-size: 11px;
+    color: #94a3b8;
+  }
+  .scene-time {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+  }
+
+  /* Action Buttons */
+  .actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: #07090e;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(245, 158, 11, 0.5);
+  }
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f8fafc;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s ease;
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+  .voice-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+  .voice-selector select {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .download-status {
+    font-size: 12px;
+    color: var(--green);
+    text-align: center;
+    display: none;
+    padding: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">🔥 Autonomous Content Production</div>
+  <h1>VantorX <span>Viral Reel Studio</span></h1>
+  <p class="subtitle">100% automated 9:16 vertical video engine reproducing the viral Taskless AI formula (Cosmic Laser Hook → Speed-to-Lead Agitation → Ava Voice AI Live Demo → ManyChat DM Trap).</p>
+</header>
+
+<div class="studio-layout">
+  <!-- 9:16 Video Stage Canvas -->
+  <div class="video-stage">
+    <div class="stage-overlay">
+      <div class="stage-pill">9:16 VERTICAL REEL</div>
+      <div class="stage-pill rec-indicator" id="recStatusPill">
+        <span class="rec-dot"></span>
+        <span id="recText">READY</span>
+      </div>
+    </div>
+    <canvas id="reelCanvas" width="540" height="960"></canvas>
+  </div>
+
+  <!-- Control & Customization Panel -->
+  <div class="control-panel">
+    <div>
+      <div class="panel-section-title">⏱️ Reel Timeline & Audio Sync</div>
+      <div class="timeline-bar-container" style="margin-top:10px">
+        <div class="timeline-labels">
+          <span id="currentTimeLabel">00:00</span>
+          <span id="currentSceneLabel">Scene 1: Cosmic Laser Hook</span>
+          <span id="totalDurationLabel">00:26</span>
+        </div>
+        <div class="progress-track" id="progressTrack">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-section-title">🎬 Video Scenes (Taskless Formula)</div>
+      <div class="scenes-grid" style="margin-top:10px">
+        <div class="scene-card active" onclick="jumpToScene(0)">
+          <div class="scene-idx">1</div>
+          <div class="scene-meta">
+            <div class="scene-name">Cosmic Laser Pattern Interrupt</div>
+            <div class="scene-desc">8 Billion Lasers at Uranus • 6 hrs round trip</div>
+          </div>
+          <div class="scene-time">00:00</div>
+        </div>
+        <div class="scene-card" onclick="jumpToScene(5)">
+          <div class="scene-idx">2</div>
+          <div class="scene-meta">
+            <div class="scene-name">Brutal Contractor Lead Reality</div>
+            <div class="scene-desc">Voicemail ring out • $7,800 emergency loss</div>
+          </div>
+          <div class="scene-time">00:05</div>
+        </div>
+        <div class="scene-card" onclick="jumpToScene(11)">
+          <div class="scene-idx">3</div>
+          <div class="scene-meta">
+            <div class="scene-name">Ava Voice AI & Speed-to-Lead</div>
+            <div class="scene-desc">0.8s pickup • Golden audio wave • SMS dispatch</div>
+          </div>
+          <div class="scene-time">00:11</div>
+        </div>
+        <div class="scene-card" onclick="jumpToScene(20)">
+          <div class="scene-idx">4</div>
+          <div class="scene-meta">
+            <div class="scene-name">ManyChat DM Inbound Trap</div>
+            <div class="scene-desc">Comment "AVA" • Live Phone: (561) 813-8602</div>
+          </div>
+          <div class="scene-time">00:20</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="voice-selector">
+      <span>🎙️ Voice Narration:</span>
+      <select id="voiceModelSelect">
+        <option value="auto">Natural AI Narrator (Auto)</option>
+        <option value="david">Deep Confident (David)</option>
+        <option value="zira">Clean Professional (Zira)</option>
+      </select>
+    </div>
+
+    <div class="actions-group">
+      <button class="btn-primary" id="btnPlayPause" onclick="togglePlay()">
+        <span>▶️</span> Play &amp; Preview Reel
+      </button>
+      <button class="btn-secondary" id="btnRecordExport" onclick="recordAndExportVideo()">
+        <span>🎥</span> Render &amp; Download Video (.webm / .mp4)
+      </button>
+      <div class="download-status" id="downloadStatus">
+        🎉 Video rendered! Downloading to your device now...
+      </div>
+      <a href="/demo/" style="text-align:center;color:#94a3b8;font-size:12px;text-decoration:none;margin-top:4px">
+        ← Back to Interactive Website Demo
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Reel Canvas Dimensions (9:16 Vertical HD Preview)
+  const canvas = document.getElementById('reelCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width;  // 540
+  const H = canvas.height; // 960
+
+  // Total Reel Duration: 26 seconds
+  const TOTAL_DURATION = 26;
+  let currentTime = 0;
+  let isPlaying = false;
+  let lastTimestamp = 0;
+  let animationFrameId = null;
+
+  // Sound Engine (Web Audio API)
+  let audioCtx = null;
+  function initAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  }
+
+  function playTone(freq, type, duration, vol=0.1) {
+    if (!audioCtx) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch(e) {}
+  }
+
+  // Voice Narration Script & Timeline Cues
+  const SCRIPT_CUES = [
+    { start: 0.2, end: 4.8, text: "8 billion lasers pointed at Uranus... 6 hours round trip." },
+    { start: 5.2, end: 10.5, text: "Still faster than most contractors reply to a new lead. Missing that call costs $7,800." },
+    { start: 11.0, end: 19.5, text: "Ava answers in 0.8 seconds, qualifies the emergency, and texts your on-call tech automatically." },
+    { start: 20.2, end: 25.5, text: "Comment AVA below to test the simulator, or call (561) 813-8602 to test her live." }
+  ];
+
+  // Particle System for Cosmic Lasers
+  const stars = [];
+  for (let i = 0; i < 120; i++) {
+    stars.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 2 + 0.5,
+      speed: Math.random() * 3 + 1,
+      color: Math.random() > 0.8 ? '#38bdf8' : '#ffffff'
+    });
+  }
+
+  const laserBeams = [];
+  for (let i = 0; i < 35; i++) {
+    laserBeams.push({
+      startX: Math.random() * W,
+      startY: H + Math.random() * 200,
+      targetX: W * 0.5 + (Math.random() - 0.5) * 80,
+      targetY: H * 0.38 + (Math.random() - 0.5) * 60,
+      progress: Math.random(),
+      speed: Math.random() * 0.04 + 0.02,
+      color: Math.random() > 0.3 ? '#10B981' : '#F59E0B'
+    });
+  }
+
+  // Waveform heights for Ava speech
+  const waveHeights = [15, 30, 50, 85, 110, 75, 95, 120, 60, 45, 80, 105, 50, 25];
+
+  // Main Render Loop
+  function renderFrame(time) {
+    ctx.clearRect(0, 0, W, H);
+
+    // Deep Dark Space Background
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+    bgGrad.addColorStop(0, '#030508');
+    bgGrad.addColorStop(1, '#0b0f19');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Stars Background
+    ctx.fillStyle = '#ffffff';
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, (s.y + time * s.speed * 20) % H, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.color;
+      ctx.fill();
+    });
+
+    // Determine Active Scene
+    if (time < 5.0) {
+      renderScene1_CosmicLaser(time);
+    } else if (time < 11.0) {
+      renderScene2_BrutalLeadLeak(time);
+    } else if (time < 20.0) {
+      renderScene3_AvaDemo(time);
+    } else {
+      renderScene4_ManyChatCTA(time);
+    }
+
+    // Render Kinetic Word Subtitles
+    renderCaptions(time);
+
+    // Subtle Vignette Frame
+    const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.2, W / 2, H / 2, H * 0.6);
+    vig.addColorStop(0, 'rgba(0,0,0,0)');
+    vig.addColorStop(1, 'rgba(0,0,0,0.65)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // SCENE 1: Cosmic Laser Hook
+  function renderScene1_CosmicLaser(t) {
+    const pX = W * 0.5;
+    const pY = H * 0.38;
+
+    // Glowing Uranus Planet
+    ctx.save();
+    const planetGlow = ctx.createRadialGradient(pX, pY, 10, pX, pY, 140);
+    planetGlow.addColorStop(0, 'rgba(56, 189, 248, 0.9)');
+    planetGlow.addColorStop(0.5, 'rgba(14, 165, 233, 0.4)');
+    planetGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = planetGlow;
+    ctx.beginPath();
+    ctx.arc(pX, pY, 140, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Planet Sphere
+    const sphereGrad = ctx.createRadialGradient(pX - 25, pY - 25, 10, pX, pY, 65);
+    sphereGrad.addColorStop(0, '#7dd3fc');
+    sphereGrad.addColorStop(0.7, '#0284c7');
+    sphereGrad.addColorStop(1, '#082f49');
+    ctx.fillStyle = sphereGrad;
+    ctx.beginPath();
+    ctx.arc(pX, pY, 65, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Ring around Uranus
+    ctx.strokeStyle = 'rgba(186, 230, 253, 0.4)';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.ellipse(pX, pY, 110, 28, -0.3, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+
+    // Firing Neon Lasers
+    laserBeams.forEach(b => {
+      b.progress += b.speed;
+      if (b.progress > 1) b.progress = 0;
+
+      const curX = b.startX + (b.targetX - b.startX) * b.progress;
+      const curY = b.startY + (b.targetY - b.startY) * b.progress;
+      const prevX = b.startX + (b.targetX - b.startX) * Math.max(0, b.progress - 0.25);
+      const prevY = b.startY + (b.targetY - b.startY) * Math.max(0, b.progress - 0.25);
+
+      ctx.save();
+      ctx.strokeStyle = b.color;
+      ctx.lineWidth = 3.5;
+      ctx.shadowColor = b.color;
+      ctx.shadowBlur = 12;
+      ctx.beginPath();
+      ctx.moveTo(prevX, prevY);
+      ctx.lineTo(curX, curY);
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    // Top Brand Tag
+    renderTopPill("⚡ SPEED-TO-LEAD REALITY CHECK");
+  }
+
+  // SCENE 2: Brutal Lead Leak & Voicemail
+  function renderScene2_BrutalLeadLeak(t) {
+    const relT = t - 5.0;
+
+    renderTopPill("❌ THE CONTRACTOR VOICEMAIL GRAVEYARD");
+
+    // Phone Mockup (Call Screen)
+    const phoneW = 280;
+    const phoneH = 420;
+    const phoneX = (W - phoneW) / 2;
+    const phoneY = 220;
+
+    // Red warning ambient flash
+    const pulseAlpha = Math.sin(relT * 6) * 0.15 + 0.15;
+    ctx.fillStyle = `rgba(239, 68, 68, ${pulseAlpha})`;
+    ctx.fillRect(0, 0, W, H);
+
+    // Phone Body
+    ctx.save();
+    ctx.fillStyle = '#0f172a';
+    ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+    ctx.lineWidth = 2;
+    roundRect(ctx, phoneX, phoneY, phoneW, phoneH, 24, true, true);
+
+    // Caller Details
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '600 13px Inter';
+    ctx.textAlign = 'center';
+    ctx.fillText('OUTGOING CALL • SUNDAY 8:45 PM', W / 2, phoneY + 50);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 20px Space Grotesk';
+    ctx.fillText('Palm Beach Emergency AC', W / 2, phoneY + 80);
+
+    // Ringing Animation / Voicemail text
+    if (relT < 2.5) {
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '700 14px JetBrains Mono';
+      ctx.fillText('📞 Ringing... (Ring 5)', W / 2, phoneY + 130);
+    } else {
+      ctx.fillStyle = '#ef4444';
+      ctx.font = '800 15px Space Grotesk';
+      ctx.fillText('⚠️ SENT TO VOICEMAIL', W / 2, phoneY + 125);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '12px Inter';
+      ctx.fillText('"Please leave a message after the tone..."', W / 2, phoneY + 150);
+    }
+
+    // Huge Red Loss Card Pop-up
+    if (relT > 2.0) {
+      const cardY = phoneY + 190;
+      ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+      ctx.strokeStyle = '#ef4444';
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, phoneX + 20, cardY, phoneW - 40, 110, 12, true, true);
+
+      ctx.fillStyle = '#ef4444';
+      ctx.font = '800 13px JetBrains Mono';
+      ctx.fillText('LOST EMERGENCY JOB', W / 2, cardY + 30);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 32px Space Grotesk';
+      ctx.fillText('-$7,800', W / 2, cardY + 70);
+
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '600 11px Inter';
+      ctx.fillText('Homeowner hired next shop on Google', W / 2, cardY + 92);
+    }
+    ctx.restore();
+  }
+
+  // SCENE 3: Ava Voice AI Live Demo
+  function renderScene3_AvaDemo(t) {
+    const relT = t - 11.0;
+
+    renderTopPill("⚡ AVA 24/7 VOICE AI • ANSWERED IN 0.8s");
+
+    const phoneW = 300;
+    const phoneH = 460;
+    const phoneX = (W - phoneW) / 2;
+    const phoneY = 200;
+
+    // Glowing Golden Card
+    ctx.save();
+    ctx.fillStyle = '#0b0f19';
+    ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
+    ctx.lineWidth = 2;
+    ctx.shadowColor = 'rgba(245, 158, 11, 0.25)';
+    ctx.shadowBlur = 25;
+    roundRect(ctx, phoneX, phoneY, phoneW, phoneH, 24, true, true);
+    ctx.restore();
+
+    // Ava Header
+    ctx.fillStyle = '#F59E0B';
+    ctx.font = '800 13px JetBrains Mono';
+    ctx.textAlign = 'center';
+    ctx.fillText('AVA 24/7 AI RECEPTIONIST', W / 2, phoneY + 45);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '700 15px Space Grotesk';
+    ctx.fillText('Titan HVAC Emergency Dispatch', W / 2, phoneY + 70);
+
+    // Audio Waveform Animation
+    const waveY = phoneY + 120;
+    const barW = 8;
+    const gap = 6;
+    const totalW = waveHeights.length * (barW + gap);
+    let startX = (W - totalW) / 2;
+
+    waveHeights.forEach((h, idx) => {
+      const dynamicH = h * (0.6 + Math.sin(t * 12 + idx) * 0.4);
+      ctx.fillStyle = '#F59E0B';
+      ctx.shadowColor = '#F59E0B';
+      ctx.shadowBlur = 10;
+      roundRect(ctx, startX + idx * (barW + gap), waveY - dynamicH / 2, barW, dynamicH, 4, true, false);
+    });
+    ctx.shadowBlur = 0;
+
+    // Live Transcript Chat
+    const chatY = phoneY + 180;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+    roundRect(ctx, phoneX + 16, chatY, phoneW - 32, 140, 12, true, false);
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#F59E0B';
+    ctx.font = '700 11px JetBrains Mono';
+    ctx.fillText('AVA (0.8s):', phoneX + 26, chatY + 24);
+
+    ctx.fillStyle = '#e2e8f0';
+    ctx.font = '500 12px Inter';
+    ctx.fillText('"Thanks for calling Titan HVAC!', phoneX + 26, chatY + 44);
+    ctx.fillText('Are you experiencing an AC emergency?"', phoneX + 26, chatY + 62);
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = '700 11px JetBrains Mono';
+    ctx.fillText('CALLER:', phoneX + 26, chatY + 88);
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '500 12px Inter';
+    ctx.fillText('"Yes! The unit died and it is 89° inside."', phoneX + 26, chatY + 106);
+
+    // Slide-in SMS Notification Card
+    if (relT > 4.0) {
+      const notifY = phoneY + 340;
+      ctx.fillStyle = '#10B981';
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.5)';
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, phoneX + 16, notifY, phoneW - 32, 80, 12, true, true);
+
+      ctx.fillStyle = '#064e3b';
+      ctx.fillRect(phoneX + 16, notifY, phoneW - 32, 80);
+
+      ctx.fillStyle = '#34d399';
+      ctx.font = '800 11px JetBrains Mono';
+      ctx.fillText('📲 TECH SMS DISPATCHED (24s)', phoneX + 26, notifY + 24);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 12px Space Grotesk';
+      ctx.fillText('Emergency AC Replacement • $8,200', phoneX + 26, notifY + 46);
+
+      ctx.fillStyle = '#a7f3d0';
+      ctx.font = '500 11px Inter';
+      ctx.fillText('Customer address & photo linked.', phoneX + 26, notifY + 64);
+    }
+  }
+
+  // SCENE 4: ManyChat CTA & Phone Call
+  function renderScene4_ManyChatCTA(t) {
+    renderTopPill("🚀 TEST AVA LIVE ON YOUR PHONE");
+
+    const boxW = 320;
+    const boxH = 460;
+    const boxX = (W - boxW) / 2;
+    const boxY = 200;
+
+    ctx.save();
+    ctx.fillStyle = '#0d121d';
+    ctx.strokeStyle = 'rgba(245, 158, 11, 0.5)';
+    ctx.lineWidth = 2;
+    ctx.shadowColor = 'rgba(245, 158, 11, 0.3)';
+    ctx.shadowBlur = 30;
+    roundRect(ctx, boxX, boxY, boxW, boxH, 24, true, true);
+    ctx.restore();
+
+    // Instagram DM Header
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 18px Space Grotesk';
+    ctx.textAlign = 'center';
+    ctx.fillText('Get the Free Live Demo', W / 2, boxY + 50);
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '500 12px Inter';
+    ctx.fillText('Automated instant DM sent to your inbox:', W / 2, boxY + 74);
+
+    // Mock Instagram DM Bubble
+    const dmY = boxY + 105;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    roundRect(ctx, boxX + 18, dmY, boxW - 36, 110, 14, true, false);
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#F59E0B';
+    ctx.font = '700 12px JetBrains Mono';
+    ctx.fillText('@vantorxsolutions:', boxX + 32, dmY + 28);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '500 12px Inter';
+    ctx.fillText('Hey! Here is your interactive link:', boxX + 32, dmY + 50);
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = '600 12px JetBrains Mono';
+    ctx.fillText('vantorxsolutions.com/demo', boxX + 32, dmY + 72);
+
+    // Giant Call CTA Card
+    const ctaY = boxY + 240;
+    ctx.fillStyle = 'linear-gradient(135deg, #F59E0B, #D97706)';
+    ctx.fillStyle = '#F59E0B';
+    roundRect(ctx, boxX + 18, ctaY, boxW - 36, 80, 14, true, false);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#070a0f';
+    ctx.font = '900 14px Space Grotesk';
+    ctx.fillText('📞 TEST AVA ON YOUR CELL NOW', W / 2, ctaY + 30);
+
+    ctx.fillStyle = '#070a0f';
+    ctx.font = '900 24px JetBrains Mono';
+    ctx.fillText('(561) 813-8602', W / 2, ctaY + 62);
+
+    // Bottom Comment Prompt
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 15px Space Grotesk';
+    ctx.fillText('👇 COMMENT "AVA" BELOW', W / 2, boxY + 370);
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '500 12px Inter';
+    ctx.fillText('Our automation will DM you the live link!', W / 2, boxY + 395);
+  }
+
+  // Top Category Pill Helper
+  function renderTopPill(text) {
+    ctx.save();
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    ctx.lineWidth = 1;
+    roundRect(ctx, W / 2 - 170, 70, 340, 32, 16, true, true);
+
+    ctx.fillStyle = '#F59E0B';
+    ctx.font = '800 10.5px JetBrains Mono';
+    ctx.textAlign = 'center';
+    ctx.fillText(text, W / 2, 90);
+    ctx.restore();
+  }
+
+  // Kinetic Bold Word Subtitles
+  function renderCaptions(t) {
+    let activeCue = SCRIPT_CUES.find(c => t >= c.start && t <= c.end);
+    if (!activeCue) return;
+
+    ctx.save();
+    const captionY = H * 0.86;
+    ctx.textAlign = 'center';
+
+    // Shadow & Stroke
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+    ctx.shadowBlur = 12;
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 6;
+    ctx.lineJoin = 'round';
+
+    ctx.font = '900 20px Space Grotesk';
+
+    // Word wrap
+    wrapText(ctx, activeCue.text.toUpperCase(), W / 2, captionY, 440, 26);
+    ctx.restore();
+  }
+
+  function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let line = '';
+    const lines = [];
+
+    for (let n = 0; n < words.length; n++) {
+      const testLine = line + words[n] + ' ';
+      const metrics = context.measureText(testLine);
+      if (metrics.width > maxWidth && n > 0) {
+        lines.push(line);
+        line = words[n] + ' ';
+      } else {
+        line = testLine;
+      }
+    }
+    lines.push(line);
+
+    const startY = y - ((lines.length - 1) * lineHeight) / 2;
+    lines.forEach((l, i) => {
+      // Stroke
+      context.strokeText(l.trim(), x, startY + i * lineHeight);
+      // Yellow highlight on keywords
+      if (l.includes('URANUS') || l.includes('FASTER') || l.includes('AVA') || l.includes('$7,800') || l.includes('(561)')) {
+        context.fillStyle = '#F59E0B';
+      } else {
+        context.fillStyle = '#FFFFFF';
+      }
+      context.fillText(l.trim(), x, startY + i * lineHeight);
+    });
+  }
+
+  function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+    if (fill) ctx.fill();
+    if (stroke) ctx.stroke();
+  }
+
+  // Animation & Playback Engine
+  function loop(timestamp) {
+    if (!lastTimestamp) lastTimestamp = timestamp;
+    const delta = (timestamp - lastTimestamp) / 1000;
+    lastTimestamp = timestamp;
+
+    if (isPlaying) {
+      currentTime += delta;
+      if (currentTime >= TOTAL_DURATION) {
+        currentTime = 0;
+      }
+      updateUI();
+    }
+
+    renderFrame(currentTime);
+    animationFrameId = requestAnimationFrame(loop);
+  }
+
+  function togglePlay() {
+    initAudio();
+    isPlaying = !isPlaying;
+    const btn = document.getElementById('btnPlayPause');
+    if (isPlaying) {
+      btn.innerHTML = '<span>⏸️</span> Pause Reel';
+      speakCurrentCue();
+    } else {
+      btn.innerHTML = '<span>▶️</span> Play &amp; Preview Reel';
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+  }
+
+  function jumpToScene(targetTime) {
+    currentTime = targetTime;
+    updateUI();
+    renderFrame(currentTime);
+    if (isPlaying) speakCurrentCue();
+  }
+
+  function updateUI() {
+    const pct = (currentTime / TOTAL_DURATION) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+
+    const curSec = Math.floor(currentTime);
+    document.getElementById('currentTimeLabel').textContent = '00:' + (curSec < 10 ? '0' : '') + curSec;
+
+    // Update active scene highlight
+    const cards = document.querySelectorAll('.scene-card');
+    cards.forEach(c => c.classList.remove('active'));
+    if (currentTime < 5) cards[0].classList.add('active');
+    else if (currentTime < 11) cards[1].classList.add('active');
+    else if (currentTime < 20) cards[2].classList.add('active');
+    else cards[3].classList.add('active');
+  }
+
+  // Speech Synthesizer Voiceover
+  let currentUtterance = null;
+  function speakCurrentCue() {
+    if (!('speechSynthesis' in window)) return;
+    const cue = SCRIPT_CUES.find(c => currentTime >= c.start && currentTime <= c.end);
+    if (!cue) return;
+
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(cue.text);
+    utter.rate = 1.05;
+    utter.pitch = 0.95;
+
+    const voices = window.speechSynthesis.getVoices();
+    const sel = document.getElementById('voiceModelSelect').value;
+    if (sel === 'david') {
+      const v = voices.find(v => v.name.includes('David') || v.name.includes('Guy') || v.name.includes('Male'));
+      if (v) utter.voice = v;
+    } else if (sel === 'zira') {
+      const v = voices.find(v => v.name.includes('Zira') || v.name.includes('Jenny') || v.name.includes('Female'));
+      if (v) utter.voice = v;
+    }
+    window.speechSynthesis.speak(utter);
+  }
+
+  // 1-Click Video Recording & Export (MediaRecorder API)
+  let mediaRecorder = null;
+  let recordedChunks = [];
+
+  function recordAndExportVideo() {
+    initAudio();
+    if (!('MediaRecorder' in window)) {
+      alert('MediaRecorder is not supported in this browser. Please use Chrome or Edge.');
+      return;
+    }
+
+    const recPill = document.getElementById('recStatusPill');
+    const recText = document.getElementById('recText');
+    const exportBtn = document.getElementById('btnRecordExport');
+    const statusBox = document.getElementById('downloadStatus');
+
+    // Reset to start
+    currentTime = 0;
+    isPlaying = true;
+    recordedChunks = [];
+
+    // Capture 60 FPS stream from Canvas
+    const stream = canvas.captureStream(60);
+
+    const options = { mimeType: 'video/webm;codecs=vp9' };
+    try {
+      mediaRecorder = new MediaRecorder(stream, options);
+    } catch(e) {
+      mediaRecorder = new MediaRecorder(stream);
+    }
+
+    mediaRecorder.ondataavailable = function(e) {
+      if (e.data.size > 0) recordedChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = function() {
+      recText.textContent = 'READY';
+      recPill.style.color = 'var(--accent)';
+      exportBtn.disabled = false;
+      exportBtn.innerHTML = '<span>🎥</span> Render &amp; Download Video (.webm / .mp4)';
+
+      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'vantorx_viral_speed_to_lead_reel.webm';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 100);
+
+      statusBox.style.display = 'block';
+      setTimeout(() => { statusBox.style.display = 'none'; }, 6000);
+    };
+
+    mediaRecorder.start();
+    recText.textContent = 'RECORDING 60FPS...';
+    recPill.style.color = '#ef4444';
+    exportBtn.disabled = true;
+    exportBtn.innerHTML = '<span>⏳</span> Rendering Video... (26s)';
+
+    // Stop recording automatically when reel finishes
+    setTimeout(() => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        isPlaying = false;
+        document.getElementById('btnPlayPause').innerHTML = '<span>▶️</span> Play &amp; Preview Reel';
+      }
+    }, TOTAL_DURATION * 1000);
+  }
+
+  // Scrubber Click
+  document.getElementById('progressTrack').addEventListener('click', (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    currentTime = pos * TOTAL_DURATION;
+    updateUI();
+    renderFrame(currentTime);
+  });
+
+  // Start Animation
+  requestAnimationFrame(loop);
+</script>
+
+</body>
+</html>

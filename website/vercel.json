@@ -17,6 +17,8 @@
     { "source": "/audit/:id", "destination": "/audit/index.html" },
     { "source": "/demo", "destination": "/demo/index.html" },
     { "source": "/demo/", "destination": "/demo/index.html" },
+    { "source": "/demo/reel", "destination": "/demo/reel-creator.html" },
+    { "source": "/demo/reel/", "destination": "/demo/reel-creator.html" },
     { "source": "/.well-known/llms.txt", "destination": "/llms.txt" },
     { "source": "/.well-known/llms-full.txt", "destination": "/llms-full.txt" }
   ],

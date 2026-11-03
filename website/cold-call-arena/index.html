@@ -816,8 +816,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div style="margin-left:auto;display:flex;align-items:center;gap:6px">
             <label for="leadSortSelect" style="font-size:11px;color:var(--dim);font-family:var(--font-mono);font-weight:700">SORT:</label>
             <select id="leadSortSelect" style="background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:4px 8px;border-radius:6px;font-size:12px;cursor:pointer">
-              <option value="default" selected>Default Queue Order</option>
-              <option value="empAsc">🎯 Smallest Local First (1-5 Staff Priority)</option>
+              <option value="empAsc" selected>🎯 Smallest Local First (1-5 Staff Priority)</option>
+              <option value="default">Default Queue Order</option>
               <option value="leakDesc">Highest Leak First ($)</option>
             </select>
           </div>
@@ -8613,7 +8613,7 @@ window.closeLeakMathModal = function() {
   let currentStatusFilter = 'all'; // 'all', 'uncalled', 'called'
   let currentCallerFilter = 'all'; // 'all', 'carter', 'lucas', 'luke', 'james'
   let currentEmpFilter = 'all'; // 'all', 'sweetSpot', 'smallCrew', 'smallBizAll', 'midShop', 'regional'
-  let currentSort = 'default'; // 'default', 'empAsc', 'leakDesc'
+  let currentSort = 'empAsc'; // 'empAsc' (Smallest Local First: 1-5 Staff Priority), 'default', 'leakDesc'
   let leadSearchQuery = '';
 
   const todayDateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });

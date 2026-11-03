@@ -1,4 +1,4 @@
-﻿# scripts/test_team_call_sync.ps1
+# scripts/test_team_call_sync.ps1
 $ErrorActionPreference = "Stop"
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
@@ -126,6 +126,8 @@ setTimeout(function() {
 
     // Initial state: clear any prior call for fl_se_001 in teammate's local view
     delete CALL_RECORDS[testLeadId];
+    const sSel = document.getElementById('leadSortSelect');
+    if (sSel) { sSel.value = 'default'; sSel.dispatchEvent(new Event('change', { bubbles: true })); }
     renderLeadsTable();
 
     const rowBefore = document.getElementById('leadRow_' + testLeadId);
