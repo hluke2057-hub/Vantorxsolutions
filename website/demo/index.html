@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Interactive Demo &mdash; VantorX Systems for Small Local Contractors</title>
+<meta name="description" content="Experience VantorX live: sub-second custom contractor websites, Ava 24/7 Voice AI receptionist answering in 1 ring, 45-second speed-to-lead SMS, and small local business ROI calculator.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0F16'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23F59E0B'%3EV%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #070a0f;
+  --bg2: #0d131f;
+  --bg3: #131b2c;
+  --card-bg: rgba(13, 19, 31, 0.75);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(245, 158, 11, 0.4);
+  --accent: #f59e0b;
+  --accent2: #fbbf24;
+  --accent-glow: rgba(245, 158, 11, 0.18);
+  --blue: #38bdf8;
+  --blue-glow: rgba(56, 189, 248, 0.18);
+  --ok: #34d399;
+  --ok-glow: rgba(52, 211, 153, 0.18);
+  --danger: #f87171;
+  --ink: #f8fafc;
+  --dim: #94a3b8;
+  --faint: #64748b;
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* Subtle Ambient Glow */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+}
+.glow-gold {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, transparent 70%);
+  top: -100px;
+  left: 10%;
+}
+.glow-blue {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
+  bottom: 10%;
+  right: -100px;
+}
+
+/* Nav */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(7, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.logo {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.logo b { color: var(--accent); }
+.logo-tag {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--accent2);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 2px 7px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dim);
+  transition: color 0.15s;
+}
+.nav-link:hover { color: var(--ink); }
+.nav-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-live-phone {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: var(--accent2);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn-live-phone:hover {
+  background: rgba(245, 158, 11, 0.22);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--ok);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--ok);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Layout */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero */
+.demo-hero {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 50px;
+}
+.eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #6ee7b7;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.demo-hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+}
+.demo-hero h1 span.gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.demo-hero p {
+  color: var(--dim);
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.6;
+  max-width: 740px;
+  margin: 0 auto 28px;
+}
+
+/* Quick Nav Tab Pills */
+.demo-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.demo-nav-btn {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--dim);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-nav-btn:hover {
+  background: var(--bg3);
+  color: var(--ink);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+.demo-nav-btn.active {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--accent);
+  color: var(--accent2);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.2);
+}
+
+/* Card Section */
+.demo-section-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px;
+  margin-bottom: 40px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.section-title-wrap h2 {
+  font-family: var(--font-head);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title-wrap p {
+  color: var(--dim);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Module 1: Website Showcase */
+.showcase-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+  background: var(--bg2);
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.device-toggle-group, .trade-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pill-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--dim);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+.pill-btn:hover { color: var(--ink); border-color: rgba(255, 255, 255, 0.2); }
+.pill-btn.active {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--accent);
+  color: var(--accent2);
+}
+.preview-stage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #111827 0%, #070a0f 100%);
+  border-radius: 14px;
+  padding: 30px 20px;
+  min-height: 520px;
+  border: 1px solid var(--border);
+}
+
+/* Simulated Devices */
+.mock-device {
+  transition: all 0.3s ease;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  background: #0b0f16;
+  border: 10px solid #1e293b;
+  border-radius: 36px;
+  overflow: hidden;
+  position: relative;
+}
+.mock-device.mobile-mode {
+  width: 375px;
+  height: 650px;
+}
+.mock-device.tablet-mode {
+  width: 680px;
+  height: 620px;
+  border-radius: 28px;
+}
+.mock-device.desktop-mode {
+  width: 100%;
+  max-width: 960px;
+  height: 580px;
+  border-radius: 14px;
+  border: 8px solid #1e293b;
+}
+
+/* Inside the Simulated Website */
+.sim-site-header {
+  background: rgba(11, 15, 22, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sim-brand {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 15px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sim-brand span { color: var(--accent); }
+.sim-call-cta {
+  background: var(--accent);
+  color: #070a0f;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.sim-site-body {
+  padding: 20px 18px;
+  height: calc(100% - 54px);
+  overflow-y: auto;
+  background: #0b0f16;
+}
+.sim-hero-banner {
+  text-align: center;
+  padding: 20px 10px 24px;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, transparent 100%);
+  border-radius: 12px;
+  margin-bottom: 18px;
+}
+.sim-badge-lead {
+  display: inline-block;
+  font-size: 10.5px;
+  font-family: var(--font-mono);
+  background: rgba(52, 211, 153, 0.15);
+  color: #6ee7b7;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.sim-hero-banner h3 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+.sim-hero-banner p {
+  font-size: 12.5px;
+  color: var(--dim);
+  margin-bottom: 14px;
+}
+.sim-btn-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.sim-btn-primary {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #070a0f;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+}
+.sim-btn-secondary {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+/* Simulated Instant Estimator */
+.sim-estimator-card {
+  background: var(--bg2);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.sim-est-title {
+  font-size: 11.5px;
+  font-family: var(--font-mono);
+  color: var(--accent2);
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sim-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.sim-opt-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 6px;
+  text-align: left;
+  transition: all 0.1s;
+}
+.sim-opt-btn.active {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: var(--accent);
+  color: var(--accent2);
+  font-weight: 700;
+}
+.sim-quote-box {
+  background: #070a0f;
+  border: 1px dashed rgba(52, 211, 153, 0.4);
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+.sim-quote-price {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ok);
+}
+.sim-quote-sub {
+  font-size: 10px;
+  color: var(--dim);
+}
+
+/* Module 2: Ava Voice AI Receptionist Simulator */
+.ava-simulator-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+}
+@media(max-width: 900px) {
+  .ava-simulator-grid { grid-template-columns: 1fr; }
+}
+.ava-call-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+}
+.scenario-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.scenario-btn {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--dim);
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-align: left;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.scenario-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--ink);
+}
+.scenario-btn.active {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+.scenario-btn .title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+}
+.scenario-btn .sub {
+  font-size: 11px;
+  color: var(--dim);
+}
+.ava-player-box {
+  background: #070a0f;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+}
+.audio-waveform-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 48px;
+  margin: 14px 0;
+}
+.wave-bar {
+  width: 4px;
+  background: var(--accent);
+  border-radius: 999px;
+  height: 8px;
+  transition: height 0.1s ease;
+}
+.audio-waveform-bars.playing .wave-bar {
+  animation: wavePulse 1s ease-in-out infinite alternate;
+}
+.audio-waveform-bars.playing .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+.audio-waveform-bars.playing .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+.audio-waveform-bars.playing .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+.audio-waveform-bars.playing .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+.audio-waveform-bars.playing .wave-bar:nth-child(6) { animation-delay: 0.5s; }
+.audio-waveform-bars.playing .wave-bar:nth-child(7) { animation-delay: 0.6s; }
+.audio-waveform-bars.playing .wave-bar:nth-child(8) { animation-delay: 0.7s; }
+@keyframes wavePulse {
+  0% { height: 6px; }
+  100% { height: 42px; background: var(--accent2); }
+}
+.btn-play-call {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #070a0f;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+  transition: all 0.2s;
+}
+.btn-play-call:hover { transform: scale(1.04); }
+
+/* Live Transcript Log */
+.transcript-card {
+  background: #070a0f;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  height: 240px;
+  overflow-y: auto;
+  font-size: 12.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+.msg-bubble {
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 85%;
+  line-height: 1.4;
+}
+.msg-bubble.caller {
+  background: #1e293b;
+  color: #e2e8f0;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+.msg-bubble.ava {
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fef3c7;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+.msg-sender {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+.msg-bubble.caller .msg-sender { color: #94a3b8; }
+.msg-bubble.ava .msg-sender { color: var(--accent2); }
+
+/* Real-Time Generated Lead Dossier */
+.dossier-card {
+  background: var(--bg2);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: 14px;
+  padding: 20px;
+}
+.dossier-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.dossier-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+}
+.dossier-label {
+  font-size: 10.5px;
+  font-family: var(--font-mono);
+  color: var(--dim);
+  text-transform: uppercase;
+}
+.dossier-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 3px;
+}
+.dossier-alert-box {
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #a7f3d0;
+  font-size: 11.5px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Module 3: Speed-to-Lead SMS Demo */
+.sms-demo-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 30px;
+  align-items: center;
+}
+@media(max-width: 850px) {
+  .sms-demo-grid { grid-template-columns: 1fr; }
+}
+.phone-frame {
+  background: #0b0f16;
+  border: 10px solid #1e293b;
+  border-radius: 36px;
+  height: 520px;
+  padding: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+.phone-notch {
+  width: 120px;
+  height: 18px;
+  background: #1e293b;
+  border-radius: 0 0 12px 12px;
+  margin: -16px auto 14px;
+}
+.sms-thread {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+.sms-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  max-width: 85%;
+}
+.sms-bubble.inbound {
+  background: #1e293b;
+  color: #fff;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+.sms-bubble.outbound {
+  background: #0284c7;
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+.sms-time {
+  font-size: 9.5px;
+  opacity: 0.7;
+  margin-top: 4px;
+  text-align: right;
+}
+.sms-metrics-col h3 {
+  font-family: var(--font-head);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.speed-stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.speed-stat-num {
+  font-family: var(--font-head);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent2);
+}
+
+/* Module 4: Small Local Business ROI Calculator */
+.calc-module-card {
+  background: linear-gradient(135deg, rgba(13, 19, 31, 0.95), rgba(19, 27, 44, 0.95));
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: 18px;
+  padding: 32px;
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 32px;
+}
+@media(max-width: 860px) {
+  .calc-grid { grid-template-columns: 1fr; }
+}
+.calc-control-group {
+  margin-bottom: 22px;
+}
+.calc-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.calc-label {
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.calc-val-pill {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--accent2);
+  background: rgba(245, 158, 11, 0.15);
+  padding: 2px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.calc-slider {
+  width: 100%;
+  height: 6px;
+  background: #1e293b;
+  border-radius: 999px;
+  outline: none;
+  -webkit-appearance: none;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--accent);
+}
+.calc-output-box {
+  background: #070a0f;
+  border: 1.5px solid rgba(52, 211, 153, 0.3);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.leak-row-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.leak-row-stat:last-child { border-bottom: none; }
+.leak-big-saved {
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 14px;
+}
+.leak-big-saved .amount {
+  font-family: var(--font-head);
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--ok);
+  line-height: 1;
+}
+
+/* Call to Action Footer Box */
+.demo-cta-box {
+  background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.18), transparent 60%), #0d131f;
+  border: 1.5px solid var(--border-gold);
+  border-radius: 18px;
+  padding: 40px;
+  text-align: center;
+  margin-top: 50px;
+}
+.demo-cta-box h2 {
+  font-family: var(--font-head);
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.btn-gold-large {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #070a0f;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  box-shadow: 0 4px 25px rgba(245, 158, 11, 0.4);
+  transition: all 0.2s;
+}
+.btn-gold-large:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
+}
+</style>
+</head>
+<body>
+
+<div class="ambient-bg">
+  <div class="glow-orb glow-gold"></div>
+  <div class="glow-orb glow-blue"></div>
+</div>
+
+<header>
+  <div class="nav-wrap">
+    <a href="/" class="logo">
+      Vantor<b>X</b>
+      <span class="logo-tag">LIVE DEMO</span>
+    </a>
+    <div class="nav-links">
+      <a href="#module-website" class="nav-link">Websites</a>
+      <a href="#module-ava" class="nav-link">Ava Voice AI</a>
+      <a href="#module-speed" class="nav-link">Speed-to-Lead</a>
+      <a href="#module-calculator" class="nav-link">Small Biz ROI</a>
+      <a href="/" class="nav-link" style="color:var(--accent2)">&larr; Return to Home</a>
+    </div>
+    <div class="nav-cta-group">
+      <a href="tel:5618138602" class="btn-live-phone" title="Dial to hear Ava live right now">
+        <span class="pulse-dot"></span>
+        <span>Call Ava: (561) 813-8602</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Demo Hero -->
+  <section class="demo-hero">
+    <div class="eyebrow-pill">
+      <span>⚡ Done-For-You Contractor Infrastructure</span>
+      <span>•</span>
+      <span>Small Local Businesses (1-10 Crew)</span>
+    </div>
+    <h1>See How VantorX Runs Your Trade Business <span class="gold">On Autopilot.</span></h1>
+    <p>When you're turning wrenches, on a roof, or driving between jobs, every unanswered call is an $8,000 job handed straight to your competitor. Test our live systems below.</p>
+    
+    <!-- Quick Nav Buttons -->
+    <div class="demo-nav-bar">
+      <button type="button" class="demo-nav-btn active" onclick="scrollToSection('module-website')">
+        <span>💻</span> 1. High-Converting Website
+      </button>
+      <button type="button" class="demo-nav-btn" onclick="scrollToSection('module-ava')">
+        <span>🎙️</span> 2. Ava AI Receptionist (1-Ring)
+      </button>
+      <button type="button" class="demo-nav-btn" onclick="scrollToSection('module-speed')">
+        <span>💬</span> 3. 45-Sec SMS Speed-to-Lead
+      </button>
+      <button type="button" class="demo-nav-btn" onclick="scrollToSection('module-calculator')">
+        <span>💰</span> 4. Small Biz ROI Calculator
+      </button>
+    </div>
+  </section>
+
+  <!-- MODULE 1: INTERACTIVE CONTRACTOR WEBSITE DEMO -->
+  <section id="module-website" class="demo-section-card">
+    <div class="section-header-row">
+      <div class="section-title-wrap">
+        <h2><span>💻</span> High-Converting Contractor Website Showcase</h2>
+        <p>Built exclusively for small local trade contractors. Sub-second mobile loading, 1-tap emergency dispatch, and instant quote capture.</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:12px;font-family:var(--font-mono);background:rgba(52,211,153,0.15);color:#6ee7b7;padding:4px 10px;border-radius:6px;font-weight:700">
+          🟢 Core Web Vitals: 100/100
+        </span>
+      </div>
+    </div>
+
+    <!-- Toolbar for Device & Trade Switcher -->
+    <div class="showcase-toolbar">
+      <div class="device-toggle-group">
+        <span style="font-size:11.5px;color:var(--dim);font-family:var(--font-mono);margin-right:4px">DEVICE:</span>
+        <button type="button" class="pill-btn active" id="btnDeviceMobile" onclick="setDeviceView('mobile')">📱 Mobile (82% of Traffic)</button>
+        <button type="button" class="pill-btn" id="btnDeviceDesktop" onclick="setDeviceView('desktop')">💻 Desktop</button>
+        <button type="button" class="pill-btn" id="btnDeviceTablet" onclick="setDeviceView('tablet')">📟 Tablet</button>
+      </div>
+      <div class="trade-toggle-group">
+        <span style="font-size:11.5px;color:var(--dim);font-family:var(--font-mono);margin-right:4px">SAMPLE TRADE:</span>
+        <button type="button" class="pill-btn active" id="btnTradeHvac" onclick="setSampleTrade('hvac')">❄️ HVAC</button>
+        <button type="button" class="pill-btn" id="btnTradePlumbing" onclick="setSampleTrade('plumbing')">🔧 Plumbing</button>
+        <button type="button" class="pill-btn" id="btnTradeRoofing" onclick="setSampleTrade('roofing')">🏠 Roofing</button>
+        <button type="button" class="pill-btn" id="btnTradeElectrical" onclick="setSampleTrade('electrical')">⚡ Electrical</button>
+      </div>
+    </div>
+
+    <!-- Live Simulated Device Frame -->
+    <div class="preview-stage-container">
+      <div class="mock-device mobile-mode" id="mockDeviceFrame">
+        <!-- Site Header -->
+        <div class="sim-site-header">
+          <div class="sim-brand">
+            <span id="simBrandIcon">❄️</span>
+            <div id="simBrandText">APEX <span>COMFORT</span></div>
+          </div>
+          <a href="tel:5618138602" class="sim-call-cta">
+            <span>📞</span> <span id="simHeaderPhone">(561) 813-8602</span>
+          </a>
+        </div>
+
+        <!-- Site Body -->
+        <div class="sim-site-body">
+          <div class="sim-hero-banner">
+            <div class="sim-badge-lead" id="simHeroBadge">⚡ 24/7 EMERGENCY DISPATCH • 1-RING ANSWER</div>
+            <h3 id="simHeroHeading">Boca Raton's Top-Rated Emergency AC Specialists</h3>
+            <p id="simHeroSubhead">No answering machine. No weekend delays. Live certified technicians on-call 24 hours a day.</p>
+            <div class="sim-btn-row">
+              <button class="sim-btn-primary" onclick="alert('Simulation: Ava Voice AI receptionist answers in 0.8s on first ring!')">Call Emergency Dispatch</button>
+              <button class="sim-btn-secondary" onclick="alert('Ballpark estimate calculator opened.')">Get Price</button>
+            </div>
+          </div>
+
+          <!-- Interactive Ballpark Estimator inside Sample Site -->
+          <div class="sim-estimator-card">
+            <div class="sim-est-title">
+              <span>📊 INSTANT BALLPARK ESTIMATOR</span>
+              <span style="color:var(--ok)">✓ 1-Tap Quote</span>
+            </div>
+            <div class="sim-options-grid" id="simOptionsGrid">
+              <button class="sim-opt-btn active" onclick="selectSimService(0)">AC Replacement</button>
+              <button class="sim-opt-btn" onclick="selectSimService(1)">Emergency Tune-Up</button>
+              <button class="sim-opt-btn" onclick="selectSimService(2)">Ductless Mini-Split</button>
+              <button class="sim-opt-btn" onclick="selectSimService(3)">Coil Leak Repair</button>
+            </div>
+            <div class="sim-quote-box">
+              <div style="font-size:11px;color:var(--dim)" id="simServiceSelected">Estimated Range for Homeowner:</div>
+              <div class="sim-quote-price" id="simPriceQuote">$4,800 – $8,500</div>
+              <div class="sim-quote-sub">✓ Captures caller phone & alerts technician via SMS in &lt;45s</div>
+            </div>
+          </div>
+
+          <!-- Proof points -->
+          <div style="background:var(--bg2);border-radius:10px;padding:12px;font-size:11.5px;color:var(--dim)">
+            <div style="color:#fff;font-weight:700;margin-bottom:6px">⭐ Why Local Homeowners Choose Us:</div>
+            <div>• Average response time: <strong>45 seconds</strong></div>
+            <div>• Zero hidden diagnostic surcharges</div>
+            <div>• Licensed & Insured Master Contractors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 2: AVA VOICE AI RECEPTIONIST SIMULATOR -->
+  <section id="module-ava" class="demo-section-card">
+    <div class="section-header-row">
+      <div class="section-title-wrap">
+        <h2><span>🎙️</span> Ava 24/7 Voice AI Receptionist Simulator</h2>
+        <p>Listen to how Ava answers real emergency trade calls in 0.8 seconds while the owner is on a ladder or asleep.</p>
+      </div>
+      <a href="tel:5618138602" class="btn-live-phone" style="font-size:12px">
+        <span>📞 Dial Live: (561) 813-8602</span>
+      </a>
+    </div>
+
+    <div class="ava-simulator-grid">
+      <!-- Player & Scenario Chooser -->
+      <div class="ava-call-card">
+        <div style="font-size:12px;font-family:var(--font-mono);color:var(--accent2);font-weight:700;margin-bottom:10px">
+          SELECT EMERGENCY SCENARIO:
+        </div>
+        <div class="scenario-selector">
+          <button type="button" class="scenario-btn active" onclick="setAvaScenario(0)">
+            <div>
+              <div class="title">1. AC Breakdown in 98° Heat Wave</div>
+              <div class="sub">Saturday 11:30 PM • 3-person HVAC crew (owner sleeping)</div>
+            </div>
+            <span style="color:var(--accent2)">▶</span>
+          </button>
+          <button type="button" class="scenario-btn" onclick="setAvaScenario(1)">
+            <div>
+              <div class="title">2. Slab Leak Flooding Kitchen Floor</div>
+              <div class="sub">Sunday 8:15 AM • 2-man plumbing shop (techs on another job)</div>
+            </div>
+            <span style="color:var(--accent2)">▶</span>
+          </button>
+          <button type="button" class="scenario-btn" onclick="setAvaScenario(2)">
+            <div>
+              <div class="title">3. Storm Hail Roof Leak Triage</div>
+              <div class="sub">Weekday 1:15 PM • Roofer up on ladder (hands full)</div>
+            </div>
+            <span style="color:var(--accent2)">▶</span>
+          </button>
+        </div>
+
+        <div class="ava-player-box">
+          <div style="font-size:11px;font-family:var(--font-mono);color:var(--dim)">AVA LIVE AUDIO CHANNEL • 0.8s LATENCY</div>
+          <div class="audio-waveform-bars" id="audioWaveform">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <button type="button" class="btn-play-call" id="btnPlayAvaCall" onclick="togglePlayScenario()">
+            <span id="playIcon">▶</span> <span id="playText">Play Live Call Audio</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Real-Time Dialogue & Generated Lead Dossier -->
+      <div>
+        <div style="font-size:12px;font-family:var(--font-mono);color:var(--dim);font-weight:700;margin-bottom:8px">
+          LIVE CONVERSATION TRANSCRIPT:
+        </div>
+        <div class="transcript-card" id="transcriptContainer">
+          <!-- Populated dynamically as audio plays -->
+        </div>
+
+        <!-- Generated Lead Dossier -->
+        <div class="dossier-card" style="margin-top:14px">
+          <div class="dossier-header">
+            <span style="font-size:12px;font-family:var(--font-mono);color:var(--ok);font-weight:700">✓ INSTANT DISPATCH DOSSIER GENERATED</span>
+            <span style="font-size:11px;color:var(--dim)">Synced to Calendar in 0.8s</span>
+          </div>
+          <div class="dossier-grid">
+            <div class="dossier-item">
+              <div class="dossier-label">Homeowner</div>
+              <div class="dossier-val" id="dosName">Sarah Jenkins</div>
+            </div>
+            <div class="dossier-item">
+              <div class="dossier-label">Address</div>
+              <div class="dossier-val" id="dosAddress">4421 Ocean Dr, Boca Raton</div>
+            </div>
+            <div class="dossier-item">
+              <div class="dossier-label">Job Type</div>
+              <div class="dossier-val" id="dosJob">Emergency AC Replacement</div>
+            </div>
+            <div class="dossier-item">
+              <div class="dossier-label">Diagnostic Fee</div>
+              <div class="dossier-val" style="color:var(--ok)" id="dosFee">Approved $149 Emergency Call</div>
+            </div>
+          </div>
+          <div class="dossier-alert-box">
+            <span>📲</span>
+            <span>SMS Dossier dispatched to on-call technician Dave's cell phone. Job secured before competitor picked up.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 3: 45-SECOND SPEED-TO-LEAD SMS DEMO -->
+  <section id="module-speed" class="demo-section-card">
+    <div class="section-header-row">
+      <div class="section-title-wrap">
+        <h2><span>💬</span> LeadFlow 45-Second Speed-to-Lead SMS</h2>
+        <p>The average local contractor takes 4.5 hours to respond to a website lead. 78% of homeowners hire the first business that texts them back.</p>
+      </div>
+    </div>
+
+    <div class="sms-demo-grid">
+      <!-- Simulated iPhone Frame -->
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div style="text-align:center;font-size:11.5px;color:var(--dim);margin-bottom:12px">
+          Messages with <strong>Apex Comfort HVAC</strong>
+        </div>
+        <div class="sms-thread" id="smsThread">
+          <div class="sms-bubble inbound">
+            <div>Hi, my AC stopped blowing cold air and making a rattling noise. Can someone come out today?</div>
+            <div class="sms-time">11:02 AM • Homeowner Web Form</div>
+          </div>
+          <div class="sms-bubble outbound" style="animation: fadeIn 0.4s ease">
+            <div>Hey Mike! This is Ava with Apex HVAC. We received your emergency request. Our certified tech Dave is in your area and can be there between 1:00 PM – 3:00 PM. Does that time work for you?</div>
+            <div class="sms-time">11:02:24 AM (24s response)</div>
+          </div>
+          <div class="sms-bubble inbound">
+            <div>Yes! 1:00 PM works perfect, thank you!</div>
+            <div class="sms-time">11:03 AM • Homeowner</div>
+          </div>
+          <div class="sms-bubble outbound">
+            <div>You're all set! Dave is confirmed for 1:00 PM. We'll text you a tracking link when he's en route. Have a great day!</div>
+            <div class="sms-time">11:03:15 AM (Confirmed & Booked)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Speed Stats Column -->
+      <div class="sms-metrics-col">
+        <h3>Why Speed-to-Lead Closes 4x More Deals</h3>
+        <p style="color:var(--dim);margin-bottom:20px">When homeowners have an emergency or request an estimate online, they submit forms on 3 different websites. LeadFlow immediately texts their phone in under 45 seconds, locking in the booking before competitors even check their email.</p>
+
+        <div class="speed-stat-card">
+          <div class="speed-stat-num">45s</div>
+          <div>
+            <div style="font-weight:700;color:#fff">VantorX LeadFlow Response</div>
+            <div style="font-size:12.5px;color:var(--dim)">Homeowner is engaged and booked while still on your website.</div>
+          </div>
+        </div>
+
+        <div class="speed-stat-card" style="border-color:rgba(248,113,113,0.3)">
+          <div class="speed-stat-num" style="color:var(--danger)">4.5h</div>
+          <div>
+            <div style="font-weight:700;color:#fff">Average Contractor Response</div>
+            <div style="font-size:12.5px;color:var(--dim)">By the time they call back, the job has already been awarded.</div>
+          </div>
+        </div>
+
+        <div class="speed-stat-card" style="border-color:rgba(52,211,153,0.3)">
+          <div class="speed-stat-num" style="color:var(--ok)">+78%</div>
+          <div>
+            <div style="font-weight:700;color:#fff">First-Responder Advantage</div>
+            <div style="font-size:12.5px;color:var(--dim)">Studies prove the first contractor to respond wins the contract 78% of the time.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 4: SMALL LOCAL BUSINESS REVENUE LEAK CALCULATOR -->
+  <section id="module-calculator" class="calc-module-card">
+    <div class="section-header-row">
+      <div class="section-title-wrap">
+        <h2><span>💰</span> Small Local Business Revenue Leak Calculator</h2>
+        <p>Built specifically for 1 to 10 employee trade contractors (HVAC, Plumbing, Roofing, Electrical). See how much revenue your small crew is losing to voicemail.</p>
+      </div>
+      <div style="font-size:12px;font-family:var(--font-mono);background:rgba(245,158,11,0.15);color:var(--accent2);padding:4px 10px;border-radius:6px;font-weight:700">
+        🎯 1-10 Employee Sweet Spot
+      </div>
+    </div>
+
+    <div class="calc-grid">
+      <!-- Controls -->
+      <div>
+        <!-- Slider 1: Team Size -->
+        <div class="calc-control-group">
+          <div class="calc-label-row">
+            <span class="calc-label">👥 Team Size / Employees:</span>
+            <span class="calc-val-pill" id="valTeamSize">3 Employees</span>
+          </div>
+          <input type="range" class="calc-slider" id="sliderTeamSize" min="1" max="10" value="3" oninput="updateSmallBizRoi()">
+          <div style="font-size:11px;color:var(--dim);margin-top:4px">Sweet spot: Owner in the field + 1-4 field technicians</div>
+        </div>
+
+        <!-- Slider 2: Average Job Ticket -->
+        <div class="calc-control-group">
+          <div class="calc-label-row">
+            <span class="calc-label">🏷️ Average Emergency Job Value:</span>
+            <span class="calc-val-pill" id="valAvgTicket">$4,500</span>
+          </div>
+          <input type="range" class="calc-slider" id="sliderAvgTicket" min="1500" max="12000" step="500" value="4500" oninput="updateSmallBizRoi()">
+          <div style="font-size:11px;color:var(--dim);margin-top:4px">E.g., AC changeout ($8k), Sewer repipe ($7k), Roof repair ($4.5k)</div>
+        </div>
+
+        <!-- Slider 3: Missed Calls per Month -->
+        <div class="calc-control-group">
+          <div class="calc-label-row">
+            <span class="calc-label">📞 Missed Calls per Month (While on jobs/night):</span>
+            <span class="calc-val-pill" id="valMissedCalls">4 Calls / mo</span>
+          </div>
+          <input type="range" class="calc-slider" id="sliderMissedCalls" min="1" max="15" value="4" oninput="updateSmallBizRoi()">
+          <div style="font-size:11px;color:var(--dim);margin-top:4px">Calls that hit voicemail because nobody could pick up in 3 rings</div>
+        </div>
+      </div>
+
+      <!-- Live Results Box -->
+      <div class="calc-output-box">
+        <div>
+          <div style="font-size:11.5px;font-family:var(--font-mono);color:var(--dim);letter-spacing:0.05em">
+            YOUR CONTRACTING SHOP'S LEAK MATH:
+          </div>
+          <div class="leak-row-stat" style="margin-top:10px">
+            <span style="color:var(--dim)">Monthly Cash Leaked to Competitors:</span>
+            <span style="color:#f87171;font-weight:700;font-family:var(--font-mono)" id="calcMonthlyLeak">-$7,200 / mo</span>
+          </div>
+          <div class="leak-row-stat">
+            <span style="color:var(--dim)">Annual Revenue Lost:</span>
+            <span style="color:#f87171;font-weight:700;font-family:var(--font-mono)" id="calcAnnualLeak">-$86,400 / yr</span>
+          </div>
+          <div class="leak-row-stat">
+            <span style="color:var(--dim)">VantorX Done-For-You Investment:</span>
+            <span style="color:var(--accent2);font-weight:700;font-family:var(--font-mono)">$397 / mo ($4,764 / yr)</span>
+          </div>
+        </div>
+
+        <div class="leak-big-saved">
+          <div style="font-size:11px;font-family:var(--font-mono);color:#6ee7b7;font-weight:700;text-transform:uppercase">
+            NET CASH PROFIT SAVED WITH VANTORX:
+          </div>
+          <div class="amount" id="calcNetSaved">+$81,636 / yr</div>
+          <div style="font-size:11.5px;color:#a7f3d0;margin-top:4px" id="calcRoiMultiplier">
+            18.1x Return on Investment • Just 1 job covers 20 months
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Box -->
+  <section class="demo-cta-box">
+    <h2>Ready to Stop Losing $8,000 Jobs While on the Ladder?</h2>
+    <p style="color:var(--dim);max-width:680px;margin:0 auto 24px">
+      We build your custom high-converting website, configure Ava with your exact trade services and pricing, and launch in 7 business days. Zero software to manage.
+    </p>
+    <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
+      <a href="tel:5618138602" class="btn-gold-large">
+        <span>📞 Call Ava Live: (561) 813-8602</span>
+      </a>
+      <a href="/#contact" class="btn-gold-large" style="background:#1e293b;color:#fff;box-shadow:none">
+        <span>Request Free 15-Minute Audit →</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<script>
+// Scroll smooth to section
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.demo-nav-btn').forEach(b => b.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+  }
+}
+
+// 1. Device View Switcher
+function setDeviceView(device) {
+  const frame = document.getElementById('mockDeviceFrame');
+  document.getElementById('btnDeviceMobile').classList.remove('active');
+  document.getElementById('btnDeviceDesktop').classList.remove('active');
+  document.getElementById('btnDeviceTablet').classList.remove('active');
+
+  frame.className = `mock-device ${device}-mode`;
+  if (device === 'mobile') document.getElementById('btnDeviceMobile').classList.add('active');
+  if (device === 'desktop') document.getElementById('btnDeviceDesktop').classList.add('active');
+  if (device === 'tablet') document.getElementById('btnDeviceTablet').classList.add('active');
+}
+
+// 2. Trade Switcher
+const TRADE_DATA = {
+  hvac: {
+    icon: '❄️',
+    brand: 'APEX <span>COMFORT HVAC</span>',
+    heroBadge: '⚡ 24/7 EMERGENCY AC DISPATCH • 1-RING ANSWER',
+    heading: "Boca Raton's Top-Rated Emergency AC Specialists",
+    subhead: 'No answering machine. No weekend delays. Live certified technicians on-call 24 hours a day.',
+    services: [
+      { name: 'AC Replacement', price: '$4,800 – $8,500' },
+      { name: 'Emergency Tune-Up', price: '$129 Flat' },
+      { name: 'Ductless Mini-Split', price: '$2,800 – $5,200' },
+      { name: 'Coil Leak Repair', price: '$1,200 – $2,400' }
+    ]
+  },
+  plumbing: {
+    icon: '🔧',
+    brand: 'GUARDIAN <span>PLUMBING</span>',
+    heroBadge: '🚨 45-MINUTE FLOOD & BURST PIPE RESPONSE',
+    heading: 'South Florida Emergency Plumbing & Trenchless Repipe',
+    subhead: 'Water heaters, sewer backups, and emergency slab leaks repaired right the first time.',
+    services: [
+      { name: 'Tankless Water Heater', price: '$2,400 – $4,600' },
+      { name: 'Trenchless Sewer Line', price: '$5,500 – $9,800' },
+      { name: 'Slab Leak Detection', price: '$350 – $850' },
+      { name: 'Emergency Drain Clear', price: '$189 Flat' }
+    ]
+  },
+  roofing: {
+    icon: '🏠',
+    brand: 'SUMMIT <span>ROOFING & TILE</span>',
+    heroBadge: '🌪️ STORM SURGE & HURRICANE ROOF TRIAGE',
+    heading: 'Palm Beach Tile, Shingle & Metal Roof Restorations',
+    subhead: 'Direct insurance claim assistance, drone roof inspections, and lifetime leak guarantees.',
+    services: [
+      { name: 'Full Roof Replacement', price: '$12,000 – $28,000' },
+      { name: 'Emergency Tarping', price: '$450 – $950' },
+      { name: 'Tile Roof Repair', price: '$1,500 – $3,800' },
+      { name: 'Gutter Guard System', price: '$1,800 – $3,200' }
+    ]
+  },
+  electrical: {
+    icon: '⚡',
+    brand: 'VOLT <span>PRO ELECTRICAL</span>',
+    heroBadge: '⚡ 200A PANEL UPGRADES & GENERATOR POWER',
+    heading: 'Licensed Master Electricians Serving Palm Beach County',
+    subhead: 'Whole-home generator backups, EV chargers, and emergency outage restoration.',
+    services: [
+      { name: '200A Panel Upgrade', price: '$2,800 – $4,500' },
+      { name: 'Whole-Home Generator', price: '$8,500 – $14,000' },
+      { name: 'Level 2 EV Charger', price: '$950 – $1,800' },
+      { name: 'Emergency Power Loss', price: '$199 Diagnostic' }
+    ]
+  }
+};
+
+let currentTradeKey = 'hvac';
+function setSampleTrade(trade) {
+  currentTradeKey = trade;
+  const data = TRADE_DATA[trade];
+  document.getElementById('btnTradeHvac').classList.remove('active');
+  document.getElementById('btnTradePlumbing').classList.remove('active');
+  document.getElementById('btnTradeRoofing').classList.remove('active');
+  document.getElementById('btnTradeElectrical').classList.remove('active');
+
+  const btnMap = { hvac: 'btnTradeHvac', plumbing: 'btnTradePlumbing', roofing: 'btnTradeRoofing', electrical: 'btnTradeElectrical' };
+  document.getElementById(btnMap[trade]).classList.add('active');
+
+  document.getElementById('simBrandIcon').textContent = data.icon;
+  document.getElementById('simBrandText').innerHTML = data.brand;
+  document.getElementById('simHeroBadge').textContent = data.heroBadge;
+  document.getElementById('simHeroHeading').textContent = data.heading;
+  document.getElementById('simHeroSubhead').textContent = data.subhead;
+
+  // Re-render estimator buttons
+  const grid = document.getElementById('simOptionsGrid');
+  grid.innerHTML = '';
+  data.services.forEach((s, idx) => {
+    const btn = document.createElement('button');
+    btn.className = `sim-opt-btn ${idx === 0 ? 'active' : ''}`;
+    btn.textContent = s.name;
+    btn.onclick = () => selectSimService(idx);
+    grid.appendChild(btn);
+  });
+  selectSimService(0);
+}
+
+function selectSimService(idx) {
+  const data = TRADE_DATA[currentTradeKey];
+  const s = data.services[idx];
+  document.querySelectorAll('.sim-opt-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === idx);
+  });
+  document.getElementById('simServiceSelected').textContent = `Estimated Range for ${s.name}:`;
+  document.getElementById('simPriceQuote').textContent = s.price;
+}
+
+// 3. Ava Voice Simulator Scenarios
+const SCENARIOS = [
+  {
+    title: 'AC Breakdown in 98° Heat Wave',
+    sub: 'Saturday 11:30 PM • 3-person HVAC crew',
+    dossier: { name: 'Sarah Jenkins', address: '4421 Ocean Dr, Boca Raton', job: 'Emergency AC Replacement ($7,500)', fee: 'Approved $149 Fee' },
+    transcript: [
+      { sender: 'ava', text: 'Thanks for calling Apex Comfort 24/7 emergency dispatch! This is Ava. How can I help you tonight?' },
+      { sender: 'caller', text: 'Hi Ava, my AC just shut off and it is 86 degrees inside with a 6-month-old baby. Can you send someone?' },
+      { sender: 'ava', text: "I completely understand Sarah. We have an on-call emergency technician available tonight. Our after-hours diagnostic dispatch fee is $149. May I get your address so I can confirm his arrival window?" },
+      { sender: 'caller', text: 'Yes please, 4421 Ocean Drive in Boca Raton. 149 is totally fine, just please hurry.' },
+      { sender: 'ava', text: "I've locked in technician Dave for you. He will arrive between 12:15 AM and 1:00 AM. I just sent a confirmation text to your cell with his live arrival tracker. Hang tight Sarah, help is on the way!" }
+    ]
+  },
+  {
+    title: 'Slab Leak Flooding Kitchen Floor',
+    sub: 'Sunday 8:15 AM • 2-man plumbing crew',
+    dossier: { name: 'Robert Vance', address: '1820 NW 4th Ave, Delray Beach', job: 'Emergency Slab Leak Repipe ($6,200)', fee: 'Approved $189 Fee' },
+    transcript: [
+      { sender: 'ava', text: 'Guardian Plumbing 24/7 priority line, this is Ava. Are you experiencing an active water leak?' },
+      { sender: 'caller', text: 'Yes! Water is bubbling up through the grout in my kitchen tile right now.' },
+      { sender: 'ava', text: 'Understood Robert. First, locate your main water shutoff valve near the street or garage and turn it clockwise to stop flooding. Can you do that right now?' },
+      { sender: 'caller', text: 'Doing that right now. Got it shut off.' },
+      { sender: 'ava', text: "Great. Our master leak technician is 15 minutes away in Delray. Our emergency detection fee is $189. Can he come straight to 1820 NW 4th Ave?" },
+      { sender: 'caller', text: 'Yes, absolutely. Thank you so much.' }
+    ]
+  },
+  {
+    title: 'Storm Hail Roof Leak Triage',
+    sub: 'Weekday 1:15 PM • Roofer on ladder',
+    dossier: { name: 'Danielle Miller', address: '7822 Palmetto Park Rd, Boca', job: 'Emergency Roof Tarping ($850) + Re-Roof', fee: 'Approved Emergency Tarp' },
+    transcript: [
+      { sender: 'ava', text: 'Summit Roofing emergency storm triage, this is Ava. How can I help you today?' },
+      { sender: 'caller', text: 'The storm just cracked several tiles and water is dripping through the master bedroom ceiling.' },
+      { sender: 'ava', text: "We have an emergency tarping crew active in your neighborhood right now. We can be there within 60 minutes to seal the leak and prevent drywall collapse. Is the property at 7822 Palmetto Park Road?" },
+      { sender: 'caller', text: 'Yes! Please send them as fast as possible.' },
+      { sender: 'ava', text: "Crew #2 is dispatched to you right now. I just texted you our inspector's contact info. Please avoid standing under the water bulge until we arrive." }
+    ]
+  }
+];
+
+let activeScenarioIndex = 0;
+let isPlayingCall = false;
+let playbackTimeout = null;
+
+function setAvaScenario(idx) {
+  activeScenarioIndex = idx;
+  document.querySelectorAll('.scenario-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+  stopPlayback();
+  renderScenarioPreview();
+}
+
+function renderScenarioPreview() {
+  const sc = SCENARIOS[activeScenarioIndex];
+  document.getElementById('dosName').textContent = sc.dossier.name;
+  document.getElementById('dosAddress').textContent = sc.dossier.address;
+  document.getElementById('dosJob').textContent = sc.dossier.job;
+  document.getElementById('dosFee').textContent = sc.dossier.fee;
+
+  const tCont = document.getElementById('transcriptContainer');
+  tCont.innerHTML = '';
+  sc.transcript.forEach(msg => {
+    const div = document.createElement('div');
+    div.className = `msg-bubble ${msg.sender}`;
+    div.innerHTML = `<div class="msg-sender">${msg.sender === 'ava' ? 'Ava (AI Receptionist)' : 'Caller (Homeowner)'}</div><div>${msg.text}</div>`;
+    tCont.appendChild(div);
+  });
+}
+
+function togglePlayScenario() {
+  if (isPlayingCall) {
+    stopPlayback();
+  } else {
+    startPlayback();
+  }
+}
+
+function startPlayback() {
+  isPlayingCall = true;
+  document.getElementById('playIcon').textContent = '⏹';
+  document.getElementById('playText').textContent = 'Stop Call Audio';
+  document.getElementById('audioWaveform').classList.add('playing');
+
+  // Synthesize audio using Web Speech API if available
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const sc = SCENARIOS[activeScenarioIndex];
+    let msgIdx = 0;
+
+    function speakNext() {
+      if (!isPlayingCall || msgIdx >= sc.transcript.length) {
+        stopPlayback();
+        return;
+      }
+      const item = sc.transcript[msgIdx];
+      const utter = new SpeechSynthesisUtterance(item.text);
+      utter.rate = (item.sender === 'ava') ? 1.05 : 1.0;
+      utter.pitch = (item.sender === 'ava') ? 1.15 : 0.95;
+      utter.onend = () => {
+        msgIdx++;
+        playbackTimeout = setTimeout(speakNext, 400);
+      };
+      utter.onerror = () => stopPlayback();
+      window.speechSynthesis.speak(utter);
+    }
+    speakNext();
+  } else {
+    // Fallback timer
+    playbackTimeout = setTimeout(stopPlayback, 6000);
+  }
+}
+
+function stopPlayback() {
+  isPlayingCall = false;
+  document.getElementById('playIcon').textContent = '▶';
+  document.getElementById('playText').textContent = 'Play Live Call Audio';
+  document.getElementById('audioWaveform').classList.remove('playing');
+  if (playbackTimeout) clearTimeout(playbackTimeout);
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
+
+// 4. Small Business ROI Calculator Logic
+function updateSmallBizRoi() {
+  const teamSize = parseInt(document.getElementById('sliderTeamSize').value, 10);
+  const avgTicket = parseInt(document.getElementById('sliderAvgTicket').value, 10);
+  const missedCalls = parseInt(document.getElementById('sliderMissedCalls').value, 10);
+
+  document.getElementById('valTeamSize').textContent = `${teamSize} ${teamSize === 1 ? 'Person (Solo)' : 'Employees'}`;
+  document.getElementById('valAvgTicket').textContent = `$${avgTicket.toLocaleString()}`;
+  document.getElementById('valMissedCalls').textContent = `${missedCalls} ${missedCalls === 1 ? 'Call' : 'Calls'} / mo`;
+
+  // Assume 40% of missed calls would have turned into high-ticket jobs
+  const monthlyLostRevenue = Math.round(missedCalls * 0.4 * avgTicket);
+  const annualLostRevenue = monthlyLostRevenue * 12;
+  const vantorxAnnualCost = 397 * 12; // $4,764
+  const netSaved = Math.max(0, annualLostRevenue - vantorxAnnualCost);
+  const multiplier = (annualLostRevenue / vantorxAnnualCost).toFixed(1);
+
+  document.getElementById('calcMonthlyLeak').textContent = `-$${monthlyLostRevenue.toLocaleString()} / mo`;
+  document.getElementById('calcAnnualLeak').textContent = `-$${annualLostRevenue.toLocaleString()} / yr`;
+  document.getElementById('calcNetSaved').textContent = `+$${netSaved.toLocaleString()} / yr`;
+  document.getElementById('calcRoiMultiplier').textContent = `${multiplier}x Return on Investment • Just 1 job covers ${Math.round(avgTicket / 397)} months`;
+}
+
+// Init on load
+window.addEventListener('DOMContentLoaded', () => {
+  renderScenarioPreview();
+  updateSmallBizRoi();
+});
+</script>
+
+</body>
+</html>
