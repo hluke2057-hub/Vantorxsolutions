@@ -3130,11 +3130,15 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <span class="status-badge status-badge-uncalled" id="prompterStatusBadge">⏳ To Call</span>
             <button class="btn btn-ghost btn-sm" id="prompterToggleCallBtn" style="border:1px solid rgba(52,211,153,0.5);color:#6ee7b7">✓ Mark as Called</button>
             <a href="tel:5612031315" class="btn btn-gold btn-sm" id="activeLeadCallBtn">📞 Call (561) 203-1315</a>
-            <button type="button" class="btn btn-ghost btn-sm" id="btnCopyAuditUrl" style="border:1px solid rgba(56,189,248,0.5);color:#7dd3fc" title="Copy live confidential audit URL to text or email prospect">🔗 Copy Audit Link</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnEmailLead" style="border:1px solid rgba(52,211,153,0.5);color:#6ee7b7" title="Send verified email via mailto">✉️ Email Lead (MX Verified)</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnOpenLinkedIn" style="border:1px solid #0a66c2;color:#60a5fa" title="Search owner profile on LinkedIn">🔗 Find on LinkedIn</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnCopyLinkedInMsg" style="border:1px solid #0a66c2;color:#93c5fd" title="Copy personalized 280-char connection note or InMail">💬 Copy LinkedIn Note</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btnCopyAuditUrl" style="border:1px solid rgba(56,189,248,0.5);color:#7dd3fc" title="Copy live confidential audit URL to text or email prospect">📊 Copy Audit Link</button>
             <button type="button" class="btn btn-ghost btn-sm" id="btnCopyFollowUpSms" style="border:1px solid rgba(245,158,11,0.5);color:var(--accent2)" title="Copy targeted, non-fluff follow-up text referencing this audit">💬 Copy Follow-Up SMS</button>
             <button class="btn btn-ghost btn-sm" id="clearActiveLeadBtn">✕ Clear Lead</button>
           </div>
         </div>
+
 
         <div class="active-lead-grid">
           <div class="active-lead-cell">
@@ -9211,7 +9215,18 @@ window.closeLeakMathModal = function() {
         </td>
         <td>
           <a href="tel:${lead.phone.replace(/[^0-9]/g, '')}" style="color:var(--blue);font-family:var(--font-mono);font-weight:700;text-decoration:none">${lead.phone}</a>
+          ${lead.email ? `
+            <div style="font-size:11px;margin-top:3px;display:flex;align-items:center;gap:4px">
+              <a href="mailto:${lead.email}" style="color:var(--accent2);text-decoration:none;font-size:11px" title="MX Verified: ${lead.mx_host || 'Valid'}">✉️ ${lead.email}</a>
+              <span style="color:#34d399;font-size:10px" title="Active MX Mailserver: ${lead.mx_host || 'Verified'}">🛡️</span>
+            </div>` : ''}
+          <div style="margin-top:4px">
+            <a href="https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent(lead.owner + ' ' + lead.company)}" target="_blank" style="color:#60a5fa;font-size:11px;text-decoration:none;display:inline-flex;align-items:center;gap:3px" title="Search ${lead.owner} on LinkedIn">
+              <span>🔗</span> <span>LinkedIn</span>
+            </a>
+          </div>
         </td>
+
         <td style="max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${lead.painPoint}">
           <span style="font-size:11.5px;color:#e2e8f0">${lead.painPoint}</span>
         </td>
@@ -9785,6 +9800,45 @@ window.closeLeakMathModal = function() {
     });
   }
 
+  // LinkedIn Search Opener
+  const btnOpenLinkedInEl = document.getElementById('btnOpenLinkedIn');
+  if (btnOpenLinkedInEl) {
+    btnOpenLinkedInEl.addEventListener('click', () => {
+      if (!activeLead) return;
+      const q = encodeURIComponent(`${activeLead.owner} ${activeLead.company}`);
+      window.open(`https://www.linkedin.com/search/results/all/?keywords=${q}`, '_blank');
+      showToast(`🔗 Opening LinkedIn search for ${activeLead.owner}...`);
+    });
+  }
+
+  // LinkedIn Connection Note & InMail Copier
+  const btnCopyLinkedInMsgEl = document.getElementById('btnCopyLinkedInMsg');
+  if (btnCopyLinkedInMsgEl) {
+    btnCopyLinkedInMsgEl.addEventListener('click', () => {
+      if (!activeLead) return;
+      const note = `Hey ${activeLead.owner}, saw ${activeLead.company}'s work in ${activeLead.city}. Quick question: when your crew is on site or after hours, who catches emergency calls? Built a 24/7 Voice AI for Florida trade shops so jobs don't drop to voicemail. Would love to connect!`;
+      navigator.clipboard.writeText(note);
+      showToast(`✓ Copied 280-char LinkedIn Connection Note for ${activeLead.owner}!`);
+    });
+  }
+
+  // MX Verified Email Dispatcher
+  const btnEmailLeadEl = document.getElementById('btnEmailLead');
+  if (btnEmailLeadEl) {
+    btnEmailLeadEl.addEventListener('click', () => {
+      if (!activeLead) return;
+      if (!activeLead.email) {
+        showToast(`⚠️ No email verified for ${activeLead.company}. Use phone dialer or LinkedIn!`);
+        return;
+      }
+      const lossMo = Number(activeLead.monthlyLoss || 8500).toLocaleString();
+      const subject = encodeURIComponent(`Quick question regarding ${activeLead.company} after-hours calls`);
+      const body = encodeURIComponent(`Hey ${activeLead.owner},\n\nI was looking at ${activeLead.company} in ${activeLead.city}. For Florida ${activeLead.trade} shops running a crew of ${activeLead.employees || 3}, emergency calls that drop to voicemail after hours or while on-site typically leak around $${lossMo}/mo to competing contractors.\n\nWe deployed Ava, a 24/7 Voice AI that answers in 0.8 seconds, qualifies the caller, and texts you the job details immediately.\n\nCould I send you a 60-second interactive demo link so you can hear how she answers calls?\n\nBest,\nLuke Hamilton\nFounder, VantorX Solutions\n(561) 813-8602\nhttps://www.vantorxsolutions.com`);
+      window.location.href = `mailto:${activeLead.email}?subject=${subject}&body=${body}`;
+      showToast(`✓ Opening verified email to ${activeLead.email}`);
+    });
+  }
+
   function loadLeadIntoTeleprompter(leadId) {
     const lead = LEADS_DATA.find(l => l.id === leadId);
     if (!lead) return;
@@ -9812,6 +9866,21 @@ window.closeLeakMathModal = function() {
     updateSavingsMathUI(lead, false);
     document.getElementById('activeLeadCallBtn').href = `tel:${lead.phone.replace(/[^0-9]/g, '')}`;
     document.getElementById('activeLeadCallBtn').textContent = `📞 Call ${lead.phone}`;
+
+    // Update Email Button State with MX Shield
+    const emailBtn = document.getElementById('btnEmailLead');
+    if (emailBtn) {
+      if (lead.email) {
+        emailBtn.innerHTML = `✉️ Email ${lead.email} <span style="color:#34d399;font-size:10px" title="Active MX Mailserver: ${lead.mx_host || 'Verified'}">🛡️ MX Verified</span>`;
+        emailBtn.style.opacity = '1';
+        emailBtn.title = `Send verified email to ${lead.email} (Mail Exchange: ${lead.mx_host || 'Active'})`;
+      } else {
+        emailBtn.innerHTML = `✉️ Phone-First Lead <span style="font-size:10px;color:var(--dim)">(No Bounce)</span>`;
+        emailBtn.style.opacity = '0.65';
+        emailBtn.title = `No email verified for ${lead.company}. Rely on phone or LinkedIn to maintain 0% bounce rate.`;
+      }
+    }
+
 
     const pkgBadgeEl = document.getElementById('activeLeadPkgBadge');
     if (pkgBadgeEl) {
