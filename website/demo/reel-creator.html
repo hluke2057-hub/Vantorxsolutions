@@ -629,8 +629,9 @@
   let lastTimestamp = 0;
   let animationFrameId = null;
 
-  // Active Voice Mode: 'ai' | 'mic' | 'upload'
-  let currentVoiceMode = 'ai';
+  // Active Voice Mode: 'elevenlabs' | 'ai' | 'mic' | 'upload'
+  let currentVoiceMode = 'elevenlabs';
+
   let uploadedAudioElement = null;
   let recordedMicAudioBlob = null;
   let recordedMicAudioUrl = null;
@@ -694,6 +695,39 @@
       musicGainNode.connect(masterGain);
     }
   }
+
+  let activeMediaSource = null;
+  function bindAudioElementToMasterGraph(audioEl) {
+    if (!audioEl) return;
+    initAudioGraph();
+    try {
+      if (!audioEl._vantorxBound) {
+        const srcNode = audioCtx.createMediaElementSource(audioEl);
+        srcNode.connect(bassEQ); // Direct into +4dB Bass EQ & Dynamics Compressor!
+        audioEl._vantorxBound = true;
+      }
+
+      // Sidechain ducking for uploaded/generated human audio
+      audioEl.onplay = () => {
+        if (musicGainNode && audioCtx) {
+          musicGainNode.gain.setValueAtTime(0.035, audioCtx.currentTime);
+        }
+      };
+      audioEl.onpause = () => {
+        if (musicGainNode && audioCtx) {
+          musicGainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        }
+      };
+      audioEl.onended = () => {
+        if (musicGainNode && audioCtx) {
+          musicGainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        }
+      };
+    } catch(e) {
+      console.warn('Audio bind notice (normal on rebind):', e);
+    }
+  }
+
 
   // Sound Effects Synthesis with Web Audio
   function playSfx(type) {
@@ -1347,11 +1381,12 @@
     }
   }
 
-  // Smart Speech Narration with Neural Online Voices
+  // Smart Speech Narration & Master Human Studio Audio Sync
   let lastSpokenCueIdx = -1;
   function triggerAudioForCurrentTime() {
-    if (currentVoiceMode === 'upload' && uploadedAudioElement) {
-      if (Math.abs(uploadedAudioElement.currentTime - currentTime) > 0.4) {
+    // 1. If human studio audio is loaded (from ElevenLabs Adam, Mic, or Upload)
+    if (uploadedAudioElement) {
+      if (Math.abs(uploadedAudioElement.currentTime - currentTime) > 0.35) {
         uploadedAudioElement.currentTime = currentTime;
       }
       if (uploadedAudioElement.paused && isPlaying) {
@@ -1360,11 +1395,7 @@
       return;
     }
 
-    if (currentVoiceMode === 'mic' && recordedMicAudioUrl) {
-      // Play back recorded mic audio
-      return;
-    }
-
+    // 2. Only use Browser Speech Synthesis if user explicitly clicked 'ai' (Browser TTS)
     if (currentVoiceMode === 'ai') {
       const cueIdx = SCRIPT_CUES.findIndex(c => currentTime >= c.start && currentTime <= c.end);
       if (cueIdx !== -1 && cueIdx !== lastSpokenCueIdx) {
@@ -1375,6 +1406,7 @@
       }
     }
   }
+
 
   function speakCueNeural(text) {
     if (!('speechSynthesis' in window)) return;
@@ -1476,7 +1508,7 @@
     const voiceId = voiceSelect ? voiceSelect.value : 'pNInz6obpgDQGcFmaJgB';
     const voiceName = voiceSelect ? voiceSelect.selectedOptions[0].text.split(' ')[1] : 'Adam';
 
-    const fullScript = scriptCues.map(c => c.text).join(' ');
+    const fullScript = SCRIPT_CUES.map(c => c.text).join(' ');
 
     if (genBtn) {
       genBtn.disabled = true;
@@ -1518,6 +1550,7 @@
       const audioBlob = await resp.blob();
       const audioUrl = URL.createObjectURL(audioBlob);
       uploadedAudioElement = new Audio(audioUrl);
+      bindAudioElementToMasterGraph(uploadedAudioElement);
 
       // Trigger automatic backup download of studio audio
       const a = document.createElement('a');
@@ -1532,7 +1565,7 @@
         statusMsg.style.background = 'rgba(16, 185, 129, 0.15)';
         statusMsg.style.border = '1px solid rgba(16, 185, 129, 0.4)';
         statusMsg.style.color = '#10B981';
-        statusMsg.innerHTML = `✅ <strong>Studio Voice Generated (${voiceName})!</strong> Audio synced to 26s reel and downloaded .mp3 backup.`;
+        statusMsg.innerHTML = `✅ <strong>Studio Voice Generated (${voiceName})!</strong> Audio synced to 30s reel and downloaded .mp3 backup.`;
       }
       if (genBtn) {
         genBtn.disabled = false;
@@ -1572,8 +1605,6 @@ If you run an HVAC, plumbing, or roofing company in Florida, stop bleeding thous
     alert('✓ Copied 30-second extended story script! Open elevenlabs.io, select the Adam voice, generate the MP3, and drag it into the Upload Audio tab.');
   }
 
-
-
   // Mode 2: Live Mic Recording
   let micMediaRecorder = null;
   let micChunks = [];
@@ -1594,6 +1625,7 @@ If you run an HVAC, plumbing, or roofing company in Florida, stop bleeding thous
           recordedMicAudioBlob = new Blob(micChunks, { type: 'audio/webm' });
           recordedMicAudioUrl = URL.createObjectURL(recordedMicAudioBlob);
           uploadedAudioElement = new Audio(recordedMicAudioUrl);
+          bindAudioElementToMasterGraph(uploadedAudioElement);
           txt.textContent = '✅ Recorded! Play Reel to Hear';
           btn.style.background = '#10B981';
         };
@@ -1625,10 +1657,12 @@ If you run an HVAC, plumbing, or roofing company in Florida, stop bleeding thous
 
     const url = URL.createObjectURL(file);
     uploadedAudioElement = new Audio(url);
+    bindAudioElementToMasterGraph(uploadedAudioElement);
     document.getElementById('customAudioName').style.display = 'block';
     document.getElementById('customAudioName').textContent = `✅ Active: ${file.name}`;
     setVoiceMode('upload');
   }
+
 
   // 1-Click Video + Audio Recording & Export (MediaRecorder with Web Audio Stream)
   let videoRecorder = null;
