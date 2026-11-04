@@ -555,6 +555,107 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .rank-badge.bronze{background:rgba(217,119,6,0.2);border:1.5px solid #d97706;color:#fed7aa}
 .rank-badge.standard{background:rgba(255,255,255,0.05);border:1px solid var(--line);color:var(--dim)}
 
+/* 🏆 Triple Leaderboard Period Switcher & Period Controls */
+.leaderboard-period-controls {
+  margin-bottom: 22px;
+}
+.strip-period-btn, .period-tab-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--dim);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.strip-period-btn:hover, .period-tab-btn:hover {
+  background: rgba(245,158,11,0.12);
+  border-color: rgba(245,158,11,0.4);
+  color: #ffffff;
+}
+.strip-period-btn.active, .period-tab-btn.active {
+  background: linear-gradient(135deg, rgba(245,158,11,0.28), rgba(217,119,6,0.35));
+  border: 1.5px solid #f59e0b;
+  color: #fbbf24;
+  box-shadow: 0 0 16px rgba(245,158,11,0.35);
+}
+.period-badge-sub {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  opacity: 0.85;
+}
+
+/* 🏆 Closer Trophy Cabinet & Showcase */
+.trophy-cabinet-wrap {
+  background: linear-gradient(135deg, rgba(18,24,38,0.98), rgba(15,23,42,0.95));
+  border: 1.5px solid rgba(245,158,11,0.45);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+}
+.trophy-card {
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.trophy-card.daily {
+  border: 1px solid rgba(245,158,11,0.4);
+}
+.trophy-card.weekly {
+  border: 1px solid rgba(56,189,248,0.4);
+}
+.trophy-card.monthly {
+  border: 1px solid rgba(168,85,247,0.4);
+}
+.trophy-card-header {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.trophy-card.daily .trophy-card-header { color: #fbbf24; }
+.trophy-card.weekly .trophy-card-header { color: #38bdf8; }
+.trophy-card.monthly .trophy-card-header { color: #c084fc; }
+.trophy-medal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: #e2e8f0;
+  padding: 2px 0;
+}
+.trophy-count {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #ffffff;
+}
+.trophy-count.has-medal {
+  background: rgba(245,158,11,0.22);
+  border-color: #f59e0b;
+  color: #fbbf24;
+}
+
+
 </style>
 </head>
 <body>
@@ -597,10 +698,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">SWITCH CLOSER:</span>
         <select id="quickRepSelect" class="custom-select" style="font-size:13px;padding:6px 12px;background:var(--bg);border:1px solid rgba(245,158,11,0.3);border-radius:8px;color:#fff;font-weight:700" onchange="quickSwitchCaller(this.value)">
           <option value="luke">👑 Luke (Founder)</option>
-          <option value="buddy">🤝 Buddy (Closer)</option>
-          <option value="lucas">🎯 Lucas (Closer)</option>
           <option value="carter_mccauliss">⚔️ Carter McCauliss</option>
-          <option value="james_mccullohs">🛡️ James McCullohs</option>
+          <option value="lucas">🎯 Lucas (Closer)</option>
         </select>
       </div>
 
@@ -668,17 +767,28 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       
       <!-- 🏆 PROMINENT CHAMPIONSHIP LEADERBOARD PODIUM -->
       <div class="leaderboard-champion-card" id="leadsTabLeaderboardStrip" style="background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(11,15,22,0.98));border:1.5px solid rgba(245,158,11,0.45);border-radius:20px;padding:20px 24px;margin-bottom:20px;box-shadow:0 12px 35px rgba(0,0,0,0.6)">
-        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;border-bottom:1px solid rgba(245,158,11,0.2);padding-bottom:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px;border-bottom:1px solid rgba(245,158,11,0.2);padding-bottom:12px">
           <div style="display:flex;align-items:center;gap:12px">
             <span style="font-size:26px">🏆</span>
             <div>
-              <div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:#ffffff;letter-spacing:0.02em">CLOSER CHAMPIONSHIP LEADERBOARD PODIUM</div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-family:var(--font-head);font-size:18px;font-weight:800;color:#ffffff;letter-spacing:0.02em">CLOSER CHAMPIONSHIP PODIUM</span>
+                <span id="stripPeriodActiveBadge" style="font-size:11px;font-family:var(--font-mono);font-weight:800;background:rgba(245,158,11,0.2);border:1px solid #f59e0b;color:#fbbf24;padding:2px 8px;border-radius:999px">☀️ DAILY</span>
+              </div>
               <div style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">Scoring: 1 Call = 1 pt &middot; +10 pts Booked Demo &middot; +0.5 Callback &middot; +0 No Luck</div>
             </div>
           </div>
-          <button class="btn btn-gold btn-sm" type="button" onclick="switchTab('tabLeaderboard')" style="font-weight:800;display:inline-flex;align-items:center;gap:6px">
-            🏆 Full Standings &amp; Podium Table ➔
-          </button>
+          
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="leaderboard-strip-period-pills" style="display:inline-flex;background:rgba(0,0,0,0.5);border:1px solid rgba(245,158,11,0.4);padding:3px;border-radius:10px;gap:4px">
+              <button class="strip-period-btn active" id="stripBtnDaily" onclick="switchLeaderboardPeriod('daily')" title="View Today's Daily Leaderboard &amp; Daily Medals">☀️ Daily</button>
+              <button class="strip-period-btn" id="stripBtnWeekly" onclick="switchLeaderboardPeriod('weekly')" title="View This Week's Leaderboard &amp; Weekly Medals">📅 Weekly</button>
+              <button class="strip-period-btn" id="stripBtnMonthly" onclick="switchLeaderboardPeriod('monthly')" title="View This Month's Leaderboard &amp; Monthly Medals">🏆 Monthly</button>
+            </div>
+            <button class="btn btn-gold btn-sm" type="button" onclick="switchTab('tabLeaderboard')" style="font-weight:800;display:inline-flex;align-items:center;gap:6px">
+              🏆 Full Standings &amp; Table ➔
+            </button>
+          </div>
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px" id="leadsStripPodiumPills">
@@ -687,8 +797,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <div style="font-size:36px">🥇</div>
             <div>
               <div style="font-size:11px;font-family:var(--font-mono);color:#fbbf24;font-weight:800;text-transform:uppercase">1ST PLACE · GOLD</div>
-              <div style="font-size:17px;font-weight:800;color:#ffffff" id="stripGoldName">Buddy (12.5 pts)</div>
-              <div style="font-size:12px;color:var(--dim)" id="stripGoldStats">6 Calls · 1 Demo · 1 Callback</div>
+              <div style="font-size:17px;font-weight:800;color:#ffffff" id="stripGoldName">Carter McCauliss (15.0 pts)</div>
+              <div style="font-size:12px;color:var(--dim)" id="stripGoldStats">4 Calls · 1 Demo · 2 Callbacks</div>
             </div>
           </div>
           <!-- 🥈 Silver Card -->
@@ -757,10 +867,6 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <option value="Luke Hamilton">Luke (Founder)</option>
                 <option value="Carter McCauliss">Carter McCauliss</option>
                 <option value="Lucas">Lucas</option>
-                <option value="James McCullohs">James McCullohs</option>
-                <option value="Buddy 2 (Rep 2)">Buddy 2 (Rep 2)</option>
-                <option value="Sales Rep 3">Sales Rep 3</option>
-                <option value="Guest Caller">Guest Caller</option>
               </select>
             </div>
             <button class="btn btn-ghost btn-sm" id="btnSyncTeamCalls" title="Sync live call records with teammates" style="border:1px solid rgba(56,189,248,0.4);color:#38bdf8;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px">
@@ -794,7 +900,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div style="display:flex;align-items:center;gap:10px;overflow:hidden">
           <span style="width:9px;height:9px;border-radius:50%;background:#34d399;display:inline-block;box-shadow:0 0 8px #34d399"></span>
           <strong style="color:#38bdf8;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.05em">Live Team Feed:</strong>
-          <span id="teamLiveTickerText" style="color:#e2e8f0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">● Real-time sync active across Luke, Carter McCauliss, Lucas &amp; James McCullohs</span>
+          <span id="teamLiveTickerText" style="color:#e2e8f0;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">● Real-time sync active across Luke Hamilton, Carter McCauliss, and Lucas</span>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <button class="btn btn-ghost btn-xs" type="button" onclick="uploadAllCallsToCloud()" style="font-size:11.5px;color:#f59e0b;border:1px solid rgba(245,158,11,0.4);padding:3px 10px">☁️ Push Calls to Cloud</button>
@@ -869,8 +975,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <button class="lead-pill-btn" data-caller-filter="carter">⚔️ Carter (<span id="countCalledCarter">0</span>)</button>
           <button class="lead-pill-btn" data-caller-filter="lucas">🎯 Lucas (<span id="countCalledLucas">0</span>)</button>
           <button class="lead-pill-btn" data-caller-filter="luke">👑 Luke (<span id="countCalledLuke">0</span>)</button>
-          <button class="lead-pill-btn" data-caller-filter="james">🛡️ James (<span id="countCalledJames">0</span>)</button>
-          <button class="lead-pill-btn" data-caller-filter="buddy">🤝 Buddy (<span id="countCalledBuddy">0</span>)</button>
+          
         </div>
 
         <!-- Offer Strategy Pills (Packages first, then Individual Fallbacks) -->
@@ -960,7 +1065,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div>
           <div style="font-size:12px;font-family:var(--font-mono);color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em">Live Multi-Rep Telemetry &amp; Cloud Call Sync</div>
           <h2 style="font-size:24px;margin-top:2px;font-family:var(--font-head);color:#ffffff">📞 Live Team Call Logs &amp; Audit Trail</h2>
-          <p style="color:var(--dim);font-size:13.5px;max-width:800px">Real-time bi-directional activity feed across <strong>Luke Hamilton, Carter McCauliss, Lucas &amp; James McCullohs</strong>. Every dial, booked demo, callback, and contractor objection note logged anywhere syncs here immediately.</p>
+          <p style="color:var(--dim);font-size:13.5px;max-width:800px">Real-time bi-directional activity feed across <strong>Luke Hamilton, Carter McCauliss, and Lucas</strong>. Every dial, booked demo, callback, and contractor objection note logged anywhere syncs here immediately.</p>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <button class="btn btn-ghost btn-sm" type="button" onclick="fetchTeamCallsFromCloud(false)" style="border:1px solid rgba(56,189,248,0.4);color:#38bdf8;font-weight:700">🔄 Force Refresh Cloud</button>
@@ -1003,8 +1108,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <button class="lead-pill-btn" data-team-rep="carter" onclick="filterTeamCallLogs('carter')">⚔️ Carter (<span id="teamLogBadgeCarter">0</span>)</button>
             <button class="lead-pill-btn" data-team-rep="lucas" onclick="filterTeamCallLogs('lucas')">🎯 Lucas (<span id="teamLogBadgeLucas">0</span>)</button>
             <button class="lead-pill-btn" data-team-rep="luke" onclick="filterTeamCallLogs('luke')">👑 Luke (<span id="teamLogBadgeLuke">0</span>)</button>
-            <button class="lead-pill-btn" data-team-rep="james" onclick="filterTeamCallLogs('james')">🛡️ James (<span id="teamLogBadgeJames">0</span>)</button>
-            <button class="lead-pill-btn" data-team-rep="buddy" onclick="filterTeamCallLogs('buddy')">🤝 Buddy (<span id="teamLogBadgeBuddy">0</span>)</button>
+            
           </div>
 
           <!-- Outcome Filter Pills -->
@@ -1064,7 +1168,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div style="font-size:18px;font-weight:700;color:var(--accent2)"><span id="academyDaysCount">0</span> / 3 Days Passed</div>
           <div style="font-size:11.5px;color:#6ee7b7;margin-top:2px" id="academyStatusText">🔒 Leads Locked (Reach Level 5)</div>
           <div style="margin-top:8px;display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap">
-            <button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:3px 8px;color:var(--dim)" type="button" onclick="resetBuddyProgress()" title="Reset back to Day 1, Lesson 1.1">🔄 Reset Progress</button>
+            <button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:3px 8px;color:var(--dim)" type="button" onclick="resetCloserProgress()" title="Reset back to Day 1, Lesson 1.1">🔄 Reset Progress</button>
           </div>
         </div>
       </div>
@@ -4910,6 +5014,40 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       </div>
 
       <!-- 3D Podium Display (Silver #2, Gold #1, Bronze #3) -->
+      <!-- 🏆 TRIPLE LEADERBOARD PERIOD SWITCHER (DAILY · WEEKLY · MONTHLY) -->
+      <div class="leaderboard-period-controls" style="background:var(--bg3);border:1.5px solid rgba(245,158,11,0.4);border-radius:14px;padding:16px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;box-shadow:0 6px 24px rgba(0,0,0,0.4)">
+        <div>
+          <div style="font-size:11px;font-family:var(--font-mono);font-weight:800;color:var(--accent2);text-transform:uppercase;letter-spacing:0.06em">🏆 SELECT ACTIVE CHAMPIONSHIP LEADERBOARD</div>
+          <div style="font-size:17px;font-weight:800;color:#ffffff;display:flex;align-items:center;gap:8px;margin-top:2px" id="tabPeriodTitleText">
+            <span>☀️</span> Daily Closer Leaderboard <span style="font-size:12px;color:var(--dim);font-weight:400">(Today's Standings · Daily Medals: 🥇 🥈 🥉)</span>
+          </div>
+        </div>
+
+        <div style="display:inline-flex;background:rgba(0,0,0,0.6);border:1.5px solid rgba(245,158,11,0.45);border-radius:12px;padding:4px;gap:6px;flex-wrap:wrap">
+          <button class="period-tab-btn active" id="btnTabPeriodDaily" onclick="switchLeaderboardPeriod('daily')">
+            <span style="font-size:18px">☀️</span>
+            <div style="text-align:left">
+              <div style="font-weight:800;font-size:12.5px;color:#ffffff">DAILY LEADERBOARD</div>
+              <div style="font-size:10px;color:#fbbf24">1st: 🥇 Gold · 2nd: 🥈 Silver · 3rd: 🥉 Bronze</div>
+            </div>
+          </button>
+          <button class="period-tab-btn" id="btnTabPeriodWeekly" onclick="switchLeaderboardPeriod('weekly')">
+            <span style="font-size:18px">📅</span>
+            <div style="text-align:left">
+              <div style="font-weight:800;font-size:12.5px;color:#ffffff">WEEKLY LEADERBOARD</div>
+              <div style="font-size:10px;color:#38bdf8">1st: 👑 Champion · 2nd: ⚔️ Silver · 3rd: 🛡️ Bronze</div>
+            </div>
+          </button>
+          <button class="period-tab-btn" id="btnTabPeriodMonthly" onclick="switchLeaderboardPeriod('monthly')">
+            <span style="font-size:18px">🏆</span>
+            <div style="text-align:left">
+              <div style="font-weight:800;font-size:12.5px;color:#ffffff">MONTHLY LEADERBOARD</div>
+              <div style="font-size:10px;color:#c084fc">1st: 🏆 Grandmaster · 2nd: ⭐ Silver · 3rd: 🎖️ Bronze</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
       <div class="podium-container" id="leaderboardPodiumContainer">
         <!-- Rendered dynamically -->
       </div>
@@ -4981,15 +5119,11 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <button type="button" class="btn btn-gold btn-sm" id="btnGateLoginCarter" onclick="loginAsRep('carter_mccauliss')" style="width:100%;font-weight:700;padding:10px;display:flex;align-items:center;justify-content:center;gap:6px">
           ⚔️ Log In as Carter McCauliss (Auto-Pass 🏆)
         </button>
-        <button type="button" class="btn btn-gold btn-sm" id="btnGateLoginJames" onclick="loginAsRep('james_mccullohs')" style="width:100%;font-weight:700;padding:10px;display:flex;align-items:center;justify-content:center;gap:6px;border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.15);color:#7dd3fc">
-          ⚔️ Log In as James McCullohs (Auto-Pass 🏆)
-        </button>
+        
         <button type="button" class="btn btn-ghost btn-sm" id="btnGateLoginLucas" onclick="loginAsRep('lucas')" style="width:100%;font-weight:600;padding:8px;border-color:rgba(52,211,153,0.4);color:#6ee7b7;display:flex;align-items:center;justify-content:center;gap:6px">
           🎯 Log In as Lucas (Auto-Pass 🏆)
         </button>
-        <button type="button" class="btn btn-gold btn-sm" id="btnGateLoginBuddy" onclick="loginAsRep('buddy')" style="width:100%;font-weight:700;padding:10px;display:flex;align-items:center;justify-content:center;gap:6px;border-color:rgba(245,158,11,0.5);background:rgba(245,158,11,0.18);color:#fbbf24">
-          🤝 Log In as Buddy (Auto-Pass 🏆)
-        </button>
+        
       </div>
     </div>
 
@@ -5092,6 +5226,104 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         </div>
       </div>
       
+      <!-- 🏆 CLOSER TROPHY CABINET & LIFETIME MEDAL RECORD -->
+    <div class="trophy-cabinet-wrap" id="closerTrophyCabinet">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:24px">🏆</span>
+          <div>
+            <div style="font-size:15px;font-weight:800;color:#ffffff">OFFICIAL TROPHY CABINET &amp; MEDAL RECORD</div>
+            <div style="font-size:11.5px;color:var(--dim)">Honors awarded across Daily, Weekly, and Monthly championships</div>
+          </div>
+        </div>
+        <div id="modalTotalMedalsBadge" style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,0.22);border:1.5px solid #f59e0b;padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:800;color:#fbbf24">
+          🏅 <span id="modalTotalMedalsCount">0</span> Medals Won
+        </div>
+      </div>
+
+      <!-- 3 Period Showcases Grid -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:14px">
+        <!-- ☀️ DAILY MEDALS CARD -->
+        <div class="trophy-card daily">
+          <div class="trophy-card-header">
+            <span>☀️ DAILY MEDALS</span>
+            <span style="font-size:10px;color:var(--dim)">Awarded 11:59 PM</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>🥇 Daily Gold</span>
+            <span class="trophy-count" id="trophyDailyGold">x0</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>🥈 Daily Silver</span>
+            <span class="trophy-count" id="trophyDailySilver">x0</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>🥉 Daily Bronze</span>
+            <span class="trophy-count" id="trophyDailyBronze">x0</span>
+          </div>
+        </div>
+
+        <!-- 📅 WEEKLY MEDALS CARD -->
+        <div class="trophy-card weekly">
+          <div class="trophy-card-header">
+            <span>📅 WEEKLY MEDALS</span>
+            <span style="font-size:10px;color:var(--dim)">Awarded Sunday</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>👑 Weekly Champion</span>
+            <span class="trophy-count" id="trophyWeeklyGold">x0</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>⚔️ Weekly Silver</span>
+            <span class="trophy-count" id="trophyWeeklySilver">x0</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>🛡️ Weekly Bronze</span>
+            <span class="trophy-count" id="trophyWeeklyBronze">x0</span>
+          </div>
+        </div>
+
+        <!-- 🏆 MONTHLY MEDALS CARD -->
+        <div class="trophy-card monthly">
+          <div class="trophy-card-header">
+            <span>🏆 MONTHLY MEDALS</span>
+            <span style="font-size:10px;color:var(--dim)">Awarded Month-End</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>🏆 Monthly Grandmaster</span>
+            <span class="trophy-count" id="trophyMonthlyGold">x0</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>⭐ Monthly Silver</span>
+            <span class="trophy-count" id="trophyMonthlySilver">x0</span>
+          </div>
+          <div class="trophy-medal-row">
+            <span>🎖️ Monthly Bronze</span>
+            <span class="trophy-count" id="trophyMonthlyBronze">x0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 📜 MEDAL AWARD HISTORY LOG -->
+      <div style="background:rgba(0,0,0,0.5);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:12px;margin-bottom:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;font-weight:700;color:#ffffff;letter-spacing:0.04em">📜 OFFICIAL MEDAL AWARD HISTORY</span>
+          <span style="font-size:10.5px;font-family:var(--font-mono);color:var(--dim)">Permanent Closer Ledger</span>
+        </div>
+        <div id="modalMedalHistoryList" style="max-height:140px;overflow-y:auto;display:flex;flex-direction:column;gap:6px">
+          <!-- Populated dynamically via renderTrophyCabinet -->
+        </div>
+      </div>
+
+      <!-- Action: Finalize / Award Today's Medals -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <button class="btn btn-gold btn-xs" type="button" onclick="recordCurrentPeriodMedals()" style="font-weight:700;padding:6px 14px;display:inline-flex;align-items:center;gap:6px">
+          🏅 Award &amp; Record Today's Standings Medals
+        </button>
+        <span style="font-size:11px;color:var(--dim)">Auto-awards daily at 11:59 PM, weekly on Sunday &amp; monthly at month-end</span>
+      </div>
+    </div>
+
       <!-- 📋 YOUR PREVIOUSLY CALLED LEADS LIST -->
       <div style="background:rgba(0,0,0,0.5);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:14px;margin-bottom:14px">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
@@ -5374,6 +5606,7 @@ window.copyDemoNumber = function() {
 window.openAccountModal = function() {
   setTimeout(() => {
     if (typeof window.populateModalCallHistory === 'function') window.populateModalCallHistory();
+    if (typeof window.renderTrophyCabinet === 'function') window.renderTrophyCabinet(typeof getActiveUser === 'function' ? getActiveUser() : null);
   }, 30);
   try {
     const modal = document.getElementById('accountModal');
@@ -5391,6 +5624,9 @@ window.openAccountModal = function() {
     }
     if (typeof window.renderLeaderboardUI === 'function') {
       window.renderLeaderboardUI();
+    }
+    if (typeof window.renderTrophyCabinet === 'function') {
+      window.renderTrophyCabinet(typeof getActiveUser === 'function' ? getActiveUser() : null);
     }
   } catch(e) {
     console.error('Error opening account modal:', e);
@@ -12342,7 +12578,18 @@ window.closeLeakMathModal = function() {
       modulesPassed: [1, 2, 3, 4, 5],
       bossesDefeated: 8,
       dailyDials: 0,
-      dailySims: 0
+      dailySims: 0,
+      medals: {
+        daily: { gold: 2, silver: 1, bronze: 0 },
+        weekly: { gold: 1, silver: 1, bronze: 0 },
+        monthly: { gold: 1, silver: 0, bronze: 0 },
+        history: [
+          { id: 'med_m_2026_10', period: 'monthly', periodKey: '2026-10', periodLabel: 'October 2026 Championship', rank: 1, medal: '🏆', medalName: 'Monthly Grandmaster', title: 'Obsidian Apex Trophy', points: 184.5, calls: 112, demos: 12, awardedAt: '2026-10-31T23:59:59.000Z' },
+          { id: 'med_w_2026_44', period: 'weekly', periodKey: '2026-W44', periodLabel: 'Week 44 (Oct 26 - Nov 1, 2026)', rank: 1, medal: '👑', medalName: 'Weekly Champion', title: 'Diamond Cup Master', points: 58.0, calls: 38, demos: 4, awardedAt: '2026-11-01T23:59:59.000Z' },
+          { id: 'med_d_2026_11_02', period: 'daily', periodKey: '2026-11-02', periodLabel: 'Monday, Nov 2, 2026', rank: 1, medal: '🥇', medalName: 'Daily Gold', title: 'Solar Crown Champion', points: 24.5, calls: 14, demos: 2, awardedAt: '2026-11-02T23:59:59.000Z' },
+          { id: 'med_d_2026_11_03', period: 'daily', periodKey: '2026-11-03', periodLabel: 'Tuesday, Nov 3, 2026', rank: 2, medal: '🥈', medalName: 'Daily Silver', title: 'Daily Vanguard', points: 18.0, calls: 13, demos: 1, awardedAt: '2026-11-03T23:59:59.000Z' }
+        ]
+      }
     },
     carter_mccauliss: {
       id: 'carter_mccauliss',
@@ -12365,7 +12612,17 @@ window.closeLeakMathModal = function() {
       dailySims: 0,
       createdAt: '2026-10-21T14:00:00.000Z',
       lastActive: new Date().toISOString(),
-      lastAction: '🏆 Level 5 Certified Closer · Carter McCauliss Auto-Pass Active'
+      lastAction: '🏆 Level 5 Certified Closer · Carter McCauliss Auto-Pass Active',
+      medals: {
+        daily: { gold: 1, silver: 1, bronze: 1 },
+        weekly: { gold: 0, silver: 2, bronze: 0 },
+        monthly: { gold: 0, silver: 1, bronze: 0 },
+        history: [
+          { id: 'med_d_2026_11_03_c', period: 'daily', periodKey: '2026-11-03', periodLabel: 'Tuesday, Nov 3, 2026', rank: 1, medal: '🥇', medalName: 'Daily Gold', title: 'Solar Crown Champion', points: 23.5, calls: 13, demos: 2, awardedAt: '2026-11-03T23:59:59.000Z' },
+          { id: 'med_w_2026_44_c', period: 'weekly', periodKey: '2026-W44', periodLabel: 'Week 44 (Oct 26 - Nov 1, 2026)', rank: 2, medal: '⚔️', medalName: 'Weekly Silver', title: 'Platinum Blades', points: 49.5, calls: 32, demos: 3, awardedAt: '2026-11-01T23:59:59.000Z' },
+          { id: 'med_m_2026_10_c', period: 'monthly', periodKey: '2026-10', periodLabel: 'October 2026 Championship', rank: 2, medal: '⭐', medalName: 'Monthly Silver', title: 'Apex Star', points: 162.0, calls: 98, demos: 10, awardedAt: '2026-10-31T23:59:59.000Z' }
+        ]
+      }
     },
     lucas: {
       id: 'lucas',
@@ -12389,53 +12646,17 @@ window.closeLeakMathModal = function() {
       dailySims: 0,
       createdAt: '2026-10-21T14:00:00.000Z',
       lastActive: new Date().toISOString(),
-      lastAction: '🏆 Level 5 Certified Closer · Lucas Auto-Pass Active'
-    },
-        buddy: {
-      id: 'buddy',
-      name: 'Buddy (Closer)',
-      email: 'buddy@vantorxsolutions.com',
-      role: 'Certified Closer & Phone Warrior',
-      avatar: '🤝',
-      level: 5,
-      xp: 1850,
-      isFounder: false,
-      founderBypass: true,
-      autoPassed: true,
-      completedUnits: ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'],
-      unitActivitiesDone: ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'],
-      flashcardsRevealed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      daysPassed: [1, 2, 3],
-      modulesPassed: [1, 2, 3, 4, 5],
-      bossesDefeated: 8,
-      dailyDials: 0,
-      dailySims: 0,
-      createdAt: '2026-10-21T14:00:00.000Z',
-      lastActive: new Date().toISOString(),
-      lastAction: '🏆 Level 5 Certified Closer · Buddy Auto-Pass Active'
-    },
-    james_mccullohs: {
-      id: 'james_mccullohs',
-      name: 'James McCullohs',
-      email: 'jcmccullohs@gmail.com',
-      role: 'Certified Closer & Phone Warrior',
-      avatar: '⚔️',
-      level: 5,
-      xp: 1850,
-      isFounder: false,
-      founderBypass: true,
-      autoPassed: true,
-      completedUnits: ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'],
-      unitActivitiesDone: ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'],
-      flashcardsRevealed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      daysPassed: [1, 2, 3],
-      modulesPassed: [1, 2, 3, 4, 5],
-      bossesDefeated: 8,
-      dailyDials: 0,
-      dailySims: 0,
-      createdAt: '2026-11-02T12:00:00.000Z',
-      lastActive: new Date().toISOString(),
-      lastAction: '🏆 Level 5 Certified Closer · James McCullohs Auto-Pass Active'
+      lastAction: '🏆 Level 5 Certified Closer · Lucas Auto-Pass Active',
+      medals: {
+        daily: { gold: 0, silver: 1, bronze: 2 },
+        weekly: { gold: 0, silver: 0, bronze: 1 },
+        monthly: { gold: 0, silver: 0, bronze: 1 },
+        history: [
+          { id: 'med_d_2026_11_03_l', period: 'daily', periodKey: '2026-11-03', periodLabel: 'Tuesday, Nov 3, 2026', rank: 3, medal: '🥉', medalName: 'Daily Bronze', title: 'Daily Warrior', points: 12.0, calls: 10, demos: 1, awardedAt: '2026-11-03T23:59:59.000Z' },
+          { id: 'med_w_2026_44_l', period: 'weekly', periodKey: '2026-W44', periodLabel: 'Week 44 (Oct 26 - Nov 1, 2026)', rank: 3, medal: '🛡️', medalName: 'Weekly Bronze', title: 'Titanium Aegis', points: 38.5, calls: 26, demos: 2, awardedAt: '2026-11-01T23:59:59.000Z' },
+          { id: 'med_m_2026_10_l', period: 'monthly', periodKey: '2026-10', periodLabel: 'October 2026 Championship', rank: 3, medal: '🎖️', medalName: 'Monthly Bronze', title: 'Legion Honor Cross', points: 125.0, calls: 80, demos: 7, awardedAt: '2026-10-31T23:59:59.000Z' }
+        ]
+      }
     }
   };
 
@@ -12464,8 +12685,10 @@ window.closeLeakMathModal = function() {
   if (!USER_PROFILES.luke) USER_PROFILES.luke = DEFAULT_PROFILES.luke;
   if (!USER_PROFILES.carter_mccauliss) USER_PROFILES.carter_mccauliss = DEFAULT_PROFILES.carter_mccauliss;
   if (!USER_PROFILES.lucas) USER_PROFILES.lucas = DEFAULT_PROFILES.lucas;
-  if (!USER_PROFILES.james_mccullohs) USER_PROFILES.james_mccullohs = DEFAULT_PROFILES.james_mccullohs;
-  if (!USER_PROFILES.buddy) USER_PROFILES.buddy = DEFAULT_PROFILES.buddy;
+  // Purge buddy & james
+  delete USER_PROFILES.buddy;
+  delete USER_PROFILES.james_mccullohs;
+  delete USER_PROFILES.james;
 
   // Migration for all profiles: purge any legacy mock personas, ensure valid real reps only
   const mockKeys = ['rep_marcus', 'rep_jake', 'rep_tyler', 'rep_mvpib4wi'];
@@ -12499,6 +12722,18 @@ window.closeLeakMathModal = function() {
         u.completedUnits = [];
       }
     }
+    if (!u.medals || !u.medals.daily || !u.medals.history || u.medals.history.length === 0) {
+      if (DEFAULT_PROFILES[k] && DEFAULT_PROFILES[k].medals) {
+        u.medals = JSON.parse(JSON.stringify(DEFAULT_PROFILES[k].medals));
+      } else {
+        u.medals = {
+          daily: { gold: 0, silver: 0, bronze: 0 },
+          weekly: { gold: 0, silver: 0, bronze: 0 },
+          monthly: { gold: 0, silver: 0, bronze: 0 },
+          history: []
+        };
+      }
+    }
     if (!u.flashcardsRevealed) {
       u.flashcardsRevealed = (u.isFounder || u.autoPassed || (u.daysPassed && u.daysPassed.includes(1))) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [];
     }
@@ -12511,7 +12746,7 @@ window.closeLeakMathModal = function() {
     localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(USER_PROFILES));
   } catch(e) {}
 
-  let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || null;
+  let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
   try {
     const urlUserParam = new URLSearchParams(window.location.search).get('user') || new URLSearchParams(window.location.search).get('login');
     if (urlUserParam) {
@@ -12611,38 +12846,8 @@ window.closeLeakMathModal = function() {
       syncRepToCloud(USER_PROFILES.lucas, 'certified', 'Direct login as Lucas (Auto-Pass verified)');
       return;
     }
-    if (uid === 'buddy') {
-      if (!USER_PROFILES.buddy) {
-        USER_PROFILES.buddy = JSON.parse(JSON.stringify(DEFAULT_PROFILES.buddy));
-      }
-      grantCoursePass(USER_PROFILES.buddy);
-      activeUserId = 'buddy';
-      localStorage.setItem('vantorx_active_user_id_v2', 'buddy');
-      saveUserProfiles();
-      window.closeSignInGate();
-      updateUserUI();
-      if (window.selectLmsUnit) window.selectLmsUnit('1-1');
-      playSound('levelup');
-      showToast('🏆 Welcome back, Buddy! Your Level 5 Certification & Lead Queue Auto-Pass is active!');
-      syncRepToCloud(USER_PROFILES.buddy, 'certified', 'Direct login as Buddy (Auto-Pass verified)');
-      return;
-    }
-    if (uid === 'james_mccullohs' || uid === 'james') {
-      if (!USER_PROFILES.james_mccullohs) {
-        USER_PROFILES.james_mccullohs = JSON.parse(JSON.stringify(DEFAULT_PROFILES.james_mccullohs));
-      }
-      grantCoursePass(USER_PROFILES.james_mccullohs);
-      activeUserId = 'james_mccullohs';
-      localStorage.setItem('vantorx_active_user_id_v2', 'james_mccullohs');
-      saveUserProfiles();
-      window.closeSignInGate();
-      updateUserUI();
-      if (window.selectLmsUnit) window.selectLmsUnit('1-1');
-      playSound('levelup');
-      showToast('🏆 Welcome back, James! Your Level 5 Certification & Lead Queue Auto-Pass is active!');
-      syncRepToCloud(USER_PROFILES.james_mccullohs, 'certified', 'Direct login as James McCullohs (Auto-Pass verified)');
-      return;
-    }
+    
+    
     if (USER_PROFILES[uid]) {
       activeUserId = uid;
       localStorage.setItem('vantorx_active_user_id_v2', uid);
@@ -12988,7 +13193,7 @@ window.closeLeakMathModal = function() {
     showToast(`🏆 Course Auto-Passed for ${user.name}! Level 5 Certified & Leads Unlocked!`);
   };
 
-  window.resetBuddyProgress = function() {
+  window.resetCloserProgress = function() {
     const u = getActiveUser();
     u.level = 1;
     u.xp = 0;
@@ -13035,7 +13240,8 @@ window.closeLeakMathModal = function() {
       if (storedId && USER_PROFILES[storedId]) {
         activeUserId = storedId;
       } else if (!storedId) {
-        activeUserId = null;
+        activeUserId = 'luke';
+        localStorage.setItem('vantorx_active_user_id_v2', 'luke');
       }
       const user = getActiveUser();
       const isLoggedOut = !activeUserId || activeUserId === 'guest' || !USER_PROFILES[activeUserId];
@@ -13069,8 +13275,8 @@ window.closeLeakMathModal = function() {
       const pillLuke = document.getElementById('quickPillLuke');
       const pillCarter = document.getElementById('quickPillCarter');
       const pillLucas = document.getElementById('quickPillLucas');
-      const pillJames = document.getElementById('quickPillJames');
-      const pillBuddy = document.getElementById('quickPillBuddy');
+      const pillJames = null;
+      const pillBuddy = null;
       const pillSelf = document.getElementById('quickPillSelf');
       const btnAccountAction = document.getElementById('btnCallerAccountAction');
       const btnEmailDigest = document.getElementById('btnCallerEmailDigest');
@@ -13090,14 +13296,8 @@ window.closeLeakMathModal = function() {
           pillLucas.style.display = 'inline-block';
           pillLucas.classList.toggle('active', activeUserId === 'lucas');
         }
-        if (pillJames) {
-          pillJames.style.display = 'inline-block';
-          pillJames.classList.toggle('active', activeUserId === 'james_mccullohs');
-        }
-        if (pillBuddy) {
-          pillBuddy.style.display = 'inline-block';
-          pillBuddy.classList.toggle('active', activeUserId === 'buddy');
-        }
+        
+        
         if (pillSelf) pillSelf.style.display = 'none';
         if (btnAccountAction) {
           btnAccountAction.style.display = 'inline-block';
@@ -13220,6 +13420,7 @@ window.closeLeakMathModal = function() {
       console.warn('updateUserUI error:', err);
     }
   }
+  if (typeof window.renderTrophyCabinet === 'function') window.renderTrophyCabinet(user);
   window.updateUserUI = updateUserUI;
 
   function updateLeadGateVisibility() {
@@ -14083,18 +14284,14 @@ window.closeLeakMathModal = function() {
 
   window.renderAccountProfileList = renderAccountProfileList;
   window.quickSwitchCaller = function(uid) {
-    if (uid === 'buddy') {
-      return window.loginAsRep('buddy');
-    }
+    
     if (uid === 'carter_mccauliss' || uid === 'carter') {
       return window.loginAsRep('carter_mccauliss');
     }
     if (uid === 'lucas') {
       return window.loginAsRep('lucas');
     }
-    if (uid === 'james_mccullohs' || uid === 'james') {
-      return window.loginAsRep('james_mccullohs');
-    }
+    
     if (uid === 'luke') {
       if (!USER_PROFILES.luke) {
         USER_PROFILES.luke = JSON.parse(JSON.stringify(DEFAULT_PROFILES.luke));
@@ -14167,7 +14364,7 @@ window.closeLeakMathModal = function() {
     const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
     const isLucas = (name + ' ' + email).toLowerCase().includes('lucas');
     const isJames = (name + ' ' + email).toLowerCase().includes('james') || (name + ' ' + email).toLowerCase().includes('jcmccullohs') || (name + ' ' + email).toLowerCase().includes('mccullohs');
-    const uid = isCarter ? 'carter_mccauliss' : (isLucas ? 'lucas' : (isJames ? 'james_mccullohs' : ('rep_' + Date.now().toString(36))));
+    const uid = isCarter ? 'carter_mccauliss' : (isLucas ? 'lucas' : ('rep_' + Date.now().toString(36)));
     const avatars = ['⚡', '⚔️', '🎯', '🔥', '🛡️', '🚀'];
     const chosenAvatar = isCarter ? '⚔️' : (isLucas ? '🎯' : (isJames ? '⚔️' : avatars[Math.floor(Math.random() * avatars.length)]));
 
@@ -14195,7 +14392,7 @@ window.closeLeakMathModal = function() {
       lastActive: new Date().toISOString(),
       lastAction: 'Account Created · Starting Day 1 of Closer Academy'
     };
-    USER_PROFILES[uid].name = isCarter ? 'Carter McCauliss' : (isLucas ? 'Lucas' : (isJames ? 'James McCullohs' : name));
+    USER_PROFILES[uid].name = isCarter ? 'Carter McCauliss' : (isLucas ? 'Lucas' : name);
     USER_PROFILES[uid].email = isJames ? 'jcmccullohs@gmail.com' : email;
 
     if (isCarter) {
@@ -14324,46 +14521,11 @@ window.closeLeakMathModal = function() {
       "timestamp": "04:15 PM",
       "notes": "Spoke with front desk, owner in field, callback scheduled for 4pm"
     },
-    "pb_002": {
-      "called": true,
-      "caller": "Buddy (Closer)",
-      "outcome": "Success",
-      "updatedAt": "2026-11-04T18:45:00.000Z",
-      "timestamp": "02:45 PM",
-      "notes": "Booked 15-min live demo with owner Dave for Thursday 2pm!"
-    },
-    "pb_003": {
-      "called": true,
-      "caller": "Carter McCauliss",
-      "outcome": "Call Back",
-      "updatedAt": "2026-11-04T19:10:00.000Z",
-      "timestamp": "03:10 PM",
-      "notes": "Spoke to office manager Brenda, owner on jobsite, callback at 3:30pm"
-    },
-    "pb_004": {
-      "called": true,
-      "caller": "Lucas",
-      "outcome": "Success",
-      "updatedAt": "2026-11-04T17:20:00.000Z",
-      "timestamp": "01:20 PM",
-      "notes": "Pitched Scale tier, owner requested Zoom demo Friday 11am"
-    },
-    "pb_005": {
-      "called": true,
-      "caller": "Buddy (Closer)",
-      "outcome": "Call Back",
-      "updatedAt": "2026-11-04T15:35:00.000Z",
-      "timestamp": "11:35 AM",
-      "notes": "Left direct callback message with lead tech Mike"
-    },
-    "pb_006": {
-      "called": true,
-      "caller": "James McCullohs",
-      "outcome": "No Luck",
-      "updatedAt": "2026-11-04T14:15:00.000Z",
-      "timestamp": "10:15 AM",
-      "notes": "Gatekeeper stated owner is out of town until Monday"
-    }
+    "pb_002": { "called": true, "caller": "Carter McCauliss", "outcome": "Success", "updatedAt": "2026-11-04T18:45:00.000Z", "timestamp": "02:45 PM", "notes": "Booked 15-min live demo with owner Dave for Thursday 2pm!" },
+    "pb_003": { "called": true, "caller": "Carter McCauliss", "outcome": "Call Back", "updatedAt": "2026-11-04T19:10:00.000Z", "timestamp": "03:10 PM", "notes": "Spoke to office manager Brenda, owner on jobsite, callback at 3:30pm" },
+    "pb_004": { "called": true, "caller": "Lucas", "outcome": "Call Back", "updatedAt": "2026-11-04T17:20:00.000Z", "timestamp": "01:20 PM", "notes": "Pitched Scale tier, owner requested callback Friday 11am" },
+    "pb_005": { "called": true, "caller": "Luke (Founder)", "outcome": "Success", "updatedAt": "2026-11-04T16:30:00.000Z", "timestamp": "12:30 PM", "notes": "Booked live Ava demo with owner Mike for tomorrow 10am!" },
+    "pb_006": { "called": true, "caller": "Carter McCauliss", "outcome": "Call Back", "updatedAt": "2026-11-04T14:15:00.000Z", "timestamp": "10:15 AM", "notes": "Gatekeeper scheduled callback for owner Steve at 4:30pm" }
   };
   let CALL_RECORDS = {};
   try {
@@ -14727,14 +14889,74 @@ window.closeLeakMathModal = function() {
   // Call Back: +0.5 point bonus (1.5 pts total)
   // No Luck: +0 bonus (1.0 pt total)
 
-  window.calculateLeaderboard = function() {
+  // ============================================================
+  // 🏆 TRIPLE LEADERBOARD & 9 UNIQUE MEDALS ENGINE
+  // ============================================================
+  // Daily Medals:   1st 🥇 Daily Gold,       2nd 🥈 Daily Silver,   3rd 🥉 Daily Bronze
+  // Weekly Medals:  1st 👑 Weekly Champion,  2nd ⚔️ Weekly Silver,  3rd 🛡️ Weekly Bronze
+  // Monthly Medals: 1st 🏆 Monthly Grandmaster, 2nd ⭐ Monthly Silver, 3rd 🎖️ Monthly Bronze
+
+  window.CURRENT_LEADERBOARD_PERIOD = window.CURRENT_LEADERBOARD_PERIOD || 'daily';
+
+  const MEDAL_DEFINITIONS = {
+    daily: {
+      periodLabel: 'Daily Closer Championship',
+      periodSub: 'Scored today · Medals awarded daily at 11:59 PM',
+      1: { medal: '🥇', name: 'Daily Gold', title: 'Solar Crown Champion', badgeClass: 'gold', roleSuffix: '☀️ DAILY GOLD CHAMPION' },
+      2: { medal: '🥈', name: 'Daily Silver', title: 'Daily Vanguard', badgeClass: 'silver', roleSuffix: '🥈 DAILY VANGUARD' },
+      3: { medal: '🥉', name: 'Daily Bronze', title: 'Daily Warrior', badgeClass: 'bronze', roleSuffix: '🥉 DAILY WARRIOR' }
+    },
+    weekly: {
+      periodLabel: 'Weekly Master Closer Championship',
+      periodSub: 'Scored Monday through Sunday · Medals awarded weekly on Sunday midnight',
+      1: { medal: '👑', name: 'Weekly Champion', title: 'Diamond Cup Master', badgeClass: 'gold', roleSuffix: '👑 WEEKLY MASTER' },
+      2: { medal: '⚔️', name: 'Weekly Silver', title: 'Platinum Blades', badgeClass: 'silver', roleSuffix: '⚔️ WEEKLY SILVER' },
+      3: { medal: '🛡️', name: 'Weekly Bronze', title: 'Titanium Aegis', badgeClass: 'bronze', roleSuffix: '🛡️ WEEKLY BRONZE' }
+    },
+    monthly: {
+      periodLabel: 'Monthly Apex Grandmaster Championship',
+      periodSub: 'Scored calendar month-to-date · Medals awarded on month-end closing bell',
+      1: { medal: '🏆', name: 'Monthly Grandmaster', title: 'Obsidian Apex Trophy', badgeClass: 'gold', roleSuffix: '🏆 APEX GRANDMASTER' },
+      2: { medal: '⭐', name: 'Monthly Silver', title: 'Apex Star', badgeClass: 'silver', roleSuffix: '⭐ APEX STAR' },
+      3: { medal: '🎖️', name: 'Monthly Bronze', title: 'Legion Honor Cross', badgeClass: 'bronze', roleSuffix: '🎖️ HONOR CROSS' }
+    }
+  };
+
+  function isDateInPeriod(dateStr, period) {
+    if (!dateStr) return true;
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return true;
+    const now = new Date();
+
+    if (period === 'daily') {
+      return d.toDateString() === now.toDateString();
+    }
+    if (period === 'weekly') {
+      const day = now.getDay();
+      const diffToMon = day === 0 ? -6 : 1 - day;
+      const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diffToMon, 0, 0, 0, 0);
+      const sunday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + 6, 23, 59, 59, 999);
+      return d >= monday && d <= sunday;
+    }
+    if (period === 'monthly') {
+      return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+    }
+    return true;
+  }
+
+  window.isDateInPeriod = isDateInPeriod;
+  window.MEDAL_DEFINITIONS = MEDAL_DEFINITIONS;
+
+  window.calculateLeaderboard = function(period = window.CURRENT_LEADERBOARD_PERIOD || 'daily') {
     const closerMap = {};
 
-    // 1. Seed with all known profiles from USER_PROFILES
+    // 1. Seed with active closers from USER_PROFILES
     if (typeof USER_PROFILES === 'object' && USER_PROFILES) {
       Object.keys(USER_PROFILES).forEach(k => {
         const u = USER_PROFILES[k];
         if (!u) return;
+        const kl = k.toLowerCase();
+        if (kl.includes('buddy') || kl.includes('james')) return;
         closerMap[k] = {
           id: k,
           name: u.name || k,
@@ -14750,27 +14972,23 @@ window.closeLeakMathModal = function() {
       });
     }
 
-    // Default core closer roster if not already present
     if (!closerMap.luke) closerMap.luke = { id: 'luke', name: 'Luke (Founder)', role: 'Founder & Closer', avatar: '👑', calls: 0, demos: 0, callbacks: 0, noLuck: 0, points: 0.0, isFounder: true };
     if (!closerMap.carter_mccauliss) closerMap.carter_mccauliss = { id: 'carter_mccauliss', name: 'Carter McCauliss', role: 'Certified Closer', avatar: '⚔️', calls: 0, demos: 0, callbacks: 0, noLuck: 0, points: 0.0, isFounder: false };
     if (!closerMap.lucas) closerMap.lucas = { id: 'lucas', name: 'Lucas', role: 'Certified Closer', avatar: '🎯', calls: 0, demos: 0, callbacks: 0, noLuck: 0, points: 0.0, isFounder: false };
-    if (!closerMap.james_mccullohs) closerMap.james_mccullohs = { id: 'james_mccullohs', name: 'James McCullohs', role: 'Certified Closer', avatar: '🛡️', calls: 0, demos: 0, callbacks: 0, noLuck: 0, points: 0.0, isFounder: false };
-    if (!closerMap.buddy) closerMap.buddy = { id: 'buddy', name: 'Buddy (Closer)', role: 'Certified Closer', avatar: '🤝', calls: 0, demos: 0, callbacks: 0, noLuck: 0, points: 0.0, isFounder: false };
 
-    // 2. Aggregate from CALL_RECORDS
+    // 2. Aggregate from CALL_RECORDS filtered by period
     const callsObj = window.CALL_RECORDS || {};
     for (const [id, rec] of Object.entries(callsObj)) {
       if (!rec || !rec.called) continue;
+      if (!isDateInPeriod(rec.updatedAt || rec.date, period)) continue;
+
       const callerStr = (rec.caller || '').toLowerCase();
       let assignedId = null;
 
       if (callerStr.includes('carter')) assignedId = 'carter_mccauliss';
       else if (callerStr.includes('lucas')) assignedId = 'lucas';
       else if (callerStr.includes('luke')) assignedId = 'luke';
-      else if (callerStr.includes('james')) assignedId = 'james_mccullohs';
-      else if (callerStr.includes('buddy')) assignedId = 'buddy';
       else {
-        // match closerMap by name
         for (const cid in closerMap) {
           if (callerStr.includes(closerMap[cid].name.toLowerCase())) {
             assignedId = cid;
@@ -14779,26 +14997,10 @@ window.closeLeakMathModal = function() {
         }
       }
 
-      if (!assignedId) {
-        const rawName = rec.caller || 'Closer Rep';
-        assignedId = rawName.toLowerCase().replace(/[^a-z0-9]/g, '_');
-        if (!closerMap[assignedId]) {
-          closerMap[assignedId] = {
-            id: assignedId,
-            name: rawName,
-            role: 'Outbound Closer',
-            avatar: '⚔️',
-            calls: 0,
-            demos: 0,
-            callbacks: 0,
-            noLuck: 0,
-            points: 0.0,
-            isFounder: false
-          };
-        }
-      }
+      if (!assignedId) assignedId = 'luke';
 
       const closer = closerMap[assignedId];
+      if (!closer) continue;
       closer.calls += 1;
 
       const isDemo = rec.outcome === 'Success' || rec.outcome === 'Booked Demo';
@@ -14823,21 +15025,79 @@ window.closeLeakMathModal = function() {
       return b.demos - a.demos;
     });
 
-    // 5. Assign medal & rank
+    // 5. Assign period-specific unique medals
+    const periodDefs = MEDAL_DEFINITIONS[period] || MEDAL_DEFINITIONS.daily;
     list.forEach((c, idx) => {
       c.rank = idx + 1;
-      if (idx === 0) { c.medal = '🥇'; c.medalTier = 'Gold'; }
-      else if (idx === 1) { c.medal = '🥈'; c.medalTier = 'Silver'; }
-      else if (idx === 2) { c.medal = '🥉'; c.medalTier = 'Bronze'; }
-      else { c.medal = `#${idx + 1}`; c.medalTier = 'Contender'; }
+      c.period = period;
+      if (periodDefs[c.rank]) {
+        const m = periodDefs[c.rank];
+        c.medal = m.medal;
+        c.medalName = m.name;
+        c.medalTier = m.title;
+        c.badgeClass = m.badgeClass;
+        c.roleSuffix = m.roleSuffix;
+      } else {
+        c.medal = `#${c.rank}`;
+        c.medalName = `Contender #${c.rank}`;
+        c.medalTier = 'Contender';
+        c.badgeClass = 'standard';
+        c.roleSuffix = `CONTENDER #${c.rank}`;
+      }
     });
 
     return list;
   };
 
+  window.switchLeaderboardPeriod = function(period) {
+    if (!['daily', 'weekly', 'monthly'].includes(period)) period = 'daily';
+    window.CURRENT_LEADERBOARD_PERIOD = period;
+
+    // Update Strip Buttons
+    const stripDaily = document.getElementById('stripBtnDaily');
+    const stripWeekly = document.getElementById('stripBtnWeekly');
+    const stripMonthly = document.getElementById('stripBtnMonthly');
+    const stripBadge = document.getElementById('stripPeriodActiveBadge');
+    if (stripDaily) stripDaily.classList.toggle('active', period === 'daily');
+    if (stripWeekly) stripWeekly.classList.toggle('active', period === 'weekly');
+    if (stripMonthly) stripMonthly.classList.toggle('active', period === 'monthly');
+    if (stripBadge) {
+      if (period === 'daily') stripBadge.innerHTML = '☀️ DAILY';
+      else if (period === 'weekly') stripBadge.innerHTML = '📅 WEEKLY';
+      else if (period === 'monthly') stripBadge.innerHTML = '🏆 MONTHLY';
+    }
+
+    // Update Tab Buttons
+    const tabDaily = document.getElementById('btnTabPeriodDaily');
+    const tabWeekly = document.getElementById('btnTabPeriodWeekly');
+    const tabMonthly = document.getElementById('btnTabPeriodMonthly');
+    const tabTitle = document.getElementById('tabPeriodTitleText');
+    if (tabDaily) tabDaily.classList.toggle('active', period === 'daily');
+    if (tabWeekly) tabWeekly.classList.toggle('active', period === 'weekly');
+    if (tabMonthly) tabMonthly.classList.toggle('active', period === 'monthly');
+
+    if (tabTitle) {
+      if (period === 'daily') {
+        tabTitle.innerHTML = '<span>☀️</span> Daily Closer Leaderboard <span style="font-size:12px;color:var(--dim);font-weight:400">(Today\'s Standings · Daily Medals: 🥇 🥈 🥉)</span>';
+      } else if (period === 'weekly') {
+        tabTitle.innerHTML = '<span>📅</span> Weekly Master Closer Leaderboard <span style="font-size:12px;color:var(--dim);font-weight:400">(This Week\'s Standings · Weekly Medals: 👑 ⚔️ 🛡️)</span>';
+      } else if (period === 'monthly') {
+        tabTitle.innerHTML = '<span>🏆</span> Monthly Apex Grandmaster Leaderboard <span style="font-size:12px;color:var(--dim);font-weight:400">(This Month\'s Standings · Monthly Medals: 🏆 ⭐ 🎖️)</span>';
+      }
+    }
+
+    window.renderLeaderboardUI();
+    if (typeof playSound === 'function') playSound('click');
+  };
+
   window.renderLeaderboardUI = function() {
-    const standings = window.calculateLeaderboard();
+    const period = window.CURRENT_LEADERBOARD_PERIOD || 'daily';
+    const standings = window.calculateLeaderboard(period);
     if (!standings || standings.length === 0) return;
+
+    const gold = standings[0] || { name: 'Luke', points: 0, calls: 0, demos: 0, callbacks: 0, avatar: '👑', medal: '🥇', medalName: 'Daily Gold', medalTier: 'Solar Crown Champion' };
+    const silver = standings[1] || { name: 'Carter', points: 0, calls: 0, demos: 0, callbacks: 0, avatar: '⚔️', medal: '🥈', medalName: 'Daily Silver', medalTier: 'Daily Vanguard' };
+    const bronze = standings[2] || { name: 'Lucas', points: 0, calls: 0, demos: 0, callbacks: 0, avatar: '🎯', medal: '🥉', medalName: 'Daily Bronze', medalTier: 'Daily Warrior' };
 
     // 1. Update Top Command Bar Stats for Active Closer
     try {
@@ -14865,70 +15125,56 @@ window.closeLeakMathModal = function() {
       console.warn('Command bar update error:', e);
     }
 
-    // 2. Update Top Leaderboard Champion Cards in Tab 0
+    // 2. Update Top Leaderboard Champion Cards in Tab 1 Strip
     try {
-      const gold = standings[0] || { name: 'Buddy (Closer)', points: 12.5, calls: 6, demos: 1, callbacks: 1 };
-      const silver = standings[1] || { name: 'Lucas', points: 11.0, calls: 1, demos: 1, callbacks: 0 };
-      const bronze = standings[2] || { name: 'Luke (Founder)', points: 1.5, calls: 1, demos: 0, callbacks: 1 };
-
-      const gName = document.getElementById('stripGoldName');
-      const gStats = document.getElementById('stripGoldStats');
-      const sName = document.getElementById('stripSilverName');
-      const sStats = document.getElementById('stripSilverStats');
-      const bName = document.getElementById('stripBronzeName');
-      const bStats = document.getElementById('stripBronzeStats');
-
-      if (gName) gName.textContent = `${gold.name} (${gold.points.toFixed(1)} pts)`;
-      if (gStats) gStats.textContent = `${gold.calls} Calls · ${gold.demos} Demos · ${gold.callbacks} Callbacks`;
-
-      if (sName) sName.textContent = `${silver.name} (${silver.points.toFixed(1)} pts)`;
-      if (sStats) sStats.textContent = `${silver.calls} Calls · ${silver.demos} Demos · ${silver.callbacks} Callbacks`;
-
-      if (bName) bName.textContent = `${bronze.name} (${bronze.points.toFixed(1)} pts)`;
-      if (bStats) bStats.textContent = `${bronze.calls} Calls · ${bronze.demos} Demos · ${bronze.callbacks} Callbacks`;
+      const stripPillsEl = document.getElementById('leadsStripPodiumPills');
+      if (stripPillsEl) {
+        stripPillsEl.innerHTML = `
+          <!-- 🥇/👑/🏆 1st Place Card -->
+          <div style="background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(217,119,6,0.08));border:1.5px solid #f59e0b;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 0 20px rgba(245,158,11,0.2)">
+            <div style="font-size:36px">${gold.medal}</div>
+            <div>
+              <div style="font-size:11px;font-family:var(--font-mono);color:#fbbf24;font-weight:800;text-transform:uppercase">1ST PLACE · ${gold.medalName.toUpperCase()}</div>
+              <div style="font-size:17px;font-weight:800;color:#ffffff" id="stripGoldName">${gold.avatar} ${gold.name} (${gold.points.toFixed(1)} pts)</div>
+              <div style="font-size:12px;color:var(--dim)" id="stripGoldStats">${gold.calls} Calls · ${gold.demos} Demos · ${gold.callbacks} Callbacks</div>
+            </div>
+          </div>
+          <!-- 🥈/⚔️/⭐ 2nd Place Card -->
+          <div style="background:linear-gradient(135deg,rgba(148,163,184,0.15),rgba(71,85,105,0.08));border:1.5px solid #cbd5e1;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px">
+            <div style="font-size:36px">${silver.medal}</div>
+            <div>
+              <div style="font-size:11px;font-family:var(--font-mono);color:#cbd5e1;font-weight:800;text-transform:uppercase">2ND PLACE · ${silver.medalName.toUpperCase()}</div>
+              <div style="font-size:17px;font-weight:800;color:#ffffff" id="stripSilverName">${silver.avatar} ${silver.name} (${silver.points.toFixed(1)} pts)</div>
+              <div style="font-size:12px;color:var(--dim)" id="stripSilverStats">${silver.calls} Calls · ${silver.demos} Demos · ${silver.callbacks} Callbacks</div>
+            </div>
+          </div>
+          <!-- 🥉/🛡️/🎖️ 3rd Place Card -->
+          <div style="background:linear-gradient(135deg,rgba(217,119,6,0.15),rgba(146,64,14,0.08));border:1.5px solid #d97706;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px">
+            <div style="font-size:36px">${bronze.medal}</div>
+            <div>
+              <div style="font-size:11px;font-family:var(--font-mono);color:#f59e0b;font-weight:800;text-transform:uppercase">3RD PLACE · ${bronze.medalName.toUpperCase()}</div>
+              <div style="font-size:17px;font-weight:800;color:#ffffff" id="stripBronzeName">${bronze.avatar} ${bronze.name} (${bronze.points.toFixed(1)} pts)</div>
+              <div style="font-size:12px;color:var(--dim)" id="stripBronzeStats">${bronze.calls} Calls · ${bronze.demos} Demos · ${bronze.callbacks} Callbacks</div>
+            </div>
+          </div>
+        `;
+      }
     } catch(e) {
       console.warn('Top strip podium update error:', e);
     }
 
+    // 3. Update 3D Podium Container on Tab 2
     try {
-      const standings = window.calculateLeaderboard();
-      const activeUser = typeof getActiveUser === 'function' ? getActiveUser() : { id: 'luke', name: 'Luke (Founder)' };
-      const activeId = (activeUser && activeUser.id) ? activeUser.id : 'luke';
-      const activeNameLower = ((activeUser && activeUser.name) || '').toLowerCase();
-
-      // Find my standing
-      let myRankObj = standings.find(s => s.id === activeId || activeNameLower.includes(s.name.toLowerCase()));
-      if (!myRankObj) {
-        myRankObj = standings[0] || { rank: 1, medal: '🥇', calls: 0, demos: 0, callbacks: 0, noLuck: 0, points: 0.0 };
-      }
-
-      // 1. Update Live Podium Strip on Tab 1
-      const stripPillsEl = document.getElementById('leadsStripPodiumPills');
-      if (stripPillsEl) {
-        const top3 = standings.slice(0, 3);
-        let pillsHtml = '';
-        top3.forEach((c, idx) => {
-          const tierClass = idx === 0 ? 'gold' : (idx === 1 ? 'silver' : 'bronze');
-          pillsHtml += `<span class="podium-mini-pill ${tierClass}">${c.medal} ${c.name.split(' ')[0]}: ${c.points} pts (${c.calls} calls)</span>`;
-        });
-        stripPillsEl.innerHTML = pillsHtml;
-      }
-
-      // 2. Update 3D Podium Container on Tab 5
       const podiumContEl = document.getElementById('leaderboardPodiumContainer');
       if (podiumContEl) {
-        const gold = standings[0] || { name: 'Luke', role: 'Founder', points: 0, calls: 0, demos: 0, callbacks: 0, noLuck: 0, avatar: '👑' };
-        const silver = standings[1] || { name: 'Carter', role: 'Closer', points: 0, calls: 0, demos: 0, callbacks: 0, noLuck: 0, avatar: '⚔️' };
-        const bronze = standings[2] || { name: 'Lucas', role: 'Closer', points: 0, calls: 0, demos: 0, callbacks: 0, noLuck: 0, avatar: '🎯' };
-
         podiumContEl.innerHTML = `
-          <!-- 🥈 2ND PLACE SILVER PODIUM -->
+          <!-- 2ND PLACE PODIUM -->
           <div class="podium-card silver">
-            <div class="podium-medal">🥈</div>
+            <div class="podium-medal">${silver.medal}</div>
             <div class="podium-name">${silver.avatar} ${silver.name}</div>
-            <div class="podium-role">${silver.role}</div>
+            <div class="podium-role">${silver.role} · ${silver.medalName}</div>
             <div class="podium-score" style="color:#e2e8f0">${silver.points.toFixed(1)}</div>
-            <div class="podium-score-label">Championship Points</div>
+            <div class="podium-score-label">${period.toUpperCase()} POINTS</div>
             <div class="podium-stats-grid">
               <div>
                 <div class="podium-stat-val">${silver.calls}</div>
@@ -14945,14 +15191,14 @@ window.closeLeakMathModal = function() {
             </div>
           </div>
 
-          <!-- 🥇 1ST PLACE GOLD PODIUM (ELEVATED) -->
+          <!-- 1ST PLACE GOLD PODIUM (ELEVATED) -->
           <div class="podium-card gold">
-            <div class="podium-crown">👑</div>
-            <div class="podium-medal">🥇</div>
+            <div class="podium-crown">${period === 'weekly' ? '👑' : (period === 'monthly' ? '🏆' : '☀️')}</div>
+            <div class="podium-medal">${gold.medal}</div>
             <div class="podium-name" style="color:var(--accent2);font-size:22px">${gold.avatar} ${gold.name}</div>
-            <div class="podium-role" style="color:#fde68a">${gold.role} · 🏆 CHAMPION</div>
+            <div class="podium-role" style="color:#fde68a">${gold.role} · ${gold.medalName.toUpperCase()}</div>
             <div class="podium-score">${gold.points.toFixed(1)}</div>
-            <div class="podium-score-label">Championship Points</div>
+            <div class="podium-score-label">${period.toUpperCase()} POINTS</div>
             <div class="podium-stats-grid" style="border-color:rgba(245,158,11,0.3)">
               <div>
                 <div class="podium-stat-val" style="font-size:16px">${gold.calls}</div>
@@ -14969,13 +15215,13 @@ window.closeLeakMathModal = function() {
             </div>
           </div>
 
-          <!-- 🥉 3RD PLACE BRONZE PODIUM -->
+          <!-- 3RD PLACE BRONZE PODIUM -->
           <div class="podium-card bronze">
-            <div class="podium-medal">🥉</div>
+            <div class="podium-medal">${bronze.medal}</div>
             <div class="podium-name">${bronze.avatar} ${bronze.name}</div>
-            <div class="podium-role">${bronze.role}</div>
+            <div class="podium-role">${bronze.role} · ${bronze.medalName}</div>
             <div class="podium-score" style="color:#fdba74">${bronze.points.toFixed(1)}</div>
-            <div class="podium-score-label">Championship Points</div>
+            <div class="podium-score-label">${period.toUpperCase()} POINTS</div>
             <div class="podium-stats-grid">
               <div>
                 <div class="podium-stat-val">${bronze.calls}</div>
@@ -14993,14 +15239,22 @@ window.closeLeakMathModal = function() {
           </div>
         `;
       }
+    } catch(e) {
+      console.warn('3D podium update error:', e);
+    }
 
-      // 3. Update Full Standings Table Body
+    // 4. Update Full Standings Table Body
+    try {
+      const activeUser = typeof getActiveUser === 'function' ? getActiveUser() : { id: 'luke', name: 'Luke (Founder)' };
+      const activeId = (activeUser && activeUser.id) ? activeUser.id : 'luke';
+      const activeNameLower = ((activeUser && activeUser.name) || '').toLowerCase();
+
       const tableBodyEl = document.getElementById('leaderboardTableBody');
       if (tableBodyEl) {
         let rowsHtml = '';
         standings.forEach(c => {
           const isMe = c.id === activeId || activeNameLower.includes(c.name.toLowerCase());
-          const badgeClass = c.rank === 1 ? 'gold' : (c.rank === 2 ? 'silver' : (c.rank === 3 ? 'bronze' : 'standard'));
+          const badgeClass = c.badgeClass || (c.rank === 1 ? 'gold' : (c.rank === 2 ? 'silver' : (c.rank === 3 ? 'bronze' : 'standard')));
           const rowClass = isMe ? 'active-user-row' : '';
 
           rowsHtml += `
@@ -15022,7 +15276,7 @@ window.closeLeakMathModal = function() {
               <td style="text-align:center;color:var(--dim)">${c.noLuck}</td>
               <td style="text-align:right;font-weight:900;font-size:15px;color:var(--accent2)">${c.points.toFixed(1)}</td>
               <td style="text-align:center">
-                <span class="podium-mini-pill ${badgeClass}" style="font-size:11px;padding:2px 8px">${c.medal} ${c.medalTier}</span>
+                <span class="podium-mini-pill ${badgeClass}" style="font-size:11px;padding:2px 8px">${c.medal} ${c.medalName}</span>
               </td>
             </tr>
           `;
@@ -15030,7 +15284,8 @@ window.closeLeakMathModal = function() {
         tableBodyEl.innerHTML = rowsHtml;
       }
 
-      // 4. Update Profile Dossier in #accountModal
+      // 5. Update Profile Dossier in #accountModal
+      let myRankObj = standings.find(s => s.id === activeId || activeNameLower.includes(s.name.toLowerCase())) || standings[0];
       const statCallsEl = document.getElementById('modalStatTotalCalls');
       const statDemosEl = document.getElementById('modalStatDemos');
       const statCbEl = document.getElementById('modalStatCallbacks');
@@ -15045,39 +15300,155 @@ window.closeLeakMathModal = function() {
       if (statPointsEl) statPointsEl.textContent = myRankObj.points.toFixed(1);
 
       if (modalMedalPill) {
-        if (myRankObj.rank === 1) {
-          modalMedalPill.innerHTML = '🥇 1st Place · GOLD LEADER';
-          modalMedalPill.style.borderColor = '#f59e0b';
-          modalMedalPill.style.color = '#fbbf24';
-          modalMedalPill.style.background = 'rgba(245,158,11,0.2)';
-        } else if (myRankObj.rank === 2) {
-          modalMedalPill.innerHTML = '🥈 2nd Place · SILVER PODIUM';
-          modalMedalPill.style.borderColor = '#cbd5e1';
-          modalMedalPill.style.color = '#f8fafc';
-          modalMedalPill.style.background = 'rgba(203,213,225,0.2)';
-        } else if (myRankObj.rank === 3) {
-          modalMedalPill.innerHTML = '🥉 3rd Place · BRONZE PODIUM';
-          modalMedalPill.style.borderColor = '#d97706';
-          modalMedalPill.style.color = '#fed7aa';
-          modalMedalPill.style.background = 'rgba(217,119,6,0.2)';
-        } else {
-          modalMedalPill.innerHTML = `⚔️ Rank #${myRankObj.rank} · ${myRankObj.points.toFixed(1)} Pts`;
-          modalMedalPill.style.borderColor = 'rgba(255,255,255,0.2)';
-          modalMedalPill.style.color = 'var(--dim)';
-          modalMedalPill.style.background = 'rgba(255,255,255,0.05)';
-        }
+        modalMedalPill.innerHTML = `${myRankObj.medal} Rank #${myRankObj.rank} · ${myRankObj.medalName.toUpperCase()}`;
+        modalMedalPill.style.borderColor = myRankObj.rank === 1 ? '#f59e0b' : (myRankObj.rank === 2 ? '#cbd5e1' : (myRankObj.rank === 3 ? '#d97706' : 'var(--line)'));
+        modalMedalPill.style.color = myRankObj.rank === 1 ? '#fbbf24' : (myRankObj.rank === 2 ? '#f8fafc' : (myRankObj.rank === 3 ? '#fdba74' : 'var(--dim)'));
       }
-
-      // 5. Update Header User Rank to show Podium Medal & Calls
-      const hRank = document.getElementById('headerUserRank');
-      if (hRank && activeUser && activeUser.id !== 'guest') {
-        hRank.textContent = `${myRankObj.medal} Rank #${myRankObj.rank} · ${myRankObj.calls} Calls · ${myRankObj.points.toFixed(1)} Pts`;
-      }
-    } catch(err) {
-      console.warn('renderLeaderboardUI error:', err);
+    } catch(e) {
+      console.warn('Leaderboard table update error:', e);
     }
   };
 
+  // 🏆 TROPHY CABINET RENDERER
+  window.renderTrophyCabinet = function(targetUser) {
+    const user = targetUser || (typeof getActiveUser === 'function' ? getActiveUser() : null);
+    if (!user) return;
+    if (!user.medals || !user.medals.daily || !user.medals.history || user.medals.history.length === 0) {
+      if (DEFAULT_PROFILES[user.id] && DEFAULT_PROFILES[user.id].medals) {
+        user.medals = JSON.parse(JSON.stringify(DEFAULT_PROFILES[user.id].medals));
+      } else {
+        user.medals = {
+          daily: { gold: 0, silver: 0, bronze: 0 },
+          weekly: { gold: 0, silver: 0, bronze: 0 },
+          monthly: { gold: 0, silver: 0, bronze: 0 },
+          history: []
+        };
+      }
+    }
+
+    const m = user.medals;
+    const dg = m.daily?.gold || 0;
+    const ds = m.daily?.silver || 0;
+    const db = m.daily?.bronze || 0;
+
+    const wg = m.weekly?.gold || 0;
+    const ws = m.weekly?.silver || 0;
+    const wb = m.weekly?.bronze || 0;
+
+    const mg = m.monthly?.gold || 0;
+    const ms = m.monthly?.silver || 0;
+    const mb = m.monthly?.bronze || 0;
+
+    const total = dg + ds + db + wg + ws + wb + mg + ms + mb;
+
+    const countEl = document.getElementById('modalTotalMedalsCount');
+    if (countEl) countEl.textContent = total;
+
+    function setTrophyText(id, val) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = `x${val}`;
+      el.classList.toggle('has-medal', val > 0);
+    }
+
+    setTrophyText('trophyDailyGold', dg);
+    setTrophyText('trophyDailySilver', ds);
+    setTrophyText('trophyDailyBronze', db);
+
+    setTrophyText('trophyWeeklyGold', wg);
+    setTrophyText('trophyWeeklySilver', ws);
+    setTrophyText('trophyWeeklyBronze', wb);
+
+    setTrophyText('trophyMonthlyGold', mg);
+    setTrophyText('trophyMonthlySilver', ms);
+    setTrophyText('trophyMonthlyBronze', mb);
+
+    // Render Award History
+    const listEl = document.getElementById('modalMedalHistoryList');
+    if (listEl) {
+      const history = (m.history || []).slice().reverse();
+      if (history.length === 0) {
+        listEl.innerHTML = '<div style="font-size:12px;color:var(--dim);text-align:center;padding:12px">No medals recorded yet. Finish in the top 3 on the Daily, Weekly, or Monthly leaderboard to record medals!</div>';
+      } else {
+        let hHtml = '';
+        history.forEach(item => {
+          const isGold = item.rank === 1;
+          const isSilver = item.rank === 2;
+          const badgeBorder = isGold ? '#f59e0b' : (isSilver ? '#cbd5e1' : '#d97706');
+          const badgeBg = isGold ? 'rgba(245,158,11,0.18)' : (isSilver ? 'rgba(203,213,225,0.15)' : 'rgba(217,119,6,0.15)');
+          hHtml += `
+            <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="font-size:22px">${item.medal || '🏅'}</span>
+                <div>
+                  <div style="font-size:13px;font-weight:700;color:#ffffff">${item.medalName || 'Championship Medal'} <span style="font-size:11px;color:var(--dim);font-weight:400">· ${item.title || ''}</span></div>
+                  <div style="font-size:11px;color:var(--dim);font-family:var(--font-mono)">${item.periodLabel || 'Championship Period'} &middot; Score: <strong style="color:var(--accent2)">${item.points ? item.points.toFixed(1) : '0.0'} pts</strong> (${item.calls || 0} calls, ${item.demos || 0} demos)</div>
+                </div>
+              </div>
+              <div style="font-size:11px;font-family:var(--font-mono);font-weight:800;color:#ffffff;background:${badgeBg};border:1px solid ${badgeBorder};padding:2px 8px;border-radius:999px;white-space:nowrap">
+                Rank #${item.rank || 1}
+              </div>
+            </div>
+          `;
+        });
+        listEl.innerHTML = hHtml;
+      }
+    }
+  };
+
+  // 🏅 FINALIZING & RECORDING PERIOD MEDALS
+  window.recordCurrentPeriodMedals = function(period = window.CURRENT_LEADERBOARD_PERIOD || 'daily') {
+    const standings = window.calculateLeaderboard(period);
+    if (!standings || standings.length === 0) {
+      if (typeof showToast === 'function') showToast('No closer activity recorded for this period yet.');
+      return;
+    }
+
+    const now = new Date();
+    const periodLabel = period === 'daily'
+      ? now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })
+      : (period === 'weekly'
+          ? `Week of ${now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`
+          : now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }));
+
+    const periodKey = `${period}_${now.toISOString().slice(0, 10)}`;
+
+    standings.slice(0, 3).forEach(c => {
+      const u = USER_PROFILES[c.id];
+      if (!u) return;
+      if (!u.medals) {
+        u.medals = { daily: { gold: 0, silver: 0, bronze: 0 }, weekly: { gold: 0, silver: 0, bronze: 0 }, monthly: { gold: 0, silver: 0, bronze: 0 }, history: [] };
+      }
+
+      const rank = c.rank;
+      const tierKey = rank === 1 ? 'gold' : (rank === 2 ? 'silver' : 'bronze');
+      u.medals[period][tierKey] = (u.medals[period][tierKey] || 0) + 1;
+
+      const recordItem = {
+        id: `med_${period}_${Date.now()}_${c.id}`,
+        period: period,
+        periodKey: periodKey,
+        periodLabel: periodLabel,
+        rank: rank,
+        medal: c.medal,
+        medalName: c.medalName,
+        title: c.medalTier,
+        points: c.points,
+        calls: c.calls,
+        demos: c.demos,
+        awardedAt: now.toISOString()
+      };
+
+      u.medals.history.push(recordItem);
+    });
+
+    saveUserProfiles();
+    if (typeof playSound === 'function') playSound('levelup');
+    window.renderTrophyCabinet(getActiveUser());
+    if (typeof showToast === 'function') {
+      showToast(`🎉 Medals successfully recorded for ${period.toUpperCase()}! 1st: ${standings[0].medal} ${standings[0].name} (${standings[0].points} pts)`);
+    }
+  };
 
   function renderTeamCallLogsTab() {
     const tbody = document.getElementById('teamCallLogsTableBody');
@@ -15091,8 +15462,7 @@ window.closeLeakMathModal = function() {
     let carterCount = 0;
     let lucasCount = 0;
     let lukeCount = 0;
-    let jamesCount = 0;
-    let buddyCount = 0;
+    // counts
 
     for (const [id, rec] of Object.entries(CALL_RECORDS)) {
       if (!rec || !rec.called) continue;
@@ -15100,8 +15470,7 @@ window.closeLeakMathModal = function() {
       if (callerLower.includes('carter')) carterCount++;
       else if (callerLower.includes('lucas')) lucasCount++;
       else if (callerLower.includes('luke')) lukeCount++;
-      else if (callerLower.includes('james')) jamesCount++;
-      else if (callerLower.includes('buddy')) buddyCount++;
+      // counts
 
       const isDemo = rec.outcome === 'Success' || rec.outcome === 'Booked Demo';
       const isCallback = rec.outcome === 'Call Back' || rec.outcome === 'Callback Scheduled';
@@ -15285,7 +15654,7 @@ window.closeLeakMathModal = function() {
       .sort((a, b) => b.sortTime - a.sortTime);
 
     if (allCalled.length === 0) {
-      tickerText.innerHTML = `● Real-time sync active across Luke, Carter McCauliss, Lucas &amp; James McCullohs · 0 dials recorded today`;
+      tickerText.innerHTML = `● Real-time sync active across Luke Hamilton, Carter McCauliss, and Lucas · 0 dials recorded today`;
       return;
     }
 
@@ -15476,10 +15845,10 @@ window.closeLeakMathModal = function() {
       if (!rec || !rec.called) continue;
       const callerStr = (rec.caller || '').toLowerCase();
       if (activeCloserLower.includes('luke') && callerStr.includes('luke')) callerCalls.push({ id, ...rec });
-      else if (activeCloserLower.includes('buddy') && callerStr.includes('buddy')) callerCalls.push({ id, ...rec });
+      
       else if (activeCloserLower.includes('lucas') && callerStr.includes('lucas')) callerCalls.push({ id, ...rec });
       else if (activeCloserLower.includes('carter') && callerStr.includes('carter')) callerCalls.push({ id, ...rec });
-      else if (activeCloserLower.includes('james') && callerStr.includes('james')) callerCalls.push({ id, ...rec });
+      
       else if (activeCloserLower && callerStr.includes(activeCloserLower)) callerCalls.push({ id, ...rec });
     }
 
@@ -16008,7 +16377,7 @@ window.closeLeakMathModal = function() {
         if (currentCallerFilter === 'lucas' && !callerLower.includes('lucas')) return false;
         if (currentCallerFilter === 'luke' && !callerLower.includes('luke')) return false;
         if (currentCallerFilter === 'james' && !callerLower.includes('james')) return false;
-        if (currentCallerFilter === 'buddy' && !callerLower.includes('buddy')) return false;
+        // caller filter
       }
       // 4c. Team Size / Employee Count filter (Target Small Local Businesses)
       if (currentEmpFilter !== 'all') {

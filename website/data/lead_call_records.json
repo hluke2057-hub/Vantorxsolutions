@@ -9,7 +9,7 @@
   },
   "pb_002": {
     "called": true,
-    "caller": "Buddy (Closer)",
+    "caller": "Carter McCauliss",
     "outcome": "Success",
     "updatedAt": "2026-11-04T18:45:00.000Z",
     "timestamp": "02:45 PM",
@@ -26,25 +26,129 @@
   "pb_004": {
     "called": true,
     "caller": "Lucas",
-    "outcome": "Success",
+    "outcome": "Call Back",
     "updatedAt": "2026-11-04T17:20:00.000Z",
     "timestamp": "01:20 PM",
-    "notes": "Pitched Scale tier, owner requested Zoom demo Friday 11am"
+    "notes": "Pitched Scale tier, owner requested callback Friday 11am"
   },
   "pb_005": {
     "called": true,
-    "caller": "Buddy (Closer)",
-    "outcome": "Call Back",
-    "updatedAt": "2026-11-04T15:35:00.000Z",
-    "timestamp": "11:35 AM",
-    "notes": "Left direct callback message with lead tech Mike"
+    "caller": "Luke (Founder)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-04T16:30:00.000Z",
+    "timestamp": "12:30 PM",
+    "notes": "Booked live Ava demo with owner Mike for tomorrow 10am!"
   },
   "pb_006": {
     "called": true,
-    "caller": "James McCullohs",
-    "outcome": "No Luck",
+    "caller": "Carter McCauliss",
+    "outcome": "Call Back",
     "updatedAt": "2026-11-04T14:15:00.000Z",
     "timestamp": "10:15 AM",
-    "notes": "Gatekeeper stated owner is out of town until Monday"
+    "notes": "Gatekeeper scheduled callback for owner Steve at 4:30pm"
+  },
+  "pb_007": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T13:45:00.000Z",
+    "timestamp": "09:45 AM",
+    "notes": "Owner in attic, receptionist set 3pm callback"
+  },
+  "pb_008": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "No Luck",
+    "updatedAt": "2026-11-04T12:10:00.000Z",
+    "timestamp": "08:10 AM",
+    "notes": "Voicemail left on after-hours emergency line"
+  },
+  "pb_009": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "No Luck",
+    "updatedAt": "2026-11-04T11:20:00.000Z",
+    "timestamp": "07:20 AM",
+    "notes": "Left message with dispatch coordinator"
+  },
+  "pb_010": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "No Luck",
+    "updatedAt": "2026-11-04T10:50:00.000Z",
+    "timestamp": "06:50 AM",
+    "notes": "Automated IVR queue reached, left callback request"
+  },
+  "pb_011": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-03T16:00:00.000Z",
+    "timestamp": "04:00 PM",
+    "notes": "Booked demo for Accelerate package with owner Frank"
+  },
+  "pb_012": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-02T15:30:00.000Z",
+    "timestamp": "03:30 PM",
+    "notes": "Demo booked with Apex Plumbing owner Tom"
+  },
+  "pb_013": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Success",
+    "updatedAt": "2026-11-03T14:00:00.000Z",
+    "timestamp": "02:00 PM",
+    "notes": "Booked 20-min demo for Ava Voice AI with Sun Coast HVAC"
+  },
+  "pb_014": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "Success",
+    "updatedAt": "2026-11-02T17:15:00.000Z",
+    "timestamp": "05:15 PM",
+    "notes": "Booked demo with Gold Coast Electric owner Sam"
+  },
+  "pb_015": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-03T11:00:00.000Z",
+    "timestamp": "11:00 AM",
+    "notes": "Follow up on pricing sheet with owner"
+  },
+  "pb_016": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-02T13:00:00.000Z",
+    "timestamp": "01:00 PM",
+    "notes": "Scheduled afternoon follow-up on leak math"
+  },
+  "pb_017": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-01T16:00:00.000Z",
+    "timestamp": "04:00 PM",
+    "notes": "Month-start blitz: Booked Scale demo with regional contractor"
+  },
+  "pb_018": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Success",
+    "updatedAt": "2026-11-01T15:00:00.000Z",
+    "timestamp": "03:00 PM",
+    "notes": "Booked demo with Titan HVAC owner"
+  },
+  "pb_019": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "Success",
+    "updatedAt": "2026-11-01T14:30:00.000Z",
+    "timestamp": "02:30 PM",
+    "notes": "Demo scheduled for Saturday morning"
   }
 }
