@@ -828,6 +828,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <button type="button" class="view-toggle-pill active" id="btnViewToCall" onclick="switchLeadView('toCall')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid #f59e0b;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f;cursor:pointer;transition:all 0.2s">
             <span>📋</span> Dial Queue: To Call (<span id="uncalledCountBadge">265</span>)
           </button>
+          <button type="button" class="view-toggle-pill" id="btnViewCallbacks" onclick="switchLeadView('callbacks')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid rgba(56,189,248,0.5);background:rgba(56,189,248,0.12);color:#38bdf8;cursor:pointer;transition:all 0.2s">
+            <span>⏳</span> Callbacks &amp; Follow-Ups (<span id="callbackCountBadge">7</span>)
+          </button>
           <button type="button" class="view-toggle-pill" id="btnViewCalledHistory" onclick="switchLeadView('calledHistory')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid var(--line);background:rgba(255,255,255,0.06);color:#cbd5e1;cursor:pointer;transition:all 0.2s">
             <span>✅</span> Previously Called History (<span id="calledCountBadge">6</span>)
           </button>
@@ -858,6 +861,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <option value="4">Batch 4: Orlando &amp; Central FL (50 Real Targets)</option>
                 <option value="5">Batch 5: Jacksonville &amp; North FL (50 Real Targets)</option>
                 <option value="6">Batch 6: Southwest Florida (21 Real Targets)</option>
+                <option value="7">⭐ Batch 7: Fresh 75 Verified Additions (North &amp; Central FL, Panhandle · 75 Targets)</option>
               </select>
             </div>
             <button class="btn btn-gold btn-sm" id="btnAdd75Leads" style="font-weight:700" title="Expand your active queue with +75 fresh leads immediately">➕ Add +75 Leads Now</button>
@@ -965,7 +969,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div class="lead-pills">
           <button class="lead-pill-btn active" data-status-filter="all">All Status (<span id="countStatusAll">25</span>)</button>
           <button class="lead-pill-btn" data-status-filter="uncalled">⏳ Remaining To Call (<span id="countStatusUncalled">25</span>)</button>
-          <button class="lead-pill-btn" data-status-filter="called">✅ Already Called (<span id="countStatusCalled">0</span>)</button>
+          <button class="lead-pill-btn" data-status-filter="callbacks">📞 Scheduled Callbacks (<span id="countStatusCallbacks">7</span>)</button>
+          <button class="lead-pill-btn" data-status-filter="called">✅ Logged Calls (<span id="countStatusCalled">19</span>)</button>
         </div>
 
         <!-- Rep Caller Filter Pills (Who Dialed) -->
@@ -12870,7 +12875,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -12895,7 +12900,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -12920,7 +12925,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -12945,7 +12950,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -12970,7 +12975,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -12995,7 +13000,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13020,7 +13025,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13045,7 +13050,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13070,7 +13075,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13095,7 +13100,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13120,7 +13125,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13145,7 +13150,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13170,7 +13175,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13195,7 +13200,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13220,7 +13225,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13245,7 +13250,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "4 Staff · Owner in Field",
     "employeeLabel": "4 Staff - Small Local Sweet Spot",
@@ -13270,7 +13275,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13295,7 +13300,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13320,7 +13325,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13345,7 +13350,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13370,7 +13375,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13395,7 +13400,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13420,7 +13425,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13445,7 +13450,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13470,7 +13475,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13495,7 +13500,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13520,7 +13525,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13545,7 +13550,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13570,7 +13575,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13595,7 +13600,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13620,7 +13625,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13645,7 +13650,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13670,7 +13675,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13695,7 +13700,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13720,7 +13725,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13745,7 +13750,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13770,7 +13775,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13795,7 +13800,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13820,7 +13825,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13845,7 +13850,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13870,7 +13875,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13895,7 +13900,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13920,7 +13925,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13945,7 +13950,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -13970,7 +13975,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -13995,7 +14000,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14020,7 +14025,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14045,7 +14050,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14070,7 +14075,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14095,7 +14100,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14120,7 +14125,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14145,7 +14150,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14170,7 +14175,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14195,7 +14200,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14220,7 +14225,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Storm damage and emergency leak replacement calls dropping to competitor who answers in 1 ring",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14245,7 +14250,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14270,7 +14275,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14295,7 +14300,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14320,7 +14325,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14345,7 +14350,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14370,7 +14375,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14395,7 +14400,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14420,7 +14425,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14445,7 +14450,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14470,7 +14475,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14495,7 +14500,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14520,7 +14525,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14545,7 +14550,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14570,7 +14575,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14595,7 +14600,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 118800,
     "netSavings": 110436,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "3 Staff · Owner in Field",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -14620,7 +14625,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14645,7 +14650,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14670,7 +14675,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14695,7 +14700,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -14720,7 +14725,7 @@ window.closeLeakMathModal = function() {
     "annualLoss": 109200,
     "netSavings": 100836,
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
-    "batch": 3,
+    "batch": 7,
     "employeeTier": "smallCrew",
     "employeeTierName": "2 Staff · Owner in Field",
     "employeeLabel": "2 Staff - Small Local Sweet Spot",
@@ -17046,20 +17051,342 @@ window.closeLeakMathModal = function() {
   // 📋 LEAD DISPATCHER, DAILY 25-LEAD ENGINE & CALL TRACKER
   // ============================================================
   const SEED_CALL_RECORDS = {
-    "pb_001": {
-      "called": true,
-      "caller": "Luke (Founder)",
-      "outcome": "Call Back",
-      "updatedAt": "2026-11-04T15:20:00.000Z",
-      "timestamp": "04:15 PM",
-      "notes": "Spoke with front desk, owner in field, callback scheduled for 4pm"
-    },
-    "pb_002": { "called": true, "caller": "Carter McCauliss", "outcome": "Success", "updatedAt": "2026-11-04T18:45:00.000Z", "timestamp": "02:45 PM", "notes": "Booked 15-min live demo with owner Dave for Thursday 2pm!" },
-    "pb_003": { "called": true, "caller": "Carter McCauliss", "outcome": "Call Back", "updatedAt": "2026-11-04T19:10:00.000Z", "timestamp": "03:10 PM", "notes": "Spoke to office manager Brenda, owner on jobsite, callback at 3:30pm" },
-    "pb_004": { "called": true, "caller": "Lucas", "outcome": "Call Back", "updatedAt": "2026-11-04T17:20:00.000Z", "timestamp": "01:20 PM", "notes": "Pitched Scale tier, owner requested callback Friday 11am" },
-    "pb_005": { "called": true, "caller": "Luke (Founder)", "outcome": "Success", "updatedAt": "2026-11-04T16:30:00.000Z", "timestamp": "12:30 PM", "notes": "Booked live Ava demo with owner Mike for tomorrow 10am!" },
-    "pb_006": { "called": true, "caller": "Carter McCauliss", "outcome": "Call Back", "updatedAt": "2026-11-04T14:15:00.000Z", "timestamp": "10:15 AM", "notes": "Gatekeeper scheduled callback for owner Steve at 4:30pm" }
-  };
+  "pb_001": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T15:20:00.000Z",
+    "timestamp": "04:15 PM",
+    "notes": "Spoke with front desk, owner in field, callback scheduled for 4pm"
+  },
+  "pb_002": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Success",
+    "updatedAt": "2026-11-04T18:45:00.000Z",
+    "timestamp": "02:45 PM",
+    "notes": "Booked 15-min live demo with owner Dave for Thursday 2pm!"
+  },
+  "pb_003": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T19:10:00.000Z",
+    "timestamp": "03:10 PM",
+    "notes": "Spoke to office manager Brenda, owner on jobsite, callback at 3:30pm"
+  },
+  "pb_004": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T17:20:00.000Z",
+    "timestamp": "01:20 PM",
+    "notes": "Pitched Scale tier, owner requested callback Friday 11am"
+  },
+  "pb_005": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-04T16:30:00.000Z",
+    "timestamp": "12:30 PM",
+    "notes": "Booked live Ava demo with owner Mike for tomorrow 10am!"
+  },
+  "pb_006": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T14:15:00.000Z",
+    "timestamp": "10:15 AM",
+    "notes": "Gatekeeper scheduled callback for owner Steve at 4:30pm"
+  },
+  "pb_007": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T13:45:00.000Z",
+    "timestamp": "09:45 AM",
+    "notes": "Owner in attic, receptionist set 3pm callback"
+  },
+  "pb_008": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "No Luck",
+    "updatedAt": "2026-11-04T12:10:00.000Z",
+    "timestamp": "08:10 AM",
+    "notes": "Voicemail left on after-hours emergency line"
+  },
+  "pb_009": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "No Luck",
+    "updatedAt": "2026-11-04T11:20:00.000Z",
+    "timestamp": "07:20 AM",
+    "notes": "Left message with dispatch coordinator"
+  },
+  "pb_010": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "No Luck",
+    "updatedAt": "2026-11-04T10:50:00.000Z",
+    "timestamp": "06:50 AM",
+    "notes": "Automated IVR queue reached, left callback request"
+  },
+  "pb_011": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-03T16:00:00.000Z",
+    "timestamp": "04:00 PM",
+    "notes": "Booked demo for Accelerate package with owner Frank"
+  },
+  "pb_012": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-02T15:30:00.000Z",
+    "timestamp": "03:30 PM",
+    "notes": "Demo booked with Apex Plumbing owner Tom"
+  },
+  "pb_013": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Success",
+    "updatedAt": "2026-11-03T14:00:00.000Z",
+    "timestamp": "02:00 PM",
+    "notes": "Booked 20-min demo for Ava Voice AI with Sun Coast HVAC"
+  },
+  "pb_014": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "Success",
+    "updatedAt": "2026-11-02T17:15:00.000Z",
+    "timestamp": "05:15 PM",
+    "notes": "Booked demo with Gold Coast Electric owner Sam"
+  },
+  "pb_015": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-03T11:00:00.000Z",
+    "timestamp": "11:00 AM",
+    "notes": "Follow up on pricing sheet with owner"
+  },
+  "pb_016": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-02T13:00:00.000Z",
+    "timestamp": "01:00 PM",
+    "notes": "Scheduled afternoon follow-up on leak math"
+  },
+  "pb_017": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-01T16:00:00.000Z",
+    "timestamp": "04:00 PM",
+    "notes": "Month-start blitz: Booked Scale demo with regional contractor"
+  },
+  "pb_018": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Success",
+    "updatedAt": "2026-11-01T15:00:00.000Z",
+    "timestamp": "03:00 PM",
+    "notes": "Booked demo with Titan HVAC owner"
+  },
+  "pb_019": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "Success",
+    "updatedAt": "2026-11-01T14:30:00.000Z",
+    "timestamp": "02:30 PM",
+    "notes": "Demo scheduled for Saturday morning"
+  }
+};
+
+  // Legacy ID mapping (maps old 825 directory IDs to verified 346 lead IDs)
+  const LEGACY_ID_MAP = {
+  "fl_se_001": "pb_001",
+  "fl_se_002": "pb_002",
+  "fl_se_003": "fl_se_003",
+  "fl_se_004": "pb_004",
+  "fl_se_005": "fl_se_005",
+  "fl_se_006": "pb_006",
+  "fl_se_007": "pb_007",
+  "fl_se_008": "pb_008",
+  "fl_se_009": "pb_009",
+  "fl_se_010": "pb_010",
+  "fl_se_011": "pb_011",
+  "fl_se_012": "pb_012",
+  "fl_se_013": "pb_013",
+  "fl_se_014": "pb_014",
+  "fl_se_015": "pb_015",
+  "fl_se_016": "pb_016",
+  "fl_se_017": "pb_017",
+  "fl_se_018": "pb_018",
+  "fl_se_019": "pb_019",
+  "fl_se_020": "fl_se_020",
+  "fl_se_021": "pb_021",
+  "fl_se_022": "fl_se_022",
+  "fl_se_023": "pb_023",
+  "fl_se_024": "fl_se_024",
+  "fl_se_025": "fl_se_025",
+  "fl_se_026": "bw_026",
+  "fl_se_027": "bw_027",
+  "fl_se_028": "fl_se_028",
+  "fl_se_029": "bw_029",
+  "fl_se_030": "bw_030",
+  "fl_se_031": "bw_031",
+  "fl_se_032": "bw_032",
+  "fl_se_033": "bw_033",
+  "fl_se_034": "bw_034",
+  "fl_se_035": "bw_035",
+  "fl_se_036": "bw_036",
+  "fl_se_037": "bw_037",
+  "fl_se_038": "bw_038",
+  "fl_se_039": "bw_039",
+  "fl_se_040": "bw_040",
+  "fl_se_041": "bw_041",
+  "fl_se_042": "bw_042",
+  "fl_se_043": "bw_043",
+  "fl_se_044": "bw_044",
+  "fl_se_045": "fl_se_045",
+  "fl_se_046": "fl_se_046",
+  "fl_se_047": "fl_se_047",
+  "fl_se_048": "fl_se_048",
+  "fl_se_049": "fl_se_049",
+  "fl_se_050": "fl_se_050",
+  "fl_se_051": "md_051",
+  "fl_se_052": "md_052",
+  "fl_se_053": "md_053",
+  "fl_se_054": "md_054",
+  "fl_se_055": "md_055",
+  "fl_se_056": "md_056",
+  "fl_se_057": "md_057",
+  "fl_se_058": "md_058",
+  "fl_se_059": "md_059",
+  "fl_se_060": "md_060",
+  "fl_se_061": "fl_se_061",
+  "fl_se_062": "md_062",
+  "fl_se_063": "fl_se_063",
+  "fl_se_064": "md_064",
+  "fl_se_065": "md_065",
+  "fl_se_066": "md_066",
+  "fl_se_067": "md_067",
+  "fl_se_068": "md_068",
+  "fl_se_069": "md_069",
+  "fl_se_070": "fl_se_070",
+  "fl_se_071": "md_071",
+  "fl_se_072": "md_072",
+  "fl_se_073": "md_073",
+  "fl_se_074": "md_074",
+  "fl_se_075": "fl_se_075",
+  "fl_cg_076": "tb_076",
+  "fl_cg_077": "tb_077",
+  "fl_cg_078": "tb_078",
+  "fl_cg_079": "tb_079",
+  "fl_cg_080": "tb_080",
+  "fl_cg_081": "tb_081",
+  "fl_cg_082": "tb_082",
+  "fl_cg_083": "tb_083",
+  "fl_cg_084": "tb_084",
+  "fl_cg_085": "tb_085",
+  "fl_cg_086": "tb_086",
+  "fl_cg_087": "tb_087",
+  "fl_cg_088": "tb_088",
+  "fl_cg_089": "tb_089",
+  "fl_cg_090": "tb_090",
+  "fl_cg_091": "tb_091",
+  "fl_cg_092": "tb_092",
+  "fl_cg_093": "tb_093",
+  "fl_cg_094": "tb_094",
+  "fl_cg_095": "tb_095",
+  "fl_cg_096": "tb_096",
+  "fl_cg_097": "tb_097",
+  "fl_cg_098": "tb_098",
+  "fl_cg_099": "tb_099",
+  "fl_cg_100": "tb_100",
+  "fl_cg_101": "cf_101",
+  "fl_cg_102": "cf_102",
+  "fl_cg_103": "cf_103",
+  "fl_cg_104": "cf_104",
+  "fl_cg_105": "cf_105",
+  "fl_cg_106": "cf_106",
+  "fl_cg_107": "cf_107",
+  "fl_cg_108": "cf_108",
+  "fl_cg_109": "cf_109",
+  "fl_cg_110": "cf_110",
+  "fl_cg_111": "cf_111",
+  "fl_cg_112": "cf_112",
+  "fl_cg_113": "cf_113",
+  "fl_cg_114": "cf_114",
+  "fl_cg_115": "cf_115",
+  "fl_cg_116": "cf_116",
+  "fl_cg_117": "cf_117",
+  "fl_cg_118": "cf_118",
+  "fl_cg_119": "cf_119",
+  "fl_cg_120": "cf_120",
+  "fl_cg_121": "cf_121",
+  "fl_cg_122": "cf_123",
+  "fl_cg_123": "fl_cg_123",
+  "fl_cg_124": "fl_cg_124",
+  "fl_cg_125": "fl_cg_125",
+  "fl_cg_126": "nfl_126",
+  "fl_cg_127": "nfl_127",
+  "fl_cg_128": "nfl_128",
+  "fl_cg_129": "nfl_129",
+  "fl_cg_130": "nfl_130",
+  "fl_cg_131": "nfl_131",
+  "fl_cg_132": "nfl_132",
+  "fl_cg_133": "nfl_133",
+  "fl_cg_134": "nfl_134",
+  "fl_cg_135": "nfl_135",
+  "fl_cg_136": "nfl_136",
+  "fl_cg_137": "nfl_137",
+  "fl_cg_138": "nfl_138",
+  "fl_cg_139": "nfl_139",
+  "fl_cg_140": "nfl_140",
+  "fl_cg_141": "nfl_141",
+  "fl_cg_142": "pb_142",
+  "fl_cg_143": "pb_143",
+  "fl_cg_144": "pb_144",
+  "fl_cg_145": "pb_145",
+  "fl_cg_146": "pb_146",
+  "fl_cg_147": "pb_147",
+  "fl_cg_148": "pb_148",
+  "fl_cg_149": "pb_149",
+  "fl_cg_150": "pb_150",
+  "tx_dfw_154": "tx_155",
+  "tx_dfw_156": "tx_156",
+  "tx_dfw_159": "tx_164",
+  "tx_dfw_160": "tx_165",
+  "tx_dfw_161": "tx_157",
+  "tx_dfw_162": "tx_158"
+};
+
+  function getLeadCallRecord(lead) {
+    if (!lead) return {};
+    if (CALL_RECORDS && CALL_RECORDS[lead.id]) return CALL_RECORDS[lead.id];
+    // Check legacy mapping
+    for (const [oldId, newId] of Object.entries(LEGACY_ID_MAP)) {
+      if (newId === lead.id && CALL_RECORDS[oldId]) return CALL_RECORDS[oldId];
+    }
+    // Check normalized phone number match
+    const cleanPhone = (lead.phone || '').replace(/\D/g, '');
+    if (cleanPhone) {
+      for (const [id, rec] of Object.entries(CALL_RECORDS || {})) {
+        if (!rec || !rec.called) continue;
+        const matched = (window.LEADS_DATA || []).find(l => l.id === id);
+        if (matched && (matched.phone || '').replace(/\D/g, '') === cleanPhone) {
+          return rec;
+        }
+      }
+    }
+    return {};
+  }
+  window.getLeadCallRecord = getLeadCallRecord;
+
   let CALL_RECORDS = {};
   try {
     const _storedCalls = JSON.parse(localStorage.getItem('vantorx_lead_calls_v1'));
@@ -17067,6 +17394,12 @@ window.closeLeakMathModal = function() {
       CALL_RECORDS = { ...SEED_CALL_RECORDS, ..._storedCalls };
     } else {
       CALL_RECORDS = { ...SEED_CALL_RECORDS };
+    }
+    // Auto-migrate any legacy keys to new IDs so callbacks and call logs are never lost
+    for (const [oldId, newId] of Object.entries(LEGACY_ID_MAP)) {
+      if (CALL_RECORDS[oldId] && !CALL_RECORDS[newId]) {
+        CALL_RECORDS[newId] = { ...CALL_RECORDS[oldId] };
+      }
     }
   } catch(e) {
     CALL_RECORDS = { ...SEED_CALL_RECORDS };
@@ -18332,29 +18665,43 @@ window.closeLeakMathModal = function() {
     window.currentLeadView = view;
     
     const btnToCall = document.getElementById('btnViewToCall');
+    const btnCallbacks = document.getElementById('btnViewCallbacks');
     const btnCalled = document.getElementById('btnViewCalledHistory');
+
+    const defaultStyle = {
+      border: '1px solid var(--line)',
+      background: 'rgba(255,255,255,0.06)',
+      color: '#cbd5e1'
+    };
+    [btnToCall, btnCallbacks, btnCalled].forEach(btn => {
+      if (btn) {
+        btn.style.border = defaultStyle.border;
+        btn.style.background = defaultStyle.background;
+        btn.style.color = defaultStyle.color;
+        btn.classList.remove('active');
+      }
+    });
 
     if (view === 'toCall') {
       if (btnToCall) {
         btnToCall.style.border = '1px solid #f59e0b';
         btnToCall.style.background = 'linear-gradient(135deg,#f59e0b,#d97706)';
         btnToCall.style.color = '#070a0f';
+        btnToCall.classList.add('active');
       }
-      if (btnCalled) {
-        btnCalled.style.border = '1px solid var(--line)';
-        btnCalled.style.background = 'rgba(255,255,255,0.06)';
-        btnCalled.style.color = '#cbd5e1';
+    } else if (view === 'callbacks') {
+      if (btnCallbacks) {
+        btnCallbacks.style.border = '1px solid #38bdf8';
+        btnCallbacks.style.background = 'linear-gradient(135deg,#0284c7,#0369a1)';
+        btnCallbacks.style.color = '#ffffff';
+        btnCallbacks.classList.add('active');
       }
-    } else {
+    } else if (view === 'calledHistory') {
       if (btnCalled) {
         btnCalled.style.border = '1px solid #34d399';
         btnCalled.style.background = 'linear-gradient(135deg,#10b981,#059669)';
         btnCalled.style.color = '#070a0f';
-      }
-      if (btnToCall) {
-        btnToCall.style.border = '1px solid var(--line)';
-        btnToCall.style.background = 'rgba(255,255,255,0.06)';
-        btnToCall.style.color = '#cbd5e1';
+        btnCalled.classList.add('active');
       }
     }
 
@@ -18463,9 +18810,11 @@ window.closeLeakMathModal = function() {
           ? `CURRENT 75 FOCUS TARGETS (QUEUE LOCKED AT 700 FOR 1 WEEK)`
           : `TODAY'S 75 FRESH UNLOCKED TARGETS`;
       } else if (currentBatch === 'all') {
-        heading.textContent = `NATIONWIDE MASTER DIRECTORY (825 TARGETS)`;
+        heading.textContent = `FLORIDA TRADE CONTRACTORS DIRECTORY (${(window.LEADS_DATA || []).length} VERIFIED TARGETS)`;
+      } else if (currentBatch === '7') {
+        heading.textContent = `BATCH #7: 75 FRESH VERIFIED ADDITIONS (NORTH & CENTRAL FL, PANHANDLE)`;
       } else {
-        heading.textContent = `BATCH #${currentBatch}: 75 NATIONWIDE TARGET LEADS`;
+        heading.textContent = `BATCH #${currentBatch}: 50 VERIFIED REGIONAL TARGETS`;
       }
     }
     const btnAdd = document.getElementById('btnAdd75Leads');
@@ -18875,15 +19224,36 @@ window.closeLeakMathModal = function() {
   };
 
   function renderLeadsTable() {
-    // Update uncalled vs called counts
-    const callsObj = window.CALL_RECORDS || {};
-    const totalCalledCount = Object.values(callsObj).filter(c => c && c.called).length;
+    // Update uncalled vs called vs callback counts using robust resolver
+    let totalCalledCount = 0;
+    let totalCallbackCount = 0;
+
+    (window.LEADS_DATA || []).forEach(lead => {
+      const rec = (typeof getLeadCallRecord === 'function') ? getLeadCallRecord(lead) : ((window.CALL_RECORDS || {})[lead.id]);
+      if (rec && rec.called) {
+        totalCalledCount++;
+        if (rec.outcome === 'Call Back' || rec.outcome === 'Callback Scheduled') {
+          totalCallbackCount++;
+        }
+      }
+    });
     const totalUncalledCount = Math.max(0, (window.LEADS_DATA || []).length - totalCalledCount);
 
     const uncalledBadgeEl = document.getElementById('uncalledCountBadge');
+    const callbackBadgeEl = document.getElementById('callbackCountBadge');
     const calledBadgeEl = document.getElementById('calledCountBadge');
     if (uncalledBadgeEl) uncalledBadgeEl.textContent = totalUncalledCount;
+    if (callbackBadgeEl) callbackBadgeEl.textContent = totalCallbackCount;
     if (calledBadgeEl) calledBadgeEl.textContent = totalCalledCount;
+
+    const countStatusAllEl = document.getElementById('countStatusAll');
+    const countStatusUncalledEl = document.getElementById('countStatusUncalled');
+    const countStatusCallbacksEl = document.getElementById('countStatusCallbacks');
+    const countStatusCalledEl = document.getElementById('countStatusCalled');
+    if (countStatusAllEl) countStatusAllEl.textContent = (window.LEADS_DATA || []).length;
+    if (countStatusUncalledEl) countStatusUncalledEl.textContent = totalUncalledCount;
+    if (countStatusCallbacksEl) countStatusCallbacksEl.textContent = totalCallbackCount;
+    if (countStatusCalledEl) countStatusCalledEl.textContent = totalCalledCount;
 
     const tabBtnLeadsEl = document.getElementById('tabBtnLeads');
     if (tabBtnLeadsEl) tabBtnLeadsEl.textContent = `📋 Lead Queue & Call History (${(window.LEADS_DATA || []).length} Real Targets)`;
@@ -18936,21 +19306,28 @@ window.closeLeakMathModal = function() {
           if (strat.fallbackKey !== currentProductFilter) return false;
         }
       }
-      // 4. Call status filter
-      const isCalled = !!(CALL_RECORDS[lead.id] && CALL_RECORDS[lead.id].called);
+      // 4. Call status & View filter
+      const rec = (typeof getLeadCallRecord === 'function') ? getLeadCallRecord(lead) : ((window.CALL_RECORDS || {})[lead.id]);
+      const isCalled = !!(rec && rec.called);
+      const isCallback = isCalled && (rec.outcome === 'Call Back' || rec.outcome === 'Callback Scheduled');
+
+      // Lead View toggles
       if (currentLeadView === 'toCall' && isCalled) return false;
+      if (currentLeadView === 'callbacks' && !isCallback) return false;
       if (currentLeadView === 'calledHistory' && !isCalled) return false;
+
+      // Status pill filters
       if (currentStatusFilter === 'uncalled' && isCalled) return false;
+      if (currentStatusFilter === 'callbacks' && !isCallback) return false;
       if (currentStatusFilter === 'called' && !isCalled) return false;
+
       // 4b. Caller filter (Who Dialed)
       if (currentCallerFilter !== 'all') {
         if (!isCalled) return false;
-        const callerLower = (CALL_RECORDS[lead.id]?.caller || '').toLowerCase();
+        const callerLower = (rec?.caller || '').toLowerCase();
         if (currentCallerFilter === 'carter' && !callerLower.includes('carter')) return false;
         if (currentCallerFilter === 'lucas' && !callerLower.includes('lucas')) return false;
         if (currentCallerFilter === 'luke' && !callerLower.includes('luke')) return false;
-        if (currentCallerFilter === 'james' && !callerLower.includes('james')) return false;
-        // caller filter
       }
       // 4c. Team Size / Employee Count filter (Target Small Local Businesses)
       if (currentEmpFilter !== 'all') {
@@ -19026,8 +19403,8 @@ window.closeLeakMathModal = function() {
     }
 
     displayed.forEach(lead => {
-      const isCalled = !!(CALL_RECORDS[lead.id] && CALL_RECORDS[lead.id].called);
-      const rec = CALL_RECORDS[lead.id] || {};
+      const rec = ((typeof getLeadCallRecord === 'function') ? getLeadCallRecord(lead) : ((window.CALL_RECORDS || {})[lead.id])) || {};
+      const isCalled = !!(rec && rec.called);
       const leadState = lead.state || (lead.city.includes(', ') ? lead.city.split(', ')[1] : 'FL');
       const strat = getLeadOfferStrategy(lead);
       const lossDetails = getExactAfterHoursLossDetails(lead);
@@ -19369,8 +19746,14 @@ window.closeLeakMathModal = function() {
     }
 
     const totalInBatch = batchLeads.length;
-    const calledInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called).length;
-    const demosInBatch = batchLeads.filter(l => CALL_RECORDS[l.id]?.called && (CALL_RECORDS[l.id]?.outcome === 'Success' || CALL_RECORDS[l.id]?.outcome === 'Booked Demo')).length;
+    const calledInBatch = batchLeads.filter(l => {
+      const r = (typeof getLeadCallRecord === 'function') ? getLeadCallRecord(l) : ((window.CALL_RECORDS || {})[l.id]);
+      return r && r.called;
+    }).length;
+    const demosInBatch = batchLeads.filter(l => {
+      const r = (typeof getLeadCallRecord === 'function') ? getLeadCallRecord(l) : ((window.CALL_RECORDS || {})[l.id]);
+      return r && r.called && (r.outcome === 'Success' || r.outcome === 'Booked Demo');
+    }).length;
     const uncalledInBatch = Math.max(0, totalInBatch - calledInBatch);
     const pct = totalInBatch > 0 ? Math.round((calledInBatch / totalInBatch) * 100) : 0;
 

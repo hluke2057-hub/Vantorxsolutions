@@ -884,7 +884,7 @@ const formattedNewLeads = RAW_75_LEADS.map((raw, index) => {
     annualLoss: annualLoss,
     netSavings: netSavings,
     painPoint: PAIN_POINTS[raw.trade] || PAIN_POINTS.HVAC,
-    batch: 3,
+    batch: 7,
     employeeTier: is3Staff ? 'smallCrew' : 'smallCrew',
     employeeTierName: `${emp} Staff · Owner in Field`,
     employeeLabel: `${emp} Staff - Small Local Sweet Spot`,
