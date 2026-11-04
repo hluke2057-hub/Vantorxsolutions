@@ -54,7 +54,7 @@ async function render() {
   const browser = await puppeteer.launch({
     executablePath: edgePath,
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--allow-file-access-from-files']
   });
 
   const page = await browser.newPage();
@@ -114,6 +114,14 @@ async function render() {
 
   const stat = fs.statSync(outMp4);
   console.log(`\n🎉 SUCCESS! Rendered master MP4: ${outMp4} (${(stat.size / (1024*1024)).toFixed(2)} MB)`);
+
+  const brainMp4 = 'C:/Users/hungr/.gemini/antigravity/brain/b805e771-e1c1-4976-afc1-cd59dd49eae0/vantorx-speed-to-lead-reel.mp4';
+  try {
+    fs.copyFileSync(outMp4, brainMp4);
+    console.log(`Synced to Artifact Directory: ${brainMp4}`);
+  } catch (err) {
+    console.warn('Artifact copy warning:', err.message);
+  }
 }
 
 render().catch(err => {
