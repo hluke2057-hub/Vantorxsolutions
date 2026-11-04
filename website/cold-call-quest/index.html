@@ -749,62 +749,137 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
   <!-- 🚪 Quest Closer Sign In Gate Modal -->
 <div class="modal-overlay" id="questSignInModal" style="z-index:99999;background:rgba(5,8,14,0.94);backdrop-filter:blur(14px)">
   <div class="modal-card" style="max-width:440px;border:1px solid rgba(245,158,11,0.4);box-shadow:0 0 50px rgba(0,0,0,0.9),0 0 25px rgba(245,158,11,0.18)">
-    <div style="text-align:center;margin-bottom:20px">
+    <div style="text-align:center;margin-bottom:18px">
       <div style="width:56px;height:56px;margin:0 auto 12px;border-radius:14px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.4);display:flex;align-items:center;justify-content:center;font-size:28px">⚔️</div>
       <h2 style="font-family:var(--font-head);font-size:22px;color:#ffffff;margin:0 0 6px">Sign In to Cold Call RPG</h2>
-      <p style="font-size:13px;color:var(--dim);margin:0">Enter your name and personal email to access your RPG combat track and sync progress.</p>
+      <p style="font-size:13px;color:var(--dim);margin:0">Secure closer combat access with PIN authentication.</p>
     </div>
 
-    <!-- ⚡ Fast-Track 1-Click Closer Logins -->
-    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px;margin-bottom:16px;text-align:center">
-      <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;color:var(--accent2);text-transform:uppercase;margin-bottom:8px">⚡ Fast-Track 1-Click Login</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <button type="button" class="hud-btn gold" id="btnQuestLoginCarter" onclick="window.loginAsQuestRep('carter_mccauliss')" style="width:100%;font-weight:700;padding:10px;justify-content:center;box-shadow:0 0 15px rgba(245,158,11,0.25)">
-          ⚔️ Log In as Carter McCauliss (Level 5 Auto-Pass 🏆)
-        </button>
-        <button type="button" class="hud-btn gold" id="btnQuestLoginJames" onclick="window.loginAsQuestRep('james_mccullohs')" style="width:100%;font-weight:700;padding:10px;justify-content:center;box-shadow:0 0 15px rgba(56,189,248,0.25);border-color:rgba(56,189,248,0.5);color:#7dd3fc">
-          ⚔️ Log In as James McCullohs (Level 5 Auto-Pass 🏆)
-        </button>
-        <button type="button" class="hud-btn" id="btnQuestLoginLucas" onclick="window.loginAsQuestRep('lucas')" style="width:100%;font-weight:600;padding:8px;border-color:rgba(52,211,153,0.4);color:#6ee7b7;justify-content:center">
-          🎯 Log In as Lucas (Level 5 Auto-Pass 🏆)
-        </button>
+    <!-- 🔒 Closer Sign-In With PIN Verification -->
+    <div style="background:rgba(245,158,11,0.08);border:1.5px solid rgba(245,158,11,0.35);border-radius:12px;padding:14px;margin-bottom:18px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.06em;color:var(--accent2);text-transform:uppercase">🔒 Closer Account Sign-In</span>
+        <span style="font-size:10.5px;font-family:var(--font-mono);color:var(--dim)">PIN Required</span>
       </div>
+      
+      <div style="margin-bottom:10px">
+        <label style="display:block;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:4px">Select Account</label>
+        <select id="questGateCloserSelect" class="custom-select" style="width:100%;font-size:13.5px;padding:10px 12px;font-weight:700" onchange="onQuestGateCloserSelectChange(this.value)">
+          <option value="luke">👑 Luke the Closer (Founder)</option>
+          <option value="carter_mccauliss">⚔️ Carter McCauliss</option>
+          <option value="lucas">🎯 Lucas (Closer)</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom:12px">
+        <label style="display:block;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:4px">4-Digit Security PIN or Passcode</label>
+        <input type="password" id="questGateCloserPinInput" placeholder="Enter Security PIN (••••)" class="custom-select" style="width:100%;font-size:15px;text-align:center;letter-spacing:0.2em;padding:10px 12px;font-family:var(--font-mono)" maxlength="20" autocomplete="current-password" onkeydown="if(event.key==='Enter') handleQuestGateCloserLogin();">
+        <div id="questGateCloserPinError" style="display:none;color:#f87171;font-size:11.5px;font-weight:700;margin-top:6px;text-align:center">
+          ❌ Incorrect PIN for this closer. Access denied.
+        </div>
+      </div>
+
+      <button type="button" class="hud-btn gold" id="btnQuestUnlockCloser" onclick="handleQuestGateCloserLogin()" style="width:100%;padding:11px;font-size:13.5px;font-weight:800;justify-content:center">
+        🔑 Authenticate &amp; Unlock Quest ➔
+      </button>
+    </div>
+
+    <!-- Divider -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <div style="flex:1;height:1px;background:var(--line)"></div>
+      <span style="font-size:10px;font-family:var(--font-mono);color:var(--dim);text-transform:uppercase;letter-spacing:0.06em">OR REGISTER NEW CLOSER</span>
+      <div style="flex:1;height:1px;background:var(--line)"></div>
     </div>
 
     <form id="questSignInGateForm" onsubmit="handleQuestSignInGateSubmit(event)">
-      <div style="margin-bottom:14px">
-        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Your Full Name</label>
-        <input type="text" id="questGateNameInput" placeholder="e.g. Roman Vance" class="custom-input" style="width:100%;font-size:14px;padding:10px 14px" required autocomplete="name">
+      <div style="margin-bottom:12px">
+        <label style="display:block;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:4px">Your Full Name</label>
+        <input type="text" id="questGateNameInput" placeholder="e.g. Roman Vance" class="custom-select" style="width:100%;font-size:13.5px;padding:9px 12px" required autocomplete="name">
       </div>
 
-      <div style="margin-bottom:14px">
-        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Your Personal Email</label>
-        <input type="email" id="questGateEmailInput" placeholder="e.g. roman@gmail.com" class="custom-input" style="width:100%;font-size:14px;padding:10px 14px" required autocomplete="email">
+      <div style="margin-bottom:12px">
+        <label style="display:block;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:4px">Your Personal Email</label>
+        <input type="email" id="questGateEmailInput" placeholder="e.g. roman@gmail.com" class="custom-select" style="width:100%;font-size:13.5px;padding:9px 12px" required autocomplete="email">
       </div>
 
-      <div style="margin-bottom:18px">
-        <label style="display:block;font-size:11.5px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:6px">Role Track</label>
-        <select id="questGateRoleSelect" class="custom-input" style="width:100%;font-size:13.5px;padding:10px 14px;background:var(--bg)">
-          <option value="Outbound Closer">Outbound Closer (RPG Combat Track)</option>
+      <div style="margin-bottom:12px">
+        <label style="display:block;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:4px">Role Track</label>
+        <select id="questGateRoleSelect" class="custom-select" style="width:100%;font-size:13px;padding:9px 12px">
+          <option value="Outbound Closer">Outbound Closer (3-Day Certification Track)</option>
           <option value="Appointment Setter">Appointment Setter (Speed-to-Lead)</option>
           <option value="Sales Rep (Commission)">Sales Rep (Commission)</option>
         </select>
       </div>
 
-      <button type="submit" class="hud-btn gold" id="btnQuestGateSignIn" style="width:100%;padding:12px;font-size:14.5px;font-weight:700;justify-content:center;box-shadow:0 0 15px rgba(245,158,11,0.25);margin-bottom:12px">
-        Enter Cold Call RPG ➔
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:4px">Create 4-Digit Security PIN</label>
+        <input type="password" id="questGateNewPinInput" placeholder="Set 4-digit PIN (e.g. 1234)" class="custom-select" style="width:100%;font-size:14px;padding:9px 12px;letter-spacing:0.15em;text-align:center;font-family:var(--font-mono)" maxlength="10" required autocomplete="new-password">
+      </div>
+
+      <button type="submit" class="hud-btn" id="btnQuestGateSignIn" style="width:100%;padding:11px;font-size:13.5px;font-weight:700;margin-bottom:12px;justify-content:center">
+        Enter Cold Call RPG Combat ➔
       </button>
 
-      <div style="text-align:center;padding-top:10px;border-top:1px solid var(--line)">
-        <button type="button" class="btn btn-ghost btn-sm" onclick="promptFounderQuestLogin()" style="font-size:11.5px;color:var(--dim)">
-          👑 Founder Sign In (Luke)
+      <div style="text-align:center;padding-top:8px;border-top:1px solid var(--line)">
+        <button type="button" class="hud-btn" onclick="promptFounderQuestLogin()" style="font-size:11px;color:var(--dim);border-color:transparent;background:transparent;padding:4px 8px">
+          👑 Founder Direct Sign In (Luke)
         </button>
       </div>
     </form>
   </div>
 </div>
 
-  <!-- 👤 SALES REP ACCOUNT & TELEMETRY ROSTER MODAL -->
+<!-- 🔒 Quest Closer Security PIN Verification Modal -->
+<div class="modal-overlay" id="questCloserAuthModal" style="z-index:100000;background:rgba(5,8,14,0.96);backdrop-filter:blur(16px)">
+  <div class="modal-card" style="max-width:390px;border:1.5px solid rgba(245,158,11,0.5);box-shadow:0 0 50px rgba(0,0,0,0.95), 0 0 25px rgba(245,158,11,0.25);text-align:center;padding:24px 20px">
+    <div style="width:58px;height:58px;margin:0 auto 12px;border-radius:16px;background:rgba(245,158,11,0.12);border:1.5px solid rgba(245,158,11,0.4);display:flex;align-items:center;justify-content:center;font-size:28px" id="questCloserAuthAvatar">
+      🔒
+    </div>
+    <div style="font-size:11px;font-family:var(--font-mono);font-weight:800;color:var(--accent2);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px">
+      SECURITY AUTHENTICATION
+    </div>
+    <h3 style="font-family:var(--font-head);font-size:19px;color:#ffffff;margin:0 0 6px" id="questCloserAuthTitle">
+      Enter Closer PIN
+    </h3>
+    <p style="font-size:12px;color:var(--dim);margin:0 0 16px" id="questCloserAuthDesc">
+      Enter 4-digit security PIN for this account to proceed.
+    </p>
+
+    <div style="margin-bottom:14px">
+      <input type="password" id="questCloserAuthPinInput" placeholder="••••" maxlength="20" class="custom-select" style="text-align:center;font-size:24px;letter-spacing:0.3em;padding:10px 14px;background:#06090e;border:1.5px solid rgba(245,158,11,0.4);border-radius:10px;width:100%;color:#ffffff;font-family:var(--font-mono)" autocomplete="current-password" autofocus onkeydown="if(event.key==='Enter') submitQuestCloserAuth(); else if(event.key==='Escape') cancelQuestCloserAuth();">
+      <div id="questCloserAuthError" style="display:none;color:#f87171;font-size:11.5px;font-weight:700;margin-top:8px">
+        ❌ Incorrect PIN. Access Denied.
+      </div>
+    </div>
+
+    <!-- Quick Virtual Keypad -->
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;max-width:240px;margin:0 auto 18px">
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('1')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">1</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('2')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">2</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('3')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">3</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('4')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">4</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('5')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">5</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('6')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">6</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('7')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">7</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('8')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">8</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('9')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">9</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('clear')" style="padding:10px;font-size:11px;font-weight:700;font-family:var(--font-mono);color:#f87171;justify-content:center">CLR</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('0')" style="padding:10px;font-size:16px;font-weight:700;font-family:var(--font-mono);justify-content:center">0</button>
+      <button type="button" class="hud-btn" onclick="questCloserAuthNumpad('back')" style="padding:10px;font-size:14px;font-weight:700;font-family:var(--font-mono);color:var(--dim);justify-content:center">⌫</button>
+    </div>
+
+    <div style="display:flex;gap:10px">
+      <button type="button" class="hud-btn" onclick="cancelQuestCloserAuth()" style="flex:1;padding:10px;font-size:13px;justify-content:center">
+        Cancel
+      </button>
+      <button type="button" class="hud-btn gold" id="btnQuestCloserAuthSubmit" onclick="submitQuestCloserAuth()" style="flex:1;padding:10px;font-size:13px;font-weight:700;justify-content:center">
+        Unlock ➔
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 👤 SALES REP ACCOUNT & TELEMETRY ROSTER MODAL -->
 <div class="modal-overlay" id="repModal">
   <div class="modal-card" style="max-width:560px">
     <div class="modal-header">
@@ -2140,7 +2215,42 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
   window.openQuestSignInGate = function() {
     const modal = document.getElementById('questSignInModal');
-    if (modal) modal.classList.add('open');
+    if (modal) {
+      modal.classList.add('open');
+      const selectEl = document.getElementById('questGateCloserSelect');
+      if (selectEl) {
+        selectEl.innerHTML = '';
+        let profiles = {};
+        try { profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}'); } catch(e) {}
+        const core = [
+          { id: 'luke', name: '👑 Luke the Closer (Founder)' },
+          { id: 'carter_mccauliss', name: '⚔️ Carter McCauliss' },
+          { id: 'lucas', name: '🎯 Lucas (Closer)' }
+        ];
+        core.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = c.name;
+          selectEl.appendChild(opt);
+        });
+        Object.keys(profiles).forEach(uid => {
+          if (uid === 'luke' || uid === 'carter_mccauliss' || uid === 'lucas' || uid === 'buddy' || uid === 'james' || uid === 'james_mccullohs') return;
+          const u = profiles[uid];
+          if (!u || !u.name) return;
+          const opt = document.createElement('option');
+          opt.value = uid;
+          opt.textContent = `${u.avatar || '👤'} ${u.name}`;
+          selectEl.appendChild(opt);
+        });
+      }
+      const pinInput = document.getElementById('questGateCloserPinInput');
+      if (pinInput) {
+        pinInput.value = '';
+        setTimeout(() => pinInput.focus(), 100);
+      }
+      const errEl = document.getElementById('questGateCloserPinError');
+      if (errEl) errEl.style.display = 'none';
+    }
   };
 
   window.closeQuestSignInGate = function() {
@@ -2148,15 +2258,180 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     if (modal) modal.classList.remove('open');
   };
 
-  window.loginAsQuestRep = function(uid) {
+  window.onQuestGateCloserSelectChange = function(uid) {
+    const pinInput = document.getElementById('questGateCloserPinInput');
+    const errEl = document.getElementById('questGateCloserPinError');
+    if (pinInput) {
+      pinInput.value = '';
+      pinInput.focus();
+    }
+    if (errEl) errEl.style.display = 'none';
+  };
+
+  window.verifyQuestCloserPin = function(uid, pin) {
+    if (!pin) return false;
+    const clean = pin.toString().trim().toLowerCase();
+    let profiles = {};
+    try { profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}'); } catch(e) {}
+    const u = profiles[uid];
+
     if (uid === 'luke') {
-      window.promptFounderQuestLogin();
+      return (clean === '7777' || clean === 'vantorx2026' || clean === 'luke' || clean === 'founder');
+    }
+    if (uid === 'carter_mccauliss' || uid === 'carter') {
+      return (clean === '2026' || clean === 'carter2026');
+    }
+    if (uid === 'lucas') {
+      return (clean === '3030' || clean === 'lucas2026');
+    }
+    if (u) {
+      if (u.pin && clean === u.pin.toString().trim().toLowerCase()) return true;
+      if (u.passcode && clean === u.passcode.toString().trim().toLowerCase()) return true;
+    }
+    return false;
+  };
+
+  let _questAuthPending = null;
+
+  window.promptQuestCloserAuth = function(targetUid, onSuccess, onCancel) {
+    let profiles = {};
+    try { profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}'); } catch(e) {}
+    const target = profiles[targetUid] || { name: targetUid, avatar: '👤' };
+
+    _questAuthPending = { targetUid, onSuccess, onCancel };
+
+    const modal = document.getElementById('questCloserAuthModal');
+    const avatarEl = document.getElementById('questCloserAuthAvatar');
+    const titleEl = document.getElementById('questCloserAuthTitle');
+    const descEl = document.getElementById('questCloserAuthDesc');
+    const inputEl = document.getElementById('questCloserAuthPinInput');
+    const errorEl = document.getElementById('questCloserAuthError');
+
+    if (avatarEl) avatarEl.textContent = target.avatar || '👤';
+    if (titleEl) titleEl.textContent = `Unlock ${target.name}'s Account`;
+    if (descEl) descEl.textContent = `Enter 4-digit security PIN for ${target.name} to proceed.`;
+    if (inputEl) {
+      inputEl.value = '';
+      setTimeout(() => inputEl.focus(), 80);
+    }
+    if (errorEl) {
+      errorEl.style.display = 'none';
+      errorEl.textContent = '';
+    }
+
+    if (modal) modal.classList.add('open');
+  };
+
+  window.questCloserAuthNumpad = function(val) {
+    const inputEl = document.getElementById('questCloserAuthPinInput');
+    if (!inputEl) return;
+    if (val === 'clear') {
+      inputEl.value = '';
+    } else if (val === 'back') {
+      inputEl.value = inputEl.value.slice(0, -1);
+    } else {
+      inputEl.value += val;
+    }
+    inputEl.focus();
+  };
+
+  window.submitQuestCloserAuth = function() {
+    if (!_questAuthPending) return;
+    const inputEl = document.getElementById('questCloserAuthPinInput');
+    const errorEl = document.getElementById('questCloserAuthError');
+    const enteredPin = inputEl ? inputEl.value : '';
+    const targetUid = _questAuthPending.targetUid;
+
+    let profiles = {};
+    try { profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}'); } catch(e) {}
+    const target = profiles[targetUid] || { name: targetUid };
+
+    if (!window.verifyQuestCloserPin(targetUid, enteredPin)) {
+      if (errorEl) {
+        errorEl.textContent = `❌ Incorrect PIN for ${target.name}. Access Denied.`;
+        errorEl.style.display = 'block';
+      }
+      if (inputEl) {
+        inputEl.value = '';
+        inputEl.focus();
+      }
+      showToast(`❌ Access Denied: Incorrect PIN for ${target.name}.`);
       return;
     }
+
+    // Success!
+    const modal = document.getElementById('questCloserAuthModal');
+    if (modal) modal.classList.remove('open');
+    const cb = _questAuthPending.onSuccess;
+    _questAuthPending = null;
+    if (cb) cb();
+  };
+
+  window.cancelQuestCloserAuth = function() {
+    const modal = document.getElementById('questCloserAuthModal');
+    if (modal) modal.classList.remove('open');
+    if (_questAuthPending && _questAuthPending.onCancel) {
+      _questAuthPending.onCancel();
+    }
+    _questAuthPending = null;
+  };
+
+  window.handleQuestGateCloserLogin = function() {
+    const selectEl = document.getElementById('questGateCloserSelect');
+    const pinInput = document.getElementById('questGateCloserPinInput');
+    const errEl = document.getElementById('questGateCloserPinError');
+
+    const uid = selectEl ? selectEl.value : 'luke';
+    const pin = pinInput ? pinInput.value.trim() : '';
+
+    if (!pin) {
+      if (errEl) {
+        errEl.textContent = 'Please enter your 4-digit security PIN.';
+        errEl.style.display = 'block';
+      }
+      if (pinInput) pinInput.focus();
+      return;
+    }
+
+    if (!window.verifyQuestCloserPin(uid, pin)) {
+      if (errEl) {
+        errEl.textContent = '❌ Incorrect PIN for this closer. Access denied.';
+        errEl.style.display = 'block';
+      }
+      if (pinInput) {
+        pinInput.value = '';
+        pinInput.focus();
+      }
+      showToast('❌ Access Denied: Incorrect PIN.');
+      return;
+    }
+
+    window.loginAsQuestRep(uid, pin);
+  };
+
+  window.loginAsQuestRep = function(uid, optPin) {
+    if (!optPin || !window.verifyQuestCloserPin(uid, optPin)) {
+      window.promptQuestCloserAuth(uid, () => {
+        window.loginAsQuestRep(uid, 'verified');
+      });
+      return;
+    }
+
     let profiles = {};
     try {
       profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
     } catch(e) {}
+
+    if (uid === 'luke') {
+      profiles.luke = profiles.luke || { id: 'luke', name: 'Luke the Closer', role: 'Founder & Master Closer', email: 'luke@vantorxsolutions.com', avatar: '👑', level: 5, xp: 1850, bossesDefeated: 8, streak: 5 };
+      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
+      localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+      window.closeQuestSignInGate();
+      initQuestProfile();
+      showToast('👑 Welcome back, Luke! Founder God Mode Active.');
+      return;
+    }
+
     if (uid === 'carter_mccauliss' || uid === 'carter') {
       uid = 'carter_mccauliss';
       if (!profiles.carter_mccauliss) {
@@ -2183,9 +2458,10 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       window.closeQuestSignInGate();
       initQuestProfile();
       syncQuestToCloud('certified', 'Restored Level 5 Certification for Carter McCauliss', profiles.carter_mccauliss);
-      showToast('🏆 Welcome back, Carter! Level 5 Certification & 8 Bosses Slayed restored!');
+      showToast('🏆 Welcome back, Carter! Level 5 Certification & 8 Bosses Slayed unlocked!');
       return;
     }
+
     if (uid === 'lucas') {
       if (!profiles.lucas) {
         profiles.lucas = {
@@ -2211,37 +2487,15 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       window.closeQuestSignInGate();
       initQuestProfile();
       syncQuestToCloud('certified', 'Restored Level 5 Certification for Lucas', profiles.lucas);
-      showToast('🏆 Welcome back, Lucas! Level 5 Certification & 8 Bosses Slayed restored!');
+      showToast('🏆 Welcome back, Lucas! Level 5 Certification & 8 Bosses Slayed unlocked!');
       return;
     }
-    if (uid === 'james_mccullohs' || uid === 'james') {
-      uid = 'james_mccullohs';
-      if (!profiles.james_mccullohs) {
-        profiles.james_mccullohs = {
-          id: 'james_mccullohs',
-          name: 'James McCullohs',
-          role: 'Certified Closer & Phone Warrior',
-          email: 'jcmccullohs@gmail.com',
-          avatar: '⚔️'
-        };
-      }
-      profiles.james_mccullohs.level = 5;
-      profiles.james_mccullohs.xp = 1850;
-      profiles.james_mccullohs.autoPassed = true;
-      profiles.james_mccullohs.founderBypass = true;
-      profiles.james_mccullohs.bossesDefeated = 8;
-      profiles.james_mccullohs.streak = 5;
-      profiles.james_mccullohs.completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
-      profiles.james_mccullohs.daysPassed = [1, 2, 3];
-      profiles.james_mccullohs.lastAction = '🏆 Level 5 Certified · James McCullohs Auto-Pass Active';
-      profiles.james_mccullohs.lastActive = new Date().toISOString();
-      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
-      localStorage.setItem('vantorx_active_user_id_v2', 'james_mccullohs');
+
+    if (profiles[uid]) {
+      localStorage.setItem('vantorx_active_user_id_v2', uid);
       window.closeQuestSignInGate();
       initQuestProfile();
-      syncQuestToCloud('certified', 'Restored Level 5 Certification for James McCullohs', profiles.james_mccullohs);
-      showToast('🏆 Welcome back, James! Level 5 Certification & 8 Bosses Slayed restored!');
-      return;
+      showToast(`✓ Authenticated as ${profiles[uid].name}!`);
     }
   };
 
@@ -2250,10 +2504,12 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     const nameInput = document.getElementById('questGateNameInput');
     const emailInput = document.getElementById('questGateEmailInput');
     const roleSelect = document.getElementById('questGateRoleSelect');
+    const pinInput = document.getElementById('questGateNewPinInput');
 
     const name = nameInput ? nameInput.value.trim() : '';
     const email = emailInput ? emailInput.value.trim() : '';
     const role = roleSelect ? roleSelect.value : 'Outbound Closer';
+    const pin = pinInput ? pinInput.value.trim() : '';
 
     if (!name) {
       showToast('Please enter your full name.');
@@ -2263,102 +2519,67 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       showToast('Please enter a valid personal email.');
       return;
     }
+    if (!pin || pin.length < 4) {
+      showToast('Please create a 4-digit security PIN.');
+      if (pinInput) pinInput.focus();
+      return;
+    }
 
-    const emailLower = email.toLowerCase();
     const nameLower = name.toLowerCase();
+    const emailLower = email.toLowerCase();
 
-    // 1-Click Fast path for Carter McCauliss
+    // Prevent usurping Carter or Lucas without PIN
     if (nameLower.includes('carter') || emailLower.includes('carter')) {
-      return window.loginAsQuestRep('carter_mccauliss');
+      showToast('Carter McCauliss account already exists. Please enter PIN in the account section above.');
+      return;
     }
-
-    // 1-Click Fast path for James McCullohs
-    if (nameLower.includes('james') || emailLower.includes('jcmccullohs') || emailLower.includes('mccullohs')) {
-      return window.loginAsQuestRep('james_mccullohs');
-    }
-
-    // 1-Click Fast path for Lucas
     if (nameLower.includes('lucas') || emailLower.includes('lucas')) {
-      return window.loginAsQuestRep('lucas');
+      showToast('Lucas account already exists. Please enter PIN in the account section above.');
+      return;
+    }
+    if (nameLower.includes('luke') || emailLower.includes('luke')) {
+      showToast('Founder account detected. Please sign in with founder PIN (7777).');
+      return;
     }
 
-    if (emailLower === 'luke@vantorxsolutions.com' || nameLower === 'luke the closer' || nameLower === 'luke hamilton') {
-      const code = prompt('Founder account detected. Please enter master passcode:');
-      if (code && (code.trim().toLowerCase() === 'vantorx2026' || code.trim().toLowerCase() === 'founder' || code.trim().toLowerCase() === 'luke')) {
-        localStorage.setItem('vantorx_active_user_id_v2', 'luke');
-        window.closeQuestSignInGate();
-        initQuestProfile();
-        showToast('👑 Welcome back, Luke! Master Founder Cockpit active.');
-        return;
-      } else {
-        showToast('❌ Founder authentication failed.');
-        return;
-      }
-    }
-
+    const uid = 'rep_' + Date.now().toString(36);
     let profiles = {};
     try {
       profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
     } catch(e) {}
 
-    let foundUid = null;
-    Object.keys(profiles).forEach(uid => {
-      const p = profiles[uid];
-      if (p && ((p.email && p.email.toLowerCase() === emailLower) || (p.name && p.name.toLowerCase() === name.toLowerCase()))) {
-        if (uid !== 'luke' && uid !== 'buddy') foundUid = uid;
-      }
-    });
+    const avatars = ['⚔️', '⚡', '🎯', '🔥', '🛡️', '🚀'];
+    const avatar = avatars[Math.floor(Math.random() * avatars.length)];
 
-    let uid = foundUid;
-    if (!uid) {
-      uid = 'rep_' + Date.now().toString(36);
-      const avatars = ['⚔️', '⚡', '🎯', '🔥', '🛡️', '🚀'];
-      const avatar = avatars[Math.floor(Math.random() * avatars.length)];
-      profiles[uid] = {
-        id: uid,
-        name: name,
-        email: email,
-        role: role,
-        avatar: avatar,
-        level: 1,
-        xp: 0,
-        completedUnits: [],
-        daysPassed: [],
-        bossesDefeated: 0,
-        streak: 0,
-        createdAt: new Date().toISOString(),
-        lastActive: new Date().toISOString(),
-        lastAction: 'Joined Sales Team · Cold Call RPG'
-      };
-      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
-      localStorage.setItem('vantorx_active_user_id_v2', uid);
-      syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role}`, profiles[uid]);
-    } else {
-      profiles[uid].lastActive = new Date().toISOString();
-      profiles[uid].lastAction = 'Signed in to Cold Call RPG';
-      localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
-      localStorage.setItem('vantorx_active_user_id_v2', uid);
-      syncQuestToCloud('progress_update', `Sales closer signed in: ${name} (${email})`, profiles[uid]);
-    }
+    profiles[uid] = {
+      id: uid,
+      name: name,
+      email: email,
+      role: role,
+      pin: pin,
+      avatar: avatar,
+      level: 1,
+      xp: 0,
+      bossesDefeated: 0,
+      dealsClosed: 0,
+      streak: 0,
+      createdAt: new Date().toISOString(),
+      lastActive: new Date().toISOString(),
+      lastAction: 'Registered for Cold Call RPG'
+    };
 
+    localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
     localStorage.setItem('vantorx_active_user_id_v2', uid);
     window.closeQuestSignInGate();
-    selectActiveQuestRep(uid, profiles[uid]);
-    showToast(`✓ Welcome, ${name}! Your closer combat track is active.`);
+    initQuestProfile();
+    syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role} (PIN secured)`, profiles[uid]);
+    showToast(`✓ Welcome, ${name}! Your closer combat track is active and PIN secured.`);
   };
 
   window.promptFounderQuestLogin = function() {
-    const code = prompt('Enter Founder Master Passcode (or founder email):');
-    if (!code) return;
-    const clean = code.trim().toLowerCase();
-    if (clean === 'vantorx2026' || clean === 'luke' || clean === 'luke@vantorxsolutions.com' || clean === 'founder') {
-      localStorage.setItem('vantorx_active_user_id_v2', 'luke');
-      window.closeQuestSignInGate();
-      initQuestProfile();
-      showToast('👑 Welcome back, Luke! Master Founder Cockpit active.');
-    } else {
-      showToast('❌ Incorrect founder passcode.');
-    }
+    window.promptQuestCloserAuth('luke', () => {
+      window.loginAsQuestRep('luke', '7777');
+    });
   };
 
   window.logoutQuestCloser = function() {
@@ -2596,36 +2817,14 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
 
 
   function selectActiveQuestRep(id, profile) {
-    if (id === 'carter_mccauliss' || id === 'carter') {
-      return window.loginAsQuestRep('carter_mccauliss');
-    }
-    if (id === 'lucas') {
-      return window.loginAsQuestRep('lucas');
-    }
-    if (id === 'james_mccullohs' || id === 'james') {
-      return window.loginAsQuestRep('james_mccullohs');
-    }
     const curId = localStorage.getItem('vantorx_active_user_id_v2');
-    const isFounder = curId === 'luke';
-    if (!isFounder && curId && id !== curId) {
-      showToast('⚠️ Restricted: You can only view your own closer profile.');
-      return;
-    }
-    localStorage.setItem('vantorx_active_user_id_v2', id);
-    player.name = profile.name;
-    const nameHdr = document.getElementById('playerNameHeader');
-    if (nameHdr) {
-      nameHdr.innerHTML = `${profile.name} <span class="streak-badge" id="streakHeader">🔥 ${player.streak || 0} Streak</span>`;
-    }
-    const avIcon = document.getElementById('playerAvatarIcon');
-    if (avIcon) avIcon.textContent = profile.avatar || '🗡️';
+    if (id === curId) return;
 
-    renderQuestRepList();
-    savePlayer();
-    syncQuestToCloud('progress_update', `Switched active caller to ${profile.name}`);
-    showToast(`✓ Switched caller profile to ${profile.name}`);
-    closeRepModal();
-    initQuestProfile();
+    window.promptQuestCloserAuth(id, () => {
+      window.loginAsQuestRep(id, 'verified');
+      if (typeof closeRepModal === 'function') closeRepModal();
+      renderQuestRepList();
+    });
   }
   window.selectActiveQuestRep = selectActiveQuestRep;
 
@@ -2643,27 +2842,41 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       return;
     }
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showToast('Please enter a valid email address so Luke can track progress.');
+      showToast('Please enter a valid email address.');
       return;
     }
 
-    const isCarter = (name + ' ' + email).toLowerCase().includes('carter');
-    const isLucas = (name + ' ' + email).toLowerCase().includes('lucas');
-    const isJames = (name + ' ' + email).toLowerCase().includes('james') || (name + ' ' + email).toLowerCase().includes('jcmccullohs') || (name + ' ' + email).toLowerCase().includes('mccullohs');
-    const uid = isCarter ? 'carter_mccauliss' : (isLucas ? 'lucas' : (isJames ? 'james_mccullohs' : ('rep_' + Date.now().toString(36))));
+    const nameLower = name.toLowerCase();
+    const emailLower = email.toLowerCase();
+
+    if (nameLower.includes('carter') || emailLower.includes('carter')) {
+      showToast('Carter McCauliss account already exists. Please switch using his PIN (2026).');
+      return;
+    }
+    if (nameLower.includes('lucas') || emailLower.includes('lucas')) {
+      showToast('Lucas account already exists. Please switch using his PIN (3030).');
+      return;
+    }
+    if (nameLower.includes('luke') || emailLower.includes('luke')) {
+      showToast('Founder account already exists. Please switch using founder PIN (7777).');
+      return;
+    }
+
+    const uid = 'rep_' + Date.now().toString(36);
     let profiles = {};
     try {
       profiles = JSON.parse(localStorage.getItem('vantorx_user_profiles_v2') || '{}');
     } catch(e){}
 
     const avatars = ['⚡', '⚔️', '🎯', '🔥', '🛡️', '🚀'];
-    const avatar = isCarter ? '⚔️' : (isLucas ? '🎯' : (isJames ? '⚔️' : avatars[Math.floor(Math.random() * avatars.length)]));
+    const avatar = avatars[Math.floor(Math.random() * avatars.length)];
 
     profiles[uid] = {
       id: uid,
       name,
       email,
       role,
+      pin: '1234',
       avatar,
       level: 1,
       xp: 0,
@@ -2676,35 +2889,16 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
       lastAction: 'Joined Sales Team · Cold Call RPG'
     };
 
-    if (isCarter || isLucas || isJames) {
-      profiles[uid].level = 5;
-      profiles[uid].xp = 1850;
-      profiles[uid].autoPassed = true;
-      profiles[uid].founderBypass = true;
-      profiles[uid].bossesDefeated = 8;
-      profiles[uid].streak = 5;
-      profiles[uid].completedUnits = ['1-1','1-2','1-3','1-4','1-5','2-1','2-2','2-3','2-4','2-5','3-1','3-2','3-3','3-4','3-5'];
-      profiles[uid].daysPassed = [1, 2, 3];
-      profiles[uid].lastAction = `🏆 Level 5 Certified · ${name || (isCarter ? 'Carter McCauliss' : (isLucas ? 'Lucas' : 'James McCullohs'))} Auto-Pass Active`;
-    }
-
     localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(profiles));
     localStorage.setItem('vantorx_active_user_id_v2', uid);
 
     if (nameInput) nameInput.value = '';
     if (emailInput) emailInput.value = '';
 
-    selectActiveQuestRep(uid, profiles[uid]);
-    syncQuestToCloud((isCarter || isLucas || isJames) ? 'certified' : 'account_created', (isCarter || isLucas || isJames) ? `Restored Level 5 Certification for ${name}` : `New sales closer registered: ${name} (${email}) as ${role}`, profiles[uid]);
-    if (isCarter) {
-      showToast(`🏆 Welcome back, Carter! Level 5 Certification & 8 Bosses Slayed restored!`);
-    } else if (isLucas) {
-      showToast(`🏆 Welcome back, Lucas! Level 5 Certification & 8 Bosses Slayed restored!`);
-    } else if (isJames) {
-      showToast(`🏆 Welcome back, James! Level 5 Certification & 8 Bosses Slayed restored!`);
-    } else {
-      showToast(`✓ Closer account created for ${name}! Added to Luke's roster.`);
-    }
+    window.loginAsQuestRep(uid, 'verified');
+    syncQuestToCloud('account_created', `New sales closer registered: ${name} (${email}) as ${role} (PIN secured)`, profiles[uid]);
+    showToast(`✓ Closer account created for ${name}! Added to Luke's roster.`);
+    if (typeof closeRepModal === 'function') closeRepModal();
   };
 
   function recalcPlayerStats() {
