@@ -19,7 +19,7 @@ async function render() {
   console.log('Output file:', outMp4);
 
   const fps = 30;
-  const duration = 59.3;
+  const duration = 63.0;
   const totalFrames = Math.ceil(duration * fps);
   console.log(`Total frames to render: ${totalFrames} (${duration}s at ${fps} FPS)`);
 
