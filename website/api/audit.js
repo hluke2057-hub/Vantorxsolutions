@@ -75,8 +75,8 @@ async function getRoster() {
         const nameLower = name.toLowerCase();
 
         // Strictly exclude legacy fabricated mock personas & fake vantorx domain emails
-        const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") || key.includes("test@") || key.includes("verify") ||
-                       nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe") || nameLower.includes("buddy") ||
+        const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe")  || key.includes("test@") || key.includes("verify") ||
+                       nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe")  ||
                        (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com");
 
         if (key && !isMock && name) {
@@ -116,8 +116,8 @@ async function getRoster() {
               const key = (email || rep.id).toLowerCase();
               const nameLower = (rep.name || "").toLowerCase();
               // Filter out fabricated mock personas
-              const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe") || key.includes("buddy") || key.includes("test@") || key.includes("verify") ||
-                             nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe") || nameLower.includes("buddy") ||
+              const isMock = key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe")  || key.includes("test@") || key.includes("verify") ||
+                             nameLower.includes("marcus") || nameLower.includes("jake") || nameLower.includes("tyler") || nameLower.includes("probe")  ||
                              (email.endsWith("@vantorxsolutions.com") && email !== "luke@vantorxsolutions.com");
 
               if (key && !isMock) {
@@ -278,6 +278,40 @@ async function getRoster() {
         dealsClosed: 14,
         bestGrade: "S",
         gold: 1250
+      }
+    });
+  }
+
+    // Ensure Buddy profile is present with Level 5 Auto-Pass
+  const hasBuddy = uniqueReps.some(r => r.id === "buddy" || r.id === "buddy2" || (r.name && r.name.toLowerCase().includes("buddy")));
+  if (!hasBuddy) {
+    uniqueReps.push({
+      id: "buddy",
+      name: "Buddy (Closer)",
+      email: "buddy@vantorxsolutions.com",
+      role: "Certified Closer & Phone Warrior",
+      avatar: "🤝",
+      createdAt: "2026-10-21T14:00:00.000Z",
+      lastActive: new Date().toISOString(),
+      lastAction: "🏆 Level 5 Certified Closer · Buddy Auto-Pass Active",
+      course: {
+        completedUnits: ["1-1", "1-2", "1-3", "1-4", "1-5", "2-1", "2-2", "2-3", "2-4", "2-5", "3-1", "3-2", "3-3", "3-4", "3-5"],
+        daysPassed: ["Day 1: Psychology & Objections", "Day 2: Leak Math & Pricing", "Day 3: Emergency Live Closes"],
+        percent: 100,
+        level: 5,
+        xp: 1850,
+        status: "🏆 Level 5 Certified"
+      },
+      game: {
+        level: 5,
+        xp: 1850,
+        streak: 5,
+        bossesDefeated: 8,
+        bossList: ["Rick", "Karen", "Mike", "Dave", "Sal", "Brad", "Gary", "Vito"],
+        totalDials: 30,
+        dealsClosed: 12,
+        bestGrade: "S",
+        gold: 1100
       }
     });
   }
@@ -523,7 +557,7 @@ async function handleRepSync(req, res) {
   }
 
   const keyCheck = (name + " " + email + " " + repId).toLowerCase();
-  if (keyCheck.includes("marcus") || keyCheck.includes("jake") || keyCheck.includes("tyler") || keyCheck.includes("probe") || keyCheck.includes("buddy")) {
+  if (keyCheck.includes("marcus") || keyCheck.includes("jake") || keyCheck.includes("tyler") || keyCheck.includes("probe")) {
     return res.status(200).json({ ok: true, ignored: true, message: "Legacy mock persona ignored." });
   }
 
@@ -586,7 +620,8 @@ async function handleRepSync(req, res) {
   const isCarter = (name + " " + (email || "") + " " + existing.id).toLowerCase().includes("carter");
   const isLucas = (name + " " + (email || "") + " " + existing.id).toLowerCase().includes("lucas");
   const isJames = (name + " " + (email || "") + " " + existing.id).toLowerCase().includes("james") || (email || "").toLowerCase().includes("jcmccullohs");
-  if (isCarter || isLucas || isJames) {
+  const isBuddy = (name + " " + (email || "") + " " + existing.id).toLowerCase().includes("buddy");
+  if (isCarter || isLucas || isJames || isBuddy) {
     existing.course = {
       completedUnits: ["1-1", "1-2", "1-3", "1-4", "1-5", "2-1", "2-2", "2-3", "2-4", "2-5", "3-1", "3-2", "3-3", "3-4", "3-5"],
       daysPassed: ["Day 1: Psychology & Objections", "Day 2: Leak Math & Pricing", "Day 3: Emergency Live Closes"],
@@ -679,7 +714,7 @@ async function handleRepDigest(req, res) {
   // Filter out any mock personas so only real signups appear
   const roster = allReps.filter(r => {
     const key = (r.id || r.email || "").toLowerCase();
-    return !key.includes("marcus") && !key.includes("jake") && !key.includes("tyler") && !key.includes("probe") && !key.includes("buddy2");
+    return !key.includes("marcus") && !key.includes("jake") && !key.includes("tyler") && !key.includes("probe");
   });
   const now = Date.now();
   const oneDayMs = 24 * 60 * 60 * 1000;
@@ -849,7 +884,7 @@ module.exports = async function handler(req, res) {
     const allReps = await getRoster();
     const cleanRoster = allReps.filter(r => {
       const key = (r.id || r.email || "").toLowerCase();
-      return !key.includes("marcus") && !key.includes("jake") && !key.includes("tyler") && !key.includes("probe") && !key.includes("buddy2");
+      return !key.includes("marcus") && !key.includes("jake") && !key.includes("tyler") && !key.includes("probe") ;
     });
     return res.status(200).json({ ok: true, roster: cleanRoster });
   }

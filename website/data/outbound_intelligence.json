@@ -7,7 +7,7 @@
     "learningEngine": "Thompson Sampling Multi-Armed Bandit with 48h Ghosting Penalty",
     "currentWinRate": "0.0%",
     "benchmarkGoal": "90%+",
-    "targetGoal": "15-Minute Zoom Call Booking"
+    "targetGoal": "10-Minute Live Demo Booking"
   },
   "dispatchSettings": {
     "senderName": "Luke",
@@ -27,7 +27,7 @@
     "unopenedDecayPenalty": 0.25,
     "minOpenRateBenchmark": "25.0%",
     "autoSubjectMutation": true,
-    "zoomCtaTarget": "15-Minute Screen Share Walkthrough"
+    "zoomCtaTarget": "10-Minute Live Interactive Demo"
   },
   "metrics": {
     "totalSent": 775,

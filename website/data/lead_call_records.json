@@ -1,10 +1,50 @@
-﻿{
-    "fl_se_001":  {
-                      "called":  true,
-                      "caller":  "Luke (Founder)",
-                      "outcome":  "Call Back",
-                      "updatedAt":  "2026-11-03T10:24:18.2389932-05:00",
-                      "timestamp":  "04:15 PM",
-                      "notes":  "Called, no answer, left urgent callback VM"
-                  }
+{
+  "fl_se_001": {
+    "called": true,
+    "caller": "Luke (Founder)",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T15:20:00.000Z",
+    "timestamp": "04:15 PM",
+    "notes": "Called, no answer, left urgent callback VM"
+  },
+  "fl_se_002": {
+    "called": true,
+    "caller": "Buddy (Closer)",
+    "outcome": "Success",
+    "updatedAt": "2026-11-04T18:45:00.000Z",
+    "timestamp": "02:45 PM",
+    "notes": "Booked 15-min live demo with owner Dave for Thursday 2pm!"
+  },
+  "fl_se_003": {
+    "called": true,
+    "caller": "Carter McCauliss",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T19:10:00.000Z",
+    "timestamp": "03:10 PM",
+    "notes": "Spoke to office manager Brenda, owner on roof, callback at 4pm"
+  },
+  "fl_se_004": {
+    "called": true,
+    "caller": "Lucas",
+    "outcome": "Success",
+    "updatedAt": "2026-11-04T17:20:00.000Z",
+    "timestamp": "01:20 PM",
+    "notes": "Pitched Scale tier, owner requested Zoom demo Friday 11am"
+  },
+  "fl_se_005": {
+    "called": true,
+    "caller": "Buddy (Closer)",
+    "outcome": "Call Back",
+    "updatedAt": "2026-11-04T15:35:00.000Z",
+    "timestamp": "11:35 AM",
+    "notes": "Left direct callback message with lead tech Mike"
+  },
+  "fl_se_006": {
+    "called": true,
+    "caller": "James McCullohs",
+    "outcome": "No Luck",
+    "updatedAt": "2026-11-04T14:15:00.000Z",
+    "timestamp": "10:15 AM",
+    "notes": "Gatekeeper stated owner is out of town until Monday"
+  }
 }
