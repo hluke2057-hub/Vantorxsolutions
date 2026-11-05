@@ -694,14 +694,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <span style="font-size:11px;font-family:var(--font-mono);color:var(--accent2);background:rgba(245,158,11,0.2);padding:2px 8px;border-radius:999px">👤 My Profile &amp; History</span>
       </div>
 
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">SWITCH CLOSER:</span>
-        <select id="quickRepSelect" class="custom-select" style="font-size:13px;padding:6px 12px;background:var(--bg);border:1px solid rgba(245,158,11,0.3);border-radius:8px;color:#fff;font-weight:700" onchange="quickSwitchCaller(this.value)">
-          <option value="luke">👑 Luke (Founder)</option>
-          <option value="carter_mccauliss">⚔️ Carter McCauliss</option>
-          <option value="lucas">🎯 Lucas (Closer)</option>
-        </select>
-      </div>
+      <button class="btn btn-ghost btn-xs" type="button" onclick="logoutCloser()" style="font-size:11.5px;color:var(--dim);border:1px solid var(--line);padding:5px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:5px" title="Lock session &amp; switch account">
+        🔒 <span>Lock / Switch Closer</span>
+      </button>
 
       <!-- Live Closer Stats Pill -->
       <div id="closerLiveStatsPill" onclick="openAccountModal()" style="cursor:pointer;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:5px 14px;border-radius:10px;font-size:13px" title="Click to see your call history">
@@ -845,33 +840,34 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <div class="daily-batch-banner">
         <div class="batch-hud-grid">
           <div class="batch-title-area">
-            <h3><span>🎯</span> <span id="batchHeadingText">ACTIVE COLD CALL QUEUE: 100 TARGETS (+75 ADDED DAILY)</span></h3>
+            <h3><span>🎯</span> <span id="batchHeadingText">ACTIVE COLD CALL QUEUE: 100 TARGETS (+100 ADDED DAILY)</span></h3>
             <div class="batch-subtitle">
-              <span id="todayDateDisplay">Wednesday, October 21, 2026</span> · Starts with 100 nationwide leads · +75 fresh leads added every 24h · Hit [➕ Add +75 Leads Now] anytime!
+              <span id="todayDateDisplay">Today</span> · 100 fresh verified trade contractor leads added daily · 0 fake numbers · 100% verified real businesses
             </div>
           </div>
           <div class="batch-controls">
             <div style="display:flex;align-items:center;gap:6px">
               <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">QUEUE:</span>
               <select id="batchSelect" class="custom-select" style="font-weight:700">
-                <option value="all" selected>All 346 Real Verified Leads (Strictly 2-10 Staff)</option>
+                <option value="today100" selected>☀️ Today's 100 Fresh Leads</option>
+                <option value="all">📋 All Available Verified Leads (346 Targets)</option>
                 <option value="1">Batch 1: Palm Beach &amp; Broward (50 Real Targets)</option>
                 <option value="2">Batch 2: Miami-Dade &amp; South FL (50 Real Targets)</option>
                 <option value="3">Batch 3: Tampa Bay &amp; Gulf Coast (50 Real Targets)</option>
                 <option value="4">Batch 4: Orlando &amp; Central FL (50 Real Targets)</option>
                 <option value="5">Batch 5: Jacksonville &amp; North FL (50 Real Targets)</option>
                 <option value="6">Batch 6: Southwest Florida (21 Real Targets)</option>
-                <option value="7">⭐ Batch 7: Fresh 75 Verified Additions (North &amp; Central FL, Panhandle · 75 Targets)</option>
+                <option value="7">⭐ Batch 7: Fresh 75 Verified Additions (North &amp; Central FL · 75 Targets)</option>
               </select>
             </div>
-            <button class="btn btn-gold btn-sm" id="btnAdd75Leads" style="font-weight:700" title="Expand your active queue with +75 fresh leads immediately">➕ Add +75 Leads Now</button>
-            <div style="display:flex;align-items:center;gap:6px">
-              <span style="font-size:12px;color:var(--dim);font-family:var(--font-mono)">REP:</span>
-              <select id="callerSelect" class="custom-select" style="max-width:140px">
-                <option value="Luke Hamilton">Luke (Founder)</option>
-                <option value="Carter McCauliss">Carter McCauliss</option>
-                <option value="Lucas">Lucas</option>
-              </select>
+            <button class="btn btn-gold btn-sm" id="btnAdd100Leads" onclick="expandQueue100Leads()" style="font-weight:700" title="Expand your active queue with +100 fresh leads immediately">➕ Add +100 Fresh Leads</button>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div id="activeRepBadge" style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);padding:5px 12px;border-radius:8px">
+                <span id="activeRepAvatar" style="font-size:14px">👑</span>
+                <span style="font-size:11px;font-family:var(--font-mono);font-weight:700;color:#f59e0b">REP:</span>
+                <span id="activeRepNameDisplay" style="font-size:12.5px;font-weight:700;color:#ffffff">Luke (Founder)</span>
+              </div>
+              <button class="btn btn-ghost btn-xs" type="button" onclick="logoutCloser()" style="font-size:11px;color:var(--dim);border:1px solid var(--line);padding:4px 8px" title="Lock session & switch closer account">🚪 Switch</button>
             </div>
             <button class="btn btn-ghost btn-sm" id="btnSyncTeamCalls" title="Sync live call records with teammates" style="border:1px solid rgba(56,189,248,0.4);color:#38bdf8;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px">
               <span id="teamCallSyncDot" style="width:8px;height:8px;background:#34d399;border-radius:50%;display:inline-block"></span>
@@ -967,10 +963,10 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
         <!-- Call Status Filter Pills -->
         <div class="lead-pills">
-          <button class="lead-pill-btn active" data-status-filter="all">All Status (<span id="countStatusAll">25</span>)</button>
-          <button class="lead-pill-btn" data-status-filter="uncalled">⏳ Remaining To Call (<span id="countStatusUncalled">25</span>)</button>
-          <button class="lead-pill-btn" data-status-filter="callbacks">📞 Scheduled Callbacks (<span id="countStatusCallbacks">7</span>)</button>
-          <button class="lead-pill-btn" data-status-filter="called">✅ Logged Calls (<span id="countStatusCalled">19</span>)</button>
+          <button class="lead-pill-btn active" data-status-filter="all">All Status (<span id="countStatusAll">100</span>)</button>
+          <button class="lead-pill-btn" data-status-filter="uncalled">⏳ Remaining To Call (<span id="countStatusUncalled">100</span>)</button>
+          <button class="lead-pill-btn" data-status-filter="callbacks">📞 Scheduled Callbacks (<span id="countStatusCallbacks">0</span>)</button>
+          <button class="lead-pill-btn" data-status-filter="called">✅ Logged Calls (<span id="countStatusCalled">0</span>)</button>
         </div>
 
         <!-- Rep Caller Filter Pills (Who Dialed) -->
@@ -5490,13 +5486,22 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         </select>
       </div>
 
-      <div style="margin-bottom:16px">
+      <div style="margin-bottom:12px">
         <label style="display:block;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;margin-bottom:4px">Create 4-Digit Security PIN</label>
         <input type="password" id="gateNewPinInput" placeholder="Set 4-digit PIN (e.g. 1234)" class="custom-select" style="width:100%;font-size:14px;padding:9px 12px;letter-spacing:0.15em;text-align:center;font-family:var(--font-mono)" maxlength="10" required autocomplete="new-password">
       </div>
 
-      <button type="submit" class="btn btn-secondary" id="btnGateSignIn" style="width:100%;padding:11px;font-size:13.5px;font-weight:700;margin-bottom:12px">
-        Register New Closer &amp; Start Academy ➔
+      <div style="margin-bottom:16px;background:rgba(245,158,11,0.08);border:1.5px dashed rgba(245,158,11,0.45);border-radius:10px;padding:12px">
+        <label style="display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:800;color:var(--accent2);text-transform:uppercase;margin-bottom:4px">
+          <span>🔑 Team Invite Access Code</span>
+          <span style="font-size:10px;font-family:var(--font-mono);color:#f59e0b">Required from Luke</span>
+        </label>
+        <input type="password" id="gateAccessCodeInput" placeholder="Enter Team Invite Code" class="custom-select" style="width:100%;font-size:14px;padding:9px 12px;letter-spacing:0.15em;text-align:center;font-family:var(--font-mono);border-color:rgba(245,158,11,0.5)" required autocomplete="off">
+        <div style="font-size:11px;color:var(--dim);margin-top:5px;text-align:center">Must be given by Luke (Founder) to register and join the team.</div>
+      </div>
+
+      <button type="submit" class="btn btn-gold" id="btnGateSignIn" style="width:100%;padding:12px;font-size:14px;font-weight:800;margin-bottom:12px;box-shadow:0 4px 15px rgba(245,158,11,0.3)">
+        Register Account &amp; Enter Arena ➔
       </button>
 
       <div style="text-align:center;padding-top:8px;border-top:1px solid var(--line)">
@@ -5762,34 +5767,71 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <button class="btn btn-gold btn-sm" id="btnToggleFounderBypass" onclick="toggleFounderBypass()">Bypass: ON</button>
     </div>
 
-    <!-- Switch Existing Account -->
-    <div style="margin-bottom:20px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <label style="display:block;font-size:12.5px;font-weight:600;color:var(--dim);margin:0;font-family:var(--font-mono)" id="accountModalListLabel">CALLER PROFILE:</label>
-        <button class="btn btn-ghost btn-sm" id="btnModalEmailDigest" onclick="triggerFounderDigest()" style="font-size:11.5px;padding:3px 8px;color:var(--accent2);border-color:rgba(245,158,11,0.3)">📧 Email Digest</button>
+    <!-- Founder Admin Team Management Container (Only shown to Luke) -->
+    <div id="adminTeamManagementContainer" style="display:none">
+      <!-- Team Sign-Up Invite Access Code Panel -->
+      <div style="background:rgba(245,158,11,0.08);border:1.5px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px 16px;margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="font-size:11.5px;font-family:var(--font-mono);font-weight:800;color:var(--accent2);text-transform:uppercase">🔑 Team Sign-Up Invite Access Code</div>
+          <span style="font-size:10.5px;color:var(--dim)">Founder Control</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+          <input type="text" id="adminTeamInviteCodeInput" class="custom-select" style="font-family:var(--font-mono);font-size:13.5px;font-weight:700;letter-spacing:0.1em;padding:7px 12px;max-width:220px;border-color:rgba(245,158,11,0.5)" placeholder="VANTORX2026">
+          <button class="btn btn-gold btn-sm" type="button" onclick="saveAdminInviteCode()" style="font-size:12px;font-weight:700;padding:7px 14px">Save Code</button>
+        </div>
+        <div style="font-size:11px;color:var(--dim);margin-top:5px">Give this code to new closers to allow them to register an account in the Arena.</div>
       </div>
-      <div id="accountProfileList" style="display:flex;flex-direction:column;gap:8px;max-height:160px;overflow-y:auto">
-        <!-- Rendered dynamically -->
+
+      <!-- Team Closers Roster & Access Management -->
+      <div style="margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--dim);margin:0;font-family:var(--font-mono)" id="accountModalListLabel">TEAM ROSTER &amp; ACCESS CONTROL:</label>
+          <button class="btn btn-ghost btn-sm" id="btnModalEmailDigest" onclick="triggerFounderDigest()" style="font-size:11.5px;padding:3px 8px;color:var(--accent2);border-color:rgba(245,158,11,0.3)">📧 Email Digest</button>
+        </div>
+        <div id="accountProfileList" style="display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto">
+          <!-- Rendered dynamically -->
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btnArenaDigest" onclick="triggerFounderDigest()" style="width:100%;margin-top:10px;font-size:12px;font-weight:700">📧 Email Team Progress Digest to Luke</button>
       </div>
-      <button class="btn btn-secondary btn-sm" id="btnArenaDigest" onclick="triggerFounderDigest()" style="width:100%;margin-top:10px;font-size:12px;font-weight:700">📧 Email Team Progress Digest to Luke</button>
+
+      <!-- Create New Rep Account Form (Admin Quick-Add) -->
+      <div style="border-top:1px solid var(--line);padding-top:16px;margin-bottom:14px" id="adminCreateRepContainer">
+        <div style="font-size:13px;font-weight:700;color:#ffffff;margin-bottom:10px">➕ Admin Add Closer Account</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <input type="text" id="newRepName" placeholder="Full Name" class="custom-select" style="width:100%" required>
+          <input type="email" id="newRepEmail" placeholder="Email" class="custom-select" style="width:100%" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <select id="newRepRole" class="custom-select" style="width:100%">
+            <option value="Outbound Closer">Outbound Closer</option>
+            <option value="Appointment Setter">Appointment Setter</option>
+            <option value="Sales Rep (Commission)">Sales Rep (Commission)</option>
+          </select>
+          <input type="password" id="newRepPin" placeholder="Set 4-Digit PIN" class="custom-select" style="width:100%;text-align:center;font-family:var(--font-mono);letter-spacing:0.1em" maxlength="10">
+        </div>
+        <button class="btn btn-gold" id="btnCreateAccount" onclick="createNewAccountFromModal()" style="width:100%;font-weight:700">Add Closer &amp; Grant Access ➔</button>
+      </div>
     </div>
 
-    <!-- Create New Rep Account Form -->
-    <div style="border-top:1px solid var(--line);padding-top:16px">
-      <div style="font-size:13px;font-weight:700;color:#ffffff;margin-bottom:10px">➕ Create New Sales Rep Account</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-        <input type="text" id="newRepName" placeholder="Full Name (e.g. Jason Miller)" class="custom-select" style="width:100%" required>
-        <input type="email" id="newRepEmail" placeholder="Email (e.g. jason@gmail.com)" class="custom-select" style="width:100%" required>
+    <!-- Regular Closer Account View (Shown when not Luke) -->
+    <div id="repSelfAccountContainer" style="display:none;background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:24px" id="repSelfAvatar">⚔️</span>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#ffffff" id="repSelfName">Closer</div>
+            <div style="font-size:11.5px;color:var(--dim)" id="repSelfEmail">closer@vantorxsolutions.com</div>
+          </div>
+        </div>
+        <span style="font-size:11px;color:var(--ok);font-weight:700;background:rgba(52,211,153,0.12);padding:4px 8px;border-radius:6px;border:1px solid rgba(52,211,153,0.3)">🟢 Active Closer</span>
       </div>
-      <div style="margin-bottom:10px">
-        <select id="newRepRole" class="custom-select" style="width:100%">
-          <option value="Outbound Closer">Outbound Closer (3-Day Certification Track)</option>
-          <option value="Appointment Setter">Appointment Setter (Speed-to-Lead)</option>
-          <option value="Sales Rep (Commission)">Sales Rep (Commission)</option>
-          <option value="Junior Trainee">Junior Trainee</option>
-        </select>
-      </div>
-      <button class="btn btn-gold" id="btnCreateAccount" onclick="createNewAccountFromModal()" style="width:100%;font-weight:700">Create Rep Account &amp; Start Academy ➔</button>
+    </div>
+
+    <!-- Sign Out / Lock Session Button -->
+    <div style="border-top:1px solid var(--line);padding-top:14px">
+      <button class="btn btn-secondary btn-sm" type="button" onclick="logoutCloser()" style="width:100%;font-size:12.5px;font-weight:700;border:1px solid rgba(248,113,113,0.4);color:#fca5a5">
+        🚪 Sign Out &amp; Lock Cockpit
+      </button>
     </div>
   </div>
 </div>
@@ -14981,6 +15023,7 @@ window.closeLeakMathModal = function() {
   if (!USER_PROFILES.luke) USER_PROFILES.luke = DEFAULT_PROFILES.luke;
   if (!USER_PROFILES.carter_mccauliss) USER_PROFILES.carter_mccauliss = DEFAULT_PROFILES.carter_mccauliss;
   if (!USER_PROFILES.lucas) USER_PROFILES.lucas = DEFAULT_PROFILES.lucas;
+  window.USER_PROFILES = USER_PROFILES;
 
   // Ensure security PINs exist on all core profiles
   if (USER_PROFILES.luke) {
@@ -15061,7 +15104,7 @@ window.closeLeakMathModal = function() {
     localStorage.setItem('vantorx_user_profiles_v2', JSON.stringify(USER_PROFILES));
   } catch(e) {}
 
-  let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || 'luke';
+  let activeUserId = localStorage.getItem('vantorx_active_user_id_v2') || null;
   try {
     const urlUserParam = new URLSearchParams(window.location.search).get('user') || new URLSearchParams(window.location.search).get('login');
     if (urlUserParam) {
@@ -15134,6 +15177,11 @@ window.closeLeakMathModal = function() {
     const clean = pin.toString().trim().toLowerCase();
     const u = USER_PROFILES[uid];
     if (!u) return false;
+
+    // Check if account has been booted / revoked by Luke
+    if (u.status === 'revoked' || u.isBooted === true) {
+      return 'BOOTED';
+    }
 
     // Luke (Founder)
     if (uid === 'luke' || u.isFounder) {
@@ -15311,7 +15359,18 @@ window.closeLeakMathModal = function() {
       return;
     }
 
-    if (!window.verifyCloserPin(uid, pin)) {
+    const verifyStatus = window.verifyCloserPin(uid, pin);
+    if (verifyStatus === 'BOOTED') {
+      if (errEl) {
+        errEl.textContent = '🚫 ACCESS REVOKED: This account has been deactivated by Luke (Founder).';
+        errEl.style.display = 'block';
+      }
+      playSound('wrong');
+      showToast('🚫 ACCESS REVOKED: Account deactivated by Luke.');
+      return;
+    }
+
+    if (!verifyStatus) {
       const u = USER_PROFILES[uid];
       const targetName = u ? u.name : 'this closer';
       if (errEl) {
@@ -15462,6 +15521,21 @@ window.closeLeakMathModal = function() {
       updateUserUI();
       playSound('levelup');
       showToast(`✓ Welcome back, ${USER_PROFILES[foundUid].name}!`);
+      return;
+    }
+
+    // VERIFY TEAM INVITE ACCESS CODE
+    const accessCodeInput = document.getElementById('gateAccessCodeInput');
+    const enteredAccessCode = (accessCodeInput ? accessCodeInput.value : '').trim();
+    const authorizedCode = (localStorage.getItem('vantorx_team_invite_code') || 'VANTORX2026').trim();
+
+    if (!enteredAccessCode || enteredAccessCode.toUpperCase() !== authorizedCode.toUpperCase()) {
+      showToast('❌ Access Code Required: You must enter the authorized invite code provided by Luke to join the team.');
+      playSound('wrong');
+      if (accessCodeInput) {
+        accessCodeInput.focus();
+        accessCodeInput.style.borderColor = '#ef4444';
+      }
       return;
     }
 
@@ -15778,10 +15852,17 @@ window.closeLeakMathModal = function() {
     try {
       const storedId = localStorage.getItem('vantorx_active_user_id_v2');
       if (storedId && USER_PROFILES[storedId]) {
+        const u = USER_PROFILES[storedId];
+        if (u.status === 'revoked' || u.isBooted === true) {
+          localStorage.removeItem('vantorx_active_user_id_v2');
+          activeUserId = null;
+          window.openSignInGate();
+          showToast('🚫 ACCESS REVOKED: Your account access has been deactivated by Luke (Founder).', 6000);
+          return;
+        }
         activeUserId = storedId;
-      } else if (!storedId) {
-        activeUserId = 'luke';
-        localStorage.setItem('vantorx_active_user_id_v2', 'luke');
+      } else {
+        activeUserId = null;
       }
       const user = getActiveUser();
       const isLoggedOut = !activeUserId || activeUserId === 'guest' || !USER_PROFILES[activeUserId];
@@ -15906,20 +15987,12 @@ window.closeLeakMathModal = function() {
       }
 
       // 3. Caller Select in Leads Table
-      callerSelectEl = callerSelectEl || document.getElementById('callerSelect');
-      if (callerSelectEl) {
-        let found = false;
-        for (let i = 0; i < callerSelectEl.options.length; i++) {
-          if (callerSelectEl.options[i].value === user.name) found = true;
-        }
-        if (!found && !isLoggedOut) {
-          const o = document.createElement('option');
-          o.value = user.name;
-          o.textContent = user.name;
-          callerSelectEl.appendChild(o);
-        }
-        callerSelectEl.value = user.name;
-      }
+      // Update Active Rep badge
+      const repAvatarEl = document.getElementById('activeRepAvatar');
+      const repNameEl = document.getElementById('activeRepNameDisplay');
+      if (repAvatarEl) repAvatarEl.textContent = user.avatar || (isFounder ? '👑' : '⚔️');
+      if (repNameEl) repNameEl.textContent = isLoggedOut ? 'Sign In Required' : user.name;
+
       activeCaller = user.name;
       try { localStorage.setItem('vantorx_active_caller', activeCaller); } catch(e) {}
 
@@ -15965,7 +16038,8 @@ window.closeLeakMathModal = function() {
 
   function updateLeadGateVisibility() {
     const user = getActiveUser();
-    const isUnlocked = user.level >= 5 || user.founderBypass === true;
+    // Simplified: always unlocked for all authenticated active team members
+    const isUnlocked = true;
     const gateCard = document.getElementById('leadsLockedGate');
     const tableContainer = document.getElementById('leadsTableContainer');
 
@@ -15974,8 +16048,8 @@ window.closeLeakMathModal = function() {
         gateCard.style.display = 'none';
         tableContainer.style.display = 'block';
       } else {
-        gateCard.style.display = 'block';
-        tableContainer.style.display = 'none';
+        gateCard.style.display = 'none';
+        tableContainer.style.display = 'block';
 
         const curLevel = document.getElementById('gateCurLevel');
         const curXp = document.getElementById('gateCurXp');
@@ -16978,66 +17052,132 @@ window.closeLeakMathModal = function() {
     btnFounderOverride.addEventListener('click', window.activateFounderBypass);
   }
 
+  window.bootTeamRep = function(uid, skipConfirm = false) {
+    const u = USER_PROFILES[uid];
+    if (!u) return;
+    if (uid === 'luke' || uid === 'founder_luke' || u.isFounder) {
+      showToast('⚠️ Cannot revoke the Founder account.');
+      return;
+    }
+    if (!skipConfirm) {
+      const confirmed = confirm(`⚠️ Are you sure you want to boot ${u.name}?\n\nThis will immediately revoke their access and lock them out of the Cold Call Arena.`);
+      if (!confirmed) return;
+    }
+
+    u.status = 'revoked';
+    u.isBooted = true;
+    u.revokedAt = new Date().toISOString();
+    saveUserProfiles();
+    syncRepToCloud(u, 'revoked', `Closer access revoked by Luke`);
+    renderAccountProfileList();
+    if (typeof window.renderLeaderboardUI === 'function') window.renderLeaderboardUI();
+    showToast(`🚫 ${u.name} has been booted and locked out of the arena.`);
+  };
+
+  window.reinstateTeamRep = function(uid) {
+    const u = USER_PROFILES[uid];
+    if (!u) return;
+    u.status = 'active';
+    u.isBooted = false;
+    delete u.revokedAt;
+    saveUserProfiles();
+    syncRepToCloud(u, 'reinstated', `Closer access reinstated by Luke`);
+    renderAccountProfileList();
+    if (typeof window.renderLeaderboardUI === 'function') window.renderLeaderboardUI();
+    showToast(`✓ ${u.name}'s closer access has been reinstated!`);
+  };
+
+  window.saveAdminInviteCode = function() {
+    const input = document.getElementById('adminTeamInviteCodeInput');
+    if (!input) return;
+    const newCode = input.value.trim();
+    if (!newCode || newCode.length < 4) {
+      showToast('❌ Invite code must be at least 4 characters.');
+      return;
+    }
+    localStorage.setItem('vantorx_team_invite_code', newCode);
+    showToast(`✓ Team Invite Access Code updated to: ${newCode}`);
+  };
+
   function renderAccountProfileList() {
     const list = document.getElementById('accountProfileList');
-    if (!list) return;
-    list.innerHTML = '';
+    const adminContainer = document.getElementById('adminTeamManagementContainer');
+    const repSelfContainer = document.getElementById('repSelfAccountContainer');
     const activeU = getActiveUser();
     const isFounder = activeU && (activeU.isFounder === true || activeUserId === 'luke');
 
-    const lbl = document.getElementById('accountModalListLabel');
-    if (lbl) {
-      lbl.textContent = isFounder ? 'ALL SALES TEAM ROSTER:' : 'YOUR CLOSER PROFILE:';
+    // 1. Founder vs Rep View Isolation
+    if (adminContainer && repSelfContainer) {
+      if (isFounder) {
+        adminContainer.style.display = 'block';
+        repSelfContainer.style.display = 'none';
+        const inviteInput = document.getElementById('adminTeamInviteCodeInput');
+        if (inviteInput) {
+          inviteInput.value = localStorage.getItem('vantorx_team_invite_code') || 'VANTORX2026';
+        }
+      } else {
+        adminContainer.style.display = 'none';
+        repSelfContainer.style.display = 'block';
+        const selfAvatar = document.getElementById('repSelfAvatar');
+        const selfName = document.getElementById('repSelfName');
+        const selfEmail = document.getElementById('repSelfEmail');
+        if (selfAvatar) selfAvatar.textContent = activeU.avatar || '⚔️';
+        if (selfName) selfName.textContent = activeU.name;
+        if (selfEmail) selfEmail.textContent = activeU.email || `${activeU.name.toLowerCase().replace(/\s+/g, '')}@vantorxsolutions.com`;
+        return; // Non-admin reps only see their own account!
+      }
     }
 
-    let uidsToRender = [];
-    if (isFounder) {
-      uidsToRender = Object.keys(USER_PROFILES);
-    } else if (activeUserId && USER_PROFILES[activeUserId]) {
-      uidsToRender = [activeUserId];
-    }
+    if (!list) return;
+    list.innerHTML = '';
+
+    const uidsToRender = Object.keys(USER_PROFILES);
 
     uidsToRender.forEach(uid => {
       const u = USER_PROFILES[uid];
       if (!u) return;
-      if (!isFounder && (uid === 'buddy' || uid === 'rep_buddy_2' || uid === 'luke' || uid === 'founder_luke')) return;
+      if (uid === 'buddy' || uid === 'rep_buddy_2' || uid === 'founder_luke') return;
 
       const isCur = uid === activeUserId;
+      const isBooted = u.status === 'revoked' || u.isBooted === true;
+      const isSelfFounder = uid === 'luke' || u.isFounder;
+
       const row = document.createElement('div');
       row.style.display = 'flex';
       row.style.alignItems = 'center';
       row.style.justifyContent = 'space-between';
-      row.style.background = isCur ? 'rgba(245,158,11,0.14)' : 'var(--bg)';
-      row.style.border = isCur ? '1.5px solid var(--accent)' : '1px solid var(--line)';
+      row.style.background = isCur ? 'rgba(245,158,11,0.14)' : (isBooted ? 'rgba(239,68,68,0.08)' : 'var(--bg)');
+      row.style.border = isCur ? '1.5px solid var(--accent)' : (isBooted ? '1px solid rgba(239,68,68,0.4)' : '1px solid var(--line)');
       row.style.borderRadius = '8px';
       row.style.padding = '8px 12px';
-      row.style.cursor = isFounder ? 'pointer' : 'default';
+      row.style.gap = '10px';
 
-      const isCert = (u.daysPassed && u.daysPassed.length >= 3) || u.autoPassed || u.isFounder || u.level >= 5;
-      const pct = Math.min(100, Math.round(((u.completedUnits || []).length / 15) * 100));
+      const callsCount = Object.values(window.CALL_RECORDS || {}).filter(c => c && c.called && (c.caller || '').toLowerCase().includes(u.name.toLowerCase())).length;
+
       row.innerHTML = `
-        <div style="display:flex;align-items:center;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0">
           <span style="font-size:18px">${u.avatar || '👤'}</span>
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#ffffff">${u.name} ${isCur ? '<span style="font-size:10px;color:var(--accent2)">(Active)</span>' : ''}</div>
-            <div style="font-size:11px;color:var(--dim)">${u.role}${u.email ? ' · ' + u.email : ''}</div>
-            <div style="font-size:10.5px;color:${isCert ? 'var(--ok)' : 'var(--accent2)'};margin-top:2px">
-              ${isCert ? '🏆 Level 5 Certified' : `Level ${u.level} · ${pct}% Course Complete (${(u.daysPassed || []).length}/3 Days)`} · ⚔️ ${u.bossesDefeated || 0} Bosses
+          <div style="min-width:0;flex:1">
+            <div style="display:flex;align-items:center;gap:6px">
+              <span style="font-size:13px;font-weight:700;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${u.name}</span>
+              ${isCur ? '<span style="font-size:10px;color:var(--accent2);font-weight:700">(Active)</span>' : ''}
+              ${isBooted ? '<span style="font-size:10px;color:#f87171;font-weight:800;background:rgba(239,68,68,0.2);padding:2px 6px;border-radius:4px">🔴 REVOKED</span>' : '<span style="font-size:10px;color:#34d399;font-weight:800;background:rgba(52,211,153,0.15);padding:2px 6px;border-radius:4px">🟢 ACTIVE</span>'}
+            </div>
+            <div style="font-size:11px;color:var(--dim)">${u.role}${u.email ? ' · ' + u.email : ''} · PIN: ${isSelfFounder ? '••••' : (u.pin || '2026')}</div>
+            <div style="font-size:10.5px;color:var(--dim);margin-top:2px">
+              📞 ${callsCount} calls logged · 🏅 Level ${u.level || 1}
             </div>
           </div>
         </div>
-        ${isFounder ? `<button class="btn btn-ghost btn-sm" style="font-size:11.5px;padding:4px 8px">${isCur ? '✓ Using' : 'Switch ➔'}</button>` : `<span style="font-size:11.5px;color:var(--ok);font-weight:700">✓ Your Account</span>`}
+        <div style="display:flex;align-items:center;gap:6px">
+          ${!isSelfFounder ? (
+            isBooted ? 
+            `<button class="btn btn-ghost btn-xs" type="button" onclick="reinstateTeamRep('${uid}')" style="font-size:11px;color:#34d399;border:1px solid rgba(52,211,153,0.4);padding:3px 8px">🟢 Reinstate</button>` :
+            `<button class="btn btn-ghost btn-xs" type="button" onclick="bootTeamRep('${uid}')" style="font-size:11px;color:#f87171;border:1px solid rgba(239,68,68,0.4);padding:3px 8px" title="Immediately revoke access and lock out rep">🔴 Boot Rep</button>`
+          ) : '<span style="font-size:11px;color:var(--accent2);font-weight:700">👑 Founder</span>'}
+          ${(!isCur && !isBooted) ? `<button class="btn btn-ghost btn-xs" type="button" onclick="closeAccountModal(); quickSwitchCaller('${uid}')" style="font-size:11px;padding:3px 8px">Switch ➔</button>` : ''}
+        </div>
       `;
-
-      if (isFounder) {
-        row.addEventListener('click', () => {
-          if (uid === activeUserId) return;
-          const accountModal = document.getElementById('accountModal');
-          if (accountModal) accountModal.classList.remove('active');
-          window.quickSwitchCaller(uid);
-        });
-      }
-
       list.appendChild(row);
     });
   }
@@ -17050,160 +17190,7 @@ window.closeLeakMathModal = function() {
   // ============================================================
   // 📋 LEAD DISPATCHER, DAILY 25-LEAD ENGINE & CALL TRACKER
   // ============================================================
-  const SEED_CALL_RECORDS = {
-  "pb_001": {
-    "called": true,
-    "caller": "Luke (Founder)",
-    "outcome": "Call Back",
-    "updatedAt": "2026-11-04T15:20:00.000Z",
-    "timestamp": "04:15 PM",
-    "notes": "Spoke with front desk, owner in field, callback scheduled for 4pm"
-  },
-  "pb_002": {
-    "called": true,
-    "caller": "Carter McCauliss",
-    "outcome": "Success",
-    "updatedAt": "2026-11-04T18:45:00.000Z",
-    "timestamp": "02:45 PM",
-    "notes": "Booked 15-min live demo with owner Dave for Thursday 2pm!"
-  },
-  "pb_003": {
-    "called": true,
-    "caller": "Carter McCauliss",
-    "outcome": "Call Back",
-    "updatedAt": "2026-11-04T19:10:00.000Z",
-    "timestamp": "03:10 PM",
-    "notes": "Spoke to office manager Brenda, owner on jobsite, callback at 3:30pm"
-  },
-  "pb_004": {
-    "called": true,
-    "caller": "Lucas",
-    "outcome": "Call Back",
-    "updatedAt": "2026-11-04T17:20:00.000Z",
-    "timestamp": "01:20 PM",
-    "notes": "Pitched Scale tier, owner requested callback Friday 11am"
-  },
-  "pb_005": {
-    "called": true,
-    "caller": "Luke (Founder)",
-    "outcome": "Success",
-    "updatedAt": "2026-11-04T16:30:00.000Z",
-    "timestamp": "12:30 PM",
-    "notes": "Booked live Ava demo with owner Mike for tomorrow 10am!"
-  },
-  "pb_006": {
-    "called": true,
-    "caller": "Carter McCauliss",
-    "outcome": "Call Back",
-    "updatedAt": "2026-11-04T14:15:00.000Z",
-    "timestamp": "10:15 AM",
-    "notes": "Gatekeeper scheduled callback for owner Steve at 4:30pm"
-  },
-  "pb_007": {
-    "called": true,
-    "caller": "Lucas",
-    "outcome": "Call Back",
-    "updatedAt": "2026-11-04T13:45:00.000Z",
-    "timestamp": "09:45 AM",
-    "notes": "Owner in attic, receptionist set 3pm callback"
-  },
-  "pb_008": {
-    "called": true,
-    "caller": "Luke (Founder)",
-    "outcome": "No Luck",
-    "updatedAt": "2026-11-04T12:10:00.000Z",
-    "timestamp": "08:10 AM",
-    "notes": "Voicemail left on after-hours emergency line"
-  },
-  "pb_009": {
-    "called": true,
-    "caller": "Carter McCauliss",
-    "outcome": "No Luck",
-    "updatedAt": "2026-11-04T11:20:00.000Z",
-    "timestamp": "07:20 AM",
-    "notes": "Left message with dispatch coordinator"
-  },
-  "pb_010": {
-    "called": true,
-    "caller": "Lucas",
-    "outcome": "No Luck",
-    "updatedAt": "2026-11-04T10:50:00.000Z",
-    "timestamp": "06:50 AM",
-    "notes": "Automated IVR queue reached, left callback request"
-  },
-  "pb_011": {
-    "called": true,
-    "caller": "Luke (Founder)",
-    "outcome": "Success",
-    "updatedAt": "2026-11-03T16:00:00.000Z",
-    "timestamp": "04:00 PM",
-    "notes": "Booked demo for Accelerate package with owner Frank"
-  },
-  "pb_012": {
-    "called": true,
-    "caller": "Luke (Founder)",
-    "outcome": "Success",
-    "updatedAt": "2026-11-02T15:30:00.000Z",
-    "timestamp": "03:30 PM",
-    "notes": "Demo booked with Apex Plumbing owner Tom"
-  },
-  "pb_013": {
-    "called": true,
-    "caller": "Carter McCauliss",
-    "outcome": "Success",
-    "updatedAt": "2026-11-03T14:00:00.000Z",
-    "timestamp": "02:00 PM",
-    "notes": "Booked 20-min demo for Ava Voice AI with Sun Coast HVAC"
-  },
-  "pb_014": {
-    "called": true,
-    "caller": "Lucas",
-    "outcome": "Success",
-    "updatedAt": "2026-11-02T17:15:00.000Z",
-    "timestamp": "05:15 PM",
-    "notes": "Booked demo with Gold Coast Electric owner Sam"
-  },
-  "pb_015": {
-    "called": true,
-    "caller": "Luke (Founder)",
-    "outcome": "Call Back",
-    "updatedAt": "2026-11-03T11:00:00.000Z",
-    "timestamp": "11:00 AM",
-    "notes": "Follow up on pricing sheet with owner"
-  },
-  "pb_016": {
-    "called": true,
-    "caller": "Carter McCauliss",
-    "outcome": "Call Back",
-    "updatedAt": "2026-11-02T13:00:00.000Z",
-    "timestamp": "01:00 PM",
-    "notes": "Scheduled afternoon follow-up on leak math"
-  },
-  "pb_017": {
-    "called": true,
-    "caller": "Luke (Founder)",
-    "outcome": "Success",
-    "updatedAt": "2026-11-01T16:00:00.000Z",
-    "timestamp": "04:00 PM",
-    "notes": "Month-start blitz: Booked Scale demo with regional contractor"
-  },
-  "pb_018": {
-    "called": true,
-    "caller": "Carter McCauliss",
-    "outcome": "Success",
-    "updatedAt": "2026-11-01T15:00:00.000Z",
-    "timestamp": "03:00 PM",
-    "notes": "Booked demo with Titan HVAC owner"
-  },
-  "pb_019": {
-    "called": true,
-    "caller": "Lucas",
-    "outcome": "Success",
-    "updatedAt": "2026-11-01T14:30:00.000Z",
-    "timestamp": "02:30 PM",
-    "notes": "Demo scheduled for Saturday morning"
-  }
-};
+  const SEED_CALL_RECORDS = {};
 
   // Legacy ID mapping (maps old 825 directory IDs to verified 346 lead IDs)
   const LEGACY_ID_MAP = {
@@ -17391,9 +17378,16 @@ window.closeLeakMathModal = function() {
   try {
     const _storedCalls = JSON.parse(localStorage.getItem('vantorx_lead_calls_v1'));
     if (_storedCalls && typeof _storedCalls === 'object' && Object.keys(_storedCalls).length > 0) {
-      CALL_RECORDS = { ...SEED_CALL_RECORDS, ..._storedCalls };
+      CALL_RECORDS = { ..._storedCalls };
+      // Purge legacy mock calls from local storage
+      const mockLeadIds = ['pb_001', 'pb_002', 'pb_003', 'pb_004', 'pb_005', 'pb_006', 'pb_007', 'pb_008', 'pb_009', 'pb_010', 'pb_011', 'pb_012', 'pb_013', 'pb_014', 'pb_015', 'pb_016', 'pb_017', 'pb_018', 'pb_019'];
+      mockLeadIds.forEach(sid => {
+        if (CALL_RECORDS[sid] && (CALL_RECORDS[sid].notes?.includes('front desk') || CALL_RECORDS[sid].notes?.includes('Booked 15-min live demo') || CALL_RECORDS[sid].updatedAt?.startsWith('2026-11-01') || CALL_RECORDS[sid].updatedAt?.startsWith('2026-11-04'))) {
+          delete CALL_RECORDS[sid];
+        }
+      });
     } else {
-      CALL_RECORDS = { ...SEED_CALL_RECORDS };
+      CALL_RECORDS = {};
     }
     // Auto-migrate any legacy keys to new IDs so callbacks and call logs are never lost
     for (const [oldId, newId] of Object.entries(LEGACY_ID_MAP)) {
@@ -17789,9 +17783,9 @@ window.closeLeakMathModal = function() {
   };
 
   function isDateInPeriod(dateStr, period) {
-    if (!dateStr) return true;
+    if (!dateStr) return false;
     const d = new Date(dateStr);
-    if (isNaN(d.getTime())) return true;
+    if (isNaN(d.getTime())) return false;
     const now = new Date();
 
     if (period === 'daily') {
@@ -17823,6 +17817,7 @@ window.closeLeakMathModal = function() {
         if (!u) return;
         const kl = k.toLowerCase();
         if (kl.includes('buddy') || kl.includes('james')) return;
+        if (u.status === 'revoked' || u.isBooted === true) return; // Skip booted closers
         closerMap[k] = {
           id: k,
           name: u.name || k,
@@ -17856,14 +17851,16 @@ window.closeLeakMathModal = function() {
       else if (callerStr.includes('luke')) assignedId = 'luke';
       else {
         for (const cid in closerMap) {
-          if (callerStr.includes(closerMap[cid].name.toLowerCase())) {
+          const cName = (closerMap[cid].name || '').toLowerCase().trim();
+          if (cName && (callerStr === cName || callerStr.includes(cName) || cName.includes(callerStr))) {
             assignedId = cid;
             break;
           }
         }
       }
 
-      if (!assignedId) assignedId = 'luke';
+      // STRICT: Never default unknown calls to Luke! If unassigned or booted, ignore.
+      if (!assignedId || !closerMap[assignedId]) continue;
 
       const closer = closerMap[assignedId];
       if (!closer) continue;
@@ -18634,7 +18631,7 @@ window.closeLeakMathModal = function() {
     // Lead Intake Active: Unpaused & Growing (+75 daily auto growth + manual additions)
   const isIntakePaused = false;
   const effectiveDays = daysSinceLaunch;
-  const autoDailyAdditions = effectiveDays * 75; // autoDailyAdditions = daysSinceLaunch * 75;
+  const autoDailyAdditions = effectiveDays * 100;
 
   let manualAdditions = 0;
   try {
@@ -18649,9 +18646,19 @@ window.closeLeakMathModal = function() {
 
   function getTodayFreshRange() {
     const limit = getActiveQueueLimit();
-    const start = Math.max(0, limit - 75);
+    const start = Math.max(0, limit - 100);
     return { start, end: limit };
   }
+
+  window.expandQueue100Leads = function() {
+    manualAdditions += 100;
+    try {
+      localStorage.setItem('vantorx_manual_lead_additions', manualAdditions.toString());
+    } catch(e) {}
+    renderLeadsTable();
+    updateQuotaHUD();
+    showToast(`✓ +100 Verified Leads added to active queue! (Active queue: ${getActiveQueueLimit()} leads)`);
+  };
   window.LEADS_DATA = LEADS_DATA;
   window.getActiveQueueLimit = getActiveQueueLimit;
   window.getTodayFreshRange = getTodayFreshRange;
@@ -18769,7 +18776,7 @@ window.closeLeakMathModal = function() {
   }
   window.populateModalCallHistory = populateModalCallHistory;
 
-  let currentBatch = 'all';
+  let currentBatch = 'today100';
   let currentProductFilter = 'all';
   let currentStateFilter = 'all';
   let currentStatusFilter = 'all'; // 'all', 'uncalled', 'called'
@@ -19289,7 +19296,7 @@ window.closeLeakMathModal = function() {
       } else if (!isCustomFilter) {
         if (currentBatch === 'activeQueue') {
           if (index >= activeLimit) return false;
-        } else if (currentBatch === 'todayFresh') {
+        } else if (currentBatch === 'todayFresh' || currentBatch === 'today100') {
           if (index < freshRange.start || index >= freshRange.end) return false;
         }
       }
