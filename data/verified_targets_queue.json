@@ -6903,15 +6903,15 @@
     "service": "24/7 AI Phone Receptionist (Ava)",
     "estLoss": "$9,400/mo",
     "painPoint": "Burst pipe emergency calls going to voicemail while techs are on active service runs",
-    "subject": "Quick question for Frank regarding Mister Plumber Inc. emergency calls",
+    "subject": "Re: Quick question for Frank regarding Mister Plumber Inc. emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a1a24c-6b88-7ede-b7d6-1bbbc61c8d48",
-    "sentAt": "2026-11-03T16:44:39.744Z",
+    "touch": 2,
+    "resendMessageId": "01a1aca4-bab6-799f-acac-4337403513fd",
+    "sentAt": "2026-11-05T16:57:19.340Z",
     "mx_status": "VERIFIED",
     "mx_host": ".",
     "website": "https://misterplumberinc.com",
-    "body": "Hi Frank,\n\nSaw your solid reputation in West Palm Beach, FL — congrats on building a trusted local brand.\n\nI was auditing local Plumbing providers in West Palm Beach, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Plumbing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Mister Plumber Inc. roughly $9,400/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_016\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "body": "Hi Frank,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Mister Plumber Inc..\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_016\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_se_017",
@@ -6949,15 +6949,15 @@
     "service": "Scale Enterprise Tier (,297/mo)",
     "estLoss": "$19,500/mo",
     "painPoint": "High lead response latency on digital web forms across Palm Beach and Broward",
-    "subject": "Quick question for Sansone Family regarding Sansone Air Conditioning, Electrical & Plumbing emergency calls",
+    "subject": "Re: Quick question for Sansone Family regarding Sansone Air Conditioning, Electrical & Plumbing emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a1a24c-6c22-7bf8-b0a0-53c971d6f640",
-    "sentAt": "2026-11-03T16:44:39.888Z",
+    "touch": 2,
+    "resendMessageId": "01a1aca4-bb91-714f-a565-31fe7af3711d",
+    "sentAt": "2026-11-05T16:57:19.554Z",
     "mx_status": "VERIFIED",
     "mx_host": "us-smtp-inbound-1.mimecast.com",
     "website": "https://sansone-ac.com",
-    "body": "Hi Sansone Family,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Deerfield Beach, FL.\n\nWhile Sansone Air Conditioning, Electrical & Plumbing has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_018\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Deerfield Beach, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "body": "Hi Sansone Family,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Sansone Air Conditioning, Electrical & Plumbing.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_018\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_se_019",
@@ -9264,10 +9264,11 @@
     "estLoss": "$9,900/mo",
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
     "subject": "Quick question for Terry regarding Terry Vereen Plumbing emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1aca4-bc42-78ef-bec4-e4b4860b469e",
+    "sentAt": "2026-11-05T16:57:19.730Z",
+    "body": "Hi Terry,\n\nSaw your solid reputation in Jacksonville, FL — congrats on building a trusted local brand.\n\nI was auditing local Plumbing providers in Jacksonville, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Plumbing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Terry Vereen Plumbing roughly $9,900/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_279\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_ver_280",
@@ -9283,10 +9284,11 @@
     "estLoss": "$9,900/mo",
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
     "subject": "Quick question for Robert regarding Turner Plumbing Co. emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1aca4-bd04-794f-ad36-3e86b0fcf36a",
+    "sentAt": "2026-11-05T16:57:19.929Z",
+    "body": "Hi Robert,\n\nSaw your solid reputation in Jacksonville, FL — congrats on building a trusted local brand.\n\nI was auditing local Plumbing providers in Jacksonville, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Plumbing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Turner Plumbing Co. roughly $9,900/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_280\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_ver_281",
@@ -9302,10 +9304,11 @@
     "estLoss": "$9,100/mo",
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
     "subject": "Quick question for Larry regarding Couf Plumbing emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1aca4-bd7f-703c-8a86-cbdd07eb50ea",
+    "sentAt": "2026-11-05T16:57:20.048Z",
+    "body": "Hi Larry,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Plumbing contractors in Jacksonville, FL.\n\nWhile Couf Plumbing has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Plumbing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_281\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Plumbing in Jacksonville, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_ver_282",
