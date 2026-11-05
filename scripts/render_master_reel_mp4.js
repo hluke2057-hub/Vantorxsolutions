@@ -30,8 +30,8 @@ async function render() {
     '-i', '-',
     '-i', audioPath,
     '-c:v', 'libx264',
-    '-preset', 'fast',
-    '-crf', '20',
+    '-preset', 'veryfast',
+    '-crf', '21',
     '-pix_fmt', 'yuv420p',
     '-c:a', 'aac',
     '-b:a', '192k',
@@ -58,11 +58,15 @@ async function render() {
   });
 
   const page = await browser.newPage();
+  page.setDefaultTimeout(0);
+  page.setDefaultNavigationTimeout(0);
+
   const htmlPath = path.resolve('website/demo/reel-creator.html');
   await page.goto('file:///' + htmlPath.replace(/\\/g, '/'), { waitUntil: 'load' });
+  await new Promise(r => setTimeout(r, 1200));
 
-  // Render in batches of 45 frames
-  const batchSize = 45;
+  // Render in batches of 30 frames
+  const batchSize = 30;
   let frameIdx = 0;
   const startTime = Date.now();
 
@@ -74,11 +78,13 @@ async function render() {
 
     const base64Batch = await page.evaluate(async (start, count, frameRate) => {
       const results = [];
+      const cvs = document.getElementById('reelCanvas');
       for (let i = 0; i < count; i++) {
         const t = (start + i) / frameRate;
-        window.renderFrame(t);
-        // canvas is 540x960
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.88);
+        if (typeof window.renderFrame === 'function') {
+          window.renderFrame(t);
+        }
+        const dataUrl = cvs.toDataURL('image/jpeg', 0.88);
         results.push(dataUrl.slice(23)); // strip 'data:image/jpeg;base64,'
       }
       return results;

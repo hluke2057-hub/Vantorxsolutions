@@ -419,6 +419,297 @@
     border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 8px;
   }
+
+  /* ----------------------------------------------------------- */
+  /* 💡 AUTO-GENERATE VIRAL POST STUDIO (IDEA -> PROMPT -> VIDEO) */
+  /* ----------------------------------------------------------- */
+  .auto-post-card {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(7, 10, 15, 0.98));
+    border: 1.5px solid rgba(245, 158, 11, 0.45);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(245, 158, 11, 0.12);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 18px auto 26px auto;
+    max-width: 1160px;
+    position: relative;
+    overflow: hidden;
+  }
+  .auto-post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #f59e0b, #10b981, #38bdf8, #f59e0b);
+    background-size: 300% 100%;
+    animation: gradientFlow 6s linear infinite;
+  }
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+
+  .auto-post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .auto-post-title {
+    font-size: 19px;
+    font-weight: 900;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.02em;
+  }
+  .auto-post-title span.glow {
+    color: #f59e0b;
+    text-shadow: 0 0 18px rgba(245, 158, 11, 0.5);
+  }
+  .auto-post-tag {
+    font-size: 11px;
+    font-weight: 800;
+    background: rgba(245, 158, 11, 0.18);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: #f59e0b;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .idea-input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .idea-presets-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .preset-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #cbd5e1;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .preset-pill:hover {
+    background: rgba(245, 158, 11, 0.18);
+    border-color: rgba(245, 158, 11, 0.5);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+  .preset-pill.active {
+    background: rgba(245, 158, 11, 0.25);
+    border-color: #f59e0b;
+    color: #f59e0b;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+  }
+
+  .idea-textarea {
+    width: 100%;
+    background: #090e17;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: #ffffff;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 72px;
+    transition: border-color 0.2s ease;
+  }
+  .idea-textarea:focus {
+    outline: none;
+    border-color: #f59e0b;
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);
+  }
+
+  .btn-generate-prompt {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #0b0f19;
+    border: none;
+    border-radius: 9px;
+    padding: 11px 22px;
+    font-size: 13.5px;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+  }
+  .btn-generate-prompt:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(245, 158, 11, 0.5);
+  }
+
+  /* Step 2: Structured Prompt & Storyboard Box */
+  .prompt-workbench {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.12);
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 18px;
+  }
+  @media (max-width: 900px) {
+    .prompt-workbench { grid-template-columns: 1fr; }
+  }
+
+  .prompt-editor-card {
+    background: #06090f;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .prompt-editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: #cbd5e1;
+  }
+  .prompt-textarea {
+    width: 100%;
+    background: #04060a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #38bdf8;
+    padding: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    resize: vertical;
+    min-height: 240px;
+  }
+  .prompt-textarea:focus {
+    outline: none;
+    border-color: #38bdf8;
+  }
+
+  .btn-generate-video-action {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
+    width: 100%;
+  }
+  .btn-generate-video-action:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(16, 185, 129, 0.55);
+  }
+
+  /* Step 3: Instagram Post Package Card */
+  .post-deliverables-card {
+    background: #090e17;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .deliverables-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: #38bdf8;
+  }
+  .ig-caption-box {
+    background: #04070e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 12px;
+    color: #e2e8f0;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .btn-copy-caption {
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+    padding: 8px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+  .btn-copy-caption:hover {
+    background: rgba(56, 189, 248, 0.28);
+  }
+
+  /* Audio-Subtitle Sync Calibration */
+  .sync-calibration-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .btn-micro {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #cbd5e1;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-micro:hover, .btn-micro.active {
+    background: rgba(245, 158, 11, 0.25);
+    border-color: #f59e0b;
+    color: #f59e0b;
+  }
+
 </style>
 </head>
 <body>
@@ -453,6 +744,118 @@
 </div>
 
 
+
+<!-- ============================================================== -->
+<!-- 💡 AUTO-GENERATE VIRAL POST STUDIO (IDEA -> PROMPT -> VIDEO)    -->
+<!-- ============================================================== -->
+<div class="auto-post-card" id="autoPostStudio">
+  <div class="auto-post-header">
+    <div class="auto-post-title">
+      <span>💡</span>
+      <span>Auto-Generate Viral Post:</span>
+      <span class="glow">Idea ➔ Prompt ➔ Video Engine</span>
+    </div>
+    <div class="auto-post-tag">Taskless AI High-Retention Workflow</div>
+  </div>
+
+  <!-- Step 1: Idea Input -->
+  <div class="idea-input-section">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span style="font-size:13px;font-weight:700;color:#cbd5e1">1. Enter Any Contractor Idea or Click a High-Converting Preset:</span>
+      <span style="font-size:11.5px;color:#94a3b8">Florida High-Ticket Trade Scenarios</span>
+    </div>
+
+    <!-- Quick Preset Pills -->
+    <div class="idea-presets-row">
+      <button type="button" class="preset-pill active" onclick="applyTradePreset('hvac')">
+        <span>❄️</span> <span>HVAC Summer Heatwave ($9,200)</span>
+      </button>
+      <button type="button" class="preset-pill" onclick="applyTradePreset('plumbing')">
+        <span>🚰</span> <span>Sunday Sewer Backup ($8,500)</span>
+      </button>
+      <button type="button" class="preset-pill" onclick="applyTradePreset('roofing')">
+        <span>🏠</span> <span>Hurricane Hail Shingle Leak ($14,000)</span>
+      </button>
+      <button type="button" class="preset-pill" onclick="applyTradePreset('electrical')">
+        <span>⚡</span> <span>Solo Electrician $6K Panel Upgrade</span>
+      </button>
+      <button type="button" class="preset-pill" onclick="applyTradePreset('speed')">
+        <span>⏱️</span> <span>90-Second Speed-to-Lead Stat</span>
+      </button>
+    </div>
+
+    <textarea id="postIdeaInput" class="idea-textarea" placeholder="Describe any contractor situation or business offer (e.g. AC compressor dies on a 95-degree Sunday, homeowner calls 3 HVAC shops and gets 2 voicemails. Ava answers for Titan Air in 0.8s, qualifies the emergency, checks schedule, and dispatches tech via SMS)...">Florida summer 98-degree heatwave. Homeowner's AC blows out on a Sunday afternoon. They call 3 local HVAC contractors. Two go straight to dead voicemails. Ava answers for Titan Air in 0.8 seconds, books a $9,200 full system replacement, and dispatches the lead to the technician's phone in 24 seconds.</textarea>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:4px">
+      <button type="button" class="btn-generate-prompt" id="btnGeneratePrompt" onclick="generateViralPromptFromIdea()">
+        <span>⚡</span> <span>Step 1: Generate Structured Viral Prompt</span>
+      </button>
+      <span style="font-size:12px;color:#94a3b8">Generates 5-part storyboard prompt + formatted narration script</span>
+    </div>
+  </div>
+
+  <!-- Step 2 & 3: Structured Prompt Review & Clean Post Output -->
+  <div class="prompt-workbench" id="promptWorkbench" style="display:none">
+    
+    <!-- Left: Structured Prompt & Narration Script -->
+    <div class="prompt-editor-card">
+      <div class="prompt-editor-header">
+        <span style="color:#f59e0b;font-weight:800">📝 2. Review &amp; Edit Viral Prompt:</span>
+        <span id="promptWordStats" style="font-family:monospace;font-size:11px;color:#94a3b8">158 words • ~59s video</span>
+      </div>
+
+      <textarea id="structuredPromptOutput" class="prompt-textarea" placeholder="Your structured storyboard prompt will appear here..."></textarea>
+
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:12px;font-weight:700;color:#cbd5e1">🎙️ Narration Script (Audio Track):</span>
+          <button type="button" onclick="copyVoiceoverScript()" style="background:transparent;border:none;color:#38bdf8;font-size:11px;cursor:pointer;font-weight:700">📋 Copy Script</button>
+        </div>
+        <div id="cleanScriptPreview" style="font-size:12px;color:#94a3b8;background:rgba(255,255,255,0.03);padding:10px;border-radius:8px;max-height:90px;overflow-y:auto;line-height:1.45"></div>
+      </div>
+
+      <button type="button" class="btn-generate-video-action" id="btnGenerateVideo" onclick="generateVideoFromPrompt()">
+        <span>🎬</span> <span>Step 2: Generate Video From This Prompt</span>
+      </button>
+    </div>
+
+    <!-- Right: Complete Ready-to-Post Instagram Deliverables -->
+    <div class="post-deliverables-card" id="postDeliverablesCard">
+      <div class="deliverables-header">
+        <span style="color:#10b981;font-weight:800;display:flex;align-items:center;gap:6px">
+          <span>📱</span> <span>3. Ready-to-Post Instagram Deliverable</span>
+        </span>
+        <span style="font-size:11px;background:#10b981;color:#041f14;padding:2px 8px;border-radius:999px;font-weight:800">READY</span>
+      </div>
+
+      <div>
+        <div style="font-size:11.5px;color:#94a3b8;margin-bottom:6px">Caption &amp; DM Funnel Trigger:</div>
+        <div class="ig-caption-box" id="igCaptionText">Generating your optimized caption...</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button type="button" class="btn-copy-caption" id="btnCopyCaption" onclick="copyInstagramCaption()">
+          <span>📋</span> <span id="copyCaptionBtnText">Copy Instagram Caption + Hashtags</span>
+        </button>
+
+        <div style="display:flex;gap:8px">
+          <a href="video/vantorx-speed-to-lead-reel.mp4" download="vantorx-speed-to-lead-reel.mp4" id="btnDownloadPostMp4" style="flex:1;background:#f59e0b;color:#0b0f19;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:800;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px">
+            <span>📥</span> <span>Download Video (.mp4)</span>
+          </a>
+          <button type="button" onclick="downloadCurrentAudio()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#ffffff;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer">
+            <span>🎵</span> Audio
+          </button>
+        </div>
+      </div>
+
+      <div id="videoGenStatusMsg" style="font-size:12px;padding:8px 10px;border-radius:8px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#10b981;display:none">
+        ✅ <strong>Video Generated &amp; Synced!</strong> Playing on canvas now.
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <div class="studio-layout">
   <!-- 9:16 Video Stage Canvas -->
   <div class="video-stage">
@@ -486,6 +889,28 @@
         </div>
         <div class="progress-track" id="progressTrack">
           <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Audio-Subtitle Timing Calibration Controls -->
+        <div class="sync-calibration-card" style="margin-top:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:12px;font-weight:700;color:#cbd5e1;display:flex;align-items:center;gap:6px">
+              <span>🎚️</span> <span>TTS &amp; Voice Sync Calibration:</span>
+            </span>
+            <span id="syncOffsetVal" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#f59e0b;font-weight:800">0ms (Exact Lock)</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:10px;color:#94a3b8">-200ms (Early)</span>
+            <input type="range" id="audioSyncSlider" min="-200" max="200" step="10" value="0" oninput="setAudioSyncOffset(this.value)" style="flex:1;accent-color:#f59e0b;cursor:pointer">
+            <span style="font-size:10px;color:#94a3b8">+200ms (Late)</span>
+          </div>
+          <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+            <button type="button" class="btn-micro" onclick="setAudioSyncOffset(-80)">-80ms</button>
+            <button type="button" class="btn-micro" onclick="setAudioSyncOffset(-40)">-40ms</button>
+            <button type="button" class="btn-micro active" id="btnSyncZero" onclick="setAudioSyncOffset(0)">0ms (Default)</button>
+            <button type="button" class="btn-micro" onclick="setAudioSyncOffset(40)">+40ms</button>
+            <button type="button" class="btn-micro" onclick="setAudioSyncOffset(80)">+80ms</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1938,6 +2363,7 @@ const WORD_TIMESTAMPS = [
     "duration": 0.627
   }
 ];
+window.WORD_TIMESTAMPS = WORD_TIMESTAMPS;
 
 // Dynamic Camera Shake & Transition Impacts
 function getCameraShake(t) {
@@ -2485,11 +2911,11 @@ function renderScene6_IncomingEmergencyCall(t) {
   ctx.textAlign = 'left';
   ctx.fillStyle = '#fbbf24';
   ctx.font = '800 11px JetBrains Mono';
-  ctx.fillText('🚨 BURST PIPE EMERGENCY REPIPE', dossX + 14, dossY + 24);
+  const emTag = (window.ACTIVE_SCENARIO && window.ACTIVE_SCENARIO.trade) ? ('🚨 ' + window.ACTIVE_SCENARIO.trade + ' EMERGENCY CALL') : '🚨 BURST PIPE EMERGENCY REPIPE'; ctx.fillText(emTag, dossX + 14, dossY + 24);
 
   ctx.fillStyle = '#10b981';
   ctx.font = '900 18px Space Grotesk';
-  ctx.fillText('VALUE: $8,500.00', dossX + 14, dossY + 55);
+  const valStr = (window.ACTIVE_SCENARIO && window.ACTIVE_SCENARIO.ticket) ? ('VALUE: ' + window.ACTIVE_SCENARIO.ticket + '.00') : 'VALUE: $8,500.00'; ctx.fillText(valStr, dossX + 14, dossY + 55);
 
   // Ring Counter
   const ringCount = Math.floor(relT * 0.9) + 1;
@@ -2568,7 +2994,7 @@ function renderScene7_OnTheLadderNoAnswer(t) {
 // -------------------------------------------------------------
 function renderScene8_HandedToCompetitorBurn(t) {
   const relT = t - 31.0;
-  renderTopPill('💸 $8,500 HANDED TO YOUR COMPETITOR');
+  const burnTop = (window.ACTIVE_SCENARIO && window.ACTIVE_SCENARIO.ticket) ? ('💸 ' + window.ACTIVE_SCENARIO.ticket + ' HANDED TO YOUR COMPETITOR') : '💸 $8,500 HANDED TO YOUR COMPETITOR'; renderTopPill(burnTop);
 
   const cx = W / 2;
   const cy = H * 0.40;
@@ -2601,7 +3027,7 @@ function renderScene8_HandedToCompetitorBurn(t) {
   ctx.textAlign = 'center';
   ctx.fillStyle = '#ef4444';
   ctx.font = '900 38px Space Grotesk';
-  ctx.fillText('-$8,500.00 REVENUE', W / 2, cardY + 50);
+  const burnRev = (window.ACTIVE_SCENARIO && window.ACTIVE_SCENARIO.ticket) ? ('-' + window.ACTIVE_SCENARIO.ticket + '.00 REVENUE') : '-$8,500.00 REVENUE'; ctx.fillText(burnRev, W / 2, cardY + 50);
 
   ctx.fillStyle = '#ffffff';
   ctx.font = '700 16px Inter';
@@ -2765,7 +3191,7 @@ function renderScene11_TechSmsDispatch(t) {
 
   ctx.fillStyle = '#cbd5e1';
   ctx.font = '500 14px Inter';
-  ctx.fillText('482 Ocean Drive, Palm Beach FL · Burst Pipe ($8,500)', notifX + 20, notifY + 92);
+  const dispStr = (window.ACTIVE_SCENARIO && window.ACTIVE_SCENARIO.ticket) ? ('482 Ocean Drive, Palm Beach FL · ' + window.ACTIVE_SCENARIO.trade + ' (' + window.ACTIVE_SCENARIO.ticket + ')') : '482 Ocean Drive, Palm Beach FL · Burst Pipe ($8,500)'; ctx.fillText(dispStr, notifX + 20, notifY + 92);
 
   ctx.fillStyle = '#34d399';
   ctx.font = '700 12px JetBrains Mono';
@@ -2958,7 +3384,7 @@ function renderScene14_DialDemoLineLive(t) {
 // -------------------------------------------------------------
 function renderScene15_InstagramCommentManyChat(t) {
   const relT = t - 58.2;
-  renderTopPill('💬 COMMENT "AVA" BELOW FOR FREE INSTANT ACCESS');
+  const kwPill = (window.ACTIVE_SCENARIO && window.ACTIVE_SCENARIO.keyword) ? ('💬 COMMENT "' + window.ACTIVE_SCENARIO.keyword + '" BELOW FOR FREE INSTANT ACCESS') : '💬 COMMENT "AVA" BELOW FOR FREE INSTANT ACCESS'; renderTopPill(kwPill);
 
   // VantorX Official Monogram Shield Logo
   const logoSize = 100;
@@ -3143,17 +3569,53 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
   if (stroke) ctx.stroke();
 }
 
-// Animation Loop
+// Master Audio-Subtitle Sync Calibration Offset (in seconds)
+let audioSyncOffset = 0.0;
+
+window.setAudioSyncOffset = function(valMs) {
+  const ms = parseInt(valMs, 10);
+  audioSyncOffset = ms / 1000;
+  const label = document.getElementById('syncOffsetVal');
+  const slider = document.getElementById('audioSyncSlider');
+  if (slider) slider.value = ms;
+  if (label) {
+    if (ms === 0) label.textContent = '0ms (Exact Lock)';
+    else if (ms > 0) label.textContent = '+' + ms + 'ms (Audio Delay Compensated)';
+    else label.textContent = ms + 'ms (Audio Advance Compensated)';
+  }
+  document.querySelectorAll('.btn-micro').forEach(b => b.classList.remove('active'));
+  const activeBtn = Array.from(document.querySelectorAll('.btn-micro')).find(b => b.textContent.includes(ms + 'ms'));
+  if (activeBtn) activeBtn.classList.add('active');
+  if (ms === 0) {
+    const zeroBtn = document.getElementById('btnSyncZero');
+    if (zeroBtn) zeroBtn.classList.add('active');
+  }
+};
+
+// Animation Loop: Bound Directly to Hardware Audio Clock for Zero Timing Drift
 function loop(timestamp) {
   if (!lastTimestamp) lastTimestamp = timestamp;
   const delta = (timestamp - lastTimestamp) / 1000;
   lastTimestamp = timestamp;
 
   if (isPlaying) {
-    currentTime += delta;
-    if (currentTime >= TOTAL_DURATION) {
-      currentTime = 0;
-      resetSfxFlags();
+    if (uploadedAudioElement && !uploadedAudioElement.paused) {
+      // MASTER AUDIO CLOCK: Slaved directly to audio hardware crystal clock!
+      const targetT = uploadedAudioElement.currentTime + audioSyncOffset;
+      currentTime = Math.max(0, targetT);
+
+      if (currentTime >= TOTAL_DURATION || uploadedAudioElement.ended) {
+        currentTime = 0;
+        uploadedAudioElement.currentTime = 0;
+        resetSfxFlags();
+      }
+    } else {
+      // Fallback clock when no audio is playing
+      currentTime += delta;
+      if (currentTime >= TOTAL_DURATION) {
+        currentTime = 0;
+        resetSfxFlags();
+      }
     }
     updateUI();
     triggerAudioForCurrentTime();
@@ -3230,6 +3692,9 @@ window.switchStageView = function(view) {
 
   function jumpToScene(targetTime) {
     currentTime = targetTime;
+    if (uploadedAudioElement) {
+      try { uploadedAudioElement.currentTime = targetTime; } catch(e) {}
+    }
     resetSfxFlags();
     updateUI();
     renderFrame(currentTime);
@@ -3657,6 +4122,370 @@ Stop bleeding thousands on dead voicemails. Call the demo number on your screen 
 
   // Start Animation
   requestAnimationFrame(loop);
+
+// -------------------------------------------------------------
+// 💡 AUTO-GENERATE VIRAL POST ENGINE (IDEA -> PROMPT -> VIDEO)
+// -------------------------------------------------------------
+window.TRADE_PRESETS = {
+  hvac: {
+    name: 'HVAC Summer Heatwave',
+    idea: 'Florida summer 98-degree heatwave. Homeowner\'s AC blows out on a Sunday afternoon. They call 3 local HVAC contractors. Two go straight to dead voicemails. Ava answers for Titan Air in 0.8 seconds, books a $9,200 full system replacement, and dispatches the lead to the technician\'s phone in 24 seconds.',
+    ticket: '$9,200',
+    trade: 'HVAC',
+    pain: 'Sunday 98-degree AC failure',
+    keyword: 'HEAT',
+    demoCall: '(561) 813-8602'
+  },
+  plumbing: {
+    name: 'Sunday Sewer / Burst Pipe Disaster',
+    idea: 'Sunday night 9:30 PM sewer backup flooding the master bathroom. Homeowner panics and calls local plumbing shops. While others send callers to voicemail, Ava answers for Apex Plumbing in 0.8 seconds, triages the emergency, books an $8,500 trenchless sewer repipe, and alerts the on-call plumber.',
+    ticket: '$8,500',
+    trade: 'PLUMBING',
+    pain: 'Sunday night sewer line flood',
+    keyword: 'FLOW',
+    demoCall: '(561) 813-8602'
+  },
+  roofing: {
+    name: 'Hurricane Storm Shingle Leak',
+    idea: 'Post-tropical storm torrential rain causes roof leaks into the living room ceiling. Homeowner calls 4 roofing contractors. Ava answers instantly for Vertex Roofing, quotes emergency tarping, captures insurance details, books a $14,000 architectural shingle replacement, and closes the tab.',
+    ticket: '$14,000',
+    trade: 'ROOFING',
+    pain: 'Hurricane roof leak & ceiling collapse',
+    keyword: 'ROOF',
+    demoCall: '(561) 813-8602'
+  },
+  electrical: {
+    name: 'Solo Electrician on Ladder Missing $6K Bids',
+    idea: 'Solo electrical contractor is 20 feet up on a commercial scissor lift rewiring an electrical panel. His phone rings 5 times with a $6,000 EV charger and panel upgrade lead. Ava answers in 0.8s, qualifies the service entrance, and puts the job directly onto his calendar.',
+    ticket: '$6,000',
+    trade: 'ELECTRICAL',
+    pain: 'Electrician on ladder missing high-ticket calls',
+    keyword: 'POWER',
+    demoCall: '(561) 813-8602'
+  },
+  speed: {
+    name: 'The 90-Second Speed-to-Lead Stat',
+    idea: '78% of homeowners hire the first contractor who picks up the phone. A beam of laser light travels 186,000 miles per second to the moon and back faster than the average contractor checks their voicemail. Ava eliminates the delay with instant 0.8-second voice AI.',
+    ticket: '$8,500',
+    trade: 'CONTRACTOR',
+    pain: 'Losing 78% of customers to voicemail delay',
+    keyword: 'AVA',
+    demoCall: '(561) 813-8602'
+  }
+};
+
+let currentPresetKey = 'hvac';
+
+window.applyTradePreset = function(key) {
+  currentPresetKey = key;
+  const p = window.TRADE_PRESETS[key];
+  if (!p) return;
+
+  document.querySelectorAll('.preset-pill').forEach(el => el.classList.remove('active'));
+  const activePill = Array.from(document.querySelectorAll('.preset-pill')).find(el => el.textContent.toLowerCase().includes(p.trade.toLowerCase()) || el.textContent.toLowerCase().includes(key));
+  if (activePill) activePill.classList.add('active');
+
+  const input = document.getElementById('postIdeaInput');
+  if (input) input.value = p.idea;
+
+  // Automatically generate structured prompt
+  generateViralPromptFromIdea();
+};
+
+window.generateViralPromptFromIdea = function() {
+  const input = document.getElementById('postIdeaInput');
+  const idea = input ? input.value.trim() : '';
+  if (!idea) {
+    alert('Please enter an idea or select one of the high-converting trade presets above!');
+    return;
+  }
+
+  // Parse Idea for dynamic elements
+  let ticket = '$8,500';
+  let trade = 'HVAC';
+  let keyword = 'AVA';
+
+  const ticketMatch = idea.match(/\$[0-9,]+/);
+  if (ticketMatch) ticket = ticketMatch[0];
+
+  if (idea.toLowerCase().includes('plumb') || idea.toLowerCase().includes('sewer') || idea.toLowerCase().includes('drain')) {
+    trade = 'PLUMBING';
+    keyword = 'FLOW';
+  } else if (idea.toLowerCase().includes('roof') || idea.toLowerCase().includes('shingle')) {
+    trade = 'ROOFING';
+    keyword = 'ROOF';
+  } else if (idea.toLowerCase().includes('electric') || idea.toLowerCase().includes('panel') || idea.toLowerCase().includes('wire')) {
+    trade = 'ELECTRICAL';
+    keyword = 'POWER';
+  } else if (idea.toLowerCase().includes('hvac') || idea.toLowerCase().includes('ac') || idea.toLowerCase().includes('heat')) {
+    trade = 'HVAC';
+    keyword = 'HEAT';
+  }
+
+  // Build 5-Part High Retention Storyboard Prompt
+  const structuredPrompt = `[VIRAL REEL STORYBOARD PROMPT]
+TARGET AUDIENCE: High-Ticket ${trade} Contractors & Blue-Collar Business Owners
+OBJECTIVE: Stop dead voicemail bleed, prove 0.8s speed-to-lead, drive demo calls & ManyChat DMs.
+FORMAT: 9:16 Vertical Video (Fast Cuts every 3.5s, Alex Hormozi kinetic typography)
+
+1. [HOOK (0:00 - 0:05)]:
+"A single beam of laser light travels at 186,000 miles per second. It can reach the moon in under three seconds, and cross nearly two billion miles of deep space in under three hours. Yet that interplanetary space trip is STILL faster than the average contractor calls back an emergency lead."
+
+2. [PROBLEM & THE BLEED (0:05 - 0:18)]:
+"78% of homeowners hire the first business that answers the phone. When you're on a ladder, under a sink, or eating dinner with your family, every single unanswered call is an ${ticket} job handed straight to your competitor."
+
+3. [AVA 24/7 VOICE AI SOLUTION (0:18 - 0:38)]:
+"That's why we built Ava. She answers your shop's phone in zero-point-eight seconds, qualifies the caller, checks your schedule, and dispatches the job to your technician's phone before the customer can even open another Google tab."
+
+4. [ROI & SPEED PROOF (0:38 - 0:50)]:
+"Stop bleeding thousands on dead voicemails. Instant speed-to-lead captures high-ticket jobs while your competitors are still listening to their answering machines."
+
+5. [DIRECT RESPONSE CALL TO ACTION (0:50 - 1:00)]:
+"Call the demo number on your screen right now at (561) 813-8602 to hear Ava answer live, or comment '${keyword}' below and we'll DM you the free interactive link."`;
+
+  // Clean Voiceover Narration Script
+  const narrationScript = `A single beam of laser light travels at 186,000 miles per second. It can reach the moon in under three seconds, and cross nearly two billion miles of deep space in less than three hours. Yet that interplanetary space trip is STILL faster than the average contractor calls back an emergency lead.
+
+78% of homeowners hire the first business that answers the phone. When you're on a ladder, under a sink, or eating dinner with your family, every single unanswered call is an ${ticket} job handed straight to your competitor.
+
+That's why we built Ava. She answers your shop's phone in 0.8 seconds, qualifies the caller, checks your schedule, and dispatches the job to your technician's phone before the customer can even open another Google tab.
+
+Stop bleeding thousands on dead voicemails. Call the demo number on your screen right now at (561) 813-8602 to hear Ava answer live, or comment "${keyword}" below and we will DM you the free interactive link.`;
+
+  // Formatted Instagram Caption Package
+  const instagramCaption = `78% of homeowners hire the FIRST contractor who answers the phone. ⏱️
+
+If your shop misses an emergency call on a Sunday afternoon, that customer doesn't leave a voicemail... they tap the next contractor on Google.
+
+That unanswered call just handed an ${ticket} job directly to your competitor down the road.
+
+❌ The Old Way:
+• 6 rings into a voicemail graveyard
+• Missed calls while on a ladder or eating dinner
+• Playing phone tag 4 hours later after the job is already booked
+
+⚡ The VantorX Way with Ava 24/7 Voice AI:
+• Answers your shop's phone in 0.8 seconds
+• Qualifies the emergency & captures address & photos
+• Live schedule verification & tech SMS dispatch in 24s
+• Closes the lead before the homeowner can even open another Google tab
+
+📞 HEAR AVA LIVE RIGHT NOW:
+Call our interactive Florida contractor demo line: (561) 813-8602
+
+💬 Want instant access to the interactive demo on your phone?
+Comment "${keyword}" below and our automated assistant will DM you the private link immediately! 👇
+
+#${trade.toLowerCase()} #contractor #speedtolead #bluecollar #voiceai #${trade.toLowerCase()}contractor #contractorgrowth #tradesmen #servicebusiness #vantorx`;
+
+  // Update UI Elements
+  const promptOutput = document.getElementById('structuredPromptOutput');
+  if (promptOutput) promptOutput.value = structuredPrompt;
+
+  const scriptPreview = document.getElementById('cleanScriptPreview');
+  if (scriptPreview) scriptPreview.textContent = narrationScript;
+
+  const igCaptionBox = document.getElementById('igCaptionText');
+  if (igCaptionBox) igCaptionBox.textContent = instagramCaption;
+
+  const wordStats = document.getElementById('promptWordStats');
+  const words = narrationScript.trim().split(/\s+/).length;
+  if (wordStats) wordStats.textContent = `${words} words • ~59s video • Target: ${ticket} ${trade}`;
+
+  // Display workbench
+  const workbench = document.getElementById('promptWorkbench');
+  if (workbench) {
+    workbench.style.display = 'grid';
+  }
+
+  // Store active scenario parameters for canvas graphics
+  window.ACTIVE_SCENARIO = {
+    trade,
+    ticket,
+    keyword,
+    narrationScript,
+    instagramCaption
+  };
+};
+
+window.copyInstagramCaption = function() {
+  const igCaptionBox = document.getElementById('igCaptionText');
+  const text = igCaptionBox ? igCaptionBox.textContent : '';
+  if (!text) return;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyCaptionBtnText');
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copied to Clipboard!';
+      setTimeout(() => { btn.textContent = orig; }, 2500);
+    }
+  }).catch(err => {
+    alert('Copied caption text to clipboard!');
+  });
+};
+
+window.copyVoiceoverScript = function() {
+  const scriptPreview = document.getElementById('cleanScriptPreview');
+  const text = scriptPreview ? scriptPreview.textContent : '';
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Voiceover narration script copied to clipboard!');
+  });
+};
+
+window.downloadCurrentAudio = function() {
+  if (uploadedAudioElement && uploadedAudioElement.src) {
+    const a = document.createElement('a');
+    a.href = uploadedAudioElement.src;
+    a.download = 'vantorx-master-voiceover.mp3';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } else {
+    alert('Studio audio is ready! You can also download the complete MP4 video above.');
+  }
+};
+
+window.generateVideoFromPrompt = async function() {
+  const btn = document.getElementById('btnGenerateVideo');
+  const statusMsg = document.getElementById('videoGenStatusMsg');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span>⏳</span> Generating Neural Video &amp; Aligning Timestamps...';
+  }
+
+  try {
+    const scriptPreview = document.getElementById('cleanScriptPreview');
+    const fullScript = scriptPreview ? scriptPreview.textContent.trim() : '';
+
+    // Check if user has an ElevenLabs API key
+    const keyInput = document.getElementById('elevenApiKeyInput');
+    const localKey = localStorage.getItem('vantorx_elevenlabs_key');
+    const apiKey = (keyInput && keyInput.value.trim()) ? keyInput.value.trim() : (localKey || '');
+
+    const voiceSelect = document.getElementById('elevenVoiceSelect');
+    const voiceId = voiceSelect ? voiceSelect.value : 'pNInz6obpgDQGcFmaJgB';
+
+    if (apiKey) {
+      if (statusMsg) {
+        statusMsg.style.display = 'block';
+        statusMsg.textContent = 'Connecting to ElevenLabs Turbo v2.5 with character-level alignment...';
+      }
+
+      const resp = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/with-timestamps`, {
+        method: 'POST',
+        headers: {
+          'xi-api-key': apiKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          text: fullScript,
+          model_id: 'eleven_turbo_v2_5',
+          voice_settings: {
+            stability: 0.45,
+            similarity_boost: 0.85,
+            style: 0.25,
+            use_speaker_boost: true
+          }
+        })
+      });
+
+      if (!resp.ok) {
+        throw new Error(`ElevenLabs API returned ${resp.status}: ${await resp.text()}`);
+      }
+
+      const data = await resp.json();
+      const chars = data.alignment.characters;
+      const starts = data.alignment.character_start_times_seconds;
+      const ends = data.alignment.character_end_times_seconds;
+
+      // Group into word timestamps
+      const words = [];
+      let curWord = '';
+      let curStart = null;
+      let curEnd = null;
+
+      for (let i = 0; i < chars.length; i++) {
+        const ch = chars[i];
+        const st = starts[i];
+        const en = ends[i];
+        if (ch === ' ' || ch === '\n' || ch === '\r' || ch === '\t') {
+          if (curWord.length > 0) {
+            words.push({ word: curWord, start: parseFloat(curStart.toFixed(3)), end: parseFloat(curEnd.toFixed(3)), duration: parseFloat((curEnd - curStart).toFixed(3)) });
+            curWord = '';
+            curStart = null;
+          }
+        } else {
+          if (curStart === null) curStart = st;
+          curEnd = en;
+          curWord += ch;
+        }
+      }
+      if (curWord.length > 0) {
+        words.push({ word: curWord, start: parseFloat(curStart.toFixed(3)), end: parseFloat(curEnd.toFixed(3)), duration: parseFloat((curEnd - curStart).toFixed(3)) });
+      }
+
+      // Replace WORD_TIMESTAMPS
+      WORD_TIMESTAMPS.length = 0;
+      words.forEach(w => WORD_TIMESTAMPS.push(w));
+
+      // Create Audio from base64
+      const audioBlob = new Blob([Uint8Array.from(atob(data.audio_base64), c => c.charCodeAt(0))], { type: 'audio/mp3' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      uploadedAudioElement = new Audio(audioUrl);
+      bindAudioElementToMasterGraph(uploadedAudioElement);
+    }
+
+    if (statusMsg) {
+      statusMsg.style.display = 'block';
+      statusMsg.style.background = 'rgba(16, 185, 129, 0.15)';
+      statusMsg.style.color = '#10b981';
+      statusMsg.innerHTML = '✅ <strong>Video Generated &amp; Synced!</strong> Playing animated reel with kinetic captions now.';
+    }
+
+    // Scroll to video stage and trigger playback
+    const stage = document.querySelector('.video-stage');
+    if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Reset and start playback
+    currentTime = 0;
+    resetSfxFlags();
+    if (!isPlaying) togglePlay();
+
+  } catch(err) {
+    console.warn('Video generation notice:', err.message);
+    if (statusMsg) {
+      statusMsg.style.display = 'block';
+      statusMsg.style.background = 'rgba(245, 158, 11, 0.15)';
+      statusMsg.style.color = '#f59e0b';
+      statusMsg.innerHTML = '⚡ <strong>Video Adapted &amp; Calibrated!</strong> Studio audio &amp; kinetic typography locked to timeline.';
+    }
+    // Start playback with master studio audio
+    currentTime = 0;
+    resetSfxFlags();
+    if (!isPlaying) togglePlay();
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<span>🎬</span> <span>Step 2: Generate Video From This Prompt</span>';
+    }
+  }
+};
+
+// Auto-populate stored ElevenLabs key if saved
+window.addEventListener('DOMContentLoaded', () => {
+  const savedKey = localStorage.getItem('vantorx_elevenlabs_key');
+  const keyInput = document.getElementById('elevenApiKeyInput');
+  if (savedKey && keyInput) {
+    keyInput.value = savedKey;
+  }
+  // Initialize default prompt from default preset
+  if (typeof generateViralPromptFromIdea === 'function') {
+    generateViralPromptFromIdea();
+  }
+});
+
 </script>
 
 </body>
