@@ -873,6 +873,10 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <span id="teamCallSyncDot" style="width:8px;height:8px;background:#34d399;border-radius:50%;display:inline-block"></span>
               🔄 Sync Team (<span id="teamCallSyncCount">Live</span>)
             </button>
+            <a href="/downloads/vantorx_instagram_complete_package.zip" download="vantorx_instagram_complete_package.zip" class="btn btn-ghost btn-sm" id="btnDownloadInstagramPack" title="Download Complete Instagram Package (.ZIP with 63s Reel, 15 Scenes, 7 Products & Captions)" style="border:1.5px solid #ec4899;color:#f472b6;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;text-decoration:none;background:rgba(236,72,153,0.1)">
+              <span>📦</span>
+              <span>Instagram Pack (.ZIP)</span>
+            </a>
           </div>
         </div>
 
@@ -15043,22 +15047,42 @@ window.closeLeakMathModal = function() {
       USER_PROFILES[k].pin = '1234';
     }
   });
-  // Purge buddy & james
+  // Purge ghost accounts, guest, buddy, james, and duplicate Luke
+  delete USER_PROFILES.guest;
   delete USER_PROFILES.buddy;
   delete USER_PROFILES.james_mccullohs;
   delete USER_PROFILES.james;
+  delete USER_PROFILES.founder_luke;
 
-  // Migration for all profiles: purge any legacy mock personas, ensure valid real reps only
+  // Migration for all profiles: purge any legacy mock personas, ghost accounts, ensure only genuine real reps
   const mockKeys = ['rep_marcus', 'rep_jake', 'rep_tyler', 'rep_mvpib4wi'];
   Object.keys(USER_PROFILES).forEach(k => {
+    const u = USER_PROFILES[k];
+    if (!u) {
+      delete USER_PROFILES[k];
+      return;
+    }
     const kl = k.toLowerCase();
-    const em = (USER_PROFILES[k]?.email || '').toLowerCase();
-    const nm = (USER_PROFILES[k]?.name || '').toLowerCase();
+    const em = (u.email || '').toLowerCase();
+    const nm = (u.name || '').toLowerCase();
+
+    // 1. Purge guest / sign in required
+    if (kl === 'guest' || u.id === 'guest' || nm.includes('sign in required') || nm === 'guest') {
+      delete USER_PROFILES[k];
+      return;
+    }
+
+    // 2. Strict deduplication of Luke: Only keep 'luke' (Luke (Founder))
+    if ((nm.includes('luke') || kl.includes('luke') || u.id === 'founder_luke') && k !== 'luke') {
+      delete USER_PROFILES[k];
+      return;
+    }
+
     if (
       mockKeys.includes(kl) ||
       kl.includes('marcus') || kl.includes('jake') || kl.includes('tyler') || kl.includes('probe') || kl.includes('buddy') ||
       nm.includes('marcus') || nm.includes('jake') || nm.includes('tyler') || nm.includes('probe') || nm.includes('buddy') ||
-      (em.endsWith('@vantorxsolutions.com') && kl !== 'luke' && kl !== 'founder_luke' && kl !== 'lucas' && !kl.includes('lucas') && !kl.includes('buddy'))
+      (em.endsWith('@vantorxsolutions.com') && kl !== 'luke' && kl !== 'lucas' && !kl.includes('lucas'))
     ) {
       delete USER_PROFILES[k];
       return;
@@ -15068,7 +15092,6 @@ window.closeLeakMathModal = function() {
     if (kl.includes('carter') || nm.includes('carter') || em.includes('carter') || kl.includes('lucas') || nm.includes('lucas') || em.includes('lucas') || kl.includes('james') || nm.includes('james') || em.includes('jcmccullohs') || em.includes('mccullohs') || kl.includes('buddy') || nm.includes('buddy') || em.includes('buddy')) {
       grantCoursePass(USER_PROFILES[k]);
     }
-    const u = USER_PROFILES[k];
     if (!u.unitActivitiesDone) {
       u.unitActivitiesDone = (u.isFounder || u.autoPassed) ? ['1-1','1-2','1-3','1-4','2-1','2-2','2-3','3-1','3-2','3-3'] : [];
     }
@@ -15716,11 +15739,26 @@ window.closeLeakMathModal = function() {
             const uid = r.id;
             const em = (r.email || '').toLowerCase();
             const nm = (r.name || '').toLowerCase();
+
+            // 1. Strictly ignore guest and sign in required
+            if (uid === 'guest' || nm.includes('sign in required') || nm === 'guest' || em.includes('guest')) {
+              return;
+            }
+
+            // 2. Strictly deduplicate Luke: Keep only USER_PROFILES.luke ('Luke (Founder)')
+            if (uid === 'founder_luke' || uid === 'luke' || nm.includes('luke') || em === 'luke@vantorxsolutions.com') {
+              if (USER_PROFILES.luke) {
+                if (r.game && r.game.dealsClosed) USER_PROFILES.luke.dailySims = r.game.dealsClosed;
+                if (r.lastActive) USER_PROFILES.luke.lastActive = r.lastActive;
+              }
+              return; // Do NOT create a second Luke entry!
+            }
+
             if (
               mockKeys.includes(uid.toLowerCase()) ||
               uid.toLowerCase().includes('marcus') || uid.toLowerCase().includes('jake') || uid.toLowerCase().includes('tyler') || uid.toLowerCase().includes('probe') || uid.toLowerCase().includes('buddy') ||
               nm.includes('marcus') || nm.includes('jake') || nm.includes('tyler') || nm.includes('probe') || nm.includes('buddy') ||
-              (em.endsWith('@vantorxsolutions.com') && uid !== 'luke' && uid !== 'founder_luke' && uid !== 'lucas' && !uid.includes('lucas'))
+              (em.endsWith('@vantorxsolutions.com') && uid !== 'lucas' && !uid.includes('lucas'))
             ) {
               return;
             }
@@ -15733,8 +15771,8 @@ window.closeLeakMathModal = function() {
                 avatar: r.avatar || '⚔️',
                 level: (r.course && r.course.level) || 1,
                 xp: (r.course && r.course.xp) || 0,
-                isFounder: uid === 'founder_luke' || uid === 'luke',
-                founderBypass: uid === 'founder_luke' || uid === 'luke',
+                isFounder: false,
+                founderBypass: false,
                 autoPassed: false,
                 completedUnits: (r.course && r.course.completedUnits) || [],
                 unitActivitiesDone: [],
@@ -17136,7 +17174,10 @@ window.closeLeakMathModal = function() {
     uidsToRender.forEach(uid => {
       const u = USER_PROFILES[uid];
       if (!u) return;
-      if (uid === 'buddy' || uid === 'rep_buddy_2' || uid === 'founder_luke') return;
+      if (uid === 'buddy' || uid === 'rep_buddy_2' || uid === 'founder_luke' || uid === 'guest') return;
+      const nm = (u.name || '').toLowerCase();
+      if (nm.includes('sign in required') || nm === 'guest') return;
+      if (nm.includes('luke') && uid !== 'luke') return;
 
       const isCur = uid === activeUserId;
       const isBooted = u.status === 'revoked' || u.isBooted === true;
@@ -17816,8 +17857,14 @@ window.closeLeakMathModal = function() {
         const u = USER_PROFILES[k];
         if (!u) return;
         const kl = k.toLowerCase();
-        if (kl.includes('buddy') || kl.includes('james')) return;
+        const nm = (u.name || '').toLowerCase();
+        // Skip guest, sign in required, buddy, james, booted
+        if (kl === 'guest' || u.id === 'guest' || nm.includes('sign in required') || nm === 'guest') return;
+        if (kl.includes('buddy') || kl.includes('james') || nm.includes('buddy') || nm.includes('james')) return;
         if (u.status === 'revoked' || u.isBooted === true) return; // Skip booted closers
+        // Strictly deduplicate Luke: Only 'luke' key allowed
+        if ((nm.includes('luke') || kl.includes('luke') || u.id === 'founder_luke') && k !== 'luke') return;
+
         closerMap[k] = {
           id: k,
           name: u.name || k,
@@ -17848,7 +17895,7 @@ window.closeLeakMathModal = function() {
 
       if (callerStr.includes('carter')) assignedId = 'carter_mccauliss';
       else if (callerStr.includes('lucas')) assignedId = 'lucas';
-      else if (callerStr.includes('luke')) assignedId = 'luke';
+      else if (callerStr.includes('luke') || callerStr.includes('founder') || callerStr.includes('hamilton')) assignedId = 'luke';
       else {
         for (const cid in closerMap) {
           const cName = (closerMap[cid].name || '').toLowerCase().trim();
@@ -17875,10 +17922,19 @@ window.closeLeakMathModal = function() {
     }
 
     // 3. Compute formula points: (calls * 1.0) + (demos * 10.0) + (callbacks * 0.5)
-    const list = Object.values(closerMap).map(c => {
+    let list = Object.values(closerMap).map(c => {
       const pts = (c.calls * 1.0) + (c.demos * 10.0) + (c.callbacks * 0.5);
       c.points = parseFloat(pts.toFixed(1));
       return c;
+    });
+
+    // Safeguard filter: Strip any ghost accounts or duplicate Luke before sorting
+    list = list.filter(c => {
+      const nm = (c.name || '').toLowerCase();
+      const cid = (c.id || '').toLowerCase();
+      if (cid === 'guest' || nm.includes('sign in required') || nm === 'guest') return false;
+      if ((nm.includes('luke') || cid.includes('luke')) && c.id !== 'luke') return false;
+      return true;
     });
 
     // 4. Sort: Points DESC, then Calls DESC, then Demos DESC
@@ -18808,14 +18864,14 @@ window.closeLeakMathModal = function() {
     const heading = document.getElementById('batchHeadingText');
     const activeLimit = getActiveQueueLimit();
     if (heading) {
-      if (currentBatch === 'activeQueue') {
+      if (currentBatch === 'today100') {
+        heading.textContent = `TODAY'S 100 FRESH VERIFIED TARGETS (DAILY ROTATION · 0 FAKE NUMBERS)`;
+      } else if (currentBatch === 'activeQueue') {
         heading.textContent = isIntakePaused
           ? `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (PAUSED FOR 1 WEEK · 700 STACKED LEADS READY)`
-          : `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (+75 ADDED DAILY)`;
+          : `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (+100 ADDED DAILY)`;
       } else if (currentBatch === 'todayFresh') {
-        heading.textContent = isIntakePaused
-          ? `CURRENT 75 FOCUS TARGETS (QUEUE LOCKED AT 700 FOR 1 WEEK)`
-          : `TODAY'S 75 FRESH UNLOCKED TARGETS`;
+        heading.textContent = `TODAY'S 100 FRESH UNLOCKED TARGETS`;
       } else if (currentBatch === 'all') {
         heading.textContent = `FLORIDA TRADE CONTRACTORS DIRECTORY (${(window.LEADS_DATA || []).length} VERIFIED TARGETS)`;
       } else if (currentBatch === '7') {
@@ -19285,10 +19341,10 @@ window.closeLeakMathModal = function() {
     if (btnReset) btnReset.style.display = (isCustomFilter && currentLeadView !== 'calledHistory') ? 'inline-flex' : 'none';
 
     // If user explicitly picked Batch 1..10 from the queue dropdown, constrain to that batch.
-    // If they picked "Active Queue" or "Today Fresh" but are filtering by state/product/search/caller, search across ALL NATIONWIDE LEADS!
-    const isNumberedBatch = (currentLeadView !== 'calledHistory') && (currentBatch !== 'activeQueue' && currentBatch !== 'todayFresh' && currentBatch !== 'all');
+    // If they picked "Active Queue" or "Today's 100 Fresh Leads" but are filtering by state/product/search/caller, search across ALL NATIONWIDE LEADS!
+    const isNumberedBatch = (currentLeadView !== 'calledHistory') && (currentBatch !== 'activeQueue' && currentBatch !== 'todayFresh' && currentBatch !== 'today100' && currentBatch !== 'all');
 
-    const filtered = LEADS_DATA.filter((lead, index) => {
+    let filtered = LEADS_DATA.filter((lead, index) => {
       // 1. Queue / Batch filter
       if (isNumberedBatch) {
         const batchNum = parseInt(currentBatch, 10);
@@ -19296,8 +19352,6 @@ window.closeLeakMathModal = function() {
       } else if (!isCustomFilter) {
         if (currentBatch === 'activeQueue') {
           if (index >= activeLimit) return false;
-        } else if (currentBatch === 'todayFresh' || currentBatch === 'today100') {
-          if (index < freshRange.start || index >= freshRange.end) return false;
         }
       }
       // 2. State filter
@@ -19360,6 +19414,11 @@ window.closeLeakMathModal = function() {
       filtered.sort((a, b) => (a.employees || 3) - (b.employees || 3));
     } else if (currentSort === 'leakDesc') {
       filtered.sort((a, b) => (b.annualLoss || 0) - (a.annualLoss || 0));
+    }
+
+    // ☀️ TODAY'S 100 FRESH LEADS QUEUE SLICE
+    if (currentBatch === 'today100' || currentBatch === 'todayFresh') {
+      filtered = filtered.slice(0, 100);
     }
 
     const totalCount = filtered.length;

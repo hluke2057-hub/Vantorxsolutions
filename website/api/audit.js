@@ -143,14 +143,24 @@ async function getRoster() {
     }
   }
 
-  const uniqueReps = Array.from(new Set(mergedMap.values()));
+  let uniqueReps = Array.from(new Set(mergedMap.values()));
 
-  // Ensure Founder Luke profile is present
-  const hasLuke = uniqueReps.some(r => r.id === "founder_luke" || (r.email && r.email.toLowerCase() === "luke@vantorxsolutions.com"));
-  if (!hasLuke) {
+  // Filter out any ghost guest or sign-in required entries
+  uniqueReps = uniqueReps.filter(r => {
+    const k = (r.id || '').toLowerCase();
+    const nm = (r.name || '').toLowerCase();
+    return k !== 'guest' && !nm.includes('sign in required') && nm !== 'guest';
+  });
+
+  // Ensure Founder Luke profile is present exactly once
+  const lukeIndex = uniqueReps.findIndex(r => r.id === "luke" || r.id === "founder_luke" || (r.email && r.email.toLowerCase() === "luke@vantorxsolutions.com"));
+  if (lukeIndex >= 0) {
+    uniqueReps[lukeIndex].id = "luke";
+    uniqueReps[lukeIndex].name = "Luke (Founder)";
+  } else {
     uniqueReps.unshift({
-      id: "founder_luke",
-      name: "Luke Hamilton",
+      id: "luke",
+      name: "Luke (Founder)",
       email: "luke@vantorxsolutions.com",
       role: "Founder & Master Closer",
       avatar: "👑",
@@ -884,7 +894,12 @@ module.exports = async function handler(req, res) {
     const allReps = await getRoster();
     const cleanRoster = allReps.filter(r => {
       const key = (r.id || r.email || "").toLowerCase();
-      return !key.includes("marcus") && !key.includes("jake") && !key.includes("tyler") && !key.includes("probe") ;
+      const name = (r.name || "").toLowerCase();
+      if (key.includes("marcus") || key.includes("jake") || key.includes("tyler") || key.includes("probe")) return false;
+      if (key === "guest" || name.includes("sign in required") || name === "guest") return false;
+      // Deduplicate secondary Luke accounts
+      if ((name.includes("luke") || key.includes("luke")) && r.id !== "luke") return false;
+      return true;
     });
     return res.status(200).json({ ok: true, roster: cleanRoster });
   }
