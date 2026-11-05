@@ -7453,12 +7453,12 @@
     "service": "LeadFlow 90-Second SMS Speed-to-Lead",
     "estLoss": "$9,100/mo",
     "painPoint": "Homeowners hiring competitors when quote forms sit unreplied for over an hour",
-    "subject": "Quick question for Adam regarding Plumbing Experts Inc. emergency calls",
+    "subject": "Re: Quick question for Adam regarding Plumbing Experts Inc. emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a1a354-0f43-7477-a8f8-b9845e6e1e49",
-    "sentAt": "2026-11-03T21:32:37.661Z",
-    "body": "Hi Adam,\n\nQuick question regarding Plumbing Experts Inc.'s customer response speed:\n\nWhen customers in Pompano Beach, FL fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Plumbing, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_041\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $9,100/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a1ada4-853a-7616-a505-977a6dda19b7",
+    "sentAt": "2026-11-05T21:36:42.857Z",
+    "body": "Hi Adam,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Plumbing Experts Inc..\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_041\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_se_042",
@@ -7517,12 +7517,12 @@
     "service": "High-Converting Webflow Website",
     "estLoss": "$10,400/mo",
     "painPoint": "Mobile bounce rate high due to 6-second load time on cellular networks",
-    "subject": "Quick question for Neil regarding ABC Roofing Corp. emergency calls",
+    "subject": "Re: Quick question for Neil regarding ABC Roofing Corp. emergency calls",
     "status": "sent",
-    "touch": 1,
-    "resendMessageId": "01a1a354-103c-7cbe-831f-b4fb9f6e42b3",
-    "sentAt": "2026-11-03T21:32:37.879Z",
-    "body": "Hi Neil,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Coral Springs, FL.\n\nWhile ABC Roofing Corp. has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_044\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Coral Springs, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
+    "touch": 2,
+    "resendMessageId": "01a1ada4-859f-706b-a4d7-ade54de64157",
+    "sentAt": "2026-11-05T21:36:42.959Z",
+    "body": "Hi Neil,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at ABC Roofing Corp..\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_044\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_se_045",
@@ -9558,10 +9558,13 @@
     "estLoss": "$9,100/mo",
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
     "subject": "Quick question for Brock regarding Wallace Electric Company emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Brock,\n\nSaw your solid reputation in Jacksonville, FL — congrats on building a trusted local brand.\n\nI was auditing local Electrical providers in Jacksonville, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Electrical, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Wallace Electric Company roughly $9,100/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_293\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-05T21:36:42.972Z"
   },
   {
     "id": "fl_ver_294",
@@ -9577,10 +9580,11 @@
     "estLoss": "$9,100/mo",
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
     "subject": "Quick question for Richard regarding Legacy Power Solutions emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1ada4-8618-7dfe-86e5-79e442d09816",
+    "sentAt": "2026-11-05T21:36:43.083Z",
+    "body": "Hi Richard,\n\nSaw your solid reputation in Jacksonville, FL — congrats on building a trusted local brand.\n\nI was auditing local Electrical providers in Jacksonville, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Electrical, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Legacy Power Solutions roughly $9,100/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_294\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_ver_295",
@@ -9596,10 +9600,13 @@
     "estLoss": "$9,100/mo",
     "painPoint": "Emergency panel outage and commercial wiring service calls dropping to voicemail during peak storm spikes",
     "subject": "Quick question for Jim regarding Coastal Elite LLC emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Jim,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Electrical contractors in Jacksonville, FL.\n\nWhile Coastal Elite LLC has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Electrical contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_295\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Electrical in Jacksonville, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-05T21:36:43.127Z"
   },
   {
     "id": "fl_ver_296",
