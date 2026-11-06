@@ -66,7 +66,305 @@
     line-height: 1.5;
   }
 
-  /* Studio Workspace */
+    /* ============================================================== */
+  /* GIANT GENERATE REEL BUTTON CARD & RENDERING PROGRESS OVERLAY    */
+  /* ============================================================== */
+  .giant-generate-reel-card {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    background: radial-gradient(circle at 50% 25%, rgba(245, 158, 11, 0.16) 0%, rgba(6, 9, 15, 0.98) 75%);
+    border: 2px solid rgba(245, 158, 11, 0.5) !important;
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    min-height: 460px;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.8), 0 0 35px -8px rgba(245, 158, 11, 0.3);
+    overflow: hidden;
+  }
+  .giant-generate-reel-card:hover {
+    transform: translateY(-4px) scale(1.012);
+    border-color: #f59e0b !important;
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.9), 0 0 55px -4px rgba(245, 158, 11, 0.5);
+    background: radial-gradient(circle at 50% 25%, rgba(245, 158, 11, 0.22) 0%, rgba(6, 9, 15, 0.98) 75%);
+  }
+  .giant-generate-reel-card:active {
+    transform: translateY(2px) scale(0.988);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 158, 11, 0.35);
+  }
+
+  .giant-btn-mind-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #fbbf24;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .giant-pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #10b981;
+    animation: pulseDotAnim 1.4s infinite alternate;
+  }
+  @keyframes pulseDotAnim {
+    0% { transform: scale(0.85); opacity: 0.7; }
+    100% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 14px #10b981; }
+  }
+
+  .giant-hero-icon-wrap {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .giant-hero-icon-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px dashed rgba(245, 158, 11, 0.6);
+    border-radius: 50%;
+    animation: rotateHeroRing 12s linear infinite;
+  }
+  @keyframes rotateHeroRing {
+    100% { transform: rotate(360deg); }
+  }
+  .giant-hero-icon-glow {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.4) 0%, rgba(245, 158, 11, 0) 70%);
+    border-radius: 50%;
+    filter: blur(10px);
+  }
+  .giant-hero-icon {
+    font-size: 42px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.8));
+    animation: bounceHeroIcon 2s ease-in-out infinite alternate;
+  }
+  @keyframes bounceHeroIcon {
+    0% { transform: translateY(-2px) scale(0.98); }
+    100% { transform: translateY(3px) scale(1.05); }
+  }
+
+  .giant-btn-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    margin: 2px 0 0;
+    background: linear-gradient(180deg, #ffffff 30%, #fde68a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .giant-btn-sub {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 4px 0 10px;
+  }
+
+  .giant-target-card {
+    width: 100%;
+    background: rgba(10, 15, 26, 0.85);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 12px;
+    padding: 12px 14px;
+    text-align: left;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  }
+
+  .giant-stepper-row {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    justify-content: center;
+    margin: 6px 0;
+  }
+  .giant-step-pill {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #64748b;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.25s ease;
+  }
+  .giant-step-pill.active {
+    background: rgba(245, 158, 11, 0.22);
+    border-color: #f59e0b;
+    color: #fbbf24;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+  }
+
+  .giant-action-bar {
+    width: 100%;
+    background: linear-gradient(90deg, #d97706, #f59e0b, #fbbf24);
+    color: #070a0f;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14.5px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    padding: 13px 18px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    margin-top: 6px;
+  }
+
+  /* Video Stage Active Rendering HUD Progress Overlay */
+  .reel-render-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 999;
+    background: rgba(5, 8, 16, 0.95);
+    backdrop-filter: blur(18px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    transition: opacity 0.35s ease;
+  }
+  .render-hud-box {
+    width: 100%;
+    max-width: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+  }
+  .render-reactor {
+    position: relative;
+    width: 84px;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .reactor-outer-spin {
+    position: absolute;
+    inset: 0;
+    border: 3px dashed #f59e0b;
+    border-radius: 50%;
+    animation: spinReactor 6s linear infinite;
+  }
+  @keyframes spinReactor {
+    100% { transform: rotate(360deg); }
+  }
+  .reactor-inner-pulse {
+    font-size: 38px;
+    animation: pulseReactorIcon 1.2s ease-in-out infinite alternate;
+  }
+  @keyframes pulseReactorIcon {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 14px #f59e0b); }
+  }
+  .render-hud-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+    margin: 0;
+  }
+  .render-hud-sub {
+    font-size: 12px;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.4;
+  }
+  .render-progress-track {
+    width: 100%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+  .render-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24, #10b981);
+    border-radius: 10px;
+    transition: width 0.12s linear;
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.8);
+  }
+  .render-telemetry-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: #cbd5e1;
+  }
+  .render-percent {
+    font-weight: 900;
+    color: #fbbf24;
+    font-size: 13.5px;
+  }
+  .render-steps-log {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .step-log-item {
+    font-size: 10.5px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+  .step-log-item.active {
+    color: #fbbf24;
+    font-weight: 700;
+  }
+  .step-log-item.done {
+    color: #10b981;
+    font-weight: 600;
+  }
+
+
+/* Studio Workspace */
   .studio-layout {
     display: flex;
     gap: 28px;
@@ -777,96 +1075,61 @@
 
   <div class="two-box-layout" id="promptWorkbench">
 
-    <!-- BOX 1: IDEA INPUT & GENERATE REEL -->
-    <div class="box-card box-left">
-      <div class="box-header">
-        <span class="box-title">💡 1. Enter Idea &amp; Generate Reel:</span>
-        <span class="box-badge">PROMPT &amp; REEL CREATOR</span>
+    <!-- BOX 1: ENTIRE SQUARE IS A GIANT 1-CLICK GENERATE REEL BUTTON -->
+    <div class="box-card box-left giant-generate-reel-card" id="btnGiantGenerateReel" onclick="generatePromptAndMakeReel()" role="button" tabindex="0">
+      
+      <!-- Top Brain Status Badge -->
+      <div class="giant-btn-mind-badge">
+        <span class="giant-pulse-dot"></span>
+        <span id="giantBtnMindLabel">🧠 BUTTON MIND: CYCLING 5 PRODUCTS</span>
       </div>
 
-      <!-- Product Mode Selector & Rotation Bar -->
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:6px">
+      <!-- Hero Visual Centerpiece -->
+      <div class="giant-hero-icon-wrap">
+        <div class="giant-hero-icon-ring"></div>
+        <div class="giant-hero-icon-glow"></div>
+        <span class="giant-hero-icon" id="giantHeroEmoji">⚡</span>
+      </div>
+
+      <!-- Main Headline & Subtitle -->
+      <div>
+        <h2 class="giant-btn-title">GENERATE NEW REEL</h2>
+        <p class="giant-btn-sub">Click anywhere to create &amp; render the next animated video</p>
+      </div>
+
+      <!-- Next Target in Mind Card -->
+      <div class="giant-target-card">
         <div style="display:flex;align-items:center;justify-content:space-between">
-          <span style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em">Product Mode:</span>
-          <span id="rotationCounterBadge" style="font-size:10.5px;padding:3px 8px;border-radius:6px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.35);color:#fbbf24;font-family:monospace">🔄 Auto-Rotate: Active (Cycles 5 Products)</span>
+          <span style="font-size:10px;color:#94a3b8;font-weight:800;letter-spacing:0.06em;text-transform:uppercase">Next Up in Mind:</span>
+          <span id="giantTargetLapBadge" style="font-size:10px;background:rgba(245,158,11,0.2);color:#fbbf24;padding:2px 6px;border-radius:4px;font-family:monospace">Product 1 of 5</span>
         </div>
-
-        <div class="idea-presets-row" id="productSelectorRow">
-          <button type="button" class="preset-pill active" id="btnProductAutoRotate" onclick="selectProductMode('auto')">
-            <span>🔄</span> <span>Auto-Rotate (All 5)</span>
-          </button>
-          <button type="button" class="preset-pill" id="btnProductVoiceAi" onclick="selectProductMode('voice_ai')">
-            <span>📞</span> <span>Ava Voice AI</span>
-          </button>
-          <button type="button" class="preset-pill" id="btnProductSpeed" onclick="selectProductMode('speed_to_lead')">
-            <span>⏱️</span> <span>90s SMS Speed</span>
-          </button>
-          <button type="button" class="preset-pill" id="btnProductWeb" onclick="selectProductMode('mobile_web')">
-            <span>📱</span> <span>Fast Web Funnel</span>
-          </button>
-          <button type="button" class="preset-pill" id="btnProductAeo" onclick="selectProductMode('aeo_search')">
-            <span>🔍</span> <span>AEO AI Search</span>
-          </button>
-          <button type="button" class="preset-pill" id="btnProductBundle" onclick="selectProductMode('growth_bundle')">
-            <span>🚀</span> <span>Growth Engine</span>
-          </button>
-        </div>
-
-        <!-- Quick Idea Starters & Random Idea Trigger -->
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px">
-          <span style="font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em">Idea Starters &amp; Situations:</span>
-          <button type="button" onclick="generateRandomContractorSituation()" style="background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.35);color:#38bdf8;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:4px">
-            <span>🎲</span> <span>Surprise Me / New Scenario</span>
-          </button>
-        </div>
-
-        <div class="idea-presets-row" style="gap:6px">
-          <button type="button" class="preset-pill" style="font-size:11px;padding:4px 9px" onclick="applyTradePreset('hvac')">
-            <span>❄️</span> <span>HVAC Heat ($9.2k)</span>
-          </button>
-          <button type="button" class="preset-pill" style="font-size:11px;padding:4px 9px" onclick="applyTradePreset('plumbing')">
-            <span>🚰</span> <span>Sewer Flood ($8.5k)</span>
-          </button>
-          <button type="button" class="preset-pill" style="font-size:11px;padding:4px 9px" onclick="applyTradePreset('roofing')">
-            <span>🏠</span> <span>Roof Storm ($14k)</span>
-          </button>
-          <button type="button" class="preset-pill" style="font-size:11px;padding:4px 9px" onclick="applyTradePreset('electrical')">
-            <span>⚡</span> <span>Panel Burn ($6k)</span>
-          </button>
-          <button type="button" class="preset-pill" style="font-size:11px;padding:4px 9px" onclick="clearIdeaForCustomInput()">
-            <span>✏️</span> <span>Custom Freeform Idea</span>
-          </button>
-        </div>
-
-        <!-- Active Product Indicator Bar -->
-        <div id="activeProductIndicator" style="display:flex;align-items:center;justify-content:space-between;padding:7px 11px;background:rgba(15,23,42,0.85);border:1px solid rgba(245,158,11,0.3);border-radius:8px;font-size:11.5px;color:#cbd5e1">
-          <div style="display:flex;align-items:center;gap:8px">
-            <span style="font-size:14px">🎬</span>
-            <span>Current Reel Product: <strong id="currentProductLabel" style="color:#fbbf24">Ava 24/7 Voice AI Receptionist</strong></span>
-          </div>
-          <span id="currentProductKeywordBadge" style="background:#f59e0b;color:#070a0f;font-weight:800;font-size:10.5px;padding:2px 7px;border-radius:4px;font-family:monospace">DM: "AVA"</span>
-        </div>
+        <div id="giantNextProductTitle" style="font-size:14.5px;font-weight:800;color:#fbbf24;margin-top:3px">📞 Ava 24/7 Voice AI Phone Receptionist</div>
+        <div id="giantNextProductScenario" style="font-size:11px;color:#cbd5e1;margin-top:3px;line-height:1.4">Sunday 98° Heatwave AC Emergency · $9,200 System Save</div>
       </div>
 
-      <textarea id="postIdeaInput" class="idea-textarea" style="min-height: 120px;" placeholder="Describe any contractor situation or business offer (e.g. AC compressor dies on a 95-degree Sunday, homeowner calls 3 HVAC shops and gets 2 voicemails. Ava answers for Titan Air in 0.8s, qualifies the emergency, checks schedule, and dispatches tech via SMS)...">Florida summer 98-degree heatwave. Homeowner's AC blows out on a Sunday afternoon. They call 3 local HVAC contractors. Two go straight to dead voicemails. Ava answers for Titan Air in 0.8 seconds, books a $9,200 full system replacement, and dispatches the lead to the technician's phone in 24 seconds.</textarea>
-
-      <!-- BIG 1-CLICK GENERATE REEL BUTTON -->
-      <button type="button" class="btn-generate-main" id="btnGeneratePromptAndReel" onclick="generatePromptAndMakeReel()">
-        <span>⚡</span> <span>Generate Prompt &amp; Create Reel</span>
-      </button>
-
-      <!-- Status indicator -->
-      <div id="reelGenStatusMsg" style="display:none;font-size:12px;padding:9px 12px;border-radius:8px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.35);color:#10b981;display:flex;align-items:center;gap:8px">
-        <span>🎬</span> <span><strong>Reel Generated!</strong> Playing new reel with kinetic captions in the reel spot below...</span>
+      <!-- 5-Product Mind Stepper Dots -->
+      <div class="giant-stepper-row" id="productMindStepper">
+        <div class="giant-step-pill active" id="stepPill0"><span>1</span> Ava</div>
+        <div class="giant-step-pill" id="stepPill1"><span>2</span> 90s SMS</div>
+        <div class="giant-step-pill" id="stepPill2"><span>3</span> Web</div>
+        <div class="giant-step-pill" id="stepPill3"><span>4</span> AEO</div>
+        <div class="giant-step-pill" id="stepPill4"><span>5</span> Engine</div>
       </div>
 
-      <!-- Expandable details for prompt & script if user ever wants to inspect -->
-      <details style="margin-top:auto">
-        <summary style="font-size:11px;color:#94a3b8;cursor:pointer;user-select:none">🔍 View Generated Storyboard Prompt &amp; Narration</summary>
-        <div id="promptWordStats" style="font-family:monospace;font-size:11px;color:#f59e0b;margin-top:4px">158 words • ~59s video</div>
-        <textarea id="structuredPromptOutput" class="prompt-textarea" style="min-height:90px;margin-top:6px;font-size:11px" readonly></textarea>
-        <div id="cleanScriptPreview" style="display:none"></div>
-      </details>
+      <!-- Big Action Bar -->
+      <div class="giant-action-bar">
+        <span>⚡</span> <span>CLICK TO GENERATE &amp; RENDER REEL NOW</span>
+      </div>
+
+      <!-- Hidden elements for backward-compatibility with downstream functions -->
+      <div style="display:none">
+        <textarea id="postIdeaInput"></textarea>
+        <textarea id="structuredPromptOutput"></textarea>
+        <div id="cleanScriptPreview"></div>
+        <button id="btnGeneratePromptAndReel"></button>
+        <div id="reelGenStatusMsg"></div>
+      </div>
+
     </div>
 
     <!-- BOX 2: READY-TO-POST INSTAGRAM CAPTION -->
@@ -900,6 +1163,42 @@
 <div class="studio-layout">
   <!-- 9:16 Video Stage Canvas -->
   <div class="video-stage">
+    <!-- 🚀 ACTIVE RENDERING ENGINE PROGRESS OVERLAY -->
+    <div id="reelRenderingOverlay" class="reel-render-overlay" style="display:none">
+      <div class="render-hud-box">
+        <!-- Spinning Hex Reactor -->
+        <div class="render-reactor">
+          <div class="reactor-outer-spin"></div>
+          <div class="reactor-inner-pulse" id="reactorEmoji">🎬</div>
+        </div>
+
+        <!-- Status Title & Subtitle -->
+        <div>
+          <h3 id="renderStatusTitle" class="render-hud-title">CREATING NEW VIRAL REEL</h3>
+          <p id="renderStatusSubtitle" class="render-hud-sub">Synthesizing Product Storyboard &amp; Aligning Timeline...</p>
+        </div>
+
+        <!-- The Animated Progress Bar -->
+        <div class="render-progress-track">
+          <div id="renderProgressBar" class="render-progress-fill" style="width: 0%"></div>
+        </div>
+
+        <!-- Percentage & Speed Telemetry -->
+        <div class="render-telemetry-row">
+          <span id="renderPercentText" class="render-percent">0%</span>
+          <span class="render-fps" style="color:#94a3b8">60 FPS · 1080×1920 HD</span>
+        </div>
+
+        <!-- 5-Step Live Telemetry Log -->
+        <div class="render-steps-log" id="renderStepsLog">
+          <div class="step-log-item active" id="renderStep1">🧠 Step 1: Synthesizing script &amp; high-converting hook...</div>
+          <div class="step-log-item" id="renderStep2">🎙️ Step 2: Calibrating voiceover &amp; millisecond timestamps...</div>
+          <div class="step-log-item" id="renderStep3">🎬 Step 3: Rendering 15 motion scenes &amp; 3D warp FX...</div>
+          <div class="step-log-item" id="renderStep4">⚡ Step 4: Baking Hormozi kinetic typography &amp; captions...</div>
+          <div class="step-log-item" id="renderStep5">✨ Step 5: Finalizing 9:16 master reel &amp; audio sync...</div>
+        </div>
+      </div>
+    </div>
     <div class="stage-overlay">
       
       <div style="display:flex;gap:6px">
@@ -4179,13 +4478,19 @@ Stop bleeding thousands on dead voicemails. Call the demo number on your screen 
 // 💡 AUTO-GENERATE VIRAL POST ENGINE (IDEA -> PROMPT -> VIDEO)
 // -------------------------------------------------------------
 // =============================================================
-// 🚀 VANTORX 5-PRODUCT ROTATION & DYNAMIC REEL CREATION ENGINE
+// 🚀 VANTORX 5-PRODUCT BRAIN QUEUE & ACTIVE RENDER PROGRESS ENGINE
 // =============================================================
-window.VANTORX_PRODUCTS = [
+window.PRODUCTS_MIND_QUEUE = [
   {
     id: 'voice_ai',
+    stepIndex: 0,
+    emoji: '📞',
     name: 'Ava 24/7 Voice AI Phone Receptionist',
     shortName: 'Ava Voice AI',
+    trade: 'HVAC',
+    ticket: '$9,200',
+    scenarioHeadline: 'Sunday 98° Heatwave AC Failure · $9,200 System Save',
+    scenarioDesc: 'Homeowner calls 3 HVAC shops on Sunday afternoon. Two go to dead voicemails. Ava answers in 0.8s, qualifies emergency & dispatches tech via SMS.',
     badge: '📞 24/7 VOICE AI RECEPTIONIST',
     keyword: 'AVA',
     statNumber: '0.8s',
@@ -4203,12 +4508,18 @@ window.VANTORX_PRODUCTS = [
   },
   {
     id: 'speed_to_lead',
+    stepIndex: 1,
+    emoji: '⏱️',
     name: '90-Second SMS Speed-to-Lead Auto-Responder',
     shortName: '90s SMS Speed-to-Lead',
+    trade: 'ROOFING',
+    ticket: '$14,000',
+    scenarioHeadline: 'Post-Storm Emergency Roof Leak · $14,000 Shingle Replacement',
+    scenarioDesc: 'Torrential rain leaks through living room ceiling. In 24 seconds, instant automated two-way SMS engages homeowner & locks the inspection.',
     badge: '⏱️ 90s SMS SPEED-TO-LEAD ENGINE',
     keyword: 'SPEED',
     statNumber: '24s',
-    statTitle: 'SPEED-TO-LEAD LAW',
+    statTitle: 'THE SPEED-TO-LEAD RULE',
     statHeadline: 'INSTANT TWO-WAY SMS IN 24 SECONDS',
     statSub: 'Leads contacted within 90 seconds are 391% more likely to close.',
     solutionTitle: 'VantorX 90s SMS Speed Engine',
@@ -4222,8 +4533,14 @@ window.VANTORX_PRODUCTS = [
   },
   {
     id: 'mobile_web',
+    stepIndex: 2,
+    emoji: '📱',
     name: 'Mobile-First High-Converting Contractor Website',
     shortName: 'Mobile Fast Funnel Web',
+    trade: 'PLUMBING',
+    ticket: '$8,500',
+    scenarioHeadline: 'Sunday Night Sewer Disaster · $8,500 Trenchless Repipe',
+    scenarioDesc: 'Homeowner searches plumbing on smartphone. Competitor sites load in 6s and bounce. VantorX site loads in 0.4s with 1-tap emergency booking funnel.',
     badge: '📱 0.4s FAST MOBILE FUNNEL WEBSITE',
     keyword: 'WEB',
     statNumber: '0.4s',
@@ -4241,8 +4558,14 @@ window.VANTORX_PRODUCTS = [
   },
   {
     id: 'aeo_search',
+    stepIndex: 3,
+    emoji: '🔍',
     name: 'Answer Engine Optimization (AEO) & AI Search Dominance',
     shortName: 'AEO AI Search Engine',
+    trade: 'ELECTRICAL',
+    ticket: '$6,800',
+    scenarioHeadline: 'Homeowner Asks ChatGPT for 200A Panel Upgrade · Recommended #1',
+    scenarioDesc: 'High-income homeowner asks AI assistant for top electrical contractor in their city. VantorX AEO schema feeds ChatGPT the #1 authority recommendation.',
     badge: '🔍 AEO · #1 ON CHATGPT & GOOGLE MAPS',
     keyword: 'RANK',
     statNumber: '#1',
@@ -4260,8 +4583,14 @@ window.VANTORX_PRODUCTS = [
   },
   {
     id: 'growth_bundle',
+    stepIndex: 4,
+    emoji: '🚀',
     name: 'All-In-One Revenue Growth Engine',
     shortName: 'All-In-One Growth Engine',
+    trade: 'CONTRACTOR',
+    ticket: '$18,500',
+    scenarioHeadline: 'Full 4-Pillar Stack Replaces 4 Fragmented Tools · $18k/Mo Added',
+    scenarioDesc: 'Unifies 24/7 Voice AI, 90s SMS Speed-to-Lead, 0.4s Fast Mobile Funnel, and AEO AI Search into one automated lead-capturing revenue machine.',
     badge: '🚀 COMPLETE CONTRACTOR REVENUE ENGINE',
     keyword: 'GROWTH',
     statNumber: '4X',
@@ -4280,158 +4609,57 @@ window.VANTORX_PRODUCTS = [
 ];
 
 window.PRODUCT_ROTATION_INDEX = 0;
-window.SELECTED_PRODUCT_MODE = 'auto'; // 'auto' | 'voice_ai' | 'speed_to_lead' | 'mobile_web' | 'aeo_search' | 'growth_bundle'
+window.IS_RENDERING_REEL = false;
 
-// Set default active scenario
+// Initialize with First Product
 window.ACTIVE_SCENARIO = {
-  productId: 'voice_ai',
-  productName: 'Ava 24/7 Voice AI Phone Receptionist',
-  badge: '📞 24/7 VOICE AI RECEPTIONIST',
-  trade: 'HVAC',
-  ticket: '$9,200',
-  keyword: 'AVA',
-  statValue: '0.8s',
-  statTitle: 'SPEED-TO-LEAD LAW',
-  statHeadline: 'ANSWERS PHONE IN 0.8 SECONDS',
-  statSub: '78% of homeowners hire the first business that answers.',
-  solutionTitle: 'Meet Ava: 24/7 Voice AI',
-  solutionSub: 'Answers in 0.8s · Live Triage · Dispatches Tech via SMS',
-  ctaText: 'COMMENT "AVA" ON THIS REEL NOW',
+  productId: window.PRODUCTS_MIND_QUEUE[0].id,
+  productName: window.PRODUCTS_MIND_QUEUE[0].name,
+  badge: window.PRODUCTS_MIND_QUEUE[0].badge,
+  trade: window.PRODUCTS_MIND_QUEUE[0].trade,
+  ticket: window.PRODUCTS_MIND_QUEUE[0].ticket,
+  keyword: window.PRODUCTS_MIND_QUEUE[0].keyword,
+  statValue: window.PRODUCTS_MIND_QUEUE[0].statNumber,
+  statTitle: window.PRODUCTS_MIND_QUEUE[0].statTitle,
+  statHeadline: window.PRODUCTS_MIND_QUEUE[0].statHeadline,
+  statSub: window.PRODUCTS_MIND_QUEUE[0].statSub,
+  solutionTitle: window.PRODUCTS_MIND_QUEUE[0].solutionTitle,
+  solutionSub: window.PRODUCTS_MIND_QUEUE[0].solutionSub,
+  ctaText: window.PRODUCTS_MIND_QUEUE[0].ctaText,
   demoCall: '(561) 813-8602'
 };
 
-// Trade Presets & Scenarios Library
-window.TRADE_PRESETS = {
-  hvac: {
-    name: 'Sunday 98° Heatwave AC Failure',
-    idea: 'Florida summer 98-degree heatwave. Homeowner AC compressor blows out on a Sunday afternoon. They call 3 local HVAC contractors. Two go straight to dead voicemails. Ava answers for Titan Air in 0.8 seconds, books a $9,200 full system replacement, and dispatches the lead to the technician phone in 24 seconds.',
-    ticket: '$9,200',
-    trade: 'HVAC',
-    pain: 'Sunday 98-degree AC failure',
-    keyword: 'HEAT',
-    demoCall: '(561) 813-8602'
-  },
-  plumbing: {
-    name: 'Sunday Sewer / Burst Pipe Disaster',
-    idea: 'Sunday night 9:30 PM sewer backup flooding the master bathroom. Homeowner panics and calls local plumbing shops. While others send callers to voicemail, Ava answers for Apex Plumbing in 0.8 seconds, triages the emergency, books an $8,500 trenchless sewer repipe, and alerts the on-call plumber.',
-    ticket: '$8,500',
-    trade: 'PLUMBING',
-    pain: 'Sunday night sewer line flood',
-    keyword: 'FLOW',
-    demoCall: '(561) 813-8602'
-  },
-  roofing: {
-    name: 'Hurricane Storm Shingle Leak',
-    idea: 'Post-tropical storm torrential rain causes roof leaks into the living room ceiling. Homeowner calls 4 roofing contractors. Ava answers instantly for Vertex Roofing, quotes emergency tarping, captures insurance details, books a $14,000 architectural shingle replacement, and closes the tab.',
-    ticket: '$14,000',
-    trade: 'ROOFING',
-    pain: 'Hurricane roof leak & ceiling collapse',
-    keyword: 'ROOF',
-    demoCall: '(561) 813-8602'
-  },
-  electrical: {
-    name: 'Solo Electrician on Scissor Lift Missing $6K Bids',
-    idea: 'Solo electrical contractor is 20 feet up on a commercial scissor lift rewiring an electrical panel. His phone rings 5 times with a $6,000 EV charger and panel upgrade lead. Ava answers in 0.8s, qualifies the service entrance, and puts the job directly onto his calendar.',
-    ticket: '$6,000',
-    trade: 'ELECTRICAL',
-    pain: 'Electrician on ladder missing high-ticket calls',
-    keyword: 'POWER',
-    demoCall: '(561) 813-8602'
-  },
-  speed: {
-    name: 'The 90-Second Speed-to-Lead Stat',
-    idea: '78% of homeowners hire the first contractor who picks up the phone. A beam of laser light travels 186,000 miles per second to the moon and back faster than the average contractor checks their voicemail. Ava eliminates the delay with instant 0.8-second voice AI.',
-    ticket: '$8,500',
-    trade: 'CONTRACTOR',
-    pain: 'Losing 78% of customers to voicemail delay',
-    keyword: 'AVA',
-    demoCall: '(561) 813-8602'
+// Update Giant Button UI to reflect which product is up next in mind
+function updateGiantButtonMindState(prod, nextProd) {
+  const titleEl = document.getElementById('giantNextProductTitle');
+  if (titleEl) titleEl.textContent = `${prod.emoji} ${prod.name}`;
+
+  const scenEl = document.getElementById('giantNextProductScenario');
+  if (scenEl) scenEl.textContent = prod.scenarioHeadline;
+
+  const emojiEl = document.getElementById('giantHeroEmoji');
+  if (emojiEl) emojiEl.textContent = prod.emoji;
+
+  const lapEl = document.getElementById('giantTargetLapBadge');
+  if (lapEl) {
+    const lapNum = Math.floor(window.PRODUCT_ROTATION_INDEX / 5) + 1;
+    lapEl.textContent = `Product ${prod.stepIndex + 1} of 5 (Lap ${lapNum})`;
   }
-};
 
-window.RANDOM_SCENARIOS = [
-  { trade: 'HVAC', ticket: '$9,200', text: 'Sunday afternoon heatwave in Texas. Homeowner AC fan motor seizes up during a family reunion. Two local AC companies roll to voicemail. Ava answers for Precision Air in 0.8s, books a $9,200 changeout, and texts the on-call tech.' },
-  { trade: 'PLUMBING', ticket: '$8,500', text: '11:00 PM mainline sewer backup in a residential home. Homeowner calls three emergency plumbers. Ava answers on the second ring, qualifies the emergency, quotes initial diagnostic dispatch, and locks down the $8,500 trenchless sewer job.' },
-  { trade: 'ROOFING', ticket: '$14,500', text: 'Hailstorm damages 40 homes in a neighborhood. Homeowners flood phone lines requesting inspections. Ava answers every call simultaneously, captures address & roof age, and books $14,500 full roof replacements without dropping a single caller.' },
-  { trade: 'ELECTRICAL', ticket: '$6,800', text: 'Homeowner installing a Tesla charger needs a 200-amp main electrical service panel upgrade. Submitted estimate forms to 3 electrical shops. VantorX 90-second SMS engages them in 18 seconds and secures the $6,800 job.' },
-  { trade: 'COMMERCIAL HVAC', ticket: '$18,000', text: 'Restaurant walk-in cooler fails on Friday evening. Owner searches ChatGPT for emergency commercial refrigeration. VantorX AEO delivers the top listing, Ava answers instantly, and dispatches commercial tech.' },
-  { trade: 'WATER RESTORATION', ticket: '$12,000', text: 'Washing machine hose ruptures flooding two floors of a luxury condo. Ava answers at 3:00 AM, instructs homeowner on main water shutoff, and books a $12,000 emergency extraction and dryout.' }
-];
-
-window.selectProductMode = function(mode) {
-  window.SELECTED_PRODUCT_MODE = mode;
-  document.querySelectorAll('#productSelectorRow .preset-pill').forEach(el => el.classList.remove('active'));
-
-  const btnMap = {
-    'auto': 'btnProductAutoRotate',
-    'voice_ai': 'btnProductVoiceAi',
-    'speed_to_lead': 'btnProductSpeed',
-    'mobile_web': 'btnProductWeb',
-    'aeo_search': 'btnProductAeo',
-    'growth_bundle': 'btnProductBundle'
-  };
-
-  const activeBtn = document.getElementById(btnMap[mode]);
-  if (activeBtn) activeBtn.classList.add('active');
-
-  const badge = document.getElementById('rotationCounterBadge');
-  if (badge) {
-    if (mode === 'auto') {
-      badge.textContent = `🔄 Auto-Rotate: Active (Next: Product ${(window.PRODUCT_ROTATION_INDEX % 5) + 1} of 5)`;
-      badge.style.background = 'rgba(245,158,11,0.15)';
-      badge.style.color = '#fbbf24';
-    } else {
-      const prod = window.VANTORX_PRODUCTS.find(p => p.id === mode);
-      badge.textContent = `🔒 Locked: ${prod ? prod.shortName : mode}`;
-      badge.style.background = 'rgba(56,189,248,0.15)';
-      badge.style.color = '#38bdf8';
+  // Update Stepper Dots
+  for (let i = 0; i < 5; i++) {
+    const pill = document.getElementById('stepPill' + i);
+    if (pill) {
+      if (i === prod.stepIndex) {
+        pill.classList.add('active');
+      } else {
+        pill.classList.remove('active');
+      }
     }
   }
-
-  // Update current preview
-  updateActiveProductDisplay(getActiveProduct());
-  generateViralPromptFromIdea();
-};
-
-function getActiveProduct() {
-  if (window.SELECTED_PRODUCT_MODE === 'auto') {
-    return window.VANTORX_PRODUCTS[window.PRODUCT_ROTATION_INDEX % window.VANTORX_PRODUCTS.length];
-  }
-  return window.VANTORX_PRODUCTS.find(p => p.id === window.SELECTED_PRODUCT_MODE) || window.VANTORX_PRODUCTS[0];
 }
 
-function updateActiveProductDisplay(prod) {
-  const lbl = document.getElementById('currentProductLabel');
-  if (lbl) lbl.textContent = prod.name;
-  const kw = document.getElementById('currentProductKeywordBadge');
-  if (kw) kw.textContent = `DM: "${prod.keyword}"`;
-}
-
-window.generateRandomContractorSituation = function() {
-  const rand = window.RANDOM_SCENARIOS[Math.floor(Math.random() * window.RANDOM_SCENARIOS.length)];
-  const input = document.getElementById('postIdeaInput');
-  if (input) input.value = rand.text;
-  generateViralPromptFromIdea();
-};
-
-window.clearIdeaForCustomInput = function() {
-  const input = document.getElementById('postIdeaInput');
-  if (input) {
-    input.value = '';
-    input.focus();
-    input.placeholder = 'Type ANY contractor scenario or offer here... (e.g. Commercial refrigeration dies on Friday night, homeowner calls 3 shops, Ava books $18k replacement)...';
-  }
-};
-
-window.applyTradePreset = function(key) {
-  const p = window.TRADE_PRESETS[key];
-  if (!p) return;
-  const input = document.getElementById('postIdeaInput');
-  if (input) input.value = p.idea;
-  generateViralPromptFromIdea();
-};
-
-// Helper: Generate Word-by-Word Timestamps for Kinetic Typography
+// Generate Word Timestamps from script
 function generateTimestampsForNarration(scriptText, totalDurationSeconds) {
   const words = scriptText.trim().split(/\s+/).map(w => w.replace(/[^a-zA-Z0-9$%,.?!'-]/g, '')).filter(Boolean);
   if (!words.length) return [];
@@ -4440,7 +4668,7 @@ function generateTimestampsForNarration(scriptText, totalDurationSeconds) {
   const avgDurationPerWord = targetDuration / words.length;
   let currentStart = 0.05;
 
-  return words.map((word, idx) => {
+  return words.map((word) => {
     let wDuration = avgDurationPerWord;
     if (word.endsWith('.') || word.endsWith('!') || word.endsWith('?')) {
       wDuration *= 1.45;
@@ -4461,48 +4689,14 @@ function generateTimestampsForNarration(scriptText, totalDurationSeconds) {
   });
 }
 
-// -------------------------------------------------------------
-// MAIN GENERATOR: Builds dynamic prompt, voiceover, word timestamps & Instagram caption
-// -------------------------------------------------------------
-window.generateViralPromptFromIdea = function() {
-  const input = document.getElementById('postIdeaInput');
-  const idea = input ? input.value.trim() : '';
-
-  const prod = getActiveProduct();
-  updateActiveProductDisplay(prod);
-
-  // Parse Idea for dynamic elements
-  let ticket = '$8,500';
-  let trade = 'CONTRACTOR';
-
-  if (idea) {
-    const ticketMatch = idea.match(/\$[0-9,]+/);
-    if (ticketMatch) ticket = ticketMatch[0];
-
-    const lower = idea.toLowerCase();
-    if (lower.includes('plumb') || lower.includes('sewer') || lower.includes('drain') || lower.includes('water heater') || lower.includes('pipe')) {
-      trade = 'PLUMBING';
-    } else if (lower.includes('roof') || lower.includes('shingle') || lower.includes('tarp') || lower.includes('storm')) {
-      trade = 'ROOFING';
-    } else if (lower.includes('electric') || lower.includes('panel') || lower.includes('wire') || lower.includes('charger') || lower.includes('breaker')) {
-      trade = 'ELECTRICAL';
-    } else if (lower.includes('hvac') || lower.includes('ac') || lower.includes('heat') || lower.includes('cooler') || lower.includes('air conditioning')) {
-      trade = 'HVAC';
-    } else if (lower.includes('restoration') || lower.includes('flood') || lower.includes('mold')) {
-      trade = 'RESTORATION';
-    }
-  } else {
-    ticket = '$9,200';
-    trade = 'HVAC';
-  }
-
-  // Populate Active Scenario Global
+// Core Build Function for Active Product
+function buildReelAssetsForProduct(prod) {
   window.ACTIVE_SCENARIO = {
     productId: prod.id,
     productName: prod.name,
     badge: prod.badge,
-    trade: trade,
-    ticket: ticket,
+    trade: prod.trade,
+    ticket: prod.ticket,
     keyword: prod.keyword,
     statValue: prod.statNumber,
     statTitle: prod.statTitle,
@@ -4514,9 +4708,8 @@ window.generateViralPromptFromIdea = function() {
     demoCall: '(561) 813-8602'
   };
 
-  // Build Narration Script tailored to the Product and Idea
   const hookScript = prod.hookScript;
-  const problemScript = prod.problemScript.replace('{TICKET}', ticket);
+  const problemScript = prod.problemScript.replace('{TICKET}', prod.ticket);
   const solutionScript = prod.solutionScript;
   const proofScript = prod.proofScript;
   const ctaScript = prod.ctaScript;
@@ -4531,12 +4724,11 @@ ${proofScript}
 
 ${ctaScript}`;
 
-  // Build 15-Scene Vertical Storyboard Prompt
   const structuredPrompt = `[VIRAL REEL STORYBOARD PROMPT — VANTORX ${prod.shortName.toUpperCase()}]
-TARGET AUDIENCE: High-Ticket ${trade} Contractors & Blue-Collar Business Owners
+TARGET AUDIENCE: High-Ticket ${prod.trade} Contractors & Blue-Collar Business Owners
 PRODUCT ANGLE: ${prod.name} (${prod.badge})
 CORE METRIC: ${prod.statHeadline} (${prod.statNumber})
-TICKET RESCUE: ${ticket} Average Job Loss Prevented
+TICKET RESCUE: ${prod.ticket} Average Job Loss Prevented
 CTA TRIGGER: Comment "${prod.keyword}" or Call (561) 813-8602
 
 1. [HOOK (0:00 - 0:08)]:
@@ -4554,16 +4746,15 @@ CTA TRIGGER: Comment "${prod.keyword}" or Call (561) 813-8602
 5. [DIRECT RESPONSE CALL TO ACTION (0:50 - 0:59)]:
 "${ctaScript}"`;
 
-  // Build Dynamic Word Timestamps for Kinetic Typography
-  const newWordTimestamps = generateTimestampsForNarration(narrationScript, 58.5);
-  window.WORD_TIMESTAMPS = newWordTimestamps;
+  // Dynamic Word Timestamps
+  window.WORD_TIMESTAMPS = generateTimestampsForNarration(narrationScript, 58.5);
 
-  // Build High-Converting Ready-to-Post Instagram Caption
+  // Box 2 Instagram Caption
   const instagramCaption = `78% of homeowners hire the FIRST contractor who answers their call or texts them back. ⚡
 
-If your shop misses an emergency ${trade.toLowerCase()} lead on a weekend, that homeowner doesn't wait for your voicemail. They immediately tap the next contractor on Google.
+If your shop misses an emergency ${prod.trade.toLowerCase()} lead on a weekend, that homeowner doesn't wait for your voicemail. They immediately tap the next contractor on Google.
 
-That single unanswered inquiry just handed an ${ticket} job straight to your competitor down the road.
+That single unanswered inquiry just handed an ${prod.ticket} job straight to your competitor down the road.
 
 ❌ The Old Way:
 • Calls rolling into a voicemail graveyard while you are on a ladder
@@ -4582,87 +4773,173 @@ Call our interactive contractor line: (561) 813-8602
 💬 Want the interactive demo link sent straight to your Instagram DMs?
 Comment "${prod.keyword}" below and our automated engine will message you privately in 2 seconds! 🚀
 
-#${trade.toLowerCase()} #contractor #speedtolead #bluecollar #voiceai #contractorgrowth #tradesmen #servicebusiness #vantorx #${prod.keyword.toLowerCase()}`;
+#${prod.trade.toLowerCase()} #contractor #speedtolead #bluecollar #voiceai #contractorgrowth #tradesmen #servicebusiness #vantorx #${prod.keyword.toLowerCase()}`;
 
-  // Update UI Elements
-  const promptOutput = document.getElementById('structuredPromptOutput');
-  if (promptOutput) promptOutput.value = structuredPrompt;
+  // Update DOM elements
+  const igCaptionBox = document.getElementById('igCaptionText');
+  if (igCaptionBox) igCaptionBox.textContent = instagramCaption;
 
   const scriptPreview = document.getElementById('cleanScriptPreview');
   if (scriptPreview) scriptPreview.textContent = narrationScript;
 
-  const igCaptionBox = document.getElementById('igCaptionText');
-  if (igCaptionBox) igCaptionBox.textContent = instagramCaption;
-
-  const wordStats = document.getElementById('promptWordStats');
-  const words = narrationScript.trim().split(/\s+/).length;
-  if (wordStats) wordStats.textContent = `${words} words • ~59s video • Product: ${prod.shortName} • ${ticket} ${trade}`;
-};
+  const promptOutput = document.getElementById('structuredPromptOutput');
+  if (promptOutput) promptOutput.value = structuredPrompt;
+}
 
 // -------------------------------------------------------------
-// BIG 1-CLICK GENERATE PROMPT & MAKE REEL
+// PROGRESS BAR ANIMATOR & ENGINE CONTROLLER
+// -------------------------------------------------------------
+function animateRenderProgressBar(durationMs, onProgress, onComplete) {
+  const startTime = performance.now();
+
+  function frame(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(1, elapsed / durationMs);
+    const percent = Math.floor(progress * 100);
+
+    onProgress(percent);
+
+    if (progress < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      onComplete();
+    }
+  }
+
+  requestAnimationFrame(frame);
+}
+
+// -------------------------------------------------------------
+// BIG 1-CLICK GENERATE REEL HANDLER: Scrolls down & runs progress bar!
 // -------------------------------------------------------------
 window.generatePromptAndMakeReel = async function() {
-  const btn = document.getElementById('btnGeneratePromptAndReel');
-  const statusMsg = document.getElementById('reelGenStatusMsg');
-  if (btn) {
-    btn.disabled = true;
-    btn.innerHTML = `<span>⚡</span> <span>Generating ${getActiveProduct().shortName} Reel...</span>`;
+  if (window.IS_RENDERING_REEL) return;
+  window.IS_RENDERING_REEL = true;
+
+  // 1. Get current product from Mind Queue
+  const currentProd = window.PRODUCTS_MIND_QUEUE[window.PRODUCT_ROTATION_INDEX % window.PRODUCTS_MIND_QUEUE.length];
+
+  // 2. Advance rotation index for the NEXT click
+  window.PRODUCT_ROTATION_INDEX++;
+  const nextProd = window.PRODUCTS_MIND_QUEUE[window.PRODUCT_ROTATION_INDEX % window.PRODUCTS_MIND_QUEUE.length];
+
+  // 3. Update Giant Button UI to show next target
+  updateGiantButtonMindState(nextProd);
+
+  // 4. Smoothly scroll down to the video stage so the user sees the creation
+  const stage = document.querySelector('.video-stage');
+  if (stage) {
+    stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  // 1. Advance rotation if in Auto-Rotate mode
-  if (window.SELECTED_PRODUCT_MODE === 'auto') {
-    window.PRODUCT_ROTATION_INDEX = (window.PRODUCT_ROTATION_INDEX + 1) % window.VANTORX_PRODUCTS.length;
-    const badge = document.getElementById('rotationCounterBadge');
-    if (badge) {
-      badge.textContent = `🔄 Auto-Rotate: Active (Product ${(window.PRODUCT_ROTATION_INDEX % 5) + 1} of 5)`;
+  // 5. Activate the Rendering HUD Progress Overlay over the canvas
+  const overlay = document.getElementById('reelRenderingOverlay');
+  const progressBar = document.getElementById('renderProgressBar');
+  const percentText = document.getElementById('renderPercentText');
+  const titleEl = document.getElementById('renderStatusTitle');
+  const subEl = document.getElementById('renderStatusSubtitle');
+  const reactorEmoji = document.getElementById('reactorEmoji');
+
+  if (overlay) {
+    overlay.style.display = 'flex';
+    overlay.style.opacity = '1';
+  }
+
+  if (titleEl) titleEl.textContent = `CREATING: ${currentProd.shortName.toUpperCase()}`;
+  if (subEl) subEl.textContent = `Rendering ${currentProd.trade} High-Ticket Storyboard (${currentProd.ticket})...`;
+  if (reactorEmoji) reactorEmoji.textContent = currentProd.emoji;
+
+  // Reset steps log
+  const stepItems = [
+    document.getElementById('renderStep1'),
+    document.getElementById('renderStep2'),
+    document.getElementById('renderStep3'),
+    document.getElementById('renderStep4'),
+    document.getElementById('renderStep5')
+  ];
+
+  stepItems.forEach((item, idx) => {
+    if (item) {
+      item.className = 'step-log-item' + (idx === 0 ? ' active' : '');
     }
-  }
+  });
 
-  // 2. Generate Prompt, Narration, Kinetic Timestamps & Caption for Active Product
-  generateViralPromptFromIdea();
+  // 6. Build the dynamic assets (script, captions, timestamps, scene config)
+  buildReelAssetsForProduct(currentProd);
 
-  const prod = getActiveProduct();
-
-  // 3. Update Scene Top Label in UI
+  // Update Scene Top Label in UI
   const sceneLabel = document.getElementById('currentSceneLabel');
   if (sceneLabel) {
-    sceneLabel.textContent = `Scene 1: ${prod.badge}`;
+    sceneLabel.textContent = `Scene 1: ${currentProd.badge}`;
   }
 
-  // 4. Start making and animating the new reel in the reel spot!
-  try {
-    if (statusMsg) {
-      statusMsg.style.display = 'flex';
-      statusMsg.innerHTML = `<span>🎬</span> <span><strong>Brand New Reel Generated for ${prod.shortName}!</strong> Playing new customized reel with live kinetic captions below...</span>`;
-    }
+  // 7. Run animated progress bar over 2.6 seconds
+  animateRenderProgressBar(
+    2600,
+    (percent) => {
+      if (progressBar) progressBar.style.width = percent + '%';
+      if (percentText) percentText.textContent = percent + '%';
 
-    // Scroll smoothly to video stage / reel spot
-    const stage = document.querySelector('.video-stage');
-    if (stage) {
-      stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    // Reset and start playback of the reel
-    currentTime = 0;
-    resetSfxFlags();
-    if (!isPlaying) {
-      togglePlay();
-    } else {
-      if (uploadedAudioElement) {
-        uploadedAudioElement.currentTime = 0;
+      // Step telemetry triggers
+      if (percent >= 20 && stepItems[0] && stepItems[1]) {
+        stepItems[0].className = 'step-log-item done';
+        stepItems[1].className = 'step-log-item active';
       }
-      playStartTime = performance.now();
+      if (percent >= 45 && stepItems[1] && stepItems[2]) {
+        stepItems[1].className = 'step-log-item done';
+        stepItems[2].className = 'step-log-item active';
+      }
+      if (percent >= 70 && stepItems[2] && stepItems[3]) {
+        stepItems[2].className = 'step-log-item done';
+        stepItems[3].className = 'step-log-item active';
+      }
+      if (percent >= 90 && stepItems[3] && stepItems[4]) {
+        stepItems[3].className = 'step-log-item done';
+        stepItems[4].className = 'step-log-item active';
+      }
+    },
+    () => {
+      // 100% Complete!
+      if (stepItems[4]) stepItems[4].className = 'step-log-item done';
+      if (percentText) {
+        percentText.textContent = '100% READY!';
+        percentText.style.color = '#10b981';
+      }
+      if (titleEl) titleEl.textContent = '✨ REEL RENDERED & READY!';
+
+      // Smooth fade out and launch playback of brand new reel
+      setTimeout(() => {
+        if (overlay) {
+          overlay.style.opacity = '0';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+          }, 350);
+        }
+
+        // Reset and launch the new reel animation from 0.0s!
+        currentTime = 0;
+        resetSfxFlags();
+        if (!isPlaying) {
+          togglePlay();
+        } else {
+          if (uploadedAudioElement) {
+            uploadedAudioElement.currentTime = 0;
+          }
+          playStartTime = performance.now();
+        }
+
+        window.IS_RENDERING_REEL = false;
+      }, 450);
     }
-  } catch(e) {
-    console.warn('Reel playback notice:', e);
-  } finally {
-    if (btn) {
-      btn.disabled = false;
-      btn.innerHTML = '<span>⚡</span> <span>Generate Prompt &amp; Create Reel</span>';
-    }
-  }
+  );
 };
+
+// Initialize Box 2 and Mind State on load
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    buildReelAssetsForProduct(window.PRODUCTS_MIND_QUEUE[0]);
+  });
+}
 
 
 window.generateVideoFromPrompt = async function() {
