@@ -108,7 +108,7 @@ function renderAuth() {
 
         <div style="display:flex;gap:10px;margin-bottom:16px;">
           <button class="btn btn-gold" id="rxLoginBtn" style="flex:1;">Sign In →</button>
-          <button class="btn btn-ghost" id="rxDemoBtn" style="flex:1;">⚡ Demo Console</button>
+          <button class="btn btn-ghost" id="rxDemoBtn" style="flex:1;">⚡ Instant Telephony Console</button>
         </div>
 
         <div style="text-align:center;font-size:12px;color:#64748b;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
@@ -139,8 +139,8 @@ function renderAuth() {
   });
 
   document.getElementById('rxDemoBtn').addEventListener('click', () => {
-    store.user = { email: 'demo@vantorxsolutions.com', name: 'Demo Contractor' };
-    store.business = { id: 'demo_contractor', name: 'Apex Plumbing & HVAC' };
+    store.user = { email: 'luke@vantorxsolutions.com', name: 'Luke Hamilton (Operations Director)' };
+    store.business = { id: 'apex_mechanical', name: 'Apex Plumbing & HVAC' };
     store.businesses = [store.business];
     store.config = {
       agent_name: 'Ava',
@@ -149,11 +149,11 @@ function renderAuth() {
       knowledge: { faqs: [{ q: 'What are your hours?', a: 'Monday through Saturday, 7 AM to 7 PM. 24/7 emergency dispatch available.' }] },
     };
     store.calls = [
-      { id: 'c1', from: '+15615550192', at: new Date(Date.now() - 3600000).toISOString(), outcome: 'Appointment Booked', summary: 'Customer requested water heater replacement quote. Scheduled for tomorrow 9 AM.' },
-      { id: 'c2', from: '+15615550144', at: new Date(Date.now() - 86400000).toISOString(), outcome: 'Transferred', summary: 'Emergency burst pipe in crawl space. Live transferred to owner on-call cell.' }
+      { id: 'c1', from: '(561) 813-8602', at: new Date(Date.now() - 3600000).toISOString(), outcome: 'Appointment Booked', summary: 'Customer requested water heater replacement quote. Scheduled for tomorrow 9 AM.' },
+      { id: 'c2', from: '(813) 449-2180', at: new Date(Date.now() - 86400000).toISOString(), outcome: 'Transferred', summary: 'Emergency burst pipe in crawl space. Live transferred to owner on-call cell.' }
     ];
     store.appointments = [
-      { id: 'a1', customer: 'David Miller', phone: '(561) 555-0192', service: 'Water Heater Replacement', at: new Date(Date.now() + 86400000).toISOString(), status: 'Confirmed' }
+      { id: 'a1', customer: 'David Miller', phone: '(561) 813-8602', service: 'Water Heater Replacement', at: new Date(Date.now() + 86400000).toISOString(), status: 'Confirmed' }
     ];
     store.loaded = true;
     shell();

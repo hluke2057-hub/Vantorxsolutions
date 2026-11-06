@@ -88,7 +88,7 @@ async function router() {
           <div id="hubAuthErr"></div>
           <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
             <button class="btn btn-gold" id="hubGo" style="flex:1">Sign In</button>
-            <button class="btn btn-ghost" id="hubDemo" style="flex:1">⚡ Demo Preview</button>
+            <button class="btn btn-ghost" id="hubDemo" style="flex:1">⚡ Direct Contractor Access (Live)</button>
           </div>
           <div style="margin-top:14px;text-align:center">
             <a class="cell-dim" href="/" style="font-size:0.8rem;text-decoration:none">← Return to VantorX Portal</a>
@@ -106,7 +106,7 @@ async function router() {
     });
     authEl.querySelector('#hubDemo').addEventListener('click', () => {
       S.mountDemoMode();
-      toast('Welcome to Apex Plumbing Interactive Hub Demo', 'success');
+      toast('Welcome to Apex Plumbing & HVAC Operations Hub', 'success');
       router();
     });
     authEl.querySelector('#hubPass').addEventListener('keydown', e => { if (e.key === 'Enter') authEl.querySelector('#hubGo').click(); });

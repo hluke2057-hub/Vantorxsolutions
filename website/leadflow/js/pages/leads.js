@@ -316,7 +316,7 @@ export function openLeadForm(leadId, onSaved) {
       ${field({ label: 'Last name', name: 'lastName', value: lead?.lastName || '', required: true })}
     </div>
     <div class="form-row">
-      ${field({ label: 'Phone', name: 'phone', type: 'tel', value: lead?.phone || '', placeholder: '(813) 555-0100' })}
+      ${field({ label: 'Phone', name: 'phone', type: 'tel', value: lead?.phone || '', placeholder: '(813) 449-2180' })}
       ${field({ label: 'Email', name: 'email', type: 'email', value: lead?.email || '', placeholder: 'name@example.com' })}
     </div>
     <div class="form-row">
@@ -324,7 +324,7 @@ export function openLeadForm(leadId, onSaved) {
       ${field({ label: 'Lead source', name: 'source', type: 'select', options: sources, value: lead?.source || 'Manual' })}
     </div>
     <div class="form-row">
-      ${field({ label: 'Service interest', name: 'serviceInterest', value: lead?.serviceInterest || '', placeholder: 'e.g. Haircut + Beard' })}
+      ${field({ label: 'Service interest', name: 'serviceInterest', value: lead?.serviceInterest || '', placeholder: 'e.g. Emergency AC Compressor / Water Leak / Shingle Repair' })}
       ${field({ label: 'Estimated value ($)', name: 'estimatedValue', type: 'number', value: lead?.estimatedValue ?? '' })}
     </div>
     <div class="form-row">

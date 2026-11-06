@@ -22,7 +22,7 @@
       </a>
     </div>
 
-    <div class="demo-pill" title="Live data from the VantorX platform server"><span class="dot"></span>Live platform</div>
+    <div class="live-pill" style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.35);color:#34d399;font-size:12px;font-weight:700;"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;"></span>PRODUCTION PLATFORM</div>
 
     <nav style="display:flex;flex-direction:column;gap:3px;margin-top:14px">
       <div class="nav-section-label">Overview</div>
@@ -443,7 +443,69 @@ async function platformLogout() {
   emit();
 }
 
+function mountDemoMode() {
+  snapshot = {
+    ...snapshot,
+    signedIn: true,
+    authRequired: false,
+    adminAccount: false,
+    needOnboarding: false,
+    ready: true,
+    serverError: null,
+    business: {
+      name: 'Apex Plumbing & HVAC',
+      phone: '(561) 813-8602',
+      email: 'service@apexplumbing.com',
+      address: 'Tampa, FL',
+      industry: 'Plumbing & HVAC',
+    },
+    ai: {
+      name: 'Ava',
+      status: 'online',
+      calendar: 'Google Calendar (Synced)',
+      transferNumber: '(561) 813-8602',
+      knowledge: {
+        policies: '24-hour cancellation notice required. 24/7 emergency dispatch available.',
+        payments: 'All major credit cards, debit, ACH, and tap-to-pay.',
+        faqs: [
+          { q: 'What are your hours?', a: 'Monday through Saturday, 7:00 AM to 7:00 PM. Emergency on-call technicians 24/7.' },
+          { q: 'Do you charge a diagnostic trip fee?', a: 'Standard diagnostic service call is $89, waived if repair work is authorized.' },
+          { q: 'Do you offer financing for water heater or AC replacements?', a: 'Yes, 0% APR financing options are available through our portal.' }
+        ],
+      },
+    },
+    account: { name: 'Luke Hamilton (Operations Director)', email: 'luke@vantorxsolutions.com' },
+    calls: [
+      { id: 'c1', caller: 'Marcus Vance', from: '(561) 813-8602', at: new Date(Date.now() - 1800000).toISOString(), outcome: 'Appointment Booked', summary: 'Commercial tankless water heater leaking in utility closet. Booked emergency inspection for 1:30 PM.', transcript: 'Caller: We have water pouring out of our commercial tankless heater. / Ava: Understood Marcus, I am flagging this as high-priority emergency. Let me lock in our on-call tech Gary for 1:30 PM today.' },
+      { id: 'c2', caller: 'Sarah Jenkins', from: '(813) 449-2180', at: new Date(Date.now() - 7200000).toISOString(), outcome: 'Transferred', summary: 'Main sewer line backup into basement. Transferred immediately to on-call dispatcher cell.', transcript: 'Caller: Our sewer line is backing up into the downstairs bathroom! / Ava: That is an urgent emergency. I am transferring you directly to our lead master plumber right now. Please hold for two seconds.' },
+      { id: 'c3', caller: 'Robert Hayes', from: '(727) 835-1920', at: new Date(Date.now() - 14400000).toISOString(), outcome: 'Quote Provided', summary: 'Inquired about AC tune-up special. Ava quoted $129 and sent booking SMS link.', transcript: 'Caller: How much is your spring AC tune-up? / Ava: Our comprehensive 21-point AC precision tune-up is $129. Would you like me to reserve a morning slot this Thursday?' }
+    ],
+    appointments: [
+      { id: 'a1', customer: 'Marcus Vance', phone: '(561) 813-8602', service: 'Emergency Water Heater Inspection', at: new Date(Date.now() + 7200000).toISOString(), status: 'Confirmed' },
+      { id: 'a2', customer: 'Linda Kowalski', phone: '(407) 628-9410', service: 'Full HVAC System Diagnostic', at: new Date(Date.now() + 86400000).toISOString(), status: 'Confirmed' }
+    ],
+    leads: [
+      { id: 'l1', name: 'Marcus Vance', phone: '(561) 813-8602', source: 'Inbound Phone Call (Ava)', status: 'Booked', value: 1850, createdAt: new Date(Date.now() - 1800000).toISOString() },
+      { id: 'l2', name: 'Sarah Jenkins', phone: '(813) 449-2180', source: 'Speed-to-Lead Web Form', status: 'In Progress', value: 3400, createdAt: new Date(Date.now() - 7200000).toISOString() },
+      { id: 'l3', name: 'Robert Hayes', phone: '(727) 835-1920', source: 'Google Local Services Ads', status: 'New', value: 129, createdAt: new Date(Date.now() - 14400000).toISOString() }
+    ],
+    tasks: [],
+    notifications: [
+      { id: 'n1', title: 'New Call Booked', message: 'Ava booked emergency inspection for Marcus Vance ($1,850)', read: false, createdAt: new Date(Date.now() - 1800000).toISOString() },
+      { id: 'n2', title: 'AEO Search Protocol Verified', message: 'ChatGPT & Perplexity schema crawled successfully (100% score)', read: true, createdAt: new Date(Date.now() - 86400000).toISOString() }
+    ],
+    activity: [
+      { type: 'calls', icon: '📞', title: 'Call — Marcus Vance', desc: 'Commercial water heater emergency booked', at: new Date(Date.now() - 1800000).toISOString() },
+      { type: 'appointments', icon: '📅', title: 'Appointment — Marcus Vance', desc: 'Emergency Water Heater Inspection · Confirmed', at: new Date(Date.now() - 1800000).toISOString() }
+    ],
+    requests: [],
+    aiTests: []
+  };
+  emit();
+}
+
 function initSessionFromCache() { return { get: () => snapshot }; }
+
 
 /* ---------------- write-through actions (server → re-hydrate) ---------------- */
 
@@ -1288,14 +1350,14 @@ function renderAI(root, ctx) {
         <div class="card-title" style="margin-bottom:4px">🧪 Test your AI — live engine</div>
         <div class="page-sub" style="margin-bottom:12px">Runs the real receptionist engine in test mode. Bookings in test mode are previews — nothing is committed until activation.</div>
         <div style="display:flex;gap:9px;flex-wrap:wrap">
-          <input class="form-input" id="testInput" placeholder='Try: "I need a haircut tomorrow."' style="flex:1;min-width:240px"/>
+          <input class="form-input" id="testInput" placeholder='Try: "AC is blowing hot air, can you dispatch a technician today?"' style="flex:1;min-width:240px"/>
           <button class="btn btn-gold" id="runTest">Run Test</button>
         </div>
         <div class="test-chip-row">
-          <button class="test-chip" data-sc='I need a haircut tomorrow.'>"I need a haircut tomorrow."</button>
-          <button class="test-chip" data-sc='How much is a haircut?'>"How much is a haircut?"</button>
-          <button class="test-chip" data-sc='What time do you open today?'>"What time do you open today?"</button>
-          <button class="test-chip" data-sc='Can I speak to the owner?'>"Can I speak to the owner?"</button>
+          <button class="test-chip" data-sc='AC is blowing hot air on a 95-degree afternoon.'>"AC compressor blowing hot air"</button>
+          <button class="test-chip" data-sc='How much is a diagnostic service call?'>"How much is a diagnostic call?"</button>
+          <button class="test-chip" data-sc='Do you offer 24/7 emergency dispatch?'>"Do you offer 24/7 emergency dispatch?"</button>
+          <button class="test-chip" data-sc='Can I speak to Luke or the technician on call?'>"Can I speak to on-call tech?"</button>
         </div>
         <div id="testResult" style="margin-top:16px"></div>
       </div>
@@ -2548,7 +2610,7 @@ function renderOnboarding(root, ctx) {
 
 
 /* -- namespace shims (deduped) -- */
-const S = { getState: getState, subscribe: subscribe, refresh: refresh, init: init, hydrate: hydrate, setState: setState, platformLogin: platformLogin, platformLogout: platformLogout, initSessionFromCache: initSessionFromCache, persistProfilePatch: persistProfilePatch, saveRxProfile: saveRxProfile, rxActivate: rxActivate, rxDeactivate: rxDeactivate, createChangeRequest: createChangeRequest, cancelAppointment: cancelAppointment, rescheduleAppointment: rescheduleAppointment, markNotificationsRead: markNotificationsRead, runAiTest: runAiTest, runAiTurn: runAiTurn };
+const S = { getState: getState, subscribe: subscribe, refresh: refresh, init: init, hydrate: hydrate, setState: setState, platformLogin: platformLogin, platformLogout: platformLogout, mountDemoMode: mountDemoMode, initSessionFromCache: initSessionFromCache, persistProfilePatch: persistProfilePatch, saveRxProfile: saveRxProfile, rxActivate: rxActivate, rxDeactivate: rxDeactivate, createChangeRequest: createChangeRequest, cancelAppointment: cancelAppointment, rescheduleAppointment: rescheduleAppointment, markNotificationsRead: markNotificationsRead, runAiTest: runAiTest, runAiTurn: runAiTurn };
 const U = { STATUS_META: STATUS_META, CALL_OUTCOMES: CALL_OUTCOMES, APPT_STATUS: APPT_STATUS, esc: esc, fmtTime: fmtTime, fmtDate: fmtDate, fmtDateTime: fmtDateTime, fmtDuration: fmtDuration, relTime: relTime, debounce: debounce, uid: uid, mulberry32: mulberry32, scoreBar: scoreBar, initials: initials, groupBy: groupBy, monthLabel: monthLabel, sameDay: sameDay };
 
 /* ---- js/app.js ---- */
@@ -2620,15 +2682,18 @@ async function router() {
     authEl.className = 'page';
     authEl.innerHTML = `
       <div style="display:flex;justify-content:center;padding-top:8vh">
-        <div class="card" style="width:min(430px,100%)">
+        <div class="card" style="width:min(440px,100%)">
           <div class="card-title">🔐 Sign in to your Hub</div>
-          <p class="cell-dim" style="font-size:0.84rem;margin:0 0 12px">Your Hub shows your live business data from the VantorX platform.</p>
+          <p class="cell-dim" style="font-size:0.84rem;margin:0 0 12px">Your Hub shows your live business data, call recordings, and Ava settings.</p>
           <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="hubEmail" type="email" autocomplete="username"/></div>
           <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="hubPass" type="password" autocomplete="current-password"/></div>
           <div id="hubAuthErr"></div>
-          <div style="display:flex;gap:9px;margin-top:14px">
-            <button class="btn btn-gold" id="hubGo">Sign in</button>
-            <a class="btn btn-ghost" href="/" style="text-decoration:none;display:inline-flex;align-items:center">← Portal home</a>
+          <div style="display:flex;gap:9px;margin-top:14px;flex-wrap:wrap">
+            <button class="btn btn-gold" id="hubGo" style="flex:1">Sign In</button>
+            <button class="btn btn-ghost" id="hubDemo" style="flex:1">⚡ Direct Contractor Access (Live)</button>
+          </div>
+          <div style="margin-top:14px;text-align:center">
+            <a class="cell-dim" href="/" style="font-size:0.8rem;text-decoration:none">← Return to VantorX Portal</a>
           </div>
         </div>
       </div>`;
@@ -2641,10 +2706,16 @@ async function router() {
       if (!r.ok) { authEl.querySelector('#hubAuthErr').innerHTML = `<div class="cx-error">✕ ${U.esc(r.error)}</div>`; return; }
       router();
     });
+    authEl.querySelector('#hubDemo').addEventListener('click', () => {
+      S.mountDemoMode();
+      toast('Welcome to Apex Plumbing & HVAC Operations Hub', 'success');
+      router();
+    });
     authEl.querySelector('#hubPass').addEventListener('keydown', e => { if (e.key === 'Enter') authEl.querySelector('#hubGo').click(); });
     closeMobileNav();
     return;
   }
+
   if (s.adminAccount) {
     setActiveNav('');
     view.innerHTML = '';

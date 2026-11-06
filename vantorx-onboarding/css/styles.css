@@ -39,7 +39,11 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body { height: 100%; }
+html {
+  min-height: 100%;
+  height: auto;
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--bg);
@@ -48,7 +52,10 @@ body {
   font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  overflow: hidden;
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden;
 }
 
 ::selection { background: var(--gold-dim); color: var(--gold-bright); }
@@ -948,7 +955,14 @@ tr[data-clickable] { cursor: pointer; }
 
 .gold-text { color: var(--gold-bright); }
 
-.obx-wrap { max-width: 880px; margin: 0 auto; padding: 28px 22px 40px; }
+.obx-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 22px 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .obx-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
 .obx-brand { display: flex; align-items: center; gap: 10px; }
@@ -962,7 +976,7 @@ tr[data-clickable] { cursor: pointer; }
 .obx-step-label { color: var(--text-dim); font-size: 0.8rem; }
 .obx-step-name { color: var(--gold-bright); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; }
 
-.obx-main { animation: obxFade 0.25s var(--ease); }
+.obx-main { animation: obxFade 0.25s var(--ease); flex: 1; }
 @keyframes obxFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 .obx-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; gap: 14px; }
@@ -971,7 +985,7 @@ tr[data-clickable] { cursor: pointer; }
 .obx-validation.show { animation: obxShake 0.3s; }
 @keyframes obxShake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 
-.obx-foot { text-align: center; color: var(--text-dim); font-size: 0.72rem; margin-top: 34px; }
+.obx-foot { text-align: center; color: var(--text-dim); font-size: 0.72rem; margin-top: auto; padding-top: 34px; }
 
 /* step 1 — industry picker */
 .obx-ind-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -1053,3 +1067,149 @@ tr[data-clickable] { cursor: pointer; }
   .obx-nav .btn { width: 100%; }
   .obx-nav-right { justify-content: space-between; }
 }
+
+/* ============================================================
+   PRIVATE CLIENT ACCESS GATE
+   ============================================================ */
+.obx-gate-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0 40px;
+  width: 100%;
+}
+.obx-gate-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 38px 32px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  animation: obxFade 0.3s var(--ease);
+}
+.obx-gate-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--gold-bright);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+.obx-gate-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.obx-gate-desc {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+.obx-gate-form {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: left;
+  margin-bottom: 18px;
+}
+.obx-gate-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.obx-gate-input-row {
+  display: flex;
+  gap: 10px;
+}
+.obx-gate-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 11px 14px;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s;
+}
+.obx-gate-input:focus {
+  border-color: var(--gold);
+  outline: none;
+}
+.obx-gate-error {
+  color: var(--red);
+  font-size: 0.82rem;
+  margin-top: 10px;
+  display: none;
+}
+.obx-gate-error.show {
+  display: block;
+}
+.obx-gate-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+.obx-gate-divider::before, .obx-gate-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.obx-gate-portal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-soft);
+  color: var(--text-soft);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: all 0.2s;
+}
+.obx-gate-portal-link:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.obx-gate-footer {
+  margin-top: 22px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 16px;
+  line-height: 1.5;
+}
+.obx-gate-footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+.obx-gate-footer a:hover {
+  text-decoration: underline;
+}
+

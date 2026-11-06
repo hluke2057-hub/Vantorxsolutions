@@ -310,7 +310,7 @@ export function showOnboarding() {
     if (step === 2) content = `
       <div class="onboard-title">What industry are you in?</div>
       <div class="onboard-sub">We tune sample services and message tone.</div>
-      ${['Barbershop', 'Tattoo Studio', 'Salon / Med Spa', 'Gym / Fitness', 'Auto Services', 'Home Services', 'Dental', 'Real Estate', 'Other'].map(ind =>
+      ${['HVAC & Cooling', 'Roofing & Gutters', 'Plumbing & Drain', 'Electrical & Solar', 'Water Damage Restoration', 'General Contracting', 'Auto Services', 'Commercial Facilities', 'Other'].map(ind =>
         `<button class="onboard-option ${data.industry === ind ? 'selected' : ''}" data-ind="${ind}"><span class="onboard-ico">${industryIcon(ind)}</span>${ind}</button>`).join('')}`;
     if (step === 3) content = `
       <div class="onboard-title">Where do your leads come from?</div>
@@ -383,8 +383,8 @@ export function showOnboarding() {
 
 function industryIcon(ind) {
   const map = {
-    Barbershop: '💈', 'Tattoo Studio': '🖋️', 'Salon / Med Spa': '💅', 'Gym / Fitness': '🏋️',
-    'Auto Services': '🚗', 'Home Services': '🏠', Dental: '🦷', 'Real Estate': '🏡', Other: '🏢',
+    'HVAC & Cooling': '❄️', 'Roofing & Gutters': '🏠', 'Plumbing & Drain': '🔧', 'Electrical & Solar': '⚡',
+    'Auto Services': '🚗', 'Home Services': '🏠', 'Water Damage Restoration': '🌊', 'Real Estate': '🏡', Other: '🏢',
     Phone: '📞', Website: '🌐', Instagram: '📸', Facebook: '📘', TikTok: '🎵', Google: '🔍',
     'Walk-in': '🚶', Referral: '🤝'
   };

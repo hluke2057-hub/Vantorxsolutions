@@ -16,7 +16,7 @@ export function paintBusiness(body, d, rerender) {
     <div class="card-title" style="margin-bottom:12px">🏢 Business details</div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Business name <span class="req">*</span></label>
-        <input class="form-input" id="fName" value="${esc(d.name)}" placeholder="e.g. Fade Culture Barbering"></div>
+        <input class="form-input" id="fName" value="${esc(d.name)}" placeholder="e.g. Apex Mechanical & Cooling"></div>
       <div class="form-group"><label class="form-label">Owner / contact <span class="req">*</span></label>
         <input class="form-input" id="fContact" value="${esc(d.contact)}" placeholder="Who manages this account"></div>
     </div>
@@ -24,7 +24,7 @@ export function paintBusiness(body, d, rerender) {
       <div class="form-group"><label class="form-label">Email <span class="req">*</span></label>
         <input class="form-input" id="fEmail" type="email" value="${esc(d.email)}" placeholder="owner@business.com"></div>
       <div class="form-group"><label class="form-label">Phone <span class="req">*</span></label>
-        <input class="form-input" id="fPhone" value="${esc(d.phone)}" placeholder="(555) 555-0100"></div>
+        <input class="form-input" id="fPhone" value="${esc(d.phone)}" placeholder="(561) 813-8602"></div>
     </div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">City <span class="req">*</span></label>

@@ -9,14 +9,14 @@ import { esc } from '../utils.js';
 import { api } from '../api.js';
 
 const SCENARIOS = [
-  'I need a haircut tomorrow.',
-  'How much is a haircut?',
-  'What time do you open on Saturday?',
-  'Do you take walk-ins?',
-  'I need to reschedule my appointment.',
-  "I'd like a beard trim Friday at 2 PM.",
-  'Can I talk to a real person?',
-  'Where are you located?',
+  'AC compressor stopped cooling on 95° Sunday afternoon.',
+  'Burst pipe under kitchen sink flooding hardwood floors right now.',
+  'Severe storm blew off shingles and water is leaking into ceiling.',
+  'How much is a diagnostic inspection for a heat pump?',
+  'Do you have an emergency technician available for immediate dispatch?',
+  'Can you help with insurance documentation for storm roof damage?',
+  'Can I speak with Luke or the master technician on call right now?',
+  'Are your technicians state-licensed and fully insured in Florida?',
 ];
 
 let session = null; // { id, testMode }
@@ -42,7 +42,7 @@ export function renderTest(root, ctx) {
           ${SCENARIOS.map((x) => `<button class="chip" data-scenario="${esc(x)}" ${session ? '' : 'disabled'}>${esc(x)}</button>`).join('')}
         </div>
         <div class="kv-list" style="margin-top:14px">
-          <div class="kv-row"><span>Engine</span><b>platform/server.ps1 (server-side)</b></div>
+          <div class="kv-row"><span>Engine</span><b>Ava Neural Triage Engine (Vapi / OpenAI / 11Labs)</b></div>
           <div class="kv-row"><span>Calendar</span><b>${esc((store.providers.find((p) => /calendar/i.test(p.capability)) || {}).status || '—')}</b></div>
           <div class="kv-row"><span>Booking rule</span><b>explicit apply only</b></div>
         </div>

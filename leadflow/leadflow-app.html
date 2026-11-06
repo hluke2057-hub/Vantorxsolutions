@@ -2135,7 +2135,7 @@ function openLeadForm(leadId, onSaved) {
       ${field({ label: 'Last name', name: 'lastName', value: lead?.lastName || '', required: true })}
     </div>
     <div class="form-row">
-      ${field({ label: 'Phone', name: 'phone', type: 'tel', value: lead?.phone || '', placeholder: '(813) 555-0100' })}
+      ${field({ label: 'Phone', name: 'phone', type: 'tel', value: lead?.phone || '', placeholder: '(813) 449-2180' })}
       ${field({ label: 'Email', name: 'email', type: 'email', value: lead?.email || '', placeholder: 'name@example.com' })}
     </div>
     <div class="form-row">
@@ -2143,7 +2143,7 @@ function openLeadForm(leadId, onSaved) {
       ${field({ label: 'Lead source', name: 'source', type: 'select', options: sources, value: lead?.source || 'Manual' })}
     </div>
     <div class="form-row">
-      ${field({ label: 'Service interest', name: 'serviceInterest', value: lead?.serviceInterest || '', placeholder: 'e.g. Haircut + Beard' })}
+      ${field({ label: 'Service interest', name: 'serviceInterest', value: lead?.serviceInterest || '', placeholder: 'e.g. Emergency AC Compressor / Water Leak / Shingle Repair' })}
       ${field({ label: 'Estimated value ($)', name: 'estimatedValue', type: 'number', value: lead?.estimatedValue ?? '' })}
     </div>
     <div class="form-row">
@@ -3935,7 +3935,7 @@ function showOnboarding() {
     if (step === 2) content = `
       <div class="onboard-title">What industry are you in?</div>
       <div class="onboard-sub">We tune sample services and message tone.</div>
-      ${['Barbershop', 'Tattoo Studio', 'Salon / Med Spa', 'Gym / Fitness', 'Auto Services', 'Home Services', 'Dental', 'Real Estate', 'Other'].map(ind =>
+      ${['HVAC & Cooling', 'Roofing & Gutters', 'Plumbing & Drain', 'Electrical & Solar', 'Water Damage Restoration', 'General Contracting', 'Auto Services', 'Commercial Facilities', 'Other'].map(ind =>
         `<button class="onboard-option ${data.industry === ind ? 'selected' : ''}" data-ind="${ind}"><span class="onboard-ico">${industryIcon(ind)}</span>${ind}</button>`).join('')}`;
     if (step === 3) content = `
       <div class="onboard-title">Where do your leads come from?</div>
@@ -4008,8 +4008,8 @@ function showOnboarding() {
 
 function industryIcon(ind) {
   const map = {
-    Barbershop: '💈', 'Tattoo Studio': '🖋️', 'Salon / Med Spa': '💅', 'Gym / Fitness': '🏋️',
-    'Auto Services': '🚗', 'Home Services': '🏠', Dental: '🦷', 'Real Estate': '🏡', Other: '🏢',
+    'HVAC & Cooling': '❄️', 'Roofing & Gutters': '🏠', 'Plumbing & Drain': '🔧', 'Electrical & Solar': '⚡',
+    'Auto Services': '🚗', 'Home Services': '🏠', 'Water Damage Restoration': '🌊', 'Real Estate': '🏡', Other: '🏢',
     Phone: '📞', Website: '🌐', Instagram: '📸', Facebook: '📘', TikTok: '🎵', Google: '🔍',
     'Walk-in': '🚶', Referral: '🤝'
   };

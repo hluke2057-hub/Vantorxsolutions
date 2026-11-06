@@ -172,20 +172,20 @@ export function mountDemoMode() {
         ],
       },
     },
-    account: { name: 'Luke Hamilton (Demo)', email: 'luke@vantorxsolutions.com' },
+    account: { name: 'Luke Hamilton (Operations Director)', email: 'luke@vantorxsolutions.com' },
     calls: [
-      { id: 'c1', caller: 'Marcus Vance', from: '+15615550184', at: new Date(Date.now() - 1800000).toISOString(), outcome: 'Appointment Booked', summary: 'Commercial tankless water heater leaking in utility closet. Booked emergency inspection for 1:30 PM.', transcript: 'Caller: We have water pouring out of our commercial tankless heater. / Ava: Understood Marcus, I am flagging this as high-priority emergency. Let me lock in our on-call tech Gary for 1:30 PM today.' },
-      { id: 'c2', caller: 'Sarah Jenkins', from: '+15615550133', at: new Date(Date.now() - 7200000).toISOString(), outcome: 'Transferred', summary: 'Main sewer line backup into basement. Transferred immediately to on-call dispatcher cell.', transcript: 'Caller: Our sewer line is backing up into the downstairs bathroom! / Ava: That is an urgent emergency. I am transferring you directly to our lead master plumber right now. Please hold for two seconds.' },
-      { id: 'c3', caller: 'Robert Hayes', from: '+15615550198', at: new Date(Date.now() - 14400000).toISOString(), outcome: 'Quote Provided', summary: 'Inquired about AC tune-up special. Ava quoted $129 and sent booking SMS link.', transcript: 'Caller: How much is your spring AC tune-up? / Ava: Our comprehensive 21-point AC precision tune-up is $129. Would you like me to reserve a morning slot this Thursday?' }
+      { id: 'c1', caller: 'Marcus Vance', from: '(561) 813-8602', at: new Date(Date.now() - 1800000).toISOString(), outcome: 'Appointment Booked', summary: 'Commercial tankless water heater leaking in utility closet. Booked emergency inspection for 1:30 PM.', transcript: 'Caller: We have water pouring out of our commercial tankless heater. / Ava: Understood Marcus, I am flagging this as high-priority emergency. Let me lock in our on-call tech Gary for 1:30 PM today.' },
+      { id: 'c2', caller: 'Sarah Jenkins', from: '(813) 449-2180', at: new Date(Date.now() - 7200000).toISOString(), outcome: 'Transferred', summary: 'Main sewer line backup into basement. Transferred immediately to on-call dispatcher cell.', transcript: 'Caller: Our sewer line is backing up into the downstairs bathroom! / Ava: That is an urgent emergency. I am transferring you directly to our lead master plumber right now. Please hold for two seconds.' },
+      { id: 'c3', caller: 'Robert Hayes', from: '(727) 835-1920', at: new Date(Date.now() - 14400000).toISOString(), outcome: 'Quote Provided', summary: 'Inquired about AC tune-up special. Ava quoted $129 and sent booking SMS link.', transcript: 'Caller: How much is your spring AC tune-up? / Ava: Our comprehensive 21-point AC precision tune-up is $129. Would you like me to reserve a morning slot this Thursday?' }
     ],
     appointments: [
-      { id: 'a1', customer: 'Marcus Vance', phone: '(561) 555-0184', service: 'Emergency Water Heater Inspection', at: new Date(Date.now() + 7200000).toISOString(), status: 'Confirmed' },
-      { id: 'a2', customer: 'Linda Kowalski', phone: '(561) 555-0167', service: 'Full HVAC System Diagnostic', at: new Date(Date.now() + 86400000).toISOString(), status: 'Confirmed' }
+      { id: 'a1', customer: 'Marcus Vance', phone: '(561) 813-8602', service: 'Emergency Water Heater Inspection', at: new Date(Date.now() + 7200000).toISOString(), status: 'Confirmed' },
+      { id: 'a2', customer: 'Linda Kowalski', phone: '(407) 628-9410', service: 'Full HVAC System Diagnostic', at: new Date(Date.now() + 86400000).toISOString(), status: 'Confirmed' }
     ],
     leads: [
-      { id: 'l1', name: 'Marcus Vance', phone: '(561) 555-0184', source: 'Inbound Phone Call (Ava)', status: 'Booked', value: 1850, createdAt: new Date(Date.now() - 1800000).toISOString() },
-      { id: 'l2', name: 'Sarah Jenkins', phone: '(561) 555-0133', source: 'Speed-to-Lead Web Form', status: 'In Progress', value: 3400, createdAt: new Date(Date.now() - 7200000).toISOString() },
-      { id: 'l3', name: 'Robert Hayes', phone: '(561) 555-0198', source: 'Google Local Services Ads', status: 'New', value: 129, createdAt: new Date(Date.now() - 14400000).toISOString() }
+      { id: 'l1', name: 'Marcus Vance', phone: '(561) 813-8602', source: 'Inbound Phone Call (Ava)', status: 'Booked', value: 1850, createdAt: new Date(Date.now() - 1800000).toISOString() },
+      { id: 'l2', name: 'Sarah Jenkins', phone: '(813) 449-2180', source: 'Speed-to-Lead Web Form', status: 'In Progress', value: 3400, createdAt: new Date(Date.now() - 7200000).toISOString() },
+      { id: 'l3', name: 'Robert Hayes', phone: '(727) 835-1920', source: 'Google Local Services Ads', status: 'New', value: 129, createdAt: new Date(Date.now() - 14400000).toISOString() }
     ],
     tasks: [],
     notifications: [

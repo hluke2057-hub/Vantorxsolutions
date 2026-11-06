@@ -32,9 +32,9 @@ export function paintAI(body, d, rerender) {
 
         <div class="card-title" style="margin:18px 0 10px">↪️ Human transfer</div>
         <div class="form-group"><label class="form-label">Transfer to number</label>
-          <input class="form-input" id="aiTransfer" value="${esc(a.transferNumber)}" placeholder="(555) 555-0100"></div>
+          <input class="form-input" id="aiTransfer" value="${esc(a.transferNumber)}" placeholder="(561) 813-8602"></div>
         <div class="form-group"><label class="form-label">When should it transfer?</label>
-          <textarea class="form-textarea obx-transfer-when" id="aiTransferWhen" placeholder="e.g. complaints, medical questions...">${esc(a.transferWhen)}</textarea></div>
+          <textarea class="form-textarea obx-transfer-when" id="aiTransferWhen" placeholder="e.g. active emergency pipe flood, compressor burn, urgent technician dispatch...">${esc(a.transferWhen)}</textarea></div>
       </div>
 
       <div class="obx-preview">

@@ -1032,7 +1032,7 @@ tr[data-clickable] { cursor: pointer; }
         <div class="biz-avatar">OP</div>
         <div>
           <div class="biz-name" id="opsName">VantorX Team</div>
-          <div class="biz-plan" id="opsPlan">4 staff · all clients</div>
+          <div class="biz-plan" id="opsPlan">8 staff · all clients (Luke, Carter, Lucas, James + 4 Closers)</div>
         </div>
         <div class="biz-caret">▾</div>
       </div>
@@ -1958,11 +1958,11 @@ function cxSampleEnvelope() {
     business: {
       legal_name: 'Lakeside Dental PLLC',
       display_name: 'Lakeside Dental',
-      industry: 'Dental',
+      industry: 'HVAC & Cooling',
       timezone: 'America/Chicago',
-      phone: '(312) 555-0142',
-      email: 'frontdesk@lakesidedental.example',
-      website: 'lakesidedental.example',
+      phone: '(561) 813-8602',
+      email: 'dispatch@titanairfl.com',
+      website: 'titanairfl.com',
       currency: 'USD',
       address: { city: 'Chicago' },
       hours: [
@@ -1980,7 +1980,7 @@ function cxSampleEnvelope() {
       { name: 'Consultation', duration_minutes: 30, price_minor: 8000 },
     ],
     users: [
-      { email: 'owner@lakesidedental.example', role: 'business_owner' },
+      { email: 'owner@titanairfl.com', role: 'business_owner' },
     ],
     receptionist: { name: 'Ava', greeting: 'Thanks for calling Lakeside Dental!', enabled: false },
     knowledge: [
@@ -2220,9 +2220,9 @@ function cxOpenAddClient(root, inq) {
     body: `
       <p class="cell-dim" style="margin:0 0 10px;font-size:0.82rem">Enter what you know now. Everything is validated and reviewed before anything is created — and the client stays <strong>not live</strong> until all readiness checks pass and you click GO LIVE.</p>
       <div class="cx-form-row"><strong>1 · Business</strong></div>
-      <div class="cx-form-row"><label>Business name *</label><input id="cxAcName" type="text" value="${esc(inq ? inq.business : '')}" placeholder="Lakeside Barbers"></div>
+      <div class="cx-form-row"><label>Business name *</label><input id="cxAcName" type="text" value="${esc(inq ? inq.business : '')}" placeholder="Titan Mechanical & Roofing"></div>
       <div class="cx-form-row"><label>Industry *</label><input id="cxAcInd" type="text" value="${esc(inq ? inq.industry : '')}" placeholder="Barber / Salon / Dental / Detailing…"></div>
-      <div class="cx-form-row"><label>Business phone *</label><input id="cxAcPhone" type="text" value="${esc(inq ? inq.phone : '')}" placeholder="(813) 555-0100"></div>
+      <div class="cx-form-row"><label>Business phone *</label><input id="cxAcPhone" type="text" value="${esc(inq ? inq.phone : '')}" placeholder="(813) 449-2180"></div>
       <div class="cx-form-row"><label>Business email *</label><input id="cxAcEmail" type="text" value="${esc(inq ? inq.email : '')}"></div>
       <div class="cx-form-row"><label>Website</label><input id="cxAcWeb" type="text" value="${esc(inq ? inq.website : '')}"></div>
       <div class="cx-form-row"><label>City</label><input id="cxAcCity" type="text"></div>
@@ -2230,9 +2230,9 @@ function cxOpenAddClient(root, inq) {
       <div class="cx-form-row"><strong>2 · Hours</strong></div>
       <table style="font-size:0.82rem">${hoursRows}</table>
       <div class="cx-form-row"><strong>3 · Services</strong> <span class="cell-dim">one per line: name | minutes | price in dollars</span>
-        <textarea id="cxAcSvc" rows="5" placeholder="Haircut | 30 | 35&#10;Beard trim | 15 | 15"></textarea></div>
+        <textarea id="cxAcSvc" rows="5" placeholder="Diagnostic Inspection | 45 | 89&#10;Emergency AC Repair | 90 | 380&#10;Full System Replacement | 240 | 7500"></textarea></div>
       <div class="cx-form-row"><strong>4 · Business knowledge / FAQs</strong> <span class="cell-dim">one per line: question | answer (policies, parking, payment, etc.)</span>
-        <textarea id="cxAcKb" rows="5" placeholder="Do you take walk-ins? | Yes, when the schedule allows."></textarea></div>
+        <textarea id="cxAcKb" rows="5" placeholder="Do you offer 24/7 emergency dispatch? | Yes, our on-call master technicians respond 24/7 for urgent emergencies."></textarea></div>
       <div class="cx-form-row"><strong>5 · AI receptionist</strong></div>
       <div class="cx-form-row"><label>Receptionist name</label><input id="cxAcRxName" type="text" value="Ava"></div>
       <div class="cx-form-row"><label>Greeting</label><input id="cxAcRxGreet" type="text" placeholder="Thanks for calling … how can I help?"></div>

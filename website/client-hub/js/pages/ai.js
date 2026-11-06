@@ -90,14 +90,14 @@ export function renderAI(root, ctx) {
         <div class="card-title" style="margin-bottom:4px">🧪 Test your AI — live engine</div>
         <div class="page-sub" style="margin-bottom:12px">Runs the real receptionist engine in test mode. Bookings in test mode are previews — nothing is committed until activation.</div>
         <div style="display:flex;gap:9px;flex-wrap:wrap">
-          <input class="form-input" id="testInput" placeholder='Try: "I need a haircut tomorrow."' style="flex:1;min-width:240px"/>
+          <input class="form-input" id="testInput" placeholder='Try: "AC is blowing hot air, can you dispatch a technician today?"' style="flex:1;min-width:240px"/>
           <button class="btn btn-gold" id="runTest">Run Test</button>
         </div>
         <div class="test-chip-row">
-          <button class="test-chip" data-sc='I need a haircut tomorrow.'>"I need a haircut tomorrow."</button>
-          <button class="test-chip" data-sc='How much is a haircut?'>"How much is a haircut?"</button>
-          <button class="test-chip" data-sc='What time do you open today?'>"What time do you open today?"</button>
-          <button class="test-chip" data-sc='Can I speak to the owner?'>"Can I speak to the owner?"</button>
+          <button class="test-chip" data-sc='AC is blowing hot air on a 95-degree afternoon.'>"AC compressor blowing hot air"</button>
+          <button class="test-chip" data-sc='How much is a diagnostic service call?'>"How much is a diagnostic call?"</button>
+          <button class="test-chip" data-sc='Do you offer 24/7 emergency dispatch?'>"Do you offer 24/7 emergency dispatch?"</button>
+          <button class="test-chip" data-sc='Can I speak to Luke or the technician on call?'>"Can I speak to on-call tech?"</button>
         </div>
         <div id="testResult" style="margin-top:16px"></div>
       </div>
