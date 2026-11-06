@@ -1,0 +1,411 @@
+const puppeteer = require('puppeteer-core');
+const path = require('path');
+const fs = require('fs');
+
+const EDGE_PATH = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+const ARTIFACT_DIR = 'C:\\Users\\hungr\\.gemini\\antigravity\\brain\\b805e771-e1c1-4976-afc1-cd59dd49eae0';
+
+// Test page with canvas to verify stick figure animations
+const testHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { background: #070a0f; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+    canvas { background: #0b0f17; border: 2px solid #f59e0b; border-radius: 12px; }
+  </style>
+</head>
+<body>
+  <canvas id="c" width="1080" height="1920" style="width: 540px; height: 960px;"></canvas>
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+
+    // -----------------------------------------------------------
+    // QUALITY STICK FIGURE ANIMATION ENGINE
+    // -----------------------------------------------------------
+    function drawStickFigure(ctx, x, y, opts = {}) {
+      ctx.save();
+      const scale = opts.scale || 1.0;
+      const color = opts.color || '#ffffff';
+      const facing = opts.facing || 1;
+      const anim = opts.anim || 0;
+      const pose = opts.pose || 'stand';
+
+      ctx.translate(x, y);
+      ctx.scale(facing * scale, scale);
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 8;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      if (opts.glow) {
+        ctx.shadowColor = opts.glow;
+        ctx.shadowBlur = 15;
+      }
+
+      // Base proportions (Origin is at hip center: x=0, y=0)
+      const headRadius = 26;
+      const headCenterY = -120;
+      const shoulderY = -85;
+      const hipY = 0;
+
+      // 1. Spine / Torso
+      ctx.beginPath();
+      ctx.moveTo(0, shoulderY);
+      ctx.lineTo(0, hipY);
+      ctx.stroke();
+
+      // 2. Head
+      ctx.beginPath();
+      ctx.arc(0, headCenterY, headRadius, 0, Math.PI * 2);
+      ctx.fillStyle = '#101726';
+      ctx.fill();
+      ctx.stroke();
+
+      // Expressive Eyes
+      ctx.fillStyle = opts.eyeColor || '#ffffff';
+      if (opts.expression === 'worried') {
+        // Worried eyes + sweat drop
+        ctx.beginPath();
+        ctx.arc(6, headCenterY - 4, 3.5, 0, Math.PI * 2);
+        ctx.arc(16, headCenterY - 4, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+        // Worried mouth
+        ctx.beginPath();
+        ctx.arc(11, headCenterY + 12, 8, Math.PI * 1.1, Math.PI * 1.9, false);
+        ctx.stroke();
+        // Blue sweat drop
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath();
+        ctx.arc(28, headCenterY - 14 + Math.sin(anim * 8) * 4, 5, 0, Math.PI * 2);
+        ctx.fill();
+      } else if (opts.expression === 'happy') {
+        // Confident/happy eyes
+        ctx.beginPath();
+        ctx.arc(8, headCenterY - 2, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(8, headCenterY + 6, 8, 0, Math.PI, false);
+        ctx.stroke();
+      } else {
+        // Focused neutral
+        ctx.beginPath();
+        ctx.arc(8, headCenterY - 2, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 3. Head Props
+      if (opts.headProp === 'hard_hat') {
+        // Contractor Yellow Hard Hat
+        ctx.save();
+        ctx.fillStyle = '#f59e0b';
+        ctx.strokeStyle = '#d97706';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(0, headCenterY - 6, headRadius + 4, Math.PI * 1.05, Math.PI * 1.95, false);
+        ctx.fill();
+        ctx.stroke();
+        // Hat Brim
+        ctx.beginPath();
+        ctx.moveTo(-headRadius - 12, headCenterY - 6);
+        ctx.lineTo(headRadius + 18, headCenterY - 6);
+        ctx.stroke();
+        ctx.restore();
+      } else if (opts.headProp === 'headset') {
+        // Ava Sleek Cyber Headset
+        ctx.save();
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(0, headCenterY, headRadius + 5, Math.PI * 0.9, Math.PI * 1.9);
+        ctx.stroke();
+        // Ear cup
+        ctx.fillStyle = '#0284c7';
+        ctx.beginPath();
+        ctx.arc(-headRadius - 4, headCenterY + 4, 7, 0, Math.PI * 2);
+        ctx.fill();
+        // Boom Mic
+        ctx.beginPath();
+        ctx.moveTo(-headRadius - 4, headCenterY + 4);
+        ctx.lineTo(14, headCenterY + 16);
+        ctx.stroke();
+        // Glowing Mic Tip
+        ctx.fillStyle = '#38bdf8';
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(16, headCenterY + 16, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 4. Limbs based on Pose
+      if (pose === 'ladder_climb') {
+        // Contractor balanced on ladder rungs with ringing phone
+        const leftLegLift = Math.sin(anim * 4) * 12;
+        const rightLegLift = -Math.sin(anim * 4) * 12;
+
+        // Left Leg
+        ctx.beginPath();
+        ctx.moveTo(0, hipY);
+        ctx.lineTo(-24, hipY + 45 + leftLegLift);
+        ctx.lineTo(-24, hipY + 95);
+        ctx.stroke();
+
+        // Right Leg
+        ctx.beginPath();
+        ctx.moveTo(0, hipY);
+        ctx.lineTo(24, hipY + 45 + rightLegLift);
+        ctx.lineTo(24, hipY + 95);
+        ctx.stroke();
+
+        // Left Arm holding ladder rung
+        ctx.beginPath();
+        ctx.moveTo(0, shoulderY);
+        ctx.lineTo(-35, shoulderY - 15);
+        ctx.lineTo(-50, shoulderY - 35);
+        ctx.stroke();
+
+        // Right Arm holding wrench or reaching for pocket
+        const armWobble = Math.sin(anim * 6) * 10;
+        ctx.beginPath();
+        ctx.moveTo(0, shoulderY);
+        ctx.lineTo(35, shoulderY + 10 + armWobble);
+        ctx.lineTo(55, shoulderY + 25);
+        ctx.stroke();
+
+        // Wrench in right hand
+        ctx.save();
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.moveTo(55, shoulderY + 25);
+        ctx.lineTo(75, shoulderY + 35);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(77, shoulderY + 36, 7, 0, Math.PI * 1.5);
+        ctx.stroke();
+        ctx.restore();
+
+        // Tool Belt around waist
+        ctx.save();
+        ctx.strokeStyle = '#b45309';
+        ctx.lineWidth = 7;
+        ctx.beginPath();
+        ctx.moveTo(-18, hipY);
+        ctx.lineTo(18, hipY);
+        ctx.stroke();
+        ctx.restore();
+
+      } else if (pose === 'panicked_phone') {
+        // Homeowner frantically calling with water leaking
+        // Legs pacing
+        const pace = Math.sin(anim * 5) * 8;
+        ctx.beginPath();
+        ctx.moveTo(0, hipY);
+        ctx.lineTo(-18 + pace, hipY + 45);
+        ctx.lineTo(-14 + pace, hipY + 95);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, hipY);
+        ctx.lineTo(18 - pace, hipY + 45);
+        ctx.lineTo(22 - pace, hipY + 95);
+        ctx.stroke();
+
+        // Left hand raised in exasperation
+        ctx.beginPath();
+        ctx.moveTo(0, shoulderY);
+        ctx.lineTo(-40, shoulderY - 30);
+        ctx.lineTo(-60, shoulderY - 55);
+        ctx.stroke();
+
+        // Right hand holding phone to ear
+        ctx.beginPath();
+        ctx.moveTo(0, shoulderY);
+        ctx.lineTo(25, shoulderY - 15);
+        ctx.lineTo(14, headCenterY + 4);
+        ctx.stroke();
+
+        // Phone held to ear
+        ctx.save();
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillRect(16, headCenterY - 10, 8, 16);
+        // Sound waves
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(28, headCenterY - 2, 10, -Math.PI * 0.3, Math.PI * 0.3);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(28, headCenterY - 2, 16, -Math.PI * 0.3, Math.PI * 0.3);
+        ctx.stroke();
+        ctx.restore();
+
+      } else if (pose === 'ava_dispatch') {
+        // Ava AI answering with thumbs up & dispatching
+        // Confident standing pose
+        ctx.beginPath();
+        ctx.moveTo(0, hipY);
+        ctx.lineTo(-16, hipY + 50);
+        ctx.lineTo(-18, hipY + 95);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, hipY);
+        ctx.lineTo(16, hipY + 50);
+        ctx.lineTo(18, hipY + 95);
+        ctx.stroke();
+
+        // Left arm touching headset
+        ctx.beginPath();
+        ctx.moveTo(0, shoulderY);
+        ctx.lineTo(-24, shoulderY - 20);
+        ctx.lineTo(-headRadius - 4, headCenterY + 4);
+        ctx.stroke();
+
+        // Right arm holding glowing holographic tablet
+        ctx.beginPath();
+        ctx.moveTo(0, shoulderY);
+        ctx.lineTo(35, shoulderY + 15);
+        ctx.lineTo(50, shoulderY + 5);
+        ctx.stroke();
+
+        // Holographic Dispatch Tablet
+        ctx.save();
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 3;
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 16;
+        ctx.strokeRect(52, shoulderY - 20, 48, 36);
+        ctx.fillRect(52, shoulderY - 20, 48, 36);
+
+        // Tablet text / checkmark
+        ctx.fillStyle = '#34d399';
+        ctx.font = '900 12px Inter';
+        ctx.fillText('DISPATCH', 56, shoulderY - 6);
+        ctx.font = '700 9px monospace';
+        ctx.fillText('0.8s SMS', 56, shoulderY + 8);
+        ctx.restore();
+      }
+
+      ctx.restore();
+    }
+
+    // Draw scene with 3 figures
+    function drawDemo() {
+      ctx.clearRect(0, 0, 1080, 1920);
+
+      // Background title
+      ctx.fillStyle = '#f59e0b';
+      ctx.font = '900 48px Space Grotesk';
+      ctx.textAlign = 'center';
+      ctx.fillText('VANTORX ANIMATED STICKMAN ENGINE', 540, 200);
+
+      // 1. Ladder Contractor
+      // Draw ladder
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 8;
+      ctx.beginPath();
+      ctx.moveTo(250, 400); ctx.lineTo(250, 950);
+      ctx.moveTo(330, 400); ctx.lineTo(330, 950);
+      for (let y = 450; y < 950; y += 50) {
+        ctx.moveTo(250, y); ctx.lineTo(330, y);
+      }
+      ctx.stroke();
+
+      drawStickFigure(ctx, 290, 620, {
+        pose: 'ladder_climb',
+        headProp: 'hard_hat',
+        expression: 'worried',
+        color: '#f8fafc',
+        scale: 1.4,
+        anim: 1.2
+      });
+
+      // Contractor Callout
+      ctx.fillStyle = '#f87171';
+      ctx.font = '800 24px Space Grotesk';
+      ctx.fillText('RINGING ON LADDER!', 290, 430);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 18px Inter';
+      ctx.fillText('Cannot reach $9,200 call', 290, 460);
+
+      // 2. Panicked Homeowner
+      drawStickFigure(ctx, 750, 720, {
+        pose: 'panicked_phone',
+        expression: 'worried',
+        color: '#f8fafc',
+        scale: 1.4,
+        anim: 1.2
+      });
+
+      // Leaking pipe above homeowner
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 12;
+      ctx.beginPath();
+      ctx.moveTo(650, 400); ctx.lineTo(820, 400);
+      ctx.stroke();
+      // Pipe break burst
+      ctx.fillStyle = '#38bdf8';
+      ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 15;
+      for (let i = 0; i < 6; i++) {
+        ctx.beginPath();
+        ctx.arc(750 + (i - 3) * 8, 430 + i * 14, 4 + (i % 3), 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '800 24px Space Grotesk';
+      ctx.fillText('EMERGENCY FLOOD!', 750, 480);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '600 18px Inter';
+      ctx.fillText('Calling 3 shops -> Voicemail', 750, 510);
+
+      // 3. Ava Heroine Below
+      drawStickFigure(ctx, 540, 1300, {
+        pose: 'ava_dispatch',
+        headProp: 'headset',
+        expression: 'happy',
+        color: '#fbbf24',
+        glow: '#f59e0b',
+        scale: 1.8,
+        anim: 1.2
+      });
+
+      ctx.fillStyle = '#34d399';
+      ctx.font = '900 32px Space Grotesk';
+      ctx.fillText('AVA ANSWERS IN 0.8s', 540, 1050);
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = '600 22px Inter';
+      ctx.fillText('Instant Tech SMS Dispatch · Zero Lost Jobs', 540, 1090);
+    }
+
+    drawDemo();
+  </script>
+</body>
+</html>
+`;
+
+fs.writeFileSync('scripts/test_stick_figure.html', testHtml, 'utf8');
+
+async function testStickRender() {
+  const browser = await puppeteer.launch({
+    executablePath: EDGE_PATH,
+    headless: true,
+    args: ['--no-sandbox', '--allow-file-access-from-files']
+  });
+  const page = await browser.newPage();
+  await page.setViewport({ width: 1080, height: 1920 });
+  await page.goto(`file:///${path.resolve('scripts/test_stick_figure.html').replace(/\\/g, '/')}`, { waitUntil: 'load' });
+  const shotPath = path.join(ARTIFACT_DIR, 'test_stick_figures_rendered.png');
+  await page.screenshot({ path: shotPath });
+  console.log('📸 Saved test_stick_figures_rendered.png');
+  await browser.close();
+}
+
+testStickRender();
