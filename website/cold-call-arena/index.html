@@ -861,7 +861,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
                 <option value="7">⭐ Batch 7: Fresh 75 Verified Additions (North &amp; Central FL · 75 Targets)</option>
               </select>
             </div>
-            <button class="btn btn-gold btn-sm" id="btnAdd100Leads" onclick="expandQueue100Leads()" style="font-weight:700" title="Expand your active queue with +100 fresh leads immediately">➕ Add +100 Fresh Leads</button>
+            <button class="btn btn-gold btn-sm" id="btnAdd200Leads" onclick="expandQueueLeads(200)" style="font-weight:700" title="Expand your active queue with +200 fresh leads for the full team">⚡ Add +200 Fresh Leads</button>
             <div style="display:flex;align-items:center;gap:8px">
               <div id="activeRepBadge" style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.35);padding:5px 12px;border-radius:8px">
                 <span id="activeRepAvatar" style="font-size:14px">👑</span>
@@ -23181,13 +23181,13 @@ window.closeLeakMathModal = function() {
     return { start, end: limit };
   }
 
-  window.expandQueue100Leads = function() {
+  window.expandQueueLeads = function(amount = 200) {
     const curLimit = getActiveQueueLimit();
     if (curLimit >= LEADS_DATA.length) {
       showToast(`All ${LEADS_DATA.length} verified trade contractor leads are already active in your queue!`);
       return;
     }
-    manualAdditions += 100;
+    manualAdditions += amount;
     try {
       localStorage.setItem('vantorx_manual_lead_additions', manualAdditions.toString());
     } catch(e) {}
@@ -23198,8 +23198,9 @@ window.closeLeakMathModal = function() {
     renderLeadsTable();
     updateQuotaHUD();
     playSound('levelup');
-    showToast(`✅ +100 Verified Leads added to active queue! (Active queue: ${newLimit} leads)`);
+    showToast(`🚀 +${amount} Verified Leads added to active queue! (Active queue: ${newLimit} leads for team)`);
   };
+  window.expandQueue100Leads = function() { window.expandQueueLeads(100); };
   window.LEADS_DATA = LEADS_DATA;
   window.getActiveQueueLimit = getActiveQueueLimit;
   window.getTodayFreshRange = getTodayFreshRange;
@@ -23352,7 +23353,7 @@ window.closeLeakMathModal = function() {
     const activeLimit = getActiveQueueLimit();
     if (heading) {
       if (currentBatch === 'today100' || currentBatch === 'activeQueue' || currentBatch === 'todayFresh') {
-        heading.textContent = `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (+100 ADDED ON DEMAND)`;
+        heading.textContent = `ACTIVE COLD CALL QUEUE: ${activeLimit} TARGETS (+200 TEAM QUOTA ON DEMAND)`;
       } else if (currentBatch === 'all') {
         heading.textContent = `VERIFIED TRADE CONTRACTORS DIRECTORY (${(window.LEADS_DATA || []).length} TARGETS)`;
       } else if (currentBatch === '6') {
