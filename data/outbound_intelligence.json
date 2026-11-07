@@ -1,6 +1,6 @@
 {
   "version": "5.1.0",
-  "lastUpdated": "2026-11-07T22:26:04.739Z",
+  "lastUpdated": "2026-11-07T23:25:59.889Z",
   "systemStatus": {
     "mode": "24/7 Multi-Service Autonomous Engine",
     "autoSenderStatus": "RUNNING",
@@ -30,7 +30,7 @@
     "zoomCtaTarget": "10-Minute Live Interactive Demo"
   },
   "metrics": {
-    "totalSent": 864,
+    "totalSent": 866,
     "totalOpened": 0,
     "totalUnopened48h": 0,
     "totalReplied": 0,
@@ -177,6 +177,42 @@
   ],
   "inboundResponses": [],
   "recentDispatches": [
+    {
+      "id": "fl_ver_296",
+      "company": "Empire Electric",
+      "owner": "Dan",
+      "title": "Master Electrician / Owner",
+      "email": "info@empireelectric.com",
+      "phone": "(904) 724-3400",
+      "city": "Jacksonville, FL",
+      "trade": "Electrical",
+      "serviceCategory": "Ava 24/7 Voice AI Receptionist (<1s instant pickup & technician SMS dispatch)",
+      "subject": "Re: Quick question for Dan regarding Empire Electric emergency calls",
+      "body": "Hi Dan,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Empire Electric.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_296\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$9,100/mo",
+      "touch": 2,
+      "resendMessageId": "01a1b855-49b4-70ca-8003-b7c04d7a1b94",
+      "sent": true,
+      "dispatchedAt": "2026-11-07T23:25:59.633Z"
+    },
+    {
+      "id": "fl_ver_297",
+      "company": "Crawford Electric",
+      "owner": "Steve",
+      "title": "President",
+      "email": "info@crawfordelectric.com",
+      "phone": "(904) 246-3500",
+      "city": "Jacksonville Beach, FL",
+      "trade": "Electrical",
+      "serviceCategory": "Custom High-Converting Mobile Website (<1s load time, tap-to-call & instant booking)",
+      "subject": "Re: Quick question for Steve regarding Crawford Electric emergency calls",
+      "body": "Hi Steve,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Crawford Electric.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_297\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$9,100/mo",
+      "touch": 2,
+      "resendMessageId": "01a1b855-4a85-7053-92f3-ce379b6093ba",
+      "sent": true,
+      "dispatchedAt": "2026-11-07T23:25:59.876Z"
+    },
     {
       "id": "fl_ver_294",
       "company": "Legacy Power Solutions",
@@ -1940,42 +1976,6 @@
       "resendMessageId": "01a1ad3d-9205-744c-b844-ccdaab71b0b5",
       "sent": true,
       "dispatchedAt": "2026-11-05T19:44:16.000Z"
-    },
-    {
-      "id": "fl_se_032",
-      "company": "Clark Roofing",
-      "owner": "the owner",
-      "title": "Owner / Principal",
-      "email": "estimates@clarkroofing.com",
-      "phone": "(954) 960-1300",
-      "city": "Pompano Beach, FL",
-      "trade": "Roofing",
-      "serviceCategory": "High-Converting Webflow Website",
-      "subject": "Re: Quick question for the owner regarding Clark Roofing emergency calls",
-      "body": "Hi the owner,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Clark Roofing.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_032\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-      "estLoss": "$9,500/mo",
-      "touch": 2,
-      "resendMessageId": "01a1ad3d-936c-7f00-8512-c06376f94d52",
-      "sent": true,
-      "dispatchedAt": "2026-11-05T19:44:16.347Z"
-    },
-    {
-      "id": "fl_se_033",
-      "company": "Cool Air USA",
-      "owner": "Dan",
-      "title": "Operations Manager",
-      "email": "service@coolairusa.com",
-      "phone": "(954) 915-1155",
-      "city": "Fort Lauderdale, FL",
-      "trade": "HVAC",
-      "serviceCategory": "24/7 AI Phone Receptionist (Ava)",
-      "subject": "Re: Quick question for Dan regarding Cool Air USA emergency calls",
-      "body": "Hi Dan,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Cool Air USA.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_033\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-      "estLoss": "$11,200/mo",
-      "touch": 2,
-      "resendMessageId": "01a1ad3d-944c-714a-9a2a-d524c14c4ec8",
-      "sent": true,
-      "dispatchedAt": "2026-11-05T19:44:16.538Z"
     }
   ],
   "objectionCatalog": {
@@ -2043,6 +2043,6 @@
     "totalReps": 4,
     "certifiedLevel5": 4,
     "totalBossesDefeated": 32,
-    "lastRosterUpdate": "2026-11-07T22:26:04.744Z"
+    "lastRosterUpdate": "2026-11-07T23:25:59.894Z"
   }
 }
