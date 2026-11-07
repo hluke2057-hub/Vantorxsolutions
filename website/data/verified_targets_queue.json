@@ -10508,10 +10508,13 @@
     "estLoss": "$9,100/mo",
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
     "subject": "Quick question for Donald regarding Watts Cooling, Heating & Plumbing emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Donald,\n\nSaw your solid reputation in Tallahassee, FL — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Tallahassee, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Watts Cooling, Heating & Plumbing roughly $9,100/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_338\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-07T13:41:56.910Z"
   },
   {
     "id": "fl_ver_339",
@@ -10527,10 +10530,11 @@
     "estLoss": "$9,100/mo",
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
     "subject": "Quick question for Andrew regarding AND Services emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1b63e-9591-7b38-b1ff-00a1a72b6288",
+    "sentAt": "2026-11-07T13:41:57.360Z",
+    "body": "Hi Andrew,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Tallahassee, FL.\n\nWhile AND Services has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_339\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Tallahassee, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_ver_340",
@@ -10546,10 +10550,13 @@
     "estLoss": "$9,100/mo",
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
     "subject": "Quick question for Patrick regarding Patrick's Heating & Air Conditioning emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Patrick,\n\nQuick question regarding Patrick's Heating & Air Conditioning's customer response speed:\n\nWhen customers in Gainesville, FL fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In HVAC, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_340\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $9,100/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-07T13:41:57.436Z"
   },
   {
     "id": "fl_ver_341",
@@ -10565,10 +10572,13 @@
     "estLoss": "$9,900/mo",
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
     "subject": "Quick question for Glenn regarding Peaden Air Conditioning, Plumbing & Electrical emergency calls",
-    "status": "pending",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
-    "sentAt": null
+    "sentAt": null,
+    "body": "Hi Glenn,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Panama City, FL.\n\nWhile Peaden Air Conditioning, Plumbing & Electrical has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_341\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Panama City, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "dnsError": "Recipient domain has no valid MX or A DNS records",
+    "verifiedAt": "2026-11-07T13:41:57.534Z"
   },
   {
     "id": "fl_ver_342",
@@ -10584,10 +10594,11 @@
     "estLoss": "$9,100/mo",
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
     "subject": "Quick question for Jim regarding A Superior Mechanical emergency calls",
-    "status": "pending",
+    "status": "sent",
     "touch": 1,
-    "resendMessageId": null,
-    "sentAt": null
+    "resendMessageId": "01a1b63e-9753-7bcd-be5a-6261f36ea255",
+    "sentAt": "2026-11-07T13:41:57.814Z",
+    "body": "Hi Jim,\n\nSaw your solid reputation in Panama City Beach, FL — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Panama City Beach, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs A Superior Mechanical roughly $9,100/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_342\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com"
   },
   {
     "id": "fl_ver_343",
