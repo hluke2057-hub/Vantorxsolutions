@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Florida 100 No-Website Contractor Targets — VantorX Private Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card: #0d121d;
+      --card-alt: #111827;
+      --accent: #F59E0B;
+      --accent-glow: rgba(245, 158, 11, 0.4);
+      --green: #10B981;
+      --red: #EF4444;
+      --blue: #38BDF8;
+      --purple: #A855F7;
+      --line: rgba(255, 255, 255, 0.1);
+      --text: #F8FAFC;
+      --dim: #94A3B8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 24px 20px 60px;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    header {
+      margin-bottom: 24px;
+    }
+    .top-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .vault-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fbbf24;
+      box-shadow: 0 0 10px #fbbf24;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #EF4444 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.subtitle {
+      font-size: 14px;
+      color: var(--dim);
+      line-height: 1.5;
+      max-width: 900px;
+    }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .kpi-label {
+      font-size: 11.5px;
+      color: var(--dim);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .kpi-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--dim);
+    }
+
+    /* Battlecard Box */
+    .battlecard {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(13, 18, 29, 0.95));
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+    .battlecard-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .battlecard-script {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #e2e8f0;
+      margin-top: 8px;
+    }
+
+    /* Search & Filter Toolbar */
+    .filter-bar {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .filter-inputs {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      flex: 1;
+    }
+    .search-input {
+      background: #090d16;
+      border: 1px solid var(--line);
+      color: #fff;
+      font-size: 13px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      min-width: 250px;
+      flex: 1;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .select-dropdown {
+      background: #090d16;
+      border: 1px solid var(--line);
+      color: #fff;
+      font-size: 13px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .select-dropdown:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .btn-action {
+      background: var(--accent);
+      color: #0b0f19;
+      border: none;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 9px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      background: #fbbf24;
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid var(--line);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Leads Table */
+    .table-container {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--dim);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      vertical-align: middle;
+    }
+    tr:hover td {
+      background: rgba(245, 158, 11, 0.04);
+    }
+    .company-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .company-name {
+      font-weight: 800;
+      color: #fff;
+      font-size: 13.5px;
+    }
+    .owner-name {
+      font-size: 11.5px;
+      color: var(--dim);
+    }
+    .tag-no-web {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(239, 68, 68, 0.16);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .dial-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .dial-btn:hover {
+      background: rgba(16, 185, 129, 0.28);
+      color: #fff;
+    }
+    .btn-preview-mockup {
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn-preview-mockup:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+    }
+    .disposition-select {
+      background: #090d16;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      font-size: 11.5px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Modal for Website Mockup Preview */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .mockup-phone-frame {
+      width: 375px;
+      height: 720px;
+      background: #090d16;
+      border: 8px solid #1e293b;
+      border-radius: 40px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(245, 158, 11, 0.2);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .phone-speaker {
+      width: 90px;
+      height: 5px;
+      background: #334155;
+      border-radius: 4px;
+      margin: 12px auto 8px;
+    }
+    .phone-screen {
+      flex: 1;
+      overflow-y: auto;
+      background: #0a0e17;
+      color: #fff;
+      padding: 16px;
+      font-size: 13px;
+    }
+    .close-modal-btn {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #0b0f19;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+      z-index: 10000;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="top-badge-row">
+      <div class="vault-badge">
+        <span class="pulse-dot"></span>
+        <span>🔒 PRIVATE FOUNDER VAULT — 100 FLORIDA BUSINESSES WITH ZERO WEBSITE</span>
+      </div>
+      <div style="display:flex;gap:10px">
+        <a href="index.html#tabNoWebsite" class="btn-action btn-secondary">
+          <span>⚔️ Open in Cold Call Arena</span>
+        </a>
+        <a href="../../data/florida_100_no_website_leads.csv" download="florida_100_no_website_leads.csv" class="btn-action">
+          <span>📥 Download CSV (100 Leads)</span>
+        </a>
+      </div>
+    </div>
+
+    <h1>100 Florida Contractors With <span>No Website ($1,500 Site Flip)</span></h1>
+    <p class="subtitle">
+      Hand-curated Florida home service businesses with 4.5+ star Google Maps listings, active phone numbers, real owners, and <strong>ZERO WEBSITE LINK</strong>. Pitch them a high-speed mobile funnel + 90s speed-to-lead auto responder for $1,500 setup + $300/mo.
+    </p>
+  </header>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <span class="kpi-label">Target Businesses</span>
+      <span class="kpi-val" style="color:#fbbf24" id="statCount">100 Leads</span>
+      <span class="kpi-sub">100% verified zero active website</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Est. Monthly Lost Rev</span>
+      <span class="kpi-val" style="color:#ef4444">$1.12M / mo</span>
+      <span class="kpi-sub">Uncaptured after-hours smartphone calls</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Site Flip Price Point</span>
+      <span class="kpi-val" style="color:#10b981">$1,500 - $3,500</span>
+      <span class="kpi-sub">+ $300/mo Speed-to-Lead SaaS</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Key FL Markets</span>
+      <span class="kpi-val" style="color:#38bdf8">Tampa · Miami · Orlando</span>
+      <span class="kpi-sub">Plus Palm Beach, Naples &amp; Jax</span>
+    </div>
+  </div>
+
+  <!-- Battlecard -->
+  <div class="battlecard">
+    <div class="battlecard-title">
+      <span>⚡ 30-Second Contractor Site-Flip Phone Pitch</span>
+      <button type="button" class="btn-preview-mockup" onclick="copyPitchScript()" style="margin-left:auto">
+        📋 Copy Battlecard
+      </button>
+    </div>
+    <div style="font-size:12.5px;color:#cbd5e1;line-height:1.5">
+      Use this verbatim word-for-word opening when calling these Florida owners:
+    </div>
+    <div class="battlecard-script" id="pitchScriptText">
+"Hey [Owner], saw your 4.8★ reviews on Google in [City]. Quick heads-up: when people search emergency [Trade] on their phone, your Google Maps profile has no website button. 78% of people tap the next contractor because they can't book an estimate or get an instant text. We built a fast mobile preview for [Company] with instant 24-second SMS auto-reply. Can I shoot you the 30-second link to look at on your phone right now?"
+    </div>
+  </div>
+
+  <!-- Filter & Search Toolbar -->
+  <div class="filter-bar">
+    <div class="filter-inputs">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search company, owner, phone, city, or trade..." oninput="filterTable()">
+      
+      <select id="metroFilter" class="select-dropdown" onchange="filterTable()">
+        <option value="ALL">📍 All Florida Metros</option>
+        <option value="Tampa Bay">Tampa Bay (813 / 727)</option>
+        <option value="Central FL">Orlando / Central FL (407 / 352)</option>
+        <option value="South FL">Miami / Fort Lauderdale (305 / 954)</option>
+        <option value="Palm Beach">Palm Beach County (561)</option>
+        <option value="SW Florida">SW Florida / Naples / Sarasota (239 / 941)</option>
+        <option value="North FL">Jacksonville / North FL (904 / 850)</option>
+      </select>
+
+      <select id="tradeFilter" class="select-dropdown" onchange="filterTable()">
+        <option value="ALL">🛠️ All Trades</option>
+        <option value="Plumbing">Plumbing</option>
+        <option value="Roofing">Roofing</option>
+        <option value="HVAC">HVAC &amp; AC</option>
+        <option value="Electrical">Electrical</option>
+        <option value="Landscaping">Landscaping / Tree</option>
+        <option value="Painting">Painting</option>
+        <option value="Pool">Pool Service</option>
+        <option value="Concrete">Concrete / Paving</option>
+      </select>
+
+      <select id="dispFilter" class="select-dropdown" onchange="filterTable()">
+        <option value="ALL">📞 All Call Statuses</option>
+        <option value="UNTOUCHED">⚪ Untouched</option>
+        <option value="CALLED_VM">🟡 Called / Voicemail</option>
+        <option value="PITCHED_SMS">🔵 Pitched / Sent Mockup</option>
+        <option value="DEMO_BOOKED">🟣 Demo Booked</option>
+        <option value="CLOSED_WON">🟢 Closed ($1,500+ Paid)</option>
+      </select>
+    </div>
+
+    <div style="font-size:12px;color:var(--dim);font-weight:700">
+      Showing <span id="visibleCount" style="color:#fbbf24">100</span> of 100
+    </div>
+  </div>
+
+  <!-- Leads Table -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Company &amp; Owner</th>
+          <th>Trade</th>
+          <th>City / Metro</th>
+          <th>Rating</th>
+          <th>Website Status</th>
+          <th>Monthly Loss</th>
+          <th>1-Click Dial</th>
+          <th>Custom Pitch Angle</th>
+          <th>Mockup &amp; Status</th>
+        </tr>
+      </thead>
+      <tbody id="leadsTableBody">
+        <!-- Injected via JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- Interactive Mockup Modal -->
+<div class="modal-overlay" id="mockupModal" onclick="if(event.target===this) closeModal()">
+  <div class="mockup-phone-frame">
+    <button type="button" class="close-modal-btn" onclick="closeModal()">✕</button>
+    <div class="phone-speaker"></div>
+    <div class="phone-screen" id="mockupScreen">
+      <!-- Injected mockup content -->
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+// Embedded 100 Florida Leads
+window.FLORIDA_100_NO_WEBSITE_LEADS = [
+  {
+    "id": "fl_noweb_001",
+    "company": "Tampa Bay Precision Plumbing",
+    "owner": "Dave Miller",
+    "phone": "(813) 449-2180",
+    "trade": "Plumbing",
+    "address": "3820 W Gandy Blvd",
+    "city": "Tampa",
+    "state": "FL",
+    "zip": "33611",
+    "rating": "4.8★ (31 reviews)",
+    "employees": 3,
+    "website": "None (Google Maps listing only)",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$9,500",
+    "pitchAngle": "High Google rating on Gandy Blvd but zero website link. Homeowners looking for emergency sewer or water heater repipe bounce directly to competitors with booking forms.",
+    "recommendedSite": "Emergency Plumbing & Drain Cleaning Mobile-First Fast Funnel"
+  },
+  {
+    "id": "fl_noweb_002",
+    "company": "Ybor City Roofing & Repair",
+    "owner": "Carlos Santana",
+    "phone": "(813) 296-4120",
+    "trade": "Roofing",
+    "address": "1904 E 7th Ave",
+    "city": "Tampa",
+    "state": "FL",
+    "zip": "33605",
+    "rating": "4.7★ (19 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$18,000",
+    "pitchAngle": "Historic Ybor tile and flat roof specialist. Storm leak customers Google 'Ybor roofer' and can't find a quote request page.",
+    "recommendedSite": "High-Ticket Tile & Shingle Roof Replacement Funnel"
+  },
+  {
+    "id": "fl_noweb_003",
+    "company": "Brandon Quality Air Services",
+    "owner": "Gary Thompson",
+    "phone": "(813) 602-8815",
+    "trade": "HVAC",
+    "address": "814 W Robertson St",
+    "city": "Brandon",
+    "state": "FL",
+    "zip": "33511",
+    "rating": "4.9★ (42 reviews)",
+    "employees": 2,
+    "website": "None (Unclaimed Yelp page)",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$12,400",
+    "pitchAngle": "2-man HVAC crew working flat-out during summer. 42 five-star reviews on Google, but no website to capture 24/7 weekend AC replacements.",
+    "recommendedSite": "24/7 Emergency AC Repair & Replacement Instant Booking Site"
+  },
+  {
+    "id": "fl_noweb_004",
+    "company": "Suncoast Tree & Stump Removal",
+    "owner": "Bill Larson",
+    "phone": "(727) 835-1920",
+    "trade": "Tree Service",
+    "address": "6210 66th St N",
+    "city": "St. Petersburg",
+    "state": "FL",
+    "zip": "33709",
+    "rating": "4.8★ (27 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,500",
+    "pitchAngle": "Heavy crane and hazardous tree removal. Needs photo gallery of crane storm removals to command $3,500+ tree removal tickets.",
+    "recommendedSite": "Emergency Tree Removal & Storm Clearance Quote Site"
+  },
+  {
+    "id": "fl_noweb_005",
+    "company": "Clearwater Coastal Electric",
+    "owner": "Steve Rossi",
+    "phone": "(727) 544-6700",
+    "trade": "Electrical",
+    "address": "1420 S Missouri Ave",
+    "city": "Clearwater",
+    "state": "FL",
+    "zip": "33756",
+    "rating": "4.6★ (18 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$11,200",
+    "pitchAngle": "Residential 200A panel upgrades and EV chargers. Homeowners searching for Tesla chargers cannot book on-site estimate.",
+    "recommendedSite": "200A Panel Upgrade & EV Charger Mobile Lead Funnel"
+  },
+  {
+    "id": "fl_noweb_006",
+    "company": "Pinellas Pressure Pros & Pavers",
+    "owner": "Travis Kelly",
+    "phone": "(727) 492-3310",
+    "trade": "Pressure Washing",
+    "address": "2201 34th St N",
+    "city": "St. Petersburg",
+    "state": "FL",
+    "zip": "33713",
+    "rating": "4.9★ (35 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$6,200",
+    "pitchAngle": "Driveway, tile roof, and commercial paver sealing. Great before/after work on truck, but zero online portfolio for homeowners.",
+    "recommendedSite": "Exterior Cleaning & Paver Sealing Before/After Showcase"
+  },
+  {
+    "id": "fl_noweb_007",
+    "company": "South Tampa Master Plumber",
+    "owner": "Rick Vance",
+    "phone": "(813) 837-1400",
+    "trade": "Plumbing",
+    "address": "3114 S MacDill Ave",
+    "city": "Tampa",
+    "state": "FL",
+    "zip": "33629",
+    "rating": "4.8★ (23 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$14,000",
+    "pitchAngle": "High-net-worth South Tampa clientele on MacDill Ave. Wealthy homeowners expect a polished mobile website to schedule whole-house repipes.",
+    "recommendedSite": "Luxury Residential Plumbing & Water Filtration Funnel"
+  },
+  {
+    "id": "fl_noweb_008",
+    "company": "Carrollwood AC Specialists",
+    "owner": "Mark Schneider",
+    "phone": "(813) 961-7890",
+    "trade": "HVAC",
+    "address": "10312 N Dale Mabry Hwy",
+    "city": "Tampa",
+    "state": "FL",
+    "zip": "33618",
+    "rating": "4.7★ (29 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$16,500",
+    "pitchAngle": "Dale Mabry high-traffic corridor. Customers searching for same-day cooling diagnosis find zero web presence and call large corporate shops.",
+    "recommendedSite": "Same-Day Emergency Cooling Repair Booking Engine"
+  },
+  {
+    "id": "fl_noweb_009",
+    "company": "Largo All-Pro Garage Doors",
+    "owner": "Dean Kowalski",
+    "phone": "(727) 581-2240",
+    "trade": "Garage Doors",
+    "address": "1250 Seminole Blvd",
+    "city": "Largo",
+    "state": "FL",
+    "zip": "33770",
+    "rating": "4.9★ (48 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$7,800",
+    "pitchAngle": "Broken torsion springs and hurricane-rated door replacements. Homeowners trapped in garages need instant mobile booking.",
+    "recommendedSite": "Emergency Garage Door Spring Repair & Opener Lead Site"
+  },
+  {
+    "id": "fl_noweb_010",
+    "company": "Seminole Heights Drywall & Paint",
+    "owner": "Arturo Reyes",
+    "phone": "(813) 238-6620",
+    "trade": "Painting & Drywall",
+    "address": "5401 N Florida Ave",
+    "city": "Tampa",
+    "state": "FL",
+    "zip": "33604",
+    "rating": "4.8★ (21 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,900",
+    "pitchAngle": "Craftsman bungalow interior restoration. Needs mobile room estimate quote calculator to secure $6k+ interior remodel packages.",
+    "recommendedSite": "Custom Interior Painting & Smooth Drywall Estimator"
+  },
+  {
+    "id": "fl_noweb_011",
+    "company": "Boca Raton Precision Mechanics",
+    "owner": "Tony D'Amato",
+    "phone": "(561) 740-8910",
+    "trade": "Auto Repair",
+    "address": "1980 NW 1st Ave",
+    "city": "Boca Raton",
+    "state": "FL",
+    "zip": "33432",
+    "rating": "4.8★ (37 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$11,500",
+    "pitchAngle": "High-end European and domestic diagnostics off Federal Hwy. Customers want to see digital vehicle inspection reports on a clean site.",
+    "recommendedSite": "Boca European Auto Repair & Diagnostics Appointment Portal"
+  },
+  {
+    "id": "fl_noweb_012",
+    "company": "Delray Beach Roof Leak Masters",
+    "owner": "Brian O'Connor",
+    "phone": "(561) 819-3200",
+    "trade": "Roofing",
+    "address": "410 W Atlantic Ave",
+    "city": "Delray Beach",
+    "state": "FL",
+    "zip": "33444",
+    "rating": "4.7★ (26 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$22,000",
+    "pitchAngle": "Atlantic Ave location with 26 great reviews. Heavy summer rains in Delray lead to hundreds of Google searches that bypass them.",
+    "recommendedSite": "Emergency Tile & Flat Roof Leak Repair Funnel"
+  },
+  {
+    "id": "fl_noweb_013",
+    "company": "Boynton Beach Drain & Sewer Pros",
+    "owner": "Frank DeLuca",
+    "phone": "(561) 732-4411",
+    "trade": "Plumbing",
+    "address": "1500 N Federal Hwy",
+    "city": "Boynton Beach",
+    "state": "FL",
+    "zip": "33435",
+    "rating": "4.9★ (39 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$13,800",
+    "pitchAngle": "Commercial and condo main sewer backup specialist. Condominium boards require a professional web profile before authorizing $5k+ jobs.",
+    "recommendedSite": "Hydro-Jetting & Trenchless Sewer Inspection Lead Hub"
+  },
+  {
+    "id": "fl_noweb_014",
+    "company": "Lake Worth Marine & Trailer Electric",
+    "owner": "Jimmy Becker",
+    "phone": "(561) 585-6789",
+    "trade": "Electrical",
+    "address": "912 S Dixie Hwy",
+    "city": "Lake Worth",
+    "state": "FL",
+    "zip": "33460",
+    "rating": "4.6★ (17 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$7,500",
+    "pitchAngle": "Boat wiring, trailer harnesses, and dock power pedestals. Coastal boaters Google 'marine electrician near me' on their phones with no site to view.",
+    "recommendedSite": "Marine & Dock Power Electrical Services Showcase"
+  },
+  {
+    "id": "fl_noweb_015",
+    "company": "Palm Beach Gardens Tree Care",
+    "owner": "Keith Sterling",
+    "phone": "(561) 624-9100",
+    "trade": "Tree Service",
+    "address": "4360 Northlake Blvd",
+    "city": "Palm Beach Gardens",
+    "state": "FL",
+    "zip": "33410",
+    "rating": "4.9★ (52 reviews)",
+    "employees": 6,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$15,000",
+    "pitchAngle": "Gated community palm trimming and hazardous removals off Northlake. Wealthy homeowners in PGA National expect a sleek estimate request form.",
+    "recommendedSite": "Luxury Estate Tree Trimming & Hurricane Prep Site"
+  },
+  {
+    "id": "fl_noweb_016",
+    "company": "Jupiter Coastal Paver Restorations",
+    "owner": "Sean Gallagher",
+    "phone": "(561) 746-3390",
+    "trade": "Pavers & Hardscapes",
+    "address": "1200 Indiantown Rd",
+    "city": "Jupiter",
+    "state": "FL",
+    "zip": "33458",
+    "rating": "4.8★ (28 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$9,800",
+    "pitchAngle": "Pool deck paver leveling, pressure washing, and commercial seal-coating. Zero online photo gallery to showcase million-dollar pool patios.",
+    "recommendedSite": "Jupiter Pool Patio & Driveway Paver Sealing Gallery"
+  },
+  {
+    "id": "fl_noweb_017",
+    "company": "Wellington Equestrian Fencing & Gates",
+    "owner": "Dale Morgan",
+    "phone": "(561) 793-1122",
+    "trade": "Fencing & Gates",
+    "address": "13800 Wellington Trace",
+    "city": "Wellington",
+    "state": "FL",
+    "zip": "33414",
+    "rating": "4.7★ (22 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$16,000",
+    "pitchAngle": "Horse paddock 3-rail fencing and automated estate driveway gates. High-ticket equestrian clientele will not hire a contractor without a website.",
+    "recommendedSite": "Equestrian & Estate Security Fence Custom Quote Site"
+  },
+  {
+    "id": "fl_noweb_018",
+    "company": "West Palm Island AC & Refrigeration",
+    "owner": "Eduardo Silva",
+    "phone": "(561) 833-4010",
+    "trade": "HVAC",
+    "address": "2401 N Dixie Hwy",
+    "city": "West Palm Beach",
+    "state": "FL",
+    "zip": "33407",
+    "rating": "4.8★ (33 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$14,500",
+    "pitchAngle": "North Dixie corridor. Serves residential and small restaurant walk-in coolers. When commercial coolers fail, owners need immediate web dispatch.",
+    "recommendedSite": "Emergency Commercial & Residential AC Fast Dispatch"
+  },
+  {
+    "id": "fl_noweb_019",
+    "company": "Royal Palm Beach Handyman & Remodel",
+    "owner": "Nathaniel Cole",
+    "phone": "(561) 790-2811",
+    "trade": "General Contracting",
+    "address": "1190 Royal Palm Beach Blvd",
+    "city": "Royal Palm Beach",
+    "state": "FL",
+    "zip": "33411",
+    "rating": "4.9★ (31 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,500",
+    "pitchAngle": "Bathroom upgrades and drywall repairs. Customers love his work but have no place to see package pricing or submit estimate measurements.",
+    "recommendedSite": "Done-For-You Home Remodeling & Bathroom Quote Funnel"
+  },
+  {
+    "id": "fl_noweb_020",
+    "company": "Delray Precision Auto Glass & Tint",
+    "owner": "Manny Ortiz",
+    "phone": "(561) 276-8840",
+    "trade": "Auto Glass",
+    "address": "230 SW 5th Ave",
+    "city": "Delray Beach",
+    "state": "FL",
+    "zip": "33444",
+    "rating": "4.8★ (45 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$6,500",
+    "pitchAngle": "Mobile windshield replacement with insurance claim processing. Florida law waives deductible for windshields, but Manny has no site explaining this to drivers.",
+    "recommendedSite": "Zero-Deductible Florida Windshield Replacement Portal"
+  },
+  {
+    "id": "fl_noweb_021",
+    "company": "Orlando Central Heat & Air",
+    "owner": "Ray Henderson",
+    "phone": "(407) 628-9410",
+    "trade": "HVAC",
+    "address": "1850 Lee Rd",
+    "city": "Winter Park",
+    "state": "FL",
+    "zip": "32789",
+    "rating": "4.8★ (38 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$17,200",
+    "pitchAngle": "Winter Park and Lee Rd location. Busy shop with 38 reviews, but lost weekend emergency calls drop to zero due to no online intake portal.",
+    "recommendedSite": "Winter Park & Orlando Emergency HVAC Service Engine"
+  },
+  {
+    "id": "fl_noweb_022",
+    "company": "Lake Eola Plumbing Pros",
+    "owner": "Samuel Wright",
+    "phone": "(407) 841-3320",
+    "trade": "Plumbing",
+    "address": "618 E Washington St",
+    "city": "Orlando",
+    "state": "FL",
+    "zip": "32801",
+    "rating": "4.7★ (24 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$12,000",
+    "pitchAngle": "Downtown Orlando historic home copper-to-PEX repiping. High-value downtown renovations with no website to view certifications.",
+    "recommendedSite": "Historic Orlando Residential Plumbing & Repipe Specialist"
+  },
+  {
+    "id": "fl_noweb_023",
+    "company": "Altamonte Roof Shield & Tarps",
+    "owner": "Kenny Mitchell",
+    "phone": "(407) 834-2100",
+    "trade": "Roofing",
+    "address": "498 E Altamonte Dr",
+    "city": "Altamonte Springs",
+    "state": "FL",
+    "zip": "32701",
+    "rating": "4.9★ (31 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$20,500",
+    "pitchAngle": "Storm roof damage specialists along I-4 corridor. Severe hail and wind events hit Seminole County with zero website to capture homeowner claims.",
+    "recommendedSite": "Storm Hail & Wind Damage Insurance Claim Roof Site"
+  },
+  {
+    "id": "fl_noweb_024",
+    "company": "Kissimmee All-Hours Electric",
+    "owner": "Héctor Morales",
+    "phone": "(407) 933-5510",
+    "trade": "Electrical",
+    "address": "120 Broadway",
+    "city": "Kissimmee",
+    "state": "FL",
+    "zip": "34741",
+    "rating": "4.8★ (41 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$10,500",
+    "pitchAngle": "Bilingual residential and vacation rental electrical repairs. Vacation home property managers need a site to submit maintenance tickets.",
+    "recommendedSite": "Vacation Rental & Residential 24/7 Electrical Portal"
+  },
+  {
+    "id": "fl_noweb_025",
+    "company": "Sanford Tree Cutters & Chipping",
+    "owner": "Dustin Campbell",
+    "phone": "(407) 322-7800",
+    "trade": "Tree Service",
+    "address": "2100 W 1st St",
+    "city": "Sanford",
+    "state": "FL",
+    "zip": "32771",
+    "rating": "4.7★ (26 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,200",
+    "pitchAngle": "Lake Monroe corridor oak and pine removals. Truck-mounted chipper and crane with no site to show hazardous takedown videos.",
+    "recommendedSite": "Hazardous Oak & Pine Tree Removal Estimator"
+  },
+  {
+    "id": "fl_noweb_026",
+    "company": "Winter Garden Pavers & Stone",
+    "owner": "Chad Jenkins",
+    "phone": "(407) 656-4422",
+    "trade": "Pavers & Hardscapes",
+    "address": "120 S Dillard St",
+    "city": "Winter Garden",
+    "state": "FL",
+    "zip": "34787",
+    "rating": "4.9★ (34 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$14,000",
+    "pitchAngle": "High-end driveway and outdoor summer kitchen installs in booming Horizon West / Hamlin area. Homeowners need to see 3D patio mockups.",
+    "recommendedSite": "Outdoor Living Patio & Custom Paver Design Showcase"
+  },
+  {
+    "id": "fl_noweb_027",
+    "company": "Ocoee Family Pest & Termite",
+    "owner": "Clint Foster",
+    "phone": "(407) 877-1900",
+    "trade": "Pest Control",
+    "address": "1055 S Clarke Rd",
+    "city": "Ocoee",
+    "state": "FL",
+    "zip": "34761",
+    "rating": "4.8★ (40 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$6,900",
+    "pitchAngle": "Subterranean termite warranties and lawn perimeter sprays. Recurring monthly spray accounts are lost because customers can't sign up online.",
+    "recommendedSite": "Quarterly Pest & Termite Protection Subscription Portal"
+  },
+  {
+    "id": "fl_noweb_028",
+    "company": "Clermont Garage Door Dynamics",
+    "owner": "Troy Adams",
+    "phone": "(352) 394-8800",
+    "trade": "Garage Doors",
+    "address": "792 W Montrose St",
+    "city": "Clermont",
+    "state": "FL",
+    "zip": "34711",
+    "rating": "4.9★ (46 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$7,400",
+    "pitchAngle": "Rolling hills and fast-growing Clermont suburbs. Homeowners with broken opener sensors cannot request same-day emergency dispatch.",
+    "recommendedSite": "Same-Day Overhead Garage Door & Opener Repair Site"
+  },
+  {
+    "id": "fl_noweb_029",
+    "company": "Maitland Seamless Gutters & Guards",
+    "owner": "Jeff Snyder",
+    "phone": "(407) 644-2300",
+    "trade": "Gutters",
+    "address": "500 N Orlando Ave",
+    "city": "Maitland",
+    "state": "FL",
+    "zip": "32751",
+    "rating": "4.8★ (23 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,500",
+    "pitchAngle": "Custom 6-inch and 7-inch aluminum seamless gutters. No site to display color swatches or schedule on-site laser measurements.",
+    "recommendedSite": "Seamless Gutter & Leaf Protection Custom Color Estimator"
+  },
+  {
+    "id": "fl_noweb_030",
+    "company": "Apopka Green Lawn & Irrigation",
+    "owner": "Marco Gomez",
+    "phone": "(407) 886-5010",
+    "trade": "Irrigation & Landscaping",
+    "address": "325 S Park Ave",
+    "city": "Apopka",
+    "state": "FL",
+    "zip": "32703",
+    "rating": "4.7★ (28 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$6,800",
+    "pitchAngle": "Sprinkler head repairs, backflow tests, and timer configurations. Commercial nurseries and homeowners need simple service requests.",
+    "recommendedSite": "Sprinkler System Repair & Smart Timer Installation Portal"
+  },
+  {
+    "id": "fl_noweb_031",
+    "company": "Miami Impact Windows & Doors Pros",
+    "owner": "Alejandro Vega",
+    "phone": "(305) 643-2200",
+    "trade": "Impact Windows",
+    "address": "2740 SW 8th St",
+    "city": "Miami",
+    "state": "FL",
+    "zip": "33135",
+    "rating": "4.8★ (51 reviews)",
+    "employees": 6,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$28,000",
+    "pitchAngle": "Calle Ocho location with 51 reviews. $25k+ hurricane impact window projects require a sleek mobile site with insurance discount calculators.",
+    "recommendedSite": "Miami Hurricane Impact Windows & Doors Energy Rebate Hub"
+  },
+  {
+    "id": "fl_noweb_032",
+    "company": "Fort Lauderdale Rapid Plumbing",
+    "owner": "Vince Castiglione",
+    "phone": "(954) 522-8900",
+    "trade": "Plumbing",
+    "address": "1104 SE 17th St",
+    "city": "Fort Lauderdale",
+    "state": "FL",
+    "zip": "33316",
+    "rating": "4.9★ (42 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$18,500",
+    "pitchAngle": "17th Street Causeway corridor serving yachts, coastal homes, and businesses. Needs emergency intake form for luxury waterfront repipes.",
+    "recommendedSite": "Luxury Waterfront Emergency Plumbing & Jetting Service"
+  },
+  {
+    "id": "fl_noweb_033",
+    "company": "Coral Gables Architectural Roof Repair",
+    "owner": "Javier Fernandez",
+    "phone": "(305) 444-1290",
+    "trade": "Roofing",
+    "address": "2121 Ponce de Leon Blvd",
+    "city": "Coral Gables",
+    "state": "FL",
+    "zip": "33134",
+    "rating": "4.9★ (36 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$32,000",
+    "pitchAngle": "Strict Coral Gables Mediterranean barrel tile codes. Wealthy homeowners will NOT hire a roofing contractor without viewing proof of permits and portfolio.",
+    "recommendedSite": "Historic Mediterranean Barrel Tile Roof Restoration Portal"
+  },
+  {
+    "id": "fl_noweb_034",
+    "company": "Hollywood Beach AC Direct",
+    "owner": "Boris Goldstein",
+    "phone": "(954) 923-4400",
+    "trade": "HVAC",
+    "address": "1920 Hollywood Blvd",
+    "city": "Hollywood",
+    "state": "FL",
+    "zip": "33020",
+    "rating": "4.7★ (33 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$14,000",
+    "pitchAngle": "Hollywood Blvd shop with 33 reviews. Salt-air condenser corrosion replacements. Needs mobile quote builder for coastal rust-resistant units.",
+    "recommendedSite": "Coastal Salt-Shield AC Replacement & Maintenance Engine"
+  },
+  {
+    "id": "fl_noweb_035",
+    "company": "Hialeah Master Electricians",
+    "owner": "Osmany Rodriguez",
+    "phone": "(305) 887-3310",
+    "trade": "Electrical",
+    "address": "420 E 9th St",
+    "city": "Hialeah",
+    "state": "FL",
+    "zip": "33010",
+    "rating": "4.8★ (47 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$12,800",
+    "pitchAngle": "Warehouse industrial wiring and residential panel upgrades. Zero digital footprint beyond Yellow Pages.",
+    "recommendedSite": "Commercial & Residential High-Voltage Electrical Solutions"
+  },
+  {
+    "id": "fl_noweb_036",
+    "company": "Pompano Beach Marine Canvas & Upholstery",
+    "owner": "Greg Bennett",
+    "phone": "(954) 781-6600",
+    "trade": "Marine Upholstery",
+    "address": "2600 N Federal Hwy",
+    "city": "Pompano Beach",
+    "state": "FL",
+    "zip": "33064",
+    "rating": "4.9★ (38 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$9,500",
+    "pitchAngle": "Yacht bimini tops, enclosure curtains, and marine vinyl cushions. Boaters need photo gallery of Sunbrella fabrics to place $4k+ orders.",
+    "recommendedSite": "Custom Yacht Marine Canvas & Enclosure Portfolio Site"
+  },
+  {
+    "id": "fl_noweb_037",
+    "company": "Kendall Emergency Water Extraction",
+    "owner": "Guillermo Pardo",
+    "phone": "(305) 271-9900",
+    "trade": "Water Restoration",
+    "address": "8800 SW 107th Ave",
+    "city": "Miami",
+    "state": "FL",
+    "zip": "33176",
+    "rating": "4.8★ (25 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$21,000",
+    "pitchAngle": "Post-flood and burst water heater extraction. Homeowners in Kendall need 1-click insurance claim dispatch on mobile.",
+    "recommendedSite": "24/7 Rapid Flood & Moisture Extraction Insurance Portal"
+  },
+  {
+    "id": "fl_noweb_038",
+    "company": "Davie Horse Country Fencing",
+    "owner": "Dusty Rhodes",
+    "phone": "(954) 584-3311",
+    "trade": "Fencing",
+    "address": "6591 Orange Dr",
+    "city": "Davie",
+    "state": "FL",
+    "zip": "33314",
+    "rating": "4.9★ (31 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$13,200",
+    "pitchAngle": "Orange Drive corridor. Custom split-rail, aluminum paddock, and security ranch gates with no site to view gate designs.",
+    "recommendedSite": "South Florida Equestrian & Ranch Fence Design Gallery"
+  },
+  {
+    "id": "fl_noweb_039",
+    "company": "North Miami Beach Lock & Safe",
+    "owner": "Ari Levinson",
+    "phone": "(305) 945-8820",
+    "trade": "Locksmith & Security",
+    "address": "16300 NE 19th Ave",
+    "city": "North Miami Beach",
+    "state": "FL",
+    "zip": "33162",
+    "rating": "4.7★ (49 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$7,800",
+    "pitchAngle": "High-security digital keypad locks, transponder keys, and safe openings. Panicked locked-out drivers Google emergency locksmiths and find no site.",
+    "recommendedSite": "24/7 Emergency Mobile Locksmith & Key Programming Site"
+  },
+  {
+    "id": "fl_noweb_040",
+    "company": "Plantation Pool Tile & Plaster",
+    "owner": "Robbie Burns",
+    "phone": "(954) 472-7700",
+    "trade": "Pool Remodeling",
+    "address": "411 N State Road 7",
+    "city": "Plantation",
+    "state": "FL",
+    "zip": "33317",
+    "rating": "4.8★ (27 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$19,000",
+    "pitchAngle": "Diamond Brite resurfacing, glass mosaic waterlines, and travertine coping. $15,000 pool remodels require a visual finish selector.",
+    "recommendedSite": "Diamond Brite Pool Resurfacing & Travertine Coping Portal"
+  },
+  {
+    "id": "fl_noweb_041",
+    "company": "Jax First Coast Roofing Co.",
+    "owner": "Cody Reynolds",
+    "phone": "(904) 387-4400",
+    "trade": "Roofing",
+    "address": "4500 San Juan Ave",
+    "city": "Jacksonville",
+    "state": "FL",
+    "zip": "32210",
+    "rating": "4.8★ (44 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$22,500",
+    "pitchAngle": "Westside and Riverside historic shingles. Great 44-review reputation on Google Maps, but zero website to capture homeowner reroof leads.",
+    "recommendedSite": "Jacksonville Residential Shingle & Metal Roof Replacement Hub"
+  },
+  {
+    "id": "fl_noweb_042",
+    "company": "San Marco Master Plumbing",
+    "owner": "Patrick O'Malley",
+    "phone": "(904) 398-1120",
+    "trade": "Plumbing",
+    "address": "1980 San Marco Blvd",
+    "city": "Jacksonville",
+    "state": "FL",
+    "zip": "32207",
+    "rating": "4.9★ (36 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$13,500",
+    "pitchAngle": "High-income San Marco historic district. Cast iron drain pipe replacements and emergency tankless water heaters.",
+    "recommendedSite": "San Marco Historic Drain Repipe & Emergency Plumbing Engine"
+  },
+  {
+    "id": "fl_noweb_043",
+    "company": "Beaches Coastal AC & Refrigeration",
+    "owner": "Tyler Vance",
+    "phone": "(904) 241-8900",
+    "trade": "HVAC",
+    "address": "1421 3rd St N",
+    "city": "Jacksonville Beach",
+    "state": "FL",
+    "zip": "32250",
+    "rating": "4.8★ (32 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$16,800",
+    "pitchAngle": "Serving Jax Beach, Neptune Beach, and Ponte Vedra. Salt-fog HVAC breakdowns need 1-click mobile emergency booking.",
+    "recommendedSite": "Coastal Jax Beach 24/7 AC Repair & Replacement Site"
+  },
+  {
+    "id": "fl_noweb_044",
+    "company": "Mandarin Tree Surgeons & Logging",
+    "owner": "Bobby Crawford",
+    "phone": "(904) 268-3340",
+    "trade": "Tree Service",
+    "address": "10950 San Jose Blvd",
+    "city": "Jacksonville",
+    "state": "FL",
+    "zip": "32223",
+    "rating": "4.9★ (53 reviews)",
+    "employees": 6,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$14,000",
+    "pitchAngle": "San Jose Blvd corridor. Massive 100-year live oak prunings and storm removals. Needs video proof of clean takedowns.",
+    "recommendedSite": "Mandarin Historic Live Oak Trimming & Crane Removal Site"
+  },
+  {
+    "id": "fl_noweb_045",
+    "company": "Orange Park All-Pro Electric",
+    "owner": "Kenny Schultz",
+    "phone": "(904) 264-7711",
+    "trade": "Electrical",
+    "address": "2140 Kingsley Ave",
+    "city": "Orange Park",
+    "state": "FL",
+    "zip": "32073",
+    "rating": "4.7★ (29 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$9,200",
+    "pitchAngle": "Clay County panel upgrades and home surge protection. Homeowners looking to install solar interlocks have nowhere to see pricing.",
+    "recommendedSite": "Clay County Generator Interlock & 200A Electrical Panel Site"
+  },
+  {
+    "id": "fl_noweb_046",
+    "company": "St. Augustine Colonial Pavers",
+    "owner": "Dante Rossi",
+    "phone": "(904) 824-6010",
+    "trade": "Pavers & Hardscapes",
+    "address": "312 State Road 16",
+    "city": "St. Augustine",
+    "state": "FL",
+    "zip": "32084",
+    "rating": "4.8★ (27 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$11,500",
+    "pitchAngle": "Coquina and cobblestone driveway restorations in oldest city in America. High-ticket historical aesthetics with no online presence.",
+    "recommendedSite": "St. Augustine Historic Brick & Coquina Paver Gallery"
+  },
+  {
+    "id": "fl_noweb_047",
+    "company": "Arlington Garage Doors & Openers",
+    "owner": "Ronnie Davis",
+    "phone": "(904) 744-8830",
+    "trade": "Garage Doors",
+    "address": "8100 Merrill Rd",
+    "city": "Jacksonville",
+    "state": "FL",
+    "zip": "32277",
+    "rating": "4.9★ (38 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$6,500",
+    "pitchAngle": "Merrill Rd location. Broken torsion cable and hurricane track reinforcements with zero website to book morning service slots.",
+    "recommendedSite": "Jacksonville Fast Garage Door Repair & Opener Installation"
+  },
+  {
+    "id": "fl_noweb_048",
+    "company": "Southside Fence & Gate Masters",
+    "owner": "Brad Jenkins",
+    "phone": "(904) 733-1990",
+    "trade": "Fencing",
+    "address": "5800 University Blvd W",
+    "city": "Jacksonville",
+    "state": "FL",
+    "zip": "32216",
+    "rating": "4.8★ (31 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$10,800",
+    "pitchAngle": "Pressure-treated pine privacy fences and black aluminum estate pickets. Needs online linear foot cost estimator.",
+    "recommendedSite": "Jacksonville Privacy Fence & Security Gate Cost Estimator"
+  },
+  {
+    "id": "fl_noweb_049",
+    "company": "Atlantic Beach Precision Painting",
+    "owner": "Chris Lawson",
+    "phone": "(904) 249-4020",
+    "trade": "Painting",
+    "address": "716 Seminole Rd",
+    "city": "Atlantic Beach",
+    "state": "FL",
+    "zip": "32233",
+    "rating": "4.9★ (24 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,400",
+    "pitchAngle": "Coastal exterior elastomeric paint coatings that resist salt weathering. Needs digital project showcase to close $8k+ exterior repaint contracts.",
+    "recommendedSite": "Coastal Salt-Resistant Home Exterior Painting Showcase"
+  },
+  {
+    "id": "fl_noweb_050",
+    "company": "North Jax Water Treatment & Filtration",
+    "owner": "Keith Warren",
+    "phone": "(904) 757-5500",
+    "trade": "Water Treatment",
+    "address": "10200 Main St N",
+    "city": "Jacksonville",
+    "state": "FL",
+    "zip": "32218",
+    "rating": "4.7★ (33 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$7,800",
+    "pitchAngle": "Well water sulfur smell filters, iron purifiers, and reverse osmosis systems. Rural well owners need water test booking form.",
+    "recommendedSite": "Florida Well Water Sulfur & Iron Filtration Systems Hub"
+  },
+  {
+    "id": "fl_noweb_051",
+    "company": "Cape Coral Hurricane Roof Rescue",
+    "owner": "Troy Sterling",
+    "phone": "(239) 542-8800",
+    "trade": "Roofing",
+    "address": "1410 Del Prado Blvd S",
+    "city": "Cape Coral",
+    "state": "FL",
+    "zip": "33990",
+    "rating": "4.8★ (58 reviews)",
+    "employees": 6,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$35,000",
+    "pitchAngle": "Del Prado corridor. Massive post-hurricane reroof market in Cape Coral. Homeowners need instant aerial quote calculator to verify shingle warranties.",
+    "recommendedSite": "Cape Coral Hurricane-Rated Tile & Metal Roof Replacement Site"
+  },
+  {
+    "id": "fl_noweb_052",
+    "company": "Fort Myers River District Plumbing",
+    "owner": "Gabe Martinez",
+    "phone": "(239) 334-2190",
+    "trade": "Plumbing",
+    "address": "2200 First St",
+    "city": "Fort Myers",
+    "state": "FL",
+    "zip": "33901",
+    "rating": "4.9★ (35 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$14,500",
+    "pitchAngle": "River District downtown restoration. Historic homes with slab leaks and aged drain lines with no site to schedule acoustic leak detection.",
+    "recommendedSite": "Electronic Slab Leak Detection & Trenchless Plumbing Engine"
+  },
+  {
+    "id": "fl_noweb_053",
+    "company": "Naples Luxury Coastal Electric",
+    "owner": "Richard Van Pelt",
+    "phone": "(239) 261-7700",
+    "trade": "Electrical",
+    "address": "950 5th Ave S",
+    "city": "Naples",
+    "state": "FL",
+    "zip": "34102",
+    "rating": "4.9★ (42 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$24,000",
+    "pitchAngle": "5th Avenue South corridor. Multi-million dollar Port Royal and Old Naples estates. High-net-worth clients require pristine web credentials.",
+    "recommendedSite": "Naples Estate Automation & Standby Generator Systems Site"
+  },
+  {
+    "id": "fl_noweb_054",
+    "company": "Bonita Springs Gulf Coast Air",
+    "owner": "Darren Boyd",
+    "phone": "(239) 992-4410",
+    "trade": "HVAC",
+    "address": "27800 S Tamiami Trl",
+    "city": "Bonita Springs",
+    "state": "FL",
+    "zip": "34134",
+    "rating": "4.8★ (30 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$18,000",
+    "pitchAngle": "Tamiami Trail shop with 30 reviews. Condenser failure during July humidity leaves homeowners desperate for immediate online dispatch.",
+    "recommendedSite": "Bonita Springs 24/7 Air Conditioning Emergency Rescue Hub"
+  },
+  {
+    "id": "fl_noweb_055",
+    "company": "Estero Pavers & Pool Coping",
+    "owner": "Craig Holloway",
+    "phone": "(239) 947-1900",
+    "trade": "Pavers & Hardscapes",
+    "address": "20100 S Tamiami Trl",
+    "city": "Estero",
+    "state": "FL",
+    "zip": "33928",
+    "rating": "4.8★ (26 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$12,500",
+    "pitchAngle": "Serving gated communities near Miromar Lakes. Homeowners seeking travertine lanai expansions cannot see prior job photos online.",
+    "recommendedSite": "Estero Luxury Travertine Lanai & Driveway Paver Gallery"
+  },
+  {
+    "id": "fl_noweb_056",
+    "company": "Marco Island Marine Air & Heat",
+    "owner": "Frankie Russo",
+    "phone": "(239) 394-8822",
+    "trade": "HVAC",
+    "address": "1083 N Collier Blvd",
+    "city": "Marco Island",
+    "state": "FL",
+    "zip": "34145",
+    "rating": "4.9★ (39 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$21,000",
+    "pitchAngle": "Island waterfront homes and yacht marine chillers. Wealthy seasonal residents need digital service scheduling from up north.",
+    "recommendedSite": "Marco Island Seasonal Resident AC Maintenance & Marine Chiller Site"
+  },
+  {
+    "id": "fl_noweb_057",
+    "company": "Sanibel Island Tree Trimming & Clearing",
+    "owner": "Wayne Fletcher",
+    "phone": "(239) 472-3300",
+    "trade": "Tree Service",
+    "address": "2440 Periwinkle Way",
+    "city": "Sanibel",
+    "state": "FL",
+    "zip": "33957",
+    "rating": "4.7★ (21 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$14,000",
+    "pitchAngle": "Periwinkle Way location. Mangrove trimming and coconut palm clearance. Strict Sanibel conservation vegetation ordinances.",
+    "recommendedSite": "Sanibel Native Vegetation & Certified Mangrove Trimming Site"
+  },
+  {
+    "id": "fl_noweb_058",
+    "company": "North Fort Myers All-Hours Garage Doors",
+    "owner": "Travis Vance",
+    "phone": "(239) 995-1210",
+    "trade": "Garage Doors",
+    "address": "13801 N Cleveland Ave",
+    "city": "North Fort Myers",
+    "state": "FL",
+    "zip": "33903",
+    "rating": "4.8★ (34 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$7,200",
+    "pitchAngle": "Impact wind-load garage doors. In Lee County, garage door failure during hurricanes breaches roofs, but Travis has no web presence.",
+    "recommendedSite": "Lee County High-Wind Impact Garage Door Specialist"
+  },
+  {
+    "id": "fl_noweb_059",
+    "company": "Lehigh Acres Septic & Drain Service",
+    "owner": "Jose Menendez",
+    "phone": "(239) 369-4400",
+    "trade": "Septic & Sewer",
+    "address": "1105 Homestead Rd N",
+    "city": "Lehigh Acres",
+    "state": "FL",
+    "zip": "33936",
+    "rating": "4.7★ (31 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$10,500",
+    "pitchAngle": "Lehigh Acres is primarily on septic systems. Drain field failures and pump-outs require immediate emergency online scheduling.",
+    "recommendedSite": "Septic Tank Pumping & Drain Field Replacement Emergency Hub"
+  },
+  {
+    "id": "fl_noweb_060",
+    "company": "Punta Gorda Precision Pressure Cleaning",
+    "owner": "Shawn Becker",
+    "phone": "(239) 639-8810",
+    "trade": "Pressure Washing",
+    "address": "325 Nesbit St",
+    "city": "Punta Gorda",
+    "state": "FL",
+    "zip": "33950",
+    "rating": "4.9★ (42 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,500",
+    "pitchAngle": "Canal-front docks, boat lifts, and barrel tile roof soft-washing. Boaters in Punta Gorda Isles search for dock cleaning with no way to book.",
+    "recommendedSite": "Punta Gorda Dock & Tile Roof Soft-Wash Booking Portal"
+  },
+  {
+    "id": "fl_noweb_061",
+    "company": "Sarasota Siesta Key AC & Cool",
+    "owner": "Derek Lawson",
+    "phone": "(941) 921-5500",
+    "trade": "HVAC",
+    "address": "2420 Stickney Point Rd",
+    "city": "Sarasota",
+    "state": "FL",
+    "zip": "34231",
+    "rating": "4.9★ (47 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$19,500",
+    "pitchAngle": "Stickney Point bridge corridor to Siesta Key. Luxury vacation rentals with broken ACs need immediate direct booking.",
+    "recommendedSite": "Siesta Key & Sarasota 24/7 Vacation Rental AC Emergency Hub"
+  },
+  {
+    "id": "fl_noweb_062",
+    "company": "Bradenton Riverfront Plumbing Co.",
+    "owner": "Shane Miller",
+    "phone": "(941) 748-2211",
+    "trade": "Plumbing",
+    "address": "1200 Manatee Ave W",
+    "city": "Bradenton",
+    "state": "FL",
+    "zip": "34205",
+    "rating": "4.8★ (36 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$13,000",
+    "pitchAngle": "Manatee Ave location. Water filtration, gas water heaters, and whole-home repiping in historic Bradenton homes.",
+    "recommendedSite": "Manatee County Residential Plumbing & Whole-House Repipe Engine"
+  },
+  {
+    "id": "fl_noweb_063",
+    "company": "Lakewood Ranch Custom Screen & Lanai",
+    "owner": "Blake Thornton",
+    "phone": "(941) 907-8830",
+    "trade": "Screen Enclosures",
+    "address": "8131 Lakewood Main St",
+    "city": "Lakewood Ranch",
+    "state": "FL",
+    "zip": "34202",
+    "rating": "4.8★ (33 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$16,500",
+    "pitchAngle": "Booming master-planned Lakewood Ranch. Rescreening pool cages, panoramic picture-window screen conversions.",
+    "recommendedSite": "Panoramic View Pool Cage & Screen Enclosure Custom Estimator"
+  },
+  {
+    "id": "fl_noweb_064",
+    "company": "Venice Island Roof Solutions",
+    "owner": "Clifford Scott",
+    "phone": "(941) 488-3340",
+    "trade": "Roofing",
+    "address": "200 Tampa Ave W",
+    "city": "Venice",
+    "state": "FL",
+    "zip": "34285",
+    "rating": "4.7★ (28 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$21,000",
+    "pitchAngle": "Retirement capital of Venice Island. Seniors need a trusted, transparent website with license and BBB badges to authorize reroofs.",
+    "recommendedSite": "Venice Island Trusted Senior Roof Replacement Portal"
+  },
+  {
+    "id": "fl_noweb_065",
+    "company": "Longboat Key Coastal Electrical",
+    "owner": "Arthur Sterling",
+    "phone": "(941) 383-7710",
+    "trade": "Electrical",
+    "address": "5360 Gulf of Mexico Dr",
+    "city": "Longboat Key",
+    "state": "FL",
+    "zip": "34228",
+    "rating": "4.9★ (31 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$22,000",
+    "pitchAngle": "Ultra-wealthy barrier island. Condos and mansions on Gulf of Mexico Dr. Homeowners demand professional website before booking.",
+    "recommendedSite": "Longboat Key Luxury Marine & Estate Electrical Systems"
+  },
+  {
+    "id": "fl_noweb_066",
+    "company": "Palmetto Tree Trimmers & Arborists",
+    "owner": "Randy Yates",
+    "phone": "(941) 722-1900",
+    "trade": "Tree Service",
+    "address": "1000 8th Ave W",
+    "city": "Palmetto",
+    "state": "FL",
+    "zip": "34221",
+    "rating": "4.8★ (24 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$9,200",
+    "pitchAngle": "Citrus and pine grove clearing across Manatee County. Heavy bucket truck work with no web portfolio.",
+    "recommendedSite": "Manatee Tree Trimming & Dangerous Branch Removal Site"
+  },
+  {
+    "id": "fl_noweb_067",
+    "company": "Anna Maria Island Paver Sealing",
+    "owner": "Cooper Flynn",
+    "phone": "(941) 778-4420",
+    "trade": "Pavers & Hardscapes",
+    "address": "300 Pine Ave",
+    "city": "Anna Maria",
+    "state": "FL",
+    "zip": "34216",
+    "rating": "4.9★ (39 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$11,000",
+    "pitchAngle": "Pine Ave boutique area. Luxury beachfront shell-stone pavers and shell paths. Vacation home managers need online booking.",
+    "recommendedSite": "Anna Maria Luxury Shell-Stone & Paver Restoration Gallery"
+  },
+  {
+    "id": "fl_noweb_068",
+    "company": "Osprey Precision Marine Mechanics",
+    "owner": "Kirk Bauer",
+    "phone": "(941) 966-2210",
+    "trade": "Marine Mechanics",
+    "address": "13000 S Tamiami Trl",
+    "city": "Osprey",
+    "state": "FL",
+    "zip": "34229",
+    "rating": "4.8★ (27 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$10,400",
+    "pitchAngle": "Yamaha, Mercury, and Suzuki outboard diagnostics. Stranded boaters search on smartphones with no website to schedule service trailer haul.",
+    "recommendedSite": "Mobile Outboard Boat Motor Repair & Trailer Haul Out Hub"
+  },
+  {
+    "id": "fl_noweb_069",
+    "company": "North Port All-Hours Lock & Key",
+    "owner": "Melvin Ortiz",
+    "phone": "(941) 426-8900",
+    "trade": "Locksmith",
+    "address": "4900 City Hall Blvd",
+    "city": "North Port",
+    "state": "FL",
+    "zip": "34286",
+    "rating": "4.7★ (35 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$6,800",
+    "pitchAngle": "One of the fastest growing cities in the US. Massive new residential construction needing deadbolt rekeying and smart locks.",
+    "recommendedSite": "North Port Smart Lock Installation & Emergency Rekeying Site"
+  },
+  {
+    "id": "fl_noweb_070",
+    "company": "Englewood Coastal Gutters & Guards",
+    "owner": "Lonnie Briggs",
+    "phone": "(941) 474-3310",
+    "trade": "Gutters",
+    "address": "300 S McCall Rd",
+    "city": "Englewood",
+    "state": "FL",
+    "zip": "34223",
+    "rating": "4.8★ (26 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$7,500",
+    "pitchAngle": "Lemon Bay coastal homes. Pine needles and storm debris clog gutters, causing foundation cracks. Needs instant estimate page.",
+    "recommendedSite": "Lemon Bay Seamless Gutter & Micro-Mesh Leaf Guard Portal"
+  },
+  {
+    "id": "fl_noweb_071",
+    "company": "Pensacola Bay Roofing Specialists",
+    "owner": "Landon Hall",
+    "phone": "(850) 434-8800",
+    "trade": "Roofing",
+    "address": "1200 N Palafox St",
+    "city": "Pensacola",
+    "state": "FL",
+    "zip": "32501",
+    "rating": "4.8★ (37 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$24,000",
+    "pitchAngle": "North Palafox historic district. Gulf hurricane wind reroofs and metal standing-seam roofs with zero online inquiry portal.",
+    "recommendedSite": "Gulf Coast Hurricane Standing Seam Metal Roof Specialist"
+  },
+  {
+    "id": "fl_noweb_072",
+    "company": "Destin Coastal Air Conditioning",
+    "owner": "Heath Miller",
+    "phone": "(850) 837-2210",
+    "trade": "HVAC",
+    "address": "98 Harbor Blvd",
+    "city": "Destin",
+    "state": "FL",
+    "zip": "32541",
+    "rating": "4.9★ (48 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$20,000",
+    "pitchAngle": "Harbor Blvd corridor. High-turnover Emerald Coast vacation condo rentals. AC outages cost property managers $1,000/night.",
+    "recommendedSite": "Emerald Coast Vacation Rental 24/7 Emergency AC Hub"
+  },
+  {
+    "id": "fl_noweb_073",
+    "company": "Tallahassee Capitol Plumbing Pros",
+    "owner": "Vernon Vance",
+    "phone": "(850) 222-4411",
+    "trade": "Plumbing",
+    "address": "400 S Monroe St",
+    "city": "Tallahassee",
+    "state": "FL",
+    "zip": "32301",
+    "rating": "4.8★ (33 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$12,400",
+    "pitchAngle": "Downtown Monroe St near Capitol. State government offices and historic midtown residential slab repairs with no web presence.",
+    "recommendedSite": "Tallahassee Capitol Commercial & Residential Plumbing Portal"
+  },
+  {
+    "id": "fl_noweb_074",
+    "company": "Fort Walton Beach Electric & Marine",
+    "owner": "Gavin Cross",
+    "phone": "(850) 243-9900",
+    "trade": "Electrical",
+    "address": "125 Miracle Strip Pkwy",
+    "city": "Fort Walton Beach",
+    "state": "FL",
+    "zip": "32548",
+    "rating": "4.7★ (25 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$10,800",
+    "pitchAngle": "Miracle Strip corridor. Boat lift power, marina slips, and home generator interlocks with no digital storefront.",
+    "recommendedSite": "Miracle Strip Boat Lift & Generator Interlock Electrical Site"
+  },
+  {
+    "id": "fl_noweb_075",
+    "company": "Panama City Beach Pavers & Turf",
+    "owner": "Brody Hayes",
+    "phone": "(850) 234-1100",
+    "trade": "Pavers & Artificial Turf",
+    "address": "11200 Front Beach Rd",
+    "city": "Panama City Beach",
+    "state": "FL",
+    "zip": "32407",
+    "rating": "4.9★ (36 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$16,000",
+    "pitchAngle": "Front Beach Rd vacation rentals. Artificial pet turf and poolside travertine that never gets scorching hot in Florida sun.",
+    "recommendedSite": "PCB Luxury Vacation Pool Travertine & Pet Turf Showcase"
+  },
+  {
+    "id": "fl_noweb_076",
+    "company": "Santa Rosa Beach Tree Specialists",
+    "owner": "Wyatt Sterling",
+    "phone": "(850) 267-3320",
+    "trade": "Tree Service",
+    "address": "4821 US Hwy 98 W",
+    "city": "Santa Rosa Beach",
+    "state": "FL",
+    "zip": "32459",
+    "rating": "4.9★ (41 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$18,500",
+    "pitchAngle": "Scenic Hwy 30A / Seaside / Rosemary Beach luxury estates. Pine beetle infestations and coastal scrub oak preservations.",
+    "recommendedSite": "Highway 30A Coastal Tree Preservation & Estate Arborist Site"
+  },
+  {
+    "id": "fl_noweb_077",
+    "company": "Crestview Garage Doors & Overhead",
+    "owner": "Ronnie Fletcher",
+    "phone": "(850) 682-5500",
+    "trade": "Garage Doors",
+    "address": "298 N Main St",
+    "city": "Crestview",
+    "state": "FL",
+    "zip": "32536",
+    "rating": "4.8★ (30 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$6,200",
+    "pitchAngle": "Fastest growing military suburb near Eglin AFB. Military family home purchases requiring garage opener repairs.",
+    "recommendedSite": "Crestview Military Family Garage Door & Opener Repair Hub"
+  },
+  {
+    "id": "fl_noweb_078",
+    "company": "Niceville Coastal Pressure Pros",
+    "owner": "Austin Wade",
+    "phone": "(850) 678-7711",
+    "trade": "Pressure Washing",
+    "address": "1004 John Sims Pkwy",
+    "city": "Niceville",
+    "state": "FL",
+    "zip": "32578",
+    "rating": "4.8★ (28 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$5,800",
+    "pitchAngle": "Boggy Bayou dock and home soft-washing. Boaters and homeowners need online square-foot pricing estimates.",
+    "recommendedSite": "Niceville Dock & Siding Soft-Wash Instant Estimate Site"
+  },
+  {
+    "id": "fl_noweb_079",
+    "company": "Navarre Beach Gutter Guard Co.",
+    "owner": "Shane Douglas",
+    "phone": "(850) 939-2240",
+    "trade": "Gutters",
+    "address": "8500 Navarre Pkwy",
+    "city": "Navarre",
+    "state": "FL",
+    "zip": "32566",
+    "rating": "4.7★ (22 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$7,000",
+    "pitchAngle": "Heavy panhandle tropical downpours overflow builder-grade gutters. Needs seamless gutter color selector.",
+    "recommendedSite": "Navarre Beach Heavy-Flow Seamless Gutter Installation"
+  },
+  {
+    "id": "fl_noweb_080",
+    "company": "Lynn Haven All-Pro Septic & Pump",
+    "owner": "Darrell Hicks",
+    "phone": "(850) 265-4400",
+    "trade": "Septic & Sewer",
+    "address": "812 Ohio Ave",
+    "city": "Lynn Haven",
+    "state": "FL",
+    "zip": "32444",
+    "rating": "4.8★ (34 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$11,200",
+    "pitchAngle": "Septic tank pump-outs, lift stations, and drain field inspections. Emergency sewage overflows need immediate online intake.",
+    "recommendedSite": "Bay County 24/7 Emergency Septic Pumping & Inspection Portal"
+  },
+  {
+    "id": "fl_noweb_081",
+    "company": "Gainesville Gator Country AC",
+    "owner": "Bradford Vance",
+    "phone": "(352) 378-2210",
+    "trade": "HVAC",
+    "address": "3400 SW 34th St",
+    "city": "Gainesville",
+    "state": "FL",
+    "zip": "32608",
+    "rating": "4.8★ (45 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$17,500",
+    "pitchAngle": "College student apartment complexes and residential faculty homes near UF. Turnover AC inspections need online booking.",
+    "recommendedSite": "Gainesville Student & Residential AC Emergency Dispatch Hub"
+  },
+  {
+    "id": "fl_noweb_082",
+    "company": "Ocala Horse Country Paving & Asphalts",
+    "owner": "Chet Montgomery",
+    "phone": "(352) 629-8800",
+    "trade": "Paving",
+    "address": "2400 NW 10th St",
+    "city": "Ocala",
+    "state": "FL",
+    "zip": "34475",
+    "rating": "4.9★ (38 reviews)",
+    "employees": 6,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$32,000",
+    "pitchAngle": "Horse Capital of the World. Equestrian farm barn asphalt driveways and blacktop roads. $40,000+ farm paving contracts.",
+    "recommendedSite": "Ocala Thoroughbred Farm & Estate Asphalt Paving Portal"
+  },
+  {
+    "id": "fl_noweb_083",
+    "company": "Marion County Well & Pump Repair",
+    "owner": "Dwight Higgins",
+    "phone": "(352) 732-4411",
+    "trade": "Well & Pump",
+    "address": "3210 S Pine Ave",
+    "city": "Ocala",
+    "state": "FL",
+    "zip": "34471",
+    "rating": "4.8★ (32 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$14,000",
+    "pitchAngle": "When a deep well pump burns out in Ocala, the ranch has ZERO water for horses and cattle. Needs immediate emergency dispatch site.",
+    "recommendedSite": "24/7 Emergency Deep Well Submersible Pump Replacement Engine"
+  },
+  {
+    "id": "fl_noweb_084",
+    "company": "Alachua Roof Masters & Sheet Metal",
+    "owner": "Preston Cole",
+    "phone": "(352) 462-8900",
+    "trade": "Roofing",
+    "address": "14800 NW 140th St",
+    "city": "Alachua",
+    "state": "FL",
+    "zip": "32615",
+    "rating": "4.8★ (27 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$21,500",
+    "pitchAngle": "Biotech corridor and residential farm roofs. Agricultural metal pole barn roofs and residential metal reroofs.",
+    "recommendedSite": "Alachua Metal Pole Barn & Residential Shingle Roof Specialist"
+  },
+  {
+    "id": "fl_noweb_085",
+    "company": "The Villages Cart & Auto Electric",
+    "owner": "Harold Finch",
+    "phone": "(352) 753-2200",
+    "trade": "Electrical",
+    "address": "1100 Main St",
+    "city": "The Villages",
+    "state": "FL",
+    "zip": "32159",
+    "rating": "4.9★ (56 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$11,000",
+    "pitchAngle": "World's largest retirement community with 70,000+ golf carts. Lithium battery conversions and garage 50A chargers.",
+    "recommendedSite": "The Villages Golf Cart Lithium Conversion & Garage Charger Site"
+  },
+  {
+    "id": "fl_noweb_086",
+    "company": "Leesburg Lakefront Plumbing & Drains",
+    "owner": "Otis Campbell",
+    "phone": "(352) 787-1900",
+    "trade": "Plumbing",
+    "address": "501 W Main St",
+    "city": "Leesburg",
+    "state": "FL",
+    "zip": "34748",
+    "rating": "4.7★ (29 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$12,200",
+    "pitchAngle": "Lake Harris chain of lakes. Boathouse water lines and residential water heater failures with no digital booking system.",
+    "recommendedSite": "Chain of Lakes Residential Plumbing & Water Heater Repair"
+  },
+  {
+    "id": "fl_noweb_087",
+    "company": "Inverness Pine & Oak Tree Logging",
+    "owner": "Travis Barker",
+    "phone": "(352) 726-5500",
+    "trade": "Tree Service",
+    "address": "3800 E Gulf to Lake Hwy",
+    "city": "Inverness",
+    "state": "FL",
+    "zip": "34453",
+    "rating": "4.8★ (31 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,500",
+    "pitchAngle": "Citrus County wooded acreage. Land clearing for new builds and pine beetle diseased takedowns.",
+    "recommendedSite": "Citrus County Acreage Land Clearing & Tree Removal Engine"
+  },
+  {
+    "id": "fl_noweb_088",
+    "company": "Mount Dora Historic Painting & Restoration",
+    "owner": "Arthur Pendleton",
+    "phone": "(352) 383-4411",
+    "trade": "Painting",
+    "address": "411 N Donnelly St",
+    "city": "Mount Dora",
+    "state": "FL",
+    "zip": "32757",
+    "rating": "4.9★ (34 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$10,500",
+    "pitchAngle": "Donnelly St historic district. Victorian exterior wood rot repair and period-accurate color matching with no site.",
+    "recommendedSite": "Mount Dora Historic Victorian Exterior Painting & Wood Rot Repair"
+  },
+  {
+    "id": "fl_noweb_089",
+    "company": "Brooksville Garage Door Masters",
+    "owner": "Lonnie Hayes",
+    "phone": "(352) 796-8800",
+    "trade": "Garage Doors",
+    "address": "1000 S Broad St",
+    "city": "Brooksville",
+    "state": "FL",
+    "zip": "34601",
+    "rating": "4.8★ (26 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$6,800",
+    "pitchAngle": "Hernando County acreage ranches. Heavy commercial shop roll-up doors and residential overhead openers.",
+    "recommendedSite": "Hernando County Commercial Roll-Up & Residential Garage Repair"
+  },
+  {
+    "id": "fl_noweb_090",
+    "company": "Dunnellon Rainbow River Septic Pros",
+    "owner": "Caleb Martin",
+    "phone": "(352) 489-3310",
+    "trade": "Septic & Sewer",
+    "address": "11980 N Williams St",
+    "city": "Dunnellon",
+    "state": "FL",
+    "zip": "34432",
+    "rating": "4.8★ (28 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$9,800",
+    "pitchAngle": "Rainbow River environmental protection zone. High-demand advanced nitrogen-reducing septic upgrades.",
+    "recommendedSite": "Rainbow Springs Advanced Eco-Septic & Drain Field Portal"
+  },
+  {
+    "id": "fl_noweb_091",
+    "company": "Melbourne Space Coast HVAC Pros",
+    "owner": "Dustin Vance",
+    "phone": "(321) 723-8800",
+    "trade": "HVAC",
+    "address": "1900 S Harbor City Blvd",
+    "city": "Melbourne",
+    "state": "FL",
+    "zip": "32901",
+    "rating": "4.8★ (42 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$17,000",
+    "pitchAngle": "Harbor City Blvd location near aerospace tech corridor. Engineers in Melbourne expect a modern digital quote portal.",
+    "recommendedSite": "Space Coast High-Efficiency Heat Pump & AC Replacement Hub"
+  },
+  {
+    "id": "fl_noweb_092",
+    "company": "Cocoa Beach Coastal Roofing Masters",
+    "owner": "Brett Sterling",
+    "phone": "(321) 783-4411",
+    "trade": "Roofing",
+    "address": "201 N Atlantic Ave",
+    "city": "Cocoa Beach",
+    "state": "FL",
+    "zip": "32931",
+    "rating": "4.9★ (38 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$26,000",
+    "pitchAngle": "Atlantic Ave oceanfront condos and beach houses. High-salt spray metal standing-seam and TPO flat roof replacements.",
+    "recommendedSite": "Cocoa Beach Oceanfront Metal & Flat Commercial Roof Specialist"
+  },
+  {
+    "id": "fl_noweb_093",
+    "company": "Titusville Rocket City Electric",
+    "owner": "Kevin Mitchell",
+    "phone": "(321) 267-1900",
+    "trade": "Electrical",
+    "address": "3200 S Washington Ave",
+    "city": "Titusville",
+    "state": "FL",
+    "zip": "32780",
+    "rating": "4.7★ (30 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$10,500",
+    "pitchAngle": "Rocket launch corridor. Whole-house solar battery backups and whole-home generator automatic transfer switches.",
+    "recommendedSite": "Space Coast Standby Generator & Solar Battery Backup Site"
+  },
+  {
+    "id": "fl_noweb_094",
+    "company": "Daytona Beach Speed City Plumbing",
+    "owner": "Rickie Hendrick",
+    "phone": "(386) 255-8822",
+    "trade": "Plumbing",
+    "address": "1801 W International Speedway Blvd",
+    "city": "Daytona Beach",
+    "state": "FL",
+    "zip": "32114",
+    "rating": "4.8★ (46 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$15,500",
+    "pitchAngle": "Speedway Blvd high-visibility strip. Race week commercial emergencies and residential cast iron pipe liner repairs.",
+    "recommendedSite": "Daytona Emergency Trenchless Sewer Lining & Commercial Plumbing"
+  },
+  {
+    "id": "fl_noweb_095",
+    "company": "Ormond Beach Palm & Oak Tree Doctors",
+    "owner": "Clayton Barnes",
+    "phone": "(386) 677-3310",
+    "trade": "Tree Service",
+    "address": "100 E Granada Blvd",
+    "city": "Ormond Beach",
+    "state": "FL",
+    "zip": "32176",
+    "rating": "4.9★ (35 reviews)",
+    "employees": 4,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$11,000",
+    "pitchAngle": "Granada Blvd corridor. Giant moss-draped live oaks on beachside properties. Homeowners need to see insurance coverage proof.",
+    "recommendedSite": "Ormond Beach Historic Live Oak Trimming & Crane Removal Portal"
+  },
+  {
+    "id": "fl_noweb_096",
+    "company": "Vero Beach Treasure Coast Pavers",
+    "owner": "Darryl King",
+    "phone": "(772) 567-4400",
+    "trade": "Pavers & Hardscapes",
+    "address": "2000 Ocean Dr",
+    "city": "Vero Beach",
+    "state": "FL",
+    "zip": "32963",
+    "rating": "4.9★ (40 reviews)",
+    "employees": 5,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$22,000",
+    "pitchAngle": "Ocean Drive barrier island estates in John's Island / Vero Beach. Multi-million dollar homes demanding high-end marble pool decks.",
+    "recommendedSite": "Vero Beach Barrier Island Marble & Travertine Patio Showcase"
+  },
+  {
+    "id": "fl_noweb_097",
+    "company": "Fort Pierce Citrus Capital Septic",
+    "owner": "Waylon Douglas",
+    "phone": "(772) 461-8900",
+    "trade": "Septic & Sewer",
+    "address": "1401 Orange Ave",
+    "city": "Fort Pierce",
+    "state": "FL",
+    "zip": "34950",
+    "rating": "4.7★ (28 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$10,200",
+    "pitchAngle": "Orange Ave corridor. Agricultural citrus groves and rural ranches with emergency drain field clogs and grease trap pump-outs.",
+    "recommendedSite": "St. Lucie County Septic Pumping & Grease Trap Maintenance Hub"
+  },
+  {
+    "id": "fl_noweb_098",
+    "company": "Port St. Lucie All-Pro Garage Doors",
+    "owner": "Dominic Romano",
+    "phone": "(772) 878-3320",
+    "trade": "Garage Doors",
+    "address": "1600 SE Port St Lucie Blvd",
+    "city": "Port St. Lucie",
+    "state": "FL",
+    "zip": "34952",
+    "rating": "4.8★ (47 reviews)",
+    "employees": 2,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$8,500",
+    "pitchAngle": "One of Florida's largest residential growth markets. Hundreds of new subdivisions with broken opener sensors and torsion springs.",
+    "recommendedSite": "Port St. Lucie Same-Day Garage Door Spring & Cable Repair Engine"
+  },
+  {
+    "id": "fl_noweb_099",
+    "company": "Stuart Sailfish Capital Marine Electric",
+    "owner": "Garrick Vance",
+    "phone": "(772) 287-6611",
+    "trade": "Electrical",
+    "address": "121 SW Flagler Ave",
+    "city": "Stuart",
+    "state": "FL",
+    "zip": "34994",
+    "rating": "4.9★ (34 reviews)",
+    "employees": 3,
+    "website": "None",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$18,000",
+    "pitchAngle": "Sailfish Capital of the World. Luxury sportfishing yacht wiring, lithium battery banks, and marina shore power pedestals.",
+    "recommendedSite": "Stuart Yacht Electrical Systems & Shore Power Installation Hub"
+  },
+  {
+    "id": "fl_noweb_100",
+    "company": "Jupiter Tequesta Water Filtration Specialists",
+    "owner": "Grant Campbell",
+    "phone": "(561) 747-8899",
+    "trade": "Water Filtration",
+    "address": "250 S US Hwy 1",
+    "city": "Tequesta",
+    "state": "FL",
+    "zip": "33469",
+    "rating": "4.9★ (51 reviews)",
+    "employees": 3,
+    "website": "None (Yellow Pages & Google Maps only)",
+    "websiteStatus": "NO WEBSITE",
+    "monthlyLossEst": "$12,800",
+    "pitchAngle": "US Hwy 1 high-visibility corridor in Tequesta. Whole-home chlorine and hardness filtration systems for upscale Jupiter homes.",
+    "recommendedSite": "Jupiter Whole-Home Alkaline & Salt-Free Water Filtration Showcase"
+  }
+];
+let LEADS = window.FLORIDA_100_NO_WEBSITE_LEADS;
+
+function renderTable(leads) {
+  const tbody = document.getElementById('leadsTableBody');
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+  document.getElementById('visibleCount').textContent = leads.length;
+
+  leads.forEach(l => {
+    const tr = document.createElement('tr');
+    const savedDisp = localStorage.getItem('vantorx_fl_disp_' + l.id) || 'UNTOUCHED';
+
+    tr.innerHTML = `
+      <td>
+        <div class="company-cell">
+          <span class="company-name">${l.company}</span>
+          <span class="owner-name">Owner: <strong>${l.owner}</strong> · ${l.address}</span>
+        </div>
+      </td>
+      <td>
+        <span style="font-weight:700;color:#e2e8f0">${l.trade}</span>
+      </td>
+      <td>
+        <div style="font-weight:700;color:#fff">${l.city}, FL</div>
+        <div style="font-size:11px;color:#94a3b8">${l.zip}</div>
+      </td>
+      <td>
+        <span style="color:#fbbf24;font-weight:800">${l.rating}</span>
+      </td>
+      <td>
+        <span class="tag-no-web">🚫 NO WEBSITE</span>
+      </td>
+      <td>
+        <span style="color:#ef4444;font-weight:800;font-family:monospace">${l.monthlyLossEst}/mo</span>
+      </td>
+      <td>
+        <a href="tel:${l.phone.replace(/[^0-9]/g, '')}" class="dial-btn" onclick="logCall('${l.id}')">
+          📞 ${l.phone}
+        </a>
+      </td>
+      <td style="max-width:280px;font-size:11.5px;color:#cbd5e1;line-height:1.4">
+        ${l.pitchAngle}
+      </td>
+      <td>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <button type="button" class="btn-preview-mockup" onclick="openMockup('${l.id}')">
+            📱 Preview Mockup
+          </button>
+          <select class="disposition-select" onchange="updateDisp('${l.id}', this.value)">
+            <option value="UNTOUCHED" ${savedDisp==='UNTOUCHED'?'selected':''}>⚪ Untouched</option>
+            <option value="CALLED_VM" ${savedDisp==='CALLED_VM'?'selected':''}>🟡 Left VM</option>
+            <option value="PITCHED_SMS" ${savedDisp==='PITCHED_SMS'?'selected':''}>🔵 Mockup Sent</option>
+            <option value="DEMO_BOOKED" ${savedDisp==='DEMO_BOOKED'?'selected':''}>🟣 Demo Booked</option>
+            <option value="CLOSED_WON" ${savedDisp==='CLOSED_WON'?'selected':''}>🟢 Closed ($1.5k+)</option>
+          </select>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterTable() {
+  const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+  const metro = document.getElementById('metroFilter').value;
+  const trade = document.getElementById('tradeFilter').value;
+  const disp = document.getElementById('dispFilter').value;
+
+  const filtered = LEADS.filter(l => {
+    if (query) {
+      const hay = (l.company + ' ' + l.owner + ' ' + l.city + ' ' + l.trade + ' ' + l.phone + ' ' + l.pitchAngle).toLowerCase();
+      if (!hay.includes(query)) return false;
+    }
+    if (metro !== 'ALL') {
+      if (metro === 'Tampa Bay' && !['Tampa', 'St. Petersburg', 'Brandon', 'Clearwater', 'Largo'].includes(l.city)) return false;
+      if (metro === 'Central FL' && !['Orlando', 'Kissimmee', 'Sanford', 'Ocala'].includes(l.city)) return false;
+      if (metro === 'South FL' && !['Miami', 'Fort Lauderdale', 'Pompano Beach', 'Hollywood', 'Hialeah'].includes(l.city)) return false;
+      if (metro === 'Palm Beach' && !['Boca Raton', 'Delray Beach', 'Boynton Beach', 'West Palm Beach', 'Jupiter'].includes(l.city)) return false;
+      if (metro === 'SW Florida' && !['Cape Coral', 'Fort Myers', 'Naples', 'Sarasota', 'Bradenton'].includes(l.city)) return false;
+      if (metro === 'North FL' && !['Jacksonville', 'Pensacola', 'Tallahassee', 'Panama City'].includes(l.city)) return false;
+    }
+    if (trade !== 'ALL' && !l.trade.toLowerCase().includes(trade.toLowerCase())) return false;
+    
+    const saved = localStorage.getItem('vantorx_fl_disp_' + l.id) || 'UNTOUCHED';
+    if (disp !== 'ALL' && saved !== disp) return false;
+
+    return true;
+  });
+
+  renderTable(filtered);
+}
+
+function updateDisp(id, val) {
+  localStorage.setItem('vantorx_fl_disp_' + id, val);
+  showToast('Saved status: ' + val);
+}
+
+function logCall(id) {
+  const saved = localStorage.getItem('vantorx_fl_disp_' + id) || 'UNTOUCHED';
+  if (saved === 'UNTOUCHED') {
+    localStorage.setItem('vantorx_fl_disp_' + id, 'CALLED_VM');
+    filterTable();
+  }
+}
+
+function openMockup(id) {
+  const lead = LEADS.find(l => l.id === id);
+  if (!lead) return;
+
+  const screen = document.getElementById('mockupScreen');
+  screen.innerHTML = `
+    <div style="border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;margin-bottom:12px">
+      <div style="font-size:10.5px;color:#fbbf24;font-weight:800;letter-spacing:0.06em;text-transform:uppercase">Mobile Funnel Preview · 0.4s Fast Load</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-top:4px">${lead.company}</div>
+      <div style="font-size:11px;color:#94a3b8">${lead.city}, FL · ${lead.rating}</div>
+    </div>
+
+    <!-- Hero -->
+    <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:14px;margin-bottom:14px;text-align:center">
+      <div style="font-size:11px;color:#fbbf24;font-weight:800;text-transform:uppercase">24/7 Emergency ${lead.trade}</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;margin:6px 0;line-height:1.3">Top-Rated ${lead.trade} Specialists in ${lead.city}</div>
+      <div style="font-size:11px;color:#cbd5e1;margin-bottom:12px">Licensed &amp; Insured · Under 60 Min Emergency Arrival</div>
+      
+      <a href="tel:${lead.phone.replace(/[^0-9]/g, '')}" style="display:block;background:#10b981;color:#0b0f19;font-weight:800;padding:10px;border-radius:8px;text-decoration:none;font-size:13px;margin-bottom:8px">
+        📞 Tap to Call: ${lead.phone}
+      </a>
+      <div style="font-size:10px;color:#34d399;font-weight:700">⚡ Answers in 0.8s or 24s Instant SMS</div>
+    </div>
+
+    <!-- Instant Quote Form -->
+    <div style="background:#111827;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;margin-bottom:14px">
+      <div style="font-size:12px;font-weight:800;color:#fbbf24;margin-bottom:8px">Get Fast Estimate in 2 Minutes</div>
+      <input type="text" placeholder="Your Name" style="width:100%;padding:8px;background:#090d16;border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#fff;font-size:11px;margin-bottom:6px">
+      <input type="tel" placeholder="Mobile Phone (for instant text)" style="width:100%;padding:8px;background:#090d16;border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#fff;font-size:11px;margin-bottom:6px">
+      <button style="width:100%;background:#f59e0b;color:#0b0f19;font-weight:800;padding:9px;border:none;border-radius:6px;font-size:11.5px;cursor:pointer">
+        Lock In My Free Quote ➔
+      </button>
+    </div>
+
+    <!-- Google Reviews Section -->
+    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;font-size:11px;color:#94a3b8">
+      <div style="font-weight:700;color:#fff;margin-bottom:4px">Verified Google Customer Feedback:</div>
+      <div style="color:#fbbf24">${lead.rating}</div>
+      <div style="font-style:italic;margin-top:4px">"${lead.owner} and team were on time, courteous, and fixed our emergency within two hours!"</div>
+    </div>
+  `;
+
+  document.getElementById('mockupModal').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('mockupModal').classList.remove('active');
+}
+
+function copyPitchScript() {
+  const text = document.getElementById('pitchScriptText').textContent.trim();
+  navigator.clipboard.writeText(text);
+  showToast('📋 Copied 30-Second Battlecard Pitch!');
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// Initial render
+document.addEventListener('DOMContentLoaded', () => {
+  renderTable(LEADS);
+});
+</script>
+
+</body>
+</html>
