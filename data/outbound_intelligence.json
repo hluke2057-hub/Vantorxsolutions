@@ -1,6 +1,6 @@
 {
   "version": "5.1.0",
-  "lastUpdated": "2026-11-07T20:26:04.115Z",
+  "lastUpdated": "2026-11-07T21:26:04.519Z",
   "systemStatus": {
     "mode": "24/7 Multi-Service Autonomous Engine",
     "autoSenderStatus": "RUNNING",
@@ -30,7 +30,7 @@
     "zoomCtaTarget": "10-Minute Live Interactive Demo"
   },
   "metrics": {
-    "totalSent": 862,
+    "totalSent": 863,
     "totalOpened": 0,
     "totalUnopened48h": 0,
     "totalReplied": 0,
@@ -177,6 +177,24 @@
   ],
   "inboundResponses": [],
   "recentDispatches": [
+    {
+      "id": "fl_ver_291",
+      "company": "Mardant Electrical",
+      "owner": "Roy",
+      "title": "Managing Owner",
+      "email": "info@mardantelectrical.com",
+      "phone": "(904) 363-0200",
+      "city": "Jacksonville, FL",
+      "trade": "Electrical",
+      "serviceCategory": "LeadFlow 90-Second SMS Speed-to-Lead and Missed-Call Recovery Engine",
+      "subject": "Re: Quick question for Roy regarding Mardant Electrical emergency calls",
+      "body": "Hi Roy,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Mardant Electrical.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_291\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$9,100/mo",
+      "touch": 2,
+      "resendMessageId": "01a1b7e7-7f98-794d-9bbb-a99c6136e8fb",
+      "sent": true,
+      "dispatchedAt": "2026-11-07T21:26:04.509Z"
+    },
     {
       "id": "fl_ver_289",
       "company": "American Electrical Contracting, Inc.",
@@ -1958,24 +1976,6 @@
       "resendMessageId": null,
       "sent": false,
       "dispatchedAt": "2026-11-05T19:44:16.925Z"
-    },
-    {
-      "id": "fl_ver_289",
-      "company": "American Electrical Contracting, Inc.",
-      "owner": "Brian",
-      "title": "President",
-      "email": "info@americanelectricalco.com",
-      "phone": "(904) 737-7770",
-      "city": "Jacksonville, FL",
-      "trade": "Electrical",
-      "serviceCategory": "Ava 24/7 Voice AI Receptionist (<1s instant pickup & technician SMS dispatch)",
-      "subject": "Quick question for Brian regarding American Electrical Contracting, Inc. emergency calls",
-      "body": "Hi Brian,\n\nSaw your solid reputation in Jacksonville, FL — congrats on building a trusted local brand.\n\nI was auditing local Electrical providers in Jacksonville, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Electrical, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs American Electrical Contracting, Inc. roughly $9,900/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_289\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-      "estLoss": "$9,900/mo",
-      "touch": 1,
-      "resendMessageId": "01a1ad3d-958b-7cc6-a1b2-94bec07fbe30",
-      "sent": true,
-      "dispatchedAt": "2026-11-05T19:44:16.851Z"
     }
   ],
   "objectionCatalog": {
@@ -2043,6 +2043,6 @@
     "totalReps": 4,
     "certifiedLevel5": 4,
     "totalBossesDefeated": 32,
-    "lastRosterUpdate": "2026-11-07T20:26:04.120Z"
+    "lastRosterUpdate": "2026-11-07T21:26:04.523Z"
   }
 }
