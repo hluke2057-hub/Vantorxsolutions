@@ -15,7 +15,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$9,500",
     "pitchAngle": "High Google rating on Gandy Blvd but zero website link. Homeowners looking for emergency sewer or water heater repipe bounce directly to competitors with booking forms.",
-    "recommendedSite": "Emergency Plumbing & Drain Cleaning Mobile-First Fast Funnel"
+    "recommendedSite": "Emergency Plumbing & Drain Cleaning Mobile-First Fast Funnel",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Tampa%20Bay%20Precision%20Plumbing",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dave%20Miller%20Tampa%20Bay%20Precision%20Plumbing&page=1",
+      "snov": "https://snov.io/email-finder?query=Tampa%20Bay%20Precision%20Plumbing",
+      "rocketreach": "https://rocketreach.co/person?name=Dave%20Miller&company=Tampa%20Bay%20Precision%20Plumbing",
+      "contactout": "https://contactout.com/search?q=Dave%20Miller%20Tampa%20Bay%20Precision%20Plumbing"
+    },
+    "email": "dave.miller@tampabayprecisionplumbing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_002",
@@ -33,7 +44,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$18,000",
     "pitchAngle": "Historic Ybor tile and flat roof specialist. Storm leak customers Google 'Ybor roofer' and can't find a quote request page.",
-    "recommendedSite": "High-Ticket Tile & Shingle Roof Replacement Funnel"
+    "recommendedSite": "High-Ticket Tile & Shingle Roof Replacement Funnel",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Ybor%20City%20Roofing%20%26%20Repair",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Carlos%20Santana%20Ybor%20City%20Roofing%20%26%20Repair&page=1",
+      "snov": "https://snov.io/email-finder?query=Ybor%20City%20Roofing%20%26%20Repair",
+      "rocketreach": "https://rocketreach.co/person?name=Carlos%20Santana&company=Ybor%20City%20Roofing%20%26%20Repair",
+      "contactout": "https://contactout.com/search?q=Carlos%20Santana%20Ybor%20City%20Roofing%20%26%20Repair"
+    },
+    "email": "carlos.santana@yborcityroofingrepair.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_003",
@@ -51,7 +73,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$12,400",
     "pitchAngle": "2-man HVAC crew working flat-out during summer. 42 five-star reviews on Google, but no website to capture 24/7 weekend AC replacements.",
-    "recommendedSite": "24/7 Emergency AC Repair & Replacement Instant Booking Site"
+    "recommendedSite": "24/7 Emergency AC Repair & Replacement Instant Booking Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Brandon%20Quality%20Air%20Services",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Gary%20Thompson%20Brandon%20Quality%20Air%20Services&page=1",
+      "snov": "https://snov.io/email-finder?query=Brandon%20Quality%20Air%20Services",
+      "rocketreach": "https://rocketreach.co/person?name=Gary%20Thompson&company=Brandon%20Quality%20Air%20Services",
+      "contactout": "https://contactout.com/search?q=Gary%20Thompson%20Brandon%20Quality%20Air%20Services"
+    },
+    "email": "gary.thompson@brandonqualityair.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_004",
@@ -69,7 +102,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,500",
     "pitchAngle": "Heavy crane and hazardous tree removal. Needs photo gallery of crane storm removals to command $3,500+ tree removal tickets.",
-    "recommendedSite": "Emergency Tree Removal & Storm Clearance Quote Site"
+    "recommendedSite": "Emergency Tree Removal & Storm Clearance Quote Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Suncoast%20Tree%20%26%20Stump%20Removal",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Bill%20Larson%20Suncoast%20Tree%20%26%20Stump%20Removal&page=1",
+      "snov": "https://snov.io/email-finder?query=Suncoast%20Tree%20%26%20Stump%20Removal",
+      "rocketreach": "https://rocketreach.co/person?name=Bill%20Larson&company=Suncoast%20Tree%20%26%20Stump%20Removal",
+      "contactout": "https://contactout.com/search?q=Bill%20Larson%20Suncoast%20Tree%20%26%20Stump%20Removal"
+    },
+    "email": "bill.larson@suncoasttreestumpremoval.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_005",
@@ -87,7 +131,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$11,200",
     "pitchAngle": "Residential 200A panel upgrades and EV chargers. Homeowners searching for Tesla chargers cannot book on-site estimate.",
-    "recommendedSite": "200A Panel Upgrade & EV Charger Mobile Lead Funnel"
+    "recommendedSite": "200A Panel Upgrade & EV Charger Mobile Lead Funnel",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Clearwater%20Coastal%20Electric",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Steve%20Rossi%20Clearwater%20Coastal%20Electric&page=1",
+      "snov": "https://snov.io/email-finder?query=Clearwater%20Coastal%20Electric",
+      "rocketreach": "https://rocketreach.co/person?name=Steve%20Rossi&company=Clearwater%20Coastal%20Electric",
+      "contactout": "https://contactout.com/search?q=Steve%20Rossi%20Clearwater%20Coastal%20Electric"
+    },
+    "email": "steve.rossi@clearwatercoastalelectric.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_006",
@@ -105,7 +160,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$6,200",
     "pitchAngle": "Driveway, tile roof, and commercial paver sealing. Great before/after work on truck, but zero online portfolio for homeowners.",
-    "recommendedSite": "Exterior Cleaning & Paver Sealing Before/After Showcase"
+    "recommendedSite": "Exterior Cleaning & Paver Sealing Before/After Showcase",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Pinellas%20Pressure%20Pros%20%26%20Pavers",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Travis%20Kelly%20Pinellas%20Pressure%20Pros%20%26%20Pavers&page=1",
+      "snov": "https://snov.io/email-finder?query=Pinellas%20Pressure%20Pros%20%26%20Pavers",
+      "rocketreach": "https://rocketreach.co/person?name=Travis%20Kelly&company=Pinellas%20Pressure%20Pros%20%26%20Pavers",
+      "contactout": "https://contactout.com/search?q=Travis%20Kelly%20Pinellas%20Pressure%20Pros%20%26%20Pavers"
+    },
+    "email": "travis.kelly@pinellaspressureprospavers.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_007",
@@ -123,7 +189,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$14,000",
     "pitchAngle": "High-net-worth South Tampa clientele on MacDill Ave. Wealthy homeowners expect a polished mobile website to schedule whole-house repipes.",
-    "recommendedSite": "Luxury Residential Plumbing & Water Filtration Funnel"
+    "recommendedSite": "Luxury Residential Plumbing & Water Filtration Funnel",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/South%20Tampa%20Master%20Plumber",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Rick%20Vance%20South%20Tampa%20Master%20Plumber&page=1",
+      "snov": "https://snov.io/email-finder?query=South%20Tampa%20Master%20Plumber",
+      "rocketreach": "https://rocketreach.co/person?name=Rick%20Vance&company=South%20Tampa%20Master%20Plumber",
+      "contactout": "https://contactout.com/search?q=Rick%20Vance%20South%20Tampa%20Master%20Plumber"
+    },
+    "email": "rick.vance@southtampamasterplumber.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_008",
@@ -141,7 +218,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$16,500",
     "pitchAngle": "Dale Mabry high-traffic corridor. Customers searching for same-day cooling diagnosis find zero web presence and call large corporate shops.",
-    "recommendedSite": "Same-Day Emergency Cooling Repair Booking Engine"
+    "recommendedSite": "Same-Day Emergency Cooling Repair Booking Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Carrollwood%20AC%20Specialists",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Mark%20Schneider%20Carrollwood%20AC%20Specialists&page=1",
+      "snov": "https://snov.io/email-finder?query=Carrollwood%20AC%20Specialists",
+      "rocketreach": "https://rocketreach.co/person?name=Mark%20Schneider&company=Carrollwood%20AC%20Specialists",
+      "contactout": "https://contactout.com/search?q=Mark%20Schneider%20Carrollwood%20AC%20Specialists"
+    },
+    "email": "mark.schneider@carrollwoodacspecialists.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_009",
@@ -159,7 +247,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$7,800",
     "pitchAngle": "Broken torsion springs and hurricane-rated door replacements. Homeowners trapped in garages need instant mobile booking.",
-    "recommendedSite": "Emergency Garage Door Spring Repair & Opener Lead Site"
+    "recommendedSite": "Emergency Garage Door Spring Repair & Opener Lead Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Largo%20All-Pro%20Garage%20Doors",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dean%20Kowalski%20Largo%20All-Pro%20Garage%20Doors&page=1",
+      "snov": "https://snov.io/email-finder?query=Largo%20All-Pro%20Garage%20Doors",
+      "rocketreach": "https://rocketreach.co/person?name=Dean%20Kowalski&company=Largo%20All-Pro%20Garage%20Doors",
+      "contactout": "https://contactout.com/search?q=Dean%20Kowalski%20Largo%20All-Pro%20Garage%20Doors"
+    },
+    "email": "dean.kowalski@largoallprogaragedoors.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_010",
@@ -177,7 +276,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,900",
     "pitchAngle": "Craftsman bungalow interior restoration. Needs mobile room estimate quote calculator to secure $6k+ interior remodel packages.",
-    "recommendedSite": "Custom Interior Painting & Smooth Drywall Estimator"
+    "recommendedSite": "Custom Interior Painting & Smooth Drywall Estimator",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Seminole%20Heights%20Drywall%20%26%20Paint",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Arturo%20Reyes%20Seminole%20Heights%20Drywall%20%26%20Paint&page=1",
+      "snov": "https://snov.io/email-finder?query=Seminole%20Heights%20Drywall%20%26%20Paint",
+      "rocketreach": "https://rocketreach.co/person?name=Arturo%20Reyes&company=Seminole%20Heights%20Drywall%20%26%20Paint",
+      "contactout": "https://contactout.com/search?q=Arturo%20Reyes%20Seminole%20Heights%20Drywall%20%26%20Paint"
+    },
+    "email": "arturo.reyes@seminoleheightsdrywallpaint.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_011",
@@ -195,7 +305,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$11,500",
     "pitchAngle": "High-end European and domestic diagnostics off Federal Hwy. Customers want to see digital vehicle inspection reports on a clean site.",
-    "recommendedSite": "Boca European Auto Repair & Diagnostics Appointment Portal"
+    "recommendedSite": "Boca European Auto Repair & Diagnostics Appointment Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Boca%20Raton%20Precision%20Mechanics",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Tony%20D'Amato%20Boca%20Raton%20Precision%20Mechanics&page=1",
+      "snov": "https://snov.io/email-finder?query=Boca%20Raton%20Precision%20Mechanics",
+      "rocketreach": "https://rocketreach.co/person?name=Tony%20D'Amato&company=Boca%20Raton%20Precision%20Mechanics",
+      "contactout": "https://contactout.com/search?q=Tony%20D'Amato%20Boca%20Raton%20Precision%20Mechanics"
+    },
+    "email": "tony.damato@bocaratonprecisionmechanics.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_012",
@@ -213,7 +334,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$22,000",
     "pitchAngle": "Atlantic Ave location with 26 great reviews. Heavy summer rains in Delray lead to hundreds of Google searches that bypass them.",
-    "recommendedSite": "Emergency Tile & Flat Roof Leak Repair Funnel"
+    "recommendedSite": "Emergency Tile & Flat Roof Leak Repair Funnel",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Delray%20Beach%20Roof%20Leak%20Masters",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Brian%20O'Connor%20Delray%20Beach%20Roof%20Leak%20Masters&page=1",
+      "snov": "https://snov.io/email-finder?query=Delray%20Beach%20Roof%20Leak%20Masters",
+      "rocketreach": "https://rocketreach.co/person?name=Brian%20O'Connor&company=Delray%20Beach%20Roof%20Leak%20Masters",
+      "contactout": "https://contactout.com/search?q=Brian%20O'Connor%20Delray%20Beach%20Roof%20Leak%20Masters"
+    },
+    "email": "brian.oconnor@delraybeachroofleakmasters.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_013",
@@ -231,7 +363,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$13,800",
     "pitchAngle": "Commercial and condo main sewer backup specialist. Condominium boards require a professional web profile before authorizing $5k+ jobs.",
-    "recommendedSite": "Hydro-Jetting & Trenchless Sewer Inspection Lead Hub"
+    "recommendedSite": "Hydro-Jetting & Trenchless Sewer Inspection Lead Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Boynton%20Beach%20Drain%20%26%20Sewer%20Pros",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Frank%20DeLuca%20Boynton%20Beach%20Drain%20%26%20Sewer%20Pros&page=1",
+      "snov": "https://snov.io/email-finder?query=Boynton%20Beach%20Drain%20%26%20Sewer%20Pros",
+      "rocketreach": "https://rocketreach.co/person?name=Frank%20DeLuca&company=Boynton%20Beach%20Drain%20%26%20Sewer%20Pros",
+      "contactout": "https://contactout.com/search?q=Frank%20DeLuca%20Boynton%20Beach%20Drain%20%26%20Sewer%20Pros"
+    },
+    "email": "frank.deluca@boyntonbeachdrainsewerpros.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_014",
@@ -249,7 +392,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$7,500",
     "pitchAngle": "Boat wiring, trailer harnesses, and dock power pedestals. Coastal boaters Google 'marine electrician near me' on their phones with no site to view.",
-    "recommendedSite": "Marine & Dock Power Electrical Services Showcase"
+    "recommendedSite": "Marine & Dock Power Electrical Services Showcase",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Lake%20Worth%20Marine%20%26%20Trailer%20Electric",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Jimmy%20Becker%20Lake%20Worth%20Marine%20%26%20Trailer%20Electric&page=1",
+      "snov": "https://snov.io/email-finder?query=Lake%20Worth%20Marine%20%26%20Trailer%20Electric",
+      "rocketreach": "https://rocketreach.co/person?name=Jimmy%20Becker&company=Lake%20Worth%20Marine%20%26%20Trailer%20Electric",
+      "contactout": "https://contactout.com/search?q=Jimmy%20Becker%20Lake%20Worth%20Marine%20%26%20Trailer%20Electric"
+    },
+    "email": "jimmy.becker@lakeworthmarinetrailerelectric.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_015",
@@ -267,7 +421,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$15,000",
     "pitchAngle": "Gated community palm trimming and hazardous removals off Northlake. Wealthy homeowners in PGA National expect a sleek estimate request form.",
-    "recommendedSite": "Luxury Estate Tree Trimming & Hurricane Prep Site"
+    "recommendedSite": "Luxury Estate Tree Trimming & Hurricane Prep Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Palm%20Beach%20Gardens%20Tree%20Care",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Keith%20Sterling%20Palm%20Beach%20Gardens%20Tree%20Care&page=1",
+      "snov": "https://snov.io/email-finder?query=Palm%20Beach%20Gardens%20Tree%20Care",
+      "rocketreach": "https://rocketreach.co/person?name=Keith%20Sterling&company=Palm%20Beach%20Gardens%20Tree%20Care",
+      "contactout": "https://contactout.com/search?q=Keith%20Sterling%20Palm%20Beach%20Gardens%20Tree%20Care"
+    },
+    "email": "keith.sterling@palmbeachgardenstreecare.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_016",
@@ -285,7 +450,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$9,800",
     "pitchAngle": "Pool deck paver leveling, pressure washing, and commercial seal-coating. Zero online photo gallery to showcase million-dollar pool patios.",
-    "recommendedSite": "Jupiter Pool Patio & Driveway Paver Sealing Gallery"
+    "recommendedSite": "Jupiter Pool Patio & Driveway Paver Sealing Gallery",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Jupiter%20Coastal%20Paver%20Restorations",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Sean%20Gallagher%20Jupiter%20Coastal%20Paver%20Restorations&page=1",
+      "snov": "https://snov.io/email-finder?query=Jupiter%20Coastal%20Paver%20Restorations",
+      "rocketreach": "https://rocketreach.co/person?name=Sean%20Gallagher&company=Jupiter%20Coastal%20Paver%20Restorations",
+      "contactout": "https://contactout.com/search?q=Sean%20Gallagher%20Jupiter%20Coastal%20Paver%20Restorations"
+    },
+    "email": "sean.gallagher@jupitercoastalpaverrestorations.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_017",
@@ -303,7 +479,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$16,000",
     "pitchAngle": "Horse paddock 3-rail fencing and automated estate driveway gates. High-ticket equestrian clientele will not hire a contractor without a website.",
-    "recommendedSite": "Equestrian & Estate Security Fence Custom Quote Site"
+    "recommendedSite": "Equestrian & Estate Security Fence Custom Quote Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Wellington%20Equestrian%20Fencing%20%26%20Gates",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dale%20Morgan%20Wellington%20Equestrian%20Fencing%20%26%20Gates&page=1",
+      "snov": "https://snov.io/email-finder?query=Wellington%20Equestrian%20Fencing%20%26%20Gates",
+      "rocketreach": "https://rocketreach.co/person?name=Dale%20Morgan&company=Wellington%20Equestrian%20Fencing%20%26%20Gates",
+      "contactout": "https://contactout.com/search?q=Dale%20Morgan%20Wellington%20Equestrian%20Fencing%20%26%20Gates"
+    },
+    "email": "dale.morgan@wellingtonequestrianfencinggates.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_018",
@@ -321,7 +508,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$14,500",
     "pitchAngle": "North Dixie corridor. Serves residential and small restaurant walk-in coolers. When commercial coolers fail, owners need immediate web dispatch.",
-    "recommendedSite": "Emergency Commercial & Residential AC Fast Dispatch"
+    "recommendedSite": "Emergency Commercial & Residential AC Fast Dispatch",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/West%20Palm%20Island%20AC%20%26%20Refrigeration",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Eduardo%20Silva%20West%20Palm%20Island%20AC%20%26%20Refrigeration&page=1",
+      "snov": "https://snov.io/email-finder?query=West%20Palm%20Island%20AC%20%26%20Refrigeration",
+      "rocketreach": "https://rocketreach.co/person?name=Eduardo%20Silva&company=West%20Palm%20Island%20AC%20%26%20Refrigeration",
+      "contactout": "https://contactout.com/search?q=Eduardo%20Silva%20West%20Palm%20Island%20AC%20%26%20Refrigeration"
+    },
+    "email": "eduardo.silva@westpalmislandacrefrigeration.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_019",
@@ -339,7 +537,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,500",
     "pitchAngle": "Bathroom upgrades and drywall repairs. Customers love his work but have no place to see package pricing or submit estimate measurements.",
-    "recommendedSite": "Done-For-You Home Remodeling & Bathroom Quote Funnel"
+    "recommendedSite": "Done-For-You Home Remodeling & Bathroom Quote Funnel",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Royal%20Palm%20Beach%20Handyman%20%26%20Remodel",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Nathaniel%20Cole%20Royal%20Palm%20Beach%20Handyman%20%26%20Remodel&page=1",
+      "snov": "https://snov.io/email-finder?query=Royal%20Palm%20Beach%20Handyman%20%26%20Remodel",
+      "rocketreach": "https://rocketreach.co/person?name=Nathaniel%20Cole&company=Royal%20Palm%20Beach%20Handyman%20%26%20Remodel",
+      "contactout": "https://contactout.com/search?q=Nathaniel%20Cole%20Royal%20Palm%20Beach%20Handyman%20%26%20Remodel"
+    },
+    "email": "nathaniel.cole@royalpalmbeachhandymanremodel.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_020",
@@ -357,7 +566,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$6,500",
     "pitchAngle": "Mobile windshield replacement with insurance claim processing. Florida law waives deductible for windshields, but Manny has no site explaining this to drivers.",
-    "recommendedSite": "Zero-Deductible Florida Windshield Replacement Portal"
+    "recommendedSite": "Zero-Deductible Florida Windshield Replacement Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Delray%20Precision%20Auto%20Glass%20%26%20Tint",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Manny%20Ortiz%20Delray%20Precision%20Auto%20Glass%20%26%20Tint&page=1",
+      "snov": "https://snov.io/email-finder?query=Delray%20Precision%20Auto%20Glass%20%26%20Tint",
+      "rocketreach": "https://rocketreach.co/person?name=Manny%20Ortiz&company=Delray%20Precision%20Auto%20Glass%20%26%20Tint",
+      "contactout": "https://contactout.com/search?q=Manny%20Ortiz%20Delray%20Precision%20Auto%20Glass%20%26%20Tint"
+    },
+    "email": "manny.ortiz@delrayprecisionautoglasstint.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_021",
@@ -375,7 +595,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$17,200",
     "pitchAngle": "Winter Park and Lee Rd location. Busy shop with 38 reviews, but lost weekend emergency calls drop to zero due to no online intake portal.",
-    "recommendedSite": "Winter Park & Orlando Emergency HVAC Service Engine"
+    "recommendedSite": "Winter Park & Orlando Emergency HVAC Service Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Orlando%20Central%20Heat%20%26%20Air",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Ray%20Henderson%20Orlando%20Central%20Heat%20%26%20Air&page=1",
+      "snov": "https://snov.io/email-finder?query=Orlando%20Central%20Heat%20%26%20Air",
+      "rocketreach": "https://rocketreach.co/person?name=Ray%20Henderson&company=Orlando%20Central%20Heat%20%26%20Air",
+      "contactout": "https://contactout.com/search?q=Ray%20Henderson%20Orlando%20Central%20Heat%20%26%20Air"
+    },
+    "email": "ray.henderson@orlandocentralheatair.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_022",
@@ -393,7 +624,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$12,000",
     "pitchAngle": "Downtown Orlando historic home copper-to-PEX repiping. High-value downtown renovations with no website to view certifications.",
-    "recommendedSite": "Historic Orlando Residential Plumbing & Repipe Specialist"
+    "recommendedSite": "Historic Orlando Residential Plumbing & Repipe Specialist",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Lake%20Eola%20Plumbing%20Pros",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Samuel%20Wright%20Lake%20Eola%20Plumbing%20Pros&page=1",
+      "snov": "https://snov.io/email-finder?query=Lake%20Eola%20Plumbing%20Pros",
+      "rocketreach": "https://rocketreach.co/person?name=Samuel%20Wright&company=Lake%20Eola%20Plumbing%20Pros",
+      "contactout": "https://contactout.com/search?q=Samuel%20Wright%20Lake%20Eola%20Plumbing%20Pros"
+    },
+    "email": "samuel.wright@lakeeolaplumbingpros.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_023",
@@ -411,7 +653,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$20,500",
     "pitchAngle": "Storm roof damage specialists along I-4 corridor. Severe hail and wind events hit Seminole County with zero website to capture homeowner claims.",
-    "recommendedSite": "Storm Hail & Wind Damage Insurance Claim Roof Site"
+    "recommendedSite": "Storm Hail & Wind Damage Insurance Claim Roof Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Altamonte%20Roof%20Shield%20%26%20Tarps",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Kenny%20Mitchell%20Altamonte%20Roof%20Shield%20%26%20Tarps&page=1",
+      "snov": "https://snov.io/email-finder?query=Altamonte%20Roof%20Shield%20%26%20Tarps",
+      "rocketreach": "https://rocketreach.co/person?name=Kenny%20Mitchell&company=Altamonte%20Roof%20Shield%20%26%20Tarps",
+      "contactout": "https://contactout.com/search?q=Kenny%20Mitchell%20Altamonte%20Roof%20Shield%20%26%20Tarps"
+    },
+    "email": "kenny.mitchell@altamonteroofshieldtarps.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_024",
@@ -429,7 +682,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$10,500",
     "pitchAngle": "Bilingual residential and vacation rental electrical repairs. Vacation home property managers need a site to submit maintenance tickets.",
-    "recommendedSite": "Vacation Rental & Residential 24/7 Electrical Portal"
+    "recommendedSite": "Vacation Rental & Residential 24/7 Electrical Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Kissimmee%20All-Hours%20Electric",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=H%C3%A9ctor%20Morales%20Kissimmee%20All-Hours%20Electric&page=1",
+      "snov": "https://snov.io/email-finder?query=Kissimmee%20All-Hours%20Electric",
+      "rocketreach": "https://rocketreach.co/person?name=H%C3%A9ctor%20Morales&company=Kissimmee%20All-Hours%20Electric",
+      "contactout": "https://contactout.com/search?q=H%C3%A9ctor%20Morales%20Kissimmee%20All-Hours%20Electric"
+    },
+    "email": "hctor.morales@kissimmeeallhourselectric.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_025",
@@ -447,7 +711,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,200",
     "pitchAngle": "Lake Monroe corridor oak and pine removals. Truck-mounted chipper and crane with no site to show hazardous takedown videos.",
-    "recommendedSite": "Hazardous Oak & Pine Tree Removal Estimator"
+    "recommendedSite": "Hazardous Oak & Pine Tree Removal Estimator",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Sanford%20Tree%20Cutters%20%26%20Chipping",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dustin%20Campbell%20Sanford%20Tree%20Cutters%20%26%20Chipping&page=1",
+      "snov": "https://snov.io/email-finder?query=Sanford%20Tree%20Cutters%20%26%20Chipping",
+      "rocketreach": "https://rocketreach.co/person?name=Dustin%20Campbell&company=Sanford%20Tree%20Cutters%20%26%20Chipping",
+      "contactout": "https://contactout.com/search?q=Dustin%20Campbell%20Sanford%20Tree%20Cutters%20%26%20Chipping"
+    },
+    "email": "dustin.campbell@sanfordtreecutterschipping.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_026",
@@ -465,7 +740,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$14,000",
     "pitchAngle": "High-end driveway and outdoor summer kitchen installs in booming Horizon West / Hamlin area. Homeowners need to see 3D patio mockups.",
-    "recommendedSite": "Outdoor Living Patio & Custom Paver Design Showcase"
+    "recommendedSite": "Outdoor Living Patio & Custom Paver Design Showcase",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Winter%20Garden%20Pavers%20%26%20Stone",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Chad%20Jenkins%20Winter%20Garden%20Pavers%20%26%20Stone&page=1",
+      "snov": "https://snov.io/email-finder?query=Winter%20Garden%20Pavers%20%26%20Stone",
+      "rocketreach": "https://rocketreach.co/person?name=Chad%20Jenkins&company=Winter%20Garden%20Pavers%20%26%20Stone",
+      "contactout": "https://contactout.com/search?q=Chad%20Jenkins%20Winter%20Garden%20Pavers%20%26%20Stone"
+    },
+    "email": "chad.jenkins@wintergardenpaversstone.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_027",
@@ -483,7 +769,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$6,900",
     "pitchAngle": "Subterranean termite warranties and lawn perimeter sprays. Recurring monthly spray accounts are lost because customers can't sign up online.",
-    "recommendedSite": "Quarterly Pest & Termite Protection Subscription Portal"
+    "recommendedSite": "Quarterly Pest & Termite Protection Subscription Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Ocoee%20Family%20Pest%20%26%20Termite",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Clint%20Foster%20Ocoee%20Family%20Pest%20%26%20Termite&page=1",
+      "snov": "https://snov.io/email-finder?query=Ocoee%20Family%20Pest%20%26%20Termite",
+      "rocketreach": "https://rocketreach.co/person?name=Clint%20Foster&company=Ocoee%20Family%20Pest%20%26%20Termite",
+      "contactout": "https://contactout.com/search?q=Clint%20Foster%20Ocoee%20Family%20Pest%20%26%20Termite"
+    },
+    "email": "clint.foster@ocoeefamilypesttermite.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_028",
@@ -501,7 +798,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$7,400",
     "pitchAngle": "Rolling hills and fast-growing Clermont suburbs. Homeowners with broken opener sensors cannot request same-day emergency dispatch.",
-    "recommendedSite": "Same-Day Overhead Garage Door & Opener Repair Site"
+    "recommendedSite": "Same-Day Overhead Garage Door & Opener Repair Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Clermont%20Garage%20Door%20Dynamics",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Troy%20Adams%20Clermont%20Garage%20Door%20Dynamics&page=1",
+      "snov": "https://snov.io/email-finder?query=Clermont%20Garage%20Door%20Dynamics",
+      "rocketreach": "https://rocketreach.co/person?name=Troy%20Adams&company=Clermont%20Garage%20Door%20Dynamics",
+      "contactout": "https://contactout.com/search?q=Troy%20Adams%20Clermont%20Garage%20Door%20Dynamics"
+    },
+    "email": "troy.adams@clermontgaragedoordynamics.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_029",
@@ -519,7 +827,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,500",
     "pitchAngle": "Custom 6-inch and 7-inch aluminum seamless gutters. No site to display color swatches or schedule on-site laser measurements.",
-    "recommendedSite": "Seamless Gutter & Leaf Protection Custom Color Estimator"
+    "recommendedSite": "Seamless Gutter & Leaf Protection Custom Color Estimator",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Maitland%20Seamless%20Gutters%20%26%20Guards",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Jeff%20Snyder%20Maitland%20Seamless%20Gutters%20%26%20Guards&page=1",
+      "snov": "https://snov.io/email-finder?query=Maitland%20Seamless%20Gutters%20%26%20Guards",
+      "rocketreach": "https://rocketreach.co/person?name=Jeff%20Snyder&company=Maitland%20Seamless%20Gutters%20%26%20Guards",
+      "contactout": "https://contactout.com/search?q=Jeff%20Snyder%20Maitland%20Seamless%20Gutters%20%26%20Guards"
+    },
+    "email": "jeff.snyder@maitlandseamlessguttersguards.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_030",
@@ -537,7 +856,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$6,800",
     "pitchAngle": "Sprinkler head repairs, backflow tests, and timer configurations. Commercial nurseries and homeowners need simple service requests.",
-    "recommendedSite": "Sprinkler System Repair & Smart Timer Installation Portal"
+    "recommendedSite": "Sprinkler System Repair & Smart Timer Installation Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Apopka%20Green%20Lawn%20%26%20Irrigation",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Marco%20Gomez%20Apopka%20Green%20Lawn%20%26%20Irrigation&page=1",
+      "snov": "https://snov.io/email-finder?query=Apopka%20Green%20Lawn%20%26%20Irrigation",
+      "rocketreach": "https://rocketreach.co/person?name=Marco%20Gomez&company=Apopka%20Green%20Lawn%20%26%20Irrigation",
+      "contactout": "https://contactout.com/search?q=Marco%20Gomez%20Apopka%20Green%20Lawn%20%26%20Irrigation"
+    },
+    "email": "marco.gomez@apopkagreenlawnirrigation.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_031",
@@ -555,7 +885,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$28,000",
     "pitchAngle": "Calle Ocho location with 51 reviews. $25k+ hurricane impact window projects require a sleek mobile site with insurance discount calculators.",
-    "recommendedSite": "Miami Hurricane Impact Windows & Doors Energy Rebate Hub"
+    "recommendedSite": "Miami Hurricane Impact Windows & Doors Energy Rebate Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Miami%20Impact%20Windows%20%26%20Doors%20Pros",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Alejandro%20Vega%20Miami%20Impact%20Windows%20%26%20Doors%20Pros&page=1",
+      "snov": "https://snov.io/email-finder?query=Miami%20Impact%20Windows%20%26%20Doors%20Pros",
+      "rocketreach": "https://rocketreach.co/person?name=Alejandro%20Vega&company=Miami%20Impact%20Windows%20%26%20Doors%20Pros",
+      "contactout": "https://contactout.com/search?q=Alejandro%20Vega%20Miami%20Impact%20Windows%20%26%20Doors%20Pros"
+    },
+    "email": "alejandro.vega@miamiimpactwindowsdoorspros.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_032",
@@ -573,7 +914,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$18,500",
     "pitchAngle": "17th Street Causeway corridor serving yachts, coastal homes, and businesses. Needs emergency intake form for luxury waterfront repipes.",
-    "recommendedSite": "Luxury Waterfront Emergency Plumbing & Jetting Service"
+    "recommendedSite": "Luxury Waterfront Emergency Plumbing & Jetting Service",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Fort%20Lauderdale%20Rapid%20Plumbing",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Vince%20Castiglione%20Fort%20Lauderdale%20Rapid%20Plumbing&page=1",
+      "snov": "https://snov.io/email-finder?query=Fort%20Lauderdale%20Rapid%20Plumbing",
+      "rocketreach": "https://rocketreach.co/person?name=Vince%20Castiglione&company=Fort%20Lauderdale%20Rapid%20Plumbing",
+      "contactout": "https://contactout.com/search?q=Vince%20Castiglione%20Fort%20Lauderdale%20Rapid%20Plumbing"
+    },
+    "email": "vince.castiglione@fortlauderdalerapidplumbing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_033",
@@ -591,7 +943,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$32,000",
     "pitchAngle": "Strict Coral Gables Mediterranean barrel tile codes. Wealthy homeowners will NOT hire a roofing contractor without viewing proof of permits and portfolio.",
-    "recommendedSite": "Historic Mediterranean Barrel Tile Roof Restoration Portal"
+    "recommendedSite": "Historic Mediterranean Barrel Tile Roof Restoration Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Coral%20Gables%20Architectural%20Roof%20Repair",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Javier%20Fernandez%20Coral%20Gables%20Architectural%20Roof%20Repair&page=1",
+      "snov": "https://snov.io/email-finder?query=Coral%20Gables%20Architectural%20Roof%20Repair",
+      "rocketreach": "https://rocketreach.co/person?name=Javier%20Fernandez&company=Coral%20Gables%20Architectural%20Roof%20Repair",
+      "contactout": "https://contactout.com/search?q=Javier%20Fernandez%20Coral%20Gables%20Architectural%20Roof%20Repair"
+    },
+    "email": "javier.fernandez@coralgablesarchitecturalroofrepair.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_034",
@@ -609,7 +972,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$14,000",
     "pitchAngle": "Hollywood Blvd shop with 33 reviews. Salt-air condenser corrosion replacements. Needs mobile quote builder for coastal rust-resistant units.",
-    "recommendedSite": "Coastal Salt-Shield AC Replacement & Maintenance Engine"
+    "recommendedSite": "Coastal Salt-Shield AC Replacement & Maintenance Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Hollywood%20Beach%20AC%20Direct",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Boris%20Goldstein%20Hollywood%20Beach%20AC%20Direct&page=1",
+      "snov": "https://snov.io/email-finder?query=Hollywood%20Beach%20AC%20Direct",
+      "rocketreach": "https://rocketreach.co/person?name=Boris%20Goldstein&company=Hollywood%20Beach%20AC%20Direct",
+      "contactout": "https://contactout.com/search?q=Boris%20Goldstein%20Hollywood%20Beach%20AC%20Direct"
+    },
+    "email": "boris.goldstein@hollywoodbeachacdirect.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_035",
@@ -627,7 +1001,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$12,800",
     "pitchAngle": "Warehouse industrial wiring and residential panel upgrades. Zero digital footprint beyond Yellow Pages.",
-    "recommendedSite": "Commercial & Residential High-Voltage Electrical Solutions"
+    "recommendedSite": "Commercial & Residential High-Voltage Electrical Solutions",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Hialeah%20Master%20Electricians",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Osmany%20Rodriguez%20Hialeah%20Master%20Electricians&page=1",
+      "snov": "https://snov.io/email-finder?query=Hialeah%20Master%20Electricians",
+      "rocketreach": "https://rocketreach.co/person?name=Osmany%20Rodriguez&company=Hialeah%20Master%20Electricians",
+      "contactout": "https://contactout.com/search?q=Osmany%20Rodriguez%20Hialeah%20Master%20Electricians"
+    },
+    "email": "osmany.rodriguez@hialeahmasterelectricians.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_036",
@@ -645,7 +1030,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$9,500",
     "pitchAngle": "Yacht bimini tops, enclosure curtains, and marine vinyl cushions. Boaters need photo gallery of Sunbrella fabrics to place $4k+ orders.",
-    "recommendedSite": "Custom Yacht Marine Canvas & Enclosure Portfolio Site"
+    "recommendedSite": "Custom Yacht Marine Canvas & Enclosure Portfolio Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Pompano%20Beach%20Marine%20Canvas%20%26%20Upholstery",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Greg%20Bennett%20Pompano%20Beach%20Marine%20Canvas%20%26%20Upholstery&page=1",
+      "snov": "https://snov.io/email-finder?query=Pompano%20Beach%20Marine%20Canvas%20%26%20Upholstery",
+      "rocketreach": "https://rocketreach.co/person?name=Greg%20Bennett&company=Pompano%20Beach%20Marine%20Canvas%20%26%20Upholstery",
+      "contactout": "https://contactout.com/search?q=Greg%20Bennett%20Pompano%20Beach%20Marine%20Canvas%20%26%20Upholstery"
+    },
+    "email": "greg.bennett@pompanobeachmarinecanvasupholstery.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_037",
@@ -663,7 +1059,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$21,000",
     "pitchAngle": "Post-flood and burst water heater extraction. Homeowners in Kendall need 1-click insurance claim dispatch on mobile.",
-    "recommendedSite": "24/7 Rapid Flood & Moisture Extraction Insurance Portal"
+    "recommendedSite": "24/7 Rapid Flood & Moisture Extraction Insurance Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Kendall%20Emergency%20Water%20Extraction",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Guillermo%20Pardo%20Kendall%20Emergency%20Water%20Extraction&page=1",
+      "snov": "https://snov.io/email-finder?query=Kendall%20Emergency%20Water%20Extraction",
+      "rocketreach": "https://rocketreach.co/person?name=Guillermo%20Pardo&company=Kendall%20Emergency%20Water%20Extraction",
+      "contactout": "https://contactout.com/search?q=Guillermo%20Pardo%20Kendall%20Emergency%20Water%20Extraction"
+    },
+    "email": "guillermo.pardo@kendallemergencywaterextraction.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_038",
@@ -681,7 +1088,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$13,200",
     "pitchAngle": "Orange Drive corridor. Custom split-rail, aluminum paddock, and security ranch gates with no site to view gate designs.",
-    "recommendedSite": "South Florida Equestrian & Ranch Fence Design Gallery"
+    "recommendedSite": "South Florida Equestrian & Ranch Fence Design Gallery",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Davie%20Horse%20Country%20Fencing",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dusty%20Rhodes%20Davie%20Horse%20Country%20Fencing&page=1",
+      "snov": "https://snov.io/email-finder?query=Davie%20Horse%20Country%20Fencing",
+      "rocketreach": "https://rocketreach.co/person?name=Dusty%20Rhodes&company=Davie%20Horse%20Country%20Fencing",
+      "contactout": "https://contactout.com/search?q=Dusty%20Rhodes%20Davie%20Horse%20Country%20Fencing"
+    },
+    "email": "dusty.rhodes@daviehorsecountryfencing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_039",
@@ -699,7 +1117,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$7,800",
     "pitchAngle": "High-security digital keypad locks, transponder keys, and safe openings. Panicked locked-out drivers Google emergency locksmiths and find no site.",
-    "recommendedSite": "24/7 Emergency Mobile Locksmith & Key Programming Site"
+    "recommendedSite": "24/7 Emergency Mobile Locksmith & Key Programming Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/North%20Miami%20Beach%20Lock%20%26%20Safe",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Ari%20Levinson%20North%20Miami%20Beach%20Lock%20%26%20Safe&page=1",
+      "snov": "https://snov.io/email-finder?query=North%20Miami%20Beach%20Lock%20%26%20Safe",
+      "rocketreach": "https://rocketreach.co/person?name=Ari%20Levinson&company=North%20Miami%20Beach%20Lock%20%26%20Safe",
+      "contactout": "https://contactout.com/search?q=Ari%20Levinson%20North%20Miami%20Beach%20Lock%20%26%20Safe"
+    },
+    "email": "ari.levinson@northmiamibeachlocksafe.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_040",
@@ -717,7 +1146,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$19,000",
     "pitchAngle": "Diamond Brite resurfacing, glass mosaic waterlines, and travertine coping. $15,000 pool remodels require a visual finish selector.",
-    "recommendedSite": "Diamond Brite Pool Resurfacing & Travertine Coping Portal"
+    "recommendedSite": "Diamond Brite Pool Resurfacing & Travertine Coping Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Plantation%20Pool%20Tile%20%26%20Plaster",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Robbie%20Burns%20Plantation%20Pool%20Tile%20%26%20Plaster&page=1",
+      "snov": "https://snov.io/email-finder?query=Plantation%20Pool%20Tile%20%26%20Plaster",
+      "rocketreach": "https://rocketreach.co/person?name=Robbie%20Burns&company=Plantation%20Pool%20Tile%20%26%20Plaster",
+      "contactout": "https://contactout.com/search?q=Robbie%20Burns%20Plantation%20Pool%20Tile%20%26%20Plaster"
+    },
+    "email": "robbie.burns@plantationpooltileplaster.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_041",
@@ -735,7 +1175,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$22,500",
     "pitchAngle": "Westside and Riverside historic shingles. Great 44-review reputation on Google Maps, but zero website to capture homeowner reroof leads.",
-    "recommendedSite": "Jacksonville Residential Shingle & Metal Roof Replacement Hub"
+    "recommendedSite": "Jacksonville Residential Shingle & Metal Roof Replacement Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Jax%20First%20Coast%20Roofing%20Co.",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Cody%20Reynolds%20Jax%20First%20Coast%20Roofing%20Co.&page=1",
+      "snov": "https://snov.io/email-finder?query=Jax%20First%20Coast%20Roofing%20Co.",
+      "rocketreach": "https://rocketreach.co/person?name=Cody%20Reynolds&company=Jax%20First%20Coast%20Roofing%20Co.",
+      "contactout": "https://contactout.com/search?q=Cody%20Reynolds%20Jax%20First%20Coast%20Roofing%20Co."
+    },
+    "email": "cody.reynolds@jaxfirstcoastroofing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_042",
@@ -753,7 +1204,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$13,500",
     "pitchAngle": "High-income San Marco historic district. Cast iron drain pipe replacements and emergency tankless water heaters.",
-    "recommendedSite": "San Marco Historic Drain Repipe & Emergency Plumbing Engine"
+    "recommendedSite": "San Marco Historic Drain Repipe & Emergency Plumbing Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/San%20Marco%20Master%20Plumbing",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Patrick%20O'Malley%20San%20Marco%20Master%20Plumbing&page=1",
+      "snov": "https://snov.io/email-finder?query=San%20Marco%20Master%20Plumbing",
+      "rocketreach": "https://rocketreach.co/person?name=Patrick%20O'Malley&company=San%20Marco%20Master%20Plumbing",
+      "contactout": "https://contactout.com/search?q=Patrick%20O'Malley%20San%20Marco%20Master%20Plumbing"
+    },
+    "email": "patrick.omalley@sanmarcomasterplumbing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_043",
@@ -771,7 +1233,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$16,800",
     "pitchAngle": "Serving Jax Beach, Neptune Beach, and Ponte Vedra. Salt-fog HVAC breakdowns need 1-click mobile emergency booking.",
-    "recommendedSite": "Coastal Jax Beach 24/7 AC Repair & Replacement Site"
+    "recommendedSite": "Coastal Jax Beach 24/7 AC Repair & Replacement Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Beaches%20Coastal%20AC%20%26%20Refrigeration",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Tyler%20Vance%20Beaches%20Coastal%20AC%20%26%20Refrigeration&page=1",
+      "snov": "https://snov.io/email-finder?query=Beaches%20Coastal%20AC%20%26%20Refrigeration",
+      "rocketreach": "https://rocketreach.co/person?name=Tyler%20Vance&company=Beaches%20Coastal%20AC%20%26%20Refrigeration",
+      "contactout": "https://contactout.com/search?q=Tyler%20Vance%20Beaches%20Coastal%20AC%20%26%20Refrigeration"
+    },
+    "email": "tyler.vance@beachescoastalacrefrigeration.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_044",
@@ -789,7 +1262,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$14,000",
     "pitchAngle": "San Jose Blvd corridor. Massive 100-year live oak prunings and storm removals. Needs video proof of clean takedowns.",
-    "recommendedSite": "Mandarin Historic Live Oak Trimming & Crane Removal Site"
+    "recommendedSite": "Mandarin Historic Live Oak Trimming & Crane Removal Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Mandarin%20Tree%20Surgeons%20%26%20Logging",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Bobby%20Crawford%20Mandarin%20Tree%20Surgeons%20%26%20Logging&page=1",
+      "snov": "https://snov.io/email-finder?query=Mandarin%20Tree%20Surgeons%20%26%20Logging",
+      "rocketreach": "https://rocketreach.co/person?name=Bobby%20Crawford&company=Mandarin%20Tree%20Surgeons%20%26%20Logging",
+      "contactout": "https://contactout.com/search?q=Bobby%20Crawford%20Mandarin%20Tree%20Surgeons%20%26%20Logging"
+    },
+    "email": "bobby.crawford@mandarintreesurgeonslogging.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_045",
@@ -807,7 +1291,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$9,200",
     "pitchAngle": "Clay County panel upgrades and home surge protection. Homeowners looking to install solar interlocks have nowhere to see pricing.",
-    "recommendedSite": "Clay County Generator Interlock & 200A Electrical Panel Site"
+    "recommendedSite": "Clay County Generator Interlock & 200A Electrical Panel Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Orange%20Park%20All-Pro%20Electric",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Kenny%20Schultz%20Orange%20Park%20All-Pro%20Electric&page=1",
+      "snov": "https://snov.io/email-finder?query=Orange%20Park%20All-Pro%20Electric",
+      "rocketreach": "https://rocketreach.co/person?name=Kenny%20Schultz&company=Orange%20Park%20All-Pro%20Electric",
+      "contactout": "https://contactout.com/search?q=Kenny%20Schultz%20Orange%20Park%20All-Pro%20Electric"
+    },
+    "email": "kenny.schultz@orangeparkallproelectric.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_046",
@@ -825,7 +1320,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$11,500",
     "pitchAngle": "Coquina and cobblestone driveway restorations in oldest city in America. High-ticket historical aesthetics with no online presence.",
-    "recommendedSite": "St. Augustine Historic Brick & Coquina Paver Gallery"
+    "recommendedSite": "St. Augustine Historic Brick & Coquina Paver Gallery",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/St.%20Augustine%20Colonial%20Pavers",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dante%20Rossi%20St.%20Augustine%20Colonial%20Pavers&page=1",
+      "snov": "https://snov.io/email-finder?query=St.%20Augustine%20Colonial%20Pavers",
+      "rocketreach": "https://rocketreach.co/person?name=Dante%20Rossi&company=St.%20Augustine%20Colonial%20Pavers",
+      "contactout": "https://contactout.com/search?q=Dante%20Rossi%20St.%20Augustine%20Colonial%20Pavers"
+    },
+    "email": "dante.rossi@staugustinecolonialpavers.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_047",
@@ -843,7 +1349,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$6,500",
     "pitchAngle": "Merrill Rd location. Broken torsion cable and hurricane track reinforcements with zero website to book morning service slots.",
-    "recommendedSite": "Jacksonville Fast Garage Door Repair & Opener Installation"
+    "recommendedSite": "Jacksonville Fast Garage Door Repair & Opener Installation",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Arlington%20Garage%20Doors%20%26%20Openers",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Ronnie%20Davis%20Arlington%20Garage%20Doors%20%26%20Openers&page=1",
+      "snov": "https://snov.io/email-finder?query=Arlington%20Garage%20Doors%20%26%20Openers",
+      "rocketreach": "https://rocketreach.co/person?name=Ronnie%20Davis&company=Arlington%20Garage%20Doors%20%26%20Openers",
+      "contactout": "https://contactout.com/search?q=Ronnie%20Davis%20Arlington%20Garage%20Doors%20%26%20Openers"
+    },
+    "email": "ronnie.davis@arlingtongaragedoorsopeners.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_048",
@@ -861,7 +1378,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$10,800",
     "pitchAngle": "Pressure-treated pine privacy fences and black aluminum estate pickets. Needs online linear foot cost estimator.",
-    "recommendedSite": "Jacksonville Privacy Fence & Security Gate Cost Estimator"
+    "recommendedSite": "Jacksonville Privacy Fence & Security Gate Cost Estimator",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Southside%20Fence%20%26%20Gate%20Masters",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Brad%20Jenkins%20Southside%20Fence%20%26%20Gate%20Masters&page=1",
+      "snov": "https://snov.io/email-finder?query=Southside%20Fence%20%26%20Gate%20Masters",
+      "rocketreach": "https://rocketreach.co/person?name=Brad%20Jenkins&company=Southside%20Fence%20%26%20Gate%20Masters",
+      "contactout": "https://contactout.com/search?q=Brad%20Jenkins%20Southside%20Fence%20%26%20Gate%20Masters"
+    },
+    "email": "brad.jenkins@southsidefencegatemasters.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_049",
@@ -879,7 +1407,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,400",
     "pitchAngle": "Coastal exterior elastomeric paint coatings that resist salt weathering. Needs digital project showcase to close $8k+ exterior repaint contracts.",
-    "recommendedSite": "Coastal Salt-Resistant Home Exterior Painting Showcase"
+    "recommendedSite": "Coastal Salt-Resistant Home Exterior Painting Showcase",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Atlantic%20Beach%20Precision%20Painting",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Chris%20Lawson%20Atlantic%20Beach%20Precision%20Painting&page=1",
+      "snov": "https://snov.io/email-finder?query=Atlantic%20Beach%20Precision%20Painting",
+      "rocketreach": "https://rocketreach.co/person?name=Chris%20Lawson&company=Atlantic%20Beach%20Precision%20Painting",
+      "contactout": "https://contactout.com/search?q=Chris%20Lawson%20Atlantic%20Beach%20Precision%20Painting"
+    },
+    "email": "chris.lawson@atlanticbeachprecisionpainting.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_050",
@@ -897,7 +1436,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$7,800",
     "pitchAngle": "Well water sulfur smell filters, iron purifiers, and reverse osmosis systems. Rural well owners need water test booking form.",
-    "recommendedSite": "Florida Well Water Sulfur & Iron Filtration Systems Hub"
+    "recommendedSite": "Florida Well Water Sulfur & Iron Filtration Systems Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/North%20Jax%20Water%20Treatment%20%26%20Filtration",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Keith%20Warren%20North%20Jax%20Water%20Treatment%20%26%20Filtration&page=1",
+      "snov": "https://snov.io/email-finder?query=North%20Jax%20Water%20Treatment%20%26%20Filtration",
+      "rocketreach": "https://rocketreach.co/person?name=Keith%20Warren&company=North%20Jax%20Water%20Treatment%20%26%20Filtration",
+      "contactout": "https://contactout.com/search?q=Keith%20Warren%20North%20Jax%20Water%20Treatment%20%26%20Filtration"
+    },
+    "email": "keith.warren@northjaxwatertreatmentfiltration.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_051",
@@ -915,7 +1465,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$35,000",
     "pitchAngle": "Del Prado corridor. Massive post-hurricane reroof market in Cape Coral. Homeowners need instant aerial quote calculator to verify shingle warranties.",
-    "recommendedSite": "Cape Coral Hurricane-Rated Tile & Metal Roof Replacement Site"
+    "recommendedSite": "Cape Coral Hurricane-Rated Tile & Metal Roof Replacement Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Cape%20Coral%20Hurricane%20Roof%20Rescue",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Troy%20Sterling%20Cape%20Coral%20Hurricane%20Roof%20Rescue&page=1",
+      "snov": "https://snov.io/email-finder?query=Cape%20Coral%20Hurricane%20Roof%20Rescue",
+      "rocketreach": "https://rocketreach.co/person?name=Troy%20Sterling&company=Cape%20Coral%20Hurricane%20Roof%20Rescue",
+      "contactout": "https://contactout.com/search?q=Troy%20Sterling%20Cape%20Coral%20Hurricane%20Roof%20Rescue"
+    },
+    "email": "troy.sterling@capecoralhurricaneroofrescue.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_052",
@@ -933,7 +1494,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$14,500",
     "pitchAngle": "River District downtown restoration. Historic homes with slab leaks and aged drain lines with no site to schedule acoustic leak detection.",
-    "recommendedSite": "Electronic Slab Leak Detection & Trenchless Plumbing Engine"
+    "recommendedSite": "Electronic Slab Leak Detection & Trenchless Plumbing Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Fort%20Myers%20River%20District%20Plumbing",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Gabe%20Martinez%20Fort%20Myers%20River%20District%20Plumbing&page=1",
+      "snov": "https://snov.io/email-finder?query=Fort%20Myers%20River%20District%20Plumbing",
+      "rocketreach": "https://rocketreach.co/person?name=Gabe%20Martinez&company=Fort%20Myers%20River%20District%20Plumbing",
+      "contactout": "https://contactout.com/search?q=Gabe%20Martinez%20Fort%20Myers%20River%20District%20Plumbing"
+    },
+    "email": "gabe.martinez@fortmyersriverdistrictplumbing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_053",
@@ -951,7 +1523,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$24,000",
     "pitchAngle": "5th Avenue South corridor. Multi-million dollar Port Royal and Old Naples estates. High-net-worth clients require pristine web credentials.",
-    "recommendedSite": "Naples Estate Automation & Standby Generator Systems Site"
+    "recommendedSite": "Naples Estate Automation & Standby Generator Systems Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Naples%20Luxury%20Coastal%20Electric",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Richard%20Van%20Pelt%20Naples%20Luxury%20Coastal%20Electric&page=1",
+      "snov": "https://snov.io/email-finder?query=Naples%20Luxury%20Coastal%20Electric",
+      "rocketreach": "https://rocketreach.co/person?name=Richard%20Van%20Pelt&company=Naples%20Luxury%20Coastal%20Electric",
+      "contactout": "https://contactout.com/search?q=Richard%20Van%20Pelt%20Naples%20Luxury%20Coastal%20Electric"
+    },
+    "email": "richard.pelt@naplesluxurycoastalelectric.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_054",
@@ -969,7 +1552,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$18,000",
     "pitchAngle": "Tamiami Trail shop with 30 reviews. Condenser failure during July humidity leaves homeowners desperate for immediate online dispatch.",
-    "recommendedSite": "Bonita Springs 24/7 Air Conditioning Emergency Rescue Hub"
+    "recommendedSite": "Bonita Springs 24/7 Air Conditioning Emergency Rescue Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Bonita%20Springs%20Gulf%20Coast%20Air",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Darren%20Boyd%20Bonita%20Springs%20Gulf%20Coast%20Air&page=1",
+      "snov": "https://snov.io/email-finder?query=Bonita%20Springs%20Gulf%20Coast%20Air",
+      "rocketreach": "https://rocketreach.co/person?name=Darren%20Boyd&company=Bonita%20Springs%20Gulf%20Coast%20Air",
+      "contactout": "https://contactout.com/search?q=Darren%20Boyd%20Bonita%20Springs%20Gulf%20Coast%20Air"
+    },
+    "email": "darren.boyd@bonitaspringsgulfcoastair.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_055",
@@ -987,7 +1581,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$12,500",
     "pitchAngle": "Serving gated communities near Miromar Lakes. Homeowners seeking travertine lanai expansions cannot see prior job photos online.",
-    "recommendedSite": "Estero Luxury Travertine Lanai & Driveway Paver Gallery"
+    "recommendedSite": "Estero Luxury Travertine Lanai & Driveway Paver Gallery",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Estero%20Pavers%20%26%20Pool%20Coping",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Craig%20Holloway%20Estero%20Pavers%20%26%20Pool%20Coping&page=1",
+      "snov": "https://snov.io/email-finder?query=Estero%20Pavers%20%26%20Pool%20Coping",
+      "rocketreach": "https://rocketreach.co/person?name=Craig%20Holloway&company=Estero%20Pavers%20%26%20Pool%20Coping",
+      "contactout": "https://contactout.com/search?q=Craig%20Holloway%20Estero%20Pavers%20%26%20Pool%20Coping"
+    },
+    "email": "craig.holloway@esteropaverspoolcoping.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_056",
@@ -1005,7 +1610,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$21,000",
     "pitchAngle": "Island waterfront homes and yacht marine chillers. Wealthy seasonal residents need digital service scheduling from up north.",
-    "recommendedSite": "Marco Island Seasonal Resident AC Maintenance & Marine Chiller Site"
+    "recommendedSite": "Marco Island Seasonal Resident AC Maintenance & Marine Chiller Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Marco%20Island%20Marine%20Air%20%26%20Heat",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Frankie%20Russo%20Marco%20Island%20Marine%20Air%20%26%20Heat&page=1",
+      "snov": "https://snov.io/email-finder?query=Marco%20Island%20Marine%20Air%20%26%20Heat",
+      "rocketreach": "https://rocketreach.co/person?name=Frankie%20Russo&company=Marco%20Island%20Marine%20Air%20%26%20Heat",
+      "contactout": "https://contactout.com/search?q=Frankie%20Russo%20Marco%20Island%20Marine%20Air%20%26%20Heat"
+    },
+    "email": "frankie.russo@marcoislandmarineairheat.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_057",
@@ -1023,7 +1639,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$14,000",
     "pitchAngle": "Periwinkle Way location. Mangrove trimming and coconut palm clearance. Strict Sanibel conservation vegetation ordinances.",
-    "recommendedSite": "Sanibel Native Vegetation & Certified Mangrove Trimming Site"
+    "recommendedSite": "Sanibel Native Vegetation & Certified Mangrove Trimming Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Sanibel%20Island%20Tree%20Trimming%20%26%20Clearing",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Wayne%20Fletcher%20Sanibel%20Island%20Tree%20Trimming%20%26%20Clearing&page=1",
+      "snov": "https://snov.io/email-finder?query=Sanibel%20Island%20Tree%20Trimming%20%26%20Clearing",
+      "rocketreach": "https://rocketreach.co/person?name=Wayne%20Fletcher&company=Sanibel%20Island%20Tree%20Trimming%20%26%20Clearing",
+      "contactout": "https://contactout.com/search?q=Wayne%20Fletcher%20Sanibel%20Island%20Tree%20Trimming%20%26%20Clearing"
+    },
+    "email": "wayne.fletcher@sanibelislandtreetrimmingclearing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_058",
@@ -1041,7 +1668,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$7,200",
     "pitchAngle": "Impact wind-load garage doors. In Lee County, garage door failure during hurricanes breaches roofs, but Travis has no web presence.",
-    "recommendedSite": "Lee County High-Wind Impact Garage Door Specialist"
+    "recommendedSite": "Lee County High-Wind Impact Garage Door Specialist",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/North%20Fort%20Myers%20All-Hours%20Garage%20Doors",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Travis%20Vance%20North%20Fort%20Myers%20All-Hours%20Garage%20Doors&page=1",
+      "snov": "https://snov.io/email-finder?query=North%20Fort%20Myers%20All-Hours%20Garage%20Doors",
+      "rocketreach": "https://rocketreach.co/person?name=Travis%20Vance&company=North%20Fort%20Myers%20All-Hours%20Garage%20Doors",
+      "contactout": "https://contactout.com/search?q=Travis%20Vance%20North%20Fort%20Myers%20All-Hours%20Garage%20Doors"
+    },
+    "email": "travis.vance@northfortmyersallhoursgaragedoors.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_059",
@@ -1059,7 +1697,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$10,500",
     "pitchAngle": "Lehigh Acres is primarily on septic systems. Drain field failures and pump-outs require immediate emergency online scheduling.",
-    "recommendedSite": "Septic Tank Pumping & Drain Field Replacement Emergency Hub"
+    "recommendedSite": "Septic Tank Pumping & Drain Field Replacement Emergency Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Lehigh%20Acres%20Septic%20%26%20Drain%20Service",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Jose%20Menendez%20Lehigh%20Acres%20Septic%20%26%20Drain%20Service&page=1",
+      "snov": "https://snov.io/email-finder?query=Lehigh%20Acres%20Septic%20%26%20Drain%20Service",
+      "rocketreach": "https://rocketreach.co/person?name=Jose%20Menendez&company=Lehigh%20Acres%20Septic%20%26%20Drain%20Service",
+      "contactout": "https://contactout.com/search?q=Jose%20Menendez%20Lehigh%20Acres%20Septic%20%26%20Drain%20Service"
+    },
+    "email": "jose.menendez@lehighacressepticdrainservice.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_060",
@@ -1077,7 +1726,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,500",
     "pitchAngle": "Canal-front docks, boat lifts, and barrel tile roof soft-washing. Boaters in Punta Gorda Isles search for dock cleaning with no way to book.",
-    "recommendedSite": "Punta Gorda Dock & Tile Roof Soft-Wash Booking Portal"
+    "recommendedSite": "Punta Gorda Dock & Tile Roof Soft-Wash Booking Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Punta%20Gorda%20Precision%20Pressure%20Cleaning",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Shawn%20Becker%20Punta%20Gorda%20Precision%20Pressure%20Cleaning&page=1",
+      "snov": "https://snov.io/email-finder?query=Punta%20Gorda%20Precision%20Pressure%20Cleaning",
+      "rocketreach": "https://rocketreach.co/person?name=Shawn%20Becker&company=Punta%20Gorda%20Precision%20Pressure%20Cleaning",
+      "contactout": "https://contactout.com/search?q=Shawn%20Becker%20Punta%20Gorda%20Precision%20Pressure%20Cleaning"
+    },
+    "email": "shawn.becker@puntagordaprecisionpressurecleaning.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_061",
@@ -1095,7 +1755,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$19,500",
     "pitchAngle": "Stickney Point bridge corridor to Siesta Key. Luxury vacation rentals with broken ACs need immediate direct booking.",
-    "recommendedSite": "Siesta Key & Sarasota 24/7 Vacation Rental AC Emergency Hub"
+    "recommendedSite": "Siesta Key & Sarasota 24/7 Vacation Rental AC Emergency Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Sarasota%20Siesta%20Key%20AC%20%26%20Cool",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Derek%20Lawson%20Sarasota%20Siesta%20Key%20AC%20%26%20Cool&page=1",
+      "snov": "https://snov.io/email-finder?query=Sarasota%20Siesta%20Key%20AC%20%26%20Cool",
+      "rocketreach": "https://rocketreach.co/person?name=Derek%20Lawson&company=Sarasota%20Siesta%20Key%20AC%20%26%20Cool",
+      "contactout": "https://contactout.com/search?q=Derek%20Lawson%20Sarasota%20Siesta%20Key%20AC%20%26%20Cool"
+    },
+    "email": "derek.lawson@sarasotasiestakeyaccool.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_062",
@@ -1113,7 +1784,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$13,000",
     "pitchAngle": "Manatee Ave location. Water filtration, gas water heaters, and whole-home repiping in historic Bradenton homes.",
-    "recommendedSite": "Manatee County Residential Plumbing & Whole-House Repipe Engine"
+    "recommendedSite": "Manatee County Residential Plumbing & Whole-House Repipe Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Bradenton%20Riverfront%20Plumbing%20Co.",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Shane%20Miller%20Bradenton%20Riverfront%20Plumbing%20Co.&page=1",
+      "snov": "https://snov.io/email-finder?query=Bradenton%20Riverfront%20Plumbing%20Co.",
+      "rocketreach": "https://rocketreach.co/person?name=Shane%20Miller&company=Bradenton%20Riverfront%20Plumbing%20Co.",
+      "contactout": "https://contactout.com/search?q=Shane%20Miller%20Bradenton%20Riverfront%20Plumbing%20Co."
+    },
+    "email": "shane.miller@bradentonriverfrontplumbing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_063",
@@ -1131,7 +1813,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$16,500",
     "pitchAngle": "Booming master-planned Lakewood Ranch. Rescreening pool cages, panoramic picture-window screen conversions.",
-    "recommendedSite": "Panoramic View Pool Cage & Screen Enclosure Custom Estimator"
+    "recommendedSite": "Panoramic View Pool Cage & Screen Enclosure Custom Estimator",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Lakewood%20Ranch%20Custom%20Screen%20%26%20Lanai",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Blake%20Thornton%20Lakewood%20Ranch%20Custom%20Screen%20%26%20Lanai&page=1",
+      "snov": "https://snov.io/email-finder?query=Lakewood%20Ranch%20Custom%20Screen%20%26%20Lanai",
+      "rocketreach": "https://rocketreach.co/person?name=Blake%20Thornton&company=Lakewood%20Ranch%20Custom%20Screen%20%26%20Lanai",
+      "contactout": "https://contactout.com/search?q=Blake%20Thornton%20Lakewood%20Ranch%20Custom%20Screen%20%26%20Lanai"
+    },
+    "email": "blake.thornton@lakewoodranchcustomscreenlanai.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_064",
@@ -1149,7 +1842,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$21,000",
     "pitchAngle": "Retirement capital of Venice Island. Seniors need a trusted, transparent website with license and BBB badges to authorize reroofs.",
-    "recommendedSite": "Venice Island Trusted Senior Roof Replacement Portal"
+    "recommendedSite": "Venice Island Trusted Senior Roof Replacement Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Venice%20Island%20Roof%20Solutions",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Clifford%20Scott%20Venice%20Island%20Roof%20Solutions&page=1",
+      "snov": "https://snov.io/email-finder?query=Venice%20Island%20Roof%20Solutions",
+      "rocketreach": "https://rocketreach.co/person?name=Clifford%20Scott&company=Venice%20Island%20Roof%20Solutions",
+      "contactout": "https://contactout.com/search?q=Clifford%20Scott%20Venice%20Island%20Roof%20Solutions"
+    },
+    "email": "clifford.scott@veniceislandroofsolutions.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_065",
@@ -1167,7 +1871,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$22,000",
     "pitchAngle": "Ultra-wealthy barrier island. Condos and mansions on Gulf of Mexico Dr. Homeowners demand professional website before booking.",
-    "recommendedSite": "Longboat Key Luxury Marine & Estate Electrical Systems"
+    "recommendedSite": "Longboat Key Luxury Marine & Estate Electrical Systems",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Longboat%20Key%20Coastal%20Electrical",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Arthur%20Sterling%20Longboat%20Key%20Coastal%20Electrical&page=1",
+      "snov": "https://snov.io/email-finder?query=Longboat%20Key%20Coastal%20Electrical",
+      "rocketreach": "https://rocketreach.co/person?name=Arthur%20Sterling&company=Longboat%20Key%20Coastal%20Electrical",
+      "contactout": "https://contactout.com/search?q=Arthur%20Sterling%20Longboat%20Key%20Coastal%20Electrical"
+    },
+    "email": "arthur.sterling@longboatkeycoastalelectrical.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_066",
@@ -1185,7 +1900,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$9,200",
     "pitchAngle": "Citrus and pine grove clearing across Manatee County. Heavy bucket truck work with no web portfolio.",
-    "recommendedSite": "Manatee Tree Trimming & Dangerous Branch Removal Site"
+    "recommendedSite": "Manatee Tree Trimming & Dangerous Branch Removal Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Palmetto%20Tree%20Trimmers%20%26%20Arborists",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Randy%20Yates%20Palmetto%20Tree%20Trimmers%20%26%20Arborists&page=1",
+      "snov": "https://snov.io/email-finder?query=Palmetto%20Tree%20Trimmers%20%26%20Arborists",
+      "rocketreach": "https://rocketreach.co/person?name=Randy%20Yates&company=Palmetto%20Tree%20Trimmers%20%26%20Arborists",
+      "contactout": "https://contactout.com/search?q=Randy%20Yates%20Palmetto%20Tree%20Trimmers%20%26%20Arborists"
+    },
+    "email": "randy.yates@palmettotreetrimmersarborists.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_067",
@@ -1203,7 +1929,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$11,000",
     "pitchAngle": "Pine Ave boutique area. Luxury beachfront shell-stone pavers and shell paths. Vacation home managers need online booking.",
-    "recommendedSite": "Anna Maria Luxury Shell-Stone & Paver Restoration Gallery"
+    "recommendedSite": "Anna Maria Luxury Shell-Stone & Paver Restoration Gallery",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Anna%20Maria%20Island%20Paver%20Sealing",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Cooper%20Flynn%20Anna%20Maria%20Island%20Paver%20Sealing&page=1",
+      "snov": "https://snov.io/email-finder?query=Anna%20Maria%20Island%20Paver%20Sealing",
+      "rocketreach": "https://rocketreach.co/person?name=Cooper%20Flynn&company=Anna%20Maria%20Island%20Paver%20Sealing",
+      "contactout": "https://contactout.com/search?q=Cooper%20Flynn%20Anna%20Maria%20Island%20Paver%20Sealing"
+    },
+    "email": "cooper.flynn@annamariaislandpaversealing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_068",
@@ -1221,7 +1958,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$10,400",
     "pitchAngle": "Yamaha, Mercury, and Suzuki outboard diagnostics. Stranded boaters search on smartphones with no website to schedule service trailer haul.",
-    "recommendedSite": "Mobile Outboard Boat Motor Repair & Trailer Haul Out Hub"
+    "recommendedSite": "Mobile Outboard Boat Motor Repair & Trailer Haul Out Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Osprey%20Precision%20Marine%20Mechanics",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Kirk%20Bauer%20Osprey%20Precision%20Marine%20Mechanics&page=1",
+      "snov": "https://snov.io/email-finder?query=Osprey%20Precision%20Marine%20Mechanics",
+      "rocketreach": "https://rocketreach.co/person?name=Kirk%20Bauer&company=Osprey%20Precision%20Marine%20Mechanics",
+      "contactout": "https://contactout.com/search?q=Kirk%20Bauer%20Osprey%20Precision%20Marine%20Mechanics"
+    },
+    "email": "kirk.bauer@ospreyprecisionmarinemechanics.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_069",
@@ -1239,7 +1987,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$6,800",
     "pitchAngle": "One of the fastest growing cities in the US. Massive new residential construction needing deadbolt rekeying and smart locks.",
-    "recommendedSite": "North Port Smart Lock Installation & Emergency Rekeying Site"
+    "recommendedSite": "North Port Smart Lock Installation & Emergency Rekeying Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/North%20Port%20All-Hours%20Lock%20%26%20Key",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Melvin%20Ortiz%20North%20Port%20All-Hours%20Lock%20%26%20Key&page=1",
+      "snov": "https://snov.io/email-finder?query=North%20Port%20All-Hours%20Lock%20%26%20Key",
+      "rocketreach": "https://rocketreach.co/person?name=Melvin%20Ortiz&company=North%20Port%20All-Hours%20Lock%20%26%20Key",
+      "contactout": "https://contactout.com/search?q=Melvin%20Ortiz%20North%20Port%20All-Hours%20Lock%20%26%20Key"
+    },
+    "email": "melvin.ortiz@northportallhourslockkey.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_070",
@@ -1257,7 +2016,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$7,500",
     "pitchAngle": "Lemon Bay coastal homes. Pine needles and storm debris clog gutters, causing foundation cracks. Needs instant estimate page.",
-    "recommendedSite": "Lemon Bay Seamless Gutter & Micro-Mesh Leaf Guard Portal"
+    "recommendedSite": "Lemon Bay Seamless Gutter & Micro-Mesh Leaf Guard Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Englewood%20Coastal%20Gutters%20%26%20Guards",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Lonnie%20Briggs%20Englewood%20Coastal%20Gutters%20%26%20Guards&page=1",
+      "snov": "https://snov.io/email-finder?query=Englewood%20Coastal%20Gutters%20%26%20Guards",
+      "rocketreach": "https://rocketreach.co/person?name=Lonnie%20Briggs&company=Englewood%20Coastal%20Gutters%20%26%20Guards",
+      "contactout": "https://contactout.com/search?q=Lonnie%20Briggs%20Englewood%20Coastal%20Gutters%20%26%20Guards"
+    },
+    "email": "lonnie.briggs@englewoodcoastalguttersguards.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_071",
@@ -1275,7 +2045,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$24,000",
     "pitchAngle": "North Palafox historic district. Gulf hurricane wind reroofs and metal standing-seam roofs with zero online inquiry portal.",
-    "recommendedSite": "Gulf Coast Hurricane Standing Seam Metal Roof Specialist"
+    "recommendedSite": "Gulf Coast Hurricane Standing Seam Metal Roof Specialist",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Pensacola%20Bay%20Roofing%20Specialists",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Landon%20Hall%20Pensacola%20Bay%20Roofing%20Specialists&page=1",
+      "snov": "https://snov.io/email-finder?query=Pensacola%20Bay%20Roofing%20Specialists",
+      "rocketreach": "https://rocketreach.co/person?name=Landon%20Hall&company=Pensacola%20Bay%20Roofing%20Specialists",
+      "contactout": "https://contactout.com/search?q=Landon%20Hall%20Pensacola%20Bay%20Roofing%20Specialists"
+    },
+    "email": "landon.hall@pensacolabayroofingspecialists.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_072",
@@ -1293,7 +2074,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$20,000",
     "pitchAngle": "Harbor Blvd corridor. High-turnover Emerald Coast vacation condo rentals. AC outages cost property managers $1,000/night.",
-    "recommendedSite": "Emerald Coast Vacation Rental 24/7 Emergency AC Hub"
+    "recommendedSite": "Emerald Coast Vacation Rental 24/7 Emergency AC Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Destin%20Coastal%20Air%20Conditioning",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Heath%20Miller%20Destin%20Coastal%20Air%20Conditioning&page=1",
+      "snov": "https://snov.io/email-finder?query=Destin%20Coastal%20Air%20Conditioning",
+      "rocketreach": "https://rocketreach.co/person?name=Heath%20Miller&company=Destin%20Coastal%20Air%20Conditioning",
+      "contactout": "https://contactout.com/search?q=Heath%20Miller%20Destin%20Coastal%20Air%20Conditioning"
+    },
+    "email": "heath.miller@destincoastalairconditioning.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_073",
@@ -1311,7 +2103,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$12,400",
     "pitchAngle": "Downtown Monroe St near Capitol. State government offices and historic midtown residential slab repairs with no web presence.",
-    "recommendedSite": "Tallahassee Capitol Commercial & Residential Plumbing Portal"
+    "recommendedSite": "Tallahassee Capitol Commercial & Residential Plumbing Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Tallahassee%20Capitol%20Plumbing%20Pros",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Vernon%20Vance%20Tallahassee%20Capitol%20Plumbing%20Pros&page=1",
+      "snov": "https://snov.io/email-finder?query=Tallahassee%20Capitol%20Plumbing%20Pros",
+      "rocketreach": "https://rocketreach.co/person?name=Vernon%20Vance&company=Tallahassee%20Capitol%20Plumbing%20Pros",
+      "contactout": "https://contactout.com/search?q=Vernon%20Vance%20Tallahassee%20Capitol%20Plumbing%20Pros"
+    },
+    "email": "vernon.vance@tallahasseecapitolplumbingpros.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_074",
@@ -1329,7 +2132,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$10,800",
     "pitchAngle": "Miracle Strip corridor. Boat lift power, marina slips, and home generator interlocks with no digital storefront.",
-    "recommendedSite": "Miracle Strip Boat Lift & Generator Interlock Electrical Site"
+    "recommendedSite": "Miracle Strip Boat Lift & Generator Interlock Electrical Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Fort%20Walton%20Beach%20Electric%20%26%20Marine",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Gavin%20Cross%20Fort%20Walton%20Beach%20Electric%20%26%20Marine&page=1",
+      "snov": "https://snov.io/email-finder?query=Fort%20Walton%20Beach%20Electric%20%26%20Marine",
+      "rocketreach": "https://rocketreach.co/person?name=Gavin%20Cross&company=Fort%20Walton%20Beach%20Electric%20%26%20Marine",
+      "contactout": "https://contactout.com/search?q=Gavin%20Cross%20Fort%20Walton%20Beach%20Electric%20%26%20Marine"
+    },
+    "email": "gavin.cross@fortwaltonbeachelectricmarine.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_075",
@@ -1347,7 +2161,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$16,000",
     "pitchAngle": "Front Beach Rd vacation rentals. Artificial pet turf and poolside travertine that never gets scorching hot in Florida sun.",
-    "recommendedSite": "PCB Luxury Vacation Pool Travertine & Pet Turf Showcase"
+    "recommendedSite": "PCB Luxury Vacation Pool Travertine & Pet Turf Showcase",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Panama%20City%20Beach%20Pavers%20%26%20Turf",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Brody%20Hayes%20Panama%20City%20Beach%20Pavers%20%26%20Turf&page=1",
+      "snov": "https://snov.io/email-finder?query=Panama%20City%20Beach%20Pavers%20%26%20Turf",
+      "rocketreach": "https://rocketreach.co/person?name=Brody%20Hayes&company=Panama%20City%20Beach%20Pavers%20%26%20Turf",
+      "contactout": "https://contactout.com/search?q=Brody%20Hayes%20Panama%20City%20Beach%20Pavers%20%26%20Turf"
+    },
+    "email": "brody.hayes@panamacitybeachpaversturf.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_076",
@@ -1365,7 +2190,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$18,500",
     "pitchAngle": "Scenic Hwy 30A / Seaside / Rosemary Beach luxury estates. Pine beetle infestations and coastal scrub oak preservations.",
-    "recommendedSite": "Highway 30A Coastal Tree Preservation & Estate Arborist Site"
+    "recommendedSite": "Highway 30A Coastal Tree Preservation & Estate Arborist Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Santa%20Rosa%20Beach%20Tree%20Specialists",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Wyatt%20Sterling%20Santa%20Rosa%20Beach%20Tree%20Specialists&page=1",
+      "snov": "https://snov.io/email-finder?query=Santa%20Rosa%20Beach%20Tree%20Specialists",
+      "rocketreach": "https://rocketreach.co/person?name=Wyatt%20Sterling&company=Santa%20Rosa%20Beach%20Tree%20Specialists",
+      "contactout": "https://contactout.com/search?q=Wyatt%20Sterling%20Santa%20Rosa%20Beach%20Tree%20Specialists"
+    },
+    "email": "wyatt.sterling@santarosabeachtreespecialists.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_077",
@@ -1383,7 +2219,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$6,200",
     "pitchAngle": "Fastest growing military suburb near Eglin AFB. Military family home purchases requiring garage opener repairs.",
-    "recommendedSite": "Crestview Military Family Garage Door & Opener Repair Hub"
+    "recommendedSite": "Crestview Military Family Garage Door & Opener Repair Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Crestview%20Garage%20Doors%20%26%20Overhead",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Ronnie%20Fletcher%20Crestview%20Garage%20Doors%20%26%20Overhead&page=1",
+      "snov": "https://snov.io/email-finder?query=Crestview%20Garage%20Doors%20%26%20Overhead",
+      "rocketreach": "https://rocketreach.co/person?name=Ronnie%20Fletcher&company=Crestview%20Garage%20Doors%20%26%20Overhead",
+      "contactout": "https://contactout.com/search?q=Ronnie%20Fletcher%20Crestview%20Garage%20Doors%20%26%20Overhead"
+    },
+    "email": "ronnie.fletcher@crestviewgaragedoorsoverhead.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_078",
@@ -1401,7 +2248,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$5,800",
     "pitchAngle": "Boggy Bayou dock and home soft-washing. Boaters and homeowners need online square-foot pricing estimates.",
-    "recommendedSite": "Niceville Dock & Siding Soft-Wash Instant Estimate Site"
+    "recommendedSite": "Niceville Dock & Siding Soft-Wash Instant Estimate Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Niceville%20Coastal%20Pressure%20Pros",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Austin%20Wade%20Niceville%20Coastal%20Pressure%20Pros&page=1",
+      "snov": "https://snov.io/email-finder?query=Niceville%20Coastal%20Pressure%20Pros",
+      "rocketreach": "https://rocketreach.co/person?name=Austin%20Wade&company=Niceville%20Coastal%20Pressure%20Pros",
+      "contactout": "https://contactout.com/search?q=Austin%20Wade%20Niceville%20Coastal%20Pressure%20Pros"
+    },
+    "email": "austin.wade@nicevillecoastalpressurepros.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_079",
@@ -1419,7 +2277,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$7,000",
     "pitchAngle": "Heavy panhandle tropical downpours overflow builder-grade gutters. Needs seamless gutter color selector.",
-    "recommendedSite": "Navarre Beach Heavy-Flow Seamless Gutter Installation"
+    "recommendedSite": "Navarre Beach Heavy-Flow Seamless Gutter Installation",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Navarre%20Beach%20Gutter%20Guard%20Co.",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Shane%20Douglas%20Navarre%20Beach%20Gutter%20Guard%20Co.&page=1",
+      "snov": "https://snov.io/email-finder?query=Navarre%20Beach%20Gutter%20Guard%20Co.",
+      "rocketreach": "https://rocketreach.co/person?name=Shane%20Douglas&company=Navarre%20Beach%20Gutter%20Guard%20Co.",
+      "contactout": "https://contactout.com/search?q=Shane%20Douglas%20Navarre%20Beach%20Gutter%20Guard%20Co."
+    },
+    "email": "shane.douglas@navarrebeachgutterguard.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_080",
@@ -1437,7 +2306,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$11,200",
     "pitchAngle": "Septic tank pump-outs, lift stations, and drain field inspections. Emergency sewage overflows need immediate online intake.",
-    "recommendedSite": "Bay County 24/7 Emergency Septic Pumping & Inspection Portal"
+    "recommendedSite": "Bay County 24/7 Emergency Septic Pumping & Inspection Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Lynn%20Haven%20All-Pro%20Septic%20%26%20Pump",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Darrell%20Hicks%20Lynn%20Haven%20All-Pro%20Septic%20%26%20Pump&page=1",
+      "snov": "https://snov.io/email-finder?query=Lynn%20Haven%20All-Pro%20Septic%20%26%20Pump",
+      "rocketreach": "https://rocketreach.co/person?name=Darrell%20Hicks&company=Lynn%20Haven%20All-Pro%20Septic%20%26%20Pump",
+      "contactout": "https://contactout.com/search?q=Darrell%20Hicks%20Lynn%20Haven%20All-Pro%20Septic%20%26%20Pump"
+    },
+    "email": "darrell.hicks@lynnhavenallprosepticpump.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_081",
@@ -1455,7 +2335,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$17,500",
     "pitchAngle": "College student apartment complexes and residential faculty homes near UF. Turnover AC inspections need online booking.",
-    "recommendedSite": "Gainesville Student & Residential AC Emergency Dispatch Hub"
+    "recommendedSite": "Gainesville Student & Residential AC Emergency Dispatch Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Gainesville%20Gator%20Country%20AC",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Bradford%20Vance%20Gainesville%20Gator%20Country%20AC&page=1",
+      "snov": "https://snov.io/email-finder?query=Gainesville%20Gator%20Country%20AC",
+      "rocketreach": "https://rocketreach.co/person?name=Bradford%20Vance&company=Gainesville%20Gator%20Country%20AC",
+      "contactout": "https://contactout.com/search?q=Bradford%20Vance%20Gainesville%20Gator%20Country%20AC"
+    },
+    "email": "bradford.vance@gainesvillegatorcountryac.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_082",
@@ -1473,7 +2364,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$32,000",
     "pitchAngle": "Horse Capital of the World. Equestrian farm barn asphalt driveways and blacktop roads. $40,000+ farm paving contracts.",
-    "recommendedSite": "Ocala Thoroughbred Farm & Estate Asphalt Paving Portal"
+    "recommendedSite": "Ocala Thoroughbred Farm & Estate Asphalt Paving Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Ocala%20Horse%20Country%20Paving%20%26%20Asphalts",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Chet%20Montgomery%20Ocala%20Horse%20Country%20Paving%20%26%20Asphalts&page=1",
+      "snov": "https://snov.io/email-finder?query=Ocala%20Horse%20Country%20Paving%20%26%20Asphalts",
+      "rocketreach": "https://rocketreach.co/person?name=Chet%20Montgomery&company=Ocala%20Horse%20Country%20Paving%20%26%20Asphalts",
+      "contactout": "https://contactout.com/search?q=Chet%20Montgomery%20Ocala%20Horse%20Country%20Paving%20%26%20Asphalts"
+    },
+    "email": "chet.montgomery@ocalahorsecountrypavingasphalts.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_083",
@@ -1491,7 +2393,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$14,000",
     "pitchAngle": "When a deep well pump burns out in Ocala, the ranch has ZERO water for horses and cattle. Needs immediate emergency dispatch site.",
-    "recommendedSite": "24/7 Emergency Deep Well Submersible Pump Replacement Engine"
+    "recommendedSite": "24/7 Emergency Deep Well Submersible Pump Replacement Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Marion%20County%20Well%20%26%20Pump%20Repair",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dwight%20Higgins%20Marion%20County%20Well%20%26%20Pump%20Repair&page=1",
+      "snov": "https://snov.io/email-finder?query=Marion%20County%20Well%20%26%20Pump%20Repair",
+      "rocketreach": "https://rocketreach.co/person?name=Dwight%20Higgins&company=Marion%20County%20Well%20%26%20Pump%20Repair",
+      "contactout": "https://contactout.com/search?q=Dwight%20Higgins%20Marion%20County%20Well%20%26%20Pump%20Repair"
+    },
+    "email": "dwight.higgins@marioncountywellpumprepair.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_084",
@@ -1509,7 +2422,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$21,500",
     "pitchAngle": "Biotech corridor and residential farm roofs. Agricultural metal pole barn roofs and residential metal reroofs.",
-    "recommendedSite": "Alachua Metal Pole Barn & Residential Shingle Roof Specialist"
+    "recommendedSite": "Alachua Metal Pole Barn & Residential Shingle Roof Specialist",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Alachua%20Roof%20Masters%20%26%20Sheet%20Metal",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Preston%20Cole%20Alachua%20Roof%20Masters%20%26%20Sheet%20Metal&page=1",
+      "snov": "https://snov.io/email-finder?query=Alachua%20Roof%20Masters%20%26%20Sheet%20Metal",
+      "rocketreach": "https://rocketreach.co/person?name=Preston%20Cole&company=Alachua%20Roof%20Masters%20%26%20Sheet%20Metal",
+      "contactout": "https://contactout.com/search?q=Preston%20Cole%20Alachua%20Roof%20Masters%20%26%20Sheet%20Metal"
+    },
+    "email": "preston.cole@alachuaroofmasterssheetmetal.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_085",
@@ -1527,7 +2451,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$11,000",
     "pitchAngle": "World's largest retirement community with 70,000+ golf carts. Lithium battery conversions and garage 50A chargers.",
-    "recommendedSite": "The Villages Golf Cart Lithium Conversion & Garage Charger Site"
+    "recommendedSite": "The Villages Golf Cart Lithium Conversion & Garage Charger Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/The%20Villages%20Cart%20%26%20Auto%20Electric",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Harold%20Finch%20The%20Villages%20Cart%20%26%20Auto%20Electric&page=1",
+      "snov": "https://snov.io/email-finder?query=The%20Villages%20Cart%20%26%20Auto%20Electric",
+      "rocketreach": "https://rocketreach.co/person?name=Harold%20Finch&company=The%20Villages%20Cart%20%26%20Auto%20Electric",
+      "contactout": "https://contactout.com/search?q=Harold%20Finch%20The%20Villages%20Cart%20%26%20Auto%20Electric"
+    },
+    "email": "harold.finch@thevillagescartautoelectric.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_086",
@@ -1545,7 +2480,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$12,200",
     "pitchAngle": "Lake Harris chain of lakes. Boathouse water lines and residential water heater failures with no digital booking system.",
-    "recommendedSite": "Chain of Lakes Residential Plumbing & Water Heater Repair"
+    "recommendedSite": "Chain of Lakes Residential Plumbing & Water Heater Repair",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Leesburg%20Lakefront%20Plumbing%20%26%20Drains",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Otis%20Campbell%20Leesburg%20Lakefront%20Plumbing%20%26%20Drains&page=1",
+      "snov": "https://snov.io/email-finder?query=Leesburg%20Lakefront%20Plumbing%20%26%20Drains",
+      "rocketreach": "https://rocketreach.co/person?name=Otis%20Campbell&company=Leesburg%20Lakefront%20Plumbing%20%26%20Drains",
+      "contactout": "https://contactout.com/search?q=Otis%20Campbell%20Leesburg%20Lakefront%20Plumbing%20%26%20Drains"
+    },
+    "email": "otis.campbell@leesburglakefrontplumbingdrains.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_087",
@@ -1563,7 +2509,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,500",
     "pitchAngle": "Citrus County wooded acreage. Land clearing for new builds and pine beetle diseased takedowns.",
-    "recommendedSite": "Citrus County Acreage Land Clearing & Tree Removal Engine"
+    "recommendedSite": "Citrus County Acreage Land Clearing & Tree Removal Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Inverness%20Pine%20%26%20Oak%20Tree%20Logging",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Travis%20Barker%20Inverness%20Pine%20%26%20Oak%20Tree%20Logging&page=1",
+      "snov": "https://snov.io/email-finder?query=Inverness%20Pine%20%26%20Oak%20Tree%20Logging",
+      "rocketreach": "https://rocketreach.co/person?name=Travis%20Barker&company=Inverness%20Pine%20%26%20Oak%20Tree%20Logging",
+      "contactout": "https://contactout.com/search?q=Travis%20Barker%20Inverness%20Pine%20%26%20Oak%20Tree%20Logging"
+    },
+    "email": "travis.barker@invernesspineoaktreelogging.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_088",
@@ -1581,7 +2538,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$10,500",
     "pitchAngle": "Donnelly St historic district. Victorian exterior wood rot repair and period-accurate color matching with no site.",
-    "recommendedSite": "Mount Dora Historic Victorian Exterior Painting & Wood Rot Repair"
+    "recommendedSite": "Mount Dora Historic Victorian Exterior Painting & Wood Rot Repair",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Mount%20Dora%20Historic%20Painting%20%26%20Restoration",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Arthur%20Pendleton%20Mount%20Dora%20Historic%20Painting%20%26%20Restoration&page=1",
+      "snov": "https://snov.io/email-finder?query=Mount%20Dora%20Historic%20Painting%20%26%20Restoration",
+      "rocketreach": "https://rocketreach.co/person?name=Arthur%20Pendleton&company=Mount%20Dora%20Historic%20Painting%20%26%20Restoration",
+      "contactout": "https://contactout.com/search?q=Arthur%20Pendleton%20Mount%20Dora%20Historic%20Painting%20%26%20Restoration"
+    },
+    "email": "arthur.pendleton@mountdorahistoricpaintingrestoration.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_089",
@@ -1599,7 +2567,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$6,800",
     "pitchAngle": "Hernando County acreage ranches. Heavy commercial shop roll-up doors and residential overhead openers.",
-    "recommendedSite": "Hernando County Commercial Roll-Up & Residential Garage Repair"
+    "recommendedSite": "Hernando County Commercial Roll-Up & Residential Garage Repair",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Brooksville%20Garage%20Door%20Masters",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Lonnie%20Hayes%20Brooksville%20Garage%20Door%20Masters&page=1",
+      "snov": "https://snov.io/email-finder?query=Brooksville%20Garage%20Door%20Masters",
+      "rocketreach": "https://rocketreach.co/person?name=Lonnie%20Hayes&company=Brooksville%20Garage%20Door%20Masters",
+      "contactout": "https://contactout.com/search?q=Lonnie%20Hayes%20Brooksville%20Garage%20Door%20Masters"
+    },
+    "email": "lonnie.hayes@brooksvillegaragedoormasters.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_090",
@@ -1617,7 +2596,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$9,800",
     "pitchAngle": "Rainbow River environmental protection zone. High-demand advanced nitrogen-reducing septic upgrades.",
-    "recommendedSite": "Rainbow Springs Advanced Eco-Septic & Drain Field Portal"
+    "recommendedSite": "Rainbow Springs Advanced Eco-Septic & Drain Field Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Dunnellon%20Rainbow%20River%20Septic%20Pros",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Caleb%20Martin%20Dunnellon%20Rainbow%20River%20Septic%20Pros&page=1",
+      "snov": "https://snov.io/email-finder?query=Dunnellon%20Rainbow%20River%20Septic%20Pros",
+      "rocketreach": "https://rocketreach.co/person?name=Caleb%20Martin&company=Dunnellon%20Rainbow%20River%20Septic%20Pros",
+      "contactout": "https://contactout.com/search?q=Caleb%20Martin%20Dunnellon%20Rainbow%20River%20Septic%20Pros"
+    },
+    "email": "caleb.martin@dunnellonrainbowriversepticpros.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_091",
@@ -1635,7 +2625,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$17,000",
     "pitchAngle": "Harbor City Blvd location near aerospace tech corridor. Engineers in Melbourne expect a modern digital quote portal.",
-    "recommendedSite": "Space Coast High-Efficiency Heat Pump & AC Replacement Hub"
+    "recommendedSite": "Space Coast High-Efficiency Heat Pump & AC Replacement Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Melbourne%20Space%20Coast%20HVAC%20Pros",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dustin%20Vance%20Melbourne%20Space%20Coast%20HVAC%20Pros&page=1",
+      "snov": "https://snov.io/email-finder?query=Melbourne%20Space%20Coast%20HVAC%20Pros",
+      "rocketreach": "https://rocketreach.co/person?name=Dustin%20Vance&company=Melbourne%20Space%20Coast%20HVAC%20Pros",
+      "contactout": "https://contactout.com/search?q=Dustin%20Vance%20Melbourne%20Space%20Coast%20HVAC%20Pros"
+    },
+    "email": "dustin.vance@melbournespacecoasthvacpros.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_092",
@@ -1653,7 +2654,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$26,000",
     "pitchAngle": "Atlantic Ave oceanfront condos and beach houses. High-salt spray metal standing-seam and TPO flat roof replacements.",
-    "recommendedSite": "Cocoa Beach Oceanfront Metal & Flat Commercial Roof Specialist"
+    "recommendedSite": "Cocoa Beach Oceanfront Metal & Flat Commercial Roof Specialist",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Cocoa%20Beach%20Coastal%20Roofing%20Masters",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Brett%20Sterling%20Cocoa%20Beach%20Coastal%20Roofing%20Masters&page=1",
+      "snov": "https://snov.io/email-finder?query=Cocoa%20Beach%20Coastal%20Roofing%20Masters",
+      "rocketreach": "https://rocketreach.co/person?name=Brett%20Sterling&company=Cocoa%20Beach%20Coastal%20Roofing%20Masters",
+      "contactout": "https://contactout.com/search?q=Brett%20Sterling%20Cocoa%20Beach%20Coastal%20Roofing%20Masters"
+    },
+    "email": "brett.sterling@cocoabeachcoastalroofingmasters.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_093",
@@ -1671,7 +2683,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$10,500",
     "pitchAngle": "Rocket launch corridor. Whole-house solar battery backups and whole-home generator automatic transfer switches.",
-    "recommendedSite": "Space Coast Standby Generator & Solar Battery Backup Site"
+    "recommendedSite": "Space Coast Standby Generator & Solar Battery Backup Site",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Titusville%20Rocket%20City%20Electric",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Kevin%20Mitchell%20Titusville%20Rocket%20City%20Electric&page=1",
+      "snov": "https://snov.io/email-finder?query=Titusville%20Rocket%20City%20Electric",
+      "rocketreach": "https://rocketreach.co/person?name=Kevin%20Mitchell&company=Titusville%20Rocket%20City%20Electric",
+      "contactout": "https://contactout.com/search?q=Kevin%20Mitchell%20Titusville%20Rocket%20City%20Electric"
+    },
+    "email": "kevin.mitchell@titusvillerocketcityelectric.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_094",
@@ -1689,7 +2712,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$15,500",
     "pitchAngle": "Speedway Blvd high-visibility strip. Race week commercial emergencies and residential cast iron pipe liner repairs.",
-    "recommendedSite": "Daytona Emergency Trenchless Sewer Lining & Commercial Plumbing"
+    "recommendedSite": "Daytona Emergency Trenchless Sewer Lining & Commercial Plumbing",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Daytona%20Beach%20Speed%20City%20Plumbing",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Rickie%20Hendrick%20Daytona%20Beach%20Speed%20City%20Plumbing&page=1",
+      "snov": "https://snov.io/email-finder?query=Daytona%20Beach%20Speed%20City%20Plumbing",
+      "rocketreach": "https://rocketreach.co/person?name=Rickie%20Hendrick&company=Daytona%20Beach%20Speed%20City%20Plumbing",
+      "contactout": "https://contactout.com/search?q=Rickie%20Hendrick%20Daytona%20Beach%20Speed%20City%20Plumbing"
+    },
+    "email": "rickie.hendrick@daytonabeachspeedcityplumbing.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_095",
@@ -1707,7 +2741,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$11,000",
     "pitchAngle": "Granada Blvd corridor. Giant moss-draped live oaks on beachside properties. Homeowners need to see insurance coverage proof.",
-    "recommendedSite": "Ormond Beach Historic Live Oak Trimming & Crane Removal Portal"
+    "recommendedSite": "Ormond Beach Historic Live Oak Trimming & Crane Removal Portal",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Ormond%20Beach%20Palm%20%26%20Oak%20Tree%20Doctors",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Clayton%20Barnes%20Ormond%20Beach%20Palm%20%26%20Oak%20Tree%20Doctors&page=1",
+      "snov": "https://snov.io/email-finder?query=Ormond%20Beach%20Palm%20%26%20Oak%20Tree%20Doctors",
+      "rocketreach": "https://rocketreach.co/person?name=Clayton%20Barnes&company=Ormond%20Beach%20Palm%20%26%20Oak%20Tree%20Doctors",
+      "contactout": "https://contactout.com/search?q=Clayton%20Barnes%20Ormond%20Beach%20Palm%20%26%20Oak%20Tree%20Doctors"
+    },
+    "email": "clayton.barnes@ormondbeachpalmoaktreedoctors.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_096",
@@ -1725,7 +2770,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$22,000",
     "pitchAngle": "Ocean Drive barrier island estates in John's Island / Vero Beach. Multi-million dollar homes demanding high-end marble pool decks.",
-    "recommendedSite": "Vero Beach Barrier Island Marble & Travertine Patio Showcase"
+    "recommendedSite": "Vero Beach Barrier Island Marble & Travertine Patio Showcase",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Vero%20Beach%20Treasure%20Coast%20Pavers",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Darryl%20King%20Vero%20Beach%20Treasure%20Coast%20Pavers&page=1",
+      "snov": "https://snov.io/email-finder?query=Vero%20Beach%20Treasure%20Coast%20Pavers",
+      "rocketreach": "https://rocketreach.co/person?name=Darryl%20King&company=Vero%20Beach%20Treasure%20Coast%20Pavers",
+      "contactout": "https://contactout.com/search?q=Darryl%20King%20Vero%20Beach%20Treasure%20Coast%20Pavers"
+    },
+    "email": "darryl.king@verobeachtreasurecoastpavers.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_097",
@@ -1743,7 +2799,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$10,200",
     "pitchAngle": "Orange Ave corridor. Agricultural citrus groves and rural ranches with emergency drain field clogs and grease trap pump-outs.",
-    "recommendedSite": "St. Lucie County Septic Pumping & Grease Trap Maintenance Hub"
+    "recommendedSite": "St. Lucie County Septic Pumping & Grease Trap Maintenance Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Fort%20Pierce%20Citrus%20Capital%20Septic",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Waylon%20Douglas%20Fort%20Pierce%20Citrus%20Capital%20Septic&page=1",
+      "snov": "https://snov.io/email-finder?query=Fort%20Pierce%20Citrus%20Capital%20Septic",
+      "rocketreach": "https://rocketreach.co/person?name=Waylon%20Douglas&company=Fort%20Pierce%20Citrus%20Capital%20Septic",
+      "contactout": "https://contactout.com/search?q=Waylon%20Douglas%20Fort%20Pierce%20Citrus%20Capital%20Septic"
+    },
+    "email": "waylon.douglas@fortpiercecitruscapitalseptic.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_098",
@@ -1761,7 +2828,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$8,500",
     "pitchAngle": "One of Florida's largest residential growth markets. Hundreds of new subdivisions with broken opener sensors and torsion springs.",
-    "recommendedSite": "Port St. Lucie Same-Day Garage Door Spring & Cable Repair Engine"
+    "recommendedSite": "Port St. Lucie Same-Day Garage Door Spring & Cable Repair Engine",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Port%20St.%20Lucie%20All-Pro%20Garage%20Doors",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Dominic%20Romano%20Port%20St.%20Lucie%20All-Pro%20Garage%20Doors&page=1",
+      "snov": "https://snov.io/email-finder?query=Port%20St.%20Lucie%20All-Pro%20Garage%20Doors",
+      "rocketreach": "https://rocketreach.co/person?name=Dominic%20Romano&company=Port%20St.%20Lucie%20All-Pro%20Garage%20Doors",
+      "contactout": "https://contactout.com/search?q=Dominic%20Romano%20Port%20St.%20Lucie%20All-Pro%20Garage%20Doors"
+    },
+    "email": "dominic.romano@portstlucieallprogaragedoors.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_099",
@@ -1779,7 +2857,18 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$18,000",
     "pitchAngle": "Sailfish Capital of the World. Luxury sportfishing yacht wiring, lithium battery banks, and marina shore power pedestals.",
-    "recommendedSite": "Stuart Yacht Electrical Systems & Shore Power Installation Hub"
+    "recommendedSite": "Stuart Yacht Electrical Systems & Shore Power Installation Hub",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Stuart%20Sailfish%20Capital%20Marine%20Electric",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Garrick%20Vance%20Stuart%20Sailfish%20Capital%20Marine%20Electric&page=1",
+      "snov": "https://snov.io/email-finder?query=Stuart%20Sailfish%20Capital%20Marine%20Electric",
+      "rocketreach": "https://rocketreach.co/person?name=Garrick%20Vance&company=Stuart%20Sailfish%20Capital%20Marine%20Electric",
+      "contactout": "https://contactout.com/search?q=Garrick%20Vance%20Stuart%20Sailfish%20Capital%20Marine%20Electric"
+    },
+    "email": "garrick.vance@stuartsailfishcapitalmarineelectric.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   },
   {
     "id": "fl_noweb_100",
@@ -1797,6 +2886,17 @@
     "websiteStatus": "NO WEBSITE",
     "monthlyLossEst": "$12,800",
     "pitchAngle": "US Hwy 1 high-visibility corridor in Tequesta. Whole-home chlorine and hardness filtration systems for upscale Jupiter homes.",
-    "recommendedSite": "Jupiter Whole-Home Alkaline & Salt-Free Water Filtration Showcase"
+    "recommendedSite": "Jupiter Whole-Home Alkaline & Salt-Free Water Filtration Showcase",
+    "enrichmentLinks": {
+      "hunter": "https://hunter.io/try/search/Jupiter%20Tequesta%20Water%20Filtration%20Specialists",
+      "apollo": "https://app.apollo.io/#/people?qKeywords=Grant%20Campbell%20Jupiter%20Tequesta%20Water%20Filtration%20Specialists&page=1",
+      "snov": "https://snov.io/email-finder?query=Jupiter%20Tequesta%20Water%20Filtration%20Specialists",
+      "rocketreach": "https://rocketreach.co/person?name=Grant%20Campbell&company=Jupiter%20Tequesta%20Water%20Filtration%20Specialists",
+      "contactout": "https://contactout.com/search?q=Grant%20Campbell%20Jupiter%20Tequesta%20Water%20Filtration%20Specialists"
+    },
+    "email": "grant.campbell@jupitertequestawaterfiltrationspecialists.com",
+    "emailSource": "Pattern Synthesized",
+    "mxStatus": "SYNTHESIZED",
+    "mxHost": null
   }
 ]
