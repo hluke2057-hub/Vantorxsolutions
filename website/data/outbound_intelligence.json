@@ -1,6 +1,6 @@
 {
   "version": "5.1.0",
-  "lastUpdated": "2026-11-08T13:40:46.446Z",
+  "lastUpdated": "2026-11-08T14:30:19.356Z",
   "systemStatus": {
     "mode": "24/7 Multi-Service Autonomous Engine",
     "autoSenderStatus": "RUNNING",
@@ -30,7 +30,7 @@
     "zoomCtaTarget": "10-Minute Live Interactive Demo"
   },
   "metrics": {
-    "totalSent": 870,
+    "totalSent": 873,
     "totalOpened": 0,
     "totalUnopened48h": 0,
     "totalReplied": 0,
@@ -177,6 +177,60 @@
   ],
   "inboundResponses": [],
   "recentDispatches": [
+    {
+      "id": "fl_se_007",
+      "company": "Forte Roofing",
+      "owner": "the owner",
+      "title": "Owner / Principal",
+      "email": "estimates@forteroofing.com",
+      "phone": "(561) 910-4662",
+      "city": "Delray Beach, FL",
+      "trade": "Roofing",
+      "serviceCategory": "High-Converting Webflow Website & Mobile Funnel",
+      "subject": "Final note regarding Forte Roofing call capture",
+      "body": "Hi the owner,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Delray Beach, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_007\n\nIf you ever want to plug the $9,800/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Forte Roofing a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$9,800/mo",
+      "touch": 3,
+      "resendMessageId": "01a1bb91-3853-760b-86e8-d1c5b8a6ce0a",
+      "sent": true,
+      "dispatchedAt": "2026-11-08T14:30:19.009Z"
+    },
+    {
+      "id": "fl_se_008",
+      "company": "Aastro Roofing Company",
+      "owner": "the owner",
+      "title": "Owner / Principal",
+      "email": "estimates@aastroroofingcompany.com",
+      "phone": "(561) 409-3280",
+      "city": "Boca Raton, FL",
+      "trade": "Roofing",
+      "serviceCategory": "Full Digital Infrastructure Bundle",
+      "subject": "Final note regarding Aastro Roofing Company call capture",
+      "body": "Hi the owner,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Boca Raton, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_008\n\nIf you ever want to plug the $16,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Aastro Roofing Company a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$16,500/mo",
+      "touch": 3,
+      "resendMessageId": "01a1bb91-38e6-7085-ba0b-b386a0a2e4cd",
+      "sent": true,
+      "dispatchedAt": "2026-11-08T14:30:19.182Z"
+    },
+    {
+      "id": "fl_ver_303",
+      "company": "Elo Roofing",
+      "owner": "Kyle",
+      "title": "Managing Partner",
+      "email": "estimates@eloroofing.com",
+      "phone": "(904) 528-0188",
+      "city": "Jacksonville, FL",
+      "trade": "Roofing",
+      "serviceCategory": "Ava 24/7 Voice AI Receptionist (<1s instant pickup & technician SMS dispatch)",
+      "subject": "Re: Quick question for Kyle regarding Elo Roofing emergency calls",
+      "body": "Hi Kyle,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Elo Roofing.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_303\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$9,900/mo",
+      "touch": 2,
+      "resendMessageId": "01a1bb91-398a-78db-9c62-0a1f2a245bf5",
+      "sent": true,
+      "dispatchedAt": "2026-11-08T14:30:19.344Z"
+    },
     {
       "id": "fl_se_004",
       "company": "Friendly A/C",
@@ -1922,60 +1976,6 @@
       "resendMessageId": "01a1ada4-8618-7dfe-86e5-79e442d09816",
       "sent": true,
       "dispatchedAt": "2026-11-05T21:36:43.083Z"
-    },
-    {
-      "id": "fl_ver_295",
-      "company": "Coastal Elite LLC",
-      "owner": "Jim",
-      "title": "Owner",
-      "email": "info@coastalelitellc.com",
-      "phone": "(904) 438-4050",
-      "city": "Jacksonville, FL",
-      "trade": "Electrical",
-      "serviceCategory": "Scale Enterprise Tier: Multi-Crew Autonomous Infrastructure, Bilingual Dispatch & CRM Integration",
-      "subject": "Quick question for Jim regarding Coastal Elite LLC emergency calls",
-      "body": "Hi Jim,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Electrical contractors in Jacksonville, FL.\n\nWhile Coastal Elite LLC has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Electrical contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_295\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Electrical in Jacksonville, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-      "estLoss": "$9,100/mo",
-      "touch": 1,
-      "resendMessageId": null,
-      "sent": false,
-      "dispatchedAt": "2026-11-05T21:36:43.136Z"
-    },
-    {
-      "id": "fl_se_036",
-      "company": "Air Quality Control Environmental",
-      "owner": "Mike",
-      "title": "Founder",
-      "email": "service@airqualitycontrolenv.com",
-      "phone": "(954) 345-5821",
-      "city": "Coral Springs, FL",
-      "trade": "HVAC",
-      "serviceCategory": "High-Converting Webflow Website",
-      "subject": "Re: Quick question for Mike regarding Air Quality Control Environmental emergency calls",
-      "body": "Hi Mike,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Air Quality Control Environmental.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_036\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-      "estLoss": "$7,800/mo",
-      "touch": 2,
-      "resendMessageId": "01a1ad6f-880b-708a-b968-a94a2aa636b6",
-      "sent": true,
-      "dispatchedAt": "2026-11-05T20:38:50.197Z"
-    },
-    {
-      "id": "fl_se_039",
-      "company": "Thermal Concepts Inc.",
-      "owner": "Larry",
-      "title": "CEO",
-      "email": "service@thermalconceptsinc.com",
-      "phone": "(954) 472-4465",
-      "city": "Davie, FL",
-      "trade": "HVAC",
-      "serviceCategory": "Scale Enterprise Tier (,297/mo)",
-      "subject": "Re: Quick question for Larry regarding Thermal Concepts Inc. emergency calls",
-      "body": "Hi Larry,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Thermal Concepts Inc..\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_039\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-      "estLoss": "$25,000/mo",
-      "touch": 2,
-      "resendMessageId": "01a1ad6f-88af-7630-8efe-1c6546921b42",
-      "sent": true,
-      "dispatchedAt": "2026-11-05T20:38:50.322Z"
     }
   ],
   "objectionCatalog": {
@@ -2043,6 +2043,6 @@
     "totalReps": 4,
     "certifiedLevel5": 4,
     "totalBossesDefeated": 32,
-    "lastRosterUpdate": "2026-11-08T13:40:46.451Z"
+    "lastRosterUpdate": "2026-11-08T14:30:19.360Z"
   }
 }
