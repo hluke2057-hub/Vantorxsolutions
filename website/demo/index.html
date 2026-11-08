@@ -1521,6 +1521,20 @@ function togglePlayScenario() {
   }
 }
 
+
+// 🛡️ VISIBILITY AUDIO SAFETY GUARD (AVA DEMO)
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && isPlayingCall) {
+    stopPlayback();
+  }
+});
+
+window.addEventListener('beforeunload', () => {
+  if ('speechSynthesis' in window) {
+    try { window.speechSynthesis.cancel(); } catch(_) {}
+  }
+});
+
 function startPlayback() {
   isPlayingCall = true;
   document.getElementById('playIcon').textContent = '⏹';

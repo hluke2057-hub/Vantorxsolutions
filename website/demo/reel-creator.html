@@ -1276,6 +1276,16 @@
     
   <div class="video-stage-column" style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:380px">
     <!-- Clean Toolbar centered directly above the phone screen -->
+    <!-- 🎬 Direct Storyline Selector Toolbar (7 Unique Non-Laser Stories) -->
+    <div class="story-quick-tabs" style="display:flex;gap:5px;width:100%;max-width:360px;margin-bottom:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:thin">
+      <button class="btn-story-chip active" id="chipStory0" onclick="switchStoryline(0)" title="Ava Voice AI · Speed of Light & Saturn" style="background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid #f59e0b;border-radius:20px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s">⚡ 1. Light & Saturn</button>
+      <button class="btn-story-chip" id="chipStory1" onclick="switchStoryline(1)" title="90s SMS · Falcon 242 MPH Dive" style="background:rgba(30,41,59,0.8);color:#94a3b8;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s">🦅 2. Falcon 242 MPH</button>
+      <button class="btn-story-chip" id="chipStory2" onclick="switchStoryline(2)" title="Mobile Website · F1 1.8s Pitstop" style="background:rgba(30,41,59,0.8);color:#94a3b8;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s">🏎️ 3. F1 Pitstop</button>
+      <button class="btn-story-chip" id="chipStory3" onclick="switchStoryline(3)" title="AEO & AI Search · 86B Brain Neurons" style="background:rgba(30,41,59,0.8);color:#94a3b8;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s">🧠 4. Brain AI</button>
+      <button class="btn-story-chip" id="chipStory4" onclick="switchStoryline(4)" title="Revenue Engine · Apollo 11 Moon Lander" style="background:rgba(30,41,59,0.8);color:#94a3b8;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s">🚀 5. Apollo 11</button>
+      <button class="btn-story-chip" id="chipStory5" onclick="switchStoryline(5)" title="Ava Voice AI · 1B Volts Lightning" style="background:rgba(30,41,59,0.8);color:#94a3b8;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s">⚡ 6. 1B Volts</button>
+      <button class="btn-story-chip" id="chipStory6" onclick="switchStoryline(6)" title="90s SMS · Niagara 750k Gallons" style="background:rgba(30,41,59,0.8);color:#94a3b8;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:4px 9px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s">🌊 7. Niagara Torrent</button>
+    </div>
     <div class="stage-top-toolbar" style="display:flex;justify-content:space-between;align-items:center;width:100%;max-width:360px;margin-bottom:12px;padding:0 2px">
       <div style="display:flex;gap:6px">
         <button id="btnViewCanvas" onclick="switchStageView('canvas')" style="background:rgba(245,158,11,0.95);color:#0b0f19;border:none;font-size:11px;font-weight:800;padding:6px 12px;border-radius:8px;cursor:pointer;box-shadow:0 0 12px rgba(245,158,11,0.3);transition:all 0.2s">Interactive Canvas</button>
@@ -1471,7 +1481,11 @@
       <!-- Master Audio Toggles -->
       <div class="audio-controls-row">
         <label class="audio-toggle-label">
-          <input type="checkbox" id="chkEnableMusic" checked>
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer" title="Enable browser neural voice (Muted by default to prevent unexpected sounds)">
+          <input type="checkbox" id="chkEnableVoice">
+          <span style="color:#38bdf8;font-weight:700">🗣️ AI Voice (Muted Default)</span>
+        </label>
+        <input type="checkbox" id="chkEnableMusic" checked>
           <span>🎵 Background Lofi Beat</span>
         </label>
         <label class="audio-toggle-label">
@@ -3106,6 +3120,13 @@ function renderDynamicAtmosphere(t, storyType) {
 
 function renderFrame(time) {
   window.renderFrame = renderFrame;
+
+  // Strict NaN & Finite Number Guard: Prevents canvas from rendering empty stars!
+  if (!Number.isFinite(time) || isNaN(time) || time < 0) {
+    time = 0;
+  }
+  time = Math.min(time, TOTAL_DURATION || 63);
+
   ctx.save();
   ctx.clearRect(0, 0, W, H);
 
@@ -3117,11 +3138,21 @@ function renderFrame(time) {
   const activeStoryType = (window.ACTIVE_STORY && window.ACTIVE_STORY.storyType) ? window.ACTIVE_STORY.storyType : 'cosmic_light';
   renderDynamicAtmosphere(time, activeStoryType);
 
+  // STUDIO HERO POSTER CARD ON PAUSE / INITIAL LOAD (t === 0): Ensures canvas NEVER looks blank!
+  if (!isPlaying && time === 0) {
+    renderStudioHeroPosterCard(activeStoryType);
+    ctx.restore();
+    return;
+  }
+
   // SFX Triggers calibrated to exact scene cuts
-  if (time >= 0.2 && !playedSfxMap['laser']) { playSfx('laser'); playedSfxMap['laser'] = true; }
-  if (time >= 18.0 && !playedSfxMap['subdrop']) { playSfx('subdrop'); playedSfxMap['subdrop'] = true; }
-  if (time >= 22.5 && !playedSfxMap['phone']) { playSfx('phone_ring'); playedSfxMap['phone'] = true; }
-  if (time >= 44.0 && !playedSfxMap['ios_ping']) { playSfx('ios_ping'); playedSfxMap['ios_ping'] = true; }
+  // SFX Triggers: ONLY when actively playing AND tab is visible!
+  if (isPlaying && !document.hidden) {
+    if (time >= 0.2 && !playedSfxMap['laser']) { playSfx('laser'); playedSfxMap['laser'] = true; }
+    if (time >= 18.0 && !playedSfxMap['subdrop']) { playSfx('subdrop'); playedSfxMap['subdrop'] = true; }
+    if (time >= 22.5 && !playedSfxMap['phone']) { playSfx('phone_ring'); playedSfxMap['phone'] = true; }
+    if (time >= 44.0 && !playedSfxMap['ios_ping']) { playSfx('ios_ping'); playedSfxMap['ios_ping'] = true; }
+  }
 
   // 15 Fast-Paced Scene Switches (Every 3.0 - 4.5 seconds)
   if (time < 18.0) {
@@ -4832,6 +4863,105 @@ window.setAudioSyncOffset = function(valMs) {
   }
 };
 
+// 🎬 CINEMATIC STUDIO HERO POSTER CARD (Rendered on Canvas at t=0 when Paused)
+function renderStudioHeroPosterCard(storyType) {
+  const curProd = window.ACTIVE_STORY || window.PRODUCTS_MIND_QUEUE[0];
+  const cx = W / 2;
+  const cy = H / 2;
+  ctx.save();
+  const cardW = W - 48;
+  const cardH = H - 120;
+  const cardX = 24;
+  const cardY = 60;
+  ctx.fillStyle = "rgba(11, 15, 25, 0.88)";
+  ctx.strokeStyle = "rgba(245, 158, 11, 0.45)";
+  ctx.lineWidth = 2;
+  ctx.shadowColor = "rgba(245, 158, 11, 0.35)";
+  ctx.shadowBlur = 24;
+  roundRect(ctx, cardX, cardY, cardW, cardH, 24, true, true);
+  ctx.shadowBlur = 0;
+  const badgeW = Math.min(cardW - 40, 420);
+  const badgeX = (W - badgeW) / 2;
+  ctx.fillStyle = "rgba(245, 158, 11, 0.18)";
+  ctx.strokeStyle = "#f59e0b";
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, badgeX, 86, badgeW, 36, 18, true, true);
+  ctx.fillStyle = "#fbbf24";
+  ctx.font = "900 13px Space Grotesk";
+  ctx.textAlign = "center";
+  ctx.fillText(curProd.badge || "⚡ VANTORX VIRAL REEL ENGINE", cx, 109);
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 30px Space Grotesk";
+  ctx.shadowColor = "#f59e0b";
+  ctx.shadowBlur = 20;
+  const rawTitle = curProd.storyTitle || "Speed of Light & 2B Miles to Saturn";
+  const titleParts = rawTitle.split("&");
+  if (titleParts.length > 1) {
+    ctx.fillText(titleParts[0].trim(), cx, 175);
+    ctx.fillStyle = "#fbbf24";
+    ctx.font = "900 26px Space Grotesk";
+    ctx.fillText("& " + titleParts[1].trim(), cx, 215);
+  } else {
+    ctx.fillText(rawTitle, cx, 195);
+  }
+  ctx.shadowBlur = 0;
+  const emblemY = 350;
+  const pulse = (performance.now() * 0.003) % 1;
+  ctx.strokeStyle = "rgba(245, 158, 11, " + (0.9 - pulse * 0.7) + ")";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(cx, emblemY, 68 + pulse * 28, 0, Math.PI * 2);
+  ctx.stroke();
+  const coreGrad = ctx.createRadialGradient(cx - 15, emblemY - 15, 10, cx, emblemY, 65);
+  coreGrad.addColorStop(0, "#f59e0b");
+  coreGrad.addColorStop(0.6, "#b45309");
+  coreGrad.addColorStop(1, "#1e293b");
+  ctx.fillStyle = coreGrad;
+  ctx.beginPath();
+  ctx.arc(cx, emblemY, 60, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.font = "54px Inter";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(curProd.emoji || "⚡", cx, emblemY + 2);
+  ctx.textBaseline = "alphabetic";
+  const scenePillY = 460;
+  ctx.fillStyle = "rgba(2, 6, 23, 0.9)";
+  ctx.strokeStyle = "#38bdf8";
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, cx - 180, scenePillY, 360, 72, 14, true, true);
+  ctx.fillStyle = "#38bdf8";
+  ctx.font = "800 12px JetBrains Mono";
+  ctx.fillText("HIGH-TICKET CONTRACTOR SCENARIO", cx, scenePillY + 24);
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "900 17px Space Grotesk";
+  ctx.fillText((curProd.trade || "HVAC") + " · " + (curProd.ticket || "$9,200") + " REVENUE RESCUE", cx, scenePillY + 52);
+  ctx.fillStyle = "#94a3b8";
+  ctx.font = "600 14px Inter";
+  ctx.fillText(curProd.shortName || "Ava Voice AI", cx, 570);
+  ctx.fillStyle = "#fbbf24";
+  ctx.font = "800 13px JetBrains Mono";
+  ctx.fillText("⚡ 78% of homeowners hire the 1st responder", cx, 595);
+  const btnPlayY = 660;
+  const btnPlayW = 280;
+  const btnPlayH = 64;
+  const btnPlayX = (W - btnPlayW) / 2;
+  const btnGrad = ctx.createLinearGradient(btnPlayX, btnPlayY, btnPlayX + btnPlayW, btnPlayY + btnPlayH);
+  btnGrad.addColorStop(0, "#f59e0b");
+  btnGrad.addColorStop(1, "#d97706");
+  ctx.fillStyle = btnGrad;
+  ctx.shadowColor = "#f59e0b";
+  ctx.shadowBlur = 28;
+  roundRect(ctx, btnPlayX, btnPlayY, btnPlayW, btnPlayH, 32, true, false);
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = "#0b0f19";
+  ctx.font = "900 18px Space Grotesk";
+  ctx.fillText("▶ TAP TO PLAY REEL", cx + 10, btnPlayY + 39);
+  ctx.fillStyle = "#64748b";
+  ctx.font = "700 11px JetBrains Mono";
+  ctx.fillText("60 FPS INTERACTIVE ENGINE · 1080×1920 HD", cx, 780);
+  ctx.restore();
+}
 // Animation Loop: Bound Directly to Hardware Audio Clock for Zero Timing Drift
 function loop(timestamp) {
   if (!lastTimestamp) lastTimestamp = timestamp;
@@ -4839,19 +4969,20 @@ function loop(timestamp) {
   lastTimestamp = timestamp;
 
   if (isPlaying) {
-    if (uploadedAudioElement && !uploadedAudioElement.paused) {
+    if (uploadedAudioElement && !uploadedAudioElement.paused && Number.isFinite(uploadedAudioElement.currentTime)) {
       // MASTER AUDIO CLOCK: Slaved directly to audio hardware crystal clock!
-      const targetT = uploadedAudioElement.currentTime + audioSyncOffset;
-      currentTime = Math.max(0, targetT);
+      const targetT = uploadedAudioElement.currentTime + (Number.isFinite(audioSyncOffset) ? audioSyncOffset : 0);
+      currentTime = (Number.isFinite(targetT) && targetT >= 0) ? targetT : 0;
 
       if (currentTime >= TOTAL_DURATION || uploadedAudioElement.ended) {
         currentTime = 0;
-        uploadedAudioElement.currentTime = 0;
+        try { uploadedAudioElement.currentTime = 0; } catch(_) {}
         resetSfxFlags();
       }
     } else {
-      // Fallback clock when no audio is playing
-      currentTime += delta;
+      // Fallback clock: Guarantees animation always plays smoothly without audio dependency!
+      const safeDelta = (Number.isFinite(delta) && delta > 0 && delta < 0.2) ? delta : 0.016;
+      currentTime = (Number.isFinite(currentTime) && currentTime >= 0) ? (currentTime + safeDelta) : 0;
       if (currentTime >= TOTAL_DURATION) {
         currentTime = 0;
         resetSfxFlags();
@@ -4995,6 +5126,12 @@ window.switchStageView = function(view) {
   // Smart Speech Narration & Master Human Studio Audio Sync
   let lastSpokenCueIdx = -1;
   function triggerAudioForCurrentTime() {
+    // STRICT SILENCE GUARD: Never trigger audio if paused or tab is in background!
+    if (!isPlaying || document.hidden) return;
+
+    const chkVoice = document.getElementById('chkEnableVoice');
+    const isVoiceAllowed = (chkVoice && chkVoice.checked);
+
     const isCosmic = (window.ACTIVE_STORY && window.ACTIVE_STORY.storyType === 'cosmic_light');
 
     // 1. If human studio audio is loaded AND active story is cosmic_light
@@ -5026,6 +5163,9 @@ window.switchStageView = function(view) {
 
 
   function speakCueNeural(text) {
+    if (!isPlaying || document.hidden) return;
+    const chkVoice = document.getElementById('chkEnableVoice');
+    if (chkVoice && !chkVoice.checked) return;
     if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
 
@@ -5977,6 +6117,82 @@ window.generatePromptAndMakeReel = async function() {
   // -------------------------------------------------------------
   // 📅 DAILY 2-REELS PIPELINE SELECTION HANDLER (Morning vs Evening)
   // -------------------------------------------------------------
+  // -------------------------------------------------------------
+// 🎬 1-CLICK STORYLINE SWITCHER (ALL 7 UNIQUE STORIES)
+// -------------------------------------------------------------
+window.switchStoryline = function(index) {
+  if (index < 0 || index >= window.PRODUCTS_MIND_QUEUE.length) return;
+  window.PRODUCT_ROTATION_INDEX = index;
+  const prod = window.PRODUCTS_MIND_QUEUE[index];
+
+  // Update Story Chips UI
+  document.querySelectorAll(".btn-story-chip").forEach((btn, idx) => {
+    if (idx === index) {
+      btn.classList.add("active");
+      btn.style.background = "rgba(245,158,11,0.25)";
+      btn.style.color = "#fbbf24";
+      btn.style.borderColor = "#f59e0b";
+      btn.style.boxShadow = "0 0 12px rgba(245,158,11,0.3)";
+    } else {
+      btn.classList.remove("active");
+      btn.style.background = "rgba(30,41,59,0.8)";
+      btn.style.color = "#94a3b8";
+      btn.style.borderColor = "rgba(255,255,255,0.12)";
+      btn.style.boxShadow = "none";
+    }
+  });
+
+  // Build the dynamic assets (script, captions, timestamps, scene config)
+  buildReelAssetsForProduct(prod);
+
+  // Update Scene Top Label in UI
+  const sceneLabel = document.getElementById("currentSceneLabel");
+  if (sceneLabel) sceneLabel.textContent = "Scene 1: " + prod.badge;
+
+  const playSub = document.getElementById("reelPlayStorySub");
+  if (playSub) playSub.textContent = prod.storyTitle + " · " + prod.shortName + " (" + prod.ticket + " Save)";
+
+  // Reset clock to 0
+  currentTime = 0;
+  resetSfxFlags();
+  if ("speechSynthesis" in window) {
+    try { window.speechSynthesis.cancel(); } catch(_) {}
+  }
+  renderFrame(0);
+};
+
+// -------------------------------------------------------------
+// 🛡️ GLOBAL VISIBILITY AUDIO SAFETY GUARD (SILENCES BACKGROUND TABS)
+// -------------------------------------------------------------
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    if ("speechSynthesis" in window) {
+      try { window.speechSynthesis.cancel(); } catch(_) {}
+    }
+    if (typeof stopBackgroundBeat === "function") stopBackgroundBeat();
+    if (typeof uploadedAudioElement !== "undefined" && uploadedAudioElement && !uploadedAudioElement.paused) {
+      try { uploadedAudioElement.pause(); } catch(_) {}
+    }
+    if (typeof isPlaying !== "undefined" && isPlaying && typeof togglePlay === "function") {
+      togglePlay();
+    }
+    if (typeof audioCtx !== "undefined" && audioCtx && audioCtx.state === "running") {
+      try { audioCtx.suspend(); } catch(_) {}
+    }
+  }
+});
+
+window.addEventListener("beforeunload", () => {
+  if ("speechSynthesis" in window) {
+    try { window.speechSynthesis.cancel(); } catch(_) {}
+  }
+});
+
+window.addEventListener("pagehide", () => {
+  if ("speechSynthesis" in window) {
+    try { window.speechSynthesis.cancel(); } catch(_) {}
+  }
+});
   window.selectDailySlot = function(slot) {
     const btnMorning = document.getElementById('btnMorningSlot');
     const btnEvening = document.getElementById('btnEveningSlot');
@@ -5998,27 +6214,20 @@ window.generatePromptAndMakeReel = async function() {
         btnEvening.style.boxShadow = 'none';
       }
 
-      // Drop #1: Morning (9:00 AM)
-      // Product: Ava 24/7 Voice AI Phone Receptionist
-      // Hook & Story: Speed of Light & The Ladder Dilemma ($9,200 Save)
-      window.PRODUCT_ROTATION_INDEX = 0;
-      const prod = window.PRODUCTS_MIND_QUEUE[0];
-      buildReelAssetsForProduct(prod);
+      // Drop #1: Morning (9:00 AM) - Ava 24/7 Voice AI Phone Receptionist
+      // Hook & Story: Speed of Light & The Ladder Dilemma ($9,200 Save) / 1B Volts
+      const morningIndices = [0, 5]; // Ava stories
+      window._morningSubIndex = (typeof window._morningSubIndex === 'undefined') ? 0 : ((window._morningSubIndex + 1) % morningIndices.length);
+      const targetIndex = morningIndices[window._morningSubIndex];
+      window.switchStoryline(targetIndex);
 
       if (playSub) {
         playSub.textContent = 'Speed of Light & The Ladder Dilemma · Ava Voice AI ($9,200 Save)';
       }
 
-      currentTime = 0;
-      resetSfxFlags();
-      renderFrame(0);
-
       // Scroll to video stage
       const stage = document.querySelector('.video-stage');
       if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // Start playback
-      if (!isPlaying) togglePlay();
 
     } else {
       if (btnEvening) {
@@ -6036,27 +6245,20 @@ window.generatePromptAndMakeReel = async function() {
         btnMorning.style.boxShadow = 'none';
       }
 
-      // Drop #2: Evening (5:00 PM)
-      // Product: 90-Second SMS Speed-to-Lead Auto-Responder
-      // Hook & Story: Peregrine Falcon 242 MPH Dive & The Cash Thief ($14,000 Save)
-      window.PRODUCT_ROTATION_INDEX = 1;
-      const prod = window.PRODUCTS_MIND_QUEUE[1];
-      buildReelAssetsForProduct(prod);
+      // Drop #2: Evening (5:00 PM) - 90-Second SMS Speed-to-Lead & Product Rotation
+      // Hook & Story: Peregrine Falcon 242 MPH Dive & Cash Thief ($14,000 Save) / F1 Pitstop / Niagara
+      const eveningIndices = [1, 2, 3, 4, 6]; // 90s SMS, Mobile Web, Brain AI, Apollo, Niagara
+      window._eveningSubIndex = (typeof window._eveningSubIndex === 'undefined') ? 0 : ((window._eveningSubIndex + 1) % eveningIndices.length);
+      const targetIndex = eveningIndices[window._eveningSubIndex];
+      window.switchStoryline(targetIndex);
 
       if (playSub) {
         playSub.textContent = 'Peregrine Falcon 242 MPH Dive & Cash Thief · 90s SMS ($14k Save)';
       }
 
-      currentTime = 0;
-      resetSfxFlags();
-      renderFrame(0);
-
       // Scroll to video stage
       const stage = document.querySelector('.video-stage');
       if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // Start playback
-      if (!isPlaying) togglePlay();
     }
   };
 

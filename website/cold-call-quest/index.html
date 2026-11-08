@@ -1543,6 +1543,25 @@ header{background:rgba(15,21,34,0.94);border-bottom:1px solid var(--line);paddin
     } catch(e){}
   }
 
+  
+  // 🛡️ VISIBILITY AUDIO SAFETY GUARD (COLD CALL QUEST)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        try { window.speechSynthesis.cancel(); } catch(_) {}
+      }
+      if (audioCtx && audioCtx.state === 'running') {
+        try { audioCtx.suspend(); } catch(_) {}
+      }
+    }
+  });
+
+  window.addEventListener('beforeunload', () => {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      try { window.speechSynthesis.cancel(); } catch(_) {}
+    }
+  });
+
   window.toggleVoice = function() {
     voiceEnabled = !voiceEnabled;
     const btn = document.getElementById('voiceToggleBtn');

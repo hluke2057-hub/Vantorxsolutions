@@ -20525,7 +20525,7 @@ window.closeLeakMathModal = function() {
   }
 ];
   // Sound Engine (Lazy Loaded on User Interaction)
-  let soundEnabled = true;
+  let soundEnabled = false;
   let audioCtx = null;
   function getAudioContext() {
     if (!audioCtx) {
@@ -20594,6 +20594,14 @@ window.closeLeakMathModal = function() {
       console.warn('playSound audio error:', err);
     }
   }
+
+  
+  // 🛡️ VISIBILITY AUDIO SAFETY GUARD (COLD CALL ARENA)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && audioCtx && audioCtx.state === 'running') {
+      try { audioCtx.suspend(); } catch(_) {}
+    }
+  });
 
   const soundBtn = document.getElementById('soundToggleBtn');
   if (soundBtn) {
