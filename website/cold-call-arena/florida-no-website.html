@@ -594,7 +594,24 @@
     <div style="font-size:12.5px;color:#cbd5e1;line-height:1.5">
       Use this verbatim word-for-word opening when calling these Florida owners:
     </div>
-    <div class="battlecard-script" id="pitchScriptText">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+      <button type="button" id="flBtnScriptTab1" onclick="switchFlScriptTab('tab1')" style="padding:8px 12px;border:none;border-radius:8px;font-size:12px;font-weight:900;cursor:pointer;background:rgba(245,158,11,0.95);color:#0b0f19">
+        ⚡ Tab 1: "Transfer Me Back" Hook (Default)
+      </button>
+      <button type="button" id="flBtnScriptTab2" onclick="switchFlScriptTab('tab2')" style="padding:8px 12px;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;background:transparent;color:#94a3b8;border:1px solid rgba(255,255,255,0.15)">
+        📜 Tab 2: Direct Google Reviews Hook
+      </button>
+    </div>
+    <div class="battlecard-script" id="pitchScriptText" style="display:block">
+"Hey, I was just talking to the owner, I'm wondering if you can transfer me back?"
+
+[IF TRANSFERRED / OWNER PICKS UP]:
+"Hey [Owner], appreciate you hopping back on! Look, I'll be blunt—I was looking at [Company] on Google Maps in [City]. You've got [Rating] reviews, but you literally don't have a website button. When people search emergency [Trade] on their phone, 78% tap the next contractor because they can't book an estimate or get an instant text. We built a fast mobile preview for [Company] with instant 24-second SMS auto-reply. Can I shoot you the 30-second link to look at on your phone right now?"
+
+[IF GATEKEEPER ASKS "WHAT WAS THIS REGARDING?"]:
+"Yeah, it was regarding his Google profile missing its emergency booking link and sending leads to competitors—is he out on a job site right now or at his desk?"
+    </div>
+    <div class="battlecard-script" id="pitchScriptText2" style="display:none">
 "Hey [Owner], saw your 4.8★ reviews on Google in [City]. Quick heads-up: when people search emergency [Trade] on their phone, your Google Maps profile has no website button. 78% of people tap the next contractor because they can't book an estimate or get an instant text. We built a fast mobile preview for [Company] with instant 24-second SMS auto-reply. Can I shoot you the 30-second link to look at on your phone right now?"
     </div>
   </div>
@@ -2711,6 +2728,24 @@ document.addEventListener('DOMContentLoaded', () => {
   checkVaultAccess();
 });
 
+
+function switchFlScriptTab(tab) {
+  const p1 = document.getElementById('pitchScriptText');
+  const p2 = document.getElementById('pitchScriptText2');
+  const b1 = document.getElementById('flBtnScriptTab1');
+  const b2 = document.getElementById('flBtnScriptTab2');
+  if (tab === 'tab2') {
+    if (p1) p1.style.display = 'none';
+    if (p2) p2.style.display = 'block';
+    if (b1) { b1.style.background = 'transparent'; b1.style.color = '#94a3b8'; b1.style.border = '1px solid rgba(255,255,255,0.15)'; }
+    if (b2) { b2.style.background = 'rgba(245,158,11,0.95)'; b2.style.color = '#0b0f19'; b2.style.border = 'none'; }
+  } else {
+    if (p1) p1.style.display = 'block';
+    if (p2) p2.style.display = 'none';
+    if (b1) { b1.style.background = 'rgba(245,158,11,0.95)'; b1.style.color = '#0b0f19'; b1.style.border = 'none'; }
+    if (b2) { b2.style.background = 'transparent'; b2.style.color = '#94a3b8'; b2.style.border = '1px solid rgba(255,255,255,0.15)'; }
+  }
+}
 </script>
 
 </body>
