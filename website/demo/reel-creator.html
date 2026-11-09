@@ -1581,6 +1581,25 @@
   let isPlaying = false;
   let lastTimestamp = 0;
   let animationFrameId = null;
+  let audioSyncOffset = 0;
+  let playedLaserSfx = false;
+  let playedSubdropSfx = false;
+  let playedPhoneSfx = false;
+  let playedIosPingSfx = false;
+
+  window.setAudioSyncOffset = function(val) {
+    audioSyncOffset = (Number(val) || 0) / 1000;
+    const slider = document.getElementById('audioSyncSlider');
+    if (slider && slider.value !== String(val)) slider.value = String(val);
+    const btns = document.querySelectorAll('.btn-micro');
+    btns.forEach(b => {
+      if (b.textContent.includes(val + 'ms') || (val === 0 && b.id === 'btnSyncZero')) {
+        b.classList.add('active');
+      } else {
+        b.classList.remove('active');
+      }
+    });
+  };
 
   window.currentTime = currentTime;
   window.isPlaying = isPlaying;
@@ -5197,6 +5216,18 @@ function resetSfxFlags() {
 }
 
 function togglePlay() {
+  const videoEl = document.getElementById('masterMp4Player');
+  const isVideoView = videoEl && videoEl.style.display === 'block';
+
+  if (isVideoView) {
+    if (videoEl.paused) {
+      videoEl.play().catch(e => console.warn('Video play blocked:', e));
+    } else {
+      videoEl.pause();
+    }
+    return;
+  }
+
   initAudioGraph();
   if (audioCtx && audioCtx.state === 'suspended') {
     audioCtx.resume().catch(() => {});
@@ -5220,7 +5251,7 @@ function togglePlay() {
     startBackgroundBeat();
     triggerAudioForCurrentTime();
   } else {
-    if (btn) btn.innerHTML = '<span>▶️</span> Play &amp; Preview Reel';
+    if (btn) btn.innerHTML = '<span>▶️</span> Play &amp; Preview Reel (With Studio Audio)';
     if (playOverlay) playOverlay.style.display = 'flex';
     if (recText) recText.textContent = 'READY';
     if (recPill) {
@@ -5238,12 +5269,22 @@ window.switchStageView = function(view) {
   const videoEl = document.getElementById('masterMp4Player');
   const btnC = document.getElementById('btnViewCanvas');
   const btnV = document.getElementById('btnViewVideo');
+  const playOverlay = document.getElementById('reelPlayOverlay');
+  const btnPlay = document.getElementById('btnPlayPause');
+
   if (view === 'video') {
-    if (isPlaying) togglePlay();
+    if (isPlaying) {
+      togglePlay();
+    }
     if (canvasEl) canvasEl.style.display = 'none';
+    if (playOverlay) playOverlay.style.display = 'none';
     if (videoEl) {
       videoEl.style.display = 'block';
-      videoEl.play().catch(() => {});
+      videoEl.currentTime = currentTime || 0;
+      videoEl.play().catch(e => console.log('Autoplay deferred:', e));
+      if (btnPlay) {
+        btnPlay.innerHTML = videoEl.paused ? '<span>▶️</span> Play Master MP4' : '<span>⏸️</span> Pause Master MP4';
+      }
     }
     if (btnV) {
       btnV.style.background = 'rgba(245,158,11,0.9)';
@@ -5257,10 +5298,17 @@ window.switchStageView = function(view) {
     }
   } else {
     if (videoEl) {
+      currentTime = videoEl.currentTime || 0;
       videoEl.pause();
       videoEl.style.display = 'none';
     }
     if (canvasEl) canvasEl.style.display = 'block';
+    if (!isPlaying && playOverlay) {
+      playOverlay.style.display = 'flex';
+    }
+    if (btnPlay) {
+      btnPlay.innerHTML = isPlaying ? '<span>⏸️</span> Pause Reel' : '<span>▶️</span> Play &amp; Preview Reel (With Studio Audio)';
+    }
     if (btnC) {
       btnC.style.background = 'rgba(245,158,11,0.9)';
       btnC.style.color = '#0b0f19';
@@ -5276,6 +5324,10 @@ window.switchStageView = function(view) {
 
   function jumpToScene(targetTime) {
     currentTime = targetTime;
+    const videoEl = document.getElementById('masterMp4Player');
+    if (videoEl && videoEl.style.display === 'block') {
+      try { videoEl.currentTime = targetTime; } catch(e) {}
+    }
     if (uploadedAudioElement) {
       try { uploadedAudioElement.currentTime = targetTime; } catch(e) {}
     }
@@ -5286,23 +5338,27 @@ window.switchStageView = function(view) {
   }
 
   function updateUI() {
+    const videoEl = document.getElementById('masterMp4Player');
+    const isVideoView = videoEl && videoEl.style.display === 'block';
+
     const pct = (currentTime / TOTAL_DURATION) * 100;
-    document.getElementById('progressFill').style.width = pct + '%';
+    const progressFill = document.getElementById('progressFill');
+    if (progressFill) progressFill.style.width = pct + '%';
 
     const curSec = Math.floor(currentTime);
-    document.getElementById('currentTimeLabel').textContent = '00:' + (curSec < 10 ? '0' : '') + curSec;
+    const label = document.getElementById('currentTimeLabel');
+    if (label) label.textContent = '00:' + (curSec < 10 ? '0' : '') + curSec;
 
     const cards = document.querySelectorAll('.scene-card');
     cards.forEach(c => c.classList.remove('active'));
-    if (currentTime < 18.5) cards[0].classList.add('active');
-    else if (currentTime < 32.5) cards[1].classList.add('active');
-    else if (currentTime < 47.5) cards[2].classList.add('active');
-    else cards[3].classList.add('active');
-
+    if (currentTime < 18.5 && cards[0]) cards[0].classList.add('active');
+    else if (currentTime < 32.5 && cards[1]) cards[1].classList.add('active');
+    else if (currentTime < 47.5 && cards[2]) cards[2].classList.add('active');
+    else if (cards[3]) cards[3].classList.add('active');
 
     const playOverlay = document.getElementById('reelPlayOverlay');
     if (playOverlay) {
-      if (isPlaying) {
+      if (isPlaying || isVideoView) {
         if (playOverlay.style.display !== 'none') playOverlay.style.display = 'none';
       } else {
         if (playOverlay.style.display !== 'flex') playOverlay.style.display = 'flex';
@@ -5310,26 +5366,24 @@ window.switchStageView = function(view) {
         const playTitle = playOverlay.querySelector('.reel-play-title');
         const playSub = playOverlay.querySelector('.reel-play-sub');
         const playBadge = playOverlay.querySelector('.reel-play-badge');
+        if (playCircle) playCircle.style.display = 'flex';
+        if (playTitle) playTitle.style.display = 'block';
+        if (playSub) playSub.style.display = 'block';
+        if (playBadge) playBadge.style.display = 'inline-flex';
         if (currentTime <= 0.05) {
           playOverlay.classList.remove('mid-pause');
-          if (playCircle) playCircle.style.display = 'none';
-          if (playTitle) playTitle.style.display = 'none';
-          if (playSub) playSub.style.display = 'none';
-          if (playBadge) playBadge.style.display = 'none';
         } else {
           playOverlay.classList.add('mid-pause');
-          if (playCircle) playCircle.style.display = 'flex';
-          if (playTitle) playTitle.style.display = 'block';
-          if (playSub) playSub.style.display = 'block';
-          if (playBadge) playBadge.style.display = 'inline-flex';
         }
       }
     }
 
     // Update Mic Teleprompter
-    const cue = SCRIPT_CUES.find(c => currentTime >= c.start && currentTime <= c.end);
+    const cues = (window.ACTIVE_SCRIPT_CUES && window.ACTIVE_SCRIPT_CUES.length > 0) ? window.ACTIVE_SCRIPT_CUES : (window.SCRIPT_CUES || SCRIPT_CUES);
+    const cue = cues ? cues.find(c => currentTime >= c.start && currentTime <= c.end) : null;
     if (cue) {
-      document.getElementById('micTeleprompter').textContent = `"${cue.text}"`;
+      const mic = document.getElementById('micTeleprompter');
+      if (mic) mic.textContent = `"${cue.text}"`;
     }
   }
 
@@ -5733,10 +5787,63 @@ Stop bleeding thousands on dead voicemails. Call the demo number on your screen 
     const rect = e.currentTarget.getBoundingClientRect();
     const pos = (e.clientX - rect.left) / rect.width;
     currentTime = pos * TOTAL_DURATION;
+    const videoEl = document.getElementById('masterMp4Player');
+    if (videoEl && videoEl.style.display === 'block') {
+      try { videoEl.currentTime = currentTime; } catch(e) {}
+    }
+    if (uploadedAudioElement) {
+      try { uploadedAudioElement.currentTime = currentTime; } catch(e) {}
+    }
     resetSfxFlags();
     updateUI();
     renderFrame(currentTime);
   });
+
+  // Master MP4 video listeners for seamless UI sync
+  const masterVideo = document.getElementById('masterMp4Player');
+  if (masterVideo) {
+    masterVideo.addEventListener('play', () => {
+      const btn = document.getElementById('btnPlayPause');
+      if (btn) btn.innerHTML = '<span>⏸️</span> Pause Master MP4';
+      const recText = document.getElementById('recText');
+      const recPill = document.getElementById('recStatusPill');
+      if (recText) recText.textContent = 'PLAYING MP4';
+      if (recPill) {
+        recPill.style.color = '#10b981';
+        recPill.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+      }
+    });
+    masterVideo.addEventListener('pause', () => {
+      const btn = document.getElementById('btnPlayPause');
+      if (btn) btn.innerHTML = '<span>▶️</span> Play Master MP4';
+      const recText = document.getElementById('recText');
+      const recPill = document.getElementById('recStatusPill');
+      if (recText) recText.textContent = 'READY';
+      if (recPill) {
+        recPill.style.color = '#ef4444';
+        recPill.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+      }
+    });
+    masterVideo.addEventListener('timeupdate', () => {
+      if (masterVideo.style.display === 'block') {
+        currentTime = masterVideo.currentTime || 0;
+        const dur = masterVideo.duration || TOTAL_DURATION || 63;
+        const pct = (currentTime / dur) * 100;
+        const progressFill = document.getElementById('progressFill');
+        if (progressFill) progressFill.style.width = pct + '%';
+        const curSec = Math.floor(currentTime);
+        const label = document.getElementById('currentTimeLabel');
+        if (label) label.textContent = '00:' + (curSec < 10 ? '0' : '') + curSec;
+
+        const cards = document.querySelectorAll('.scene-card');
+        cards.forEach(c => c.classList.remove('active'));
+        if (currentTime < 18.5 && cards[0]) cards[0].classList.add('active');
+        else if (currentTime < 32.5 && cards[1]) cards[1].classList.add('active');
+        else if (currentTime < 47.5 && cards[2]) cards[2].classList.add('active');
+        else if (cards[3]) cards[3].classList.add('active');
+      }
+    });
+  }
 
   // Ensure voices are loaded
   if ('speechSynthesis' in window) {
