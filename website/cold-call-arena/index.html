@@ -7168,7 +7168,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
 <!-- 📞 QUICK CALL OUTCOME & NOTE LOGGER MODAL -->
 <div class="modal-overlay" id="callLogModal">
-  <div class="modal-box" style="max-width:520px;border:1.5px solid var(--accent);box-shadow:0 0 40px rgba(245,158,11,0.25)">
+  <div class="modal-box" style="max-width:620px;max-height:92vh;overflow-y:auto;border:1.5px solid var(--accent);box-shadow:0 0 40px rgba(245,158,11,0.25);scrollbar-width:thin">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
       <h3 style="font-family:var(--font-head);font-size:19px;color:var(--accent2);display:flex;align-items:center;gap:8px;margin:0">
         <span>📞</span> Log Call Result: <span id="callLogModalLeadName" style="color:#ffffff">Contractor</span>
@@ -7220,6 +7220,61 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Spoke with dispatcher - got direct owner cell')">👩‍💼 Spoke with Dispatcher</button>
         <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Not interested right now - happy with current setup')">❌ Not Interested</button>
         <button type="button" class="quick-chip-btn" onclick="appendCallLogChip('Voicemail box full / no answer')">📞 VM Full / No Answer</button>
+      </div>
+    </div>
+
+    <!-- 3. CUSTOMIZED COMPANY EMAIL & AUTOMATIC DISPATCH -->
+    <div class="call-log-email-card" style="margin-top:14px;background:linear-gradient(180deg, rgba(15,23,42,0.85) 0%, rgba(20,29,51,0.92) 100%);border:1.5px solid rgba(245,158,11,0.35);border-radius:12px;padding:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px">
+        <div style="font-size:11.5px;font-family:var(--font-mono);font-weight:800;color:var(--accent2);text-transform:uppercase;display:flex;align-items:center;gap:6px">
+          <span>✉️</span> 3. CUSTOMIZED COMPANY EMAIL &amp; AUTO-SEND:
+        </div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap">
+          <button type="button" class="btn-micro" id="btnTplNoLuck" onclick="setCallLogEmailTemplate('No Luck')" style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid rgba(239,68,68,0.4);background:rgba(239,68,68,0.15);color:#fca5a5;cursor:pointer;transition:all 0.15s">❌ No Luck VM</button>
+          <button type="button" class="btn-micro" id="btnTplSuccess" onclick="setCallLogEmailTemplate('Success')" style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid rgba(34,197,94,0.4);background:rgba(34,197,94,0.15);color:#86efac;cursor:pointer;transition:all 0.15s">🎉 Demo Booked</button>
+          <button type="button" class="btn-micro" id="btnTplCallback" onclick="setCallLogEmailTemplate('Call Back')" style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid rgba(245,158,11,0.4);background:rgba(245,158,11,0.15);color:#fde68a;cursor:pointer;transition:all 0.15s">⏳ Callback</button>
+          <button type="button" class="btn-micro" id="btnTplShort" onclick="setCallLogEmailTemplate('Short')" style="font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid rgba(56,189,248,0.4);background:rgba(56,189,248,0.15);color:#7dd3fc;cursor:pointer;transition:all 0.15s">⚡ 2-Sentence Punch</button>
+        </div>
+      </div>
+
+      <!-- Recipient Input Row -->
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);margin-bottom:4px;font-weight:700">
+          <span>RECIPIENT EMAIL (Input or edit any address):</span>
+          <span id="callLogEmailStatusBadge" style="color:#34d399;font-size:10.5px;display:flex;align-items:center;gap:4px">🛡️ MX Verified</span>
+        </div>
+        <div style="display:flex;gap:6px">
+          <input type="email" id="callLogEmailRecipient" placeholder="Type or paste recipient email (e.g. owner@contractor.com)..." style="flex:1;background:var(--bg2);border:1.5px solid var(--line2);color:#ffffff;font-size:13px;padding:8px 12px;border-radius:8px;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--line2)'" oninput="onCustomEmailRecipientInput(this.value)">
+          <button type="button" class="btn btn-ghost btn-sm" onclick="resetDefaultLeadEmail()" title="Reset to default company pattern email" style="padding:6px 12px;font-size:11px;white-space:nowrap;border:1px solid var(--line2)">↺ Reset</button>
+        </div>
+      </div>
+
+      <!-- Subject Input -->
+      <div style="margin-bottom:10px">
+        <label for="callLogEmailSubject" style="display:block;font-size:11px;color:var(--dim);margin-bottom:4px;font-weight:700">CUSTOMIZED SUBJECT:</label>
+        <input type="text" id="callLogEmailSubject" style="width:100%;background:var(--bg2);border:1px solid var(--line2);color:var(--accent2);font-weight:700;font-size:12.5px;padding:7px 12px;border-radius:8px;outline:none">
+      </div>
+
+      <!-- Body Input -->
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);margin-bottom:4px;font-weight:700">
+          <span>EMAIL BODY (Customized for Company):</span>
+          <span style="font-size:10.5px;color:#94a3b8">Target: <b id="callLogEmailCoName" style="color:#fbbf24">Contractor</b></span>
+        </div>
+        <textarea id="callLogEmailBody" rows="7" style="width:100%;background:var(--bg2);border:1px solid var(--line2);color:var(--ink);padding:10px 12px;border-radius:8px;font-family:inherit;font-size:12.5px;line-height:1.55;resize:vertical;outline:none"></textarea>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="copyCustomEmailBody()" style="display:flex;align-items:center;gap:6px;font-size:12px;border:1px solid var(--line2)">
+          <span>📋</span> Copy Email Text
+        </button>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:11px;color:var(--dim)" id="callLogEmailSentBadge"></span>
+          <button type="button" class="btn btn-gold btn-sm" id="btnAutoSendEmail" onclick="sendCustomizedCallEmail()" style="font-weight:800;display:flex;align-items:center;gap:7px;padding:8px 18px;background:linear-gradient(135deg, #f59e0b 0%, #d97706 100%);color:#0b0f19;border:none;border-radius:8px;box-shadow:0 0 18px rgba(245,158,11,0.4);cursor:pointer;font-size:12.5px;transition:all 0.2s">
+            <span>🚀</span> Automatically Send Email
+          </button>
+        </div>
       </div>
     </div>
 
@@ -25447,6 +25502,221 @@ window.closeLeakMathModal = function() {
   let activeLogLeadId = null;
   let selectedCallOutcome = 'Success';
 
+  // ------------------------------------------------------------
+  // ✉️ CUSTOMIZED COMPANY EMAIL & AUTOMATIC DISPATCH ENGINE
+  // ------------------------------------------------------------
+  let activeLogEmailTemplate = 'No Luck';
+
+  window.generateCustomEmailContent = function(lead, outcome) {
+    if (!lead) return { subject: '', body: '' };
+    const lossMo = Number(lead.monthlyLoss || 8500).toLocaleString();
+    const trade = lead.trade || 'Trade';
+    const city = lead.city || 'Florida';
+    const owner = lead.owner || 'Business Owner';
+    const company = lead.company || 'your team';
+    const employees = lead.employees || 3;
+    const callerName = activeCaller || 'Luke Hamilton';
+
+    let subject = '';
+    let body = '';
+
+    if (outcome === 'Success') {
+      subject = `Confirmed: VantorX Live Demo for ${company}`;
+      body = `Hey ${owner},
+
+Great connecting with you today!
+
+Confirming our upcoming live demo for ${company}. We will walk through how we eliminate missed after-hours calls, automate 24-second speed-to-lead SMS, and capture high-ticket ${trade} emergencies across ${city}.
+
+If you want to test our live Ava voice receptionist before our call, dial our test line anytime at (561) 813-8602.
+
+Looking forward to speaking with you!
+
+Best regards,
+${callerName}
+VantorX Solutions
+Direct: (561) 813-8602
+https://www.vantorxsolutions.com`;
+    } else if (outcome === 'Call Back') {
+      subject = `Following up regarding our quick call — ${company}`;
+      body = `Hey ${owner},
+
+Following up on our quick call earlier. I know you're busy running jobs on-site with your team at ${company}, so I'll reach back out as discussed.
+
+In the meantime, feel free to test our 24/7 Voice AI demo line at (561) 813-8602 to see how it handles incoming emergency ${trade} calls in under 1 second.
+
+Talk soon,
+${callerName}
+VantorX Solutions
+Direct: (561) 813-8602
+https://www.vantorxsolutions.com`;
+    } else if (outcome === 'Short') {
+      subject = `Quick question regarding ${company} after-hours calls`;
+      body = `Hey ${owner},
+
+Left you a quick voicemail regarding ${company}. For ${trade} contractors in ${city}, emergency calls dropping to voicemail typically leak ~${lossMo}/mo to competing shops.
+
+We deployed Ava, a 24/7 Voice AI that answers in 0.8 seconds and texts your tech the job details instantly. 
+
+Can I send you a 90-second video of Ava answering a simulated call for ${company}?
+
+Best,
+${callerName}
+VantorX Solutions | (561) 813-8602`;
+    } else {
+      // Default: 'No Luck' / Voicemail follow-up
+      subject = `Quick follow-up on voicemail regarding ${company} after-hours calls`;
+      body = `Hey ${owner},
+
+I just left a brief voicemail at ${company} regarding after-hours calls in ${city}.
+
+For Florida ${trade} contractors running a crew of ${employees}, emergency calls that drop to voicemail after hours or while on a job typically leak roughly ${lossMo}/mo straight to competing contractors.
+
+We deployed Ava, a 24/7 Voice AI phone receptionist that answers in 0.8 seconds, qualifies the caller's emergency, and texts you the job details immediately so you never lose high-ticket work to another contractor.
+
+You can test Ava live right now by calling our test line at (561) 813-8602, or reply to this email and I'll send over a 2-minute demo video tailored for ${company}.
+
+Best regards,
+${callerName}
+Founder, VantorX Solutions
+Direct: (561) 813-8602
+https://www.vantorxsolutions.com`;
+    }
+
+    return { subject, body };
+  };
+
+  window.setCallLogEmailTemplate = function(templateType) {
+    activeLogEmailTemplate = templateType;
+    const lead = LEADS_DATA.find(l => l.id === activeLogLeadId);
+    if (!lead) return;
+
+    // Update template toggle buttons
+    const btnNL = document.getElementById('btnTplNoLuck');
+    const btnS = document.getElementById('btnTplSuccess');
+    const btnCB = document.getElementById('btnTplCallback');
+    const btnSh = document.getElementById('btnTplShort');
+
+    if (btnNL) btnNL.style.background = templateType === 'No Luck' ? 'rgba(239,68,68,0.45)' : 'rgba(239,68,68,0.15)';
+    if (btnS) btnS.style.background = templateType === 'Success' ? 'rgba(34,197,94,0.45)' : 'rgba(34,197,94,0.15)';
+    if (btnCB) btnCB.style.background = templateType === 'Call Back' ? 'rgba(245,158,11,0.45)' : 'rgba(245,158,11,0.15)';
+    if (btnSh) btnSh.style.background = templateType === 'Short' ? 'rgba(56,189,248,0.45)' : 'rgba(56,189,248,0.15)';
+
+    const content = generateCustomEmailContent(lead, templateType);
+    const subjEl = document.getElementById('callLogEmailSubject');
+    const bodyEl = document.getElementById('callLogEmailBody');
+    if (subjEl) subjEl.value = content.subject;
+    if (bodyEl) bodyEl.value = content.body;
+  };
+
+  window.onCustomEmailRecipientInput = function(val) {
+    if (!activeLogLeadId) return;
+    const trimmed = (val || '').trim();
+    if (!CALL_RECORDS[activeLogLeadId]) CALL_RECORDS[activeLogLeadId] = {};
+    CALL_RECORDS[activeLogLeadId].customEmail = trimmed;
+
+    const badge = document.getElementById('callLogEmailStatusBadge');
+    if (badge) {
+      if (trimmed.includes('@') && trimmed.includes('.')) {
+        badge.textContent = '🛡️ Email Ready';
+        badge.style.color = '#34d399';
+      } else if (trimmed.length > 0) {
+        badge.textContent = '⚠️ Incomplete Email';
+        badge.style.color = '#fbbf24';
+      } else {
+        badge.textContent = '✏️ Enter recipient email';
+        badge.style.color = '#94a3b8';
+      }
+    }
+  };
+
+  window.resetDefaultLeadEmail = function() {
+    if (!activeLogLeadId) return;
+    const lead = LEADS_DATA.find(l => l.id === activeLogLeadId);
+    if (!lead) return;
+    const defaultEmail = lead.email || (lead.company ? (lead.company.toLowerCase().replace(/[^a-z0-9]/g, '') + '@gmail.com') : '');
+    const input = document.getElementById('callLogEmailRecipient');
+    if (input) {
+      input.value = defaultEmail;
+      onCustomEmailRecipientInput(defaultEmail);
+    }
+    showToast(`↺ Reset recipient to ${defaultEmail || 'blank'}`);
+  };
+
+  window.sendCustomizedCallEmail = function() {
+    if (!activeLogLeadId) return;
+    const lead = LEADS_DATA.find(l => l.id === activeLogLeadId);
+    const recipientInput = document.getElementById('callLogEmailRecipient');
+    const recipient = (recipientInput?.value || '').trim();
+
+    if (!recipient || !recipient.includes('@') || !recipient.includes('.')) {
+      if (recipientInput) {
+        recipientInput.style.borderColor = '#ef4444';
+        recipientInput.style.boxShadow = '0 0 12px rgba(239,68,68,0.5)';
+        recipientInput.focus();
+      }
+      showToast('⚠️ Please enter a valid recipient email address above!');
+      return;
+    }
+
+    const subject = (document.getElementById('callLogEmailSubject')?.value || '').trim();
+    const bodyText = (document.getElementById('callLogEmailBody')?.value || '').trim();
+
+    // 1. Build mailto URI
+    const mailtoUrl = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+
+    // 2. Copy email body to clipboard as instant backup
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(`To: ${recipient}\nSubject: ${subject}\n\n${bodyText}`).catch(() => {});
+    }
+
+    // 3. Trigger default email client dispatch
+    const mailLink = document.createElement('a');
+    mailLink.href = mailtoUrl;
+    mailLink.target = '_blank';
+    document.body.appendChild(mailLink);
+    mailLink.click();
+    setTimeout(() => { document.body.removeChild(mailLink); }, 150);
+
+    // 4. Update call record tracking
+    if (!CALL_RECORDS[activeLogLeadId]) CALL_RECORDS[activeLogLeadId] = {};
+    CALL_RECORDS[activeLogLeadId].email = recipient;
+    CALL_RECORDS[activeLogLeadId].emailSent = true;
+    CALL_RECORDS[activeLogLeadId].emailSentTimestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // Append to notes
+    const notesEl = document.getElementById('callLogModalNotes');
+    if (notesEl) {
+      const emailNote = `[✉️ Email sent to ${recipient} (${activeLogEmailTemplate})]`;
+      if (!notesEl.value.includes(emailNote)) {
+        notesEl.value = notesEl.value.trim().length > 0 ? `${notesEl.value.trim()} — ${emailNote}` : emailNote;
+      }
+    }
+
+    // Update sent badge
+    const sentBadge = document.getElementById('callLogEmailSentBadge');
+    if (sentBadge) {
+      sentBadge.textContent = `✓ Sent to ${recipient}!`;
+      sentBadge.style.color = '#10b981';
+    }
+
+    showToast(`🚀 Dispatched email to ${recipient}! (Also copied to clipboard)`);
+  };
+
+  window.copyCustomEmailBody = function() {
+    const recipient = (document.getElementById('callLogEmailRecipient')?.value || '').trim();
+    const subject = (document.getElementById('callLogEmailSubject')?.value || '').trim();
+    const bodyText = (document.getElementById('callLogEmailBody')?.value || '').trim();
+    const fullText = `To: ${recipient}\nSubject: ${subject}\n\n${bodyText}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(fullText).then(() => {
+        showToast('📋 Copied full email (To, Subject, Body) to clipboard!');
+      }).catch(() => {
+        showToast('📋 Email copied!');
+      });
+    }
+  };
+
   window.openCallLogModal = function(leadId) {
     const lead = LEADS_DATA.find(l => l.id === leadId);
     if (!lead) return;
@@ -25475,6 +25745,32 @@ window.closeLeakMathModal = function() {
 
     selectCallLogOutcome(currentOutcome);
 
+    // Populate Email Card
+    const coNameEl = document.getElementById('callLogEmailCoName');
+    if (coNameEl) coNameEl.textContent = lead.company;
+
+    const emailInput = document.getElementById('callLogEmailRecipient');
+    const defaultEmail = rec.customEmail || rec.email || lead.email || '';
+    if (emailInput) {
+      emailInput.value = defaultEmail;
+      emailInput.style.borderColor = 'var(--line2)';
+      emailInput.style.boxShadow = 'none';
+      onCustomEmailRecipientInput(defaultEmail);
+    }
+
+    const sentBadge = document.getElementById('callLogEmailSentBadge');
+    if (sentBadge) {
+      if (rec.emailSent) {
+        sentBadge.textContent = `✓ Previously sent (${rec.emailSentTimestamp || 'Today'})`;
+        sentBadge.style.color = '#10b981';
+      } else {
+        sentBadge.textContent = '';
+      }
+    }
+
+    // Automatically initialize template matching current outcome
+    setCallLogEmailTemplate(currentOutcome);
+
     if (unmarkBtn) {
       unmarkBtn.style.display = rec.called ? 'inline-flex' : 'none';
     }
@@ -25499,6 +25795,9 @@ window.closeLeakMathModal = function() {
     if (btnS) btnS.classList.toggle('active', outcome === 'Success');
     if (btnC) btnC.classList.toggle('active', outcome === 'Call Back');
     if (btnN) btnN.classList.toggle('active', outcome === 'No Luck');
+
+    // Automatically synchronize the email template to the selected outcome!
+    setCallLogEmailTemplate(outcome);
   };
 
   window.appendCallLogChip = function(chipText) {
@@ -25522,12 +25821,19 @@ window.closeLeakMathModal = function() {
     const note = notesEl ? notesEl.value.trim() : '';
     const wasCalled = !!(CALL_RECORDS[id]?.called);
 
+    const recipientInput = document.getElementById('callLogEmailRecipient');
+    const customEmail = (recipientInput?.value || '').trim();
+    const existingRec = CALL_RECORDS[id] || {};
+
     CALL_RECORDS[id] = {
       called: true,
       caller: activeCaller,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       outcome: selectedCallOutcome,
-      notes: note
+      notes: note,
+      email: customEmail || existingRec.email || lead?.email || '',
+      emailSent: !!(existingRec.emailSent),
+      emailSentTimestamp: existingRec.emailSentTimestamp || ''
     };
 
     const u = getActiveUser();
@@ -25918,31 +26224,19 @@ window.closeLeakMathModal = function() {
     });
   }
 
-  // MX Verified Email Dispatcher
+  // MX Verified Email Dispatcher -> Opens customized company email modal with auto-send
   const btnEmailLeadEl = document.getElementById('btnEmailLead');
   if (btnEmailLeadEl) {
     btnEmailLeadEl.addEventListener('click', () => {
       if (!activeLead) return;
-      if (!activeLead.email) {
-        showToast(`⚠️ No email verified for ${activeLead.company}. Use phone dialer or LinkedIn!`);
-        return;
-      }
-      const lossMo = Number(activeLead.monthlyLoss || 8500).toLocaleString();
-      let subject = encodeURIComponent(`Quick question regarding ${activeLead.company} after-hours calls`);
-      let bodyText = `Hey ${activeLead.owner},\n\nI was looking at ${activeLead.company} in ${activeLead.city}. For Florida ${activeLead.trade} shops running a crew of ${activeLead.employees || 3}, emergency calls that drop to voicemail after hours or while on-site typically leak around $${lossMo}/mo to competing contractors.\n\nWe deployed Ava, a 24/7 Voice AI that answers in 0.8 seconds, qualifies the caller, and texts you the job details immediately.\n\nCan I book a quick 10-minute live demo on your calendar this Thursday or Friday to show you Ava answering a simulated call for ${activeLead.company}?\n\nBest,\nLuke Hamilton\nFounder, VantorX Solutions\n(561) 813-8602\nhttps://www.vantorxsolutions.com`;
-      if (currentActiveProduct === 'website') {
-        subject = encodeURIComponent(`Mobile website bottleneck audit for ${activeLead.company}`);
-        bodyText = `Hey ${activeLead.owner},\n\nI was reviewing ${activeLead.company}'s mobile site in ${activeLead.city}. With ${activeLead.painPoint ? activeLead.painPoint.toLowerCase() : 'mobile loading delays'}, over 60% of homeowners tapping from Google bounce to the next contractor within 5 seconds.\n\nWe build custom, 1-second mobile Webflow sites with 1-tap quote booking specifically for trade contractors.\n\nCan I book a quick 10-minute live demo on Zoom this Thursday or Friday to walk you through a side-by-side speed audit of ${activeLead.company}?\n\nBest,\nLuke Hamilton\nFounder, VantorX Solutions\n(561) 813-8602\nhttps://www.vantorxsolutions.com`;
-      } else if (currentActiveProduct === 'speed') {
-        subject = encodeURIComponent(`90-second response latency check for ${activeLead.company}`);
-        bodyText = `Hey ${activeLead.owner},\n\nMIT studies show 78% of homeowners buy from whichever contractor replies first. When quote requests or missed calls sit during the day, high-ticket jobs slip to competitors.\n\nWe deployed LeadFlow 90-Second SMS speed-to-lead so every inquiry gets an automated, conversational text response in 90 seconds.\n\nCan I book a quick 10-minute live demo to trigger a real test lead to your phone?\n\nBest,\nLuke Hamilton\nFounder, VantorX Solutions\n(561) 813-8602\nhttps://www.vantorxsolutions.com`;
-      } else if (currentActiveProduct === 'aeo') {
-        subject = encodeURIComponent(`Google Maps & AI search visibility audit for ${activeLead.company}`);
-        bodyText = `Hey ${activeLead.owner},\n\nI ran an AI citation check for ${activeLead.trade} in ${activeLead.city} across Siri, ChatGPT, and Google Local Services. Review velocity and missing schema data are giving competitors top placement for high-ticket emergency searches.\n\nCan I book a quick 10-minute live demo to show you the live queries and our 14-day AEO roadmap for ${activeLead.company}?\n\nBest,\nLuke Hamilton\nFounder, VantorX Solutions\n(561) 813-8602\nhttps://www.vantorxsolutions.com`;
-      }
-      const body = encodeURIComponent(bodyText);
-      window.location.href = `mailto:${activeLead.email}?subject=${subject}&body=${body}`;
-      showToast(`✓ Opening verified email to ${activeLead.email}`);
+      openCallLogModal(activeLead.id);
+      setTimeout(() => {
+        const emailInput = document.getElementById('callLogEmailRecipient');
+        if (emailInput) {
+          emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          emailInput.focus();
+        }
+      }, 150);
     });
   }
 
