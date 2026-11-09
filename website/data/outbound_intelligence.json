@@ -1,6 +1,6 @@
 {
   "version": "5.1.0",
-  "lastUpdated": "2026-11-09T17:49:06.585Z",
+  "lastUpdated": "2026-11-09T18:42:34.452Z",
   "systemStatus": {
     "mode": "24/7 Multi-Service Autonomous Engine",
     "autoSenderStatus": "RUNNING",
@@ -30,7 +30,7 @@
     "zoomCtaTarget": "10-Minute Live Interactive Demo"
   },
   "metrics": {
-    "totalSent": 923,
+    "totalSent": 925,
     "totalOpened": 0,
     "totalUnopened48h": 0,
     "totalReplied": 0,
@@ -177,6 +177,42 @@
   ],
   "inboundResponses": [],
   "recentDispatches": [
+    {
+      "id": "fl_cg_081",
+      "company": "United Plumbing & Drain",
+      "owner": "Steve",
+      "title": "President",
+      "email": "dispatch@unitedplumbingdrain.com",
+      "phone": "(813) 576-8639",
+      "city": "Tampa, FL",
+      "trade": "Plumbing",
+      "serviceCategory": "LeadFlow 90-Second SMS Speed-to-Lead",
+      "subject": "Final note regarding United Plumbing & Drain call capture",
+      "body": "Hi Steve,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Tampa, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_cg_081\n\nIf you ever want to plug the $9,200/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at United Plumbing & Drain a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$9,200/mo",
+      "touch": 3,
+      "resendMessageId": "01a1c19e-85bd-752e-986c-10fd8d19b9f3",
+      "sent": true,
+      "dispatchedAt": "2026-11-09T18:42:34.127Z"
+    },
+    {
+      "id": "fl_cg_082",
+      "company": "The Clean Plumbers",
+      "owner": "Charlie",
+      "title": "General Manager",
+      "email": "dispatch@thecleanplumbers.com",
+      "phone": "(813) 991-7667",
+      "city": "Tampa, FL",
+      "trade": "Plumbing",
+      "serviceCategory": "Full Digital Infrastructure Bundle",
+      "subject": "Final note regarding The Clean Plumbers call capture",
+      "body": "Hi Charlie,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Tampa, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_cg_082\n\nIf you ever want to plug the $16,200/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at The Clean Plumbers a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+      "estLoss": "$16,200/mo",
+      "touch": 3,
+      "resendMessageId": "01a1c19e-8705-783d-a77d-38964e1de324",
+      "sent": true,
+      "dispatchedAt": "2026-11-09T18:42:34.441Z"
+    },
     {
       "id": "fl_cg_077",
       "company": "Westfall Roofing",
@@ -1940,42 +1976,6 @@
       "resendMessageId": "01a1b294-fda7-7c54-be3a-28c8c6966d8e",
       "sent": true,
       "dispatchedAt": "2026-11-06T20:37:51.216Z"
-    },
-    {
-      "id": "fl_ver_320",
-      "company": "Kirkwood Electric",
-      "owner": "Randy",
-      "title": "Owner & Lead Qualifier",
-      "email": "info@kirkwoodelectric.com",
-      "phone": "(239) 574-3449",
-      "city": "Cape Coral, FL",
-      "trade": "Electrical",
-      "serviceCategory": "AEO Engine™ & Google Review Dominance (Siri, ChatGPT & Google Map Pack Top 3)",
-      "subject": "Quick question for Randy regarding Kirkwood Electric emergency calls",
-      "body": "Hi Randy,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Electrical contractors in Cape Coral, FL.\n\nWhile Kirkwood Electric has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Electrical contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_320\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Electrical in Cape Coral, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-      "estLoss": "$9,100/mo",
-      "touch": 1,
-      "resendMessageId": "01a1b294-fe7d-765d-a1c6-fc754337b81a",
-      "sent": true,
-      "dispatchedAt": "2026-11-06T20:37:51.390Z"
-    },
-    {
-      "id": "fl_ver_321",
-      "company": "NCS Electric Inc.",
-      "owner": "Nelson",
-      "title": "President",
-      "email": "info@ncselectricinc.com",
-      "phone": "(239) 573-3456",
-      "city": "Cape Coral, FL",
-      "trade": "Electrical",
-      "serviceCategory": "Accelerate Growth Engine: 24/7 Ava Voice AI + 90s SMS Speed-to-Lead + Custom Mobile Website + AEO",
-      "subject": "Quick question for Nelson regarding NCS Electric Inc. emergency calls",
-      "body": "Hi Nelson,\n\nSaw your solid reputation in Cape Coral, FL — congrats on building a trusted local brand.\n\nI was auditing local Electrical providers in Cape Coral, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Electrical, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs NCS Electric Inc. roughly $9,100/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_321\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-      "estLoss": "$9,100/mo",
-      "touch": 1,
-      "resendMessageId": null,
-      "sent": false,
-      "dispatchedAt": "2026-11-06T20:37:51.637Z"
     }
   ],
   "objectionCatalog": {
@@ -2043,6 +2043,6 @@
     "totalReps": 4,
     "certifiedLevel5": 4,
     "totalBossesDefeated": 32,
-    "lastRosterUpdate": "2026-11-09T17:49:06.589Z"
+    "lastRosterUpdate": "2026-11-09T18:42:34.455Z"
   }
 }
