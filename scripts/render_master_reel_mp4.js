@@ -5,7 +5,8 @@ const fs = require('fs');
 const path = require('path');
 
 const edgePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-const audioPath = path.resolve('website/demo/audio/reel-voiceover-master.mp3');
+const fullMasterAudio = path.resolve('website/demo/audio/reel-audio-full-master.wav');
+const audioPath = fs.existsSync(fullMasterAudio) ? fullMasterAudio : path.resolve('website/demo/audio/reel-voiceover-master.mp3');
 const outDir = path.resolve('website/demo/video');
 const outMp4 = path.join(outDir, 'vantorx-speed-to-lead-reel.mp4');
 
