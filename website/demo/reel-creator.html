@@ -2961,258 +2961,18 @@ function resetSfxFlags() {
   }
 
 function renderDynamicAtmosphere(t, storyType) {
-  // 🌌 TASKLESS SIGNATURE ATMOSPHERE: Deep Obsidian Midnight Void + Violet Nebula + Neural Grid
-  const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
-  bgGrad.addColorStop(0, '#06030c');
-  bgGrad.addColorStop(0.4, '#100720');
-  bgGrad.addColorStop(0.8, '#180a32');
-  bgGrad.addColorStop(1, '#080310');
-  ctx.fillStyle = bgGrad;
-  ctx.fillRect(-20, -20, W + 40, H + 40);
-
-  // Soft Cyber Violet Nebula Radial Glow
-  const nebula = ctx.createRadialGradient(W * 0.75, H * 0.35, 20, W * 0.75, H * 0.35, 340);
-  nebula.addColorStop(0, 'rgba(168, 85, 247, 0.22)');
-  nebula.addColorStop(0.5, 'rgba(147, 51, 234, 0.08)');
-  nebula.addColorStop(1, 'rgba(0, 0, 0, 0)');
-  ctx.fillStyle = nebula;
+  // TryTaskless Signature Clean Midnight Navy Gradient
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, '#060913');
+  grad.addColorStop(0.55, '#0b1220');
+  grad.addColorStop(1, '#080d18');
+  ctx.fillStyle = grad;
   ctx.fillRect(0, 0, W, H);
-
-  // Neural Constellation Grid (Taskless Connected Nodes)
-  ctx.save();
-  ctx.strokeStyle = 'rgba(168, 85, 247, 0.18)';
-  ctx.fillStyle = 'rgba(200, 255, 0, 0.4)';
-  ctx.lineWidth = 1;
-  const nodes = [
-    [W * 0.15, H * 0.12], [W * 0.42, H * 0.08], [W * 0.85, H * 0.16],
-    [W * 0.72, H * 0.28], [W * 0.9, H * 0.45], [W * 0.65, H * 0.62],
-    [W * 0.82, H * 0.78], [W * 0.25, H * 0.85]
-  ];
-  for (let i = 0; i < nodes.length - 1; i++) {
-    ctx.beginPath();
-    ctx.moveTo(nodes[i][0], nodes[i][1]);
-    ctx.lineTo(nodes[i + 1][0], nodes[i + 1][1]);
-    ctx.stroke();
-  }
-  for (const n of nodes) {
-    ctx.beginPath();
-    ctx.arc(n[0], n[1], 2.5, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  ctx.restore();
-
-  // Floating Micro Dust Particles
-  renderWarpStars(t);
-
-  // Top Right Minimalist Brand Logo (Taskless Style)
-  ctx.save();
-  ctx.textAlign = 'right';
-  ctx.fillStyle = '#ffffff';
-  ctx.font = '800 13px Space Grotesk';
-  ctx.shadowColor = '#a855f7';
-  ctx.shadowBlur = 10;
-  ctx.fillText('⚡ VantorX AI', W - 28, 42);
-  ctx.restore();
-
-  switch (storyType) {
-    case 'falcon_dive': {
-      // High-speed storm sky gradient (charcoal slate to deep navy)
-      const grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, '#06101e');
-      grad.addColorStop(0.5, '#0b1c33');
-      grad.addColorStop(1, '#02060d');
-      ctx.fillStyle = grad;
-      ctx.fillRect(-20, -20, W + 40, H + 40);
-
-      // 242 MPH Vertical Wind Dive Streaks
-      ctx.save();
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
-      ctx.lineWidth = 2;
-      for (let i = 0; i < 42; i++) {
-        const sx = ((i * 37) % W);
-        const sy = ((t * 900 + i * 95) % (H + 120)) - 60;
-        const len = 40 + (i % 5) * 30;
-        ctx.beginPath();
-        ctx.moveTo(sx, sy);
-        ctx.lineTo(sx, sy + len);
-        ctx.stroke();
-      }
-      ctx.restore();
-      break;
-    }
-    case 'f1_pitstop': {
-      // Race track tarmac dark graphite gradient
-      const grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, '#14161d');
-      grad.addColorStop(0.6, '#0d0f14');
-      grad.addColorStop(1, '#050608');
-      ctx.fillStyle = grad;
-      ctx.fillRect(-20, -20, W + 40, H + 40);
-
-      // Angled F1 track grid lines & red/white racing curbs
-      ctx.save();
-      const curbOffset = (t * 260) % 60;
-      for (let y = -60; y < H + 60; y += 60) {
-        ctx.fillStyle = ((Math.floor((y + curbOffset) / 60)) % 2 === 0) ? 'rgba(239, 68, 68, 0.35)' : 'rgba(255, 255, 255, 0.35)';
-        ctx.fillRect(8, y + curbOffset, 14, 28);
-        ctx.fillRect(W - 22, y + curbOffset, 14, 28);
-      }
-      // Speed tarmac blur streaks
-      ctx.strokeStyle = 'rgba(245, 158, 11, 0.22)';
-      ctx.lineWidth = 2.5;
-      for (let i = 0; i < 22; i++) {
-        const x = (i * 29) % W;
-        const y = ((t * 700 + i * 85) % H);
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x, y + 35);
-        ctx.stroke();
-      }
-      ctx.restore();
-      break;
-    }
-    case 'brain_ai': {
-      // Neural synapse cyber matrix
-      const grad = ctx.createRadialGradient(W / 2, H * 0.4, 30, W / 2, H / 2, H * 0.85);
-      grad.addColorStop(0, '#06172d');
-      grad.addColorStop(0.6, '#020b17');
-      grad.addColorStop(1, '#01040a');
-      ctx.fillStyle = grad;
-      ctx.fillRect(-20, -20, W + 40, H + 40);
-
-      // Glowing neural node network
-      ctx.save();
-      const nodeCount = 18;
-      const nodes = [];
-      for (let i = 0; i < nodeCount; i++) {
-        const nx = ((i * 83 + Math.sin(t * 0.6 + i) * 35) % (W - 60)) + 30;
-        const ny = ((i * 61 + Math.cos(t * 0.5 + i) * 30) % (H * 0.7)) + 60;
-        nodes.push({ x: nx, y: ny });
-      }
-      // Connect nearby nodes with pulsing synapses
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.2)';
-      ctx.lineWidth = 1.2;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      // Draw pulsing nodes
-      for (const n of nodes) {
-        ctx.fillStyle = '#38bdf8';
-        ctx.shadowColor = '#38bdf8';
-        ctx.shadowBlur = 12;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, 3.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.restore();
-      break;
-    }
-    case 'saturn_rocket': {
-      // Apollo 11 Cape Canaveral midnight launch
-      const grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, '#150824');
-      grad.addColorStop(0.6, '#0d0417');
-      grad.addColorStop(1, '#05010a');
-      ctx.fillStyle = grad;
-      ctx.fillRect(-20, -20, W + 40, H + 40);
-
-      // Rising rocket exhaust smoke & flame embers
-      ctx.save();
-      for (let i = 0; i < 35; i++) {
-        const px = ((i * 31 + Math.sin(t * 2 + i) * 40) % W);
-        const py = H - ((t * 280 + i * 45) % (H + 100));
-        const sz = 2 + (i % 4) * 2;
-        ctx.fillStyle = (i % 2 === 0) ? '#f59e0b' : '#ef4444';
-        ctx.shadowColor = '#f59e0b';
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.arc(px, py, sz, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.restore();
-      break;
-    }
-    case 'lightning_strike': {
-      // 1-Billion-Volt Electric Storm
-      const grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, '#160d2e');
-      grad.addColorStop(0.6, '#0a0517');
-      grad.addColorStop(1, '#020108');
-      ctx.fillStyle = grad;
-      ctx.fillRect(-20, -20, W + 40, H + 40);
-
-      // Rain downpour
-      ctx.save();
-      ctx.strokeStyle = 'rgba(192, 132, 252, 0.3)';
-      ctx.lineWidth = 1.5;
-      for (let i = 0; i < 45; i++) {
-        const rx = (i * 29) % W;
-        const ry = (t * 750 + i * 65) % (H + 80) - 40;
-        ctx.beginPath();
-        ctx.moveTo(rx, ry);
-        ctx.lineTo(rx - 8, ry + 35);
-        ctx.stroke();
-      }
-      // Electric storm horizon flash
-      if (Math.sin(t * 14) > 0.88) {
-        ctx.fillStyle = 'rgba(168, 85, 247, 0.18)';
-        ctx.fillRect(0, 0, W, H);
-      }
-      ctx.restore();
-      break;
-    }
-    case 'niagara_torrent': {
-      // 750,000 Gallons/Sec Rushing Water Torrent
-      const grad = ctx.createLinearGradient(0, 0, 0, H);
-      grad.addColorStop(0, '#04223d');
-      grad.addColorStop(0.5, '#021629');
-      grad.addColorStop(1, '#010811');
-      ctx.fillStyle = grad;
-      ctx.fillRect(-20, -20, W + 40, H + 40);
-
-      // Hydraulic foaming water ribbons
-      ctx.save();
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
-      ctx.lineWidth = 2.5;
-      for (let i = 0; i < 30; i++) {
-        const wx = (i * 35) % W;
-        const wy = (t * 550 + i * 85) % (H + 100) - 50;
-        ctx.beginPath();
-        ctx.moveTo(wx, wy);
-        ctx.bezierCurveTo(wx + 15, wy + 20, wx - 15, wy + 40, wx, wy + 60);
-        ctx.stroke();
-      }
-      ctx.restore();
-      break;
-    }
-    default: {
-      // Cosmic Light: Deep space void + warp stars
-      const bgGrad = ctx.createRadialGradient(W / 2, H * 0.4, 40, W / 2, H / 2, H * 0.85);
-      bgGrad.addColorStop(0, '#0a101f');
-      bgGrad.addColorStop(0.5, '#04070d');
-      bgGrad.addColorStop(1, '#010204');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(-20, -20, W + 40, H + 40);
-      renderWarpStars(t);
-      break;
-    }
-  }
 }
 
 function renderFrame(time) {
   window.renderFrame = renderFrame;
 
-  // Strict NaN & Finite Number Guard: Prevents canvas from rendering empty stars!
   if (!Number.isFinite(time) || isNaN(time) || time < 0) {
     time = 0;
   }
@@ -3225,19 +2985,16 @@ function renderFrame(time) {
   const shake = getCameraShake(time);
   ctx.translate(shake.x, shake.y);
 
-  // Dynamic Atmosphere matching the active story (Falcon, F1, Brain, Rocket, Lightning, Niagara, Cosmic)
-  const activeStoryType = (window.ACTIVE_STORY && window.ACTIVE_STORY.storyType) ? window.ACTIVE_STORY.storyType : 'cosmic_light';
-  renderDynamicAtmosphere(time, activeStoryType);
+  renderDynamicAtmosphere(time);
 
   // STUDIO HERO POSTER CARD ON PAUSE / INITIAL LOAD (t === 0): Ensures canvas NEVER looks blank!
   if (!isPlaying && time === 0) {
-    renderStudioHeroPosterCard(activeStoryType);
+    renderStudioHeroPosterCard();
     ctx.restore();
     return;
   }
 
   // SFX Triggers calibrated to exact scene cuts
-  // SFX Triggers: ONLY when actively playing AND tab is visible!
   if (isPlaying && !document.hidden) {
     if (time >= 0.2 && !playedSfxMap['laser']) { playSfx('laser'); playedSfxMap['laser'] = true; }
     if (time >= 18.0 && !playedSfxMap['subdrop']) { playSfx('subdrop'); playedSfxMap['subdrop'] = true; }
@@ -3245,48 +3002,43 @@ function renderFrame(time) {
     if (time >= 44.0 && !playedSfxMap['ios_ping']) { playSfx('ios_ping'); playedSfxMap['ios_ping'] = true; }
   }
 
-  // 15 Fast-Paced Scene Switches (Every 3.0 - 4.5 seconds)
-  if (time < 18.0) {
-    renderDynamicStoryHookPhase(time);
-  } else if (time < 22.5) {
-    renderScene5_Stat78PercentSlam(time);
-  } else if (time < 26.8) {
-    renderScene6_IncomingEmergencyCall(time);
-  } else if (time < 31.0) {
-    renderScene7_OnTheLadderNoAnswer(time);
-  } else if (time < 36.5) {
-    renderScene8_HandedToCompetitorBurn(time);
-  } else if (time < 40.5) {
-    renderScene9_MeetAvaReveal(time);
-  } else if (time < 44.0) {
-    renderScene10_ConversationalTriage(time);
-  } else if (time < 47.8) {
-    renderScene11_TechSmsDispatch(time);
-  } else if (time < 50.8) {
-    renderScene12_CompetitorTabClosed(time);
-  } else if (time < 54.0) {
-    renderScene13_StopBleedingDashboard(time);
-  } else if (time < 58.2) {
-    renderScene14_DialDemoLineLive(time);
+  // TryTaskless Signature Scene Progression (1:1 with @trytaskless.ai viral reels)
+  if (time < 7.2) {
+    renderTasklessScene1_NightPhone(time);
+  } else if (time < 12.8) {
+    renderTasklessScene2_LasersUranus(time);
+  } else if (time < 18.2) {
+    renderTasklessScene3_CustomerWindow(time);
+  } else if (time < 24.8) {
+    renderTasklessScene4_Stat78Percent(time);
+  } else if (time < 32.2) {
+    renderTasklessScene5_TwoShopsComparison(time);
+  } else if (time < 39.2) {
+    renderTasklessScene6_ShopB_AvaReply(time);
+  } else if (time < 47.2) {
+    renderTasklessScene7_WorkflowNodes(time);
+  } else if (time < 53.0) {
+    renderTasklessScene8_TechDispatchAndDashboard(time);
+  } else if (time < 58.5) {
+    renderTasklessScene9_LiveDemoDialer(time);
   } else {
-    renderScene15_InstagramCommentManyChat(time);
+    renderTasklessScene10_TryTasklessCTA(time);
   }
 
-  // Word-by-Word Kinetic Caption Bar (Alex Hormozi Style)
+  // TryTaskless Subtitles
   renderKineticSubtitles(time);
 
-  // Cinematic Vignette
-  const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.28, W / 2, H / 2, H * 0.65);
+  // Subtle Cinematic Vignette
+  const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, H * 0.75);
   vig.addColorStop(0, 'rgba(0,0,0,0)');
-  vig.addColorStop(0.7, 'rgba(0,0,0,0.3)');
-  vig.addColorStop(1, 'rgba(0,0,0,0.85)');
+  vig.addColorStop(1, 'rgba(0,0,0,0.5)');
   ctx.fillStyle = vig;
   ctx.fillRect(0, 0, W, H);
 
   ctx.restore();
 }
 
-// Helper: 3D Warp Starfield
+// Helper: 3D Warp Starfield// Helper: 3D Warp Starfield
 function renderWarpStars(t) {
   const warpSpeed = t < 18.0 ? (12 + Math.sin(t * 2) * 5) : 4;
   ctx.save();
@@ -4455,749 +4207,938 @@ function renderUniversalGlitchContrast(t) {
   ctx.restore();
 }
 
-// SCENES 5 TO 15: CINEMATIC HOLLYWOOD PROBLEM, MECHANISM & CTA
-// SCENE 5: THE SPEED-TO-LEAD LAW (78% CLOSING RULE)
-function renderScene5_Stat78PercentSlam(t) {
-  const relT = t - 18.0;
-  renderTopPill("⚡ THE SPEED-TO-LEAD LAW: 78% CLOSING RULE");
-  const cx = W / 2; const cy = 420;
-  ctx.save();
-  const cardW = W - 56; const cardH = 500;
-  ctx.fillStyle = "rgba(16, 8, 32, 0.92)";
-  ctx.strokeStyle = "rgba(168, 85, 247, 0.7)";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "rgba(168, 85, 247, 0.4)";
-  ctx.shadowBlur = 25;
-  roundRect(ctx, (W - cardW) / 2, 170, cardW, cardH, 24, true, true);
-  ctx.shadowBlur = 0;
-  const wave = (relT * 3.5) % 1;
-  ctx.strokeStyle = "rgba(168, 85, 247, " + (1 - wave) + ")"; ctx.lineWidth = 4;
-  ctx.beginPath(); ctx.arc(cx, 320, 50 + wave * 200, 0, Math.PI * 2); ctx.stroke();
-  const popScale = Math.min(1.0, relT * 4.0);
-  ctx.save();
-  ctx.translate(cx, 330);
-  ctx.scale(popScale, popScale);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 italic 118px Space Grotesk";
-  ctx.textAlign = "center";
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 35;
-  ctx.fillText("78%", 0, 0);
-  ctx.shadowBlur = 0;
-  ctx.restore();
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 22px Space Grotesk";
-  ctx.fillText("OF HOMEOWNERS HIRE", cx, 410);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 italic 24px Space Grotesk";
-  ctx.fillText("THE 1ST CONTRACTOR WHO ANSWERS", cx, 442);
-  ctx.fillStyle = "#cbd5e1";
-  ctx.font = "italic 600 14px Inter";
-  ctx.fillText("When you miss the call, they tap the next", cx, 500);
-  ctx.fillText("contractor on Google in under 15 seconds.", cx, 524);
-  ctx.fillStyle = "rgba(168, 85, 247, 0.2)";
-  ctx.strokeStyle = "#a855f7";
-  ctx.lineWidth = 1.2;
-  roundRect(ctx, cx - 140, 570, 280, 36, 18, true, true);
-  ctx.fillStyle = "#a855f7";
-  ctx.font = "800 12px JetBrains Mono";
-  ctx.fillText("SPEED-TO-LEAD LAW: WIN OR LOSE", cx, 593);
-  ctx.restore();
-}
+// =============================================================
+// 🎬 TRYTASKLESS.AI SIGNATURE 2D VECTOR ANIMATION ENGINE
+// 100% Match to @trytaskless.ai: Kurzgesagt / Vox Minimalist Flat Aesthetic
+// =============================================================
 
-// SCENE 6: INCOMING EMERGENCY CALL
-function renderScene6_IncomingEmergencyCall(t) {
-  const relT = t - 22.5;
-  renderTopPill("🚨 INCOMING HIGH-TICKET EMERGENCY CALL");
-  const cx = W / 2; const cy = 440;
-  ctx.save();
-  const phoneW = 280; const phoneH = 480;
-  ctx.fillStyle = "#0c0618";
-  ctx.strokeStyle = "#a855f7";
-  ctx.lineWidth = 3;
-  ctx.shadowColor = "#a855f7";
-  ctx.shadowBlur = 30;
-  roundRect(ctx, cx - phoneW / 2, cy - phoneH / 2, phoneW, phoneH, 36, true, true);
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = "#000000";
-  roundRect(ctx, cx - 50, cy - phoneH / 2 + 12, 100, 24, 12, true, false);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "800 12px JetBrains Mono";
-  ctx.textAlign = "center";
-  ctx.fillText("INCOMING EMERGENCY CALL", cx, cy - 140);
-  const curProd = window.ACTIVE_STORY || window.PRODUCTS_MIND_QUEUE[0];
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 24px Space Grotesk";
-  ctx.fillText(curProd.trade || "HVAC Emergency", cx, cy - 95);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 italic 38px Space Grotesk";
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 24;
-  ctx.fillText((curProd.ticket || "$9,200") + " REVENUE", cx, cy - 45);
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "italic 14px Inter";
-  ctx.fillText("Sunday Afternoon · Heatwave Failure", cx, cy - 10);
-  const pulse = (relT * 3.5) % 1;
-  ctx.strokeStyle = "rgba(200, 255, 0, " + (1 - pulse) + ")";
-  ctx.lineWidth = 3;
+function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+  if (typeof r === 'number') r = { tl: r, tr: r, br: r, bl: r };
   ctx.beginPath();
-  ctx.arc(cx, cy + 90, 36 + pulse * 24, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.fillStyle = "#10b981";
-  ctx.shadowColor = "#10b981";
-  ctx.shadowBlur = 25;
-  ctx.beginPath();
-  ctx.arc(cx, cy + 90, 34, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "28px Inter";
-  ctx.fillText("📞", cx, cy + 100);
-  ctx.restore();
-}
-
-// SCENE 7: ON THE LADDER (3D CYBER TECHNICIAN VISUAL)
-function renderScene7_OnTheLadderNoAnswer(t) {
-  const relT = t - 26.8;
-  renderTopPill("🪜 ON A LADDER · CANNOT REACH THE PHONE");
-  ctx.save();
-  const techW = 200; const techH = 340;
-  const techX = 26; const techY = 220;
-  if (TASKLESS_ASSETS.tech && TASKLESS_ASSETS.tech.complete) {
-    drawTasklessAvatar(ctx, TASKLESS_ASSETS.tech, techX, techY, techW, techH, {
-      radius: 20,
-      borderColor: "#f59e0b",
-      shadowColor: "#f59e0b",
-      shadowBlur: 20
-    });
-  }
-  const cardX = techX + techW + 14;
-  const cardW = W - cardX - 22;
-  const cardH = 340;
-  ctx.fillStyle = "rgba(20, 8, 36, 0.92)";
-  ctx.strokeStyle = "#ef4444";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#ef4444";
-  ctx.shadowBlur = 22;
-  roundRect(ctx, cardX, techY, cardW, cardH, 20, true, true);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "left";
-  const textX = cardX + 16;
-  ctx.fillStyle = "#ef4444";
-  ctx.font = "900 12px JetBrains Mono";
-  ctx.fillText("⚠️ STATUS ALERT", textX, techY + 36);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 20px Space Grotesk";
-  ctx.fillText("BALANCING", textX, techY + 74);
-  ctx.fillText("ON LADDER", textX, techY + 98);
-  ctx.fillStyle = "#f87171";
-  ctx.font = "800 13px Inter";
-  ctx.fillText("Hands full of tools.", textX, techY + 140);
-  ctx.fillText("Cannot grab phone.", textX, techY + 162);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "800 12px JetBrains Mono";
-  ctx.fillText("VOICEMAIL IN 15s", textX, techY + 210);
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "italic 12px Inter";
-  ctx.fillText("Avg delay: 4h 12m", textX, techY + 236);
-  const barY = 600;
-  ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
-  ctx.strokeStyle = "#ef4444";
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, 26, barY, W - 52, 60, 14, true, true);
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 15px Space Grotesk";
-  ctx.fillText("THE HOMEOWNER HANGS UP AND CALLS SHOP #2", W / 2, barY + 36);
-  ctx.restore();
-}
-
-// SCENE 8: HANDED TO COMPETITOR BURN
-function renderScene8_HandedToCompetitorBurn(t) {
-  const relT = t - 31.0;
-  renderTopPill("💸 $9,200 HANDED TO COMPETITOR ON GOOGLE");
-  const cx = W / 2; const cy = 410;
-  ctx.save();
-  const cardW = W - 52; const cardH = 480;
-  ctx.fillStyle = "rgba(28, 6, 20, 0.94)";
-  ctx.strokeStyle = "#ef4444";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#ef4444";
-  ctx.shadowBlur = 25;
-  roundRect(ctx, (W - cardW) / 2, 170, cardW, cardH, 22, true, true);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#ef4444";
-  ctx.font = "900 13px JetBrains Mono";
-  ctx.fillText("LEAD LOST IN REAL TIME", cx, 218);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 28px Space Grotesk";
-  ctx.fillText("YOUR MISSED CALL", cx, 268);
-  const curProd = window.ACTIVE_STORY || window.PRODUCTS_MIND_QUEUE[0];
-  ctx.fillStyle = "#f87171";
-  ctx.font = "900 italic 38px Space Grotesk";
-  ctx.fillText("WAS THEIR " + (curProd.ticket || "$9,200") + " PAYDAY", cx, 318);
-  ctx.font = "64px Inter";
-  ctx.fillText("🏃‍♂️💨💰", cx, 400);
-  ctx.fillStyle = "#cbd5e1";
-  ctx.font = "italic 14px Inter";
-  ctx.fillText("Competitor answered on ring #2.", cx, 470);
-  ctx.fillText("Job signed before you even climbed down.", cx, 496);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "800 13px JetBrains Mono";
-  ctx.fillText("HOW TO NEVER LOSE A LEAD AGAIN ➔", cx, 570);
-  ctx.restore();
-}
-
-// SCENE 9: MEET AVA REVEAL (3D TITANIUM ANDROID)
-function renderScene9_MeetAvaReveal(t) {
-  const relT = t - 36.5;
-  renderTopPill("✨ MEET AVA: 24/7 AUTONOMOUS VOICE AI");
-  ctx.save();
-  const avaW = 210; const avaH = 340;
-  const avaX = 24; const avaY = 210;
-  if (TASKLESS_ASSETS.ava && TASKLESS_ASSETS.ava.complete) {
-    drawTasklessAvatar(ctx, TASKLESS_ASSETS.ava, avaX, avaY, avaW, avaH, {
-      radius: 24,
-      borderColor: "#a855f7",
-      borderWidth: 2.5,
-      shadowColor: "#a855f7",
-      shadowBlur: 24
-    });
-  }
-  const cardX = avaX + avaW + 14;
-  const cardW = W - cardX - 22;
-  const cardH = 340;
-  ctx.fillStyle = "rgba(16, 8, 34, 0.92)";
-  ctx.strokeStyle = "#c8ff00";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 20;
-  roundRect(ctx, cardX, avaY, cardW, cardH, 20, true, true);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "left";
-  const textX = cardX + 16;
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 11px JetBrains Mono";
-  ctx.fillText("⚡ 0.8s RESPONSE", textX, avaY + 36);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 24px Space Grotesk";
-  ctx.fillText("MEET AVA", textX, avaY + 76);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 italic 30px Space Grotesk";
-  ctx.fillText("24/7 AI", textX, avaY + 112);
-  ctx.fillStyle = "#e2e8f0";
-  ctx.font = "italic 12px Inter";
-  ctx.fillText("• 0.8s Voice Answer", textX, avaY + 160);
-  ctx.fillText("• Live Human Tone", textX, avaY + 188);
-  ctx.fillText("• Emergency Triage", textX, avaY + 216);
-  ctx.fillText("• Direct SMS Dispatch", textX, avaY + 244);
-  const barY = 586;
-  ctx.fillStyle = "rgba(200, 255, 0, 0.12)";
-  ctx.strokeStyle = "#c8ff00";
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, 24, barY, W - 48, 64, 16, true, true);
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 16px Space Grotesk";
-  ctx.fillText("ANSWERS EVERY CALL BEFORE THE COMPETITOR CAN", W / 2, barY + 38);
-  ctx.restore();
-}
-
-// SCENE 10: CONVERSATIONAL TRIAGE
-function renderScene10_ConversationalTriage(t) {
-  const relT = t - 40.5;
-  renderTopPill("🗣️ LIVE EMERGENCY CONVERSATIONAL TRIAGE");
-  const cx = W / 2;
-  ctx.save();
-  const bubble1Y = 210;
-  ctx.fillStyle = "rgba(30, 41, 59, 0.9)";
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, 30, bubble1Y, W - 60, 90, 18, true, true);
-  ctx.textAlign = "left";
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "800 11px JetBrains Mono";
-  ctx.fillText("HOMEOWNER (CALLER)", 50, bubble1Y + 28);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "italic 15px Inter";
-  ctx.fillText('"Our AC completely died and house is 98°!"', 50, bubble1Y + 58);
-  const bubble2Y = 325;
-  ctx.fillStyle = "rgba(22, 10, 42, 0.94)";
-  ctx.strokeStyle = "#a855f7";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#a855f7";
-  ctx.shadowBlur = 18;
-  roundRect(ctx, 30, bubble2Y, W - 60, 120, 18, true, true);
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 12px JetBrains Mono";
-  ctx.fillText("AVA (24/7 AI RECEPTIONIST) · 0.8s LATENCY", 50, bubble2Y + 30);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "italic 15px Inter";
-  ctx.fillText('"I understand this is an emergency. I have a tech', 50, bubble2Y + 62);
-  ctx.fillText('available in 45 minutes. What is your address?"', 50, bubble2Y + 86);
-  const badgeY = 480;
-  ctx.fillStyle = "rgba(200, 255, 0, 0.15)";
-  ctx.strokeStyle = "#c8ff00";
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, cx - 160, badgeY, 320, 52, 26, true, true);
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 14px Space Grotesk";
-  ctx.fillText("⚡ QUALIFIED: $9,200 SYSTEM REPLACEMENT", cx, badgeY + 32);
-  ctx.restore();
-}
-
-// SCENE 11: TECH SMS DISPATCH (3D HOLOGRAPHIC SHIELD BOT)
-function renderScene11_TechSmsDispatch(t) {
-  const relT = t - 44.0;
-  renderTopPill("📲 INSTANT 24s SMS DISPATCH TO TECH CELL");
-  ctx.save();
-  const botW = 200; const botH = 340;
-  const botX = 24; const botY = 210;
-  if (TASKLESS_ASSETS.bot && TASKLESS_ASSETS.bot.complete) {
-    drawTasklessAvatar(ctx, TASKLESS_ASSETS.bot, botX, botY, botW, botH, {
-      radius: 22,
-      borderColor: "#a855f7",
-      shadowColor: "#a855f7",
-      shadowBlur: 20
-    });
-  }
-  const cardX = botX + botW + 14;
-  const cardW = W - cardX - 22;
-  const cardH = 340;
-  ctx.fillStyle = "rgba(16, 8, 36, 0.94)";
-  ctx.strokeStyle = "#10b981";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#10b981";
-  ctx.shadowBlur = 18;
-  roundRect(ctx, cardX, botY, cardW, cardH, 20, true, true);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "left";
-  const textX = cardX + 16;
-  ctx.fillStyle = "#10b981";
-  ctx.font = "900 11px JetBrains Mono";
-  ctx.fillText("✓ SMS DISPATCHED", textX, botY + 34);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 20px Space Grotesk";
-  ctx.fillText("LEAD SENT", textX, botY + 68);
-  ctx.fillText("IN 24 SECS", textX, botY + 92);
-  ctx.fillStyle = "#cbd5e1";
-  ctx.font = "italic 12px Inter";
-  ctx.fillText("• Homeowner Address", textX, botY + 135);
-  ctx.fillText("• Verified HVAC Unit", textX, botY + 160);
-  ctx.fillText("• Pre-booked Window", textX, botY + 185);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 13px Space Grotesk";
-  ctx.fillText("TECH CELL BEEPS ➔", textX, botY + 230);
-  const barY = 586;
-  ctx.fillStyle = "rgba(16, 185, 129, 0.15)";
-  ctx.strokeStyle = "#10b981";
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, 24, barY, W - 48, 64, 16, true, true);
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 16px Space Grotesk";
-  ctx.fillText("JOB LOCKED BEFORE CALLER TAPS ANOTHER GOOGLE TAB", W / 2, barY + 38);
-  ctx.restore();
-}
-
-// SCENE 12: COMPETITOR TAB CLOSED
-function renderScene12_CompetitorTabClosed(t) {
-  const relT = t - 47.8;
-  renderTopPill("🛡️ COMPETITOR TAB CLOSED · JOB LOCKED");
-  const cx = W / 2; const cy = 410;
-  ctx.save();
-  const cardW = W - 56; const cardH = 460;
-  ctx.fillStyle = "rgba(16, 8, 34, 0.94)";
-  ctx.strokeStyle = "#a855f7";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#a855f7";
-  ctx.shadowBlur = 24;
-  roundRect(ctx, (W - cardW) / 2, 180, cardW, cardH, 22, true, true);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 12px JetBrains Mono";
-  ctx.fillText("ZERO REVENUE LEAKAGE", cx, 226);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 30px Space Grotesk";
-  ctx.fillText("COMPETITOR TABS", cx, 276);
-  ctx.fillStyle = "#ef4444";
-  ctx.font = "900 italic 34px Space Grotesk";
-  ctx.fillText("CLOSED & DISSOLVED", cx, 318);
-  ctx.font = "54px Inter";
-  ctx.fillText("🔒✨", cx, 395);
-  ctx.fillStyle = "#e2e8f0";
-  ctx.font = "italic 15px Inter";
-  ctx.fillText("The caller stops looking for other contractors.", cx, 465);
-  ctx.fillText("Ava answered first, secured trust, and booked it.", cx, 492);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "800 13px JetBrains Mono";
-  ctx.fillText("FIRST TO RESPOND = 78% WIN RATE", cx, 570);
-  ctx.restore();
-}
-
-// SCENE 13: STOP BLEEDING DASHBOARD
-function renderScene13_StopBleedingDashboard(t) {
-  const relT = t - 50.8;
-  renderTopPill("📊 REAL-TIME REVENUE RECOVERY DASHBOARD");
-  const cx = W / 2; const cy = 410;
-  ctx.save();
-  const cardW = W - 52; const cardH = 470;
-  ctx.fillStyle = "rgba(14, 7, 30, 0.94)";
-  ctx.strokeStyle = "#c8ff00";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 22;
-  roundRect(ctx, (W - cardW) / 2, 180, cardW, cardH, 22, true, true);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 12px JetBrains Mono";
-  ctx.fillText("REVENUE ENGINE ACTIVE", cx, 226);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 28px Space Grotesk";
-  ctx.fillText("STOP BLEEDING THOUSANDS", cx, 272);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 italic 42px Space Grotesk";
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 24;
-  ctx.fillText("+$42,800 / MO", cx, 330);
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = "#cbd5e1";
-  ctx.font = "italic 15px Inter";
-  ctx.fillText("In captured emergency calls & speed-to-lead.", cx, 385);
-  const gridY = 430;
-  ctx.fillStyle = "rgba(168, 85, 247, 0.15)";
-  ctx.strokeStyle = "#a855f7";
-  ctx.lineWidth = 1.2;
-  roundRect(ctx, cx - 150, gridY, 140, 64, 12, true, true);
-  roundRect(ctx, cx + 10, gridY, 140, 64, 12, true, true);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 18px Space Grotesk";
-  ctx.fillText("0.8s", cx - 80, gridY + 28);
-  ctx.fillText("100%", cx + 80, gridY + 28);
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "700 11px JetBrains Mono";
-  ctx.fillText("ANSWER TIME", cx - 80, gridY + 48);
-  ctx.fillText("CALLS TRIAGED", cx + 80, gridY + 48);
-  ctx.restore();
-}
-
-// SCENE 14: DIAL LIVE DEMO LINE
-function renderScene14_DialDemoLineLive(t) {
-  const relT = t - 54.0;
-  renderTopPill("📞 DIAL AVA LIVE NOW · TEST ON YOUR CELL");
-  const cx = W / 2; const cy = 410;
-  ctx.save();
-  const cardW = W - 52; const cardH = 470;
-  ctx.fillStyle = "rgba(16, 8, 34, 0.94)";
-  ctx.strokeStyle = "#38bdf8";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#38bdf8";
-  ctx.shadowBlur = 25;
-  roundRect(ctx, (W - cardW) / 2, 180, cardW, cardH, 22, true, true);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#38bdf8";
-  ctx.font = "900 12px JetBrains Mono";
-  ctx.fillText("LIVE INTERACTIVE PHONE LINE", cx, 226);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 28px Space Grotesk";
-  ctx.fillText("CALL AVA RIGHT NOW", cx, 272);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 italic 38px Space Grotesk";
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 25;
-  ctx.fillText("(561) 813-8602", cx, 335);
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = "#cbd5e1";
-  ctx.font = "italic 15px Inter";
-  ctx.fillText("Hear her answer in zero-point-eight seconds", cx, 390);
-  ctx.fillText("and triage a simulated contractor emergency.", cx, 414);
-  const btnY = 460;
-  ctx.fillStyle = "#10b981";
-  ctx.shadowColor = "#10b981";
-  ctx.shadowBlur = 22;
-  roundRect(ctx, cx - 130, btnY, 260, 52, 26, true, false);
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 16px Space Grotesk";
-  ctx.fillText("📞 TAP TO DIAL LIVE", cx, btnY + 33);
-  ctx.restore();
-}
-
-// SCENE 15: INSTAGRAM COMMENT MANYCHAT CTA (TASKLESS SIGNATURE FINALE)
-function renderScene15_InstagramCommentManyChat(t) {
-  const relT = t - 58.2;
-  renderTopPill("💬 COMMENT ON THIS REEL TO GET FREE LINK");
-  const cx = W / 2; const cy = 410;
-  ctx.save();
-  const avaW = 180; const avaH = 290;
-  const avaX = 26; const avaY = 190;
-  if (TASKLESS_ASSETS.ava && TASKLESS_ASSETS.ava.complete) {
-    drawTasklessAvatar(ctx, TASKLESS_ASSETS.ava, avaX, avaY, avaW, avaH, {
-      radius: 20,
-      borderColor: "#c8ff00",
-      shadowColor: "#c8ff00",
-      shadowBlur: 20
-    });
-  }
-  const cardX = avaX + avaW + 14;
-  const cardW = W - cardX - 24;
-  const cardH = 290;
-  ctx.fillStyle = "rgba(16, 8, 36, 0.94)";
-  ctx.strokeStyle = "#c8ff00";
-  ctx.lineWidth = 2;
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 20;
-  roundRect(ctx, cardX, avaY, cardW, cardH, 20, true, true);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "left";
-  const textX = cardX + 16;
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 11px JetBrains Mono";
-  ctx.fillText("INSTANT DM BOT", textX, avaY + 34);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 20px Space Grotesk";
-  ctx.fillText("COMMENT", textX, avaY + 70);
-  const curProd = window.ACTIVE_STORY || window.PRODUCTS_MIND_QUEUE[0];
-  const keyword = curProd.keyword || "AVA";
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 italic 32px Space Grotesk";
-  ctx.fillText('"' + keyword + '"', textX, avaY + 112);
-  ctx.fillStyle = "#e2e8f0";
-  ctx.font = "italic 12px Inter";
-  ctx.fillText("We will immediately DM", textX, avaY + 155);
-  ctx.fillText("you the free live link.", textX, avaY + 175);
-  const bannerY = 510;
-  ctx.fillStyle = "rgba(20, 10, 42, 0.95)";
-  ctx.strokeStyle = "rgba(168, 85, 247, 0.6)";
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, 24, bannerY, W - 48, 80, 18, true, true);
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 17px Space Grotesk";
-  ctx.fillText('COMMENT "' + keyword + '" ON THIS REEL NOW', cx, bannerY + 34);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "700 12px JetBrains Mono";
-  ctx.fillText("→ Get your free live interactive contractor demo", cx, bannerY + 58);
-  ctx.restore();
-}
-
-
-function renderKineticSubtitles(t) {
-  const activeWordList = (window.ACTIVE_WORD_TIMESTAMPS && window.ACTIVE_WORD_TIMESTAMPS.length > 0)
-    ? window.ACTIVE_WORD_TIMESTAMPS
-    : ((window.WORD_TIMESTAMPS && window.WORD_TIMESTAMPS.length > 0) ? window.WORD_TIMESTAMPS : WORD_TIMESTAMPS);
-  const activeIdx = activeWordList.findIndex(w => t >= w.start && t <= w.end);
-  let activeWord = null;
-  let targetIdx = -1;
-  if (activeIdx !== -1) {
-    activeWord = activeWordList[activeIdx];
-    targetIdx = activeIdx;
-  } else {
-    const prev = activeWordList.filter(w => w.end <= t).slice(-1)[0];
-    if (prev && t - prev.end < 0.35) {
-      activeWord = prev;
-      targetIdx = activeWordList.indexOf(prev);
-    }
-  }
-  if (targetIdx === -1) return;
-  const windowSize = 3;
-  const start = Math.max(0, Math.min(activeWordList.length - windowSize, targetIdx - 1));
-  const cluster = activeWordList.slice(start, start + windowSize);
-  ctx.save();
-  const subY = H * 0.86;
-  ctx.textAlign = "center";
-  ctx.lineJoin = "round";
-  ctx.font = "900 italic 26px Space Grotesk";
-  let totalW = 0;
-  const wordWidths = cluster.map(w => {
-    const cleanWord = w.word.toUpperCase().replace(/[.,!]/g, "");
-    const wWidth = ctx.measureText(cleanWord).width + 24;
-    totalW += wWidth;
-    return wWidth;
-  });
-  const pillW = Math.max(280, totalW + 40);
-  const pillH = 54;
-  const pillX = (W - pillW) / 2;
-  const pillY = subY - 37;
-  ctx.fillStyle = "rgba(12, 6, 24, 0.92)";
-  ctx.strokeStyle = "rgba(168, 85, 247, 0.6)";
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = "rgba(168, 85, 247, 0.3)";
-  ctx.shadowBlur = 16;
-  roundRect(ctx, pillX, pillY, pillW, pillH, 27, true, true);
-  ctx.shadowBlur = 0;
-  let curX = (W - totalW) / 2;
-  cluster.forEach((w, idx) => {
-    const cleanWord = w.word.toUpperCase().replace(/[.,!]/g, "");
-    const wWidth = wordWidths[idx];
-    const centerX = curX + wWidth / 2;
-    const isCur = (w === activeWord);
-    if (isCur) {
-      ctx.fillStyle = "#c8ff00";
-      ctx.shadowColor = "#c8ff00";
-      ctx.shadowBlur = 18;
-      ctx.font = "900 italic 30px Space Grotesk";
-      ctx.fillText(cleanWord, centerX, subY + 2);
-      ctx.shadowBlur = 0;
-    } else {
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "800 italic 25px Space Grotesk";
-      ctx.fillText(cleanWord, centerX, subY);
-    }
-    curX += wWidth;
-  });
-  ctx.restore();
-}
-
-function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.moveTo(x + r.tl, y);
+  ctx.lineTo(x + w - r.tr, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r.tr);
+  ctx.lineTo(x + w, y + h - r.br);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
+  ctx.lineTo(x + r.bl, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r.bl);
+  ctx.lineTo(x, y + r.tl);
+  ctx.quadraticCurveTo(x, y, x + r.tl, y);
   ctx.closePath();
   if (fill) ctx.fill();
   if (stroke) ctx.stroke();
 }
 
-// Master Audio-Subtitle Sync Calibration Offset (in seconds)
-let audioSyncOffset = 0.0;
-
-window.setAudioSyncOffset = function(valMs) {
-  const ms = parseInt(valMs, 10);
-  audioSyncOffset = ms / 1000;
-  const label = document.getElementById('syncOffsetVal');
-  const slider = document.getElementById('audioSyncSlider');
-  if (slider) slider.value = ms;
-  if (label) {
-    if (ms === 0) label.textContent = '0ms (Exact Lock)';
-    else if (ms > 0) label.textContent = '+' + ms + 'ms (Audio Delay Compensated)';
-    else label.textContent = ms + 'ms (Audio Advance Compensated)';
-  }
-  document.querySelectorAll('.btn-micro').forEach(b => b.classList.remove('active'));
-  const activeBtn = Array.from(document.querySelectorAll('.btn-micro')).find(b => b.textContent.includes(ms + 'ms'));
-  if (activeBtn) activeBtn.classList.add('active');
-  if (ms === 0) {
-    const zeroBtn = document.getElementById('btnSyncZero');
-    if (zeroBtn) zeroBtn.classList.add('active');
-  }
-};
-
-// 🎬 CINEMATIC STUDIO HERO POSTER CARD (Rendered on Canvas at t=0 when Paused)
-// 🎬 CINEMATIC TASKLESS HERO POSTER CARD (Rendered on Canvas at t=0 when Paused)
-function renderStudioHeroPosterCard(storyType) {
-  const curProd = window.ACTIVE_STORY || window.PRODUCTS_MIND_QUEUE[0];
-  const cx = W / 2;
-  const cy = H / 2;
+// Top Category Badge
+function renderTasklessTopPill(label) {
   ctx.save();
-  const avatarW = 240;
-  const avatarH = 240;
-  const avatarX = (W - avatarW) / 2;
-  const avatarY = 56;
-  if (TASKLESS_ASSETS.ava && TASKLESS_ASSETS.ava.complete) {
-    drawTasklessAvatar(ctx, TASKLESS_ASSETS.ava, avatarX, avatarY, avatarW, avatarH, {
-      radius: 28,
-      borderColor: "#a855f7",
-      borderWidth: 2.5,
-      shadowColor: "#a855f7",
-      shadowBlur: 24
-    });
-  }
-  const cardW = W - 44;
-  const cardH = 590;
-  const cardX = 22;
-  const cardY = 312;
-  ctx.fillStyle = "rgba(16, 8, 32, 0.9)";
-  ctx.strokeStyle = "rgba(168, 85, 247, 0.7)";
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = "rgba(168, 85, 247, 0.35)";
-  ctx.shadowBlur = 24;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 22, true, true);
-  ctx.shadowBlur = 0;
-  const pillW = 280;
+  const pillW = Math.min(W - 48, label.length * 8.5 + 40);
+  const pillH = 32;
   const pillX = (W - pillW) / 2;
-  ctx.fillStyle = "rgba(200, 255, 0, 0.12)";
-  ctx.strokeStyle = "#c8ff00";
-  ctx.lineWidth = 1.2;
-  roundRect(ctx, pillX, cardY + 22, pillW, 30, 15, true, true);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 11px JetBrains Mono";
-  ctx.textAlign = "center";
-  ctx.fillText(curProd.badge || "📞 24/7 VOICE AI RECEPTIONIST", cx, cardY + 41);
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "900 italic 28px Space Grotesk";
-  ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
-  ctx.shadowBlur = 12;
-  ctx.fillText("NEVER MISS AN", cx, cardY + 98);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "900 italic 36px Space Grotesk";
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 20;
-  ctx.fillText((curProd.ticket || "$9,200") + " JOB", cx, cardY + 140);
-  ctx.shadowBlur = 0;
-  const bulletY = cardY + 180;
-  ctx.textAlign = "left";
-  const startX = cardX + 28;
-  const bullets = [
-    { icon: "📞", text: "Answers shop phone in zero-point-eight seconds" },
-    { icon: "⚡", text: "78% of homeowners hire the 1st responder" },
-    { icon: "📅", text: "Qualifies emergency & dispatches technician cell" },
-    { icon: "🛡️", text: "Stops high-ticket leads leaking to competitors" }
-  ];
-  bullets.forEach((b, idx) => {
-    const y = bulletY + idx * 42;
-    ctx.font = "16px Inter";
-    ctx.fillText(b.icon, startX, y);
-    ctx.fillStyle = "#e2e8f0";
-    ctx.font = "italic 600 13px Inter";
-    ctx.fillText(b.text, startX + 26, y - 2);
-  });
-  const btnPlayY = cardY + 368;
-  const btnPlayW = 280;
-  const btnPlayH = 58;
-  const btnPlayX = (W - btnPlayW) / 2;
-  const btnGrad = ctx.createLinearGradient(btnPlayX, btnPlayY, btnPlayX + btnPlayW, btnPlayY + btnPlayH);
-  btnGrad.addColorStop(0, "#c8ff00");
-  btnGrad.addColorStop(1, "#a3e635");
-  ctx.fillStyle = btnGrad;
-  ctx.shadowColor = "#c8ff00";
-  ctx.shadowBlur = 26;
-  roundRect(ctx, btnPlayX, btnPlayY, btnPlayW, btnPlayH, 29, true, false);
-  ctx.shadowBlur = 0;
-  ctx.textAlign = "center";
-  ctx.fillStyle = "#06030c";
-  ctx.font = "900 16px Space Grotesk";
-  ctx.fillText("▶ PLAY 60 FPS VIRAL REEL", cx, btnPlayY + 36);
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "700 11px JetBrains Mono";
-  ctx.fillText((curProd.trade || "HVAC") + " · " + (curProd.scenarioHeadline ? curProd.scenarioHeadline.split("·")[0].trim() : "Emergency Save"), cx, cardY + 452);
-  ctx.strokeStyle = "rgba(168, 85, 247, 0.4)";
+  const pillY = 32;
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
   ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(cardX + 16, cardY + 480);
-  ctx.lineTo(cardX + cardW - 16, cardY + 480);
-  ctx.stroke();
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "600 12px Inter";
-  ctx.fillText("Try live interactive AI demo → (561) 813-8602", cx, cardY + 514);
-  ctx.fillStyle = "#c8ff00";
-  ctx.font = "700 11px JetBrains Mono";
-  ctx.fillText('COMMENT "AVA" TO GET INSTANT LINK', cx, cardY + 542);
+  roundRect(ctx, pillX, pillY, pillW, pillH, 16, true, true);
+
+  ctx.fillStyle = '#a3e635';
+  ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Inter", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(label.toUpperCase(), W / 2, pillY + 20);
   ctx.restore();
 }
+
+// --- SCENE 1: THE 11:04 PM BEDSIDE IPHONE HOOK (0.0s - 7.2s) ---
+function renderTasklessScene1_NightPhone(t) {
+  renderTasklessTopPill('⚡ SPEED TO LEAD · EMERGENCY DISPATCH');
+
+  // 1. Moonlight 4-Pane Window on Wall
+  const winX = 48; const winY = 86; const winW = 190; const winH = 220;
+  ctx.save();
+  ctx.fillStyle = '#080e1a';
+  ctx.fillRect(winX - 6, winY - 6, winW + 12, winH + 12);
+
+  const skyGrad = ctx.createLinearGradient(winX, winY, winX, winY + winH);
+  skyGrad.addColorStop(0, '#0f1c30');
+  skyGrad.addColorStop(1, '#09101d');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(winX, winY, winW, winH);
+
+  // Soft Moon in Window
+  ctx.save();
+  ctx.fillStyle = '#f1f5f9';
+  ctx.shadowColor = 'rgba(255, 255, 255, 0.45)';
+  ctx.shadowBlur = 18;
+  ctx.beginPath();
+  ctx.arc(winX + 130, winY + 60, 22, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Distant city buildings in window
+  ctx.fillStyle = '#050a12';
+  ctx.fillRect(winX + 10, winY + 160, 35, 60);
+  ctx.fillRect(winX + 55, winY + 140, 45, 80);
+  ctx.fillRect(winX + 110, winY + 170, 30, 50);
+  ctx.fillRect(winX + 148, winY + 150, 38, 70);
+
+  // Yellow building lights
+  ctx.fillStyle = 'rgba(234, 179, 8, 0.65)';
+  ctx.fillRect(winX + 18, winY + 172, 4, 4);
+  ctx.fillRect(winX + 28, winY + 185, 4, 4);
+  ctx.fillRect(winX + 65, winY + 152, 4, 4);
+  ctx.fillRect(winX + 82, winY + 168, 4, 4);
+  ctx.fillRect(winX + 120, winY + 180, 4, 4);
+  ctx.fillRect(winX + 160, winY + 165, 4, 4);
+
+  // Window mullions
+  ctx.strokeStyle = '#050912';
+  ctx.lineWidth = 8;
+  ctx.beginPath();
+  ctx.moveTo(winX + winW / 2, winY);
+  ctx.lineTo(winX + winW / 2, winY + winH);
+  ctx.moveTo(winX, winY + winH / 2);
+  ctx.lineTo(winX + winW, winY + winH / 2);
+  ctx.stroke();
+  ctx.restore();
+
+  // 2. Bedside Table Base
+  const tableY = 480;
+  const tableGrad = ctx.createLinearGradient(0, tableY, 0, H);
+  tableGrad.addColorStop(0, '#0a101d');
+  tableGrad.addColorStop(1, '#05080e');
+  ctx.fillStyle = tableGrad;
+  ctx.fillRect(0, tableY, W, H - tableY);
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, tableY);
+  ctx.lineTo(W, tableY);
+  ctx.stroke();
+
+  // 3. Vector iPhone Chassis
+  const phoneW = 270;
+  const phoneH = 500;
+  const phoneX = (W - phoneW) / 2 + 30;
+  const phoneY = 240;
+
+  ctx.save();
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.75)';
+  ctx.shadowBlur = 36;
+  ctx.shadowOffsetY = 16;
+  ctx.fillStyle = '#0f172a';
+  roundRect(ctx, phoneX, phoneY, phoneW, phoneH, 38, true, false);
+  ctx.restore();
+
+  ctx.fillStyle = '#0b0f19';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 2;
+  roundRect(ctx, phoneX, phoneY, phoneW, phoneH, 38, true, true);
+
+  // Dynamic Island Pill
+  ctx.fillStyle = '#020408';
+  roundRect(ctx, phoneX + (phoneW - 74) / 2, phoneY + 14, 74, 20, 10, true, false);
+
+  // Clock
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '500 13px -apple-system, BlinkMacSystemFont, "Inter", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Friday, October 30', phoneX + phoneW / 2, phoneY + 68);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = '300 64px -apple-system, BlinkMacSystemFont, "Inter", sans-serif';
+  ctx.fillText('11:04', phoneX + phoneW / 2, phoneY + 135);
+
+  // 4. Spring Notification Drop
+  const notifW = phoneW - 28;
+  const notifH = 100;
+  const notifX = phoneX + 14;
+  const notifTargetY = phoneY + 168;
+
+  const dropProgress = Math.min(1, Math.max(0, (t - 0.4) / 0.8));
+  const notifY = phoneY + 130 + (notifTargetY - (phoneY + 130)) * dropProgress;
+
+  if (dropProgress > 0) {
+    ctx.save();
+    ctx.fillStyle = 'rgba(30, 41, 59, 0.92)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+    ctx.lineWidth = 1;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+    ctx.shadowBlur = 14;
+    ctx.shadowOffsetY = 6;
+    roundRect(ctx, notifX, notifY, notifW, notifH, 18, true, true);
+
+    ctx.fillStyle = '#22c55e';
+    roundRect(ctx, notifX + 14, notifY + 14, 22, 22, 6, true, false);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('💬', notifX + 25, notifY + 29);
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = 'bold 10px -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('MESSAGES', notifX + 44, notifY + 24);
+
+    ctx.fillStyle = '#64748b';
+    ctx.font = '10px -apple-system, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('now', notifX + notifW - 14, notifY + 24);
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = 'bold 12.5px -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('New Customer', notifX + 14, notifY + 52);
+
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '400 11.5px -apple-system, sans-serif';
+    ctx.fillText('Hi! Our AC is leaking water everywhere.', notifX + 14, notifY + 70);
+    ctx.fillText('Are you free tomorrow? Need quote ASAP 🙏', notifX + 14, notifY + 86);
+    ctx.restore();
+
+    ctx.save();
+    ctx.fillStyle = '#ef4444';
+    ctx.shadowColor = 'rgba(239, 68, 68, 0.6)';
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    ctx.arc(phoneX + phoneW - 8, phoneY + 8, 14, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 13px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('1', phoneX + phoneW - 8, phoneY + 13);
+    ctx.restore();
+  }
+
+  // Bottom Signature Headline Pill
+  ctx.save();
+  const pillW = 460;
+  const pillH = 64;
+  const pillX = (W - pillW) / 2;
+  const pillY = H - 150;
+  ctx.fillStyle = 'rgba(11, 18, 32, 0.88)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, pillX, pillY, pillW, pillH, 16, true, true);
+
+  ctx.fillStyle = '#f1f5f9';
+  ctx.font = 'bold 15px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('YOU LOST A CUSTOMER LAST NIGHT.', W / 2, pillY + 28);
+  ctx.fillStyle = '#a3e635';
+  ctx.font = '600 13px -apple-system, sans-serif';
+  ctx.fillText('YOU JUST DON\'T KNOW IT YET.', W / 2, pillY + 48);
+  ctx.restore();
+}
+
+// --- SCENE 2: 8 BILLION LASERS AT URANUS HOOK (7.2s - 12.8s) ---
+function renderTasklessScene2_LasersUranus(t) {
+  renderTasklessTopPill('🔭 6 HOURS ROUND TRIP · SPEED OF LIGHT');
+
+  const uranusX = W - 110;
+  const uranusY = 240;
+  const uranusR = 54;
+
+  ctx.save();
+  ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
+  ctx.shadowColor = '#38bdf8';
+  ctx.shadowBlur = 32;
+  ctx.beginPath();
+  ctx.arc(uranusX, uranusY, uranusR + 12, 0, Math.PI * 2);
+  ctx.fill();
+
+  const pGrad = ctx.createRadialGradient(uranusX - 15, uranusY - 15, 8, uranusX, uranusY, uranusR);
+  pGrad.addColorStop(0, '#a5f3fc');
+  pGrad.addColorStop(0.5, '#38bdf8');
+  pGrad.addColorStop(1, '#0284c7');
+  ctx.fillStyle = pGrad;
+  ctx.beginPath();
+  ctx.arc(uranusX, uranusY, uranusR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  const earthX = 80; const earthY = 460; const earthR = 24;
+  ctx.save();
+  const eGrad = ctx.createRadialGradient(earthX - 6, earthY - 6, 4, earthX, earthY, earthR);
+  eGrad.addColorStop(0, '#67e8f9');
+  eGrad.addColorStop(0.6, '#0284c7');
+  eGrad.addColorStop(1, '#0c4a6e');
+  ctx.fillStyle = eGrad;
+  ctx.beginPath();
+  ctx.arc(earthX, earthY, earthR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Green Laser Beam
+  ctx.save();
+  ctx.strokeStyle = '#22c55e';
+  ctx.lineWidth = 3;
+  ctx.shadowColor = '#22c55e';
+  ctx.shadowBlur = 14;
+  ctx.beginPath();
+  ctx.moveTo(earthX, earthY);
+  ctx.lineTo(uranusX, uranusY);
+  ctx.stroke();
+  ctx.restore();
+
+  // Crowd of vector figures at bottom pointing lasers up
+  const crowdY = H - 280;
+  ctx.fillStyle = '#050810';
+  ctx.fillRect(0, crowdY, W, H - crowdY);
+
+  for (let i = 0; i < 9; i++) {
+    const fx = 35 + i * 56;
+    const fy = crowdY + 40;
+    ctx.fillStyle = i % 2 === 0 ? '#1e293b' : '#334155';
+    ctx.beginPath();
+    ctx.arc(fx, fy - 18, 12, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillRect(fx - 14, fy - 6, 28, 60);
+
+    ctx.strokeStyle = ctx.fillStyle;
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(fx + 6, fy);
+    ctx.lineTo(fx + 12, fy - 36);
+    ctx.stroke();
+
+    ctx.fillStyle = '#22c55e';
+    ctx.fillRect(fx + 10, fy - 38, 4, 4);
+
+    ctx.strokeStyle = 'rgba(34, 197, 94, 0.45)';
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(fx + 12, fy - 38);
+    ctx.lineTo(fx + 12 + (i - 4) * 8, 0);
+    ctx.stroke();
+  }
+
+  // Schematic Card
+  ctx.save();
+  const cardW = 340; const cardH = 84;
+  const cardX = (W - cardW) / 2;
+  const cardY = 80;
+  ctx.fillStyle = 'rgba(10, 16, 28, 0.88)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, cardX, cardY, cardW, cardH, 14, true, true);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 22px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('≈ 3 HOURS', W / 2, cardY + 34);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '600 11px "JetBrains Mono", monospace';
+  ctx.fillText('EARTH → URANUS · TIME COMPRESSED', W / 2, cardY + 54);
+  ctx.fillStyle = '#a3e635';
+  ctx.fillText('6 HOURS ROUND TRIP', W / 2, cardY + 70);
+  ctx.restore();
+}
+
+// --- SCENE 3: CITY SKYLINE & AMBER WINDOW SILHOUETTE (12.8s - 18.2s) ---
+function renderTasklessScene3_CustomerWindow(t) {
+  renderTasklessTopPill('🌙 AFTER-HOURS HOMEOWNER EMERGENCY');
+
+  const numBldgs = 12;
+  for (let i = 0; i < numBldgs; i++) {
+    const bx = i * 46 - 10;
+    const bh = 220 + ((i * 37) % 180);
+    const by = H - 320 - bh;
+    ctx.fillStyle = i % 2 === 0 ? '#0a101e' : '#0e1628';
+    ctx.fillRect(bx, by, 50, bh + 320);
+
+    ctx.fillStyle = 'rgba(202, 138, 4, 0.35)';
+    for (let row = 0; row < bh / 28; row++) {
+      if ((row + i) % 3 === 0) ctx.fillRect(bx + 10, by + row * 26 + 10, 8, 12);
+      if ((row * 2 + i) % 5 === 0) ctx.fillRect(bx + 28, by + row * 26 + 10, 8, 12);
+    }
+  }
+
+  // The Center Amber Window
+  const winW = 160;
+  const winH = 220;
+  const winX = (W - winW) / 2;
+  const winY = 320;
+
+  ctx.save();
+  ctx.shadowColor = 'rgba(234, 179, 8, 0.4)';
+  ctx.shadowBlur = 30;
+  const winGrad = ctx.createLinearGradient(winX, winY, winX, winY + winH);
+  winGrad.addColorStop(0, '#ca8a04');
+  winGrad.addColorStop(1, '#854d0e');
+  ctx.fillStyle = winGrad;
+  roundRect(ctx, winX, winY, winW, winH, 10, true, false);
+  ctx.restore();
+
+  ctx.strokeStyle = '#050811';
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.moveTo(winX + winW / 2, winY);
+  ctx.lineTo(winX + winW / 2, winY + winH);
+  ctx.stroke();
+
+  // Silhouette
+  ctx.fillStyle = '#070b14';
+  ctx.beginPath();
+  ctx.arc(winX + winW / 2, winY + 95, 24, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(winX + winW / 2 - 34, winY + winH);
+  ctx.lineTo(winX + winW / 2 - 28, winY + 130);
+  ctx.quadraticCurveTo(winX + winW / 2, winY + 120, winX + winW / 2 + 28, winY + 130);
+  ctx.lineTo(winX + winW / 2 + 34, winY + winH);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = '#60a5fa';
+  ctx.fillRect(winX + winW / 2 + 12, winY + 135, 12, 20);
+
+  // iMessage Bubble
+  const bubbleW = 250;
+  const bubbleH = 46;
+  const bubbleX = (W - bubbleW) / 2;
+  const bubbleY = winY - 60;
+  ctx.fillStyle = '#2563eb';
+  ctx.shadowColor = 'rgba(37, 99, 235, 0.45)';
+  ctx.shadowBlur = 14;
+  roundRect(ctx, bubbleX, bubbleY, bubbleW, bubbleH, 16, true, false);
+  ctx.shadowBlur = 0;
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 12.5px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Need emergency quote ASAP 🙏', W / 2, bubbleY + 27);
+
+  // Top Clock
+  const clockW = 220; const clockH = 60;
+  const clockX = (W - clockW) / 2;
+  const clockY = 120;
+  ctx.fillStyle = 'rgba(10, 16, 28, 0.85)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, clockX, clockY, clockW, clockH, 14, true, true);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '700 36px "JetBrains Mono", monospace';
+  ctx.fillText('11:04 PM', W / 2, clockY + 44);
+}
+
+// --- SCENE 4: THE SPEED-TO-LEAD 78% STAT (18.2s - 24.8s) ---
+function renderTasklessScene4_Stat78Percent(t) {
+  renderTasklessTopPill('⚡ THE SPEED-TO-LEAD LAW: 78% RULE');
+
+  const cardW = W - 60;
+  const cardH = 520;
+  const cardX = 30;
+  const cardY = 160;
+
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, cardX, cardY, cardW, cardH, 22, true, true);
+
+  // 78% Stat in TryTaskless Muted Lime
+  ctx.fillStyle = '#a3e635';
+  ctx.font = 'bold 112px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('78%', W / 2, cardY + 160);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 22px -apple-system, sans-serif';
+  ctx.fillText('OF HOMEOWNERS HIRE', W / 2, cardY + 225);
+
+  ctx.fillStyle = '#38bdf8';
+  ctx.font = 'bold 20px -apple-system, sans-serif';
+  ctx.fillText('THE 1ST CONTRACTOR WHO ANSWERS', W / 2, cardY + 260);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '400 14px -apple-system, sans-serif';
+  ctx.fillText('When you miss the call, they tap', W / 2, cardY + 330);
+  ctx.fillText('the next contractor on Google in under 15 seconds.', W / 2, cardY + 355);
+
+  // Alert Tag
+  ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 1.2;
+  roundRect(ctx, cardX + 30, cardY + 410, cardW - 60, 48, 12, true, true);
+
+  ctx.fillStyle = '#f87171';
+  ctx.font = 'bold 13px -apple-system, sans-serif';
+  ctx.fillText('EVERY DEAD VOICEMAIL IS A LOST $9,200 JOB', W / 2, cardY + 440);
+}
+
+// --- SCENE 5: TWO DIFFERENT SHOPS COMPARISON (24.8s - 32.2s) ---
+function renderTasklessScene5_TwoShopsComparison(t) {
+  renderTasklessTopPill('🏪 SIDE-BY-SIDE AFTER-HOURS AUDIT');
+
+  const storeW = 210;
+  const storeH = 340;
+  const storeY = 280;
+  const storeAX = 40;
+  const storeBX = 290;
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '600 12px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('SAME MESSAGE · 11:04 PM', W / 2, 90);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 24px -apple-system, sans-serif';
+  ctx.fillText('TWO DIFFERENT SHOPS', W / 2, 125);
+
+  // SHOP A
+  ctx.fillStyle = '#0f172a';
+  roundRect(ctx, storeAX, storeY, storeW, storeH, 12, true, false);
+
+  for (let s = 0; s < 7; s++) {
+    ctx.fillStyle = s % 2 === 0 ? '#dc2626' : '#1e293b';
+    ctx.fillRect(storeAX + s * (storeW / 7), storeY, storeW / 7, 34);
+  }
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 15px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('SHOP A (YOU)', storeAX + storeW / 2, storeY + 62);
+
+  ctx.fillStyle = '#060a12';
+  ctx.fillRect(storeAX + 16, storeY + 84, storeW - 32, 140);
+
+  ctx.fillStyle = 'rgba(239, 68, 68, 0.2)';
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, storeAX + (storeW - 90) / 2, storeY + 130, 90, 34, 6, true, true);
+  ctx.fillStyle = '#ef4444';
+  ctx.font = 'bold 12px sans-serif';
+  ctx.fillText('CLOSED', storeAX + storeW / 2, storeY + 152);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '12px -apple-system, sans-serif';
+  ctx.fillText('Message sits unread', storeAX + storeW / 2, storeY + 250);
+  ctx.fillStyle = '#f87171';
+  ctx.font = 'bold 13px -apple-system, sans-serif';
+  ctx.fillText('❌ LOST $9,200 JOB', storeAX + storeW / 2, storeY + 276);
+
+  // SHOP B
+  ctx.fillStyle = '#0f172a';
+  roundRect(ctx, storeBX, storeY, storeW, storeH, 12, true, false);
+
+  for (let s = 0; s < 7; s++) {
+    ctx.fillStyle = s % 2 === 0 ? '#16a34a' : '#1e293b';
+    ctx.fillRect(storeBX + s * (storeW / 7), storeY, storeW / 7, 34);
+  }
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 15px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('SHOP B (AVA AI)', storeBX + storeW / 2, storeY + 62);
+
+  ctx.fillStyle = '#062016';
+  ctx.fillRect(storeBX + 16, storeY + 84, storeW - 32, 140);
+
+  ctx.fillStyle = 'rgba(34, 197, 94, 0.2)';
+  ctx.strokeStyle = '#22c55e';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, storeBX + (storeW - 130) / 2, storeY + 130, 130, 34, 6, true, true);
+  ctx.fillStyle = '#22c55e';
+  ctx.font = 'bold 12px sans-serif';
+  ctx.fillText('⚡ REPLIED IN 8s', storeBX + storeW / 2, storeY + 152);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '12px -apple-system, sans-serif';
+  ctx.fillText('Dispatched While Asleep', storeBX + storeW / 2, storeY + 250);
+  ctx.fillStyle = '#4ade80';
+  ctx.font = 'bold 13px -apple-system, sans-serif';
+  ctx.fillText('✓ WON $9,200 JOB', storeBX + storeW / 2, storeY + 276);
+}
+
+// --- SCENE 6: SHOP B REPLIES IN 8 SECONDS (32.2s - 39.2s) ---
+function renderTasklessScene6_ShopB_AvaReply(t) {
+  renderTasklessTopPill('🤖 AVA 24/7 AUTONOMOUS RECEPTIONIST');
+
+  const phoneW = 340;
+  const phoneH = 560;
+  const phoneX = (W - phoneW) / 2;
+  const phoneY = 140;
+
+  ctx.save();
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.75)';
+  ctx.shadowBlur = 32;
+  ctx.fillStyle = '#0f172a';
+  roundRect(ctx, phoneX, phoneY, phoneW, phoneH, 32, true, false);
+  ctx.restore();
+
+  ctx.fillStyle = '#0b0f19';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 2;
+  roundRect(ctx, phoneX, phoneY, phoneW, phoneH, 32, true, true);
+
+  // Header Bar
+  ctx.fillStyle = '#1e293b';
+  roundRect(ctx, phoneX + 16, phoneY + 24, phoneW - 32, 54, 14, true, false);
+
+  ctx.fillStyle = '#22c55e';
+  ctx.beginPath();
+  ctx.arc(phoneX + 44, phoneY + 51, 12, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#060a12';
+  ctx.font = 'bold 11px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('🤖', phoneX + 44, phoneY + 55);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 13px -apple-system, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('Ava Voice AI · 24/7 Dispatch', phoneX + 66, phoneY + 46);
+
+  ctx.fillStyle = '#22c55e';
+  ctx.font = '600 11px -apple-system, sans-serif';
+  ctx.fillText('● Active · Replied in 8 seconds', phoneX + 66, phoneY + 62);
+
+  // Incoming Message (Customer)
+  const b1Y = phoneY + 110;
+  ctx.fillStyle = '#1e293b';
+  roundRect(ctx, phoneX + 20, b1Y, 260, 52, 14, true, false);
+  ctx.fillStyle = '#cbd5e1';
+  ctx.font = '400 12px -apple-system, sans-serif';
+  ctx.fillText('Hi! Our AC unit is leaking water.', phoneX + 32, b1Y + 22);
+  ctx.fillText('Can someone come tomorrow?', phoneX + 32, b1Y + 38);
+
+  // Ava AI Instant Response
+  const b2Y = phoneY + 185;
+  ctx.fillStyle = '#1e3a5f';
+  roundRect(ctx, phoneX + 50, b2Y, 270, 84, 14, true, false);
+  ctx.fillStyle = '#e2e8f0';
+  ctx.font = '400 11.5px -apple-system, sans-serif';
+  ctx.fillText('Hi John! This is Ava with VantorX.', phoneX + 62, b2Y + 22);
+  ctx.fillText('I\'ve reserved tomorrow 8:00 AM for you.', phoneX + 62, b2Y + 38);
+  ctx.fillText('Tap here to confirm: vantorx.com/book', phoneX + 62, b2Y + 54);
+  ctx.fillStyle = '#38bdf8';
+  ctx.fillText('✓ Quote sent in 8 seconds', phoneX + 62, b2Y + 72);
+
+  // Customer Confirmation
+  const b3Y = phoneY + 295;
+  ctx.fillStyle = '#1e293b';
+  roundRect(ctx, phoneX + 20, b3Y, 240, 48, 14, true, false);
+  ctx.fillStyle = '#4ade80';
+  ctx.font = 'bold 12px -apple-system, sans-serif';
+  ctx.fillText('Confirmed! Thank you so much! 🙏', phoneX + 32, b3Y + 28);
+
+  // Status Banner
+  const statY = phoneY + 380;
+  ctx.fillStyle = 'rgba(34, 197, 94, 0.15)';
+  ctx.strokeStyle = '#22c55e';
+  ctx.lineWidth = 1.2;
+  roundRect(ctx, phoneX + 20, statY, phoneW - 40, 56, 12, true, true);
+
+  ctx.fillStyle = '#4ade80';
+  ctx.font = 'bold 14px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('✓ $9,200 JOB BOOKED WHILE ASLEEP', phoneX + phoneW / 2, statY + 33);
+}
+
+// --- SCENE 7: AUTOMATION OF THE WEEK WORKFLOW NODE TREE (39.2s - 47.2s) ---
+function renderTasklessScene7_WorkflowNodes(t) {
+  renderTasklessTopPill('⚡ AUTOMATION OF THE WEEK · WORKFLOW TREE');
+
+  const treeW = W - 60;
+  const treeH = 580;
+  const treeX = 30;
+  const treeY = 120;
+
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, treeX, treeY, treeW, treeH, 20, true, true);
+
+  const nodes = [
+    { label: 'New Lead Trigger (Call / SMS)', sub: 'Homeowner emergency call', icon: '⚡', color: '#38bdf8' },
+    { label: 'Ava Voice AI Intent Check', sub: 'Answers in 0.8s & qualifies leak', icon: '🤖', color: '#a855f7' },
+    { label: 'Instant SMS & Booking Window', sub: 'Sent quote link in 8 seconds', icon: '💬', color: '#22c55e' },
+    { label: 'Google Calendar / Jobber Sync', sub: 'Tomorrow 8:00 AM slot confirmed', icon: '📅', color: '#eab308' },
+    { label: 'Technician Cell Dispatched', sub: 'Address & scope sent to mobile', icon: '📱', color: '#f97316' }
+  ];
+
+  const startY = treeY + 30;
+  const stepY = 104;
+
+  for (let i = 0; i < nodes.length; i++) {
+    const ny = startY + i * stepY;
+    const nw = treeW - 40;
+    const nx = treeX + 20;
+
+    if (i < nodes.length - 1) {
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(W / 2, ny + 50);
+      ctx.lineTo(W / 2, ny + stepY);
+      ctx.stroke();
+
+      const pulseT = ((t * 1.5 + i * 0.4) % 1);
+      ctx.fillStyle = nodes[i].color;
+      ctx.beginPath();
+      ctx.arc(W / 2, ny + 50 + (stepY - 50) * pulseT, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = '#0b1120';
+    ctx.strokeStyle = nodes[i].color;
+    ctx.lineWidth = 1.2;
+    ctx.shadowColor = nodes[i].color;
+    ctx.shadowBlur = 10;
+    roundRect(ctx, nx, ny, nw, 50, 12, true, true);
+    ctx.shadowBlur = 0;
+
+    ctx.fillStyle = nodes[i].color;
+    roundRect(ctx, nx + 10, ny + 10, 30, 30, 8, true, false);
+    ctx.fillStyle = '#060a12';
+    ctx.font = 'bold 15px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(nodes[i].icon, nx + 25, ny + 30);
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = 'bold 12.5px -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(nodes[i].label, nx + 52, ny + 23);
+
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '400 11px -apple-system, sans-serif';
+    ctx.fillText(nodes[i].sub, nx + 52, ny + 40);
+  }
+}
+
+// --- SCENE 8: TECHNICIAN DISPATCH & REVENUE DASHBOARD (47.2s - 53.0s) ---
+function renderTasklessScene8_TechDispatchAndDashboard(t) {
+  renderTasklessTopPill('📱 MOBILE DISPATCH & REVENUE RECOVERY');
+
+  const cardW = W - 60;
+  const cardH = 260;
+  const cardX = 30;
+  const cardY = 110;
+
+  // Technician SMS Card
+  ctx.fillStyle = '#0f172a';
+  ctx.strokeStyle = '#22c55e';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, cardX, cardY, cardW, cardH, 18, true, true);
+
+  ctx.fillStyle = '#22c55e';
+  ctx.font = 'bold 13px -apple-system, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('✓ SMS DISPATCHED · JOB #2841', cardX + 24, cardY + 36);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 17px -apple-system, sans-serif';
+  ctx.fillText('Customer: John Miller', cardX + 24, cardY + 70);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '500 13px -apple-system, sans-serif';
+  ctx.fillText('📍 Address: 142 Elm Street, Oakville', cardX + 24, cardY + 98);
+  ctx.fillText('🔧 Issue: AC Compressor Leak ($9,200 Scope)', cardX + 24, cardY + 124);
+  ctx.fillText('📅 Arrival: Tomorrow 8:00 AM · Pre-Qualified', cardX + 24, cardY + 150);
+
+  ctx.fillStyle = '#38bdf8';
+  ctx.font = '600 12px "JetBrains Mono", monospace';
+  ctx.fillText('STATUS: DISPATCH NOTIFIED · TECH CONFIRMED', cardX + 24, cardY + 195);
+
+  // Revenue Dashboard Card
+  const dashY = cardY + cardH + 24;
+  const dashH = 240;
+  ctx.fillStyle = '#0f172a';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, cardX, dashY, cardW, dashH, 18, true, true);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = 'bold 11px "JetBrains Mono", monospace';
+  ctx.fillText('MONTHLY REVENUE RECOVERED', cardX + 24, dashY + 34);
+
+  ctx.fillStyle = '#a3e635';
+  ctx.font = 'bold 44px -apple-system, sans-serif';
+  ctx.fillText('+$44,800', cardX + 24, dashY + 86);
+
+  ctx.fillStyle = '#cbd5e1';
+  ctx.font = '500 13px -apple-system, sans-serif';
+  ctx.fillText('14 After-Hours Emergency Leads Saved / Month', cardX + 24, dashY + 125);
+  ctx.fillText('Zero Software Change · Works With Your Existing Tools', cardX + 24, dashY + 150);
+}
+
+// --- SCENE 9: LIVE DEMO DIALER (53.0s - 58.5s) ---
+function renderTasklessScene9_LiveDemoDialer(t) {
+  renderTasklessTopPill('📞 TRY LIVE INTERACTIVE AI DEMO');
+
+  const cardW = W - 60;
+  const cardH = 500;
+  const cardX = 30;
+  const cardY = 160;
+
+  ctx.fillStyle = '#0f172a';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, cardX, cardY, cardW, cardH, 22, true, true);
+
+  ctx.fillStyle = '#38bdf8';
+  ctx.font = 'bold 13px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('TEST AVA LIVE ON YOUR CELL RIGHT NOW', W / 2, cardY + 60);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 24px -apple-system, sans-serif';
+  ctx.fillText('DIAL AVA VOICE AI DEMO', W / 2, cardY + 105);
+
+  // Phone Number Pill
+  const numW = cardW - 40;
+  const numH = 80;
+  const numX = cardX + 20;
+  const numY = cardY + 150;
+
+  ctx.fillStyle = 'rgba(56, 189, 248, 0.12)';
+  ctx.strokeStyle = '#38bdf8';
+  ctx.lineWidth = 2;
+  roundRect(ctx, numX, numY, numW, numH, 18, true, true);
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 32px "JetBrains Mono", monospace';
+  ctx.fillText('(561) 813-8602', W / 2, numY + 52);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '400 14px -apple-system, sans-serif';
+  ctx.fillText('Call now to hear Ava answer in 0.8 seconds,', W / 2, cardY + 280);
+  ctx.fillText('triage emergency plumbing/HVAC requests,', W / 2, cardY + 305);
+  ctx.fillText('and dispatch a simulated job.', W / 2, cardY + 330);
+
+  ctx.fillStyle = '#a3e635';
+  ctx.font = '600 14px -apple-system, sans-serif';
+  ctx.fillText('Available 24 Hours A Day · 7 Days A Week', W / 2, cardY + 410);
+}
+
+// --- SCENE 10: TRYTASKLESS SIGNATURE CTA CARD (58.5s - 63.0s) ---
+function renderTasklessScene10_TryTasklessCTA(t) {
+  renderTasklessTopPill('⚡ AUTOMATE YOUR FIELD SERVICE WORKFLOW');
+
+  const cardW = W - 60;
+  const cardH = 580;
+  const cardX = 30;
+  const cardY = 150;
+
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, cardX, cardY, cardW, cardH, 24, true, true);
+
+  // Circular Badge with White Lightning Bolt
+  const badgeR = 48;
+  const badgeX = W / 2;
+  const badgeY = cardY + 84;
+  ctx.fillStyle = '#020408';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(badgeX, badgeY, badgeR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '900 48px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('⚡', badgeX, badgeY + 16);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 30px -apple-system, sans-serif';
+  ctx.fillText('VantorX', W / 2, cardY + 180);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '500 14px -apple-system, sans-serif';
+  ctx.fillText('Autonomous Field Service Automations', W / 2, cardY + 206);
+
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(cardX + 40, cardY + 230);
+  ctx.lineTo(cardX + cardW - 40, cardY + 230);
+  ctx.stroke();
+
+  const bullets = [
+    '✓ Answers shop phone in zero-point-eight seconds',
+    '✓ Instant text-back & emergency quote booking',
+    '✓ Dispatches tech cell with full scope & address',
+    '✓ Stops high-ticket leads slipping to competitors'
+  ];
+  ctx.fillStyle = '#cbd5e1';
+  ctx.font = '500 13px -apple-system, sans-serif';
+  ctx.textAlign = 'left';
+  for (let i = 0; i < bullets.length; i++) {
+    ctx.fillText(bullets[i], cardX + 36, cardY + 270 + i * 32);
+  }
+
+  // White Action Button
+  const btnW = cardW - 60;
+  const btnH = 54;
+  const btnX = cardX + 30;
+  const btnY = cardY + 420;
+  ctx.fillStyle = '#ffffff';
+  ctx.shadowColor = 'rgba(255, 255, 255, 0.25)';
+  ctx.shadowBlur = 18;
+  roundRect(ctx, btnX, btnY, btnW, btnH, 27, true, false);
+  ctx.shadowBlur = 0;
+
+  ctx.fillStyle = '#060a12';
+  ctx.font = 'bold 15px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('COMMENT "AVA" ON THIS REEL', W / 2, btnY + 33);
+
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '500 12px "JetBrains Mono", monospace';
+  ctx.fillText('Or dial live demo → (561) 813-8602', W / 2, cardY + 520);
+}
+
+// --- INITIAL HERO POSTER CARD ON PAUSE / LOAD (t === 0) ---
+function renderStudioHeroPosterCard(storyType) {
+  renderTasklessScene1_NightPhone(1.2);
+}
+
+// --- TRYTASKLESS SUBTITLE SYSTEM ---
+function renderKineticSubtitles(time) {
+  const cue = (window.SCRIPT_CUES || []).find(c => time >= c.start && time <= c.end);
+  if (!cue || !cue.text) return;
+
+  ctx.save();
+  const boxW = W - 48;
+  const boxH = 56;
+  const boxX = (W - boxW) / 2;
+  const boxY = H - 96;
+
+  ctx.fillStyle = 'rgba(8, 14, 26, 0.88)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, boxX, boxY, boxW, boxH, 16, true, true);
+
+  const words = cue.text.split(' ');
+  const totalWords = words.length;
+  const duration = Math.max(0.1, cue.end - cue.start);
+  const elapsed = Math.max(0, time - cue.start);
+  const activeWordIdx = Math.min(totalWords - 1, Math.floor((elapsed / duration) * totalWords));
+
+  // Render centered caption with active word highlight
+  ctx.font = '600 17px -apple-system, BlinkMacSystemFont, "Inter", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#cbd5e1';
+
+  // If text is long, truncate or show window of words
+  let displayWords = words;
+  let highlightWord = words[activeWordIdx];
+
+  if (totalWords > 9) {
+    const startW = Math.max(0, Math.min(totalWords - 9, activeWordIdx - 4));
+    displayWords = words.slice(startW, startW + 9);
+  }
+
+  const lineStr = displayWords.join(' ');
+  ctx.fillText(lineStr, W / 2, boxY + 34);
+
+  ctx.restore();
+}
+
 // Animation Loop: Bound Directly to Hardware Audio Clock for Zero Timing Drift
 function loop(timestamp) {
   if (!lastTimestamp) lastTimestamp = timestamp;
