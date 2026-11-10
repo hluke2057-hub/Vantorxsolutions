@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 155 ➔ 180 Aesthetic Blueprint | Luke Hamilton Fitness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --primary: #c8ff00;
+      --primary-glow: rgba(200, 255, 0, 0.35);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.3);
+      --text: #ffffff;
+      --text-muted: #94a3b8;
+      --danger: #f87171;
+      --success: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Ambient Lighting Glows */
+    .glow-top {
+      position: fixed;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(200, 255, 0, 0.12) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-badge {
+      background: var(--primary);
+      color: #090d16;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 70px 0 50px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200, 255, 0, 0.1);
+      border: 1px solid rgba(200, 255, 0, 0.35);
+      color: var(--primary);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 30px;
+      margin-bottom: 24px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.08;
+      margin-bottom: 24px;
+    }
+
+    .hero-title span.highlight {
+      color: var(--primary);
+      text-shadow: 0 0 35px var(--primary-glow);
+    }
+
+    .hero-title span.blue {
+      color: var(--accent);
+      text-shadow: 0 0 35px var(--accent-glow);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #090d16;
+      font-size: 16px;
+      font-weight: 900;
+      padding: 16px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px var(--primary-glow);
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(200, 255, 0, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #fff;
+    }
+
+    /* Transformation Photo Comparison Grid */
+    .trans-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .trans-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .trans-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+    }
+
+    .trans-card img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .trans-card-label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      background: rgba(9, 13, 22, 0.88);
+      backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .trans-tag {
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .trans-tag.before {
+      color: #f87171;
+    }
+
+    .trans-tag.after {
+      color: var(--primary);
+    }
+
+    .trans-weight {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #cbd5e1;
+      font-weight: 700;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 90px;
+      gap: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .stat-val {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 900;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* The Golden Law Callout */
+    .law-section {
+      background: linear-gradient(135deg, rgba(200, 255, 0, 0.08) 0%, rgba(56, 189, 248, 0.04) 100%);
+      border: 1px solid rgba(200, 255, 0, 0.25);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 90px;
+      position: relative;
+    }
+
+    .law-tag {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .law-quote {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .law-desc {
+      color: #cbd5e1;
+      font-size: 16px;
+      max-width: 820px;
+      line-height: 1.6;
+    }
+
+    /* Routine Tabs Section */
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-badge {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .tabs-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #090d16;
+      border-color: var(--primary);
+      box-shadow: 0 4px 20px var(--primary-glow);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Exercise List Cards */
+    .exercise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .exercise-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 22px;
+      position: relative;
+    }
+
+    .exercise-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .exercise-name {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .exercise-badge {
+      background: rgba(200, 255, 0, 0.15);
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(200, 255, 0, 0.3);
+    }
+
+    .exercise-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .exercise-cue {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: #e2e8f0;
+    }
+
+    /* Interactive Macro Calculator */
+    .calc-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 90px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 800px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calc-input-group {
+      margin-bottom: 20px;
+    }
+
+    .calc-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .calc-input, .calc-select {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      padding: 14px 18px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 15px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .calc-input:focus, .calc-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .calc-results {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .result-row:last-child {
+      border-bottom: none;
+    }
+
+    .result-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      color: var(--primary);
+      font-size: 16px;
+    }
+
+    /* Pricing Section */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 90px;
+    }
+
+    @media (max-width: 900px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .price-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 36px 28px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-card.featured {
+      border-color: var(--primary);
+      box-shadow: 0 0 40px rgba(200, 255, 0, 0.15);
+      background: linear-gradient(180deg, rgba(200, 255, 0, 0.04) 0%, rgba(15, 23, 42, 0.95) 100%);
+    }
+
+    .price-badge-top {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #090d16;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 4px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .price-name {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .price-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      min-height: 40px;
+    }
+
+    .price-num {
+      font-size: 48px;
+      font-weight: 900;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .price-num span {
+      font-size: 16px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .price-bullets {
+      list-style: none;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .price-bullets li {
+      padding: 8px 0;
+      font-size: 14px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price-bullets li::before {
+      content: "✓";
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    /* Mentorship Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 580px;
+      padding: 36px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .modal-title {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .modal-sub {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 50px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-top"></div>
+
+  <div class="container">
+    <!-- Navbar -->
+    <nav>
+      <div class="nav-logo">
+        LUKE HAMILTON <span class="nav-badge">155 ➔ 180 LBS</span>
+      </div>
+      <div class="nav-links">
+        <a href="#routine" class="nav-link">The Routine</a>
+        <a href="#nutrition" class="nav-link">Diet Matrix</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <button class="btn-nav" onclick="openMentorshipModal()">1-on-1 Mentorship</button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">⚡ THE 2-SET FAILURE BLUEPRINT</div>
+      <h1 class="hero-title">
+        From 155 lbs Skinny-Fat to <span class="highlight">180 lbs Shredded</span> with <span class="blue">8-Pack Abs</span>
+      </h1>
+      <p class="hero-sub">
+        Stop wasting 2.5 hours in the gym on 20 junk-volume sets. Discover the exact low-volume, high-intensity system that added 25 lbs of rock-hard aesthetic muscle using the Golden Rule of Progressive Overload.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#pricing" class="btn-primary">Get The Complete Blueprint ($47) →</a>
+        <button class="btn-secondary" onclick="openMentorshipModal()">Apply For 1-on-1 Mentorship</button>
+      </div>
+    </section>
+
+    <!-- Transformation Photos Gallery -->
+    <section class="trans-gallery">
+      <div class="trans-card">
+        <img src="images/luke_before_155_bathroom.jpg" alt="Luke at 155 lbs">
+        <div class="trans-card-label">
+          <span class="trans-tag before">BEFORE</span>
+          <span class="trans-weight">155 lbs Baseline</span>
+        </div>
+      </div>
+      <div class="trans-card">
+        <img src="images/luke_before_155_shirt_lift.jpg" alt="Luke 155 lbs Soft Starter">
+        <div class="trans-card-label">
+          <span class="trans-tag before">START</span>
+          <span class="trans-weight">Day 1 Frame</span>
+        </div>
+      </div>
+      <div class="trans-card">
+        <img src="images/luke_after_180_shredded_abs.jpg" alt="Luke 180 lbs Shredded Abs">
+        <div class="trans-card-label">
+          <span class="trans-tag after">AFTER</span>
+          <span class="trans-weight">180 lbs Shredded</span>
+        </div>
+      </div>
+      <div class="trans-card">
+        <img src="images/luke_after_180_gym_delts.jpg" alt="Luke 180 lbs 3D Delts">
+        <div class="trans-card-label">
+          <span class="trans-tag after">RESULT</span>
+          <span class="trans-weight">3D Delts & Veins</span>
+        </div>
+      </div>
+      <div class="trans-card">
+        <img src="images/luke_after_180_full_physique.jpg" alt="Luke 180 lbs Full Physique">
+        <div class="trans-card-label">
+          <span class="trans-tag after">AESTHETIC</span>
+          <span class="trans-weight">Greek God Frame</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof Stats -->
+    <section class="stats-bar">
+      <div>
+        <div class="stat-val">+25 LBS</div>
+        <div class="stat-label">Pure Muscle Added</div>
+      </div>
+      <div>
+        <div class="stat-val">2 SETS</div>
+        <div class="stat-label">To Absolute Failure</div>
+      </div>
+      <div>
+        <div class="stat-val">52 MIN</div>
+        <div class="stat-label">Average Workout Time</div>
+      </div>
+      <div>
+        <div class="stat-val">100%</div>
+        <div class="stat-label">Abs Preserved on Bulk</div>
+      </div>
+    </section>
+
+    <!-- The Golden Law Callout -->
+    <section class="law-section">
+      <span class="law-tag">THE FOUNDATIONAL PRINCIPLE</span>
+      <h2 class="law-quote">"Adding weight is progressive overload. If you're not tracking reps and adding weight, you're just exercising—not building muscle."</h2>
+      <p class="law-desc">
+        Most guys do 4 sets of 12 with weight they could easily do for 18. In this program, every set is taken to absolute mechanical failure (RPE 10). When you train with true intensity, 2 working sets triggers 100% of muscle protein synthesis with zero wasted recovery capacity.
+      </p>
+    </section>
+
+    <!-- Routine Breakdown -->
+    <section id="routine">
+      <div class="section-header">
+        <span class="section-badge">WEEKLY SPLIT BREAKDOWN</span>
+        <h2 class="section-title">The Exact Workout Split</h2>
+      </div>
+
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('push')">🔴 Push (Chest/Delts/Tri)</button>
+        <button class="tab-btn" onclick="switchTab('pull')">🔵 Pull (Back/Biceps)</button>
+        <button class="tab-btn" onclick="switchTab('legs')">🟢 Legs (Quads/Hams/Calves)</button>
+        <button class="tab-btn" onclick="switchTab('abs')">🟡 Core (3x / Week)</button>
+      </div>
+
+      <!-- Push Tab -->
+      <div id="tab-push" class="tab-content active">
+        <div class="exercise-grid">
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Flat Chest Press</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Mid Pectorals · 6–8 Reps Target</div>
+            <div class="exercise-cue">3-sec slow eccentric down, deep chest stretch, explode upward without locking elbows.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Incline Chest Press</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Upper Clavicular Pecs · 6–9 Reps Target</div>
+            <div class="exercise-cue">30° bench angle. Drive elbows inward toward your chin to build a thick upper shelf.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Pec Deck Flye</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Inner Sternal Fibers · 8–10 Reps Target</div>
+            <div class="exercise-cue">Slight elbow bend; squeeze hands together and hold the peak contraction for 1 second.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Dumbbell Lateral Raises</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Lateral Boulder Delts · 10–12 Reps Target</div>
+            <div class="exercise-cue">Lean forward 10°, lead with elbows, raise to ear height; 5-sec isometric hold on last rep.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Cable Lateral Raises (Single Arm)</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Constant Tension Delts · 10–12 Reps Target</div>
+            <div class="exercise-cue">Cable set behind back at wrist height. Constant peak resistance at the bottom stretch.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Skull Crushers (EZ Bar)</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Triceps Long Head · 8–10 Reps Target</div>
+            <div class="exercise-cue">Lower bar behind your head (not forehead) for maximum stretch on the long head.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Tricep Rope Pushdown</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Lateral Head · 10–12 Reps Target</div>
+            <div class="exercise-cue">Pin elbows to ribs, flare the rope handles apart aggressively at the bottom lockout.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Tricep Straight Bar Pushdown</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Heavy Horseshoe Triceps · 6–8 Reps Target</div>
+            <div class="exercise-cue">Lean slightly over the bar, heavy strict overload to failure.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pull Tab -->
+      <div id="tab-pull" class="tab-content">
+        <div class="exercise-grid">
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Lat Pulldowns</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">V-Taper Width · 8–10 Reps Target</div>
+            <div class="exercise-cue">Drive your elbows down into your back pockets; slight 10° lean back.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Lat Pullovers (Cable)</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Outer Lat Sweep · 10–12 Reps Target</div>
+            <div class="exercise-cue">Keep elbows soft and fixed; sweep hands downward in a wide arc to the thighs.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">T-Bar Row</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Mid-Back & Rhomboids · 6–8 Reps Target</div>
+            <div class="exercise-cue">Heavy row to belly button; retract and squeeze shoulder blades together at top.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Unilateral Row Machine</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Deep Lat Stretch · 8–10 Reps Target</div>
+            <div class="exercise-cue">Rotate torso forward at full reach for extreme lat stretch, pull back hard.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Hyperextensions</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Spinal Erectors & Posterior Chain · 10–12 Reps</div>
+            <div class="exercise-cue">Hold 45 lb plate across chest; hinge strictly from hips with neutral neck.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Reverse Pec Deck</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Rear Deltoids · 12–15 Reps Target</div>
+            <div class="exercise-cue">Drive knuckles outward in a wide circle; isolate rear delts without pinching traps.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Standing Cable Bicep Curl</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Bicep Peak · 8–10 Reps Target</div>
+            <div class="exercise-cue">Pin elbows forward, supinate palms aggressively at the peak squeeze.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Cable Hammer Curl (Rope)</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Brachialis / Arm Thickness · 10–12 Reps</div>
+            <div class="exercise-cue">Neutral thumbs-up grip; builds that thick 3D arm width next to the bicep.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legs Tab -->
+      <div id="tab-legs" class="tab-content">
+        <div class="exercise-grid">
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Hack Squat</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Quad Teardrop & Outer Sweep · 6–9 Reps</div>
+            <div class="exercise-cue">Feet placed low on platform; 3-second descent into deep knee flexion below parallel.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Romanian Deadlifts (RDLs)</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Hamstrings & Glutes · 8–10 Reps</div>
+            <div class="exercise-cue">Push hips straight back like touching a wall; feel the deep hamstring stretch.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Hip Abductor Machine</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Gluteus Medius / Hip Width · 12–15 Reps</div>
+            <div class="exercise-cue">Lean slightly forward off backrest, push knees out hard, hold 1-sec at full spread.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Hip Adductor Machine</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Inner Thigh Density · 12–15 Reps</div>
+            <div class="exercise-cue">Control the eccentric stretch outward; squeeze pads together and hold.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Leg Extension</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Rectus Femoris Quad Burn · 10–12 Reps</div>
+            <div class="exercise-cue">Pause at top lockout for 1 full second; fight the eccentric down to zero.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Lying / Seated Leg Curl</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Hamstring Isolation · 8–10 Reps</div>
+            <div class="exercise-cue">Keep toes pointed back; do not let hips lift off bench at peak contraction.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Standing Calf Raises</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Calf Meat (Gastrocnemius) · 12–15 Reps</div>
+            <div class="exercise-cue">2-second dead stop at the bottom stretch; explode up onto your big toes.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Abs Tab -->
+      <div id="tab-abs" class="tab-content">
+        <div class="exercise-grid">
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Decline / Cable Ab Crunches</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Upper & Mid Rectus Abdominis · 3x / Week</div>
+            <div class="exercise-cue">Round your spine like curling into a ball; blow out all air at bottom of crunch.</div>
+          </div>
+          <div class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-name">Hanging Leg / Knee Raises</span>
+              <span class="exercise-badge">2 Sets to Failure</span>
+            </div>
+            <div class="exercise-meta">Lower Ab Pouch & Core Compression · 3x / Week</div>
+            <div class="exercise-cue">Do not just swing legs; curl your pelvis UP toward your sternum to activate lower abs.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Macro Calculator -->
+    <section id="nutrition" class="calc-box">
+      <div class="calc-grid">
+        <div>
+          <span class="section-badge">INTERACTIVE NUTRITION MATRIX</span>
+          <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 16px;">Calculate Your Lean-Bulk Targets</h2>
+          <p style="color: var(--text-muted); font-size: 14.5px; margin-bottom: 24px;">
+            Find out the exact calories and macros you need to gain lean muscle without losing your abs, based on Luke's proven formula.
+          </p>
+
+          <div class="calc-input-group">
+            <label class="calc-label">Your Current Body Weight (lbs)</label>
+            <input type="number" id="calcWeight" class="calc-input" value="160" oninput="calculateMacros()">
+          </div>
+
+          <div class="calc-input-group">
+            <label class="calc-label">Your Training Goal</label>
+            <select id="calcGoal" class="calc-select" onchange="calculateMacros()">
+              <option value="lean_bulk">Lean Muscle Bulk (+350 kcal) - Luke's Choice</option>
+              <option value="recomp">Body Recomposition (Maintenance)</option>
+              <option value="aggressive">Aggressive Hardgainer (+550 kcal)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="calc-results">
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px;">Your Daily Target Breakdown</h3>
+            <div class="result-row">
+              <span style="color: #cbd5e1;">Daily Calories:</span>
+              <span id="resCalories" class="result-num">2,750 kcal</span>
+            </div>
+            <div class="result-row">
+              <span style="color: #cbd5e1;">Protein (1.0g / lb):</span>
+              <span id="resProtein" class="result-num">160g</span>
+            </div>
+            <div class="result-row">
+              <span style="color: #cbd5e1;">Carbohydrates (Energy):</span>
+              <span id="resCarbs" class="result-num">360g</span>
+            </div>
+            <div class="result-row">
+              <span style="color: #cbd5e1;">Healthy Fats:</span>
+              <span id="resFats" class="result-num">65g</span>
+            </div>
+            <div class="result-row">
+              <span style="color: #cbd5e1;">Water Target:</span>
+              <span class="result-num">1.0 Gallon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+      <div class="section-header">
+        <span class="section-badge">MEMBERSHIP TIERS</span>
+        <h2 class="section-title">Choose Your Path to 180 lbs</h2>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Tier 1 -->
+        <div class="price-card">
+          <div class="price-name">The Core Blueprint</div>
+          <div class="price-desc">Complete self-guided training and nutrition protocol.</div>
+          <div class="price-num">$47 <span>one-time</span></div>
+          <ul class="price-bullets">
+            <li>Full Push / Pull / Legs / Abs 2-Set Protocol</li>
+            <li>Interactive Notion Workout Tracker</li>
+            <li>Video Form Execution Cues</li>
+            <li>Lean-Bulk Grocery List & Meal Matrix</li>
+            <li>Supplement & Sleep Optimization Guide</li>
+          </ul>
+          <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="alert('Redirecting to checkout...')">Get Instant Access →</button>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="price-card featured">
+          <div class="price-badge-top">MOST POPULAR</div>
+          <div class="price-name">The Inner Circle</div>
+          <div class="price-desc">Everything in Core + community accountability and live Q&As.</div>
+          <div class="price-num">$29 <span>/ month</span></div>
+          <ul class="price-bullets">
+            <li>Everything in The Core Blueprint</li>
+            <li>Private Skool / Whop Community Access</li>
+            <li>Monthly Live Video Q&A with Luke</li>
+            <li>Form Check Video Forum</li>
+            <li>Leaderboard & Progressive Overload Tracking</li>
+          </ul>
+          <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="alert('Redirecting to community checkout...')">Join The Circle →</button>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="price-card">
+          <div class="price-name">1-on-1 VIP Mentorship</div>
+          <div class="price-desc">Direct personal mentorship and weekly video audits with Luke.</div>
+          <div class="price-num">$897 <span>/ 12 weeks</span></div>
+          <ul class="price-bullets">
+            <li>Everything in Tiers 1 & 2</li>
+            <li><strong>Direct 1-on-1 WhatsApp Access</strong> to Luke</li>
+            <li>Weekly Loom Video Form Audits</li>
+            <li>Custom Macro & Diet Adjustments Every 2 Weeks</li>
+            <li>100% 10-15 lb Muscle Gain Guarantee</li>
+          </ul>
+          <button class="btn-secondary" style="width: 100%; justify-content: center;" onclick="openMentorshipModal()">Apply for Mentorship →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mentorship Application Modal -->
+    <div id="mentorshipModal" class="modal-overlay">
+      <div class="modal-card">
+        <button class="modal-close" onclick="closeMentorshipModal()">&times;</button>
+        <h3 class="modal-title">Apply for 1-on-1 VIP Mentorship</h3>
+        <p class="modal-sub">Luke personally reviews every application. Only 5 clients accepted per month.</p>
+
+        <form id="mentorshipForm" onsubmit="handleFormSubmit(event)">
+          <div class="calc-input-group">
+            <label class="calc-label">Full Name</label>
+            <input type="text" class="calc-input" placeholder="e.g. John Doe" required>
+          </div>
+          <div class="calc-input-group">
+            <label class="calc-label">Email Address</label>
+            <input type="email" class="calc-input" placeholder="john@example.com" required>
+          </div>
+          <div class="calc-input-group">
+            <label class="calc-label">Phone / WhatsApp Number</label>
+            <input type="tel" class="calc-input" placeholder="+1 (555) 000-0000" required>
+          </div>
+          <div class="calc-input-group">
+            <label class="calc-label">Current Weight vs Goal Weight</label>
+            <input type="text" class="calc-input" placeholder="e.g. Currently 150 lbs, want to reach 175 lbs" required>
+          </div>
+          <div class="calc-input-group">
+            <label class="calc-label">What is your biggest struggle right now?</label>
+            <select class="calc-select">
+              <option>Can't eat enough calories / hardgainer</option>
+              <option>Gaining too much belly fat on bulks</option>
+              <option>Stuck at the same bench / squat weight</option>
+              <option>Lack of accountability & routine discipline</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">Submit Application →</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Luke Hamilton Fitness · All Rights Reserved.</p>
+      <p style="margin-top: 8px; font-size: 12px; color: #64748b;">Built with Progressive Overload · Results guaranteed with consistency.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Tab Switching
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tabName).classList.add('active');
+    }
+
+    // Interactive Nutrition Calculator
+    function calculateMacros() {
+      const weight = parseFloat(document.getElementById('calcWeight').value) || 160;
+      const goal = document.getElementById('calcGoal').value;
+
+      let surplus = 350;
+      if (goal === 'recomp') surplus = 0;
+      if (goal === 'aggressive') surplus = 550;
+
+      const baseCals = Math.round(weight * 15 + surplus);
+      const protein = Math.round(weight * 1.0);
+      const fats = Math.round((baseCals * 0.22) / 9);
+      const remainingCals = baseCals - (protein * 4) - (fats * 9);
+      const carbs = Math.round(remainingCals / 4);
+
+      document.getElementById('resCalories').innerText = baseCals.toLocaleString() + ' kcal';
+      document.getElementById('resProtein').innerText = protein + 'g';
+      document.getElementById('resCarbs').innerText = carbs + 'g';
+      document.getElementById('resFats').innerText = fats + 'g';
+    }
+
+    // Modal Controls
+    function openMentorshipModal() {
+      document.getElementById('mentorshipModal').classList.add('active');
+    }
+
+    function closeMentorshipModal() {
+      document.getElementById('mentorshipModal').classList.remove('active');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Application received! Luke will reach out via WhatsApp/Email within 24 hours to schedule your onboarding call.');
+      closeMentorshipModal();
+    }
+  </script>
+</body>
+</html>
