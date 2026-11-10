@@ -9,20 +9,15 @@ function renderFrame(time) {
   ctx.save();
   ctx.clearRect(0, 0, W, H);
 
-  // Apply 124 BPM Heartbeat Zoom & Continuous Smooth Cinematic Camera Drift
-  // Guarantees that literally EVERY SINGLE PIXEL on screen has continuous motion!
-  const beat = (time * 124 / 60) * Math.PI * 2;
-  const breatheZoom = 1.0 + 0.012 * Math.sin(beat);
-  const driftX = Math.sin(time * 0.8) * 6;
-  const driftY = Math.cos(time * 0.6) * 4;
+  // SILKY SMOOTH CINEMATIC DOLLY GLIDE (ZERO JITTER / ZERO RAPID BOUNCE)
+  // Replaced rapid heartbeat oscillation with a smooth, luxurious motorized jib drift:
+  const cineZoom = 1.0 + Math.sin(time * 0.18) * 0.008;
+  const driftX = Math.sin(time * 0.35) * 3.5;
+  const driftY = Math.cos(time * 0.28) * 2.5;
 
   ctx.translate(W / 2 + driftX, H / 2 + driftY);
-  ctx.scale(breatheZoom, breatheZoom);
+  ctx.scale(cineZoom, cineZoom);
   ctx.translate(-W / 2, -H / 2);
-
-  // Apply Camera Shake if active
-  const shake = getCameraShake(time);
-  ctx.translate(shake.x, shake.y);
 
   renderDynamicAtmosphere(time);
 
@@ -68,13 +63,26 @@ function renderFrame(time) {
     renderTasklessScene10_TryTasklessCTA(time);
   }
 
+  // Soft cinematic transition dip between scene boundaries (smooth 0.25s ease)
+  const sceneCuts = [7.2, 12.8, 18.2, 24.8, 32.2, 39.2, 47.2, 53.0, 58.5];
+  let minCutDist = 999;
+  for (let c = 0; c < sceneCuts.length; c++) {
+    minCutDist = Math.min(minCutDist, Math.abs(time - sceneCuts[c]));
+  }
+  if (minCutDist < 0.22) {
+    const fadeProg = 1 - (minCutDist / 0.22);
+    const dipAlpha = Math.sin(fadeProg * (Math.PI / 2)) * 0.32;
+    ctx.fillStyle = 'rgba(8, 12, 20, ' + dipAlpha + ')';
+    ctx.fillRect(0, 0, W, H);
+  }
+
   // Kinetic Subtitles
   renderKineticSubtitles(time);
 
   // Subtle Cinematic Vignette
-  const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, H * 0.75);
+  const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.38, W / 2, H / 2, H * 0.78);
   vig.addColorStop(0, 'rgba(0,0,0,0)');
-  vig.addColorStop(1, 'rgba(0,0,0,0.5)');
+  vig.addColorStop(1, 'rgba(0,0,0,0.45)');
   ctx.fillStyle = vig;
   ctx.fillRect(0, 0, W, H);
 

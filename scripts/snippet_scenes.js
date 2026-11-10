@@ -1,6 +1,6 @@
 // =========================================================================
-// 🎬 10 NARRATION-MATCHED STICK FIGURE STORY SCENES (CONTINUOUS KINETIC ACTION)
-// Zero still frames: continuous locomotion, particle bursts, physics, and animations
+// 🎬 10 NARRATION-MATCHED STICK FIGURE STORY SCENES (SILKY SMOOTH & CLEAN)
+// Smooth continuous motion, fluid kinematics, organic easing, and zero jitter
 // =========================================================================
 
 // --- SCENE 1: THE LASER SPEED HOOK (0.0s - 7.2s) ---
@@ -8,15 +8,15 @@
 function renderTasklessScene1_NightPhone(t) {
   renderStoryPill('⚡ ACT 1: THE SPEED HOOK', '186,000 MILES PER SECOND');
 
-  // Ground: Cartoon planet Earth curve at bottom with continuous rotation!
+  // Ground: Cartoon planet Earth curve with smooth slow rotation
   ctx.save();
   ctx.fillStyle = '#0284c7';
   ctx.beginPath();
   ctx.arc(W / 2, H + 460, 700, 0, Math.PI * 2);
   ctx.fill();
 
-  // Continents smoothly moving across horizon
-  const earthShift = (t * 18) % 360;
+  // Continents smoothly gliding across horizon
+  const earthShift = (t * 8) % 360;
   ctx.fillStyle = '#16a34a';
   ctx.beginPath();
   ctx.ellipse(W / 2 - 120 + earthShift, H - 130, 90, 42, -0.2, 0, Math.PI * 2);
@@ -29,11 +29,13 @@ function renderTasklessScene1_NightPhone(t) {
   ctx.fill();
   ctx.restore();
 
-  // Stick figure sprints in from left edge (t < 0.9s), then whips out laser pointer!
-  const sprintIn = Math.min(1, t / 0.9);
-  const charX = -60 + (W / 2 - 20) * sprintIn;
+  // Stick figure smoothly enters with natural ease-out (t < 1.0s), then aims laser!
+  const sprintIn = Math.min(1, t / 1.0);
+  // Cubic ease-out for smooth landing
+  const sprintEase = 1 - Math.pow(1 - sprintIn, 3);
+  const charX = -60 + (W / 2 - 20) * sprintEase;
   const charY = H - 180;
-  const isRunning = t < 0.9;
+  const isRunning = t < 1.0;
 
   drawStickPerson(ctx, charX, charY, {
     scale: 1.15,
@@ -41,66 +43,69 @@ function renderTasklessScene1_NightPhone(t) {
     expr: 'happy',
     pose: isRunning ? 'run' : 'laser_pointer',
     color: '#ffffff',
-    talking: t >= 1.0,
+    talking: t >= 1.2,
     t: t
   });
 
-  // Skidding dust puffs when stopping at t ≈ 0.9s
-  if (t >= 0.8 && t <= 1.4) {
-    const skidT = (t - 0.8) / 0.6;
-    ctx.fillStyle = 'rgba(226, 232, 240, ' + (1 - skidT) + ')';
-    ctx.beginPath(); ctx.arc(charX - 25, charY, 6 + skidT * 12, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(charX - 45, charY, 4 + skidT * 8, 0, Math.PI * 2); ctx.fill();
+  // Soft dust puff upon arrival (t ≈ 1.0s)
+  if (t >= 0.9 && t <= 1.5) {
+    const skidProg = (t - 0.9) / 0.6;
+    const skidAlpha = Math.sin(skidProg * Math.PI) * 0.6;
+    ctx.fillStyle = 'rgba(226, 232, 240, ' + skidAlpha + ')';
+    ctx.beginPath(); ctx.arc(charX - 25, charY, 6 + skidProg * 8, 0, Math.PI * 2); ctx.fill();
   }
 
-  // Neon Green Laser Beam with traveling energy pulses and muzzle flare!
-  if (t >= 0.9) {
+  // Neon Green Laser Beam with smooth glowing beam & traveling light pulses
+  if (t >= 1.0) {
     const beamStartX = charX + 54;
     const beamStartY = charY - 146;
-    const beamProgress = Math.min(1, (t - 0.9) / 0.8);
-    const beamEndX = beamStartX + (W + 200) * beamProgress;
-    const beamEndY = beamStartY - 480 * beamProgress;
+    const beamProgress = Math.min(1, (t - 1.0) / 0.7);
+    const beamEase = 1 - Math.pow(1 - beamProgress, 2);
+    const beamEndX = beamStartX + (W + 200) * beamEase;
+    const beamEndY = beamStartY - 480 * beamEase;
 
     ctx.save();
+    // Glowing laser beam
     ctx.shadowColor = '#22c55e';
-    ctx.shadowBlur = 28;
+    ctx.shadowBlur = 24;
     ctx.strokeStyle = '#22c55e';
-    ctx.lineWidth = 6 + Math.sin(t * 30) * 1.5;
+    ctx.lineWidth = 5.5 + Math.sin(t * 6) * 0.8;
     ctx.beginPath();
     ctx.moveTo(beamStartX, beamStartY);
     ctx.lineTo(beamEndX, beamEndY);
     ctx.stroke();
 
     ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2.2;
     ctx.beginPath();
     ctx.moveTo(beamStartX, beamStartY);
     ctx.lineTo(beamEndX, beamEndY);
     ctx.stroke();
 
-    // Muzzle Flare spark at pointer tip
+    // Soft muzzle glow
     ctx.fillStyle = '#ffffff';
     ctx.beginPath();
-    ctx.arc(beamStartX, beamStartY, 8 + Math.sin(t * 40) * 3, 0, Math.PI * 2);
+    ctx.arc(beamStartX, beamStartY, 7 + Math.sin(t * 8) * 1.5, 0, Math.PI * 2);
     ctx.fill();
 
-    // Traveling photon pulses along the beam
-    const pulseCount = 4;
+    // Traveling light pulses along the beam
+    const pulseCount = 3;
     for (let p = 0; p < pulseCount; p++) {
-      const pulseT = ((t * 3.5 + p / pulseCount) % 1.0);
+      const pulseT = ((t * 1.6 + p / pulseCount) % 1.0);
       const px = beamStartX + (beamEndX - beamStartX) * pulseT;
       const py = beamStartY + (beamEndY - beamStartY) * pulseT;
-      ctx.fillStyle = '#c8ff00';
+      const pulseAlpha = Math.sin(pulseT * Math.PI);
+      ctx.fillStyle = 'rgba(200, 255, 0, ' + pulseAlpha + ')';
       ctx.beginPath();
-      ctx.arc(px, py, 6, 0, Math.PI * 2);
+      ctx.arc(px, py, 5.5, 0, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
   }
 
-  // Big Bold Comic Headline Card with floating hover and animated odometer
+  // Comic Headline Card with smooth, gentle float
   ctx.save();
-  const floatCard = Math.sin(t * 4) * 4;
+  const floatCard = Math.sin(t * 1.8) * 3;
   const cardW = 420;
   const cardH = 110;
   const cardX = (W - cardW) / 2;
@@ -109,12 +114,13 @@ function renderTasklessScene1_NightPhone(t) {
   ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
   ctx.strokeStyle = '#22c55e';
   ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(34, 197, 94, 0.4)';
-  ctx.shadowBlur = 20;
+  ctx.shadowColor = 'rgba(34, 197, 94, 0.3)';
+  ctx.shadowBlur = 18;
   roundRect(ctx, cardX, cardY, cardW, cardH, 16, true, true);
   ctx.shadowBlur = 0;
 
-  const counterVal = Math.min(186000, Math.floor(t * 186000 / 2.0));
+  // Smooth odometer count up
+  const counterVal = Math.min(186000, Math.floor(Math.min(1, t / 2.0) * 186000));
   ctx.fillStyle = '#ffffff';
   ctx.font = '900 46px "Space Grotesk", sans-serif';
   ctx.textAlign = 'center';
@@ -131,26 +137,29 @@ function renderTasklessScene1_NightPhone(t) {
 function renderTasklessScene2_LasersUranus(t) {
   renderStoryPill('🔭 ACT 1: INTERPLANETARY SPEED', 'EARTH TO MOON IN 1.3s');
 
-  const moonBounce = Math.sin(t * 6) * 8;
+  // Moon with gentle, soothing float (NO rapid bouncing)
+  const moonBounce = Math.sin(t * 1.8) * 5;
   const moonX = W - 125;
   const moonY = 240 + moonBounce;
   const moonR = 64;
 
   ctx.save();
   ctx.fillStyle = '#f8fafc';
-  ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
-  ctx.shadowBlur = 28;
+  ctx.shadowColor = 'rgba(255, 255, 255, 0.35)';
+  ctx.shadowBlur = 24;
   ctx.beginPath();
   ctx.arc(moonX, moonY, moonR, 0, Math.PI * 2);
   ctx.fill();
   ctx.shadowBlur = 0;
 
+  // Craters
   ctx.fillStyle = '#e2e8f0';
   ctx.beginPath(); ctx.arc(moonX - 22, moonY - 14, 13, 0, Math.PI * 2); ctx.fill();
   ctx.beginPath(); ctx.arc(moonX + 18, moonY + 20, 15, 0, Math.PI * 2); ctx.fill();
   ctx.beginPath(); ctx.arc(moonX + 9, moonY - 24, 9, 0, Math.PI * 2); ctx.fill();
 
-  const isBlink = (t % 2.5) < 0.12;
+  // Gentle Blinking Face
+  const isBlink = (t % 3.2) < 0.14;
   ctx.fillStyle = '#1e293b';
   if (isBlink) {
     ctx.lineWidth = 2.5;
@@ -164,56 +173,60 @@ function renderTasklessScene2_LasersUranus(t) {
   ctx.lineWidth = 2.5;
   ctx.beginPath(); ctx.arc(moonX + 1, moonY + 12, 10, 0, Math.PI); ctx.stroke();
 
-  ctx.fillStyle = 'rgba(244, 114, 182, 0.6)';
+  // Pink Cheeks
+  ctx.fillStyle = 'rgba(244, 114, 182, 0.5)';
   ctx.beginPath(); ctx.arc(moonX - 18, moonY + 10, 6, 0, Math.PI * 2); ctx.fill();
   ctx.beginPath(); ctx.arc(moonX + 20, moonY + 10, 6, 0, Math.PI * 2); ctx.fill();
   ctx.restore();
 
-  // Passing Cartoon Comet / Shooting Star streaking through space!
-  const cometX = ((t * 300) % (W + 300)) - 100;
-  const cometY = 160 + Math.sin(t * 2) * 40;
+  // Shooting Star gliding smoothly across space
+  const cometCycle = ((t * 0.45) % 1.0);
+  const cometX = -50 + cometCycle * (W + 200);
+  const cometY = 150 + cometCycle * 60;
   ctx.save();
-  const cometGrad = ctx.createLinearGradient(cometX - 80, cometY + 20, cometX, cometY);
+  const cometGrad = ctx.createLinearGradient(cometX - 70, cometY - 20, cometX, cometY);
   cometGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
-  cometGrad.addColorStop(1, 'rgba(200, 255, 0, 0.8)');
+  cometGrad.addColorStop(1, 'rgba(200, 255, 0, 0.7)');
   ctx.strokeStyle = cometGrad;
-  ctx.lineWidth = 4;
+  ctx.lineWidth = 3.5;
   ctx.beginPath();
-  ctx.moveTo(cometX - 80, cometY + 20);
+  ctx.moveTo(cometX - 70, cometY - 20);
   ctx.lineTo(cometX, cometY);
   ctx.stroke();
   ctx.fillStyle = '#ffffff';
-  ctx.beginPath(); ctx.arc(cometX, cometY, 5, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cometX, cometY, 4.5, 0, Math.PI * 2); ctx.fill();
   ctx.restore();
 
-  // Distant Saturn with spinning tilted rings
+  // Saturn with tilted rings
   ctx.save();
-  const satX = 90; const satY = 380 + Math.sin(t * 3) * 6;
+  const satX = 90; const satY = 380 + Math.sin(t * 1.6) * 4;
   ctx.fillStyle = '#f59e0b';
   ctx.beginPath(); ctx.arc(satX, satY, 24, 0, Math.PI * 2); ctx.fill();
   ctx.strokeStyle = '#fbbf24';
-  ctx.lineWidth = 4;
-  ctx.beginPath(); ctx.ellipse(satX, satY, 44 + Math.sin(t * 4) * 2, 9, -0.3, 0, Math.PI * 2); ctx.stroke();
+  ctx.lineWidth = 3.5;
+  ctx.beginPath(); ctx.ellipse(satX, satY, 44, 9, -0.3, 0, Math.PI * 2); ctx.stroke();
   ctx.restore();
 
-  // Pulsing Laser beam zooming to Moon with traveling energy packets
+  // Smooth Laser Beam to Moon
   ctx.save();
   ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 5 + Math.sin(t * 24) * 1.5;
+  ctx.lineWidth = 5;
   ctx.shadowColor = '#38bdf8';
-  ctx.shadowBlur = 24;
+  ctx.shadowBlur = 20;
   ctx.beginPath();
   ctx.moveTo(80, H - 200);
   ctx.lineTo(moonX - 45, moonY + 25);
   ctx.stroke();
 
-  const sparkR = 12 + Math.sin(t * 30) * 8;
-  ctx.fillStyle = '#c8ff00';
+  // Gentle impact glow on Moon
+  const sparkR = 10 + Math.sin(t * 6) * 3;
+  ctx.fillStyle = 'rgba(200, 255, 0, 0.85)';
   ctx.beginPath();
   ctx.arc(moonX - 45, moonY + 25, sparkR, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
 
+  // Speech bubble tag
   drawSpeechBubble(ctx, moonX - 45, moonY - 45, '⏱️ 1.3 SECONDS!', {
     bg: '#ffffff',
     border: '#22c55e',
@@ -221,9 +234,10 @@ function renderTasklessScene2_LasersUranus(t) {
     t: t
   });
 
+  // Story Card
   const cardW = 420; const cardH = 100;
   const cardX = (W - cardW) / 2;
-  const cardY = 100 + Math.sin(t * 3) * 3;
+  const cardY = 100 + Math.sin(t * 1.5) * 2.5;
   ctx.save();
   ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
   ctx.strokeStyle = '#38bdf8';
@@ -249,10 +263,11 @@ function renderTasklessScene3_CustomerWindow(t) {
   const roomY = 220;
   drawLeakyPipe(ctx, W / 2 - 30, roomY + 20, t);
 
-  const paceX = Math.sin(t * 4.5) * 65;
+  // Homeowner paces smoothly with realistic stride (t * 1.8 rad/s, not frantic)
+  const paceX = Math.sin(t * 1.8) * 50;
   const homeX = W / 2 + 50 + paceX;
   const homeY = roomY + 230;
-  const homeFacing = paceX >= 0 ? 1 : -1;
+  const homeFacing = Math.cos(t * 1.8) >= 0 ? 1 : -1;
 
   drawStickPerson(ctx, homeX, homeY, {
     scale: 1.1,
@@ -271,6 +286,7 @@ function renderTasklessScene3_CustomerWindow(t) {
     t: t
   });
 
+  // Wall Clock with smooth sweep second hand & gentle pendulum
   const clockX = 90; const clockY = roomY + 70;
   ctx.save();
   ctx.fillStyle = '#ffffff';
@@ -278,7 +294,8 @@ function renderTasklessScene3_CustomerWindow(t) {
   ctx.lineWidth = 3;
   ctx.beginPath(); ctx.arc(clockX, clockY, 30, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
 
-  const handAngle = t * 14;
+  // Smooth continuous sweep hand
+  const handAngle = t * 4.5;
   ctx.strokeStyle = '#0f172a';
   ctx.lineWidth = 2.5;
   ctx.beginPath();
@@ -286,7 +303,8 @@ function renderTasklessScene3_CustomerWindow(t) {
   ctx.lineTo(clockX + Math.cos(handAngle) * 18, clockY + Math.sin(handAngle) * 18);
   ctx.stroke();
 
-  const pendAngle = Math.sin(t * 6) * 0.4;
+  // Pendulum
+  const pendAngle = Math.sin(t * 3.0) * 0.3;
   ctx.strokeStyle = '#94a3b8';
   ctx.lineWidth = 2;
   ctx.beginPath();
@@ -295,15 +313,16 @@ function renderTasklessScene3_CustomerWindow(t) {
   ctx.stroke();
   ctx.fillStyle = '#ef4444';
   ctx.beginPath();
-  ctx.arc(clockX + Math.sin(pendAngle) * 35, clockY + 30 + Math.cos(pendAngle) * 35, 6, 0, Math.PI * 2);
+  ctx.arc(clockX + Math.sin(pendAngle) * 35, clockY + 30 + Math.cos(pendAngle) * 35, 5.5, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
 
+  // Banner Card with gentle breathing pulse
   const cardW = 440; const cardH = 120;
   const cardX = (W - cardW) / 2;
-  const cardY = H - 280 + Math.sin(t * 3) * 3;
+  const cardY = H - 280 + Math.sin(t * 1.5) * 2.5;
   ctx.save();
-  const alertPulse = 0.15 + 0.1 * Math.sin(t * 8);
+  const alertPulse = 0.16 + 0.06 * Math.sin(t * 3);
   ctx.fillStyle = 'rgba(239, 68, 68, ' + alertPulse + ')';
   ctx.strokeStyle = '#ef4444';
   ctx.lineWidth = 2.5;
@@ -332,26 +351,16 @@ function renderTasklessScene4_Stat78Percent(t) {
   const cardW = 440;
   const cardH = 240;
   const cardX = (W - cardW) / 2;
-  const cardY = 110 + Math.sin(t * 4) * 4;
+  const cardY = 110 + Math.sin(t * 1.8) * 3;
 
   ctx.save();
   ctx.fillStyle = 'rgba(15, 23, 42, 0.94)';
   ctx.strokeStyle = '#c8ff00';
   ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(200, 255, 0, 0.4)';
-  ctx.shadowBlur = 28;
+  ctx.shadowColor = 'rgba(200, 255, 0, 0.3)';
+  ctx.shadowBlur = 22;
   roundRect(ctx, cardX, cardY, cardW, cardH, 20, true, true);
   ctx.shadowBlur = 0;
-
-  for (let e = 0; e < 3; e++) {
-    const arcX = cardX + Math.random() * cardW;
-    ctx.strokeStyle = '#c8ff00';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.moveTo(arcX, cardY);
-    ctx.lineTo(arcX + (Math.random() - 0.5) * 20, cardY - 10);
-    ctx.stroke();
-  }
 
   ctx.fillStyle = '#c8ff00';
   ctx.font = '900 86px "Space Grotesk", sans-serif';
@@ -373,8 +382,10 @@ function renderTasklessScene4_Stat78Percent(t) {
 
   const gy = H - 200;
 
+  // Contractor 1 smoothly sprints across screen with cubic ease
   const run1Progress = Math.min(1, (t - 18.5) / 5.5);
-  const g1X = 60 + run1Progress * 320;
+  const runEase = 1 - Math.pow(1 - run1Progress, 2);
+  const g1X = 60 + runEase * 320;
 
   drawStickPerson(ctx, g1X, gy, {
     scale: 1.05,
@@ -386,6 +397,7 @@ function renderTasklessScene4_Stat78Percent(t) {
   });
   drawSpeechBubble(ctx, g1X, gy - 140, 'HIRED! 🏆', { bg: '#22c55e', border: '#ffffff', textColor: '#ffffff', t: t });
 
+  // Finish Ribbon
   ctx.save();
   ctx.strokeStyle = '#facc15';
   ctx.lineWidth = 4;
@@ -393,7 +405,7 @@ function renderTasklessScene4_Stat78Percent(t) {
   ctx.moveTo(380, gy - 150);
   ctx.lineTo(380, gy);
   ctx.stroke();
-  const flutter = Math.sin(t * 14) * 8;
+  const flutter = Math.sin(t * 6) * 6;
   ctx.fillStyle = '#ef4444';
   ctx.beginPath();
   ctx.moveTo(380, gy - 140);
@@ -403,7 +415,8 @@ function renderTasklessScene4_Stat78Percent(t) {
   ctx.fill();
   ctx.restore();
 
-  const g2X = 80 + Math.min(120, run1Progress * 100);
+  // Contractor 2 dragging heavy voicemail weight slowly
+  const g2X = 80 + Math.min(110, runEase * 80);
   drawStickPerson(ctx, g2X, gy, {
     scale: 0.95,
     facing: 1,
@@ -452,41 +465,43 @@ function renderTasklessScene5_TwoShopsComparison(t) {
     t: t
   });
 
-  const acVibe = Math.sin(t * 30) * 1.5;
+  // AC Condenser Unit
   ctx.fillStyle = '#334155';
-  ctx.fillRect(ladX + 45 + acVibe, ladY + 30, 70, 80);
+  ctx.fillRect(ladX + 45, ladY + 30, 70, 80);
   ctx.fillStyle = '#0f172a';
-  ctx.beginPath(); ctx.arc(ladX + 80 + acVibe, ladY + 70, 24, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(ladX + 80, ladY + 70, 24, 0, Math.PI * 2); ctx.fill();
 
+  // Smartphone on ground ringing gently with smooth expanding rings
   const phoneX = ladX - 60;
   const phoneY = ladY + ladH;
-  const hopY = Math.abs(Math.sin(t * 18)) * 14;
-  const phoneRot = Math.sin(t * 24) * 0.2;
+  const hopY = Math.abs(Math.sin(t * 6)) * 6; // Gentle clean hop
 
   ctx.save();
   ctx.translate(phoneX, phoneY - hopY);
-  ctx.rotate(phoneRot);
   ctx.fillStyle = '#ef4444';
   roundRect(ctx, -11, -19, 22, 38, 5, true, false);
 
-  const ringR = (t * 40) % 50;
-  const ringA = Math.max(0, 1 - ringR / 50);
+  const ringCycle = (t * 1.4) % 1.0;
+  const ringR = ringCycle * 40;
+  const ringA = Math.sin(ringCycle * Math.PI) * 0.7;
   ctx.strokeStyle = 'rgba(239, 68, 68, ' + ringA + ')';
   ctx.lineWidth = 2;
   ctx.beginPath(); ctx.arc(0, 0, ringR, 0, Math.PI * 2); ctx.stroke();
   ctx.restore();
 
-  drawSpeechBubble(ctx, phoneX - 10, phoneY - 50, 'RING! (( 📞 ))', {
+  drawSpeechBubble(ctx, phoneX - 10, phoneY - 45, 'RING! (( 📞 ))', {
     bg: '#ef4444',
     border: '#ffffff',
     textColor: '#ffffff',
     t: t
   });
 
+  // Flying Money Bag soaring smoothly across screen like a bird
   const flyStartX = ladX + 30;
   const flyTargetX = W - 100;
-  const curFlyX = flyStartX + (flyTargetX - flyStartX) * Math.min(1, p * 1.4);
-  const curFlyY = ladY + 50 + Math.sin(t * 7) * 25;
+  const flightEase = 0.5 - 0.5 * Math.cos(Math.min(1, p * 1.25) * Math.PI);
+  const curFlyX = flyStartX + (flyTargetX - flyStartX) * flightEase;
+  const curFlyY = ladY + 50 + Math.sin(t * 3.5) * 16;
 
   drawFlyingMoneyBag(ctx, curFlyX, curFlyY, t, '$8,000');
 
@@ -518,7 +533,7 @@ function renderTasklessScene6_ShopB_AvaReply(t) {
   const badgeW = 380;
   const badgeH = 80;
   const badgeX = (W - badgeW) / 2;
-  const badgeY = 110 + Math.sin(t * 4) * 3;
+  const badgeY = 110 + Math.sin(t * 1.8) * 2.5;
   ctx.save();
   ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
   ctx.strokeStyle = '#c8ff00';
@@ -577,7 +592,7 @@ function renderTasklessScene7_WorkflowNodes(t) {
   const calW = 380;
   const calH = 76;
   const calX = (W - calW) / 2;
-  const calY = 110 + Math.sin(t * 4) * 3;
+  const calY = 110 + Math.sin(t * 1.8) * 2.5;
   ctx.save();
   ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
   ctx.strokeStyle = '#22c55e';
@@ -595,8 +610,8 @@ function renderTasklessScene7_WorkflowNodes(t) {
 
   const vanY = 480;
 
-  // Background building silhouettes scrolling left at 80 px/s
-  const bldgShift = (t * 80) % 240;
+  // Background building silhouettes scrolling smoothly at 45 px/s
+  const bldgShift = (t * 45) % 240;
   ctx.fillStyle = '#0f172a';
   for (let b = -1; b < 4; b++) {
     const bx = b * 240 - bldgShift;
@@ -609,16 +624,17 @@ function renderTasklessScene7_WorkflowNodes(t) {
   ctx.fillStyle = '#1e293b';
   ctx.fillRect(0, vanY + 12, W, 70);
 
-  // White Dashed Road Stripes rushing past at 500 px/s!
-  const stripeShift = (t * 500) % 90;
+  // Dashed Road Stripes moving at a clean, smooth cruising speed (220 px/s, no strobe!)
+  const stripeShift = (t * 220) % 90;
   ctx.fillStyle = '#facc15';
   for (let s = -1; s < 8; s++) {
     ctx.fillRect(s * 90 - stripeShift, vanY + 42, 45, 8);
   }
 
+  // Work Van driving with smooth ease
   const vanStartX = -100;
   const vanEndX = W + 120;
-  const vanX = vanStartX + (vanEndX - vanStartX) * Math.min(1, p * 1.3);
+  const vanX = vanStartX + (vanEndX - vanStartX) * Math.min(1, p * 1.25);
 
   drawWorkVan(ctx, vanX, vanY, t);
 
@@ -657,13 +673,13 @@ function renderTasklessScene8_TechDispatchAndDashboard(t) {
   const cardW = 440;
   const cardH = 120;
   const cardX = (W - cardW) / 2;
-  const cardY = 110 + Math.sin(t * 4) * 3;
+  const cardY = 110 + Math.sin(t * 1.8) * 2.5;
   ctx.save();
   ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
   ctx.strokeStyle = '#c8ff00';
   ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(200, 255, 0, 0.35)';
-  ctx.shadowBlur = 24;
+  ctx.shadowColor = 'rgba(200, 255, 0, 0.3)';
+  ctx.shadowBlur = 20;
   roundRect(ctx, cardX, cardY, cardW, cardH, 18, true, true);
   ctx.shadowBlur = 0;
 
@@ -692,15 +708,17 @@ function renderTasklessScene8_TechDispatchAndDashboard(t) {
     t: t
   });
 
-  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 20, t * 0.5, '$8k');
-  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 60, (t + 1) * 0.5, '$8k');
-  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 100, (t + 2) * 0.5, '$8k');
+  // Stack of Money Bags
+  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 20, t * 0.4, '$8k');
+  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 60, (t + 1) * 0.4, '$8k');
+  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 100, (t + 2) * 0.4, '$8k');
 
+  // Smooth floating point rewards
   for (let b = 0; b < 2; b++) {
-    const bT = (t * 0.8 + b * 0.6) % 1.5;
-    const bY = avaY - 80 - bT * 40;
-    const bX = avaX - 45 + Math.sin(t * 4 + b) * 10;
-    const bA = Math.max(0, 1 - bT / 1.5);
+    const bCycle = (t * 0.5 + b * 0.5) % 1.0;
+    const bY = avaY - 70 - bCycle * 45;
+    const bX = avaX - 45 + Math.sin(t * 1.5 + b) * 8;
+    const bA = Math.sin(bCycle * Math.PI) * 0.9;
     ctx.fillStyle = 'rgba(200, 255, 0, ' + bA + ')';
     ctx.font = 'bold 14px "Space Grotesk", sans-serif';
     ctx.fillText('+$8,000 ✓', bX, bY);
@@ -715,13 +733,13 @@ function renderTasklessScene9_LiveDemoDialer(t) {
   const cardW = 460;
   const cardH = 240;
   const cardX = (W - cardW) / 2;
-  const cardY = 110 + Math.sin(t * 4) * 3;
+  const cardY = 110 + Math.sin(t * 1.8) * 2.5;
   ctx.save();
   ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
   ctx.strokeStyle = '#38bdf8';
   ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
-  ctx.shadowBlur = 24;
+  ctx.shadowColor = 'rgba(56, 189, 248, 0.35)';
+  ctx.shadowBlur = 22;
   roundRect(ctx, cardX, cardY, cardW, cardH, 20, true, true);
   ctx.shadowBlur = 0;
 
@@ -735,11 +753,13 @@ function renderTasklessScene9_LiveDemoDialer(t) {
   const numX = cardX + 20;
   const numY = cardY + 58;
 
-  const pingR = (t * 50) % 90;
-  const pingA = Math.max(0, 1 - pingR / 90);
+  // Smooth expanding radar ping
+  const pingCycle = (t * 0.8) % 1.0;
+  const pingR = pingCycle * 60;
+  const pingA = Math.sin(pingCycle * Math.PI) * 0.6;
   ctx.strokeStyle = 'rgba(56, 189, 248, ' + pingA + ')';
-  ctx.lineWidth = 2;
-  roundRect(ctx, numX - pingR * 0.3, numY - pingR * 0.2, numW + pingR * 0.6, numH + pingR * 0.4, 18, false, true);
+  ctx.lineWidth = 1.8;
+  roundRect(ctx, numX - pingR * 0.25, numY - pingR * 0.18, numW + pingR * 0.5, numH + pingR * 0.36, 18, false, true);
 
   ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
   ctx.strokeStyle = '#38bdf8';
@@ -760,15 +780,16 @@ function renderTasklessScene9_LiveDemoDialer(t) {
   ctx.fillText('No sales pitch — just instant live technology.', W / 2, cardY + 202);
   ctx.restore();
 
-  const arrowBounce = Math.sin(t * 12) * 12;
+  // Smooth bouncing arrow pointing directly to the number
+  const arrowBounce = Math.sin(t * 4.0) * 8;
   ctx.save();
   ctx.fillStyle = '#c8ff00';
   ctx.shadowColor = '#c8ff00';
-  ctx.shadowBlur = 14;
+  ctx.shadowBlur = 12;
   ctx.beginPath();
   ctx.moveTo(W / 2, cardY - 20 + arrowBounce);
-  ctx.lineTo(W / 2 - 14, cardY - 40 + arrowBounce);
-  ctx.lineTo(W / 2 + 14, cardY - 40 + arrowBounce);
+  ctx.lineTo(W / 2 - 14, cardY - 38 + arrowBounce);
+  ctx.lineTo(W / 2 + 14, cardY - 38 + arrowBounce);
   ctx.closePath();
   ctx.fill();
   ctx.restore();
@@ -793,12 +814,13 @@ function renderTasklessScene9_LiveDemoDialer(t) {
 function renderTasklessScene10_TryTasklessCTA(t) {
   renderStoryPill('⚡ GET INSTANT ACCESS', 'VANTORX SOLUTIONS');
 
+  // Smooth floating Instagram Emojis
   const emojis = ['❤️', '🔥', '🚀', '⚡', '👏'];
-  for (let em = 0; em < 8; em++) {
-    const emT = (t * 0.8 + em * 0.45) % 3.0;
-    const emY = H - emT * 280;
-    const emX = 60 + (em * 65) % (W - 120) + Math.sin(t * 4 + em) * 16;
-    const emAlpha = Math.max(0, 1 - emT / 3.0);
+  for (let em = 0; em < 6; em++) {
+    const emCycle = (t * 0.35 + em * 0.16) % 1.0;
+    const emY = H - emCycle * 320;
+    const emX = 70 + (em * 70) % (W - 140) + Math.sin(t * 1.5 + em) * 14;
+    const emAlpha = Math.sin(emCycle * Math.PI) * 0.85;
     ctx.save();
     ctx.globalAlpha = emAlpha;
     ctx.font = '22px -apple-system, sans-serif';
@@ -806,24 +828,27 @@ function renderTasklessScene10_TryTasklessCTA(t) {
     ctx.restore();
   }
 
-  for (let c = 0; c < 16; c++) {
-    const cT = (t * 1.5 + c * 0.3) % 2.5;
-    const cY = cT * 380;
-    const cX = (c * 35) % W + Math.sin(t * 6 + c) * 20;
-    const cRot = t * 8 + c;
+  // Smooth drifting confetti
+  for (let c = 0; c < 14; c++) {
+    const cCycle = (t * 0.6 + c * 0.12) % 1.0;
+    const cY = cCycle * 400;
+    const cX = (c * 38) % W + Math.sin(t * 2.0 + c) * 16;
+    const cRot = t * 3 + c;
     const cColor = c % 3 === 0 ? '#c8ff00' : (c % 3 === 1 ? '#38bdf8' : '#f43f5e');
+    const cAlpha = Math.sin(cCycle * Math.PI) * 0.8;
     ctx.save();
+    ctx.globalAlpha = cAlpha;
     ctx.translate(cX, cY);
     ctx.rotate(cRot);
     ctx.fillStyle = cColor;
-    ctx.fillRect(-4, -6, 8, 12);
+    ctx.fillRect(-3.5, -5.5, 7, 11);
     ctx.restore();
   }
 
   const cardW = 460;
   const cardH = 500;
   const cardX = (W - cardW) / 2;
-  const cardY = 110 + Math.sin(t * 4) * 3;
+  const cardY = 110 + Math.sin(t * 1.8) * 2.5;
 
   ctx.save();
   ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
@@ -859,7 +884,7 @@ function renderTasklessScene10_TryTasklessCTA(t) {
 
   const btnW = cardW - 50;
   const btnH = 64;
-  const btnPulse = 1.0 + Math.sin(t * 8) * 0.03;
+  const btnPulse = 1.0 + Math.sin(t * 3.5) * 0.02;
 
   ctx.save();
   ctx.translate(W / 2, cardY + 345 + btnH / 2);
