@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Luke Hamilton - 155 to 180 lbs Progressive Overload Master Reel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Space+Grotesk:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --card-bg: #0a0a0a;
+      --border: rgba(255, 255, 255, 0.12);
+      --accent: #38bdf8;
+      --lime: #a3e635;
+      --amber: #facc15;
+      --text: #ffffff;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #050505;
+      color: var(--text);
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .header-bar {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(163, 230, 53, 0.12);
+      border: 1px solid rgba(163, 230, 53, 0.3);
+      color: var(--lime);
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 10px var(--lime);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .reel-container {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 9 / 16;
+      background: #000000;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #000000;
+    }
+
+    .controls-bar {
+      width: 100%;
+      max-width: 440px;
+      background: #0d0d0d;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .timeline-scrubber {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .time-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      min-width: 45px;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      height: 6px;
+      background: #262626;
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 8px var(--lime);
+      cursor: pointer;
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn {
+      background: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      background: #262626;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-primary {
+      background: var(--lime);
+      color: #000000;
+      border-color: var(--lime);
+    }
+
+    .btn-primary:hover {
+      background: #bbf451;
+      box-shadow: 0 0 15px rgba(163, 230, 53, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Taskless Style Reel • 63.5s
+    </div>
+    <div style="font-size: 13px; color: var(--text-muted); font-family: 'JetBrains Mono';">
+      LUKE HAMILTON 155➔180
+    </div>
+  </div>
+
+  <div class="reel-container" id="playerWrap">
+    <canvas id="reelCanvas" width="1080" height="1920"></canvas>
+  </div>
+
+  <div class="controls-bar">
+    <div class="timeline-scrubber">
+      <span class="time-label" id="timeCurrent">00:00</span>
+      <input type="range" id="timeSlider" min="0" max="63.5" step="0.033" value="0">
+      <span class="time-label" id="timeTotal">01:03</span>
+    </div>
+
+    <div class="action-row">
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-primary" id="playBtn">▶ Play</button>
+        <button class="btn" id="restartBtn">↺ Reset</button>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn" id="jumpBeforeAfter">📸 Proof</button>
+        <button class="btn" id="jumpCta">⚡ CTA</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="masterAudio" src="audio/luke-audio-full-master.wav" preload="auto"></audio>
+
+  <script>
+    // --- CANVAS & TIMING ENGINE ---
+    const canvas = document.getElementById('reelCanvas');
+    const ctx = canvas.getContext('2d');
+    const audio = document.getElementById('masterAudio');
+    const playBtn = document.getElementById('playBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const timeSlider = document.getElementById('timeSlider');
+    const timeCurrent = document.getElementById('timeCurrent');
+    const timeTotal = document.getElementById('timeTotal');
+
+    const TOTAL_DURATION = 63.5;
+    let currentTime = 0;
+    let isPlaying = false;
+    let animFrameId = null;
+
+    // --- PRELOAD REAL LUKE TRANSFORMATION IMAGES ---
+    const images = {
+      before1: new Image(),
+      before2: new Image(),
+      afterAbs: new Image(),
+      afterDelts: new Image(),
+      afterFull: new Image()
+    };
+    images.before1.src = 'images/luke_before_155_bathroom.jpg';
+    images.before2.src = 'images/luke_before_155_shirt_lift.jpg';
+    images.afterAbs.src = 'images/luke_after_180_shredded_abs.jpg';
+    images.afterDelts.src = 'images/luke_after_180_gym_delts.jpg';
+    images.afterFull.src = 'images/luke_after_180_full_physique.jpg';
+
+    // --- SUBTITLES WITH WORD-LEVEL HIGHLIGHTING ---
+    // Active spoken word highlights in #facc15 amber gold
+    const subtitles = [
+      {
+        start: 0.2, end: 6.5,
+        words: [
+          { w: "Most", s: 0.2, e: 0.6 },
+          { w: "guys", s: 0.6, e: 1.0 },
+          { w: "waste", s: 1.0, e: 1.4 },
+          { w: "two", s: 1.4, e: 1.7 },
+          { w: "hours", s: 1.7, e: 2.1 },
+          { w: "in", s: 2.1, e: 2.3 },
+          { w: "the", s: 2.3, e: 2.5 },
+          { w: "gym", s: 2.5, e: 2.9 },
+          { w: "doing", s: 2.9, e: 3.3 },
+          { w: "twenty", s: 3.3, e: 3.8 },
+          { w: "junk-volume", s: 3.8, e: 4.5 },
+          { w: "sets,", s: 4.5, e: 5.0 },
+          { w: "destroying", s: 5.0, e: 5.7 },
+          { w: "their", s: 5.7, e: 6.0 },
+          { w: "joints.", s: 6.0, e: 6.5 }
+        ]
+      },
+      {
+        start: 6.5, end: 14.0,
+        words: [
+          { w: "Luke", s: 6.5, e: 7.0 },
+          { w: "took", s: 7.0, e: 7.3 },
+          { w: "his", s: 7.3, e: 7.5 },
+          { w: "physique", s: 7.5, e: 8.0 },
+          { w: "from", s: 8.0, e: 8.3 },
+          { w: "a", s: 8.3, e: 8.5 },
+          { w: "soft", s: 8.5, e: 8.9 },
+          { w: "155", s: 8.9, e: 9.7 },
+          { w: "pounds", s: 9.7, e: 10.2 },
+          { w: "to", s: 10.2, e: 10.5 },
+          { w: "an", s: 10.5, e: 10.7 },
+          { w: "ultra-shredded", s: 10.7, e: 11.6 },
+          { w: "180", s: 11.6, e: 12.3 },
+          { w: "pounds", s: 12.3, e: 12.8 },
+          { w: "with", s: 12.8, e: 13.1 },
+          { w: "8-pack", s: 13.1, e: 13.6 },
+          { w: "abs.", s: 13.6, e: 14.0 }
+        ]
+      },
+      {
+        start: 14.0, end: 21.5,
+        words: [
+          { w: "And", s: 14.0, e: 14.3 },
+          { w: "he", s: 14.3, e: 14.5 },
+          { w: "did", s: 14.5, e: 14.7 },
+          { w: "it", s: 14.7, e: 14.9 },
+          { w: "by", s: 14.9, e: 15.1 },
+          { w: "following", s: 15.1, e: 15.6 },
+          { w: "one", s: 15.6, e: 15.9 },
+          { w: "unbreakable", s: 15.9, e: 16.7 },
+          { w: "law:", s: 16.7, e: 17.2 },
+          { w: "Adding", s: 17.2, e: 17.8 },
+          { w: "weight", s: 17.8, e: 18.3 },
+          { w: "is", s: 18.3, e: 18.6 },
+          { w: "progressive", s: 18.6, e: 19.4 },
+          { w: "overload.", s: 19.4, e: 20.3 },
+          { w: "Two", s: 20.3, e: 20.7 },
+          { w: "working", s: 20.7, e: 21.1 },
+          { w: "sets.", s: 21.1, e: 21.5 }
+        ]
+      },
+      {
+        start: 21.5, end: 29.5,
+        words: [
+          { w: "Every", s: 21.5, e: 21.9 },
+          { w: "single", s: 21.9, e: 22.3 },
+          { w: "exercise", s: 22.3, e: 23.0 },
+          { w: "taken", s: 23.0, e: 23.4 },
+          { w: "to", s: 23.4, e: 23.6 },
+          { w: "absolute", s: 23.6, e: 24.2 },
+          { w: "mechanical", s: 24.2, e: 24.9 },
+          { w: "failure.", s: 24.9, e: 25.6 },
+          { w: "Forty-eight", s: 25.6, e: 26.5 },
+          { w: "minutes", s: 26.5, e: 27.2 },
+          { w: "per", s: 27.2, e: 27.5 },
+          { w: "workout.", s: 27.5, e: 28.3 },
+          { w: "Zero", s: 28.3, e: 28.8 },
+          { w: "wasted", s: 28.8, e: 29.2 },
+          { w: "effort.", s: 29.2, e: 29.5 }
+        ]
+      },
+      {
+        start: 29.5, end: 38.5,
+        words: [
+          { w: "When", s: 29.5, e: 29.8 },
+          { w: "you", s: 29.8, e: 30.0 },
+          { w: "push", s: 30.0, e: 30.3 },
+          { w: "the", s: 30.3, e: 30.5 },
+          { w: "final", s: 30.5, e: 31.0 },
+          { w: "two", s: 31.0, e: 31.3 },
+          { w: "reps", s: 31.3, e: 31.7 },
+          { w: "to", s: 31.7, e: 31.9 },
+          { w: "true", s: 31.9, e: 32.2 },
+          { w: "failure,", s: 32.2, e: 32.8 },
+          { w: "your", s: 32.8, e: 33.1 },
+          { w: "CNS", s: 33.1, e: 33.6 },
+          { w: "recruits", s: 33.6, e: 34.2 },
+          { w: "100%", s: 34.2, e: 35.1 },
+          { w: "of", s: 35.1, e: 35.4 },
+          { w: "high-threshold", s: 35.4, e: 36.4 },
+          { w: "muscle", s: 36.4, e: 37.1 },
+          { w: "fibers.", s: 37.1, e: 38.5 }
+        ]
+      },
+      {
+        start: 38.5, end: 46.5,
+        words: [
+          { w: "You", s: 38.5, e: 38.8 },
+          { w: "don't", s: 38.8, e: 39.1 },
+          { w: "need", s: 39.1, e: 39.4 },
+          { w: "five", s: 39.4, e: 39.8 },
+          { w: "exercises", s: 39.8, e: 40.6 },
+          { w: "for", s: 40.6, e: 40.9 },
+          { w: "chest.", s: 40.9, e: 41.6 },
+          { w: "You", s: 41.6, e: 41.9 },
+          { w: "need", s: 41.9, e: 42.2 },
+          { w: "two", s: 42.2, e: 42.5 },
+          { w: "sets", s: 42.5, e: 43.0 },
+          { w: "executed", s: 43.0, e: 43.8 },
+          { w: "with", s: 43.8, e: 44.1 },
+          { w: "surgical", s: 44.1, e: 44.8 },
+          { w: "violence.", s: 44.8, e: 46.5 }
+        ]
+      },
+      {
+        start: 46.5, end: 54.0,
+        words: [
+          { w: "Comment", s: 46.5, e: 47.1 },
+          { w: '"BULK"', s: 47.1, e: 47.9 },
+          { w: "below", s: 47.9, e: 48.4 },
+          { w: "right", s: 48.4, e: 48.8 },
+          { w: "now,", s: 48.8, e: 49.3 },
+          { w: "and", s: 49.3, e: 49.6 },
+          { w: "we'll", s: 49.6, e: 49.9 },
+          { w: "DM", s: 49.9, e: 50.4 },
+          { w: "you", s: 50.4, e: 50.7 },
+          { w: "Luke's", s: 50.7, e: 51.3 },
+          { w: "exact", s: 51.3, e: 51.8 },
+          { w: "split", s: 51.8, e: 52.4 },
+          { w: "and", s: 52.4, e: 52.7 },
+          { w: "meal", s: 52.7, e: 53.2 },
+          { w: "formula.", s: 53.2, e: 54.0 }
+        ]
+      },
+      {
+        start: 54.0, end: 63.5,
+        words: [
+          { w: "DM", s: 54.0, e: 54.6 },
+          { w: '"BULK"', s: 54.6, e: 55.4 },
+          { w: "to", s: 55.4, e: 55.8 },
+          { w: "unlock", s: 55.8, e: 56.4 },
+          { w: "the", s: 56.4, e: 56.8 },
+          { w: "155", s: 56.8, e: 57.5 },
+          { w: "to", s: 57.5, e: 57.8 },
+          { w: "180", s: 57.8, e: 58.6 },
+          { w: "Protocol.", s: 58.6, e: 60.0 }
+        ]
+      }
+    ];
+
+    // Helper: Draw Taskless Top HUD Metrics
+    function drawTopHUD(t, statLeft, labelRight) {
+      const W = 1080;
+      ctx.save();
+
+      // Top Left Stat
+      ctx.font = '800 48px "Space Grotesk", sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'left';
+      ctx.fillText(statLeft, 60, 110);
+
+      // Top Right Monospace Label
+      ctx.font = '700 24px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#38bdf8'; // glowing cyan
+      ctx.textAlign = 'right';
+      ctx.fillText(labelRight, W - 60, 105);
+
+      // Subtle horizontal rule
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(60, 140);
+      ctx.lineTo(W - 60, 140);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // Helper: Draw Kinetic Captions
+    function drawCaptions(t) {
+      const W = 1080;
+      const cap = subtitles.find(c => t >= c.start && t < c.end);
+      if (!cap) return;
+
+      ctx.save();
+      ctx.shadowBlur = 0;
+      ctx.shadowColor = 'transparent';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '800 52px "Space Grotesk", sans-serif';
+
+      // Measure total width
+      const words = cap.words;
+      const wordSpacings = words.map(w => ctx.measureText(w.w + ' ').width);
+      const totalW = wordSpacings.reduce((a, b) => a + b, 0);
+
+      // If text is too wide for one line, wrap it
+      let lineWords = [];
+      let currentLineWidth = 0;
+      let lines = [];
+
+      words.forEach((item, idx) => {
+        const w = wordSpacings[idx];
+        if (currentLineWidth + w > 940 && lineWords.length > 0) {
+          lines.push(lineWords);
+          lineWords = [item];
+          currentLineWidth = w;
+        } else {
+          lineWords.push(item);
+          currentLineWidth += w;
+        }
+      });
+      if (lineWords.length > 0) lines.push(lineWords);
+
+      // Draw lines centered at y = 1620
+      const startY = 1620 - ((lines.length - 1) * 35);
+
+      lines.forEach((line, lIdx) => {
+        const lineW = line.reduce((acc, item) => acc + ctx.measureText(item.w + ' ').width, 0);
+        let curX = (W / 2) - (lineW / 2);
+        const y = startY + (lIdx * 70);
+
+        line.forEach(item => {
+          const isActive = (t >= item.s && t < item.e);
+          const txt = item.w;
+          const wordW = ctx.measureText(txt + ' ').width;
+
+          // Shadow (crisp black drop shadow)
+          ctx.save();
+          ctx.shadowBlur = 0;
+          ctx.shadowColor = 'transparent';
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.95)';
+          ctx.fillText(txt, curX + (wordW/2) + 2, y + 2);
+          ctx.restore();
+
+          // Word color: Active is neon amber, inactive is bright white
+          if (isActive) {
+            ctx.save();
+            ctx.fillStyle = '#facc15';
+            ctx.shadowColor = 'rgba(250, 204, 21, 0.65)';
+            ctx.shadowBlur = 18;
+            ctx.fillText(txt, curX + (wordW/2), y);
+            ctx.restore();
+          } else {
+            ctx.save();
+            ctx.shadowBlur = 0;
+            ctx.shadowColor = 'transparent';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(txt, curX + (wordW/2), y);
+            ctx.restore();
+          }
+
+          curX += wordW;
+        });
+      });
+
+      ctx.restore();
+    }
+
+    // --- MAIN RENDER LOOP ---
+    function renderFrame(t) {
+      const W = 1080;
+      const H = 1920;
+
+      // 1. Identity transform reset & Pitch-black void
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle Taskless technical grid
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+      ctx.lineWidth = 1;
+      for (let x = 60; x < W; x += 120) {
+        ctx.beginPath();
+        ctx.moveTo(x, 140);
+        ctx.lineTo(x, H - 240);
+        ctx.stroke();
+      }
+      for (let y = 200; y < H - 240; y += 120) {
+        ctx.beginPath();
+        ctx.moveTo(60, y);
+        ctx.lineTo(W - 60, y);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // ==========================================
+      // SCENE 1 (0.0s - 6.5s): 20 JUNK SETS VS 2 SETS FAILURE
+      // ==========================================
+      if (t < 6.5) {
+        const p = t / 6.5;
+        drawTopHUD(t, '20 SETS VS 2 SETS', '// MECHANICAL TENSION RATIO');
+
+        // Main comparison graph
+        const originX = 160;
+        const originY = 1250;
+        const graphW = 760;
+        const graphH = 680;
+
+        // Axes
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(originX, originY - graphH);
+        ctx.lineTo(originX, originY);
+        ctx.lineTo(originX + graphW, originY);
+        ctx.stroke();
+
+        // Axis Labels
+        ctx.font = '700 22px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'right';
+        ctx.fillText('STIMULUS %', originX - 15, originY - graphH + 30);
+        ctx.textAlign = 'center';
+        ctx.fillText('SETS PERFORMED', originX + graphW / 2, originY + 50);
+
+        // Curve 1: 20 Junk Sets (Rises then flatlines / Cortisol spikes)
+        ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        for (let i = 0; i <= 20; i++) {
+          const gx = originX + (i / 20) * graphW;
+          // Stimulus plateaus at set 3-4, then systemic fatigue overwhelms
+          const stimulus = Math.min(0.65, (i / 5) * 0.65) - (i > 6 ? (i - 6) * 0.025 : 0);
+          const gy = originY - stimulus * graphH;
+          if (i === 0) ctx.moveTo(gx, gy);
+          else ctx.lineTo(gx, gy);
+        }
+        ctx.stroke();
+
+        // Curve 2: 2 Sets to True Failure (Peaks straight to 100% stimulus)
+        const progressX = Math.min(1, t / 3.5);
+        ctx.strokeStyle = '#10b981';
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        for (let i = 0; i <= 4; i++) {
+          const frac = i / 4;
+          if (frac > progressX) break;
+          const gx = originX + (i / 20) * graphW;
+          const stimulus = Math.min(0.96, (i / 2) * 0.95);
+          const gy = originY - stimulus * graphH;
+          if (i === 0) ctx.moveTo(gx, gy);
+          else ctx.lineTo(gx, gy);
+        }
+        ctx.stroke();
+
+        // Stat Callout Cards
+        ctx.save();
+        // Red Junk Set Warning Card
+        ctx.fillStyle = 'rgba(239, 68, 68, 0.08)';
+        ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(140, 260, 380, 210, 16);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = '800 28px "Space Grotesk"';
+        ctx.fillStyle = '#ef4444';
+        ctx.textAlign = 'left';
+        ctx.fillText('20 JUNK SETS', 170, 310);
+        ctx.font = '600 20px "JetBrains Mono"';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText('• 2.5 Hrs in Gym', 170, 360);
+        ctx.fillText('• High Joint Wear', 170, 400);
+        ctx.fillStyle = '#f87171';
+        ctx.fillText('• 60% Junk Fatigue', 170, 440);
+
+        // Green 2-Set Card
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.08)';
+        ctx.strokeStyle = 'rgba(16, 185, 129, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(560, 260, 380, 210, 16);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = '800 28px "Space Grotesk"';
+        ctx.fillStyle = '#10b981';
+        ctx.fillText('2-SET FAILURE', 590, 310);
+        ctx.font = '600 20px "JetBrains Mono"';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText('• 48 Min Max', 590, 360);
+        ctx.fillText('• Zero Wasted Reps', 590, 400);
+        ctx.fillStyle = '#34d399';
+        ctx.fillText('• 100% Growth Signal', 590, 440);
+        ctx.restore();
+
+        // Central Timer graphic
+        ctx.save();
+        ctx.font = '800 76px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        const gymMins = Math.floor(Math.min(135, p * 140));
+        ctx.fillText(`${gymMins} MINS`, W / 2, 570);
+        ctx.font = '700 24px "JetBrains Mono"';
+        ctx.fillStyle = '#f87171';
+        ctx.fillText('AVERAGE GYM TIME BLOWN', W / 2, 620);
+        ctx.restore();
+      }
+
+      // ==========================================
+      // SCENE 2 (6.5s - 14.0s): TRANSFORMATION PROOF (155 VS 180)
+      // ==========================================
+      else if (t < 14.0) {
+        const st = t - 6.5;
+        drawTopHUD(t, '155 ➔ 180 LBS', '// REAL CLIENT TRANSFORMATION');
+
+        // Two Biometric Photo Cards Side-by-Side
+        const cardW = 440;
+        const cardH = 680;
+        const cardY = 280;
+
+        // CARD 1: 155 LBS STARTING BASELINE
+        const card1X = 75;
+        ctx.save();
+        ctx.fillStyle = '#0a0a0a';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(card1X, cardY, cardW, cardH, 20);
+        ctx.fill();
+        ctx.stroke();
+
+        // Clip photo inside card
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(card1X + 15, cardY + 15, cardW - 30, cardH - 120, 16);
+        ctx.clip();
+        if (images.before1.complete && images.before1.naturalWidth) {
+          ctx.drawImage(images.before1, card1X + 15, cardY + 15, cardW - 30, cardH - 120);
+        }
+        ctx.restore();
+
+        // Badge 155 LBS
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.beginPath();
+        ctx.roundRect(card1X + 30, cardY + cardH - 85, cardW - 60, 60, 12);
+        ctx.fill();
+        ctx.font = '800 28px "Space Grotesk"';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText('155 LBS • BASELINE', card1X + cardW / 2, cardY + cardH - 45);
+        ctx.restore();
+
+        // CARD 2: 180 LBS ULTRA SHREDDED (Glowing Cyan & Gold)
+        const card2X = 565;
+        ctx.save();
+        ctx.fillStyle = '#0a0a0a';
+        ctx.strokeStyle = '#10b981';
+        ctx.lineWidth = 3;
+        ctx.shadowColor = 'rgba(16, 185, 129, 0.4)';
+        ctx.shadowBlur = 20;
+        ctx.beginPath();
+        ctx.roundRect(card2X, cardY, cardW, cardH, 20);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+
+        // Clip photo 2
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(card2X + 15, cardY + 15, cardW - 30, cardH - 120, 16);
+        ctx.clip();
+        if (images.afterAbs.complete && images.afterAbs.naturalWidth) {
+          ctx.drawImage(images.afterAbs, card2X + 15, cardY + 15, cardW - 30, cardH - 120);
+        }
+
+        // Biometric Laser Scanner sweep
+        const scanY = (cardY + 15) + ((st * 0.8) % 1) * (cardH - 120);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 4;
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 15;
+        ctx.beginPath();
+        ctx.moveTo(card2X + 15, scanY);
+        ctx.lineTo(card2X + cardW - 15, scanY);
+        ctx.stroke();
+        ctx.restore();
+
+        // Badge 180 LBS
+        ctx.save();
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.2)';
+        ctx.strokeStyle = '#10b981';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(card2X + 30, cardY + cardH - 85, cardW - 60, 60, 12);
+        ctx.fill();
+        ctx.stroke();
+        ctx.font = '800 28px "Space Grotesk"';
+        ctx.fillStyle = '#a3e635';
+        ctx.textAlign = 'center';
+        ctx.fillText('180 LBS • SHREDDED', card2X + cardW / 2, cardY + cardH - 45);
+        ctx.restore();
+
+        // Bottom Delta Metric Pill
+        ctx.save();
+        ctx.fillStyle = 'rgba(250, 204, 21, 0.12)';
+        ctx.strokeStyle = 'rgba(250, 204, 21, 0.6)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(160, 1030, 760, 110, 24);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = '800 38px "Space Grotesk"';
+        ctx.fillStyle = '#facc15';
+        ctx.textAlign = 'center';
+        ctx.fillText('+25 LBS PURE LEAN MASS', W / 2, 1080);
+        ctx.font = '700 20px "JetBrains Mono"';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText('ZERO BELLY FAT • 8-PACK ABS MAINTAINED', W / 2, 1115);
+        ctx.restore();
+
+        // Biometric Stats Row
+        ctx.save();
+        ctx.font = '700 22px "JetBrains Mono"';
+        ctx.fillStyle = '#38bdf8';
+        ctx.textAlign = 'center';
+        ctx.fillText('STRENGTH: +140%  |  BODY FAT: 8.4%  |  TIME: 24 WEEKS', W / 2, 1220);
+        ctx.restore();
+      }
+
+      // ==========================================
+      // SCENE 3 (14.0s - 21.5s): THE GOLDEN LAW: PROGRESSIVE OVERLOAD
+      // ==========================================
+      else if (t < 21.5) {
+        const st = t - 14.0;
+        drawTopHUD(t, 'THE GOLDEN LAW', '// RPE 10 MECHANICAL FAILURE');
+
+        // Giant Golden Metric Card
+        ctx.save();
+        ctx.fillStyle = '#0a0a0a';
+        ctx.strokeStyle = '#facc15';
+        ctx.lineWidth = 3;
+        ctx.shadowColor = 'rgba(250, 204, 21, 0.35)';
+        ctx.shadowBlur = 30;
+        ctx.beginPath();
+        ctx.roundRect(100, 240, 880, 290, 28);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = '800 32px "JetBrains Mono"';
+        ctx.fillStyle = '#38bdf8';
+        ctx.textAlign = 'center';
+        ctx.fillText('[ UNBREAKABLE LAW ]', W / 2, 310);
+
+        ctx.font = '900 52px "Space Grotesk"';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText('ADDING WEIGHT =', W / 2, 390);
+        ctx.fillStyle = '#facc15';
+        ctx.fillText('PROGRESSIVE OVERLOAD', W / 2, 460);
+        ctx.restore();
+
+        // Dynamic Barbell Overload Vector Chart
+        const originX = 160;
+        const originY = 1200;
+        const chartW = 760;
+        const chartH = 500;
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(originX, originY - chartH);
+        ctx.lineTo(originX, originY);
+        ctx.lineTo(originX + chartW, originY);
+        ctx.stroke();
+
+        // Weight on bar curve
+        const curveFrac = Math.min(1, st / 4.5);
+        ctx.save();
+        ctx.strokeStyle = '#a3e635'; // neon lime
+        ctx.lineWidth = 8;
+        ctx.shadowColor = '#a3e635';
+        ctx.shadowBlur = 20;
+        ctx.beginPath();
+        for (let x = 0; x <= chartW * curveFrac; x += 10) {
+          const normX = x / chartW;
+          const normY = Math.pow(normX, 1.4); // upward curve
+          const px = originX + x;
+          const py = originY - normY * chartH;
+          if (x === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+        ctx.restore();
+
+        // Exercise Progression Badges
+        const exercises = [
+          { name: 'FLAT CHEST PRESS', start: '135 LBS', end: '245 LBS (+110)' },
+          { name: 'HACK SQUAT', start: '185 LBS', end: '455 LBS (+270)' },
+          { name: 'T-BAR ROW', start: '90 LBS', end: '205 LBS (+115)' }
+        ];
+
+        exercises.forEach((ex, idx) => {
+          const ey = 610 + idx * 110;
+          ctx.save();
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.roundRect(140, ey, 800, 85, 14);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.font = '800 24px "Space Grotesk"';
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'left';
+          ctx.fillText(ex.name, 175, ey + 52);
+
+          ctx.font = '700 22px "JetBrains Mono"';
+          ctx.fillStyle = '#a3e635';
+          ctx.textAlign = 'right';
+          ctx.fillText(ex.end, 900, ey + 52);
+          ctx.restore();
+        });
+      }
+
+      // ==========================================
+      // SCENE 4 (21.5s - 29.5s): 48-MINUTE CLOCK & PUSH/PULL/LEGS
+      // ==========================================
+      else if (t < 29.5) {
+        const st = t - 21.5;
+        drawTopHUD(t, '48 MIN WORKOUT', '// MAXIMUM STIMULUS EFFICIENCY');
+
+        // Circular Taskless Clock Schematic
+        const clockX = W / 2;
+        const clockY = 480;
+        const clockR = 190;
+
+        ctx.save();
+        // Clock outer ring
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.arc(clockX, clockY, clockR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // 48-minute sweeping wedge in neon emerald
+        const sweepAngle = (Math.PI * 2) * (48 / 60) * Math.min(1, st / 2.0);
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+        ctx.beginPath();
+        ctx.moveTo(clockX, clockY);
+        ctx.arc(clockX, clockY, clockR, -Math.PI / 2, -Math.PI / 2 + sweepAngle);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = '#10b981';
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.arc(clockX, clockY, clockR, -Math.PI / 2, -Math.PI / 2 + sweepAngle);
+        ctx.stroke();
+
+        // Center Digital Readout
+        ctx.font = '900 64px "JetBrains Mono"';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText('48:00', clockX, clockY + 15);
+        ctx.font = '700 20px "JetBrains Mono"';
+        ctx.fillStyle = '#10b981';
+        ctx.fillText('WORKOUT DURATION', clockX, clockY + 60);
+        ctx.restore();
+
+        // 3 Protocol Split Nodes
+        const splits = [
+          { title: 'PUSH', focus: 'CHEST • DELTS • TRICEPS', tag: '2 SETS TO FAILURE' },
+          { title: 'PULL', focus: 'LATS • ROWS • BICEPS', tag: '2 SETS TO FAILURE' },
+          { title: 'LEGS', focus: 'HACK SQUAT • RDLS • CALVES', tag: '2 SETS TO FAILURE' }
+        ];
+
+        splits.forEach((s, idx) => {
+          const sy = 760 + idx * 160;
+          ctx.save();
+          ctx.fillStyle = '#0a0a0a';
+          ctx.strokeStyle = (idx === 0) ? '#38bdf8' : (idx === 1) ? '#a3e635' : '#facc15';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.roundRect(120, sy, 840, 130, 18);
+          ctx.fill();
+          ctx.stroke();
+
+          // Title
+          ctx.font = '900 36px "Space Grotesk"';
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'left';
+          ctx.fillText(s.title, 160, sy + 60);
+
+          // Focus
+          ctx.font = '600 20px "JetBrains Mono"';
+          ctx.fillStyle = '#94a3b8';
+          ctx.fillText(s.focus, 160, sy + 100);
+
+          // Badge
+          ctx.font = '800 20px "JetBrains Mono"';
+          ctx.fillStyle = ctx.strokeStyle;
+          ctx.textAlign = 'right';
+          ctx.fillText(s.tag, 920, sy + 75);
+          ctx.restore();
+        });
+
+        // Bottom Banner
+        ctx.save();
+        ctx.font = '700 24px "JetBrains Mono"';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText('ZERO JUNK VOLUME  •  MAXIMUM RECOVERY', W / 2, 1320);
+        ctx.restore();
+      }
+
+      // ==========================================
+      // SCENE 5 (29.5s - 38.5s): 100% HIGH-THRESHOLD FIBERS & 3D DELTS
+      // ==========================================
+      else if (t < 38.5) {
+        const st = t - 29.5;
+        drawTopHUD(t, '100% MOTOR RECRUITMENT', '// HIGH THRESHOLD ACTIVATION');
+
+        // Luke's 3D Delts Gym Photo Embedded in HUD Frame
+        const imgW = 460;
+        const imgH = 680;
+        const imgX = 80;
+        const imgY = 280;
+
+        ctx.save();
+        ctx.fillStyle = '#0a0a0a';
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 3;
+        ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
+        ctx.shadowBlur = 25;
+        ctx.beginPath();
+        ctx.roundRect(imgX, imgY, imgW, imgH, 20);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(imgX + 12, imgY + 12, imgW - 24, imgH - 24, 16);
+        ctx.clip();
+        if (images.afterDelts.complete && images.afterDelts.naturalWidth) {
+          ctx.drawImage(images.afterDelts, imgX + 12, imgY + 12, imgW - 24, imgH - 24);
+        }
+        ctx.restore();
+
+        // Right Side: High-Threshold Fiber Breakdown Gauge
+        const gaugeX = 580;
+        const gaugeY = 280;
+        const gaugeW = 420;
+
+        // Metric Card
+        ctx.fillStyle = '#0a0a0a';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(gaugeX, gaugeY, gaugeW, imgH, 20);
+        ctx.fill();
+        ctx.stroke();
+
+        // Rep progression
+        ctx.font = '800 26px "Space Grotesk"';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'left';
+        ctx.fillText('FIBER RECRUITMENT', gaugeX + 30, gaugeY + 60);
+
+        const repStages = [
+          { rep: 'REPS 1–4', label: 'Low Threshold', pct: 30, col: '#64748b' },
+          { rep: 'REPS 5–6', label: 'Medium Threshold', pct: 65, col: '#facc15' },
+          { rep: 'REP 7 (FAIL)', label: 'Mechanical Failure', pct: 100, col: '#10b981' }
+        ];
+
+        repStages.forEach((stage, idx) => {
+          const sy = gaugeY + 110 + idx * 160;
+          ctx.font = '700 20px "JetBrains Mono"';
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText(stage.rep, gaugeX + 30, sy);
+          ctx.font = '600 16px "JetBrains Mono"';
+          ctx.fillStyle = '#94a3b8';
+          ctx.fillText(stage.label, gaugeX + 30, sy + 30);
+
+          // Bar background
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+          ctx.beginPath();
+          ctx.roundRect(gaugeX + 30, sy + 50, gaugeW - 60, 24, 6);
+          ctx.fill();
+
+          // Bar active
+          const barFrac = Math.min(1, st / 2.5) * (stage.pct / 100);
+          ctx.fillStyle = stage.col;
+          ctx.beginPath();
+          ctx.roundRect(gaugeX + 30, sy + 50, (gaugeW - 60) * barFrac, 24, 6);
+          ctx.fill();
+        });
+        ctx.restore();
+
+        // Big Bottom Callout
+        ctx.save();
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.1)';
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(100, 1040, 880, 130, 20);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = '900 36px "Space Grotesk"';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText('TRUE FAILURE = 100% MUSCLE FIBER GROWTH', W / 2, 1100);
+        ctx.font = '700 20px "JetBrains Mono"';
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillText('NO WASTED REPS  •  MAXIMUM NEUROLOGICAL DRIVE', W / 2, 1140);
+        ctx.restore();
+      }
+
+      // ==========================================
+      // SCENE 6 (38.5s - 46.5s): SURGICAL VIOLENCE LOGBOOK UI
+      // ==========================================
+      else if (t < 46.5) {
+        const st = t - 38.5;
+        drawTopHUD(t, 'SURGICAL VIOLENCE', '// DAILY LOGBOOK TRACKER');
+
+        // Dark Digital Logbook Card
+        ctx.save();
+        ctx.fillStyle = '#0a0a0a';
+        ctx.strokeStyle = '#a3e635';
+        ctx.lineWidth = 2.5;
+        ctx.shadowColor = 'rgba(163, 230, 53, 0.25)';
+        ctx.shadowBlur = 25;
+        ctx.beginPath();
+        ctx.roundRect(90, 260, 900, 780, 24);
+        ctx.fill();
+        ctx.stroke();
+
+        // Header
+        ctx.font = '800 30px "Space Grotesk"';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'left';
+        ctx.fillText('DAILY OVERLOAD LOGBOOK', 140, 330);
+
+        ctx.font = '700 20px "JetBrains Mono"';
+        ctx.fillStyle = '#a3e635';
+        ctx.textAlign = 'right';
+        ctx.fillText('// TRACKED SESSION', 940, 330);
+
+        // Divider
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(140, 360);
+        ctx.lineTo(940, 360);
+        ctx.stroke();
+
+        // Log Rows
+        const rows = [
+          { lift: 'FLAT CHEST PRESS', set1: '245 LBS x 8 REPS (FAIL)', next: '+5 LBS NEXT WEEK' },
+          { lift: 'INCLINE SMITH PRESS', set1: '205 LBS x 7 REPS (FAIL)', next: '+5 LBS NEXT WEEK' },
+          { lift: 'HACK SQUAT', set1: '455 LBS x 8 REPS (FAIL)', next: '+10 LBS NEXT WEEK' },
+          { lift: 'T-BAR ROW', set1: '205 LBS x 9 REPS (FAIL)', next: '+5 LBS NEXT WEEK' }
+        ];
+
+        rows.forEach((r, idx) => {
+          const ry = 400 + idx * 140;
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+          ctx.beginPath();
+          ctx.roundRect(130, ry, 820, 115, 14);
+          ctx.fill();
+
+          ctx.font = '800 22px "Space Grotesk"';
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'left';
+          ctx.fillText(r.lift, 160, ry + 45);
+
+          ctx.font = '700 20px "JetBrains Mono"';
+          ctx.fillStyle = '#38bdf8';
+          ctx.fillText(r.set1, 160, ry + 85);
+
+          // Status Badge
+          ctx.fillStyle = 'rgba(163, 230, 53, 0.15)';
+          ctx.beginPath();
+          ctx.roundRect(690, ry + 32, 230, 50, 10);
+          ctx.fill();
+
+          ctx.font = '800 16px "JetBrains Mono"';
+          ctx.fillStyle = '#a3e635';
+          ctx.textAlign = 'center';
+          ctx.fillText(r.next, 805, ry + 63);
+        });
+        ctx.restore();
+
+        // Bottom quote
+        ctx.save();
+        ctx.font = '800 34px "Space Grotesk"';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText('"NOT 5 EXERCISES. JUST 2 VIOLENT SETS."', W / 2, 1150);
+        ctx.restore();
+      }
+
+      // ==========================================
+      // SCENE 7 (46.5s - 54.0s): GREEK GOD PHYSIQUE & DM NOTIFICATION
+      // ==========================================
+      else if (t < 54.0) {
+        const st = t - 46.5;
+        drawTopHUD(t, 'FREE PROTOCOL DM', '// LUKE HAMILTON');
+
+        // Full Greek God Physique Photo
+        const pW = 540;
+        const pH = 780;
+        const pX = (W - pW) / 2;
+        const pY = 260;
+
+        ctx.save();
+        ctx.fillStyle = '#0a0a0a';
+        ctx.strokeStyle = '#a3e635';
+        ctx.lineWidth = 3;
+        ctx.shadowColor = 'rgba(163, 230, 53, 0.35)';
+        ctx.shadowBlur = 25;
+        ctx.beginPath();
+        ctx.roundRect(pX, pY, pW, pH, 24);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(pX + 12, pY + 12, pW - 24, pH - 24, 18);
+        ctx.clip();
+        if (images.afterFull.complete && images.afterFull.naturalWidth) {
+          ctx.drawImage(images.afterFull, pX + 12, pY + 12, pW - 24, pH - 24);
+        }
+        ctx.restore();
+        ctx.restore();
+
+        // Animated Instagram DM Popup Card
+        const dmY = 1100;
+        ctx.save();
+        ctx.fillStyle = '#171717';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.lineWidth = 2;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+        ctx.shadowBlur = 30;
+        ctx.beginPath();
+        ctx.roundRect(100, dmY, 880, 160, 20);
+        ctx.fill();
+        ctx.stroke();
+
+        // Instagram Icon / Avatar
+        ctx.fillStyle = '#a3e635';
+        ctx.beginPath();
+        ctx.arc(170, dmY + 80, 35, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.font = '800 28px "Space Grotesk"';
+        ctx.fillStyle = '#000000';
+        ctx.textAlign = 'center';
+        ctx.fillText('LH', 170, dmY + 90);
+
+        // Text
+        ctx.font = '800 24px "Space Grotesk"';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'left';
+        ctx.fillText('@tryluke • Just Now', 230, dmY + 65);
+
+        ctx.font = '600 20px "JetBrains Mono"';
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText('Here is your 155➔180 lbs Progressive Overload PDF ⚡', 230, dmY + 105);
+        ctx.restore();
+      }
+
+      // ==========================================
+      // SCENE 8 (54.0s - 63.5s): 1:1 TASKLESS CTA END CARD
+      // ==========================================
+      else {
+        // Pure pitch black void
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.save();
+        // 1. Top Brand Header
+        ctx.font = '800 38px "Space Grotesk", sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText('[ ⚡ ] LUKE HAMILTON', W / 2, 600);
+
+        ctx.font = '700 22px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText('THE 155 ➔ 180 AESTHETIC PROTOCOL', W / 2, 655);
+
+        // 2. Neon Lime Pill Button (Exact Taskless Style)
+        const btnW = 540;
+        const btnH = 92;
+        const btnX = (W - btnW) / 2;
+        const btnY = 740;
+
+        ctx.shadowColor = 'rgba(163, 230, 53, 0.45)';
+        ctx.shadowBlur = 30;
+        ctx.fillStyle = '#a3e635'; // vibrant Taskless neon lime
+        ctx.beginPath();
+        ctx.roundRect(btnX, btnY, btnW, btnH, 46);
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.font = '900 36px "Space Grotesk", sans-serif';
+        ctx.fillStyle = '#000000';
+        ctx.textAlign = 'center';
+        ctx.fillText('DM "BULK" ➔', W / 2, btnY + 58);
+
+        // 3. Supporting Subtext
+        ctx.font = '600 24px "Inter", sans-serif';
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fillText("We'll send you the exact 2-set failure split,", W / 2, 895);
+        ctx.fillText("logbook template & lean bulk nutrition plan", W / 2, 935);
+
+        // 4. Tracked Monospace Domain
+        ctx.font = '700 24px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#64748b';
+        ctx.fillText('VANTORX.COM/FITNESS', W / 2, 1140);
+        ctx.restore();
+      }
+
+      // Draw Floating Kinetic Captions on top
+      drawCaptions(t);
+    }
+
+    // --- CONTROLLER LOGIC ---
+    function formatTime(s) {
+      const mins = Math.floor(s / 60);
+      const secs = Math.floor(s % 60);
+      return `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    function update() {
+      if (isPlaying) {
+        currentTime = audio.currentTime;
+        if (currentTime >= TOTAL_DURATION) {
+          currentTime = TOTAL_DURATION;
+          pause();
+        }
+        timeSlider.value = currentTime;
+        timeCurrent.textContent = formatTime(currentTime);
+      }
+      renderFrame(currentTime);
+      if (isPlaying) {
+        animFrameId = requestAnimationFrame(update);
+      }
+    }
+
+    function play() {
+      isPlaying = true;
+      playBtn.textContent = '⏸ Pause';
+      audio.play();
+      animFrameId = requestAnimationFrame(update);
+    }
+
+    function pause() {
+      isPlaying = false;
+      playBtn.textContent = '▶ Play';
+      audio.pause();
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) pause();
+      else play();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      pause();
+      currentTime = 0;
+      audio.currentTime = 0;
+      timeSlider.value = 0;
+      timeCurrent.textContent = '00:00';
+      renderFrame(0);
+    });
+
+    timeSlider.addEventListener('input', (e) => {
+      currentTime = parseFloat(e.target.value);
+      audio.currentTime = currentTime;
+      timeCurrent.textContent = formatTime(currentTime);
+      renderFrame(currentTime);
+    });
+
+    document.getElementById('jumpBeforeAfter').addEventListener('click', () => {
+      currentTime = 8.5;
+      audio.currentTime = 8.5;
+      timeSlider.value = 8.5;
+      timeCurrent.textContent = formatTime(8.5);
+      renderFrame(8.5);
+    });
+
+    document.getElementById('jumpCta').addEventListener('click', () => {
+      currentTime = 56.0;
+      audio.currentTime = 56.0;
+      timeSlider.value = 56.0;
+      timeCurrent.textContent = formatTime(56.0);
+      renderFrame(56.0);
+    });
+
+    // Initial draw
+    window.addEventListener('load', () => {
+      renderFrame(0);
+    });
+    setTimeout(() => renderFrame(0), 200);
+  </script>
+</body>
+</html>

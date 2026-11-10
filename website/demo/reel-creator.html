@@ -2965,3127 +2965,1061 @@ let WORD_TIMESTAMPS = [
 ];
 window.WORD_TIMESTAMPS = WORD_TIMESTAMPS;
 
-// Dynamic Camera Shake & Transition Impacts
-function getCameraShake(t) {
-  let intensity = 0;
-  // Punch pulses on every scene transition
-  const cuts = [0.0, 4.5, 8.2, 13.5, 18.0, 22.5, 26.8, 31.0, 36.5, 40.5, 44.0, 47.8, 50.8, 54.0, 58.2];
-  for (const c of cuts) {
-    const dt = t - c;
-    if (dt >= 0 && dt < 0.45) {
-      intensity = Math.max(intensity, (1 - dt / 0.45) * 8.5);
+// ============================================================================
+// VANTORX VIRAL REEL ENGINE — 1:1 TASKLESS STUDIO VISUAL IDENTITY
+// Pure black void, minimalist technical schematics, HUD metrics, clean kinetic typography
+// ============================================================================
+
+function drawTasklessHUD(ctx, opts) {
+  ctx.save();
+  ctx.beginPath();
+
+  // Top Left Metric
+  if (opts.topStat) {
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 46px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillText(opts.topStat, 40, 52);
+
+    if (opts.topStatUnit) {
+      const statW = ctx.measureText(opts.topStat).width;
+      ctx.font = '600 22px "Space Grotesk", sans-serif';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.fillText(' ' + opts.topStatUnit, 40 + statW, 70);
+    }
+
+    let subY = 106;
+    ctx.font = '700 13px "Inter", "JetBrains Mono", sans-serif';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+    if (opts.topSub1) {
+      ctx.fillText(opts.topSub1.toUpperCase(), 42, subY);
+      subY += 18;
+    }
+    if (opts.topSub2) {
+      ctx.fillText(opts.topSub2.toUpperCase(), 42, subY);
     }
   }
-  if (intensity === 0) return { x: 0, y: 0 };
-  return {
-    x: Math.sin(t * 60) * intensity,
-    y: Math.cos(t * 52) * intensity
-  };
+
+  // Top Right Context Label
+  if (opts.rightLabel) {
+    ctx.font = '700 13px "Inter", "JetBrains Mono", sans-serif';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'top';
+    ctx.fillText(opts.rightLabel.toUpperCase(), W - 40, 58);
+  }
+
+  ctx.restore();
 }
 
-let playedSfxMap = {};
-function resetSfxFlags() {
-  playedSfxMap = {};
-}
-
-// -------------------------------------------------------------
-// 🎬 MASTER 15-SCENE MULTI-SCENE RENDER ENGINE (3-4s Cuts)
-// -------------------------------------------------------------
-// -------------------------------------------------------------
-// DYNAMIC STORY ATMOSPHERE & BACKGROUND ENGINE (Zero Hardcoded Void)
-// -------------------------------------------------------------
-
-  
-  // =========================================================================
-// 🎨 IMMERSIVE STICK FIGURE STORY ANIMATION ENGINE (SILKY SMOOTH & CLEAN)
-// Smooth motion, fluid kinematics, organic easing, soft particle physics, zero jitter
-// =========================================================================
-
-// --- 42 CONTINUOUS LIVING AMBIENT PARTICLES (SILKY SMOOTH DRIFT) ---
-const AMBIENT_PARTICLES = Array.from({ length: 42 }, (_, i) => ({
-  x: Math.random() * 540,
-  y: Math.random() * 960,
-  vx: (Math.random() - 0.5) * 0.35, // Gentle, relaxing drift
-  vy: -0.25 - Math.random() * 0.45,
-  size: 1.5 + Math.random() * 2.0,
-  alpha: 0.18 + Math.random() * 0.35,
-  color: i % 4 === 0 ? '#38bdf8' : (i % 4 === 1 ? '#c8ff00' : (i % 4 === 2 ? '#a855f7' : '#ffffff')),
-  pulseSpeed: 1.2 + Math.random() * 1.8
-}));
-
-// --- LIVING DARK CANVAS BACKGROUND WITH CONTINUOUS SMOOTH PARTICLES ---
-function renderDynamicAtmosphere(t, storyType) {
-  // Deep clean midnight chalkboard navy with very gentle gradient breathing
-  const shiftY = Math.sin(t * 0.25) * 20;
-  const grad = ctx.createLinearGradient(0, -shiftY, 0, H + shiftY);
-  grad.addColorStop(0, '#090d16');
-  grad.addColorStop(0.5, '#0d1322');
-  grad.addColorStop(1, '#080c14');
-  ctx.fillStyle = grad;
+// ----------------------------------------------------------------------------
+// SCENE 1 (0.0s - 7.0s): Laser Crowd Hook
+// Crowd of 2D flat vector silhouettes pointing green lasers up into space
+// Foreground arm with green laser pointer emitting vibrant beam
+// ----------------------------------------------------------------------------
+function renderTasklessScene1_LaserCrowd(t) {
+  ctx.save();
+  ctx.beginPath();
+  // Very subtle deep teal-to-black atmosphere gradient
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#060d10');
+  bg.addColorStop(0.5, '#0b1417');
+  bg.addColorStop(1, '#020507');
+  ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
-  // Smooth floating ambient particle drift (organic & non-distracting)
-  ctx.save();
-  for (let i = 0; i < AMBIENT_PARTICLES.length; i++) {
-    const p = AMBIENT_PARTICLES[i];
-    p.y += p.vy;
-    p.x += p.vx + Math.sin(t * 0.8 + i) * 0.15;
-    if (p.y < -10) p.y = H + 10;
-    if (p.x < -10) p.x = W + 10;
-    if (p.x > W + 10) p.x = -10;
-
-    // Smooth sinusoidal alpha pulsing (no abrupt blinking)
-    const pulse = 0.6 + 0.4 * Math.sin(t * p.pulseSpeed + i);
-    ctx.fillStyle = p.color;
-    ctx.globalAlpha = p.alpha * pulse;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  ctx.restore();
-
-  // Clean floor ground line with gentle ambient sheen
-  ctx.save();
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(0, H - 180);
-  ctx.lineTo(W, H - 180);
-  ctx.stroke();
-
-  // Smooth floor light glide
-  const scanX = (t * 70) % (W + 240) - 120;
-  const scanGrad = ctx.createLinearGradient(scanX - 70, 0, scanX + 70, 0);
-  scanGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
-  scanGrad.addColorStop(0.5, 'rgba(56, 189, 248, 0.18)');
-  scanGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
-  ctx.strokeStyle = scanGrad;
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.moveTo(scanX - 70, H - 180);
-  ctx.lineTo(scanX + 70, H - 180);
-  ctx.stroke();
-  ctx.restore();
-}
-
-// --- EXPRESSIVE STICK FIGURE CHARACTER DRAWING ROUTINE 3.0 (BUTTERY SMOOTH) ---
-function drawStickPerson(ctx, x, y, opts) {
-  opts = opts || {};
-  const t = opts.t || 0;
-  ctx.save();
-
-  // Gentle, organic breathing & idle squash-and-stretch (NO rapid jitter)
-  const breath = Math.sin(t * 2.8) * 2.0;
-  const squashY = 1.0 + Math.sin(t * 2.8) * 0.015;
-  const squashX = 1.0 - Math.sin(t * 2.8) * 0.012;
-
-  ctx.translate(x, y + breath);
-
-  const scale = opts.scale || 1.0;
-  const facing = opts.facing || 1; // 1 = right, -1 = left
-  ctx.scale(facing * scale * squashX, scale * squashY);
-
-  const color = opts.color || '#ffffff';
-  ctx.strokeStyle = color;
-  ctx.lineWidth = opts.lineWidth || 4.2;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-
-  const headRadius = 22;
-  const headY = -120;
-  const neckY = -98;
-  const hipY = -35;
-  const footY = 0;
-
-  // 1. HEAD
-  ctx.fillStyle = opts.headFill || '#0d1322';
-  ctx.beginPath();
-  ctx.arc(0, headY, headRadius, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.stroke();
-
-  // Natural Blinking: smooth 0.15s blink every 3.5s
-  const blinkCycle = t % 3.5;
-  const isBlink = blinkCycle < 0.14;
-
-  // 2. FACIAL EXPRESSIONS (CLEAN & EXPRESSIVE)
-  const expr = opts.expr || 'happy';
-  ctx.fillStyle = color;
-  ctx.strokeStyle = color;
-
-  if (isBlink && expr !== 'sleep') {
-    // Soft closed eyes
-    ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(-9, headY - 2); ctx.lineTo(-3, headY - 2); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(3, headY - 2); ctx.lineTo(9, headY - 2); ctx.stroke();
-  } else if (expr === 'happy') {
-    // Smiling eyes ^ ^
-    ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.arc(-7, headY - 2, 4, Math.PI, 0); ctx.stroke();
-    ctx.beginPath(); ctx.arc(7, headY - 2, 4, Math.PI, 0); ctx.stroke();
-
-    // Natural talking mouth
-    const mouthOpen = opts.talking ? Math.abs(Math.sin(t * 7)) * 4.5 : 0;
-    if (mouthOpen > 1.2) {
-      ctx.fillStyle = '#f87171';
-      ctx.beginPath();
-      ctx.ellipse(0, headY + 6, 5.5, mouthOpen, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-    } else {
-      ctx.beginPath();
-      ctx.arc(0, headY + 5, 7.5, 0, Math.PI);
-      ctx.stroke();
-    }
-  } else if (expr === 'panic' || expr === 'shock') {
-    // Wide shocked eyes O O with very subtle breathing
-    ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.arc(-7, headY - 2, 5.5, 0, Math.PI * 2); ctx.stroke();
-    ctx.beginPath(); ctx.arc(7, headY - 2, 5.5, 0, Math.PI * 2); ctx.stroke();
-
-    // Open gasping mouth
-    const mouthSize = 6 + Math.sin(t * 5) * 1.2;
-    ctx.beginPath(); ctx.arc(0, headY + 8, mouthSize, 0, Math.PI * 2); ctx.stroke();
-
-    // Smooth floating sweat droplets with parabolic fade
-    for (let sw = 0; sw < 2; sw++) {
-      const swT = (t * 2.2 + sw * 0.7) % 1.5;
-      const swProg = swT / 1.5;
-      const swDist = swProg * 26;
-      const swX = 14 + swDist * 0.8;
-      const swY = headY - 10 + swDist * 0.5;
-      const swAlpha = Math.sin(swProg * Math.PI); // Smooth fade in and out!
-      ctx.fillStyle = 'rgba(56, 189, 248, ' + (swAlpha * 0.85) + ')';
-      ctx.beginPath();
-      ctx.arc(swX, swY, 3.2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  } else if (expr === 'sweat') {
-    // Stressed eyebrows
-    ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(-10, headY - 4); ctx.lineTo(-4, headY - 2); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(4, headY - 2); ctx.lineTo(10, headY - 4); ctx.stroke();
-    ctx.beginPath(); ctx.arc(0, headY + 6, 6.5, 0, Math.PI); ctx.stroke();
-
-    // Smooth teardrop sweat arc
-    for (let sw = 0; sw < 2; sw++) {
-      const swT = (t * 2.0 + sw * 0.8) % 1.6;
-      const swProg = swT / 1.6;
-      const swX = 16 + swProg * 20;
-      const swY = headY - 8 + swProg * 16;
-      const swAlpha = Math.sin(swProg * Math.PI);
-      ctx.fillStyle = 'rgba(56, 189, 248, ' + (swAlpha * 0.85) + ')';
-      ctx.beginPath();
-      ctx.arc(swX, swY, 3.5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  } else if (expr === 'sad') {
-    ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.arc(-7, headY - 2, 2.5, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(7, headY - 2, 2.5, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(0, headY + 12, 7.5, Math.PI, 0); ctx.stroke();
-  } else if (expr === 'sleep') {
-    ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(-10, headY); ctx.lineTo(-4, headY); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(4, headY); ctx.lineTo(10, headY); ctx.stroke();
-    ctx.beginPath(); ctx.arc(0, headY + 6, 5.5, 0, Math.PI); ctx.stroke();
-  }
-
-  // 3. HARD HAT (Contractor)
-  if (opts.hat === 'hardhat') {
-    ctx.fillStyle = '#facc15';
-    ctx.strokeStyle = '#ca8a04';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.arc(0, headY - 14, headRadius + 2, Math.PI, 0);
-    ctx.fill();
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.roundRect(-headRadius - 8, headY - 14, (headRadius + 8) * 2, 6, 3);
-    ctx.fill();
-    ctx.stroke();
-  } else if (opts.hat === 'nightcap') {
-    const capSway = Math.sin(t * 1.8) * 4;
-    ctx.fillStyle = '#60a5fa';
-    ctx.beginPath();
-    ctx.moveTo(-headRadius, headY - 12);
-    ctx.quadraticCurveTo(0, headY - 48, 30 + capSway, headY - 40);
-    ctx.lineTo(headRadius, headY - 12);
-    ctx.closePath();
-    ctx.fill();
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath(); ctx.arc(32 + capSway, headY - 40, 6, 0, Math.PI * 2); ctx.fill();
-  }
-
-  // 4. TORSO (Spine)
-  ctx.strokeStyle = color;
-  ctx.lineWidth = opts.lineWidth || 4.2;
-  ctx.beginPath();
-  ctx.moveTo(0, neckY);
-  ctx.lineTo(0, hipY);
-  ctx.stroke();
-
-  // Safety Vest
-  if (opts.vest) {
-    ctx.fillStyle = '#a3e635';
-    ctx.fillRect(-10, neckY + 8, 20, hipY - neckY - 14);
-    ctx.fillStyle = '#f97316';
-    ctx.fillRect(-10, neckY + 22, 20, 6);
-  }
-
-  // 5. ARMS & LEGS WITH FLUID, SMOOTH LOCOMOTION
-  const pose = opts.pose || 'stand';
-
-  if (pose === 'run' || pose === 'sprint') {
-    // Smooth athletic sprint at natural 8.5 rad/s (NO frantic blender blur)
-    const runFreq = 8.5;
-    const leg1 = Math.sin(t * runFreq) * 28;
-    const leg2 = Math.sin(t * runFreq + Math.PI) * 28;
-    const arm1 = Math.sin(t * runFreq + Math.PI) * 22;
-    const arm2 = Math.sin(t * runFreq) * 22;
-
-    ctx.rotate(0.10); // Natural athletic forward lean
-
-    // Pumping arms
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-arm1, neckY + 28); ctx.lineTo(-arm1 * 1.25, hipY + 8);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(arm2, neckY + 28); ctx.lineTo(arm2 * 1.25, hipY - 8);
-    ctx.stroke();
-
-    // Striding legs
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(leg1 * 0.65, hipY + 24); ctx.lineTo(leg1, footY);
-    ctx.moveTo(0, hipY); ctx.lineTo(leg2 * 0.65, hipY + 24); ctx.lineTo(leg2, footY);
-    ctx.stroke();
-
-    // Soft puff behind heel
-    const puffCycle = (t * 4.2) % 1;
-    const puffAlpha = Math.sin(puffCycle * Math.PI) * 0.6;
-    ctx.fillStyle = 'rgba(226, 232, 240, ' + puffAlpha + ')';
-    ctx.beginPath();
-    ctx.arc(-22 - puffCycle * 16, footY - puffCycle * 6, 3 + puffCycle * 5, 0, Math.PI * 2);
-    ctx.fill();
-  } else if (pose === 'walk' || pose === 'pace') {
-    // Smooth fluid walk at 4.8 rad/s
-    const walkFreq = 4.8;
-    const leg1 = Math.sin(t * walkFreq) * 18;
-    const leg2 = Math.sin(t * walkFreq + Math.PI) * 18;
-    const arm1 = Math.sin(t * walkFreq + Math.PI) * 14;
-    const arm2 = Math.sin(t * walkFreq) * 14;
-
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-arm1, neckY + 28); ctx.lineTo(-arm1 * 1.15, hipY + 8);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(arm2, neckY + 28); ctx.lineTo(arm2 * 1.15, hipY + 8);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(leg1 * 0.55, hipY + 20); ctx.lineTo(leg1, footY);
-    ctx.moveTo(0, hipY); ctx.lineTo(leg2 * 0.55, hipY + 20); ctx.lineTo(leg2, footY);
-    ctx.stroke();
-  } else if (pose === 'ladder_work') {
-    // Deliberate wrenching with smooth, natural cadence
-    const wrenchAnim = Math.sin(t * 3.8) * 8;
-    const balanceTilt = Math.sin(t * 2.2) * 0.025;
-    ctx.rotate(balanceTilt);
-
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-24, neckY - 10); ctx.lineTo(-32, neckY - 35);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(26, neckY - 8 + wrenchAnim); ctx.lineTo(44, neckY - 26 + wrenchAnim);
-    ctx.stroke();
-
-    // Wrench
-    ctx.save();
-    ctx.fillStyle = '#94a3b8';
-    ctx.strokeStyle = '#cbd5e1';
-    ctx.lineWidth = 2;
-    ctx.fillRect(38, neckY - 40 + wrenchAnim, 10, 24);
-    ctx.fillRect(34, neckY - 44 + wrenchAnim, 18, 8);
-    if (Math.sin(t * 3.8) > 0.8) {
-      ctx.fillStyle = '#fde047';
-      ctx.beginPath(); ctx.arc(43, neckY - 46 + wrenchAnim, 3.5, 0, Math.PI * 2); ctx.fill();
-    }
-    ctx.restore();
-
-    // Steady feet on ladder
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(-18, hipY + 35); ctx.lineTo(-14, footY);
-    ctx.moveTo(0, hipY); ctx.lineTo(18, hipY + 30); ctx.lineTo(14, footY - 12);
-    ctx.stroke();
-  } else if (pose === 'panic_phone') {
-    // Smooth pacing with phone to ear
-    const phoneSway = Math.sin(t * 3.2) * 1.5;
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-24, neckY); ctx.lineTo(-18, headY + 5 + phoneSway);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(24, neckY); ctx.lineTo(18, headY + 5);
-    ctx.stroke();
-
-    ctx.fillStyle = '#38bdf8';
-    roundRect(ctx, -28, headY - 5 + phoneSway, 10, 18, 3, true, false);
-
-    // Natural pacing footsteps
-    const paceStep = Math.sin(t * 4.5) * 10;
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(-16 + paceStep, footY);
-    ctx.moveTo(0, hipY); ctx.lineTo(16 - paceStep, footY);
-    ctx.stroke();
-  } else if (pose === 'laser_pointer') {
-    // Smooth, deliberate aim tracking
-    const aimWobble = Math.sin(t * 1.8) * 4;
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(28, neckY - 12 + aimWobble); ctx.lineTo(50, neckY - 28 + aimWobble);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-18, neckY + 10); ctx.lineTo(-6, hipY);
-    ctx.stroke();
-
-    ctx.fillStyle = '#22c55e';
-    roundRect(ctx, 46, neckY - 34 + aimWobble, 18, 8, 3, true, false);
-
-    // Confident standing legs with gentle breath
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(-20, footY);
-    ctx.moveTo(0, hipY); ctx.lineTo(20, footY);
-    ctx.stroke();
-  } else if (pose === 'cheer' || pose === 'jump_cheer') {
-    // Smooth, celebratory jump
-    const jump = Math.abs(Math.sin(t * 3.5)) * 16;
-    const wave1 = Math.sin(t * 4.5) * 10;
-    const wave2 = Math.cos(t * 4.5) * 10;
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-28, neckY - 25); ctx.lineTo(-38 + wave1, neckY - 50);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(28, neckY - 25); ctx.lineTo(38 + wave2, neckY - 50);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(-18, footY - jump);
-    ctx.moveTo(0, hipY); ctx.lineTo(18, footY - jump);
-    ctx.stroke();
-  } else if (pose === 'drag_heavy') {
-    // Heavy, slow trudging
-    const step = Math.sin(t * 2.5) * 10;
-    ctx.rotate(-0.12);
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-20, neckY + 34); ctx.lineTo(-26, hipY + 15);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(12, neckY + 34); ctx.lineTo(16, hipY + 15);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(-16 + step, footY);
-    ctx.moveTo(0, hipY); ctx.lineTo(16 - step, footY);
-    ctx.stroke();
-  } else if (pose === 'sad_ladder') {
-    const sigh = Math.sin(t * 1.8) * 2.5;
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-18, neckY + 38 + sigh); ctx.lineTo(-12, hipY + 15);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(18, neckY + 38 + sigh); ctx.lineTo(12, hipY + 15);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(-16, footY);
-    ctx.moveTo(0, hipY); ctx.lineTo(16, footY);
-    ctx.stroke();
-  } else {
-    // Default stand with gentle weight shift
-    const weightShift = Math.sin(t * 2.0) * 1.5;
-    ctx.beginPath();
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(-22, neckY + 30); ctx.lineTo(-18, hipY + 10);
-    ctx.moveTo(0, neckY + 12); ctx.lineTo(22, neckY + 30); ctx.lineTo(18, hipY + 10);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0, hipY); ctx.lineTo(-18 + weightShift, footY);
-    ctx.moveTo(0, hipY); ctx.lineTo(18 - weightShift, footY);
-    ctx.stroke();
-  }
-
-  ctx.restore();
-}
-
-// --- CUTE AVA ROBOT 3.0 (SILKY HOVER & GLOWING HOLOGRAPHICS) ---
-function drawAvaRobot(ctx, x, y, opts) {
-  opts = opts || {};
-  const t = opts.t || 0;
-  ctx.save();
-
-  // Floaty, luxurious antigravity hover (smooth 2.0 rad/s)
-  const hoverY = Math.sin(t * 2.0) * 8;
-  const hoverTilt = Math.sin(t * 1.5) * 0.025;
-
-  ctx.translate(x, y + hoverY);
-  ctx.rotate(hoverTilt);
-
-  const scale = opts.scale || 1.0;
-  ctx.scale(scale, scale);
-
-  const headRadius = 24;
-  const headY = -120;
-  const neckY = -96;
-  const hipY = -35;
-  const footY = 0;
-
-  ctx.save();
-  ctx.shadowColor = '#38bdf8';
-  ctx.shadowBlur = 20;
-
-  ctx.fillStyle = '#0f172a';
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 3.5;
-  ctx.beginPath();
-  roundRect(ctx, -headRadius - 4, headY - headRadius, (headRadius + 4) * 2, headRadius * 2 + 4, 16, true, true);
-  ctx.restore();
-
-  // Soft ion thruster glow (breathes smoothly, NO strobe)
-  const flameH = 14 + Math.sin(t * 6) * 3;
-  [-14, 14].forEach(fx => {
-    ctx.fillStyle = '#38bdf8';
-    ctx.shadowColor = '#38bdf8';
-    ctx.shadowBlur = 12;
-    ctx.beginPath();
-    ctx.moveTo(fx - 5, footY);
-    ctx.lineTo(fx + 5, footY);
-    ctx.lineTo(fx, footY + flameH);
-    ctx.closePath();
-    ctx.fill();
-    ctx.fillStyle = '#c8ff00';
-    ctx.beginPath();
-    ctx.moveTo(fx - 2.5, footY);
-    ctx.lineTo(fx + 2.5, footY);
-    ctx.lineTo(fx, footY + flameH * 0.6);
-    ctx.closePath();
-    ctx.fill();
-    ctx.shadowBlur = 0;
+  // HUD
+  drawTasklessHUD(ctx, {
+    topStat: '186,000',
+    topStatUnit: 'mi/s',
+    topSub1: 'SPEED OF LIGHT IN VACUUM',
+    topSub2: 'SCHEMATIC • 1 FRAME = 1 SEC',
+    rightLabel: 'PHOTON VELOCITY'
   });
 
-  // Antenna with soft star
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.moveTo(0, headY - headRadius);
-  ctx.lineTo(0, headY - headRadius - 16);
-  ctx.stroke();
+  // Background Crowd of Minimalist Vector People
+  const crowdCount = 18;
+  for (let i = 0; i < crowdCount; i++) {
+    const cx = 50 + (i % 6) * 85 + ((i * 17) % 30);
+    const cy = H - 280 - Math.floor(i / 6) * 70;
+    const depth = 0.5 + Math.floor(i / 6) * 0.22;
+    const alpha = 0.18 + depth * 0.35;
 
-  // Smooth expanding radio wave
-  const sigCycle = (t * 0.8) % 1.0;
-  const sigR = sigCycle * 32;
-  const sigA = Math.sin(sigCycle * Math.PI) * 0.7; // Smooth fade in and out!
-  ctx.strokeStyle = 'rgba(56, 189, 248, ' + sigA + ')';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.arc(0, headY - headRadius - 18, sigR, 0, Math.PI * 2);
-  ctx.stroke();
+    // Head
+    ctx.fillStyle = 'rgba(203, 213, 225, ' + (alpha * 0.8) + ')';
+    ctx.beginPath();
+    ctx.arc(cx, cy - 22 * depth, 11 * depth, 0, Math.PI * 2);
+    ctx.fill();
 
-  ctx.fillStyle = '#c8ff00';
-  ctx.shadowColor = '#c8ff00';
-  ctx.shadowBlur = 12;
-  ctx.beginPath();
-  ctx.arc(0, headY - headRadius - 18, 5, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.shadowBlur = 0;
+    // Body
+    ctx.fillStyle = 'rgba(148, 163, 184, ' + alpha + ')';
+    ctx.beginPath();
+    ctx.roundRect(cx - 13 * depth, cy - 10 * depth, 26 * depth, 45 * depth, 4);
+    ctx.fill();
+  }
 
-  // Headset
-  ctx.fillStyle = '#a855f7';
-  roundRect(ctx, -headRadius - 8, headY - 8, 8, 16, 4, true, false);
-  ctx.strokeStyle = '#a855f7';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(-headRadius - 4, headY);
-  ctx.quadraticCurveTo(-12, headY + 18, 6, headY + 14);
-  ctx.stroke();
-  ctx.fillStyle = '#38bdf8';
-  ctx.beginPath(); ctx.arc(8, headY + 14, 3.5, 0, Math.PI * 2); ctx.fill();
-
-  // Concentric voice rings
-  const micCycle = (t * 1.2) % 1.0;
-  const micR = micCycle * 22;
-  const micA = Math.sin(micCycle * Math.PI) * 0.7;
-  ctx.strokeStyle = 'rgba(56, 189, 248, ' + micA + ')';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.arc(8, headY + 14, micR, -0.6, 0.6);
-  ctx.stroke();
-
-  // Digital face with smooth transitions
-  ctx.fillStyle = '#38bdf8';
-  ctx.font = 'bold 15px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  const emoteCycle = Math.floor(t * 0.8) % 3;
-  let emote = '^ ‿ ^';
-  if (emoteCycle === 1) emote = '⚡ ‿ ⚡';
-  else if (emoteCycle === 2) emote = '◕ ‿ ◕';
-  ctx.fillText(emote, 0, headY + 6);
-
-  // Torso
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.moveTo(0, neckY);
-  ctx.lineTo(0, hipY);
-  ctx.stroke();
-
-  // Heart badge
-  const badgePulse = 1.0 + Math.sin(t * 4) * 0.05;
+  // Foreground Giant Arm & Hand Holding Laser (Exact 1:1 match to Taskless frame_01.jpg!)
   ctx.save();
-  ctx.scale(badgePulse, badgePulse);
-  ctx.fillStyle = '#a855f7';
-  roundRect(ctx, -14, neckY + 12, 28, 20, 6, true, false);
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 9px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('AVA', 0, neckY + 26);
-  ctx.restore();
+  const armSway = Math.sin(t * 1.8) * 4;
+  const handBaseX = W * 0.38 + armSway;
+  const handBaseY = H * 0.44;
 
-  // Smooth typing motion
-  const typeMotion = Math.sin(t * 8) * 3;
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 4;
+  // Arm reaching up from bottom-left
+  ctx.fillStyle = '#b7835b'; // Warm skin tone
   ctx.beginPath();
-  ctx.moveTo(0, neckY + 10);
-  ctx.lineTo(24, neckY + 4 + typeMotion);
-  ctx.lineTo(16, neckY + 24 + typeMotion);
-  ctx.moveTo(0, neckY + 10);
-  ctx.lineTo(-24, neckY + 12);
-  ctx.lineTo(-12, neckY + 30);
-  ctx.stroke();
+  ctx.moveTo(W * 0.10, H);
+  ctx.lineTo(W * 0.24, H);
+  ctx.lineTo(handBaseX + 32, handBaseY + 60);
+  ctx.lineTo(handBaseX - 32, handBaseY + 60);
+  ctx.closePath();
+  ctx.fill();
 
-  // Tablet
+  // Hand Palm & Fingers
+  ctx.beginPath();
+  ctx.roundRect(handBaseX - 35, handBaseY - 20, 70, 70, 16);
+  ctx.fill();
+
+  // 4 Fingers pointing up
+  const fingerW = 12;
+  const fingerH = 50;
+  for (let f = 0; f < 4; f++) {
+    const fx = handBaseX - 25 + f * 17;
+    const fy = handBaseY - 20 - fingerH + (f === 1 ? -6 : f === 2 ? -4 : 0);
+    ctx.beginPath();
+    ctx.roundRect(fx, fy, fingerW, fingerH + 10, 6);
+    ctx.fill();
+  }
+
+  // Laser Pointer Device in Hand
+  const deviceX = handBaseX + 28;
+  const deviceY = handBaseY - 50;
   ctx.fillStyle = '#1e293b';
-  ctx.strokeStyle = '#c8ff00';
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, -32, neckY + 22, 34, 22, 4, true, true);
-
-  // Holographic beam
-  ctx.save();
-  const holoGrad = ctx.createLinearGradient(0, neckY + 20, 0, neckY - 55);
-  holoGrad.addColorStop(0, 'rgba(56, 189, 248, 0.35)');
-  holoGrad.addColorStop(1, 'rgba(200, 255, 0, 0)');
-  ctx.fillStyle = holoGrad;
   ctx.beginPath();
-  ctx.moveTo(-28, neckY + 22);
-  ctx.lineTo(0, neckY + 22);
-  ctx.lineTo(16, neckY - 45);
-  ctx.lineTo(-42, neckY - 45);
-  ctx.closePath();
+  ctx.roundRect(deviceX - 10, deviceY - 24, 20, 48, 6);
   ctx.fill();
 
-  // Smooth rising data particles
-  for (let dp = 0; dp < 3; dp++) {
-    const dpCycle = (t * 0.9 + dp * 0.33) % 1.0;
-    const dpY = neckY + 20 - dpCycle * 45;
-    const dpX = -14 + Math.sin(t * 2 + dp) * 8;
-    const dpAlpha = Math.sin(dpCycle * Math.PI);
-    ctx.fillStyle = 'rgba(200, 255, 0, ' + dpAlpha + ')';
-    ctx.fillRect(dpX, dpY, 3, 3);
-  }
-  ctx.restore();
+  // Laser Emitter Glowing Dot
+  const emitterX = deviceX;
+  const emitterY = deviceY - 26;
+  const glowPulse = 0.8 + 0.2 * Math.sin(t * 12);
 
-  // Hovering Legs
+  // Intense Emerald Glow Aura
+  const emitterGlow = ctx.createRadialGradient(emitterX, emitterY, 2, emitterX, emitterY, 35);
+  emitterGlow.addColorStop(0, 'rgba(74, 222, 128, 1)');
+  emitterGlow.addColorStop(0.3, 'rgba(34, 197, 94, 0.7)');
+  emitterGlow.addColorStop(1, 'rgba(34, 197, 94, 0)');
+  ctx.fillStyle = emitterGlow;
   ctx.beginPath();
-  ctx.moveTo(0, hipY); ctx.lineTo(-14, hipY + 18); ctx.lineTo(-14, footY);
-  ctx.moveTo(0, hipY); ctx.lineTo(14, hipY + 18); ctx.lineTo(14, footY);
-  ctx.stroke();
+  ctx.arc(emitterX, emitterY, 35, 0, Math.PI * 2);
+  ctx.fill();
 
-  ctx.restore();
-}
+  // Laser Beam shooting up-right towards top of screen (exact match to Taskless frame_01.jpg!)
+  const beamTopX = W * 0.78;
+  const beamTopY = 0;
 
-// --- PROPS & STORY HELPERS WITH CLEAN, FLUID MOTION ---
-
-function drawLadder(ctx, x, y, h, t) {
+  // Outer Glow Beam
   ctx.save();
-  const sway = Math.sin((t || 0) * 2.2) * 0.02; // Very gentle creak
-  ctx.translate(x, y + h);
-  ctx.rotate(sway);
-  ctx.translate(-x, -(y + h));
-
-  ctx.strokeStyle = '#f59e0b';
-  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(74, 222, 128, 0.35)';
+  ctx.lineWidth = 14 * glowPulse;
   ctx.lineCap = 'round';
-
-  const w = 48;
-  ctx.beginPath();
-  ctx.moveTo(x - w / 2, y); ctx.lineTo(x - w / 2, y + h);
-  ctx.moveTo(x + w / 2, y); ctx.lineTo(x + w / 2, y + h);
-
-  const numRungs = Math.floor(h / 32);
-  for (let i = 1; i < numRungs; i++) {
-    const ry = y + i * 32;
-    ctx.moveTo(x - w / 2, ry);
-    ctx.lineTo(x + w / 2, ry);
-  }
+  ctx.moveTo(emitterX, emitterY);
+  ctx.lineTo(beamTopX, beamTopY);
   ctx.stroke();
-  ctx.restore();
-}
-
-function drawLeakyPipe(ctx, x, y, t) {
-  ctx.save();
-  // Solid sturdy iron pipe
-  ctx.fillStyle = '#475569';
-  ctx.fillRect(x - 80, y, 160, 18);
-  ctx.fillStyle = '#64748b';
-  ctx.fillRect(x - 12, y - 4, 24, 26);
-
-  const floorY = y + 210;
-
-  // Single realistic water drip falling with parabolic gravity
-  const dropCycle = (t * 1.5) % 1.0;
-  // Parabolic easing (t^2) simulates real falling gravity!
-  const dropProgress = dropCycle * dropCycle;
-  const dropY = y + 26 + dropProgress * (floorY - (y + 26));
-
-  ctx.fillStyle = '#38bdf8';
-  ctx.beginPath();
-  ctx.arc(x, dropY, 4.5, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Soft expanding splash on contact
-  if (dropCycle > 0.82) {
-    const splashProg = (dropCycle - 0.82) / 0.18;
-    const splashR = splashProg * 18;
-    const splashAlpha = Math.sin(splashProg * Math.PI);
-    ctx.strokeStyle = 'rgba(56, 189, 248, ' + splashAlpha + ')';
-    ctx.lineWidth = 1.8;
-    for (let a = 0; a < 4; a++) {
-      const ang = (Math.PI / 5) * (a + 1) + Math.PI;
-      const spX = x + Math.cos(ang) * splashR;
-      const spY = floorY + Math.sin(ang) * splashR * 0.45;
-      ctx.fillStyle = '#38bdf8';
-      ctx.beginPath(); ctx.arc(spX, spY, 2.2, 0, Math.PI * 2); ctx.fill();
-    }
-  }
-
-  // Puddle with smooth breathing ripples
-  const puddleW = 50 + Math.sin(t * 2.5) * 4;
-  ctx.fillStyle = 'rgba(56, 189, 248, 0.35)';
-  ctx.beginPath();
-  ctx.ellipse(x, floorY, puddleW, 11, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Smooth expanding ripple
-  const ripCycle = (t * 1.2) % 1.0;
-  const ripR = ripCycle * 45 + 8;
-  const ripAlpha = Math.sin(ripCycle * Math.PI) * 0.5;
-  ctx.strokeStyle = 'rgba(56, 189, 248, ' + ripAlpha + ')';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.ellipse(x, floorY, ripR * 1.35, ripR * 0.38, 0, 0, Math.PI * 2);
-  ctx.stroke();
-
-  ctx.restore();
-}
-
-function drawFlyingMoneyBag(ctx, x, y, t, amount) {
-  ctx.save();
-  // Smooth soaring glide like a bird
-  const swoopY = Math.sin(t * 3.5) * 12;
-  ctx.translate(x, y + swoopY);
-
-  const flap = Math.sin(t * 8) * 0.35; // Elegant flap cadence
-
-  // Gentle floating dollar trail
-  for (let dt = 1; dt <= 2; dt++) {
-    const trailCycle = (t * 1.8 + dt * 0.5) % 1.0;
-    const trX = -32 - trailCycle * 42;
-    const trY = Math.sin(t * 2.5 + dt) * 12 + trailCycle * 10;
-    const trAlpha = Math.sin(trailCycle * Math.PI) * 0.75;
-    ctx.fillStyle = 'rgba(34, 197, 94, ' + trAlpha + ')';
-    ctx.font = 'bold 13px "Space Grotesk", sans-serif';
-    ctx.fillText('$', trX, trY);
-  }
-
-  // Wings
-  ctx.fillStyle = '#ffffff';
-  ctx.strokeStyle = '#cbd5e1';
-  ctx.lineWidth = 2;
-  ctx.save();
-  ctx.rotate(flap);
-  ctx.beginPath(); ctx.ellipse(-26, -10, 22, 9, -0.35, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-  ctx.restore();
-  ctx.save();
-  ctx.rotate(-flap);
-  ctx.beginPath(); ctx.ellipse(26, -10, 22, 9, 0.35, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-  ctx.restore();
-
-  // Bag
-  const bagSquash = 1.0 + Math.sin(t * 4) * 0.03;
-  ctx.scale(1 / bagSquash, bagSquash);
-  ctx.fillStyle = '#22c55e';
-  ctx.strokeStyle = '#15803d';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.arc(0, 8, 22, 0, Math.PI * 2);
-  ctx.fill(); ctx.stroke();
-
-  ctx.fillStyle = '#16a34a';
-  ctx.fillRect(-8, -18, 16, 8);
-
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 13px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText(amount || '$8,000', 0, 12);
-
-  ctx.restore();
-}
-
-function drawWorkVan(ctx, x, y, t) {
-  ctx.save();
-  // Smooth highway suspension glide
-  const bounceY = Math.sin(t * 7) * 1.8;
-  ctx.translate(x, y + bounceY);
-
-  ctx.fillStyle = '#ffffff';
-  ctx.strokeStyle = '#0284c7';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  roundRect(ctx, -80, -45, 160, 45, 10, true, true);
-
-  ctx.fillStyle = '#38bdf8';
-  roundRect(ctx, 40, -40, 35, 24, 6, true, false);
-
-  drawLadder(ctx, 0, -62, 22, t);
-
-  ctx.fillStyle = '#0284c7';
-  ctx.font = 'bold 11px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('⚡ VantorX DISPATCH', -10, -20);
-
-  // Wheels rotating at clean highway speed (no strobing)
-  const wheelSpin = t * 14;
-  [-45, 45].forEach(wx => {
-    ctx.save();
-    ctx.translate(wx, 5);
-    ctx.fillStyle = '#1e293b';
-    ctx.beginPath(); ctx.arc(0, 0, 14, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#94a3b8';
-    ctx.beginPath(); ctx.arc(0, 0, 6, 0, Math.PI * 2); ctx.fill();
-    ctx.rotate(wheelSpin);
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(-7, 0); ctx.lineTo(7, 0); ctx.moveTo(0, -7); ctx.lineTo(0, 7); ctx.stroke();
-    ctx.restore();
-  });
-
-  // Smooth expanding exhaust clouds
-  for (let s = 0; s < 2; s++) {
-    const puffCycle = ((t * 1.8 + s * 0.5) % 1.0);
-    const puffAlpha = Math.sin(puffCycle * Math.PI) * 0.55;
-    ctx.fillStyle = 'rgba(203, 213, 225, ' + puffAlpha + ')';
-    ctx.beginPath();
-    ctx.arc(-95 - puffCycle * 45, -5 - puffCycle * 14, 8 + puffCycle * 12, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  ctx.restore();
-}
-
-function drawBedWithContractor(ctx, x, y, t) {
-  ctx.save();
-  const snoreBreath = Math.sin(t * 1.8) * 2.5;
-  ctx.translate(x, y);
-
-  ctx.fillStyle = '#92400e';
-  roundRect(ctx, -90, -70, 18, 70, 4, true, false);
-  ctx.fillStyle = '#78350f';
-  roundRect(ctx, 75, -40, 14, 40, 4, true, false);
-
-  ctx.fillStyle = '#1e3a8a';
-  roundRect(ctx, -75, -35 + snoreBreath * 0.5, 150, 35 - snoreBreath * 0.5, 8, true, false);
-
-  ctx.fillStyle = '#f8fafc';
-  roundRect(ctx, -68, -48, 36, 18, 8, true, false);
-
-  drawStickPerson(ctx, -50, -32 + snoreBreath * 0.3, {
-    scale: 0.85,
-    expr: 'sleep',
-    hat: 'nightcap',
-    t: t
-  });
-
-  // Soft drifting Zzz bubbles
-  for (let z = 0; z < 3; z++) {
-    const zCycle = (t * 0.7 + z * 0.33) % 1.0;
-    const zY = -60 - zCycle * 50;
-    const zX = -40 + Math.sin(t * 1.5 + z) * 10 + zCycle * 16;
-    const zAlpha = Math.sin(zCycle * Math.PI) * 0.8;
-    ctx.fillStyle = 'rgba(147, 197, 253, ' + zAlpha + ')';
-    ctx.font = 'bold ' + (14 + z * 4) + 'px "JetBrains Mono", monospace';
-    ctx.textAlign = 'center';
-    ctx.fillText('Z', zX, zY);
-  }
-
-  ctx.restore();
-}
-
-function drawSpeechBubble(ctx, x, y, text, opts) {
-  opts = opts || {};
-  const t = opts.t || 0;
-  ctx.save();
-  const floatY = Math.sin(t * 2.2) * 2.5;
-  ctx.translate(0, floatY);
-
-  ctx.font = opts.font || 'bold 14px "Space Grotesk", sans-serif';
-  const textW = ctx.measureText(text).width;
-  const bubbleW = textW + 32;
-  const bubbleH = 42;
-  const bx = x - bubbleW / 2;
-  const by = y - bubbleH;
-
-  ctx.fillStyle = opts.bg || '#ffffff';
-  ctx.strokeStyle = opts.border || '#38bdf8';
-  ctx.lineWidth = 2;
-  ctx.shadowColor = opts.shadow || 'rgba(0,0,0,0.25)';
-  ctx.shadowBlur = 8;
-  roundRect(ctx, bx, by, bubbleW, bubbleH, 14, true, true);
-  ctx.shadowBlur = 0;
-
-  ctx.fillStyle = opts.bg || '#ffffff';
-  ctx.beginPath();
-  ctx.moveTo(x - 8, by + bubbleH);
-  ctx.lineTo(x, by + bubbleH + 10);
-  ctx.lineTo(x + 8, by + bubbleH);
   ctx.closePath();
-  ctx.fill();
+
+  // Inner Core Beam
+  ctx.beginPath();
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 4;
+  ctx.moveTo(emitterX, emitterY);
+  ctx.lineTo(beamTopX, beamTopY);
   ctx.stroke();
+  ctx.closePath();
+  ctx.restore();
 
-  ctx.fillStyle = opts.textColor || '#0f172a';
-  ctx.textAlign = 'center';
-  ctx.fillText(text, x, by + 26);
   ctx.restore();
 }
 
-function renderStoryPill(badge, text) {
+// ----------------------------------------------------------------------------
+// SCENE 2 (7.0s - 13.5s): Earth to Uranus Schematic
+// 1:1 Match with Taskless frame_04.jpg!
+// Pure pitch black. Glowing vector Earth at bottom-left, cyan Uranus at top-right.
+// Concentric orbital rings, neon green laser corridor linking Earth to Uranus.
+// ----------------------------------------------------------------------------
+function renderTasklessScene2_EarthToUranus(t) {
   ctx.save();
-  const pillW = 420;
-  const pillH = 42;
-  const pillX = (W - pillW) / 2;
-  const pillY = 46;
-
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, pillX, pillY, pillW, pillH, 21, true, true);
-
-  ctx.font = 'bold 13px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#38bdf8';
-  ctx.fillText(badge + ' · ' + text, W / 2, pillY + 26);
-  ctx.restore();
-}
-
-function renderFrame(time) {
-  window.renderFrame = renderFrame;
-
-  if (!Number.isFinite(time) || isNaN(time) || time < 0) {
-    time = 0;
-  }
-  time = Math.min(time, TOTAL_DURATION || 63);
-
-  ctx.save();
-  ctx.clearRect(0, 0, W, H);
-
-  // SILKY SMOOTH CINEMATIC DOLLY GLIDE (ZERO JITTER / ZERO RAPID BOUNCE)
-  // Replaced rapid heartbeat oscillation with a smooth, luxurious motorized jib drift:
-  const cineZoom = 1.0 + Math.sin(time * 0.18) * 0.008;
-  const driftX = Math.sin(time * 0.35) * 3.5;
-  const driftY = Math.cos(time * 0.28) * 2.5;
-
-  ctx.translate(W / 2 + driftX, H / 2 + driftY);
-  ctx.scale(cineZoom, cineZoom);
-  ctx.translate(-W / 2, -H / 2);
-
-  renderDynamicAtmosphere(time);
-
-  // STUDIO HERO POSTER CARD ON PAUSE / INITIAL LOAD (t === 0)
-  if (!isPlaying && time === 0) {
-    renderStudioHeroPosterCard();
-    ctx.restore();
-    return;
-  }
-
-  // SFX Triggers calibrated to exact story moments
-  if (isPlaying && !document.hidden) {
-    if (time >= 0.3 && !playedSfxMap['laser']) { playSfx('laser'); playedSfxMap['laser'] = true; }
-    if (time >= 13.2 && !playedSfxMap['drip']) { playSfx('water_drip'); playedSfxMap['drip'] = true; }
-    if (time >= 15.0 && !playedSfxMap['phone1']) { playSfx('phone_ring'); playedSfxMap['phone1'] = true; }
-    if (time >= 25.2 && !playedSfxMap['phone2']) { playSfx('phone_ring'); playedSfxMap['phone2'] = true; }
-    if (time >= 28.5 && !playedSfxMap['whoosh']) { playSfx('whoosh'); playedSfxMap['whoosh'] = true; }
-    if (time >= 33.0 && !playedSfxMap['ava']) { playSfx('ava_chime'); playedSfxMap['ava'] = true; }
-    if (time >= 41.5 && !playedSfxMap['van']) { playSfx('van_zoom'); playedSfxMap['van'] = true; }
-    if (time >= 48.0 && !playedSfxMap['chaching']) { playSfx('chaching'); playedSfxMap['chaching'] = true; }
-  }
-
-  // Continuous Dynamic Scene Progression
-  if (time < 7.2) {
-    renderTasklessScene1_NightPhone(time);
-  } else if (time < 12.8) {
-    renderTasklessScene2_LasersUranus(time);
-  } else if (time < 18.2) {
-    renderTasklessScene3_CustomerWindow(time);
-  } else if (time < 24.8) {
-    renderTasklessScene4_Stat78Percent(time);
-  } else if (time < 32.2) {
-    renderTasklessScene5_TwoShopsComparison(time);
-  } else if (time < 39.2) {
-    renderTasklessScene6_ShopB_AvaReply(time);
-  } else if (time < 47.2) {
-    renderTasklessScene7_WorkflowNodes(time);
-  } else if (time < 53.0) {
-    renderTasklessScene8_TechDispatchAndDashboard(time);
-  } else if (time < 58.5) {
-    renderTasklessScene9_LiveDemoDialer(time);
-  } else {
-    renderTasklessScene10_TryTasklessCTA(time);
-  }
-
-  // Soft cinematic transition dip between scene boundaries (smooth 0.25s ease)
-  const sceneCuts = [7.2, 12.8, 18.2, 24.8, 32.2, 39.2, 47.2, 53.0, 58.5];
-  let minCutDist = 999;
-  for (let c = 0; c < sceneCuts.length; c++) {
-    minCutDist = Math.min(minCutDist, Math.abs(time - sceneCuts[c]));
-  }
-  if (minCutDist < 0.22) {
-    const fadeProg = 1 - (minCutDist / 0.22);
-    const dipAlpha = Math.sin(fadeProg * (Math.PI / 2)) * 0.32;
-    ctx.fillStyle = 'rgba(8, 12, 20, ' + dipAlpha + ')';
-    ctx.fillRect(0, 0, W, H);
-  }
-
-  // Kinetic Subtitles
-  renderKineticSubtitles(time);
-
-  // Subtle Cinematic Vignette
-  const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.38, W / 2, H / 2, H * 0.78);
-  vig.addColorStop(0, 'rgba(0,0,0,0)');
-  vig.addColorStop(1, 'rgba(0,0,0,0.45)');
-  ctx.fillStyle = vig;
+  ctx.beginPath();
+  // Pure Pitch Black
+  ctx.fillStyle = '#000000';
   ctx.fillRect(0, 0, W, H);
 
-  ctx.restore();
-}
-
-
-// Helper: 3D Warp Starfield// Helper: 3D Warp Starfield
-function renderWarpStars(t) {
-  const warpSpeed = t < 18.0 ? (12 + Math.sin(t * 2) * 5) : 4;
-  ctx.save();
-  ctx.translate(W / 2, H / 2);
-
-  for (const s of WARP_STARS) {
-    s.prevZ = s.z;
-    s.z -= warpSpeed;
-    if (s.z <= 10) {
-      s.z = 1000;
-      s.prevZ = 1000;
-      s.x = (Math.random() - 0.5) * W * 2.2;
-      s.y = (Math.random() - 0.5) * H * 2.2;
-    }
-
-    const k = 420 / s.z;
-    const px = s.x * k;
-    const py = s.y * k;
-
-    const prevK = 420 / s.prevZ;
-    const prevPx = s.x * prevK;
-    const prevPy = s.y * prevK;
-
-    if (px > -W && px < W && py > -H && py < H) {
-      const alpha = Math.min(1, (1000 - s.z) / 450);
-      ctx.strokeStyle = s.color;
-      ctx.lineWidth = Math.max(1, (1 - s.z / 1000) * 3);
-      ctx.globalAlpha = alpha;
-      ctx.beginPath();
-      ctx.moveTo(prevPx, prevPy);
-      ctx.lineTo(px, py);
-      ctx.stroke();
-    }
-  }
-  ctx.restore();
-}
-
-// Helper: 3D Planetary Rings
-function renderPlanetaryRings(ctx, rot, isBack) {
-  ctx.save();
-  ctx.rotate(-0.42);
-  ctx.scale(1.0, 0.28);
-
-  const startAngle = isBack ? Math.PI : 0;
-  const endAngle = isBack ? Math.PI * 2 : Math.PI;
-
-  const ringGrad = ctx.createLinearGradient(-190, 0, 190, 0);
-  ringGrad.addColorStop(0, 'rgba(245, 158, 11, 0.7)');
-  ringGrad.addColorStop(0.3, 'rgba(56, 189, 248, 0.5)');
-  ringGrad.addColorStop(0.7, 'rgba(251, 191, 36, 0.8)');
-  ringGrad.addColorStop(1, 'rgba(217, 119, 6, 0.6)');
-
-  ctx.strokeStyle = ringGrad;
-  ctx.lineWidth = 28;
-  ctx.beginPath();
-  ctx.arc(0, 0, 150, startAngle, endAngle);
-  ctx.stroke();
-
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.arc(0, 0, 175, startAngle, endAngle);
-  ctx.stroke();
-
-  ctx.restore();
-}
-
-// Helper: Top Scene Indicator Pill
-function renderTopPill(text) {
-  ctx.save();
-  const pillW = 460;
-  const pillH = 40;
-  const pillX = (W - pillW) / 2;
-  const pillY = 36;
-
-  // Frosted Dark Glass Pill
-  ctx.fillStyle = 'rgba(11, 15, 25, 0.92)';
-  ctx.strokeStyle = 'rgba(245, 158, 11, 0.45)';
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = 'rgba(245, 158, 11, 0.2)';
-  ctx.shadowBlur = 12;
-  roundRect(ctx, pillX, pillY, pillW, pillH, 20, true, true);
-
-  // Bold Crisp Typography
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#fbbf24';
-  ctx.font = '900 14px Space Grotesk';
-  ctx.shadowColor = '#f59e0b';
-  ctx.shadowBlur = 10;
-  ctx.fillText(text, W / 2, pillY + 25);
-  ctx.restore();
-}
-
-function drawStickFigure(ctx, x, y, opts) {
-  opts = opts || {};
-  ctx.save();
-  const scale = opts.scale || 1.0;
-  const color = opts.color || '#ffffff';
-  const facing = opts.facing || 1;
-  const anim = opts.anim || 0;
-  const pose = opts.pose || 'stand';
-  const isContractor = opts.role === 'contractor' || pose === 'ladder_climb' || pose === 'panicked_phone';
-
-  ctx.translate(x, y);
-  ctx.scale(facing * scale, scale);
-
-  if (opts.glow) {
-    ctx.shadowColor = opts.glow;
-    ctx.shadowBlur = 18;
-  }
-
-  const headRadius = 24;
-  const headCenterY = -118;
-  const neckY = -92;
-  const shoulderY = -78;
-  const hipY = 0;
-
-  // 1. VOLUMETRIC TORSO & APPAREL
-  if (isContractor) {
-    // Dark Rugged Base Shirt
-    ctx.fillStyle = '#1e293b';
-    ctx.beginPath();
-    ctx.roundRect(-16, shoulderY - 4, 32, hipY - shoulderY + 4, 6);
-    ctx.fill();
-
-    // High-Vis Neon Lime Safety Vest
-    const vestGrad = ctx.createLinearGradient(-14, shoulderY, 14, hipY);
-    vestGrad.addColorStop(0, '#bef264');
-    vestGrad.addColorStop(0.5, '#a3e635');
-    vestGrad.addColorStop(1, '#65a30d');
-    ctx.fillStyle = vestGrad;
-    ctx.beginPath();
-    ctx.roundRect(-14, shoulderY - 2, 28, hipY - shoulderY + 2, 5);
-    ctx.fill();
-
-    // Safety Orange Shoulder Yoke
-    ctx.fillStyle = '#f97316';
-    ctx.beginPath();
-    ctx.roundRect(-14, shoulderY - 2, 28, 14, [5, 5, 0, 0]);
-    ctx.fill();
-
-    // Dual Silver Reflective Safety Stripes
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
-    ctx.shadowBlur = 5;
-    ctx.fillRect(-14, shoulderY + 18, 28, 4);
-    ctx.fillRect(-14, shoulderY + 34, 28, 4);
-    ctx.shadowBlur = 0;
-
-    // Leather Toolbelt with Brass Buckle
-    ctx.fillStyle = '#78350f';
-    ctx.fillRect(-16, hipY - 7, 32, 9);
-    ctx.fillStyle = '#fbbf24';
-    ctx.fillRect(-5, hipY - 6, 10, 7);
-
-  } else if (pose === 'run_cash') {
-    // Athletic Competitor Technician (Crimson & Charcoal)
-    ctx.fillStyle = '#b91c1c';
-    ctx.beginPath();
-    ctx.roundRect(-14, shoulderY - 4, 28, hipY - shoulderY + 4, 6);
-    ctx.fill();
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(-14, shoulderY + 16, 28, 3.5);
-
-  } else if (pose === 'ava_dispatch') {
-    // Ava AI Cyber Suit (Cyan & Slate Holographic)
-    const suitGrad = ctx.createLinearGradient(-14, shoulderY, 14, hipY);
-    suitGrad.addColorStop(0, '#0284c7');
-    suitGrad.addColorStop(0.5, '#0f172a');
-    suitGrad.addColorStop(1, '#0284c7');
-    ctx.fillStyle = suitGrad;
-    ctx.strokeStyle = '#38bdf8';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.roundRect(-14, shoulderY - 4, 28, hipY - shoulderY + 4, 6);
-    ctx.fill(); ctx.stroke();
-
-    // Cyber Arc Reactor
-    ctx.fillStyle = '#38bdf8'; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 12;
-    ctx.beginPath(); ctx.arc(0, shoulderY + 16, 5, 0, Math.PI * 2); ctx.fill();
-    ctx.shadowBlur = 0;
-
-  } else {
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 8;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(0, shoulderY); ctx.lineTo(0, hipY);
-    ctx.stroke();
-  }
-
-  // 2. HEAD WITH 3D GRADIENT & EXPRESSIVE EYES
-  const headGrad = ctx.createRadialGradient(-5, headCenterY - 6, 3, 0, headCenterY, headRadius);
-  headGrad.addColorStop(0, '#ffffff');
-  headGrad.addColorStop(0.6, '#f1f5f9');
-  headGrad.addColorStop(1, '#cbd5e1');
-  ctx.fillStyle = headGrad;
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 3.5;
-  ctx.beginPath();
-  ctx.arc(0, headCenterY, headRadius, 0, Math.PI * 2);
-  ctx.fill(); ctx.stroke();
-
-  // Expressive Blinking Eyes
-  const isBlinking = (Math.sin(anim * 2.8) > 0.94);
-  const eyeX1 = 4;
-  const eyeX2 = 14;
-  const eyeY = headCenterY - 2;
-
-  ctx.save();
-  if (isBlinking) {
-    ctx.strokeStyle = '#0f172a';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(eyeX1 - 3, eyeY); ctx.lineTo(eyeX1 + 3, eyeY);
-    ctx.moveTo(eyeX2 - 3, eyeY); ctx.lineTo(eyeX2 + 3, eyeY);
-    ctx.stroke();
-  } else {
-    ctx.fillStyle = '#0f172a';
-    ctx.beginPath();
-    ctx.arc(eyeX1, eyeY, 3.8, 0, Math.PI * 2);
-    ctx.arc(eyeX2, eyeY, 3.8, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.arc(eyeX1 + 1.2, eyeY - 1.2, 1.4, 0, Math.PI * 2);
-    ctx.arc(eyeX2 + 1.2, eyeY - 1.2, 1.4, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Facial Expressions
-  if (opts.expression === 'worried') {
-    ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.8;
-    ctx.beginPath();
-    ctx.moveTo(eyeX1 - 4, eyeY - 8); ctx.lineTo(eyeX1 + 4, eyeY - 5);
-    ctx.moveTo(eyeX2 - 4, eyeY - 5); ctx.lineTo(eyeX2 + 4, eyeY - 8);
-    ctx.stroke();
-    // Trembling O-Mouth
-    ctx.fillStyle = '#0f172a';
-    ctx.beginPath();
-    ctx.ellipse(9, headCenterY + 11, 4.5, 6, 0, 0, Math.PI * 2);
-    ctx.fill();
-    // Flying Panic Sweat Droplets
-    for (let s = 0; s < 3; s++) {
-      const swX = 22 + s * 8 + Math.sin(anim * 8 + s) * 5;
-      const swY = headCenterY - 12 + s * 7;
-      ctx.fillStyle = '#38bdf8';
-      ctx.beginPath(); ctx.arc(swX, swY, 2.8 - s * 0.4, 0, Math.PI * 2); ctx.fill();
-    }
-  } else if (opts.expression === 'happy') {
-    ctx.strokeStyle = '#10b981'; ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.arc(eyeX1, eyeY - 7, 4.5, Math.PI * 1.15, Math.PI * 1.85);
-    ctx.arc(eyeX2, eyeY - 7, 4.5, Math.PI * 1.15, Math.PI * 1.85);
-    ctx.stroke();
-    ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#059669'; ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.arc(9, headCenterY + 7, 7, 0, Math.PI, false);
-    ctx.fill(); ctx.stroke();
-  }
-  ctx.restore();
-
-  // 3. HEAD PROPS (OSHA Construction Hard Hat & Cyber Headset)
-  if (opts.headProp === 'hard_hat') {
-    ctx.save();
-    const hatGrad = ctx.createLinearGradient(-headRadius, headCenterY - 30, headRadius, headCenterY - 4);
-    hatGrad.addColorStop(0, '#fef08a');
-    hatGrad.addColorStop(0.4, '#f59e0b');
-    hatGrad.addColorStop(1, '#b45309');
-    ctx.fillStyle = hatGrad;
-    ctx.strokeStyle = '#78350f';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.arc(0, headCenterY - 5, headRadius + 4, Math.PI * 1.05, Math.PI * 1.95, false);
-    ctx.fill(); ctx.stroke();
-    // Visor Brim
-    ctx.beginPath();
-    ctx.ellipse(3, headCenterY - 5, headRadius + 12, 4.5, 0, 0, Math.PI * 2);
-    ctx.fill(); ctx.stroke();
-    // Reflective Safety Stripe
-    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.arc(0, headCenterY - 12, headRadius + 1.5, Math.PI * 1.15, Math.PI * 1.85);
-    ctx.stroke();
-    ctx.restore();
-
-  } else if (opts.headProp === 'headset') {
-    ctx.save();
-    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3.5;
-    ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 10;
-    ctx.beginPath();
-    ctx.arc(0, headCenterY - 2, headRadius + 4, Math.PI * 0.9, Math.PI * 1.9);
-    ctx.stroke();
-    ctx.fillStyle = '#0284c7';
-    ctx.beginPath();
-    ctx.ellipse(-headRadius - 3, headCenterY + 2, 6, 9, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(-headRadius - 3, headCenterY + 4);
-    ctx.quadraticCurveTo(0, headCenterY + 18, 15, headCenterY + 14);
-    ctx.stroke();
-    ctx.fillStyle = '#38bdf8';
-    ctx.beginPath(); ctx.arc(16, headCenterY + 14, 3.8, 0, Math.PI * 2); ctx.fill();
-    ctx.restore();
-  }
-
-  // 4. LIMB KINEMATICS & PROPS
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 8;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-
-  if (pose === 'ladder_climb') {
-    const legW = Math.sin(anim * 4) * 6;
-    ctx.beginPath();
-    ctx.moveTo(-6, hipY); ctx.lineTo(-20, hipY + 38 + legW); ctx.lineTo(-18, hipY + 84);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(6, hipY); ctx.lineTo(20, hipY + 38 - legW); ctx.lineTo(22, hipY + 84);
-    ctx.stroke();
-
-    // Leather Work Boots
-    ctx.fillStyle = '#78350f';
-    ctx.fillRect(-26, hipY + 80, 16, 7);
-    ctx.fillRect(16, hipY + 80, 16, 7);
-
-    // Left Arm Holding Ladder Rail
-    ctx.beginPath();
-    ctx.moveTo(-10, shoulderY); ctx.lineTo(-32, shoulderY - 16); ctx.lineTo(-44, shoulderY - 36);
-    ctx.stroke();
-
-    // Right Arm Holding Plumber Pipe Wrench
-    const shake = Math.sin(anim * 10) * 6;
-    ctx.beginPath();
-    ctx.moveTo(10, shoulderY); ctx.lineTo(32, shoulderY + 8 + shake); ctx.lineTo(50, shoulderY + 22 + shake);
-    ctx.stroke();
-
-    // Red Cast-Iron Pipe Wrench
-    ctx.save();
-    ctx.translate(50, shoulderY + 22 + shake);
-    ctx.rotate(Math.PI * 0.28);
-    ctx.fillStyle = '#ef4444'; ctx.fillRect(-5, -24, 10, 36);
-    ctx.fillStyle = '#94a3b8'; ctx.fillRect(-7, -36, 14, 14); ctx.fillRect(-10, -36, 7, 7);
-    ctx.restore();
-
-    // Glowing Vibrating Phone in Toolbelt
-    ctx.save();
-    ctx.fillStyle = '#f59e0b'; ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 14;
-    ctx.fillRect(10, hipY - 14, 12, 18);
-    ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5;
-    const rPulse = (anim * 8) % 1;
-    ctx.beginPath(); ctx.arc(16, hipY - 5, 14 + rPulse * 12, -Math.PI * 0.4, Math.PI * 0.4); ctx.stroke();
-    ctx.restore();
-
-  } else if (pose === 'panicked_phone') {
-    const pace = Math.sin(anim * 6) * 8;
-    ctx.beginPath();
-    ctx.moveTo(-6, hipY); ctx.lineTo(-14 + pace, hipY + 40); ctx.lineTo(-12 + pace, hipY + 84);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(6, hipY); ctx.lineTo(14 - pace, hipY + 40); ctx.lineTo(18 - pace, hipY + 84);
-    ctx.stroke();
-
-    // Left Arm Clutching Head
-    ctx.beginPath();
-    ctx.moveTo(-10, shoulderY); ctx.lineTo(-34, shoulderY - 26); ctx.lineTo(-headRadius - 4, headCenterY - 6);
-    ctx.stroke();
-
-    // Right Arm Holding Phone to Ear
-    ctx.beginPath();
-    ctx.moveTo(10, shoulderY); ctx.lineTo(26, shoulderY - 12); ctx.lineTo(headRadius + 6, headCenterY + 4);
-    ctx.stroke();
-
-    ctx.save();
-    ctx.fillStyle = '#38bdf8'; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 14;
-    ctx.fillRect(headRadius + 4, headCenterY - 7, 9, 16);
-    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
-    const rW = (anim * 6) % 1;
-    ctx.beginPath(); ctx.arc(headRadius + 12, headCenterY + 1, 9 + rW * 12, -Math.PI * 0.3, Math.PI * 0.3); ctx.stroke();
-    ctx.restore();
-
-  } else if (pose === 'run_cash') {
-    const cycle = Math.sin(anim * 9);
-    // Dynamic High-Knee Sprinting
-    ctx.beginPath();
-    ctx.moveTo(-6, hipY); ctx.lineTo(-28 * cycle, hipY + 34); ctx.lineTo(-40 * cycle, hipY + 76);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(6, hipY); ctx.lineTo(28 * cycle, hipY + 34); ctx.lineTo(40 * cycle, hipY + 76);
-    ctx.stroke();
-
-    // Running Arms Holding Money Sack
-    ctx.beginPath();
-    ctx.moveTo(10, shoulderY); ctx.lineTo(30, shoulderY - 14); ctx.lineTo(44, shoulderY - 36);
-    ctx.stroke();
-
-    // Burlap Sack of Cash
-    ctx.save();
-    ctx.fillStyle = '#10b981'; ctx.shadowColor = '#10b981'; ctx.shadowBlur = 20;
-    ctx.beginPath(); ctx.arc(52, shoulderY - 40, 24, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = '#064e3b'; ctx.font = '900 22px Space Grotesk'; ctx.textAlign = 'center';
-    ctx.fillText('$', 52, shoulderY - 32);
-
-    // Floating Fluttering Green Bills
-    for (let b = 0; b < 4; b++) {
-      const bx = -16 - b * 24 + Math.sin(anim * 6 + b) * 10;
-      const by = shoulderY - 8 + b * 16 + Math.cos(anim * 5 + b) * 6;
-      ctx.save();
-      ctx.translate(bx, by);
-      ctx.rotate(Math.sin(anim * 4 + b) * 0.5);
-      ctx.fillStyle = '#34d399'; ctx.strokeStyle = '#065f46'; ctx.lineWidth = 1.2;
-      ctx.fillRect(-10, -5, 20, 10); ctx.strokeRect(-10, -5, 20, 10);
-      ctx.fillStyle = '#064e3b'; ctx.font = '700 7px monospace';
-      ctx.fillText('$', 0, 3);
-      ctx.restore();
-    }
-    ctx.restore();
-
-  } else if (pose === 'ava_dispatch') {
-    ctx.beginPath();
-    ctx.moveTo(-6, hipY); ctx.lineTo(-14, hipY + 44); ctx.lineTo(-16, hipY + 86);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(6, hipY); ctx.lineTo(14, hipY + 44); ctx.lineTo(16, hipY + 86);
-    ctx.stroke();
-
-    // Left Hand on Headset
-    ctx.beginPath();
-    ctx.moveTo(-10, shoulderY); ctx.lineTo(-24, shoulderY - 18); ctx.lineTo(-headRadius - 2, headCenterY + 4);
-    ctx.stroke();
-
-    // Right Hand Projecting Holographic Glass Tablet
-    ctx.beginPath();
-    ctx.moveTo(10, shoulderY); ctx.lineTo(34, shoulderY + 10); ctx.lineTo(48, shoulderY);
-    ctx.stroke();
-
-    // Holographic Dispatch HUD Card
-    ctx.save();
-    ctx.fillStyle = 'rgba(56, 189, 248, 0.22)';
-    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
-    ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 20;
-    roundRect(ctx, 46, shoulderY - 24, 68, 44, 8, true, true);
-    ctx.fillStyle = '#34d399'; ctx.font = '900 11px Inter';
-    ctx.fillText('⚡ DISPATCH', 52, shoulderY - 8);
-    ctx.fillStyle = '#ffffff'; ctx.font = '800 9px JetBrains Mono';
-    ctx.fillText('0.8s QUALIFIED', 52, shoulderY + 8);
-    ctx.restore();
-
-  } else {
-    ctx.beginPath();
-    ctx.moveTo(-6, hipY); ctx.lineTo(-12, hipY + 42); ctx.lineTo(-14, hipY + 86);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(6, hipY); ctx.lineTo(12, hipY + 42); ctx.lineTo(14, hipY + 86);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(-10, shoulderY); ctx.lineTo(-22, shoulderY + 24); ctx.lineTo(-24, shoulderY + 54);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(10, shoulderY); ctx.lineTo(22, shoulderY + 24); ctx.lineTo(24, shoulderY + 54);
-    ctx.stroke();
-  }
-
-  ctx.restore();
-}
-
-function renderDynamicStoryHookPhase(t) {
-  const storyType = (window.ACTIVE_STORY && window.ACTIVE_STORY.storyType) ? window.ACTIVE_STORY.storyType : 'cosmic_light';
-
-  if (t < 4.5) {
-    switch (storyType) {
-      case 'falcon_dive': renderStory2_FalconHighAltitude(t); break;
-      case 'f1_pitstop': renderStory3_F1StartingGridLights(t); break;
-      case 'brain_ai': renderStory4_BrainSynapses(t); break;
-      case 'saturn_rocket': renderStory5_ApolloCountdown(t); break;
-      case 'lightning_strike': renderStory6_LightningStorm(t); break;
-      case 'niagara_torrent': renderStory7_NiagaraWaterfall(t); break;
-      default: renderStory1_LaserSpeed(t); break;
-    }
-  } else if (t < 8.2) {
-    switch (storyType) {
-      case 'falcon_dive': renderStory2_FalconDiveHUD(t); break;
-      case 'f1_pitstop': renderStory3_F1Stopwatch180(t); break;
-      case 'brain_ai': renderStory4_ChatGptTerminal(t); break;
-      case 'saturn_rocket': renderStory5_RocketExhaust(t); break;
-      case 'lightning_strike': renderStory6_OneBillionVolts(t); break;
-      case 'niagara_torrent': renderStory7_GallonsMeter750k(t); break;
-      default: renderStory1_MoonImpact(t); break;
-    }
-  } else if (t < 13.5) {
-    switch (storyType) {
-      case 'falcon_dive': renderStory2_FalconReflex15ms(t); break;
-      case 'f1_pitstop': renderStory3_F1SpinningTire(t); break;
-      case 'brain_ai': renderStory4_AiCitationRank1(t); break;
-      case 'saturn_rocket': renderStory5_Apollo4kbRAM(t); break;
-      case 'lightning_strike': renderStory6_Thermal50kDegrees(t); break;
-      case 'niagara_torrent': renderStory7_BurstPipePressure(t); break;
-      default: renderStory1_SaturnDeepSpace(t); break;
-    }
-  } else {
-    renderUniversalGlitchContrast(t);
-  }
-}
-
-// STORY 1: COSMIC SPEED OF LIGHT & SATURN
-function renderStory1_LaserSpeed(t) {
-  renderTopPill('⚡ SPEED OF LIGHT: 186,000 MILES/SEC');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  // Relativistic Lightspeed Radial Lines
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)'; ctx.lineWidth = 2;
-  for (let i = 0; i < 24; i++) {
-    const angle = (i / 24) * Math.PI * 2 + t * 0.4;
-    const r1 = 90 + ((t * 80 + i * 20) % 180);
-    const r2 = r1 + 35;
-    ctx.beginPath();
-    ctx.moveTo(cx + Math.cos(angle) * r1, cy + Math.sin(angle) * r1);
-    ctx.lineTo(cx + Math.cos(angle) * r2, cy + Math.sin(angle) * r2);
-    ctx.stroke();
-  }
-
-  // Blinding Concentric Core Pulses
-  const pulse = (t * 6) % 1;
-  ctx.strokeStyle = 'rgba(245, 158, 11, ' + (1 - pulse) + ')'; ctx.lineWidth = 4;
-  ctx.beginPath(); ctx.arc(cx, cy, 70 + pulse * 130, 0, Math.PI * 2); ctx.stroke();
-
-  // High-Energy Tachometer Arc
-  ctx.strokeStyle = '#fbbf24'; ctx.lineWidth = 14;
-  ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 30;
-  ctx.beginPath();
-  ctx.arc(cx, cy, 130, Math.PI * 0.75, Math.PI * 0.75 + (t / 4.5) * Math.PI * 1.5);
-  ctx.stroke();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 52px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 25;
-  ctx.fillText('186,000', cx, cy - 10);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '800 20px JetBrains Mono';
-  ctx.fillText('MILES PER SECOND', cx, cy + 30);
-  ctx.restore();
-}
-
-function renderStory1_MoonImpact(t) {
-  renderTopPill('🌕 1.3 SECONDS: MOON ORBIT BREACH');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  const moonGrad = ctx.createRadialGradient(cx - 30, cy - 30, 10, cx, cy, 105);
-  moonGrad.addColorStop(0, '#f8fafc');
-  moonGrad.addColorStop(0.5, '#cbd5e1');
-  moonGrad.addColorStop(0.85, '#475569');
-  moonGrad.addColorStop(1, '#0f172a');
-  ctx.fillStyle = moonGrad;
-  ctx.shadowColor = '#94a3b8'; ctx.shadowBlur = 25;
-  ctx.beginPath(); ctx.arc(cx, cy, 105, 0, Math.PI * 2); ctx.fill();
-
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.45)';
-  const craters = [[-40, -25, 20], [25, -45, 16], [-20, 35, 26], [40, 20, 18], [10, -10, 14]];
-  for (const c of craters) {
-    ctx.beginPath(); ctx.arc(cx + c[0], cy + c[1], c[2], 0, Math.PI * 2); ctx.fill();
-  }
-
-  const beamProgress = Math.min(1, (t - 4.5) / 1.5);
-  const startX = -60; const startY = cy - 220;
-  const curX = startX + (cx - startX) * beamProgress;
-  const curY = startY + (cy - startY) * beamProgress;
-  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 8;
-  ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 30;
-  ctx.beginPath(); ctx.moveTo(startX, startY); ctx.lineTo(curX, curY); ctx.stroke();
-
-  if (beamProgress >= 0.85) {
-    ctx.fillStyle = '#ffffff'; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 45;
-    ctx.beginPath(); ctx.arc(cx, cy, 26, 0, Math.PI * 2); ctx.fill();
-  }
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 36px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 20;
-  ctx.fillText('1.3 SECONDS', cx, cy + 150);
-  ctx.fillStyle = '#38bdf8'; ctx.font = '800 18px JetBrains Mono';
-  ctx.fillText('EARTH TO MOON BREACH', cx, cy + 185);
-  ctx.restore();
-}
-
-function renderStory1_SaturnDeepSpace(t) {
-  renderTopPill('🪐 2 BILLION MILES TO SATURN IN 3 HOURS');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  const satGrad = ctx.createRadialGradient(cx - 35, cy - 35, 15, cx, cy, 95);
-  satGrad.addColorStop(0, '#fef08a');
-  satGrad.addColorStop(0.35, '#f59e0b');
-  satGrad.addColorStop(0.7, '#d97706');
-  satGrad.addColorStop(1, '#78350f');
-  ctx.fillStyle = satGrad;
-  ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 30;
-  ctx.beginPath(); ctx.arc(cx, cy, 95, 0, Math.PI * 2); ctx.fill();
-
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate(-Math.PI * 0.16);
-  ctx.strokeStyle = 'rgba(251, 191, 36, 0.7)'; ctx.lineWidth = 18;
-  ctx.shadowColor = '#fbbf24'; ctx.shadowBlur = 25;
-  ctx.beginPath(); ctx.ellipse(0, 0, 230, 48, 0, 0, Math.PI * 2); ctx.stroke();
-  ctx.restore();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 36px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#fbbf24'; ctx.shadowBlur = 20;
-  ctx.fillText('3 HOURS TO SATURN', cx, cy + 155);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '800 18px JetBrains Mono';
-  ctx.fillText('YET CONTRACTORS TAKE 4+ HOURS', cx, cy + 190);
-  ctx.restore();
-}
-
-// STORY 2: PEREGRINE FALCON (Realistic Raptor Anatomy & Supersonic Mach Shockwave)
-function renderStory2_FalconHighAltitude(t) {
-  renderTopPill('🦅 NATURE\'S FASTEST WEAPON: PEREGRINE FALCON');
-  const cx = W / 2; const cy = 360;
-  ctx.save();
-
-  const wingFlap = Math.sin(t * 7) * 14;
-  ctx.save();
-  ctx.translate(cx, cy + Math.sin(t * 3) * 15);
-
-  // Aerodynamic Raptor Body & Wings
-  ctx.fillStyle = '#38bdf8'; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 25;
-  ctx.beginPath();
-  ctx.moveTo(0, -45); // Head
-  ctx.quadraticCurveTo(80, -35 + wingFlap, 155, 5 + wingFlap); // Right wing tip
-  ctx.quadraticCurveTo(90, 25, 25, 15);
-  ctx.lineTo(0, 55); // Tail feathers
-  ctx.lineTo(-25, 15);
-  ctx.quadraticCurveTo(-90, 25, -155, 5 + wingFlap); // Left wing tip
-  ctx.quadraticCurveTo(-80, -35 + wingFlap, 0, -45);
-  ctx.fill();
-
-  // Head & Beak
-  ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(0, -42, 16, 0, Math.PI * 2); ctx.fill();
-  ctx.fillStyle = '#fbbf24'; ctx.beginPath(); ctx.moveTo(-6, -50); ctx.lineTo(6, -50); ctx.lineTo(0, -64); ctx.fill();
-  ctx.restore();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 48px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 25;
-  ctx.fillText('3,500 FEET', cx, cy + 160);
-  ctx.fillStyle = '#38bdf8'; ctx.font = '800 20px JetBrains Mono';
-  ctx.fillText('HIGH ALTITUDE TARGET ACQUIRED', cx, cy + 195);
-  ctx.restore();
-}
-
-function renderStory2_FalconDiveHUD(t) {
-  renderTopPill('⚡ DIVE SPEED: 242 MILES PER HOUR');
-  const cx = W / 2; const cy = 340;
-  ctx.save();
-
-  // Supersonic Shock Vapor Cone (Mach Cone)
-  const conePulse = (t * 8) % 1;
-  ctx.strokeStyle = 'rgba(56, 189, 248, ' + (0.9 - conePulse) + ')'; ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.ellipse(cx, cy + 35, 75 + conePulse * 95, 25 + conePulse * 30, 0, 0, Math.PI * 2);
-  ctx.stroke();
-
-  // Realistic Swept-Wing Stoop Dive Silhouette
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.fillStyle = '#0284c7'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3;
-  ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 30;
-  ctx.beginPath();
-  ctx.moveTo(0, 85); // Beak pointing straight down
-  ctx.quadraticCurveTo(30, 25, 65, -45); // Swept-back right wing
-  ctx.lineTo(35, -75);
-  ctx.lineTo(0, -55); // Tail
-  ctx.lineTo(-35, -75);
-  ctx.lineTo(-65, -45); // Swept-back left wing
-  ctx.quadraticCurveTo(-30, 25, 0, 85);
-  ctx.fill(); ctx.stroke();
-
-  // Curved Raptor Beak
-  ctx.fillStyle = '#f59e0b';
-  ctx.beginPath(); ctx.moveTo(-6, 68); ctx.lineTo(6, 68); ctx.lineTo(0, 92); ctx.fill();
-
-  // Piercing Predator Eye
-  ctx.fillStyle = '#fbbf24'; ctx.shadowColor = '#fbbf24'; ctx.shadowBlur = 15;
-  ctx.beginPath(); ctx.arc(8, 48, 5, 0, Math.PI * 2); ctx.fill();
-  ctx.fillStyle = '#000000'; ctx.beginPath(); ctx.arc(9, 48, 2.5, 0, Math.PI * 2); ctx.fill();
-  ctx.restore();
-
-  // Tactical Jet HUD
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)'; ctx.lineWidth = 2;
-  ctx.strokeRect(cx - 160, cy - 110, 320, 220);
-  ctx.beginPath();
-  ctx.moveTo(cx - 180, cy); ctx.lineTo(cx - 140, cy);
-  ctx.moveTo(cx + 140, cy); ctx.lineTo(cx + 180, cy);
-  ctx.moveTo(cx, cy - 130); ctx.lineTo(cx, cy - 90);
-  ctx.stroke();
-
-  // Altimeter tape
-  ctx.fillStyle = '#38bdf8'; ctx.font = '800 12px JetBrains Mono'; ctx.textAlign = 'right';
-  ctx.fillText('ALT: 250 FT', cx + 150, cy - 80);
-  ctx.fillText('G-FORCE: 18G', cx + 150, cy - 60);
-
-  // Speed Readout
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 64px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 30;
-  ctx.fillText('242 MPH', cx, cy + 185);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '800 20px JetBrains Mono';
-  ctx.fillText('TERMINAL VELOCITY STOOP DIVE', cx, cy + 225);
-  ctx.restore();
-}
-
-function renderStory2_FalconReflex15ms(t) {
-  renderTopPill('⏱️ 15 MILLISECONDS NERVOUS REFLEX ARC');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  const prog = Math.min(1, (t - 8.2) / 5.0);
-  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 14; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 25;
-  ctx.beginPath(); ctx.arc(cx, cy, 125, -Math.PI * 0.5, -Math.PI * 0.5 + prog * Math.PI * 2); ctx.stroke();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 64px JetBrains Mono'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 25;
-  ctx.fillText('15 MS', cx, cy + 5);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '800 20px Space Grotesk';
-  ctx.fillText('NEURAL REFLEX SPEED', cx, cy + 45);
-  ctx.restore();
-}
-
-// STORY 3: FORMULA 1 PITSTOP (Realistic Car Chassis, Crew & Tires)
-function renderStory3_F1StartingGridLights(t) {
-  renderTopPill('🏎️ FORMULA 1 WORLD RECORD PIT STOP');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  // 5 Overhead Gantry Starting Lights
-  const litCount = Math.min(5, Math.floor(((t * 2) % 6) + 1));
-  for (let i = 0; i < 5; i++) {
-    const lx = cx - 140 + i * 70;
-    const ly = 120;
-    ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.arc(lx, ly, 22, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-    if (i < litCount) {
-      ctx.fillStyle = '#ef4444'; ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 25;
-      ctx.beginPath(); ctx.arc(lx, ly, 16, 0, Math.PI * 2); ctx.fill();
-    }
-  }
-
-  // Realistic Top-Down F1 Car (Larger & Detailed)
-  ctx.save();
-  ctx.translate(cx, cy + 20);
-
-  // Aerodynamic Crimson Chassis
-  ctx.fillStyle = '#dc2626'; ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 25;
-  ctx.beginPath();
-  ctx.moveTo(0, -115); // Nosecone tip
-  ctx.lineTo(16, -55); ctx.lineTo(34, 15); ctx.lineTo(38, 75); // Right sidepod
-  ctx.lineTo(0, 95); // Rear wing
-  ctx.lineTo(-38, 75); ctx.lineTo(-34, 15); ctx.lineTo(-16, -55); // Left sidepod
-  ctx.closePath(); ctx.fill();
-
-  // Multi-Element Front Wing with Endplates
-  ctx.fillStyle = '#0f172a'; ctx.fillRect(-68, -112, 136, 15);
-  ctx.fillStyle = '#ef4444'; ctx.fillRect(-70, -116, 6, 22); ctx.fillRect(64, -116, 6, 22);
-
-  // Rear Wing with DRS Flap
-  ctx.fillStyle = '#0f172a'; ctx.fillRect(-62, 85, 124, 16);
-
-  // Halo Cockpit & Driver Helmet
-  ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 4;
-  ctx.beginPath(); ctx.arc(0, -15, 14, Math.PI * 0.9, Math.PI * 2.1); ctx.stroke();
-  ctx.fillStyle = '#fbbf24'; ctx.beginPath(); ctx.arc(0, -15, 10, 0, Math.PI * 2); ctx.fill();
-
-  // 4 Wide Pirelli Racing Slick Tires with Red P-Zero Compound Rings
-  const tires = [[-66, -70], [42, -70], [-68, 50], [44, 50]];
-  for (const pos of tires) {
-    ctx.fillStyle = '#0f172a'; ctx.fillRect(pos[0], pos[1], 24, 42);
-    ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 2.5; ctx.strokeRect(pos[0], pos[1], 24, 42);
-    // Glowing brake caliper inside wheel hub
-    ctx.fillStyle = '#f97316'; ctx.beginPath(); ctx.arc(pos[0] + 12, pos[1] + 21, 6, 0, Math.PI * 2); ctx.fill();
-  }
-  ctx.restore();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 32px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 20;
-  ctx.fillText('20 CREW MEMBERS · 4 TIRES', cx, cy + 180);
-  ctx.restore();
-}
-
-function renderStory3_F1Stopwatch180(t) {
-  renderTopPill('⏱️ 1.80 SECONDS COMPLETE TIRE SWAP');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  // Titanium Sparks
-  for (let s = 0; s < 30; s++) {
-    const spAngle = (s * 41 + t * 20) % (Math.PI * 2);
-    const spDist = 45 + ((t * 220 + s * 15) % 140);
-    ctx.fillStyle = (s % 2 === 0) ? '#ffffff' : '#fbbf24';
-    ctx.beginPath(); ctx.arc(cx + Math.cos(spAngle) * spDist, cy - 20 + Math.sin(spAngle) * spDist, 2.5, 0, Math.PI * 2); ctx.fill();
-  }
-
-  ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 14; ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 30;
-  ctx.beginPath(); ctx.arc(cx, cy - 20, 130, 0, Math.PI * 2); ctx.stroke();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 76px JetBrains Mono'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 30;
-  ctx.fillText('1.80s', cx, cy - 10);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '900 24px Space Grotesk';
-  ctx.fillText('WORLD RECORD PIT STOP', cx, cy + 40);
-  ctx.restore();
-}
-
-function renderStory3_F1SpinningTire(t) {
-  renderTopPill('🛞 0.4s FAST MOBILE WEBSITE FUNNEL');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  ctx.save();
-  ctx.translate(cx, cy - 10);
-  ctx.rotate(t * 12);
-  ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 18; ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 35;
-  ctx.beginPath(); ctx.arc(0, 0, 75, 0, Math.PI * 2); ctx.stroke();
-  ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 6; ctx.shadowBlur = 0;
-  for (let s = 0; s < 5; s++) {
-    const spAngle = (s / 5) * Math.PI * 2;
-    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(spAngle) * 95, Math.sin(spAngle) * 95); ctx.stroke();
-  }
-  ctx.restore();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 38px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#fbbf24'; ctx.shadowBlur = 25;
-  ctx.fillText('0.4s PAGE LOAD', cx, cy + 155);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '800 18px JetBrains Mono';
-  ctx.fillText('CONVERTS 3X MORE LOCAL LEADS', cx, cy + 190);
-  ctx.restore();
-}
-
-// STORY 4: BRAIN NEURAL SYNAPSES & AI SEARCH
-function renderStory4_BrainSynapses(t) {
-  renderTopPill('🧠 86 BILLION NEURONS: 13MS SYNAPTIC FIRING');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 4; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 30;
-  ctx.beginPath();
-  ctx.arc(cx - 45, cy - 20, 75, Math.PI * 0.5, Math.PI * 1.5);
-  ctx.arc(cx + 45, cy - 20, 75, -Math.PI * 0.5, Math.PI * 0.5);
-  ctx.stroke();
-
-  for (let s = 0; s < 18; s++) {
-    const sx = cx - 110 + ((s * 47 + t * 180) % 220);
-    const sy = cy - 70 + ((s * 31) % 110);
-    ctx.fillStyle = '#ffffff'; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 15;
-    ctx.beginPath(); ctx.arc(sx, sy, 3.5, 0, Math.PI * 2); ctx.fill();
-  }
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 36px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 25;
-  ctx.fillText('13 MILLISECONDS', cx, cy + 145);
-  ctx.fillStyle = '#38bdf8'; ctx.font = '800 18px JetBrains Mono';
-  ctx.fillText('HUMAN VISUAL RECOGNITION SPEED', cx, cy + 180);
-  ctx.restore();
-}
-
-function renderStory4_ChatGptTerminal(t) {
-  renderTopPill('🤖 CHATGPT & AI SEARCH REVOLUTION');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
-  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.5; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 30;
-  roundRect(ctx, cx - 180, cy - 110, 360, 220, 16, true, true);
-
-  ctx.fillStyle = '#38bdf8'; ctx.font = '700 13px JetBrains Mono'; ctx.textAlign = 'left';
-  ctx.fillText('> Perplexity AI Search Engine', cx - 160, cy - 50);
-  ctx.fillStyle = '#ffffff'; ctx.font = '800 16px Space Grotesk';
-  ctx.fillText('"Top Emergency AC Contractor in Orlando"', cx - 160, cy - 18);
-
-  ctx.fillStyle = 'rgba(16, 185, 129, 0.15)'; ctx.strokeStyle = '#10b981'; ctx.lineWidth = 1.5;
-  roundRect(ctx, cx - 160, cy + 10, 320, 75, 10, true, true);
-  ctx.fillStyle = '#34d399'; ctx.font = '800 12px JetBrains Mono';
-  ctx.fillText('AI CITATION #1 (100% CONFIDENCE):', cx - 145, cy + 34);
-  ctx.fillStyle = '#ffffff'; ctx.font = '700 14px Space Grotesk';
-  ctx.fillText('VantorX Automated Client Network', cx - 145, cy + 62);
-  ctx.restore();
-}
-
-function renderStory4_AiCitationRank1(t) {
-  renderTopPill('🏆 RANK #1 IN AI OVERVIEWS & PERPLEXITY');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  ctx.save();
-  ctx.translate(cx, cy - 20);
-  ctx.fillStyle = '#fbbf24'; ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 35;
-  ctx.beginPath();
-  ctx.moveTo(-50, -50); ctx.lineTo(50, -50); ctx.quadraticCurveTo(45, 15, 0, 35); ctx.quadraticCurveTo(-45, 15, -50, -50);
-  ctx.fill();
-  ctx.fillRect(-28, 35, 56, 16); ctx.fillRect(-45, 51, 90, 16);
-  ctx.restore();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 42px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#fbbf24'; ctx.shadowBlur = 25;
-  ctx.fillText('RANK #1', cx, cy + 145);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '800 18px JetBrains Mono';
-  ctx.fillText('DOMINATE EVERY AI OVERVIEW', cx, cy + 180);
-  ctx.restore();
-}
-
-// STORY 5: SATURN V MOON ROCKET (NASA Apollo 11 Livery & Roaring Dual-Layer Flame)
-function renderStory5_ApolloCountdown(t) {
-  renderTopPill('🚀 APOLLO 11 SATURN V: CAPE CANAVERAL');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  // Red Umbilical Launch Tower
-  ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 3;
-  ctx.strokeRect(cx - 110, cy - 140, 36, 240);
-  for (let r = 0; r < 7; r++) {
-    ctx.beginPath();
-    ctx.moveTo(cx - 110, cy - 140 + r * 34); ctx.lineTo(cx - 74, cy - 106 + r * 34);
-    ctx.stroke();
-  }
-
-  // Realistic Saturn V 3-Stage Rocket
-  ctx.save();
-  ctx.translate(cx + 15, cy - 10);
-  // White Rocket Body with Black NASA Chevrons
-  ctx.fillStyle = '#ffffff'; ctx.shadowColor = '#ffffff'; ctx.shadowBlur = 20;
-  roundRect(ctx, -22, -120, 44, 200, [14, 14, 0, 0], true, false);
-  ctx.fillStyle = '#0f172a'; // Roll patterns
-  ctx.fillRect(-22, -80, 44, 26);
-  ctx.fillRect(-22, -10, 44, 26);
-  // Base Fins
-  ctx.fillStyle = '#cbd5e1';
-  ctx.beginPath(); ctx.moveTo(-22, 60); ctx.lineTo(-40, 80); ctx.lineTo(-22, 80); ctx.fill();
-  ctx.beginPath(); ctx.moveTo(22, 60); ctx.lineTo(40, 80); ctx.lineTo(22, 80); ctx.fill();
-  // Escape Tower Needle
-  ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(0, -120); ctx.lineTo(0, -160); ctx.stroke();
-  ctx.restore();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 52px JetBrains Mono'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#f59e0b'; ctx.shadowBlur = 25;
-  ctx.fillText('T - 00:03', cx, cy + 165);
-  ctx.restore();
-}
-
-function renderStory5_RocketExhaust(t) {
-  renderTopPill('🔥 7.5 MILLION POUNDS OF ROCKET THRUST');
-  const cx = W / 2; const cy = 340;
-  ctx.save();
-
-  const flameWobble = Math.sin(t * 25) * 8;
-  ctx.save();
-  ctx.translate(cx, cy + 30);
-
-  // Roaring Rocket Exhaust Fire
-  const fireGrad = ctx.createLinearGradient(0, 0, 0, 200);
-  fireGrad.addColorStop(0, '#ffffff');
-  fireGrad.addColorStop(0.15, '#fef08a');
-  fireGrad.addColorStop(0.5, '#f97316');
-  fireGrad.addColorStop(1, 'rgba(239, 68, 68, 0)');
-  ctx.fillStyle = fireGrad; ctx.shadowColor = '#f97316'; ctx.shadowBlur = 40;
-  ctx.beginPath();
-  ctx.moveTo(-32, 0);
-  ctx.quadraticCurveTo(-75 + flameWobble, 100, 0, 200);
-  ctx.quadraticCurveTo(75 - flameWobble, 100, 32, 0);
-  ctx.closePath(); ctx.fill();
-
-  // White-Hot Shock Diamonds in Exhaust
-  ctx.fillStyle = '#ffffff'; ctx.shadowBlur = 15;
-  ctx.beginPath(); ctx.ellipse(0, 45, 12, 18, 0, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.ellipse(0, 95, 8, 14, 0, 0, Math.PI * 2); ctx.fill();
-
-  // Rocket Base
-  ctx.fillStyle = '#ffffff'; ctx.fillRect(-26, -110, 52, 110);
-  ctx.fillStyle = '#0f172a'; ctx.fillRect(-26, -70, 52, 24);
-  // Base Fins
-  ctx.fillStyle = '#cbd5e1';
-  ctx.beginPath(); ctx.moveTo(-26, -20); ctx.lineTo(-46, 0); ctx.lineTo(-26, 0); ctx.fill();
-  ctx.beginPath(); ctx.moveTo(26, -20); ctx.lineTo(46, 0); ctx.lineTo(26, 0); ctx.fill();
-  ctx.restore();
-
-  // Billowing Launchpad Steam Clouds
-  for (let c = 0; c < 18; c++) {
-    const cxP = cx - 180 + ((c * 43 + t * 90) % 360);
-    const cyP = cy + 160 + Math.sin(t * 4 + c) * 15;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-    ctx.beginPath(); ctx.arc(cxP, cyP, 26 + (c % 4) * 8, 0, Math.PI * 2); ctx.fill();
-  }
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 42px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#f97316'; ctx.shadowBlur = 25;
-  ctx.fillText('7.5 MILLION LBS', cx, cy + 240);
-  ctx.restore();
-}
-
-function renderStory5_Apollo4kbRAM(t) {
-  renderTopPill('💾 4 KILOBYTES OF RAM REACHED THE MOON');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  ctx.fillStyle = '#022c22'; ctx.strokeStyle = '#10b981'; ctx.lineWidth = 3;
-  ctx.shadowColor = '#10b981'; ctx.shadowBlur = 25;
-  roundRect(ctx, cx - 160, cy - 90, 320, 180, 14, true, true);
-
-  ctx.fillStyle = '#34d399'; ctx.font = '900 48px JetBrains Mono'; ctx.textAlign = 'center';
-  ctx.fillText('4 KB RAM', cx, cy - 10);
-  ctx.font = '800 16px JetBrains Mono';
-  ctx.fillText('APOLLO GUIDANCE COMPUTER', cx, cy + 30);
-  ctx.fillText('TRAVELED 240,000 MILES', cx, cy + 55);
-  ctx.restore();
-}
-
-// STORY 6: LIGHTNING STORM (Fractal Branching Lightning Arc)
-function renderStory6_LightningStorm(t) {
-  renderTopPill('⚡ ONE BILLION VOLTS: ATMOSPHERIC DISCHARGE');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  // Thunderhead Clouds
-  ctx.fillStyle = '#0f172a';
-  for (let c = 0; c < 8; c++) {
-    ctx.beginPath(); ctx.arc(cx - 160 + c * 48, cy - 120 + Math.sin(c) * 15, 48, 0, Math.PI * 2); ctx.fill();
-  }
-
-  // Electrical Leader Arcs
-  ctx.strokeStyle = '#c084fc'; ctx.lineWidth = 3; ctx.shadowColor = '#c084fc'; ctx.shadowBlur = 20;
-  ctx.beginPath();
-  ctx.moveTo(cx - 20, cy - 80); ctx.lineTo(cx + 30, cy - 20); ctx.lineTo(cx - 10, cy + 30);
-  ctx.stroke();
-
-  // Ambient Flash
-  if (Math.sin(t * 18) > 0.85) {
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'; ctx.fillRect(0, 0, W, H);
-  }
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 36px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#a855f7'; ctx.shadowBlur = 25;
-  ctx.fillText('THUNDERSTORM OVERHEAD', cx, cy + 140);
-  ctx.restore();
-}
-
-function renderStory6_OneBillionVolts(t) {
-  renderTopPill('⚡ 1,000,000,000 VOLTS ATMOSPHERIC BOLT');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  // Blinding Fractal Lightning Discharge
-  ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 7; ctx.shadowColor = '#c084fc'; ctx.shadowBlur = 45;
-  ctx.beginPath();
-  ctx.moveTo(cx, cy - 150);
-  ctx.lineTo(cx - 35, cy - 75);
-  ctx.lineTo(cx + 30, cy - 20);
-  ctx.lineTo(cx - 20, cy + 45);
-  ctx.lineTo(cx + 40, cy + 105);
-  ctx.stroke();
-
-  // Branching Forks
-  ctx.lineWidth = 3; ctx.strokeStyle = '#c084fc';
-  ctx.beginPath();
-  ctx.moveTo(cx - 35, cy - 75); ctx.lineTo(cx - 85, cy - 40);
-  ctx.moveTo(cx + 30, cy - 20); ctx.lineTo(cx + 90, cy + 15);
-  ctx.moveTo(cx - 20, cy + 45); ctx.lineTo(cx - 75, cy + 75);
-  ctx.stroke();
-
-  // Ground Impact Flash
-  ctx.fillStyle = '#ffffff'; ctx.shadowBlur = 50;
-  ctx.beginPath(); ctx.arc(cx + 40, cy + 105, 28, 0, Math.PI * 2); ctx.fill();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 56px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#a855f7'; ctx.shadowBlur = 30;
-  ctx.fillText('1 BILLION', cx, cy + 165);
-  ctx.fillStyle = '#c084fc'; ctx.font = '800 22px JetBrains Mono';
-  ctx.fillText('VOLTS OF RAW POWER', cx, cy + 205);
-  ctx.restore();
-}
-
-function renderStory6_Thermal50kDegrees(t) {
-  renderTopPill('🔥 50,000°F THERMAL PLASMA CHANNEL');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 14; ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 30;
-  ctx.beginPath(); ctx.arc(cx, cy - 10, 120, 0, Math.PI * 2); ctx.stroke();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 64px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 30;
-  ctx.fillText('50,000°F', cx, cy + 5);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '800 18px JetBrains Mono';
-  ctx.fillText('5X HOTTER THAN THE SUN', cx, cy + 45);
-  ctx.restore();
-}
-
-// STORY 7: NIAGARA WATERFALL
-function renderStory7_NiagaraWaterfall(t) {
-  renderTopPill('🌊 NIAGARA FALLS: 750,000 GALLONS PER SECOND');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  const fallGrad = ctx.createLinearGradient(0, cy - 120, 0, cy + 100);
-  fallGrad.addColorStop(0, '#0284c7'); fallGrad.addColorStop(0.5, '#38bdf8'); fallGrad.addColorStop(1, '#ffffff');
-  ctx.fillStyle = fallGrad; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 30;
-  roundRect(ctx, cx - 140, cy - 110, 280, 200, 16, true, false);
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 48px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 25;
-  ctx.fillText('750,000', cx, cy + 160);
-  ctx.fillStyle = '#38bdf8'; ctx.font = '800 20px JetBrains Mono';
-  ctx.fillText('GALLONS PER SECOND', cx, cy + 195);
-  ctx.restore();
-}
-
-function renderStory7_GallonsMeter750k(t) {
-  renderTopPill('🚨 BURST COMMERCIAL PIPE EMERGENCY');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  ctx.strokeStyle = '#b45309'; ctx.lineWidth = 26;
-  ctx.beginPath(); ctx.moveTo(cx - 160, cy); ctx.lineTo(cx + 160, cy); ctx.stroke();
-  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 14; ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 35;
-  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx - 40, cy - 90); ctx.stroke();
-
-  ctx.fillStyle = '#ef4444'; ctx.font = '900 36px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#ef4444'; ctx.shadowBlur = 25;
-  ctx.fillText('WATER SPREADING FAST', cx, cy + 145);
-  ctx.restore();
-}
-
-function renderStory7_BurstPipePressure(t) {
-  renderTopPill('⚡ 90-SECOND SMS SPEED-TO-LEAD LOCK');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-
-  ctx.strokeStyle = '#10b981'; ctx.lineWidth = 14; ctx.shadowColor = '#10b981'; ctx.shadowBlur = 30;
-  ctx.beginPath(); ctx.arc(cx, cy - 10, 120, 0, Math.PI * 2); ctx.stroke();
-
-  ctx.fillStyle = '#ffffff'; ctx.font = '900 64px JetBrains Mono'; ctx.textAlign = 'center';
-  ctx.shadowColor = '#10b981'; ctx.shadowBlur = 25;
-  ctx.fillText('24 SEC', cx, cy + 5);
-  ctx.fillStyle = '#34d399'; ctx.font = '800 20px Space Grotesk';
-  ctx.fillText('AUTOMATED TWO-WAY SMS DISPATCH', cx, cy + 45);
-  ctx.restore();
-}
-
-function renderUniversalGlitchContrast(t) {
-  renderTopPill('⚠️ YET CONTRACTORS TAKE 4+ HOURS TO CALLBACK');
-  const cx = W / 2; const cy = 380;
-  ctx.save();
-  ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
-  ctx.fillRect(0, 0, W, H);
-
-  drawStickFigure(ctx, cx, cy + 15, {
-    pose: 'panicked_phone',
-    role: 'contractor',
-    headProp: 'hard_hat',
-    expression: 'worried',
-    color: '#f8fafc',
-    scale: 1.45,
-    anim: t
+  // HUD
+  drawTasklessHUD(ctx, {
+    topStat: '≈3 HOURS',
+    topSub1: 'ONE WAY • DISTANCE VARIES',
+    topSub2: 'SCHEMATIC • TIME COMPRESSED',
+    rightLabel: 'EARTH ➔ URANUS'
   });
 
-  ctx.fillStyle = '#f87171'; ctx.font = '900 30px Space Grotesk'; ctx.textAlign = 'center';
-  ctx.fillText('VOICEMAIL... PLEASE HOLD', cx, cy - 135);
-  ctx.fillStyle = '#fbbf24'; ctx.font = '800 18px JetBrains Mono';
-  ctx.fillText('AVERAGE DELAY: 4 HOURS 12 MINS', cx, cy + 135);
-  ctx.restore();
-}
+  const earthX = 85;
+  const earthY = H - 260;
+  const earthR = 42;
 
-// =============================================================
-// 🎬 TRYTASKLESS.AI SIGNATURE 2D VECTOR ANIMATION ENGINE
-// 100% Match to @trytaskless.ai: Kurzgesagt / Vox Minimalist Flat Aesthetic
-// =============================================================
+  const uranusX = W - 140;
+  const uranusY = 240;
+  const uranusR = 120;
 
-function roundRect(ctx, x, y, w, h, r, fill, stroke) {
-  if (typeof r === 'number') r = { tl: r, tr: r, br: r, bl: r };
-  ctx.beginPath();
-  ctx.moveTo(x + r.tl, y);
-  ctx.lineTo(x + w - r.tr, y);
-  ctx.quadraticCurveTo(x + w, y, x + w, y + r.tr);
-  ctx.lineTo(x + w, y + h - r.br);
-  ctx.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
-  ctx.lineTo(x + r.bl, y + h);
-  ctx.quadraticCurveTo(x, y + h, x, y + h - r.bl);
-  ctx.lineTo(x, y + r.tl);
-  ctx.quadraticCurveTo(x, y, x + r.tl, y);
-  ctx.closePath();
-  if (fill) ctx.fill();
-  if (stroke) ctx.stroke();
-}
-
-// Top Category Badge
-function renderTasklessTopPill(label) {
+  // Concentric Orbital Ring Waves around Uranus (Exact match to Taskless frame_04!)
   ctx.save();
-  const pillW = Math.min(W - 48, label.length * 8.5 + 40);
-  const pillH = 32;
-  const pillX = (W - pillW) / 2;
-  const pillY = 32;
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-  ctx.lineWidth = 1;
-  roundRect(ctx, pillX, pillY, pillW, pillH, 16, true, true);
-
-  ctx.fillStyle = '#a3e635';
-  ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Inter", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText(label.toUpperCase(), W / 2, pillY + 20);
-  ctx.restore();
-}
-
-// =========================================================================
-// 🎬 10 NARRATION-MATCHED STICK FIGURE STORY SCENES (SILKY SMOOTH & CLEAN)
-// Smooth continuous motion, fluid kinematics, organic easing, and zero jitter
-// =========================================================================
-
-// --- SCENE 1: THE LASER SPEED HOOK (0.0s - 7.2s) ---
-// Voiceover: "A single beam of laser light travels at 186,000 miles per second."
-function renderTasklessScene1_NightPhone(t) {
-  renderStoryPill('⚡ ACT 1: THE SPEED HOOK', '186,000 MILES PER SECOND');
-
-  // Ground: Cartoon planet Earth curve with smooth slow rotation
-  ctx.save();
-  ctx.fillStyle = '#0284c7';
-  ctx.beginPath();
-  ctx.arc(W / 2, H + 460, 700, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Continents smoothly gliding across horizon
-  const earthShift = (t * 8) % 360;
-  ctx.fillStyle = '#16a34a';
-  ctx.beginPath();
-  ctx.ellipse(W / 2 - 120 + earthShift, H - 130, 90, 42, -0.2, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.ellipse(W / 2 + 140 + earthShift, H - 120, 80, 36, 0.3, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.ellipse(W / 2 - 380 + earthShift, H - 125, 95, 40, -0.1, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
-
-  // Stick figure smoothly enters with natural ease-out (t < 1.0s), then aims laser!
-  const sprintIn = Math.min(1, t / 1.0);
-  // Cubic ease-out for smooth landing
-  const sprintEase = 1 - Math.pow(1 - sprintIn, 3);
-  const charX = -60 + (W / 2 - 20) * sprintEase;
-  const charY = H - 180;
-  const isRunning = t < 1.0;
-
-  drawStickPerson(ctx, charX, charY, {
-    scale: 1.15,
-    facing: 1,
-    expr: 'happy',
-    pose: isRunning ? 'run' : 'laser_pointer',
-    color: '#ffffff',
-    talking: t >= 1.2,
-    t: t
-  });
-
-  // Soft dust puff upon arrival (t ≈ 1.0s)
-  if (t >= 0.9 && t <= 1.5) {
-    const skidProg = (t - 0.9) / 0.6;
-    const skidAlpha = Math.sin(skidProg * Math.PI) * 0.6;
-    ctx.fillStyle = 'rgba(226, 232, 240, ' + skidAlpha + ')';
-    ctx.beginPath(); ctx.arc(charX - 25, charY, 6 + skidProg * 8, 0, Math.PI * 2); ctx.fill();
-  }
-
-  // Neon Green Laser Beam with smooth glowing beam & traveling light pulses
-  if (t >= 1.0) {
-    const beamStartX = charX + 54;
-    const beamStartY = charY - 146;
-    const beamProgress = Math.min(1, (t - 1.0) / 0.7);
-    const beamEase = 1 - Math.pow(1 - beamProgress, 2);
-    const beamEndX = beamStartX + (W + 200) * beamEase;
-    const beamEndY = beamStartY - 480 * beamEase;
-
-    ctx.save();
-    // Glowing laser beam
-    ctx.shadowColor = '#22c55e';
-    ctx.shadowBlur = 24;
-    ctx.strokeStyle = '#22c55e';
-    ctx.lineWidth = 5.5 + Math.sin(t * 6) * 0.8;
+  const ringCount = 8;
+  for (let r = 0; r < ringCount; r++) {
+    const radius = uranusR + 15 + r * 16;
+    const ringAlpha = 0.08 + (r % 2 === 0 ? 0.06 : 0.02);
     ctx.beginPath();
-    ctx.moveTo(beamStartX, beamStartY);
-    ctx.lineTo(beamEndX, beamEndY);
+    ctx.strokeStyle = 'rgba(103, 232, 249, ' + ringAlpha + ')';
+    ctx.lineWidth = 1.0;
+    ctx.arc(uranusX, uranusY, radius, 0, Math.PI * 2);
     ctx.stroke();
-
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2.2;
-    ctx.beginPath();
-    ctx.moveTo(beamStartX, beamStartY);
-    ctx.lineTo(beamEndX, beamEndY);
-    ctx.stroke();
-
-    // Soft muzzle glow
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.arc(beamStartX, beamStartY, 7 + Math.sin(t * 8) * 1.5, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Traveling light pulses along the beam
-    const pulseCount = 3;
-    for (let p = 0; p < pulseCount; p++) {
-      const pulseT = ((t * 1.6 + p / pulseCount) % 1.0);
-      const px = beamStartX + (beamEndX - beamStartX) * pulseT;
-      const py = beamStartY + (beamEndY - beamStartY) * pulseT;
-      const pulseAlpha = Math.sin(pulseT * Math.PI);
-      ctx.fillStyle = 'rgba(200, 255, 0, ' + pulseAlpha + ')';
-      ctx.beginPath();
-      ctx.arc(px, py, 5.5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
+    ctx.closePath();
   }
+  ctx.restore();
 
-  // Comic Headline Card with smooth, gentle float
+  // Neon Green Laser Beam Corridor Linking Earth to Uranus
   ctx.save();
-  const floatCard = Math.sin(t * 1.8) * 3;
-  const cardW = 420;
-  const cardH = 110;
-  const cardX = (W - cardW) / 2;
-  const cardY = 110 + floatCard;
+  const laserProgress = Math.min(1.0, (t - 7.0) / 1.5);
 
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
-  ctx.strokeStyle = '#22c55e';
-  ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(34, 197, 94, 0.3)';
+  const curBeamEndX = earthX + (uranusX - earthX) * laserProgress;
+  const curBeamEndY = earthY + (uranusY - earthY) * laserProgress;
+
+  // Tapered Laser Beam Outer Glow
+  const beamGrad = ctx.createLinearGradient(earthX, earthY, uranusX, uranusY);
+  beamGrad.addColorStop(0, 'rgba(74, 222, 128, 0.9)');
+  beamGrad.addColorStop(0.8, 'rgba(34, 197, 94, 0.7)');
+  beamGrad.addColorStop(1, 'rgba(103, 232, 249, 0.9)');
+
+  ctx.beginPath();
+  ctx.strokeStyle = beamGrad;
+  ctx.lineWidth = 6;
+  ctx.shadowColor = 'rgba(74, 222, 128, 0.8)';
   ctx.shadowBlur = 18;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 16, true, true);
-  ctx.shadowBlur = 0;
-
-  // Smooth odometer count up
-  const counterVal = Math.min(186000, Math.floor(Math.min(1, t / 2.0) * 186000));
-  ctx.fillStyle = '#ffffff';
-  ctx.font = '900 46px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText(counterVal.toLocaleString(), W / 2, cardY + 54);
-
-  ctx.fillStyle = '#22c55e';
-  ctx.font = 'bold 16px "JetBrains Mono", monospace';
-  ctx.fillText('⚡ MILES PER SECOND ⚡', W / 2, cardY + 86);
-  ctx.restore();
-}
-
-// --- SCENE 2: MOON IN 1.3s & DEEP SPACE (7.3s - 12.8s) ---
-// Voiceover: "It can reach the moon in under three seconds, and cross nearly two billion miles of space in under three hours."
-function renderTasklessScene2_LasersUranus(t) {
-  renderStoryPill('🔭 ACT 1: INTERPLANETARY SPEED', 'EARTH TO MOON IN 1.3s');
-
-  // Moon with gentle, soothing float (NO rapid bouncing)
-  const moonBounce = Math.sin(t * 1.8) * 5;
-  const moonX = W - 125;
-  const moonY = 240 + moonBounce;
-  const moonR = 64;
-
-  ctx.save();
-  ctx.fillStyle = '#f8fafc';
-  ctx.shadowColor = 'rgba(255, 255, 255, 0.35)';
-  ctx.shadowBlur = 24;
-  ctx.beginPath();
-  ctx.arc(moonX, moonY, moonR, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.shadowBlur = 0;
-
-  // Craters
-  ctx.fillStyle = '#e2e8f0';
-  ctx.beginPath(); ctx.arc(moonX - 22, moonY - 14, 13, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.arc(moonX + 18, moonY + 20, 15, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.arc(moonX + 9, moonY - 24, 9, 0, Math.PI * 2); ctx.fill();
-
-  // Gentle Blinking Face
-  const isBlink = (t % 3.2) < 0.14;
-  ctx.fillStyle = '#1e293b';
-  if (isBlink) {
-    ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(moonX - 16, moonY); ctx.lineTo(moonX - 4, moonY); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(moonX + 6, moonY); ctx.lineTo(moonX + 18, moonY); ctx.stroke();
-  } else {
-    ctx.beginPath(); ctx.arc(moonX - 10, moonY, 4.5, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(moonX + 12, moonY, 4.5, 0, Math.PI * 2); ctx.fill();
-  }
-  ctx.strokeStyle = '#1e293b';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath(); ctx.arc(moonX + 1, moonY + 12, 10, 0, Math.PI); ctx.stroke();
-
-  // Pink Cheeks
-  ctx.fillStyle = 'rgba(244, 114, 182, 0.5)';
-  ctx.beginPath(); ctx.arc(moonX - 18, moonY + 10, 6, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.arc(moonX + 20, moonY + 10, 6, 0, Math.PI * 2); ctx.fill();
-  ctx.restore();
-
-  // Shooting Star gliding smoothly across space
-  const cometCycle = ((t * 0.45) % 1.0);
-  const cometX = -50 + cometCycle * (W + 200);
-  const cometY = 150 + cometCycle * 60;
-  ctx.save();
-  const cometGrad = ctx.createLinearGradient(cometX - 70, cometY - 20, cometX, cometY);
-  cometGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
-  cometGrad.addColorStop(1, 'rgba(200, 255, 0, 0.7)');
-  ctx.strokeStyle = cometGrad;
-  ctx.lineWidth = 3.5;
-  ctx.beginPath();
-  ctx.moveTo(cometX - 70, cometY - 20);
-  ctx.lineTo(cometX, cometY);
+  ctx.moveTo(earthX, earthY);
+  ctx.lineTo(curBeamEndX, curBeamEndY);
   ctx.stroke();
-  ctx.fillStyle = '#ffffff';
-  ctx.beginPath(); ctx.arc(cometX, cometY, 4.5, 0, Math.PI * 2); ctx.fill();
-  ctx.restore();
-
-  // Saturn with tilted rings
-  ctx.save();
-  const satX = 90; const satY = 380 + Math.sin(t * 1.6) * 4;
-  ctx.fillStyle = '#f59e0b';
-  ctx.beginPath(); ctx.arc(satX, satY, 24, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = '#fbbf24';
-  ctx.lineWidth = 3.5;
-  ctx.beginPath(); ctx.ellipse(satX, satY, 44, 9, -0.3, 0, Math.PI * 2); ctx.stroke();
-  ctx.restore();
-
-  // Smooth Laser Beam to Moon
-  ctx.save();
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 5;
-  ctx.shadowColor = '#38bdf8';
-  ctx.shadowBlur = 20;
-  ctx.beginPath();
-  ctx.moveTo(80, H - 200);
-  ctx.lineTo(moonX - 45, moonY + 25);
-  ctx.stroke();
-
-  // Gentle impact glow on Moon
-  const sparkR = 10 + Math.sin(t * 6) * 3;
-  ctx.fillStyle = 'rgba(200, 255, 0, 0.85)';
-  ctx.beginPath();
-  ctx.arc(moonX - 45, moonY + 25, sparkR, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
-
-  // Speech bubble tag
-  drawSpeechBubble(ctx, moonX - 45, moonY - 45, '⏱️ 1.3 SECONDS!', {
-    bg: '#ffffff',
-    border: '#22c55e',
-    textColor: '#15803d',
-    t: t
-  });
-
-  // Story Card
-  const cardW = 420; const cardH = 100;
-  const cardX = (W - cardW) / 2;
-  const cardY = 100 + Math.sin(t * 1.5) * 2.5;
-  ctx.save();
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 2;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 16, true, true);
-
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 22px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('2 BILLION MILES', W / 2, cardY + 40);
-
-  ctx.fillStyle = '#c8ff00';
-  ctx.font = 'bold 15px "JetBrains Mono", monospace';
-  ctx.fillText('IN UNDER 3.0 HOURS FLAT', W / 2, cardY + 72);
-  ctx.restore();
-}
-
-// --- SCENE 3: THE LEAKY PIPE & 4-HOUR DELAY (12.9s - 18.2s) ---
-// Voiceover: "Yet that interplanetary space trip is STILL faster than the average contractor calls back an emergency lead."
-function renderTasklessScene3_CustomerWindow(t) {
-  renderStoryPill('💧 ACT 2: THE HOMEOWNER EMERGENCY', 'WATER LEAKING EVERYWHERE');
-
-  const roomY = 220;
-  drawLeakyPipe(ctx, W / 2 - 30, roomY + 20, t);
-
-  // Homeowner paces smoothly with realistic stride (t * 1.8 rad/s, not frantic)
-  const paceX = Math.sin(t * 1.8) * 50;
-  const homeX = W / 2 + 50 + paceX;
-  const homeY = roomY + 230;
-  const homeFacing = Math.cos(t * 1.8) >= 0 ? 1 : -1;
-
-  drawStickPerson(ctx, homeX, homeY, {
-    scale: 1.1,
-    facing: homeFacing,
-    expr: 'panic',
-    pose: 'panic_phone',
-    color: '#ffffff',
-    talking: true,
-    t: t
-  });
-
-  drawSpeechBubble(ctx, homeX - 30 * homeFacing, homeY - 145, 'HELP! CEILING LEAKING! 😱', {
-    bg: '#ffffff',
-    border: '#ef4444',
-    textColor: '#b91c1c',
-    t: t
-  });
-
-  // Wall Clock with smooth sweep second hand & gentle pendulum
-  const clockX = 90; const clockY = roomY + 70;
-  ctx.save();
-  ctx.fillStyle = '#ffffff';
-  ctx.strokeStyle = '#ef4444';
-  ctx.lineWidth = 3;
-  ctx.beginPath(); ctx.arc(clockX, clockY, 30, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-
-  // Smooth continuous sweep hand
-  const handAngle = t * 4.5;
-  ctx.strokeStyle = '#0f172a';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.moveTo(clockX, clockY);
-  ctx.lineTo(clockX + Math.cos(handAngle) * 18, clockY + Math.sin(handAngle) * 18);
-  ctx.stroke();
-
-  // Pendulum
-  const pendAngle = Math.sin(t * 3.0) * 0.3;
-  ctx.strokeStyle = '#94a3b8';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(clockX, clockY + 30);
-  ctx.lineTo(clockX + Math.sin(pendAngle) * 35, clockY + 30 + Math.cos(pendAngle) * 35);
-  ctx.stroke();
-  ctx.fillStyle = '#ef4444';
-  ctx.beginPath();
-  ctx.arc(clockX + Math.sin(pendAngle) * 35, clockY + 30 + Math.cos(pendAngle) * 35, 5.5, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
-
-  // Banner Card with gentle breathing pulse
-  const cardW = 440; const cardH = 120;
-  const cardX = (W - cardW) / 2;
-  const cardY = H - 280 + Math.sin(t * 1.5) * 2.5;
-  ctx.save();
-  const alertPulse = 0.16 + 0.06 * Math.sin(t * 3);
-  ctx.fillStyle = 'rgba(239, 68, 68, ' + alertPulse + ')';
-  ctx.strokeStyle = '#ef4444';
-  ctx.lineWidth = 2.5;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 16, true, true);
-
-  ctx.fillStyle = '#f87171';
-  ctx.font = 'bold 13px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('AVERAGE CONTRACTOR CALLBACK TIME:', W / 2, cardY + 36);
-
-  ctx.fillStyle = '#ffffff';
-  ctx.font = '900 32px "Space Grotesk", sans-serif';
-  ctx.fillText('4.2 HOURS (OR NEVER)', W / 2, cardY + 76);
-
-  ctx.fillStyle = '#fca5a5';
-  ctx.font = '500 12px -apple-system, sans-serif';
-  ctx.fillText('Space travel is literally faster than returning a lead.', W / 2, cardY + 102);
-  ctx.restore();
-}
-
-// --- SCENE 4: THE 78% RACE TRACK (18.5s - 24.8s) ---
-// Voiceover: "78% of homeowners hire the first business that answers the phone."
-function renderTasklessScene4_Stat78Percent(t) {
-  renderStoryPill('⚡ ACT 3: THE SPEED-TO-LEAD LAW', 'FIRST TO ANSWER WINS');
-
-  const cardW = 440;
-  const cardH = 240;
-  const cardX = (W - cardW) / 2;
-  const cardY = 110 + Math.sin(t * 1.8) * 3;
-
-  ctx.save();
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.94)';
-  ctx.strokeStyle = '#c8ff00';
-  ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(200, 255, 0, 0.3)';
-  ctx.shadowBlur = 22;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 20, true, true);
-  ctx.shadowBlur = 0;
-
-  ctx.fillStyle = '#c8ff00';
-  ctx.font = '900 86px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('78%', W / 2, cardY + 98);
-
-  ctx.fillStyle = '#ffffff';
-  ctx.font = '900 22px "Space Grotesk", sans-serif';
-  ctx.fillText('OF HOMEOWNERS HIRE', W / 2, cardY + 148);
-
-  ctx.fillStyle = '#38bdf8';
-  ctx.font = 'bold 18px "Space Grotesk", sans-serif';
-  ctx.fillText('THE 1ST CONTRACTOR WHO ANSWERS', W / 2, cardY + 178);
-
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = '500 13px -apple-system, sans-serif';
-  ctx.fillText('They do NOT wait for your voicemail.', W / 2, cardY + 212);
-  ctx.restore();
-
-  const gy = H - 200;
-
-  // Contractor 1 smoothly sprints across screen with cubic ease
-  const run1Progress = Math.min(1, (t - 18.5) / 5.5);
-  const runEase = 1 - Math.pow(1 - run1Progress, 2);
-  const g1X = 60 + runEase * 320;
-
-  drawStickPerson(ctx, g1X, gy, {
-    scale: 1.05,
-    facing: 1,
-    expr: 'happy',
-    pose: 'run',
-    color: '#22c55e',
-    t: t
-  });
-  drawSpeechBubble(ctx, g1X, gy - 140, 'HIRED! 🏆', { bg: '#22c55e', border: '#ffffff', textColor: '#ffffff', t: t });
-
-  // Finish Ribbon
-  ctx.save();
-  ctx.strokeStyle = '#facc15';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.moveTo(380, gy - 150);
-  ctx.lineTo(380, gy);
-  ctx.stroke();
-  const flutter = Math.sin(t * 6) * 6;
-  ctx.fillStyle = '#ef4444';
-  ctx.beginPath();
-  ctx.moveTo(380, gy - 140);
-  ctx.lineTo(430 + flutter, gy - 125);
-  ctx.lineTo(380, gy - 110);
   ctx.closePath();
-  ctx.fill();
-  ctx.restore();
 
-  // Contractor 2 dragging heavy voicemail weight slowly
-  const g2X = 80 + Math.min(110, runEase * 80);
-  drawStickPerson(ctx, g2X, gy, {
-    scale: 0.95,
-    facing: 1,
-    expr: 'sad',
-    pose: 'drag_heavy',
-    color: '#94a3b8',
-    t: t
-  });
-
-  ctx.save();
-  ctx.strokeStyle = '#475569';
-  ctx.lineWidth = 3;
+  // White Hot Beam Core
   ctx.beginPath();
-  ctx.moveTo(g2X - 10, gy);
-  ctx.lineTo(g2X - 45, gy);
-  ctx.stroke();
-  ctx.fillStyle = '#1e293b';
-  ctx.beginPath(); ctx.arc(g2X - 55, gy - 8, 14, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-  ctx.fillStyle = '#f87171';
-  ctx.font = 'bold 9px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('VOICEMAIL', g2X - 55, gy - 26);
-  ctx.restore();
-}
-
-// --- SCENE 5: CONTRACTOR ON LADDER & FLYING $8,000 (24.9s - 32.2s) ---
-// Voiceover: "When you're on a ladder or eating dinner with family, every unanswered call is an $8,000 job handed to your competitor."
-function renderTasklessScene5_TwoShopsComparison(t) {
-  renderStoryPill('🪜 ACT 3: THE LADDER DILEMMA', 'MISSED CALL = -$8,000');
-
-  const p = Math.min(1, Math.max(0, (t - 24.9) / 7.3));
-
-  const ladX = 140;
-  const ladY = 220;
-  const ladH = 340;
-  drawLadder(ctx, ladX, ladY, ladH, t);
-
-  const conY = ladY + 80;
-  drawStickPerson(ctx, ladX, conY, {
-    scale: 1.05,
-    facing: 1,
-    expr: 'sweat',
-    hat: 'hardhat',
-    vest: true,
-    pose: 'ladder_work',
-    t: t
-  });
-
-  // AC Condenser Unit
-  ctx.fillStyle = '#334155';
-  ctx.fillRect(ladX + 45, ladY + 30, 70, 80);
-  ctx.fillStyle = '#0f172a';
-  ctx.beginPath(); ctx.arc(ladX + 80, ladY + 70, 24, 0, Math.PI * 2); ctx.fill();
-
-  // Smartphone on ground ringing gently with smooth expanding rings
-  const phoneX = ladX - 60;
-  const phoneY = ladY + ladH;
-  const hopY = Math.abs(Math.sin(t * 6)) * 6; // Gentle clean hop
-
-  ctx.save();
-  ctx.translate(phoneX, phoneY - hopY);
-  ctx.fillStyle = '#ef4444';
-  roundRect(ctx, -11, -19, 22, 38, 5, true, false);
-
-  const ringCycle = (t * 1.4) % 1.0;
-  const ringR = ringCycle * 40;
-  const ringA = Math.sin(ringCycle * Math.PI) * 0.7;
-  ctx.strokeStyle = 'rgba(239, 68, 68, ' + ringA + ')';
-  ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.arc(0, 0, ringR, 0, Math.PI * 2); ctx.stroke();
-  ctx.restore();
-
-  drawSpeechBubble(ctx, phoneX - 10, phoneY - 45, 'RING! (( 📞 ))', {
-    bg: '#ef4444',
-    border: '#ffffff',
-    textColor: '#ffffff',
-    t: t
-  });
-
-  // Flying Money Bag soaring smoothly across screen like a bird
-  const flyStartX = ladX + 30;
-  const flyTargetX = W - 100;
-  const flightEase = 0.5 - 0.5 * Math.cos(Math.min(1, p * 1.25) * Math.PI);
-  const curFlyX = flyStartX + (flyTargetX - flyStartX) * flightEase;
-  const curFlyY = ladY + 50 + Math.sin(t * 3.5) * 16;
-
-  drawFlyingMoneyBag(ctx, curFlyX, curFlyY, t, '$8,000');
-
-  const compX = W - 90;
-  const compY = ladY + ladH;
-  drawStickPerson(ctx, compX, compY, {
-    scale: 1.0,
-    facing: -1,
-    expr: 'happy',
-    pose: 'jump_cheer',
-    color: '#22c55e',
-    t: t
-  });
-  drawSpeechBubble(ctx, compX, compY - 140, 'Thanks! 🤑', { bg: '#22c55e', border: '#ffffff', textColor: '#ffffff', t: t });
-
-  drawSpeechBubble(ctx, ladX, conY - 150, "I can't reach it! 😭", {
-    bg: '#ffffff',
-    border: '#ef4444',
-    textColor: '#b91c1c',
-    t: t
-  });
-}
-
-// --- SCENE 6: ENTER AVA THE ROBOT (32.5s - 39.2s) ---
-// Voiceover: "That's why we built Ava. She answers your shop's phone in 0.8 seconds and qualifies the caller."
-function renderTasklessScene6_ShopB_AvaReply(t) {
-  renderStoryPill('🤖 ACT 4: MEET AVA VOICE AI', 'ANSWERS IN 0.8 SECONDS');
-
-  const badgeW = 380;
-  const badgeH = 80;
-  const badgeX = (W - badgeW) / 2;
-  const badgeY = 110 + Math.sin(t * 1.8) * 2.5;
-  ctx.save();
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
-  ctx.strokeStyle = '#c8ff00';
-  ctx.lineWidth = 2;
-  roundRect(ctx, badgeX, badgeY, badgeW, badgeH, 16, true, true);
-
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 13px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('SPEED TO LEAD BENCHMARK:', W / 2, badgeY + 28);
-
-  ctx.fillStyle = '#c8ff00';
-  ctx.font = '900 32px "Space Grotesk", sans-serif';
-  ctx.fillText('ANSWERS IN 0.8s ⚡', W / 2, badgeY + 62);
-  ctx.restore();
-
-  const avaX = W / 2;
-  const avaY = 440;
-  drawAvaRobot(ctx, avaX, avaY, {
-    scale: 1.3,
-    t: t
-  });
-
-  drawSpeechBubble(ctx, avaX, avaY - 180, '⚡ "Hi! How can we help?" 📞', {
-    bg: '#ffffff',
-    border: '#38bdf8',
-    textColor: '#0284c7',
-    t: t
-  });
-
-  const checkY = H - 260;
-  const checkW = 440;
-  const checkX = (W - checkW) / 2;
-  ctx.save();
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
-  ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, checkX, checkY, checkW, 110, 14, true, true);
-
-  ctx.font = 'bold 13.5px -apple-system, sans-serif';
-  ctx.textAlign = 'left';
-  ctx.fillStyle = '#22c55e';
-  ctx.fillText('✓ Answers in 0.8s · Never misses a ring', checkX + 24, checkY + 34);
-  ctx.fillText('✓ Qualifies emergency leak & customer address', checkX + 24, checkY + 64);
-  ctx.fillText('✓ Books calendar slot directly into your CRM', checkX + 24, checkY + 94);
-  ctx.restore();
-}
-
-// --- SCENE 7: AUTO DISPATCH WORK VAN PARALLAX (39.3s - 47.2s) ---
-// Voiceover: "She checks your schedule and dispatches the job to your technician's phone before the customer can open another Google tab."
-function renderTasklessScene7_WorkflowNodes(t) {
-  renderStoryPill('📲 ACT 4: INSTANT DISPATCH', 'TECH DISPATCHED IN 6 SECONDS');
-
-  const p = Math.min(1, Math.max(0, (t - 39.3) / 7.9));
-
-  const calW = 380;
-  const calH = 76;
-  const calX = (W - calW) / 2;
-  const calY = 110 + Math.sin(t * 1.8) * 2.5;
-  ctx.save();
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
-  ctx.strokeStyle = '#22c55e';
-  ctx.lineWidth = 2;
-  roundRect(ctx, calX, calY, calW, calH, 14, true, true);
-
-  ctx.fillStyle = '#22c55e';
-  ctx.font = 'bold 13px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('📅 SCHEDULE AUTO-BOOKED', W / 2, calY + 30);
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 18px "Space Grotesk", sans-serif';
-  ctx.fillText('Tomorrow 8:00 AM Locked ✓', W / 2, calY + 56);
-  ctx.restore();
-
-  const vanY = 480;
-
-  // Background building silhouettes scrolling smoothly at 45 px/s
-  const bldgShift = (t * 45) % 240;
-  ctx.fillStyle = '#0f172a';
-  for (let b = -1; b < 4; b++) {
-    const bx = b * 240 - bldgShift;
-    ctx.fillRect(bx, vanY - 140, 90, 140);
-    ctx.fillRect(bx + 110, vanY - 90, 70, 90);
-    ctx.fillRect(bx + 190, vanY - 120, 45, 120);
-  }
-
-  // Asphalt Road surface
-  ctx.fillStyle = '#1e293b';
-  ctx.fillRect(0, vanY + 12, W, 70);
-
-  // Dashed Road Stripes moving at a clean, smooth cruising speed (220 px/s, no strobe!)
-  const stripeShift = (t * 220) % 90;
-  ctx.fillStyle = '#facc15';
-  for (let s = -1; s < 8; s++) {
-    ctx.fillRect(s * 90 - stripeShift, vanY + 42, 45, 8);
-  }
-
-  // Work Van driving with smooth ease
-  const vanStartX = -100;
-  const vanEndX = W + 120;
-  const vanX = vanStartX + (vanEndX - vanStartX) * Math.min(1, p * 1.25);
-
-  drawWorkVan(ctx, vanX, vanY, t);
-
-  drawSpeechBubble(ctx, vanX, vanY - 72, 'ON MY WAY! 🚗💨', {
-    bg: '#38bdf8',
-    border: '#ffffff',
-    textColor: '#ffffff',
-    t: t
-  });
-
-  const banW = 440;
-  const banH = 70;
-  const banX = (W - banW) / 2;
-  const banY = H - 260;
-  ctx.save();
-  ctx.fillStyle = 'rgba(34, 197, 94, 0.2)';
-  ctx.strokeStyle = '#22c55e';
-  ctx.lineWidth = 1.5;
-  roundRect(ctx, banX, banY, banW, banH, 14, true, true);
-
-  ctx.fillStyle = '#c8ff00';
-  ctx.font = '900 17px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('BEFORE TAB CLOSE', W / 2, banY + 30);
-  ctx.fillStyle = '#cbd5e1';
-  ctx.font = '500 13px -apple-system, sans-serif';
-  ctx.fillText('Customer never even had time to call Shop B.', W / 2, banY + 52);
-  ctx.restore();
-}
-
-// --- SCENE 8: SLEEPING PEACEFULLY WHILE AVA STACKS CASH (47.5s - 53.0s) ---
-// Voiceover: "Stop bleeding thousands on dead voicemails."
-function renderTasklessScene8_TechDispatchAndDashboard(t) {
-  renderStoryPill('🛡️ ACT 5: STOP BLEEDING REVENUE', '+$44,800 BOOKED WHILE ASLEEP');
-
-  const cardW = 440;
-  const cardH = 120;
-  const cardX = (W - cardW) / 2;
-  const cardY = 110 + Math.sin(t * 1.8) * 2.5;
-  ctx.save();
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
-  ctx.strokeStyle = '#c8ff00';
-  ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(200, 255, 0, 0.3)';
-  ctx.shadowBlur = 20;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 18, true, true);
-  ctx.shadowBlur = 0;
-
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = 'bold 12px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('MONTHLY RECOVERED REVENUE:', W / 2, cardY + 34);
-
-  ctx.fillStyle = '#c8ff00';
-  ctx.font = '900 48px "Space Grotesk", sans-serif';
-  ctx.fillText('+$44,800', W / 2, cardY + 82);
-
-  ctx.fillStyle = '#34d399';
-  ctx.font = 'bold 12px -apple-system, sans-serif';
-  ctx.fillText('✓ 14 AFTER-HOURS JOBS SAVED THIS MONTH', W / 2, cardY + 104);
-  ctx.restore();
-
-  const bedX = 140;
-  const bedY = 520;
-  drawBedWithContractor(ctx, bedX, bedY, t);
-
-  const avaX = W - 120;
-  const avaY = 520;
-  drawAvaRobot(ctx, avaX, avaY, {
-    scale: 1.15,
-    t: t
-  });
-
-  // Stack of Money Bags
-  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 20, t * 0.4, '$8k');
-  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 60, (t + 1) * 0.4, '$8k');
-  drawFlyingMoneyBag(ctx, avaX - 45, avaY - 100, (t + 2) * 0.4, '$8k');
-
-  // Smooth floating point rewards
-  for (let b = 0; b < 2; b++) {
-    const bCycle = (t * 0.5 + b * 0.5) % 1.0;
-    const bY = avaY - 70 - bCycle * 45;
-    const bX = avaX - 45 + Math.sin(t * 1.5 + b) * 8;
-    const bA = Math.sin(bCycle * Math.PI) * 0.9;
-    ctx.fillStyle = 'rgba(200, 255, 0, ' + bA + ')';
-    ctx.font = 'bold 14px "Space Grotesk", sans-serif';
-    ctx.fillText('+$8,000 ✓', bX, bY);
-  }
-}
-
-// --- SCENE 9: LIVE DEMO DIALER WITH PULSING RADAR WAVES (53.1s - 58.5s) ---
-// Voiceover: "Call the demo number on screen right now to hear Ava live..."
-function renderTasklessScene9_LiveDemoDialer(t) {
-  renderStoryPill('📞 ACT 5: TEST AVA LIVE RIGHT NOW', 'FLORIDA DEDICATED DEMO LINE');
-
-  const cardW = 460;
-  const cardH = 240;
-  const cardX = (W - cardW) / 2;
-  const cardY = 110 + Math.sin(t * 1.8) * 2.5;
-  ctx.save();
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(56, 189, 248, 0.35)';
-  ctx.shadowBlur = 22;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 20, true, true);
-  ctx.shadowBlur = 0;
-
-  ctx.fillStyle = '#38bdf8';
-  ctx.font = 'bold 13px "JetBrains Mono", monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('PICK UP YOUR CELL & DIAL RIGHT NOW:', W / 2, cardY + 38);
-
-  const numW = cardW - 40;
-  const numH = 80;
-  const numX = cardX + 20;
-  const numY = cardY + 58;
-
-  // Smooth expanding radar ping
-  const pingCycle = (t * 0.8) % 1.0;
-  const pingR = pingCycle * 60;
-  const pingA = Math.sin(pingCycle * Math.PI) * 0.6;
-  ctx.strokeStyle = 'rgba(56, 189, 248, ' + pingA + ')';
-  ctx.lineWidth = 1.8;
-  roundRect(ctx, numX - pingR * 0.25, numY - pingR * 0.18, numW + pingR * 0.5, numH + pingR * 0.36, 18, false, true);
-
-  ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 2;
-  roundRect(ctx, numX, numY, numW, numH, 16, true, true);
-
-  ctx.fillStyle = '#ffffff';
-  ctx.font = '900 36px "JetBrains Mono", monospace';
-  ctx.fillText('(561) 813-8602', W / 2, numY + 48);
-
-  ctx.fillStyle = '#22c55e';
-  ctx.font = 'bold 12px "JetBrains Mono", monospace';
-  ctx.fillText('● ONLINE 24/7 · ANSWERS IN 0.8 SECONDS', W / 2, numY + 70);
-
-  ctx.fillStyle = '#cbd5e1';
-  ctx.font = '500 13px -apple-system, sans-serif';
-  ctx.fillText('Experience real AI voice triage on your own phone.', W / 2, cardY + 175);
-  ctx.fillText('No sales pitch — just instant live technology.', W / 2, cardY + 202);
-  ctx.restore();
-
-  // Smooth bouncing arrow pointing directly to the number
-  const arrowBounce = Math.sin(t * 4.0) * 8;
-  ctx.save();
-  ctx.fillStyle = '#c8ff00';
-  ctx.shadowColor = '#c8ff00';
-  ctx.shadowBlur = 12;
-  ctx.beginPath();
-  ctx.moveTo(W / 2, cardY - 20 + arrowBounce);
-  ctx.lineTo(W / 2 - 14, cardY - 38 + arrowBounce);
-  ctx.lineTo(W / 2 + 14, cardY - 38 + arrowBounce);
-  ctx.closePath();
-  ctx.fill();
-  ctx.restore();
-
-  const avaX = W / 2;
-  const avaY = 560;
-  drawAvaRobot(ctx, avaX, avaY, {
-    scale: 1.25,
-    t: t
-  });
-
-  drawSpeechBubble(ctx, avaX + 80, avaY - 150, 'DIAL ME NOW! 📞', {
-    bg: '#22c55e',
-    border: '#ffffff',
-    textColor: '#ffffff',
-    t: t
-  });
-}
-
-// --- SCENE 10: VIRAL ACTION CARD WITH FLOATING HEARTS & CONFETTI (58.5s - 63.0s) ---
-// Voiceover: "...or comment 'AVA' below for free instant access."
-function renderTasklessScene10_TryTasklessCTA(t) {
-  renderStoryPill('⚡ GET INSTANT ACCESS', 'VANTORX SOLUTIONS');
-
-  // Smooth floating Instagram Emojis
-  const emojis = ['❤️', '🔥', '🚀', '⚡', '👏'];
-  for (let em = 0; em < 6; em++) {
-    const emCycle = (t * 0.35 + em * 0.16) % 1.0;
-    const emY = H - emCycle * 320;
-    const emX = 70 + (em * 70) % (W - 140) + Math.sin(t * 1.5 + em) * 14;
-    const emAlpha = Math.sin(emCycle * Math.PI) * 0.85;
-    ctx.save();
-    ctx.globalAlpha = emAlpha;
-    ctx.font = '22px -apple-system, sans-serif';
-    ctx.fillText(emojis[em % emojis.length], emX, emY);
-    ctx.restore();
-  }
-
-  // Smooth drifting confetti
-  for (let c = 0; c < 14; c++) {
-    const cCycle = (t * 0.6 + c * 0.12) % 1.0;
-    const cY = cCycle * 400;
-    const cX = (c * 38) % W + Math.sin(t * 2.0 + c) * 16;
-    const cRot = t * 3 + c;
-    const cColor = c % 3 === 0 ? '#c8ff00' : (c % 3 === 1 ? '#38bdf8' : '#f43f5e');
-    const cAlpha = Math.sin(cCycle * Math.PI) * 0.8;
-    ctx.save();
-    ctx.globalAlpha = cAlpha;
-    ctx.translate(cX, cY);
-    ctx.rotate(cRot);
-    ctx.fillStyle = cColor;
-    ctx.fillRect(-3.5, -5.5, 7, 11);
-    ctx.restore();
-  }
-
-  const cardW = 460;
-  const cardH = 500;
-  const cardX = (W - cardW) / 2;
-  const cardY = 110 + Math.sin(t * 1.8) * 2.5;
-
-  ctx.save();
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
   ctx.strokeStyle = '#ffffff';
   ctx.lineWidth = 2.5;
-  roundRect(ctx, cardX, cardY, cardW, cardH, 24, true, true);
+  ctx.shadowBlur = 0;
+  ctx.moveTo(earthX, earthY);
+  ctx.lineTo(curBeamEndX, curBeamEndY);
+  ctx.stroke();
+  ctx.closePath();
 
-  drawAvaRobot(ctx, W / 2, cardY + 130, {
-    scale: 0.9,
-    t: t
+  // Traveling Light Pulse Packet
+  const pulseLoop = ((t - 7.0) * 1.4) % 1.0;
+  const px = earthX + (uranusX - earthX) * pulseLoop;
+  const py = earthY + (uranusY - earthY) * pulseLoop;
+  ctx.beginPath();
+  ctx.fillStyle = '#ffffff';
+  ctx.shadowColor = '#22c55e';
+  ctx.shadowBlur = 16;
+  ctx.arc(px, py, 6, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+  ctx.restore();
+
+  // Earth (Vector Sphere with Atmosphere Glow Ring)
+  ctx.save();
+  // Atmosphere Halo
+  const earthGlow = ctx.createRadialGradient(earthX, earthY, earthR, earthX, earthY, earthR + 14);
+  earthGlow.addColorStop(0, 'rgba(56, 189, 248, 0.55)');
+  earthGlow.addColorStop(1, 'rgba(56, 189, 248, 0)');
+  ctx.beginPath();
+  ctx.fillStyle = earthGlow;
+  ctx.arc(earthX, earthY, earthR + 14, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  // Earth Ocean Body
+  const oceanGrad = ctx.createRadialGradient(earthX - earthR * 0.3, earthY - earthR * 0.3, 4, earthX, earthY, earthR);
+  oceanGrad.addColorStop(0, '#1d4ed8');
+  oceanGrad.addColorStop(0.7, '#1e3a8a');
+  oceanGrad.addColorStop(1, '#0f172a');
+  ctx.beginPath();
+  ctx.fillStyle = oceanGrad;
+  ctx.arc(earthX, earthY, earthR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  // Vector Continents
+  ctx.beginPath();
+  ctx.fillStyle = '#10b981';
+  ctx.ellipse(earthX - 6, earthY - 8, 14, 18, 0.3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.beginPath();
+  ctx.ellipse(earthX + 16, earthY + 10, 10, 12, -0.4, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  // Moon Marker at 1.3s light travel distance
+  const moonProg = 0.16;
+  const moonX = earthX + (uranusX - earthX) * moonProg + 25;
+  const moonY = earthY + (uranusY - earthY) * moonProg - 20;
+  ctx.beginPath();
+  ctx.fillStyle = '#e2e8f0';
+  ctx.arc(moonX, moonY, 7, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.font = '700 11px "Inter", sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('MOON (1.3s)', moonX + 14, moonY);
+  ctx.restore();
+
+  // Uranus (Cyan Gas Giant Vector Sphere)
+  ctx.save();
+  // Soft outer gas glow
+  const uranusGlow = ctx.createRadialGradient(uranusX, uranusY, uranusR, uranusX, uranusY, uranusR + 25);
+  uranusGlow.addColorStop(0, 'rgba(103, 232, 249, 0.45)');
+  uranusGlow.addColorStop(1, 'rgba(103, 232, 249, 0)');
+  ctx.beginPath();
+  ctx.fillStyle = uranusGlow;
+  ctx.arc(uranusX, uranusY, uranusR + 25, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  // Gas Giant Body
+  const uBodyGrad = ctx.createRadialGradient(uranusX - uranusR * 0.3, uranusY - uranusR * 0.3, 10, uranusX, uranusY, uranusR);
+  uBodyGrad.addColorStop(0, '#cffafe');
+  uBodyGrad.addColorStop(0.4, '#67e8f9');
+  uBodyGrad.addColorStop(0.85, '#06b6d4');
+  uBodyGrad.addColorStop(1, '#0e7490');
+  ctx.beginPath();
+  ctx.fillStyle = uBodyGrad;
+  ctx.arc(uranusX, uranusY, uranusR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+  ctx.restore();
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 3 (13.5s - 16.5s): Giant Uranus Metric Close-Up
+// 1:1 Match with Taskless frame_08.jpg!
+// Pure pitch black. Giant glowing gas giant. Large metric "50,271 km"
+// ----------------------------------------------------------------------------
+function renderTasklessScene3_UranusCloseUp(t) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  drawTasklessHUD(ctx, {
+    topStat: '50,271',
+    topStatUnit: 'km',
+    topSub1: 'EQUATORIAL DIAMETER',
+    rightLabel: 'URANUS DIAMETER'
   });
 
-  ctx.fillStyle = '#ffffff';
-  ctx.font = '900 32px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('VantorX AI', W / 2, cardY + 175);
+  const uX = W / 2;
+  const uY = H * 0.52;
+  const uR = 210;
 
-  ctx.fillStyle = '#94a3b8';
-  ctx.font = '500 14px -apple-system, sans-serif';
-  ctx.fillText('The 24/7 Trade Dispatcher', W / 2, cardY + 202);
-
-  const bullets = [
-    '✓ Never miss another high-ticket emergency call',
-    '✓ Answers in 0.8s and dispatches your techs',
-    '✓ Zero software change · Keeps your number'
-  ];
-  ctx.font = '500 13px -apple-system, sans-serif';
-  ctx.fillStyle = '#cbd5e1';
-  ctx.textAlign = 'left';
-  for (let i = 0; i < bullets.length; i++) {
-    ctx.fillText(bullets[i], cardX + 36, cardY + 245 + i * 28);
+  // Faint concentric orbits
+  for (let r = 1; r <= 6; r++) {
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(103, 232, 249, ' + (0.05 + r * 0.02) + ')';
+    ctx.lineWidth = 1;
+    ctx.arc(uX, uY, uR + r * 20, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.closePath();
   }
 
-  const btnW = cardW - 50;
-  const btnH = 64;
-  const btnPulse = 1.0 + Math.sin(t * 3.5) * 0.02;
+  // Planet body
+  const body = ctx.createRadialGradient(uX - 60, uY - 60, 20, uX, uY, uR);
+  body.addColorStop(0, '#cffafe');
+  body.addColorStop(0.35, '#67e8f9');
+  body.addColorStop(0.75, '#22d3ee');
+  body.addColorStop(1, '#0891b2');
+  ctx.beginPath();
+  ctx.fillStyle = body;
+  ctx.arc(uX, uY, uR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
 
+  // Atmospheric haze
+  const haze = ctx.createRadialGradient(uX, uY, uR - 20, uX, uY, uR + 30);
+  haze.addColorStop(0, 'rgba(103, 232, 249, 0)');
+  haze.addColorStop(0.7, 'rgba(103, 232, 249, 0.35)');
+  haze.addColorStop(1, 'rgba(103, 232, 249, 0)');
+  ctx.fillStyle = haze;
+  ctx.arc(uX, uY, uR + 30, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 4 (16.5s - 20.0s): Minimalist Clock Round Trip
+// 1:1 Match with Taskless frame_12.jpg!
+// Pure pitch black. Clean circular clock with 12 ticks and fast sweeping hands.
+// ----------------------------------------------------------------------------
+function renderTasklessScene4_RoundTripClock(t) {
   ctx.save();
-  ctx.translate(W / 2, cardY + 345 + btnH / 2);
-  ctx.scale(btnPulse, btnPulse);
+  ctx.beginPath();
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  drawTasklessHUD(ctx, {
+    topStat: '≈6 HOURS',
+    topSub1: 'OUTWARD + RETURN LIGHT TRIP',
+    topSub2: 'SPEED OF LIGHT ROUND TRIP',
+    rightLabel: 'OUTWARD + RETURN'
+  });
+
+  const clockX = W / 2;
+  const clockY = H * 0.50;
+  const clockR = 175;
+
+  // Outer circle
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.arc(clockX, clockY, clockR, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.closePath();
+
+  // 12 Delicate Tick Marks
+  for (let i = 0; i < 12; i++) {
+    const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
+    const isMajor = (i % 3 === 0);
+    const tickLen = isMajor ? 16 : 8;
+    const x1 = clockX + Math.cos(angle) * (clockR - tickLen);
+    const y1 = clockY + Math.sin(angle) * (clockR - tickLen);
+    const x2 = clockX + Math.cos(angle) * clockR;
+    const y2 = clockY + Math.sin(angle) * clockR;
+
+    ctx.beginPath();
+    ctx.strokeStyle = isMajor ? '#ffffff' : 'rgba(255, 255, 255, 0.35)';
+    ctx.lineWidth = isMajor ? 2.5 : 1.2;
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.closePath();
+  }
+
+  // Fast Sweeping Clock Hands (showing 6 hours passage)
+  const clockProgress = (t - 16.5) / 3.5;
+  const hourAngle = clockProgress * Math.PI * 2 - Math.PI / 2;
+  const minuteAngle = clockProgress * Math.PI * 24 - Math.PI / 2;
+
+  // Minute Hand (Longer, thin white)
+  ctx.beginPath();
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 2.5;
+  ctx.lineCap = 'round';
+  ctx.moveTo(clockX, clockY);
+  ctx.lineTo(clockX + Math.cos(minuteAngle) * (clockR - 35), clockY + Math.sin(minuteAngle) * (clockR - 35));
+  ctx.stroke();
+  ctx.closePath();
+
+  // Hour Hand (Shorter, cyan tinted)
+  ctx.beginPath();
+  ctx.strokeStyle = '#67e8f9';
+  ctx.lineWidth = 4.0;
+  ctx.moveTo(clockX, clockY);
+  ctx.lineTo(clockX + Math.cos(hourAngle) * (clockR - 75), clockY + Math.sin(hourAngle) * (clockR - 75));
+  ctx.stroke();
+  ctx.closePath();
+
+  // Center Pivot Dot
+  ctx.beginPath();
+  ctx.fillStyle = '#67e8f9';
+  ctx.arc(clockX, clockY, 7, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  // Red Contrast Alert at t > 18.2s
+  if (t > 18.2) {
+    const alertAlpha = Math.min(1.0, (t - 18.2) / 0.5);
+    ctx.fillStyle = 'rgba(239, 68, 68, ' + (alertAlpha * 0.9) + ')';
+    ctx.font = '800 18px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText('VS. AVERAGE CONTRACTOR: 48+ HOURS', clockX, clockY + clockR + 55);
+  }
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 5 (20.0s - 26.5s): The 78% Conversion Benchmark
+// Giant bold 78% in golden amber with First Responder vs Lost Deal comparison
+// ----------------------------------------------------------------------------
+function renderTasklessScene5_Stat78Percent(t) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  drawTasklessHUD(ctx, {
+    topStat: '78%',
+    topSub1: 'WIN RATE OF 1ST RESPONDER',
+    topSub2: 'SOURCE: LEAD RESPONSE AUDIT',
+    rightLabel: 'LEAD CONVERSION'
+  });
+
+  const prog = Math.min(1.0, Math.max(0, (t - 20.0) / 1.0));
+  const currentStat = Math.floor(prog * 78);
+
+  // Giant Stat Center
+  ctx.font = '900 120px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15'; // Amber gold
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.shadowColor = 'rgba(250, 204, 21, 0.45)';
+  ctx.shadowBlur = 35;
+  ctx.fillText(currentStat + '%', W / 2, H * 0.38);
+  ctx.shadowBlur = 0;
+
+  ctx.font = '700 20px "Inter", sans-serif';
   ctx.fillStyle = '#ffffff';
-  roundRect(ctx, -btnW / 2, -btnH / 2, btnW, btnH, 32, true, false);
+  ctx.fillText('BUY FROM THE FIRST RESPONDER', W / 2, H * 0.47);
 
-  ctx.fillStyle = '#0f172a';
-  ctx.font = '900 18px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('COMMENT "AVA" ON THIS REEL', 0, 7);
-  ctx.restore();
+  // Two Lane Comparison Graphic
+  const laneY = H * 0.58;
+  const laneW = W - 80;
+  const laneX = 40;
 
-  ctx.fillStyle = '#c8ff00';
-  ctx.font = 'bold 13px -apple-system, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText("We'll DM you the free instant setup blueprint.", W / 2, cardY + 440);
+  // Lane 1: First Responder (< 60s)
+  ctx.beginPath();
+  ctx.fillStyle = '#111319';
+  ctx.roundRect(laneX, laneY, laneW, 64, 12);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(34, 197, 94, 0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.closePath();
 
+  // Green Progress Bar Fill
+  const barProg = Math.min(1.0, Math.max(0, (t - 20.5) / 1.2));
+  ctx.beginPath();
+  ctx.fillStyle = '#22c55e';
+  ctx.roundRect(laneX + 4, laneY + 4, (laneW - 8) * 0.78 * barProg, 56, 8);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.font = '800 16px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('⚡ 1ST RESPONDER (<60s)', laneX + 18, laneY + 32);
+  ctx.textAlign = 'right';
+  ctx.fillText('CLOSED JOB • $8,000', laneX + laneW - 18, laneY + 32);
+
+  // Lane 2: Hours Later (Voicemail)
+  const lane2Y = laneY + 84;
+  ctx.beginPath();
+  ctx.fillStyle = '#111319';
+  ctx.roundRect(laneX, lane2Y, laneW, 64, 12);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(239, 68, 68, 0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.beginPath();
+  ctx.fillStyle = 'rgba(239, 68, 68, 0.25)';
+  ctx.roundRect(laneX + 4, lane2Y + 4, (laneW - 8) * 0.22, 56, 8);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.font = '800 16px "Space Grotesk", sans-serif';
   ctx.fillStyle = '#94a3b8';
-  ctx.font = '500 12px "JetBrains Mono", monospace';
-  ctx.fillText('Or dial demo: (561) 813-8602', W / 2, cardY + 470);
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('⏳ CALLED BACK 3 HRS LATER', laneX + 18, lane2Y + 32);
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#ef4444';
+  ctx.fillText('LOST TO COMPETITOR', laneX + laneW - 18, lane2Y + 32);
+
   ctx.restore();
 }
 
-// --- INITIAL HERO POSTER CARD ON PAUSE / LOAD (t === 0) ---
-function renderStudioHeroPosterCard(storyType) {
-  renderTasklessScene1_NightPhone(1.2);
+// ----------------------------------------------------------------------------
+// SCENE 6 (26.5s - 34.0s): Sleek Dark UI Card — The Missed Lead
+// 1:1 Match with Taskless frame_16.jpg!
+// Dark card (#111217), NEW LEAD • WAITING, customer chat bubble, missed call risk
+// ----------------------------------------------------------------------------
+function renderTasklessScene6_ContractorPainLadder(t) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  drawTasklessHUD(ctx, {
+    topStat: '8,000',
+    topStatUnit: 'USD',
+    topSub1: 'AVERAGE HVAC/PLUMBING TICKET',
+    rightLabel: 'REVENUE AT RISK'
+  });
+
+  // Sleek Dark UI Card (Exact match to Taskless frame_16.jpg!)
+  const cardX = 40;
+  const cardY = 170;
+  const cardW = W - 80;
+  const cardH = 430;
+
+  // Card Container
+  ctx.beginPath();
+  ctx.fillStyle = '#111217';
+  ctx.roundRect(cardX, cardY, cardW, cardH, 20);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.closePath();
+
+  // Header inside card
+  ctx.font = '700 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('NEW LEAD', cardX + 24, cardY + 28);
+
+  // Amber Waiting Indicator
+  const dotPulse = 0.5 + 0.5 * Math.sin(t * 6);
+  ctx.beginPath();
+  ctx.fillStyle = 'rgba(245, 158, 11, ' + dotPulse + ')';
+  ctx.arc(cardX + cardW - 85, cardY + 34, 4.5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.font = '700 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#f59e0b';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'top';
+  ctx.fillText('WAITING', cardX + cardW - 24, cardY + 28);
+
+  // Incoming Customer Message Bubble
+  const bubbleX = cardX + 24;
+  const bubbleY = cardY + 68;
+  const bubbleW = cardW - 48;
+  const bubbleH = 88;
+
+  ctx.beginPath();
+  ctx.fillStyle = '#1e222d';
+  ctx.roundRect(bubbleX, bubbleY, bubbleW, bubbleH, 14);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.font = '600 16px "Inter", sans-serif';
+  ctx.fillStyle = '#f8fafc';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('Hi! Water is leaking through my ceiling,', bubbleX + 18, bubbleY + 22);
+  ctx.fillText('can someone come give a quote today?', bubbleX + 18, bubbleY + 46);
+
+  // Typing / Waiting Indicator (3 pulsing dots)
+  const typingY = bubbleY + 110;
+  const typingX = cardX + cardW - 110;
+  ctx.beginPath();
+  ctx.fillStyle = '#2a3142';
+  ctx.roundRect(typingX, typingY, 86, 42, 21);
+  ctx.fill();
+  ctx.closePath();
+
+  for (let d = 0; d < 3; d++) {
+    const dotAlpha = 0.3 + 0.7 * Math.abs(Math.sin(t * 5 + d * 0.8));
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(163, 230, 53, ' + dotAlpha + ')';
+    ctx.arc(typingX + 24 + d * 19, typingY + 21, 4.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  // Red Alert Banner below: Missed Call Bleed
+  const alertY = cardY + cardH - 115;
+  ctx.beginPath();
+  ctx.fillStyle = 'rgba(239, 68, 68, 0.12)';
+  ctx.roundRect(cardX + 20, alertY, cardW - 40, 75, 12);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.font = '800 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ef4444';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillText('⚠️ UNANSWERED CALL HANDED TO COMPETITOR', cardX + cardW / 2, alertY + 18);
+
+  ctx.font = '700 20px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('-$8,000.00 REVENUE BLEED', cardX + cardW / 2, alertY + 42);
+
+  ctx.restore();
 }
 
+// ----------------------------------------------------------------------------
+// SCENE 7 (34.0s - 43.0s): Ava Instant 0.8s Response & Autonomous Dispatch
+// Dark card updates with Ava Voice AI badge, waveform, and technician dispatch
+// ----------------------------------------------------------------------------
+function renderTasklessScene7_AvaInstantReply(t) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  drawTasklessHUD(ctx, {
+    topStat: '0.8s',
+    topSub1: 'SPEED-TO-LEAD VOICE AI',
+    topSub2: 'AUTONOMOUS CALL QUALIFICATION',
+    rightLabel: 'AVA ➔ LIVE CALL'
+  });
+
+  const cardX = 40;
+  const cardY = 160;
+  const cardW = W - 80;
+  const cardH = 460;
+
+  ctx.beginPath();
+  ctx.fillStyle = '#111217';
+  ctx.roundRect(cardX, cardY, cardW, cardH, 20);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.closePath();
+
+  // Ava Status Header
+  ctx.font = '800 13px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#38bdf8';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('⚡ AVA AUTONOMOUS VOICE AI', cardX + 24, cardY + 28);
+
+  ctx.font = '700 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.textAlign = 'right';
+  ctx.fillText('● ANSWERED IN 0.8s', cardX + cardW - 24, cardY + 28);
+
+  // Holographic Audio Waveform
+  const waveY = cardY + 80;
+  const waveW = cardW - 48;
+  const waveX = cardX + 24;
+
+  ctx.beginPath();
+  ctx.fillStyle = '#0a1622';
+  ctx.roundRect(waveX, waveY, waveW, 60, 10);
+  ctx.fill();
+  ctx.closePath();
+
+  const barCount = 32;
+  const barW = (waveW - 40) / barCount;
+  for (let b = 0; b < barCount; b++) {
+    const waveH = 8 + 26 * Math.abs(Math.sin(t * 8 + b * 0.4));
+    const bx = waveX + 20 + b * barW;
+    const by = waveY + 30 - waveH / 2;
+
+    const barGrad = ctx.createLinearGradient(0, by, 0, by + waveH);
+    barGrad.addColorStop(0, '#38bdf8');
+    barGrad.addColorStop(1, '#a3e635');
+    ctx.beginPath();
+    ctx.fillStyle = barGrad;
+    ctx.roundRect(bx, by, barW - 3, waveH, 2);
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  // Ava Spoken Bubble
+  const avaBubbleY = cardY + 165;
+  ctx.beginPath();
+  ctx.fillStyle = '#1e293b';
+  ctx.roundRect(cardX + 24, avaBubbleY, cardW - 48, 100, 14);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.font = '600 15px "Inter", sans-serif';
+  ctx.fillStyle = '#f8fafc';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('"Thanks for calling! We have a technician', cardX + 42, avaBubbleY + 20);
+  ctx.fillText('available at 2:00 PM today. I have booked', cardX + 42, avaBubbleY + 44);
+  ctx.fillText('that on the schedule for you right now."', cardX + 42, avaBubbleY + 68);
+
+  // Dispatch Confirmation Box
+  const dispY = cardY + cardH - 120;
+  ctx.beginPath();
+  ctx.fillStyle = 'rgba(34, 197, 94, 0.15)';
+  ctx.roundRect(cardX + 24, dispY, cardW - 48, 85, 12);
+  ctx.fill();
+  ctx.strokeStyle = '#22c55e';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.font = '800 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('✓ JOB BOOKED & CALENDAR SYNCED', cardX + 44, dispY + 22);
+
+  ctx.font = '600 13px "Inter", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('Dispatched to Technician Truck #2 Phone', cardX + 44, dispY + 48);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 8 (43.0s - 51.5s): Revenue Protection Schematic
+// 10 incoming calls: Without AI (-$64,000) vs With Ava (+$80,000 protected)
+// ----------------------------------------------------------------------------
+function renderTasklessScene8_RevenueWaterfall(t) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  drawTasklessHUD(ctx, {
+    topStat: '+$80,000',
+    topSub1: 'MONTHLY PIPELINE PROTECTED',
+    topSub2: '100% INBOUND CALL CAPTURE',
+    rightLabel: 'REVENUE AUDIT'
+  });
+
+  const boxW = W - 80;
+  const boxX = 40;
+
+  // Top Card: Dead Voicemail Bleed
+  const topY = 170;
+  ctx.beginPath();
+  ctx.fillStyle = '#111217';
+  ctx.roundRect(boxX, topY, boxW, 140, 16);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(239, 68, 68, 0.35)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.font = '800 16px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ef4444';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('❌ WITHOUT AVA (MANUAL CALLBACKS)', boxX + 24, topY + 24);
+
+  ctx.font = '600 14px "Inter", sans-serif';
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('8 out of 10 emergency calls go to voicemail', boxX + 24, topY + 54);
+
+  ctx.font = '800 24px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ef4444';
+  ctx.fillText('-$64,000 LOST TO COMPETITORS', boxX + 24, topY + 92);
+
+  // Bottom Card: Protected by VantorX Ava
+  const botY = topY + 165;
+  ctx.beginPath();
+  ctx.fillStyle = '#111217';
+  ctx.roundRect(boxX, botY, boxW, 150, 16);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(34, 197, 94, 0.45)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.font = '800 16px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#22c55e';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('⚡ WITH VANTORX SPEED-TO-LEAD', boxX + 24, botY + 24);
+
+  ctx.font = '600 14px "Inter", sans-serif';
+  ctx.fillStyle = '#cbd5e1';
+  ctx.fillText('10 out of 10 answered in < 1 second', boxX + 24, botY + 54);
+
+  ctx.font = '800 24px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.fillText('+$80,000 REVENUE RETAINED', boxX + 24, botY + 92);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 9 (51.5s - 56.5s): Live Interactive Demo Dialer
+// Dial live demo number right now
+// ----------------------------------------------------------------------------
+function renderTasklessScene9_LiveDialerInteractive(t) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  drawTasklessHUD(ctx, {
+    topStat: 'LIVE DEMO',
+    topSub1: 'HEAR AVA ANSWER YOUR CALL',
+    rightLabel: 'TEST AVA NOW'
+  });
+
+  const cardX = 40;
+  const cardY = 180;
+  const cardW = W - 80;
+  const cardH = 380;
+
+  ctx.beginPath();
+  ctx.fillStyle = '#111217';
+  ctx.roundRect(cardX, cardY, cardW, cardH, 20);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.font = '800 18px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillText('CALL OUR SHOP TEST LINE NOW:', W / 2, cardY + 36);
+
+  // Phone Number Pill
+  const numPillY = cardY + 80;
+  ctx.beginPath();
+  ctx.fillStyle = '#0f172a';
+  ctx.roundRect(cardX + 25, numPillY, cardW - 50, 75, 14);
+  ctx.fill();
+  ctx.strokeStyle = '#38bdf8';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.font = '900 32px "Space Grotesk", monospace';
+  ctx.fillStyle = '#38bdf8';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('(844) 328-8255', W / 2, numPillY + 38);
+
+  // Pulse rings around phone icon
+  const pulseR = 25 + 15 * Math.sin(t * 5);
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+  ctx.lineWidth = 2;
+  ctx.arc(W / 2, cardY + 230, pulseR, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.beginPath();
+  ctx.fillStyle = '#22c55e';
+  ctx.arc(W / 2, cardY + 230, 24, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.font = '900 20px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('📞', W / 2, cardY + 230);
+
+  ctx.font = '700 15px "Inter", sans-serif';
+  ctx.fillStyle = '#94a3b8';
+  ctx.textBaseline = 'top';
+  ctx.fillText('Ava answers 24/7 in 0.8 seconds', W / 2, cardY + 295);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 10 (56.5s - 63.0s): The Taskless End Card
+// 1:1 Match with Taskless frame_18.jpg!
+// Pure black void. Brand icon [⚡] VantorX. Glowing lime button: DM "AVA" ➔
+// Subtext: "We'll show you where your leads are slipping". Tracked domain: VANTORX.COM
+// ----------------------------------------------------------------------------
+function renderTasklessScene10_TasklessEndCard(t) {
+  ctx.save();
+  ctx.beginPath();
+  // Pure Pitch Black
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  const centerX = W / 2;
+
+  // 1. Brand Logo: [ ⚡ ] VantorX (Clean white rounded box + bold text)
+  const logoY = H * 0.26;
+  const iconSize = 44;
+  const iconX = centerX - 110;
+
+  // Rounded icon square
+  ctx.beginPath();
+  ctx.fillStyle = '#ffffff';
+  ctx.roundRect(iconX, logoY - 22, iconSize, iconSize, 10);
+  ctx.fill();
+  ctx.closePath();
+
+  // Lightning Bolt inside icon
+  ctx.fillStyle = '#f97316'; // vibrant orange bolt
+  ctx.font = '900 24px "Space Grotesk", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('⚡', iconX + iconSize / 2, logoY);
+
+  // Brand Name
+  ctx.font = '800 44px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'left';
+  ctx.fillText('VantorX', iconX + iconSize + 16, logoY);
+
+  // 2. Glowing Neon Lime Pill Button (Exact match to Taskless frame_18!)
+  const btnY = H * 0.38;
+  const btnW = 340;
+  const btnH = 74;
+  const btnX = centerX - btnW / 2;
+
+  // Neon Glow Aura
+  ctx.save();
+  ctx.beginPath();
+  ctx.shadowColor = 'rgba(163, 230, 53, 0.7)';
+  ctx.shadowBlur = 32;
+  ctx.fillStyle = '#a3e635'; // Taskless neon lime
+  ctx.roundRect(btnX, btnY, btnW, btnH, 37);
+  ctx.fill();
+  ctx.closePath();
+  ctx.restore();
+
+  // Button Text
+  ctx.font = '900 26px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#000000';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('DM "AVA" ➔', centerX, btnY + btnH / 2);
+
+  // 3. Subtext Below Button
+  const subY = btnY + btnH + 45;
+  ctx.font = '700 22px "Inter", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillText("We'll show you where", centerX, subY);
+  ctx.fillText('your leads are slipping', centerX, subY + 30);
+
+  // 4. Muted Tracking Domain
+  ctx.font = '700 13px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+  ctx.fillText('VANTORX.COM', centerX, H * 0.64);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// KINETIC CAPTIONS — 1:1 TASKLESS STUDIO TYPOGRAPHY
+// Floating borderless bold sans-serif text floating over the black void
+// White text with the currently spoken word highlighted in vivid amber gold (#facc15)
+// ----------------------------------------------------------------------------
 function renderKineticSubtitles(time) {
   const cue = (SCRIPT_CUES || window.SCRIPT_CUES || []).find(c => time >= c.start && time < c.end);
   if (!cue) return;
@@ -6097,62 +4031,124 @@ function renderKineticSubtitles(time) {
   const activeWordIdx = Math.min(words.length - 1, Math.floor(progress * words.length));
 
   ctx.save();
-  const pillW = Math.min(W - 40, 480);
-  const pillH = 72;
-  const pillX = (W - pillW) / 2;
-  const pillY = H - 150;
+  ctx.beginPath();
 
-  // Frosted Obsidian Pill Backdrop
-  ctx.fillStyle = 'rgba(6, 3, 14, 0.9)';
-  ctx.strokeStyle = 'rgba(168, 85, 247, 0.5)';
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
-  ctx.shadowBlur = 18;
-  roundRect(ctx, pillX, pillY, pillW, pillH, 18, true, true);
-  ctx.shadowBlur = 0;
+  // Floating at bottom: y = H - 140
+  const subY = H - 140;
 
-  // Compute 2-3 word window around active word for high retention
+  // Display a clean window of 3-4 words for instant readable kinetic pacing
   const windowSize = 4;
   const startIdx = Math.max(0, Math.min(activeWordIdx - 1, words.length - windowSize));
   const displayWords = words.slice(startIdx, startIdx + windowSize);
 
-  ctx.font = '900 22px "Space Grotesk", sans-serif';
-  ctx.textAlign = 'center';
-
-  let fullStr = displayWords.join(' ').toUpperCase();
-  // Highlight keywords
-  const isKey = (w) => /186,000|MOON|THREE|TWO|BILLION|FASTER|78%|LADDER|DINNER|\$8,000|AVA|0\.8|SECONDS|DISPATCH|BLEEDING|DEMO|AVA|FREE/i.test(w);
+  ctx.font = '800 36px "Inter", "Space Grotesk", -apple-system, sans-serif';
+  ctx.textBaseline = 'middle';
 
   // Measure word positions
-  const wordWidths = displayWords.map(w => ctx.measureText(w.toUpperCase() + ' ').width);
-  const totalW = wordWidths.reduce((a, b) => a + b, 0);
+  const spaceW = ctx.measureText(' ').width;
+  const wordWidths = displayWords.map(w => ctx.measureText(w).width);
+  const totalW = wordWidths.reduce((a, b) => a + b, 0) + (displayWords.length - 1) * spaceW;
   let curX = (W - totalW) / 2;
 
   displayWords.forEach((word, idx) => {
     const globalIdx = startIdx + idx;
-    const isActive = globalIdx === activeWordIdx;
-    const wText = word.toUpperCase();
-    const wWidth = wordWidths[idx];
+    const isActive = (globalIdx === activeWordIdx);
 
     ctx.save();
+    // Drop shadow for crisp legibility over any background
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 2;
+
     if (isActive) {
-      ctx.fillStyle = isKey(wText) ? '#c8ff00' : '#38bdf8';
-      ctx.shadowColor = ctx.fillStyle;
-      ctx.shadowBlur = 14;
-      ctx.font = '900 24px "Space Grotesk", sans-serif';
+      // Active spoken word in Taskless golden amber (#facc15 / #fbbf24)
+      ctx.fillStyle = '#facc15';
+      ctx.font = '900 38px "Inter", "Space Grotesk", sans-serif';
     } else {
-      ctx.fillStyle = isKey(wText) ? '#fde047' : '#f8fafc';
-      ctx.font = '900 21px "Space Grotesk", sans-serif';
+      // Clean white text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 36px "Inter", "Space Grotesk", sans-serif';
     }
+
     ctx.textAlign = 'left';
-    ctx.fillText(wText, curX, pillY + 44);
+    ctx.fillText(word, curX, subY);
     ctx.restore();
 
-    curX += wWidth;
+    curX += wordWidths[idx] + spaceW;
   });
 
   ctx.restore();
 }
+
+// ----------------------------------------------------------------------------
+// MASTER RENDER FRAME FUNCTION
+// Pure black void, silky camera jib drift, scene progression, audio sync
+// ----------------------------------------------------------------------------
+function renderFrame(time) {
+  window.renderFrame = renderFrame;
+
+  if (!Number.isFinite(time) || isNaN(time) || time < 0) {
+    time = 0;
+  }
+  time = Math.min(time, TOTAL_DURATION || 63);
+
+  // GUARANTEED MATRIX & BUFFER RESET (ZERO LEAK / ZERO ACCUMULATION)
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.save();
+  ctx.beginPath();
+
+  // Gentle cinematic camera drift (smooth motorized jib glide)
+  const driftX = Math.sin(time * 0.3) * 2.0;
+  const driftY = Math.cos(time * 0.25) * 1.5;
+  ctx.translate(driftX, driftY);
+
+  // Dynamic Scene Progression Calibrated to Audio Timing
+  if (time < 7.0) {
+    renderTasklessScene1_LaserCrowd(time);
+  } else if (time < 13.5) {
+    renderTasklessScene2_EarthToUranus(time);
+  } else if (time < 16.5) {
+    renderTasklessScene3_UranusCloseUp(time);
+  } else if (time < 20.0) {
+    renderTasklessScene4_RoundTripClock(time);
+  } else if (time < 26.5) {
+    renderTasklessScene5_Stat78Percent(time);
+  } else if (time < 34.0) {
+    renderTasklessScene6_ContractorPainLadder(time);
+  } else if (time < 43.0) {
+    renderTasklessScene7_AvaInstantReply(time);
+  } else if (time < 51.5) {
+    renderTasklessScene8_RevenueWaterfall(time);
+  } else if (time < 56.5) {
+    renderTasklessScene9_LiveDialerInteractive(time);
+  } else {
+    renderTasklessScene10_TasklessEndCard(time);
+  }
+
+  // Soft cinematic fade at scene cuts (0.18s ease)
+  const sceneCuts = [7.0, 13.5, 16.5, 20.0, 26.5, 34.0, 43.0, 51.5, 56.5];
+  let minCutDist = 999;
+  for (let c = 0; c < sceneCuts.length; c++) {
+    minCutDist = Math.min(minCutDist, Math.abs(time - sceneCuts[c]));
+  }
+  if (minCutDist < 0.18) {
+    const fadeProg = 1 - (minCutDist / 0.18);
+    const dipAlpha = Math.sin(fadeProg * (Math.PI / 2)) * 0.28;
+    ctx.fillStyle = 'rgba(0, 0, 0, ' + dipAlpha + ')';
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // Kinetic Floating Subtitles
+  renderKineticSubtitles(time);
+
+  ctx.restore();
+}
+
 
 // Animation Loop: Bound Directly to Hardware Audio Clock for Zero Timing Drift
 function loop(timestamp) {
