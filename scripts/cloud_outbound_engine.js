@@ -81,10 +81,25 @@ function writeJsonSafe(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
 }
 
+const KNOWN_SUPPRESSED = new Set([
+  'dispatch@thecleanplumbers.com',
+  'dispatch@unitedplumbingdrain.com',
+  'dispatch@benefieldplumbing.com',
+  'service@asuperiormechanical.com',
+  'dispatch@olinplumbing.com',
+  'estimates@arrysroofingservices.com'
+]);
+
 async function sendPhysicalEmail(lead) {
   if (!RESEND_API_KEY) {
     console.warn(`[Resend Engine] Skipping physical send for ${lead.email} — RESEND_API_KEY not configured.`);
     return null;
+  }
+
+  const cleanEmail = (lead.email || '').trim().toLowerCase();
+  if (KNOWN_SUPPRESSED.has(cleanEmail)) {
+    console.warn(`[Suppression Guard] Skipping ${lead.company} (${cleanEmail}) — Address is in Resend Suppression list.`);
+    return { skipped: true, error: 'Recipient is in Resend Suppression List' };
   }
 
   // Pre-flight recipient DNS verification to prevent 421 4.4.0 transient SMTP errors
@@ -671,8 +686,11 @@ async function runAutonomousEngine() {
     return;
   }
 
-  // 3. Take next 5 verified targets (Safe Drip)
-  const batchSize = Math.min(5, pendingTargets.length);
+  // 3. Take next verified targets (Scaled Outbound: 10-15/batch or configurable)
+  const defaultBatch = 10;
+  const batchArg = process.argv.find(a => a.startsWith('--batch='));
+  const requestedBatch = batchArg ? parseInt(batchArg.split('=')[1], 10) : (parseInt(process.env.BATCH_SIZE, 10) || defaultBatch);
+  const batchSize = Math.min(requestedBatch, pendingTargets.length);
   const currentBatch = pendingTargets.slice(0, batchSize);
   const newlyDispatched = [];
 
