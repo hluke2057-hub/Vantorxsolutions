@@ -55,7 +55,7 @@ async function render() {
   const browser = await puppeteer.launch({
     executablePath: edgePath,
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--allow-file-access-from-files']
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--allow-file-access-from-files', '--disable-web-security']
   });
 
   const page = await browser.newPage();
