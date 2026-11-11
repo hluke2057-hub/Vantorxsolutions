@@ -1,17 +1,88 @@
 const fs = require('fs');
 const path = require('path');
 
-const chunksPath = path.resolve(__dirname, '../website/demo/audio/caption_chunks.json');
-const chunks = JSON.parse(fs.readFileSync(chunksPath, 'utf8'));
+const wordsPath = path.resolve(__dirname, '../website/demo/audio/word_timestamps.json');
+const words = JSON.parse(fs.readFileSync(wordsPath, 'utf8'));
+
+// Build balanced 2-3 word Cueva-style caption chunks with ZERO 1-word orphan flashes
+// and seamless hold across breath pauses so captions never blink off!
+const rawChunks = [];
+let currentChunk = [];
+
+for (let i = 0; i < words.length; i++) {
+  const w = words[i];
+  const cleanText = w.word.replace(/[^a-zA-Z0-9$%.']/g, '');
+  currentChunk.push({
+    word: cleanText || w.word,
+    rawWord: w.word,
+    start: w.start,
+    end: w.end
+  });
+
+  const nextW = words[i + 1];
+  const gap = nextW ? (nextW.start - w.end) : 999;
+  const endsSentence = /[.?!]$/.test(w.word);
+  const endsClause = /[,;:—]$/.test(w.word);
+  const curChars = currentChunk.map(x => x.rawWord).join(' ').length;
+  const nextChars = nextW ? (curChars + 1 + nextW.word.length) : 999;
+
+  // Prefer 2-3 words per chunk, max ~18 chars
+  if (
+    currentChunk.length >= 3 ||
+    (currentChunk.length === 2 && (endsSentence || endsClause || gap > 0.18 || nextChars > 18)) ||
+    (currentChunk.length === 1 && (endsSentence || gap > 0.35 || nextChars > 20))
+  ) {
+    rawChunks.push(currentChunk);
+    currentChunk = [];
+  }
+}
+if (currentChunk.length > 0) {
+  rawChunks.push(currentChunk);
+}
+
+// Second pass: eliminate jarring 1-word orphan chunks by merging with previous chunk if total <= 3 words & <= 21 chars
+const mergedChunks = [];
+for (let i = 0; i < rawChunks.length; i++) {
+  const ch = rawChunks[i];
+  if (ch.length === 1 && mergedChunks.length > 0) {
+    const prev = mergedChunks[mergedChunks.length - 1];
+    const prevLastWord = prev[prev.length - 1].rawWord;
+    const prevEndsSentence = /[.?!]$/.test(prevLastWord);
+    const timeGap = ch[0].start - prev[prev.length - 1].end;
+    const combinedLen = prev.map(x => x.rawWord).join(' ').length + 1 + ch[0].rawWord.length;
+    if (!prevEndsSentence && prev.length <= 2 && timeGap < 0.25 && combinedLen <= 21) {
+      prev.push(ch[0]);
+      continue;
+    }
+  }
+  mergedChunks.push(ch);
+}
+
+// Convert to final CAPTION_CHUNKS and bridge short gaps (< 0.6s) so captions never flicker off
+const CUEVA_HIGHLIGHT_COLORS = ['#ff6b4a', '#38bdf8', '#facc15', '#c084fc', '#4ade80'];
+const captionChunks = mergedChunks.map((ch, idx) => {
+  const nextCh = mergedChunks[idx + 1];
+  const rawEnd = ch[ch.length - 1].end;
+  const nextStart = nextCh ? nextCh[0].start : (rawEnd + 0.45);
+  const bridgedEnd = (nextStart - rawEnd < 0.65) ? (nextStart - 0.01) : (rawEnd + 0.35);
+  return {
+    id: idx + 1,
+    start: ch[0].start,
+    end: parseFloat(bridgedEnd.toFixed(3)),
+    color: CUEVA_HIGHLIGHT_COLORS[idx % CUEVA_HIGHLIGHT_COLORS.length],
+    text: ch.map(x => x.rawWord).join(' '),
+    words: ch
+  };
+});
 
 const engineCode = `// ============================================================================
-// VANTORX VIRAL REEL ENGINE — CUEVA / TASKLESS STUDIO VISUAL IDENTITY
-// 89.0s Extended Cosmic Hook (0-27.6s) + Full "Bob & Sarah" Story (27.6-64.8s) + Ava AI (64.8-89.0s)
-// Pure black void, minimalist technical schematics, HUD metrics, crisp Cueva captions
-// ZERO STILL FRAMES & ZERO SUBPATH BLEED
+// VANTORX VIRAL REEL ENGINE — AUTHENTIC CUEVA ILLUSTRATED STUDIO ENGINE
+// 89.0s Extended Hook (0-27.6s) + Full "Bob & Sarah" Story (27.6-64.8s) + Ava AI (64.8-89.0s)
+// Rich Colored Studio Backdrops, Top 1-5 Stepper, Expressive 2D Characters,
+// Tactile Machines (Speedometer, Balance Scale, Fishing Hook, Hologram, Typewriter),
+// and Boxless Cueva Kinetic Captions with CRT Scanline Shader.
 // ============================================================================
 
-// Safe helper for rounded rectangles that ALWAYS begins a fresh path
 function drawRoundBox(ctx, x, y, w, h, r, fillColor, strokeColor, lineW = 1.5) {
   ctx.beginPath();
   if (typeof ctx.roundRect === 'function') {
@@ -41,195 +112,370 @@ function drawRoundBox(ctx, x, y, w, h, r, fillColor, strokeColor, lineW = 1.5) {
 }
 
 // ----------------------------------------------------------------------------
-// HUD OVERLAY: Minimalist Clean Technical Telemetry
+// CUEVA STUDIO ROOM BACKDROP + STAGE FLOOR + TOP ① ② ③ ④ ⑤ PROGRESS STEPPER
 // ----------------------------------------------------------------------------
-function drawTasklessHUD(ctx, opts) {
+function drawCuevaRoom(ctx, wallTop, wallBot, floorColor, activeStep, t, topTag) {
   ctx.save();
-
-  if (opts.topStat) {
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '800 40px "Space Grotesk", sans-serif';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
-    ctx.fillText(opts.topStat, 36, 42);
-
-    if (opts.topStatUnit) {
-      const statW = ctx.measureText(opts.topStat).width;
-      ctx.font = '700 18px "Space Grotesk", sans-serif';
-      ctx.fillStyle = '#38bdf8';
-      ctx.fillText(' ' + opts.topStatUnit, 36 + statW, 58);
-    }
-
-    let subY = 90;
-    ctx.font = '700 11px "JetBrains Mono", "Inter", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
-    if (opts.topSub1) {
-      ctx.fillText(opts.topSub1.toUpperCase(), 38, subY);
-      subY += 16;
-    }
-    if (opts.topSub2) {
-      ctx.fillText(opts.topSub2.toUpperCase(), 38, subY);
-    }
-  }
-
-  if (opts.rightLabel) {
-    ctx.font = '700 11px "JetBrains Mono", "Inter", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
-    ctx.textAlign = 'right';
-    ctx.textBaseline = 'top';
-    ctx.fillText(opts.rightLabel.toUpperCase(), W - 36, 48);
-  }
-
-  ctx.restore();
-}
-
-// ----------------------------------------------------------------------------
-// ZERO STILL FRAMES: Ambient Floating Particle Field
-// ----------------------------------------------------------------------------
-function drawAmbientDustParticles(ctx, t) {
-  ctx.save();
-  for (let i = 0; i < 40; i++) {
-    const speedX = 14 + (i % 7) * 5;
-    const speedY = (8 + (i % 5) * 4) * (i % 2 === 0 ? 1 : -0.7);
-    const px = ((i * 127.3 + t * speedX) % (W + 60)) - 30;
-    const py = ((i * 193.7 + t * speedY) % (H + 60)) - 30;
-    const pSize = 1.0 + (i % 3) * 0.8;
-    const pAlpha = 0.08 + 0.14 * Math.sin(t * 2.2 + i * 0.8);
-
-    ctx.fillStyle = (i % 3 === 0) ? 'rgba(103, 232, 249, ' + pAlpha + ')' :
-                    (i % 3 === 1) ? 'rgba(74, 222, 128, ' + pAlpha + ')' :
-                                    'rgba(250, 204, 21, ' + (pAlpha * 0.8) + ')';
-    ctx.beginPath();
-    ctx.arc(px, py, pSize, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  ctx.restore();
-}
-
-// ----------------------------------------------------------------------------
-// SCENE 1 (0.0s - 8.0s): Laser Crowd Hook
-// "If you point a single beam of laser light into the night sky, it fires into the dark at 186,000 miles per second."
-// ----------------------------------------------------------------------------
-function renderTasklessScene1_LaserCrowd(t) {
-  ctx.save();
-
-  const bg = ctx.createLinearGradient(0, 0, 0, H);
-  bg.addColorStop(0, '#04090c');
-  bg.addColorStop(0.5, '#091318');
-  bg.addColorStop(1, '#020406');
+  const bg = ctx.createLinearGradient(0, 0, 0, H * 0.77);
+  bg.addColorStop(0, wallTop);
+  bg.addColorStop(1, wallBot);
   ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, W, H);
+  ctx.fillRect(0, 0, W, H * 0.77);
 
-  drawTasklessHUD(ctx, {
-    topStat: '186,000',
-    topStatUnit: 'MI/S',
-    topSub1: 'SPEED OF LIGHT IN VACUUM',
-    topSub2: 'PHOTON VELOCITY • NIGHT SKY',
-    rightLabel: 'HOOK • 01'
-  });
+  // Subtle vertical studio wall paneling texture (like Cueva's crimson/teal rooms)
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.018)';
+  for (let x = 0; x < W; x += 36) {
+    ctx.fillRect(x, 0, 14, H * 0.77);
+  }
 
-  // Crowd silhouettes pointing lasers
-  const crowdCount = 18;
-  for (let i = 0; i < crowdCount; i++) {
-    const sway = Math.sin(t * 2.5 + i * 0.8) * 3;
-    const cx = 48 + (i % 6) * 86 + ((i * 17) % 28) + sway * 0.5;
-    const cy = H - 310 - Math.floor(i / 6) * 68 + Math.sin(t * 3.0 + i) * 2;
-    const depth = 0.5 + Math.floor(i / 6) * 0.22;
-    const alpha = 0.16 + depth * 0.32;
+  // Soft ambient center studio spotlight
+  const spot = ctx.createRadialGradient(W / 2, H * 0.38, 20, W / 2, H * 0.38, 320);
+  spot.addColorStop(0, 'rgba(255, 255, 255, 0.09)');
+  spot.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = spot;
+  ctx.fillRect(0, 0, W, H * 0.77);
 
-    ctx.fillStyle = 'rgba(203, 213, 225, ' + (alpha * 0.8) + ')';
+  // Dark Stage Floor (Bottom 23% where captions float cleanly with zero clutter!)
+  const floorGrad = ctx.createLinearGradient(0, H * 0.77, 0, H);
+  floorGrad.addColorStop(0, floorColor || '#090612');
+  floorGrad.addColorStop(1, '#020105');
+  ctx.fillStyle = floorGrad;
+  ctx.fillRect(0, H * 0.77, W, H * 0.23);
+
+  // Crisp stage floor horizon molding line
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(0, H * 0.77);
+  ctx.lineTo(W, H * 0.77);
+  ctx.stroke();
+
+  // Cueva Top Progress Stepper Circles: ① ② ③ ④ ⑤ (Matches cueva_frame_06, 08, 09, 12)
+  const stepY = 92;
+  const spacing = 36;
+  const startX = W / 2 - (spacing * 2);
+
+  // Golden ambient glow behind active stepper pills
+  const glowCount = Math.max(1, Math.min(5, activeStep));
+  const glowCenterX = startX + ((glowCount - 1) * spacing) / 2;
+  const stepGlow = ctx.createRadialGradient(glowCenterX, stepY, 4, glowCenterX, stepY, 85);
+  stepGlow.addColorStop(0, 'rgba(250, 204, 21, 0.35)');
+  stepGlow.addColorStop(1, 'rgba(250, 204, 21, 0)');
+  ctx.fillStyle = stepGlow;
+  ctx.beginPath();
+  ctx.arc(glowCenterX, stepY, 85, 0, Math.PI * 2);
+  ctx.fill();
+
+  for (let i = 1; i <= 5; i++) {
+    const cx = startX + (i - 1) * spacing;
+    const isLit = i <= activeStep;
+    const isCurrent = i === activeStep;
+    const r = isCurrent ? (13.5 + Math.sin(t * 6) * 1.0) : 12.5;
+
     ctx.beginPath();
-    ctx.arc(cx, cy - 22 * depth, 10 * depth, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.arc(cx, stepY, r, 0, Math.PI * 2);
+    if (isLit) {
+      ctx.fillStyle = '#facc15';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#fef08a';
+      ctx.stroke();
 
-    drawRoundBox(ctx, cx - 12 * depth, cy - 10 * depth, 24 * depth, 42 * depth, 4, 'rgba(148, 163, 184, ' + alpha + ')', null);
-
-    if (i % 3 === 0) {
-      const beamJitter = Math.sin(t * 15 + i * 3) * 4;
-      ctx.strokeStyle = 'rgba(74, 222, 128, ' + (alpha * 0.55) + ')';
-      ctx.lineWidth = 1.2;
-      ctx.beginPath();
-      ctx.moveTo(cx + 8 * depth, cy - 15 * depth);
-      ctx.lineTo(cx + 80 + beamJitter, 0);
+      ctx.font = '900 13px "Montserrat", "Space Grotesk", sans-serif';
+      ctx.fillStyle = '#090d16';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(i), cx, stepY + 0.5);
+    } else {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.fill();
+      ctx.lineWidth = 1.8;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
       ctx.stroke();
     }
   }
 
-  // Foreground Hand Holding Laser Pointer
-  ctx.save();
-  const armSway = Math.sin(t * 2.0) * 5;
-  const handBaseX = W * 0.38 + armSway;
-  const handBaseY = H * 0.44 + Math.cos(t * 1.8) * 3;
-
-  ctx.fillStyle = '#b7835b';
-  ctx.beginPath();
-  ctx.moveTo(W * 0.10, H - 150);
-  ctx.lineTo(W * 0.24, H - 150);
-  ctx.lineTo(handBaseX + 30, handBaseY + 55);
-  ctx.lineTo(handBaseX - 30, handBaseY + 55);
-  ctx.closePath();
-  ctx.fill();
-
-  drawRoundBox(ctx, handBaseX - 34, handBaseY - 18, 68, 66, 16, '#b7835b', null);
-
-  for (let f = 0; f < 4; f++) {
-    const fx = handBaseX - 24 + f * 16;
-    const fy = handBaseY - 18 - 46 + (f === 1 ? -6 : f === 2 ? -4 : 0);
-    drawRoundBox(ctx, fx, fy, 11, 54, 5, '#b7835b', null);
+  if (topTag) {
+    ctx.font = '800 11px "JetBrains Mono", "Space Grotesk", sans-serif';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(topTag.toUpperCase(), W / 2, stepY + 22);
   }
 
-  const deviceX = handBaseX + 26;
-  const deviceY = handBaseY - 48;
-  drawRoundBox(ctx, deviceX - 10, deviceY - 24, 20, 48, 6, '#1e293b', '#475569', 1.5);
+  ctx.restore();
+}
 
-  const emitterX = deviceX;
-  const emitterY = deviceY - 26;
-  const glowPulse = 0.8 + 0.2 * Math.sin(t * 14);
+// ----------------------------------------------------------------------------
+// CUEVA 2D ILLUSTRATED CHARACTER RENDERER (Matches cueva_frame_01, 02, 09)
+// Full expressive face, eyes with specular shine, eyebrows, talking mouth,
+// sculpted hair/hardhat, suit jacket / sweater / high-vis vest, hands & shoes!
+// ----------------------------------------------------------------------------
+function drawCuevaCharacter(ctx, opts, t) {
+  const {
+    x,
+    y, // Foot level Y (typically H * 0.77 = 739)
+    scale = 1.0,
+    outfit = 'suit', // 'suit' | 'contractor' | 'sweater_blue' | 'sweater_coral'
+    hair = 'curly_gold', // 'curly_gold' | 'hardhat' | 'auburn' | 'slick_dark'
+    mood = 'smile', // 'smile' | 'talk' | 'panic' | 'worried' | 'smirk'
+    leftArmAngle = 0.25,
+    rightArmAngle = -0.25,
+    holdingItem = null // 'wrench' | 'phone' | 'check' | 'pointer'
+  } = opts;
 
-  const emitterGlow = ctx.createRadialGradient(emitterX, emitterY, 2, emitterX, emitterY, 42 * glowPulse);
-  emitterGlow.addColorStop(0, 'rgba(74, 222, 128, 1)');
-  emitterGlow.addColorStop(0.35, 'rgba(34, 197, 94, 0.7)');
-  emitterGlow.addColorStop(1, 'rgba(34, 197, 94, 0)');
-  ctx.fillStyle = emitterGlow;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(scale, scale);
+
+  const bob = Math.sin(t * 4.5 + x * 0.02) * 2.5;
+
+  // 1. Shoes on stage floor
+  ctx.fillStyle = (outfit === 'sweater_blue' || outfit === 'sweater_coral') ? '#e2e8f0' : '#111827';
   ctx.beginPath();
-  ctx.arc(emitterX, emitterY, 42 * glowPulse, 0, Math.PI * 2);
+  ctx.ellipse(-26, -6, 20, 9, 0, 0, Math.PI * 2);
+  ctx.ellipse(26, -6, 20, 9, 0, 0, Math.PI * 2);
   ctx.fill();
 
-  const targetX = W * 0.84 + Math.sin(t * 6) * 6;
-  const targetY = 0;
+  // 2. Legs / Trousers
+  ctx.fillStyle = (outfit === 'contractor') ? '#1e293b' : '#1f2937';
+  drawRoundBox(ctx, -38, -105, 26, 98, 6, ctx.fillStyle, null);
+  drawRoundBox(ctx, 12, -105, 26, 98, 6, ctx.fillStyle, null);
 
-  ctx.beginPath();
-  ctx.strokeStyle = 'rgba(74, 222, 128, 0.42)';
-  ctx.lineWidth = 16 + Math.sin(t * 16) * 4;
-  ctx.moveTo(emitterX, emitterY);
-  ctx.lineTo(targetX, targetY);
-  ctx.stroke();
+  // 3. Torso (with breathing motion)
+  ctx.save();
+  ctx.translate(0, bob);
 
-  ctx.beginPath();
-  ctx.strokeStyle = '#22c55e';
-  ctx.lineWidth = 6;
-  ctx.moveTo(emitterX, emitterY);
-  ctx.lineTo(targetX, targetY);
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.strokeStyle = '#ffffff';
-  ctx.lineWidth = 2.5;
-  ctx.moveTo(emitterX, emitterY);
-  ctx.lineTo(targetX, targetY);
-  ctx.stroke();
-
-  for (let p = 0; p < 4; p++) {
-    const pulseProg = ((t * 2.8 + p * 0.25) % 1.0);
-    const px = emitterX + (targetX - emitterX) * pulseProg;
-    const py = emitterY + (targetY - emitterY) * pulseProg;
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = '#22c55e';
-    ctx.shadowBlur = 12;
+  if (outfit === 'suit') {
+    // Charcoal blazer body
+    drawRoundBox(ctx, -48, -225, 96, 125, 16, '#27272a', '#3f3f46', 1.5);
+    // Light blue dress shirt V-insert
+    ctx.fillStyle = '#bae6fd';
     ctx.beginPath();
-    ctx.arc(px, py, 4.5, 0, Math.PI * 2);
+    ctx.moveTo(-22, -225);
+    ctx.lineTo(22, -225);
+    ctx.lineTo(0, -165);
+    ctx.closePath();
     ctx.fill();
-    ctx.shadowBlur = 0;
+    // White collar points
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.moveTo(-24, -226);
+    ctx.lineTo(-6, -226);
+    ctx.lineTo(-16, -208);
+    ctx.closePath();
+    ctx.moveTo(24, -226);
+    ctx.lineTo(6, -226);
+    ctx.lineTo(16, -208);
+    ctx.closePath();
+    ctx.fill();
+    // 3 Suit Buttons
+    ctx.fillStyle = '#9ca3af';
+    [-150, -132, -114].forEach(by => {
+      ctx.beginPath();
+      ctx.arc(0, by, 3.2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  } else if (outfit === 'contractor') {
+    // Blue work shirt base
+    drawRoundBox(ctx, -48, -225, 96, 125, 16, '#1d4ed8', null);
+    // High-vis orange safety vest over shirt
+    drawRoundBox(ctx, -46, -223, 92, 120, 14, '#f97316', '#fb923c', 1.5);
+    // Reflective yellow/silver safety stripes
+    ctx.fillStyle = '#fde047';
+    ctx.fillRect(-46, -155, 92, 10);
+    ctx.fillRect(-46, -130, 92, 10);
+    ctx.fillRect(-30, -223, 12, 68);
+    ctx.fillRect(18, -223, 12, 68);
+  } else {
+    const sweaterCol = (outfit === 'sweater_coral') ? '#f43f5e' : '#2563eb';
+    const trimCol = (outfit === 'sweater_coral') ? '#e11d48' : '#1d4ed8';
+    drawRoundBox(ctx, -48, -225, 96, 125, 18, sweaterCol, null);
+    drawRoundBox(ctx, -48, -120, 96, 16, 6, trimCol, null);
+  }
+
+  // 4. Articulated Left & Right Arms + Round Cueva Hands
+  const armCol = (outfit === 'suit') ? '#27272a' : (outfit === 'contractor') ? '#1d4ed8' : (outfit === 'sweater_coral') ? '#f43f5e' : '#2563eb';
+  [-1, 1].forEach(side => {
+    const isRight = side === 1;
+    const shoulderX = side * 48;
+    const shoulderY = -208;
+    const angle = isRight ? rightArmAngle : leftArmAngle;
+
+    ctx.save();
+    ctx.translate(shoulderX, shoulderY);
+    ctx.rotate(angle);
+
+    // Sleeve
+    drawRoundBox(ctx, -12, 0, 24, 78, 11, armCol, null);
+    // White shirt cuff on suit
+    if (outfit === 'suit') {
+      drawRoundBox(ctx, -11, 70, 22, 8, 3, '#ffffff', null);
+    }
+    // Round Peach Hand
+    ctx.fillStyle = '#eab68c';
+    ctx.beginPath();
+    ctx.arc(0, 86, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Optional held item in right hand
+    if (isRight && holdingItem === 'wrench') {
+      ctx.save();
+      ctx.translate(4, 86);
+      ctx.rotate(-0.6 + Math.sin(t * 7) * 0.25);
+      drawRoundBox(ctx, -5, -45, 10, 48, 4, '#cbd5e1', '#64748b', 1.5);
+      ctx.beginPath();
+      ctx.arc(0, -48, 12, 0.4, Math.PI * 2 - 0.4);
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.stroke();
+      ctx.restore();
+    } else if (isRight && holdingItem === 'phone') {
+      ctx.save();
+      ctx.translate(6, 86);
+      ctx.rotate(-0.3);
+      drawRoundBox(ctx, -12, -32, 24, 42, 5, '#0f172a', '#38bdf8', 2);
+      ctx.fillStyle = '#38bdf8';
+      ctx.fillRect(-8, -26, 16, 28);
+      ctx.restore();
+    }
+
+    ctx.restore();
+  });
+
+  // 5. Head (Large expressive Cueva round head)
+  const headY = -278;
+  ctx.fillStyle = '#eab68c';
+  ctx.beginPath();
+  ctx.arc(0, headY, 46, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Subtle warm forehead shadow under hair
+  ctx.fillStyle = 'rgba(180, 115, 70, 0.28)';
+  ctx.beginPath();
+  ctx.ellipse(0, headY - 18, 34, 14, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 6. Eyes with Cueva white specular shine
+  [-15, 15].forEach(ex => {
+    ctx.fillStyle = '#111827';
+    ctx.beginPath();
+    ctx.arc(ex, headY - 4, 5.8, 0, Math.PI * 2);
+    ctx.fill();
+    // White pupil shine dot
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(ex - 1.8, headY - 6, 2.0, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // 7. Expressive Eyebrows
+  ctx.strokeStyle = '#3f2314';
+  ctx.lineWidth = 4.2;
+  ctx.lineCap = 'round';
+  if (mood === 'panic' || mood === 'worried') {
+    ctx.beginPath();
+    ctx.moveTo(-24, headY - 14);
+    ctx.lineTo(-8, headY - 20);
+    ctx.moveTo(24, headY - 14);
+    ctx.lineTo(8, headY - 20);
+    ctx.stroke();
+  } else {
+    ctx.beginPath();
+    ctx.moveTo(-23, headY - 17);
+    ctx.lineTo(-8, headY - 16);
+    ctx.moveTo(8, headY - 16);
+    ctx.lineTo(23, headY - 17);
+    ctx.stroke();
+  }
+
+  // 8. Expressive Mouth
+  ctx.strokeStyle = '#5c2814';
+  ctx.fillStyle = '#5c2814';
+  ctx.lineWidth = 4.0;
+  if (mood === 'panic') {
+    const openH = 8 + Math.abs(Math.sin(t * 10)) * 5;
+    ctx.beginPath();
+    ctx.ellipse(0, headY + 16, 11, openH, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (mood === 'worried') {
+    ctx.beginPath();
+    ctx.ellipse(0, headY + 16, 9, 4.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (mood === 'talk') {
+    const talkOpen = 3 + Math.abs(Math.sin(t * 14)) * 6;
+    ctx.beginPath();
+    ctx.ellipse(0, headY + 15, 10, talkOpen, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else {
+    // Signature Cueva confident warm smile
+    ctx.beginPath();
+    ctx.arc(0, headY + 8, 14, 0.2, Math.PI - 0.15);
+    ctx.stroke();
+  }
+
+  // 9. Hair / Hardhat
+  if (hair === 'curly_gold') {
+    // Signature Cueva fluffy golden-brown curly hair (Matches cueva_frame_01, 02, 09)
+    ctx.fillStyle = '#b4823e';
+    const puffs = [
+      { cx: -32, cy: headY - 22, r: 20 },
+      { cx: -16, cy: headY - 40, r: 24 },
+      { cx: 8,   cy: headY - 42, r: 25 },
+      { cx: 30,  cy: headY - 24, r: 21 },
+      { cx: -38, cy: headY - 4,  r: 16 },
+      { cx: 38,  cy: headY - 4,  r: 16 },
+      { cx: 0,   cy: headY - 28, r: 22 }
+    ];
+    puffs.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.cx, p.cy, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    // White glossy hair highlight pill
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.lineWidth = 4.5;
+    ctx.beginPath();
+    ctx.moveTo(-24, headY - 34);
+    ctx.lineTo(-14, headY - 42);
+    ctx.stroke();
+  } else if (hair === 'hardhat') {
+    // Brown hair sides
+    ctx.fillStyle = '#78350f';
+    ctx.beginPath();
+    ctx.arc(-38, headY - 10, 12, 0, Math.PI * 2);
+    ctx.arc(38, headY - 10, 12, 0, Math.PI * 2);
+    ctx.fill();
+    // Yellow Contractor Safety Hardhat
+    ctx.fillStyle = '#facc15';
+    ctx.beginPath();
+    ctx.arc(0, headY - 16, 48, Math.PI, Math.PI * 2);
+    ctx.fill();
+    drawRoundBox(ctx, -56, headY - 20, 112, 11, 5, '#eab308', '#fef08a', 1.5);
+    // White glossy shine on hardhat dome
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.lineWidth = 4.5;
+    ctx.beginPath();
+    ctx.arc(0, headY - 16, 36, Math.PI + 0.4, Math.PI + 1.1);
+    ctx.stroke();
+  } else if (hair === 'auburn') {
+    // Smooth sculpted auburn hair (Matches cueva_frame_02 right character)
+    ctx.fillStyle = '#9a3412';
+    ctx.beginPath();
+    ctx.arc(0, headY - 14, 48, Math.PI - 0.15, Math.PI * 2 + 0.15);
+    ctx.fill();
+    // White glossy highlight
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.88)';
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(16, headY - 40);
+    ctx.lineTo(28, headY - 30);
+    ctx.stroke();
+  } else {
+    ctx.fillStyle = '#1e293b';
+    ctx.beginPath();
+    ctx.arc(0, headY - 14, 47, Math.PI - 0.1, Math.PI * 2 + 0.1);
+    ctx.fill();
   }
 
   ctx.restore();
@@ -237,1016 +483,983 @@ function renderTasklessScene1_LaserCrowd(t) {
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 2 (8.0s - 21.0s): Deep Space Planetary Relay (Moon -> Mars -> Jupiter -> Uranus)
+// SCENE 1 (0.0s - 8.0s): Cueva Presenter & The 186,000 MI/S Photon Transmitter
+// "If you point a single beam of laser light into the night sky, it fires into the dark at 186,000 miles per second."
+// ----------------------------------------------------------------------------
+function renderTasklessScene1_LaserCrowd(t) {
+  const story = window.ACTIVE_STORY || {};
+  const topLabel = (story.storyType && story.storyType !== 'cosmic_light')
+    ? (story.storyTitle || 'SPEED-TO-LEAD HOOK')
+    : 'THE SPEED OF LIGHT PARADOX • 186,000 MI/S';
+
+  drawCuevaRoom(ctx, '#1e1b4b', '#0f0a2c', '#070510', 1, t, topLabel);
+
+  ctx.save();
+  // Starfield observatory window on upper right
+  const winX = 215, winY = 150, winW = 285, winH = 290;
+  drawRoundBox(ctx, winX, winY, winW, winH, 22, '#040711', '#38bdf8', 2.5);
+
+  // Twinkling stars inside observatory viewport
+  for (let i = 0; i < 24; i++) {
+    const sx = winX + 20 + ((i * 53) % (winW - 40));
+    const sy = winY + 20 + ((i * 71) % (winH - 40));
+    const sAlpha = 0.35 + 0.65 * Math.abs(Math.sin(t * 3 + i));
+    ctx.fillStyle = 'rgba(255, 255, 255, ' + sAlpha + ')';
+    ctx.beginPath();
+    ctx.arc(sx, sy, (i % 3 === 0) ? 2.2 : 1.3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Big Cueva Telemetry Badge inside Observatory Window
+  drawRoundBox(ctx, winX + 18, winY + 18, winW - 36, 76, 12, 'rgba(15, 23, 42, 0.9)', 'rgba(56, 189, 248, 0.5)', 1.5);
+  ctx.font = '900 32px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillText(story.statNumber && story.storyType !== 'cosmic_light' ? story.statNumber : '186,000 MI/S', winX + winW / 2, winY + 26);
+
+  ctx.font = '800 11px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#38bdf8';
+  ctx.fillText('PHOTON VELOCITY IN DEEP SPACE', winX + winW / 2, winY + 66);
+
+  // Tripod & Photon Cannon Emitter (like Cueva's projector in cueva_frame_09!)
+  const emitterX = 210, emitterY = 485;
+  ctx.strokeStyle = '#475569';
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.moveTo(emitterX, emitterY);
+  ctx.lineTo(emitterX - 38, H * 0.77);
+  ctx.moveTo(emitterX, emitterY);
+  ctx.lineTo(emitterX + 38, H * 0.77);
+  ctx.moveTo(emitterX, emitterY);
+  ctx.lineTo(emitterX, H * 0.77);
+  ctx.stroke();
+
+  // Laser Beam firing from cannon through observatory window
+  const beamEndX = winX + winW - 22;
+  const beamEndY = winY + 115 + Math.sin(t * 5) * 8;
+
+  ctx.save();
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.32)';
+  ctx.lineWidth = 26 + Math.sin(t * 14) * 5;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(emitterX + 20, emitterY - 20);
+  ctx.lineTo(beamEndX, beamEndY);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#4ade80';
+  ctx.lineWidth = 8;
+  ctx.shadowColor = '#4ade80';
+  ctx.shadowBlur = 18;
+  ctx.beginPath();
+  ctx.moveTo(emitterX + 20, emitterY - 20);
+  ctx.lineTo(beamEndX, beamEndY);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(emitterX + 20, emitterY - 20);
+  ctx.lineTo(beamEndX, beamEndY);
+  ctx.stroke();
+
+  // Pulsing photon orbs racing up the beam
+  for (let p = 0; p < 5; p++) {
+    const prog = ((t * 2.4 + p * 0.2) % 1.0);
+    const px = (emitterX + 20) + (beamEndX - (emitterX + 20)) * prog;
+    const py = (emitterY - 20) + (beamEndY - (emitterY - 20)) * prog;
+    ctx.fillStyle = '#fef08a';
+    ctx.beginPath();
+    ctx.arc(px, py, 5.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // Cannon Barrel
+  ctx.save();
+  ctx.translate(emitterX, emitterY);
+  ctx.rotate(-0.62);
+  drawRoundBox(ctx, -28, -18, 68, 36, 10, '#334155', '#94a3b8', 2);
+  ctx.fillStyle = '#4ade80';
+  ctx.beginPath();
+  ctx.arc(40, 0, 14, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Cueva Presenter Character on Left operating the Photon Cannon
+  drawCuevaCharacter(ctx, {
+    x: 112,
+    y: H * 0.77,
+    scale: 0.95,
+    outfit: 'suit',
+    hair: 'curly_gold',
+    mood: 'talk',
+    leftArmAngle: 0.18,
+    rightArmAngle: -0.85 + Math.sin(t * 3) * 0.06
+  }, t);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 2 (8.0s - 21.0s): Cueva Interplanetary Relay & Analog Speedometer Machine
 // "In just one second, it flashes past the Moon. In twelve minutes, it blazes past Mars.
 //  In forty-three minutes, it tears past Jupiter, and in under three hours, it crosses
 //  nearly two billion miles of freezing deep space to hit the rings of Uranus."
 // ----------------------------------------------------------------------------
 function renderTasklessScene2_EarthToUranus(t) {
-  ctx.save();
-  ctx.fillStyle = '#020408';
-  ctx.fillRect(0, 0, W, H);
+  drawCuevaRoom(ctx, '#19103b', '#090518', '#05030d', 1, t, '2,000,000,000 MILE SOLAR RELAY');
 
-  // Dynamic HUD updates as the beam passes each planet!
-  let curMilestone = 'MOON • 1.3 SEC';
-  let curDist = '238,900 MILES';
+  ctx.save();
+  // Determine active planet milestone
+  let activeIdx = 0; // 0=Moon, 1=Mars, 2=Jupiter, 3=Uranus
+  let statusTitle = 'MOON • 1.3 SECONDS';
+  let distText = '238,900 MILES TRAVELED';
   if (t >= 17.0) {
-    curMilestone = 'URANUS • 2.8 HRS';
-    curDist = '1.8 BILLION MILES';
+    activeIdx = 3;
+    statusTitle = 'URANUS • 2.8 HOURS';
+    distText = '1,800,000,000 MILES TRAVELED';
   } else if (t >= 13.8) {
-    curMilestone = 'JUPITER • 43 MIN';
-    curDist = '484 MILLION MILES';
-  } else if (t >= 11.2) {
-    curMilestone = 'MARS • 12.5 MIN';
-    curDist = '140 MILLION MILES';
+    activeIdx = 2;
+    statusTitle = 'JUPITER • 43 MINUTES';
+    distText = '484,000,000 MILES TRAVELED';
+  } else if (t >= 11.0) {
+    activeIdx = 1;
+    statusTitle = 'MARS • 12 MINUTES';
+    distText = '140,000,000 MILES TRAVELED';
   }
 
-  drawTasklessHUD(ctx, {
-    topStat: curMilestone,
-    topSub1: 'INTERPLANETARY LASER RELAY • ' + curDist,
-    topSub2: 'PHOTON BEAM TRAJECTORY',
-    rightLabel: 'SOLAR SYSTEM'
-  });
-
-  // Diagonal trajectory nodes from bottom-left (Earth) to top-right (Uranus)
-  const nodes = [
-    { name: 'EARTH', timeLabel: '0.0s', x: 75,  y: 720, r: 30, color1: '#60a5fa', color2: '#1d4ed8', hitT: 8.0 },
-    { name: 'MOON',  timeLabel: '1.3s', x: 145, y: 615, r: 12, color1: '#e2e8f0', color2: '#64748b', hitT: 9.0 },
-    { name: 'MARS',  timeLabel: '12m',  x: 235, y: 495, r: 20, color1: '#fb923c', color2: '#b91c1c', hitT: 11.8 },
-    { name: 'JUPITER', timeLabel: '43m', x: 340, y: 365, r: 38, color1: '#fcd34d', color2: '#b45309', hitT: 14.5 },
-    { name: 'URANUS', timeLabel: '2.8h (2B MI)', x: 445, y: 215, r: 52, color1: '#a5f3fc', color2: '#0891b2', hitT: 19.8 }
+  // Top Planetary Relay Track (4 Detailed Planets with Rings & Glow)
+  const planets = [
+    { name: 'MOON',    time: '1.3s', x: 82,  y: 215, r: 18, c1: '#f1f5f9', c2: '#64748b' },
+    { name: 'MARS',    time: '12m',  x: 195, y: 215, r: 24, c1: '#fb923c', c2: '#b91c1c' },
+    { name: 'JUPITER', time: '43m',  x: 320, y: 215, r: 34, c1: '#fde68a', c2: '#b45309' },
+    { name: 'URANUS',  time: '2.8h', x: 452, y: 215, r: 38, c1: '#67e8f9', c2: '#0e7490', ringed: true }
   ];
 
-  // Draw trajectory corridor line
-  const startNode = nodes[0];
-  const endNode = nodes[nodes.length - 1];
+  // Laser beam connecting planets
+  const beamProgress = Math.min(1, Math.max(0.05, (t - 8.0) / 11.5));
+  const beamCurrX = 82 + (452 - 82) * beamProgress;
 
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth = 6;
   ctx.beginPath();
-  ctx.strokeStyle = 'rgba(74, 222, 128, 0.25)';
-  ctx.lineWidth = 8;
-  ctx.moveTo(startNode.x, startNode.y);
-  ctx.lineTo(endNode.x, endNode.y);
+  ctx.moveTo(82, 215);
+  ctx.lineTo(452, 215);
   ctx.stroke();
 
-  // Active laser progress along the planetary chain
-  const beamProg = Math.min(1.0, Math.max(0.08, (t - 8.0) / 11.8));
-  const beamEndX = startNode.x + (endNode.x - startNode.x) * beamProg;
-  const beamEndY = startNode.y + (endNode.y - startNode.y) * beamProg;
-
+  ctx.strokeStyle = '#4ade80';
+  ctx.lineWidth = 6;
+  ctx.shadowColor = '#4ade80';
+  ctx.shadowBlur = 14;
   ctx.beginPath();
-  ctx.strokeStyle = '#22c55e';
-  ctx.lineWidth = 5;
-  ctx.shadowColor = '#22c55e';
-  ctx.shadowBlur = 16;
-  ctx.moveTo(startNode.x, startNode.y);
-  ctx.lineTo(beamEndX, beamEndY);
+  ctx.moveTo(82, 215);
+  ctx.lineTo(beamCurrX, 215);
   ctx.stroke();
   ctx.shadowBlur = 0;
 
-  ctx.beginPath();
-  ctx.strokeStyle = '#ffffff';
-  ctx.lineWidth = 2;
-  ctx.moveTo(startNode.x, startNode.y);
-  ctx.lineTo(beamEndX, beamEndY);
-  ctx.stroke();
-
-  // Continuous photon packets racing along the active beam
-  for (let p = 0; p < 5; p++) {
-    const pFrac = ((t * 2.2 + p * 0.2) % 1.0) * beamProg;
-    const px = startNode.x + (endNode.x - startNode.x) * pFrac;
-    const py = startNode.y + (endNode.y - startNode.y) * pFrac;
-    ctx.beginPath();
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = '#4ade80';
-    ctx.shadowBlur = 12;
-    ctx.arc(px, py, 4.5, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-  }
-
-  // Draw each planet & sonar shockwave when laser hits it
-  nodes.forEach((n, idx) => {
-    const isHit = (t >= n.hitT);
-    ctx.save();
-
-    // Expanding sonar rings when active
-    if (isHit) {
-      for (let r = 0; r < 3; r++) {
-        const ripple = ((t * 28 + r * 18) % 54);
-        const alpha = Math.max(0, 0.35 * (1 - ripple / 54));
-        ctx.beginPath();
-        ctx.strokeStyle = (idx === 4) ? 'rgba(103, 232, 249, ' + alpha + ')' : 'rgba(74, 222, 128, ' + alpha + ')';
-        ctx.lineWidth = 1.5;
-        ctx.arc(n.x, n.y, n.r + 4 + ripple, 0, Math.PI * 2);
-        ctx.stroke();
-      }
+  planets.forEach((p, idx) => {
+    const lit = idx <= activeIdx;
+    if (lit) {
+      const ringR = p.r + 8 + ((t * 25) % 18);
+      ctx.strokeStyle = 'rgba(74, 222, 128, 0.45)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, ringR, 0, Math.PI * 2);
+      ctx.stroke();
     }
 
-    // Planet sphere
-    const grad = ctx.createRadialGradient(n.x - n.r * 0.3, n.y - n.r * 0.3, 2, n.x, n.y, n.r);
-    grad.addColorStop(0, n.color1);
-    grad.addColorStop(1, n.color2);
-    ctx.fillStyle = grad;
+    const pg = ctx.createRadialGradient(p.x - p.r * 0.3, p.y - p.r * 0.3, 2, p.x, p.y, p.r);
+    pg.addColorStop(0, p.c1);
+    pg.addColorStop(1, p.c2);
+    ctx.fillStyle = pg;
     ctx.beginPath();
-    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
     ctx.fill();
 
-    // Uranus tilted ring
-    if (n.name === 'URANUS') {
+    if (p.ringed) {
       ctx.save();
-      ctx.translate(n.x, n.y);
-      ctx.rotate(-0.45);
-      ctx.strokeStyle = 'rgba(165, 243, 252, 0.75)';
-      ctx.lineWidth = 3;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(-0.4);
+      ctx.strokeStyle = '#a5f3fc';
+      ctx.lineWidth = 3.5;
       ctx.beginPath();
-      ctx.ellipse(0, 0, n.r * 1.55, n.r * 0.38, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, p.r * 1.5, p.r * 0.38, 0, 0, Math.PI * 2);
       ctx.stroke();
       ctx.restore();
     }
 
-    // Planet label
-    const labelOffset = (idx % 2 === 0) ? (n.r + 18) : -(n.r + 10);
-    ctx.font = '800 13px "Space Grotesk", sans-serif';
-    ctx.fillStyle = isHit ? '#ffffff' : 'rgba(255,255,255,0.45)';
+    ctx.font = '800 12px "Space Grotesk", sans-serif';
+    ctx.fillStyle = lit ? '#facc15' : 'rgba(255,255,255,0.45)';
     ctx.textAlign = 'center';
-    ctx.fillText(n.name + ' • ' + n.timeLabel, n.x, n.y + labelOffset);
-
-    ctx.restore();
+    ctx.fillText(p.name + ' (' + p.time + ')', p.x, p.y + p.r + 20);
   });
+
+  // Cueva Tactile Machine in Center (Directly inspired by cueva_frame_03 "MIND READER" machine!)
+  const machX = 95, machY = 295, machW = 350, machH = 385;
+  drawRoundBox(ctx, machX, machY, machW, machH, 24, '#272f40', '#eab308', 3.5);
+
+  // Analog Gauge Dial Circle
+  const dialX = W / 2, dialY = machY + 110, dialR = 82;
+  ctx.fillStyle = '#f8fafc';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = '#ca8a04';
+  ctx.stroke();
+
+  // Green & Cyan Speed Arcs inside dial
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = '#22c55e';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 0.85, Math.PI * 1.5);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#06b6d4';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 1.5, Math.PI * 2.15);
+  ctx.stroke();
+
+  // Sweeping Red Needle
+  const needleAngle = -Math.PI * 0.6 + beamProgress * (Math.PI * 1.2) + Math.sin(t * 18) * 0.04;
+  ctx.save();
+  ctx.translate(dialX, dialY);
+  ctx.rotate(needleAngle);
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(0, 10);
+  ctx.lineTo(0, -(dialR - 16));
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.fillStyle = '#0f172a';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, 10, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Black Label Plaque on Machine
+  drawRoundBox(ctx, machX + 20, machY + 210, machW - 40, 52, 10, '#090d16', null);
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(statusTitle, W / 2, machY + 236);
+
+  // 4 Glowing Cueva Glass Indicator Bulbs
+  const bulbColors = ['#4ade80', '#fb923c', '#facc15', '#38bdf8'];
+  for (let b = 0; b < 4; b++) {
+    const bx = machX + 62 + b * 75;
+    const by = machY + 305;
+    const isLit = b <= activeIdx;
+
+    ctx.beginPath();
+    ctx.arc(bx, by, 17, 0, Math.PI * 2);
+    if (isLit) {
+      ctx.fillStyle = bulbColors[b];
+      ctx.shadowColor = bulbColors[b];
+      ctx.shadowBlur = 18;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    } else {
+      ctx.fillStyle = '#1e293b';
+      ctx.fill();
+    }
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#0f172a';
+    ctx.stroke();
+
+    // White specular dot on bulb
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.beginPath();
+    ctx.arc(bx - 5, by - 5, 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.font = '800 13px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#e2e8f0';
+  ctx.textAlign = 'center';
+  ctx.fillText(distText, W / 2, machY + 355);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 3 (21.0s - 27.6s): The Cosmic Speed Paradox vs Contractor Callback
+// SCENE 3 (21.0s - 27.6s): Cueva Golden Balance Scale (Matches cueva_frame_08!)
 // "Yet that two-billion-mile journey across the solar system is STILL faster than the average contractor calls back an emergency lead."
 // ----------------------------------------------------------------------------
 function renderTasklessScene3_SpaceVsContractorContrast(t) {
+  drawCuevaRoom(ctx, '#b45309', '#451a03', '#1c0a02', 2, t, 'THE RESPONSE TIME PARADOX');
+
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
+  const baseX = W / 2;
+  const baseY = H * 0.77;
 
-  drawTasklessHUD(ctx, {
-    topStat: '9X SLOWER',
-    topSub1: 'CONTRACTOR RESPONSE GAP',
-    topSub2: 'SPEED OF LIGHT VS LOCAL TRADE',
-    rightLabel: 'PARADOX AUDIT'
-  });
+  // Heavy Wooden/Brass Scale Base on Stage Floor
+  drawRoundBox(ctx, baseX - 115, baseY - 38, 230, 38, 8, '#78350f', '#facc15', 2);
+  drawRoundBox(ctx, baseX - 85, baseY - 32, 65, 8, 4, '#ffffff', null);
 
-  const topCardY = 145;
-  drawRoundBox(ctx, 36, topCardY, W - 72, 165, 16, '#0b151c', 'rgba(74, 222, 128, 0.4)', 1.5);
+  // Central Golden Pillar
+  drawRoundBox(ctx, baseX - 14, 210, 28, baseY - 248, 4, '#eab308', '#ca8a04', 2);
 
-  ctx.font = '700 12px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#4ade80';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-  ctx.fillText('⚡ LASER TO URANUS (2,000,000,000 MILES)', 56, topCardY + 22);
+  // Scale Tilt Angle (Tilts heavily to the right under the 27.4 HR Contractor Delay anvil!)
+  const tiltProgress = Math.min(1, (t - 21.0) / 1.4);
+  const tiltAngle = 0.24 * tiltProgress + Math.sin(t * 5) * 0.02;
 
-  ctx.font = '900 36px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('2.8 HOURS', 56, topCardY + 50);
+  ctx.save();
+  ctx.translate(baseX, 225);
+  ctx.rotate(tiltAngle);
 
-  ctx.font = '600 13px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-  ctx.fillText('Crosses the entire outer solar system in 168 minutes', 56, topCardY + 98);
+  // Horizontal Scale Beam
+  drawRoundBox(ctx, -195, -10, 390, 20, 8, '#facc15', '#ca8a04', 2);
 
-  const pulseX = 56 + ((t * 240) % (W - 140));
-  ctx.fillStyle = '#4ade80';
+  // Left Pan (High up - Light & Fast: 2.8 HRS TO URANUS)
+  ctx.save();
+  ctx.translate(-165, 0);
+  ctx.rotate(-tiltAngle); // Keep pan level
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.arc(pulseX, topCardY + 138, 5, 0, Math.PI * 2);
-  ctx.fill();
+  ctx.moveTo(0, 0); ctx.lineTo(-48, 120);
+  ctx.moveTo(0, 0); ctx.lineTo(48, 120);
+  ctx.stroke();
 
-  // VS Badge
-  const vsY = topCardY + 195;
-  const vsPulse = 1.0 + Math.sin(t * 8) * 0.08;
-  ctx.fillStyle = '#ef4444';
-  ctx.beginPath();
-  ctx.arc(W / 2, vsY, 24 * vsPulse, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.font = '900 16px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
+  // Glowing 2.8 HR Space Laser Badge on Left Pan
+  drawRoundBox(ctx, -72, 48, 144, 72, 12, '#064e3b', '#4ade80', 2.5);
+  ctx.font = '900 24px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
   ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('VS', W / 2, vsY);
-
-  // Bottom Card: Contractor Callback
-  const botCardY = vsY + 38;
-  drawRoundBox(ctx, 36, botCardY, W - 72, 235, 16, '#160c0e', 'rgba(239, 68, 68, 0.45)', 1.5);
-
-  ctx.font = '700 12px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#f87171';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-  ctx.fillText('⏳ AVERAGE CONTRACTOR CALLBACK TIME', 56, botCardY + 22);
-
-  const clockX = 102;
-  const clockY = botCardY + 115;
-  const clockR = 44;
-
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.arc(clockX, clockY, clockR, 0, Math.PI * 2);
-  ctx.stroke();
-
-  const secAngle = t * 16;
-  const minAngle = t * 2.5;
-  ctx.strokeStyle = '#ef4444';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.moveTo(clockX, clockY);
-  ctx.lineTo(clockX + Math.sin(secAngle) * 34, clockY - Math.cos(secAngle) * 34);
-  ctx.stroke();
-
-  ctx.strokeStyle = '#ffffff';
-  ctx.lineWidth = 3.5;
-  ctx.beginPath();
-  ctx.moveTo(clockX, clockY);
-  ctx.lineTo(clockX + Math.sin(minAngle) * 24, clockY - Math.cos(minAngle) * 24);
-  ctx.stroke();
-
-  ctx.font = '900 36px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#f87171';
-  ctx.textAlign = 'left';
-  ctx.fillText('27.4 HOURS', clockX + clockR + 22, clockY - 32);
-
-  ctx.font = '700 14px "Inter", sans-serif';
+  ctx.fillText('2.8 HRS', 0, 78);
+  ctx.font = '700 11px "Inter", sans-serif';
   ctx.fillStyle = '#ffffff';
-  ctx.fillText('To call back an emergency homeowner', clockX + clockR + 22, clockY + 8);
+  ctx.fillText('LASER TO URANUS', 0, 102);
 
-  ctx.font = '700 12px "JetBrains Mono", sans-serif';
+  // Golden Pan Tray
+  ctx.fillStyle = '#eab308';
+  ctx.beginPath();
+  ctx.arc(0, 120, 62, 0, Math.PI);
+  ctx.fill();
+  ctx.restore();
+
+  // Right Pan (Weighed down heavy - 27.4 HRS CONTRACTOR CALLBACK)
+  ctx.save();
+  ctx.translate(165, 0);
+  ctx.rotate(-tiltAngle);
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 0); ctx.lineTo(-48, 120);
+  ctx.moveTo(0, 0); ctx.lineTo(48, 120);
+  ctx.stroke();
+
+  // Heavy Red Contractor Delay Anvil on Right Pan
+  drawRoundBox(ctx, -82, 34, 164, 86, 12, '#7f1d1d', '#f87171', 2.5);
+  ctx.font = '900 26px "Space Grotesk", sans-serif';
   ctx.fillStyle = '#fca5a5';
-  ctx.fillText('⚠️ 9.7X SLOWER THAN DEEP SPACE LIGHT', clockX + clockR + 22, clockY + 34);
-
-  ctx.font = '700 13px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
   ctx.textAlign = 'center';
-  ctx.fillText('By the time you call back, your competitor already cashed the check.', W / 2, botCardY + 195);
+  ctx.fillText('27.4 HRS', 0, 68);
+  ctx.font = '800 11px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('CONTRACTOR CALLBACK', 0, 92);
+  ctx.fillStyle = '#facc15';
+  ctx.fillText('9.7X SLOWER!', 0, 108);
 
+  ctx.fillStyle = '#eab308';
+  ctx.beginPath();
+  ctx.arc(0, 120, 62, 0, Math.PI);
+  ctx.fill();
+  ctx.restore();
+
+  ctx.restore();
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 4 (27.6s - 36.8s): Meet Bob — 20ft Up a Ladder in a Scorching 130° Attic
+// SCENE 4 (27.6s - 36.8s): Meet Contractor Bob — Full Cueva Character on Ladder
 // "Picture this. Meet Bob. Bob is a master contractor standing twenty feet up a ladder in a scorching attic, drenched in sweat with a wrench in his hand."
 // ----------------------------------------------------------------------------
 function renderTasklessScene4_MeetBobAtticLadder(t) {
+  drawCuevaRoom(ctx, '#7f1d1d', '#2a0707', '#120303', 2, t, 'STORY • MEET CONTRACTOR BOB');
+
   ctx.save();
-  // Warm scorching attic dark crimson/amber tint at top
-  const bg = ctx.createLinearGradient(0, 0, 0, H);
-  bg.addColorStop(0, '#180a05');
-  bg.addColorStop(0.5, '#0c0705');
-  bg.addColorStop(1, '#020202');
-  ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, W, H);
+  // Overhead Attic Copper HVAC Pipe & Air Handler Unit
+  drawRoundBox(ctx, 45, 165, W - 90, 56, 10, '#334155', '#64748b', 2);
+  ctx.fillStyle = '#d97706';
+  ctx.fillRect(30, 221, W - 60, 16);
 
-  drawTasklessHUD(ctx, {
-    topStat: '130°F',
-    topStatUnit: 'ATTIC',
-    topSub1: 'STORY • MEET CONTRACTOR BOB',
-    topSub2: '20FT UP ALUMINUM LADDER • HANDS FULL',
-    rightLabel: 'THE STORY • 01'
-  });
-
-  // Attic Rafters & Copper Refrigerant Line at Top
-  ctx.strokeStyle = '#334155';
-  ctx.lineWidth = 8;
-  ctx.beginPath();
-  ctx.moveTo(30, 185);
-  ctx.lineTo(W - 30, 185);
-  ctx.stroke();
-
-  // Copper HVAC Pipe
-  ctx.strokeStyle = '#d97706';
-  ctx.lineWidth = 12;
-  ctx.beginPath();
-  ctx.moveTo(60, 215);
-  ctx.lineTo(W - 60, 215);
-  ctx.stroke();
-
-  // Rising Scorching Heat Waves in Attic
+  // Rising Scorching Heat Wave Lines
   for (let h = 0; h < 6; h++) {
-    const hx = 80 + h * 75;
-    const hyOffset = (t * 45 + h * 30) % 180;
-    ctx.strokeStyle = 'rgba(249, 115, 22, 0.18)';
-    ctx.lineWidth = 2;
+    const hx = 75 + h * 78;
+    const hyOff = (t * 50 + h * 28) % 160;
+    ctx.strokeStyle = 'rgba(251, 146, 60, 0.25)';
+    ctx.lineWidth = 3;
     ctx.beginPath();
-    for (let wy = 0; wy < 60; wy += 10) {
-      const wx = hx + Math.sin(t * 6 + wy * 0.15 + h) * 8;
-      const curY = 420 - hyOffset - wy;
+    for (let wy = 0; wy < 65; wy += 10) {
+      const wx = hx + Math.sin(t * 7 + wy * 0.15 + h) * 9;
+      const curY = 440 - hyOff - wy;
       if (wy === 0) ctx.moveTo(wx, curY);
       else ctx.lineTo(wx, curY);
     }
     ctx.stroke();
   }
 
-  // 20ft Aluminum Extension Ladder Centered-Left
-  const floorY = 740;
-  const ladderBaseX = 190;
-  const ladderTopX = 215 + Math.sin(t * 2.2) * 2;
-  const ladderTopY = 230;
-
+  // Aluminum Extension Ladder
+  const ladX = 165;
   ctx.strokeStyle = '#94a3b8';
-  ctx.lineWidth = 4.5;
+  ctx.lineWidth = 7;
   ctx.beginPath();
-  ctx.moveTo(ladderBaseX - 18, floorY);
-  ctx.lineTo(ladderTopX - 18, ladderTopY);
-  ctx.moveTo(ladderBaseX + 18, floorY);
-  ctx.lineTo(ladderTopX + 18, ladderTopY);
+  ctx.moveTo(ladX - 38, H * 0.77);
+  ctx.lineTo(ladX - 28, 225);
+  ctx.moveTo(ladX + 38, H * 0.77);
+  ctx.lineTo(ladX + 28, 225);
   ctx.stroke();
 
-  ctx.lineWidth = 2.5;
-  for (let r = 0; r <= 12; r++) {
-    const frac = r / 12;
-    const rx1 = (ladderBaseX - 18) + (ladderTopX - ladderBaseX) * frac;
-    const ry = floorY + (ladderTopY - floorY) * frac;
+  ctx.lineWidth = 4;
+  for (let r = 0; r < 9; r++) {
+    const ry = 265 + r * 54;
     ctx.beginPath();
-    ctx.moveTo(rx1, ry);
-    ctx.lineTo(rx1 + 36, ry);
+    ctx.moveTo(ladX - 34, ry);
+    ctx.lineTo(ladX + 34, ry);
     ctx.stroke();
   }
 
-  // Contractor Bob on Ladder Turning Wrench
-  const bobX = ladderTopX;
-  const bobY = ladderTopY + 52;
-  const bobBreath = Math.sin(t * 4.5) * 2.5;
+  // Full Cueva Illustrated Contractor Bob standing on ladder with hardhat, vest & wrench!
+  drawCuevaCharacter(ctx, {
+    x: ladX,
+    y: 535,
+    scale: 0.92,
+    outfit: 'contractor',
+    hair: 'hardhat',
+    mood: 'worried',
+    leftArmAngle: 0.35,
+    rightArmAngle: -2.1 + Math.sin(t * 6) * 0.22,
+    holdingItem: 'wrench'
+  }, t);
 
-  // High-Vis Orange Vest Torso
-  ctx.strokeStyle = '#f97316';
-  ctx.lineWidth = 16;
-  ctx.beginPath();
-  ctx.moveTo(bobX, bobY);
-  ctx.lineTo(bobX, bobY + 60);
-  ctx.stroke();
-
-  // Head & Hard Hat
-  ctx.fillStyle = '#f8fafc';
-  ctx.beginPath();
-  ctx.arc(bobX, bobY - 22 + bobBreath, 17, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.fillStyle = '#facc15';
-  ctx.beginPath();
-  ctx.arc(bobX, bobY - 26 + bobBreath, 20, Math.PI, Math.PI * 2);
-  ctx.fill();
-  drawRoundBox(ctx, bobX - 24, bobY - 26 + bobBreath, 48, 6, 2, '#facc15', null);
-
-  // Sweat droplets pouring off Bob's forehead
+  // Animated Sweat Droplets flying off Bob's forehead
   ctx.fillStyle = '#38bdf8';
-  for (let sw = 0; sw < 4; sw++) {
-    const swProg = ((t * 2.2 + sw * 0.25) % 1.0);
-    const swX = bobX + 20 + sw * 6 + swProg * 8;
-    const swY = (bobY - 20) + swProg * 75;
+  for (let s = 0; s < 4; s++) {
+    const prog = ((t * 2.4 + s * 0.25) % 1.0);
+    const sx = ladX + 42 + s * 8 + prog * 18;
+    const sy = 265 + prog * 85;
     ctx.beginPath();
-    ctx.arc(swX, swY, 3, 0, Math.PI * 2);
+    ctx.arc(sx, sy, 4.5, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  // Legs on Rungs
-  ctx.strokeStyle = '#cbd5e1';
-  ctx.lineWidth = 5.5;
-  ctx.beginPath();
-  ctx.moveTo(bobX, bobY + 60);
-  ctx.lineTo(bobX - 15, bobY + 115);
-  ctx.moveTo(bobX, bobY + 60);
-  ctx.lineTo(bobX + 15, bobY + 115);
-  ctx.stroke();
-
-  // Right Arm + Animated Wrench Torqueing the Copper Pipe
-  const wrenchAngle = Math.sin(t * 5.0) * 0.35;
-  ctx.strokeStyle = '#f8fafc';
-  ctx.lineWidth = 4.5;
-  ctx.beginPath();
-  ctx.moveTo(bobX + 5, bobY + 8);
-  ctx.lineTo(bobX + 36, bobY - 28);
-  ctx.stroke();
-
-  ctx.save();
-  ctx.translate(bobX + 36, bobY - 28);
-  ctx.rotate(wrenchAngle);
-  ctx.strokeStyle = '#cbd5e1';
-  ctx.lineWidth = 7;
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.lineTo(28, -28);
-  ctx.stroke();
-  ctx.restore();
-
-  // Left Arm gripping ladder rail
-  ctx.strokeStyle = '#f8fafc';
-  ctx.lineWidth = 4.5;
-  ctx.beginPath();
-  ctx.moveTo(bobX - 5, bobY + 10);
-  ctx.lineTo(ladderTopX - 18, bobY + 26);
-  ctx.stroke();
-
-  // Story Character Dossier Card on Right
-  const cardX = 285;
-  const cardY = 310;
-  drawRoundBox(ctx, cardX, cardY, 220, 175, 14, '#0f172a', 'rgba(249, 115, 22, 0.5)', 1.5);
-
-  ctx.font = '800 12px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#fb923c';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-  ctx.fillText('👷‍♂️ CONTRACTOR PROFILE', cardX + 16, cardY + 18);
-
-  ctx.font = '900 24px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('MASTER BOB', cardX + 16, cardY + 42);
-
-  ctx.font = '600 12px "Inter", sans-serif';
-  ctx.fillStyle = '#cbd5e1';
-  ctx.fillText('• 20ft up aluminum ladder', cardX + 16, cardY + 80);
-  ctx.fillText('• 130°F Florida attic heat', cardX + 16, cardY + 102);
-  ctx.fillText('• Both hands locked on wrench', cardX + 16, cardY + 124);
+  // Cueva Character Dossier Plaque on Right
+  const cardX = 278, cardY = 285, cardW = 228, cardH = 215;
+  drawRoundBox(ctx, cardX, cardY, cardW, cardH, 18, '#1e293b', '#f97316', 2.5);
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
   ctx.fillStyle = '#facc15';
-  ctx.fillText('• Phone buried in pocket', cardX + 16, cardY + 146);
+  ctx.textAlign = 'left';
+  ctx.fillText('MEET BOB', cardX + 20, cardY + 42);
+
+  ctx.font = '700 13px "Inter", sans-serif';
+  ctx.fillStyle = '#f8fafc';
+  ctx.fillText('• Master HVAC/Plumbing Pro', cardX + 20, cardY + 78);
+  ctx.fillText('• 20ft up an attic ladder', cardX + 20, cardY + 106);
+  ctx.fillText('• 130°F heat, wrench in hand', cardX + 20, cardY + 134);
+
+  drawRoundBox(ctx, cardX + 18, cardY + 156, cardW - 36, 38, 8, 'rgba(239, 68, 68, 0.2)', '#ef4444', 1.5);
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#fca5a5';
+  ctx.textAlign = 'center';
+  ctx.fillText('HANDS FULL • CANNOT ANSWER', cardX + cardW / 2, cardY + 180);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 5 (36.8s - 44.2s): Sarah's Burst Ceiling Pipe Emergency Across Town
-// "Across town, a pipe bursts in Sarah's ceiling and water is pouring everywhere. Panicking, she grabs her phone and calls Bob first."
+// SCENE 5 (36.8s - 44.2s): Homeowner Sarah's Burst Ceiling Pipe Emergency
+// "Across town, a pipe bursts in Sarah's ceiling and water is pouring everywhere.
+//  Panicking, she grabs her phone and calls Bob first."
 // ----------------------------------------------------------------------------
 function renderTasklessScene5_SarahBurstPipe(t) {
+  drawCuevaRoom(ctx, '#0e7490', '#062430', '#041821', 3, t, 'EMERGENCY • SARAH CALLS BOB FIRST');
+
   ctx.save();
-  ctx.fillStyle = '#02060d';
-  ctx.fillRect(0, 0, W, H);
+  // Ruptured Ceiling Pipe at Top Center
+  const pipeX = 215, pipeY = 165;
+  drawRoundBox(ctx, 40, pipeY, W - 80, 22, 6, '#475569', '#94a3b8', 2);
 
-  drawTasklessHUD(ctx, {
-    topStat: 'EMERGENCY',
-    topSub1: "ACROSS TOWN • SARAH'S LIVING ROOM",
-    topSub2: 'BURST CEILING PIPE • WATER FLOODING',
-    rightLabel: 'THE STORY • 02'
-  });
-
-  const ceilingY = 165;
-  const floorY = 720;
-
-  // Ceiling & Floor
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
-  ctx.lineWidth = 3;
+  // Gushing Water Waterfall & Droplets from Pipe Rupture
+  const waterGrad = ctx.createLinearGradient(pipeX, pipeY + 22, pipeX, H * 0.77);
+  waterGrad.addColorStop(0, 'rgba(56, 189, 248, 0.85)');
+  waterGrad.addColorStop(1, 'rgba(14, 165, 233, 0.25)');
+  ctx.fillStyle = waterGrad;
   ctx.beginPath();
-  ctx.moveTo(36, ceilingY);
-  ctx.lineTo(W - 36, ceilingY);
-  ctx.moveTo(36, floorY);
-  ctx.lineTo(W - 36, floorY);
-  ctx.stroke();
-
-  // Burst Pipe on Ceiling
-  ctx.strokeStyle = '#64748b';
-  ctx.lineWidth = 14;
-  ctx.beginPath();
-  ctx.moveTo(70, ceilingY - 8);
-  ctx.lineTo(215, ceilingY - 8);
-  ctx.lineTo(215, ceilingY + 28);
-  ctx.stroke();
-
-  // Pressurized Water Gushing & Flooding
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 3;
-  for (let s = 0; s < 6; s++) {
-    const sprayAngle = Math.PI / 2 + Math.sin(t * 22 + s * 1.1) * 0.48;
-    const sprayLen = 28 + Math.sin(t * 16 + s * 2) * 14;
-    ctx.beginPath();
-    ctx.moveTo(215, ceilingY + 28);
-    ctx.lineTo(215 + Math.cos(sprayAngle) * sprayLen, ceilingY + 28 + Math.sin(sprayAngle) * sprayLen);
-    ctx.stroke();
-  }
-
-  ctx.fillStyle = '#38bdf8';
-  for (let d = 0; d < 9; d++) {
-    const dropProg = ((t * 3.0 + d * 0.11) % 1.0);
-    const dropY = ceilingY + 34 + dropProg * (floorY - (ceilingY + 34));
-    const dropX = 215 + Math.sin(dropProg * 8 + d) * 8;
-    ctx.beginPath();
-    ctx.arc(dropX, dropY, 4.5, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Bucket overflowing on floor
-  const bucketX = 215;
-  ctx.fillStyle = '#475569';
-  ctx.beginPath();
-  ctx.moveTo(bucketX - 30, floorY);
-  ctx.lineTo(bucketX - 22, floorY - 46);
-  ctx.lineTo(bucketX + 22, floorY - 46);
-  ctx.lineTo(bucketX + 30, floorY);
+  ctx.moveTo(pipeX - 18, pipeY + 22);
+  ctx.lineTo(pipeX + 18, pipeY + 22);
+  ctx.lineTo(pipeX + 68 + Math.sin(t * 10) * 8, H * 0.77);
+  ctx.lineTo(pipeX - 68 - Math.sin(t * 10) * 8, H * 0.77);
   ctx.closePath();
   ctx.fill();
 
-  // Rising water puddle across floor
-  const puddleW = 120 + Math.sin(t * 5) * 15;
+  // Animated Water Splash Droplets
+  ctx.fillStyle = '#7dd3fc';
+  for (let d = 0; d < 18; d++) {
+    const prog = ((t * 2.2 + d * 0.13) % 1.0);
+    const side = (d % 2 === 0) ? 1 : -1;
+    const dx = pipeX + side * (15 + (d % 5) * 18) * prog;
+    const dy = (pipeY + 25) + prog * (H * 0.77 - pipeY - 30);
+    ctx.beginPath();
+    ctx.arc(dx, dy, 4.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Rising Flood Water Pool on Stage Floor
   ctx.fillStyle = 'rgba(56, 189, 248, 0.35)';
   ctx.beginPath();
-  ctx.ellipse(bucketX, floorY, puddleW, 8, 0, 0, Math.PI * 2);
+  ctx.ellipse(pipeX, H * 0.77, 150 + Math.sin(t * 6) * 12, 18, 0, 0, Math.PI * 2);
   ctx.fill();
 
-  // Homeowner Sarah Frantically Calling Bob
-  const sarahX = 375 + Math.sin(t * 4) * 5;
-  const sarahY = floorY - 115;
+  // Panicked Homeowner Sarah (Full Cueva Illustrated Character calling Bob!)
+  drawCuevaCharacter(ctx, {
+    x: 375,
+    y: H * 0.77,
+    scale: 0.96,
+    outfit: 'sweater_coral',
+    hair: 'auburn',
+    mood: 'panic',
+    leftArmAngle: 0.75 + Math.sin(t * 12) * 0.2,
+    rightArmAngle: -1.65,
+    holdingItem: 'phone'
+  }, t);
 
-  ctx.fillStyle = '#f8fafc';
-  ctx.beginPath();
-  ctx.arc(sarahX, sarahY - 50, 18, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.strokeStyle = '#f8fafc';
-  ctx.lineWidth = 5;
-  ctx.beginPath();
-  ctx.moveTo(sarahX, sarahY - 32);
-  ctx.lineTo(sarahX, sarahY + 42);
-  ctx.moveTo(sarahX, sarahY + 42);
-  ctx.lineTo(sarahX - 18, floorY);
-  ctx.moveTo(sarahX, sarahY + 42);
-  ctx.lineTo(sarahX + 18, floorY);
-  ctx.stroke();
-
-  // Sarah holding phone to ear
-  ctx.beginPath();
-  ctx.moveTo(sarahX, sarahY - 16);
-  ctx.lineTo(sarahX - 22, sarahY - 36);
-  ctx.lineTo(sarahX - 14, sarahY - 50);
-  ctx.stroke();
-
-  // Other arm waving in panic
-  const panicWave = Math.sin(t * 10) * 14;
-  ctx.beginPath();
-  ctx.moveTo(sarahX, sarahY - 16);
-  ctx.lineTo(sarahX + 32, sarahY - 42 + panicWave);
-  ctx.stroke();
-
-  // Call Status Banner Above Sarah
-  drawRoundBox(ctx, 270, 250, 234, 110, 14, '#0f172a', 'rgba(56, 189, 248, 0.6)', 1.5);
+  // Calling Bob Callout Bubble
+  drawRoundBox(ctx, 42, 255, 225, 115, 16, '#0f172a', '#38bdf8', 2.5);
   ctx.font = '800 12px "JetBrains Mono", sans-serif';
   ctx.fillStyle = '#38bdf8';
   ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-  ctx.fillText('📲 SARAH CALLING BOB FIRST', 286, 268);
-
-  ctx.font = '900 20px "Space Grotesk", sans-serif';
+  ctx.fillText('📲 DIALING #1 ON GOOGLE:', 60, 286);
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
   ctx.fillStyle = '#ffffff';
-  ctx.fillText("BOB'S MASTER HVAC", 286, 292);
-
-  ctx.font = '600 12px "Inter", sans-serif';
-  ctx.fillStyle = '#facc15';
-  ctx.fillText('• Dialing #1 Google Result...', 286, 326);
+  ctx.fillText("BOB'S PLUMBING", 60, 316);
+  ctx.font = '700 13px "Inter", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.fillText(' Value: $8,000 Emergency', 60, 346);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 6 (44.2s - 51.4s): Bob's Phone Buzzing 3 Times & Dumping to Voicemail
-// "Bob's phone buzzes in his pocket, once, twice, three times, and dumps straight to voicemail. Sarah doesn't leave a message,"
+// SCENE 6 (44.2s - 51.4s): Cueva Call Detector Machine & Voicemail Dump
+// "Bob's phone buzzes in his pocket, once, twice, three times, and dumps straight to voicemail."
 // ----------------------------------------------------------------------------
 function renderTasklessScene6_PhoneBuzzToVoicemail(t) {
+  drawCuevaRoom(ctx, '#7f1d1d', '#280505', '#110202', 3, t, 'RING 1... RING 2... RING 3 -> VOICEMAIL');
+
   ctx.save();
-  ctx.fillStyle = '#040406';
-  ctx.fillRect(0, 0, W, H);
+  const isVoicemail = t >= 48.2;
+  const ringCount = t < 45.6 ? 1 : (t < 47.0 ? 2 : 3);
 
-  const isVoicemail = (t >= 48.3);
+  // Cueva Analog Call Meter Machine (Matches cueva_frame_03!)
+  const machX = 85, machY = 185, machW = 370, machH = 490;
+  const shakeX = (!isVoicemail) ? Math.sin(t * 48) * 5 : 0;
+  ctx.translate(shakeX, 0);
 
-  drawTasklessHUD(ctx, {
-    topStat: isVoicemail ? 'VOICEMAIL' : 'RINGING...',
-    topSub1: "BOB'S POCKET PHONE • 20FT UP LADDER",
-    topSub2: isVoicemail ? 'CALL DROPPED • ZERO MESSAGE LEFT' : 'BUZZING ONCE... TWICE... THREE TIMES',
-    rightLabel: 'THE STORY • 03'
-  });
+  drawRoundBox(ctx, machX, machY, machW, machH, 26, '#1f2937', isVoicemail ? '#ef4444' : '#facc15', 3.5);
 
-  // Giant Smartphone Schematic in Center Vibrating Violently
-  const vibeX = isVoicemail ? 0 : Math.sin(t * 55) * 6;
-  const vibeY = isVoicemail ? 0 : Math.cos(t * 45) * 3;
-  const phoneW = 240;
-  const phoneH = 420;
-  const phoneX = (W - phoneW) / 2 + vibeX;
-  const phoneY = 175 + vibeY;
-
-  // Concentric Buzz Shockwaves around Phone
-  if (!isVoicemail) {
-    for (let w = 1; w <= 3; w++) {
-      const ringR = 130 + w * 28 + ((t * 60) % 25);
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(250, 204, 21, ' + (0.45 - w * 0.1) + ')';
-      ctx.lineWidth = 2;
-      ctx.arc(W / 2, phoneY + phoneH / 2, ringR, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-  }
-
-  drawRoundBox(ctx, phoneX, phoneY, phoneW, phoneH, 28, '#0f172a', isVoicemail ? '#ef4444' : '#facc15', 3);
-
-  // Speaker Notch
-  drawRoundBox(ctx, phoneX + phoneW / 2 - 30, phoneY + 14, 60, 6, 3, '#334155', null);
-
-  // Caller Avatar Circle
-  ctx.fillStyle = isVoicemail ? 'rgba(239, 68, 68, 0.2)' : 'rgba(34, 197, 94, 0.2)';
+  // Big Dial Gauge at Top of Machine
+  const dialX = W / 2, dialY = machY + 125, dialR = 88;
+  ctx.fillStyle = '#f8fafc';
   ctx.beginPath();
-  ctx.arc(phoneX + phoneW / 2, phoneY + 95, 38, 0, Math.PI * 2);
+  ctx.arc(dialX, dialY, dialR, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = isVoicemail ? '#ef4444' : '#ca8a04';
+  ctx.stroke();
+
+  // Green -> Amber -> Red Danger Zones
+  ctx.lineWidth = 12;
+  ctx.strokeStyle = '#22c55e';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 0.85, Math.PI * 1.3);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#f59e0b';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 1.3, Math.PI * 1.75);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#ef4444';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 1.75, Math.PI * 2.15);
+  ctx.stroke();
+
+  // Needle pinning into Red Voicemail zone
+  const needleTarget = isVoicemail ? 0.95 : (ringCount * 0.25);
+  const needleAngle = -Math.PI * 0.6 + needleTarget * (Math.PI * 1.25);
+  ctx.save();
+  ctx.translate(dialX, dialY);
+  ctx.rotate(needleAngle);
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 5.5;
+  ctx.beginPath();
+  ctx.moveTo(0, 12);
+  ctx.lineTo(0, -(dialR - 16));
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.fillStyle = '#0f172a';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, 11, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.font = '32px sans-serif';
+  // Machine Center Plaque
+  drawRoundBox(ctx, machX + 24, machY + 235, machW - 48, 60, 12, '#090d16', null);
+  ctx.font = '900 24px "Space Grotesk", sans-serif';
+  ctx.fillStyle = isVoicemail ? '#ef4444' : '#facc15';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(isVoicemail ? '🔇' : '📲', phoneX + phoneW / 2, phoneY + 95);
+  ctx.fillText(isVoicemail ? '❌ DUMPED TO VOICEMAIL' : ('📳 BUZZING POCKET • RING #' + ringCount), W / 2, machY + 265);
 
-  ctx.font = '800 18px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('HOMEOWNER SARAH', phoneX + phoneW / 2, phoneY + 160);
+  // 3 Ring Bulbs + 4th Voicemail Bulb
+  const labels = ['ONCE', 'TWICE', '3 TIMES', 'DEAD VM'];
+  for (let b = 0; b < 4; b++) {
+    const bx = machX + 58 + b * 84;
+    const by = machY + 348;
+    const active = (b < 3 && ringCount > b) || (b === 3 && isVoicemail);
+    const col = (b === 3) ? '#ef4444' : '#facc15';
 
-  ctx.font = '700 13px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#38bdf8';
-  ctx.fillText('EMERGENCY PIPE & AC ($8,000)', phoneX + phoneW / 2, phoneY + 184);
+    ctx.beginPath();
+    ctx.arc(bx, by, 20, 0, Math.PI * 2);
+    ctx.fillStyle = active ? col : '#111827';
+    if (active) {
+      ctx.shadowColor = col;
+      ctx.shadowBlur = 18;
+    }
+    ctx.fill();
+    ctx.shadowBlur = 0;
 
-  // 3 Buzz Indicators (Once, Twice, Three Times)
-  const rings = [
-    { label: 'BUZZ #1', active: t >= 44.4 },
-    { label: 'BUZZ #2', active: t >= 45.6 },
-    { label: 'BUZZ #3', active: t >= 46.6 }
-  ];
-
-  rings.forEach((rg, idx) => {
-    const ry = phoneY + 218 + idx * 38;
-    const bgCol = rg.active ? (isVoicemail ? 'rgba(239, 68, 68, 0.2)' : 'rgba(250, 204, 21, 0.2)') : '#1e293b';
-    const borderCol = rg.active ? (isVoicemail ? '#ef4444' : '#facc15') : '#334155';
-    drawRoundBox(ctx, phoneX + 24, ry, phoneW - 48, 30, 8, bgCol, borderCol, 1.5);
-
-    ctx.font = '800 12px "JetBrains Mono", sans-serif';
-    ctx.fillStyle = rg.active ? '#ffffff' : '#64748b';
+    ctx.font = '800 11px "JetBrains Mono", sans-serif';
+    ctx.fillStyle = active ? '#ffffff' : '#64748b';
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(rg.label + (rg.active ? ' • UNANSWERED' : ''), phoneX + phoneW / 2, ry + 15);
-  });
+    ctx.fillText(labels[b], bx, by + 34);
+  }
 
-  // Bottom Voicemail Graveyard Banner inside Phone
-  const vmBg = isVoicemail ? '#ef4444' : '#1e293b';
-  drawRoundBox(ctx, phoneX + 20, phoneY + 345, phoneW - 40, 52, 10, vmBg, null);
-  ctx.font = '900 14px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
+  // Bottom Status Banner
+  drawRoundBox(ctx, machX + 24, machY + 410, machW - 48, 52, 10, 'rgba(239, 68, 68, 0.18)', '#ef4444', 1.5);
+  ctx.font = '800 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#fca5a5';
   ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(isVoicemail ? '❌ DUMPED TO VOICEMAIL' : '⏳ BOB CANNOT REACH PHONE', phoneX + phoneW / 2, phoneY + 363);
-  ctx.font = '600 11px "Inter", sans-serif';
-  ctx.fillText(isVoicemail ? 'Sarah hangs up immediately' : 'Hands locked on wrench in attic', phoneX + phoneW / 2, phoneY + 382);
+  ctx.fillText(isVoicemail ? 'HOMEOWNER HANGS UP IMMEDIATELY' : 'BOB IS STILL 20FT UP THE LADDER...', W / 2, machY + 440);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 7 (51.4s - 57.5s): The 78% Conversion Benchmark
-// "because 78% of homeowners hire the very first business that answers."
+// SCENE 7 (51.4s - 57.5s): Cueva Underwater Fishing Hook Metaphor (Matches cueva_frame_06!)
+// "Sarah doesn't leave a message, because 78% of homeowners hire the very first business that answers.
+//  Within ten seconds, she taps the next contractor on Google."
 // ----------------------------------------------------------------------------
 function renderTasklessScene7_Stat78Percent(t) {
+  drawCuevaRoom(ctx, '#0f766e', '#042f2e', '#021c1b', 3, t, 'THE 78% SPEED-TO-LEAD LAW');
+
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
+  // Warm golden sunlight header at top (just like cueva_frame_06!)
+  ctx.fillStyle = '#d97706';
+  ctx.fillRect(0, 0, W, 54);
 
-  drawTasklessHUD(ctx, {
-    topStat: '78%',
-    topSub1: 'WIN RATE OF 1ST RESPONDER',
-    topSub2: 'HOMEOWNERS NEVER LEAVE VOICEMAILS',
-    rightLabel: 'THE LAW • 04'
-  });
+  // Floating underwater bubbles
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+  ctx.lineWidth = 2;
+  for (let b = 0; b < 10; b++) {
+    const bx = 55 + (b * 48) % (W - 80);
+    const by = 650 - ((t * 45 + b * 62) % 520);
+    ctx.beginPath();
+    ctx.arc(bx, by, 6 + (b % 3) * 3, 0, Math.PI * 2);
+    ctx.stroke();
+  }
 
-  const prog = Math.min(1.0, Math.max(0, (t - 51.4) / 1.0));
-  const currentStat = Math.floor(prog * 78);
+  // Fishing Line & J-Hook dropping from top center
+  const hookX = W / 2;
+  const hookY = 335 + Math.sin(t * 3.5) * 10;
 
-  ctx.font = '900 116px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#facc15';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.shadowColor = 'rgba(250, 204, 21, 0.5)';
-  ctx.shadowBlur = 32;
-  ctx.fillText(currentStat + '%', W / 2, H * 0.35);
-  ctx.shadowBlur = 0;
-
-  ctx.font = '800 19px "Inter", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('HIRE THE VERY FIRST SHOP THAT ANSWERS', W / 2, H * 0.45);
-
-  const laneY = H * 0.54;
-  const laneW = W - 72;
-  const laneX = 36;
-
-  // Lane 1: First Responder
-  drawRoundBox(ctx, laneX, laneY, laneW, 64, 12, '#0f172a', 'rgba(34, 197, 94, 0.5)', 1.5);
-  const barProg = Math.min(1.0, Math.max(0.1, (t - 51.8) / 1.2));
-  drawRoundBox(ctx, laneX + 4, laneY + 4, (laneW - 8) * 0.78 * barProg, 56, 8, '#22c55e', null);
-
-  ctx.font = '800 15px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('⚡ ANSWERS ON RING 1', laneX + 16, laneY + 32);
-  ctx.textAlign = 'right';
-  ctx.fillText('WINS $8,000 JOB', laneX + laneW - 16, laneY + 32);
-
-  // Lane 2: Bob's Voicemail
-  const lane2Y = laneY + 84;
-  drawRoundBox(ctx, laneX, lane2Y, laneW, 64, 12, '#160c0e', 'rgba(239, 68, 68, 0.45)', 1.5);
-  drawRoundBox(ctx, laneX + 4, lane2Y + 4, (laneW - 8) * 0.22, 56, 8, 'rgba(239, 68, 68, 0.28)', null);
-
-  ctx.font = '800 15px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#fca5a5';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillText("🔇 BOB'S VOICEMAIL", laneX + 16, lane2Y + 32);
-  ctx.textAlign = 'right';
-  ctx.fillStyle = '#ef4444';
-  ctx.fillText('$0 • LOST LEAD', laneX + laneW - 16, lane2Y + 32);
-
-  ctx.restore();
-}
-
-// ----------------------------------------------------------------------------
-// SCENE 8 (57.5s - 64.8s): Sarah Taps Next Contractor on Google & Competitor Steals $8,000 Check
-// "Within ten seconds, she taps the next contractor on Google. That shop answers on ring one, rolls a truck, and collects an $8,000 check that had Bob's name written all over it."
-// ----------------------------------------------------------------------------
-function renderTasklessScene8_CompetitorStealsCheck(t) {
-  ctx.save();
-  ctx.fillStyle = '#030509';
-  ctx.fillRect(0, 0, W, H);
-
-  drawTasklessHUD(ctx, {
-    topStat: '-$8,000',
-    topStatUnit: 'LOST',
-    topSub1: 'SARAH TAPS NEXT CONTRACTOR ON GOOGLE',
-    topSub2: 'COMPETITOR ANSWERS RING 1 & ROLLS TRUCK',
-    rightLabel: 'THE STORY • 05'
-  });
-
-  // Google Search Results Card at Top
-  const searchY = 145;
-  drawRoundBox(ctx, 36, searchY, W - 72, 165, 14, '#0f172a', '#334155', 1.5);
-
-  // Row 1: Bob's Shop (Crossed out / Missed)
-  drawRoundBox(ctx, 52, searchY + 18, W - 104, 56, 8, 'rgba(239, 68, 68, 0.12)', 'rgba(239, 68, 68, 0.4)', 1);
-  ctx.font = '800 14px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#94a3b8';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillText("1. Bob's Master HVAC & Plumbing", 68, searchY + 38);
-  ctx.font = '700 11px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#ef4444';
-  ctx.fillText('❌ NO ANSWER (VOICEMAIL) — SKIPPED IN 10s', 68, searchY + 58);
-
-  // Row 2: Competitor Shop (Tapped & Hired!)
-  drawRoundBox(ctx, 52, searchY + 86, W - 104, 62, 8, 'rgba(34, 197, 94, 0.16)', '#22c55e', 1.5);
-  ctx.font = '800 14px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('2. Apex Express Rival Contractors', 68, searchY + 106);
-  ctx.font = '700 11px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#4ade80';
-  ctx.fillText('✅ ANSWERED ON RING 1 • TRUCK DISPATCHED', 68, searchY + 128);
-
-  // Flying $8,000 Check with "BOB'S NAME" crossed out landing in Competitor Truck!
-  const checkY = 355 + Math.sin(t * 6) * 6;
-  drawRoundBox(ctx, 56, checkY, W - 112, 130, 14, '#062c19', '#22c55e', 2);
-
-  ctx.font = '700 11px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#86efac';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-  ctx.fillText('💵 HOMEOWNER REPLACEMENT CHECK #4092', 76, checkY + 16);
-
-  ctx.font = '900 38px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#4ade80';
-  ctx.fillText('$8,000.00', 76, checkY + 40);
-
-  // Pay to the order of: BOB crossed out -> COMPETITOR
-  ctx.font = '700 13px "Inter", sans-serif';
-  ctx.fillStyle = '#fca5a5';
-  ctx.fillText("PAY TO: BOB'S HVAC", 76, checkY + 92);
-  // Red strikethrough line over Bob's name
-  ctx.strokeStyle = '#ef4444';
+  ctx.strokeStyle = '#e2e8f0';
   ctx.lineWidth = 2.5;
   ctx.beginPath();
-  ctx.moveTo(132, checkY + 99);
-  ctx.lineTo(222, checkY + 99);
+  ctx.moveTo(hookX, 54);
+  ctx.lineTo(hookX, hookY - 35);
   ctx.stroke();
 
-  ctx.font = '800 14px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#facc15';
-  ctx.fillText('➔ HANDED TO COMPETITOR!', 232, checkY + 91);
-
-  // Competitor Truck Driving Across Street at Y = 665
-  const streetY = 710;
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-  ctx.lineWidth = 2;
+  // Silver J-Hook
+  ctx.strokeStyle = '#cbd5e1';
+  ctx.lineWidth = 6;
+  ctx.lineCap = 'round';
   ctx.beginPath();
-  ctx.moveTo(24, streetY);
-  ctx.lineTo(W - 24, streetY);
+  ctx.moveTo(hookX, hookY - 40);
+  ctx.lineTo(hookX, hookY - 8);
+  ctx.arc(hookX - 16, hookY - 8, 16, 0, Math.PI);
   ctx.stroke();
 
-  const truckProg = ((t - 57.5) / 7.3);
-  const truckX = 60 + Math.min(1.0, Math.max(0, truckProg)) * 240;
-  const truckY = streetY - 62;
-
-  drawRoundBox(ctx, truckX, truckY, 155, 52, 8, '#1e293b', '#38bdf8', 1.5);
-  drawRoundBox(ctx, truckX + 95, truckY - 14, 75, 66, 6, '#334155', '#475569', 1.5);
-
-  ctx.font = '800 11px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#38bdf8';
-  ctx.textAlign = 'left';
-  ctx.fillText('RIVAL #2 TRUCK', truckX + 12, truckY + 26);
-
-  ctx.font = '900 14px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#4ade80';
-  ctx.fillText('+$8,000', truckX + 104, truckY + 22);
-
-  // Wheels
-  for (let w = 0; w < 2; w++) {
-    const wx = truckX + 35 + w * 102;
-    ctx.fillStyle = '#0f172a';
-    ctx.beginPath();
-    ctx.arc(wx, streetY, 16, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = '#94a3b8';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.arc(wx, streetY, 16, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-
-  ctx.restore();
-}
-
-// ----------------------------------------------------------------------------
-// SCENE 9 (64.8s - 76.2s): Ava 0.8s Autonomous Answer, Booking & SMS Dispatch to Bob
-// "That is why we built Ava. She answers your phone in 0.8 seconds, calms the homeowner down, qualifies the job, books your calendar, and texts the dispatch straight to Bob's phone before the customer can even open another Google tab."
-// ----------------------------------------------------------------------------
-function renderTasklessScene9_AvaInstantReply(t) {
+  // White Tilted Sign on Hook: "78% HIRE FIRST TO ANSWER" (Matches cueva_frame_06 "YOUR WORK?" sign!)
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
-
-  drawTasklessHUD(ctx, {
-    topStat: '0.8s',
-    topStatUnit: 'SPEED',
-    topSub1: 'AVA 24/7 AUTONOMOUS VOICE AI',
-    topSub2: 'ANSWERS • QUALIFIES • BOOKS • TEXTS BOB',
-    rightLabel: 'AVA SOLUTION'
-  });
-
-  const orbX = W / 2;
-  const orbY = 255;
-  const orbR = 64;
-
-  ctx.save();
-  for (let r = 1; r <= 3; r++) {
-    const ringRadius = orbR + r * 18;
-    const ringAngle = (t * (0.9 / r)) % (Math.PI * 2);
-    ctx.save();
-    ctx.translate(orbX, orbY);
-    ctx.rotate(ringAngle);
-    ctx.strokeStyle = (r === 1) ? 'rgba(34, 197, 94, 0.45)' : 'rgba(103, 232, 249, 0.3)';
-    ctx.lineWidth = 1.5;
-    ctx.setLineDash([12, 14]);
-    ctx.beginPath();
-    ctx.arc(0, 0, ringRadius, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  const coreGrad = ctx.createRadialGradient(orbX, orbY, 8, orbX, orbY, orbR);
-  coreGrad.addColorStop(0, '#ffffff');
-  coreGrad.addColorStop(0.35, '#34d399');
-  coreGrad.addColorStop(0.75, '#059669');
-  coreGrad.addColorStop(1, 'rgba(5, 150, 105, 0.1)');
-  ctx.fillStyle = coreGrad;
-  ctx.shadowColor = 'rgba(52, 211, 153, 0.8)';
-  ctx.shadowBlur = 30;
-  ctx.beginPath();
-  ctx.arc(orbX, orbY, orbR, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.shadowBlur = 0;
-
-  ctx.font = '900 28px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
+  ctx.translate(hookX, hookY + 36);
+  ctx.rotate(-0.04);
+  drawRoundBox(ctx, -155, -34, 310, 68, 22, '#ffffff', '#0f172a', 2);
+  ctx.font = '900 24px "Montserrat", "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#090d16';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('AVA', orbX, orbY);
+  ctx.fillText('78% HIRE FIRST ANSWER', 0, -4);
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#0d9488';
+  ctx.fillText('$8,000 EMERGENCY LEAD', 0, 18);
   ctx.restore();
 
-  // 32-Band Reactive Audio Waveform
-  const waveY = 385;
-  const waveW = W - 96;
-  const waveX = 48;
-  const barCount = 32;
-  const barW = (waveW / barCount) - 4;
+  // Left Pink Fish (BOB'S VOICEMAIL - Swimming Away Left)
+  const pinkX = 145 - Math.sin(t * 2) * 12;
+  const pinkY = 435;
+  ctx.fillStyle = '#fb7185';
+  ctx.beginPath();
+  ctx.ellipse(pinkX, pinkY, 64, 28, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(pinkX - 58, pinkY);
+  ctx.lineTo(pinkX - 88, pinkY - 24);
+  ctx.lineTo(pinkX - 88, pinkY + 24);
+  ctx.closePath();
+  ctx.fill();
 
-  ctx.save();
-  for (let b = 0; b < barCount; b++) {
-    const bx = waveX + b * (barW + 4);
-    const waveFreq = Math.abs(Math.sin(t * 12 + b * 0.4) * Math.cos(t * 7 + b * 0.2));
-    const barH = 8 + waveFreq * 46;
+  ctx.font = '900 14px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.fillText('VOICEMAIL (0%)', pinkX, pinkY + 48);
 
-    const barGrad = ctx.createLinearGradient(bx, waveY - barH / 2, bx, waveY + barH / 2);
-    barGrad.addColorStop(0, '#67e8f9');
-    barGrad.addColorStop(0.5, '#34d399');
-    barGrad.addColorStop(1, '#059669');
-    drawRoundBox(ctx, bx, waveY - barH / 2, barW, barH, 3, barGrad, null);
-  }
-  ctx.restore();
+  // Right Neon Lime Fish (NEXT SHOP ON GOOGLE - Swimming Up to Hook!)
+  const limeX = 355 + Math.cos(t * 3) * 8;
+  const limeY = 485;
+  ctx.fillStyle = '#a3e635';
+  ctx.beginPath();
+  ctx.ellipse(limeX, limeY, 72, 32, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(limeX + 66, limeY);
+  ctx.lineTo(limeX + 98, limeY - 26);
+  ctx.lineTo(limeX + 98, limeY + 26);
+  ctx.closePath();
+  ctx.fill();
+  // Fish Eye
+  ctx.fillStyle = '#090d16';
+  ctx.beginPath();
+  ctx.arc(limeX - 42, limeY - 6, 5.5, 0, Math.PI * 2);
+  ctx.fill();
 
-  // Compact Dispatch Card (Positioned cleanly above the caption zone: Y=440 to Y=660)
-  const cardY = 440;
-  const cardH = 215;
-  drawRoundBox(ctx, 36, cardY, W - 72, cardH, 16, '#0f172a', 'rgba(52, 211, 153, 0.5)', 1.5);
-
-  const items = [
-    { icon: '⚡', title: 'ANSWERED IN 0.8 SECONDS', sub: 'Sarah calmed down & emergency qualified', color: '#34d399' },
-    { icon: '📅', title: 'CALENDAR LOCKED ($8,000 JOB)', sub: "Booked onto Bob's afternoon schedule", color: '#67e8f9' },
-    { icon: '📲', title: 'INSTANT SMS DISPATCH TO BOB', sub: "Texted straight to Bob's phone on ladder", color: '#facc15' }
-  ];
-
-  items.forEach((item, idx) => {
-    const itemY = cardY + 20 + idx * 64;
-    ctx.font = '20px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
-    ctx.fillText(item.icon, 56, itemY);
-
-    ctx.font = '800 14px "Space Grotesk", sans-serif';
-    ctx.fillStyle = item.color;
-    ctx.fillText(item.title, 88, itemY + 2);
-
-    ctx.font = '600 12px "Inter", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.72)';
-    ctx.fillText(item.sub, 88, itemY + 22);
-  });
+  ctx.font = '900 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#fde047';
+  ctx.textAlign = 'center';
+  ctx.fillText('NEXT ON GOOGLE (WINS $8K)', limeX, limeY + 52);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 10 (76.2s - 81.0s): Revenue Protection Waterfall
+// SCENE 8 (57.5s - 64.8s): Competitor Answers Ring 1 & Cashes Bob's $8,000 Check
+// "That shop answers on ring one, rolls a truck, and collects an $8,000 check that had Bob's name written all over it."
+// ----------------------------------------------------------------------------
+function renderTasklessScene8_CompetitorStealsCheck(t) {
+  drawCuevaRoom(ctx, '#3b0764', '#140324', '#08010f', 4, t, "COMPETITOR CASHES BOB'S $8,000 CHECK");
+
+  ctx.save();
+  // Giant $8,000 Cashier's Check Centerpiece
+  const chkX = 48, chkY = 175, chkW = W - 96, chkH = 195;
+  drawRoundBox(ctx, chkX, chkY, chkW, chkH, 18, '#064e3b', '#4ade80', 3);
+
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#a7f3d0';
+  ctx.textAlign = 'left';
+  ctx.fillText('EMERGENCY PLUMBING & WATER PAYOUT', chkX + 24, chkY + 32);
+
+  ctx.font = '900 54px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.fillText('$8,000.00', chkX + 24, chkY + 95);
+
+  // Pay to the order of: BOB'S PLUMBING (Crossed out in red!) -> COMPETITOR #2
+  ctx.font = '800 16px "Space Grotesk", sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+  ctx.fillText("PAY TO: BOB'S CONTRACTING", chkX + 24, chkY + 138);
+
+  // Red strike-through line over Bob's name
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(chkX + 95, chkY + 133);
+  ctx.lineTo(chkX + 295, chkY + 133);
+  ctx.stroke();
+
+  ctx.font = '900 17px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
+  ctx.fillText('➔ PAID TO: COMPETITOR (RING #1)', chkX + 24, chkY + 168);
+
+  // Left: Sad Contractor Bob Empty-Handed
+  drawCuevaCharacter(ctx, {
+    x: 138,
+    y: H * 0.77,
+    scale: 0.90,
+    outfit: 'contractor',
+    hair: 'hardhat',
+    mood: 'worried',
+    leftArmAngle: 0.4,
+    rightArmAngle: -0.4
+  }, t);
+
+  // Right: Smirking Competitor in Blue Sweater celebrating
+  drawCuevaCharacter(ctx, {
+    x: 395,
+    y: H * 0.77,
+    scale: 0.90,
+    outfit: 'sweater_blue',
+    hair: 'slick_dark',
+    mood: 'smile',
+    leftArmAngle: 2.3 + Math.sin(t * 8) * 0.15,
+    rightArmAngle: -2.3 - Math.sin(t * 8) * 0.15
+  }, t);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 9 (64.8s - 76.2s): Meet Ava 24/7 Voice AI Hologram (Matches cueva_frame_01!)
+// "That is why we built Ava. She answers your phone in 0.8 seconds, calms the homeowner down,
+//  qualifies the job, books your calendar, and texts the dispatch straight to Bob's phone
+//  before the customer can even open another Google tab."
+// ----------------------------------------------------------------------------
+function renderTasklessScene9_AvaInstantReply(t) {
+  drawCuevaRoom(ctx, '#1e1b4b', '#064e3b', '#031c16', 4, t, 'SOLUTION • AVA 24/7 VOICE AI (0.8s PICKUP)');
+
+  ctx.save();
+  // Cueva Neon AI Brain & Head Hologram on Right (Directly matches cueva_frame_01.png!)
+  const holoX = 335, holoY = 315;
+
+  // Pulsing Concentric Neural Rings
+  for (let r = 0; r < 3; r++) {
+    const rad = 95 + r * 28 + Math.sin(t * 5 + r) * 6;
+    ctx.strokeStyle = 'rgba(244, 114, 182, ' + (0.35 - r * 0.08) + ')';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(holoX, holoY, rad, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  // Glowing Neon Pink/Cyan Head Silhouette Outline
+  ctx.strokeStyle = '#f472b6';
+  ctx.lineWidth = 4.5;
+  ctx.shadowColor = '#f472b6';
+  ctx.shadowBlur = 16;
+  ctx.beginPath();
+  ctx.arc(holoX, holoY - 10, 82, -Math.PI * 0.85, Math.PI * 0.45);
+  ctx.lineTo(holoX + 35, holoY + 95);
+  ctx.lineTo(holoX - 35, holoY + 95);
+  ctx.lineTo(holoX - 42, holoY + 55);
+  ctx.lineTo(holoX - 75, holoY + 50);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Glowing Pink Neural Brain Inside Head
+  ctx.fillStyle = '#fb7185';
+  const brainLobes = [
+    { dx: -22, dy: -22, r: 28 },
+    { dx: 18,  dy: -22, r: 28 },
+    { dx: -28, dy: 4,   r: 24 },
+    { dx: 24,  dy: 4,   r: 24 },
+    { dx: 0,   dy: -8,  r: 26 }
+  ];
+  brainLobes.forEach(l => {
+    ctx.beginPath();
+    ctx.arc(holoX + l.dx, holoY + l.dy, l.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // Floating Cueva Action Icons around Ava Brain (Phone, Calendar, SMS Dispatch)
+  drawRoundBox(ctx, holoX - 88, holoY - 125, 176, 36, 10, '#065f46', '#4ade80', 2);
+  ctx.font = '900 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.textAlign = 'center';
+  ctx.fillText('⚡ AVA AI • 0.8s ANSWER', holoX, holoY - 102);
+
+  // Instant SMS Dispatch Card below Hologram
+  const smsY = 445;
+  drawRoundBox(ctx, 210, smsY, 295, 145, 16, '#0f172a', '#38bdf8', 2.5);
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#38bdf8';
+  ctx.textAlign = 'left';
+  ctx.fillText('📲 INSTANT SMS TO BOB (24s):', 228, smsY + 28);
+
+  ctx.font = '800 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('✅ Sarah Jenkins — Pipe Burst', 228, smsY + 56);
+  ctx.fillText('📍 Calendar Booked • Tech Dispatched', 228, smsY + 82);
+
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.fillText('💰 +$8,000 JOB LOCKED IN', 228, smsY + 118);
+
+  // Cueva Presenter on Left pointing to Ava Hologram (Matches cueva_frame_01!)
+  drawCuevaCharacter(ctx, {
+    x: 105,
+    y: H * 0.77,
+    scale: 0.94,
+    outfit: 'suit',
+    hair: 'curly_gold',
+    mood: 'talk',
+    leftArmAngle: 0.2,
+    rightArmAngle: -1.15 + Math.sin(t * 4) * 0.08
+  }, t);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 10 (76.2s - 81.0s): Stop Handing $8,000 Checks to Competitors
 // "Stop handing $8,000 checks to your competitors."
 // ----------------------------------------------------------------------------
 function renderTasklessScene10_RevenueWaterfall(t) {
-  ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
-
-  drawTasklessHUD(ctx, {
-    topStat: '+$80,000',
-    topStatUnit: 'MO',
-    topSub1: 'PROTECTED REVENUE CAPTURE',
-    topSub2: '10 SAVED HIGH-TICKET JOBS / MONTH',
-    rightLabel: 'ROI SCHEMATIC'
-  });
+  drawCuevaRoom(ctx, '#065f46', '#022c22', '#011712', 5, t, '100% REVENUE CAPTURED BY YOUR SHOP');
 
   ctx.save();
-  for (let d = 0; d < 26; d++) {
-    const dx = 48 + (d * 19) % (W - 96);
-    const dy = 150 + ((t * 160 + d * 45) % 520);
-    const dAlpha = 0.18 + 0.45 * Math.sin(t * 3 + d);
-    ctx.fillStyle = 'rgba(34, 197, 94, ' + dAlpha + ')';
-    ctx.font = '700 16px "Space Grotesk", sans-serif';
-    ctx.fillText('$', dx, dy);
-  }
-  ctx.restore();
-
-  const countProg = Math.min(1.0, Math.max(0.1, (t - 76.2) / 1.4));
-  const currentDollars = Math.floor(countProg * 80000);
-
-  ctx.font = '900 66px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#22c55e';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.shadowColor = 'rgba(34, 197, 94, 0.5)';
-  ctx.shadowBlur = 28;
-  ctx.fillText('+$' + currentDollars.toLocaleString(), W / 2, 340);
-  ctx.shadowBlur = 0;
-
-  ctx.font = '800 17px "Inter", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('REVENUE KEPT IN YOUR SHOP EVERY MONTH', W / 2, 405);
-
-  const boxY = 455;
-  drawRoundBox(ctx, 36, boxY, W - 72, 180, 14, '#0f172a', 'rgba(34, 197, 94, 0.4)', 1.5);
-
-  const metrics = [
-    { label: 'AVERAGE EMERGENCY TICKET', val: '$8,000.00' },
-    { label: 'MISSED CALLS CAPTURED / MO', val: '10 JOBS' },
-    { label: 'AVA PICKUP SPEED', val: '0.8 SECONDS' }
+  // 3 Stacked Captured Check Cards
+  const checks = [
+    { y: 165, title: 'EMERGENCY PIPE BURST (SARAH)', amt: '+$8,000', tag: 'CAPTURED IN 0.8s' },
+    { y: 268, title: 'SUNDAY AC COMPRESSOR FAILURE', amt: '+$9,200', tag: 'BOOKED ON CALENDAR' },
+    { y: 371, title: 'AFTER-HOURS MAIN PANEL SURGE', amt: '+$7,400', tag: 'DISPATCHED VIA SMS' }
   ];
 
-  metrics.forEach((m, idx) => {
-    const my = boxY + 32 + idx * 48;
-    ctx.font = '700 12px "JetBrains Mono", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(m.label, 56, my);
+  checks.forEach((c, idx) => {
+    const hoverX = Math.sin(t * 4 + idx) * 4;
+    drawRoundBox(ctx, 44 + hoverX, c.y, W - 88, 86, 16, '#0f172a', '#4ade80', 2.5);
 
-    ctx.font = '800 16px "Space Grotesk", sans-serif';
+    ctx.font = '800 13px "Space Grotesk", sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'left';
+    ctx.fillText(c.title, 66 + hoverX, c.y + 32);
+
+    ctx.font = '700 11px "JetBrains Mono", sans-serif';
+    ctx.fillStyle = '#38bdf8';
+    ctx.fillText('⚡ ' + c.tag, 66 + hoverX, c.y + 58);
+
+    ctx.font = '900 28px "Space Grotesk", sans-serif';
     ctx.fillStyle = '#4ade80';
     ctx.textAlign = 'right';
-    ctx.fillText(m.val, W - 56, my);
+    ctx.fillText(c.amt, W - 66 + hoverX, c.y + 52);
   });
+
+  // Happy Contractor Bob at Bottom Center celebrating
+  drawCuevaCharacter(ctx, {
+    x: W / 2,
+    y: H * 0.77,
+    scale: 0.82,
+    outfit: 'contractor',
+    hair: 'hardhat',
+    mood: 'smile',
+    leftArmAngle: 2.2 + Math.sin(t * 7) * 0.15,
+    rightArmAngle: -2.2 - Math.sin(t * 7) * 0.15
+  }, t);
 
   ctx.restore();
 }
@@ -1256,185 +1469,244 @@ function renderTasklessScene10_RevenueWaterfall(t) {
 // "Call the live demo number on your screen right now to hear Ava answer live,"
 // ----------------------------------------------------------------------------
 function renderTasklessScene11_LiveDialerInteractive(t) {
+  drawCuevaRoom(ctx, '#1e3a8a', '#09132c', '#040917', 5, t, 'TEST AVA LIVE ON YOUR PHONE RIGHT NOW');
+
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
+  const btnX = W / 2, btnY = 285, btnR = 72;
 
-  drawTasklessHUD(ctx, {
-    topStat: 'LIVE DEMO',
-    topSub1: '24/7 INTERACTIVE DIALER',
-    topSub2: 'CALL AVA RIGHT NOW ON SCREEN',
-    rightLabel: 'TEST AVA LIVE'
-  });
-
-  const btnX = W / 2;
-  const btnY = 345;
-  const btnR = 82;
-
-  for (let r = 0; r < 4; r++) {
-    const ringLoop = ((t * 45 + r * 28) % 115);
-    const ringAlpha = Math.max(0, 0.5 * (1 - ringLoop / 115));
+  for (let r = 0; r < 3; r++) {
+    const loopR = ((t * 42 + r * 28) % 90);
+    const alpha = Math.max(0, 0.55 * (1 - loopR / 90));
+    ctx.strokeStyle = 'rgba(74, 222, 128, ' + alpha + ')';
+    ctx.lineWidth = 2.5;
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(34, 197, 94, ' + ringAlpha + ')';
-    ctx.lineWidth = 2.0;
-    ctx.arc(btnX, btnY, btnR + ringLoop, 0, Math.PI * 2);
+    ctx.arc(btnX, btnY, btnR + loopR, 0, Math.PI * 2);
     ctx.stroke();
   }
 
-  const btnGrad = ctx.createRadialGradient(btnX - 20, btnY - 20, 10, btnX, btnY, btnR);
-  btnGrad.addColorStop(0, '#4ade80');
-  btnGrad.addColorStop(0.7, '#22c55e');
-  btnGrad.addColorStop(1, '#15803d');
-  ctx.fillStyle = btnGrad;
-  ctx.shadowColor = 'rgba(34, 197, 94, 0.7)';
-  ctx.shadowBlur = 35;
+  ctx.fillStyle = '#22c55e';
+  ctx.shadowColor = '#22c55e';
+  ctx.shadowBlur = 28;
   ctx.beginPath();
   ctx.arc(btnX, btnY, btnR, 0, Math.PI * 2);
   ctx.fill();
   ctx.shadowBlur = 0;
 
-  ctx.save();
-  ctx.translate(btnX, btnY - 8);
-  ctx.rotate(Math.sin(t * 8) * 0.12);
-  ctx.font = '48px sans-serif';
+  ctx.font = '44px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('📞', 0, 0);
-  ctx.restore();
+  ctx.fillText('📞', btnX, btnY - 6);
 
-  ctx.font = '800 16px "Space Grotesk", sans-serif';
+  ctx.font = '900 14px "Space Grotesk", sans-serif';
   ctx.fillStyle = '#ffffff';
+  ctx.fillText('CALL LIVE DEMO', btnX, btnY + 34);
+
+  // Giant Phone Number Plaque
+  drawRoundBox(ctx, 36, 405, W - 72, 118, 18, '#0f172a', '#facc15', 3);
+  ctx.font = '900 38px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
   ctx.textAlign = 'center';
-  ctx.fillText('CALL LIVE NOW', btnX, btnY + 42);
+  ctx.fillText('(561) 813-8602', W / 2, 452);
 
-  const numCardY = 515;
-  drawRoundBox(ctx, 36, numCardY, W - 72, 115, 16, '#0f172a', 'rgba(34, 197, 94, 0.55)', 2);
-
-  ctx.font = '900 36px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'top';
-  ctx.fillText('(561) 813-8602', W / 2, numCardY + 22);
-
-  ctx.font = '700 13px "JetBrains Mono", sans-serif';
+  ctx.font = '800 13px "JetBrains Mono", sans-serif';
   ctx.fillStyle = '#4ade80';
-  ctx.fillText('• LIVE 24/7 • AVA ANSWERS IN 0.8s', W / 2, numCardY + 74);
+  ctx.fillText('• LIVE 24/7 • HEAR AVA ANSWER IN 0.8s', W / 2, 492);
+
+  // Cueva Presenter at Bottom Left pointing up to number
+  drawCuevaCharacter(ctx, {
+    x: 110,
+    y: H * 0.77,
+    scale: 0.76,
+    outfit: 'suit',
+    hair: 'curly_gold',
+    mood: 'smile',
+    leftArmAngle: 0.2,
+    rightArmAngle: -1.9
+  }, t);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 12 (85.2s - 89.0s): The Taskless End Card
+// SCENE 12 (85.2s - 89.0s): Iconic Cueva Typewriter End Card (Matches cueva_frame_12!)
 // "or comment AVA below and we will DM you the free interactive link."
 // ----------------------------------------------------------------------------
 function renderTasklessScene12_TasklessEndCard(t) {
+  drawCuevaRoom(ctx, '#1d4ed8', '#0b132b', '#050914', 5, t, 'VANTORX AUTOMATION • INSTANT DM ACCESS');
+
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
+  const story = window.ACTIVE_STORY || {};
+  const kw = story.keyword || 'AVA';
 
-  drawTasklessHUD(ctx, {
-    topStat: 'FREE LINK',
-    topSub1: 'DIRECT RESPONSE ACCESS',
-    topSub2: 'INSTANT AUTOMATED DM',
-    rightLabel: 'VANTORX.COM'
-  });
+  // Cream Paper Sheet Rising Out of Cueva Typewriter (Directly matches cueva_frame_12.png!)
+  const paperX = 48, paperY = 148, paperW = W - 96, paperH = 385;
+  drawRoundBox(ctx, paperX, paperY, paperW, paperH, 6, '#fef9c3', '#ca8a04', 2);
 
-  const bannerY = 290;
-  const borderPulse = 0.5 + 0.5 * Math.sin(t * 8);
+  // Horizontal Ruled Paper Lines
+  ctx.strokeStyle = 'rgba(180, 140, 60, 0.18)';
+  ctx.lineWidth = 1;
+  for (let ly = paperY + 24; ly < paperY + paperH - 12; ly += 14) {
+    ctx.beginPath();
+    ctx.moveTo(paperX + 12, ly);
+    ctx.lineTo(paperX + paperW - 12, ly);
+    ctx.stroke();
+  }
 
-  drawRoundBox(ctx, 36, bannerY, W - 72, 145, 20, '#17140b', 'rgba(250, 204, 21, ' + (0.5 + borderPulse * 0.5) + ')', 3);
-
-  ctx.font = '700 14px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
-  ctx.textAlign = 'center';
+  // Bold Black Typewriter Headline on Cream Paper
+  ctx.font = '900 32px "Montserrat", "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#090d16';
+  ctx.textAlign = 'left';
   ctx.textBaseline = 'top';
-  ctx.fillText('DROP A COMMENT BELOW', W / 2, bannerY + 24);
+  ctx.fillText('DROP A COMMENT:', paperX + 28, paperY + 38);
 
-  ctx.font = '900 50px "Space Grotesk", sans-serif';
+  // Highlighted Keyword Box on Paper
+  drawRoundBox(ctx, paperX + 28, paperY + 92, paperW - 56, 86, 14, '#090d16', '#facc15', 3);
+  ctx.font = '900 44px "Montserrat", "Space Grotesk", sans-serif';
   ctx.fillStyle = '#facc15';
-  ctx.shadowColor = 'rgba(250, 204, 21, 0.6)';
-  ctx.shadowBlur = 20;
-  ctx.fillText('COMMENT "AVA"', W / 2, bannerY + 54);
-  ctx.shadowBlur = 0;
-
-  ctx.font = '600 13px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-  ctx.fillText('We will instantly DM you the free interactive link', W / 2, bannerY + 114);
-
-  const arrowY = bannerY + 185;
-  const arrowBounce = Math.sin(t * 7) * 8;
-  ctx.font = '38px sans-serif';
   ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('⬇️', W / 2, arrowY + arrowBounce);
+  ctx.fillText('COMMENT "' + kw + '"', W / 2, paperY + 114);
 
-  ctx.font = '800 20px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('VANTORX AUTOMATION', W / 2, 575);
+  // Solid Black Divider Bar (Matches cueva_frame_12!)
+  ctx.fillStyle = '#090d16';
+  ctx.fillRect(paperX + 28, paperY + 206, paperW - 56, 7);
 
-  ctx.font = '600 13px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-  ctx.fillText('Speed to Lead AI Engine • (561) 813-8602', W / 2, 602);
+  ctx.font = '800 17px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#1e293b';
+  ctx.textAlign = 'center';
+  ctx.fillText('WE WILL INSTANTLY DM YOUR FREE', W / 2, paperY + 232);
+  ctx.fillText('INTERACTIVE DEMO LINK IN 2 SECONDS', W / 2, paperY + 258);
+
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#0d9488';
+  ctx.fillText('📞 LIVE DEMO: (561) 813-8602', W / 2, paperY + 302);
+
+  // Tactile Dark Cueva Typewriter Base & Round Silver Keys at Bottom (Matches cueva_frame_12!)
+  const twY = 505;
+  drawRoundBox(ctx, 18, twY, W - 36, 225, 18, '#1e293b', '#475569', 3);
+  drawRoundBox(ctx, 28, twY + 52, W - 56, 165, 12, '#0f172a', null);
+
+  // 3 Rows of Round Silver Typewriter Keys (Animated key presses!)
+  const activeKey = Math.floor(t * 12) % 18;
+  let kIdx = 0;
+  for (let row = 0; row < 3; row++) {
+    const cols = (row === 1) ? 6 : 7;
+    const startKx = (row === 1) ? 88 : 64;
+    const ky = twY + 84 + row * 42;
+    for (let col = 0; col < cols; col++) {
+      const kx = startKx + col * 68;
+      const isPressed = (kIdx === activeKey);
+      ctx.fillStyle = isPressed ? '#facc15' : '#cbd5e1';
+      ctx.beginPath();
+      ctx.arc(kx, ky + (isPressed ? 3 : 0), 15, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#475569';
+      ctx.stroke();
+      kIdx++;
+    }
+  }
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// CUEVA-STYLE KINETIC CAPTIONS — EXACT ELEVENLABS WORD ALIGNMENT
-// Positioned cleanly in dedicated lower-third zone (Y = H - 125 = 835),
-// proportioned for 540x960 canvas (28px bold italic typography, zero overflow, zero overlap)
+// BOXLESS CUEVA KINETIC CAPTIONS — EXACT ELEVENLABS WORD ALIGNMENT
+// Floating cleanly over the dark stage floor (Y = H * 0.84 = 806) with a soft
+// radial shadow glow, ZERO rectangle boxes, ZERO 1-word flashes, ZERO blinking!
 // ----------------------------------------------------------------------------
-const CAPTION_CHUNKS = ${JSON.stringify(chunks)};
+const CAPTION_CHUNKS = ${JSON.stringify(captionChunks)};
+
+function buildDynamicChunksFromWords(wordsArr) {
+  if (!wordsArr || !wordsArr.length) return CAPTION_CHUNKS;
+  const colors = ['#ff6b4a', '#38bdf8', '#facc15', '#c084fc', '#4ade80'];
+  const out = [];
+  for (let i = 0; i < wordsArr.length; i += 3) {
+    const slice = wordsArr.slice(i, i + 3).map(w => ({
+      word: w.word,
+      rawWord: w.word,
+      start: w.start,
+      end: w.end
+    }));
+    const nextStart = wordsArr[i + 3] ? wordsArr[i + 3].start : (slice[slice.length - 1].end + 0.4);
+    out.push({
+      id: out.length + 1,
+      start: slice[0].start,
+      end: nextStart,
+      color: colors[out.length % colors.length],
+      words: slice
+    });
+  }
+  return out;
+}
 
 function renderPreciseCaptions(time) {
-  const chunk = CAPTION_CHUNKS.find(c => time >= c.start && time <= c.end);
+  const story = window.ACTIVE_STORY || {};
+  const chunks = (story.storyType && story.storyType !== 'cosmic_light' && window.ACTIVE_WORD_TIMESTAMPS)
+    ? buildDynamicChunksFromWords(window.ACTIVE_WORD_TIMESTAMPS)
+    : CAPTION_CHUNKS;
+
+  let chunk = chunks.find(c => time >= c.start && time <= c.end);
+  if (!chunk && time < 0.25 && chunks.length > 0) {
+    chunk = chunks[0];
+  }
   if (!chunk) return;
 
   ctx.save();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  const subY = H - 125; // Dedicated clear zone (y = 835 on 960px canvas)
-  const fontSpec = '900 italic 29px "Space Grotesk", "Inter", sans-serif';
+  const subY = H - 142; // Sits cleanly in the dark Cueva stage floor (y = 818 on 960px canvas)
+  const fontSpec = '900 italic 35px "Montserrat", "Space Grotesk", "Inter", sans-serif';
   ctx.font = fontSpec;
   ctx.textBaseline = 'middle';
   ctx.textAlign = 'left';
 
-  const spaceW = ctx.measureText(' ').width * 1.15;
+  const spaceW = ctx.measureText(' ').width * 1.18;
   const wordWidths = chunk.words.map(w => ctx.measureText(w.rawWord).width);
   const totalTextW = wordWidths.reduce((a, b) => a + b, 0) + (chunk.words.length - 1) * spaceW;
 
-  // Sleek soft dark backdrop pill (no gaudy yellow border, never overflows 540px canvas)
-  const padX = 20;
-  const padY = 12;
-  const pillW = Math.min(W - 32, totalTextW + padX * 2);
-  const pillH = 38 + padY;
-  const pillX = (W - pillW) / 2;
-  const pillY = subY - pillH / 2;
+  // Soft Diffused Radial Dark Shadow Glow behind words (NO bordered pill box — matches Cueva 100%!)
+  const glowGrad = ctx.createRadialGradient(W / 2, subY, 12, W / 2, subY, Math.max(160, totalTextW * 0.72));
+  glowGrad.addColorStop(0, 'rgba(0, 0, 0, 0.78)');
+  glowGrad.addColorStop(0.65, 'rgba(0, 0, 0, 0.42)');
+  glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = glowGrad;
+  ctx.fillRect(0, subY - 58, W, 116);
 
-  drawRoundBox(ctx, pillX, pillY, pillW, pillH, 12, 'rgba(4, 7, 14, 0.84)', 'rgba(255, 255, 255, 0.10)', 1);
+  // Determine active word index (closest or currently spoken word)
+  let activeWordIdx = chunk.words.findIndex(w => time >= w.start && time <= w.end);
+  if (activeWordIdx === -1) {
+    // If between words inside the chunk, keep the most recently spoken word highlighted
+    for (let i = chunk.words.length - 1; i >= 0; i--) {
+      if (time >= chunk.words[i].start) {
+        activeWordIdx = i;
+        break;
+      }
+    }
+    if (activeWordIdx === -1) activeWordIdx = 0;
+  }
 
   let curX = (W - totalTextW) / 2;
   chunk.words.forEach((w, idx) => {
-    const isSpoken = (time >= w.start && time <= w.end);
-    const hasBeenSpoken = (time > w.end);
+    const isCurrent = (idx === activeWordIdx);
 
     ctx.save();
     ctx.font = fontSpec;
 
-    // Crisp black outline for 100% legibility
+    // Deep Cueva drop shadow + crisp dark stroke
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+    ctx.shadowBlur = 14;
+    ctx.shadowOffsetY = 4;
     ctx.lineJoin = 'round';
-    ctx.lineWidth = 4.5;
+    ctx.lineWidth = 6.0;
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.92)';
     ctx.strokeText(w.rawWord, curX, subY);
 
-    if (isSpoken) {
-      ctx.fillStyle = '#facc15'; // Electric amber gold highlight on active spoken word
-      ctx.shadowColor = 'rgba(250, 204, 21, 0.65)';
-      ctx.shadowBlur = 10;
-    } else if (hasBeenSpoken) {
-      ctx.fillStyle = '#ffffff';
+    if (isCurrent) {
+      ctx.fillStyle = chunk.color || '#ff6b4a'; // Vibrant Cueva Coral / Cyan / Gold highlight
+      ctx.shadowColor = chunk.color || '#ff6b4a';
+      ctx.shadowBlur = 16;
     } else {
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.fillStyle = '#ffffff';
     }
 
     ctx.fillText(w.rawWord, curX, subY);
@@ -1453,22 +1725,23 @@ function renderCRTScanlines(time) {
   ctx.save();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.14)';
+  // Crisp horizontal analog CRT scanlines across entire frame (Matches cueva_frame_01..12)
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.16)';
   for (let y = 0; y < H; y += 4) {
-    ctx.fillRect(0, y, W, 1.2);
+    ctx.fillRect(0, y, W, 1.4);
   }
 
-  const beamY = (time * 160) % (H + 300) - 150;
+  const beamY = (time * 140) % (H + 300) - 150;
   const beamGrad = ctx.createLinearGradient(0, beamY - 100, 0, beamY + 100);
-  beamGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
-  beamGrad.addColorStop(0.5, 'rgba(56, 189, 248, 0.03)');
-  beamGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+  beamGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+  beamGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.025)');
+  beamGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
   ctx.fillStyle = beamGrad;
   ctx.fillRect(0, beamY - 100, W, 200);
 
-  const vignette = ctx.createRadialGradient(W / 2, H / 2, H * 0.38, W / 2, H / 2, H * 0.78);
+  const vignette = ctx.createRadialGradient(W / 2, H / 2, H * 0.36, W / 2, H / 2, H * 0.78);
   vignette.addColorStop(0, 'rgba(0, 0, 0, 0)');
-  vignette.addColorStop(1, 'rgba(5, 7, 13, 0.40)');
+  vignette.addColorStop(1, 'rgba(3, 4, 10, 0.44)');
   ctx.fillStyle = vignette;
   ctx.fillRect(0, 0, W, H);
 
@@ -1485,22 +1758,22 @@ function renderFrame(time) {
 
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = '#090612';
   ctx.fillRect(0, 0, W, H);
   ctx.beginPath();
 
   ctx.save();
 
-  // Continuous organic camera motion (zero motionless frames!)
-  const camZoom = 1.015 + Math.sin(time * 0.4) * 0.018 + ((time % 7.0) / 7.0) * 0.03;
-  const camPanX = Math.sin(time * 0.7) * 4.5 + Math.cos(time * 1.2) * 2.0;
-  const camPanY = Math.cos(time * 0.5) * 3.5 + Math.sin(time * 0.9) * 1.8;
+  // Gentle organic Cueva camera breathing
+  const camZoom = 1.012 + Math.sin(time * 0.45) * 0.012;
+  const camPanX = Math.sin(time * 0.65) * 3.0;
+  const camPanY = Math.cos(time * 0.5) * 2.5;
 
   ctx.translate(W / 2, H / 2);
   ctx.scale(camZoom, camZoom);
   ctx.translate(-W / 2 + camPanX, -H / 2 + camPanY);
 
-  // 12-SCENE PROGRESSION ALIGNED 1:1 TO THE 89.0s EXTENDED HOOK & BOB/SARAH STORY
+  // 12-SCENE CUEVA STORY PROGRESSION ALIGNED 1:1 TO THE 89.0s AUDIO
   if (time < 8.0) {
     renderTasklessScene1_LaserCrowd(time);
   } else if (time < 21.0) {
@@ -1527,17 +1800,15 @@ function renderFrame(time) {
     renderTasklessScene12_TasklessEndCard(time);
   }
 
-  drawAmbientDustParticles(ctx, time);
-
-  // Smooth cinematic transition at scene cuts
+  // Smooth Cueva transition dip at scene cuts
   const sceneCuts = [8.0, 21.0, 27.6, 36.8, 44.2, 51.4, 57.5, 64.8, 76.2, 81.0, 85.2];
   let minCutDist = 999;
   for (let c = 0; c < sceneCuts.length; c++) {
     minCutDist = Math.min(minCutDist, Math.abs(time - sceneCuts[c]));
   }
-  if (minCutDist < 0.15) {
-    const fadeProg = 1 - (minCutDist / 0.15);
-    const dipAlpha = Math.sin(fadeProg * (Math.PI / 2)) * 0.24;
+  if (minCutDist < 0.14) {
+    const fadeProg = 1 - (minCutDist / 0.14);
+    const dipAlpha = Math.sin(fadeProg * (Math.PI / 2)) * 0.28;
     ctx.fillStyle = 'rgba(0, 0, 0, ' + dipAlpha + ')';
     ctx.fillRect(0, 0, W, H);
   }
@@ -1549,6 +1820,5 @@ function renderFrame(time) {
 }
 `;
 
-const outPath = path.resolve(__dirname, 'taskless_engine_code.js');
-fs.writeFileSync(outPath, engineCode, 'utf8');
-console.log('Successfully generated scripts/taskless_engine_code.js (' + engineCode.length + ' chars)');
+fs.writeFileSync(path.resolve(__dirname, 'taskless_engine_code.js'), engineCode);
+console.log('Generated Cueva taskless_engine_code.js with ' + captionChunks.length + ' boxless Cueva caption chunks.');

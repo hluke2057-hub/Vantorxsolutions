@@ -20,7 +20,7 @@ async function render() {
   console.log('Output file:', outMp4);
 
   const fps = 30;
-  const duration = 63.0;
+  const duration = 89.0;
   const totalFrames = Math.ceil(duration * fps);
   console.log(`Total frames to render: ${totalFrames} (${duration}s at ${fps} FPS)`);
 
@@ -67,7 +67,7 @@ async function render() {
   await new Promise(r => setTimeout(r, 1200));
 
   // Render in batches of 30 frames
-  const batchSize = 30;
+  const batchSize = 60;
   let frameIdx = 0;
   const startTime = Date.now();
 

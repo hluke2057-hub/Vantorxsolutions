@@ -1,1626 +1,1635 @@
 // ============================================================================
-// VANTORX VIRAL REEL ENGINE — 1:1 TASKLESS STUDIO VISUAL IDENTITY (EXTENDED HOOK)
-// Pure black void, minimalist technical schematics, HUD metrics, clean kinetic typography
-// ZERO STILL FRAMES: Continuous organic camera motion, ambient dust particles, dynamic kinematics
+// VANTORX VIRAL REEL ENGINE — AUTHENTIC CUEVA ILLUSTRATED STUDIO ENGINE
+// 89.0s Extended Hook (0-27.6s) + Full "Bob & Sarah" Story (27.6-64.8s) + Ava AI (64.8-89.0s)
+// Rich Colored Studio Backdrops, Top 1-5 Stepper, Expressive 2D Characters,
+// Tactile Machines (Speedometer, Balance Scale, Fishing Hook, Hologram, Typewriter),
+// and Boxless Cueva Kinetic Captions with CRT Scanline Shader.
 // ============================================================================
 
-// Global polyfill for roundRect
-if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) {
-  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
-    if (typeof r === 'undefined') r = 0;
-    if (typeof r === 'number') r = { tl: r, tr: r, br: r, bl: r };
-    this.beginPath();
-    this.moveTo(x + r.tl, y);
-    this.lineTo(x + w - r.tr, y);
-    this.quadraticCurveTo(x + w, y, x + w, y + r.tr);
-    this.lineTo(x + w, y + h - r.br);
-    this.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
-    this.lineTo(x + r.bl, y + h);
-    this.quadraticCurveTo(x, y + h, x, y + h - r.bl);
-    this.lineTo(x, y + r.tl);
-    this.quadraticCurveTo(x, y, x + r.tl, y);
-    this.closePath();
-    return this;
-  };
-}
-
-// ----------------------------------------------------------------------------
-// HUD OVERLAY: Minimalist Clean Technical Telemetry
-// ----------------------------------------------------------------------------
-function drawTasklessHUD(ctx, opts) {
-  ctx.save();
-
-  // Top Left Metric
-  if (opts.topStat) {
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '800 44px "Space Grotesk", sans-serif';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
-    ctx.fillText(opts.topStat, 40, 50);
-
-    if (opts.topStatUnit) {
-      const statW = ctx.measureText(opts.topStat).width;
-      ctx.font = '600 20px "Space Grotesk", sans-serif';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      ctx.fillText(' ' + opts.topStatUnit, 40 + statW, 68);
-    }
-
-    let subY = 102;
-    ctx.font = '700 12px "Inter", "JetBrains Mono", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.55)';
-    if (opts.topSub1) {
-      ctx.fillText(opts.topSub1.toUpperCase(), 42, subY);
-      subY += 17;
-    }
-    if (opts.topSub2) {
-      ctx.fillText(opts.topSub2.toUpperCase(), 42, subY);
-    }
+function drawRoundBox(ctx, x, y, w, h, r, fillColor, strokeColor, lineW = 1.5) {
+  ctx.beginPath();
+  if (typeof ctx.roundRect === 'function') {
+    ctx.roundRect(x, y, w, h, r);
+  } else {
+    const rad = typeof r === 'number' ? r : 8;
+    ctx.moveTo(x + rad, y);
+    ctx.lineTo(x + w - rad, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + rad);
+    ctx.lineTo(x + w, y + h - rad);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - rad, y + h);
+    ctx.lineTo(x + rad, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - rad);
+    ctx.lineTo(x, y + rad);
+    ctx.quadraticCurveTo(x, y, x + rad, y);
+    ctx.closePath();
   }
-
-  // Top Right Context Label
-  if (opts.rightLabel) {
-    ctx.font = '700 12px "Inter", "JetBrains Mono", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
-    ctx.textAlign = 'right';
-    ctx.textBaseline = 'top';
-    ctx.fillText(opts.rightLabel.toUpperCase(), W - 40, 56);
-  }
-
-  ctx.restore();
-}
-
-// ----------------------------------------------------------------------------
-// ZERO STILL FRAMES: Ambient Floating Particle Field (45 motes across canvas)
-// ----------------------------------------------------------------------------
-function drawAmbientDustParticles(ctx, t) {
-  ctx.save();
-  for (let i = 0; i < 45; i++) {
-    const speedX = 14 + (i % 7) * 5;
-    const speedY = (8 + (i % 5) * 4) * (i % 2 === 0 ? 1 : -0.7);
-    const px = ((i * 127.3 + t * speedX) % (W + 60)) - 30;
-    const py = ((i * 193.7 + t * speedY) % (H + 60)) - 30;
-    const pSize = 1.0 + (i % 3) * 0.9;
-    const pAlpha = 0.10 + 0.18 * Math.sin(t * 2.2 + i * 0.8);
-    
-    ctx.fillStyle = (i % 3 === 0) ? 'rgba(103, 232, 249, ' + pAlpha + ')' :
-                    (i % 3 === 1) ? 'rgba(74, 222, 128, ' + pAlpha + ')' :
-                                    'rgba(250, 204, 21, ' + (pAlpha * 0.8) + ')';
-    ctx.beginPath();
-    ctx.arc(px, py, pSize, 0, Math.PI * 2);
+  if (fillColor) {
+    ctx.fillStyle = fillColor;
     ctx.fill();
   }
+  if (strokeColor) {
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = lineW;
+    ctx.stroke();
+  }
+}
+
+// ----------------------------------------------------------------------------
+// CUEVA STUDIO ROOM BACKDROP + STAGE FLOOR + TOP ① ② ③ ④ ⑤ PROGRESS STEPPER
+// ----------------------------------------------------------------------------
+function drawCuevaRoom(ctx, wallTop, wallBot, floorColor, activeStep, t, topTag) {
+  ctx.save();
+  const bg = ctx.createLinearGradient(0, 0, 0, H * 0.77);
+  bg.addColorStop(0, wallTop);
+  bg.addColorStop(1, wallBot);
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H * 0.77);
+
+  // Subtle vertical studio wall paneling texture (like Cueva's crimson/teal rooms)
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.018)';
+  for (let x = 0; x < W; x += 36) {
+    ctx.fillRect(x, 0, 14, H * 0.77);
+  }
+
+  // Soft ambient center studio spotlight
+  const spot = ctx.createRadialGradient(W / 2, H * 0.38, 20, W / 2, H * 0.38, 320);
+  spot.addColorStop(0, 'rgba(255, 255, 255, 0.09)');
+  spot.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = spot;
+  ctx.fillRect(0, 0, W, H * 0.77);
+
+  // Dark Stage Floor (Bottom 23% where captions float cleanly with zero clutter!)
+  const floorGrad = ctx.createLinearGradient(0, H * 0.77, 0, H);
+  floorGrad.addColorStop(0, floorColor || '#090612');
+  floorGrad.addColorStop(1, '#020105');
+  ctx.fillStyle = floorGrad;
+  ctx.fillRect(0, H * 0.77, W, H * 0.23);
+
+  // Crisp stage floor horizon molding line
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(0, H * 0.77);
+  ctx.lineTo(W, H * 0.77);
+  ctx.stroke();
+
+  // Cueva Top Progress Stepper Circles: ① ② ③ ④ ⑤ (Matches cueva_frame_06, 08, 09, 12)
+  const stepY = 92;
+  const spacing = 36;
+  const startX = W / 2 - (spacing * 2);
+
+  // Golden ambient glow behind active stepper pills
+  const glowCount = Math.max(1, Math.min(5, activeStep));
+  const glowCenterX = startX + ((glowCount - 1) * spacing) / 2;
+  const stepGlow = ctx.createRadialGradient(glowCenterX, stepY, 4, glowCenterX, stepY, 85);
+  stepGlow.addColorStop(0, 'rgba(250, 204, 21, 0.35)');
+  stepGlow.addColorStop(1, 'rgba(250, 204, 21, 0)');
+  ctx.fillStyle = stepGlow;
+  ctx.beginPath();
+  ctx.arc(glowCenterX, stepY, 85, 0, Math.PI * 2);
+  ctx.fill();
+
+  for (let i = 1; i <= 5; i++) {
+    const cx = startX + (i - 1) * spacing;
+    const isLit = i <= activeStep;
+    const isCurrent = i === activeStep;
+    const r = isCurrent ? (13.5 + Math.sin(t * 6) * 1.0) : 12.5;
+
+    ctx.beginPath();
+    ctx.arc(cx, stepY, r, 0, Math.PI * 2);
+    if (isLit) {
+      ctx.fillStyle = '#facc15';
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#fef08a';
+      ctx.stroke();
+
+      ctx.font = '900 13px "Montserrat", "Space Grotesk", sans-serif';
+      ctx.fillStyle = '#090d16';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(i), cx, stepY + 0.5);
+    } else {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.fill();
+      ctx.lineWidth = 1.8;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+      ctx.stroke();
+    }
+  }
+
+  if (topTag) {
+    ctx.font = '800 11px "JetBrains Mono", "Space Grotesk", sans-serif';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(topTag.toUpperCase(), W / 2, stepY + 22);
+  }
+
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 1 (0.0s - 7.2s): Laser Crowd Hook
-// Crowd of 2D flat vector silhouettes pointing green lasers up into space
-// Foreground arm with green laser pointer emitting vibrant pulsing beam
+// CUEVA 2D ILLUSTRATED CHARACTER RENDERER (Matches cueva_frame_01, 02, 09)
+// Full expressive face, eyes with specular shine, eyebrows, talking mouth,
+// sculpted hair/hardhat, suit jacket / sweater / high-vis vest, hands & shoes!
+// ----------------------------------------------------------------------------
+function drawCuevaCharacter(ctx, opts, t) {
+  const {
+    x,
+    y, // Foot level Y (typically H * 0.77 = 739)
+    scale = 1.0,
+    outfit = 'suit', // 'suit' | 'contractor' | 'sweater_blue' | 'sweater_coral'
+    hair = 'curly_gold', // 'curly_gold' | 'hardhat' | 'auburn' | 'slick_dark'
+    mood = 'smile', // 'smile' | 'talk' | 'panic' | 'worried' | 'smirk'
+    leftArmAngle = 0.25,
+    rightArmAngle = -0.25,
+    holdingItem = null // 'wrench' | 'phone' | 'check' | 'pointer'
+  } = opts;
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(scale, scale);
+
+  const bob = Math.sin(t * 4.5 + x * 0.02) * 2.5;
+
+  // 1. Shoes on stage floor
+  ctx.fillStyle = (outfit === 'sweater_blue' || outfit === 'sweater_coral') ? '#e2e8f0' : '#111827';
+  ctx.beginPath();
+  ctx.ellipse(-26, -6, 20, 9, 0, 0, Math.PI * 2);
+  ctx.ellipse(26, -6, 20, 9, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 2. Legs / Trousers
+  ctx.fillStyle = (outfit === 'contractor') ? '#1e293b' : '#1f2937';
+  drawRoundBox(ctx, -38, -105, 26, 98, 6, ctx.fillStyle, null);
+  drawRoundBox(ctx, 12, -105, 26, 98, 6, ctx.fillStyle, null);
+
+  // 3. Torso (with breathing motion)
+  ctx.save();
+  ctx.translate(0, bob);
+
+  if (outfit === 'suit') {
+    // Charcoal blazer body
+    drawRoundBox(ctx, -48, -225, 96, 125, 16, '#27272a', '#3f3f46', 1.5);
+    // Light blue dress shirt V-insert
+    ctx.fillStyle = '#bae6fd';
+    ctx.beginPath();
+    ctx.moveTo(-22, -225);
+    ctx.lineTo(22, -225);
+    ctx.lineTo(0, -165);
+    ctx.closePath();
+    ctx.fill();
+    // White collar points
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.moveTo(-24, -226);
+    ctx.lineTo(-6, -226);
+    ctx.lineTo(-16, -208);
+    ctx.closePath();
+    ctx.moveTo(24, -226);
+    ctx.lineTo(6, -226);
+    ctx.lineTo(16, -208);
+    ctx.closePath();
+    ctx.fill();
+    // 3 Suit Buttons
+    ctx.fillStyle = '#9ca3af';
+    [-150, -132, -114].forEach(by => {
+      ctx.beginPath();
+      ctx.arc(0, by, 3.2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  } else if (outfit === 'contractor') {
+    // Blue work shirt base
+    drawRoundBox(ctx, -48, -225, 96, 125, 16, '#1d4ed8', null);
+    // High-vis orange safety vest over shirt
+    drawRoundBox(ctx, -46, -223, 92, 120, 14, '#f97316', '#fb923c', 1.5);
+    // Reflective yellow/silver safety stripes
+    ctx.fillStyle = '#fde047';
+    ctx.fillRect(-46, -155, 92, 10);
+    ctx.fillRect(-46, -130, 92, 10);
+    ctx.fillRect(-30, -223, 12, 68);
+    ctx.fillRect(18, -223, 12, 68);
+  } else {
+    const sweaterCol = (outfit === 'sweater_coral') ? '#f43f5e' : '#2563eb';
+    const trimCol = (outfit === 'sweater_coral') ? '#e11d48' : '#1d4ed8';
+    drawRoundBox(ctx, -48, -225, 96, 125, 18, sweaterCol, null);
+    drawRoundBox(ctx, -48, -120, 96, 16, 6, trimCol, null);
+  }
+
+  // 4. Articulated Left & Right Arms + Round Cueva Hands
+  const armCol = (outfit === 'suit') ? '#27272a' : (outfit === 'contractor') ? '#1d4ed8' : (outfit === 'sweater_coral') ? '#f43f5e' : '#2563eb';
+  [-1, 1].forEach(side => {
+    const isRight = side === 1;
+    const shoulderX = side * 48;
+    const shoulderY = -208;
+    const angle = isRight ? rightArmAngle : leftArmAngle;
+
+    ctx.save();
+    ctx.translate(shoulderX, shoulderY);
+    ctx.rotate(angle);
+
+    // Sleeve
+    drawRoundBox(ctx, -12, 0, 24, 78, 11, armCol, null);
+    // White shirt cuff on suit
+    if (outfit === 'suit') {
+      drawRoundBox(ctx, -11, 70, 22, 8, 3, '#ffffff', null);
+    }
+    // Round Peach Hand
+    ctx.fillStyle = '#eab68c';
+    ctx.beginPath();
+    ctx.arc(0, 86, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Optional held item in right hand
+    if (isRight && holdingItem === 'wrench') {
+      ctx.save();
+      ctx.translate(4, 86);
+      ctx.rotate(-0.6 + Math.sin(t * 7) * 0.25);
+      drawRoundBox(ctx, -5, -45, 10, 48, 4, '#cbd5e1', '#64748b', 1.5);
+      ctx.beginPath();
+      ctx.arc(0, -48, 12, 0.4, Math.PI * 2 - 0.4);
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.stroke();
+      ctx.restore();
+    } else if (isRight && holdingItem === 'phone') {
+      ctx.save();
+      ctx.translate(6, 86);
+      ctx.rotate(-0.3);
+      drawRoundBox(ctx, -12, -32, 24, 42, 5, '#0f172a', '#38bdf8', 2);
+      ctx.fillStyle = '#38bdf8';
+      ctx.fillRect(-8, -26, 16, 28);
+      ctx.restore();
+    }
+
+    ctx.restore();
+  });
+
+  // 5. Head (Large expressive Cueva round head)
+  const headY = -278;
+  ctx.fillStyle = '#eab68c';
+  ctx.beginPath();
+  ctx.arc(0, headY, 46, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Subtle warm forehead shadow under hair
+  ctx.fillStyle = 'rgba(180, 115, 70, 0.28)';
+  ctx.beginPath();
+  ctx.ellipse(0, headY - 18, 34, 14, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 6. Eyes with Cueva white specular shine
+  [-15, 15].forEach(ex => {
+    ctx.fillStyle = '#111827';
+    ctx.beginPath();
+    ctx.arc(ex, headY - 4, 5.8, 0, Math.PI * 2);
+    ctx.fill();
+    // White pupil shine dot
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(ex - 1.8, headY - 6, 2.0, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // 7. Expressive Eyebrows
+  ctx.strokeStyle = '#3f2314';
+  ctx.lineWidth = 4.2;
+  ctx.lineCap = 'round';
+  if (mood === 'panic' || mood === 'worried') {
+    ctx.beginPath();
+    ctx.moveTo(-24, headY - 14);
+    ctx.lineTo(-8, headY - 20);
+    ctx.moveTo(24, headY - 14);
+    ctx.lineTo(8, headY - 20);
+    ctx.stroke();
+  } else {
+    ctx.beginPath();
+    ctx.moveTo(-23, headY - 17);
+    ctx.lineTo(-8, headY - 16);
+    ctx.moveTo(8, headY - 16);
+    ctx.lineTo(23, headY - 17);
+    ctx.stroke();
+  }
+
+  // 8. Expressive Mouth
+  ctx.strokeStyle = '#5c2814';
+  ctx.fillStyle = '#5c2814';
+  ctx.lineWidth = 4.0;
+  if (mood === 'panic') {
+    const openH = 8 + Math.abs(Math.sin(t * 10)) * 5;
+    ctx.beginPath();
+    ctx.ellipse(0, headY + 16, 11, openH, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (mood === 'worried') {
+    ctx.beginPath();
+    ctx.ellipse(0, headY + 16, 9, 4.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (mood === 'talk') {
+    const talkOpen = 3 + Math.abs(Math.sin(t * 14)) * 6;
+    ctx.beginPath();
+    ctx.ellipse(0, headY + 15, 10, talkOpen, 0, 0, Math.PI * 2);
+    ctx.fill();
+  } else {
+    // Signature Cueva confident warm smile
+    ctx.beginPath();
+    ctx.arc(0, headY + 8, 14, 0.2, Math.PI - 0.15);
+    ctx.stroke();
+  }
+
+  // 9. Hair / Hardhat
+  if (hair === 'curly_gold') {
+    // Signature Cueva fluffy golden-brown curly hair (Matches cueva_frame_01, 02, 09)
+    ctx.fillStyle = '#b4823e';
+    const puffs = [
+      { cx: -32, cy: headY - 22, r: 20 },
+      { cx: -16, cy: headY - 40, r: 24 },
+      { cx: 8,   cy: headY - 42, r: 25 },
+      { cx: 30,  cy: headY - 24, r: 21 },
+      { cx: -38, cy: headY - 4,  r: 16 },
+      { cx: 38,  cy: headY - 4,  r: 16 },
+      { cx: 0,   cy: headY - 28, r: 22 }
+    ];
+    puffs.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.cx, p.cy, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    // White glossy hair highlight pill
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.lineWidth = 4.5;
+    ctx.beginPath();
+    ctx.moveTo(-24, headY - 34);
+    ctx.lineTo(-14, headY - 42);
+    ctx.stroke();
+  } else if (hair === 'hardhat') {
+    // Brown hair sides
+    ctx.fillStyle = '#78350f';
+    ctx.beginPath();
+    ctx.arc(-38, headY - 10, 12, 0, Math.PI * 2);
+    ctx.arc(38, headY - 10, 12, 0, Math.PI * 2);
+    ctx.fill();
+    // Yellow Contractor Safety Hardhat
+    ctx.fillStyle = '#facc15';
+    ctx.beginPath();
+    ctx.arc(0, headY - 16, 48, Math.PI, Math.PI * 2);
+    ctx.fill();
+    drawRoundBox(ctx, -56, headY - 20, 112, 11, 5, '#eab308', '#fef08a', 1.5);
+    // White glossy shine on hardhat dome
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.lineWidth = 4.5;
+    ctx.beginPath();
+    ctx.arc(0, headY - 16, 36, Math.PI + 0.4, Math.PI + 1.1);
+    ctx.stroke();
+  } else if (hair === 'auburn') {
+    // Smooth sculpted auburn hair (Matches cueva_frame_02 right character)
+    ctx.fillStyle = '#9a3412';
+    ctx.beginPath();
+    ctx.arc(0, headY - 14, 48, Math.PI - 0.15, Math.PI * 2 + 0.15);
+    ctx.fill();
+    // White glossy highlight
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.88)';
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(16, headY - 40);
+    ctx.lineTo(28, headY - 30);
+    ctx.stroke();
+  } else {
+    ctx.fillStyle = '#1e293b';
+    ctx.beginPath();
+    ctx.arc(0, headY - 14, 47, Math.PI - 0.1, Math.PI * 2 + 0.1);
+    ctx.fill();
+  }
+
+  ctx.restore();
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 1 (0.0s - 8.0s): Cueva Presenter & The 186,000 MI/S Photon Transmitter
+// "If you point a single beam of laser light into the night sky, it fires into the dark at 186,000 miles per second."
 // ----------------------------------------------------------------------------
 function renderTasklessScene1_LaserCrowd(t) {
+  const story = window.ACTIVE_STORY || {};
+  const topLabel = (story.storyType && story.storyType !== 'cosmic_light')
+    ? (story.storyTitle || 'SPEED-TO-LEAD HOOK')
+    : 'THE SPEED OF LIGHT PARADOX • 186,000 MI/S';
+
+  drawCuevaRoom(ctx, '#1e1b4b', '#0f0a2c', '#070510', 1, t, topLabel);
+
   ctx.save();
-  
-  // Very subtle deep teal-to-black atmosphere gradient
-  const bg = ctx.createLinearGradient(0, 0, 0, H);
-  bg.addColorStop(0, '#060d10');
-  bg.addColorStop(0.5, '#0b1417');
-  bg.addColorStop(1, '#020507');
-  ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, W, H);
+  // Starfield observatory window on upper right
+  const winX = 215, winY = 150, winW = 285, winH = 290;
+  drawRoundBox(ctx, winX, winY, winW, winH, 22, '#040711', '#38bdf8', 2.5);
 
-  // HUD
-  drawTasklessHUD(ctx, {
-    topStat: '186,000',
-    topStatUnit: 'mi/s',
-    topSub1: 'SPEED OF LIGHT IN VACUUM',
-    topSub2: 'SCHEMATIC • 1 FRAME = 1 SEC',
-    rightLabel: 'PHOTON VELOCITY'
-  });
-
-  // Background Crowd of Minimalist Vector People with subtle breathing/sway
-  const crowdCount = 18;
-  for (let i = 0; i < crowdCount; i++) {
-    const sway = Math.sin(t * 2.5 + i * 0.8) * 3;
-    const cx = 50 + (i % 6) * 85 + ((i * 17) % 30) + sway * 0.5;
-    const cy = H - 280 - Math.floor(i / 6) * 70 + Math.sin(t * 3.0 + i) * 2;
-    const depth = 0.5 + Math.floor(i / 6) * 0.22;
-    const alpha = 0.18 + depth * 0.35;
-
-    // Head
-    ctx.fillStyle = 'rgba(203, 213, 225, ' + (alpha * 0.8) + ')';
+  // Twinkling stars inside observatory viewport
+  for (let i = 0; i < 24; i++) {
+    const sx = winX + 20 + ((i * 53) % (winW - 40));
+    const sy = winY + 20 + ((i * 71) % (winH - 40));
+    const sAlpha = 0.35 + 0.65 * Math.abs(Math.sin(t * 3 + i));
+    ctx.fillStyle = 'rgba(255, 255, 255, ' + sAlpha + ')';
     ctx.beginPath();
-    ctx.arc(cx, cy - 22 * depth, 11 * depth, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Body
-    ctx.fillStyle = 'rgba(148, 163, 184, ' + alpha + ')';
-    ctx.beginPath();
-    ctx.roundRect(cx - 13 * depth, cy - 10 * depth, 26 * depth, 45 * depth, 4);
-    ctx.fill();
-
-    // Small laser pointer beams from crowd
-    if (i % 3 === 0) {
-      const beamJitter = Math.sin(t * 15 + i * 3) * 4;
-      ctx.strokeStyle = 'rgba(74, 222, 128, ' + (alpha * 0.6) + ')';
-      ctx.lineWidth = 1.2;
-      ctx.beginPath();
-      ctx.moveTo(cx + 8 * depth, cy - 15 * depth);
-      ctx.lineTo(cx + 80 + beamJitter, 0);
-      ctx.stroke();
-    }
-  }
-
-  // Foreground Giant Arm & Hand Holding Laser
-  ctx.save();
-  const armSway = Math.sin(t * 2.0) * 5;
-  const handBaseX = W * 0.38 + armSway;
-  const handBaseY = H * 0.44 + Math.cos(t * 1.8) * 3;
-
-  // Arm reaching up from bottom-left
-  ctx.fillStyle = '#b7835b'; // Warm skin tone
-  ctx.beginPath();
-  ctx.moveTo(W * 0.10, H);
-  ctx.lineTo(W * 0.24, H);
-  ctx.lineTo(handBaseX + 32, handBaseY + 60);
-  ctx.lineTo(handBaseX - 32, handBaseY + 60);
-  ctx.closePath();
-  ctx.fill();
-
-  // Hand Palm
-  ctx.beginPath();
-  ctx.roundRect(handBaseX - 35, handBaseY - 20, 70, 70, 16);
-  ctx.fill();
-
-  // 4 Fingers pointing up
-  const fingerW = 12;
-  const fingerH = 50;
-  for (let f = 0; f < 4; f++) {
-    const fx = handBaseX - 25 + f * 17;
-    const fy = handBaseY - 20 - fingerH + (f === 1 ? -6 : f === 2 ? -4 : 0);
-    ctx.beginPath();
-    ctx.roundRect(fx, fy, fingerW, fingerH + 10, 6);
+    ctx.arc(sx, sy, (i % 3 === 0) ? 2.2 : 1.3, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  // Laser Pointer Device in Hand
-  const deviceX = handBaseX + 28;
-  const deviceY = handBaseY - 50;
-  ctx.fillStyle = '#1e293b';
-  ctx.beginPath();
-  ctx.roundRect(deviceX - 10, deviceY - 24, 20, 48, 6);
-  ctx.fill();
+  // Big Cueva Telemetry Badge inside Observatory Window
+  drawRoundBox(ctx, winX + 18, winY + 18, winW - 36, 76, 12, 'rgba(15, 23, 42, 0.9)', 'rgba(56, 189, 248, 0.5)', 1.5);
+  ctx.font = '900 32px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillText(story.statNumber && story.storyType !== 'cosmic_light' ? story.statNumber : '186,000 MI/S', winX + winW / 2, winY + 26);
 
-  // Laser Emitter Glowing Dot
-  const emitterX = deviceX;
-  const emitterY = deviceY - 26;
-  const glowPulse = 0.8 + 0.2 * Math.sin(t * 14);
+  ctx.font = '800 11px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#38bdf8';
+  ctx.fillText('PHOTON VELOCITY IN DEEP SPACE', winX + winW / 2, winY + 66);
 
-  // Intense Emerald Glow Aura
-  const emitterGlow = ctx.createRadialGradient(emitterX, emitterY, 2, emitterX, emitterY, 40 * glowPulse);
-  emitterGlow.addColorStop(0, 'rgba(74, 222, 128, 1)');
-  emitterGlow.addColorStop(0.3, 'rgba(34, 197, 94, 0.7)');
-  emitterGlow.addColorStop(1, 'rgba(34, 197, 94, 0)');
-  ctx.fillStyle = emitterGlow;
-  ctx.beginPath();
-  ctx.arc(emitterX, emitterY, 40 * glowPulse, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Laser Beam shooting up-right towards top of screen
-  const targetX = W * 0.84 + Math.sin(t * 6) * 6;
-  const targetY = 0;
-
-  // Outer Emerald Glow
-  ctx.beginPath();
-  ctx.strokeStyle = 'rgba(74, 222, 128, 0.45)';
-  ctx.lineWidth = 16 + Math.sin(t * 16) * 4;
-  ctx.moveTo(emitterX, emitterY);
-  ctx.lineTo(targetX, targetY);
-  ctx.stroke();
-
-  // Mid Beam
-  ctx.beginPath();
-  ctx.strokeStyle = '#22c55e';
+  // Tripod & Photon Cannon Emitter (like Cueva's projector in cueva_frame_09!)
+  const emitterX = 210, emitterY = 485;
+  ctx.strokeStyle = '#475569';
   ctx.lineWidth = 6;
-  ctx.moveTo(emitterX, emitterY);
-  ctx.lineTo(targetX, targetY);
-  ctx.stroke();
-
-  // White Hot Beam Core
   ctx.beginPath();
-  ctx.strokeStyle = '#ffffff';
-  ctx.lineWidth = 2.5;
   ctx.moveTo(emitterX, emitterY);
-  ctx.lineTo(targetX, targetY);
+  ctx.lineTo(emitterX - 38, H * 0.77);
+  ctx.moveTo(emitterX, emitterY);
+  ctx.lineTo(emitterX + 38, H * 0.77);
+  ctx.moveTo(emitterX, emitterY);
+  ctx.lineTo(emitterX, H * 0.77);
   ctx.stroke();
 
-  // Traveling Light Pulses along beam
-  for (let p = 0; p < 4; p++) {
-    const pulseProg = ((t * 2.8 + p * 0.25) % 1.0);
-    const px = emitterX + (targetX - emitterX) * pulseProg;
-    const py = emitterY + (targetY - emitterY) * pulseProg;
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = '#22c55e';
-    ctx.shadowBlur = 12;
-    ctx.beginPath();
-    ctx.arc(px, py, 4.5, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
-  }
+  // Laser Beam firing from cannon through observatory window
+  const beamEndX = winX + winW - 22;
+  const beamEndY = winY + 115 + Math.sin(t * 5) * 8;
 
+  ctx.save();
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.32)';
+  ctx.lineWidth = 26 + Math.sin(t * 14) * 5;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(emitterX + 20, emitterY - 20);
+  ctx.lineTo(beamEndX, beamEndY);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#4ade80';
+  ctx.lineWidth = 8;
+  ctx.shadowColor = '#4ade80';
+  ctx.shadowBlur = 18;
+  ctx.beginPath();
+  ctx.moveTo(emitterX + 20, emitterY - 20);
+  ctx.lineTo(beamEndX, beamEndY);
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(emitterX + 20, emitterY - 20);
+  ctx.lineTo(beamEndX, beamEndY);
+  ctx.stroke();
+
+  // Pulsing photon orbs racing up the beam
+  for (let p = 0; p < 5; p++) {
+    const prog = ((t * 2.4 + p * 0.2) % 1.0);
+    const px = (emitterX + 20) + (beamEndX - (emitterX + 20)) * prog;
+    const py = (emitterY - 20) + (beamEndY - (emitterY - 20)) * prog;
+    ctx.fillStyle = '#fef08a';
+    ctx.beginPath();
+    ctx.arc(px, py, 5.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
   ctx.restore();
+
+  // Cannon Barrel
+  ctx.save();
+  ctx.translate(emitterX, emitterY);
+  ctx.rotate(-0.62);
+  drawRoundBox(ctx, -28, -18, 68, 36, 10, '#334155', '#94a3b8', 2);
+  ctx.fillStyle = '#4ade80';
+  ctx.beginPath();
+  ctx.arc(40, 0, 14, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Cueva Presenter Character on Left operating the Photon Cannon
+  drawCuevaCharacter(ctx, {
+    x: 112,
+    y: H * 0.77,
+    scale: 0.95,
+    outfit: 'suit',
+    hair: 'curly_gold',
+    mood: 'talk',
+    leftArmAngle: 0.18,
+    rightArmAngle: -0.85 + Math.sin(t * 3) * 0.06
+  }, t);
+
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 2 (7.2s - 13.2s): Earth to Moon to Uranus Schematic
-// Pure pitch black. Glowing vector Earth with rotating continents at bottom-left,
-// Moon at 1.3s flash, cyan Uranus at top-right with continuous expanding sonar rings.
+// SCENE 2 (8.0s - 21.0s): Cueva Interplanetary Relay & Analog Speedometer Machine
+// "In just one second, it flashes past the Moon. In twelve minutes, it blazes past Mars.
+//  In forty-three minutes, it tears past Jupiter, and in under three hours, it crosses
+//  nearly two billion miles of freezing deep space to hit the rings of Uranus."
 // ----------------------------------------------------------------------------
 function renderTasklessScene2_EarthToUranus(t) {
+  drawCuevaRoom(ctx, '#19103b', '#090518', '#05030d', 1, t, '2,000,000,000 MILE SOLAR RELAY');
+
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
-
-  // HUD
-  drawTasklessHUD(ctx, {
-    topStat: '≈3 HOURS',
-    topSub1: 'ONE WAY • 1.8 BILLION MILES',
-    topSub2: 'SCHEMATIC • SPEED OF LIGHT',
-    rightLabel: 'EARTH ➔ URANUS'
-  });
-
-  const earthX = 90;
-  const earthY = H - 260;
-  const earthR = 44;
-
-  const moonX = 175;
-  const moonY = H - 330;
-  const moonR = 14;
-
-  const uranusX = W - 130;
-  const uranusY = 230;
-  const uranusR = 115;
-
-  // Concentric Orbital Ring Waves around Uranus with continuous outward ripple
-  ctx.save();
-  const ringCount = 8;
-  for (let r = 0; r < ringCount; r++) {
-    const ripple = (t * 22 + r * 18) % 140;
-    const radius = uranusR + 10 + ripple;
-    const ringAlpha = Math.max(0, 0.22 * (1 - ripple / 140));
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(103, 232, 249, ' + ringAlpha + ')';
-    ctx.lineWidth = 1.2;
-    ctx.arc(uranusX, uranusY, radius, 0, Math.PI * 2);
-    ctx.stroke();
+  // Determine active planet milestone
+  let activeIdx = 0; // 0=Moon, 1=Mars, 2=Jupiter, 3=Uranus
+  let statusTitle = 'MOON • 1.3 SECONDS';
+  let distText = '238,900 MILES TRAVELED';
+  if (t >= 17.0) {
+    activeIdx = 3;
+    statusTitle = 'URANUS • 2.8 HOURS';
+    distText = '1,800,000,000 MILES TRAVELED';
+  } else if (t >= 13.8) {
+    activeIdx = 2;
+    statusTitle = 'JUPITER • 43 MINUTES';
+    distText = '484,000,000 MILES TRAVELED';
+  } else if (t >= 11.0) {
+    activeIdx = 1;
+    statusTitle = 'MARS • 12 MINUTES';
+    distText = '140,000,000 MILES TRAVELED';
   }
-  ctx.restore();
 
-  // Neon Green Laser Beam Corridor Linking Earth to Uranus
-  const beamGrad = ctx.createLinearGradient(earthX, earthY, uranusX, uranusY);
-  beamGrad.addColorStop(0, 'rgba(74, 222, 128, 0.9)');
-  beamGrad.addColorStop(0.8, 'rgba(34, 197, 94, 0.7)');
-  beamGrad.addColorStop(1, 'rgba(103, 232, 249, 0.9)');
+  // Top Planetary Relay Track (4 Detailed Planets with Rings & Glow)
+  const planets = [
+    { name: 'MOON',    time: '1.3s', x: 82,  y: 215, r: 18, c1: '#f1f5f9', c2: '#64748b' },
+    { name: 'MARS',    time: '12m',  x: 195, y: 215, r: 24, c1: '#fb923c', c2: '#b91c1c' },
+    { name: 'JUPITER', time: '43m',  x: 320, y: 215, r: 34, c1: '#fde68a', c2: '#b45309' },
+    { name: 'URANUS',  time: '2.8h', x: 452, y: 215, r: 38, c1: '#67e8f9', c2: '#0e7490', ringed: true }
+  ];
 
-  ctx.beginPath();
-  ctx.strokeStyle = beamGrad;
+  // Laser beam connecting planets
+  const beamProgress = Math.min(1, Math.max(0.05, (t - 8.0) / 11.5));
+  const beamCurrX = 82 + (452 - 82) * beamProgress;
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
   ctx.lineWidth = 6;
-  ctx.shadowColor = 'rgba(74, 222, 128, 0.8)';
-  ctx.shadowBlur = 18;
-  ctx.moveTo(earthX, earthY);
-  ctx.lineTo(uranusX, uranusY);
+  ctx.beginPath();
+  ctx.moveTo(82, 215);
+  ctx.lineTo(452, 215);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#4ade80';
+  ctx.lineWidth = 6;
+  ctx.shadowColor = '#4ade80';
+  ctx.shadowBlur = 14;
+  ctx.beginPath();
+  ctx.moveTo(82, 215);
+  ctx.lineTo(beamCurrX, 215);
   ctx.stroke();
   ctx.shadowBlur = 0;
 
-  // White Hot Beam Core
-  ctx.beginPath();
-  ctx.strokeStyle = '#ffffff';
-  ctx.lineWidth = 2.5;
-  ctx.moveTo(earthX, earthY);
-  ctx.lineTo(uranusX, uranusY);
-  ctx.stroke();
+  planets.forEach((p, idx) => {
+    const lit = idx <= activeIdx;
+    if (lit) {
+      const ringR = p.r + 8 + ((t * 25) % 18);
+      ctx.strokeStyle = 'rgba(74, 222, 128, 0.45)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, ringR, 0, Math.PI * 2);
+      ctx.stroke();
+    }
 
-  // Continuous Traveling Light Pulse Packets (Continuous motion!)
-  for (let p = 0; p < 5; p++) {
-    const pulseLoop = ((t * 1.8 + p * 0.2) % 1.0);
-    const px = earthX + (uranusX - earthX) * pulseLoop;
-    const py = earthY + (uranusY - earthY) * pulseLoop;
+    const pg = ctx.createRadialGradient(p.x - p.r * 0.3, p.y - p.r * 0.3, 2, p.x, p.y, p.r);
+    pg.addColorStop(0, p.c1);
+    pg.addColorStop(1, p.c2);
+    ctx.fillStyle = pg;
     ctx.beginPath();
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = 'rgba(103, 232, 249, 1)';
-    ctx.shadowBlur = 14;
-    ctx.arc(px, py, 6, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
     ctx.fill();
-    ctx.shadowBlur = 0;
-  }
 
-  // Earth: Glowing blue sphere with rotating continents
-  ctx.save();
-  const earthGrad = ctx.createRadialGradient(earthX - 10, earthY - 10, 5, earthX, earthY, earthR);
-  earthGrad.addColorStop(0, '#60a5fa');
-  earthGrad.addColorStop(0.6, '#2563eb');
-  earthGrad.addColorStop(1, '#1d4ed8');
-  ctx.fillStyle = earthGrad;
-  ctx.beginPath();
-  ctx.arc(earthX, earthY, earthR, 0, Math.PI * 2);
-  ctx.fill();
+    if (p.ringed) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(-0.4);
+      ctx.strokeStyle = '#a5f3fc';
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.r * 1.5, p.r * 0.38, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
 
-  // Rotating longitude curves on Earth
-  ctx.strokeStyle = 'rgba(147, 197, 253, 0.4)';
-  ctx.lineWidth = 1.5;
-  for (let l = -2; l <= 2; l++) {
-    const rotOffset = Math.sin(t * 1.2 + l * 0.6) * 16;
-    ctx.beginPath();
-    ctx.ellipse(earthX + rotOffset, earthY, Math.abs(rotOffset) + 6, earthR - 4, 0, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-
-  ctx.font = '700 13px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.textAlign = 'center';
-  ctx.fillText('EARTH', earthX, earthY + earthR + 24);
-  ctx.restore();
-
-  // Moon: 1.3s light speed landmark
-  ctx.save();
-  ctx.fillStyle = '#cbd5e1';
-  ctx.beginPath();
-  ctx.arc(moonX, moonY, moonR, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.font = '700 11px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-  ctx.textAlign = 'left';
-  ctx.fillText('MOON (1.3s)', moonX + moonR + 8, moonY + 4);
-  ctx.restore();
-
-  // Uranus: Cyan gas giant with cloud bands
-  ctx.save();
-  const uranusGrad = ctx.createRadialGradient(uranusX - 35, uranusY - 35, 10, uranusX, uranusY, uranusR);
-  uranusGrad.addColorStop(0, '#cffafe');
-  uranusGrad.addColorStop(0.4, '#67e8f9');
-  uranusGrad.addColorStop(0.8, '#06b6d4');
-  uranusGrad.addColorStop(1, '#0891b2');
-  ctx.fillStyle = uranusGrad;
-  ctx.beginPath();
-  ctx.arc(uranusX, uranusY, uranusR, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Rotating atmospheric cloud stripes on Uranus
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-  ctx.lineWidth = 2.0;
-  for (let b = -3; b <= 3; b++) {
-    const bandY = uranusY + b * 22 + Math.sin(t * 2.0 + b) * 3;
-    const bandW = Math.sqrt(Math.max(0, uranusR * uranusR - Math.pow(bandY - uranusY, 2)));
-    ctx.beginPath();
-    ctx.moveTo(uranusX - bandW, bandY);
-    ctx.lineTo(uranusX + bandW, bandY);
-    ctx.stroke();
-  }
-
-  ctx.font = '800 24px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.textAlign = 'center';
-  ctx.fillText('URANUS', uranusX, uranusY + uranusR + 32);
-
-  ctx.font = '600 13px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
-  ctx.fillText('1.8 BILLION MILES (2.8 HRS)', uranusX, uranusY + uranusR + 52);
-  ctx.restore();
-
-  ctx.restore();
-}
-
-// ----------------------------------------------------------------------------
-// SCENE 3 (13.2s - 17.5s): The Contrast Paradox — Space Speed vs Earth Contractor
-// "Yet that interplanetary space trip is STILL faster than the average contractor calls back an emergency lead."
-// Split comparison: Light crossing deep space in 3 hrs vs Contractor phone sitting dead 27+ hrs
-// ----------------------------------------------------------------------------
-function renderTasklessScene3_SpaceVsContractorContrast(t) {
-  ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
-
-  drawTasklessHUD(ctx, {
-    topStat: '9X SLOWER',
-    topSub1: 'CONTRACTOR RESPONSE GAP',
-    topSub2: 'SPEED OF LIGHT VS LOCAL TRADE',
-    rightLabel: 'PARADOX AUDIT'
+    ctx.font = '800 12px "Space Grotesk", sans-serif';
+    ctx.fillStyle = lit ? '#facc15' : 'rgba(255,255,255,0.45)';
+    ctx.textAlign = 'center';
+    ctx.fillText(p.name + ' (' + p.time + ')', p.x, p.y + p.r + 20);
   });
 
-  // Top Card: Interplanetary Light Speed
-  const topCardY = 150;
-  ctx.save();
-  ctx.fillStyle = '#0b1318';
-  ctx.roundRect(40, topCardY, W - 80, 160, 16);
+  // Cueva Tactile Machine in Center (Directly inspired by cueva_frame_03 "MIND READER" machine!)
+  const machX = 95, machY = 295, machW = 350, machH = 385;
+  drawRoundBox(ctx, machX, machY, machW, machH, 24, '#272f40', '#eab308', 3.5);
+
+  // Analog Gauge Dial Circle
+  const dialX = W / 2, dialY = machY + 110, dialR = 82;
+  ctx.fillStyle = '#f8fafc';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR, 0, Math.PI * 2);
   ctx.fill();
-  ctx.strokeStyle = 'rgba(74, 222, 128, 0.3)';
-  ctx.lineWidth = 1.5;
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = '#ca8a04';
   ctx.stroke();
 
-  // Top Card Header
-  ctx.font = '700 12px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#4ade80';
-  ctx.textAlign = 'left';
-  ctx.fillText('⚡ DEEP SPACE SPEED OF LIGHT', 60, topCardY + 30);
-
-  ctx.font = '800 32px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('2.8 HOURS', 60, topCardY + 70);
-
-  ctx.font = '600 14px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
-  ctx.fillText('Crosses 1,800,000,000 miles to Uranus', 60, topCardY + 98);
-
-  // Fast racing photon indicator inside card
-  const pulseX = 60 + ((t * 220) % (W - 160));
-  ctx.fillStyle = '#4ade80';
-  ctx.shadowColor = '#4ade80';
-  ctx.shadowBlur = 10;
+  // Green & Cyan Speed Arcs inside dial
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = '#22c55e';
   ctx.beginPath();
-  ctx.arc(pulseX, topCardY + 130, 5, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.shadowBlur = 0;
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 0.85, Math.PI * 1.5);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#06b6d4';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 1.5, Math.PI * 2.15);
+  ctx.stroke();
+
+  // Sweeping Red Needle
+  const needleAngle = -Math.PI * 0.6 + beamProgress * (Math.PI * 1.2) + Math.sin(t * 18) * 0.04;
+  ctx.save();
+  ctx.translate(dialX, dialY);
+  ctx.rotate(needleAngle);
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(0, 10);
+  ctx.lineTo(0, -(dialR - 16));
+  ctx.stroke();
   ctx.restore();
 
-  // Center VS Circle with pulsing shockwave
-  const vsY = topCardY + 195;
-  const vsPulse = 1.0 + Math.sin(t * 8) * 0.08;
-  ctx.save();
-  ctx.fillStyle = '#ef4444';
-  ctx.shadowColor = 'rgba(239, 68, 68, 0.5)';
-  ctx.shadowBlur = 15;
+  ctx.fillStyle = '#0f172a';
   ctx.beginPath();
-  ctx.arc(W / 2, vsY, 26 * vsPulse, 0, Math.PI * 2);
+  ctx.arc(dialX, dialY, 10, 0, Math.PI * 2);
   ctx.fill();
-  ctx.shadowBlur = 0;
 
-  ctx.font = '900 18px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
+  // Black Label Plaque on Machine
+  drawRoundBox(ctx, machX + 20, machY + 210, machW - 40, 52, 10, '#090d16', null);
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('VS', W / 2, vsY);
+  ctx.fillText(statusTitle, W / 2, machY + 236);
+
+  // 4 Glowing Cueva Glass Indicator Bulbs
+  const bulbColors = ['#4ade80', '#fb923c', '#facc15', '#38bdf8'];
+  for (let b = 0; b < 4; b++) {
+    const bx = machX + 62 + b * 75;
+    const by = machY + 305;
+    const isLit = b <= activeIdx;
+
+    ctx.beginPath();
+    ctx.arc(bx, by, 17, 0, Math.PI * 2);
+    if (isLit) {
+      ctx.fillStyle = bulbColors[b];
+      ctx.shadowColor = bulbColors[b];
+      ctx.shadowBlur = 18;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    } else {
+      ctx.fillStyle = '#1e293b';
+      ctx.fill();
+    }
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#0f172a';
+    ctx.stroke();
+
+    // White specular dot on bulb
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.beginPath();
+    ctx.arc(bx - 5, by - 5, 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.font = '800 13px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#e2e8f0';
+  ctx.textAlign = 'center';
+  ctx.fillText(distText, W / 2, machY + 355);
+
   ctx.restore();
+}
 
-  // Bottom Card: Average Contractor Response
-  const botCardY = vsY + 45;
-  ctx.save();
-  ctx.fillStyle = '#140c0e';
-  ctx.roundRect(40, botCardY, W - 80, 250, 16);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(239, 68, 68, 0.35)';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  ctx.font = '700 12px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#ef4444';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'top';
-  ctx.fillText('⏳ AVERAGE TRADE CONTRACTOR CALLBACK', 60, botCardY + 24);
-
-  // Spinning analog clock + digital counter
-  const clockX = 105;
-  const clockY = botCardY + 120;
-  const clockR = 48;
+// ----------------------------------------------------------------------------
+// SCENE 3 (21.0s - 27.6s): Cueva Golden Balance Scale (Matches cueva_frame_08!)
+// "Yet that two-billion-mile journey across the solar system is STILL faster than the average contractor calls back an emergency lead."
+// ----------------------------------------------------------------------------
+function renderTasklessScene3_SpaceVsContractorContrast(t) {
+  drawCuevaRoom(ctx, '#b45309', '#451a03', '#1c0a02', 2, t, 'THE RESPONSE TIME PARADOX');
 
   ctx.save();
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+  const baseX = W / 2;
+  const baseY = H * 0.77;
+
+  // Heavy Wooden/Brass Scale Base on Stage Floor
+  drawRoundBox(ctx, baseX - 115, baseY - 38, 230, 38, 8, '#78350f', '#facc15', 2);
+  drawRoundBox(ctx, baseX - 85, baseY - 32, 65, 8, 4, '#ffffff', null);
+
+  // Central Golden Pillar
+  drawRoundBox(ctx, baseX - 14, 210, 28, baseY - 248, 4, '#eab308', '#ca8a04', 2);
+
+  // Scale Tilt Angle (Tilts heavily to the right under the 27.4 HR Contractor Delay anvil!)
+  const tiltProgress = Math.min(1, (t - 21.0) / 1.4);
+  const tiltAngle = 0.24 * tiltProgress + Math.sin(t * 5) * 0.02;
+
+  ctx.save();
+  ctx.translate(baseX, 225);
+  ctx.rotate(tiltAngle);
+
+  // Horizontal Scale Beam
+  drawRoundBox(ctx, -195, -10, 390, 20, 8, '#facc15', '#ca8a04', 2);
+
+  // Left Pan (High up - Light & Fast: 2.8 HRS TO URANUS)
+  ctx.save();
+  ctx.translate(-165, 0);
+  ctx.rotate(-tiltAngle); // Keep pan level
+  ctx.strokeStyle = '#e2e8f0';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.arc(clockX, clockY, clockR, 0, Math.PI * 2);
+  ctx.moveTo(0, 0); ctx.lineTo(-48, 120);
+  ctx.moveTo(0, 0); ctx.lineTo(48, 120);
   ctx.stroke();
 
-  // Spinning clock hands (continuous rapid motion!)
-  const secAngle = t * 18;
-  const minAngle = t * 2.5;
-  ctx.strokeStyle = '#ef4444';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.moveTo(clockX, clockY);
-  ctx.lineTo(clockX + Math.sin(secAngle) * 36, clockY - Math.cos(secAngle) * 36);
-  ctx.stroke();
+  // Glowing 2.8 HR Space Laser Badge on Left Pan
+  drawRoundBox(ctx, -72, 48, 144, 72, 12, '#064e3b', '#4ade80', 2.5);
+  ctx.font = '900 24px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.textAlign = 'center';
+  ctx.fillText('2.8 HRS', 0, 78);
+  ctx.font = '700 11px "Inter", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('LASER TO URANUS', 0, 102);
 
-  ctx.strokeStyle = '#ffffff';
-  ctx.lineWidth = 3.5;
+  // Golden Pan Tray
+  ctx.fillStyle = '#eab308';
   ctx.beginPath();
-  ctx.moveTo(clockX, clockY);
-  ctx.lineTo(clockX + Math.sin(minAngle) * 26, clockY - Math.cos(minAngle) * 26);
-  ctx.stroke();
+  ctx.arc(0, 120, 62, 0, Math.PI);
+  ctx.fill();
   ctx.restore();
 
-  // Big Stat Text
-  ctx.font = '800 36px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#f87171';
-  ctx.textAlign = 'left';
-  ctx.fillText('27.4 HOURS', clockX + clockR + 24, clockY - 32);
+  // Right Pan (Weighed down heavy - 27.4 HRS CONTRACTOR CALLBACK)
+  ctx.save();
+  ctx.translate(165, 0);
+  ctx.rotate(-tiltAngle);
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 0); ctx.lineTo(-48, 120);
+  ctx.moveTo(0, 0); ctx.lineTo(48, 120);
+  ctx.stroke();
 
-  ctx.font = '700 14px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-  ctx.fillText('To call back an emergency lead', clockX + clockR + 24, clockY + 6);
-
-  ctx.font = '600 12px "JetBrains Mono", sans-serif';
+  // Heavy Red Contractor Delay Anvil on Right Pan
+  drawRoundBox(ctx, -82, 34, 164, 86, 12, '#7f1d1d', '#f87171', 2.5);
+  ctx.font = '900 26px "Space Grotesk", sans-serif';
   ctx.fillStyle = '#fca5a5';
-  ctx.fillText('⚠️ 9X SLOWER THAN LIGHT SPEED', clockX + clockR + 24, clockY + 30);
-
-  // Spiderweb / Inactive warning at bottom
-  ctx.font = '700 13px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
   ctx.textAlign = 'center';
-  ctx.fillText('By the time you reply, the lead is already gone.', W / 2, botCardY + 210);
+  ctx.fillText('27.4 HRS', 0, 68);
+  ctx.font = '800 11px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('CONTRACTOR CALLBACK', 0, 92);
+  ctx.fillStyle = '#facc15';
+  ctx.fillText('9.7X SLOWER!', 0, 108);
+
+  ctx.fillStyle = '#eab308';
+  ctx.beginPath();
+  ctx.arc(0, 120, 62, 0, Math.PI);
+  ctx.fill();
+  ctx.restore();
 
   ctx.restore();
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 4 (17.5s - 22.0s): Stick Figure Homeowner Emergency Dilemma
-// A stick figure homeowner at home with a burst ceiling pipe pouring water!
-// Water splashing into bucket, homeowner frantically dialing, call drops to voicemail.
+// SCENE 4 (27.6s - 36.8s): Meet Contractor Bob — Full Cueva Character on Ladder
+// "Picture this. Meet Bob. Bob is a master contractor standing twenty feet up a ladder in a scorching attic, drenched in sweat with a wrench in his hand."
 // ----------------------------------------------------------------------------
-function renderTasklessScene4_HomeownerEmergency(t) {
+function renderTasklessScene4_MeetBobAtticLadder(t) {
+  drawCuevaRoom(ctx, '#7f1d1d', '#2a0707', '#120303', 2, t, 'STORY • MEET CONTRACTOR BOB');
+
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
+  // Overhead Attic Copper HVAC Pipe & Air Handler Unit
+  drawRoundBox(ctx, 45, 165, W - 90, 56, 10, '#334155', '#64748b', 2);
+  ctx.fillStyle = '#d97706';
+  ctx.fillRect(30, 221, W - 60, 16);
 
-  drawTasklessHUD(ctx, {
-    topStat: 'CRITICAL',
-    topSub1: 'ACTIVE CEILING WATER LEAK',
-    topSub2: 'RESIDENTIAL EMERGENCY',
-    rightLabel: 'HOMEOWNER CALLING'
-  });
-
-  const ceilingY = 160;
-  const floorY = H - 240;
-
-  // Ceiling line
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(40, ceilingY);
-  ctx.lineTo(W - 40, ceilingY);
-  ctx.stroke();
-
-  // Cracked Pipe on Ceiling
-  ctx.strokeStyle = '#64748b';
-  ctx.lineWidth = 14;
-  ctx.beginPath();
-  ctx.moveTo(80, ceilingY - 10);
-  ctx.lineTo(240, ceilingY - 10);
-  ctx.lineTo(240, ceilingY + 30);
-  ctx.stroke();
-
-  // Burst Crack with water spray
-  ctx.strokeStyle = '#38bdf8';
-  ctx.lineWidth = 3;
-  for (let s = 0; s < 5; s++) {
-    const sprayAngle = Math.PI / 2 + Math.sin(t * 20 + s) * 0.4;
-    const sprayLen = 25 + Math.sin(t * 15 + s * 2) * 12;
+  // Rising Scorching Heat Wave Lines
+  for (let h = 0; h < 6; h++) {
+    const hx = 75 + h * 78;
+    const hyOff = (t * 50 + h * 28) % 160;
+    ctx.strokeStyle = 'rgba(251, 146, 60, 0.25)';
+    ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.moveTo(240, ceilingY + 30);
-    ctx.lineTo(240 + Math.cos(sprayAngle) * sprayLen, ceilingY + 30 + Math.sin(sprayAngle) * sprayLen);
+    for (let wy = 0; wy < 65; wy += 10) {
+      const wx = hx + Math.sin(t * 7 + wy * 0.15 + h) * 9;
+      const curY = 440 - hyOff - wy;
+      if (wy === 0) ctx.moveTo(wx, curY);
+      else ctx.lineTo(wx, curY);
+    }
     ctx.stroke();
   }
 
-  // Water Droplets actively falling from ceiling to bucket
-  ctx.fillStyle = '#38bdf8';
-  for (let d = 0; d < 7; d++) {
-    const dropProg = ((t * 2.8 + d * 0.16) % 1.0);
-    const dropY = ceilingY + 35 + dropProg * (floorY - (ceilingY + 35));
-    const dropX = 240 + Math.sin(dropProg * 6) * 4;
+  // Aluminum Extension Ladder
+  const ladX = 165;
+  ctx.strokeStyle = '#94a3b8';
+  ctx.lineWidth = 7;
+  ctx.beginPath();
+  ctx.moveTo(ladX - 38, H * 0.77);
+  ctx.lineTo(ladX - 28, 225);
+  ctx.moveTo(ladX + 38, H * 0.77);
+  ctx.lineTo(ladX + 28, 225);
+  ctx.stroke();
+
+  ctx.lineWidth = 4;
+  for (let r = 0; r < 9; r++) {
+    const ry = 265 + r * 54;
     ctx.beginPath();
-    ctx.arc(dropX, dropY, 4, 0, Math.PI * 2);
+    ctx.moveTo(ladX - 34, ry);
+    ctx.lineTo(ladX + 34, ry);
+    ctx.stroke();
+  }
+
+  // Full Cueva Illustrated Contractor Bob standing on ladder with hardhat, vest & wrench!
+  drawCuevaCharacter(ctx, {
+    x: ladX,
+    y: 535,
+    scale: 0.92,
+    outfit: 'contractor',
+    hair: 'hardhat',
+    mood: 'worried',
+    leftArmAngle: 0.35,
+    rightArmAngle: -2.1 + Math.sin(t * 6) * 0.22,
+    holdingItem: 'wrench'
+  }, t);
+
+  // Animated Sweat Droplets flying off Bob's forehead
+  ctx.fillStyle = '#38bdf8';
+  for (let s = 0; s < 4; s++) {
+    const prog = ((t * 2.4 + s * 0.25) % 1.0);
+    const sx = ladX + 42 + s * 8 + prog * 18;
+    const sy = 265 + prog * 85;
+    ctx.beginPath();
+    ctx.arc(sx, sy, 4.5, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  // Bucket on Floor catching water
-  const bucketX = 240;
-  const bucketY = floorY;
-  ctx.fillStyle = '#475569';
+  // Cueva Character Dossier Plaque on Right
+  const cardX = 278, cardY = 285, cardW = 228, cardH = 215;
+  drawRoundBox(ctx, cardX, cardY, cardW, cardH, 18, '#1e293b', '#f97316', 2.5);
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
+  ctx.textAlign = 'left';
+  ctx.fillText('MEET BOB', cardX + 20, cardY + 42);
+
+  ctx.font = '700 13px "Inter", sans-serif';
+  ctx.fillStyle = '#f8fafc';
+  ctx.fillText('• Master HVAC/Plumbing Pro', cardX + 20, cardY + 78);
+  ctx.fillText('• 20ft up an attic ladder', cardX + 20, cardY + 106);
+  ctx.fillText('• 130°F heat, wrench in hand', cardX + 20, cardY + 134);
+
+  drawRoundBox(ctx, cardX + 18, cardY + 156, cardW - 36, 38, 8, 'rgba(239, 68, 68, 0.2)', '#ef4444', 1.5);
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#fca5a5';
+  ctx.textAlign = 'center';
+  ctx.fillText('HANDS FULL • CANNOT ANSWER', cardX + cardW / 2, cardY + 180);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 5 (36.8s - 44.2s): Homeowner Sarah's Burst Ceiling Pipe Emergency
+// "Across town, a pipe bursts in Sarah's ceiling and water is pouring everywhere.
+//  Panicking, she grabs her phone and calls Bob first."
+// ----------------------------------------------------------------------------
+function renderTasklessScene5_SarahBurstPipe(t) {
+  drawCuevaRoom(ctx, '#0e7490', '#062430', '#041821', 3, t, 'EMERGENCY • SARAH CALLS BOB FIRST');
+
+  ctx.save();
+  // Ruptured Ceiling Pipe at Top Center
+  const pipeX = 215, pipeY = 165;
+  drawRoundBox(ctx, 40, pipeY, W - 80, 22, 6, '#475569', '#94a3b8', 2);
+
+  // Gushing Water Waterfall & Droplets from Pipe Rupture
+  const waterGrad = ctx.createLinearGradient(pipeX, pipeY + 22, pipeX, H * 0.77);
+  waterGrad.addColorStop(0, 'rgba(56, 189, 248, 0.85)');
+  waterGrad.addColorStop(1, 'rgba(14, 165, 233, 0.25)');
+  ctx.fillStyle = waterGrad;
   ctx.beginPath();
-  ctx.moveTo(bucketX - 30, bucketY);
-  ctx.lineTo(bucketX - 22, bucketY - 45);
-  ctx.lineTo(bucketX + 22, bucketY - 45);
-  ctx.lineTo(bucketX + 30, bucketY);
+  ctx.moveTo(pipeX - 18, pipeY + 22);
+  ctx.lineTo(pipeX + 18, pipeY + 22);
+  ctx.lineTo(pipeX + 68 + Math.sin(t * 10) * 8, H * 0.77);
+  ctx.lineTo(pipeX - 68 - Math.sin(t * 10) * 8, H * 0.77);
   ctx.closePath();
   ctx.fill();
 
-  // Water Splash Ripple in bucket
-  const splashRipple = (t * 40) % 25;
-  ctx.strokeStyle = 'rgba(56, 189, 248, ' + (1 - splashRipple / 25) + ')';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.ellipse(bucketX, bucketY - 45, splashRipple, splashRipple * 0.4, 0, 0, Math.PI * 2);
-  ctx.stroke();
-
-  // Floor line
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(40, floorY);
-  ctx.lineTo(W - 40, floorY);
-  ctx.stroke();
-
-  // Stick Figure Homeowner
-  const humanX = 380 + Math.sin(t * 2.5) * 6;
-  const humanY = floorY - 110;
-
-  // Head
-  ctx.fillStyle = '#f1f5f9';
-  ctx.beginPath();
-  ctx.arc(humanX, humanY - 50, 18, 0, Math.PI * 2);
-  ctx.fill();
-
-  // Torso
-  ctx.strokeStyle = '#f1f5f9';
-  ctx.lineWidth = 5;
-  ctx.beginPath();
-  ctx.moveTo(humanX, humanY - 32);
-  ctx.lineTo(humanX, humanY + 40);
-  ctx.stroke();
-
-  // Legs
-  ctx.beginPath();
-  ctx.moveTo(humanX, humanY + 40);
-  ctx.lineTo(humanX - 18, floorY);
-  ctx.moveTo(humanX, humanY + 40);
-  ctx.lineTo(humanX + 18, floorY);
-  ctx.stroke();
-
-  // Left Arm holding phone to ear
-  ctx.beginPath();
-  ctx.moveTo(humanX, humanY - 15);
-  ctx.lineTo(humanX - 18, humanY - 35);
-  ctx.lineTo(humanX - 12, humanY - 48);
-  ctx.stroke();
-
-  // Phone in hand with red "NO ANSWER" alert
-  const phoneX = humanX - 12;
-  const phoneY = humanY - 48;
-  ctx.fillStyle = '#1e293b';
-  ctx.beginPath();
-  ctx.roundRect(phoneX - 6, phoneY - 12, 12, 24, 3);
-  ctx.fill();
-
-  // Radiating soundwaves from phone
-  for (let w = 1; w <= 3; w++) {
-    const waveR = 12 + w * 10 + Math.sin(t * 12) * 4;
-    ctx.strokeStyle = 'rgba(239, 68, 68, ' + (0.8 - w * 0.2) + ')';
-    ctx.lineWidth = 2;
+  // Animated Water Splash Droplets
+  ctx.fillStyle = '#7dd3fc';
+  for (let d = 0; d < 18; d++) {
+    const prog = ((t * 2.2 + d * 0.13) % 1.0);
+    const side = (d % 2 === 0) ? 1 : -1;
+    const dx = pipeX + side * (15 + (d % 5) * 18) * prog;
+    const dy = (pipeY + 25) + prog * (H * 0.77 - pipeY - 30);
     ctx.beginPath();
-    ctx.arc(phoneX, phoneY, waveR, -Math.PI * 0.4, Math.PI * 0.4);
-    ctx.stroke();
-  }
-
-  // Right Arm throwing hands up in frustration
-  const armFrustrate = Math.sin(t * 6) * 10;
-  ctx.beginPath();
-  ctx.moveTo(humanX, humanY - 15);
-  ctx.lineTo(humanX + 28, humanY - 35 + armFrustrate);
-  ctx.stroke();
-
-  // Floating Status Card: Call Dropped to Voicemail
-  const callCardY = floorY + 30;
-  ctx.fillStyle = '#181112';
-  ctx.roundRect(40, callCardY, W - 80, 80, 14);
-  ctx.fill();
-  ctx.strokeStyle = '#ef4444';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  ctx.font = '800 16px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ef4444';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'top';
-  ctx.fillText('📞 CALL SENT TO VOICEMAIL (CONTRACTOR #1)', W / 2, callCardY + 18);
-
-  ctx.font = '700 13px "Inter", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('Homeowner immediately taps Contractor #2...', W / 2, callCardY + 44);
-
-  ctx.restore();
-}
-
-// ----------------------------------------------------------------------------
-// SCENE 5 (22.0s - 26.5s): The 78% Conversion Benchmark
-// Giant bold 78% with sweeping gold sheen and 2-lane animated comparison
-// ----------------------------------------------------------------------------
-function renderTasklessScene5_Stat78Percent(t) {
-  ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
-
-  drawTasklessHUD(ctx, {
-    topStat: '78%',
-    topSub1: 'WIN RATE OF 1ST RESPONDER',
-    topSub2: 'SOURCE: LEAD RESPONSE AUDIT',
-    rightLabel: 'LEAD CONVERSION'
-  });
-
-  const prog = Math.min(1.0, Math.max(0, (t - 22.0) / 1.0));
-  const currentStat = Math.floor(prog * 78);
-
-  // Giant Stat Center with Shimmering Sweep
-  ctx.font = '900 120px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#facc15'; // Amber gold
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.shadowColor = 'rgba(250, 204, 21, 0.5)';
-  ctx.shadowBlur = 35 + Math.sin(t * 8) * 10;
-  ctx.fillText(currentStat + '%', W / 2, H * 0.38);
-  ctx.shadowBlur = 0;
-
-  // Luminous highlight sweeping across text
-  const sweepX = (W / 2 - 160) + ((t * 260) % 320);
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-  ctx.beginPath();
-  ctx.arc(sweepX, H * 0.38, 18, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.font = '700 20px "Inter", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('BUY FROM THE FIRST RESPONDER', W / 2, H * 0.47);
-
-  // Two Lane Comparison Graphic
-  const laneY = H * 0.58;
-  const laneW = W - 80;
-  const laneX = 40;
-
-  // Lane 1: First Responder (< 60s)
-  ctx.beginPath();
-  ctx.fillStyle = '#111319';
-  ctx.roundRect(laneX, laneY, laneW, 64, 12);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(34, 197, 94, 0.5)';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // Green Progress Bar Fill with animated forward chevrons
-  const barProg = Math.min(1.0, Math.max(0, (t - 22.5) / 1.2));
-  ctx.beginPath();
-  ctx.fillStyle = '#22c55e';
-  ctx.roundRect(laneX + 4, laneY + 4, (laneW - 8) * 0.78 * barProg, 56, 8);
-  ctx.fill();
-
-  // Chevrons animated inside green bar
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
-  ctx.lineWidth = 2.5;
-  for (let c = 0; c < 6; c++) {
-    const chevX = laneX + 20 + c * 40 + ((t * 60) % 40);
-    if (chevX < laneX + (laneW - 8) * 0.78 * barProg - 20) {
-      ctx.beginPath();
-      ctx.moveTo(chevX - 6, laneY + 22);
-      ctx.lineTo(chevX, laneY + 32);
-      ctx.lineTo(chevX - 6, laneY + 42);
-      ctx.stroke();
-    }
-  }
-
-  ctx.font = '800 16px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('⚡ 1ST RESPONDER (<60s)', laneX + 18, laneY + 32);
-  ctx.textAlign = 'right';
-  ctx.fillText('CLOSED JOB • $8,000', laneX + laneW - 18, laneY + 32);
-
-  // Lane 2: Hours Later (Voicemail)
-  const lane2Y = laneY + 84;
-  ctx.beginPath();
-  ctx.fillStyle = '#111319';
-  ctx.roundRect(laneX, lane2Y, laneW, 64, 12);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.fillStyle = 'rgba(239, 68, 68, 0.25)';
-  ctx.roundRect(laneX + 4, lane2Y + 4, (laneW - 8) * 0.22, 56, 8);
-  ctx.fill();
-
-  ctx.font = '800 16px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#94a3b8';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('⏳ CALLED BACK 3 HRS LATER', laneX + 18, lane2Y + 32);
-  ctx.textAlign = 'right';
-  ctx.fillStyle = '#ef4444';
-  ctx.fillText('LOST TO COMPETITOR', laneX + laneW - 18, lane2Y + 32);
-
-  ctx.restore();
-}
-
-// ----------------------------------------------------------------------------
-// SCENE 6 (26.5s - 34.0s): Bob on 20ft Ladder & The Competitor Cash Snatch
-// "When you're on a ladder or eating dinner with family, every unanswered call is an $8,000 job handed to your competitor."
-// Bob on ladder turning wrench, sweating, pocket phone buzzing.
-// 60s timer expires -> Competitor truck zooms across bottom -> $8,000 cash packet flies into truck bed!
-// ----------------------------------------------------------------------------
-function renderTasklessScene6_ContractorPainLadder(t) {
-  ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
-
-  drawTasklessHUD(ctx, {
-    topStat: '8,000',
-    topStatUnit: 'USD',
-    topSub1: 'AVERAGE HVAC/PLUMBING TICKET',
-    rightLabel: 'REVENUE AT RISK'
-  });
-
-  const streetY = H - 180;
-  const ladderBaseX = 140;
-  const ladderTopX = 175 + Math.sin(t * 2.0) * 2; // subtle ladder sway
-  const ladderTopY = 280;
-
-  // The 20ft Extension Ladder (Aluminum side rails & rungs)
-  ctx.save();
-  ctx.strokeStyle = '#94a3b8';
-  ctx.lineWidth = 4;
-
-  // Left rail
-  ctx.beginPath();
-  ctx.moveTo(ladderBaseX - 16, streetY);
-  ctx.lineTo(ladderTopX - 16, ladderTopY);
-  ctx.stroke();
-
-  // Right rail
-  ctx.beginPath();
-  ctx.moveTo(ladderBaseX + 16, streetY);
-  ctx.lineTo(ladderTopX + 16, ladderTopY);
-  ctx.stroke();
-
-  // Rungs
-  const rungCount = 12;
-  ctx.lineWidth = 2.5;
-  for (let r = 0; r <= rungCount; r++) {
-    const frac = r / rungCount;
-    const rx1 = (ladderBaseX - 16) + (ladderTopX - ladderBaseX) * frac;
-    const ry = streetY + (ladderTopY - streetY) * frac;
-    const rx2 = rx1 + 32;
-    ctx.beginPath();
-    ctx.moveTo(rx1, ry);
-    ctx.lineTo(rx2, ry);
-    ctx.stroke();
-  }
-  ctx.restore();
-
-  // Overhead Industrial Pipe Bob is repairing
-  ctx.save();
-  ctx.strokeStyle = '#475569';
-  ctx.lineWidth = 14;
-  ctx.beginPath();
-  ctx.moveTo(60, ladderTopY - 30);
-  ctx.lineTo(320, ladderTopY - 30);
-  ctx.stroke();
-
-  // Water leaking from pipe joint
-  ctx.fillStyle = '#38bdf8';
-  for (let w = 0; w < 3; w++) {
-    const dripY = (ladderTopY - 20) + ((t * 140 + w * 40) % 110);
-    ctx.beginPath();
-    ctx.arc(210, dripY, 3.5, 0, Math.PI * 2);
+    ctx.arc(dx, dy, 4.5, 0, Math.PI * 2);
     ctx.fill();
   }
-  ctx.restore();
 
-  // Stick Figure Contractor Bob high on ladder
-  const bobX = ladderTopX;
-  const bobY = ladderTopY + 45;
-  const bobBreath = Math.sin(t * 4.0) * 2.5;
+  // Rising Flood Water Pool on Stage Floor
+  ctx.fillStyle = 'rgba(56, 189, 248, 0.35)';
+  ctx.beginPath();
+  ctx.ellipse(pipeX, H * 0.77, 150 + Math.sin(t * 6) * 12, 18, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Panicked Homeowner Sarah (Full Cueva Illustrated Character calling Bob!)
+  drawCuevaCharacter(ctx, {
+    x: 375,
+    y: H * 0.77,
+    scale: 0.96,
+    outfit: 'sweater_coral',
+    hair: 'auburn',
+    mood: 'panic',
+    leftArmAngle: 0.75 + Math.sin(t * 12) * 0.2,
+    rightArmAngle: -1.65,
+    holdingItem: 'phone'
+  }, t);
+
+  // Calling Bob Callout Bubble
+  drawRoundBox(ctx, 42, 255, 225, 115, 16, '#0f172a', '#38bdf8', 2.5);
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#38bdf8';
+  ctx.textAlign = 'left';
+  ctx.fillText('📲 DIALING #1 ON GOOGLE:', 60, 286);
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText("BOB'S PLUMBING", 60, 316);
+  ctx.font = '700 13px "Inter", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.fillText(' Value: $8,000 Emergency', 60, 346);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 6 (44.2s - 51.4s): Cueva Call Detector Machine & Voicemail Dump
+// "Bob's phone buzzes in his pocket, once, twice, three times, and dumps straight to voicemail."
+// ----------------------------------------------------------------------------
+function renderTasklessScene6_PhoneBuzzToVoicemail(t) {
+  drawCuevaRoom(ctx, '#7f1d1d', '#280505', '#110202', 3, t, 'RING 1... RING 2... RING 3 -> VOICEMAIL');
 
   ctx.save();
-  // Bob Torso with Orange Safety Vest
-  ctx.strokeStyle = '#f97316'; // High-vis orange vest
-  ctx.lineWidth = 14;
-  ctx.beginPath();
-  ctx.moveTo(bobX, bobY);
-  ctx.lineTo(bobX, bobY + 55);
-  ctx.stroke();
+  const isVoicemail = t >= 48.2;
+  const ringCount = t < 45.6 ? 1 : (t < 47.0 ? 2 : 3);
 
-  // Reflective Silver Stripe on Vest
-  ctx.strokeStyle = '#e2e8f0';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(bobX - 6, bobY + 28);
-  ctx.lineTo(bobX + 6, bobY + 28);
-  ctx.stroke();
+  // Cueva Analog Call Meter Machine (Matches cueva_frame_03!)
+  const machX = 85, machY = 185, machW = 370, machH = 490;
+  const shakeX = (!isVoicemail) ? Math.sin(t * 48) * 5 : 0;
+  ctx.translate(shakeX, 0);
 
-  // Bob Head
+  drawRoundBox(ctx, machX, machY, machW, machH, 26, '#1f2937', isVoicemail ? '#ef4444' : '#facc15', 3.5);
+
+  // Big Dial Gauge at Top of Machine
+  const dialX = W / 2, dialY = machY + 125, dialR = 88;
   ctx.fillStyle = '#f8fafc';
   ctx.beginPath();
-  ctx.arc(bobX, bobY - 20 + bobBreath, 16, 0, Math.PI * 2);
+  ctx.arc(dialX, dialY, dialR, 0, Math.PI * 2);
   ctx.fill();
-
-  // Yellow Construction Hard Hat
-  ctx.fillStyle = '#eab308';
-  ctx.beginPath();
-  ctx.arc(bobX, bobY - 24 + bobBreath, 19, Math.PI, Math.PI * 2);
-  ctx.fill();
-  // Hard hat brim
-  ctx.beginPath();
-  ctx.roundRect(bobX - 22, bobY - 24 + bobBreath, 44, 6, 2);
-  ctx.fill();
-
-  // Sweat Droplets flying from Bob's forehead (continuous struggle!)
-  ctx.fillStyle = '#38bdf8';
-  for (let sw = 0; sw < 3; sw++) {
-    const swY = (bobY - 18) + ((t * 120 + sw * 35) % 65);
-    const swX = bobX + 18 + sw * 5;
-    ctx.beginPath();
-    ctx.arc(swX, swY, 2.5, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Bob Legs planted on ladder rungs
-  ctx.strokeStyle = '#1e293b';
-  ctx.lineWidth = 5;
-  ctx.beginPath();
-  ctx.moveTo(bobX, bobY + 55);
-  ctx.lineTo(bobX - 14, bobY + 105);
-  ctx.moveTo(bobX, bobY + 55);
-  ctx.lineTo(bobX + 14, bobY + 105);
-  ctx.stroke();
-
-  // Right Arm holding wrench to pipe
-  const wrenchAngle = Math.sin(t * 3.5) * 0.25;
-  ctx.strokeStyle = '#f8fafc';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.moveTo(bobX + 4, bobY + 10);
-  ctx.lineTo(bobX + 32, bobY - 15);
-  ctx.stroke();
-
-  // Wrench tool
-  ctx.save();
-  ctx.translate(bobX + 32, bobY - 15);
-  ctx.rotate(wrenchAngle);
-  ctx.strokeStyle = '#94a3b8';
   ctx.lineWidth = 6;
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.lineTo(20, -18);
-  ctx.stroke();
-  ctx.restore();
-
-  // Left Arm balancing on ladder rail
-  ctx.strokeStyle = '#f8fafc';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.moveTo(bobX - 4, bobY + 10);
-  ctx.lineTo(ladderTopX - 16, bobY + 25);
+  ctx.strokeStyle = isVoicemail ? '#ef4444' : '#ca8a04';
   ctx.stroke();
 
-  // Bob's Pocket Phone: FURIOUS VIBRATION
-  const phoneVibeX = bobX - 8 + Math.sin(t * 50) * 3.5;
-  const phoneVibeY = bobY + 40;
-  ctx.fillStyle = '#10b981';
+  // Green -> Amber -> Red Danger Zones
+  ctx.lineWidth = 12;
+  ctx.strokeStyle = '#22c55e';
   ctx.beginPath();
-  ctx.roundRect(phoneVibeX - 5, phoneVibeY - 10, 10, 20, 2);
-  ctx.fill();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 0.85, Math.PI * 1.3);
+  ctx.stroke();
 
-  // Radiating vibrating rings from pocket
-  for (let vr = 1; vr <= 3; vr++) {
-    const vrRadius = 8 + vr * 10 + Math.sin(t * 16) * 4;
-    ctx.strokeStyle = 'rgba(74, 222, 128, ' + (0.7 - vr * 0.18) + ')';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.arc(phoneVibeX, phoneVibeY, vrRadius, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-  ctx.restore();
+  ctx.strokeStyle = '#f59e0b';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 1.3, Math.PI * 1.75);
+  ctx.stroke();
 
-  // Floating Incoming Lead Card above Bob
-  const leadCardX = W - 250;
-  const leadCardY = 240;
+  ctx.strokeStyle = '#ef4444';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, dialR - 18, Math.PI * 1.75, Math.PI * 2.15);
+  ctx.stroke();
+
+  // Needle pinning into Red Voicemail zone
+  const needleTarget = isVoicemail ? 0.95 : (ringCount * 0.25);
+  const needleAngle = -Math.PI * 0.6 + needleTarget * (Math.PI * 1.25);
   ctx.save();
-  ctx.fillStyle = '#111318';
-  ctx.roundRect(leadCardX, leadCardY, 210, 105, 12);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(239, 68, 68, 0.6)';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  ctx.font = '700 11px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#ef4444';
-  ctx.textAlign = 'left';
-  ctx.fillText('⚠️ INCOMING EMERGENCY JOB', leadCardX + 12, leadCardY + 22);
-
-  ctx.font = '800 20px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('$8,000.00', leadCardX + 12, leadCardY + 52);
-
-  // Expiring countdown bar
-  const countdownProg = Math.max(0, 1 - (t - 26.5) / 4.0);
-  ctx.fillStyle = 'rgba(239, 68, 68, 0.2)';
-  ctx.roundRect(leadCardX + 12, leadCardY + 68, 186, 8, 4);
-  ctx.fill();
-  ctx.fillStyle = '#ef4444';
-  ctx.roundRect(leadCardX + 12, leadCardY + 68, 186 * countdownProg, 8, 4);
-  ctx.fill();
-
-  ctx.font = '600 11px "Inter", sans-serif';
-  ctx.fillStyle = '#fca5a5';
-  ctx.fillText(countdownProg > 0 ? 'RINGING... CANNOT REACH PHONE' : '❌ CALL MISSED • LOST', leadCardX + 12, leadCardY + 94);
-  ctx.restore();
-
-  // Street Level Line at bottom
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-  ctx.lineWidth = 2;
+  ctx.translate(dialX, dialY);
+  ctx.rotate(needleAngle);
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 5.5;
   ctx.beginPath();
-  ctx.moveTo(20, streetY);
-  ctx.lineTo(W - 20, streetY);
+  ctx.moveTo(0, 12);
+  ctx.lineTo(0, -(dialR - 16));
   ctx.stroke();
-
-  // Competitor Truck driving across bottom (appears at t >= 28.5)
-  const truckStartT = 28.5;
-  const truckProg = Math.min(1.2, Math.max(0, (t - truckStartT) / 5.0));
-  const truckX = -200 + truckProg * (W + 350);
-  const truckY = streetY - 55;
-
-  ctx.save();
-  // Truck Body / Cab
-  ctx.fillStyle = '#1e293b';
-  ctx.roundRect(truckX, truckY, 140, 50, 6);
-  ctx.fill();
-
-  // Truck Bed
-  ctx.fillStyle = '#334155';
-  ctx.roundRect(truckX + 80, truckY - 15, 75, 65, 4);
-  ctx.fill();
-
-  // Competitor Decal on Door
-  ctx.font = '700 9px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = '#38bdf8';
-  ctx.textAlign = 'left';
-  ctx.fillText('COMPETITOR TRUCK', truckX + 8, truckY + 28);
-
-  // Rotating Truck Wheels
-  const wheelRotate = t * 20;
-  for (let w = 0; w < 2; w++) {
-    const wx = truckX + 30 + w * 95;
-    const wy = streetY;
-    ctx.save();
-    ctx.translate(wx, wy);
-    ctx.rotate(wheelRotate);
-    ctx.fillStyle = '#0f172a';
-    ctx.beginPath();
-    ctx.arc(0, 0, 16, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = '#64748b';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.arc(0, 0, 16, 0, Math.PI * 2);
-    ctx.stroke();
-    // Wheel Spokes
-    ctx.beginPath();
-    ctx.moveTo(-16, 0); ctx.lineTo(16, 0);
-    ctx.moveTo(0, -16); ctx.lineTo(0, 16);
-    ctx.stroke();
-    ctx.restore();
-  }
-
-  // Exhaust Smoke Puffs from Truck
-  ctx.fillStyle = 'rgba(148, 163, 184, 0.35)';
-  for (let sm = 0; sm < 4; sm++) {
-    const smX = truckX - 10 - sm * 18 - ((t * 40) % 20);
-    const smY = streetY - 18 - sm * 4;
-    const smR = 8 + sm * 4;
-    ctx.beginPath();
-    ctx.arc(smX, smY, smR, 0, Math.PI * 2);
-    ctx.fill();
-  }
   ctx.restore();
 
-  // The $8,000 Flying Cash Bag (flies in arc from Bob to truck at t >= 29.5)
-  if (t >= 29.5) {
-    const cashProg = Math.min(1.0, (t - 29.5) / 2.8);
-    const cashStartX = bobX;
-    const cashStartY = bobY + 40;
-    const cashEndX = truckX + 110;
-    const cashEndY = streetY - 25;
+  ctx.fillStyle = '#0f172a';
+  ctx.beginPath();
+  ctx.arc(dialX, dialY, 11, 0, Math.PI * 2);
+  ctx.fill();
 
-    // Parabolic arc path
-    const curCashX = cashStartX + (cashEndX - cashStartX) * cashProg;
-    const arcHeight = 120 * Math.sin(cashProg * Math.PI);
-    const curCashY = cashStartY + (cashEndY - cashStartY) * cashProg - arcHeight;
+  // Machine Center Plaque
+  drawRoundBox(ctx, machX + 24, machY + 235, machW - 48, 60, 12, '#090d16', null);
+  ctx.font = '900 24px "Space Grotesk", sans-serif';
+  ctx.fillStyle = isVoicemail ? '#ef4444' : '#facc15';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(isVoicemail ? '❌ DUMPED TO VOICEMAIL' : ('📳 BUZZING POCKET • RING #' + ringCount), W / 2, machY + 265);
 
-    ctx.save();
-    ctx.translate(curCashX, curCashY);
-    ctx.rotate(Math.sin(t * 12) * 0.3);
+  // 3 Ring Bulbs + 4th Voicemail Bulb
+  const labels = ['ONCE', 'TWICE', '3 TIMES', 'DEAD VM'];
+  for (let b = 0; b < 4; b++) {
+    const bx = machX + 58 + b * 84;
+    const by = machY + 348;
+    const active = (b < 3 && ringCount > b) || (b === 3 && isVoicemail);
+    const col = (b === 3) ? '#ef4444' : '#facc15';
 
-    // Glowing Green Money Bag / Cash Packet
-    ctx.fillStyle = '#22c55e';
-    ctx.shadowColor = '#22c55e';
-    ctx.shadowBlur = 18;
     ctx.beginPath();
-    ctx.roundRect(-24, -16, 48, 32, 6);
+    ctx.arc(bx, by, 20, 0, Math.PI * 2);
+    ctx.fillStyle = active ? col : '#111827';
+    if (active) {
+      ctx.shadowColor = col;
+      ctx.shadowBlur = 18;
+    }
     ctx.fill();
     ctx.shadowBlur = 0;
 
-    ctx.font = '900 16px "Space Grotesk", sans-serif';
-    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 11px "JetBrains Mono", sans-serif';
+    ctx.fillStyle = active ? '#ffffff' : '#64748b';
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('$8K', 0, 0);
-
-    // Sparkle particles trailing behind flying money
-    ctx.fillStyle = '#facc15';
-    for (let sp = 0; sp < 4; sp++) {
-      const spX = -28 - sp * 14;
-      const spY = Math.sin(t * 15 + sp) * 8;
-      ctx.beginPath();
-      ctx.arc(spX, spY, 3, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
-    // Red Bleed Alert Banner
-    const alertY = H - 90;
-    ctx.save();
-    ctx.fillStyle = 'rgba(239, 68, 68, 0.15)';
-    ctx.roundRect(40, alertY, W - 80, 55, 10);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(239, 68, 68, 0.5)';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    ctx.font = '800 15px "Space Grotesk", sans-serif';
-    ctx.fillStyle = '#ef4444';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('⚠️ -$8,000.00 REVENUE HANDED TO COMPETITOR', W / 2, alertY + 27);
-    ctx.restore();
+    ctx.fillText(labels[b], bx, by + 34);
   }
+
+  // Bottom Status Banner
+  drawRoundBox(ctx, machX + 24, machY + 410, machW - 48, 52, 10, 'rgba(239, 68, 68, 0.18)', '#ef4444', 1.5);
+  ctx.font = '800 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#fca5a5';
+  ctx.textAlign = 'center';
+  ctx.fillText(isVoicemail ? 'HOMEOWNER HANGS UP IMMEDIATELY' : 'BOB IS STILL 20FT UP THE LADDER...', W / 2, machY + 440);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 7 (34.0s - 43.0s): Ava Instant 0.8s Response & Autonomous Dispatch
-// "That's why we built Ava. She answers your shop's phone in 0.8 seconds and qualifies the caller..."
-// Sleek cybernetic transformation! 32-band dancing audio waveform, instant dispatch notification.
+// SCENE 7 (51.4s - 57.5s): Cueva Underwater Fishing Hook Metaphor (Matches cueva_frame_06!)
+// "Sarah doesn't leave a message, because 78% of homeowners hire the very first business that answers.
+//  Within ten seconds, she taps the next contractor on Google."
 // ----------------------------------------------------------------------------
-function renderTasklessScene7_AvaInstantReply(t) {
-  ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
-
-  drawTasklessHUD(ctx, {
-    topStat: '0.8s',
-    topStatUnit: 'SPEED',
-    topSub1: 'AVA 24/7 AUTONOMOUS VOICE AI',
-    topSub2: 'ZERO MISSED CALLS • INSTANT DISPATCH',
-    rightLabel: 'SYSTEM ACTIVATED'
-  });
-
-  // Center Holographic Ava AI Orb
-  const orbX = W / 2;
-  const orbY = H * 0.32;
-  const orbR = 75;
+function renderTasklessScene7_Stat78Percent(t) {
+  drawCuevaRoom(ctx, '#0f766e', '#042f2e', '#021c1b', 3, t, 'THE 78% SPEED-TO-LEAD LAW');
 
   ctx.save();
-  // Concentric rotating telemetry rings around Ava Orb
-  for (let r = 1; r <= 3; r++) {
-    const ringRadius = orbR + r * 22;
-    const ringAngle = (t * (0.8 / r)) % (Math.PI * 2);
-    ctx.save();
-    ctx.translate(orbX, orbY);
-    ctx.rotate(ringAngle);
-    ctx.strokeStyle = (r === 1) ? 'rgba(34, 197, 94, 0.4)' : 'rgba(103, 232, 249, 0.3)';
-    ctx.lineWidth = 1.5;
-    ctx.setLineDash([12, 16]);
+  // Warm golden sunlight header at top (just like cueva_frame_06!)
+  ctx.fillStyle = '#d97706';
+  ctx.fillRect(0, 0, W, 54);
+
+  // Floating underwater bubbles
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+  ctx.lineWidth = 2;
+  for (let b = 0; b < 10; b++) {
+    const bx = 55 + (b * 48) % (W - 80);
+    const by = 650 - ((t * 45 + b * 62) % 520);
     ctx.beginPath();
-    ctx.arc(0, 0, ringRadius, 0, Math.PI * 2);
+    ctx.arc(bx, by, 6 + (b % 3) * 3, 0, Math.PI * 2);
     ctx.stroke();
-    ctx.restore();
   }
 
-  // Glowing Core Gradient
-  const coreGrad = ctx.createRadialGradient(orbX, orbY, 10, orbX, orbY, orbR);
-  coreGrad.addColorStop(0, '#ffffff');
-  coreGrad.addColorStop(0.3, '#34d399');
-  coreGrad.addColorStop(0.7, '#059669');
-  coreGrad.addColorStop(1, 'rgba(5, 150, 105, 0.1)');
-  ctx.fillStyle = coreGrad;
-  ctx.shadowColor = 'rgba(52, 211, 153, 0.8)';
-  ctx.shadowBlur = 35;
+  // Fishing Line & J-Hook dropping from top center
+  const hookX = W / 2;
+  const hookY = 335 + Math.sin(t * 3.5) * 10;
+
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 2.5;
   ctx.beginPath();
-  ctx.arc(orbX, orbY, orbR, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.shadowBlur = 0;
+  ctx.moveTo(hookX, 54);
+  ctx.lineTo(hookX, hookY - 35);
+  ctx.stroke();
 
-  // Center Ava AI Symbol
-  ctx.font = '900 32px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
+  // Silver J-Hook
+  ctx.strokeStyle = '#cbd5e1';
+  ctx.lineWidth = 6;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(hookX, hookY - 40);
+  ctx.lineTo(hookX, hookY - 8);
+  ctx.arc(hookX - 16, hookY - 8, 16, 0, Math.PI);
+  ctx.stroke();
+
+  // White Tilted Sign on Hook: "78% HIRE FIRST TO ANSWER" (Matches cueva_frame_06 "YOUR WORK?" sign!)
+  ctx.save();
+  ctx.translate(hookX, hookY + 36);
+  ctx.rotate(-0.04);
+  drawRoundBox(ctx, -155, -34, 310, 68, 22, '#ffffff', '#0f172a', 2);
+  ctx.font = '900 24px "Montserrat", "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#090d16';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('AVA', orbX, orbY);
+  ctx.fillText('78% HIRE FIRST ANSWER', 0, -4);
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#0d9488';
+  ctx.fillText('$8,000 EMERGENCY LEAD', 0, 18);
   ctx.restore();
 
-  // 32-Band Reactive Dancing Audio Waveform
-  const waveY = H * 0.48;
-  const waveW = W - 100;
-  const waveX = 50;
-  const barCount = 32;
-  const barW = (waveW / barCount) - 4;
-
-  ctx.save();
-  for (let b = 0; b < barCount; b++) {
-    const bx = waveX + b * (barW + 4);
-    const waveFreq = Math.abs(Math.sin(t * 12 + b * 0.4) * Math.cos(t * 7 + b * 0.2));
-    const barH = 10 + waveFreq * 55;
-
-    const barGrad = ctx.createLinearGradient(bx, waveY - barH / 2, bx, waveY + barH / 2);
-    barGrad.addColorStop(0, '#67e8f9');
-    barGrad.addColorStop(0.5, '#34d399');
-    barGrad.addColorStop(1, '#059669');
-    ctx.fillStyle = barGrad;
-
-    ctx.beginPath();
-    ctx.roundRect(bx, waveY - barH / 2, barW, barH, 3);
-    ctx.fill();
-  }
-  ctx.restore();
-
-  // Dark Dispatch Notification Card sliding in from bottom
-  const cardProg = Math.min(1.0, (t - 34.0) / 0.8);
-  const cardY = H * 0.56 + (1 - cardProg) * 40;
-  const cardW = W - 80;
-  const cardH = 220;
-
-  ctx.save();
-  ctx.fillStyle = '#0f172a';
-  ctx.roundRect(40, cardY, cardW, cardH, 16);
+  // Left Pink Fish (BOB'S VOICEMAIL - Swimming Away Left)
+  const pinkX = 145 - Math.sin(t * 2) * 12;
+  const pinkY = 435;
+  ctx.fillStyle = '#fb7185';
+  ctx.beginPath();
+  ctx.ellipse(pinkX, pinkY, 64, 28, 0, 0, Math.PI * 2);
   ctx.fill();
-  ctx.strokeStyle = 'rgba(52, 211, 153, 0.45)';
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = 'rgba(52, 211, 153, 0.2)';
-  ctx.shadowBlur = 20;
-  ctx.stroke();
-  ctx.shadowBlur = 0;
+  ctx.beginPath();
+  ctx.moveTo(pinkX - 58, pinkY);
+  ctx.lineTo(pinkX - 88, pinkY - 24);
+  ctx.lineTo(pinkX - 88, pinkY + 24);
+  ctx.closePath();
+  ctx.fill();
 
-  // Dispatch Items
-  const items = [
-    { icon: '⚡', title: 'CALL ANSWERED IN 0.8 SECONDS', sub: 'Zero hold time • Caller qualified', color: '#34d399' },
-    { icon: '📅', title: 'SCHEDULE AUDITED & BOOKED', sub: 'Today @ 2:30 PM • Slot locked in CRM', color: '#67e8f9' },
-    { icon: '📲', title: 'DISPATCH SMS SENT TO TECH 1', sub: 'Bob received client notes & map link', color: '#facc15' }
-  ];
+  ctx.font = '900 14px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.fillText('VOICEMAIL (0%)', pinkX, pinkY + 48);
 
-  items.forEach((item, idx) => {
-    const itemY = cardY + 22 + idx * 62;
-    // Status Icon
-    ctx.font = '20px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
-    ctx.fillText(item.icon, 58, itemY);
+  // Right Neon Lime Fish (NEXT SHOP ON GOOGLE - Swimming Up to Hook!)
+  const limeX = 355 + Math.cos(t * 3) * 8;
+  const limeY = 485;
+  ctx.fillStyle = '#a3e635';
+  ctx.beginPath();
+  ctx.ellipse(limeX, limeY, 72, 32, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(limeX + 66, limeY);
+  ctx.lineTo(limeX + 98, limeY - 26);
+  ctx.lineTo(limeX + 98, limeY + 26);
+  ctx.closePath();
+  ctx.fill();
+  // Fish Eye
+  ctx.fillStyle = '#090d16';
+  ctx.beginPath();
+  ctx.arc(limeX - 42, limeY - 6, 5.5, 0, Math.PI * 2);
+  ctx.fill();
 
-    // Title
-    ctx.font = '800 14px "Space Grotesk", sans-serif';
-    ctx.fillStyle = item.color;
-    ctx.fillText(item.title, 88, itemY + 2);
-
-    // Subtitle
-    ctx.font = '600 12px "Inter", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
-    ctx.fillText(item.sub, 88, itemY + 22);
-  });
-  ctx.restore();
+  ctx.font = '900 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#fde047';
+  ctx.textAlign = 'center';
+  ctx.fillText('NEXT ON GOOGLE (WINS $8K)', limeX, limeY + 52);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 8 (43.0s - 51.5s): Revenue Protection Waterfall
-// "Stop bleeding thousands on dead voicemails."
-// Dynamic financial schematic: +$80,000 / mo retained revenue waterfall
+// SCENE 8 (57.5s - 64.8s): Competitor Answers Ring 1 & Cashes Bob's $8,000 Check
+// "That shop answers on ring one, rolls a truck, and collects an $8,000 check that had Bob's name written all over it."
 // ----------------------------------------------------------------------------
-function renderTasklessScene8_RevenueWaterfall(t) {
+function renderTasklessScene8_CompetitorStealsCheck(t) {
+  drawCuevaRoom(ctx, '#3b0764', '#140324', '#08010f', 4, t, "COMPETITOR CASHES BOB'S $8,000 CHECK");
+
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
+  // Giant $8,000 Cashier's Check Centerpiece
+  const chkX = 48, chkY = 175, chkW = W - 96, chkH = 195;
+  drawRoundBox(ctx, chkX, chkY, chkW, chkH, 18, '#064e3b', '#4ade80', 3);
 
-  drawTasklessHUD(ctx, {
-    topStat: '+$80,000',
-    topStatUnit: 'MO',
-    topSub1: 'PROTECTED REVENUE CAPTURE',
-    topSub2: '10 SAVED HIGH-TICKET JOBS',
-    rightLabel: 'FINANCIAL SCHEMATIC'
-  });
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#a7f3d0';
+  ctx.textAlign = 'left';
+  ctx.fillText('EMERGENCY PLUMBING & WATER PAYOUT', chkX + 24, chkY + 32);
 
-  // Animated Cascading Green Dollar Particles
-  ctx.save();
-  ctx.fillStyle = '#22c55e';
-  for (let d = 0; d < 30; d++) {
-    const dx = 50 + (d * 17) % (W - 100);
-    const dy = 160 + ((t * 180 + d * 45) % (H - 320));
-    const dAlpha = 0.2 + 0.6 * Math.sin(t * 3 + d);
-    ctx.fillStyle = 'rgba(34, 197, 94, ' + dAlpha + ')';
-    ctx.font = '700 16px "Space Grotesk", sans-serif';
-    ctx.fillText('$', dx, dy);
-  }
-  ctx.restore();
+  ctx.font = '900 54px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.fillText('$8,000.00', chkX + 24, chkY + 95);
 
-  // Giant Retention Metric Center
-  const countProg = Math.min(1.0, (t - 43.0) / 1.5);
-  const currentDollars = Math.floor(countProg * 80000);
+  // Pay to the order of: BOB'S PLUMBING (Crossed out in red!) -> COMPETITOR #2
+  ctx.font = '800 16px "Space Grotesk", sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+  ctx.fillText("PAY TO: BOB'S CONTRACTING", chkX + 24, chkY + 138);
 
-  ctx.font = '900 68px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#22c55e';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.shadowColor = 'rgba(34, 197, 94, 0.5)';
-  ctx.shadowBlur = 30;
-  ctx.fillText('+$' + currentDollars.toLocaleString(), W / 2, H * 0.40);
-  ctx.shadowBlur = 0;
-
-  ctx.font = '700 18px "Inter", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.fillText('NET REVENUE RETAINED / MONTH', W / 2, H * 0.47);
-
-  // ROI Telemetry Box
-  const boxY = H * 0.54;
-  ctx.save();
-  ctx.fillStyle = '#0f172a';
-  ctx.roundRect(40, boxY, W - 80, 180, 14);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(34, 197, 94, 0.35)';
-  ctx.lineWidth = 1.5;
+  // Red strike-through line over Bob's name
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(chkX + 95, chkY + 133);
+  ctx.lineTo(chkX + 295, chkY + 133);
   ctx.stroke();
 
-  const metrics = [
-    { label: 'AVERAGE HVAC/PLUMBING TICKET', val: '$8,000.00' },
-    { label: 'MISSED CALLS CONVERTED / MO', val: '10 JOBS' },
-    { label: 'DISPATCH LAG TIME', val: '0.8 SECONDS' }
-  ];
+  ctx.font = '900 17px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
+  ctx.fillText('➔ PAID TO: COMPETITOR (RING #1)', chkX + 24, chkY + 168);
 
-  metrics.forEach((m, idx) => {
-    const my = boxY + 28 + idx * 48;
-    ctx.font = '700 12px "JetBrains Mono", sans-serif';
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-    ctx.textAlign = 'left';
-    ctx.fillText(m.label, 60, my);
+  // Left: Sad Contractor Bob Empty-Handed
+  drawCuevaCharacter(ctx, {
+    x: 138,
+    y: H * 0.77,
+    scale: 0.90,
+    outfit: 'contractor',
+    hair: 'hardhat',
+    mood: 'worried',
+    leftArmAngle: 0.4,
+    rightArmAngle: -0.4
+  }, t);
 
-    ctx.font = '800 16px "Space Grotesk", sans-serif';
-    ctx.fillStyle = '#ffffff';
-    ctx.textAlign = 'right';
-    ctx.fillText(m.val, W - 60, my);
-  });
-  ctx.restore();
+  // Right: Smirking Competitor in Blue Sweater celebrating
+  drawCuevaCharacter(ctx, {
+    x: 395,
+    y: H * 0.77,
+    scale: 0.90,
+    outfit: 'sweater_blue',
+    hair: 'slick_dark',
+    mood: 'smile',
+    leftArmAngle: 2.3 + Math.sin(t * 8) * 0.15,
+    rightArmAngle: -2.3 - Math.sin(t * 8) * 0.15
+  }, t);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 9 (51.5s - 56.5s): Live Interactive Demo Dialer
-// "Call the demo number on screen right now to hear Ava live..."
-// Pulsing emerald phone dialer with expanding radiant sonar rings
+// SCENE 9 (64.8s - 76.2s): Meet Ava 24/7 Voice AI Hologram (Matches cueva_frame_01!)
+// "That is why we built Ava. She answers your phone in 0.8 seconds, calms the homeowner down,
+//  qualifies the job, books your calendar, and texts the dispatch straight to Bob's phone
+//  before the customer can even open another Google tab."
 // ----------------------------------------------------------------------------
-function renderTasklessScene9_LiveDialerInteractive(t) {
+function renderTasklessScene9_AvaInstantReply(t) {
+  drawCuevaRoom(ctx, '#1e1b4b', '#064e3b', '#031c16', 4, t, 'SOLUTION • AVA 24/7 VOICE AI (0.8s PICKUP)');
+
   ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
+  // Cueva Neon AI Brain & Head Hologram on Right (Directly matches cueva_frame_01.png!)
+  const holoX = 335, holoY = 315;
 
-  drawTasklessHUD(ctx, {
-    topStat: 'LIVE DEMO',
-    topSub1: '24/7 INTERACTIVE DIALER',
-    topSub2: 'CALL AVA RIGHT NOW ON SCREEN',
-    rightLabel: 'TEST AVA LIVE'
-  });
-
-  // Center Call Button with Radiant Expanding Rings
-  const btnX = W / 2;
-  const btnY = H * 0.42;
-  const btnR = 90;
-
-  // Concentric radiant rings expanding continuously
-  for (let r = 0; r < 4; r++) {
-    const ringLoop = ((t * 45 + r * 30) % 130);
-    const ringAlpha = Math.max(0, 0.5 * (1 - ringLoop / 130));
+  // Pulsing Concentric Neural Rings
+  for (let r = 0; r < 3; r++) {
+    const rad = 95 + r * 28 + Math.sin(t * 5 + r) * 6;
+    ctx.strokeStyle = 'rgba(244, 114, 182, ' + (0.35 - r * 0.08) + ')';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.strokeStyle = 'rgba(34, 197, 94, ' + ringAlpha + ')';
-    ctx.lineWidth = 2.0;
-    ctx.arc(btnX, btnY, btnR + ringLoop, 0, Math.PI * 2);
+    ctx.arc(holoX, holoY, rad, 0, Math.PI * 2);
     ctx.stroke();
   }
 
-  // Giant Emerald Dialer Button
-  const btnGrad = ctx.createRadialGradient(btnX - 25, btnY - 25, 10, btnX, btnY, btnR);
-  btnGrad.addColorStop(0, '#4ade80');
-  btnGrad.addColorStop(0.7, '#22c55e');
-  btnGrad.addColorStop(1, '#15803d');
-  ctx.fillStyle = btnGrad;
-  ctx.shadowColor = 'rgba(34, 197, 94, 0.7)';
-  ctx.shadowBlur = 40;
+  // Glowing Neon Pink/Cyan Head Silhouette Outline
+  ctx.strokeStyle = '#f472b6';
+  ctx.lineWidth = 4.5;
+  ctx.shadowColor = '#f472b6';
+  ctx.shadowBlur = 16;
+  ctx.beginPath();
+  ctx.arc(holoX, holoY - 10, 82, -Math.PI * 0.85, Math.PI * 0.45);
+  ctx.lineTo(holoX + 35, holoY + 95);
+  ctx.lineTo(holoX - 35, holoY + 95);
+  ctx.lineTo(holoX - 42, holoY + 55);
+  ctx.lineTo(holoX - 75, holoY + 50);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Glowing Pink Neural Brain Inside Head
+  ctx.fillStyle = '#fb7185';
+  const brainLobes = [
+    { dx: -22, dy: -22, r: 28 },
+    { dx: 18,  dy: -22, r: 28 },
+    { dx: -28, dy: 4,   r: 24 },
+    { dx: 24,  dy: 4,   r: 24 },
+    { dx: 0,   dy: -8,  r: 26 }
+  ];
+  brainLobes.forEach(l => {
+    ctx.beginPath();
+    ctx.arc(holoX + l.dx, holoY + l.dy, l.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // Floating Cueva Action Icons around Ava Brain (Phone, Calendar, SMS Dispatch)
+  drawRoundBox(ctx, holoX - 88, holoY - 125, 176, 36, 10, '#065f46', '#4ade80', 2);
+  ctx.font = '900 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.textAlign = 'center';
+  ctx.fillText('⚡ AVA AI • 0.8s ANSWER', holoX, holoY - 102);
+
+  // Instant SMS Dispatch Card below Hologram
+  const smsY = 445;
+  drawRoundBox(ctx, 210, smsY, 295, 145, 16, '#0f172a', '#38bdf8', 2.5);
+  ctx.font = '800 12px "JetBrains Mono", sans-serif';
+  ctx.fillStyle = '#38bdf8';
+  ctx.textAlign = 'left';
+  ctx.fillText('📲 INSTANT SMS TO BOB (24s):', 228, smsY + 28);
+
+  ctx.font = '800 15px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#ffffff';
+  ctx.fillText('✅ Sarah Jenkins — Pipe Burst', 228, smsY + 56);
+  ctx.fillText('📍 Calendar Booked • Tech Dispatched', 228, smsY + 82);
+
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#4ade80';
+  ctx.fillText('💰 +$8,000 JOB LOCKED IN', 228, smsY + 118);
+
+  // Cueva Presenter on Left pointing to Ava Hologram (Matches cueva_frame_01!)
+  drawCuevaCharacter(ctx, {
+    x: 105,
+    y: H * 0.77,
+    scale: 0.94,
+    outfit: 'suit',
+    hair: 'curly_gold',
+    mood: 'talk',
+    leftArmAngle: 0.2,
+    rightArmAngle: -1.15 + Math.sin(t * 4) * 0.08
+  }, t);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 10 (76.2s - 81.0s): Stop Handing $8,000 Checks to Competitors
+// "Stop handing $8,000 checks to your competitors."
+// ----------------------------------------------------------------------------
+function renderTasklessScene10_RevenueWaterfall(t) {
+  drawCuevaRoom(ctx, '#065f46', '#022c22', '#011712', 5, t, '100% REVENUE CAPTURED BY YOUR SHOP');
+
+  ctx.save();
+  // 3 Stacked Captured Check Cards
+  const checks = [
+    { y: 165, title: 'EMERGENCY PIPE BURST (SARAH)', amt: '+$8,000', tag: 'CAPTURED IN 0.8s' },
+    { y: 268, title: 'SUNDAY AC COMPRESSOR FAILURE', amt: '+$9,200', tag: 'BOOKED ON CALENDAR' },
+    { y: 371, title: 'AFTER-HOURS MAIN PANEL SURGE', amt: '+$7,400', tag: 'DISPATCHED VIA SMS' }
+  ];
+
+  checks.forEach((c, idx) => {
+    const hoverX = Math.sin(t * 4 + idx) * 4;
+    drawRoundBox(ctx, 44 + hoverX, c.y, W - 88, 86, 16, '#0f172a', '#4ade80', 2.5);
+
+    ctx.font = '800 13px "Space Grotesk", sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'left';
+    ctx.fillText(c.title, 66 + hoverX, c.y + 32);
+
+    ctx.font = '700 11px "JetBrains Mono", sans-serif';
+    ctx.fillStyle = '#38bdf8';
+    ctx.fillText('⚡ ' + c.tag, 66 + hoverX, c.y + 58);
+
+    ctx.font = '900 28px "Space Grotesk", sans-serif';
+    ctx.fillStyle = '#4ade80';
+    ctx.textAlign = 'right';
+    ctx.fillText(c.amt, W - 66 + hoverX, c.y + 52);
+  });
+
+  // Happy Contractor Bob at Bottom Center celebrating
+  drawCuevaCharacter(ctx, {
+    x: W / 2,
+    y: H * 0.77,
+    scale: 0.82,
+    outfit: 'contractor',
+    hair: 'hardhat',
+    mood: 'smile',
+    leftArmAngle: 2.2 + Math.sin(t * 7) * 0.15,
+    rightArmAngle: -2.2 - Math.sin(t * 7) * 0.15
+  }, t);
+
+  ctx.restore();
+}
+
+// ----------------------------------------------------------------------------
+// SCENE 11 (81.0s - 85.2s): Live Interactive Demo Dialer
+// "Call the live demo number on your screen right now to hear Ava answer live,"
+// ----------------------------------------------------------------------------
+function renderTasklessScene11_LiveDialerInteractive(t) {
+  drawCuevaRoom(ctx, '#1e3a8a', '#09132c', '#040917', 5, t, 'TEST AVA LIVE ON YOUR PHONE RIGHT NOW');
+
+  ctx.save();
+  const btnX = W / 2, btnY = 285, btnR = 72;
+
+  for (let r = 0; r < 3; r++) {
+    const loopR = ((t * 42 + r * 28) % 90);
+    const alpha = Math.max(0, 0.55 * (1 - loopR / 90));
+    ctx.strokeStyle = 'rgba(74, 222, 128, ' + alpha + ')';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.arc(btnX, btnY, btnR + loopR, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = '#22c55e';
+  ctx.shadowColor = '#22c55e';
+  ctx.shadowBlur = 28;
   ctx.beginPath();
   ctx.arc(btnX, btnY, btnR, 0, Math.PI * 2);
   ctx.fill();
   ctx.shadowBlur = 0;
 
-  // Phone Icon (Rocking gently)
-  ctx.save();
-  ctx.translate(btnX, btnY - 10);
-  ctx.rotate(Math.sin(t * 8) * 0.12);
-  ctx.font = '54px sans-serif';
+  ctx.font = '44px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('📞', 0, 0);
-  ctx.restore();
+  ctx.fillText('📞', btnX, btnY - 6);
 
-  ctx.font = '800 18px "Space Grotesk", sans-serif';
+  ctx.font = '900 14px "Space Grotesk", sans-serif';
   ctx.fillStyle = '#ffffff';
+  ctx.fillText('CALL LIVE DEMO', btnX, btnY + 34);
+
+  // Giant Phone Number Plaque
+  drawRoundBox(ctx, 36, 405, W - 72, 118, 18, '#0f172a', '#facc15', 3);
+  ctx.font = '900 38px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#facc15';
   ctx.textAlign = 'center';
-  ctx.fillText('TAP TO DIAL', btnX, btnY + 45);
+  ctx.fillText('(561) 813-8602', W / 2, 452);
 
-  // Phone Number Banner
-  const numCardY = H * 0.62;
-  ctx.save();
-  ctx.fillStyle = '#0f172a';
-  ctx.roundRect(40, numCardY, W - 80, 110, 16);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(34, 197, 94, 0.5)';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  ctx.font = '900 36px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'top';
-  ctx.fillText('(561) 813-8602', W / 2, numCardY + 22);
-
-  ctx.font = '700 13px "JetBrains Mono", sans-serif';
+  ctx.font = '800 13px "JetBrains Mono", sans-serif';
   ctx.fillStyle = '#4ade80';
-  ctx.fillText('• READY • AVA ANSWERS IN 0.8s', W / 2, numCardY + 72);
-  ctx.restore();
+  ctx.fillText('• LIVE 24/7 • HEAR AVA ANSWER IN 0.8s', W / 2, 492);
+
+  // Cueva Presenter at Bottom Left pointing up to number
+  drawCuevaCharacter(ctx, {
+    x: 110,
+    y: H * 0.77,
+    scale: 0.76,
+    outfit: 'suit',
+    hair: 'curly_gold',
+    mood: 'smile',
+    leftArmAngle: 0.2,
+    rightArmAngle: -1.9
+  }, t);
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// SCENE 10 (56.5s - 63.0s): The Taskless End Card
-// "...or comment 'AVA' below for free instant access."
-// Giant bold COMMENT "AVA" banner with pulsing golden border and bouncing arrows
+// SCENE 12 (85.2s - 89.0s): Iconic Cueva Typewriter End Card (Matches cueva_frame_12!)
+// "or comment AVA below and we will DM you the free interactive link."
 // ----------------------------------------------------------------------------
-function renderTasklessScene10_TasklessEndCard(t) {
-  ctx.save();
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
-
-  drawTasklessHUD(ctx, {
-    topStat: 'FREE DEMO',
-    topSub1: 'DIRECT RESPONSE ACCESS',
-    topSub2: 'AUTOMATED DIRECT MESSAGE',
-    rightLabel: 'VANTORX.COM'
-  });
-
-  // Giant Comment Banner with Pulsing Golden Border
-  const bannerY = H * 0.36;
-  const borderPulse = 0.5 + 0.5 * Math.sin(t * 8);
+function renderTasklessScene12_TasklessEndCard(t) {
+  drawCuevaRoom(ctx, '#1d4ed8', '#0b132b', '#050914', 5, t, 'VANTORX AUTOMATION • INSTANT DM ACCESS');
 
   ctx.save();
-  ctx.fillStyle = '#17140b';
-  ctx.roundRect(40, bannerY, W - 80, 140, 20);
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(250, 204, 21, ' + (0.5 + borderPulse * 0.5) + ')';
-  ctx.lineWidth = 3;
-  ctx.shadowColor = 'rgba(250, 204, 21, 0.4)';
-  ctx.shadowBlur = 25;
-  ctx.stroke();
-  ctx.shadowBlur = 0;
+  const story = window.ACTIVE_STORY || {};
+  const kw = story.keyword || 'AVA';
 
-  ctx.font = '700 14px "JetBrains Mono", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-  ctx.textAlign = 'center';
+  // Cream Paper Sheet Rising Out of Cueva Typewriter (Directly matches cueva_frame_12.png!)
+  const paperX = 48, paperY = 148, paperW = W - 96, paperH = 385;
+  drawRoundBox(ctx, paperX, paperY, paperW, paperH, 6, '#fef9c3', '#ca8a04', 2);
+
+  // Horizontal Ruled Paper Lines
+  ctx.strokeStyle = 'rgba(180, 140, 60, 0.18)';
+  ctx.lineWidth = 1;
+  for (let ly = paperY + 24; ly < paperY + paperH - 12; ly += 14) {
+    ctx.beginPath();
+    ctx.moveTo(paperX + 12, ly);
+    ctx.lineTo(paperX + paperW - 12, ly);
+    ctx.stroke();
+  }
+
+  // Bold Black Typewriter Headline on Cream Paper
+  ctx.font = '900 32px "Montserrat", "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#090d16';
+  ctx.textAlign = 'left';
   ctx.textBaseline = 'top';
-  ctx.fillText('DROP A COMMENT BELOW', W / 2, bannerY + 24);
+  ctx.fillText('DROP A COMMENT:', paperX + 28, paperY + 38);
 
-  // Giant Golden Word
-  ctx.font = '900 52px "Space Grotesk", sans-serif';
+  // Highlighted Keyword Box on Paper
+  drawRoundBox(ctx, paperX + 28, paperY + 92, paperW - 56, 86, 14, '#090d16', '#facc15', 3);
+  ctx.font = '900 44px "Montserrat", "Space Grotesk", sans-serif';
   ctx.fillStyle = '#facc15';
-  ctx.shadowColor = 'rgba(250, 204, 21, 0.6)';
-  ctx.shadowBlur = 20;
-  ctx.fillText('COMMENT "AVA"', W / 2, bannerY + 54);
-  ctx.shadowBlur = 0;
-
-  ctx.font = '600 13px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-  ctx.fillText('We will instantly DM you the interactive link', W / 2, bannerY + 112);
-  ctx.restore();
-
-  // Bouncing Golden Chevron Arrows pointing downward
-  const arrowY = bannerY + 185;
-  const arrowBounce = Math.sin(t * 7) * 8;
-  ctx.save();
-  ctx.fillStyle = '#facc15';
-  ctx.font = '40px sans-serif';
   ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('⬇️', W / 2, arrowY + arrowBounce);
-  ctx.restore();
+  ctx.fillText('COMMENT "' + kw + '"', W / 2, paperY + 114);
 
-  // Official Brand Seal
-  ctx.font = '800 20px "Space Grotesk", sans-serif';
-  ctx.fillStyle = '#ffffff';
+  // Solid Black Divider Bar (Matches cueva_frame_12!)
+  ctx.fillStyle = '#090d16';
+  ctx.fillRect(paperX + 28, paperY + 206, paperW - 56, 7);
+
+  ctx.font = '800 17px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#1e293b';
   ctx.textAlign = 'center';
-  ctx.fillText('VANTORX AUTOMATION', W / 2, H - 160);
+  ctx.fillText('WE WILL INSTANTLY DM YOUR FREE', W / 2, paperY + 232);
+  ctx.fillText('INTERACTIVE DEMO LINK IN 2 SECONDS', W / 2, paperY + 258);
 
-  ctx.font = '600 13px "Inter", sans-serif';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-  ctx.fillText('Speed to Lead AI Engine • Built for Trade Contractors', W / 2, H - 132);
+  ctx.font = '900 22px "Space Grotesk", sans-serif';
+  ctx.fillStyle = '#0d9488';
+  ctx.fillText('📞 LIVE DEMO: (561) 813-8602', W / 2, paperY + 302);
+
+  // Tactile Dark Cueva Typewriter Base & Round Silver Keys at Bottom (Matches cueva_frame_12!)
+  const twY = 505;
+  drawRoundBox(ctx, 18, twY, W - 36, 225, 18, '#1e293b', '#475569', 3);
+  drawRoundBox(ctx, 28, twY + 52, W - 56, 165, 12, '#0f172a', null);
+
+  // 3 Rows of Round Silver Typewriter Keys (Animated key presses!)
+  const activeKey = Math.floor(t * 12) % 18;
+  let kIdx = 0;
+  for (let row = 0; row < 3; row++) {
+    const cols = (row === 1) ? 6 : 7;
+    const startKx = (row === 1) ? 88 : 64;
+    const ky = twY + 84 + row * 42;
+    for (let col = 0; col < cols; col++) {
+      const kx = startKx + col * 68;
+      const isPressed = (kIdx === activeKey);
+      ctx.fillStyle = isPressed ? '#facc15' : '#cbd5e1';
+      ctx.beginPath();
+      ctx.arc(kx, ky + (isPressed ? 3 : 0), 15, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#475569';
+      ctx.stroke();
+      kIdx++;
+    }
+  }
 
   ctx.restore();
 }
 
 // ----------------------------------------------------------------------------
-// KINETIC CAPTIONS — HORMOZI / TASKLESS STYLE TYPOGRAPHY
-// Active spoken word highlighted in vivid amber gold (#facc15) with dynamic spring bounce
+// BOXLESS CUEVA KINETIC CAPTIONS — EXACT ELEVENLABS WORD ALIGNMENT
+// Floating cleanly over the dark stage floor (Y = H * 0.84 = 806) with a soft
+// radial shadow glow, ZERO rectangle boxes, ZERO 1-word flashes, ZERO blinking!
 // ----------------------------------------------------------------------------
+const CAPTION_CHUNKS = [{"id":1,"start":0,"end":0.489,"color":"#ff6b4a","text":"If you point","words":[{"word":"If","rawWord":"If","start":0,"end":0.104},{"word":"you","rawWord":"you","start":0.139,"end":0.209},{"word":"point","rawWord":"point","start":0.279,"end":0.464}]},{"id":2,"start":0.499,"end":1.151,"color":"#38bdf8","text":"a single beam","words":[{"word":"a","rawWord":"a","start":0.499,"end":0.522},{"word":"single","rawWord":"single","start":0.592,"end":0.882},{"word":"beam","rawWord":"beam","start":0.917,"end":1.115}]},{"id":3,"start":1.161,"end":1.778,"color":"#facc15","text":"of laser light","words":[{"word":"of","rawWord":"of","start":1.161,"end":1.219},{"word":"laser","rawWord":"laser","start":1.277,"end":1.533},{"word":"light","rawWord":"light","start":1.579,"end":1.753}]},{"id":4,"start":1.788,"end":2.277,"color":"#c084fc","text":"into the night","words":[{"word":"into","rawWord":"into","start":1.788,"end":1.916},{"word":"the","rawWord":"the","start":1.962,"end":2.032},{"word":"night","rawWord":"night","start":2.078,"end":2.252}]},{"id":5,"start":2.287,"end":3.67,"color":"#4ade80","text":"sky, it fires","words":[{"word":"sky","rawWord":"sky,","start":2.287,"end":2.821},{"word":"it","rawWord":"it","start":3.1,"end":3.204},{"word":"fires","rawWord":"fires","start":3.262,"end":3.646}]},{"id":6,"start":3.68,"end":4.239,"color":"#ff6b4a","text":"into the dark","words":[{"word":"into","rawWord":"into","start":3.68,"end":3.796},{"word":"the","rawWord":"the","start":3.855,"end":3.924},{"word":"dark","rawWord":"dark","start":3.971,"end":4.214}]},{"id":7,"start":4.249,"end":6.225,"color":"#38bdf8","text":"at 186,000 miles","words":[{"word":"at","rawWord":"at","start":4.249,"end":4.319},{"word":"186000","rawWord":"186,000","start":4.4,"end":5.817},{"word":"miles","rawWord":"miles","start":5.875,"end":6.188}]},{"id":8,"start":6.235,"end":7.153,"color":"#facc15","text":"per second.","words":[{"word":"per","rawWord":"per","start":6.235,"end":6.339},{"word":"second.","rawWord":"second.","start":6.374,"end":6.792}]},{"id":9,"start":7.163,"end":7.745,"color":"#c084fc","text":"In just one","words":[{"word":"In","rawWord":"In","start":7.163,"end":7.268},{"word":"just","rawWord":"just","start":7.303,"end":7.442},{"word":"one","rawWord":"one","start":7.5,"end":7.709}]},{"id":10,"start":7.755,"end":8.686,"color":"#4ade80","text":"second, it flashes","words":[{"word":"second","rawWord":"second,","start":7.755,"end":8.069},{"word":"it","rawWord":"it","start":8.092,"end":8.162},{"word":"flashes","rawWord":"flashes","start":8.22,"end":8.638}]},{"id":11,"start":8.696,"end":9.917,"color":"#ff6b4a","text":"past the Moon.","words":[{"word":"past","rawWord":"past","start":8.696,"end":8.951},{"word":"the","rawWord":"the","start":8.986,"end":9.056},{"word":"Moon.","rawWord":"Moon.","start":9.091,"end":9.497}]},{"id":12,"start":9.927,"end":10.927,"color":"#38bdf8","text":"In twelve minutes,","words":[{"word":"In","rawWord":"In","start":9.927,"end":10.043},{"word":"twelve","rawWord":"twelve","start":10.078,"end":10.379},{"word":"minutes","rawWord":"minutes,","start":10.414,"end":10.763}]},{"id":13,"start":10.937,"end":11.867,"color":"#facc15","text":"it blazes past","words":[{"word":"it","rawWord":"it","start":10.937,"end":11.03},{"word":"blazes","rawWord":"blazes","start":11.064,"end":11.471},{"word":"past","rawWord":"past","start":11.529,"end":11.808}]},{"id":14,"start":11.877,"end":12.761,"color":"#c084fc","text":"Mars.","words":[{"word":"Mars.","rawWord":"Mars.","start":11.877,"end":12.4}]},{"id":15,"start":12.771,"end":13.318,"color":"#4ade80","text":"In forty-three","words":[{"word":"In","rawWord":"In","start":12.771,"end":12.876},{"word":"fortythree","rawWord":"forty-three","start":12.922,"end":13.294}]},{"id":16,"start":13.328,"end":14.201,"color":"#ff6b4a","text":"minutes, it tears","words":[{"word":"minutes","rawWord":"minutes,","start":13.328,"end":13.688},{"word":"it","rawWord":"it","start":13.816,"end":13.921},{"word":"tears","rawWord":"tears","start":13.955,"end":14.164}]},{"id":17,"start":14.211,"end":14.979,"color":"#38bdf8","text":"past Jupiter,","words":[{"word":"past","rawWord":"past","start":14.211,"end":14.431},{"word":"Jupiter","rawWord":"Jupiter,","start":14.466,"end":14.884}]},{"id":18,"start":14.989,"end":15.431,"color":"#facc15","text":"and in under","words":[{"word":"and","rawWord":"and","start":14.989,"end":15.105},{"word":"in","rawWord":"in","start":15.151,"end":15.209},{"word":"under","rawWord":"under","start":15.244,"end":15.407}]},{"id":19,"start":15.441,"end":16.163,"color":"#c084fc","text":"three hours,","words":[{"word":"three","rawWord":"three","start":15.441,"end":15.616},{"word":"hours","rawWord":"hours,","start":15.65,"end":16.022}]},{"id":20,"start":16.173,"end":16.906,"color":"#4ade80","text":"it crosses nearly","words":[{"word":"it","rawWord":"it","start":16.173,"end":16.266},{"word":"crosses","rawWord":"crosses","start":16.301,"end":16.614},{"word":"nearly","rawWord":"nearly","start":16.649,"end":16.869}]},{"id":21,"start":16.916,"end":17.928,"color":"#ff6b4a","text":"two billion miles","words":[{"word":"two","rawWord":"two","start":16.916,"end":17.055},{"word":"billion","rawWord":"billion","start":17.148,"end":17.508},{"word":"miles","rawWord":"miles","start":17.566,"end":17.891}]},{"id":22,"start":17.938,"end":18.705,"color":"#38bdf8","text":"of freezing deep","words":[{"word":"of","rawWord":"of","start":17.938,"end":18.007},{"word":"freezing","rawWord":"freezing","start":18.054,"end":18.46},{"word":"deep","rawWord":"deep","start":18.518,"end":18.681}]},{"id":23,"start":18.715,"end":19.483,"color":"#facc15","text":"space to hit","words":[{"word":"space","rawWord":"space","start":18.715,"end":19.099},{"word":"to","rawWord":"to","start":19.203,"end":19.296},{"word":"hit","rawWord":"hit","start":19.354,"end":19.459}]},{"id":24,"start":19.493,"end":20.099,"color":"#c084fc","text":"the rings of","words":[{"word":"the","rawWord":"the","start":19.493,"end":19.563},{"word":"rings","rawWord":"rings","start":19.609,"end":19.923},{"word":"of","rawWord":"of","start":19.969,"end":20.039}]},{"id":25,"start":20.109,"end":21.109,"color":"#4ade80","text":"Uranus.","words":[{"word":"Uranus.","rawWord":"Uranus.","start":20.109,"end":20.608}]},{"id":26,"start":21.119,"end":21.48,"color":"#ff6b4a","text":"Yet that","words":[{"word":"Yet","rawWord":"Yet","start":21.119,"end":21.27},{"word":"that","rawWord":"that","start":21.304,"end":21.455}]},{"id":27,"start":21.49,"end":22.444,"color":"#38bdf8","text":"two-billion-mile","words":[{"word":"twobillionmile","rawWord":"two-billion-mile","start":21.49,"end":22.396}]},{"id":28,"start":22.454,"end":23.129,"color":"#facc15","text":"journey across the","words":[{"word":"journey","rawWord":"journey","start":22.454,"end":22.698},{"word":"across","rawWord":"across","start":22.733,"end":23},{"word":"the","rawWord":"the","start":23.035,"end":23.104}]},{"id":29,"start":23.139,"end":23.93,"color":"#c084fc","text":"solar system","words":[{"word":"solar","rawWord":"solar","start":23.139,"end":23.394},{"word":"system","rawWord":"system","start":23.441,"end":23.708}]},{"id":30,"start":23.94,"end":24.871,"color":"#4ade80","text":"is STILL faster","words":[{"word":"is","rawWord":"is","start":23.94,"end":24.103},{"word":"STILL","rawWord":"STILL","start":24.149,"end":24.393},{"word":"faster","rawWord":"faster","start":24.463,"end":24.846}]},{"id":31,"start":24.881,"end":25.474,"color":"#ff6b4a","text":"than the average","words":[{"word":"than","rawWord":"than","start":24.881,"end":24.997},{"word":"the","rawWord":"the","start":25.031,"end":25.101},{"word":"average","rawWord":"average","start":25.159,"end":25.449}]},{"id":32,"start":25.484,"end":26.299,"color":"#38bdf8","text":"contractor calls","words":[{"word":"contractor","rawWord":"contractor","start":25.484,"end":25.972},{"word":"calls","rawWord":"calls","start":26.018,"end":26.262}]},{"id":33,"start":26.309,"end":27.03,"color":"#facc15","text":"back an emergency","words":[{"word":"back","rawWord":"back","start":26.309,"end":26.459},{"word":"an","rawWord":"an","start":26.494,"end":26.552},{"word":"emergency","rawWord":"emergency","start":26.587,"end":26.97}]},{"id":34,"start":27.04,"end":27.738,"color":"#c084fc","text":"lead.","words":[{"word":"lead.","rawWord":"lead.","start":27.04,"end":27.47}]},{"id":35,"start":27.748,"end":28.702,"color":"#4ade80","text":"Picture this.","words":[{"word":"Picture","rawWord":"Picture","start":27.748,"end":28.027},{"word":"this.","rawWord":"this.","start":28.05,"end":28.433}]},{"id":36,"start":28.712,"end":29.828,"color":"#ff6b4a","text":"Meet Bob.","words":[{"word":"Meet","rawWord":"Meet","start":28.712,"end":28.909},{"word":"Bob.","rawWord":"Bob.","start":28.956,"end":29.466}]},{"id":37,"start":29.838,"end":30.316,"color":"#38bdf8","text":"Bob is a","words":[{"word":"Bob","rawWord":"Bob","start":29.838,"end":30.07},{"word":"is","rawWord":"is","start":30.117,"end":30.186},{"word":"a","rawWord":"a","start":30.221,"end":30.256}]},{"id":38,"start":30.326,"end":31.21,"color":"#facc15","text":"master contractor","words":[{"word":"master","rawWord":"master","start":30.326,"end":30.627},{"word":"contractor","rawWord":"contractor","start":30.685,"end":31.185}]},{"id":39,"start":31.22,"end":31.836,"color":"#c084fc","text":"standing twenty","words":[{"word":"standing","rawWord":"standing","start":31.22,"end":31.521},{"word":"twenty","rawWord":"twenty","start":31.568,"end":31.8}]},{"id":40,"start":31.846,"end":32.289,"color":"#4ade80","text":"feet up a","words":[{"word":"feet","rawWord":"feet","start":31.846,"end":32.009},{"word":"up","rawWord":"up","start":32.055,"end":32.16},{"word":"a","rawWord":"a","start":32.206,"end":32.241}]},{"id":41,"start":32.299,"end":32.742,"color":"#ff6b4a","text":"ladder in a","words":[{"word":"ladder","rawWord":"ladder","start":32.299,"end":32.543},{"word":"in","rawWord":"in","start":32.578,"end":32.636},{"word":"a","rawWord":"a","start":32.671,"end":32.694}]},{"id":42,"start":32.752,"end":33.706,"color":"#38bdf8","text":"scorching attic,","words":[{"word":"scorching","rawWord":"scorching","start":32.752,"end":33.112},{"word":"attic","rawWord":"attic,","start":33.17,"end":33.542}]},{"id":43,"start":33.716,"end":34.646,"color":"#facc15","text":"drenched in sweat","words":[{"word":"drenched","rawWord":"drenched","start":33.716,"end":34.099},{"word":"in","rawWord":"in","start":34.134,"end":34.203},{"word":"sweat","rawWord":"sweat","start":34.296,"end":34.61}]},{"id":44,"start":34.656,"end":35.18,"color":"#c084fc","text":"with a wrench","words":[{"word":"with","rawWord":"with","start":34.656,"end":34.784},{"word":"a","rawWord":"a","start":34.819,"end":34.842},{"word":"wrench","rawWord":"wrench","start":34.888,"end":35.155}]},{"id":45,"start":35.19,"end":36.028,"color":"#4ade80","text":"in his hand.","words":[{"word":"in","rawWord":"in","start":35.19,"end":35.26},{"word":"his","rawWord":"his","start":35.295,"end":35.376},{"word":"hand.","rawWord":"hand.","start":35.422,"end":35.805}]},{"id":46,"start":36.038,"end":36.864,"color":"#ff6b4a","text":"Across town,","words":[{"word":"Across","rawWord":"Across","start":36.038,"end":36.328},{"word":"town","rawWord":"town,","start":36.374,"end":36.781}]},{"id":47,"start":36.874,"end":37.746,"color":"#38bdf8","text":"a pipe bursts","words":[{"word":"a","rawWord":"a","start":36.874,"end":36.932},{"word":"pipe","rawWord":"pipe","start":37.001,"end":37.257},{"word":"bursts","rawWord":"bursts","start":37.326,"end":37.71}]},{"id":48,"start":37.756,"end":38.64,"color":"#facc15","text":"in Sarah's ceiling","words":[{"word":"in","rawWord":"in","start":37.756,"end":37.826},{"word":"Sarah's","rawWord":"Sarah's","start":37.884,"end":38.162},{"word":"ceiling","rawWord":"ceiling","start":38.197,"end":38.499}]},{"id":49,"start":38.65,"end":39.383,"color":"#c084fc","text":"and water is","words":[{"word":"and","rawWord":"and","start":38.65,"end":38.789},{"word":"water","rawWord":"water","start":38.882,"end":39.196},{"word":"is","rawWord":"is","start":39.254,"end":39.323}]},{"id":50,"start":39.393,"end":40.776,"color":"#4ade80","text":"pouring everywhere.","words":[{"word":"pouring","rawWord":"pouring","start":39.393,"end":39.753},{"word":"everywhere.","rawWord":"everywhere.","start":39.811,"end":40.415}]},{"id":51,"start":40.786,"end":41.6,"color":"#ff6b4a","text":"Panicking, she","words":[{"word":"Panicking","rawWord":"Panicking,","start":40.786,"end":41.367},{"word":"she","rawWord":"she","start":41.471,"end":41.576}]},{"id":52,"start":41.61,"end":42.286,"color":"#38bdf8","text":"grabs her phone","words":[{"word":"grabs","rawWord":"grabs","start":41.61,"end":41.831},{"word":"her","rawWord":"her","start":41.855,"end":41.924},{"word":"phone","rawWord":"phone","start":41.959,"end":42.261}]},{"id":53,"start":42.296,"end":42.936,"color":"#facc15","text":"and calls Bob","words":[{"word":"and","rawWord":"and","start":42.296,"end":42.365},{"word":"calls","rawWord":"calls","start":42.412,"end":42.656},{"word":"Bob","rawWord":"Bob","start":42.702,"end":42.888}]},{"id":54,"start":42.946,"end":43.958,"color":"#c084fc","text":"first.","words":[{"word":"first.","rawWord":"first.","start":42.946,"end":43.376}]},{"id":55,"start":43.968,"end":45.037,"color":"#4ade80","text":"Bob's phone buzzes","words":[{"word":"Bob's","rawWord":"Bob's","start":43.968,"end":44.27},{"word":"phone","rawWord":"phone","start":44.304,"end":44.595},{"word":"buzzes","rawWord":"buzzes","start":44.641,"end":45.001}]},{"id":56,"start":45.047,"end":45.827,"color":"#ff6b4a","text":"in his pocket,","words":[{"word":"in","rawWord":"in","start":45.047,"end":45.105},{"word":"his","rawWord":"his","start":45.14,"end":45.233},{"word":"pocket","rawWord":"pocket,","start":45.268,"end":45.663}]},{"id":57,"start":45.837,"end":47.174,"color":"#38bdf8","text":"once, twice,","words":[{"word":"once","rawWord":"once,","start":45.837,"end":46.301},{"word":"twice","rawWord":"twice,","start":46.475,"end":47.009}]},{"id":58,"start":47.184,"end":48.079,"color":"#facc15","text":"three times,","words":[{"word":"three","rawWord":"three","start":47.184,"end":47.416},{"word":"times","rawWord":"times,","start":47.451,"end":47.938}]},{"id":59,"start":48.089,"end":48.845,"color":"#c084fc","text":"and dumps straight","words":[{"word":"and","rawWord":"and","start":48.089,"end":48.229},{"word":"dumps","rawWord":"dumps","start":48.287,"end":48.496},{"word":"straight","rawWord":"straight","start":48.554,"end":48.821}]},{"id":60,"start":48.855,"end":49.948,"color":"#4ade80","text":"to voicemail.","words":[{"word":"to","rawWord":"to","start":48.855,"end":48.902},{"word":"voicemail.","rawWord":"voicemail.","start":48.948,"end":49.529}]},{"id":61,"start":49.958,"end":50.517,"color":"#ff6b4a","text":"Sarah doesn't","words":[{"word":"Sarah","rawWord":"Sarah","start":49.958,"end":50.214},{"word":"doesn't","rawWord":"doesn't","start":50.249,"end":50.492}]},{"id":62,"start":50.527,"end":51.376,"color":"#38bdf8","text":"leave a message,","words":[{"word":"leave","rawWord":"leave","start":50.527,"end":50.69},{"word":"a","rawWord":"a","start":50.725,"end":50.748},{"word":"message","rawWord":"message,","start":50.794,"end":51.259}]},{"id":63,"start":51.386,"end":52.572,"color":"#facc15","text":"because 78% of","words":[{"word":"because","rawWord":"because","start":51.386,"end":51.63},{"word":"78%","rawWord":"78%","start":51.677,"end":52.42},{"word":"of","rawWord":"of","start":52.489,"end":52.536}]},{"id":64,"start":52.582,"end":53.257,"color":"#c084fc","text":"homeowners hire","words":[{"word":"homeowners","rawWord":"homeowners","start":52.582,"end":53.023},{"word":"hire","rawWord":"hire","start":53.058,"end":53.232}]},{"id":65,"start":53.267,"end":53.861,"color":"#4ade80","text":"the very first","words":[{"word":"the","rawWord":"the","start":53.267,"end":53.337},{"word":"very","rawWord":"very","start":53.395,"end":53.569},{"word":"first","rawWord":"first","start":53.627,"end":53.825}]},{"id":66,"start":53.871,"end":54.372,"color":"#ff6b4a","text":"business that","words":[{"word":"business","rawWord":"business","start":53.871,"end":54.184},{"word":"that","rawWord":"that","start":54.219,"end":54.335}]},{"id":67,"start":54.382,"end":55.173,"color":"#38bdf8","text":"answers.","words":[{"word":"answers.","rawWord":"answers.","start":54.382,"end":54.904}]},{"id":68,"start":55.183,"end":55.742,"color":"#facc15","text":"Within ten","words":[{"word":"Within","rawWord":"Within","start":55.183,"end":55.438},{"word":"ten","rawWord":"ten","start":55.496,"end":55.671}]},{"id":69,"start":55.752,"end":56.799,"color":"#c084fc","text":"seconds, she taps","words":[{"word":"seconds","rawWord":"seconds,","start":55.752,"end":56.228},{"word":"she","rawWord":"she","start":56.402,"end":56.507},{"word":"taps","rawWord":"taps","start":56.553,"end":56.774}]},{"id":70,"start":56.809,"end":57.135,"color":"#4ade80","text":"the next","words":[{"word":"the","rawWord":"the","start":56.809,"end":56.878},{"word":"next","rawWord":"next","start":56.913,"end":57.087}]},{"id":71,"start":57.145,"end":58.853,"color":"#ff6b4a","text":"contractor on Google.","words":[{"word":"contractor","rawWord":"contractor","start":57.145,"end":57.668},{"word":"on","rawWord":"on","start":57.714,"end":57.784},{"word":"Google.","rawWord":"Google.","start":57.83,"end":58.271}]},{"id":72,"start":58.863,"end":59.643,"color":"#38bdf8","text":"That shop answers","words":[{"word":"That","rawWord":"That","start":58.863,"end":59.026},{"word":"shop","rawWord":"shop","start":59.072,"end":59.27},{"word":"answers","rawWord":"answers","start":59.328,"end":59.607}]},{"id":73,"start":59.653,"end":60.56,"color":"#facc15","text":"on ring one,","words":[{"word":"on","rawWord":"on","start":59.653,"end":59.746},{"word":"ring","rawWord":"ring","start":59.804,"end":59.966},{"word":"one","rawWord":"one,","start":60.036,"end":60.419}]},{"id":74,"start":60.57,"end":61.419,"color":"#c084fc","text":"rolls a truck,","words":[{"word":"rolls","rawWord":"rolls","start":60.57,"end":60.826},{"word":"a","rawWord":"a","start":60.86,"end":60.884},{"word":"truck","rawWord":"truck,","start":60.918,"end":61.302}]},{"id":75,"start":61.429,"end":61.919,"color":"#4ade80","text":"and collects an","words":[{"word":"and","rawWord":"and","start":61.429,"end":61.534},{"word":"collects","rawWord":"collects","start":61.58,"end":61.836},{"word":"an","rawWord":"an","start":61.859,"end":61.905}]},{"id":76,"start":61.929,"end":63.033,"color":"#ff6b4a","text":"$8,000 check that","words":[{"word":"$8000","rawWord":"$8,000","start":61.929,"end":62.579},{"word":"check","rawWord":"check","start":62.625,"end":62.834},{"word":"that","rawWord":"that","start":62.881,"end":62.997}]},{"id":77,"start":63.043,"end":63.718,"color":"#38bdf8","text":"had Bob's name","words":[{"word":"had","rawWord":"had","start":63.043,"end":63.148},{"word":"Bob's","rawWord":"Bob's","start":63.194,"end":63.449},{"word":"name","rawWord":"name","start":63.496,"end":63.693}]},{"id":78,"start":63.728,"end":64.415,"color":"#facc15","text":"written all over","words":[{"word":"written","rawWord":"written","start":63.728,"end":63.972},{"word":"all","rawWord":"all","start":64.018,"end":64.158},{"word":"over","rawWord":"over","start":64.204,"end":64.367}]},{"id":79,"start":64.425,"end":65.227,"color":"#c084fc","text":"it.","words":[{"word":"it.","rawWord":"it.","start":64.425,"end":64.727}]},{"id":80,"start":65.237,"end":65.785,"color":"#4ade80","text":"That is why","words":[{"word":"That","rawWord":"That","start":65.237,"end":65.423},{"word":"is","rawWord":"is","start":65.458,"end":65.516},{"word":"why","rawWord":"why","start":65.562,"end":65.737}]},{"id":81,"start":65.795,"end":67.097,"color":"#ff6b4a","text":"we built Ava.","words":[{"word":"we","rawWord":"we","start":65.795,"end":65.888},{"word":"built","rawWord":"built","start":65.934,"end":66.131},{"word":"Ava.","rawWord":"Ava.","start":66.201,"end":66.677}]},{"id":82,"start":67.107,"end":67.7,"color":"#38bdf8","text":"She answers your","words":[{"word":"She","rawWord":"She","start":67.107,"end":67.223},{"word":"answers","rawWord":"answers","start":67.281,"end":67.525},{"word":"your","rawWord":"your","start":67.559,"end":67.675}]},{"id":83,"start":67.71,"end":69.186,"color":"#facc15","text":"phone in 0.8","words":[{"word":"phone","rawWord":"phone","start":67.71,"end":67.977},{"word":"in","rawWord":"in","start":68.012,"end":68.082},{"word":"0.8","rawWord":"0.8","start":68.175,"end":69.138}]},{"id":84,"start":69.196,"end":70.371,"color":"#c084fc","text":"seconds, calms the","words":[{"word":"seconds","rawWord":"seconds,","start":69.196,"end":69.684},{"word":"calms","rawWord":"calms","start":69.858,"end":70.23},{"word":"the","rawWord":"the","start":70.264,"end":70.334}]},{"id":85,"start":70.381,"end":71.322,"color":"#4ade80","text":"homeowner down,","words":[{"word":"homeowner","rawWord":"homeowner","start":70.381,"end":70.775},{"word":"down","rawWord":"down,","start":70.822,"end":71.205}]},{"id":86,"start":71.332,"end":72.611,"color":"#ff6b4a","text":"qualifies the job,","words":[{"word":"qualifies","rawWord":"qualifies","start":71.332,"end":71.808},{"word":"the","rawWord":"the","start":71.843,"end":71.925},{"word":"job","rawWord":"job,","start":71.959,"end":72.412}]},{"id":87,"start":72.621,"end":72.959,"color":"#38bdf8","text":"books your","words":[{"word":"books","rawWord":"books","start":72.621,"end":72.818},{"word":"your","rawWord":"your","start":72.842,"end":72.935}]},{"id":88,"start":72.969,"end":73.761,"color":"#facc15","text":"calendar, and","words":[{"word":"calendar","rawWord":"calendar,","start":72.969,"end":73.445},{"word":"and","rawWord":"and","start":73.573,"end":73.712}]},{"id":89,"start":73.771,"end":74.875,"color":"#c084fc","text":"texts the dispatch","words":[{"word":"texts","rawWord":"texts","start":73.771,"end":74.2},{"word":"the","rawWord":"the","start":74.27,"end":74.363},{"word":"dispatch","rawWord":"dispatch","start":74.397,"end":74.792}]},{"id":90,"start":74.885,"end":75.537,"color":"#4ade80","text":"straight to Bob's","words":[{"word":"straight","rawWord":"straight","start":74.885,"end":75.164},{"word":"to","rawWord":"to","start":75.199,"end":75.245},{"word":"Bob's","rawWord":"Bob's","start":75.291,"end":75.524}]},{"id":91,"start":75.547,"end":76.106,"color":"#ff6b4a","text":"phone before the","words":[{"word":"phone","rawWord":"phone","start":75.547,"end":75.756},{"word":"before","rawWord":"before","start":75.791,"end":75.976},{"word":"the","rawWord":"the","start":76.011,"end":76.081}]},{"id":92,"start":76.116,"end":76.721,"color":"#38bdf8","text":"customer can even","words":[{"word":"customer","rawWord":"customer","start":76.116,"end":76.394},{"word":"can","rawWord":"can","start":76.429,"end":76.534},{"word":"even","rawWord":"even","start":76.569,"end":76.696}]},{"id":93,"start":76.731,"end":77.151,"color":"#facc15","text":"open another","words":[{"word":"open","rawWord":"open","start":76.731,"end":76.882},{"word":"another","rawWord":"another","start":76.917,"end":77.126}]},{"id":94,"start":77.161,"end":78.335,"color":"#c084fc","text":"Google tab.","words":[{"word":"Google","rawWord":"Google","start":77.161,"end":77.404},{"word":"tab.","rawWord":"tab.","start":77.428,"end":77.834}]},{"id":95,"start":78.345,"end":78.915,"color":"#4ade80","text":"Stop handing","words":[{"word":"Stop","rawWord":"Stop","start":78.345,"end":78.565},{"word":"handing","rawWord":"handing","start":78.612,"end":78.879}]},{"id":96,"start":78.925,"end":79.995,"color":"#ff6b4a","text":"$8,000 checks to","words":[{"word":"$8000","rawWord":"$8,000","start":78.925,"end":79.622},{"word":"checks","rawWord":"checks","start":79.657,"end":79.877},{"word":"to","rawWord":"to","start":79.912,"end":79.959}]},{"id":97,"start":80.005,"end":81.086,"color":"#38bdf8","text":"your competitors.","words":[{"word":"your","rawWord":"your","start":80.005,"end":80.121},{"word":"competitors.","rawWord":"competitors.","start":80.156,"end":80.771}]},{"id":98,"start":81.096,"end":81.655,"color":"#facc15","text":"Call the live","words":[{"word":"Call","rawWord":"Call","start":81.096,"end":81.271},{"word":"the","rawWord":"the","start":81.317,"end":81.387},{"word":"live","rawWord":"live","start":81.421,"end":81.63}]},{"id":99,"start":81.665,"end":82.317,"color":"#c084fc","text":"demo number on","words":[{"word":"demo","rawWord":"demo","start":81.665,"end":81.909},{"word":"number","rawWord":"number","start":81.967,"end":82.165},{"word":"on","rawWord":"on","start":82.223,"end":82.292}]},{"id":100,"start":82.327,"end":83.002,"color":"#4ade80","text":"your screen right","words":[{"word":"your","rawWord":"your","start":82.327,"end":82.443},{"word":"screen","rawWord":"screen","start":82.478,"end":82.71},{"word":"right","rawWord":"right","start":82.78,"end":82.966}]},{"id":101,"start":83.012,"end":83.629,"color":"#ff6b4a","text":"now to hear","words":[{"word":"now","rawWord":"now","start":83.012,"end":83.233},{"word":"to","rawWord":"to","start":83.314,"end":83.384},{"word":"hear","rawWord":"hear","start":83.442,"end":83.581}]},{"id":102,"start":83.639,"end":84.918,"color":"#38bdf8","text":"Ava answer live,","words":[{"word":"Ava","rawWord":"Ava","start":83.639,"end":83.813},{"word":"answer","rawWord":"answer","start":83.859,"end":84.092},{"word":"live","rawWord":"live,","start":84.15,"end":84.649}]},{"id":103,"start":84.928,"end":86.079,"color":"#facc15","text":"or comment AVA","words":[{"word":"or","rawWord":"or","start":84.928,"end":85.183},{"word":"comment","rawWord":"comment","start":85.392,"end":85.717},{"word":"AVA","rawWord":"AVA","start":85.764,"end":86.042}]},{"id":104,"start":86.089,"end":86.671,"color":"#c084fc","text":"below and we","words":[{"word":"below","rawWord":"below","start":86.089,"end":86.367},{"word":"and","rawWord":"and","start":86.425,"end":86.53},{"word":"we","rawWord":"we","start":86.576,"end":86.646}]},{"id":105,"start":86.681,"end":87.263,"color":"#4ade80","text":"will DM you","words":[{"word":"will","rawWord":"will","start":86.681,"end":86.808},{"word":"DM","rawWord":"DM","start":86.855,"end":87.075},{"word":"you","rawWord":"you","start":87.133,"end":87.226}]},{"id":106,"start":87.273,"end":87.553,"color":"#ff6b4a","text":"the free","words":[{"word":"the","rawWord":"the","start":87.273,"end":87.342},{"word":"free","rawWord":"free","start":87.377,"end":87.528}]},{"id":107,"start":87.563,"end":88.909,"color":"#38bdf8","text":"interactive link.","words":[{"word":"interactive","rawWord":"interactive","start":87.563,"end":87.981},{"word":"link.","rawWord":"link.","start":88.016,"end":88.469}]}];
 
-// ----------------------------------------------------------------------------
-// PRECISE KINETIC CAPTIONS — EXACT AUDIO WORD ALIGNED (NO RUBBER BAND JITTER)
-// ----------------------------------------------------------------------------
-const CAPTION_CHUNKS = [{"id":1,"start":0,"end":0.917,"text":"A single beam","words":[{"word":"A","rawWord":"A","start":0,"end":0.081},{"word":"single","rawWord":"single","start":0.163,"end":0.546},{"word":"beam","rawWord":"beam","start":0.604,"end":0.859}]},{"id":2,"start":0.917,"end":1.73,"text":"of laser light","words":[{"word":"of","rawWord":"of","start":0.917,"end":0.975},{"word":"laser","rawWord":"laser","start":1.068,"end":1.405},{"word":"light","rawWord":"light","start":1.463,"end":1.695}]},{"id":3,"start":1.73,"end":4.029,"text":"travels at 186,000","words":[{"word":"travels","rawWord":"travels","start":1.73,"end":2.136},{"word":"at","rawWord":"at","start":2.171,"end":2.241},{"word":"186000","rawWord":"186,000","start":2.31,"end":3.959}]},{"id":4,"start":4.029,"end":5.397,"text":"miles per second.","words":[{"word":"miles","rawWord":"miles","start":4.029,"end":4.4},{"word":"per","rawWord":"per","start":4.47,"end":4.574},{"word":"second","rawWord":"second.","start":4.621,"end":5.097}]},{"id":5,"start":5.538,"end":6.084,"text":"It can reach","words":[{"word":"It","rawWord":"It","start":5.538,"end":5.654},{"word":"can","rawWord":"can","start":5.689,"end":5.793},{"word":"reach","rawWord":"reach","start":5.84,"end":6.026}]},{"id":6,"start":6.084,"end":6.641,"text":"the moon in","words":[{"word":"the","rawWord":"the","start":6.084,"end":6.153},{"word":"moon","rawWord":"moon","start":6.2,"end":6.455},{"word":"in","rawWord":"in","start":6.513,"end":6.583}]},{"id":7,"start":6.641,"end":7.883,"text":"under three seconds,","words":[{"word":"under","rawWord":"under","start":6.641,"end":6.838},{"word":"three","rawWord":"three","start":6.896,"end":7.14},{"word":"seconds","rawWord":"seconds,","start":7.198,"end":7.709}]},{"id":8,"start":7.883,"end":8.707,"text":"and cross nearly","words":[{"word":"and","rawWord":"and","start":7.883,"end":8.022},{"word":"cross","rawWord":"cross","start":8.069,"end":8.336},{"word":"nearly","rawWord":"nearly","start":8.394,"end":8.649}]},{"id":9,"start":8.707,"end":10.008,"text":"two billion miles","words":[{"word":"two","rawWord":"two","start":8.707,"end":8.916},{"word":"billion","rawWord":"billion","start":9.067,"end":9.509},{"word":"miles","rawWord":"miles","start":9.567,"end":9.961}]},{"id":10,"start":10.008,"end":10.89,"text":"of deep space","words":[{"word":"of","rawWord":"of","start":10.008,"end":10.066},{"word":"deep","rawWord":"deep","start":10.136,"end":10.356},{"word":"space","rawWord":"space","start":10.426,"end":10.844}]},{"id":11,"start":10.89,"end":11.517,"text":"in less than","words":[{"word":"in","rawWord":"in","start":10.89,"end":10.96},{"word":"less","rawWord":"less","start":11.03,"end":11.215},{"word":"than","rawWord":"than","start":11.262,"end":11.424}]},{"id":12,"start":11.517,"end":12.967,"text":"three hours.","words":[{"word":"three","rawWord":"three","start":11.517,"end":11.854},{"word":"hours","rawWord":"hours.","start":11.912,"end":12.667}]},{"id":13,"start":13.27,"end":14.71,"text":"Yet that interplanetary","words":[{"word":"Yet","rawWord":"Yet","start":13.27,"end":13.444},{"word":"that","rawWord":"that","start":13.491,"end":13.677},{"word":"interplanetary","rawWord":"interplanetary","start":13.746,"end":14.64}]},{"id":14,"start":14.71,"end":15.523,"text":"space trip is","words":[{"word":"space","rawWord":"space","start":14.71,"end":15.047},{"word":"trip","rawWord":"trip","start":15.081,"end":15.29},{"word":"is","rawWord":"is","start":15.36,"end":15.453}]},{"id":15,"start":15.523,"end":16.742,"text":"STILL faster than","words":[{"word":"STILL","rawWord":"STILL","start":15.523,"end":15.917},{"word":"faster","rawWord":"faster","start":16.033,"end":16.521},{"word":"than","rawWord":"than","start":16.579,"end":16.707}]},{"id":16,"start":16.742,"end":18.379,"text":"the average contractor","words":[{"word":"the","rawWord":"the","start":16.742,"end":16.811},{"word":"average","rawWord":"average","start":16.893,"end":17.311},{"word":"contractor","rawWord":"contractor","start":17.357,"end":18.1}]},{"id":17,"start":18.379,"end":19.18,"text":"calls back an","words":[{"word":"calls","rawWord":"calls","start":18.379,"end":18.692},{"word":"back","rawWord":"back","start":18.762,"end":19.006},{"word":"an","rawWord":"an","start":19.064,"end":19.133}]},{"id":18,"start":19.18,"end":20.594,"text":"emergency lead.","words":[{"word":"emergency","rawWord":"emergency","start":19.18,"end":19.737},{"word":"lead","rawWord":"lead.","start":19.807,"end":20.294}]},{"id":19,"start":21.246,"end":23.15,"text":"78% of homeowners","words":[{"word":"78%","rawWord":"78%","start":21.246,"end":22.361},{"word":"of","rawWord":"of","start":22.477,"end":22.523},{"word":"homeowners","rawWord":"homeowners","start":22.581,"end":23.092}]},{"id":20,"start":23.15,"end":23.94,"text":"hire the first","words":[{"word":"hire","rawWord":"hire","start":23.15,"end":23.406},{"word":"the","rawWord":"the","start":23.441,"end":23.51},{"word":"first","rawWord":"first","start":23.568,"end":23.87}]},{"id":21,"start":23.94,"end":24.996,"text":"business that answers","words":[{"word":"business","rawWord":"business","start":23.94,"end":24.358},{"word":"that","rawWord":"that","start":24.393,"end":24.532},{"word":"answers","rawWord":"answers","start":24.59,"end":24.95}]},{"id":22,"start":24.996,"end":25.993,"text":"the phone.","words":[{"word":"the","rawWord":"the","start":24.996,"end":25.066},{"word":"phone","rawWord":"phone.","start":25.112,"end":25.693}]},{"id":23,"start":26.204,"end":26.726,"text":"When you are","words":[{"word":"When","rawWord":"When","start":26.204,"end":26.378},{"word":"you","rawWord":"you","start":26.413,"end":26.494},{"word":"are","rawWord":"are","start":26.552,"end":26.68}]},{"id":24,"start":26.726,"end":27.492,"text":"on a ladder,","words":[{"word":"on","rawWord":"on","start":26.726,"end":26.819},{"word":"a","rawWord":"a","start":26.866,"end":26.9},{"word":"ladder","rawWord":"ladder,","start":26.97,"end":27.411}]},{"id":25,"start":27.492,"end":28.306,"text":"under a sink,","words":[{"word":"under","rawWord":"under","start":27.492,"end":27.725},{"word":"a","rawWord":"a","start":27.783,"end":27.818},{"word":"sink","rawWord":"sink,","start":27.899,"end":28.259}]},{"id":26,"start":28.306,"end":29.072,"text":"or eating dinner","words":[{"word":"or","rawWord":"or","start":28.306,"end":28.433},{"word":"eating","rawWord":"eating","start":28.503,"end":28.747},{"word":"dinner","rawWord":"dinner","start":28.805,"end":29.025}]},{"id":27,"start":29.072,"end":30.314,"text":"with your family,","words":[{"word":"with","rawWord":"with","start":29.072,"end":29.2},{"word":"your","rawWord":"your","start":29.234,"end":29.351},{"word":"family","rawWord":"family,","start":29.409,"end":30.07}]},{"id":28,"start":30.314,"end":32.079,"text":"every single unanswered","words":[{"word":"every","rawWord":"every","start":30.314,"end":30.697},{"word":"single","rawWord":"single","start":30.813,"end":31.289},{"word":"unanswered","rawWord":"unanswered","start":31.371,"end":32.032}]},{"id":29,"start":32.079,"end":32.752,"text":"call is an","words":[{"word":"call","rawWord":"call","start":32.079,"end":32.416},{"word":"is","rawWord":"is","start":32.508,"end":32.613},{"word":"an","rawWord":"an","start":32.648,"end":32.717}]},{"id":30,"start":32.752,"end":33.832,"text":"$8,000","words":[{"word":"$8000","rawWord":"$8,000","start":32.752,"end":33.774}]},{"id":31,"start":33.832,"end":35.167,"text":"job handed straight","words":[{"word":"job","rawWord":"job","start":33.832,"end":34.169},{"word":"handed","rawWord":"handed","start":34.262,"end":34.633},{"word":"straight","rawWord":"straight","start":34.726,"end":35.121}]},{"id":32,"start":35.167,"end":36.57,"text":"to your competitor.","words":[{"word":"to","rawWord":"to","start":35.167,"end":35.248},{"word":"your","rawWord":"your","start":35.33,"end":35.504},{"word":"competitor","rawWord":"competitor.","start":35.562,"end":36.27}]},{"id":33,"start":36.711,"end":37.501,"text":"That is why","words":[{"word":"That","rawWord":"That","start":36.711,"end":37.001},{"word":"is","rawWord":"is","start":37.06,"end":37.152},{"word":"why","rawWord":"why","start":37.21,"end":37.431}]},{"id":34,"start":37.501,"end":38.73,"text":"we built Ava.","words":[{"word":"we","rawWord":"we","start":37.501,"end":37.605},{"word":"built","rawWord":"built","start":37.663,"end":37.884},{"word":"Ava","rawWord":"Ava.","start":37.954,"end":38.43}]},{"id":35,"start":38.871,"end":39.718,"text":"She answers your","words":[{"word":"She","rawWord":"She","start":38.871,"end":39.056},{"word":"answers","rawWord":"answers","start":39.149,"end":39.498},{"word":"your","rawWord":"your","start":39.544,"end":39.672}]},{"id":36,"start":39.718,"end":40.601,"text":"shop phone in","words":[{"word":"shop","rawWord":"shop","start":39.718,"end":39.962},{"word":"phone","rawWord":"phone","start":40.008,"end":40.322},{"word":"in","rawWord":"in","start":40.38,"end":40.519}]},{"id":37,"start":40.601,"end":41.541,"text":"0.8","words":[{"word":"08","rawWord":"0.8","start":40.601,"end":41.46}]},{"id":38,"start":41.541,"end":42.284,"text":"seconds,","words":[{"word":"seconds","rawWord":"seconds,","start":41.541,"end":42.11}]},{"id":39,"start":42.284,"end":43.747,"text":"qualifies the caller,","words":[{"word":"qualifies","rawWord":"qualifies","start":42.284,"end":42.923},{"word":"the","rawWord":"the","start":42.981,"end":43.05},{"word":"caller","rawWord":"caller,","start":43.097,"end":43.596}]},{"id":40,"start":43.747,"end":44.931,"text":"checks your schedule,","words":[{"word":"checks","rawWord":"checks","start":43.747,"end":44.037},{"word":"your","rawWord":"your","start":44.072,"end":44.188},{"word":"schedule","rawWord":"schedule,","start":44.223,"end":44.815}]},{"id":41,"start":44.931,"end":45.883,"text":"and dispatches the","words":[{"word":"and","rawWord":"and","start":44.931,"end":45.082},{"word":"dispatches","rawWord":"dispatches","start":45.14,"end":45.697},{"word":"the","rawWord":"the","start":45.755,"end":45.825}]},{"id":42,"start":45.883,"end":46.487,"text":"job to your","words":[{"word":"job","rawWord":"job","start":45.883,"end":46.139},{"word":"to","rawWord":"to","start":46.197,"end":46.243},{"word":"your","rawWord":"your","start":46.313,"end":46.44}]},{"id":43,"start":46.487,"end":47.671,"text":"technician phone before","words":[{"word":"technician","rawWord":"technician","start":46.487,"end":46.998},{"word":"phone","rawWord":"phone","start":47.056,"end":47.323},{"word":"before","rawWord":"before","start":47.358,"end":47.636}]},{"id":44,"start":47.671,"end":48.426,"text":"the customer can","words":[{"word":"the","rawWord":"the","start":47.671,"end":47.741},{"word":"customer","rawWord":"customer","start":47.787,"end":48.182},{"word":"can","rawWord":"can","start":48.24,"end":48.356}]},{"id":45,"start":48.426,"end":49.447,"text":"even open another","words":[{"word":"even","rawWord":"even","start":48.426,"end":48.646},{"word":"open","rawWord":"open","start":48.728,"end":49.018},{"word":"another","rawWord":"another","start":49.076,"end":49.378}]},{"id":46,"start":49.447,"end":50.641,"text":"Google tab.","words":[{"word":"Google","rawWord":"Google","start":49.447,"end":49.784},{"word":"tab","rawWord":"tab.","start":49.819,"end":50.341}]},{"id":47,"start":50.724,"end":52.094,"text":"Stop bleeding thousands","words":[{"word":"Stop","rawWord":"Stop","start":50.724,"end":51.026},{"word":"bleeding","rawWord":"bleeding","start":51.084,"end":51.444},{"word":"thousands","rawWord":"thousands","start":51.514,"end":52.048}]},{"id":48,"start":52.094,"end":53.741,"text":"on dead voicemails.","words":[{"word":"on","rawWord":"on","start":52.094,"end":52.199},{"word":"dead","rawWord":"dead","start":52.268,"end":52.466},{"word":"voicemails","rawWord":"voicemails.","start":52.524,"end":53.441}]},{"id":49,"start":54.045,"end":54.811,"text":"Call the demo","words":[{"word":"Call","rawWord":"Call","start":54.045,"end":54.277},{"word":"the","rawWord":"the","start":54.347,"end":54.416},{"word":"demo","rawWord":"demo","start":54.463,"end":54.741}]},{"id":50,"start":54.811,"end":55.38,"text":"number on your","words":[{"word":"number","rawWord":"number","start":54.811,"end":55.055},{"word":"on","rawWord":"on","start":55.124,"end":55.194},{"word":"your","rawWord":"your","start":55.24,"end":55.357}]},{"id":51,"start":55.38,"end":56.262,"text":"screen right now","words":[{"word":"screen","rawWord":"screen","start":55.38,"end":55.67},{"word":"right","rawWord":"right","start":55.74,"end":55.949},{"word":"now","rawWord":"now","start":56.007,"end":56.192}]},{"id":52,"start":56.262,"end":57.052,"text":"to hear Ava","words":[{"word":"to","rawWord":"to","start":56.262,"end":56.32},{"word":"hear","rawWord":"hear","start":56.378,"end":56.564},{"word":"Ava","rawWord":"Ava","start":56.645,"end":56.982}]},{"id":53,"start":57.052,"end":58.362,"text":"answer live,","words":[{"word":"answer","rawWord":"answer","start":57.052,"end":57.365},{"word":"live","rawWord":"live,","start":57.458,"end":58.062}]},{"id":54,"start":58.387,"end":59.571,"text":"or comment AVA","words":[{"word":"or","rawWord":"or","start":58.387,"end":58.526},{"word":"comment","rawWord":"comment","start":58.584,"end":58.99},{"word":"AVA","rawWord":"AVA","start":59.049,"end":59.49}]},{"id":55,"start":59.571,"end":60.604,"text":"below and we","words":[{"word":"below","rawWord":"below","start":59.571,"end":59.943},{"word":"and","rawWord":"and","start":60.268,"end":60.43},{"word":"we","rawWord":"we","start":60.488,"end":60.569}]},{"id":56,"start":60.604,"end":61.312,"text":"will DM you","words":[{"word":"will","rawWord":"will","start":60.604,"end":60.755},{"word":"DM","rawWord":"DM","start":60.802,"end":61.069},{"word":"you","rawWord":"you","start":61.15,"end":61.231}]},{"id":57,"start":61.312,"end":62.299,"text":"the free interactive","words":[{"word":"the","rawWord":"the","start":61.312,"end":61.382},{"word":"free","rawWord":"free","start":61.44,"end":61.661},{"word":"interactive","rawWord":"interactive","start":61.719,"end":62.265}]},{"id":58,"start":62.299,"end":63.426,"text":"link.","words":[{"word":"link","rawWord":"link.","start":62.299,"end":62.926}]}];
+function buildDynamicChunksFromWords(wordsArr) {
+  if (!wordsArr || !wordsArr.length) return CAPTION_CHUNKS;
+  const colors = ['#ff6b4a', '#38bdf8', '#facc15', '#c084fc', '#4ade80'];
+  const out = [];
+  for (let i = 0; i < wordsArr.length; i += 3) {
+    const slice = wordsArr.slice(i, i + 3).map(w => ({
+      word: w.word,
+      rawWord: w.word,
+      start: w.start,
+      end: w.end
+    }));
+    const nextStart = wordsArr[i + 3] ? wordsArr[i + 3].start : (slice[slice.length - 1].end + 0.4);
+    out.push({
+      id: out.length + 1,
+      start: slice[0].start,
+      end: nextStart,
+      color: colors[out.length % colors.length],
+      words: slice
+    });
+  }
+  return out;
+}
 
 function renderPreciseCaptions(time) {
-  const chunk = CAPTION_CHUNKS.find(c => time >= c.start && time < c.end);
+  const story = window.ACTIVE_STORY || {};
+  const chunks = (story.storyType && story.storyType !== 'cosmic_light' && window.ACTIVE_WORD_TIMESTAMPS)
+    ? buildDynamicChunksFromWords(window.ACTIVE_WORD_TIMESTAMPS)
+    : CAPTION_CHUNKS;
+
+  let chunk = chunks.find(c => time >= c.start && time <= c.end);
+  if (!chunk && time < 0.25 && chunks.length > 0) {
+    chunk = chunks[0];
+  }
   if (!chunk) return;
 
   ctx.save();
-  ctx.setTransform(1, 0, 0, 1, 0, 0); // Anchored to screen coordinates for rock-solid stability
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  const subY = H - 180;
-  ctx.font = '900 42px "Space Grotesk", "Inter", sans-serif';
+  const subY = H - 142; // Sits cleanly in the dark Cueva stage floor (y = 818 on 960px canvas)
+  const fontSpec = '900 italic 35px "Montserrat", "Space Grotesk", "Inter", sans-serif';
+  ctx.font = fontSpec;
   ctx.textBaseline = 'middle';
+  ctx.textAlign = 'left';
 
-  const spaceW = ctx.measureText(' ').width;
+  const spaceW = ctx.measureText(' ').width * 1.18;
   const wordWidths = chunk.words.map(w => ctx.measureText(w.rawWord).width);
   const totalTextW = wordWidths.reduce((a, b) => a + b, 0) + (chunk.words.length - 1) * spaceW;
 
-  // Background pill
-  const padX = 26;
-  const padY = 14;
-  const pillW = totalTextW + padX * 2;
-  const pillH = 58 + padY;
-  const pillX = (W - pillW) / 2;
-  const pillY = subY - pillH / 2;
-  const radius = 16;
+  // Soft Diffused Radial Dark Shadow Glow behind words (NO bordered pill box — matches Cueva 100%!)
+  const glowGrad = ctx.createRadialGradient(W / 2, subY, 12, W / 2, subY, Math.max(160, totalTextW * 0.72));
+  glowGrad.addColorStop(0, 'rgba(0, 0, 0, 0.78)');
+  glowGrad.addColorStop(0.65, 'rgba(0, 0, 0, 0.42)');
+  glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = glowGrad;
+  ctx.fillRect(0, subY - 58, W, 116);
 
-  // High-Contrast Frosted Dark Glass Pill
-  ctx.fillStyle = 'rgba(7, 10, 18, 0.88)';
-  ctx.beginPath();
-  ctx.roundRect(pillX, pillY, pillW, pillH, radius);
-  ctx.fill();
+  // Determine active word index (closest or currently spoken word)
+  let activeWordIdx = chunk.words.findIndex(w => time >= w.start && time <= w.end);
+  if (activeWordIdx === -1) {
+    // If between words inside the chunk, keep the most recently spoken word highlighted
+    for (let i = chunk.words.length - 1; i >= 0; i--) {
+      if (time >= chunk.words[i].start) {
+        activeWordIdx = i;
+        break;
+      }
+    }
+    if (activeWordIdx === -1) activeWordIdx = 0;
+  }
 
-  ctx.strokeStyle = 'rgba(250, 204, 21, 0.35)';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.roundRect(pillX, pillY, pillW, pillH, radius);
-  ctx.stroke();
-
-  // Draw Words with Millisecond Highlight Precision
-  let curX = pillX + padX;
+  let curX = (W - totalTextW) / 2;
   chunk.words.forEach((w, idx) => {
-    const isSpoken = (time >= w.start && time < w.end);
-    const hasBeenSpoken = (time >= w.end);
+    const isCurrent = (idx === activeWordIdx);
 
     ctx.save();
-    if (isSpoken) {
-      // Currently spoken word: Electric amber gold with soft glow
-      ctx.fillStyle = '#facc15';
-      ctx.shadowColor = 'rgba(250, 204, 21, 0.7)';
-      ctx.shadowBlur = 12;
-      ctx.font = '900 43px "Space Grotesk", "Inter", sans-serif';
-    } else if (hasBeenSpoken) {
-      // Already spoken in phrase: Soft amber-white
-      ctx.fillStyle = '#fef08a';
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
-      ctx.shadowBlur = 6;
-      ctx.font = '900 42px "Space Grotesk", "Inter", sans-serif';
+    ctx.font = fontSpec;
+
+    // Deep Cueva drop shadow + crisp dark stroke
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+    ctx.shadowBlur = 14;
+    ctx.shadowOffsetY = 4;
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = 6.0;
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.92)';
+    ctx.strokeText(w.rawWord, curX, subY);
+
+    if (isCurrent) {
+      ctx.fillStyle = chunk.color || '#ff6b4a'; // Vibrant Cueva Coral / Cyan / Gold highlight
+      ctx.shadowColor = chunk.color || '#ff6b4a';
+      ctx.shadowBlur = 16;
     } else {
-      // Upcoming in phrase: Clean crisp white
       ctx.fillStyle = '#ffffff';
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
-      ctx.shadowBlur = 6;
-      ctx.font = '900 42px "Space Grotesk", "Inter", sans-serif';
     }
 
     ctx.fillText(w.rawWord, curX, subY);
@@ -1639,31 +1648,28 @@ function renderCRTScanlines(time) {
   ctx.save();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  // 1. Fine Horizontal Scanlines
+  // Crisp horizontal analog CRT scanlines across entire frame (Matches cueva_frame_01..12)
   ctx.fillStyle = 'rgba(0, 0, 0, 0.16)';
   for (let y = 0; y < H; y += 4) {
-    ctx.fillRect(0, y, W, 1.5);
+    ctx.fillRect(0, y, W, 1.4);
   }
 
-  // 2. Slow Vertical Beam Refresh Sweep
-  const beamY = (time * 160) % (H + 300) - 150;
+  const beamY = (time * 140) % (H + 300) - 150;
   const beamGrad = ctx.createLinearGradient(0, beamY - 100, 0, beamY + 100);
-  beamGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
-  beamGrad.addColorStop(0.5, 'rgba(56, 189, 248, 0.035)');
-  beamGrad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+  beamGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+  beamGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.025)');
+  beamGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
   ctx.fillStyle = beamGrad;
   ctx.fillRect(0, beamY - 100, W, 200);
 
-  // 3. Subtle CRT Vignette Curve
-  const vignette = ctx.createRadialGradient(W / 2, H / 2, H * 0.38, W / 2, H / 2, H * 0.78);
+  const vignette = ctx.createRadialGradient(W / 2, H / 2, H * 0.36, W / 2, H / 2, H * 0.78);
   vignette.addColorStop(0, 'rgba(0, 0, 0, 0)');
-  vignette.addColorStop(1, 'rgba(5, 7, 13, 0.42)');
+  vignette.addColorStop(1, 'rgba(3, 4, 10, 0.44)');
   ctx.fillStyle = vignette;
   ctx.fillRect(0, 0, W, H);
 
   ctx.restore();
 }
-
 
 function renderFrame(time) {
   window.renderFrame = renderFrame;
@@ -1671,66 +1677,65 @@ function renderFrame(time) {
   if (!Number.isFinite(time) || isNaN(time) || time < 0) {
     time = 0;
   }
-  time = Math.min(time, TOTAL_DURATION || 63);
+  time = Math.min(time, TOTAL_DURATION || 89.0);
 
-  // GUARANTEED MATRIX & BUFFER RESET (ZERO LEAK / ZERO ACCUMULATION)
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = '#000000';
+  ctx.fillStyle = '#090612';
   ctx.fillRect(0, 0, W, H);
+  ctx.beginPath();
 
   ctx.save();
 
-  // CONTINUOUS DYNAMIC CAMERA: Slow organic push-in + motorized jib glide
-  // Guarantees zero motionless frames anywhere in the video!
-  const camZoom = 1.015 + Math.sin(time * 0.4) * 0.02 + ((time % 7.0) / 7.0) * 0.035;
-  const camPanX = Math.sin(time * 0.7) * 5.0 + Math.cos(time * 1.2) * 2.5;
-  const camPanY = Math.cos(time * 0.5) * 4.0 + Math.sin(time * 0.9) * 2.0;
+  // Gentle organic Cueva camera breathing
+  const camZoom = 1.012 + Math.sin(time * 0.45) * 0.012;
+  const camPanX = Math.sin(time * 0.65) * 3.0;
+  const camPanY = Math.cos(time * 0.5) * 2.5;
 
   ctx.translate(W / 2, H / 2);
   ctx.scale(camZoom, camZoom);
   ctx.translate(-W / 2 + camPanX, -H / 2 + camPanY);
 
-  // EXTENDED STORY HOOK (0.0s - 34.0s) & COMPLETE SCENE PROGRESSION
-  if (time < 7.2) {
+  // 12-SCENE CUEVA STORY PROGRESSION ALIGNED 1:1 TO THE 89.0s AUDIO
+  if (time < 8.0) {
     renderTasklessScene1_LaserCrowd(time);
-  } else if (time < 13.2) {
+  } else if (time < 21.0) {
     renderTasklessScene2_EarthToUranus(time);
-  } else if (time < 17.5) {
+  } else if (time < 27.6) {
     renderTasklessScene3_SpaceVsContractorContrast(time);
-  } else if (time < 22.0) {
-    renderTasklessScene4_HomeownerEmergency(time);
-  } else if (time < 26.5) {
-    renderTasklessScene5_Stat78Percent(time);
-  } else if (time < 34.0) {
-    renderTasklessScene6_ContractorPainLadder(time);
-  } else if (time < 43.0) {
-    renderTasklessScene7_AvaInstantReply(time);
-  } else if (time < 51.5) {
-    renderTasklessScene8_RevenueWaterfall(time);
-  } else if (time < 56.5) {
-    renderTasklessScene9_LiveDialerInteractive(time);
+  } else if (time < 36.8) {
+    renderTasklessScene4_MeetBobAtticLadder(time);
+  } else if (time < 44.2) {
+    renderTasklessScene5_SarahBurstPipe(time);
+  } else if (time < 51.4) {
+    renderTasklessScene6_PhoneBuzzToVoicemail(time);
+  } else if (time < 57.5) {
+    renderTasklessScene7_Stat78Percent(time);
+  } else if (time < 64.8) {
+    renderTasklessScene8_CompetitorStealsCheck(time);
+  } else if (time < 76.2) {
+    renderTasklessScene9_AvaInstantReply(time);
+  } else if (time < 81.0) {
+    renderTasklessScene10_RevenueWaterfall(time);
+  } else if (time < 85.2) {
+    renderTasklessScene11_LiveDialerInteractive(time);
   } else {
-    renderTasklessScene10_TasklessEndCard(time);
+    renderTasklessScene12_TasklessEndCard(time);
   }
 
-  // Floating Ambient Space Particles across all scenes
-  drawAmbientDustParticles(ctx, time);
-
-  // Soft cinematic fade at scene cuts (0.16s ease)
-  const sceneCuts = [7.2, 13.2, 17.5, 22.0, 26.5, 34.0, 43.0, 51.5, 56.5];
+  // Smooth Cueva transition dip at scene cuts
+  const sceneCuts = [8.0, 21.0, 27.6, 36.8, 44.2, 51.4, 57.5, 64.8, 76.2, 81.0, 85.2];
   let minCutDist = 999;
   for (let c = 0; c < sceneCuts.length; c++) {
     minCutDist = Math.min(minCutDist, Math.abs(time - sceneCuts[c]));
   }
-  if (minCutDist < 0.16) {
-    const fadeProg = 1 - (minCutDist / 0.16);
-    const dipAlpha = Math.sin(fadeProg * (Math.PI / 2)) * 0.25;
+  if (minCutDist < 0.14) {
+    const fadeProg = 1 - (minCutDist / 0.14);
+    const dipAlpha = Math.sin(fadeProg * (Math.PI / 2)) * 0.28;
     ctx.fillStyle = 'rgba(0, 0, 0, ' + dipAlpha + ')';
     ctx.fillRect(0, 0, W, H);
   }
 
-  // Hormozi Style Kinetic Subtitles with spring bounce
   renderPreciseCaptions(time);
   renderCRTScanlines(time);
 

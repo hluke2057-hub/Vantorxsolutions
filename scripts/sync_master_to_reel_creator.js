@@ -37,7 +37,6 @@ if (wordTsStart !== -1 && wordTsEnd !== -1) {
 }
 
 // D. Replace the Taskless Engine block (from "// VANTORX VIRAL REEL ENGINE" up to "// Animation Loop: Bound Directly to Hardware Audio Clock")
-const engineStartMarker = '// ============================================================================\n// VANTORX VIRAL REEL ENGINE';
 const engineStartIdx = html.indexOf('// VANTORX VIRAL REEL ENGINE');
 const loopMarker = '// Animation Loop: Bound Directly to Hardware Audio Clock';
 const loopIdx = html.indexOf(loopMarker);
@@ -45,74 +44,125 @@ const loopIdx = html.indexOf(loopMarker);
 if (engineStartIdx === -1 || loopIdx === -1) {
   throw new Error(`Could not locate engine bounds: engineStartIdx=${engineStartIdx}, loopIdx=${loopIdx}`);
 }
-// Walk back one line before engineStartIdx to include the separator comment
 const blockStart = html.lastIndexOf('// ====', engineStartIdx);
 html = html.slice(0, blockStart) + engineCode + '\n\n' + html.slice(loopIdx);
-console.log('✅ Injected 12-scene 89.0s Cueva/Taskless Engine + Clean Lower-Third Captions');
+console.log('✅ Injected 12-scene 89.0s Cueva 2D Illustrated Engine + Boxless Captions');
 
-// E. Update PRODUCTS_MIND_QUEUE[0] (voice_ai_cosmic) scripts so UI & teleprompter match the new extended hook + Bob & Sarah story
-const oldHookScript = `hookScript: 'A single beam of laser light travels at 186,000 miles per second. It can reach the moon in under three seconds, and cross nearly two billion miles of deep space to Saturn in less than three hours. Yet that interplanetary space trip is STILL faster than the average contractor calls back an emergency lead.',`;
-const newHookScript = `hookScript: 'If you point a single beam of laser light into the night sky, it fires into the dark at 186,000 miles per second. In just one second, it flashes past the Moon. In twelve minutes, it blazes past Mars. In forty-three minutes, it tears past Jupiter, and in under three hours, it crosses nearly two billion miles of freezing deep space to hit the rings of Uranus. Yet that two-billion-mile journey across the solar system is STILL faster than the average contractor calls back an emergency lead.',`;
-if (html.includes(oldHookScript)) {
-  html = html.replace(oldHookScript, newHookScript);
+// E. Update Audio Graph & uploadedAudioElement binding so masterCompressor (-14dB) NEVER ducks/crushes the baked-in Cueva music bed!
+html = html.replace(
+  /let uploadedAudioElement = new Audio\(EMBEDDED_STUDIO_AUDIO\);\s*uploadedAudioElement\.preload = 'auto';(\s*uploadedAudioElement\.addEventListener\('canplaythrough',\s*\(\)\s*=>\s*\{\s*bindAudioElementToMasterGraph\(uploadedAudioElement\);\s*\}\);)?/,
+  `let uploadedAudioElement = new Audio(EMBEDDED_STUDIO_AUDIO);\n  uploadedAudioElement.preload = 'auto';\n  uploadedAudioElement.volume = 1.0;`
+);
+
+html = html.replace(
+  /masterGain\.gain\.setValueAtTime\(0\.9,\s*audioCtx\.currentTime\);/,
+  `masterGain.gain.setValueAtTime(1.0, audioCtx.currentTime);`
+);
+
+html = html.replace(
+  /const srcNode = audioCtx\.createMediaElementSource\(audioEl\);\s*srcNode\.connect\(bassEQ\);[^\n]*/,
+  `const srcNode = audioCtx.createMediaElementSource(audioEl);\n        // Connect directly to masterGain so the pre-mastered studio mix (Voice + Cueva Synthwave Music + Foley SFX)\n        // is NEVER crushed or ducked by the -14dB compressor when the narrator speaks!\n        srcNode.connect(masterGain);`
+);
+
+// Ensure togglePlay binds uploadedAudioElement on first user gesture
+if (!html.includes('bindAudioElementToMasterGraph(uploadedAudioElement);\n  if (audioCtx && audioCtx.state')) {
+  html = html.replace(
+    /initAudioGraph\(\);\s*if \(audioCtx && audioCtx\.state === 'suspended'\)/,
+    `initAudioGraph();\n  if (uploadedAudioElement) { bindAudioElementToMasterGraph(uploadedAudioElement); }\n  if (audioCtx && audioCtx.state === 'suspended')`
+  );
 }
 
-const oldProblemScript = `problemScript: '78% of homeowners hire the first business that answers the phone. When you are on a ladder, under a sink, or eating dinner with your family, every single unanswered call is an {TICKET} job handed straight to your competitor.',`;
-const newProblemScript = `problemScript: "Picture this. Meet Bob. Bob is a master contractor standing twenty feet up a ladder in a scorching attic, drenched in sweat with a wrench in his hand. Across town, a pipe bursts in Sarah's ceiling and water is pouring everywhere. Panicking, she grabs her phone and calls Bob first. Bob's phone buzzes in his pocket, once, twice, three times, and dumps straight to voicemail. Sarah doesn't leave a message, because 78% of homeowners hire the very first business that answers. Within ten seconds, she taps the next contractor on Google. That shop answers on ring one, rolls a truck, and collects an $8,000 check that had Bob's name written all over it.",`;
-if (html.includes(oldProblemScript)) {
-  html = html.replace(oldProblemScript, newProblemScript);
-} else {
-  html = html.replace(/problemScript:\s*'Picture this\. Meet Bob\.[^n]+\n/, newProblemScript + '\n');
+// F. Update Timeline & Scene Cards UI to match 89.0s Cueva 5-Step Storyboard
+html = html.replace(
+  /<span id="currentSceneLabel">[^<]+<\/span>\s*<span id="totalDurationLabel">[^<]+<\/span>/,
+  `<span id="currentSceneLabel">Scene 1: Cueva Speed-of-Light Hook</span>\n          <span id="totalDurationLabel">01:29</span>`
+);
+
+const oldScenesGridRegex = /<!-- Scenes List -->[\s\S]*?<\/div>\s*<\/div>\s*<!-- Action Buttons -->/;
+const newScenesGrid = `<!-- Scenes List -->
+    <div>
+      <div class="panel-section-title">🎬 Video Scenes (Cueva 5-Step Storyboard)</div>
+      <div class="scenes-grid" style="margin-top:8px">
+        <div class="scene-card active" onclick="jumpToScene(0)">
+          <div class="scene-idx">1</div>
+          <div class="scene-meta">
+            <div class="scene-name" id="scene1TitleLabel">① Cueva Hook: 186,000 MI/S &amp; Solar Relay</div>
+            <div class="scene-desc" id="scene1DescLabel">Photon Cannon &amp; 4-Planet Speedometer Gauge to Uranus</div>
+          </div>
+          <div class="scene-time">00:00</div>
+        </div>
+        <div class="scene-card" onclick="jumpToScene(21.0)">
+          <div class="scene-idx">2</div>
+          <div class="scene-meta">
+            <div class="scene-name">② 27.4 Hr Paradox &amp; Meet Bob in 130°F Attic</div>
+            <div class="scene-desc">Golden Balance Scale • Master Contractor Bob 20ft up ladder</div>
+          </div>
+          <div class="scene-time">00:21</div>
+        </div>
+        <div class="scene-card" onclick="jumpToScene(36.8)">
+          <div class="scene-idx">3</div>
+          <div class="scene-meta">
+            <div class="scene-name">③ Sarah's Burst Pipe, Voicemail &amp; 78% Hook</div>
+            <div class="scene-desc">Flooding Living Room • Call Detector Machine • Underwater Hook</div>
+          </div>
+          <div class="scene-time">00:37</div>
+        </div>
+        <div class="scene-card" onclick="jumpToScene(57.5)">
+          <div class="scene-idx">4</div>
+          <div class="scene-meta">
+            <div class="scene-name">④ $8,000 Check Lost vs. Ava 0.8s AI Hologram</div>
+            <div class="scene-desc">Competitor Check Theft • Neon Pink AI Brain &amp; 24s SMS Dispatch</div>
+          </div>
+          <div class="scene-time">00:58</div>
+        </div>
+        <div class="scene-card" onclick="jumpToScene(76.2)">
+          <div class="scene-idx">5</div>
+          <div class="scene-meta">
+            <div class="scene-name">⑤ Captured Revenue &amp; Cueva Typewriter CTA</div>
+            <div class="scene-desc">+$8,000 Secured • Comment "AVA" • Live Dial: (561) 813-8602</div>
+          </div>
+          <div class="scene-time">01:16</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Action Buttons -->`;
+
+if (oldScenesGridRegex.test(html)) {
+  html = html.replace(oldScenesGridRegex, newScenesGrid);
+  console.log('✅ Updated 5 Cueva Scene Cards in right panel');
 }
 
-const oldSolutionScript = `solutionScript: 'That is why we built Ava. She answers your shop phone in zero-point-eight seconds, qualifies the caller, checks your schedule, and dispatches the job to your technician phone before the customer can even open another Google tab.',`;
-const newSolutionScript = `solutionScript: "That is why we built Ava. She answers your phone in 0.8 seconds, calms the homeowner down, qualifies the job, books your calendar, and texts the dispatch straight to Bob's phone before the customer can even open another Google tab.",`;
-if (html.includes(oldSolutionScript)) {
-  html = html.replace(oldSolutionScript, newSolutionScript);
-} else {
-  html = html.replace(/solutionScript:\s*'That is why we built Ava\.[^n]+\n/, newSolutionScript + '\n');
+// Update updateUI() time formatting (MM:SS) and 5-card active highlight
+const oldUpdateUiCardsRegex = /const curSec = Math\.floor\(currentTime\);\s*const label = document\.getElementById\('currentTimeLabel'\);\s*if \(label\) label\.textContent = '00:' \+ \(curSec < 10 \? '0' : ''\) \+ curSec;\s*const cards = document\.querySelectorAll\('\.scene-card'\);\s*cards\.forEach\(c => c\.classList\.remove\('active'\)\);\s*if \(currentTime < 18\.5 && cards\[0\]\) cards\[0\]\.classList\.add\('active'\);\s*else if \(currentTime < 32\.5 && cards\[1\]\) cards\[1\]\.classList\.add\('active'\);\s*else if \(currentTime < 47\.5 && cards\[2\]\) cards\[2\]\.classList\.add\('active'\);\s*else if \(cards\[3\]\) cards\[3\]\.classList\.add\('active'\);/;
+const newUpdateUiCards = `const curSec = Math.floor(currentTime);
+    const curMin = Math.floor(curSec / 60);
+    const remSec = curSec % 60;
+    const label = document.getElementById('currentTimeLabel');
+    if (label) label.textContent = (curMin < 10 ? '0' : '') + curMin + ':' + (remSec < 10 ? '0' : '') + remSec;
+
+    const cards = document.querySelectorAll('.scene-card');
+    cards.forEach(c => c.classList.remove('active'));
+    if (currentTime < 21.0 && cards[0]) cards[0].classList.add('active');
+    else if (currentTime < 36.8 && cards[1]) cards[1].classList.add('active');
+    else if (currentTime < 57.5 && cards[2]) cards[2].classList.add('active');
+    else if (currentTime < 76.2 && cards[3]) cards[3].classList.add('active');
+    else if (cards[4]) cards[4].classList.add('active');`;
+
+if (oldUpdateUiCardsRegex.test(html)) {
+  html = html.replace(oldUpdateUiCardsRegex, newUpdateUiCards);
+  console.log('✅ Updated updateUI() MM:SS clock and 5-scene active card highlights');
 }
 
-// F. In buildReelAssetsForProduct(prod), preserve MASTER_COSMIC_WORD_TIMESTAMPS when prod.storyType === 'cosmic_light'
-const oldDynamicTsBlock = `  // Dynamic Word Timestamps
-  const dynamicWords = generateTimestampsForNarration(narrationScript, 58.5);
-  window.ACTIVE_WORD_TIMESTAMPS = dynamicWords;
-  window.WORD_TIMESTAMPS = dynamicWords;
-  WORD_TIMESTAMPS = dynamicWords;`;
-
-const newDynamicTsBlock = `  // Dynamic Word Timestamps (Use exact ElevenLabs character-aligned timestamps for cosmic_light!)
-  const dynamicWords = (prod.storyType === 'cosmic_light' && typeof MASTER_COSMIC_WORD_TIMESTAMPS !== 'undefined')
-    ? MASTER_COSMIC_WORD_TIMESTAMPS
-    : generateTimestampsForNarration(narrationScript, 88.5);
-  window.ACTIVE_WORD_TIMESTAMPS = dynamicWords;
-  window.WORD_TIMESTAMPS = dynamicWords;
-  WORD_TIMESTAMPS = dynamicWords;`;
-
-if (html.includes(oldDynamicTsBlock.replace(/\n/g, '\r\n'))) {
-  html = html.replace(oldDynamicTsBlock.replace(/\n/g, '\r\n'), newDynamicTsBlock.replace(/\n/g, '\r\n'));
-} else if (html.includes(oldDynamicTsBlock)) {
-  html = html.replace(oldDynamicTsBlock, newDynamicTsBlock);
-}
-
-// G. Prevent procedural startBackgroundBeat() from clashing when EMBEDDED_STUDIO_AUDIO (which has full stereo music + SFX baked in) is playing
-const oldStartBeat = `  function startBackgroundBeat() {
-    if (!audioCtx || !document.getElementById('chkEnableMusic').checked) return;
-    stopBackgroundBeat();`;
-
-const newStartBeat = `  function startBackgroundBeat() {
-    if (!audioCtx || !document.getElementById('chkEnableMusic').checked) return;
-    stopBackgroundBeat();
-    // Master studio audio for cosmic_light already has the full stereo synthwave music & foley SFX baked in!
-    if (window.ACTIVE_STORY && window.ACTIVE_STORY.storyType === 'cosmic_light' && uploadedAudioElement) return;`;
-
-if (html.includes(oldStartBeat.replace(/\n/g, '\r\n'))) {
-  html = html.replace(oldStartBeat.replace(/\n/g, '\r\n'), newStartBeat.replace(/\n/g, '\r\n'));
-} else if (html.includes(oldStartBeat)) {
-  html = html.replace(oldStartBeat, newStartBeat);
-}
+// Also update top banner text
+html = html.replace(
+  /59\.3s duration • ElevenLabs Adam Master Voiceover • Lofi Beat • Subdrops &amp; Laser SFX • Ready to upload to Instagram, TikTok &amp; YouTube Shorts/,
+  `89.0s Extended Story Reel • Cueva 2D Illustrated Animation • ElevenLabs Master Voice + Synthwave Music &amp; Foley SFX • Ready to upload to Instagram, TikTok &amp; YouTube Shorts`
+);
 
 // Add cache-buster query string to masterMp4Player source so browser never caches the old MP4
-html = html.replace(/src="video\/vantorx-speed-to-lead-reel\.mp4(\?v=[0-9]+)?"/g, 'src="video/vantorx-speed-to-lead-reel.mp4?v=8902"');
+html = html.replace(/src="video\/vantorx-speed-to-lead-reel\.mp4(\?v=[0-9]+)?"/g, 'src="video/vantorx-speed-to-lead-reel.mp4?v=8905"');
 
 fs.writeFileSync(htmlPath, html, 'utf8');
 console.log('✅ Saved updated website/demo/reel-creator.html');
