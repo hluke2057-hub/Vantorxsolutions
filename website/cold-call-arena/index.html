@@ -363,9 +363,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 .user-rank{font-size:10.5px;color:var(--accent2);font-family:var(--font-mono)}
 
 /* 🔒 Modals & Overlays */
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);z-index:110;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.78);backdrop-filter:blur(8px);z-index:110;display:none;align-items:center;justify-content:center;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .modal-overlay.active{display:flex}
-.modal-box{background:var(--bg2);border:1.5px solid rgba(245,158,11,0.45);border-radius:20px;padding:28px;max-width:520px;width:100%;box-shadow:0 25px 60px rgba(0,0,0,0.65);position:relative;animation:fadeIn 0.2s ease-out}
+.modal-box{background:var(--bg2);border:1.5px solid rgba(245,158,11,0.45);border-radius:20px;padding:24px;max-width:520px;width:100%;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;box-shadow:0 25px 60px rgba(0,0,0,0.65);position:relative;animation:fadeIn 0.2s ease-out;margin:auto}
 
 /* 🔒 Level 5 Lead Gating Card */
 .leads-locked-card{background:linear-gradient(135deg,rgba(15,21,34,0.98),rgba(22,30,50,0.98));border:2px solid rgba(245,158,11,0.45);border-radius:18px;padding:48px 32px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.5);margin:20px 0}
@@ -17292,6 +17292,45 @@ const LEADS_DATA = [
     if (modal) modal.classList.remove('active');
   };
 
+  window.switchGateTab = function(tab) {
+    const paneSignIn = document.getElementById('gatePaneSignIn');
+    const paneRegister = document.getElementById('gatePaneRegister');
+    const btnSignIn = document.getElementById('gateTabBtnSignIn');
+    const btnRegister = document.getElementById('gateTabBtnRegister');
+
+    if (tab === 'register') {
+      if (paneSignIn) paneSignIn.style.display = 'none';
+      if (paneRegister) paneRegister.style.display = 'block';
+      if (btnSignIn) {
+        btnSignIn.style.background = 'transparent';
+        btnSignIn.style.color = '#94a3b8';
+        btnSignIn.style.boxShadow = 'none';
+      }
+      if (btnRegister) {
+        btnRegister.style.background = 'rgba(245,158,11,0.95)';
+        btnRegister.style.color = '#0b0f19';
+        btnRegister.style.boxShadow = '0 2px 8px rgba(245,158,11,0.3)';
+      }
+      const nameInput = document.getElementById('gateNameInput');
+      if (nameInput) setTimeout(() => nameInput.focus(), 50);
+    } else {
+      if (paneSignIn) paneSignIn.style.display = 'block';
+      if (paneRegister) paneRegister.style.display = 'none';
+      if (btnSignIn) {
+        btnSignIn.style.background = 'rgba(245,158,11,0.95)';
+        btnSignIn.style.color = '#0b0f19';
+        btnSignIn.style.boxShadow = '0 2px 8px rgba(245,158,11,0.3)';
+      }
+      if (btnRegister) {
+        btnRegister.style.background = 'transparent';
+        btnRegister.style.color = '#94a3b8';
+        btnRegister.style.boxShadow = 'none';
+      }
+      const pinInput = document.getElementById('gateCloserPinInput');
+      if (pinInput) setTimeout(() => pinInput.focus(), 50);
+    }
+  };
+
   // ============================================================
   // 🔒 CLOSER SECURITY PIN AUTHENTICATION & GATE ENGINE
   // ============================================================
@@ -17455,6 +17494,45 @@ const LEADS_DATA = [
   window.closeSignInGate = function() {
     const modal = document.getElementById('signInGateModal');
     if (modal) modal.classList.remove('active');
+  };
+
+  window.switchGateTab = function(tab) {
+    const paneSignIn = document.getElementById('gatePaneSignIn');
+    const paneRegister = document.getElementById('gatePaneRegister');
+    const btnSignIn = document.getElementById('gateTabBtnSignIn');
+    const btnRegister = document.getElementById('gateTabBtnRegister');
+
+    if (tab === 'register') {
+      if (paneSignIn) paneSignIn.style.display = 'none';
+      if (paneRegister) paneRegister.style.display = 'block';
+      if (btnSignIn) {
+        btnSignIn.style.background = 'transparent';
+        btnSignIn.style.color = '#94a3b8';
+        btnSignIn.style.boxShadow = 'none';
+      }
+      if (btnRegister) {
+        btnRegister.style.background = 'rgba(245,158,11,0.95)';
+        btnRegister.style.color = '#0b0f19';
+        btnRegister.style.boxShadow = '0 2px 8px rgba(245,158,11,0.3)';
+      }
+      const nameInput = document.getElementById('gateNameInput');
+      if (nameInput) setTimeout(() => nameInput.focus(), 50);
+    } else {
+      if (paneSignIn) paneSignIn.style.display = 'block';
+      if (paneRegister) paneRegister.style.display = 'none';
+      if (btnSignIn) {
+        btnSignIn.style.background = 'rgba(245,158,11,0.95)';
+        btnSignIn.style.color = '#0b0f19';
+        btnSignIn.style.boxShadow = '0 2px 8px rgba(245,158,11,0.3)';
+      }
+      if (btnRegister) {
+        btnRegister.style.background = 'transparent';
+        btnRegister.style.color = '#94a3b8';
+        btnRegister.style.boxShadow = 'none';
+      }
+      const pinInput = document.getElementById('gateCloserPinInput');
+      if (pinInput) setTimeout(() => pinInput.focus(), 50);
+    }
   };
 
   window.onGateCloserSelectChange = function(uid) {
@@ -22477,8 +22555,8 @@ https://www.vantorxsolutions.com`;
     if (el5to10) el5to10.textContent = countCrew5to10;
     if (el11to50) el11to50.textContent = countCrew11to50;
     if (el50Plus) el50Plus.textContent = countCrew50Plus;
-    if (kpiFocus) kpiFocus.textContent = `${countAll2to10} Small Local Shops`;
-    if (kpiFocusSub) kpiFocusSub.textContent = totalInBatch > 0 ? '100% of queue targets 2-10 staff contractors' : '2-10 staff';
+    if (kpiFocus) kpiFocus.textContent = `${countAll} Local & Regional Shops`;
+    if (kpiFocusSub) kpiFocusSub.textContent = totalInBatch > 0 ? 'Google-verified staff & fleet sizes' : '1-50+ staff';
 
     if (typeof window.renderLeaderboardUI === 'function') {
       window.renderLeaderboardUI();
