@@ -17,13 +17,13 @@ const engineCode = fs.readFileSync(enginePath, 'utf8');
 // A. Update TOTAL_DURATION = 89.0
 html = html.replace(/const TOTAL_DURATION = [0-9.]+;/g, 'const TOTAL_DURATION = 89.0;');
 
-// B. Replace EMBEDDED_STUDIO_AUDIO with the new 89.0s Full Master Mix MP3 (Voice + Music + SFX)
+// B. Replace EMBEDDED_STUDIO_AUDIO with the new 89.0s Full Master Mix MP3 (Voice + Foley SFX, NO Background Music)
 const embeddedRegex = /const EMBEDDED_STUDIO_AUDIO = "data:audio\/mp3;base64,[^"]+";/;
 if (!embeddedRegex.test(html)) {
   throw new Error('Could not find EMBEDDED_STUDIO_AUDIO in reel-creator.html');
 }
 html = html.replace(embeddedRegex, `const EMBEDDED_STUDIO_AUDIO = "data:audio/mp3;base64,${mp3Base64}";`);
-console.log('✅ Updated EMBEDDED_STUDIO_AUDIO with 89.0s Full Master Mix MP3 (' + (mp3Base64.length / 1024).toFixed(1) + ' KB base64)');
+console.log('✅ Updated EMBEDDED_STUDIO_AUDIO with 89.0s Music-Free Voice + Foley SFX MP3 (' + (mp3Base64.length / 1024).toFixed(1) + ' KB base64)');
 
 // C. Replace WORD_TIMESTAMPS array with the new 275-word ElevenLabs alignment
 const wordTsStart = html.indexOf('const MASTER_COSMIC_WORD_TIMESTAMPS =') !== -1
@@ -48,7 +48,7 @@ const blockStart = html.lastIndexOf('// ====', engineStartIdx);
 html = html.slice(0, blockStart) + engineCode + '\n\n' + html.slice(loopIdx);
 console.log('✅ Injected 12-scene 89.0s Cueva 2D Illustrated Engine + Boxless Captions');
 
-// E. Update Audio Graph & uploadedAudioElement binding so masterCompressor (-14dB) NEVER ducks/crushes the baked-in Cueva music bed!
+// E. Update Audio Graph & uploadedAudioElement binding
 html = html.replace(
   /let uploadedAudioElement = new Audio\(EMBEDDED_STUDIO_AUDIO\);\s*uploadedAudioElement\.preload = 'auto';(\s*uploadedAudioElement\.addEventListener\('canplaythrough',\s*\(\)\s*=>\s*\{\s*bindAudioElementToMasterGraph\(uploadedAudioElement\);\s*\}\);)?/,
   `let uploadedAudioElement = new Audio(EMBEDDED_STUDIO_AUDIO);\n  uploadedAudioElement.preload = 'auto';\n  uploadedAudioElement.volume = 1.0;`
@@ -61,7 +61,7 @@ html = html.replace(
 
 html = html.replace(
   /const srcNode = audioCtx\.createMediaElementSource\(audioEl\);\s*srcNode\.connect\(bassEQ\);[^\n]*/,
-  `const srcNode = audioCtx.createMediaElementSource(audioEl);\n        // Connect directly to masterGain so the pre-mastered studio mix (Voice + Cueva Synthwave Music + Foley SFX)\n        // is NEVER crushed or ducked by the -14dB compressor when the narrator speaks!\n        srcNode.connect(masterGain);`
+  `const srcNode = audioCtx.createMediaElementSource(audioEl);\n        srcNode.connect(masterGain);`
 );
 
 // Ensure togglePlay binds uploadedAudioElement on first user gesture
@@ -134,43 +134,12 @@ if (oldScenesGridRegex.test(html)) {
   console.log('✅ Updated 5 Cueva Scene Cards in right panel');
 }
 
-// Update updateUI() time formatting (MM:SS) and 5-card active highlight
-const oldUpdateUiCardsRegex = /const curSec = Math\.floor\(currentTime\);\s*const label = document\.getElementById\('currentTimeLabel'\);\s*if \(label\) label\.textContent = '00:' \+ \(curSec < 10 \? '0' : ''\) \+ curSec;\s*const cards = document\.querySelectorAll\('\.scene-card'\);\s*cards\.forEach\(c => c\.classList\.remove\('active'\)\);\s*if \(currentTime < 18\.5 && cards\[0\]\) cards\[0\]\.classList\.add\('active'\);\s*else if \(currentTime < 32\.5 && cards\[1\]\) cards\[1\]\.classList\.add\('active'\);\s*else if \(currentTime < 47\.5 && cards\[2\]\) cards\[2\]\.classList\.add\('active'\);\s*else if \(cards\[3\]\) cards\[3\]\.classList\.add\('active'\);/;
-const newUpdateUiCards = `const curSec = Math.floor(currentTime);
-    const curMin = Math.floor(curSec / 60);
-    const remSec = curSec % 60;
-    const label = document.getElementById('currentTimeLabel');
-    if (label) label.textContent = (curMin < 10 ? '0' : '') + curMin + ':' + (remSec < 10 ? '0' : '') + remSec;
-
-    const cards = document.querySelectorAll('.scene-card');
-    cards.forEach(c => c.classList.remove('active'));
-    if (currentTime < 21.0 && cards[0]) cards[0].classList.add('active');
-    else if (currentTime < 36.8 && cards[1]) cards[1].classList.add('active');
-    else if (currentTime < 57.5 && cards[2]) cards[2].classList.add('active');
-    else if (currentTime < 76.2 && cards[3]) cards[3].classList.add('active');
-    else if (cards[4]) cards[4].classList.add('active');`;
-
-if (oldUpdateUiCardsRegex.test(html)) {
-  html = html.replace(oldUpdateUiCardsRegex, newUpdateUiCards);
-  console.log('✅ Updated updateUI() MM:SS clock and 5-scene active card highlights');
-}
-
-// Also update top banner text
-html = html.replace(
-  /59\.3s duration • ElevenLabs Adam Master Voiceover • Lofi Beat • Subdrops &amp; Laser SFX • Ready to upload to Instagram, TikTok &amp; YouTube Shorts/,
-  `89.0s Extended Story Reel • Cueva 2D Illustrated Animation • ElevenLabs Master Voice + Synthwave Music &amp; Foley SFX • Ready to upload to Instagram, TikTok &amp; YouTube Shorts`
-);
-
-// Add cache-buster query string to masterMp4Player source so browser never caches the old MP4
-html = html.replace(/src="video\/vantorx-speed-to-lead-reel\.mp4(\?v=[0-9]+)?"/g, 'src="video/vantorx-speed-to-lead-reel.mp4?v=8905"');
-html = html.replace(/7\.5 MB/g, '11.0 MB');
-
-if (!html.includes('VantorX_Instagram_Highlights_Complete_Package.zip')) {
-  html = html.replace(
-    /Open Direct Video ↗\s*<\/a>/,
-    `Open Direct Video ↗\n    </a>\n    <a href="/instagram-package/VantorX_Instagram_Highlights_Complete_Package.zip" download="VantorX_Instagram_Highlights_Complete_Package.zip" style="background:#10b981;color:#041f14;font-weight:800;font-size:13.5px;padding:11px 18px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(16,185,129,0.35)">\n      <span>📦</span> <span>Download All 15 IG Pictures (.ZIP)</span>\n    </a>\n    <a href="/instagram-package/" target="_blank" style="color:#a7f3d0;font-size:12.5px;text-decoration:none;font-weight:700;padding:9px 14px;border:1px solid rgba(16,185,129,0.45);border-radius:8px">\n      📱 Open 15 IG Pictures Gallery ↗\n    </a>`
-  );
-}
+// Add cache-buster query string to masterMp4Player source and uncheck Background Music by default
+html = html.replace(/src="video\/vantorx-speed-to-lead-reel\.mp4(\?v=[0-9]+)?"/g, 'src="video/vantorx-speed-to-lead-reel.mp4?v=8912"');
+html = html.replace(/href="video\/vantorx-speed-to-lead-reel\.mp4(\?v=[0-9]+)?"/g, 'href="video/vantorx-speed-to-lead-reel.mp4?v=8912"');
+html = html.replace(/<input type="checkbox" id="chkEnableMusic" checked>/g, '<input type="checkbox" id="chkEnableMusic">');
+html = html.replace(/<span>🎵 SYNTHWAVE AUDIO<\/span>/g, '<span>🎙️ VOICE + FOLEY SFX ONLY</span>');
+html = html.replace(/7\.5 MB/g, '10.9 MB');
 
 fs.writeFileSync(htmlPath, html, 'utf8');
 console.log('✅ Saved updated website/demo/reel-creator.html');
