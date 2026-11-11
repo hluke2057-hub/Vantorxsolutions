@@ -7,6 +7,7 @@
     { "source": "/api/onboarding/:action", "destination": "/api/onboarding?action=:action" },
     { "source": "/api/billing/:action", "destination": "/api/billing?action=:action" },
     { "source": "/api/appointments/:id", "destination": "/api/appointments?id=:id" },
+    { "source": "/api/send-email", "destination": "/api/notifications?action=send-email" },
     { "source": "/api/notifications/:action", "destination": "/api/notifications?action=:action" },
     { "source": "/api/change-requests/:id", "destination": "/api/change-requests?id=:id" },
     { "source": "/api/admin/inquiries", "destination": "/api/change-requests?action=inquiries" },
