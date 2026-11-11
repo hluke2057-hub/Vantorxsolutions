@@ -67,7 +67,7 @@ const outMasterMp3Path = path.resolve(__dirname, '../website/demo/audio/reel-voi
     voiceComp.release.setValueAtTime(0.12, 0);
 
     const voiceGain = offlineCtx.createGain();
-    voiceGain.gain.setValueAtTime(0.76, 0);
+    voiceGain.gain.setValueAtTime(0.92, 0);
 
     voiceEQ.connect(voicePresence);
     voicePresence.connect(voiceComp);
@@ -82,12 +82,13 @@ const outMasterMp3Path = path.resolve(__dirname, '../website/demo/audio/reel-voi
     voiceSource.start(0);
 
     // -------------------------------------------------------------------------
-    // 2. UNMISTAKABLE CUEVA BACKGROUND MUSIC BED (Independent Stereo Bus!)
-    // Rich warm analog synth chords + catchy melodic arpeggio + driving bass + beat
+    // 2. BACKGROUND MUSIC BED MUTED (0.0) PER USER REQUEST
+    // User will add their own background music track directly!
+    // Only Voiceover + Tactile Cueva Foley SFX are rendered into the master mix.
     // -------------------------------------------------------------------------
     const musicBus = offlineCtx.createGain();
-    musicBus.gain.setValueAtTime(0.78, 0); // Unmistakably audible under narration on ALL speakers!
-    musicBus.connect(brickwall);
+    musicBus.gain.setValueAtTime(0.0, 0);
+    // musicBus disconnected so zero background music is mixed in
 
     const bpm = 120; // 0.5s per beat, 2.0s per bar
     const stepTime = 60 / bpm / 4; // 0.125s per 16th note
