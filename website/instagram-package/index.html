@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VantorX — Instagram Highlights Complete Package (15 Story Graphics)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060911;
+      --surface: #0d1321;
+      --surface-hover: #131c31;
+      --border: rgba(255, 255, 255, 0.12);
+      --gold: #f59e0b;
+      --emerald: #10b981;
+      --cyan: #38bdf8;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      padding: 36px 20px 80px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #fde68a 0%, #f59e0b 55%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Master Download Hub Card */
+    .master-download-card {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(16, 185, 129, 0.14));
+      border: 1.5px solid rgba(245, 158, 11, 0.5);
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-bottom: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+    .master-info h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .master-info p {
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+    .master-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s ease;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #060911;
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+    }
+    .btn-emerald {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border: 1.5px solid rgba(16, 185, 129, 0.5);
+    }
+    .btn-emerald:hover {
+      background: rgba(16, 185, 129, 0.28);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.06);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Category Section */
+    .category-section {
+      margin-bottom: 48px;
+      background: rgba(13, 19, 33, 0.65);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .category-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .category-num {
+      background: rgba(245, 158, 11, 0.18);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      color: #fbbf24;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+    .category-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .slides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .slide-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .slide-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 158, 11, 0.45);
+    }
+    .slide-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      background: #04070d;
+      overflow: hidden;
+    }
+    .slide-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slide-footer {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(6, 9, 17, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .slide-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+    .slide-sub {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .btn-dl-single {
+      background: rgba(245, 158, 11, 0.16);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .btn-dl-single:hover {
+      background: #f59e0b;
+      color: #060911;
+    }
+    #dlStatusToast {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #041f14;
+      font-weight: 800;
+      padding: 14px 22px;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+      z-index: 9999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="badge">📦 Ready-to-Send Instagram Highlights Kit</div>
+    <h1>VantorX <span>15 Instagram Highlight Graphics</span></h1>
+    <p class="subtitle">All 15 HD (1080×1920) vertical story graphics organized into your 5 core Highlight categories. Download the complete ZIP bundle or save all 15 photos directly to your phone/computer.</p>
+  </header>
+
+  <!-- MASTER DOWNLOAD BAR -->
+  <div class="master-download-card">
+    <div class="master-info">
+      <h2>
+        <span>📥</span>
+        <span>Download Complete 15-Picture Package</span>
+      </h2>
+      <p>Includes all 5 Highlight categories (Packages, AVA, Custom Website, AEO Engine, LeadFlow) in 1080×1920 HD PNG format.</p>
+    </div>
+    <div class="master-actions">
+      <a href="VantorX_Instagram_Highlights_Complete_Package.zip" download="VantorX_Instagram_Highlights_Complete_Package.zip" class="btn btn-gold">
+        <span>📦</span>
+        <span>Download Complete Package (.ZIP — 7.1 MB)</span>
+      </a>
+      <button type="button" onclick="downloadAll15Sequentially()" class="btn btn-emerald">
+        <span>📲</span>
+        <span>Download All 15 PNGs Directly</span>
+      </button>
+      <button type="button" onclick="shareOrSendPackage()" class="btn btn-outline" id="btnNativeShare">
+        <span>📤</span>
+        <span>Send / Share to Phone</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="categoriesContainer"></div>
+</div>
+
+<div id="dlStatusToast">Downloading...</div>
+
+<script>
+  const HIGHLIGHT_GROUPS = [
+    {
+      num: '01',
+      title: 'Our 3 Packages (Basic, Accelerate, Scale)',
+      slides: [
+        { file: 'insta_highlight_01_packages_1_basic.png', name: 'Slide 1 — Basic Package ($997 Setup)' },
+        { file: 'insta_highlight_02_packages_2_accelerate.png', name: 'Slide 2 — Accelerate ($1,497 + $297/mo)' },
+        { file: 'insta_highlight_03_packages_3_scale.png', name: 'Slide 3 — Scale ($4,997 + $497/mo)' }
+      ]
+    },
+    {
+      num: '02',
+      title: 'AVA 24/7 Voice AI Receptionist',
+      slides: [
+        { file: 'insta_highlight_04_ava_1_problem.png', name: 'Slide 1 — Missed Calls = Lost Jobs' },
+        { file: 'insta_highlight_05_ava_2_how_it_works.png', name: 'Slide 2 — How AVA Answers in 0.8s' },
+        { file: 'insta_highlight_06_ava_3_live_demo.png', name: 'Slide 3 — Test AVA Live: (561) 813-8602' }
+      ]
+    },
+    {
+      num: '03',
+      title: 'Custom High-Converting Website Design',
+      slides: [
+        { file: 'insta_highlight_07_website_1_problem.png', name: 'Slide 1 — Slow Websites Kill Trust' },
+        { file: 'insta_highlight_08_website_2_features.png', name: 'Slide 2 — Built To Book Jobs' },
+        { file: 'insta_highlight_09_website_3_results.png', name: 'Slide 3 — 3X More Quote Requests' }
+      ]
+    },
+    {
+      num: '04',
+      title: 'AEO Engine (Answer Engine Optimization)',
+      slides: [
+        { file: 'insta_highlight_10_aeo_1_what_is_aeo.png', name: 'Slide 1 — Rank #1 on AI Search' },
+        { file: 'insta_highlight_11_aeo_2_how_it_works.png', name: 'Slide 2 — How Our AEO Engine Works' },
+        { file: 'insta_highlight_12_aeo_3_dominate.png', name: 'Slide 3 — Own Your Service Area' }
+      ]
+    },
+    {
+      num: '05',
+      title: 'LeadFlow 90-Second Speed-to-Lead',
+      slides: [
+        { file: 'insta_highlight_13_leadflow_1_90s_rule.png', name: 'Slide 1 — The 90-Second Rule (+391%)' },
+        { file: 'insta_highlight_14_leadflow_2_how_it_works.png', name: 'Slide 2 — How LeadFlow SMS Works' },
+        { file: 'insta_highlight_15_leadflow_3_zero_leaks.png', name: 'Slide 3 — Zero Leads Left Behind' }
+      ]
+    }
+  ];
+
+  const container = document.getElementById('categoriesContainer');
+
+  HIGHLIGHT_GROUPS.forEach((group, gIdx) => {
+    const sec = document.createElement('section');
+    sec.className = 'category-section';
+    sec.innerHTML = `
+      <div class="category-header">
+        <div class="category-title-wrap">
+          <span class="category-num">HIGHLIGHT ${group.num}</span>
+          <h3 class="category-title">${group.title}</h3>
+        </div>
+        <button type="button" class="btn btn-outline" onclick="downloadCategory(${gIdx})">
+          <span>📥</span> <span>Download All 3 in ${group.title.split(' ')[0]}</span>
+        </button>
+      </div>
+      <div class="slides-grid">
+        ${group.slides.map((s, sIdx) => `
+          <div class="slide-card">
+            <a href="highlights/${s.file}" target="_blank" class="slide-img-wrap" title="Click to view full 1080x1920 image">
+              <img src="highlights/${s.file}" alt="${s.name}" loading="lazy" />
+            </a>
+            <div class="slide-footer">
+              <div>
+                <div class="slide-label">${s.name}</div>
+                <div class="slide-sub">1080×1920 HD PNG</div>
+              </div>
+              <a href="highlights/${s.file}" download="${s.file}" class="btn-dl-single">⬇ Save PNG</a>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    container.appendChild(sec);
+  });
+
+  function showToast(msg) {
+    const t = document.getElementById('dlStatusToast');
+    t.textContent = msg;
+    t.style.display = 'block';
+  }
+
+  function triggerDownload(url, filename) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  async function downloadCategory(groupIdx) {
+    const group = HIGHLIGHT_GROUPS[groupIdx];
+    if (!group) return;
+    for (let i = 0; i < group.slides.length; i++) {
+      const s = group.slides[i];
+      showToast(`Downloading ${i + 1}/3: ${s.file}...`);
+      triggerDownload(`highlights/${s.file}`, s.file);
+      await new Promise(r => setTimeout(r, 350));
+    }
+    setTimeout(() => { document.getElementById('dlStatusToast').style.display = 'none'; }, 2000);
+  }
+
+  async function downloadAll15Sequentially() {
+    const allSlides = HIGHLIGHT_GROUPS.flatMap(g => g.slides);
+    for (let i = 0; i < allSlides.length; i++) {
+      const s = allSlides[i];
+      showToast(`📲 Saving Picture ${i + 1} of ${allSlides.length}: ${s.file}...`);
+      triggerDownload(`highlights/${s.file}`, s.file);
+      await new Promise(r => setTimeout(r, 380));
+    }
+    showToast('✅ All 15 Instagram Highlight PNGs Downloaded!');
+    setTimeout(() => { document.getElementById('dlStatusToast').style.display = 'none'; }, 3500);
+  }
+
+  async function shareOrSendPackage() {
+    const shareUrl = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'VantorX — 15 Instagram Highlight Graphics Package',
+          text: 'Download all 15 VantorX Instagram Highlight pictures (ZIP or individual PNGs):',
+          url: shareUrl
+        });
+        return;
+      } catch (e) {}
+    }
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      showToast('📋 Direct Package Link Copied! Text or email it to yourself.');
+      setTimeout(() => { document.getElementById('dlStatusToast').style.display = 'none'; }, 3000);
+    } catch (e) {}
+  }
+</script>
+
+</body>
+</html>

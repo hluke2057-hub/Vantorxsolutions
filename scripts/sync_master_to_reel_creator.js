@@ -163,6 +163,14 @@ html = html.replace(
 
 // Add cache-buster query string to masterMp4Player source so browser never caches the old MP4
 html = html.replace(/src="video\/vantorx-speed-to-lead-reel\.mp4(\?v=[0-9]+)?"/g, 'src="video/vantorx-speed-to-lead-reel.mp4?v=8905"');
+html = html.replace(/7\.5 MB/g, '11.0 MB');
+
+if (!html.includes('VantorX_Instagram_Highlights_Complete_Package.zip')) {
+  html = html.replace(
+    /Open Direct Video ↗\s*<\/a>/,
+    `Open Direct Video ↗\n    </a>\n    <a href="/instagram-package/VantorX_Instagram_Highlights_Complete_Package.zip" download="VantorX_Instagram_Highlights_Complete_Package.zip" style="background:#10b981;color:#041f14;font-weight:800;font-size:13.5px;padding:11px 18px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(16,185,129,0.35)">\n      <span>📦</span> <span>Download All 15 IG Pictures (.ZIP)</span>\n    </a>\n    <a href="/instagram-package/" target="_blank" style="color:#a7f3d0;font-size:12.5px;text-decoration:none;font-weight:700;padding:9px 14px;border:1px solid rgba(16,185,129,0.45);border-radius:8px">\n      📱 Open 15 IG Pictures Gallery ↗\n    </a>`
+  );
+}
 
 fs.writeFileSync(htmlPath, html, 'utf8');
 console.log('✅ Saved updated website/demo/reel-creator.html');
