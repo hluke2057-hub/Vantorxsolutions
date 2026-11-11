@@ -31,9 +31,14 @@ async function verifyRecipientDns(email) {
 
   try {
     const mx = await dns.resolveMx(domain).catch(() => null);
-    if (mx && mx.length > 0) return true;
-    const a = await dns.resolve4(domain).catch(() => null);
-    if (a && a.length > 0) return true;
+    if (mx && mx.length > 0) {
+      const mxHosts = mx.map(r => (r.exchange || '').toLowerCase());
+      // Reject domains whose MX records point to domain parking / expired domain forwarding
+      if (mxHosts.some(h => PARKED_MX_PATTERNS.some(p => h.includes(p)))) {
+        return false;
+      }
+      return true;
+    }
     return false;
   } catch (err) {
     return false;
@@ -83,12 +88,40 @@ function writeJsonSafe(filePath, data) {
 
 const KNOWN_SUPPRESSED = new Set([
   'dispatch@thecleanplumbers.com',
+  'charlie@thecleanplumbers.com',
   'dispatch@unitedplumbingdrain.com',
+  'steve@unitedplumbingdrain.com',
   'dispatch@benefieldplumbing.com',
+  'larry@benefieldplumbing.com',
   'service@asuperiormechanical.com',
   'dispatch@olinplumbing.com',
-  'estimates@arrysroofingservices.com'
+  'the.owner@olinplumbing.com',
+  'estimates@arrysroofingservices.com',
+  'matthew@arrysroofing.com',
+  'the.owner@clarkroofing.com',
+  'estimates@clarkroofing.com',
+  'gregg@bestroofing.com',
+  'estimates@bestroofing.com',
+  'tommy@allyearcoolingheating.com',
+  'dispatch@bocaratonplumbingpro.com',
+  'dispatch@bocaratonplumbingpros.com',
+  'danny@astarelectric.com'
 ]);
+
+const PARKED_MX_PATTERNS = [
+  'registrar-servers.com',
+  'parkingcrew.net',
+  'sedoparking.com',
+  'bodis.com',
+  'above.com',
+  'eftydns.com',
+  'dan.com',
+  'afternic.com',
+  'sav.com',
+  'cashparking.com',
+  'namebrightmail.com',
+  'jellyfish.systems'
+];
 
 async function sendPhysicalEmail(lead) {
   if (!RESEND_API_KEY) {
@@ -97,12 +130,20 @@ async function sendPhysicalEmail(lead) {
   }
 
   const cleanEmail = (lead.email || '').trim().toLowerCase();
-  if (KNOWN_SUPPRESSED.has(cleanEmail)) {
-    console.warn(`[Suppression Guard] Skipping ${lead.company} (${cleanEmail}) — Address is in Resend Suppression list.`);
-    return { skipped: true, error: 'Recipient is in Resend Suppression List' };
+  const localPart = cleanEmail.split('@')[0] || '';
+
+  // Block placeholder/synthesized prefixes like "the.owner@" or "executive.leadership@"
+  if (
+    KNOWN_SUPPRESSED.has(cleanEmail) ||
+    localPart === 'the.owner' ||
+    localPart === 'executive.leadership' ||
+    cleanEmail.includes('the.owner@')
+  ) {
+    console.warn(`[Suppression Guard] Skipping ${lead.company} (${cleanEmail}) — Address is suppressed or a guessed placeholder.`);
+    return { skipped: true, error: 'Recipient is in Suppression List or guessed placeholder' };
   }
 
-  // Pre-flight recipient DNS verification to prevent 421 4.4.0 transient SMTP errors
+  // Pre-flight recipient DNS verification to prevent 421 4.4.0 transient SMTP errors & parked domains
   const isResolvable = await verifyRecipientDns(lead.email);
   if (!isResolvable) {
     console.warn(`[DNS Shield] Skipping Resend delivery for ${lead.company} (${lead.email}) — Recipient domain has no valid MX or A records.`);
@@ -310,41 +351,8 @@ function autoReplenishQueue(queue) {
     }
   }
 
-  // 2. Ingest unqueued leads from master dataset only if pending cold leads are low (< 15)
-  const pending = queue.filter(t => t.status === "pending" && (t.touch || 1) === 1);
-  if (pending.length < 15 && fs.existsSync(TARGETS_FILE)) {
-    const masterTargets = readJsonSafe(TARGETS_FILE);
-    const queuedIds = new Set(queue.map(q => q.id));
-
-    for (const lead of masterTargets) {
-      if (!queuedIds.has(lead.id)) {
-        const cleanSlug = lead.company.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 20);
-        const prefix = lead.trade.includes("HVAC") ? "service" : lead.trade.includes("Plumb") ? "dispatch" : lead.trade.includes("Roof") ? "estimates" : "info";
-        queue.push({
-          id: lead.id,
-          company: lead.company,
-          owner: lead.owner,
-          fullOwner: lead.fullOwner,
-          title: lead.title,
-          email: `${prefix}@${cleanSlug}.com`,
-          phone: lead.phone,
-          city: lead.city,
-          trade: lead.trade,
-          service: lead.service,
-          estLoss: `$${(lead.monthlyLoss || 8500).toLocaleString()}/mo`,
-          painPoint: lead.painPoint,
-          subject: `Quick question for ${lead.owner} regarding ${lead.company} emergency calls`,
-          status: "pending",
-          touch: 1,
-          resendMessageId: null,
-          sentAt: null
-        });
-        queuedIds.add(lead.id);
-        added++;
-        if (queue.filter(t => t.status === "pending").length >= 25) break;
-      }
-    }
-  }
+  // 2. Never synthesize fake/guessed emails from company names! Only advance verified multi-touch leads.
+  // (Previously this synthesized `${prefix}@${cleanSlug}.com`, which caused hard bounces on guessed domains.)
 
   // 3. Fallback: Recycle oldest sent leads (> 14 days old) to guarantee queue is never dry
   if (queue.filter(t => t.status === "pending").length < 10) {

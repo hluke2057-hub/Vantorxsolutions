@@ -182,26 +182,26 @@ async function synthesizeAndVerifyEmail(lead) {
   if (!domain) return null;
 
   const owner = (lead.owner || '').trim();
-  const nameParts = owner.split(/\s+/).filter(Boolean);
+  const isGenericOwner = !owner || owner.toLowerCase().includes('owner') || owner.toLowerCase().includes('leadership') || owner.toLowerCase().includes('team');
+  const nameParts = isGenericOwner ? [] : owner.split(/\s+/).filter(Boolean);
   const first = nameParts[0] ? nameParts[0].toLowerCase().replace(/[^a-z]/g, '') : '';
   const last = nameParts.length > 1 ? nameParts[nameParts.length - 1].toLowerCase().replace(/[^a-z]/g, '') : '';
 
   // Check MX on domain
   const mx = await checkDomainMx(domain);
 
-  // Candidate generation
-  const candidates = [];
+  // Candidate generation (Prioritize standard published company inboxes first, never "the.owner@")
+  const candidates = [
+    `info@${domain}`,
+    `service@${domain}`,
+    `office@${domain}`,
+  ];
   if (first && last) {
     candidates.push(`${first}.${last}@${domain}`);
     candidates.push(`${first}@${domain}`);
-    candidates.push(`${first[0]}${last}@${domain}`);
   } else if (first) {
     candidates.push(`${first}@${domain}`);
   }
-  candidates.push(`owner@${domain}`);
-  candidates.push(`service@${domain}`);
-  candidates.push(`office@${domain}`);
-  candidates.push(`info@${domain}`);
 
   return {
     domain,
