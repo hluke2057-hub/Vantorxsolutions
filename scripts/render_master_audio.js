@@ -1,28 +1,31 @@
 // scripts/render_master_audio.js
-// VantorX Master Audio Synthesizer: Voiceover + Engaging Background Music Bed + Cueva Tactile Foley SFX
+// VantorX Master Audio Synthesizer (89.0s Extended Hook + Bob & Sarah Story + Unmistakable Background Music + Cueva Foley SFX)
 const puppeteer = require('puppeteer-core');
+const ffmpegPath = require('ffmpeg-static');
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
 const edgePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-const voiceoverPath = path.resolve('website/demo/audio/reel-voiceover-master.mp3');
-const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav');
+const dryVoiceoverPath = path.resolve(__dirname, '../website/demo/audio/reel-voiceover-dry.mp3');
+const outWavPath = path.resolve(__dirname, '../website/demo/audio/reel-audio-full-master.wav');
+const outMasterMp3Path = path.resolve(__dirname, '../website/demo/audio/reel-voiceover-master.mp3');
 
 (async () => {
   console.log('==============================================================================');
-  console.log('   RENDERING CUEVA-GRADE MASTER AUDIO (VOICE + BEAT + TACTILE FOLEY SFX)     ');
+  console.log('   RENDERING 89.0s EXTENDED STORY MASTER AUDIO (VOICE + MUSIC + FOLEY SFX)    ');
   console.log('==============================================================================');
 
-  if (!fs.existsSync(voiceoverPath)) {
-    console.error('ERROR: Voiceover file not found at:', voiceoverPath);
+  if (!fs.existsSync(dryVoiceoverPath)) {
+    console.error('ERROR: Dry voiceover file not found at:', dryVoiceoverPath);
     process.exit(1);
   }
 
-  const voiceoverB64 = fs.readFileSync(voiceoverPath).toString('base64');
+  const voiceoverB64 = fs.readFileSync(dryVoiceoverPath).toString('base64');
 
   const browser = await puppeteer.launch({
     executablePath: edgePath,
-    headless: true,
+    headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
 
@@ -30,39 +33,39 @@ const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav')
 
   const wavBase64 = await page.evaluate(async (vB64) => {
     const sampleRate = 44100;
-    const duration = 63.0;
+    const duration = 89.0;
     const totalSamples = Math.ceil(sampleRate * duration);
     const offlineCtx = new OfflineAudioContext(2, totalSamples, sampleRate);
 
-    // 1. Master Output Bus with High-End Dynamics & EQ
-    const masterCompressor = offlineCtx.createDynamicsCompressor();
-    masterCompressor.threshold.setValueAtTime(-12, 0);
-    masterCompressor.knee.setValueAtTime(6, 0);
-    masterCompressor.ratio.setValueAtTime(4.0, 0);
-    masterCompressor.attack.setValueAtTime(0.003, 0);
-    masterCompressor.release.setValueAtTime(0.18, 0);
-    masterCompressor.connect(offlineCtx.destination);
+    // Master Limiter / Glue Bus (Gentle ratio so voice never crushes background music)
+    const masterLimiter = offlineCtx.createDynamicsCompressor();
+    masterLimiter.threshold.setValueAtTime(-6, 0);
+    masterLimiter.knee.setValueAtTime(4, 0);
+    masterLimiter.ratio.setValueAtTime(3.0, 0);
+    masterLimiter.attack.setValueAtTime(0.005, 0);
+    masterLimiter.release.setValueAtTime(0.15, 0);
+    masterLimiter.connect(offlineCtx.destination);
 
-    // Voiceover Channel with Warm EQ
+    // -------------------------------------------------------------------------
+    // 1. VOICEOVER CHANNEL (Clear, crisp, authoritative)
+    // -------------------------------------------------------------------------
     const voiceEQ = offlineCtx.createBiquadFilter();
-    voiceEQ.type = 'lowshelf';
-    voiceEQ.frequency.setValueAtTime(140, 0);
-    voiceEQ.gain.setValueAtTime(3.0, 0);
+    voiceEQ.type = 'highpass';
+    voiceEQ.frequency.setValueAtTime(85, 0); // Free up low-end for music bass & kick
 
-    const voiceClarity = offlineCtx.createBiquadFilter();
-    voiceClarity.type = 'peaking';
-    voiceClarity.frequency.setValueAtTime(3200, 0);
-    voiceClarity.gain.setValueAtTime(2.5, 0);
-    voiceClarity.Q.setValueAtTime(1.0, 0);
+    const voicePresence = offlineCtx.createBiquadFilter();
+    voicePresence.type = 'peaking';
+    voicePresence.frequency.setValueAtTime(3200, 0);
+    voicePresence.gain.setValueAtTime(2.5, 0);
+    voicePresence.Q.setValueAtTime(1.0, 0);
 
     const voiceGain = offlineCtx.createGain();
-    voiceGain.gain.setValueAtTime(1.15, 0); // Dominant clean vocal presence
+    voiceGain.gain.setValueAtTime(0.92, 0);
 
-    voiceEQ.connect(voiceClarity);
-    voiceClarity.connect(voiceGain);
-    voiceGain.connect(masterCompressor);
+    voiceEQ.connect(voicePresence);
+    voicePresence.connect(voiceGain);
+    voiceGain.connect(masterLimiter);
 
-    // Decode Voiceover Audio
     const voiceData = Uint8Array.from(atob(vB64), c => c.charCodeAt(0)).buffer;
     const voiceBuffer = await offlineCtx.decodeAudioData(voiceData);
     const voiceSource = offlineCtx.createBufferSource();
@@ -70,118 +73,205 @@ const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav')
     voiceSource.connect(voiceEQ);
     voiceSource.start(0);
 
-    // 2. Background Music Bed (Engaging Cyberpunk / Lo-Fi Driving Beat @ 124 BPM)
-    const musicGain = offlineCtx.createGain();
-    musicGain.gain.setValueAtTime(0.20, 0); // Calibrated background bed level (clearly audible & engaging)
-    musicGain.connect(masterCompressor);
+    // -------------------------------------------------------------------------
+    // 2. UNMISTAKABLE BACKGROUND MUSIC BED (Warm Synthwave Pad + Plucks + Beat)
+    // Audible on laptop speakers, phone speakers, and headphones from 0.0s!
+    // -------------------------------------------------------------------------
+    const musicBus = offlineCtx.createGain();
+    musicBus.gain.setValueAtTime(0.48, 0); // Strong, unmistakable musical presence
+    musicBus.connect(masterLimiter);
 
-    const stepTime = 60 / 124 / 4; // ~0.12097s per 16th note
+    const bpm = 120; // 0.5s per beat, 2.0s per bar
+    const stepTime = 60 / bpm / 4; // 0.125s per 16th note
     const totalSteps = Math.floor(duration / stepTime);
 
-    for (let step = 0; step < totalSteps; step++) {
-      const t = step * stepTime;
+    // Chord progression every 2 seconds (1 bar = 16 steps):
+    // Bar 0: A minor 9 (A3=220, C4=261.63, E4=329.63, G4=392.00, B4=493.88)
+    // Bar 1: F major 7 (F3=174.61, A3=220.00, C4=261.63, E4=329.63, G4=392.00)
+    // Bar 2: C major 9 (C3=130.81, G3=196.00, B3=246.94, D4=293.66, E4=329.63)
+    // Bar 3: G6sus4    (G3=196.00, B3=246.94, D4=293.66, E4=329.63, A4=440.00)
+    const chords = [
+      { root: 110.00, sub: 55.00, notes: [220.00, 261.63, 329.63, 392.00, 493.88] },
+      { root: 87.31,  sub: 43.65, notes: [174.61, 220.00, 261.63, 329.63, 392.00] },
+      { root: 130.81, sub: 65.41, notes: [196.00, 246.94, 293.66, 329.63, 392.00] },
+      { root: 98.00,  sub: 49.00, notes: [196.00, 246.94, 293.66, 329.63, 440.00] }
+    ];
 
-      // Punchy Kick on 1 and 3 (with syncopation)
-      if (step % 8 === 0 || step % 16 === 6 || step % 32 === 14) {
+    // Warm Stereo Pad Layer (every bar = 2.0s)
+    const barDuration = stepTime * 16; // 2.0s
+    const totalBars = Math.ceil(duration / barDuration);
+    for (let bar = 0; bar < totalBars; bar++) {
+      const barStart = bar * barDuration;
+      if (barStart >= duration) break;
+      const chord = chords[bar % chords.length];
+
+      // Lush detuned warm pad in 200Hz-500Hz range (heard clearly on all speakers)
+      chord.notes.slice(0, 4).forEach((freq, idx) => {
         const osc = offlineCtx.createOscillator();
+        const filter = offlineCtx.createBiquadFilter();
+        const pan = offlineCtx.createStereoPanner();
         const g = offlineCtx.createGain();
-        osc.frequency.setValueAtTime(135, t);
-        osc.frequency.exponentialRampToValueAtTime(38, t + 0.16);
-        g.gain.setValueAtTime(0.42, t);
-        g.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
-        osc.connect(g);
-        g.connect(musicGain);
-        osc.start(t);
-        osc.stop(t + 0.16);
-      }
 
-      // Snappy Snare on 2 and 4 (beat 4, 12 of bar)
-      if (step % 8 === 4) {
-        // Body
-        const osc = offlineCtx.createOscillator();
-        const g = offlineCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(230, t);
-        osc.frequency.exponentialRampToValueAtTime(120, t + 0.11);
-        g.gain.setValueAtTime(0.22, t);
-        g.gain.exponentialRampToValueAtTime(0.001, t + 0.11);
-        osc.connect(g);
-        g.connect(musicGain);
-        osc.start(t);
-        osc.stop(t + 0.11);
+        osc.type = (idx % 2 === 0) ? 'sawtooth' : 'triangle';
+        osc.frequency.setValueAtTime(freq, barStart);
+        osc.detune.setValueAtTime((idx - 1.5) * 8, barStart); // Warm chorus detune
 
-        // Noise crackle
-        const noise = offlineCtx.createOscillator();
-        const nG = offlineCtx.createGain();
-        noise.type = 'square';
-        noise.frequency.setValueAtTime(1200, t);
-        nG.gain.setValueAtTime(0.06, t);
-        nG.gain.exponentialRampToValueAtTime(0.0001, t + 0.14);
-        noise.connect(nG);
-        nG.connect(musicGain);
-        noise.start(t);
-        noise.stop(t + 0.14);
-      }
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1100, barStart);
 
-      // 16th-Note Hi-Hats (driving rhythm)
-      const hat = offlineCtx.createOscillator();
-      const hatG = offlineCtx.createGain();
-      hat.type = 'square';
-      const isAccented = (step % 4 === 2);
-      hat.frequency.setValueAtTime(isAccented ? 9800 : 7200, t);
-      hatG.gain.setValueAtTime(isAccented ? 0.035 : 0.016, t);
-      hatG.gain.exponentialRampToValueAtTime(0.0001, t + (isAccented ? 0.06 : 0.035));
-      hat.connect(hatG);
-      hatG.connect(musicGain);
-      hat.start(t);
-      hat.stop(t + 0.06);
+        pan.pan.setValueAtTime((idx - 1.5) * 0.35, barStart);
 
-      // Rolling Cyberpunk Sawtooth Bassline
-      if (step % 2 === 0) {
-        const bass = offlineCtx.createOscillator();
-        const bG = offlineCtx.createGain();
-        const notes = [55, 55, 65.4, 65.4, 73.4, 73.4, 49.0, 49.0]; // A - C - D - G progression
-        const note = notes[Math.floor(step / 4) % notes.length];
-        bass.type = 'sawtooth';
-        bass.frequency.setValueAtTime(note, t);
-        bG.gain.setValueAtTime(0.09, t);
-        bG.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
-        bass.connect(bG);
-        bG.connect(musicGain);
-        bass.start(t);
-        bass.stop(t + 0.18);
-      }
+        g.gain.setValueAtTime(0.001, barStart);
+        g.gain.linearRampToValueAtTime(0.055, barStart + 0.25);
+        g.gain.setValueAtTime(0.050, barStart + barDuration - 0.25);
+        g.gain.linearRampToValueAtTime(0.001, Math.min(duration, barStart + barDuration));
 
-      // Engaging Melodic Synth Plucks (keeps viewers involved)
-      if (step % 8 === 2 || step % 16 === 10 || step % 32 === 26) {
-        const synth = offlineCtx.createOscillator();
-        const sG = offlineCtx.createGain();
-        synth.type = 'triangle';
-        const chordPitches = [440, 523.25, 659.25, 783.99, 880];
-        const pitch = chordPitches[(step * 3) % chordPitches.length];
-        synth.frequency.setValueAtTime(pitch, t);
-        sG.gain.setValueAtTime(0.065, t);
-        sG.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
-        synth.connect(sG);
-        sG.connect(musicGain);
-        synth.start(t);
-        synth.stop(t + 0.28);
-      }
+        osc.connect(filter);
+        filter.connect(pan);
+        pan.connect(g);
+        g.connect(musicBus);
+
+        osc.start(barStart);
+        osc.stop(Math.min(duration, barStart + barDuration));
+      });
     }
 
-    // 3. Tactile Foley Sound Effects Bus
-    const sfxGain = offlineCtx.createGain();
-    sfxGain.gain.setValueAtTime(0.60, 0); // Tactile punchy SFX level
-    sfxGain.connect(masterCompressor);
+    // Step Sequencer: Arpeggiated Synth Plucks + Driving Bass + Crisp Drums
+    for (let step = 0; step < totalSteps; step++) {
+      const t = step * stepTime;
+      if (t >= duration - 0.05) break;
+      const barIdx = Math.floor(step / 16);
+      const stepInBar = step % 16;
+      const chord = chords[barIdx % chords.length];
 
-    // Foley Generators
+      // A. Hypnotic Synthwave Arpeggio Pluck on every 8th/16th note (Storytelling pulse!)
+      const arpPattern = [0, 1, 2, 3, 4, 3, 2, 1, 0, 2, 4, 3, 1, 2, 3, 4];
+      const noteFreq = chord.notes[arpPattern[stepInBar]];
+      const isStrongStep = (stepInBar % 2 === 0);
+
+      const pluck = offlineCtx.createOscillator();
+      const pluckFilter = offlineCtx.createBiquadFilter();
+      const pluckGain = offlineCtx.createGain();
+      const pluckPan = offlineCtx.createStereoPanner();
+
+      pluck.type = 'triangle';
+      pluck.frequency.setValueAtTime(noteFreq * (stepInBar % 4 === 0 ? 2 : 1), t);
+
+      pluckFilter.type = 'lowpass';
+      pluckFilter.frequency.setValueAtTime(2400, t);
+      pluckFilter.frequency.exponentialRampToValueAtTime(600, t + 0.11);
+
+      pluckPan.pan.setValueAtTime(Math.sin(step * 0.7) * 0.4, t);
+
+      const pluckVol = isStrongStep ? 0.11 : 0.065;
+      pluckGain.gain.setValueAtTime(pluckVol, t);
+      pluckGain.gain.exponentialRampToValueAtTime(0.001, t + 0.115);
+
+      pluck.connect(pluckFilter);
+      pluckFilter.connect(pluckPan);
+      pluckPan.connect(pluckGain);
+      pluckGain.connect(musicBus);
+      pluck.start(t);
+      pluck.stop(t + 0.12);
+
+      // B. Warm Mid-Bass + Sub-Bass Pulse (110Hz + 220Hz harmonics so phones hear the bass!)
+      if (stepInBar % 2 === 0) {
+        const bass = offlineCtx.createOscillator();
+        const bassFilter = offlineCtx.createBiquadFilter();
+        const bassG = offlineCtx.createGain();
+
+        bass.type = 'sawtooth';
+        bass.frequency.setValueAtTime(chord.root, t); // 87Hz - 130Hz
+
+        bassFilter.type = 'lowpass';
+        bassFilter.frequency.setValueAtTime(520, t); // Keep 2nd & 3rd harmonics audible on small speakers!
+        bassFilter.Q.setValueAtTime(2.5, t);
+
+        bassG.gain.setValueAtTime((stepInBar % 4 === 0) ? 0.15 : 0.10, t);
+        bassG.gain.exponentialRampToValueAtTime(0.005, t + 0.22);
+
+        bass.connect(bassFilter);
+        bassFilter.connect(bassG);
+        bassG.connect(musicBus);
+        bass.start(t);
+        bass.stop(t + 0.23);
+      }
+
+      // C. Punchy Kick Drum (Beats 0, 6, 8, 14)
+      if (stepInBar === 0 || stepInBar === 6 || stepInBar === 8 || (barIdx % 2 === 1 && stepInBar === 14)) {
+        const kick = offlineCtx.createOscillator();
+        const kickG = offlineCtx.createGain();
+        kick.type = 'sine';
+        kick.frequency.setValueAtTime(160, t);
+        kick.frequency.exponentialRampToValueAtTime(46, t + 0.15);
+        kickG.gain.setValueAtTime(0.32, t);
+        kickG.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+        kick.connect(kickG);
+        kickG.connect(musicBus);
+        kick.start(t);
+        kick.stop(t + 0.16);
+      }
+
+      // D. Crisp Rim/Snare on Backbeat (Steps 4 and 12)
+      if (stepInBar === 4 || stepInBar === 12) {
+        const snareBody = offlineCtx.createOscillator();
+        const snareG = offlineCtx.createGain();
+        snareBody.type = 'triangle';
+        snareBody.frequency.setValueAtTime(260, t);
+        snareBody.frequency.exponentialRampToValueAtTime(130, t + 0.10);
+        snareG.gain.setValueAtTime(0.18, t);
+        snareG.gain.exponentialRampToValueAtTime(0.001, t + 0.10);
+        snareBody.connect(snareG);
+        snareG.connect(musicBus);
+        snareBody.start(t);
+        snareBody.stop(t + 0.10);
+
+        // High snap
+        const snap = offlineCtx.createOscillator();
+        const snapG = offlineCtx.createGain();
+        snap.type = 'square';
+        snap.frequency.setValueAtTime(1450, t);
+        snap.frequency.exponentialRampToValueAtTime(420, t + 0.045);
+        snapG.gain.setValueAtTime(0.08, t);
+        snapG.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
+        snap.connect(snapG);
+        snapG.connect(musicBus);
+        snap.start(t);
+        snap.stop(t + 0.05);
+      }
+
+      // E. Crisp Hi-Hat Groove
+      const hat = offlineCtx.createOscillator();
+      const hatFilter = offlineCtx.createBiquadFilter();
+      const hatG = offlineCtx.createGain();
+      hat.type = 'square';
+      const openHat = (stepInBar % 4 === 2);
+      hat.frequency.setValueAtTime(openHat ? 8400 : 6800, t);
+      hatFilter.type = 'highpass';
+      hatFilter.frequency.setValueAtTime(5000, t);
+      hatG.gain.setValueAtTime(openHat ? 0.045 : 0.022, t);
+      hatG.gain.exponentialRampToValueAtTime(0.0005, t + (openHat ? 0.07 : 0.035));
+      hat.connect(hatFilter);
+      hatFilter.connect(hatG);
+      hatG.connect(musicBus);
+      hat.start(t);
+      hat.stop(t + 0.075);
+    }
+
+    // -------------------------------------------------------------------------
+    // 3. TACTILE CUEVA FOLEY SOUND EFFECTS BUS (Synced to 89.0s Story Milestones!)
+    // -------------------------------------------------------------------------
+    const sfxGain = offlineCtx.createGain();
+    sfxGain.gain.setValueAtTime(0.65, 0);
+    sfxGain.connect(masterLimiter);
+
     function playLaserSweep(time) {
       const osc = offlineCtx.createOscillator();
       const g = offlineCtx.createGain();
       osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(1800, time);
-      osc.frequency.exponentialRampToValueAtTime(90, time + 0.45);
-      g.gain.setValueAtTime(0.40, time);
+      osc.frequency.setValueAtTime(1900, time);
+      osc.frequency.exponentialRampToValueAtTime(110, time + 0.45);
+      g.gain.setValueAtTime(0.38, time);
       g.gain.exponentialRampToValueAtTime(0.001, time + 0.45);
       osc.connect(g);
       g.connect(sfxGain);
@@ -194,23 +284,23 @@ const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav')
       const g = offlineCtx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, time);
-      osc.frequency.exponentialRampToValueAtTime(freq * 1.5, time + 0.08);
-      g.gain.setValueAtTime(0.35, time);
-      g.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.45, time + 0.09);
+      g.gain.setValueAtTime(0.36, time);
+      g.gain.exponentialRampToValueAtTime(0.001, time + 0.09);
       osc.connect(g);
       g.connect(sfxGain);
       osc.start(time);
-      osc.stop(time + 0.08);
+      osc.stop(time + 0.09);
     }
 
     function playSpaceWarp(time) {
       const osc = offlineCtx.createOscillator();
       const g = offlineCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(120, time);
-      osc.frequency.exponentialRampToValueAtTime(450, time + 0.35);
-      osc.frequency.exponentialRampToValueAtTime(60, time + 0.8);
-      g.gain.setValueAtTime(0.45, time);
+      osc.frequency.setValueAtTime(110, time);
+      osc.frequency.exponentialRampToValueAtTime(480, time + 0.35);
+      osc.frequency.exponentialRampToValueAtTime(65, time + 0.8);
+      g.gain.setValueAtTime(0.42, time);
       g.gain.exponentialRampToValueAtTime(0.001, time + 0.8);
       osc.connect(g);
       g.connect(sfxGain);
@@ -222,10 +312,10 @@ const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav')
       const osc = offlineCtx.createOscillator();
       const g = offlineCtx.createGain();
       osc.type = 'square';
-      osc.frequency.setValueAtTime(800, time);
-      osc.frequency.setValueAtTime(200, time + 0.03);
-      osc.frequency.setValueAtTime(1600, time + 0.06);
-      g.gain.setValueAtTime(0.35, time);
+      osc.frequency.setValueAtTime(850, time);
+      osc.frequency.setValueAtTime(240, time + 0.03);
+      osc.frequency.setValueAtTime(1650, time + 0.06);
+      g.gain.setValueAtTime(0.32, time);
       g.gain.exponentialRampToValueAtTime(0.001, time + 0.12);
       osc.connect(g);
       g.connect(sfxGain);
@@ -233,115 +323,80 @@ const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav')
       osc.stop(time + 0.12);
     }
 
+    function playLadderWrench(time) {
+      const osc1 = offlineCtx.createOscillator();
+      const g1 = offlineCtx.createGain();
+      osc1.type = 'triangle';
+      osc1.frequency.setValueAtTime(1500, time);
+      osc1.frequency.exponentialRampToValueAtTime(680, time + 0.18);
+      g1.gain.setValueAtTime(0.38, time);
+      g1.gain.exponentialRampToValueAtTime(0.001, time + 0.18);
+      osc1.connect(g1);
+      g1.connect(sfxGain);
+      osc1.start(time);
+      osc1.stop(time + 0.18);
+    }
+
     function playPipeBurst(time) {
-      // Deep water rumble & blast
       const osc = offlineCtx.createOscillator();
       const g = offlineCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(140, time);
-      osc.frequency.exponentialRampToValueAtTime(35, time + 0.6);
-      g.gain.setValueAtTime(0.55, time);
-      g.gain.exponentialRampToValueAtTime(0.001, time + 0.6);
+      osc.frequency.setValueAtTime(160, time);
+      osc.frequency.exponentialRampToValueAtTime(38, time + 0.55);
+      g.gain.setValueAtTime(0.50, time);
+      g.gain.exponentialRampToValueAtTime(0.001, time + 0.55);
       osc.connect(g);
       g.connect(sfxGain);
       osc.start(time);
-      osc.stop(time + 0.6);
+      osc.stop(time + 0.55);
+    }
+
+    function playPhoneBuzz(time) {
+      [0, 0.15].forEach(offset => {
+        const t = time + offset;
+        const osc = offlineCtx.createOscillator();
+        const g = offlineCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(165, t);
+        g.gain.setValueAtTime(0.34, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.10);
+        osc.connect(g);
+        g.connect(sfxGain);
+        osc.start(t);
+        osc.stop(t + 0.10);
+      });
     }
 
     function playHeavyHit(time) {
       const osc = offlineCtx.createOscillator();
       const g = offlineCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(180, time);
-      osc.frequency.exponentialRampToValueAtTime(28, time + 0.5);
-      g.gain.setValueAtTime(0.65, time);
-      g.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+      osc.frequency.setValueAtTime(190, time);
+      osc.frequency.exponentialRampToValueAtTime(32, time + 0.48);
+      g.gain.setValueAtTime(0.58, time);
+      g.gain.exponentialRampToValueAtTime(0.001, time + 0.48);
       osc.connect(g);
       g.connect(sfxGain);
       osc.start(time);
-      osc.stop(time + 0.5);
-    }
-
-    function playLadderWrench(time) {
-      // Metallic clang
-      const osc1 = offlineCtx.createOscillator();
-      const g1 = offlineCtx.createGain();
-      osc1.type = 'triangle';
-      osc1.frequency.setValueAtTime(1450, time);
-      osc1.frequency.exponentialRampToValueAtTime(700, time + 0.18);
-      g1.gain.setValueAtTime(0.35, time);
-      g1.gain.exponentialRampToValueAtTime(0.001, time + 0.18);
-      osc1.connect(g1);
-      g1.connect(sfxGain);
-      osc1.start(time);
-      osc1.stop(time + 0.18);
-
-      // Low metallic body
-      const osc2 = offlineCtx.createOscillator();
-      const g2 = offlineCtx.createGain();
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(420, time);
-      osc2.frequency.exponentialRampToValueAtTime(200, time + 0.22);
-      g2.gain.setValueAtTime(0.30, time);
-      g2.gain.exponentialRampToValueAtTime(0.001, time + 0.22);
-      osc2.connect(g2);
-      g2.connect(sfxGain);
-      osc2.start(time);
-      osc2.stop(time + 0.22);
-    }
-
-    function playPhoneBuzz(time) {
-      // Two quick motor pulses (bzz-bzz)
-      [0, 0.14].forEach(offset => {
-        const t = time + offset;
-        const osc = offlineCtx.createOscillator();
-        const g = offlineCtx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(160, t);
-        g.gain.setValueAtTime(0.30, t);
-        g.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
-        osc.connect(g);
-        g.connect(sfxGain);
-        osc.start(t);
-        osc.stop(t + 0.09);
-      });
+      osc.stop(time + 0.48);
     }
 
     function playTruckWhoosh(time) {
-      // Engine rumble + whoosh
       const osc = offlineCtx.createOscillator();
       const g = offlineCtx.createGain();
       osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(65, time);
-      osc.frequency.linearRampToValueAtTime(110, time + 0.4);
-      osc.frequency.exponentialRampToValueAtTime(40, time + 0.9);
-      g.gain.setValueAtTime(0.40, time);
-      g.gain.exponentialRampToValueAtTime(0.001, time + 0.9);
+      osc.frequency.setValueAtTime(70, time);
+      osc.frequency.linearRampToValueAtTime(125, time + 0.35);
+      osc.frequency.exponentialRampToValueAtTime(42, time + 0.85);
+      g.gain.setValueAtTime(0.38, time);
+      g.gain.exponentialRampToValueAtTime(0.001, time + 0.85);
       osc.connect(g);
       g.connect(sfxGain);
       osc.start(time);
-      osc.stop(time + 0.9);
-    }
-
-    function playCashFlutter(time) {
-      // Fast paper swishes
-      [0, 0.07, 0.14, 0.21].forEach(offset => {
-        const t = time + offset;
-        const osc = offlineCtx.createOscillator();
-        const g = offlineCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(1800 + offset * 400, t);
-        g.gain.setValueAtTime(0.20, t);
-        g.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
-        osc.connect(g);
-        g.connect(sfxGain);
-        osc.start(t);
-        osc.stop(t + 0.06);
-      });
+      osc.stop(time + 0.85);
     }
 
     function playAvaChime(time) {
-      // Beautiful 2-tone crystal major triad chime (E6 -> G#6 -> B6)
       const freqs = [1318.51, 1661.22, 1975.53];
       freqs.forEach((f, idx) => {
         const t = time + idx * 0.06;
@@ -349,7 +404,7 @@ const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav')
         const g = offlineCtx.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(f, t);
-        g.gain.setValueAtTime(0.38, t);
+        g.gain.setValueAtTime(0.40, t);
         g.gain.exponentialRampToValueAtTime(0.0005, t + 0.45);
         osc.connect(g);
         g.connect(sfxGain);
@@ -362,96 +417,54 @@ const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav')
       const osc = offlineCtx.createOscillator();
       const g = offlineCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(1046.50, time); // C6
-      osc.frequency.setValueAtTime(1567.98, time + 0.08); // G6
+      osc.frequency.setValueAtTime(1046.50, time);
+      osc.frequency.setValueAtTime(1567.98, time + 0.08);
       g.gain.setValueAtTime(0.42, time);
-      g.gain.exponentialRampToValueAtTime(0.001, time + 0.4);
+      g.gain.exponentialRampToValueAtTime(0.001, time + 0.40);
       osc.connect(g);
       g.connect(sfxGain);
       osc.start(time);
-      osc.stop(time + 0.4);
+      osc.stop(time + 0.40);
     }
 
     function playCashRegister(time) {
-      // Metallic cash drawer opening spring + high bell ding
       const oscBell = offlineCtx.createOscillator();
       const gBell = offlineCtx.createGain();
       oscBell.type = 'sine';
-      oscBell.frequency.setValueAtTime(2093.00, time); // C7 bell ding
+      oscBell.frequency.setValueAtTime(2093.00, time);
       gBell.gain.setValueAtTime(0.45, time);
       gBell.gain.exponentialRampToValueAtTime(0.001, time + 0.55);
       oscBell.connect(gBell);
       gBell.connect(sfxGain);
       oscBell.start(time);
       oscBell.stop(time + 0.55);
-
-      // Cha-ching ratchet click
-      [0, 0.05, 0.09].forEach(off => {
-        const t = time + off;
-        const osc = offlineCtx.createOscillator();
-        const g = offlineCtx.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(3200, t);
-        g.gain.setValueAtTime(0.18, t);
-        g.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
-        osc.connect(g);
-        g.connect(sfxGain);
-        osc.start(t);
-        osc.stop(t + 0.04);
-      });
     }
 
-    function playFinalCtaImpact(time) {
-      // Cinematic riser sweep
-      const osc = offlineCtx.createOscillator();
-      const g = offlineCtx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(80, time - 1.2);
-      osc.frequency.exponentialRampToValueAtTime(800, time);
-      g.gain.setValueAtTime(0.05, time - 1.2);
-      g.gain.linearRampToValueAtTime(0.45, time);
-      g.gain.exponentialRampToValueAtTime(0.001, time + 0.6);
-      osc.connect(g);
-      g.connect(sfxGain);
-      osc.start(time - 1.2);
-      osc.stop(time + 0.6);
+    // Schedule Cueva Foley SFX to Exact 89.0s Story Timestamps:
+    playLaserSweep(0.08);         // 0:00 Laser fired into night sky
+    playDigitalBlip(5.40, 1500);  // 0:05.4 "186,000 miles per second"
+    playDigitalBlip(9.05, 1200);  // 0:09.0 "Moon"
+    playDigitalBlip(11.85, 1350); // 0:11.8 "Mars"
+    playDigitalBlip(14.45, 1500); // 0:14.4 "Jupiter"
+    playSpaceWarp(19.80);         // 0:19.8 "rings of Uranus"
+    playGlitchTick(24.10);        // 0:24.1 "STILL faster than the average contractor"
+    playLadderWrench(28.90);      // 0:28.9 "Meet Bob... twenty feet up a ladder"
+    playLadderWrench(35.20);      // 0:35.2 "wrench in his hand"
+    playPipeBurst(37.40);         // 0:37.4 "pipe bursts in Sarah's ceiling"
+    playPhoneBuzz(44.60);         // 0:44.6 "Bob's phone buzzes in his pocket, once"
+    playPhoneBuzz(45.80);         // 0:45.8 "twice"
+    playPhoneBuzz(46.70);         // 0:46.7 "three times"
+    playHeavyHit(51.65);          // 0:51.6 "78% of homeowners"
+    playTruckWhoosh(59.80);       // 0:59.8 "rolls a truck"
+    playCashRegister(61.90);      // 1:01.9 "collects an $8,000 check"
+    playAvaChime(66.15);          // 1:06.1 "That is why we built Ava"
+    playDigitalBlip(68.15, 1600); // 1:08.1 "0.8 seconds"
+    playSmsDing(73.10);           // 1:13.1 "texts the dispatch straight to Bob's phone"
+    playCashRegister(78.85);      // 1:18.8 "Stop handing $8,000 checks"
+    playAvaChime(81.10);          // 1:21.1 "Call the live demo number"
 
-      // Heavy 808 sub impact
-      const sub = offlineCtx.createOscillator();
-      const subG = offlineCtx.createGain();
-      sub.type = 'sine';
-      sub.frequency.setValueAtTime(150, time);
-      sub.frequency.exponentialRampToValueAtTime(32, time + 0.7);
-      subG.gain.setValueAtTime(0.70, time);
-      subG.gain.exponentialRampToValueAtTime(0.001, time + 0.7);
-      sub.connect(subG);
-      subG.connect(sfxGain);
-      sub.start(time);
-      sub.stop(time + 0.7);
-    }
-
-    // Schedule All Cueva Foley SFX Across the 63-Second Timeline
-    playLaserSweep(0.05);         // 0:00 Laser crowd hook
-    playDigitalBlip(3.2, 1600);   // 0:03.2 186,000 miles blip
-    playSpaceWarp(7.2);           // 0:07.2 Deep space dive
-    playGlitchTick(13.2);         // 0:13.2 Speed paradox glitch
-    playPipeBurst(17.5);          // 0:17.5 Homeowner burst pipe
-    playHeavyHit(22.0);           // 0:22.0 78% win rate rule
-    playLadderWrench(26.5);       // 0:26.5 Bob on 20ft ladder & wrench
-    playPhoneBuzz(28.2);          // 0:28.2 Violent phone vibration
-    playPhoneBuzz(29.8);          // 0:29.8 Second urgent buzz
-    playTruckWhoosh(31.2);        // 0:31.2 Competitor truck zoom past
-    playCashFlutter(33.0);        // 0:33.0 $8,000 fluttering into truck bed
-    playAvaChime(34.2);           // 0:34.2 Ava 0.8s crystal resolution
-    playDigitalBlip(40.0, 1200);  // 0:40.0 32-band audio waveform pulse
-    playSmsDing(44.2);            // 0:44.2 Tech SMS dispatch alert
-    playCashRegister(49.5);       // 0:49.5 +$80k revenue waterfall
-    playFinalCtaImpact(58.0);     // 0:58.0 Final CTA dialer blast
-
-    console.log('Rendering full audio buffer...');
     const renderedBuffer = await offlineCtx.startRendering();
 
-    // Convert AudioBuffer to 16-bit PCM WAV
     function audioBufferToWav(buffer) {
       const numChannels = buffer.numberOfChannels;
       const sampleRate = buffer.sampleRate;
@@ -515,6 +528,17 @@ const outWavPath = path.resolve('website/demo/audio/reel-audio-full-master.wav')
   await browser.close();
 
   fs.writeFileSync(outWavPath, Buffer.from(wavBase64, 'base64'));
-  const stat = fs.statSync(outWavPath);
-  console.log(`✅ Cueva Master Audio WAV Rendered: ${outWavPath} (${(stat.size / (1024*1024)).toFixed(2)} MB)`);
+  const wavStat = fs.statSync(outWavPath);
+  console.log(`✅ Master WAV Rendered: ${outWavPath} (${(wavStat.size / (1024*1024)).toFixed(2)} MB)`);
+
+  // Also encode Master MP3 (with Music + SFX + Voiceover baked in!)
+  execFileSync(ffmpegPath, [
+    '-y',
+    '-i', outWavPath,
+    '-codec:a', 'libmp3lame',
+    '-b:a', '192k',
+    outMasterMp3Path
+  ]);
+  const mp3Stat = fs.statSync(outMasterMp3Path);
+  console.log(`✅ Master MP3 Rendered (Voice + Music + SFX): ${outMasterMp3Path} (${(mp3Stat.size / 1024).toFixed(1)} KB)`);
 })();

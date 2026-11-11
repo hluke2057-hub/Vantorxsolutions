@@ -2,1430 +2,2666 @@
   {
     "id": 1,
     "start": 0,
-    "end": 0.917,
-    "text": "A single beam",
+    "end": 0.499,
+    "text": "If you point",
     "words": [
       {
-        "word": "A",
-        "rawWord": "A",
+        "word": "If",
+        "rawWord": "If",
         "start": 0,
-        "end": 0.081
+        "end": 0.104
       },
       {
-        "word": "single",
-        "rawWord": "single",
-        "start": 0.163,
-        "end": 0.546
+        "word": "you",
+        "rawWord": "you",
+        "start": 0.139,
+        "end": 0.209
       },
       {
-        "word": "beam",
-        "rawWord": "beam",
-        "start": 0.604,
-        "end": 0.859
+        "word": "point",
+        "rawWord": "point",
+        "start": 0.279,
+        "end": 0.464
       }
     ]
   },
   {
     "id": 2,
-    "start": 0.917,
-    "end": 1.73,
-    "text": "of laser light",
+    "start": 0.499,
+    "end": 1.161,
+    "text": "a single beam",
     "words": [
       {
-        "word": "of",
-        "rawWord": "of",
+        "word": "a",
+        "rawWord": "a",
+        "start": 0.499,
+        "end": 0.522
+      },
+      {
+        "word": "single",
+        "rawWord": "single",
+        "start": 0.592,
+        "end": 0.882
+      },
+      {
+        "word": "beam",
+        "rawWord": "beam",
         "start": 0.917,
-        "end": 0.975
-      },
-      {
-        "word": "laser",
-        "rawWord": "laser",
-        "start": 1.068,
-        "end": 1.405
-      },
-      {
-        "word": "light",
-        "rawWord": "light",
-        "start": 1.463,
-        "end": 1.695
+        "end": 1.115
       }
     ]
   },
   {
     "id": 3,
-    "start": 1.73,
-    "end": 4.029,
-    "text": "travels at 186,000",
+    "start": 1.161,
+    "end": 1.788,
+    "text": "of laser light",
     "words": [
       {
-        "word": "travels",
-        "rawWord": "travels",
-        "start": 1.73,
-        "end": 2.136
+        "word": "of",
+        "rawWord": "of",
+        "start": 1.161,
+        "end": 1.219
       },
       {
-        "word": "at",
-        "rawWord": "at",
-        "start": 2.171,
-        "end": 2.241
+        "word": "laser",
+        "rawWord": "laser",
+        "start": 1.277,
+        "end": 1.533
       },
       {
-        "word": "186000",
-        "rawWord": "186,000",
-        "start": 2.31,
-        "end": 3.959
+        "word": "light",
+        "rawWord": "light",
+        "start": 1.579,
+        "end": 1.753
       }
     ]
   },
   {
     "id": 4,
-    "start": 4.029,
-    "end": 5.397,
-    "text": "miles per second.",
+    "start": 1.788,
+    "end": 2.287,
+    "text": "into the night",
     "words": [
       {
-        "word": "miles",
-        "rawWord": "miles",
-        "start": 4.029,
-        "end": 4.4
+        "word": "into",
+        "rawWord": "into",
+        "start": 1.788,
+        "end": 1.916
       },
       {
-        "word": "per",
-        "rawWord": "per",
-        "start": 4.47,
-        "end": 4.574
+        "word": "the",
+        "rawWord": "the",
+        "start": 1.962,
+        "end": 2.032
       },
       {
-        "word": "second",
-        "rawWord": "second.",
-        "start": 4.621,
-        "end": 5.097
+        "word": "night",
+        "rawWord": "night",
+        "start": 2.078,
+        "end": 2.252
       }
     ]
   },
   {
     "id": 5,
-    "start": 5.538,
-    "end": 6.084,
-    "text": "It can reach",
+    "start": 2.287,
+    "end": 2.821,
+    "text": "sky,",
     "words": [
       {
-        "word": "It",
-        "rawWord": "It",
-        "start": 5.538,
-        "end": 5.654
-      },
-      {
-        "word": "can",
-        "rawWord": "can",
-        "start": 5.689,
-        "end": 5.793
-      },
-      {
-        "word": "reach",
-        "rawWord": "reach",
-        "start": 5.84,
-        "end": 6.026
+        "word": "sky",
+        "rawWord": "sky,",
+        "start": 2.287,
+        "end": 2.821
       }
     ]
   },
   {
     "id": 6,
-    "start": 6.084,
-    "end": 6.641,
-    "text": "the moon in",
+    "start": 3.1,
+    "end": 3.855,
+    "text": "it fires into",
     "words": [
       {
-        "word": "the",
-        "rawWord": "the",
-        "start": 6.084,
-        "end": 6.153
+        "word": "it",
+        "rawWord": "it",
+        "start": 3.1,
+        "end": 3.204
       },
       {
-        "word": "moon",
-        "rawWord": "moon",
-        "start": 6.2,
-        "end": 6.455
+        "word": "fires",
+        "rawWord": "fires",
+        "start": 3.262,
+        "end": 3.646
       },
       {
-        "word": "in",
-        "rawWord": "in",
-        "start": 6.513,
-        "end": 6.583
+        "word": "into",
+        "rawWord": "into",
+        "start": 3.68,
+        "end": 3.796
       }
     ]
   },
   {
     "id": 7,
-    "start": 6.641,
-    "end": 7.883,
-    "text": "under three seconds,",
+    "start": 3.855,
+    "end": 4.4,
+    "text": "the dark at",
     "words": [
       {
-        "word": "under",
-        "rawWord": "under",
-        "start": 6.641,
-        "end": 6.838
+        "word": "the",
+        "rawWord": "the",
+        "start": 3.855,
+        "end": 3.924
       },
       {
-        "word": "three",
-        "rawWord": "three",
-        "start": 6.896,
-        "end": 7.14
+        "word": "dark",
+        "rawWord": "dark",
+        "start": 3.971,
+        "end": 4.214
       },
       {
-        "word": "seconds",
-        "rawWord": "seconds,",
-        "start": 7.198,
-        "end": 7.709
+        "word": "at",
+        "rawWord": "at",
+        "start": 4.249,
+        "end": 4.319
       }
     ]
   },
   {
     "id": 8,
-    "start": 7.883,
-    "end": 8.707,
-    "text": "and cross nearly",
+    "start": 4.4,
+    "end": 6.235,
+    "text": "186,000 miles",
     "words": [
       {
-        "word": "and",
-        "rawWord": "and",
-        "start": 7.883,
-        "end": 8.022
+        "word": "186000",
+        "rawWord": "186,000",
+        "start": 4.4,
+        "end": 5.817
       },
       {
-        "word": "cross",
-        "rawWord": "cross",
-        "start": 8.069,
-        "end": 8.336
-      },
-      {
-        "word": "nearly",
-        "rawWord": "nearly",
-        "start": 8.394,
-        "end": 8.649
+        "word": "miles",
+        "rawWord": "miles",
+        "start": 5.875,
+        "end": 6.188
       }
     ]
   },
   {
     "id": 9,
-    "start": 8.707,
-    "end": 10.008,
-    "text": "two billion miles",
+    "start": 6.235,
+    "end": 6.792,
+    "text": "per second.",
     "words": [
       {
-        "word": "two",
-        "rawWord": "two",
-        "start": 8.707,
-        "end": 8.916
+        "word": "per",
+        "rawWord": "per",
+        "start": 6.235,
+        "end": 6.339
       },
       {
-        "word": "billion",
-        "rawWord": "billion",
-        "start": 9.067,
-        "end": 9.509
-      },
-      {
-        "word": "miles",
-        "rawWord": "miles",
-        "start": 9.567,
-        "end": 9.961
+        "word": "second.",
+        "rawWord": "second.",
+        "start": 6.374,
+        "end": 6.792
       }
     ]
   },
   {
     "id": 10,
-    "start": 10.008,
-    "end": 10.89,
-    "text": "of deep space",
+    "start": 7.163,
+    "end": 7.755,
+    "text": "In just one",
     "words": [
       {
-        "word": "of",
-        "rawWord": "of",
-        "start": 10.008,
-        "end": 10.066
+        "word": "In",
+        "rawWord": "In",
+        "start": 7.163,
+        "end": 7.268
       },
       {
-        "word": "deep",
-        "rawWord": "deep",
-        "start": 10.136,
-        "end": 10.356
+        "word": "just",
+        "rawWord": "just",
+        "start": 7.303,
+        "end": 7.442
       },
       {
-        "word": "space",
-        "rawWord": "space",
-        "start": 10.426,
-        "end": 10.844
+        "word": "one",
+        "rawWord": "one",
+        "start": 7.5,
+        "end": 7.709
       }
     ]
   },
   {
     "id": 11,
-    "start": 10.89,
-    "end": 11.517,
-    "text": "in less than",
+    "start": 7.755,
+    "end": 8.092,
+    "text": "second,",
     "words": [
       {
-        "word": "in",
-        "rawWord": "in",
-        "start": 10.89,
-        "end": 10.96
-      },
-      {
-        "word": "less",
-        "rawWord": "less",
-        "start": 11.03,
-        "end": 11.215
-      },
-      {
-        "word": "than",
-        "rawWord": "than",
-        "start": 11.262,
-        "end": 11.424
+        "word": "second",
+        "rawWord": "second,",
+        "start": 7.755,
+        "end": 8.069
       }
     ]
   },
   {
     "id": 12,
-    "start": 11.517,
-    "end": 12.967,
-    "text": "three hours.",
+    "start": 8.092,
+    "end": 8.986,
+    "text": "it flashes past",
     "words": [
       {
-        "word": "three",
-        "rawWord": "three",
-        "start": 11.517,
-        "end": 11.854
+        "word": "it",
+        "rawWord": "it",
+        "start": 8.092,
+        "end": 8.162
       },
       {
-        "word": "hours",
-        "rawWord": "hours.",
-        "start": 11.912,
-        "end": 12.667
+        "word": "flashes",
+        "rawWord": "flashes",
+        "start": 8.22,
+        "end": 8.638
+      },
+      {
+        "word": "past",
+        "rawWord": "past",
+        "start": 8.696,
+        "end": 8.951
       }
     ]
   },
   {
     "id": 13,
-    "start": 13.27,
-    "end": 14.71,
-    "text": "Yet that interplanetary",
+    "start": 8.986,
+    "end": 9.497,
+    "text": "the Moon.",
     "words": [
       {
-        "word": "Yet",
-        "rawWord": "Yet",
-        "start": 13.27,
-        "end": 13.444
+        "word": "the",
+        "rawWord": "the",
+        "start": 8.986,
+        "end": 9.056
       },
       {
-        "word": "that",
-        "rawWord": "that",
-        "start": 13.491,
-        "end": 13.677
-      },
-      {
-        "word": "interplanetary",
-        "rawWord": "interplanetary",
-        "start": 13.746,
-        "end": 14.64
+        "word": "Moon.",
+        "rawWord": "Moon.",
+        "start": 9.091,
+        "end": 9.497
       }
     ]
   },
   {
     "id": 14,
-    "start": 14.71,
-    "end": 15.523,
-    "text": "space trip is",
+    "start": 9.927,
+    "end": 10.414,
+    "text": "In twelve",
     "words": [
       {
-        "word": "space",
-        "rawWord": "space",
-        "start": 14.71,
-        "end": 15.047
+        "word": "In",
+        "rawWord": "In",
+        "start": 9.927,
+        "end": 10.043
       },
       {
-        "word": "trip",
-        "rawWord": "trip",
-        "start": 15.081,
-        "end": 15.29
-      },
-      {
-        "word": "is",
-        "rawWord": "is",
-        "start": 15.36,
-        "end": 15.453
+        "word": "twelve",
+        "rawWord": "twelve",
+        "start": 10.078,
+        "end": 10.379
       }
     ]
   },
   {
     "id": 15,
-    "start": 15.523,
-    "end": 16.742,
-    "text": "STILL faster than",
+    "start": 10.414,
+    "end": 10.937,
+    "text": "minutes,",
     "words": [
       {
-        "word": "STILL",
-        "rawWord": "STILL",
-        "start": 15.523,
-        "end": 15.917
-      },
-      {
-        "word": "faster",
-        "rawWord": "faster",
-        "start": 16.033,
-        "end": 16.521
-      },
-      {
-        "word": "than",
-        "rawWord": "than",
-        "start": 16.579,
-        "end": 16.707
+        "word": "minutes",
+        "rawWord": "minutes,",
+        "start": 10.414,
+        "end": 10.763
       }
     ]
   },
   {
     "id": 16,
-    "start": 16.742,
-    "end": 18.379,
-    "text": "the average contractor",
+    "start": 10.937,
+    "end": 11.877,
+    "text": "it blazes past",
     "words": [
       {
-        "word": "the",
-        "rawWord": "the",
-        "start": 16.742,
-        "end": 16.811
+        "word": "it",
+        "rawWord": "it",
+        "start": 10.937,
+        "end": 11.03
       },
       {
-        "word": "average",
-        "rawWord": "average",
-        "start": 16.893,
-        "end": 17.311
+        "word": "blazes",
+        "rawWord": "blazes",
+        "start": 11.064,
+        "end": 11.471
       },
       {
-        "word": "contractor",
-        "rawWord": "contractor",
-        "start": 17.357,
-        "end": 18.1
+        "word": "past",
+        "rawWord": "past",
+        "start": 11.529,
+        "end": 11.808
       }
     ]
   },
   {
     "id": 17,
-    "start": 18.379,
-    "end": 19.18,
-    "text": "calls back an",
+    "start": 11.877,
+    "end": 12.4,
+    "text": "Mars.",
     "words": [
       {
-        "word": "calls",
-        "rawWord": "calls",
-        "start": 18.379,
-        "end": 18.692
-      },
-      {
-        "word": "back",
-        "rawWord": "back",
-        "start": 18.762,
-        "end": 19.006
-      },
-      {
-        "word": "an",
-        "rawWord": "an",
-        "start": 19.064,
-        "end": 19.133
+        "word": "Mars.",
+        "rawWord": "Mars.",
+        "start": 11.877,
+        "end": 12.4
       }
     ]
   },
   {
     "id": 18,
-    "start": 19.18,
-    "end": 20.594,
-    "text": "emergency lead.",
+    "start": 12.771,
+    "end": 13.328,
+    "text": "In forty-three",
     "words": [
       {
-        "word": "emergency",
-        "rawWord": "emergency",
-        "start": 19.18,
-        "end": 19.737
+        "word": "In",
+        "rawWord": "In",
+        "start": 12.771,
+        "end": 12.876
       },
       {
-        "word": "lead",
-        "rawWord": "lead.",
-        "start": 19.807,
-        "end": 20.294
+        "word": "fortythree",
+        "rawWord": "forty-three",
+        "start": 12.922,
+        "end": 13.294
       }
     ]
   },
   {
     "id": 19,
-    "start": 21.246,
-    "end": 23.15,
-    "text": "78% of homeowners",
+    "start": 13.328,
+    "end": 13.816,
+    "text": "minutes,",
     "words": [
       {
-        "word": "78%",
-        "rawWord": "78%",
-        "start": 21.246,
-        "end": 22.361
-      },
-      {
-        "word": "of",
-        "rawWord": "of",
-        "start": 22.477,
-        "end": 22.523
-      },
-      {
-        "word": "homeowners",
-        "rawWord": "homeowners",
-        "start": 22.581,
-        "end": 23.092
+        "word": "minutes",
+        "rawWord": "minutes,",
+        "start": 13.328,
+        "end": 13.688
       }
     ]
   },
   {
     "id": 20,
-    "start": 23.15,
-    "end": 23.94,
-    "text": "hire the first",
+    "start": 13.816,
+    "end": 14.466,
+    "text": "it tears past",
     "words": [
       {
-        "word": "hire",
-        "rawWord": "hire",
-        "start": 23.15,
-        "end": 23.406
+        "word": "it",
+        "rawWord": "it",
+        "start": 13.816,
+        "end": 13.921
       },
       {
-        "word": "the",
-        "rawWord": "the",
-        "start": 23.441,
-        "end": 23.51
+        "word": "tears",
+        "rawWord": "tears",
+        "start": 13.955,
+        "end": 14.164
       },
       {
-        "word": "first",
-        "rawWord": "first",
-        "start": 23.568,
-        "end": 23.87
+        "word": "past",
+        "rawWord": "past",
+        "start": 14.211,
+        "end": 14.431
       }
     ]
   },
   {
     "id": 21,
-    "start": 23.94,
-    "end": 24.996,
-    "text": "business that answers",
+    "start": 14.466,
+    "end": 14.989,
+    "text": "Jupiter,",
     "words": [
       {
-        "word": "business",
-        "rawWord": "business",
-        "start": 23.94,
-        "end": 24.358
-      },
-      {
-        "word": "that",
-        "rawWord": "that",
-        "start": 24.393,
-        "end": 24.532
-      },
-      {
-        "word": "answers",
-        "rawWord": "answers",
-        "start": 24.59,
-        "end": 24.95
+        "word": "Jupiter",
+        "rawWord": "Jupiter,",
+        "start": 14.466,
+        "end": 14.884
       }
     ]
   },
   {
     "id": 22,
-    "start": 24.996,
-    "end": 25.993,
-    "text": "the phone.",
+    "start": 14.989,
+    "end": 15.441,
+    "text": "and in under",
     "words": [
       {
-        "word": "the",
-        "rawWord": "the",
-        "start": 24.996,
-        "end": 25.066
+        "word": "and",
+        "rawWord": "and",
+        "start": 14.989,
+        "end": 15.105
       },
       {
-        "word": "phone",
-        "rawWord": "phone.",
-        "start": 25.112,
-        "end": 25.693
+        "word": "in",
+        "rawWord": "in",
+        "start": 15.151,
+        "end": 15.209
+      },
+      {
+        "word": "under",
+        "rawWord": "under",
+        "start": 15.244,
+        "end": 15.407
       }
     ]
   },
   {
     "id": 23,
-    "start": 26.204,
-    "end": 26.726,
-    "text": "When you are",
+    "start": 15.441,
+    "end": 16.173,
+    "text": "three hours,",
     "words": [
       {
-        "word": "When",
-        "rawWord": "When",
-        "start": 26.204,
-        "end": 26.378
+        "word": "three",
+        "rawWord": "three",
+        "start": 15.441,
+        "end": 15.616
       },
       {
-        "word": "you",
-        "rawWord": "you",
-        "start": 26.413,
-        "end": 26.494
-      },
-      {
-        "word": "are",
-        "rawWord": "are",
-        "start": 26.552,
-        "end": 26.68
+        "word": "hours",
+        "rawWord": "hours,",
+        "start": 15.65,
+        "end": 16.022
       }
     ]
   },
   {
     "id": 24,
-    "start": 26.726,
-    "end": 27.492,
-    "text": "on a ladder,",
+    "start": 16.173,
+    "end": 16.649,
+    "text": "it crosses",
     "words": [
       {
-        "word": "on",
-        "rawWord": "on",
-        "start": 26.726,
-        "end": 26.819
+        "word": "it",
+        "rawWord": "it",
+        "start": 16.173,
+        "end": 16.266
       },
       {
-        "word": "a",
-        "rawWord": "a",
-        "start": 26.866,
-        "end": 26.9
-      },
-      {
-        "word": "ladder",
-        "rawWord": "ladder,",
-        "start": 26.97,
-        "end": 27.411
+        "word": "crosses",
+        "rawWord": "crosses",
+        "start": 16.301,
+        "end": 16.614
       }
     ]
   },
   {
     "id": 25,
-    "start": 27.492,
-    "end": 28.306,
-    "text": "under a sink,",
+    "start": 16.649,
+    "end": 17.148,
+    "text": "nearly two",
     "words": [
       {
-        "word": "under",
-        "rawWord": "under",
-        "start": 27.492,
-        "end": 27.725
+        "word": "nearly",
+        "rawWord": "nearly",
+        "start": 16.649,
+        "end": 16.869
       },
       {
-        "word": "a",
-        "rawWord": "a",
-        "start": 27.783,
-        "end": 27.818
-      },
-      {
-        "word": "sink",
-        "rawWord": "sink,",
-        "start": 27.899,
-        "end": 28.259
+        "word": "two",
+        "rawWord": "two",
+        "start": 16.916,
+        "end": 17.055
       }
     ]
   },
   {
     "id": 26,
-    "start": 28.306,
-    "end": 29.072,
-    "text": "or eating dinner",
+    "start": 17.148,
+    "end": 17.938,
+    "text": "billion miles",
     "words": [
       {
-        "word": "or",
-        "rawWord": "or",
-        "start": 28.306,
-        "end": 28.433
+        "word": "billion",
+        "rawWord": "billion",
+        "start": 17.148,
+        "end": 17.508
       },
       {
-        "word": "eating",
-        "rawWord": "eating",
-        "start": 28.503,
-        "end": 28.747
-      },
-      {
-        "word": "dinner",
-        "rawWord": "dinner",
-        "start": 28.805,
-        "end": 29.025
+        "word": "miles",
+        "rawWord": "miles",
+        "start": 17.566,
+        "end": 17.891
       }
     ]
   },
   {
     "id": 27,
-    "start": 29.072,
-    "end": 30.314,
-    "text": "with your family,",
+    "start": 17.938,
+    "end": 18.518,
+    "text": "of freezing",
     "words": [
       {
-        "word": "with",
-        "rawWord": "with",
-        "start": 29.072,
-        "end": 29.2
+        "word": "of",
+        "rawWord": "of",
+        "start": 17.938,
+        "end": 18.007
       },
       {
-        "word": "your",
-        "rawWord": "your",
-        "start": 29.234,
-        "end": 29.351
-      },
-      {
-        "word": "family",
-        "rawWord": "family,",
-        "start": 29.409,
-        "end": 30.07
+        "word": "freezing",
+        "rawWord": "freezing",
+        "start": 18.054,
+        "end": 18.46
       }
     ]
   },
   {
     "id": 28,
-    "start": 30.314,
-    "end": 32.079,
-    "text": "every single unanswered",
+    "start": 18.518,
+    "end": 19.354,
+    "text": "deep space to",
     "words": [
       {
-        "word": "every",
-        "rawWord": "every",
-        "start": 30.314,
-        "end": 30.697
+        "word": "deep",
+        "rawWord": "deep",
+        "start": 18.518,
+        "end": 18.681
       },
       {
-        "word": "single",
-        "rawWord": "single",
-        "start": 30.813,
-        "end": 31.289
+        "word": "space",
+        "rawWord": "space",
+        "start": 18.715,
+        "end": 19.099
       },
       {
-        "word": "unanswered",
-        "rawWord": "unanswered",
-        "start": 31.371,
-        "end": 32.032
+        "word": "to",
+        "rawWord": "to",
+        "start": 19.203,
+        "end": 19.296
       }
     ]
   },
   {
     "id": 29,
-    "start": 32.079,
-    "end": 32.752,
-    "text": "call is an",
+    "start": 19.354,
+    "end": 19.969,
+    "text": "hit the rings",
     "words": [
       {
-        "word": "call",
-        "rawWord": "call",
-        "start": 32.079,
-        "end": 32.416
+        "word": "hit",
+        "rawWord": "hit",
+        "start": 19.354,
+        "end": 19.459
       },
       {
-        "word": "is",
-        "rawWord": "is",
-        "start": 32.508,
-        "end": 32.613
+        "word": "the",
+        "rawWord": "the",
+        "start": 19.493,
+        "end": 19.563
       },
       {
-        "word": "an",
-        "rawWord": "an",
-        "start": 32.648,
-        "end": 32.717
+        "word": "rings",
+        "rawWord": "rings",
+        "start": 19.609,
+        "end": 19.923
       }
     ]
   },
   {
     "id": 30,
-    "start": 32.752,
-    "end": 33.832,
-    "text": "$8,000",
+    "start": 19.969,
+    "end": 20.608,
+    "text": "of Uranus.",
     "words": [
       {
-        "word": "$8000",
-        "rawWord": "$8,000",
-        "start": 32.752,
-        "end": 33.774
+        "word": "of",
+        "rawWord": "of",
+        "start": 19.969,
+        "end": 20.039
+      },
+      {
+        "word": "Uranus.",
+        "rawWord": "Uranus.",
+        "start": 20.109,
+        "end": 20.608
       }
     ]
   },
   {
     "id": 31,
-    "start": 33.832,
-    "end": 35.167,
-    "text": "job handed straight",
+    "start": 21.119,
+    "end": 21.49,
+    "text": "Yet that",
     "words": [
       {
-        "word": "job",
-        "rawWord": "job",
-        "start": 33.832,
-        "end": 34.169
+        "word": "Yet",
+        "rawWord": "Yet",
+        "start": 21.119,
+        "end": 21.27
       },
       {
-        "word": "handed",
-        "rawWord": "handed",
-        "start": 34.262,
-        "end": 34.633
-      },
-      {
-        "word": "straight",
-        "rawWord": "straight",
-        "start": 34.726,
-        "end": 35.121
+        "word": "that",
+        "rawWord": "that",
+        "start": 21.304,
+        "end": 21.455
       }
     ]
   },
   {
     "id": 32,
-    "start": 35.167,
-    "end": 36.57,
-    "text": "to your competitor.",
+    "start": 21.49,
+    "end": 22.454,
+    "text": "two-billion-mile",
     "words": [
       {
-        "word": "to",
-        "rawWord": "to",
-        "start": 35.167,
-        "end": 35.248
-      },
-      {
-        "word": "your",
-        "rawWord": "your",
-        "start": 35.33,
-        "end": 35.504
-      },
-      {
-        "word": "competitor",
-        "rawWord": "competitor.",
-        "start": 35.562,
-        "end": 36.27
+        "word": "twobillionmile",
+        "rawWord": "two-billion-mile",
+        "start": 21.49,
+        "end": 22.396
       }
     ]
   },
   {
     "id": 33,
-    "start": 36.711,
-    "end": 37.501,
-    "text": "That is why",
+    "start": 22.454,
+    "end": 23.035,
+    "text": "journey across",
     "words": [
       {
-        "word": "That",
-        "rawWord": "That",
-        "start": 36.711,
-        "end": 37.001
+        "word": "journey",
+        "rawWord": "journey",
+        "start": 22.454,
+        "end": 22.698
       },
       {
-        "word": "is",
-        "rawWord": "is",
-        "start": 37.06,
-        "end": 37.152
-      },
-      {
-        "word": "why",
-        "rawWord": "why",
-        "start": 37.21,
-        "end": 37.431
+        "word": "across",
+        "rawWord": "across",
+        "start": 22.733,
+        "end": 23
       }
     ]
   },
   {
     "id": 34,
-    "start": 37.501,
-    "end": 38.73,
-    "text": "we built Ava.",
+    "start": 23.035,
+    "end": 23.441,
+    "text": "the solar",
     "words": [
       {
-        "word": "we",
-        "rawWord": "we",
-        "start": 37.501,
-        "end": 37.605
+        "word": "the",
+        "rawWord": "the",
+        "start": 23.035,
+        "end": 23.104
       },
       {
-        "word": "built",
-        "rawWord": "built",
-        "start": 37.663,
-        "end": 37.884
-      },
-      {
-        "word": "Ava",
-        "rawWord": "Ava.",
-        "start": 37.954,
-        "end": 38.43
+        "word": "solar",
+        "rawWord": "solar",
+        "start": 23.139,
+        "end": 23.394
       }
     ]
   },
   {
     "id": 35,
-    "start": 38.871,
-    "end": 39.718,
-    "text": "She answers your",
+    "start": 23.441,
+    "end": 24.463,
+    "text": "system is STILL",
     "words": [
       {
-        "word": "She",
-        "rawWord": "She",
-        "start": 38.871,
-        "end": 39.056
+        "word": "system",
+        "rawWord": "system",
+        "start": 23.441,
+        "end": 23.708
       },
       {
-        "word": "answers",
-        "rawWord": "answers",
-        "start": 39.149,
-        "end": 39.498
+        "word": "is",
+        "rawWord": "is",
+        "start": 23.94,
+        "end": 24.103
       },
       {
-        "word": "your",
-        "rawWord": "your",
-        "start": 39.544,
-        "end": 39.672
+        "word": "STILL",
+        "rawWord": "STILL",
+        "start": 24.149,
+        "end": 24.393
       }
     ]
   },
   {
     "id": 36,
-    "start": 39.718,
-    "end": 40.601,
-    "text": "shop phone in",
+    "start": 24.463,
+    "end": 25.159,
+    "text": "faster than the",
     "words": [
       {
-        "word": "shop",
-        "rawWord": "shop",
-        "start": 39.718,
-        "end": 39.962
+        "word": "faster",
+        "rawWord": "faster",
+        "start": 24.463,
+        "end": 24.846
       },
       {
-        "word": "phone",
-        "rawWord": "phone",
-        "start": 40.008,
-        "end": 40.322
+        "word": "than",
+        "rawWord": "than",
+        "start": 24.881,
+        "end": 24.997
       },
       {
-        "word": "in",
-        "rawWord": "in",
-        "start": 40.38,
-        "end": 40.519
+        "word": "the",
+        "rawWord": "the",
+        "start": 25.031,
+        "end": 25.101
       }
     ]
   },
   {
     "id": 37,
-    "start": 40.601,
-    "end": 41.541,
-    "text": "0.8",
+    "start": 25.159,
+    "end": 26.018,
+    "text": "average contractor",
     "words": [
       {
-        "word": "08",
-        "rawWord": "0.8",
-        "start": 40.601,
-        "end": 41.46
+        "word": "average",
+        "rawWord": "average",
+        "start": 25.159,
+        "end": 25.449
+      },
+      {
+        "word": "contractor",
+        "rawWord": "contractor",
+        "start": 25.484,
+        "end": 25.972
       }
     ]
   },
   {
     "id": 38,
-    "start": 41.541,
-    "end": 42.284,
-    "text": "seconds,",
+    "start": 26.018,
+    "end": 26.587,
+    "text": "calls back an",
     "words": [
       {
-        "word": "seconds",
-        "rawWord": "seconds,",
-        "start": 41.541,
-        "end": 42.11
+        "word": "calls",
+        "rawWord": "calls",
+        "start": 26.018,
+        "end": 26.262
+      },
+      {
+        "word": "back",
+        "rawWord": "back",
+        "start": 26.309,
+        "end": 26.459
+      },
+      {
+        "word": "an",
+        "rawWord": "an",
+        "start": 26.494,
+        "end": 26.552
       }
     ]
   },
   {
     "id": 39,
-    "start": 42.284,
-    "end": 43.747,
-    "text": "qualifies the caller,",
+    "start": 26.587,
+    "end": 27.47,
+    "text": "emergency lead.",
     "words": [
       {
-        "word": "qualifies",
-        "rawWord": "qualifies",
-        "start": 42.284,
-        "end": 42.923
+        "word": "emergency",
+        "rawWord": "emergency",
+        "start": 26.587,
+        "end": 26.97
       },
       {
-        "word": "the",
-        "rawWord": "the",
-        "start": 42.981,
-        "end": 43.05
-      },
-      {
-        "word": "caller",
-        "rawWord": "caller,",
-        "start": 43.097,
-        "end": 43.596
+        "word": "lead.",
+        "rawWord": "lead.",
+        "start": 27.04,
+        "end": 27.47
       }
     ]
   },
   {
     "id": 40,
-    "start": 43.747,
-    "end": 44.931,
-    "text": "checks your schedule,",
+    "start": 27.748,
+    "end": 28.433,
+    "text": "Picture this.",
     "words": [
       {
-        "word": "checks",
-        "rawWord": "checks",
-        "start": 43.747,
-        "end": 44.037
+        "word": "Picture",
+        "rawWord": "Picture",
+        "start": 27.748,
+        "end": 28.027
       },
       {
-        "word": "your",
-        "rawWord": "your",
-        "start": 44.072,
-        "end": 44.188
-      },
-      {
-        "word": "schedule",
-        "rawWord": "schedule,",
-        "start": 44.223,
-        "end": 44.815
+        "word": "this.",
+        "rawWord": "this.",
+        "start": 28.05,
+        "end": 28.433
       }
     ]
   },
   {
     "id": 41,
-    "start": 44.931,
-    "end": 45.883,
-    "text": "and dispatches the",
+    "start": 28.712,
+    "end": 29.466,
+    "text": "Meet Bob.",
     "words": [
       {
-        "word": "and",
-        "rawWord": "and",
-        "start": 44.931,
-        "end": 45.082
+        "word": "Meet",
+        "rawWord": "Meet",
+        "start": 28.712,
+        "end": 28.909
       },
       {
-        "word": "dispatches",
-        "rawWord": "dispatches",
-        "start": 45.14,
-        "end": 45.697
-      },
-      {
-        "word": "the",
-        "rawWord": "the",
-        "start": 45.755,
-        "end": 45.825
+        "word": "Bob.",
+        "rawWord": "Bob.",
+        "start": 28.956,
+        "end": 29.466
       }
     ]
   },
   {
     "id": 42,
-    "start": 45.883,
-    "end": 46.487,
-    "text": "job to your",
+    "start": 29.838,
+    "end": 30.326,
+    "text": "Bob is a",
     "words": [
       {
-        "word": "job",
-        "rawWord": "job",
-        "start": 45.883,
-        "end": 46.139
+        "word": "Bob",
+        "rawWord": "Bob",
+        "start": 29.838,
+        "end": 30.07
       },
       {
-        "word": "to",
-        "rawWord": "to",
-        "start": 46.197,
-        "end": 46.243
+        "word": "is",
+        "rawWord": "is",
+        "start": 30.117,
+        "end": 30.186
       },
       {
-        "word": "your",
-        "rawWord": "your",
-        "start": 46.313,
-        "end": 46.44
+        "word": "a",
+        "rawWord": "a",
+        "start": 30.221,
+        "end": 30.256
       }
     ]
   },
   {
     "id": 43,
-    "start": 46.487,
-    "end": 47.671,
-    "text": "technician phone before",
+    "start": 30.326,
+    "end": 31.22,
+    "text": "master contractor",
     "words": [
       {
-        "word": "technician",
-        "rawWord": "technician",
-        "start": 46.487,
-        "end": 46.998
+        "word": "master",
+        "rawWord": "master",
+        "start": 30.326,
+        "end": 30.627
       },
       {
-        "word": "phone",
-        "rawWord": "phone",
-        "start": 47.056,
-        "end": 47.323
-      },
-      {
-        "word": "before",
-        "rawWord": "before",
-        "start": 47.358,
-        "end": 47.636
+        "word": "contractor",
+        "rawWord": "contractor",
+        "start": 30.685,
+        "end": 31.185
       }
     ]
   },
   {
     "id": 44,
-    "start": 47.671,
-    "end": 48.426,
-    "text": "the customer can",
+    "start": 31.22,
+    "end": 31.846,
+    "text": "standing twenty",
     "words": [
       {
-        "word": "the",
-        "rawWord": "the",
-        "start": 47.671,
-        "end": 47.741
+        "word": "standing",
+        "rawWord": "standing",
+        "start": 31.22,
+        "end": 31.521
       },
       {
-        "word": "customer",
-        "rawWord": "customer",
-        "start": 47.787,
-        "end": 48.182
-      },
-      {
-        "word": "can",
-        "rawWord": "can",
-        "start": 48.24,
-        "end": 48.356
+        "word": "twenty",
+        "rawWord": "twenty",
+        "start": 31.568,
+        "end": 31.8
       }
     ]
   },
   {
     "id": 45,
-    "start": 48.426,
-    "end": 49.447,
-    "text": "even open another",
+    "start": 31.846,
+    "end": 32.299,
+    "text": "feet up a",
     "words": [
       {
-        "word": "even",
-        "rawWord": "even",
-        "start": 48.426,
-        "end": 48.646
+        "word": "feet",
+        "rawWord": "feet",
+        "start": 31.846,
+        "end": 32.009
       },
       {
-        "word": "open",
-        "rawWord": "open",
-        "start": 48.728,
-        "end": 49.018
+        "word": "up",
+        "rawWord": "up",
+        "start": 32.055,
+        "end": 32.16
       },
       {
-        "word": "another",
-        "rawWord": "another",
-        "start": 49.076,
-        "end": 49.378
+        "word": "a",
+        "rawWord": "a",
+        "start": 32.206,
+        "end": 32.241
       }
     ]
   },
   {
     "id": 46,
-    "start": 49.447,
-    "end": 50.641,
-    "text": "Google tab.",
+    "start": 32.299,
+    "end": 32.752,
+    "text": "ladder in a",
     "words": [
       {
-        "word": "Google",
-        "rawWord": "Google",
-        "start": 49.447,
-        "end": 49.784
+        "word": "ladder",
+        "rawWord": "ladder",
+        "start": 32.299,
+        "end": 32.543
       },
       {
-        "word": "tab",
-        "rawWord": "tab.",
-        "start": 49.819,
-        "end": 50.341
+        "word": "in",
+        "rawWord": "in",
+        "start": 32.578,
+        "end": 32.636
+      },
+      {
+        "word": "a",
+        "rawWord": "a",
+        "start": 32.671,
+        "end": 32.694
       }
     ]
   },
   {
     "id": 47,
-    "start": 50.724,
-    "end": 52.094,
-    "text": "Stop bleeding thousands",
+    "start": 32.752,
+    "end": 33.716,
+    "text": "scorching attic,",
     "words": [
       {
-        "word": "Stop",
-        "rawWord": "Stop",
-        "start": 50.724,
-        "end": 51.026
+        "word": "scorching",
+        "rawWord": "scorching",
+        "start": 32.752,
+        "end": 33.112
       },
       {
-        "word": "bleeding",
-        "rawWord": "bleeding",
-        "start": 51.084,
-        "end": 51.444
-      },
-      {
-        "word": "thousands",
-        "rawWord": "thousands",
-        "start": 51.514,
-        "end": 52.048
+        "word": "attic",
+        "rawWord": "attic,",
+        "start": 33.17,
+        "end": 33.542
       }
     ]
   },
   {
     "id": 48,
-    "start": 52.094,
-    "end": 53.741,
-    "text": "on dead voicemails.",
+    "start": 33.716,
+    "end": 34.296,
+    "text": "drenched in",
     "words": [
       {
-        "word": "on",
-        "rawWord": "on",
-        "start": 52.094,
-        "end": 52.199
+        "word": "drenched",
+        "rawWord": "drenched",
+        "start": 33.716,
+        "end": 34.099
       },
       {
-        "word": "dead",
-        "rawWord": "dead",
-        "start": 52.268,
-        "end": 52.466
-      },
-      {
-        "word": "voicemails",
-        "rawWord": "voicemails.",
-        "start": 52.524,
-        "end": 53.441
+        "word": "in",
+        "rawWord": "in",
+        "start": 34.134,
+        "end": 34.203
       }
     ]
   },
   {
     "id": 49,
-    "start": 54.045,
-    "end": 54.811,
-    "text": "Call the demo",
+    "start": 34.296,
+    "end": 34.888,
+    "text": "sweat with a",
     "words": [
       {
-        "word": "Call",
-        "rawWord": "Call",
-        "start": 54.045,
-        "end": 54.277
+        "word": "sweat",
+        "rawWord": "sweat",
+        "start": 34.296,
+        "end": 34.61
       },
       {
-        "word": "the",
-        "rawWord": "the",
-        "start": 54.347,
-        "end": 54.416
+        "word": "with",
+        "rawWord": "with",
+        "start": 34.656,
+        "end": 34.784
       },
       {
-        "word": "demo",
-        "rawWord": "demo",
-        "start": 54.463,
-        "end": 54.741
+        "word": "a",
+        "rawWord": "a",
+        "start": 34.819,
+        "end": 34.842
       }
     ]
   },
   {
     "id": 50,
-    "start": 54.811,
-    "end": 55.38,
-    "text": "number on your",
+    "start": 34.888,
+    "end": 35.422,
+    "text": "wrench in his",
     "words": [
       {
-        "word": "number",
-        "rawWord": "number",
-        "start": 54.811,
-        "end": 55.055
+        "word": "wrench",
+        "rawWord": "wrench",
+        "start": 34.888,
+        "end": 35.155
       },
       {
-        "word": "on",
-        "rawWord": "on",
-        "start": 55.124,
-        "end": 55.194
+        "word": "in",
+        "rawWord": "in",
+        "start": 35.19,
+        "end": 35.26
       },
       {
-        "word": "your",
-        "rawWord": "your",
-        "start": 55.24,
-        "end": 55.357
+        "word": "his",
+        "rawWord": "his",
+        "start": 35.295,
+        "end": 35.376
       }
     ]
   },
   {
     "id": 51,
-    "start": 55.38,
-    "end": 56.262,
-    "text": "screen right now",
+    "start": 35.422,
+    "end": 35.805,
+    "text": "hand.",
     "words": [
       {
-        "word": "screen",
-        "rawWord": "screen",
-        "start": 55.38,
-        "end": 55.67
-      },
-      {
-        "word": "right",
-        "rawWord": "right",
-        "start": 55.74,
-        "end": 55.949
-      },
-      {
-        "word": "now",
-        "rawWord": "now",
-        "start": 56.007,
-        "end": 56.192
+        "word": "hand.",
+        "rawWord": "hand.",
+        "start": 35.422,
+        "end": 35.805
       }
     ]
   },
   {
     "id": 52,
-    "start": 56.262,
-    "end": 57.052,
-    "text": "to hear Ava",
+    "start": 36.038,
+    "end": 36.874,
+    "text": "Across town,",
     "words": [
       {
-        "word": "to",
-        "rawWord": "to",
-        "start": 56.262,
-        "end": 56.32
+        "word": "Across",
+        "rawWord": "Across",
+        "start": 36.038,
+        "end": 36.328
       },
       {
-        "word": "hear",
-        "rawWord": "hear",
-        "start": 56.378,
-        "end": 56.564
-      },
-      {
-        "word": "Ava",
-        "rawWord": "Ava",
-        "start": 56.645,
-        "end": 56.982
+        "word": "town",
+        "rawWord": "town,",
+        "start": 36.374,
+        "end": 36.781
       }
     ]
   },
   {
     "id": 53,
-    "start": 57.052,
-    "end": 58.362,
-    "text": "answer live,",
+    "start": 36.874,
+    "end": 37.756,
+    "text": "a pipe bursts",
     "words": [
       {
-        "word": "answer",
-        "rawWord": "answer",
-        "start": 57.052,
-        "end": 57.365
+        "word": "a",
+        "rawWord": "a",
+        "start": 36.874,
+        "end": 36.932
       },
       {
-        "word": "live",
-        "rawWord": "live,",
-        "start": 57.458,
-        "end": 58.062
+        "word": "pipe",
+        "rawWord": "pipe",
+        "start": 37.001,
+        "end": 37.257
+      },
+      {
+        "word": "bursts",
+        "rawWord": "bursts",
+        "start": 37.326,
+        "end": 37.71
       }
     ]
   },
   {
     "id": 54,
-    "start": 58.387,
-    "end": 59.571,
-    "text": "or comment AVA",
+    "start": 37.756,
+    "end": 38.197,
+    "text": "in Sarah's",
     "words": [
       {
-        "word": "or",
-        "rawWord": "or",
-        "start": 58.387,
-        "end": 58.526
+        "word": "in",
+        "rawWord": "in",
+        "start": 37.756,
+        "end": 37.826
       },
       {
-        "word": "comment",
-        "rawWord": "comment",
-        "start": 58.584,
-        "end": 58.99
-      },
-      {
-        "word": "AVA",
-        "rawWord": "AVA",
-        "start": 59.049,
-        "end": 59.49
+        "word": "Sarah's",
+        "rawWord": "Sarah's",
+        "start": 37.884,
+        "end": 38.162
       }
     ]
   },
   {
     "id": 55,
-    "start": 59.571,
-    "end": 60.604,
-    "text": "below and we",
+    "start": 38.197,
+    "end": 38.882,
+    "text": "ceiling and",
     "words": [
       {
-        "word": "below",
-        "rawWord": "below",
-        "start": 59.571,
-        "end": 59.943
+        "word": "ceiling",
+        "rawWord": "ceiling",
+        "start": 38.197,
+        "end": 38.499
       },
       {
         "word": "and",
         "rawWord": "and",
-        "start": 60.268,
-        "end": 60.43
-      },
-      {
-        "word": "we",
-        "rawWord": "we",
-        "start": 60.488,
-        "end": 60.569
+        "start": 38.65,
+        "end": 38.789
       }
     ]
   },
   {
     "id": 56,
-    "start": 60.604,
-    "end": 61.312,
-    "text": "will DM you",
+    "start": 38.882,
+    "end": 39.393,
+    "text": "water is",
     "words": [
       {
-        "word": "will",
-        "rawWord": "will",
-        "start": 60.604,
-        "end": 60.755
+        "word": "water",
+        "rawWord": "water",
+        "start": 38.882,
+        "end": 39.196
       },
       {
-        "word": "DM",
-        "rawWord": "DM",
-        "start": 60.802,
-        "end": 61.069
-      },
-      {
-        "word": "you",
-        "rawWord": "you",
-        "start": 61.15,
-        "end": 61.231
+        "word": "is",
+        "rawWord": "is",
+        "start": 39.254,
+        "end": 39.323
       }
     ]
   },
   {
     "id": 57,
-    "start": 61.312,
-    "end": 62.299,
-    "text": "the free interactive",
+    "start": 39.393,
+    "end": 39.811,
+    "text": "pouring",
     "words": [
       {
-        "word": "the",
-        "rawWord": "the",
-        "start": 61.312,
-        "end": 61.382
-      },
-      {
-        "word": "free",
-        "rawWord": "free",
-        "start": 61.44,
-        "end": 61.661
-      },
-      {
-        "word": "interactive",
-        "rawWord": "interactive",
-        "start": 61.719,
-        "end": 62.265
+        "word": "pouring",
+        "rawWord": "pouring",
+        "start": 39.393,
+        "end": 39.753
       }
     ]
   },
   {
     "id": 58,
-    "start": 62.299,
-    "end": 63.426,
-    "text": "link.",
+    "start": 39.811,
+    "end": 40.415,
+    "text": "everywhere.",
     "words": [
       {
-        "word": "link",
+        "word": "everywhere.",
+        "rawWord": "everywhere.",
+        "start": 39.811,
+        "end": 40.415
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "start": 40.786,
+    "end": 41.471,
+    "text": "Panicking,",
+    "words": [
+      {
+        "word": "Panicking",
+        "rawWord": "Panicking,",
+        "start": 40.786,
+        "end": 41.367
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "start": 41.471,
+    "end": 41.959,
+    "text": "she grabs her",
+    "words": [
+      {
+        "word": "she",
+        "rawWord": "she",
+        "start": 41.471,
+        "end": 41.576
+      },
+      {
+        "word": "grabs",
+        "rawWord": "grabs",
+        "start": 41.61,
+        "end": 41.831
+      },
+      {
+        "word": "her",
+        "rawWord": "her",
+        "start": 41.855,
+        "end": 41.924
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "start": 41.959,
+    "end": 42.702,
+    "text": "phone and calls",
+    "words": [
+      {
+        "word": "phone",
+        "rawWord": "phone",
+        "start": 41.959,
+        "end": 42.261
+      },
+      {
+        "word": "and",
+        "rawWord": "and",
+        "start": 42.296,
+        "end": 42.365
+      },
+      {
+        "word": "calls",
+        "rawWord": "calls",
+        "start": 42.412,
+        "end": 42.656
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "start": 42.702,
+    "end": 43.376,
+    "text": "Bob first.",
+    "words": [
+      {
+        "word": "Bob",
+        "rawWord": "Bob",
+        "start": 42.702,
+        "end": 42.888
+      },
+      {
+        "word": "first.",
+        "rawWord": "first.",
+        "start": 42.946,
+        "end": 43.376
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "start": 43.968,
+    "end": 44.641,
+    "text": "Bob's phone",
+    "words": [
+      {
+        "word": "Bob's",
+        "rawWord": "Bob's",
+        "start": 43.968,
+        "end": 44.27
+      },
+      {
+        "word": "phone",
+        "rawWord": "phone",
+        "start": 44.304,
+        "end": 44.595
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "start": 44.641,
+    "end": 45.268,
+    "text": "buzzes in his",
+    "words": [
+      {
+        "word": "buzzes",
+        "rawWord": "buzzes",
+        "start": 44.641,
+        "end": 45.001
+      },
+      {
+        "word": "in",
+        "rawWord": "in",
+        "start": 45.047,
+        "end": 45.105
+      },
+      {
+        "word": "his",
+        "rawWord": "his",
+        "start": 45.14,
+        "end": 45.233
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "start": 45.268,
+    "end": 45.837,
+    "text": "pocket,",
+    "words": [
+      {
+        "word": "pocket",
+        "rawWord": "pocket,",
+        "start": 45.268,
+        "end": 45.663
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "start": 45.837,
+    "end": 46.475,
+    "text": "once,",
+    "words": [
+      {
+        "word": "once",
+        "rawWord": "once,",
+        "start": 45.837,
+        "end": 46.301
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "start": 46.475,
+    "end": 47.184,
+    "text": "twice,",
+    "words": [
+      {
+        "word": "twice",
+        "rawWord": "twice,",
+        "start": 46.475,
+        "end": 47.009
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "start": 47.184,
+    "end": 48.089,
+    "text": "three times,",
+    "words": [
+      {
+        "word": "three",
+        "rawWord": "three",
+        "start": 47.184,
+        "end": 47.416
+      },
+      {
+        "word": "times",
+        "rawWord": "times,",
+        "start": 47.451,
+        "end": 47.938
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "start": 48.089,
+    "end": 48.554,
+    "text": "and dumps",
+    "words": [
+      {
+        "word": "and",
+        "rawWord": "and",
+        "start": 48.089,
+        "end": 48.229
+      },
+      {
+        "word": "dumps",
+        "rawWord": "dumps",
+        "start": 48.287,
+        "end": 48.496
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "start": 48.554,
+    "end": 48.948,
+    "text": "straight to",
+    "words": [
+      {
+        "word": "straight",
+        "rawWord": "straight",
+        "start": 48.554,
+        "end": 48.821
+      },
+      {
+        "word": "to",
+        "rawWord": "to",
+        "start": 48.855,
+        "end": 48.902
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "start": 48.948,
+    "end": 49.529,
+    "text": "voicemail.",
+    "words": [
+      {
+        "word": "voicemail.",
+        "rawWord": "voicemail.",
+        "start": 48.948,
+        "end": 49.529
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "start": 49.958,
+    "end": 50.527,
+    "text": "Sarah doesn't",
+    "words": [
+      {
+        "word": "Sarah",
+        "rawWord": "Sarah",
+        "start": 49.958,
+        "end": 50.214
+      },
+      {
+        "word": "doesn't",
+        "rawWord": "doesn't",
+        "start": 50.249,
+        "end": 50.492
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "start": 50.527,
+    "end": 50.794,
+    "text": "leave a",
+    "words": [
+      {
+        "word": "leave",
+        "rawWord": "leave",
+        "start": 50.527,
+        "end": 50.69
+      },
+      {
+        "word": "a",
+        "rawWord": "a",
+        "start": 50.725,
+        "end": 50.748
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "start": 50.794,
+    "end": 51.386,
+    "text": "message,",
+    "words": [
+      {
+        "word": "message",
+        "rawWord": "message,",
+        "start": 50.794,
+        "end": 51.259
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "start": 51.386,
+    "end": 52.582,
+    "text": "because 78% of",
+    "words": [
+      {
+        "word": "because",
+        "rawWord": "because",
+        "start": 51.386,
+        "end": 51.63
+      },
+      {
+        "word": "78%",
+        "rawWord": "78%",
+        "start": 51.677,
+        "end": 52.42
+      },
+      {
+        "word": "of",
+        "rawWord": "of",
+        "start": 52.489,
+        "end": 52.536
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "start": 52.582,
+    "end": 53.267,
+    "text": "homeowners hire",
+    "words": [
+      {
+        "word": "homeowners",
+        "rawWord": "homeowners",
+        "start": 52.582,
+        "end": 53.023
+      },
+      {
+        "word": "hire",
+        "rawWord": "hire",
+        "start": 53.058,
+        "end": 53.232
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "start": 53.267,
+    "end": 53.871,
+    "text": "the very first",
+    "words": [
+      {
+        "word": "the",
+        "rawWord": "the",
+        "start": 53.267,
+        "end": 53.337
+      },
+      {
+        "word": "very",
+        "rawWord": "very",
+        "start": 53.395,
+        "end": 53.569
+      },
+      {
+        "word": "first",
+        "rawWord": "first",
+        "start": 53.627,
+        "end": 53.825
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "start": 53.871,
+    "end": 54.382,
+    "text": "business that",
+    "words": [
+      {
+        "word": "business",
+        "rawWord": "business",
+        "start": 53.871,
+        "end": 54.184
+      },
+      {
+        "word": "that",
+        "rawWord": "that",
+        "start": 54.219,
+        "end": 54.335
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "start": 54.382,
+    "end": 54.904,
+    "text": "answers.",
+    "words": [
+      {
+        "word": "answers.",
+        "rawWord": "answers.",
+        "start": 54.382,
+        "end": 54.904
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "start": 55.183,
+    "end": 55.752,
+    "text": "Within ten",
+    "words": [
+      {
+        "word": "Within",
+        "rawWord": "Within",
+        "start": 55.183,
+        "end": 55.438
+      },
+      {
+        "word": "ten",
+        "rawWord": "ten",
+        "start": 55.496,
+        "end": 55.671
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "start": 55.752,
+    "end": 56.402,
+    "text": "seconds,",
+    "words": [
+      {
+        "word": "seconds",
+        "rawWord": "seconds,",
+        "start": 55.752,
+        "end": 56.228
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "start": 56.402,
+    "end": 56.913,
+    "text": "she taps the",
+    "words": [
+      {
+        "word": "she",
+        "rawWord": "she",
+        "start": 56.402,
+        "end": 56.507
+      },
+      {
+        "word": "taps",
+        "rawWord": "taps",
+        "start": 56.553,
+        "end": 56.774
+      },
+      {
+        "word": "the",
+        "rawWord": "the",
+        "start": 56.809,
+        "end": 56.878
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "start": 56.913,
+    "end": 57.714,
+    "text": "next contractor",
+    "words": [
+      {
+        "word": "next",
+        "rawWord": "next",
+        "start": 56.913,
+        "end": 57.087
+      },
+      {
+        "word": "contractor",
+        "rawWord": "contractor",
+        "start": 57.145,
+        "end": 57.668
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "start": 57.714,
+    "end": 58.271,
+    "text": "on Google.",
+    "words": [
+      {
+        "word": "on",
+        "rawWord": "on",
+        "start": 57.714,
+        "end": 57.784
+      },
+      {
+        "word": "Google.",
+        "rawWord": "Google.",
+        "start": 57.83,
+        "end": 58.271
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "start": 58.863,
+    "end": 59.328,
+    "text": "That shop",
+    "words": [
+      {
+        "word": "That",
+        "rawWord": "That",
+        "start": 58.863,
+        "end": 59.026
+      },
+      {
+        "word": "shop",
+        "rawWord": "shop",
+        "start": 59.072,
+        "end": 59.27
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "start": 59.328,
+    "end": 60.036,
+    "text": "answers on ring",
+    "words": [
+      {
+        "word": "answers",
+        "rawWord": "answers",
+        "start": 59.328,
+        "end": 59.607
+      },
+      {
+        "word": "on",
+        "rawWord": "on",
+        "start": 59.653,
+        "end": 59.746
+      },
+      {
+        "word": "ring",
+        "rawWord": "ring",
+        "start": 59.804,
+        "end": 59.966
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "start": 60.036,
+    "end": 60.57,
+    "text": "one,",
+    "words": [
+      {
+        "word": "one",
+        "rawWord": "one,",
+        "start": 60.036,
+        "end": 60.419
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "start": 60.57,
+    "end": 61.429,
+    "text": "rolls a truck,",
+    "words": [
+      {
+        "word": "rolls",
+        "rawWord": "rolls",
+        "start": 60.57,
+        "end": 60.826
+      },
+      {
+        "word": "a",
+        "rawWord": "a",
+        "start": 60.86,
+        "end": 60.884
+      },
+      {
+        "word": "truck",
+        "rawWord": "truck,",
+        "start": 60.918,
+        "end": 61.302
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "start": 61.429,
+    "end": 61.929,
+    "text": "and collects an",
+    "words": [
+      {
+        "word": "and",
+        "rawWord": "and",
+        "start": 61.429,
+        "end": 61.534
+      },
+      {
+        "word": "collects",
+        "rawWord": "collects",
+        "start": 61.58,
+        "end": 61.836
+      },
+      {
+        "word": "an",
+        "rawWord": "an",
+        "start": 61.859,
+        "end": 61.905
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "start": 61.929,
+    "end": 62.881,
+    "text": "$8,000 check",
+    "words": [
+      {
+        "word": "$8000",
+        "rawWord": "$8,000",
+        "start": 61.929,
+        "end": 62.579
+      },
+      {
+        "word": "check",
+        "rawWord": "check",
+        "start": 62.625,
+        "end": 62.834
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "start": 62.881,
+    "end": 63.496,
+    "text": "that had Bob's",
+    "words": [
+      {
+        "word": "that",
+        "rawWord": "that",
+        "start": 62.881,
+        "end": 62.997
+      },
+      {
+        "word": "had",
+        "rawWord": "had",
+        "start": 63.043,
+        "end": 63.148
+      },
+      {
+        "word": "Bob's",
+        "rawWord": "Bob's",
+        "start": 63.194,
+        "end": 63.449
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "start": 63.496,
+    "end": 64.018,
+    "text": "name written",
+    "words": [
+      {
+        "word": "name",
+        "rawWord": "name",
+        "start": 63.496,
+        "end": 63.693
+      },
+      {
+        "word": "written",
+        "rawWord": "written",
+        "start": 63.728,
+        "end": 63.972
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "start": 64.018,
+    "end": 64.727,
+    "text": "all over it.",
+    "words": [
+      {
+        "word": "all",
+        "rawWord": "all",
+        "start": 64.018,
+        "end": 64.158
+      },
+      {
+        "word": "over",
+        "rawWord": "over",
+        "start": 64.204,
+        "end": 64.367
+      },
+      {
+        "word": "it.",
+        "rawWord": "it.",
+        "start": 64.425,
+        "end": 64.727
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "start": 65.237,
+    "end": 65.795,
+    "text": "That is why",
+    "words": [
+      {
+        "word": "That",
+        "rawWord": "That",
+        "start": 65.237,
+        "end": 65.423
+      },
+      {
+        "word": "is",
+        "rawWord": "is",
+        "start": 65.458,
+        "end": 65.516
+      },
+      {
+        "word": "why",
+        "rawWord": "why",
+        "start": 65.562,
+        "end": 65.737
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "start": 65.795,
+    "end": 66.677,
+    "text": "we built Ava.",
+    "words": [
+      {
+        "word": "we",
+        "rawWord": "we",
+        "start": 65.795,
+        "end": 65.888
+      },
+      {
+        "word": "built",
+        "rawWord": "built",
+        "start": 65.934,
+        "end": 66.131
+      },
+      {
+        "word": "Ava.",
+        "rawWord": "Ava.",
+        "start": 66.201,
+        "end": 66.677
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "start": 67.107,
+    "end": 67.559,
+    "text": "She answers",
+    "words": [
+      {
+        "word": "She",
+        "rawWord": "She",
+        "start": 67.107,
+        "end": 67.223
+      },
+      {
+        "word": "answers",
+        "rawWord": "answers",
+        "start": 67.281,
+        "end": 67.525
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "start": 67.559,
+    "end": 68.175,
+    "text": "your phone in",
+    "words": [
+      {
+        "word": "your",
+        "rawWord": "your",
+        "start": 67.559,
+        "end": 67.675
+      },
+      {
+        "word": "phone",
+        "rawWord": "phone",
+        "start": 67.71,
+        "end": 67.977
+      },
+      {
+        "word": "in",
+        "rawWord": "in",
+        "start": 68.012,
+        "end": 68.082
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "start": 68.175,
+    "end": 69.858,
+    "text": "0.8 seconds,",
+    "words": [
+      {
+        "word": "0.8",
+        "rawWord": "0.8",
+        "start": 68.175,
+        "end": 69.138
+      },
+      {
+        "word": "seconds",
+        "rawWord": "seconds,",
+        "start": 69.196,
+        "end": 69.684
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "start": 69.858,
+    "end": 70.381,
+    "text": "calms the",
+    "words": [
+      {
+        "word": "calms",
+        "rawWord": "calms",
+        "start": 69.858,
+        "end": 70.23
+      },
+      {
+        "word": "the",
+        "rawWord": "the",
+        "start": 70.264,
+        "end": 70.334
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "start": 70.381,
+    "end": 71.332,
+    "text": "homeowner down,",
+    "words": [
+      {
+        "word": "homeowner",
+        "rawWord": "homeowner",
+        "start": 70.381,
+        "end": 70.775
+      },
+      {
+        "word": "down",
+        "rawWord": "down,",
+        "start": 70.822,
+        "end": 71.205
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "start": 71.332,
+    "end": 71.959,
+    "text": "qualifies the",
+    "words": [
+      {
+        "word": "qualifies",
+        "rawWord": "qualifies",
+        "start": 71.332,
+        "end": 71.808
+      },
+      {
+        "word": "the",
+        "rawWord": "the",
+        "start": 71.843,
+        "end": 71.925
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "start": 71.959,
+    "end": 72.621,
+    "text": "job,",
+    "words": [
+      {
+        "word": "job",
+        "rawWord": "job,",
+        "start": 71.959,
+        "end": 72.412
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "start": 72.621,
+    "end": 72.969,
+    "text": "books your",
+    "words": [
+      {
+        "word": "books",
+        "rawWord": "books",
+        "start": 72.621,
+        "end": 72.818
+      },
+      {
+        "word": "your",
+        "rawWord": "your",
+        "start": 72.842,
+        "end": 72.935
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "start": 72.969,
+    "end": 73.573,
+    "text": "calendar,",
+    "words": [
+      {
+        "word": "calendar",
+        "rawWord": "calendar,",
+        "start": 72.969,
+        "end": 73.445
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "start": 73.573,
+    "end": 74.397,
+    "text": "and texts the",
+    "words": [
+      {
+        "word": "and",
+        "rawWord": "and",
+        "start": 73.573,
+        "end": 73.712
+      },
+      {
+        "word": "texts",
+        "rawWord": "texts",
+        "start": 73.771,
+        "end": 74.2
+      },
+      {
+        "word": "the",
+        "rawWord": "the",
+        "start": 74.27,
+        "end": 74.363
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "start": 74.397,
+    "end": 75.199,
+    "text": "dispatch straight",
+    "words": [
+      {
+        "word": "dispatch",
+        "rawWord": "dispatch",
+        "start": 74.397,
+        "end": 74.792
+      },
+      {
+        "word": "straight",
+        "rawWord": "straight",
+        "start": 74.885,
+        "end": 75.164
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "start": 75.199,
+    "end": 75.791,
+    "text": "to Bob's phone",
+    "words": [
+      {
+        "word": "to",
+        "rawWord": "to",
+        "start": 75.199,
+        "end": 75.245
+      },
+      {
+        "word": "Bob's",
+        "rawWord": "Bob's",
+        "start": 75.291,
+        "end": 75.524
+      },
+      {
+        "word": "phone",
+        "rawWord": "phone",
+        "start": 75.547,
+        "end": 75.756
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "start": 75.791,
+    "end": 76.116,
+    "text": "before the",
+    "words": [
+      {
+        "word": "before",
+        "rawWord": "before",
+        "start": 75.791,
+        "end": 75.976
+      },
+      {
+        "word": "the",
+        "rawWord": "the",
+        "start": 76.011,
+        "end": 76.081
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "start": 76.116,
+    "end": 76.569,
+    "text": "customer can",
+    "words": [
+      {
+        "word": "customer",
+        "rawWord": "customer",
+        "start": 76.116,
+        "end": 76.394
+      },
+      {
+        "word": "can",
+        "rawWord": "can",
+        "start": 76.429,
+        "end": 76.534
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "start": 76.569,
+    "end": 76.917,
+    "text": "even open",
+    "words": [
+      {
+        "word": "even",
+        "rawWord": "even",
+        "start": 76.569,
+        "end": 76.696
+      },
+      {
+        "word": "open",
+        "rawWord": "open",
+        "start": 76.731,
+        "end": 76.882
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "start": 76.917,
+    "end": 77.428,
+    "text": "another Google",
+    "words": [
+      {
+        "word": "another",
+        "rawWord": "another",
+        "start": 76.917,
+        "end": 77.126
+      },
+      {
+        "word": "Google",
+        "rawWord": "Google",
+        "start": 77.161,
+        "end": 77.404
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "start": 77.428,
+    "end": 77.834,
+    "text": "tab.",
+    "words": [
+      {
+        "word": "tab.",
+        "rawWord": "tab.",
+        "start": 77.428,
+        "end": 77.834
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "start": 78.345,
+    "end": 78.925,
+    "text": "Stop handing",
+    "words": [
+      {
+        "word": "Stop",
+        "rawWord": "Stop",
+        "start": 78.345,
+        "end": 78.565
+      },
+      {
+        "word": "handing",
+        "rawWord": "handing",
+        "start": 78.612,
+        "end": 78.879
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "start": 78.925,
+    "end": 79.912,
+    "text": "$8,000 checks",
+    "words": [
+      {
+        "word": "$8000",
+        "rawWord": "$8,000",
+        "start": 78.925,
+        "end": 79.622
+      },
+      {
+        "word": "checks",
+        "rawWord": "checks",
+        "start": 79.657,
+        "end": 79.877
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "start": 79.912,
+    "end": 80.156,
+    "text": "to your",
+    "words": [
+      {
+        "word": "to",
+        "rawWord": "to",
+        "start": 79.912,
+        "end": 79.959
+      },
+      {
+        "word": "your",
+        "rawWord": "your",
+        "start": 80.005,
+        "end": 80.121
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "start": 80.156,
+    "end": 80.771,
+    "text": "competitors.",
+    "words": [
+      {
+        "word": "competitors.",
+        "rawWord": "competitors.",
+        "start": 80.156,
+        "end": 80.771
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "start": 81.096,
+    "end": 81.665,
+    "text": "Call the live",
+    "words": [
+      {
+        "word": "Call",
+        "rawWord": "Call",
+        "start": 81.096,
+        "end": 81.271
+      },
+      {
+        "word": "the",
+        "rawWord": "the",
+        "start": 81.317,
+        "end": 81.387
+      },
+      {
+        "word": "live",
+        "rawWord": "live",
+        "start": 81.421,
+        "end": 81.63
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "start": 81.665,
+    "end": 82.327,
+    "text": "demo number on",
+    "words": [
+      {
+        "word": "demo",
+        "rawWord": "demo",
+        "start": 81.665,
+        "end": 81.909
+      },
+      {
+        "word": "number",
+        "rawWord": "number",
+        "start": 81.967,
+        "end": 82.165
+      },
+      {
+        "word": "on",
+        "rawWord": "on",
+        "start": 82.223,
+        "end": 82.292
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "start": 82.327,
+    "end": 82.78,
+    "text": "your screen",
+    "words": [
+      {
+        "word": "your",
+        "rawWord": "your",
+        "start": 82.327,
+        "end": 82.443
+      },
+      {
+        "word": "screen",
+        "rawWord": "screen",
+        "start": 82.478,
+        "end": 82.71
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "start": 82.78,
+    "end": 83.442,
+    "text": "right now to",
+    "words": [
+      {
+        "word": "right",
+        "rawWord": "right",
+        "start": 82.78,
+        "end": 82.966
+      },
+      {
+        "word": "now",
+        "rawWord": "now",
+        "start": 83.012,
+        "end": 83.233
+      },
+      {
+        "word": "to",
+        "rawWord": "to",
+        "start": 83.314,
+        "end": 83.384
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "start": 83.442,
+    "end": 84.15,
+    "text": "hear Ava answer",
+    "words": [
+      {
+        "word": "hear",
+        "rawWord": "hear",
+        "start": 83.442,
+        "end": 83.581
+      },
+      {
+        "word": "Ava",
+        "rawWord": "Ava",
+        "start": 83.639,
+        "end": 83.813
+      },
+      {
+        "word": "answer",
+        "rawWord": "answer",
+        "start": 83.859,
+        "end": 84.092
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "start": 84.15,
+    "end": 84.649,
+    "text": "live,",
+    "words": [
+      {
+        "word": "live",
+        "rawWord": "live,",
+        "start": 84.15,
+        "end": 84.649
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "start": 84.928,
+    "end": 86.089,
+    "text": "or comment AVA",
+    "words": [
+      {
+        "word": "or",
+        "rawWord": "or",
+        "start": 84.928,
+        "end": 85.183
+      },
+      {
+        "word": "comment",
+        "rawWord": "comment",
+        "start": 85.392,
+        "end": 85.717
+      },
+      {
+        "word": "AVA",
+        "rawWord": "AVA",
+        "start": 85.764,
+        "end": 86.042
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "start": 86.089,
+    "end": 86.681,
+    "text": "below and we",
+    "words": [
+      {
+        "word": "below",
+        "rawWord": "below",
+        "start": 86.089,
+        "end": 86.367
+      },
+      {
+        "word": "and",
+        "rawWord": "and",
+        "start": 86.425,
+        "end": 86.53
+      },
+      {
+        "word": "we",
+        "rawWord": "we",
+        "start": 86.576,
+        "end": 86.646
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "start": 86.681,
+    "end": 87.273,
+    "text": "will DM you",
+    "words": [
+      {
+        "word": "will",
+        "rawWord": "will",
+        "start": 86.681,
+        "end": 86.808
+      },
+      {
+        "word": "DM",
+        "rawWord": "DM",
+        "start": 86.855,
+        "end": 87.075
+      },
+      {
+        "word": "you",
+        "rawWord": "you",
+        "start": 87.133,
+        "end": 87.226
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "start": 87.273,
+    "end": 87.563,
+    "text": "the free",
+    "words": [
+      {
+        "word": "the",
+        "rawWord": "the",
+        "start": 87.273,
+        "end": 87.342
+      },
+      {
+        "word": "free",
+        "rawWord": "free",
+        "start": 87.377,
+        "end": 87.528
+      }
+    ]
+  },
+  {
+    "id": 127,
+    "start": 87.563,
+    "end": 88.76899999999999,
+    "text": "interactive link.",
+    "words": [
+      {
+        "word": "interactive",
+        "rawWord": "interactive",
+        "start": 87.563,
+        "end": 87.981
+      },
+      {
+        "word": "link.",
         "rawWord": "link.",
-        "start": 62.299,
-        "end": 62.926
+        "start": 88.016,
+        "end": 88.469
       }
     ]
   }
