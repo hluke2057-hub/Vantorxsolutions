@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VantorX — Reel #2 (30-Second Speed-to-Lead Viral Cut)</title>
+  <title>VantorX — Reel #2: How Nvidia's CEO Cheated & The Voicemail Bleed (&lt;28s)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
       --gold-light: #fbbf24;
       --cyan: #38bdf8;
       --emerald: #10b981;
+      --nvidia: #22c55e;
       --text: #f8fafc;
       --muted: #94a3b8;
     }
@@ -39,9 +40,9 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.45);
-      color: #7dd3fc;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.45);
+      color: #86efac;
       padding: 6px 14px;
       border-radius: 999px;
       font-size: 12px;
@@ -59,7 +60,7 @@
       margin-bottom: 8px;
     }
     h1 span {
-      background: linear-gradient(135deg, #7dd3fc, #38bdf8, #f59e0b);
+      background: linear-gradient(135deg, #86efac, #22c55e, #fbbf24);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -68,7 +69,6 @@
       font-size: 14px;
     }
     
-    /* Layout */
     .reel-stage-container {
       display: flex;
       flex-wrap: wrap;
@@ -79,7 +79,6 @@
       margin: 0 auto;
     }
     
-    /* Phone Mockup */
     .phone-mockup {
       width: 100%;
       max-width: 380px;
@@ -88,7 +87,7 @@
       border: 3px solid rgba(255, 255, 255, 0.18);
       border-radius: 36px;
       overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.2);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(34, 197, 94, 0.2);
       position: relative;
       display: flex;
       align-items: center;
@@ -114,7 +113,6 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
     }
     
-    /* Meta & Actions Sidebar */
     .meta-sidebar {
       flex: 1;
       min-width: 320px;
@@ -142,7 +140,6 @@
       margin-bottom: 12px;
     }
     
-    /* 4-Act Pills */
     .act-list {
       display: flex;
       flex-direction: column;
@@ -159,15 +156,15 @@
       transition: all 0.2s;
     }
     .act-item.active {
-      background: rgba(56, 189, 248, 0.12);
-      border-color: rgba(56, 189, 248, 0.5);
+      background: rgba(34, 197, 94, 0.14);
+      border-color: rgba(34, 197, 94, 0.5);
     }
     .act-time {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       font-weight: 800;
-      color: var(--cyan);
-      background: rgba(56, 189, 248, 0.15);
+      color: var(--nvidia);
+      background: rgba(34, 197, 94, 0.15);
       padding: 3px 6px;
       border-radius: 6px;
       white-space: nowrap;
@@ -183,7 +180,6 @@
       margin-top: 2px;
     }
     
-    /* Action Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -199,14 +195,14 @@
       transition: all 0.18s;
       width: 100%;
     }
-    .btn-cyan {
-      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-      color: #04121d;
-      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+    .btn-green {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #022c14;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
     }
-    .btn-cyan:hover {
+    .btn-green:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(56, 189, 248, 0.5);
+      box-shadow: 0 12px 28px rgba(34, 197, 94, 0.5);
     }
     .btn-outline {
       background: rgba(255, 255, 255, 0.05);
@@ -217,7 +213,6 @@
       background: rgba(255, 255, 255, 0.1);
     }
     
-    /* Caption Box */
     .caption-box {
       background: #04070e;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -226,7 +221,7 @@
       font-size: 12.5px;
       line-height: 1.5;
       color: #cbd5e1;
-      max-height: 140px;
+      max-height: 160px;
       overflow-y: auto;
       white-space: pre-wrap;
       font-family: inherit;
@@ -250,28 +245,25 @@
 <body>
 
   <div class="header">
-    <div class="badge">⚡ Sub-30s Viral Formula</div>
-    <h1>Reel #2: <span>The 30-Second Contractor Hook</span></h1>
-    <p class="subtitle">Hook (0-4s) • Explanation (4-12s) • Example (12-22s) • Final Comment &amp; CTA (22-29s)</p>
+    <div class="badge">⚡ Viral Hook &amp; Story Formula</div>
+    <h1>Reel #2: <span>Nvidia's CEO Cheated</span></h1>
+    <p class="subtitle">Hook (0-3s) • What Jensen Did (3-12s) • Nobody is Perfect (12-16s) • Promotion &amp; CTA (16-27s)</p>
   </div>
 
   <div class="reel-stage-container">
-    <!-- Phone Player -->
     <div class="phone-mockup">
       <div class="phone-notch"></div>
-      <video id="reelVideo" src="video/vantorx-30s-reel-2.mp4?v=3002" controls playsinline preload="auto" poster="video/reel2_act1_hook.png"></video>
+      <video id="reelVideo" src="video/vantorx-30s-reel-2.mp4?v=nvidia" controls playsinline preload="auto" poster="video/reel2_act1_hook.png"></video>
     </div>
 
-    <!-- Sidebar Controls -->
     <div class="meta-sidebar">
       
-      <!-- Primary Downloads -->
-      <div class="card" style="border-color: rgba(56, 189, 248, 0.4);">
-        <div class="card-title" style="color: #38bdf8;">📥 Post Ready Package</div>
+      <div class="card" style="border-color: rgba(34, 197, 94, 0.4);">
+        <div class="card-title" style="color: #4ade80;">📥 Post Ready Video</div>
         <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href="video/vantorx-30s-reel-2.mp4?v=3002" download="vantorx-30s-reel-2.mp4" class="btn btn-cyan">
+          <a href="video/vantorx-30s-reel-2.mp4?v=nvidia" download="vantorx-nvidia-reel.mp4" class="btn btn-green">
             <span>⚡</span>
-            <span>Download Reel #2 (.MP4 — 29.7s)</span>
+            <span>Download Reel #2 (.MP4 — 27.0s)</span>
           </a>
           <button type="button" class="btn btn-outline" onclick="copyCaption()">
             <span>📋</span>
@@ -280,63 +272,66 @@
         </div>
       </div>
 
-      <!-- 4-Act Storyboard Breakdown -->
       <div class="card">
-        <div class="card-title">🎬 4-Act Video Breakdown (29.7s Total)</div>
+        <div class="card-title">🎬 4-Act Story Breakdown</div>
         <div class="act-list">
           <div class="act-item" id="act1">
-            <span class="act-time">0:00 - 0:04</span>
+            <span class="act-time">0:00 - 0:03</span>
             <div>
-              <div class="act-name">Act 1: The Hook</div>
-              <div class="act-desc">"Stop scrolling. Every call hitting your voicemail costs your shop $8,000."</div>
+              <div class="act-name">Act 1: The Viral Hook</div>
+              <div class="act-desc">"Nvidia's CEO cheated. Let me explain."</div>
             </div>
           </div>
           <div class="act-item" id="act2">
-            <span class="act-time">0:04 - 0:12</span>
+            <span class="act-time">0:03 - 0:12</span>
             <div>
-              <div class="act-name">Act 2: The Explanation</div>
-              <div class="act-desc">"78% of homeowners hire whoever picks up first. When you are on a job, they tap the next company on Google."</div>
+              <div class="act-name">Act 2: The Deep Story (1995 Sega Rescue)</div>
+              <div class="act-desc">"In 1995, Jensen Huang built a broken chip. Nvidia had thirty days of cash left. He went to Sega, confessed failure, and got five million anyway by pivoting to automation."</div>
             </div>
           </div>
           <div class="act-item" id="act3">
-            <span class="act-time">0:12 - 0:22</span>
+            <span class="act-time">0:12 - 0:16</span>
             <div>
-              <div class="act-name">Act 3: The Example</div>
-              <div class="act-desc">"Imagine Friday at 7 PM: an AC dies. Ava answers in one second, qualifies the leak, and texts you the booked job."</div>
+              <div class="act-name">Act 3: The Reality Check (Nobody's Perfect)</div>
+              <div class="act-desc">"Nobody is perfect. Neither is your business. You're losing eight grand a week to voicemail."</div>
             </div>
           </div>
           <div class="act-item" id="act4">
-            <span class="act-time">0:22 - 0:29</span>
+            <span class="act-time">0:16 - 0:27</span>
             <div>
-              <div class="act-name">Act 4: Final Comment &amp; CTA</div>
-              <div class="act-desc">"Call (561) 813-8602 or comment AVA below."</div>
+              <div class="act-name">Act 4: The Promotion &amp; CTA</div>
+              <div class="act-desc">"Meet AVA: our Voice AI that answers in one second and books jobs 24/7. Call (561) 813-8602 or comment AVA below."</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Instagram Caption -->
       <div class="card">
         <div class="card-title">📝 Optimized Instagram Caption</div>
-        <div class="caption-box" id="captionText">Stop losing $8,000 jobs to voicemail. 📉
+        <div class="caption-box" id="captionText">Nvidia’s CEO cheated. Let me explain. 🧠
 
-78% of homeowners hire the first contractor who picks up the phone. When you're on a ladder or under a sink, you can't answer — so they call your competitor.
+In 1995, Jensen Huang built the wrong chip. Nvidia had 30 days of cash left before total bankruptcy. Instead of quitting, he walked into Sega's boardroom, confessed they failed, and got $5M anyway by pivoting to ruthless automation.
+
+Here’s the truth: Nobody is perfect. And neither is your business. 📉
+
+Right now, your shop is losing $8,000 every week because calls hit voicemail while you’re on a ladder or under a sink.
+
+You don’t need to be perfect — you just need an unfair advantage. ⚡
 
 Meet AVA: Your 24/7 Voice AI Receptionist. 
 ✅ Answers on the 1st ring (under 1 second)
 ✅ Qualifies the job & emergency status
-✅ Dispatches booking details straight to your phone
+✅ Dispatches booking details straight to your truck
 
-Test AVA right now live: (561) 813-8602 📞
+Test AVA live right now: (561) 813-8602 📞
 Or drop "AVA" below and we’ll set up your shop's demo.
 
-#contractor #hvac #roofing #plumbing #servicebusiness #contractorlife #smallbusinessowner #aiautomation #homeimprovement #speedtolead</div>
+#contractor #hvac #roofing #plumbing #servicebusiness #contractorlife #smallbusinessowner #aiautomation #speedtolead #nvidia #businesslessons</div>
       </div>
 
-      <!-- Navigation Link -->
       <div style="display:flex;gap:10px">
         <a href="reel-creator.html" class="btn btn-outline" style="font-size:12px;padding:10px">
-          <span>🎬</span> <span>Open Full Viral Reel Studio</span>
+          <span>🎬</span> <span>Open Full Reel Studio</span>
         </a>
         <a href="/instagram-package/" class="btn btn-outline" style="font-size:12px;padding:10px">
           <span>📱</span> <span>IG Highlights Kit</span>
@@ -351,10 +346,10 @@ Or drop "AVA" below and we’ll set up your shop's demo.
   <script>
     const video = document.getElementById('reelVideo');
     const acts = [
-      { id: 'act1', start: 0, end: 4.8 },
-      { id: 'act2', start: 4.8, end: 12.2 },
-      { id: 'act3', start: 12.2, end: 22.8 },
-      { id: 'act4', start: 22.8, end: 30 }
+      { id: 'act1', start: 0, end: 2.61 },
+      { id: 'act2', start: 2.61, end: 12.27 },
+      { id: 'act3', start: 12.27, end: 16.39 },
+      { id: 'act4', start: 16.39, end: 28 }
     ];
 
     video.addEventListener('timeupdate', () => {

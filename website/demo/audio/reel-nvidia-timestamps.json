@@ -1,0 +1,366 @@
+{
+  "duration": 25.495,
+  "script": "Nvidia's CEO cheated. Let me explain. In 1995, Jensen Huang built a broken chip. Nvidia had thirty days of cash left. He went to Sega, confessed failure, and got five million anyway by pivoting to automation. Nobody is perfect. Neither is your business. You're losing eight grand a week to voicemail. Meet AVA: our Voice AI that answers in one second and books jobs 24/7. Call (561) 813-8602 or comment AVA below.",
+  "words": [
+    {
+      "word": "Nvidia's",
+      "start": 0,
+      "end": 0.464
+    },
+    {
+      "word": "CEO",
+      "start": 0.557,
+      "end": 1.057
+    },
+    {
+      "word": "cheated.",
+      "start": 1.138,
+      "end": 1.591
+    },
+    {
+      "word": "Let",
+      "start": 1.916,
+      "end": 2.032
+    },
+    {
+      "word": "me",
+      "start": 2.067,
+      "end": 2.125
+    },
+    {
+      "word": "explain.",
+      "start": 2.159,
+      "end": 2.612
+    },
+    {
+      "word": "In",
+      "start": 2.984,
+      "end": 3.111
+    },
+    {
+      "word": "1995,",
+      "start": 3.17,
+      "end": 4.226
+    },
+    {
+      "word": "Jensen",
+      "start": 4.354,
+      "end": 4.679
+    },
+    {
+      "word": "Huang",
+      "start": 4.725,
+      "end": 5.016
+    },
+    {
+      "word": "built",
+      "start": 5.074,
+      "end": 5.248
+    },
+    {
+      "word": "a",
+      "start": 5.294,
+      "end": 5.317
+    },
+    {
+      "word": "broken",
+      "start": 5.375,
+      "end": 5.677
+    },
+    {
+      "word": "chip.",
+      "start": 5.735,
+      "end": 6.107
+    },
+    {
+      "word": "Nvidia",
+      "start": 6.432,
+      "end": 6.792
+    },
+    {
+      "word": "had",
+      "start": 6.838,
+      "end": 6.931
+    },
+    {
+      "word": "thirty",
+      "start": 6.989,
+      "end": 7.245
+    },
+    {
+      "word": "days",
+      "start": 7.291,
+      "end": 7.488
+    },
+    {
+      "word": "of",
+      "start": 7.523,
+      "end": 7.57
+    },
+    {
+      "word": "cash",
+      "start": 7.605,
+      "end": 7.872
+    },
+    {
+      "word": "left.",
+      "start": 7.93,
+      "end": 8.278
+    },
+    {
+      "word": "He",
+      "start": 8.545,
+      "end": 8.615
+    },
+    {
+      "word": "went",
+      "start": 8.638,
+      "end": 8.742
+    },
+    {
+      "word": "to",
+      "start": 8.766,
+      "end": 8.812
+    },
+    {
+      "word": "Sega,",
+      "start": 8.87,
+      "end": 9.23
+    },
+    {
+      "word": "confessed",
+      "start": 9.265,
+      "end": 9.624
+    },
+    {
+      "word": "failure,",
+      "start": 9.671,
+      "end": 10.089
+    },
+    {
+      "word": "and",
+      "start": 10.112,
+      "end": 10.216
+    },
+    {
+      "word": "got",
+      "start": 10.251,
+      "end": 10.367
+    },
+    {
+      "word": "five",
+      "start": 10.425,
+      "end": 10.658
+    },
+    {
+      "word": "million",
+      "start": 10.704,
+      "end": 10.913
+    },
+    {
+      "word": "anyway",
+      "start": 10.959,
+      "end": 11.168
+    },
+    {
+      "word": "by",
+      "start": 11.203,
+      "end": 11.273
+    },
+    {
+      "word": "pivoting",
+      "start": 11.331,
+      "end": 11.598
+    },
+    {
+      "word": "to",
+      "start": 11.633,
+      "end": 11.679
+    },
+    {
+      "word": "automation.",
+      "start": 11.749,
+      "end": 12.271
+    },
+    {
+      "word": "Nobody",
+      "start": 12.538,
+      "end": 12.805
+    },
+    {
+      "word": "is",
+      "start": 12.84,
+      "end": 12.887
+    },
+    {
+      "word": "perfect.",
+      "start": 12.933,
+      "end": 13.328
+    },
+    {
+      "word": "Neither",
+      "start": 13.537,
+      "end": 13.792
+    },
+    {
+      "word": "is",
+      "start": 13.839,
+      "end": 13.885
+    },
+    {
+      "word": "your",
+      "start": 13.908,
+      "end": 14.001
+    },
+    {
+      "word": "business.",
+      "start": 14.036,
+      "end": 14.442
+    },
+    {
+      "word": "You're",
+      "start": 14.709,
+      "end": 14.86
+    },
+    {
+      "word": "losing",
+      "start": 14.884,
+      "end": 15.093
+    },
+    {
+      "word": "eight",
+      "start": 15.151,
+      "end": 15.29
+    },
+    {
+      "word": "grand",
+      "start": 15.325,
+      "end": 15.51
+    },
+    {
+      "word": "a",
+      "start": 15.545,
+      "end": 15.569
+    },
+    {
+      "word": "week",
+      "start": 15.603,
+      "end": 15.731
+    },
+    {
+      "word": "to",
+      "start": 15.754,
+      "end": 15.801
+    },
+    {
+      "word": "voicemail.",
+      "start": 15.859,
+      "end": 16.393
+    },
+    {
+      "word": "Meet",
+      "start": 16.718,
+      "end": 16.869
+    },
+    {
+      "word": "AVA:",
+      "start": 16.915,
+      "end": 17.275
+    },
+    {
+      "word": "our",
+      "start": 17.6,
+      "end": 17.728
+    },
+    {
+      "word": "Voice",
+      "start": 17.774,
+      "end": 17.96
+    },
+    {
+      "word": "AI",
+      "start": 17.983,
+      "end": 18.25
+    },
+    {
+      "word": "that",
+      "start": 18.308,
+      "end": 18.401
+    },
+    {
+      "word": "answers",
+      "start": 18.448,
+      "end": 18.668
+    },
+    {
+      "word": "in",
+      "start": 18.715,
+      "end": 18.761
+    },
+    {
+      "word": "one",
+      "start": 18.819,
+      "end": 18.97
+    },
+    {
+      "word": "second",
+      "start": 19.005,
+      "end": 19.26
+    },
+    {
+      "word": "and",
+      "start": 19.307,
+      "end": 19.377
+    },
+    {
+      "word": "books",
+      "start": 19.411,
+      "end": 19.562
+    },
+    {
+      "word": "jobs",
+      "start": 19.62,
+      "end": 19.922
+    },
+    {
+      "word": "24/7.",
+      "start": 19.992,
+      "end": 20.828
+    },
+    {
+      "word": "Call",
+      "start": 21.095,
+      "end": 21.35
+    },
+    {
+      "word": "(561)",
+      "start": 21.408,
+      "end": 22.326
+    },
+    {
+      "word": "813-8602",
+      "start": 22.5,
+      "end": 23.881
+    },
+    {
+      "word": "or",
+      "start": 24.148,
+      "end": 24.264
+    },
+    {
+      "word": "comment",
+      "start": 24.322,
+      "end": 24.601
+    },
+    {
+      "word": "AVA",
+      "start": 24.648,
+      "end": 24.961
+    },
+    {
+      "word": "below.",
+      "start": 24.996,
+      "end": 25.495
+    }
+  ]
+}
