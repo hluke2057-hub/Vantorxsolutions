@@ -132,15 +132,20 @@ async function sendPhysicalEmail(lead) {
   const cleanEmail = (lead.email || '').trim().toLowerCase();
   const localPart = cleanEmail.split('@')[0] || '';
 
-  // Block placeholder/synthesized prefixes like "the.owner@" or "executive.leadership@"
+  // Block placeholder/synthesized prefixes & unverified guessed emails (zero hard bounces)
+  const srcLower = (lead.emailSource || '').toLowerCase();
+  const isWebsiteVerified = srcLower.includes('website verified') || srcLower.includes('website scraped') || srcLower.includes('published');
   if (
     KNOWN_SUPPRESSED.has(cleanEmail) ||
     localPart === 'the.owner' ||
     localPart === 'executive.leadership' ||
-    cleanEmail.includes('the.owner@')
+    localPart === 'franchise.owner' ||
+    cleanEmail.includes('the.owner@') ||
+    srcLower.includes('pattern synthesized') ||
+    !isWebsiteVerified
   ) {
-    console.warn(`[Suppression Guard] Skipping ${lead.company} (${cleanEmail}) — Address is suppressed or a guessed placeholder.`);
-    return { skipped: true, error: 'Recipient is in Suppression List or guessed placeholder' };
+    console.warn(`[Suppression Guard] Skipping ${lead.company} (${cleanEmail}) [source=${lead.emailSource || 'none'}] — Unverified or suppressed address blocked to protect Resend reputation.`);
+    return { skipped: true, error: 'Unverified/guessed or suppressed recipient blocked' };
   }
 
   // Pre-flight recipient DNS verification to prevent 421 4.4.0 transient SMTP errors & parked domains
@@ -354,11 +359,13 @@ function autoReplenishQueue(queue) {
   // 2. Never synthesize fake/guessed emails from company names! Only advance verified multi-touch leads.
   // (Previously this synthesized `${prefix}@${cleanSlug}.com`, which caused hard bounces on guessed domains.)
 
-  // 3. Fallback: Recycle oldest sent leads (> 14 days old) to guarantee queue is never dry
+  // 3. Fallback: Recycle oldest sent leads (> 14 days old) ONLY if they have verified published website emails
   if (queue.filter(t => t.status === "pending").length < 10) {
     const fourteenDaysMs = 14 * 24 * 60 * 60 * 1000;
     for (const item of queue) {
-      if (item.status === "sent" && item.sentAt) {
+      const srcL = (item.emailSource || '').toLowerCase();
+      const verifiedSrc = srcL.includes('website verified') || srcL.includes('website scraped') || srcL.includes('published');
+      if (item.status === "sent" && item.sentAt && verifiedSrc && !KNOWN_SUPPRESSED.has((item.email || '').toLowerCase())) {
         const sentTime = new Date(item.sentAt).getTime();
         if (now - sentTime >= fourteenDaysMs) {
           item.status = "pending";

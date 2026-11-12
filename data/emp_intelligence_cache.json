@@ -1,0 +1,3875 @@
+{
+  "forte roofing": {
+    "company": "Forte Roofing",
+    "platforms": {
+      "LeadIQ": {
+        "raw": "59",
+        "estimate": 59,
+        "source": "LeadIQ"
+      }
+    },
+    "consensusEstimate": 59,
+    "checkedAt": "2026-11-12T02:15:31.420Z",
+    "engine": "startpage"
+  },
+  "ewing & ewing air conditioning": {
+    "company": "Ewing & Ewing Air Conditioning",
+    "platforms": {
+      "SignalHire": {
+        "raw": "6",
+        "estimate": 6,
+        "source": "SignalHire"
+      }
+    },
+    "consensusEstimate": 6,
+    "checkedAt": "2026-11-12T02:15:32.940Z",
+    "engine": "startpage"
+  },
+  "one hour air conditioning & heating": {
+    "company": "One Hour Air Conditioning & Heating",
+    "platforms": {
+      "SignalHire": {
+        "raw": "138",
+        "estimate": 138,
+        "source": "SignalHire"
+      }
+    },
+    "consensusEstimate": 138,
+    "checkedAt": "2026-11-12T02:15:33.076Z",
+    "engine": "startpage"
+  },
+  "air-ref co. inc.": {
+    "company": "Air-Ref Co. Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:33.550Z",
+    "engine": "ddg_yahoo"
+  },
+  "palm air air conditioning, inc.": {
+    "company": "Palm Air Air Conditioning, Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/hopkins-air-conditioning/354221132"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:35.051Z",
+    "engine": "startpage"
+  },
+  "engineered air": {
+    "company": "Engineered Air",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/engineered-cooling-services/46845588"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:17:35.456Z",
+    "engine": "startpage"
+  },
+  "friendly a/c": {
+    "company": "Friendly A/C",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:36.209Z",
+    "engine": "ddg_yahoo"
+  },
+  "southern coast air conditioning": {
+    "company": "Southern Coast Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:37.242Z",
+    "engine": "ddg_yahoo"
+  },
+  "whale roofing & construction": {
+    "company": "Whale Roofing & Construction",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:37.505Z",
+    "engine": "ddg_yahoo"
+  },
+  "aastro roofing company": {
+    "company": "Aastro Roofing Company",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/aastro-roofing-co/419253995"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:37.937Z",
+    "engine": "startpage"
+  },
+  "erica's plumbing, air conditioning & restoration": {
+    "company": "Erica's Plumbing, Air Conditioning & Restoration",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:39.200Z",
+    "engine": "ddg_yahoo"
+  },
+  "garabar roofing, windows & doors": {
+    "company": "Garabar Roofing, Windows & Doors",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:39.509Z",
+    "engine": "ddg_yahoo"
+  },
+  "hi-tech plumbing, air & electrical": {
+    "company": "Hi-Tech Plumbing, Air & Electrical",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/hi-tech-plumbing--air-inc/344267112"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:40.453Z",
+    "engine": "startpage"
+  },
+  "service experts west palm beach": {
+    "company": "Service Experts West Palm Beach",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/greenway-kia-west-palm-beach/353470004"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:41.654Z",
+    "engine": "startpage"
+  },
+  "service ready air conditioning & plumbing": {
+    "company": "Service Ready Air Conditioning & Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:41.881Z",
+    "engine": "ddg_yahoo"
+  },
+  "mister plumber inc.": {
+    "company": "Mister Plumber Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:42.890Z",
+    "engine": "ddg_yahoo"
+  },
+  "sansone air conditioning, electrical & plumbing": {
+    "company": "Sansone Air Conditioning, Electrical & Plumbing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/sansone-air-conditioning/103072224"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:43.826Z",
+    "engine": "startpage"
+  },
+  "east coast mechanical (ecm air conditioning)": {
+    "company": "East Coast Mechanical (ECM Air Conditioning)",
+    "platforms": {
+      "LinkedIn": {
+        "raw": "39",
+        "estimate": 39,
+        "low": 39,
+        "high": 39,
+        "source": "LinkedIn",
+        "url": "https://www.linkedin.com/company/east-coast-mechanical"
+      },
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/east-coast-mechanical-home-services-llc/37428653"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:17:44.084Z",
+    "engine": "startpage"
+  },
+  "copperhead plumbing llc": {
+    "company": "Copperhead Plumbing LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:44.215Z",
+    "engine": "ddg_yahoo"
+  },
+  "a-star electric": {
+    "company": "A-Star Electric",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/lakeland-electric/58756495"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:17:45.598Z",
+    "engine": "startpage"
+  },
+  "atlantic coast water & restoration": {
+    "company": "Atlantic Coast Water & Restoration",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/atlantic-coast-recycling-inc/347199411"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:17:46.233Z",
+    "engine": "startpage"
+  },
+  "boca raton plumbing pros": {
+    "company": "Boca Raton Plumbing Pros",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/broward-plumbing-inc/1248210343"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:46.280Z",
+    "engine": "startpage"
+  },
+  "molsbee roofing inc.": {
+    "company": "Molsbee Roofing Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:47.907Z",
+    "engine": "ddg_yahoo"
+  },
+  "cousins air conditioning": {
+    "company": "Cousins Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:48.115Z",
+    "engine": "ddg_yahoo"
+  },
+  "elite electric & solar solutions": {
+    "company": "Elite Electric & Solar Solutions",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:48.271Z",
+    "engine": "ddg_yahoo"
+  },
+  "all year cooling & heating": {
+    "company": "All Year Cooling & Heating",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:50.031Z",
+    "engine": "ddg_yahoo"
+  },
+  "lindstrom air conditioning & plumbing": {
+    "company": "Lindstrom Air Conditioning & Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:50.305Z",
+    "engine": "ddg_yahoo"
+  },
+  "paradise plumbing, ac & electrical": {
+    "company": "Paradise Plumbing, AC & Electrical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:50.320Z",
+    "engine": "ddg_yahoo"
+  },
+  "best roofing": {
+    "company": "Best Roofing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/best-roofing-co/14060594"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:17:51.505Z",
+    "engine": "startpage"
+  },
+  "snyder air conditioning, plumbing & electric": {
+    "company": "Snyder Air Conditioning, Plumbing & Electric",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/snyder-air-conditioning-plumbing--electric/139854052"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:17:52.242Z",
+    "engine": "startpage"
+  },
+  "art plumbing, ac & electric": {
+    "company": "ART Plumbing, AC & Electric",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/art-plumbing/7080539"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:17:52.503Z",
+    "engine": "startpage"
+  },
+  "clark roofing": {
+    "company": "Clark Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:54.044Z",
+    "engine": "ddg_yahoo"
+  },
+  "cool air usa": {
+    "company": "Cool Air USA",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/cool-air-usa-co/345987339"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:17:54.746Z",
+    "engine": "startpage"
+  },
+  "quality air conditioning company": {
+    "company": "Quality Air Conditioning Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:54.763Z",
+    "engine": "ddg_yahoo"
+  },
+  "complete commercial repair": {
+    "company": "Complete Commercial Repair",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/commercial-repairs--sales-llc/31659012"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:56.498Z",
+    "engine": "startpage"
+  },
+  "air quality control environmental": {
+    "company": "Air Quality Control Environmental",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/air-quality-control-environmental-inc/917991"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:56.783Z",
+    "engine": "startpage"
+  },
+  "universal air & heat": {
+    "company": "Universal Air & Heat",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:56.820Z",
+    "engine": "ddg_yahoo"
+  },
+  "thermal concepts inc.": {
+    "company": "Thermal Concepts Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/thermal-concepts-inc/68896018"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:17:57.837Z",
+    "engine": "startpage"
+  },
+  "a-star heating & cooling": {
+    "company": "A-Star Heating & Cooling",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:17:58.459Z",
+    "engine": "ddg_yahoo"
+  },
+  "sunshine plumbing of south florida": {
+    "company": "Sunshine Plumbing of South Florida",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/sunshine-plumbing-supply-inc/113213734"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:17:59.383Z",
+    "engine": "startpage"
+  },
+  "plumbing experts inc.": {
+    "company": "Plumbing Experts Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:00.588Z",
+    "engine": "ddg_yahoo"
+  },
+  "stiles construction & roofing division": {
+    "company": "Stiles Construction & Roofing Division",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:01.066Z",
+    "engine": "ddg_yahoo"
+  },
+  "abc roofing corp.": {
+    "company": "ABC Roofing Corp.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/abc-roofing-corp/358920081"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:01.704Z",
+    "engine": "startpage"
+  },
+  "chase roofing & contracting": {
+    "company": "Chase Roofing & Contracting",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:01.903Z",
+    "engine": "ddg_yahoo"
+  },
+  "tri-county restoration & clean": {
+    "company": "Tri-County Restoration & Clean",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/tri-county-sweeping-services-inc/146210897"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:18:03.236Z",
+    "engine": "startpage"
+  },
+  "dry pros water damage & mold": {
+    "company": "Dry Pros Water Damage & Mold",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/dry-first-inc/410569365"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:18:03.673Z",
+    "engine": "startpage"
+  },
+  "power core electric": {
+    "company": "Power Core Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:03.692Z",
+    "engine": "ddg_yahoo"
+  },
+  "south florida electricians": {
+    "company": "South Florida Electricians",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:04.978Z",
+    "engine": "ddg_yahoo"
+  },
+  "express air & electric": {
+    "company": "Express Air & Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:05.533Z",
+    "engine": "ddg_yahoo"
+  },
+  "all american air & appliance": {
+    "company": "All American Air & Appliance",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/all-american-air/1153094458"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:05.653Z",
+    "engine": "startpage"
+  },
+  "direct air conditioning, inc.": {
+    "company": "Direct Air Conditioning, Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/nuccio-heating--air-conditioning-inc/86114757"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:07.208Z",
+    "engine": "startpage"
+  },
+  "snyder air conditioning & plumbing (miami office)": {
+    "company": "Snyder Air Conditioning & Plumbing (Miami Office)",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/snyder-air-conditioning-plumbing--electric/139854052"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:18:07.260Z",
+    "engine": "startpage"
+  },
+  "high end plumbing (24-hour emergency)": {
+    "company": "High End Plumbing (24-Hour Emergency)",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:07.868Z",
+    "engine": "ddg_yahoo"
+  },
+  "douglas orr plumbing": {
+    "company": "Douglas Orr Plumbing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.startpage.com/clev?event=Sp_x9&sc=17xTidxZ6P7Lj9QMr94sRuXQAG2VWNjYDxvX3SejZt1ufEJHGMsSRAh6bwqa0TOFed21u0Z6252M32TPnPP7kdabm9NLumZKVzkTWU1Va6A9pUiWBR3&payload=JTdCJTIycCUyMiUzQSUyMmglMjIlMkMlMjJocCUyMiUzQSUyMmF1eCUyMiUyQyUyMnRyJTIyJTNBJTIyaHJlZi1mb2xsb3clMjIlMkMlMjJocGElMjIlM0ElMjJmYXZpY29uJTIyJTdE"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:18:08.315Z",
+    "engine": "startpage"
+  },
+  "one stop plumbing": {
+    "company": "One Stop Plumbing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/one-stop-roofing-inc/529211733"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:18:09.039Z",
+    "engine": "startpage"
+  },
+  "24/7 plumber miami": {
+    "company": "24/7 Plumber Miami",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:09.681Z",
+    "engine": "ddg_yahoo"
+  },
+  "all pro roofing group": {
+    "company": "All Pro Roofing Group",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:10.447Z",
+    "engine": "ddg_yahoo"
+  },
+  "assurance roofing services": {
+    "company": "Assurance Roofing Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:10.796Z",
+    "engine": "ddg_yahoo"
+  },
+  "green home roofing": {
+    "company": "Green Home Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:11.899Z",
+    "engine": "ddg_yahoo"
+  },
+  "central commercial air conditioning": {
+    "company": "Central Commercial Air Conditioning",
+    "platforms": {
+      "LeadIQ": {
+        "raw": "500",
+        "estimate": 500,
+        "low": 500,
+        "high": 500,
+        "source": "LeadIQ",
+        "url": "https://www.startpage.com/clev?event=Sp_x9&sc=gQhKyhqUqcX1KW9aslGP7adXqsrDI19OkOFdak5BuFNWU2ZxNT9XuwtNKBdSWw1irNkYyCH7on2pW0ivjDP2nNxI8L7dkV0yivmFw3CG4reoqz2Vv&payload=JTdCJTIycCUyMiUzQSUyMmglMjIlMkMlMjJocCUyMiUzQSUyMmF1eCUyMiUyQyUyMnRyJTIyJTNBJTIyaHJlZi1mb2xsb3clMjIlMkMlMjJocGElMjIlM0ElMjJmYXZpY29uJTIyJTdE"
+      }
+    },
+    "consensusEstimate": 500,
+    "checkedAt": "2026-11-12T02:18:12.828Z",
+    "engine": "startpage"
+  },
+  "air solution and repair": {
+    "company": "Air Solution and Repair",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/air-solution-and-repair/368822269"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:18:12.879Z",
+    "engine": "startpage"
+  },
+  "miami cooling & heating pros": {
+    "company": "Miami Cooling & Heating Pros",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:14.058Z",
+    "engine": "ddg_yahoo"
+  },
+  "falcon air conditioning": {
+    "company": "Falcon Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:14.620Z",
+    "engine": "ddg_yahoo"
+  },
+  "dade super cool": {
+    "company": "Dade Super Cool",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/supercool/119702167"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:15.002Z",
+    "engine": "startpage"
+  },
+  "total repair pros": {
+    "company": "Total Repair Pros",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/total-appliance/346630403"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:18:16.231Z",
+    "engine": "startpage"
+  },
+  "pioneer electric of south fl": {
+    "company": "Pioneer Electric of South FL",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:16.416Z",
+    "engine": "ddg_yahoo"
+  },
+  "miami power & electric": {
+    "company": "Miami Power & Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:16.790Z",
+    "engine": "ddg_yahoo"
+  },
+  "t&s roofing systems": {
+    "company": "T&S Roofing Systems",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/ts-roofing-systems-inc/353927569"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:18:17.368Z",
+    "engine": "startpage"
+  },
+  "eco electric solutions": {
+    "company": "Eco Electric Solutions",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:18.349Z",
+    "engine": "ddg_yahoo"
+  },
+  "isteta roofing": {
+    "company": "Isteta Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:18.877Z",
+    "engine": "ddg_yahoo"
+  },
+  "disaster clean miami": {
+    "company": "Disaster Clean Miami",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/the-disaster-services-inc/551330212"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:19.495Z",
+    "engine": "startpage"
+  },
+  "all dry usa (miami branch)": {
+    "company": "All Dry USA (Miami Branch)",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/all-dry-usa/369718851"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:18:20.854Z",
+    "engine": "startpage"
+  },
+  "south florida plumbers 24/7": {
+    "company": "South Florida Plumbers 24/7",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:20.890Z",
+    "engine": "ddg_yahoo"
+  },
+  "miami elite mechanical": {
+    "company": "Miami Elite Mechanical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:21.296Z",
+    "engine": "ddg_yahoo"
+  },
+  "protek roofing & solar": {
+    "company": "Protek Roofing & Solar",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:23.313Z",
+    "engine": "ddg_yahoo"
+  },
+  "pro-tech emergency air conditioning": {
+    "company": "Pro-Tech Emergency Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:23.388Z",
+    "engine": "ddg_yahoo"
+  },
+  "westfall roofing": {
+    "company": "Westfall Roofing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/roofing--reconstruction-contractors-of-america-llc/529156113"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:18:23.815Z",
+    "engine": "startpage"
+  },
+  "southshore roofing & exteriors": {
+    "company": "Southshore Roofing & Exteriors",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:25.171Z",
+    "engine": "ddg_yahoo"
+  },
+  "arry's roofing services, inc.": {
+    "company": "Arry's Roofing Services, Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/arrys-roofing-services-inc/346558300"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:18:25.613Z",
+    "engine": "startpage"
+  },
+  "olin plumbing": {
+    "company": "Olin Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:25.862Z",
+    "engine": "ddg_yahoo"
+  },
+  "united plumbing & drain": {
+    "company": "United Plumbing & Drain",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:27.239Z",
+    "engine": "ddg_yahoo"
+  },
+  "the clean plumbers": {
+    "company": "The Clean Plumbers",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/the-clean-plumbers/179421646"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:18:28.015Z",
+    "engine": "startpage"
+  },
+  "master restoration services": {
+    "company": "Master Restoration Services",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/master-restoration/346545684"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:29.150Z",
+    "engine": "startpage"
+  },
+  "florida's elite restoration": {
+    "company": "Florida's Elite Restoration",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:29.633Z",
+    "engine": "ddg_yahoo"
+  },
+  "cornerstone pros air conditioning, plumbing & electrical": {
+    "company": "Cornerstone Pros Air Conditioning, Plumbing & Electrical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:29.924Z",
+    "engine": "ddg_yahoo"
+  },
+  "action air conditioning": {
+    "company": "Action Air Conditioning",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/action-air-conditioning-inc/377092"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:31.155Z",
+    "engine": "startpage"
+  },
+  "air rescue air conditioning": {
+    "company": "Air Rescue Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:31.766Z",
+    "engine": "ddg_yahoo"
+  },
+  "easy a/c": {
+    "company": "Easy A/C",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:32.651Z",
+    "engine": "ddg_yahoo"
+  },
+  "total air & heat tampa": {
+    "company": "Total Air & Heat Tampa",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:34.116Z",
+    "engine": "ddg_yahoo"
+  },
+  "st. pete heating & air": {
+    "company": "St. Pete Heating & Air",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/gulf-mechanical-contractors-llc/358716412"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:18:35.068Z",
+    "engine": "startpage"
+  },
+  "bay area electric": {
+    "company": "Bay Area Electric",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/bay-area-electric/359539558"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:35.663Z",
+    "engine": "startpage"
+  },
+  "clearwater electric pros": {
+    "company": "Clearwater Electric Pros",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/clearwater-power-co/19878426"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:37.276Z",
+    "engine": "startpage"
+  },
+  "sonny's transfer plumbing": {
+    "company": "Sonny's Transfer Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:37.982Z",
+    "engine": "ddg_yahoo"
+  },
+  "tampa bay plumbers llc": {
+    "company": "Tampa Bay Plumbers LLC",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/tampa-bay-plumbing/375336998"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:18:38.367Z",
+    "engine": "startpage"
+  },
+  "bay to bay roofing": {
+    "company": "Bay to Bay Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:38.414Z",
+    "engine": "ddg_yahoo"
+  },
+  "stay dry roofing of tampa": {
+    "company": "Stay Dry Roofing of Tampa",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:53.335Z",
+    "engine": "ddg_yahoo"
+  },
+  "restoration 1 of tampa bay": {
+    "company": "Restoration 1 of Tampa Bay",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:18:54.129Z",
+    "engine": "ddg_yahoo"
+  },
+  "ryals brothers air conditioning": {
+    "company": "Ryals Brothers Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:08.435Z",
+    "engine": "ddg_yahoo"
+  },
+  "pinellas comfort systems": {
+    "company": "Pinellas Comfort Systems",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:23.347Z",
+    "engine": "ddg_yahoo"
+  },
+  "air care heating & cooling": {
+    "company": "Air Care Heating & Cooling",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:24.132Z",
+    "engine": "ddg_yahoo"
+  },
+  "ace solves it all": {
+    "company": "Ace Solves It All",
+    "platforms": {
+      "LeadIQ": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "LeadIQ"
+      }
+    },
+    "consensusEstimate": 19,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:09:35.574Z"
+  },
+  "frank gay services": {
+    "company": "Frank Gay Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:38.372Z",
+    "engine": "ddg_yahoo"
+  },
+  "modern plumbing industries, inc.": {
+    "company": "Modern Plumbing Industries, Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/modern-plumbing-industries-inc/1152877171"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:19:39.661Z",
+    "engine": "startpage"
+  },
+  "emerald plumbing": {
+    "company": "Emerald Plumbing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/emerald-plumbing/40343047"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:19:40.370Z",
+    "engine": "startpage"
+  },
+  "benjamin franklin plumbing (north orlando)": {
+    "company": "Benjamin Franklin Plumbing (North Orlando)",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/service-minds-llc/353496811"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:19:41.650Z",
+    "engine": "startpage"
+  },
+  "1-800-plumber & air (central florida)": {
+    "company": "1-800-Plumber & Air (Central Florida)",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:42.266Z",
+    "engine": "ddg_yahoo"
+  },
+  "united restoration team": {
+    "company": "United Restoration Team",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/united-water-restoration-group-inc/347314392"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:19:43.618Z",
+    "engine": "startpage"
+  },
+  "dehlinger construction & roofing": {
+    "company": "Dehlinger Construction & Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:44.054Z",
+    "engine": "ddg_yahoo"
+  },
+  "thielen roofing & construction": {
+    "company": "Thielen Roofing & Construction",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:45.364Z",
+    "engine": "ddg_yahoo"
+  },
+  "american air, plumbing & electrical": {
+    "company": "American Air, Plumbing & Electrical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:45.929Z",
+    "engine": "ddg_yahoo"
+  },
+  "ferran services": {
+    "company": "Ferran Services",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/ferran-services/37933009"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:19:47.534Z",
+    "engine": "startpage"
+  },
+  "downtown air & heat": {
+    "company": "Downtown Air & Heat",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:47.712Z",
+    "engine": "ddg_yahoo"
+  },
+  "rainaldi home services": {
+    "company": "Rainaldi Home Services",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.startpage.com/clev?event=Sp_x9&sc=gQhKyhqUo0mYr5ELKddMn3P2Eifjr4VcM5emvh1RoqgWoskFvnSupTPZQyWEVH2qeBgfWutQ22RU7SPpDQJeIFdMz0OZ5eJQn0xGvfqWPZhwmSq2F&payload=JTdCJTIycCUyMiUzQSUyMmglMjIlMkMlMjJocCUyMiUzQSUyMmF1eCUyMiUyQyUyMnRyJTIyJTNBJTIyaHJlZi1mb2xsb3clMjIlMkMlMjJocGElMjIlM0ElMjJmYXZpY29uJTIyJTdE"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:19:48.711Z",
+    "engine": "startpage"
+  },
+  "one/hour air conditioning of orlando": {
+    "company": "One/Hour Air Conditioning of Orlando",
+    "platforms": {
+      "SignalHire": {
+        "raw": "138",
+        "estimate": 138,
+        "low": 138,
+        "high": 138,
+        "source": "SignalHire"
+      }
+    },
+    "consensusEstimate": 138,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:09:39.691Z"
+  },
+  "herrell plumbing": {
+    "company": "Herrell Plumbing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/herrell-plumbing-inc/64229255"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:19:50.712Z",
+    "engine": "startpage"
+  },
+  "janney roofing": {
+    "company": "Janney Roofing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/janney-roofing-llc/410523043"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:19:51.467Z",
+    "engine": "startpage"
+  },
+  "castle roofing group": {
+    "company": "Castle Roofing Group",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:52.571Z",
+    "engine": "ddg_yahoo"
+  },
+  "seminole power & electric": {
+    "company": "Seminole Power & Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:53.281Z",
+    "engine": "ddg_yahoo"
+  },
+  "del-air heating, air conditioning & plumbing": {
+    "company": "Del-Air Heating, Air Conditioning & Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:19:54.134Z",
+    "engine": "ddg_yahoo"
+  },
+  "a-quality electric": {
+    "company": "A-Quality Electric",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/lakeland-electric/58756495"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:19:54.421Z",
+    "engine": "startpage"
+  },
+  "paul davis restoration of orlando": {
+    "company": "Paul Davis Restoration of Orlando",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/paul-davis-restoration-inc/1245922538"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:19:55.009Z",
+    "engine": "startpage"
+  },
+  "certified climate control": {
+    "company": "Certified Climate Control",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/certified-climate-control/363493453"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:19:56.426Z",
+    "engine": "startpage"
+  },
+  "air tech of central florida": {
+    "company": "Air Tech of Central Florida",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/air-tech-of-central-florida/348443263"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:19:56.892Z",
+    "engine": "startpage"
+  },
+  "greens energy services": {
+    "company": "Greens Energy Services",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/greens-energy-services/50956481"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:19:58.530Z",
+    "engine": "startpage"
+  },
+  "ideal conditions heating & air conditioning": {
+    "company": "Ideal Conditions Heating & Air Conditioning",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/ideal-conditions-heating--air-conditioning-inc/348141779"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:19:58.802Z",
+    "engine": "startpage"
+  },
+  "all weather contractors": {
+    "company": "All Weather Contractors",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.startpage.com/clev?event=Sp_x9&sc=17xTidxZ6P6AsrIePk2wVgpj1YWBVZUbwyoPqy6mWEmTclEBgrPuC0iQDAlttcoSGnseQ3jNzJDRqGNkAst4CYZQoH0bPJ3a1jkOxblybhN89wX7SAR&payload=JTdCJTIycCUyMiUzQSUyMmglMjIlMkMlMjJocCUyMiUzQSUyMmF1eCUyMiUyQyUyMnRyJTIyJTNBJTIyaHJlZi1mb2xsb3clMjIlMkMlMjJocGElMjIlM0ElMjJmYXZpY29uJTIyJTdE"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:19:59.515Z",
+    "engine": "startpage"
+  },
+  "buehler air conditioning & plumbing": {
+    "company": "Buehler Air Conditioning & Plumbing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/buehler-air-conditioning-inc/465696301"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:20:01.084Z",
+    "engine": "startpage"
+  },
+  "b&i contractors, inc.": {
+    "company": "B&I Contractors, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:01.544Z",
+    "engine": "ddg_yahoo"
+  },
+  "crowther roofing & cooling": {
+    "company": "Crowther Roofing & Cooling",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:03.055Z",
+    "engine": "ddg_yahoo"
+  },
+  "conditioned air company (naples office)": {
+    "company": "Conditioned Air Company (Naples Office)",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/conditioned-air/16434974"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:20:03.740Z",
+    "engine": "startpage"
+  },
+  "jackson total service": {
+    "company": "Jackson Total Service",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/jackson-total-service/76809871"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:20:04.953Z",
+    "engine": "startpage"
+  },
+  "david gray electrical, plumbing, heating & air": {
+    "company": "David Gray Electrical, Plumbing, Heating & Air",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/david-gray-plumbing-inc/45063014"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:20:06.004Z",
+    "engine": "startpage"
+  },
+  "snyder air conditioning, plumbing & electric (jax office)": {
+    "company": "Snyder Air Conditioning, Plumbing & Electric (Jax Office)",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/snyder-air-conditioning-plumbing--electric/139854052"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:20:07.251Z",
+    "engine": "startpage"
+  },
+  "duck duck rooter plumbing, septic & air": {
+    "company": "Duck Duck Rooter Plumbing, Septic & Air",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/duck-duck-rooter-llc/482024123"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:20:07.728Z",
+    "engine": "startpage"
+  },
+  "air mccall heating & air conditioning": {
+    "company": "Air McCall Heating & Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:09.661Z",
+    "engine": "ddg_yahoo"
+  },
+  "mcgowan's heating & air conditioning": {
+    "company": "McGowan's Heating & Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:09.833Z",
+    "engine": "ddg_yahoo"
+  },
+  "first coast roofing": {
+    "company": "First Coast Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:11.639Z",
+    "engine": "ddg_yahoo"
+  },
+  "carlson enterprises roofing": {
+    "company": "Carlson Enterprises Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:11.701Z",
+    "engine": "ddg_yahoo"
+  },
+  "best home services (naples/fort myers)": {
+    "company": "Best Home Services (Naples/Fort Myers)",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/best-home-services-of-sw-florida-llc/357809236"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:20:12.776Z",
+    "engine": "startpage"
+  },
+  "florida cooling solutions": {
+    "company": "Florida Cooling Solutions",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/engineered-cooling-services/46845588"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:20:13.408Z",
+    "engine": "startpage"
+  },
+  "target air conditioning": {
+    "company": "Target Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:14.587Z",
+    "engine": "ddg_yahoo"
+  },
+  "advanced roofing & sheet metal (fort myers)": {
+    "company": "Advanced Roofing & Sheet Metal (Fort Myers)",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "201-500",
+        "estimate": 306,
+        "low": 201,
+        "high": 500,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/advanced-roofing-and-sheet-metal/353611368"
+      }
+    },
+    "consensusEstimate": 306,
+    "checkedAt": "2026-11-12T02:20:15.603Z",
+    "engine": "startpage"
+  },
+  "affordable roofing by john cadwell": {
+    "company": "Affordable Roofing by John Cadwell",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/affordable-roofing/348523469"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:20:16.739Z",
+    "engine": "startpage"
+  },
+  "aztec plumbing & drains": {
+    "company": "Aztec Plumbing & Drains",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:17.945Z",
+    "engine": "ddg_yahoo"
+  },
+  "next level plumbing": {
+    "company": "Next Level Plumbing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/circle-plumbing-inc/398878518"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:20:18.822Z",
+    "engine": "startpage"
+  },
+  "action automatic door & gate": {
+    "company": "Action Automatic Door & Gate",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/action-automatic-door--gate/1675195"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:20:20.151Z",
+    "engine": "startpage"
+  },
+  "service team of professionals (stop restoration fort myers)": {
+    "company": "Service Team of Professionals (STOP Restoration Fort Myers)",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:20.677Z",
+    "engine": "ddg_yahoo"
+  },
+  "first response water damage & mold": {
+    "company": "First Response Water Damage & Mold",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:21.953Z",
+    "engine": "ddg_yahoo"
+  },
+  "cooling advisors": {
+    "company": "Cooling Advisors",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/cooling-advisors/401872081"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:20:22.749Z",
+    "engine": "startpage"
+  },
+  "del-air heating & air conditioning": {
+    "company": "Del-Air Heating & Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:23.668Z",
+    "engine": "ddg_yahoo"
+  },
+  "servpro of winter park": {
+    "company": "Servpro of Winter Park",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:24.146Z",
+    "engine": "ddg_yahoo"
+  },
+  "southern coast services": {
+    "company": "Southern Coast Services",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/southern-coast/357271716"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:20:24.535Z",
+    "engine": "startpage"
+  },
+  "star electrical contractors inc.": {
+    "company": "Star Electrical Contractors Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/star-electric-inc/353917580"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:20:25.703Z",
+    "engine": "startpage"
+  },
+  "cousin's air, inc.": {
+    "company": "Cousin's Air, Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/cousins-air-inc/346811931"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:20:26.341Z",
+    "engine": "startpage"
+  },
+  "elite electric, plumbing & air": {
+    "company": "Elite Electric, Plumbing & Air",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/elite-electric-and-air-inc/358003397"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:20:28.108Z",
+    "engine": "startpage"
+  },
+  "paradise plumbing, air & electric": {
+    "company": "Paradise Plumbing, Air & Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:28.328Z",
+    "engine": "ddg_yahoo"
+  },
+  "tri-county all restorations": {
+    "company": "Tri-County All Restorations",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:29.905Z",
+    "engine": "ddg_yahoo"
+  },
+  "dry pro solutions": {
+    "company": "Dry Pro Solutions",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/dry-first-inc/410569365"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:20:30.011Z",
+    "engine": "startpage"
+  },
+  "coastal comfort inc.": {
+    "company": "Coastal Comfort Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:31.619Z",
+    "engine": "ddg_yahoo"
+  },
+  "tole electric": {
+    "company": "Tole Electric",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "13",
+        "estimate": 13,
+        "low": 13,
+        "high": 13,
+        "source": "ZoomInfo"
+      }
+    },
+    "consensusEstimate": 13,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:09:50.589Z"
+  },
+  "kings electrical and air conditioning": {
+    "company": "Kings Electrical and Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:33.442Z",
+    "engine": "ddg_yahoo"
+  },
+  "all american air filters, inc.": {
+    "company": "All American Air Filters, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:33.563Z",
+    "engine": "ddg_yahoo"
+  },
+  "mokher plumbing company": {
+    "company": "Mokher Plumbing Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:35.123Z",
+    "engine": "ddg_yahoo"
+  },
+  "central comfort air conditioning": {
+    "company": "Central Comfort Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:35.251Z",
+    "engine": "ddg_yahoo"
+  },
+  "istueta roofing": {
+    "company": "Istueta Roofing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "51-200",
+        "estimate": 87,
+        "low": 51,
+        "high": 200,
+        "source": "ZoomInfo",
+        "url": "https://www.startpage.com/clev?event=Sp_x9&sc=gQhKyhqUnZ8Qdfum6V63HIrWJpUlStNGNbpSD074VggljGgHa0GxOUPF8yX8NwcDwSOBlRTh7aUywangdKYLj0Pz2NL3EsvP1YhvRNPDfhcchSCXX&payload=JTdCJTIycCUyMiUzQSUyMmglMjIlMkMlMjJocCUyMiUzQSUyMmF1eCUyMiUyQyUyMnRyJTIyJTNBJTIyaHJlZi1mb2xsb3clMjIlMkMlMjJocGElMjIlM0ElMjJmYXZpY29uJTIyJTdE"
+      }
+    },
+    "consensusEstimate": 87,
+    "checkedAt": "2026-11-12T02:20:36.292Z",
+    "engine": "startpage"
+  },
+  "falcon plumbing": {
+    "company": "Falcon Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:36.767Z",
+    "engine": "ddg_yahoo"
+  },
+  "pro-tech air florida": {
+    "company": "PRO-TECH Air Florida",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/pic/pro-tech-air-conditioning--plumbing-service/92095135"
+      }
+    },
+    "consensusEstimate": 19,
+    "checkedAt": "2026-11-12T02:20:38.392Z",
+    "engine": "startpage"
+  },
+  "abc air conditioning & heating": {
+    "company": "ABC Air Conditioning & Heating",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:38.632Z",
+    "engine": "ddg_yahoo"
+  },
+  "benchmark roofers central fl": {
+    "company": "Benchmark Roofers Central FL",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:40.199Z",
+    "engine": "ddg_yahoo"
+  },
+  "orlando express drain & sewer": {
+    "company": "Orlando Express Drain & Sewer",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:40.447Z",
+    "engine": "ddg_yahoo"
+  },
+  "duval air conditioning": {
+    "company": "Duval Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:42.422Z",
+    "engine": "ddg_yahoo"
+  },
+  "donovan air, electric & plumbing": {
+    "company": "Donovan Air, Electric & Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:42.484Z",
+    "engine": "ddg_yahoo"
+  },
+  "bill williams air conditioning": {
+    "company": "Bill Williams Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:44.410Z",
+    "engine": "ddg_yahoo"
+  },
+  "nefl contractors & maintenance": {
+    "company": "NEFL Contractors & Maintenance",
+    "platforms": {},
+    "consensusEstimate": null,
+    "checkedAt": "2026-11-12T02:20:46.065Z",
+    "engine": "ddg_yahoo"
+  },
+  "cool r us, inc.": {
+    "company": "Cool R Us, Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "1-10",
+        "estimate": 2,
+        "low": 1,
+        "high": 10,
+        "source": "ZoomInfo",
+        "url": "https://www.zoominfo.com/c/cool-r-us-inc/356732246"
+      }
+    },
+    "consensusEstimate": 2,
+    "checkedAt": "2026-11-12T02:20:48.927Z",
+    "engine": "startpage"
+  },
+  "delray beach restoration company": {
+    "company": "Delray Beach Restoration Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:41.827Z"
+  },
+  "charlie's tropic heating & air": {
+    "company": "Charlie's Tropic Heating & Air",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:41.836Z"
+  },
+  "brisk air heating & cooling, inc.": {
+    "company": "Brisk Air Heating & Cooling, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:41.862Z"
+  },
+  "terry vereen plumbing": {
+    "company": "Terry Vereen Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:43.095Z"
+  },
+  "couf plumbing": {
+    "company": "Couf Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:43.159Z"
+  },
+  "turner plumbing co.": {
+    "company": "Turner Plumbing Co.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "9",
+        "estimate": 9,
+        "low": 9,
+        "high": 9,
+        "source": "ZoomInfo"
+      }
+    },
+    "consensusEstimate": 9,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:10:00.088Z"
+  },
+  "touchton plumbing contractors": {
+    "company": "Touchton Plumbing Contractors",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:44.324Z"
+  },
+  "advantage plumbing": {
+    "company": "Advantage Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:44.531Z"
+  },
+  "bill fenwick plumbing": {
+    "company": "Bill Fenwick Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:44.532Z"
+  },
+  "harry l. hayes plumbing, inc.": {
+    "company": "Harry L. Hayes Plumbing, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:45.691Z"
+  },
+  "american plumbing contractors, inc.": {
+    "company": "American Plumbing Contractors, Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "19",
+        "estimate": 19,
+        "low": 19,
+        "high": 19,
+        "source": "ZoomInfo"
+      },
+      "LeadIQ": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "LeadIQ"
+      }
+    },
+    "consensusEstimate": 19,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:10:03.626Z"
+  },
+  "miller electric company": {
+    "company": "Miller Electric Company",
+    "platforms": {
+      "SignalHire": {
+        "raw": "686",
+        "estimate": 686,
+        "low": 686,
+        "high": 686,
+        "source": "SignalHire"
+      },
+      "ZoomInfo": {
+        "raw": "446",
+        "estimate": 446,
+        "low": 446,
+        "high": 446,
+        "source": "ZoomInfo"
+      }
+    },
+    "consensusEstimate": 686,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:10:04.303Z"
+  },
+  "cogburn brothers, inc.": {
+    "company": "Cogburn Brothers, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:46.926Z"
+  },
+  "american electrical contracting, inc.": {
+    "company": "American Electrical Contracting, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:47.034Z"
+  },
+  "advanced electrical solutions, inc.": {
+    "company": "Advanced Electrical Solutions, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:47.287Z"
+  },
+  "mardant electrical": {
+    "company": "Mardant Electrical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:48.237Z"
+  },
+  "advanced electric of north florida": {
+    "company": "Advanced Electric of North Florida",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:48.257Z"
+  },
+  "wallace electric company": {
+    "company": "Wallace Electric Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:48.683Z"
+  },
+  "legacy power solutions": {
+    "company": "Legacy Power Solutions",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:49.463Z"
+  },
+  "coastal elite llc": {
+    "company": "Coastal Elite LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:49.514Z"
+  },
+  "empire electric": {
+    "company": "Empire Electric",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "45",
+        "estimate": 45,
+        "low": 45,
+        "high": 45,
+        "source": "ZoomInfo"
+      },
+      "LeadIQ": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "LeadIQ"
+      }
+    },
+    "consensusEstimate": 45,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:10:09.517Z"
+  },
+  "crawford electric": {
+    "company": "Crawford Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:50.753Z"
+  },
+  "nexgen roofing": {
+    "company": "NexGen Roofing",
+    "platforms": {
+      "SignalHire": {
+        "raw": "10-50",
+        "estimate": 17,
+        "low": 10,
+        "high": 50,
+        "source": "SignalHire"
+      },
+      "LeadIQ": {
+        "raw": "7",
+        "estimate": 7,
+        "low": 7,
+        "high": 7,
+        "source": "LeadIQ"
+      }
+    },
+    "consensusEstimate": 17,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:10:10.646Z"
+  },
+  "perry roofing contractors": {
+    "company": "Perry Roofing Contractors",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:51.357Z"
+  },
+  "benton integrity roofing systems": {
+    "company": "Benton Integrity Roofing Systems",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:52.177Z"
+  },
+  "trinity restoration & roofing": {
+    "company": "Trinity Restoration & Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:52.198Z"
+  },
+  "effective roofing": {
+    "company": "Effective Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:52.673Z"
+  },
+  "elo roofing": {
+    "company": "Elo Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:53.559Z"
+  },
+  "jbl roofing llc": {
+    "company": "JBL Roofing LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:53.626Z"
+  },
+  "schick roofing": {
+    "company": "Schick Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:54.077Z"
+  },
+  "a&t roofing and exteriors llc": {
+    "company": "A&T Roofing and Exteriors LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:59.768Z"
+  },
+  "pro-tech air conditioning & plumbing service": {
+    "company": "Pro-Tech Air Conditioning & Plumbing Service",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:59.800Z"
+  },
+  "empire electrical contractors, llc": {
+    "company": "Empire Electrical Contractors, LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:07:59.917Z"
+  },
+  "ac's heating & air llc": {
+    "company": "AC's Heating & Air LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:01.187Z"
+  },
+  "allegiance plumbing": {
+    "company": "Allegiance Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:01.351Z"
+  },
+  "shamrock plumbing and drain cleaning inc.": {
+    "company": "Shamrock Plumbing and Drain Cleaning Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:01.351Z"
+  },
+  "michael's plumbing of central florida inc.": {
+    "company": "Michael's Plumbing of Central Florida Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:02.577Z"
+  },
+  "coolair air conditioning & heating": {
+    "company": "Coolair Air Conditioning & Heating",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:02.680Z"
+  },
+  "rohaley & sons plumbing contractors": {
+    "company": "Rohaley & Sons Plumbing Contractors",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:02.764Z"
+  },
+  "f&f refrigeration & air conditioning services inc.": {
+    "company": "F&F Refrigeration & Air Conditioning Services Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:03.939Z"
+  },
+  "plumbing, cooling & electrical nerds": {
+    "company": "Plumbing, Cooling & Electrical Nerds",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:04.012Z"
+  },
+  "acra electric, inc.": {
+    "company": "ACRA Electric, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:04.281Z"
+  },
+  "collier electric company of fort myers": {
+    "company": "Collier Electric Company of Fort Myers",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:05.247Z"
+  },
+  "gator electrical contractors": {
+    "company": "Gator Electrical Contractors",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:05.328Z"
+  },
+  "kirkwood electric": {
+    "company": "Kirkwood Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:05.761Z"
+  },
+  "ncs electric inc.": {
+    "company": "NCS Electric Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:06.560Z"
+  },
+  "pride plumbing co.": {
+    "company": "Pride Plumbing Co.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:06.717Z"
+  },
+  "kenneth lee cutlip plumbing": {
+    "company": "Kenneth Lee Cutlip Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:07.132Z"
+  },
+  "snook's services llc": {
+    "company": "Snook's Services LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:07.850Z"
+  },
+  "vip plumbing solutions llc": {
+    "company": "VIP Plumbing Solutions LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:08.025Z"
+  },
+  "roman roofing": {
+    "company": "Roman Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:08.337Z"
+  },
+  "aqua plumbing & air": {
+    "company": "Aqua Plumbing & Air",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:09.235Z"
+  },
+  "r.o.h. mechanical llc": {
+    "company": "R.O.H. Mechanical LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:09.314Z"
+  },
+  "mcdonald home services": {
+    "company": "McDonald Home Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:09.650Z"
+  },
+  "air & energy": {
+    "company": "Air & Energy",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:10.704Z"
+  },
+  "fox plumbing services inc.": {
+    "company": "Fox Plumbing Services Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:10.770Z"
+  },
+  "professional plumbing & design": {
+    "company": "Professional Plumbing & Design",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:11.120Z"
+  },
+  "west coast air conditioning & heating": {
+    "company": "West Coast Air Conditioning & Heating",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:12.064Z"
+  },
+  "lt plumbing llc": {
+    "company": "LT Plumbing LLC",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "22",
+        "estimate": 22,
+        "low": 22,
+        "high": 22,
+        "source": "ZoomInfo"
+      },
+      "LeadIQ": {
+        "raw": "22",
+        "estimate": 22,
+        "low": 22,
+        "high": 22,
+        "source": "LeadIQ"
+      },
+      "SignalHire": {
+        "raw": "100-200",
+        "estimate": 135,
+        "low": 100,
+        "high": 200,
+        "source": "SignalHire"
+      }
+    },
+    "consensusEstimate": 22,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:10:32.693Z"
+  },
+  "conditioned air": {
+    "company": "Conditioned Air",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:12.550Z"
+  },
+  "cooper's plumbing & air": {
+    "company": "Cooper's Plumbing & Air",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:13.391Z"
+  },
+  "c & s heating and cooling": {
+    "company": "C & S Heating and Cooling",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:13.419Z"
+  },
+  "watts cooling, heating & plumbing": {
+    "company": "Watts Cooling, Heating & Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:13.916Z"
+  },
+  "patrick's heating & air conditioning": {
+    "company": "Patrick's Heating & Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:14.702Z"
+  },
+  "and services": {
+    "company": "AND Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:14.751Z"
+  },
+  "peaden air conditioning, plumbing & electrical": {
+    "company": "Peaden Air Conditioning, Plumbing & Electrical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:15.171Z"
+  },
+  "a superior mechanical": {
+    "company": "A Superior Mechanical",
+    "platforms": {
+      "LeadIQ": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "LeadIQ"
+      }
+    },
+    "consensusEstimate": 19,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:10:37.826Z"
+  },
+  "holiday beach companies": {
+    "company": "Holiday Beach Companies",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:16.033Z"
+  },
+  "system service & engineering, inc.": {
+    "company": "System Service & Engineering, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:16.488Z"
+  },
+  "prime plumbing & septic services": {
+    "company": "Prime Plumbing & Septic Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:17.188Z"
+  },
+  "benefield plumbing": {
+    "company": "Benefield Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:17.364Z"
+  },
+  "whale roofing & construction llc": {
+    "company": "Whale Roofing & Construction LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:17.716Z"
+  },
+  "mike mcgilvary roofing, inc.": {
+    "company": "Mike McGilvary Roofing, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:18.398Z"
+  },
+  "blues brothers roofing company": {
+    "company": "Blues Brothers Roofing Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:18.734Z"
+  },
+  "sts impact windows, doors & roofing": {
+    "company": "STS Impact Windows, Doors & Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:18.992Z"
+  },
+  "cape plumbing inc.": {
+    "company": "Cape Plumbing Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:19.630Z"
+  },
+  "ees plumbers boca raton": {
+    "company": "EES Plumbers Boca Raton",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:19.965Z"
+  },
+  "team plumbing and drains": {
+    "company": "Team Plumbing and Drains",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:20.385Z"
+  },
+  "broward plumbing inc.": {
+    "company": "Broward Plumbing Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:20.958Z"
+  },
+  "a2z air inc.": {
+    "company": "A2Z Air Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:21.237Z"
+  },
+  "florida cool air conditioning": {
+    "company": "Florida Cool Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:21.671Z"
+  },
+  "license to chill ac": {
+    "company": "License To Chill AC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:22.208Z"
+  },
+  "air america ac": {
+    "company": "Air America AC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:22.608Z"
+  },
+  "simon electric llc": {
+    "company": "Simon Electric LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:22.905Z"
+  },
+  "electrical by langer electric co.": {
+    "company": "Electrical By Langer Electric Co.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:23.420Z"
+  },
+  "florida breaker & led electric": {
+    "company": "Florida Breaker & LED Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:23.878Z"
+  },
+  "the plumbing experts, inc.": {
+    "company": "The Plumbing Experts, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:24.198Z"
+  },
+  "lee wilder plumbing incorporated": {
+    "company": "Lee Wilder Plumbing Incorporated",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:24.613Z"
+  },
+  "tiny plumber services": {
+    "company": "Tiny Plumber Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:25.162Z"
+  },
+  "your 1 plumber fl": {
+    "company": "Your 1 Plumber FL",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:25.462Z"
+  },
+  "boynton ac company": {
+    "company": "Boynton AC Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:25.911Z"
+  },
+  "aloha plumbing south florida, inc.": {
+    "company": "Aloha Plumbing South Florida, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:26.531Z"
+  },
+  "xlectrical": {
+    "company": "Xlectrical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:26.813Z"
+  },
+  "others electric inc.": {
+    "company": "Others Electric Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:27.130Z"
+  },
+  "ecm air conditioning": {
+    "company": "ECM Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:27.863Z"
+  },
+  "smyth air conditioning inc.": {
+    "company": "Smyth Air Conditioning Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:28.131Z"
+  },
+  "a.r. williams air conditioning": {
+    "company": "A.R. Williams Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:28.417Z"
+  },
+  "atlantis air conditioning corp.": {
+    "company": "Atlantis Air Conditioning Corp.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:29.164Z"
+  },
+  "all temp solutions inc.": {
+    "company": "All Temp Solutions Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:29.349Z"
+  },
+  "polar comfort inc.": {
+    "company": "Polar Comfort Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:29.617Z"
+  },
+  "general plumbing and air conditioning": {
+    "company": "General Plumbing and Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:30.383Z"
+  },
+  "all pro plumbing & drain cleaning inc.": {
+    "company": "All Pro Plumbing & Drain Cleaning Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:30.636Z"
+  },
+  "drg electric inc.": {
+    "company": "DRG Electric Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:30.825Z"
+  },
+  "freshwater and son's electric llc": {
+    "company": "Freshwater and Son's Electric LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:31.776Z"
+  },
+  "lightning electric inc.": {
+    "company": "Lightning Electric Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo"
+      }
+    },
+    "consensusEstimate": 19,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:01.809Z"
+  },
+  "bobera llc plumbing": {
+    "company": "BOBERA LLC Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:32.113Z"
+  },
+  "4 star plumbing services": {
+    "company": "4 Star Plumbing Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:33.083Z"
+  },
+  "need a plumber inc.": {
+    "company": "Need a Plumber Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:33.272Z"
+  },
+  "paradise plumbing & air conditioning": {
+    "company": "Paradise Plumbing & Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:33.433Z"
+  },
+  "farmington construction co.": {
+    "company": "Farmington Construction Co.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:34.437Z"
+  },
+  "american roofing tech, inc.": {
+    "company": "American Roofing Tech, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:34.501Z"
+  },
+  "art plumbing, air conditioning & electric": {
+    "company": "Art Plumbing, Air Conditioning & Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:34.665Z"
+  },
+  "tlc electrical solutions": {
+    "company": "TLC Electrical Solutions",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:35.827Z"
+  },
+  "quick fix plumbing": {
+    "company": "Quick Fix Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:35.842Z"
+  },
+  "florida hvac contractor inc.": {
+    "company": "Florida HVAC Contractor Inc.",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "6",
+        "estimate": 6,
+        "low": 6,
+        "high": 6,
+        "source": "ZoomInfo"
+      }
+    },
+    "consensusEstimate": 6,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:08.182Z"
+  },
+  "kendale air conditioning": {
+    "company": "Kendale Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:37.044Z"
+  },
+  "flow-tech air conditioning corp.": {
+    "company": "Flow-Tech Air Conditioning Corp.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:37.112Z"
+  },
+  "rci air conditioning company": {
+    "company": "RCI Air Conditioning Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:37.348Z"
+  },
+  "one hour air conditioning miami": {
+    "company": "One Hour Air Conditioning Miami",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:38.287Z"
+  },
+  "service experts miami": {
+    "company": "Service Experts Miami",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:38.488Z"
+  },
+  "ars / rescue rooter doral": {
+    "company": "ARS / Rescue Rooter Doral",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:38.668Z"
+  },
+  "perfect roofing of florida": {
+    "company": "Perfect Roofing of Florida",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:39.539Z"
+  },
+  "a & j roofing corp": {
+    "company": "A & J Roofing Corp",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:39.718Z"
+  },
+  "all roofers hialeah": {
+    "company": "All Roofers Hialeah",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:39.873Z"
+  },
+  "weatherguard roofing & waterproofing": {
+    "company": "Weatherguard Roofing & Waterproofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:40.790Z"
+  },
+  "jamco roofing": {
+    "company": "Jamco Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:40.931Z"
+  },
+  "isaac david roofing": {
+    "company": "Isaac David Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:41.086Z"
+  },
+  "ecopowertech electrical": {
+    "company": "ECOPOWERTECH Electrical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:42.236Z"
+  },
+  "led are us electric": {
+    "company": "LED Are Us Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:42.264Z"
+  },
+  "led tech miami": {
+    "company": "LED Tech Miami",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:42.369Z"
+  },
+  "miami power electric & lighting": {
+    "company": "Miami Power Electric & Lighting",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:43.628Z"
+  },
+  "miami power company": {
+    "company": "Miami Power Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:43.680Z"
+  },
+  "j & r restoration services, inc.": {
+    "company": "J & R Restoration Services, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:43.698Z"
+  },
+  "express emergency services": {
+    "company": "Express Emergency Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:44.954Z"
+  },
+  "water damage solutions": {
+    "company": "Water Damage Solutions",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:45.019Z"
+  },
+  "boca raton water cleanup": {
+    "company": "Boca Raton Water Cleanup",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:45.046Z"
+  },
+  "roof x, inc.": {
+    "company": "Roof X, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:46.258Z"
+  },
+  "air cavalry llc": {
+    "company": "Air Cavalry LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:46.340Z"
+  },
+  "bill shields roofing": {
+    "company": "Bill Shields Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:46.400Z"
+  },
+  "harrell home services inc.": {
+    "company": "Harrell Home Services Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:47.641Z"
+  },
+  "chill masters ac llc": {
+    "company": "Chill Masters AC LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:47.641Z"
+  },
+  "reyna ac htg refrigeration services": {
+    "company": "Reyna AC Htg Refrigeration Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:47.708Z"
+  },
+  "drain flo plumbing": {
+    "company": "Drain Flo Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:48.847Z"
+  },
+  "allstar electrical experts": {
+    "company": "Allstar Electrical Experts",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:48.945Z"
+  },
+  "air stream a/c & electrical": {
+    "company": "Air Stream A/C & Electrical",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:49.073Z"
+  },
+  "freedom a/c": {
+    "company": "Freedom A/C",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:50.197Z"
+  },
+  "smart heating & cooling": {
+    "company": "Smart Heating & Cooling",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:50.258Z"
+  },
+  "orion heating and air": {
+    "company": "Orion Heating and Air",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:50.298Z"
+  },
+  "billy the sunshine plumber": {
+    "company": "Billy The Sunshine Plumber",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:51.406Z"
+  },
+  "in phaze electric inc.": {
+    "company": "In Phaze Electric Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:08:51.631Z"
+  },
+  "orlando ac and air conditioning pros": {
+    "company": "Orlando AC and Air Conditioning Pros",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:29.167Z"
+  },
+  "mahogany roofing inc.": {
+    "company": "Mahogany Roofing Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:30.266Z"
+  },
+  "thumb cooling & heating": {
+    "company": "Thumb Cooling & Heating",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:31.322Z"
+  },
+  "kalos services": {
+    "company": "Kalos Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:31.476Z"
+  },
+  "flamingo electric": {
+    "company": "Flamingo Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:32.478Z"
+  },
+  "w.w. gay mechanical contractor": {
+    "company": "W.W. Gay Mechanical Contractor",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:32.562Z"
+  },
+  "raven roofing & restoration": {
+    "company": "Raven Roofing & Restoration",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:33.803Z"
+  },
+  "locke's air conditioning": {
+    "company": "Locke's Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:33.898Z"
+  },
+  "freeman roofing": {
+    "company": "Freeman Roofing",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "11-50",
+        "estimate": 19,
+        "low": 11,
+        "high": 50,
+        "source": "ZoomInfo"
+      }
+    },
+    "consensusEstimate": 19,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:34.942Z"
+  },
+  "dac roofing, llc": {
+    "company": "DAC Roofing, LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:34.984Z"
+  },
+  "abram roofing": {
+    "company": "Abram Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:36.025Z"
+  },
+  "charles hero plumbing inc.": {
+    "company": "Charles Hero Plumbing Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:36.111Z"
+  },
+  "advanced plumbing systems, inc.": {
+    "company": "Advanced Plumbing Systems, Inc.",
+    "platforms": {
+      "SignalHire": {
+        "raw": "3",
+        "estimate": 3,
+        "low": 3,
+        "high": 3,
+        "source": "SignalHire"
+      }
+    },
+    "consensusEstimate": 3,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:37.129Z"
+  },
+  "maynard electric": {
+    "company": "Maynard Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:37.236Z"
+  },
+  "coastline outdoor lighting": {
+    "company": "Coastline Outdoor Lighting",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:38.303Z"
+  },
+  "trident electric company": {
+    "company": "Trident Electric Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:38.343Z"
+  },
+  "darcy roofing llc": {
+    "company": "Darcy Roofing LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:39.546Z"
+  },
+  "gulf coast electric": {
+    "company": "Gulf Coast Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:39.603Z"
+  },
+  "blue sky roofing": {
+    "company": "Blue Sky Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:40.835Z"
+  },
+  "usi roofing inc.": {
+    "company": "USI Roofing Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:40.875Z"
+  },
+  "duralast roofing and construction": {
+    "company": "Duralast Roofing and Construction",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:41.970Z"
+  },
+  "mitchell roofing company llc": {
+    "company": "Mitchell Roofing Company LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:42.149Z"
+  },
+  "tarheel commercial roofing": {
+    "company": "TarHeel Commercial Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:43.227Z"
+  },
+  "custom air & plumbing": {
+    "company": "Custom Air & Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:43.263Z"
+  },
+  "best home services": {
+    "company": "Best Home Services",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:44.414Z"
+  },
+  "pro-tec plumbing and air": {
+    "company": "Pro-Tec Plumbing and Air",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:44.477Z"
+  },
+  "gulf shore cooling llc": {
+    "company": "Gulf Shore Cooling LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:45.592Z"
+  },
+  "plumbing cooling electrical nerds": {
+    "company": "Plumbing Cooling Electrical Nerds",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:45.650Z"
+  },
+  "electriciansx": {
+    "company": "ElectriciansX",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:46.908Z"
+  },
+  "aztec roofs": {
+    "company": "Aztec Roofs",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:46.999Z"
+  },
+  "collier electric company": {
+    "company": "Collier Electric Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:48.151Z"
+  },
+  "kelly air systems": {
+    "company": "Kelly Air Systems",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:48.198Z"
+  },
+  "lowery roofing": {
+    "company": "Lowery Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:49.246Z"
+  },
+  "sugar sands construction and roofing": {
+    "company": "Sugar Sands Construction and Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:49.298Z"
+  },
+  "brielle construction llc": {
+    "company": "Brielle Construction LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:50.413Z"
+  },
+  "terry sowell roofing": {
+    "company": "Terry Sowell Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:50.515Z"
+  },
+  "jacob hill roofing llc": {
+    "company": "Jacob Hill Roofing LLC",
+    "platforms": {
+      "ZoomInfo": {
+        "raw": "4",
+        "estimate": 4,
+        "low": 4,
+        "high": 4,
+        "source": "ZoomInfo"
+      }
+    },
+    "consensusEstimate": 4,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:51.498Z"
+  },
+  "we care heating, cooling, plumbing & electric": {
+    "company": "We Care Heating, Cooling, Plumbing & Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:51.669Z"
+  },
+  "climatech of professional air, inc.": {
+    "company": "Climatech of Professional Air, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:52.743Z"
+  },
+  "all repair heat and air": {
+    "company": "All Repair Heat and Air",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:52.790Z"
+  },
+  "jacksonville winlectric": {
+    "company": "Jacksonville Winlectric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:54.028Z"
+  },
+  "ideal conditions heating, air conditioning & plumbing": {
+    "company": "Ideal Conditions Heating, Air Conditioning & Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:54.037Z"
+  },
+  "affordable quality roofing llc": {
+    "company": "Affordable Quality Roofing LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:55.257Z"
+  },
+  "revildor roofing & repair orlando": {
+    "company": "Revildor Roofing & Repair Orlando",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:55.266Z"
+  },
+  "the roofing experts": {
+    "company": "The Roofing Experts",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:56.463Z"
+  },
+  "roof replacements & repair llc": {
+    "company": "Roof Replacements & Repair LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:56.529Z"
+  },
+  "mr. rooter plumbing of port st. lucie-stuart": {
+    "company": "Mr. Rooter Plumbing of Port St. Lucie-Stuart",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:57.644Z"
+  },
+  "priority plumbers llc": {
+    "company": "Priority Plumbers LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:57.718Z"
+  },
+  "stuart plumbing": {
+    "company": "Stuart Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:58.897Z"
+  },
+  "john's plumbing": {
+    "company": "John's Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:11:58.953Z"
+  },
+  "dylewski plumbing inc.": {
+    "company": "Dylewski Plumbing Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:00.049Z"
+  },
+  "coastal commercial services, inc.": {
+    "company": "Coastal Commercial Services, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:00.218Z"
+  },
+  "bellwether electric company": {
+    "company": "Bellwether Electric Company",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:01.251Z"
+  },
+  "goldstar electric, inc.": {
+    "company": "Goldstar Electric, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:01.357Z"
+  },
+  "rocket cooling": {
+    "company": "Rocket Cooling",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:02.372Z"
+  },
+  "climate experts air plumbing & electric": {
+    "company": "Climate Experts Air Plumbing & Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:02.508Z"
+  },
+  "moore's air and heat, inc.": {
+    "company": "Moore's Air And Heat, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:03.594Z"
+  },
+  "certified plumbing, air and heat, inc.": {
+    "company": "Certified Plumbing, Air And Heat, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:03.742Z"
+  },
+  "quality comfort air conditioning and heating": {
+    "company": "Quality Comfort Air Conditioning And Heating",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:04.735Z"
+  },
+  "mark's air conditioning, inc.": {
+    "company": "Mark's Air Conditioning, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:04.918Z"
+  },
+  "advanced air conditioning and heat": {
+    "company": "Advanced Air Conditioning and Heat",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:06.060Z"
+  },
+  "brooks heating & air conditioning llc": {
+    "company": "Brooks Heating & Air Conditioning LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:06.141Z"
+  },
+  "air docs heating & cooling": {
+    "company": "Air Docs Heating & Cooling",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:07.410Z"
+  },
+  "palm bay air care experts": {
+    "company": "Palm Bay Air Care Experts",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:07.475Z"
+  },
+  "florida breeze air conditioning": {
+    "company": "Florida Breeze Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:08.563Z"
+  },
+  "a/c service masters, llc": {
+    "company": "A/C Service Masters, LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:08.628Z"
+  },
+  "behrens heating & air conditioning, inc.": {
+    "company": "Behrens Heating & Air Conditioning, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:09.782Z"
+  },
+  "campbell's cooling and heating, inc.": {
+    "company": "Campbell's Cooling and Heating, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:09.805Z"
+  },
+  "blaisin air llc": {
+    "company": "Blaisin Air LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:10.928Z"
+  },
+  "all pro plumbing & air lakeland": {
+    "company": "All Pro Plumbing & Air Lakeland",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:10.987Z"
+  },
+  "blue line air conditioning & heating, llc": {
+    "company": "Blue Line Air Conditioning & Heating, LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:12.193Z"
+  },
+  "central air of florida llc": {
+    "company": "Central Air of Florida LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:12.241Z"
+  },
+  "byrd's construction & roofing llc": {
+    "company": "Byrd's Construction & Roofing LLC",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:13.342Z"
+  },
+  "outhouse septic system services, inc.": {
+    "company": "Outhouse Septic System Services, Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:13.437Z"
+  },
+  "airtron heating & air conditioning": {
+    "company": "Airtron Heating & Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:14.618Z"
+  },
+  "reliable construction & plumbing": {
+    "company": "Reliable Construction & Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:14.856Z"
+  },
+  "downtown lighting centre": {
+    "company": "Downtown Lighting Centre",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:15.779Z"
+  },
+  "collier roofing inc.": {
+    "company": "Collier Roofing Inc.",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:15.977Z"
+  },
+  "coastal air & refrigeration": {
+    "company": "Coastal Air & Refrigeration",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:16.946Z"
+  },
+  "east coast battery & electric": {
+    "company": "East Coast Battery & Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:17.109Z"
+  },
+  "spec building materials corp": {
+    "company": "SPEC Building Materials Corp",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:18.290Z"
+  },
+  "island marine electric": {
+    "company": "Island Marine Electric",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:18.365Z"
+  },
+  "atlantic equipment roofing": {
+    "company": "Atlantic Equipment Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:19.566Z"
+  },
+  "roto-rooter lake worth": {
+    "company": "Roto-Rooter Lake Worth",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:19.664Z"
+  },
+  "executive water systems": {
+    "company": "Executive Water Systems",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:20.793Z"
+  },
+  "mr. rooter boca raton": {
+    "company": "Mr. Rooter Boca Raton",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:20.840Z"
+  },
+  "holt filters clearwater": {
+    "company": "Holt Filters Clearwater",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:21.973Z"
+  },
+  "total repair pros boynton": {
+    "company": "Total Repair Pros Boynton",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:22.199Z"
+  },
+  "aa american air conditioning": {
+    "company": "AA American Air Conditioning",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:23.056Z"
+  },
+  "warren malkiel plumbing": {
+    "company": "Warren Malkiel Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:23.556Z"
+  },
+  "cleary plumbing & air": {
+    "company": "Cleary Plumbing & Air",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:24.178Z"
+  },
+  "elite seal roofing boca": {
+    "company": "Elite Seal Roofing Boca",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:24.774Z"
+  },
+  "all phase construction usa": {
+    "company": "All Phase Construction USA",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:25.420Z"
+  },
+  "flowpro plumbing clearwater": {
+    "company": "FlowPro Plumbing Clearwater",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:26.122Z"
+  },
+  "experts tampa plumbing": {
+    "company": "Experts Tampa Plumbing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:26.624Z"
+  },
+  "byrd's construction & roofing": {
+    "company": "Byrd's Construction & Roofing",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:27.292Z"
+  },
+  "yousef altamonte plumber service": {
+    "company": "Yousef Altamonte Plumber Service",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:27.854Z"
+  },
+  "elite power solutions palm beach": {
+    "company": "Elite Power Solutions Palm Beach",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:28.413Z"
+  },
+  "sansone air conditioning deerfield": {
+    "company": "Sansone Air Conditioning Deerfield",
+    "platforms": {},
+    "consensusEstimate": null,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:29.076Z"
+  },
+  "one hour air conditioning west palm": {
+    "company": "One Hour Air Conditioning West Palm",
+    "platforms": {
+      "SignalHire": {
+        "raw": "138",
+        "estimate": 138,
+        "low": 138,
+        "high": 138,
+        "source": "SignalHire"
+      }
+    },
+    "consensusEstimate": 138,
+    "engine": "ddg_yahoo",
+    "checkedAt": "2026-11-12T03:12:29.559Z"
+  }
+}

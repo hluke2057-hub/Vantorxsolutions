@@ -353,7 +353,60 @@
     }
   ];
 
+  // Clean Minimalist Highlight Covers (00)
+  const CLEAN_COVERS = [
+    { file: 'covers/cover_01_ava_ai.png', name: 'Cover 01 — AVA AI (Circle-Safe)' },
+    { file: 'covers/cover_02_leadflow.png', name: 'Cover 02 — LEADFLOW (Circle-Safe)' },
+    { file: 'covers/cover_03_websites.png', name: 'Cover 03 — WEBSITES (Circle-Safe)' },
+    { file: 'covers/cover_04_aeo_rank.png', name: 'Cover 04 — AEO RANK (Circle-Safe)' },
+    { file: 'covers/cover_05_accelerate.png', name: 'Cover 05 — ACCELERATE (Circle-Safe)' },
+    { file: 'covers/cover_06_results.png', name: 'Cover 06 — RESULTS (Circle-Safe)' },
+    { file: 'covers/cover_07_live_demo.png', name: 'Cover 07 — LIVE DEMO (Circle-Safe)' },
+    { file: 'covers/cover_08_scale_fleet.png', name: 'Cover 08 — SCALE (Circle-Safe)' }
+  ];
+
+  const coverSec = document.createElement('section');
+  coverSec.className = 'category-section';
+  coverSec.innerHTML = `
+    <div class="category-header">
+      <div class="category-title-wrap">
+        <span class="category-num" style="border-color:rgba(52,211,153,0.45);color:#34d399;background:rgba(16,185,129,0.16)">CLEAN COVERS</span>
+        <h3 class="category-title">8 Minimalist Highlight Covers (1080×1080 Circle-Safe)</h3>
+      </div>
+      <button type="button" class="btn btn-emerald" onclick="downloadAllCovers()">
+        <span>✨</span> <span>Download All 8 Clean Covers</span>
+      </button>
+    </div>
+    <div class="slides-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      ${CLEAN_COVERS.map(c => `
+        <div class="slide-card">
+          <a href="highlights/${c.file}" target="_blank" class="slide-img-wrap" style="aspect-ratio:1/1" title="Click to view full 1080x1080 cover">
+            <img src="highlights/${c.file}" alt="${c.name}" loading="lazy" />
+          </a>
+          <div class="slide-footer">
+            <div>
+              <div class="slide-label">${c.name.split(' — ')[1]}</div>
+              <div class="slide-sub">1080×1080 Minimal PNG</div>
+            </div>
+            <a href="highlights/${c.file}" download="${c.file.split('/')[1]}" class="btn-dl-single">⬇ Save PNG</a>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
   const container = document.getElementById('categoriesContainer');
+  container.appendChild(coverSec);
+
+  async function downloadAllCovers() {
+    for (let i = 0; i < CLEAN_COVERS.length; i++) {
+      const c = CLEAN_COVERS[i];
+      showToast(`Saving Clean Cover ${i + 1}/8...`);
+      triggerDownload(`highlights/${c.file}`, c.file.split('/')[1]);
+      await new Promise(r => setTimeout(r, 340));
+    }
+    showToast('✅ All 8 Clean Instagram Highlight Covers Downloaded!');
+    setTimeout(() => { document.getElementById('dlStatusToast').style.display = 'none'; }, 3000);
+  }
 
   HIGHLIGHT_GROUPS.forEach((group, gIdx) => {
     const sec = document.createElement('section');
