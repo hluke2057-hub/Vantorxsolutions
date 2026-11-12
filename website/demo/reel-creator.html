@@ -1142,8 +1142,8 @@
   </div>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
     <a href="video/vantorx-speed-to-lead-reel.mp4?v=8912" download="vantorx-speed-to-lead-reel.mp4" style="background:#f59e0b;color:#0b0f19;font-weight:800;font-size:13.5px;padding:11px 22px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(245,158,11,0.4)"><span>📥</span> <span>Download Reel #1 (89s MP4)</span></a>
-    <a href="video/vantorx-30s-reel-2.mp4?v=nvidia" download="vantorx-30s-reel-2.mp4" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:#04121d;font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(56,189,248,0.4)"><span>⚡</span> <span>Download NEW Reel #2 (&lt;30s MP4)</span></a>
-    <a href="video/vantorx-30s-reel-2.mp4?v=nvidia" target="_blank" style="color:#7dd3fc;font-size:12.5px;text-decoration:none;font-weight:600;padding:9px 14px;border:1px solid rgba(56,189,248,0.4);border-radius:8px">Preview Reel #2 (29.7s) ↗</a>
+    <a href="video/vantorx-30s-reel-2.mp4?v=cueva_master" download="vantorx-30s-reel-2.mp4" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:#04121d;font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(56,189,248,0.4)"><span>⚡</span> <span>Download NEW Reel #2 (&lt;30s MP4)</span></a>
+    <a href="video/vantorx-30s-reel-2.mp4?v=cueva_master" target="_blank" style="color:#7dd3fc;font-size:12.5px;text-decoration:none;font-weight:600;padding:9px 14px;border:1px solid rgba(56,189,248,0.4);border-radius:8px">Preview Reel #2 (26.3s) ↗</a>
     <a href="/instagram-package/VantorX_Instagram_Highlights_Complete_Package.zip" download="VantorX_Instagram_Highlights_Complete_Package.zip" style="background:#10b981;color:#041f14;font-weight:800;font-size:13.5px;padding:11px 18px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(16,185,129,0.35)">
       <span>📦</span> <span>Download IG Highlights + 8 Clean Covers (.ZIP)</span>
     </a>
@@ -1385,7 +1385,7 @@
     </div>
     <canvas id="reelCanvas" width="540" height="960" onclick="togglePlay()" style="cursor:pointer"></canvas>
 
-    <video id="masterMp4Player" src="video/vantorx-30s-reel-2.mp4?v=nvidia" controls playsinline preload="auto" style="display:none;width:100%;max-width:540px;height:auto;aspect-ratio:9/16;border-radius:12px;background:#000;box-shadow:0 12px 48px rgba(0,0,0,0.8)"></video>
+    <video id="masterMp4Player" src="video/vantorx-30s-reel-2.mp4?v=cueva_master" poster="video/reel_nvidia_act1_hook.png?v=cueva_master" controls playsinline preload="auto" style="display:none;width:100%;max-width:540px;height:auto;aspect-ratio:9/16;border-radius:12px;background:#000;box-shadow:0 12px 48px rgba(0,0,0,0.8)"></video>
 
   </div>
   </div>
@@ -7046,8 +7046,9 @@ Or comment "AVA" below and we'll audit your shop's speed-to-lead.
     },
     2: {
       title: "Reel #2: How Nvidia's CEO Cheated & The $8,000 Bleed — 27.0s Viral Cut",
-      videoSrc: "video/vantorx-30s-reel-2.mp4?v=nvidia",
-      duration: "00:27",
+      videoSrc: "video/vantorx-30s-reel-2.mp4?v=cueva_master",
+      poster: "video/reel_nvidia_act1_hook.png?v=cueva_master",
+      duration: "00:26",
       subTitle: "Nvidia's CEO Cheated · 1995 Sega Rescue · Nobody's Perfect · Ava Voice AI",
       caption: `Nvidia’s CEO cheated. Let me explain. 🧠
 
@@ -7111,6 +7112,7 @@ Or drop "AVA" below and we’ll set up your shop's demo.
       const wasPlaying = !masterVideo.paused;
       masterVideo.pause();
       masterVideo.src = meta.videoSrc;
+      if (meta.poster) masterVideo.poster = meta.poster;
       masterVideo.load();
       masterVideo.style.display = 'block';
       if (canvas) canvas.style.display = 'none';
