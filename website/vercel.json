@@ -1,69 +1,194 @@
 {
   "rewrites": [
-    { "source": "/api/auth/:action", "destination": "/api/auth?action=:action" },
-    { "source": "/api/businesses/create", "destination": "/api/businesses" },
-    { "source": "/api/businesses/:id", "destination": "/api/businesses?id=:id" },
-    { "source": "/api/receptionist/:action", "destination": "/api/receptionist?action=:action" },
-    { "source": "/api/onboarding/:action", "destination": "/api/onboarding?action=:action" },
-    { "source": "/api/billing/:action", "destination": "/api/billing?action=:action" },
-    { "source": "/api/appointments/:id", "destination": "/api/appointments?id=:id" },
-    { "source": "/api/send-email", "destination": "/api/notifications?action=send-email" },
-    { "source": "/api/notifications/:action", "destination": "/api/notifications?action=:action" },
-    { "source": "/api/change-requests/:id", "destination": "/api/change-requests?id=:id" },
-    { "source": "/api/admin/inquiries", "destination": "/api/change-requests?action=inquiries" },
-    { "source": "/api/reps", "destination": "/api/audit?action=rep-roster" },
-    { "source": "/api/reps/:action", "destination": "/api/audit?action=:action" },
-    { "source": "/api/lead-calls", "destination": "/api/audit?action=lead-calls" },
-    { "source": "/api/lead-calls/:action", "destination": "/api/audit?action=:action" },
-    { "source": "/audit/:id", "destination": "/audit/index.html" },
-    { "source": "/arena", "destination": "/cold-call-arena/index.html" },
-    { "source": "/arena/", "destination": "/cold-call-arena/index.html" },
-    { "source": "/demo", "destination": "/demo/index.html" },
-    { "source": "/demo/", "destination": "/demo/index.html" },
-    { "source": "/demo/reel", "destination": "/demo/reel-creator.html" },
-    { "source": "/demo/reel/", "destination": "/demo/reel-creator.html" },
-    { "source": "/.well-known/llms.txt", "destination": "/llms.txt" },
-    { "source": "/.well-known/llms-full.txt", "destination": "/llms-full.txt" }
+    {
+      "source": "/api/auth/:action",
+      "destination": "/api/auth?action=:action"
+    },
+    {
+      "source": "/api/businesses/create",
+      "destination": "/api/businesses"
+    },
+    {
+      "source": "/api/businesses/:id",
+      "destination": "/api/businesses?id=:id"
+    },
+    {
+      "source": "/api/receptionist/:action",
+      "destination": "/api/receptionist?action=:action"
+    },
+    {
+      "source": "/api/onboarding/:action",
+      "destination": "/api/onboarding?action=:action"
+    },
+    {
+      "source": "/api/billing/:action",
+      "destination": "/api/billing?action=:action"
+    },
+    {
+      "source": "/api/appointments/:id",
+      "destination": "/api/appointments?id=:id"
+    },
+    {
+      "source": "/api/send-email",
+      "destination": "/api/notifications?action=send-email"
+    },
+    {
+      "source": "/api/notifications/:action",
+      "destination": "/api/notifications?action=:action"
+    },
+    {
+      "source": "/api/change-requests/:id",
+      "destination": "/api/change-requests?id=:id"
+    },
+    {
+      "source": "/api/admin/inquiries",
+      "destination": "/api/change-requests?action=inquiries"
+    },
+    {
+      "source": "/api/reps",
+      "destination": "/api/audit?action=rep-roster"
+    },
+    {
+      "source": "/api/reps/:action",
+      "destination": "/api/audit?action=:action"
+    },
+    {
+      "source": "/api/lead-calls",
+      "destination": "/api/audit?action=lead-calls"
+    },
+    {
+      "source": "/api/lead-calls/:action",
+      "destination": "/api/audit?action=:action"
+    },
+    {
+      "source": "/audit/:id",
+      "destination": "/audit/index.html"
+    },
+    {
+      "source": "/arena",
+      "destination": "/cold-call-arena/index.html"
+    },
+    {
+      "source": "/arena/",
+      "destination": "/cold-call-arena/index.html"
+    },
+    {
+      "source": "/demo",
+      "destination": "/demo/index.html"
+    },
+    {
+      "source": "/demo/",
+      "destination": "/demo/index.html"
+    },
+    {
+      "source": "/demo/reel",
+      "destination": "/demo/reel-creator.html"
+    },
+    {
+      "source": "/demo/reel/",
+      "destination": "/demo/reel-creator.html"
+    },
+    {
+      "source": "/demo/reel2",
+      "destination": "/demo/reel2.html"
+    },
+    {
+      "source": "/demo/reel2/",
+      "destination": "/demo/reel2.html"
+    },
+    {
+      "source": "/.well-known/llms.txt",
+      "destination": "/llms.txt"
+    },
+    {
+      "source": "/.well-known/llms-full.txt",
+      "destination": "/llms-full.txt"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
       ]
     },
     {
       "source": "/demo/video/(.*)",
       "headers": [
-        { "key": "Content-Type", "value": "video/mp4" },
-        { "key": "Accept-Ranges", "value": "bytes" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
+        {
+          "key": "Content-Type",
+          "value": "video/mp4"
+        },
+        {
+          "key": "Accept-Ranges",
+          "value": "bytes"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
       ]
     },
     {
       "source": "/demo/reel(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
       ]
     },
     {
       "source": "/llms.txt",
       "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/llms-full.txt",
       "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
       ]
     }
   ]
