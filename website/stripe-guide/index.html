@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VantorX — Complete Stripe Master Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070a12;
+      --surface: #0e1424;
+      --surface-hover: #151d33;
+      --border: rgba(255, 255, 255, 0.12);
+      --gold: #f59e0b;
+      --gold-light: #fbbf24;
+      --emerald: #10b981;
+      --cyan: #38bdf8;
+      --purple: #a855f7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      line-height: 1.6;
+      padding: 40px 20px 100px;
+    }
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .quick-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .quick-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #e2e8f0;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .quick-btn:hover {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: #f59e0b;
+      color: #fbbf24;
+      transform: translateY(-2px);
+    }
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-num {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      color: #fbbf24;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+    .calc-card {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(16, 185, 129, 0.12));
+      border: 1.5px solid rgba(245, 158, 11, 0.45);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 20px 0;
+    }
+    .calc-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .calc-input {
+      background: #040711;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      color: #fbbf24;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 800;
+      padding: 10px 16px;
+      border-radius: 10px;
+      width: 180px;
+    }
+    .calc-stats {
+      display: flex;
+      gap: 16px;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+    .stat-pill {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 16px;
+      border-radius: 10px;
+      flex: 1;
+      min-width: 140px;
+    }
+    .stat-pill-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .stat-pill-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: #cbd5e1;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
+    tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .check-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+    .check-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 3px;
+      accent-color: #10b981;
+      cursor: pointer;
+    }
+    .check-text {
+      flex: 1;
+    }
+    .check-title {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: #f1f5f9;
+    }
+    .check-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="badge">💳 VantorX Financial Operations Manual</div>
+    <h1>The Complete <span>Stripe Master Guide</span></h1>
+    <p class="subtitle">Everything you need to collect money from contractors, configure one-time &amp; monthly pricing, slash fees with ACH Direct Debit, and automate onboarding.</p>
+    
+    <div class="quick-links">
+      <a href="#section-flow" class="quick-btn">🔄 Money Flow</a>
+      <a href="#section-verify" class="quick-btn">🏛️ Verification &amp; Bank</a>
+      <a href="#section-products" class="quick-btn">📦 Products &amp; Pricing</a>
+      <a href="#section-collect" class="quick-btn">📲 3 Ways to Collect</a>
+      <a href="#section-ach" class="quick-btn">🏛️ ACH $5 Fee Cap</a>
+      <a href="#section-checklist" class="quick-btn">✅ Launch Checklist</a>
+      <a href="https://dashboard.stripe.com" target="_blank" class="quick-btn" style="background:#f59e0b;color:#0b0f19;border-color:#f59e0b">↗ Open Stripe Dashboard</a>
+    </div>
+  </header>
+
+  <section class="section-card" id="section-flow">
+    <div class="section-header">
+      <div class="section-title">
+        <span class="section-num">01</span>
+        <span>The 5 Core Objects: How Money Moves</span>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Object</th>
+          <th>Prefix</th>
+          <th>What It Represents</th>
+          <th>VantorX Real Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:#fbbf24">Customer</strong></td>
+          <td><code>cus_...</code></td>
+          <td>The contractor's business identity &amp; payment method on file</td>
+          <td><code>Best Roofing LLC (owner@bestroofing.net)</code></td>
+        </tr>
+        <tr>
+          <td><strong style="color:#38bdf8">Product</strong></td>
+          <td><code>prod_...</code></td>
+          <td>The service package being sold</td>
+          <td><code>VantorX Accelerate Bundle</code></td>
+        </tr>
+        <tr>
+          <td><strong style="color:#10b981">Price</strong></td>
+          <td><code>price_...</code></td>
+          <td>Cost and billing cadence</td>
+          <td><code>$1,497 one-time</code> OR <code>$297/mo recurring</code></td>
+        </tr>
+        <tr>
+          <td><strong style="color:#a855f7">Checkout / Invoice</strong></td>
+          <td><code>cs_...</code> / <code>in_...</code></td>
+          <td>The secure payment session or PDF bill the client sees</td>
+          <td>Hosted Stripe checkout screen with Card &amp; Plaid login</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#22c55e">Payout</strong></td>
+          <td><code>po_...</code></td>
+          <td>Transfer of cleared funds from Stripe into your bank</td>
+          <td>Automatic rolling 2-day deposit to your checking account</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-card" id="section-verify">
+    <div class="section-header">
+      <div class="section-title">
+        <span class="section-num">02</span>
+        <span>Account Verification &amp; Chargeback Defense</span>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Exact Setting to Enter</th>
+          <th>Why It Matters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Statement Descriptor</strong></td>
+          <td><code>VANTORX SOLUTIONS</code></td>
+          <td>Appears on the contractor's Amex/Visa statement. Eliminates "What is this charge?" disputes.</td>
+        </tr>
+        <tr>
+          <td><strong>Short Descriptor</strong></td>
+          <td><code>VANTORX</code></td>
+          <td>Used on shortened mobile banking SMS alerts.</td>
+        </tr>
+        <tr>
+          <td><strong>Support Phone</strong></td>
+          <td><code>(561) 813-8602</code></td>
+          <td>Clients see your live number on their statement instead of filing a dispute.</td>
+        </tr>
+        <tr>
+          <td><strong>Support Email</strong></td>
+          <td><code>support@vantorxsolutions.com</code></td>
+          <td>Contractor bookkeepers email here for receipts.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-card" id="section-products">
+    <div class="section-header">
+      <div class="section-title">
+        <span class="section-num">03</span>
+        <span>VantorX Products &amp; Pricing Structure</span>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Setup Fee (One-Time)</th>
+          <th>Monthly Retainer (Recurring)</th>
+          <th>What's Included</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:#fbbf24">Basic Front Desk</strong></td>
+          <td><code>$997.00</code></td>
+          <td><code>$0 / mo</code></td>
+          <td>24/7 AVA Voice AI setup, custom prompt, local Twilio number routing</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#38bdf8">Accelerate Bundle</strong></td>
+          <td><code>$1,497.00</code></td>
+          <td><code>$297.00 / month</code></td>
+          <td>AVA AI + High-Converting Website + AEO Search Engine Ranking</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#10b981">Scale Enterprise</strong></td>
+          <td><code>$4,997.00</code></td>
+          <td><code>$497.00 / month</code></td>
+          <td>Multi-van fleet dispatch, CRM 2-way sync, unlimited speed-to-lead</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section-card" id="section-ach">
+    <div class="section-header">
+      <div class="section-title">
+        <span class="section-num">04</span>
+        <span>Slashing Fees: ACH Direct Debit ($5 Cap vs 2.9%)</span>
+      </div>
+    </div>
+    <div class="calc-card">
+      <div style="font-weight:800;font-size:15px;color:#fbbf24">🧮 Interactive Deal Fee Calculator:</div>
+      <div class="calc-row">
+        <div>
+          <label style="display:block;font-size:11px;color:#94a3b8;font-weight:800;text-transform:uppercase;margin-bottom:4px">Deal Size ($ USD):</label>
+          <input type="number" id="dealInput" class="calc-input" value="1497" step="100" oninput="calculateFees()" />
+        </div>
+        <div class="calc-stats">
+          <div class="stat-pill">
+            <div class="stat-pill-label">Credit Card Fee (2.9% + 30¢)</div>
+            <div class="stat-pill-val" id="cardFeeVal" style="color:#f43f5e">-$43.71</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-label">Stripe ACH Fee (0.8% max $5)</div>
+            <div class="stat-pill-val" id="achFeeVal" style="color:#10b981">-$5.00</div>
+          </div>
+          <div class="stat-pill" style="border-color:rgba(16,185,129,0.5);background:rgba(16,185,129,0.1)">
+            <div class="stat-pill-label" style="color:#6ee7b7">Your Profit Saved With ACH</div>
+            <div class="stat-pill-val" id="savedVal" style="color:#34d399">+$38.71</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-card" id="section-checklist">
+    <div class="section-header">
+      <div class="section-title">
+        <span class="section-num">05</span>
+        <span>Production Launch Checklist</span>
+      </div>
+    </div>
+    <div class="checklist">
+      <label class="check-item"><input type="checkbox"><div class="check-text"><div class="check-title">1. Complete Business KYC &amp; Verification</div></div></label>
+      <label class="check-item"><input type="checkbox"><div class="check-text"><div class="check-title">2. Connect Business Checking Account</div></div></label>
+      <label class="check-item"><input type="checkbox"><div class="check-text"><div class="check-title">3. Configure Statement Descriptor &amp; Phone (561-813-8602)</div></div></label>
+      <label class="check-item"><input type="checkbox"><div class="check-text"><div class="check-title">4. Create Products: Basic ($997), Accelerate ($1,497 + $297/mo), Scale ($4,997 + $497/mo)</div></div></label>
+      <label class="check-item"><input type="checkbox"><div class="check-text"><div class="check-title">5. Enable US Bank Transfer (ACH Direct Debit)</div></div></label>
+      <label class="check-item"><input type="checkbox"><div class="check-text"><div class="check-title">6. Enable Self-Service Customer Billing Portal</div></div></label>
+    </div>
+  </section>
+</div>
+
+<script>
+  function calculateFees() {
+    const val = parseFloat(document.getElementById('dealInput').value) || 0;
+    const cardFee = (val * 0.029) + 0.30;
+    const achFee = Math.min(5.00, Math.max(0.00, val * 0.008));
+    const saved = Math.max(0, cardFee - achFee);
+
+    document.getElementById('cardFeeVal').textContent = '-$' + cardFee.toFixed(2);
+    document.getElementById('achFeeVal').textContent = '-$' + achFee.toFixed(2);
+    document.getElementById('savedVal').textContent = '+$' + saved.toFixed(2);
+  }
+  calculateFees();
+</script>
+</body>
+</html>
