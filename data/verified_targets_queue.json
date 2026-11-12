@@ -23,7 +23,7 @@
     "employeeBadge": "1 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Everett is actively in the field or in the truck with a small crew of 1. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "palmairac-com.mail.protection.outlook.com",
     "email": "service@palmairac.com",
     "website": "https://www.palmairac.com",
@@ -34,12 +34,13 @@
       "rocketreach": "https://rocketreach.co/person?name=Everett&company=Palm%20Air%20Air%20Conditioning%2C%20Inc.",
       "contactout": "https://contactout.com/search?q=Everett%20Palm%20Air%20Air%20Conditioning%2C%20Inc."
     },
-    "status": "sent",
-    "subject": "Re: Quick question for Everett regarding Palm Air Air Conditioning, Inc. after-hours calls",
-    "body": "Hi Everett,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Palm Air Air Conditioning, Inc..\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_001\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1d17b-275f-7075-8455-16facdcab3fb",
-    "sentAt": "2026-11-12T20:37:51.626Z",
+    "status": "pending",
+    "subject": "Quick question for Everett regarding Palm Air Air Conditioning, Inc. after-hours calls",
+    "body": "Hi Everett,\n\nSaw your solid reputation in Boca Raton, FL — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Boca Raton, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Palm Air Air Conditioning, Inc. roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_001\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": null,
+    "sentAt": "2026-11-10T20:11:46.027Z",
     "emailSource": "Website Verified",
+    "mxHost": "palmairac-com.mail.protection.outlook.com",
     "touch": 2
   },
   {
@@ -78,14 +79,12 @@
     "emailSource": "MX Verified (tsunami16.surfnusa.net)",
     "mxStatus": "VERIFIED",
     "mxHost": "tsunami16.surfnusa.net",
-    "status": "skipped_dns",
-    "subject": "Re: Quick question for Chris regarding Air-Ref Co. Inc. quote requests",
-    "body": "Hi Chris,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Air-Ref Co. Inc..\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_002\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "status": "pending",
+    "subject": "Quick question for Chris regarding Air-Ref Co. Inc. quote requests",
+    "body": "Hi Chris,\n\nQuick question regarding Air-Ref Co. Inc.'s customer response speed:\n\nWhen customers in Boca Raton, FL fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In HVAC, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_002\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $7,800/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "resendMessageId": null,
     "sentAt": "2026-11-10T20:11:46.571Z",
-    "touch": 2,
-    "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.626Z"
+    "touch": 2
   },
   {
     "id": "pb_003",
@@ -122,7 +121,7 @@
     "email": "michael@engineeredair.com",
     "emailSource": "MX Verified (mxa-00a25601.gslb.pphosted.com)",
     "mxStatus": "VERIFIED",
-    "mxHost": "mxa-00a25601.gslb.pphosted.com",
+    "mxHost": "mxb-00a25601.gslb.pphosted.com",
     "status": "pending",
     "subject": "Quick question for Michael regarding Engineered Air after-hours calls",
     "body": "Hi Michael,\n\nSaw your solid reputation in Boca Raton, FL — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Boca Raton, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Engineered Air roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_003\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
@@ -154,7 +153,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "David is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt2.aspmx.l.google.com",
     "email": "service@friendlyac.com",
     "website": "https://www.friendlyac.com",
@@ -171,6 +170,7 @@
     "resendMessageId": null,
     "sentAt": "2026-11-10T20:11:47.507Z",
     "emailSource": "Website Verified",
+    "mxHost": "alt2.aspmx.l.google.com",
     "touch": 2
   },
   {
@@ -235,7 +235,7 @@
     "employeeBadge": "1 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "The owner is actively in the field or in the truck with a small crew of 1. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt3.aspmx.l.google.com",
     "email": "estimates@whaleroofing.com",
     "website": "https://www.whaleroofing.com",
@@ -252,6 +252,7 @@
     "resendMessageId": null,
     "sentAt": "2026-11-10T20:11:47.711Z",
     "emailSource": "Website Verified",
+    "mxHost": "alt3.aspmx.l.google.com",
     "touch": 2
   },
   {
@@ -316,7 +317,7 @@
     "employeeBadge": "1 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "The owner is actively in the field or in the truck with a small crew of 1. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt2.aspmx.l.google.com",
     "email": "estimates@aastroroofingcompany.com",
     "website": "https://www.aastroroofingcompany.com",
@@ -333,6 +334,7 @@
     "resendMessageId": null,
     "sentAt": "2026-11-10T20:11:47.860Z",
     "emailSource": "Website Verified",
+    "mxHost": "alt1.aspmx.l.google.com",
     "touch": 2
   },
   {
@@ -359,7 +361,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "The owner is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt3.aspmx.l.google.com",
     "email": "info@garabar.com",
     "website": "https://www.garabar.com",
@@ -375,7 +377,8 @@
     "body": "Hi the owner,\n\nSaw your solid reputation in West Palm Beach, FL — congrats on building a trusted local brand.\n\nI was auditing local Roofing providers in West Palm Beach, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Roofing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Garabar Roofing, Windows & Doors roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_009\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "resendMessageId": "01a1c81d-c5d1-70ee-b6ad-900c9d54bf4a",
     "sentAt": "2026-11-11T00:59:16.923Z",
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "alt4.aspmx.l.google.com"
   },
   {
     "id": "pb_010",
@@ -401,7 +404,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Erica is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "mail.ericasplumbing.com",
     "email": "dispatch@ericasplumbing.com",
     "website": "https://www.ericasplumbing.com",
@@ -417,7 +420,8 @@
     "body": "Hi Erica,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Plumbing contractors in Boca Raton, FL.\n\nWhile Erica's Plumbing, Air Conditioning & Restoration has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Plumbing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_010\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Plumbing in Boca Raton, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "resendMessageId": "01a1c81d-c670-711d-a618-47805c9e4840",
     "sentAt": "2026-11-11T00:59:17.011Z",
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "mail.ericasplumbing.com"
   },
   {
     "id": "pb_011",
@@ -595,7 +599,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "The owner is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt1.aspmx.l.google.com",
     "email": "service@ewingair.com",
     "website": "https://www.ewingair.com",
@@ -611,7 +615,8 @@
     "body": "Hi the owner,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in West Palm Beach, FL.\n\nWhile Ewing & Ewing Air Conditioning has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_015\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in West Palm Beach, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "resendMessageId": "01a1c81d-c6a7-7b1b-93de-ae05d7730027",
     "sentAt": "2026-11-11T00:59:17.055Z",
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "alt4.aspmx.l.google.com"
   },
   {
     "id": "pb_016",
@@ -721,7 +726,7 @@
     "employeeBadge": "125 Staff (Enterprise)",
     "isSmallLocalBiz": false,
     "smallBizPitchAngle": "Regional operation with 125 staff (Major South FL regional contractor founded in 1976.). Disqualified from $397 small shop script - needs enterprise custom integration.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "us-smtp-inbound-2.mimecast.com",
     "email": "service@sansone-ac.com",
     "website": "https://www.sansone-ac.com",
@@ -737,7 +742,8 @@
     "body": "Hi Sansone Family,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Deerfield Beach, FL.\n\nWhile Sansone Air Conditioning, Electrical & Plumbing has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=pb_018\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Deerfield Beach, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "resendMessageId": "01a1cb4d-19bb-7519-a1ec-a644fe3139ea",
     "sentAt": "2026-11-11T15:49:50.199Z",
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "us-smtp-inbound-2.mimecast.com"
   },
   {
     "id": "pb_019",
@@ -973,7 +979,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "pb_025",
@@ -1075,7 +1081,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Tommy is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/allyearcoolingheating.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Tommy%20All%20Year%20Cooling%20%26%20Heating&page=1",
@@ -1086,7 +1092,7 @@
     "email": "info@allyearac.com",
     "emailSource": "Website Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "smtp.secureserver.net",
+    "mxHost": "allyearac-com.mail.protection.outlook.com",
     "status": "sent",
     "subject": "Quick question for Tommy regarding All Year Cooling & Heating AI search rankings",
     "body": "Hi Tommy,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Fort Lauderdale, FL.\n\nWhile All Year Cooling & Heating has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=bw_027\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Fort Lauderdale, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
@@ -1232,7 +1238,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Gregg is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/bestroofing.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Gregg%20Best%20Roofing&page=1",
@@ -1243,7 +1249,7 @@
     "email": "info@bestroofing.net",
     "emailSource": "Website Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "mx1-us1.ppe-hosted.com",
+    "mxHost": "bestroofing-net.mail.protection.outlook.com",
     "status": "sent",
     "subject": "Quick question for Gregg regarding Best Roofing AI search rankings",
     "body": "Hi Gregg,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Fort Lauderdale, FL.\n\nWhile Best Roofing has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=bw_031\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Fort Lauderdale, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
@@ -1318,7 +1324,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Dan is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/coolairusa.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Dan%20Cool%20Air%20USA&page=1",
@@ -1329,7 +1335,7 @@
     "email": "dan@coolairusa.com",
     "emailSource": "Website Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "aspmx.l.google.com",
+    "mxHost": "alt4.aspmx.l.google.com",
     "status": "sent",
     "subject": "Quick question for Dan regarding Cool Air USA after-hours calls",
     "body": "Hi Dan,\n\nSaw your solid reputation in Fort Lauderdale, FL — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Fort Lauderdale, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Cool Air USA roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=bw_033\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
@@ -1373,7 +1379,7 @@
     "emailSource": "MX Verified (null)",
     "mxStatus": "VERIFIED",
     "mxHost": null,
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -1400,7 +1406,7 @@
     "employeeBadge": "1 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Alan is actively in the field or in the truck with a small crew of 1. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/completecommercialrepair.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Alan%20Complete%20Commercial%20Repair&page=1",
@@ -1556,7 +1562,7 @@
     "employeeBadge": "1 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Larry is actively in the field or in the truck with a small crew of 1. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/thermalconcepts.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Larry%20Thermal%20Concepts%20Inc.&page=1",
@@ -1567,7 +1573,7 @@
     "email": "info@thermalconcepts.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "nospam3.cbsnospam.com",
+    "mxHost": "nospam4.cbsnospam.com",
     "status": "sent",
     "subject": "Quick question for Larry regarding Thermal Concepts Inc. AI search rankings",
     "body": "Hi Larry,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Davie, FL.\n\nWhile Thermal Concepts Inc. has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=bw_039\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Davie, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
@@ -1645,10 +1651,10 @@
       "contactout": "https://contactout.com/search?q=Adam%20Plumbing%20Experts%20Inc."
     },
     "email": "adam@plumbingexperts.com",
-    "emailSource": "MX Verified (aspmx.l.google.com)",
+    "emailSource": "MX Verified (aspmx3.googlemail.com)",
     "mxStatus": "VERIFIED",
-    "mxHost": "aspmx.l.google.com",
-    "status": "skipped_unverified_mailbox",
+    "mxHost": "aspmx3.googlemail.com",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -1687,7 +1693,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "bw_043",
@@ -1725,7 +1731,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "bw_044",
@@ -1763,7 +1769,7 @@
     "emailSource": "MX Verified (mx.abcroofing.com.cust.a.hostedemail.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "mx.abcroofing.com.cust.a.hostedemail.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -1878,7 +1884,7 @@
     "emailSource": "MX Verified (powercoreelectric-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "powercoreelectric-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -1917,7 +1923,7 @@
     "emailSource": "MX Verified (null)",
     "mxStatus": "VERIFIED",
     "mxHost": null,
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -2032,7 +2038,7 @@
     "emailSource": "MX Verified (null)",
     "mxStatus": "VERIFIED",
     "mxHost": null,
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -2147,7 +2153,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "md_055",
@@ -2185,7 +2191,7 @@
     "emailSource": "MX Verified (null)",
     "mxStatus": "VERIFIED",
     "mxHost": null,
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -2300,7 +2306,7 @@
     "emailSource": "MX Verified (null)",
     "mxStatus": "VERIFIED",
     "mxHost": null,
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -2491,7 +2497,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "md_064",
@@ -2517,7 +2523,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Omar is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/dadesupercool.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Omar%20Dade%20Super%20Cool&page=1",
@@ -2528,7 +2534,7 @@
     "email": "sales@dadesupercoolac.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "dadesupercool-com.mail.protection.outlook.com",
+    "mxHost": "dadesupercoolac-com.mail.protection.outlook.com",
     "status": "sent",
     "subject": "Quick question for Omar regarding Dade Super Cool after-hours calls",
     "body": "Hi Omar,\n\nSaw your solid reputation in Hialeah, FL — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Hialeah, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Dade Super Cool roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=md_064\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
@@ -2571,7 +2577,7 @@
     "emailSource": "MX Verified (totalrepairpros-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "totalrepairpros-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -2712,7 +2718,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Danny is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/tsroofingsystems.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Danny%20T%26S%20Roofing%20Systems&page=1",
@@ -2723,7 +2729,7 @@
     "email": "info@tsroofingsystems.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "aspmx.l.google.com",
+    "mxHost": "alt2.aspmx.l.google.com",
     "status": "pending"
   },
   {
@@ -2762,7 +2768,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "md_071",
@@ -3028,7 +3034,7 @@
     "emailSource": "MX Verified (westfallroofing-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "westfallroofing-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "suppressed_bounced",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -3363,7 +3369,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Ron is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/actionairconditioning.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Ron%20Action%20Air%20Conditioning&page=1",
@@ -3553,7 +3559,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Jim is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/bayareaelectric.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Jim%20Bay%20Area%20Electric&page=1",
@@ -3641,7 +3647,7 @@
     "emailSource": "MX Verified (mx.tampabayplumbers.com.cust.a.hostedemail.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "mx.tampabayplumbers.com.cust.a.hostedemail.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -3718,7 +3724,7 @@
     "emailSource": "MX Verified (mx2.privateemail.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "mx2.privateemail.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -3757,7 +3763,7 @@
     "emailSource": "MX Verified (smtp.secureserver.net)",
     "mxStatus": "VERIFIED",
     "mxHost": "smtp.secureserver.net",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -3834,7 +3840,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "tb_099",
@@ -3872,7 +3878,7 @@
     "emailSource": "MX Verified (mx-caprica.easydns.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "mx-caprica.easydns.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -3899,7 +3905,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Tony is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/aircareheatingcooling.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Tony%20Air%20Care%20Heating%20%26%20Cooling&page=1",
@@ -3949,7 +3955,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "cf_102",
@@ -3987,7 +3993,7 @@
     "emailSource": "MX Verified (acesolvesitall-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "acesolvesitall-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4064,7 +4070,7 @@
     "emailSource": "MX Verified (modernplumbingindustries.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "modernplumbingindustries.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4103,7 +4109,7 @@
     "emailSource": "MX Verified (smtp.secureserver.net)",
     "mxStatus": "VERIFIED",
     "mxHost": "smtp.secureserver.net",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4218,7 +4224,7 @@
     "emailSource": "MX Verified (mail.unitedrestorationteam.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "mail.unitedrestorationteam.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4257,7 +4263,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "cf_110",
@@ -4295,7 +4301,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "cf_111",
@@ -4371,7 +4377,7 @@
     "emailSource": "MX Verified (null)",
     "mxStatus": "VERIFIED",
     "mxHost": null,
-    "status": "skipped_unverified_mailbox",
+    "status": "suppressed_bounced",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4486,7 +4492,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "cf_116",
@@ -4512,7 +4518,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "The owner is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/herrellplumbing.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=the%20owner%20Herrell%20Plumbing&page=1",
@@ -4523,7 +4529,7 @@
     "email": "herrellplumbing@gmail.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "server.argonhosting.com",
+    "mxHost": "alt1.gmail-smtp-in.l.google.com",
     "status": "pending"
   },
   {
@@ -4562,7 +4568,7 @@
     "emailSource": "MX Verified (janneyroofing-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "janneyroofing-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "suppressed_bounced",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4601,7 +4607,7 @@
     "emailSource": "MX Verified (smtp.secureserver.net)",
     "mxStatus": "VERIFIED",
     "mxHost": "smtp.secureserver.net",
-    "status": "skipped_unverified_mailbox",
+    "status": "suppressed_bounced",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4678,7 +4684,7 @@
     "emailSource": "MX Verified (aspmx.l.google.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "aspmx.l.google.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4755,7 +4761,7 @@
     "emailSource": "MX Verified (custmx.cscdns.net)",
     "mxStatus": "VERIFIED",
     "mxHost": "custmx.cscdns.net",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4832,7 +4838,7 @@
     "emailSource": "MX Verified (smtp.secureserver.net)",
     "mxStatus": "VERIFIED",
     "mxHost": "smtp.secureserver.net",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -4859,7 +4865,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "William is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/greensenergy.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=William%20Greens%20Energy%20Services&page=1",
@@ -4935,7 +4941,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Dan is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/allweathercontractors.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Dan%20All%20Weather%20Contractors&page=1",
@@ -4985,7 +4991,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "nfl_129",
@@ -5011,7 +5017,7 @@
     "employeeBadge": "1 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Ken is actively in the field or in the truck with a small crew of 1. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/bicontractors.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Ken%20B%26I%20Contractors%2C%20Inc.&page=1",
@@ -5061,7 +5067,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "nfl_131",
@@ -5137,7 +5143,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "nfl_133",
@@ -5175,7 +5181,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "nfl_134",
@@ -5403,7 +5409,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "nfl_140",
@@ -5517,7 +5523,7 @@
     "emailSource": "MX Verified (smtp.secureserver.net)",
     "mxStatus": "VERIFIED",
     "mxHost": "smtp.secureserver.net",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -5810,7 +5816,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Chris is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/coolingadvisors.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Chris%20Cooling%20Advisors&page=1",
@@ -5860,7 +5866,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "tx_152",
@@ -6088,7 +6094,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "tx_158",
@@ -6126,7 +6132,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "tx_159",
@@ -6164,7 +6170,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "tx_160",
@@ -6304,7 +6310,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Dave is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/texasstarroofing.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Dave%20Texas%20Star%20Roofing&page=1",
@@ -6315,7 +6321,7 @@
     "email": "office@texasstarroofing.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "aspmx.l.google.com",
+    "mxHost": "aspmx3.googlemail.com",
     "status": "pending"
   },
   {
@@ -6351,10 +6357,10 @@
       "contactout": "https://contactout.com/search?q=Jeff%20Peak%20Roofing%20%26%20Construction"
     },
     "email": "jeff@peakroofingconstruction.com",
-    "emailSource": "MX Verified (aspmx.l.google.com)",
+    "emailSource": "MX Verified (alt4.aspmx.l.google.com)",
     "mxStatus": "VERIFIED",
-    "mxHost": "aspmx.l.google.com",
-    "status": "skipped_unverified_mailbox",
+    "mxHost": "alt4.aspmx.l.google.com",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -6431,7 +6437,7 @@
     "emailSource": "MX Verified (coppellplumbing.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "coppellplumbing.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -6470,7 +6476,7 @@
     "emailSource": "MX Verified (publicserviceplumbers-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "publicserviceplumbers-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -6497,7 +6503,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "The owner is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/cloverelectric.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=the%20owner%20Clover%20Electric&page=1",
@@ -6547,7 +6553,7 @@
     "emailSource": "MX Verified (arrowelectric-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "arrowelectric-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "suppressed_bounced",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -6586,7 +6592,7 @@
     "emailSource": "MX Verified (blackhillrestoration-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "blackhillrestoration-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -6622,10 +6628,10 @@
       "contactout": "https://contactout.com/search?q=Eric%20Regent%20Restoration"
     },
     "email": "eric@regentrestoration.com",
-    "emailSource": "MX Verified (aspmx.l.google.com)",
+    "emailSource": "MX Verified (alt1.aspmx.l.google.com)",
     "mxStatus": "VERIFIED",
-    "mxHost": "aspmx.l.google.com",
-    "status": "skipped_unverified_mailbox",
+    "mxHost": "alt1.aspmx.l.google.com",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -6664,7 +6670,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "tx_173",
@@ -6702,7 +6708,7 @@
     "emailSource": "MX Verified (efficienthomesolutions-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "efficienthomesolutions-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -6741,7 +6747,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "tx_175",
@@ -6779,7 +6785,7 @@
     "emailSource": "MX Verified (us-smtp-inbound-1.mimecast.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "us-smtp-inbound-1.mimecast.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -6920,7 +6926,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Don is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/johnmoore.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Don%20John%20Moore%20Services&page=1",
@@ -6931,7 +6937,7 @@
     "email": "info@johnmoore.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "johnmoore-com.inbound.emailservice.io",
+    "mxHost": "johnmoore-com.inbound.emailservice.cc",
     "status": "pending"
   },
   {
@@ -7122,7 +7128,7 @@
     "emailSource": "MX Verified (universalhomeexperts-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "universalhomeexperts-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -7161,7 +7167,7 @@
     "emailSource": "MX Verified (vqs3547.pair.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "vqs3547.pair.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -7314,7 +7320,7 @@
     "emailSource": "MX Verified (precisionroofcrafters-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "precisionroofcrafters-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -7353,7 +7359,7 @@
     "emailSource": "MX Verified (strataroofingandconstruction-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "strataroofingandconstruction-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -7456,7 +7462,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Aaron is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/aaronselectricalservice.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Aaron%20Aaron's%20Electrical%20Service&page=1",
@@ -7467,7 +7473,7 @@
     "email": "info@aaronselectricalservice.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "mx1-usg2.ppe-hosted.com",
+    "mxHost": "mx3-usg2.ppe-hosted.com",
     "status": "pending"
   },
   {
@@ -7570,7 +7576,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "David is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/drymore.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=David%20DryMore%20Company&page=1",
@@ -7581,7 +7587,7 @@
     "email": "admin@drymore.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "mail.drymore.com",
+    "mxHost": "smtp.google.com",
     "status": "pending"
   },
   {
@@ -7696,7 +7702,7 @@
     "emailSource": "MX Verified (mx1-us1.ppe-hosted.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "mx1-us1.ppe-hosted.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -7723,7 +7729,7 @@
     "employeeBadge": "2 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "The owner is actively in the field or in the truck with a small crew of 2. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/morrowmechanical.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=the%20owner%20Morrow%20Mechanical&page=1",
@@ -7773,7 +7779,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "ga_202",
@@ -7887,7 +7893,7 @@
     "emailSource": "MX Verified (null)",
     "mxStatus": "VERIFIED",
     "mxHost": null,
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -7926,7 +7932,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "ga_206",
@@ -8002,7 +8008,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "ga_208",
@@ -8040,7 +8046,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "ga_209",
@@ -8078,7 +8084,7 @@
     "emailSource": "MX Verified (aspmx.l.google.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "aspmx.l.google.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "suppressed_bounced",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -8105,7 +8111,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Dari is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/rsandrews.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Dari%20R.S.%20Andrews&page=1",
@@ -8231,7 +8237,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "ga_214",
@@ -8307,7 +8313,7 @@
     "emailSource": "MX Verified (smtp.secureserver.net)",
     "mxStatus": "VERIFIED",
     "mxHost": "smtp.secureserver.net",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -8334,7 +8340,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Paul is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/morningsideplumbing.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Paul%20Morningside%20Plumbing&page=1",
@@ -8345,7 +8351,7 @@
     "email": "office@morningsideplumbing.com",
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
-    "mxHost": "mx1-usg1.ppe-hosted.com",
+    "mxHost": "mx2-usg1.ppe-hosted.com",
     "status": "pending"
   },
   {
@@ -8422,7 +8428,7 @@
     "emailSource": "MX Verified (lightningbugelectric-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "lightningbugelectric-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -8575,7 +8581,7 @@
     "emailSource": "MX Verified (null)",
     "mxStatus": "VERIFIED",
     "mxHost": null,
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -8842,7 +8848,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "nc_230",
@@ -8880,7 +8886,7 @@
     "emailSource": "MX Verified (morrisjenkins-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "morrisjenkins-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -8919,7 +8925,7 @@
     "emailSource": "MX Verified (erplumbing-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "erplumbing-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -8996,7 +9002,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "nc_234",
@@ -9034,7 +9040,7 @@
     "emailSource": "Pattern Synthesized",
     "mxStatus": "SYNTHESIZED",
     "mxHost": null,
-    "status": "skipped_dns"
+    "status": "suppressed_bounced"
   },
   {
     "id": "nc_235",
@@ -9250,7 +9256,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Paul is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/parkersons.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Paul%20Parker%20%26%20Sons&page=1",
@@ -9376,7 +9382,7 @@
     "emailSource": "MX Verified (howardair-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "howardair-com.mail.protection.outlook.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "suppressed_bounced",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -9403,7 +9409,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "The owner is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/lyonsroofing.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=the%20owner%20Lyons%20Roofing&page=1",
@@ -9567,7 +9573,7 @@
     "emailSource": "MX Verified (eforward2.registrar-servers.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "eforward2.registrar-servers.com",
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
   },
   {
@@ -9594,7 +9600,7 @@
     "employeeBadge": "3 Staff (Sweet Spot)",
     "isSmallLocalBiz": true,
     "smallBizPitchAngle": "Shane is actively in the field or in the truck with a small crew of 3. When emergency calls ring while on a ladder or under a sink, they drop $8,000+ jobs. Ava gives them 24/7 receptionist coverage for $397/mo without the $45,000 salary of an office manager.",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/turnitonelectric.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Shane%20Turn%20It%20On%20Electric&page=1",
@@ -9667,7 +9673,7 @@
     "body": "Hi Everett,\n\nSaw your solid reputation in Boca Raton, FL â€” congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Boca Raton, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback â€” they hang up and call the next competitor who answers. We calculated that missing just 2â€“3 after-hours or overflow calls a week costs Palm Air Air Conditioning, Inc. roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_001\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "dnsError": "Recipient domain has no valid MX or A DNS records",
     "verifiedAt": "2026-11-03T00:38:36.651Z",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "palmairac-com.mail.protection.outlook.com",
     "website": "https://www.palmairac.com",
     "enrichmentLinks": {
@@ -9677,7 +9683,8 @@
       "rocketreach": "https://rocketreach.co/person?name=Everett&company=Palm%20Air%20Air%20Conditioning%2C%20Inc.",
       "contactout": "https://contactout.com/search?q=Everett%20Palm%20Air%20Air%20Conditioning%2C%20Inc."
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "palmairac-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_002",
@@ -9700,7 +9707,7 @@
     "body": "Hi Chris,\n\nQuick question regarding Air-Ref Co. Inc.'s customer response speed:\n\nWhen customers in Boca Raton, FL fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In HVAC, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_002\n\nWe deploy LeadFlow specifically for local trade contractors:\nâ€¢ Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\nâ€¢ Follows up with online estimate requests in under 90 seconds\nâ€¢ Rescues up to $7,800/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10â€“15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "dnsError": "Recipient domain has no valid MX or A DNS records",
     "verifiedAt": "2026-11-03T00:38:36.695Z",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/airref.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Chris%20Air-Ref%20Co.%20Inc.&page=1",
@@ -9733,7 +9740,7 @@
     "body": "Hi Rick Welter,\n\nSaw your solid reputation in Boca Raton, FL â€” congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Boca Raton, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback â€” they hang up and call the next competitor who answers. We calculated that missing just 2â€“3 after-hours or overflow calls a week costs Del-Air Heating & Air Conditioning roughly $14,200/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_003\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "dnsError": "Recipient domain has no valid MX or A DNS records",
     "verifiedAt": "2026-11-03T00:38:36.768Z",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "delair.com.1.arsmtp.com",
     "website": "https://www.delair.com",
     "enrichmentLinks": {
@@ -9743,7 +9750,8 @@
       "rocketreach": "https://rocketreach.co/person?name=Rick%20Welter&company=Del-Air%20Heating%20%26%20Air%20Conditioning",
       "contactout": "https://contactout.com/search?q=Rick%20Welter%20Del-Air%20Heating%20%26%20Air%20Conditioning"
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "delair.com.2.arsmtp.com"
   },
   {
     "id": "fl_se_004",
@@ -9764,7 +9772,7 @@
     "resendMessageId": "01a1bb63-dbab-7873-ba82-cbfad898b447",
     "sentAt": "2026-11-08T13:40:46.178Z",
     "body": "Hi David,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Boca Raton, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_004\n\nIf you ever want to plug the $8,200/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Friendly A/C a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt3.aspmx.l.google.com",
     "website": "https://www.friendlyac.com",
     "enrichmentLinks": {
@@ -9774,7 +9782,8 @@
       "rocketreach": "https://rocketreach.co/person?name=David&company=Friendly%20A%2FC",
       "contactout": "https://contactout.com/search?q=David%20Friendly%20A%2FC"
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "alt2.aspmx.l.google.com"
   },
   {
     "id": "fl_se_005",
@@ -9804,7 +9813,8 @@
       "snov": "https://snov.io/email-finder?query=southerncoastservices.com",
       "rocketreach": "https://rocketreach.co/person?name=Robert&company=Southern%20Coast%20Services",
       "contactout": "https://contactout.com/search?q=Robert%20Southern%20Coast%20Services"
-    }
+    },
+    "mxHost": "alt3.aspmx.l.google.com"
   },
   {
     "id": "fl_se_006",
@@ -9827,7 +9837,7 @@
     "body": "Hi the owner,\n\nSaw your solid reputation in Boca Raton, FL â€” congrats on building a trusted local brand.\n\nI was auditing local Roofing providers in Boca Raton, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Roofing, customers needing prompt service almost never wait for a callback â€” they hang up and call the next competitor who answers. We calculated that missing just 2â€“3 after-hours or overflow calls a week costs Whale Roofing & Construction roughly $12,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_006\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "dnsError": "Recipient domain has no valid MX or A DNS records",
     "verifiedAt": "2026-11-03T14:00:29.699Z",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt1.aspmx.l.google.com",
     "website": "https://www.whaleroofing.com",
     "enrichmentLinks": {
@@ -9837,7 +9847,8 @@
       "rocketreach": "https://rocketreach.co/person?name=the%20owner&company=Whale%20Roofing%20%26%20Construction",
       "contactout": "https://contactout.com/search?q=the%20owner%20Whale%20Roofing%20%26%20Construction"
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "alt3.aspmx.l.google.com"
   },
   {
     "id": "fl_se_007",
@@ -9889,7 +9900,7 @@
     "resendMessageId": "01a1bb91-38e6-7085-ba0b-b386a0a2e4cd",
     "sentAt": "2026-11-08T14:30:19.182Z",
     "body": "Hi the owner,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Boca Raton, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_008\n\nIf you ever want to plug the $16,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Aastro Roofing Company a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt2.aspmx.l.google.com",
     "website": "https://www.aastroroofingcompany.com",
     "enrichmentLinks": {
@@ -9899,7 +9910,8 @@
       "rocketreach": "https://rocketreach.co/person?name=the%20owner&company=Aastro%20Roofing%20Company",
       "contactout": "https://contactout.com/search?q=the%20owner%20Aastro%20Roofing%20Company"
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "alt1.aspmx.l.google.com"
   },
   {
     "id": "fl_se_009",
@@ -9922,7 +9934,7 @@
     "body": "Hi the owner,\n\nSaw your solid reputation in West Palm Beach, FL â€” congrats on building a trusted local brand.\n\nI was auditing local Roofing providers in West Palm Beach, FL and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Roofing, customers needing prompt service almost never wait for a callback â€” they hang up and call the next competitor who answers. We calculated that missing just 2â€“3 after-hours or overflow calls a week costs Garabar Roofing, Windows & Doors roughly $13,000/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_009\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "dnsError": "Recipient domain has no valid MX or A DNS records",
     "verifiedAt": "2026-11-03T14:00:30.649Z",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt3.aspmx.l.google.com",
     "website": "https://www.garabar.com",
     "enrichmentLinks": {
@@ -9932,7 +9944,8 @@
       "rocketreach": "https://rocketreach.co/person?name=the%20owner&company=Garabar%20Roofing%2C%20Windows%20%26%20Doors",
       "contactout": "https://contactout.com/search?q=the%20owner%20Garabar%20Roofing%2C%20Windows%20%26%20Doors"
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "alt4.aspmx.l.google.com"
   },
   {
     "id": "fl_se_010",
@@ -9955,7 +9968,7 @@
     "body": "Hi Erica,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Plumbing contractors in Boca Raton, FL.\n\nWhile Erica's Plumbing, Air Conditioning & Restoration has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Plumbing contractor near me?', the AI search engines aren't recommending you â€” they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_010\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10â€“15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Plumbing in Boca Raton, FL?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "dnsError": "Recipient domain has no valid MX or A DNS records",
     "verifiedAt": "2026-11-03T14:00:30.728Z",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "mail.ericasplumbing.com",
     "website": "https://www.ericasplumbing.com",
     "enrichmentLinks": {
@@ -9965,7 +9978,8 @@
       "rocketreach": "https://rocketreach.co/person?name=Erica&company=Erica's%20Plumbing%2C%20Air%20Conditioning%20%26%20Restoration",
       "contactout": "https://contactout.com/search?q=Erica%20Erica's%20Plumbing%2C%20Air%20Conditioning%20%26%20Restoration"
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "mail.ericasplumbing.com"
   },
   {
     "id": "fl_se_011",
@@ -10117,7 +10131,7 @@
     "touch": 3,
     "resendMessageId": "01a1bbfd-11dc-75f6-9d6e-e6c8a18725c4",
     "sentAt": "2026-11-08T16:28:07.083Z",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "alt4.aspmx.l.google.com",
     "website": "https://www.ewingair.com",
     "body": "Hi the owner,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for West Palm Beach, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_015\n\nIf you ever want to plug the $13,800/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Ewing & Ewing Air Conditioning a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
@@ -10128,7 +10142,8 @@
       "rocketreach": "https://rocketreach.co/person?name=the%20owner&company=Ewing%20%26%20Ewing%20Air%20Conditioning",
       "contactout": "https://contactout.com/search?q=the%20owner%20Ewing%20%26%20Ewing%20Air%20Conditioning"
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "alt4.aspmx.l.google.com"
   },
   {
     "id": "fl_se_016",
@@ -10175,7 +10190,7 @@
     "estLoss": "$7,500/mo",
     "painPoint": "Homeowners calling three plumbers and hiring the one who responds via text first",
     "subject": "Quick question for Jason regarding Copperhead Plumbing LLC emergency calls",
-    "status": "skipped_unverified_mailbox",
+    "status": "pending",
     "touch": 1,
     "resendMessageId": null,
     "sentAt": null,
@@ -10212,7 +10227,7 @@
     "touch": 3,
     "resendMessageId": "01a1bc32-02dd-7698-8ad4-3132c261676b",
     "sentAt": "2026-11-08T17:25:56.632Z",
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "us-smtp-inbound-1.mimecast.com",
     "website": "https://www.sansone-ac.com",
     "body": "Hi Sansone Family,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Deerfield Beach, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_018\n\nIf you ever want to plug the $19,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Sansone Air Conditioning, Electrical & Plumbing a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
@@ -10223,7 +10238,8 @@
       "rocketreach": "https://rocketreach.co/person?name=Sansone%20Family&company=Sansone%20Air%20Conditioning%2C%20Electrical%20%26%20Plumbing",
       "contactout": "https://contactout.com/search?q=Sansone%20Family%20Sansone%20Air%20Conditioning%2C%20Electrical%20%26%20Plumbing"
     },
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "us-smtp-inbound-2.mimecast.com"
   },
   {
     "id": "fl_se_019",
@@ -10272,7 +10288,7 @@
     "estLoss": "$7,200/mo",
     "painPoint": "200A service upgrade and generator calls unanswered during tropical storm watches",
     "subject": "Quick question for the owner regarding Star Electrical Contractors Inc. emergency calls",
-    "status": "skipped_dns",
+    "status": "suppressed_bounced",
     "touch": 1,
     "resendMessageId": null,
     "sentAt": null,
@@ -10336,7 +10352,7 @@
     "estLoss": "$14,500/mo",
     "painPoint": "Flood and pipe burst insurance jobs lost when midnight emergency calls go to voicemail",
     "subject": "Quick question for Scott regarding Delray Beach Restoration Company emergency calls",
-    "status": "skipped_unverified_mailbox",
+    "status": "skipped_dns",
     "touch": 1,
     "resendMessageId": null,
     "sentAt": null,
@@ -10413,7 +10429,8 @@
       "snov": "https://snov.io/email-finder?query=cousinsair.com",
       "rocketreach": "https://rocketreach.co/person?name=John&company=Cousin's%20Air%2C%20Inc.",
       "contactout": "https://contactout.com/search?q=John%20Cousin's%20Air%2C%20Inc."
-    }
+    },
+    "mxHost": "cousinsair-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_025",
@@ -10443,7 +10460,8 @@
       "snov": "https://snov.io/email-finder?query=eliteelectricandair.com",
       "rocketreach": "https://rocketreach.co/person?name=Executive%20Leadership&company=Elite%20Electric%2C%20Plumbing%20%26%20Air",
       "contactout": "https://contactout.com/search?q=Executive%20Leadership%20Elite%20Electric%2C%20Plumbing%20%26%20Air"
-    }
+    },
+    "mxHost": "eliteelectricandair-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_026",
@@ -10490,7 +10508,7 @@
     "estLoss": "$19,000/mo",
     "painPoint": "Losing ,500 new AC system replacements when midnight breakdown calls hit an automated message",
     "subject": "Quick question for Tommy regarding All Year Cooling & Heating emergency calls",
-    "status": "skipped_dns",
+    "status": "pending",
     "touch": 1,
     "resendMessageId": null,
     "sentAt": null,
@@ -10504,10 +10522,11 @@
       "rocketreach": "https://rocketreach.co/person?name=Tommy&company=All%20Year%20Cooling%20%26%20Heating",
       "contactout": "https://contactout.com/search?q=Tommy%20All%20Year%20Cooling%20%26%20Heating"
     },
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": null,
     "website": "https://www.allyearcooling.com",
-    "emailSource": "Website Verified"
+    "emailSource": "MX Verified (allyearac-com.mail.protection.outlook.com)",
+    "mxHost": "allyearac-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_028",
@@ -10628,10 +10647,11 @@
       "rocketreach": "https://rocketreach.co/person?name=Gregg&company=Best%20Roofing",
       "contactout": "https://contactout.com/search?q=Gregg%20Best%20Roofing"
     },
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "mx1-us1.ppe-hosted.com",
     "website": "https://www.bestroofing.net",
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "bestroofing-net.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_032",
@@ -10689,10 +10709,11 @@
       "rocketreach": "https://rocketreach.co/person?name=Dan&company=Cool%20Air%20USA",
       "contactout": "https://contactout.com/search?q=Dan%20Cool%20Air%20USA"
     },
-    "mx_status": "VERIFIED_PUBLISHED",
+    "mx_status": "VERIFIED",
     "mx_host": "aspmx.l.google.com",
     "website": "https://www.coolairusa.com",
-    "emailSource": "Website Verified"
+    "emailSource": "Website Verified",
+    "mxHost": "alt4.aspmx.l.google.com"
   },
   {
     "id": "fl_se_034",
@@ -10783,7 +10804,8 @@
       "contactout": "https://contactout.com/search?q=Mike%20Air%20Quality%20Control%20Environmental"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "airqualitycontrolenv-com.mail.protection.outlook.com"
+    "mx_host": "airqualitycontrolenv-com.mail.protection.outlook.com",
+    "mxHost": "airqualitycontrolenv-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_037",
@@ -10874,7 +10896,8 @@
       "contactout": "https://contactout.com/search?q=Larry%20Thermal%20Concepts%20Inc."
     },
     "mx_status": "VERIFIED",
-    "mx_host": "thermalconceptsinc-com.mail.protection.outlook.com"
+    "mx_host": "thermalconceptsinc-com.mail.protection.outlook.com",
+    "mxHost": "thermalconceptsinc-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_040",
@@ -10934,7 +10957,8 @@
       "contactout": "https://contactout.com/search?q=Adam%20Plumbing%20Experts%20Inc."
     },
     "mx_status": "VERIFIED",
-    "mx_host": "mx10.mailspamprotection.com"
+    "mx_host": "mx10.mailspamprotection.com",
+    "mxHost": "mx20.mailspamprotection.com"
   },
   {
     "id": "fl_se_042",
@@ -11025,7 +11049,8 @@
       "contactout": "https://contactout.com/search?q=Neil%20ABC%20Roofing%20Corp."
     },
     "mx_status": "VERIFIED",
-    "mx_host": "aspmx.l.google.com"
+    "mx_host": "aspmx.l.google.com",
+    "mxHost": "aspmx2.googlemail.com"
   },
   {
     "id": "fl_se_045",
@@ -11143,7 +11168,8 @@
       "contactout": "https://contactout.com/search?q=Nelson%20Tole%20Electric"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "toleelectric-com.inbound.emailservice.io"
+    "mx_host": "toleelectric-com.inbound.emailservice.io",
+    "mxHost": "toleelectric-com.inbound.emailservice.co"
   },
   {
     "id": "fl_se_049",
@@ -11596,7 +11622,8 @@
       "contactout": "https://contactout.com/search?q=the%20owner%20Falcon%20Plumbing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "falconplumbing-com.mail.protection.outlook.com"
+    "mx_host": "falconplumbing-com.mail.protection.outlook.com",
+    "mxHost": "mx2-us1.ppe-hosted.com"
   },
   {
     "id": "fl_se_064",
@@ -11625,7 +11652,8 @@
       "contactout": "https://contactout.com/search?q=Omar%20Dade%20Super%20Cool"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "dadesupercool-com.mail.protection.outlook.com"
+    "mx_host": "dadesupercool-com.mail.protection.outlook.com",
+    "mxHost": "dadesupercool-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_065",
@@ -11654,7 +11682,8 @@
       "contactout": "https://contactout.com/search?q=Carlos%20Total%20Repair%20Pros"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "totalrepairpros-com.mail.protection.outlook.com"
+    "mx_host": "totalrepairpros-com.mail.protection.outlook.com",
+    "mxHost": "totalrepairpros-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_066",
@@ -11772,7 +11801,8 @@
       "contactout": "https://contactout.com/search?q=Danny%20T%26S%20Roofing%20Systems"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "aspmx.l.google.com"
+    "mx_host": "aspmx.l.google.com",
+    "mxHost": "alt2.aspmx.l.google.com"
   },
   {
     "id": "fl_se_070",
@@ -11801,7 +11831,8 @@
       "contactout": "https://contactout.com/search?q=the%20owner%20Istueta%20Roofing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "istuetaroofing-com.mail.protection.outlook.com"
+    "mx_host": "istuetaroofing-com.mail.protection.outlook.com",
+    "mxHost": "istuetaroofing-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_se_071",
@@ -12014,7 +12045,8 @@
       "contactout": "https://contactout.com/search?q=the%20owner%20Westfall%20Roofing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "westfallroofing-com.mail.protection.outlook.com"
+    "mx_host": "westfallroofing-com.mail.protection.outlook.com",
+    "mxHost": "westfallroofing-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_cg_078",
@@ -12442,7 +12474,8 @@
       "contactout": "https://contactout.com/search?q=Jim%20Bay%20Area%20Electric"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "mx2-usg1.ppe-hosted.com"
+    "mx_host": "mx2-usg1.ppe-hosted.com",
+    "mxHost": "mx3-usg1.ppe-hosted.com"
   },
   {
     "id": "fl_cg_092",
@@ -12564,7 +12597,8 @@
       "contactout": "https://contactout.com/search?q=Joe%20Bay%20to%20Bay%20Roofing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "mx2.privateemail.com"
+    "mx_host": "mx2.privateemail.com",
+    "mxHost": "mx2.privateemail.com"
   },
   {
     "id": "fl_cg_096",
@@ -12748,7 +12782,8 @@
       "contactout": "https://contactout.com/search?q=the%20owner%20Frank%20Gay%20Services"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "frankgayservices-com.mail.protection.outlook.com"
+    "mx_host": "frankgayservices-com.mail.protection.outlook.com",
+    "mxHost": "frankgayservices-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_cg_102",
@@ -12777,7 +12812,8 @@
       "contactout": "https://contactout.com/search?q=Charlie%20Ace%20Solves%20It%20All"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "acesolvesitall-com.mail.protection.outlook.com"
+    "mx_host": "acesolvesitall-com.mail.protection.outlook.com",
+    "mxHost": "acesolvesitall-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_cg_103",
@@ -12868,7 +12904,8 @@
       "contactout": "https://contactout.com/search?q=Liam%20Emerald%20Plumbing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "smtp.secureserver.net"
+    "mx_host": "smtp.secureserver.net",
+    "mxHost": "smtp.secureserver.net"
   },
   {
     "id": "fl_cg_106",
@@ -13174,7 +13211,8 @@
       "contactout": "https://contactout.com/search?q=the%20owner%20Rainaldi%20Home%20Services"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "mx004.netsol.xion.oxcs.net"
+    "mx_host": "mx004.netsol.xion.oxcs.net",
+    "mxHost": "mx001.netsol.xion.oxcs.net"
   },
   {
     "id": "fl_cg_123",
@@ -13513,7 +13551,8 @@
       "contactout": "https://contactout.com/search?q=Terry%20Terry%20Vereen%20Plumbing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "terryvereenplumbing-com.mail.protection.outlook.com"
+    "mx_host": "terryvereenplumbing-com.mail.protection.outlook.com",
+    "mxHost": "terryvereenplumbing-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_280",
@@ -13542,7 +13581,8 @@
       "contactout": "https://contactout.com/search?q=Robert%20Turner%20Plumbing%20Co."
     },
     "mx_status": "VERIFIED",
-    "mx_host": "aspmx.l.google.com"
+    "mx_host": "aspmx.l.google.com",
+    "mxHost": "aspmx3.googlemail.com"
   },
   {
     "id": "fl_ver_281",
@@ -13571,7 +13611,8 @@
       "contactout": "https://contactout.com/search?q=Larry%20Couf%20Plumbing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "aspmx.l.google.com"
+    "mx_host": "aspmx.l.google.com",
+    "mxHost": "alt2.aspmx.l.google.com"
   },
   {
     "id": "fl_ver_282",
@@ -13631,7 +13672,8 @@
       "contactout": "https://contactout.com/search?q=Bill%20Bill%20Fenwick%20Plumbing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "billfenwickplumbing-com.mail.protection.outlook.com"
+    "mx_host": "billfenwickplumbing-com.mail.protection.outlook.com",
+    "mxHost": "billfenwickplumbing-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_284",
@@ -13660,7 +13702,8 @@
       "contactout": "https://contactout.com/search?q=Chris%20Advantage%20Plumbing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "mailx.gridhost.com"
+    "mx_host": "mailx.gridhost.com",
+    "mxHost": "mailx.gridhost.com"
   },
   {
     "id": "fl_ver_285",
@@ -13813,7 +13856,8 @@
       "contactout": "https://contactout.com/search?q=Brian%20American%20Electrical%20Contracting%2C%20Inc."
     },
     "mx_status": "VERIFIED",
-    "mx_host": "aspmx.l.google.com"
+    "mx_host": "aspmx.l.google.com",
+    "mxHost": "alt2.aspmx.l.google.com"
   },
   {
     "id": "fl_ver_290",
@@ -13873,7 +13917,8 @@
       "contactout": "https://contactout.com/search?q=Roy%20Mardant%20Electrical"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "mardantelectrical-com.mail.protection.outlook.com"
+    "mx_host": "mardantelectrical-com.mail.protection.outlook.com",
+    "mxHost": "mardantelectrical-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_292",
@@ -13964,7 +14009,8 @@
       "contactout": "https://contactout.com/search?q=Richard%20Legacy%20Power%20Solutions"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "aspmx.l.google.com"
+    "mx_host": "aspmx.l.google.com",
+    "mxHost": "alt2.aspmx.l.google.com"
   },
   {
     "id": "fl_ver_295",
@@ -14024,7 +14070,8 @@
       "contactout": "https://contactout.com/search?q=Dan%20Empire%20Electric"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "empireelectric-com.mail.protection.outlook.com"
+    "mx_host": "empireelectric-com.mail.protection.outlook.com",
+    "mxHost": "empireelectric-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_297",
@@ -14053,7 +14100,8 @@
       "contactout": "https://contactout.com/search?q=Steve%20Crawford%20Electric"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "crawfordelectric-com.mail.protection.outlook.com"
+    "mx_host": "crawfordelectric-com.mail.protection.outlook.com",
+    "mxHost": "crawfordelectric-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_298",
@@ -14082,7 +14130,8 @@
       "contactout": "https://contactout.com/search?q=Brandon%20NexGen%20Roofing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "nexgenroofing-com.mail.protection.outlook.com"
+    "mx_host": "nexgenroofing-com.mail.protection.outlook.com",
+    "mxHost": "nexgenroofing-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_299",
@@ -14233,7 +14282,8 @@
       "contactout": "https://contactout.com/search?q=Kyle%20Elo%20Roofing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "eloroofing-com.mail.protection.outlook.com"
+    "mx_host": "eloroofing-com.mail.protection.outlook.com",
+    "mxHost": "eloroofing-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_304",
@@ -14293,7 +14343,8 @@
       "contactout": "https://contactout.com/search?q=Paul%20Schick%20Roofing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "mail.schickroofing.com"
+    "mx_host": "mail.schickroofing.com",
+    "mxHost": "mail.schickroofing.com"
   },
   {
     "id": "fl_ver_306",
@@ -14661,7 +14712,8 @@
       "contactout": "https://contactout.com/search?q=Robert%20ACRA%20Electric%2C%20Inc."
     },
     "mx_status": "VERIFIED",
-    "mx_host": "acraelectricinc-com.mail.protection.outlook.com"
+    "mx_host": "acraelectricinc-com.mail.protection.outlook.com",
+    "mxHost": "acraelectricinc-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_318",
@@ -14752,7 +14804,8 @@
       "contactout": "https://contactout.com/search?q=Randy%20Kirkwood%20Electric"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "kirkwoodelectric-com.mail.protection.outlook.com"
+    "mx_host": "kirkwoodelectric-com.mail.protection.outlook.com",
+    "mxHost": "kirkwoodelectric-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_321",
@@ -14936,7 +14989,8 @@
       "contactout": "https://contactout.com/search?q=Norm%20Roman%20Roofing"
     },
     "mx_status": "VERIFIED",
-    "mx_host": "mail.romanroofing.com"
+    "mx_host": "mail.romanroofing.com",
+    "mxHost": "mail.romanroofing.com"
   },
   {
     "id": "fl_ver_327",
@@ -15029,7 +15083,7 @@
     "mx_status": "UNVERIFIED",
     "mx_host": null,
     "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.473Z"
+    "verifiedAt": "2026-11-12T20:55:21.854Z"
   },
   {
     "id": "fl_ver_330",
@@ -15059,8 +15113,9 @@
     },
     "mx_status": "VERIFIED",
     "mx_host": "mxa-00ac3f01.gslb.pphosted.com",
+    "mxHost": "mxa-00ac3f01.gslb.pphosted.com",
     "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.473Z"
+    "verifiedAt": "2026-11-12T20:55:51.446Z"
   },
   {
     "id": "fl_ver_331",
@@ -15107,10 +15162,10 @@
     "estLoss": "$9,900/mo",
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
     "subject": "Final note regarding Professional Plumbing & Design call capture",
-    "status": "skipped_dns",
+    "status": "sent",
     "touch": 3,
-    "resendMessageId": null,
-    "sentAt": "2026-11-09T00:40:04.076Z",
+    "resendMessageId": "01a1d18c-ebf9-72b7-b2ed-5539808bdbce",
+    "sentAt": "2026-11-12T20:57:16.529Z",
     "body": "Hi Matt,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Sarasota, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_332\n\nIf you ever want to plug the $9,900/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Professional Plumbing & Design a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/professionalplumbingdesign.com",
@@ -15121,8 +15176,10 @@
     },
     "mx_status": "VERIFIED",
     "mx_host": "professionalplumbing-com.mail.protection.outlook.com",
+    "mxHost": "professionalplumbing-com.mail.protection.outlook.com",
     "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.473Z"
+    "verifiedAt": "2026-11-12T20:56:13.211Z",
+    "emailSource": "MX Verified (professionalplumbing-com.mail.protection.outlook.com)"
   },
   {
     "id": "fl_ver_333",
@@ -15138,10 +15195,10 @@
     "estLoss": "$9,100/mo",
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
     "subject": "Final note regarding Drain Clean Heroes call capture",
-    "status": "skipped_dns",
+    "status": "sent",
     "touch": 3,
-    "resendMessageId": null,
-    "sentAt": "2026-11-09T00:40:07.695Z",
+    "resendMessageId": "01a1d18d-aff3-7a00-8e5c-ffef5eb19860",
+    "sentAt": "2026-11-12T20:58:06.718Z",
     "body": "Hi Brad,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Bradenton, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_333\n\nIf you ever want to plug the $9,100/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Drain Clean Heroes a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/draincleanheroes.com",
@@ -15152,8 +15209,7 @@
     },
     "mx_status": "VERIFIED",
     "mx_host": "SMTP.GOOGLE.com",
-    "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.473Z"
+    "mxHost": "smtp.google.com"
   },
   {
     "id": "fl_ver_334",
@@ -15169,10 +15225,10 @@
     "estLoss": "$9,100/mo",
     "painPoint": "After-hours emergency burst pipe and sewer backup calls rolling to voicemail while crew is on job sites",
     "subject": "Final note regarding LT Plumbing LLC call capture",
-    "status": "skipped_dns",
+    "status": "sent",
     "touch": 3,
-    "resendMessageId": null,
-    "sentAt": "2026-11-09T16:54:18.798Z",
+    "resendMessageId": "01a1d18d-b060-70ad-a2b5-4717f3c998cd",
+    "sentAt": "2026-11-12T20:58:06.814Z",
     "body": "Hi Larry,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Palmetto, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_334\n\nIf you ever want to plug the $9,100/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at LT Plumbing LLC a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/ltplumbing.com",
@@ -15183,8 +15239,7 @@
     },
     "mx_status": "VERIFIED",
     "mx_host": "ltplumbingllc-com.mail.protection.outlook.com",
-    "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.474Z"
+    "mxHost": "ltplumbingllc-com.mail.protection.outlook.com"
   },
   {
     "id": "fl_ver_335",
@@ -15199,12 +15254,12 @@
     "service": "Accelerate Growth Engine: 24/7 Ava Voice AI + 90s SMS Speed-to-Lead + Custom Mobile Website + AEO",
     "estLoss": "$9,900/mo",
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "subject": "Final note regarding Conditioned Air call capture",
-    "status": "skipped_dns",
+    "subject": "Re: Quick question for Tim regarding Conditioned Air emergency calls",
+    "status": "pending",
     "touch": 3,
     "resendMessageId": null,
     "sentAt": "2026-11-09T16:54:19.082Z",
-    "body": "Hi Tim,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Nokomis, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_335\n\nIf you ever want to plug the $9,900/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Conditioned Air a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "body": "Hi Tim,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Conditioned Air.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_335\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/conditionedair.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Tim%20Conditioned%20Air&page=1",
@@ -15214,8 +15269,7 @@
     },
     "mx_status": "VERIFIED",
     "mx_host": "conditionedair.in.tmes.trendmicro.com",
-    "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.474Z"
+    "mxHost": "conditionedair.in.tmes.trendmicro.com"
   },
   {
     "id": "fl_ver_336",
@@ -15230,12 +15284,12 @@
     "service": "Basic Package: AI Front Desk (24/7 Ava Voice AI Receptionist & Emergency Triage)",
     "estLoss": "$9,100/mo",
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "subject": "Final note regarding C & S Heating and Cooling call capture",
+    "subject": "Re: Quick question for Chris regarding C & S Heating and Cooling emergency calls",
     "status": "skipped_dns",
     "touch": 3,
     "resendMessageId": null,
     "sentAt": "2026-11-09T16:54:19.353Z",
-    "body": "Hi Chris,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Bradenton, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_336\n\nIf you ever want to plug the $9,100/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at C & S Heating and Cooling a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "body": "Hi Chris,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at C & S Heating and Cooling.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_336\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/csheatingandcooling.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Chris%20C%20%26%20S%20Heating%20and%20Cooling&page=1",
@@ -15245,8 +15299,7 @@
     },
     "mx_status": "UNVERIFIED",
     "mx_host": null,
-    "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.474Z"
+    "dnsError": "Unverified recipient domain"
   },
   {
     "id": "fl_ver_337",
@@ -15323,12 +15376,12 @@
     "service": "Custom High-Converting Mobile Website (<1s load time, tap-to-call & instant booking)",
     "estLoss": "$9,100/mo",
     "painPoint": "Losing $8,000+ AC replacement and weekend emergency service calls to competitors on Google Maps",
-    "subject": "Final note regarding AND Services call capture",
-    "status": "skipped_dns",
+    "subject": "Re: Quick question for Andrew regarding AND Services emergency calls",
+    "status": "pending",
     "touch": 3,
     "resendMessageId": null,
     "sentAt": "2026-11-09T16:54:21.721Z",
-    "body": "Hi Andrew,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Tallahassee, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_339\n\nIf you ever want to plug the $9,100/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at AND Services a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "body": "Hi Andrew,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at AND Services.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=fl_ver_339\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/AND%20Services",
       "apollo": "https://app.apollo.io/#/people?qKeywords=Andrew%20AND%20Services&page=1",
@@ -15338,8 +15391,7 @@
     },
     "mx_status": "VERIFIED",
     "mx_host": "east.smtp.exch029.serverdata.net",
-    "dnsError": "Unverified/guessed or suppressed recipient blocked",
-    "verifiedAt": "2026-11-12T20:37:51.474Z"
+    "mxHost": "west.smtp.exch029.serverdata.net"
   },
   {
     "id": "fl_ver_340",
