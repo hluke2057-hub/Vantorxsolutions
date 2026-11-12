@@ -18,7 +18,7 @@ const { resolveEmployeeIntel } = require('./verified_employee_directory.js');
 const p1 = require('./leads_data_cylex_part1.js');
 const p2 = require('./leads_data_cylex_part2.js');
 
-const BAD_SUNBIZ_RE = /\b(ANESTHESIA|AUTO NETWORK|BROKER|BROKERAGE|HOME CARE|IMPROVEMENT ASSOCIATION|SALON|BAKERY|CHURCH|DENTAL|MEDICAL|PHARMACY|RESTAURANT|TRUCKING|LOGISTICS|INSURANCE|APPLIANCES|SCREENS|PARKER, SMITH|TROPICALS|COUNSELING|ACADEMY|POWERSPORTS|THUMBECK|POLYMER|KELLYALE|ANALYTICS|COMPANY OF MIAMI|ACCESS INC|THUMB COVE|CHARLIE & SUN|ABRAMS INC|CO SERVICES LLC|SOUTHERN COASTAL CLEANING|BUEHLER ELECTRIC SERVICE|FLAMINGO AC & HEATING|MECHANICAL A\/C SERVICES|ARS RESTORATION SERVICES|ERICA'S SERVICES LLC)\b/i;
+const BAD_SUNBIZ_RE = /\b(ANESTHESIA|AUTO NETWORK|BROKER|BROKERAGE|HOME CARE|IMPROVEMENT ASSOCIATION|SALON|BAKERY|CHURCH|DENTAL|MEDICAL|PHARMACY|RESTAURANT|TRUCKING|LOGISTICS|INSURANCE|APPLIANCES|SCREENS|PARKER, SMITH|TROPICALS|COUNSELING|ACADEMY|POWERSPORTS|THUMBECK|POLYMER|KELLYALE|ANALYTICS|COMPANY OF MIAMI|ACCESS INC|THUMB COVE|CHARLIE & SUN|ABRAMS INC|ABRAMS AND COMPANY|CO SERVICES LLC|SOUTHERN COASTAL CLEANING|BUEHLER ELECTRIC SERVICE|FLAMINGO AC & HEATING|MECHANICAL A\/C SERVICES|ARS RESTORATION SERVICES|ERICA'S SERVICES LLC|EWING EXPERIENCES|WEST PALM, L\.L\.C\.|BOCA RATON PODIATRY|DONOVAN-HILL GROUP|FLOW-TECH CONSULTING)\b/i;
 
 function computeTierInfo(emp) {
   if (emp <= 4) {
@@ -129,15 +129,17 @@ function enrichLeadObject(lead, origName) {
       sunbizUrl = reg.sunbizUrl || getOfficialSunbizSearchUrl(officialCompany);
       sunbizStatus = reg.sunbizStatus || 'Active';
     }
-    if (!badName && reg.holderFullName) {
+    if (reg.holderFullName && (!badName || reg.licenseNumber)) {
       holderFull = reg.holderFullName;
       holderFirst = reg.holderFirstName || holderFull.split(/\s+/)[0];
     }
-    if (!badName && reg.licenseNumber) {
+    if (reg.licenseNumber) {
       licenseNumber = reg.licenseNumber;
     }
     if (!badName && reg.officialTitle) {
       officialTitle = reg.officialTitle;
+    } else if (reg.licenseNumber) {
+      officialTitle = `State Licensed Qualifier (${reg.licenseNumber})`;
     }
   }
 
@@ -208,12 +210,18 @@ function enrichLeadObject(lead, origName) {
 }
 
 // 1. Rebuild real_verified_leads.json (346 leads, replacing non-FL Batches 4 & 5 with real FL contractors!)
-const rvlRaw = JSON.parse(fs.readFileSync(rvlPath, 'utf8'));
+let rvlRaw, fnwRaw;
+try {
+  rvlRaw = JSON.parse(execSync('git show 5996a73:data/real_verified_leads.json', { maxBuffer: 25 * 1024 * 1024, encoding: 'utf8' }));
+  fnwRaw = JSON.parse(execSync('git show 5996a73:data/florida_100_no_website_leads.json', { maxBuffer: 25 * 1024 * 1024, encoding: 'utf8' }));
+  console.log('Loaded clean baseline datasets from 5996a73.');
+} catch (e) {
+  rvlRaw = JSON.parse(fs.readFileSync(rvlPath, 'utf8'));
+  fnwRaw = JSON.parse(fs.readFileSync(fnwPath, 'utf8'));
+}
 const existingFL = rvlRaw.filter(x => x.state === 'FL');
 const seenNorm = new Set(existingFL.map(x => x.company.toLowerCase().replace(/[^a-z0-9]/g, '')));
 const seenPhones = new Set(existingFL.map(x => (x.phone || '').replace(/\D/g, '')));
-
-const fnwRaw = JSON.parse(fs.readFileSync(fnwPath, 'utf8'));
 const flCandidatePool = [
   ...p1.batch1Raw,
   ...p1.batch2Raw,
