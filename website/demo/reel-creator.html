@@ -1361,7 +1361,7 @@
           <span>🎬 Reel #1 (89s Story)</span>
         </button>
         <button type="button" id="tabReel2" onclick="switchActiveReel(2)" style="background:rgba(56,189,248,0.15);border:1.5px solid rgba(56,189,248,0.4);color:#7dd3fc;font-size:12.5px;font-weight:800;padding:8px 14px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.18s">
-          <span>⚡ Reel #2 (&lt;30s Viral Cut)</span>
+          <span>⚡ Reel #2 (75s Master Cut)</span>
         </button>
         <a href="reel2.html" target="_blank" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#e2e8f0;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:5px">
           <span>📱 Standalone Player ↗</span>
@@ -7045,29 +7045,38 @@ Or comment "AVA" below and we'll audit your shop's speed-to-lead.
 #contractor #hvac #roofing #plumbing #servicebusiness #contractorlife #smallbusinessowner #aiautomation #homeimprovement #speedtolead`
     },
     2: {
-      title: "Reel #2: How Nvidia's CEO Cheated & The $8,000 Bleed — 29.2s Gradual Hook Cut",
-      videoSrc: "video/vantorx-30s-reel-2.mp4?v=cueva_gradual",
-      poster: "video/reel_nvidia_act1_hook.png?v=cueva_gradual",
-      duration: "00:29",
-      subTitle: "Did Nvidia Play Fair? · Nvidia's CEO Cheated · 1995 Sega Rescue · Nobody's Perfect · Ava Voice AI",
-      caption: `Think Nvidia built a $3T empire playing fair? Think again. Nvidia’s CEO cheated. Let me explain. 🧠
+      title: "Reel #2: How Nvidia's CEO Cheated & The $8,000 Bleed — 75.1s Master Cut",
+      videoSrc: "video/vantorx-30s-reel-2.mp4?v=cueva_master_75s",
+      poster: "video/reel_nvidia_act1_hook.png?v=cueva_master_75s",
+      duration: "01:15",
+      subTitle: "Did Nvidia Play Fair? · Jensen Cheated Death · 1995 Sega $5M Rescue · -$8k Bleed · Ava Voice AI",
+      caption: `Did Nvidia build a $3 Trillion empire by playing by the book? 
 
-In 1995, Jensen Huang built a broken chip, confessed to Sega, and got $5M by pivoting to automation.
+Think again. 
 
-Nobody is perfect. Neither is your business. 📉
-You're losing $8,000 every week to voicemail while you're on a ladder or running service calls.
+The untold truth about how Nvidia actually survived... is that Jensen Huang cheated death.
 
-You don’t need to be perfect — you just need an unfair advantage. ⚡
+In 1995, Nvidia was 30 days from total bankruptcy. Their flagship gaming chip was completely broken.
 
-Meet AVA: Your 24/7 Voice AI Receptionist. 
-✅ Answers on the 1st ring (under 1 second)
-✅ Qualifies the job & emergency status
-✅ Dispatches booking details straight to your truck
+Instead of hiding behind PR, Jensen walked straight into Sega's boardroom, confessed they failed, and walked out with $5,000,000 anyway... by pivoting to ruthless automation. 
 
-Test AVA live right now: (561) 813-8602 📞
-Or drop "AVA" below and we’ll set up your shop's demo.
+Here's the truth: Nobody is perfect. And neither is your business. 📉
 
-#contractor #hvac #roofing #plumbing #servicebusiness #contractorlife #smallbusinessowner #aiautomation #speedtolead #nvidia #businesslessons`
+Every single week, contractors lose $8,000 in emergency jobs while stuck on a ladder or asleep, because calls ring and die in voicemail.
+
+Jensen had an unfair advantage. And now you do too. ⚡
+
+Meet AVA: our 24/7 Voice AI Receptionist paired with a sub-second mobile website.
+✅ Answers in 0.8 seconds on the 1st ring
+✅ Qualifies emergency jobs & books calendar slots
+✅ Dispatches client details straight to your truck
+
+Don't play fair when your competitors are answering voicemail 3 hours late.
+
+📞 Call (561) 813-8602 to test AVA live right now
+💬 Or comment "AVA" below and we’ll install her for your shop.
+
+#contractor #hvac #plumbing #roofing #electrician #bluecollar #servicebusiness #nvidia #jensenhuang #speedtolead #voiceai #aiautomation #smallbusinessowner`
     }
   };
 
@@ -7129,7 +7138,7 @@ Or drop "AVA" below and we’ll set up your shop's demo.
     if (dlBtn) {
       dlBtn.href = meta.videoSrc;
       dlBtn.download = reelNum === 1 ? 'vantorx-speed-to-lead-reel.mp4' : 'vantorx-nvidia-reel.mp4';
-      dlBtn.innerHTML = '<span>📥</span> <span>Download ' + (reelNum === 1 ? 'Reel #1 (89s MP4)' : 'Reel #2: Nvidia Viral (29.2s MP4)') + '</span>';
+      dlBtn.innerHTML = '<span>📥</span> <span>Download ' + (reelNum === 1 ? 'Reel #1 (89s MP4)' : 'Reel #2: Nvidia Master (75.1s MP4)') + '</span>';
     }
 
     // 6. Update Surroundings: Box 1 Story Explanations & Telemetry
@@ -7139,9 +7148,9 @@ Or drop "AVA" below and we’ll set up your shop's demo.
     const heroEmoji = document.getElementById('giantHeroEmoji');
 
     if (reelNum === 2) {
-      if (mindLabel) mindLabel.textContent = "🧠 ACTIVE REEL: NVIDIA'S CEO CHEATED (29.2s GRADUAL HOOK)";
+      if (mindLabel) mindLabel.textContent = "🧠 ACTIVE REEL: NVIDIA'S CEO CHEATED (75.1s MASTER CUT)";
       if (prodTitle) prodTitle.textContent = "⚡ How Jensen Huang Broke The Rules & Saved Nvidia";
-      if (prodScen) prodScen.textContent = "Gradual Hook (0-7s) ➔ 1995 Sega $5M Rescue ➔ Nobody is Perfect ($8k Bleed) ➔ AVA 24/7 Voice AI";
+      if (prodScen) prodScen.textContent = "Curiosity Hook (0-15.5s) ➔ 1995 Sega $5M Rescue ➔ Nobody is Perfect (-$8k Bleed) ➔ AVA 24/7 Voice AI & 0.6s Site";
       if (heroEmoji) heroEmoji.textContent = "🧠";
       
       const step1 = document.getElementById('renderStep1');
@@ -7149,11 +7158,11 @@ Or drop "AVA" below and we’ll set up your shop's demo.
       const step3 = document.getElementById('renderStep3');
       const step4 = document.getElementById('renderStep4');
       const step5 = document.getElementById('renderStep5');
-      if (step1) step1.innerHTML = "🎣 Act 1 (Gradual Hook): <strong>'Think Nvidia built a $3T empire playing fair? Think again. Nvidia\'s CEO cheated.'</strong> (0s - 7.0s)";
-      if (step2) step2.innerHTML = "🏛️ Act 2: <strong>1995 Sega Boardroom $5M Rescue & Automation Pivot</strong> (7.0s - 14.4s)";
-      if (step3) step3.innerHTML = "📉 Act 3: <strong>'Nobody\'s perfect. Neither is your business. $8,000 lost to voicemail.'</strong> (14.4s - 18.6s)";
-      if (step4) step4.innerHTML = "⚡ Act 4: <strong>Meet AVA: 24/7 Voice AI Answers Instantly & Books Jobs</strong> (18.6s - 29.2s)";
-      if (step5) step5.innerHTML = "✨ Rendered: <strong>1080×1920 30 FPS Cueva 2D Animation + Tactile SFX Ready (29.2s)</strong>";
+      if (step1) step1.innerHTML = "🎣 Act 1 (Gradual Hook): <strong>'Did Nvidia build a $3T empire playing by the book? Think again. Jensen Huang cheated death.'</strong> (0s - 15.5s)";
+      if (step2) step2.innerHTML = "🏛️ Act 2: <strong>1995 Sega Boardroom $5M Rescue & Automation Pivot</strong> (15.5s - 33.5s)";
+      if (step3) step3.innerHTML = "📉 Act 3: <strong>'Nobody\'s perfect. Neither is your business. $8,000 lost to voicemail.'</strong> (33.5s - 46.1s)";
+      if (step4) step4.innerHTML = "⚡ Act 4: <strong>Meet AVA: 24/7 Voice AI + 0.6s Mobile Website + Truck Dispatch</strong> (46.1s - 75.1s)";
+      if (step5) step5.innerHTML = "✨ Rendered: <strong>1080×1920 30 FPS Continuous Motion Cueva Animation + 18 Tactile SFX (75.1s)</strong>";
     } else {
       if (mindLabel) mindLabel.textContent = "🧠 BUTTON MIND: CYCLING 5 PRODUCTS";
       if (prodTitle) prodTitle.textContent = "📞 Ava 24/7 Voice AI Phone Receptionist";
