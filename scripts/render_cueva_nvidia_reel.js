@@ -1,12 +1,13 @@
 // scripts/render_cueva_nvidia_reel.js
-// Renders VantorX Reel #2: "Nvidia's CEO Cheated" (<27s)
+// Renders VantorX Reel #2: "Nvidia's CEO Cheated" (29.2s — Strictly < 30s)
+// Features an Extended Gradual Hook (0s - 7.0s) + 1995 Sega Story + Contractor Bleed + Ava Promotion
 // Uses the EXACT Cueva 2D Character & Studio Room Engine from Reel #1:
 // - Authentic Cueva illustrated characters (peach heads, specular eyes, outfits, hair, breathing, articulated limbs)
 // - Jensen Huang in black leather jacket with glasses & glowing GPU
 // - Japanese Sega Executive in boardroom with $5M contract document
 // - Attic Contractor on ladder with hardhat, high-vis vest, wrench, and missed call alert
 // - Neon Holographic Ava Voice AI with pulsing neural rings & SMS dispatch card
-// - Rich Cueva Studio Backdrops (paneling, spotlight, horizon line, 1-5 stepper)
+// - Rich Cueva Studio Backdrops (paneling, spotlight, horizon line, 1-4 stepper)
 // - Boxless Hormozi Kinetic Captions
 // - Clean ElevenLabs voiceover + tactile foley SFX (NO background music)
 
@@ -26,7 +27,7 @@ const outMp4Path = path.join(root, 'website/demo/video/vantorx-30s-reel-2.mp4');
 const outNamedMp4 = path.join(root, 'website/demo/video/vantorx-nvidia-reel.mp4');
 
 const tsData = JSON.parse(fs.readFileSync(tsJsonPath, 'utf8'));
-const TOTAL_SEC = 26.3; // Full length of voiceover + CTA tail
+const TOTAL_SEC = 29.2; // Strictly under 30 seconds!
 const FPS = 30;
 const W = 1080;
 const H = 1920;
@@ -209,37 +210,29 @@ const htmlContent = `<!DOCTYPE html>
       ctx.translate(0, bob);
 
       if (outfit === 'jensen') {
-        // Jensen Huang: Black leather motorcycle jacket with neon green trim
         drawRoundBox(ctx, -50, -225, 100, 125, 16, '#09090b', '#22c55e', 2.5);
-        // V-collar shirt
         ctx.fillStyle = '#18181b';
         ctx.beginPath();
         ctx.moveTo(-22, -225); ctx.lineTo(22, -225); ctx.lineTo(0, -170); ctx.closePath();
         ctx.fill();
-        // Silver zipper line
         ctx.strokeStyle = '#a1a1aa';
         ctx.lineWidth = 3;
         ctx.beginPath(); ctx.moveTo(0, -170); ctx.lineTo(0, -105); ctx.stroke();
       } else if (outfit === 'contractor') {
-        // Contractor: Blue work shirt + High-vis orange safety vest
         drawRoundBox(ctx, -48, -225, 96, 125, 16, '#1d4ed8', null);
         drawRoundBox(ctx, -46, -223, 92, 120, 14, '#f97316', '#fb923c', 2);
-        // Yellow reflective stripes
         ctx.fillStyle = '#fde047';
         ctx.fillRect(-46, -155, 92, 10);
         ctx.fillRect(-46, -130, 92, 10);
         ctx.fillRect(-30, -223, 12, 68);
         ctx.fillRect(18, -223, 12, 68);
       } else if (outfit === 'sega') {
-        // Sega Executive: Dark charcoal tailored suit & sky blue tie
         drawRoundBox(ctx, -48, -225, 96, 125, 16, '#18181b', '#27272a', 2);
         ctx.fillStyle = '#ffffff';
         ctx.beginPath(); ctx.moveTo(-20, -225); ctx.lineTo(20, -225); ctx.lineTo(0, -165); ctx.closePath(); ctx.fill();
-        // Sky blue tie
         ctx.fillStyle = '#0284c7';
         ctx.beginPath(); ctx.moveTo(-6, -215); ctx.lineTo(6, -215); ctx.lineTo(10, -130); ctx.lineTo(0, -115); ctx.lineTo(-10, -130); ctx.closePath(); ctx.fill();
       } else {
-        // Suit
         drawRoundBox(ctx, -48, -225, 96, 125, 16, '#27272a', '#3f3f46', 2);
         ctx.fillStyle = '#bae6fd';
         ctx.beginPath(); ctx.moveTo(-22, -225); ctx.lineTo(22, -225); ctx.lineTo(0, -165); ctx.closePath(); ctx.fill();
@@ -267,7 +260,6 @@ const htmlContent = `<!DOCTYPE html>
 
         // Handheld props
         if (isRight && holdingItem === 'gpu') {
-          // Glowing Nvidia GPU Chip
           ctx.save();
           ctx.translate(6, 88);
           drawRoundBox(ctx, -24, -48, 48, 48, 8, '#15803d', '#4ade80', 3);
@@ -278,7 +270,6 @@ const htmlContent = `<!DOCTYPE html>
           ctx.fillText('GPU', 0, -24);
           ctx.restore();
         } else if (isRight && holdingItem === 'wrench') {
-          // Silver plumber's pipe wrench
           ctx.save();
           ctx.translate(4, 86);
           ctx.rotate(-0.5 + Math.sin(t * 7) * 0.2);
@@ -290,7 +281,6 @@ const htmlContent = `<!DOCTYPE html>
           ctx.stroke();
           ctx.restore();
         } else if (isRight && holdingItem === 'contract') {
-          // $5,000,000 Sega funding contract document
           ctx.save();
           ctx.translate(10, 80);
           drawRoundBox(ctx, -30, -50, 60, 45, 6, '#10b981', '#34d399', 3);
@@ -377,7 +367,6 @@ const htmlContent = `<!DOCTYPE html>
 
       // 9. Hair / Headwear
       if (hair === 'silver_jensen') {
-        // Jensen Huang's iconic silver hair
         ctx.fillStyle = '#94a3b8';
         const puffs = [
           { cx: -32, cy: headY - 22, r: 20 },
@@ -391,12 +380,10 @@ const htmlContent = `<!DOCTYPE html>
         puffs.forEach(p => {
           ctx.beginPath(); ctx.arc(p.cx, p.cy, p.r, 0, Math.PI * 2); ctx.fill();
         });
-        // Gloss highlight
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
         ctx.lineWidth = 4.5;
         ctx.beginPath(); ctx.moveTo(-24, headY - 34); ctx.lineTo(-14, headY - 42); ctx.stroke();
       } else if (hair === 'hardhat') {
-        // Yellow safety hardhat with shiny gloss dome
         ctx.fillStyle = '#78350f';
         ctx.beginPath(); ctx.arc(-38, headY - 10, 12, 0, Math.PI * 2); ctx.arc(38, headY - 10, 12, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = '#facc15';
@@ -412,7 +399,6 @@ const htmlContent = `<!DOCTYPE html>
         ctx.lineWidth = 4;
         ctx.beginPath(); ctx.moveTo(12, headY - 38); ctx.lineTo(24, headY - 30); ctx.stroke();
       } else {
-        // Signature Cueva curly golden-brown hair
         ctx.fillStyle = '#b4823e';
         const puffs = [
           { cx: -32, cy: headY - 22, r: 20 },
@@ -439,38 +425,65 @@ const htmlContent = `<!DOCTYPE html>
     window.renderFrame = function(t) {
       ctx.clearRect(0, 0, W, H);
 
-      // Act Transitions:
-      // Act 1: 0.0s - 2.61s (Hook: Nvidia's CEO Cheated)
-      // Act 2: 2.61s - 12.27s (Story: Sega Boardroom $5M Rescue)
-      // Act 3: 12.27s - 16.39s (Nobody's Perfect & Contractor Ladder)
-      // Act 4: 16.39s - End (Meet AVA Voice AI Hologram & Promotion)
+      // Act Transitions calibrated to exact ElevenLabs timestamps:
+      // Act 1 (Gradual Hook): 0.0s - 7.0s
+      // Act 2 (Sega Rescue):  7.0s - 14.36s
+      // Act 3 (Nobody Perfect): 14.36s - 18.62s
+      // Act 4 (AVA Voice AI): 18.62s - 29.2s
 
-      if (t < 2.61) {
+      if (t < 7.0) {
         // ============================================================
-        // ACT 1: THE HOOK — NVIDIA'S CEO CHEATED
+        // ACT 1: GRADUAL HOOK (0s - 7.0s)
+        // 0s - 3.4s: "Think Nvidia built a three-trillion-dollar empire playing fair?"
+        // 3.4s - 5.0s: "Think again. Nvidia's CEO cheated."
+        // 5.0s - 7.0s: "Let me explain."
         // ============================================================
-        drawCuevaRoom('#3b0764', '#0f021c', '#06010b', 1, t, "01 · THE HOOK • NVIDIA'S CEO CHEATED");
+        drawCuevaRoom('#3b0764', '#0f021c', '#06010b', 1, t, "01 · THE HOOK • THE $3 TRILLION SECRET");
 
-        // Big Crimson Alert Card
-        const pulse = 1 + Math.sin(t * 8) * 0.02;
-        ctx.save();
-        ctx.translate(W / 2, 430);
-        ctx.scale(pulse, pulse);
+        if (t < 3.4) {
+          // Part 1: The Intriguing Question
+          const pulse = 1 + Math.sin(t * 6) * 0.02;
+          ctx.save();
+          ctx.translate(W / 2, 420);
+          ctx.scale(pulse, pulse);
 
-        drawRoundBox(ctx, -420, -140, 840, 280, 28, 'rgba(244, 63, 94, 0.18)', '#f43f5e', 5);
-        ctx.font = '900 32px "Segoe UI", Arial, sans-serif';
-        ctx.fillStyle = '#fca5a5';
-        ctx.textAlign = 'center';
-        ctx.fillText('THE $3 TRILLION CONFESSION', 0, -75);
+          drawRoundBox(ctx, -440, -140, 880, 270, 28, 'rgba(56, 189, 248, 0.15)', '#38bdf8', 4);
+          ctx.font = '900 32px "Segoe UI", Arial, sans-serif';
+          ctx.fillStyle = '#7dd3fc';
+          ctx.textAlign = 'center';
+          ctx.fillText('THE $3,000,000,000,000 QUESTION', 0, -75);
 
-        ctx.font = '900 82px "Segoe UI", Arial, sans-serif';
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText("NVIDIA'S CEO", 0, 5);
+          ctx.font = '900 68px "Segoe UI", Arial, sans-serif';
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText("DID NVIDIA PLAY FAIR?", 0, 5);
 
-        ctx.font = '900 110px "Segoe UI", Arial, sans-serif';
-        ctx.fillStyle = '#f43f5e';
-        ctx.fillText('CHEATED.', 0, 105);
-        ctx.restore();
+          ctx.font = '800 32px "Segoe UI", Arial, sans-serif';
+          ctx.fillStyle = '#38bdf8';
+          ctx.fillText('HOW DID THEY BECOME #1 IN THE WORLD?', 0, 75);
+          ctx.restore();
+
+        } else {
+          // Part 2: The Bombshell Twist ("Think again. Nvidia's CEO cheated.")
+          const pulse = 1 + Math.sin(t * 9) * 0.025;
+          ctx.save();
+          ctx.translate(W / 2, 420);
+          ctx.scale(pulse, pulse);
+
+          drawRoundBox(ctx, -430, -145, 860, 280, 28, 'rgba(244, 63, 94, 0.22)', '#f43f5e', 5);
+          ctx.font = '900 34px "Segoe UI", Arial, sans-serif';
+          ctx.fillStyle = '#fca5a5';
+          ctx.textAlign = 'center';
+          ctx.fillText('THINK AGAIN · THE UNTOLD STORY', 0, -78);
+
+          ctx.font = '900 84px "Segoe UI", Arial, sans-serif';
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText("NVIDIA'S CEO", 0, 8);
+
+          ctx.font = '900 114px "Segoe UI", Arial, sans-serif';
+          ctx.fillStyle = '#f43f5e';
+          ctx.fillText('CHEATED.', 0, 108);
+          ctx.restore();
+        }
 
         // Jensen Huang on Center Stage holding GPU
         drawCuevaChar({
@@ -479,15 +492,17 @@ const htmlContent = `<!DOCTYPE html>
           scale: 1.0,
           outfit: 'jensen',
           hair: 'silver_jensen',
-          mood: 'talk',
+          mood: t < 3.4 ? 'smile' : 'talk',
           leftArmAngle: 0.25,
           rightArmAngle: -1.05 + Math.sin(t * 5) * 0.08,
           holdingItem: 'gpu'
         }, t);
 
-      } else if (t < 12.27) {
+      } else if (t < 14.36) {
         // ============================================================
-        // ACT 2: THE DEPTH — 1995 SEGA BOARDROOM $5M RESCUE
+        // ACT 2: THE DEPTH — 1995 SEGA BOARDROOM $5M RESCUE (7.0s - 14.4s)
+        // "In 1995, Jensen Huang built a broken chip, confessed to Sega,
+        //  and got five million by pivoting to automation."
         // ============================================================
         drawCuevaRoom('#064e3b', '#022c22', '#02140f', 2, t, "02 · WHAT JENSEN DID • SEGA $5M PIVOT");
 
@@ -542,9 +557,11 @@ const htmlContent = `<!DOCTYPE html>
           holdingItem: 'contract'
         }, t);
 
-      } else if (t < 16.39) {
+      } else if (t < 18.62) {
         // ============================================================
-        // ACT 3: NOBODY'S PERFECT & NEITHER IS YOUR BUSINESS
+        // ACT 3: NOBODY'S PERFECT & NEITHER IS YOUR BUSINESS (14.4s - 18.6s)
+        // "Nobody is perfect. Neither is your business.
+        //  You're losing eight grand a week to voicemail."
         // ============================================================
         drawCuevaRoom('#451a03', '#1c0a00', '#0a0401', 3, t, "03 · THE REALITY • NOBODY'S PERFECT");
 
@@ -610,7 +627,9 @@ const htmlContent = `<!DOCTYPE html>
 
       } else {
         // ============================================================
-        // ACT 4: THE UNFAIR ADVANTAGE — MEET AVA 24/7 VOICE AI
+        // ACT 4: THE UNFAIR ADVANTAGE — MEET AVA 24/7 VOICE AI (18.6s - 29.2s)
+        // "Meet AVA: our Voice AI that answers instantly and books jobs 24/7.
+        //  Call (561) 813-8602 or comment AVA."
         // ============================================================
         drawCuevaRoom('#1e1b4b', '#064e3b', '#02120e', 4, t, '04 · THE UNFAIR ADVANTAGE • MEET AVA');
 
