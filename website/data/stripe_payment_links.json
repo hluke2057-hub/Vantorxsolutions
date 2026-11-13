@@ -1,0 +1,40 @@
+{
+  "updated_at": "2026-11-13T01:37:42-05:00",
+  "products": {
+    "essential_tier": {
+      "name": "Essential Tier (AI Phone Receptionist)",
+      "price": "$397/mo + $497 setup",
+      "payment_link": "https://buy.stripe.com/dRmeVd7meg2rf8331Kgw001"
+    },
+    "accelerate_tier": {
+      "name": "Accelerate Tier (Most Popular / Full Growth Stack)",
+      "price": "$697/mo + $997 setup",
+      "payment_link": "https://buy.stripe.com/28EeVddKC7vVf830TCgw002"
+    },
+    "scale_tier": {
+      "name": "Scale Tier (Enterprise Multi-Truck)",
+      "price": "$1,297/mo + $1,997 setup",
+      "payment_link": "https://buy.stripe.com/3cI4gzcGy2bB2lhfOwgw003"
+    },
+    "website": {
+      "name": "Custom Website Design",
+      "price": "$799 flat upfront",
+      "payment_link": "https://buy.stripe.com/bJe9AT9um17x3plbyggw004"
+    },
+    "ava_voice_ai": {
+      "name": "Ava 24/7 Voice AI Receptionist",
+      "price": "$397/mo + $497 setup",
+      "payment_link": "https://buy.stripe.com/00w00j4a2g2r9NJgSAgw005"
+    },
+    "aeo_engine": {
+      "name": "AEO Engine™ (AI Search Rank)",
+      "price": "$297/mo + $297 setup",
+      "payment_link": "https://buy.stripe.com/dRm6oHeOGbMbe3Z6dWgw006"
+    },
+    "leadflow_crm": {
+      "name": "LeadFlow CRM & SMS Automation",
+      "price": "$197/mo + $197 setup",
+      "payment_link": "https://buy.stripe.com/eVqeVd21UeYnaRN8m4gw007"
+    }
+  }
+}
