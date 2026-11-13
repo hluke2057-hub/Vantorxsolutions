@@ -45,14 +45,12 @@ body {
   line-height: 1.5;
 }
 
-/* Widescreen 16:9 Presentation Deck Container */
 .deck-container {
   max-width: 1380px;
   margin: 0 auto;
   padding: 24px 20px 80px;
 }
 
-/* Sticky Presentation Top Bar */
 .top-nav {
   display: flex;
   justify-content: space-between;
@@ -135,7 +133,6 @@ body {
   box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
 }
 
-/* Slide Base — Optimized to fill 16:9 frame with NO dead blank space */
 .slide {
   background: radial-gradient(circle at 50% 0%, #151d32 0%, #070a10 75%);
   border: 1.5px solid var(--border);
@@ -181,10 +178,8 @@ body {
   line-height: 1.5;
 }
 
-/* High-Density Card Grids (Fills blank space) */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 
 .card {
   background: var(--bg-card);
@@ -206,7 +201,6 @@ body {
   margin: 10px 0;
 }
 
-/* Comparison Table */
 .comp-table {
   width: 100%;
   border-collapse: collapse;
@@ -235,27 +229,7 @@ body {
   border-bottom: none;
 }
 .text-center { text-align: center; }
-.text-right { text-align: right; }
 
-/* Audio Waveform Simulator for Ava */
-.waveform-box {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  height: 38px;
-  padding: 0 14px;
-  background: #030712;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-.w-bar {
-  flex: 1;
-  background: var(--cyan);
-  border-radius: 2px;
-  transition: height .15s ease;
-}
-
-/* Print/PDF Export Mode */
 @media print {
   body { background: #070a10 !important; -webkit-print-color-adjust: exact; }
   .top-nav { display: none !important; }
@@ -267,7 +241,7 @@ body {
 
 <div class="deck-container">
 
-  <!-- Sticky Presentation Controls -->
+  <!-- Header Controls -->
   <header class="top-nav">
     <div class="brand-mark">
       <div class="logo-icon">V</div>
@@ -275,7 +249,7 @@ body {
     </div>
 
     <div class="deck-controls">
-      <span class="slide-indicator">Slide <span id="curSlide">1</span> of 9</span>
+      <span class="slide-indicator">Slide <span id="curSlide">1</span> of 12</span>
       <a href="/demo/PRO-TECH_AIR_SERVICES_PROPOSAL.pptx" download class="nav-btn btn-gold">📊 Download Google Slides (.pptx)</a>
       <a href="/demo/PRO-TECH_AIR_SERVICES_DEMO_PRESENTATION.pdf" download class="nav-btn">📄 Download PDF</a>
       <button class="nav-btn" onclick="window.print()">🖨️ Print / Present</button>
@@ -287,7 +261,7 @@ body {
   <!-- ======================================================= -->
   <section class="slide" id="slide-1">
     <div>
-      <div class="slide-tag">STRATEGIC GROWTH &amp; 24/7 FRONT-OFFICE PROPOSAL</div>
+      <div class="slide-tag">STRATEGIC GROWTH &amp; 24/7 FRONT-OFFICE INFRASTRUCTURE</div>
       <h1 class="slide-title" style="font-size:clamp(36px, 4vw, 54px)">PRO-TECH AIR SERVICES LLC</h1>
       <p class="slide-subtitle" style="font-size:19px;color:var(--gold-light)">
         24/7 Operations, Speed-to-Lead &amp; High-Converting Web Infrastructure for Miami-Dade
@@ -333,7 +307,7 @@ body {
   </section>
 
   <!-- ======================================================= -->
-  <!-- SLIDE 2: THE MIAMI HVAC BLEED CALCULATOR (Large Fonts) -->
+  <!-- SLIDE 2: THE MIAMI HVAC BLEED CALCULATOR               -->
   <!-- ======================================================= -->
   <section class="slide" id="slide-2">
     <div>
@@ -375,27 +349,25 @@ body {
   </section>
 
   <!-- ======================================================= -->
-  <!-- SLIDE 3: PERSONALIZED PRO-TECH WEBSITE CONCEPT (Mockup) -->
+  <!-- SLIDE 3: FEATURE 1 — SUB-SECOND WEBSITE & ESTIMATOR    -->
   <!-- ======================================================= -->
   <section class="slide" id="slide-3">
     <div>
-      <div class="slide-tag">PILLAR 1 &middot; SUB-SECOND MOBILE CONVERSION ARCHITECTURE</div>
-      <h2 class="slide-title">What Carlin's <span>Custom Pro-Tech Website</span> Looks Like</h2>
+      <div class="slide-tag">FEATURE 1 &middot; HIGH-CONVERTING MOBILE INFRASTRUCTURE</div>
+      <h2 class="slide-title">Sub-Second Custom Website &amp; <span>Ballpark Estimator</span></h2>
       <p class="slide-subtitle">
         Most contractor sites take 4 to 6 seconds to load and hide the phone number. Our custom architecture loads in 0.6s with classic clean HVAC white &amp; royal blue accents.
       </p>
     </div>
 
     <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;gap:28px;align-items:center;margin:10px 0">
-      <!-- Mockup Image Preview -->
       <div style="background:#000;border:2px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.5)">
         <img src="/assets/pro_tech_website_mockup.png" alt="Pro-Tech Air Services Website Mockup" style="width:100%;height:auto;display:block">
       </div>
 
-      <!-- Feature Details -->
       <div class="card" style="padding:26px">
         <div style="font-size:11px;font-family:var(--font-mono);color:var(--gold);font-weight:800;margin-bottom:12px;text-transform:uppercase">
-          BUILT FOR SOUTH FLORIDA CONVERSION
+          PURPOSE &amp; OPERATIONAL BENEFITS
         </div>
 
         <div style="display:flex;flex-direction:column;gap:16px">
@@ -430,12 +402,12 @@ body {
   </section>
 
   <!-- ======================================================= -->
-  <!-- SLIDE 4: AVA 24/7 VOICE AI PHONE RECEPTIONIST (Kept)  -->
+  <!-- SLIDE 4: FEATURE 2 — AVA 24/7 VOICE AI RECEPTIONIST    -->
   <!-- ======================================================= -->
   <section class="slide" id="slide-4">
     <div>
-      <div class="slide-tag">PILLAR 2 &middot; 24/7/365 AI VOICE RECEPTIONIST</div>
-      <h2 class="slide-title">Never Lose Another <span>Emergency Job</span> to Missed Calls</h2>
+      <div class="slide-tag">FEATURE 2 &middot; 24/7/365 AI VOICE RECEPTIONIST</div>
+      <h2 class="slide-title">Ava 24/7 Voice AI: <span>Never Lose Another Call</span></h2>
       <p class="slide-subtitle">
         Ava is not an answering service. She is an intelligent voice receptionist trained specifically on South Florida HVAC emergencies.
       </p>
@@ -464,7 +436,6 @@ body {
         </div>
       </div>
 
-      <!-- Real Transcript Card -->
       <div class="card" style="background:#030712;border:2px solid #1e3a8a;display:flex;flex-direction:column;justify-content:space-between">
         <div>
           <div style="font-size:11px;font-family:var(--font-mono);color:var(--cyan);font-weight:800;margin-bottom:12px;text-transform:uppercase">
@@ -496,7 +467,7 @@ body {
   </section>
 
   <!-- ======================================================= -->
-  <!-- SLIDE 5: INTERACTIVE PROOF — DIAL AVA LIVE (Kept)     -->
+  <!-- SLIDE 5: FEATURE 3 — INTERACTIVE PROOF: DIAL AVA LIVE   -->
   <!-- ======================================================= -->
   <section class="slide" id="slide-5">
     <div>
@@ -529,9 +500,168 @@ body {
   </section>
 
   <!-- ======================================================= -->
-  <!-- SLIDE 6: OPTION 1 — TRADE GROWTH BUNDLE (Dedicated)   -->
+  <!-- SLIDE 6: FEATURE 4 — LEADFLOW CRM & UI MOCKUP          -->
   <!-- ======================================================= -->
   <section class="slide" id="slide-6">
+    <div>
+      <div class="slide-tag">FEATURE 4 &middot; SPEED-TO-LEAD &amp; PIPELINE ENGINE</div>
+      <h2 class="slide-title">LeadFlow CRM: <span>45-Second Speed-to-Lead</span> &amp; Live Pipeline UI</h2>
+      <p class="slide-subtitle">
+        Stop letting open quotes die on whiteboards. Every inbound web lead and phone call flows into a live visual Kanban CRM with automated 2-way SMS follow-ups.
+      </p>
+    </div>
+
+    <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;gap:28px;align-items:center;margin:10px 0">
+      <div style="background:#000;border:2px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.5)">
+        <img src="/assets/leadflow_crm_ui_mockup.png" alt="LeadFlow CRM UI Mockup" style="width:100%;height:auto;display:block">
+      </div>
+
+      <div class="card" style="padding:26px">
+        <div style="font-size:11px;font-family:var(--font-mono);color:var(--gold);font-weight:800;margin-bottom:12px;text-transform:uppercase">
+          WHAT THE CRM DOES FOR YOU
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">⚡ 45-Second Missed-Call Auto-SMS</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">The moment a call ends, system texts the customer immediately so they don't call a competitor.</div>
+          </div>
+
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">📊 4-Stage Visual Kanban Pipeline</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">Inbound calls ➔ Dispatched to Truck ➔ In Progress ➔ 5★ Review Dispatched.</div>
+          </div>
+
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">💬 2-Way Texting From Business Line</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">Text customers from your business line directly through your phone or computer.</div>
+          </div>
+
+          <div style="background:rgba(56,189,248,0.1);border:1.5px solid var(--cyan);padding:14px;border-radius:10px">
+            <div style="font-size:14px;font-weight:800;color:var(--cyan)">📱 Instant SMS Tech Alerts:</div>
+            <div style="font-size:12.5px;color:#cbd5e1;margin-top:3px">
+              Carlin and on-call technicians receive full caller dossiers right on their cell phones.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:var(--text-muted);text-align:center">
+      Live visual interface &middot; Integrated 2-way SMS chat syncing directly to Google Calendar
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- SLIDE 7: FEATURE 5 — AEO & AI SEARCH ENGINE            -->
+  <!-- ======================================================= -->
+  <section class="slide" id="slide-7">
+    <div>
+      <div class="slide-tag">FEATURE 5 &middot; AI SEARCH DOMINANCE</div>
+      <h2 class="slide-title">AEO Engine™: <span>Answer Engine Optimization</span> vs. Old Google SEO</h2>
+      <p class="slide-subtitle">
+        35% of homeowners now ask ChatGPT, Siri, or Perplexity instead of browsing Google blue links. We optimize Pro-Tech to be the cited answer.
+      </p>
+    </div>
+
+    <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;gap:28px;align-items:center;margin:10px 0">
+      <div style="background:#000;border:2px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.5)">
+        <img src="/assets/aeo_search_infographic.png" alt="AEO Infographic" style="width:100%;height:auto;display:block">
+      </div>
+
+      <div class="card" style="padding:26px">
+        <div style="font-size:11px;font-family:var(--font-mono);color:var(--gold);font-weight:800;margin-bottom:12px;text-transform:uppercase">
+          HOW AEO WORKS FOR PRO-TECH
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">🤖 The AI Shift in 2026</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">Homeowners ask Siri and ChatGPT directly: <em>"Who is the best emergency AC repair in Miami?"</em></div>
+          </div>
+
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">📄 Hidden Schema Injection</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">We code JSON-LD LocalBusiness schema into your site so AI crawlers know you are open 24/7 and licensed.</div>
+          </div>
+
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">🌐 llms.txt AI Knowledge Feed</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">A machine-readable knowledge graph summary designed specifically for AI models.</div>
+          </div>
+
+          <div style="background:rgba(56,189,248,0.1);border:1.5px solid var(--cyan);padding:14px;border-radius:10px">
+            <div style="font-size:14px;font-weight:800;color:var(--cyan)">🏆 Direct Recommendation:</div>
+            <div style="font-size:12.5px;color:#cbd5e1;margin-top:3px">
+              ChatGPT directly recommends Pro-Tech Air instead of dumping a list of 10 competitors.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:var(--text-muted);text-align:center">
+      30–60 day compounding authority asset &middot; Zero code or file management required from the contractor
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- SLIDE 8: FEATURE 6 — GOOGLE REVIEW ACCELERATOR         -->
+  <!-- ======================================================= -->
+  <section class="slide" id="slide-8">
+    <div>
+      <div class="slide-tag" style="color:var(--gold)">FEATURE 6 &middot; AUTOMATED REPUTATION ACCELERATOR</div>
+      <h2 class="slide-title">Google Review Accelerator: <span>15–25 Five-Star Reviews</span> / Month</h2>
+      <p class="slide-subtitle">
+        Turn every completed AC repair into an automated 5-star Google review with zero manual texting or chasing customers.
+      </p>
+    </div>
+
+    <div class="grid-2" style="grid-template-columns: 1.35fr 0.85fr;gap:28px;align-items:center;margin:10px 0">
+      <div style="background:#000;border:2px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.5)">
+        <img src="/assets/google_review_accelerator_infographic.png" alt="Google Review Accelerator Infographic" style="width:100%;height:auto;display:block">
+      </div>
+
+      <div class="card" style="padding:26px">
+        <div style="font-size:11px;font-family:var(--font-mono);color:var(--gold);font-weight:800;margin-bottom:12px;text-transform:uppercase">
+          HOW THE REVIEW ACCELERATOR WORKS
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">⭐ The Contractor Problem</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">95% of satisfied homeowners forget to leave a review because contractors forget to text them.</div>
+          </div>
+
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">⏱️ Smart 2-Hour Delay</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">When job is completed, system automatically waits 2 hours so homeowner is relaxed in cool AC.</div>
+          </div>
+
+          <div>
+            <div style="font-size:16px;font-weight:800;color:#fff">📱 Direct 1-Tap Google Link</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:3px">Opens Google Maps with 5 stars pre-selected &mdash; zero typing or searching required.</div>
+          </div>
+
+          <div style="background:rgba(245,158,11,0.1);border:1.5px solid var(--gold);padding:14px;border-radius:10px">
+            <div style="font-size:14px;font-weight:800;color:var(--gold)">📈 Maps &amp; AEO Supercharger:</div>
+            <div style="font-size:12.5px;color:#cbd5e1;margin-top:3px">
+              Adds 15&ndash;25 real reviews every month, pushing Pro-Tech above all Miami competitors.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:var(--text-muted);text-align:center">
+      Automated via Twilio and LeadFlow &middot; Runs 24/7 in the background with zero manual effort
+    </div>
+  </section>
+
+  <!-- ======================================================= -->
+  <!-- SLIDE 9: SALES PACKAGE 1 — TRADE GROWTH BUNDLE         -->
+  <!-- ======================================================= -->
+  <section class="slide" id="slide-9">
     <div>
       <div class="slide-tag">SALES OPTION 1 &middot; CORE OPERATIONAL FOUNDATION</div>
       <h2 class="slide-title">Option 1: <span>Trade Growth Bundle</span> (Website + Ava AI)</h2>
@@ -541,7 +671,6 @@ body {
     </div>
 
     <div class="grid-2" style="grid-template-columns: 0.85fr 1.15fr;gap:28px;margin:16px 0">
-      <!-- Pricing Box -->
       <div class="card" style="border:2px solid var(--border);padding:32px;display:flex;flex-direction:column;justify-content:space-between">
         <div>
           <div style="font-size:11px;font-family:var(--font-mono);color:var(--cyan);font-weight:800;letter-spacing:0.1em">OPTION 1 INVESTMENT</div>
@@ -561,7 +690,6 @@ body {
         </div>
       </div>
 
-      <!-- Feature Checklist -->
       <div class="card" style="padding:32px">
         <div style="font-size:12px;font-family:var(--font-mono);color:var(--gold);font-weight:800;margin-bottom:16px;text-transform:uppercase">
           WHAT PRO-TECH RECEIVES IN OPTION 1:
@@ -593,9 +721,9 @@ body {
   </section>
 
   <!-- ======================================================= -->
-  <!-- SLIDE 7: OPTION 2 — ACCELERATE TIER (Dedicated)        -->
+  <!-- SLIDE 10: SALES PACKAGE 2 — ACCELERATE TIER            -->
   <!-- ======================================================= -->
-  <section class="slide" id="slide-7">
+  <section class="slide" id="slide-10">
     <div>
       <div class="slide-tag" style="color:var(--gold)">SALES OPTION 2 &middot; FULL FRONT-OFFICE GROWTH ENGINE (RECOMMENDED)</div>
       <h2 class="slide-title">Option 2: <span>Accelerate Tier</span> (Full Market Dominance)</h2>
@@ -605,7 +733,6 @@ body {
     </div>
 
     <div class="grid-2" style="grid-template-columns: 0.85fr 1.15fr;gap:28px;margin:16px 0">
-      <!-- Pricing Box -->
       <div class="card highlight" style="border:2px solid var(--gold);padding:32px;display:flex;flex-direction:column;justify-content:space-between">
         <div>
           <div style="font-size:11px;font-family:var(--font-mono);color:var(--gold);font-weight:800;letter-spacing:0.1em">ACCELERATE BUNDLE INVESTMENT</div>
@@ -625,7 +752,6 @@ body {
         </div>
       </div>
 
-      <!-- Feature Checklist -->
       <div class="card" style="padding:32px">
         <div style="font-size:12px;font-family:var(--font-mono);color:var(--gold);font-weight:800;margin-bottom:16px;text-transform:uppercase">
           WHAT PRO-TECH RECEIVES IN OPTION 2:
@@ -656,9 +782,9 @@ body {
   </section>
 
   <!-- ======================================================= -->
-  <!-- SLIDE 8: HEAD-TO-HEAD PACKAGE COMPARISON MATRIX        -->
+  <!-- SLIDE 11: HEAD-TO-HEAD PACKAGE COMPARISON MATRIX       -->
   <!-- ======================================================= -->
-  <section class="slide" id="slide-8">
+  <section class="slide" id="slide-11">
     <div>
       <div class="slide-tag">PACKAGE COMPARISON &middot; COMPLETE EXHAUSTIVE MATRIX</div>
       <h2 class="slide-title">Option 1 vs. Option 2: <span>Side-by-Side Breakdown</span></h2>
@@ -750,9 +876,9 @@ body {
   </section>
 
   <!-- ======================================================= -->
-  <!-- SLIDE 9: THE 48-HOUR ZERO-FRICTION ROLLOUT (Upgraded)  -->
+  <!-- SLIDE 12: THE 48-HOUR ZERO-FRICTION ROLLOUT            -->
   <!-- ======================================================= -->
-  <section class="slide" id="slide-9">
+  <section class="slide" id="slide-12">
     <div>
       <div class="slide-tag" style="color:var(--emerald)">THE ROLLOUT &middot; 48-HOUR ONBOARDING GUARANTEE</div>
       <h2 class="slide-title">How We Go Live In <span>Under 48 Hours</span> With Zero Friction</h2>
@@ -803,7 +929,6 @@ body {
       </div>
     </div>
 
-    <!-- Final Call to Action Box -->
     <div class="card highlight" style="text-align:center;padding:24px;border:2px solid var(--gold)">
       <div style="font-size:18px;font-weight:800;color:#fff">
         Ready to lock in Carlin's Miami territory?
@@ -825,7 +950,6 @@ body {
 </div>
 
 <script>
-// Slide scroll tracking
 window.addEventListener('scroll', function() {
   const slides = document.querySelectorAll('.slide');
   let cur = 1;
@@ -843,9 +967,8 @@ window.addEventListener('scroll', function() {
 </html>`;
 
 fs.writeFileSync(HTML_PATH, fullHtml, 'utf8');
-console.log('✅ Updated pro-tech-presentation.html with 9 full-bleed slides!');
+console.log('✅ Updated pro-tech-presentation.html with 12 full-bleed slides!');
 
-// Export PDF using Puppeteer
 async function exportPdf() {
   const browser = await puppeteer.launch({
     executablePath: EDGE_PATH,
@@ -868,15 +991,14 @@ async function exportPdf() {
   await browser.close();
   console.log('✅ Generated PDF presentation at:', PDF_OUT);
 
-  // Copy PDF to Desktop and Downloads
   const pdfDesk = 'C:\\Users\\hungr\\OneDrive\\Desktop\\PRO-TECH_AIR_SERVICES_DEMO_PRESENTATION.pdf';
   const pdfDown = 'C:\\Users\\hungr\\Downloads\\PRO-TECH_AIR_SERVICES_DEMO_PRESENTATION.pdf';
-  const pdfArt = 'C:\\Users\\hungr\\.gemini\antigravity\\brain\\b805e771-e1c1-4976-afc1-cd59dd49eae0\\PRO-TECH_AIR_SERVICES_DEMO_PRESENTATION.pdf';
+  const pdfArt = 'C:\\Users\\hungr\\.gemini\\antigravity\\brain\\b805e771-e1c1-4976-afc1-cd59dd49eae0\\PRO-TECH_AIR_SERVICES_DEMO_PRESENTATION.pdf';
 
   fs.copyFileSync(PDF_OUT, pdfDesk);
   fs.copyFileSync(PDF_OUT, pdfDown);
   fs.copyFileSync(PDF_OUT, pdfArt);
-  console.log('✅ Copied PDF to Desktop and Downloads!');
+  console.log('✅ Copied 12-slide PDF to Desktop, Downloads, and Artifacts!');
 }
 
 exportPdf().catch(console.error);
