@@ -6434,7 +6434,11 @@
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
     "mxHost": "aspmx3.googlemail.com",
-    "status": "pending"
+    "status": "sent",
+    "subject": "Quick question for Dave regarding Texas Star Roofing after-hours calls",
+    "body": "Hi Dave,\n\nSaw your solid reputation in Plano, TX — congrats on building a trusted local brand.\n\nI was auditing local Roofing providers in Plano, TX and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Roofing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Texas Star Roofing roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_163\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2a3d-7526-aa6d-dd93557802b8",
+    "sentAt": "2026-11-14T21:21:52.214Z"
   },
   {
     "id": "tx_164",
@@ -6472,8 +6476,12 @@
     "emailSource": "MX Verified (alt4.aspmx.l.google.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "alt4.aspmx.l.google.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Jeff regarding Peak Roofing & Construction AI search rankings",
+    "body": "Hi Jeff,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Frisco, TX.\n\nWhile Peak Roofing & Construction has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_164\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Frisco, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2a8f-7091-8bc2-a5b4db3f6803",
+    "sentAt": "2026-11-14T21:21:52.295Z"
   },
   {
     "id": "tx_165",
@@ -6549,8 +6557,12 @@
     "emailSource": "MX Verified (coppellplumbing.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "coppellplumbing.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Mark regarding Coppell Plumbing after-hours calls",
+    "body": "Hi Mark,\n\nSaw your solid reputation in Coppell, TX — congrats on building a trusted local brand.\n\nI was auditing local Plumbing providers in Coppell, TX and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Plumbing, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Coppell Plumbing roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_166\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2adc-7256-9ede-9a34bdd0b1cc",
+    "sentAt": "2026-11-14T21:21:52.373Z"
   },
   {
     "id": "tx_167",
@@ -6588,8 +6600,12 @@
     "emailSource": "MX Verified (publicserviceplumbers-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "publicserviceplumbers-com.mail.protection.outlook.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Mark regarding Public Service Plumbers AI search rankings",
+    "body": "Hi Mark,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Plumbing contractors in Dallas, TX.\n\nWhile Public Service Plumbers has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Plumbing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_167\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Plumbing in Dallas, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2b52-74e1-9b67-3e8d8b696d4e",
+    "sentAt": "2026-11-14T21:21:52.492Z"
   },
   {
     "id": "tx_168",
@@ -6627,7 +6643,11 @@
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
     "mxHost": "cloverelectric-com.mail.protection.outlook.com",
-    "status": "pending"
+    "status": "sent",
+    "subject": "Quick question for Team regarding Clover Electric after-hours calls",
+    "body": "Hi Team,\n\nSaw your solid reputation in Rockwall, TX — congrats on building a trusted local brand.\n\nI was auditing local Electrical providers in Rockwall, TX and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Electrical, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Clover Electric roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_168\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2bf6-7099-a3d7-92822a473e3b",
+    "sentAt": "2026-11-14T21:21:52.668Z"
   },
   {
     "id": "tx_169",
@@ -6704,8 +6724,12 @@
     "emailSource": "MX Verified (blackhillrestoration-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "blackhillrestoration-com.mail.protection.outlook.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Justin regarding Blackhill Restoration AI search rankings",
+    "body": "Hi Justin,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Restoration contractors in Dallas, TX.\n\nWhile Blackhill Restoration has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Restoration contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_170\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Restoration in Dallas, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2cc6-7cd0-aec1-cd70e95962a8",
+    "sentAt": "2026-11-14T21:21:52.863Z"
   },
   {
     "id": "tx_171",
@@ -6743,8 +6767,12 @@
     "emailSource": "MX Verified (alt1.aspmx.l.google.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "alt1.aspmx.l.google.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Eric regarding Regent Restoration after-hours calls",
+    "body": "Hi Eric,\n\nSaw your solid reputation in Dallas, TX — congrats on building a trusted local brand.\n\nI was auditing local Restoration providers in Dallas, TX and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Restoration, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Regent Restoration roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_171\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2d17-7190-bdd0-60857ba1b736",
+    "sentAt": "2026-11-14T21:21:52.942Z"
   },
   {
     "id": "tx_172",
@@ -6820,8 +6848,12 @@
     "emailSource": "MX Verified (efficienthomesolutions-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "efficienthomesolutions-com.mail.protection.outlook.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for David regarding Efficient Home Solutions AI search rankings",
+    "body": "Hi David,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Richardson, TX.\n\nWhile Efficient Home Solutions has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_173\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Richardson, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2d88-70b3-bcfa-b688fd88bc34",
+    "sentAt": "2026-11-14T21:21:53.055Z"
   },
   {
     "id": "tx_174",
@@ -6897,8 +6929,12 @@
     "emailSource": "MX Verified (us-smtp-inbound-1.mimecast.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "us-smtp-inbound-1.mimecast.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Steve regarding Tempo Air AI search rankings",
+    "body": "Hi Steve,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Irving, TX.\n\nWhile Tempo Air has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=tx_175\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Irving, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2ee2-788c-a7fa-5f2dc6d0b327",
+    "sentAt": "2026-11-14T21:21:53.400Z"
   },
   {
     "id": "hou_176",
@@ -7050,7 +7086,11 @@
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
     "mxHost": "johnmoore-com.inbound.emailservice.cc",
-    "status": "pending"
+    "status": "sent",
+    "subject": "Quick question for Don regarding John Moore Services AI search rankings",
+    "body": "Hi Don,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended HVAC contractors in Houston, TX.\n\nWhile John Moore Services has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best HVAC contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_179\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for HVAC in Houston, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-2ff4-7142-8463-fa22d261056f",
+    "sentAt": "2026-11-14T21:21:53.680Z"
   },
   {
     "id": "hou_180",
@@ -7240,8 +7280,12 @@
     "emailSource": "MX Verified (universalhomeexperts-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "universalhomeexperts-com.mail.protection.outlook.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Paul regarding Universal Home Experts AI search rankings",
+    "body": "Hi Paul,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Electrical contractors in Houston, TX.\n\nWhile Universal Home Experts has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Electrical contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_184\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Electrical in Houston, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-30af-71e9-bd94-a574acaeee98",
+    "sentAt": "2026-11-14T21:21:53.865Z"
   },
   {
     "id": "hou_185",
@@ -7279,8 +7323,12 @@
     "emailSource": "MX Verified (vqs3547.pair.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "vqs3547.pair.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Rick regarding Richmond's Air after-hours calls",
+    "body": "Hi Rick,\n\nSaw your solid reputation in Houston, TX — congrats on building a trusted local brand.\n\nI was auditing local HVAC providers in Houston, TX and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn HVAC, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Richmond's Air roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_185\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-31bd-7455-bd7e-382e9c04bd97",
+    "sentAt": "2026-11-14T21:21:54.133Z"
   },
   {
     "id": "hou_186",
@@ -7432,8 +7480,12 @@
     "emailSource": "MX Verified (precisionroofcrafters-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "precisionroofcrafters-com.mail.protection.outlook.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Chris regarding Precision Roof Crafters AI search rankings",
+    "body": "Hi Chris,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Houston, TX.\n\nWhile Precision Roof Crafters has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_189\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Houston, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-3253-71bb-b61a-f6e7a00a7a4b",
+    "sentAt": "2026-11-14T21:21:54.284Z"
   },
   {
     "id": "hou_190",
@@ -7471,8 +7523,12 @@
     "emailSource": "MX Verified (strataroofingandconstruction-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "strataroofingandconstruction-com.mail.protection.outlook.com",
-    "status": "pending",
-    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce"
+    "status": "sent",
+    "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
+    "subject": "Quick question for Peter regarding Strata Roofing and Construction quote requests",
+    "body": "Hi Peter,\n\nQuick question regarding Strata Roofing and Construction's customer response speed:\n\nWhen customers in Houston, TX fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Roofing, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_190\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $7,800/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-336a-7c36-bc79-c2cf0e403e4f",
+    "sentAt": "2026-11-14T21:21:54.561Z"
   },
   {
     "id": "hou_191",
@@ -7586,7 +7642,11 @@
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
     "mxHost": "mx3-usg2.ppe-hosted.com",
-    "status": "pending"
+    "status": "sent",
+    "subject": "Quick question for Aaron regarding Aaron's Electrical Service after-hours calls",
+    "body": "Hi Aaron,\n\nSaw your solid reputation in Spring, TX — congrats on building a trusted local brand.\n\nI was auditing local Electrical providers in Spring, TX and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Electrical, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Aaron's Electrical Service roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_193\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1dbf0-341d-71a5-aac0-c43e2eb38734",
+    "sentAt": "2026-11-14T21:21:54.740Z"
   },
   {
     "id": "hou_194",
