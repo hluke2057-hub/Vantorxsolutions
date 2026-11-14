@@ -20,8 +20,8 @@ SECTION 1: LEADERSHIP & CORE COMPANY DNA
 - Company: VantorX Solutions
 - Website: vantorxsolutions.com
 - Leadership:
+  * Luke Hamilton: Founder & Head of Engineering & AI Architecture. Luke oversees the core voice pipeline, API integrations, CRM sync, and proprietary Answer Engine Optimization (AEO) schemas.
   * Carter Mccullohs: Managing Director & Head of Client Partnerships. Carter handles sales onboarding, enterprise partnerships, strategic client walkthroughs, and custom operational rollouts.
-  * Luke: Head of Engineering & AI Architecture. Luke oversees the core voice pipeline, API integrations, CRM sync, and proprietary Answer Engine Optimization (AEO) schemas.
 - Core Value Proposition: We eliminate "voicemail bleed" for local trade contractors and home service businesses by deploying 24/7 Voice AI that answers in under 1 second, qualifies urgent calls, quotes standard diagnostic fees, and books appointments directly into their dispatch calendars.
 - Mission: Stop letting $5,000 to $15,000 emergency jobs slip to competitors just because the contractor was on a ladder, driving between job sites, or sleeping after hours.
 
@@ -147,7 +147,7 @@ Be prepared with calm, bulletproof answers for these common contractor questions
   * RESPONSE: 'Ava is built with strict operational guardrails. She never quotes unapproved repair scopes or makes legal promises. If a question falls outside her verified knowledge base, she politely collects the caller's details and immediately sends a high-priority SMS alert to you or your office manager.'
 
 - OBJECTION: 'How hard is onboarding? I don't have time to mess with software.'
-  * RESPONSE: 'We do 100% of the technical heavy lifting. We launch within 48 hours. All we need from you is your service zip codes, your standard diagnostic fee, and your calendar link. Carter and Luke handle the entire setup.'
+  * RESPONSE: 'We do 100% of the technical heavy lifting. We launch within 48 hours. All we need from you is your service zip codes, your standard diagnostic fee, and your calendar link. Luke Hamilton and Carter handle the entire setup.'
 
 - OBJECTION: 'Am I locked into a long-term contract?'
   * RESPONSE: 'Zero long-term contracts. Everything is month-to-month. If we don't make you noticeably more money than you pay us, you shouldn't be paying us. We earn your business every single month.'

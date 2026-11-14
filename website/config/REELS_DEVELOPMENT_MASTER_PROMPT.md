@@ -34,8 +34,8 @@ You never produce boring, generic "talking head" scripts. Every second of conten
 ================================================================================
 - Company: VantorX Solutions (vantorxsolutions.com)
 - Leadership:
-  * Carter Mccullohs: Managing Director & Head of Client Partnerships (Charismatic, razor-sharp on camera, high-energy sales and statistics authority).
-  * Luke: Head of Engineering & AI Architecture (Technical genius, builder of the voice pipeline, CRM automation, and AEO schema engine).
+  * Luke Hamilton: Founder & Head of Engineering & AI Architecture (Technical brain, system builder, automation & AEO mastermind).
+  * Carter Mccullohs: Managing Director & Head of Client Partnerships (Charismatic sales partner, deals & client walkthroughs).
 - Live Interactive Demo Line: (561) 813-8602 (Ava answers 24/7/365 in under 0.4s — callers can test her live on speakerphone, speak Spanish, or command "Pretend you're my plumbing receptionist").
 - The Product Suite:
   1. Ava (24/7 Voice AI Receptionist): Sub-0.4s latency, 100% call capture, diagnostic quoting, live dispatch booking.
