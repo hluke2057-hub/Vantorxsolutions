@@ -1,0 +1,257 @@
+{
+  "last_updated": "2026-11-14T23:48:00Z",
+  "source_directories": {
+    "australia": "Yellow Pages Australia (yellowpages.com.au)",
+    "singapore": "Yellow Pages Singapore (yellowpages.com.sg)",
+    "united_kingdom": "Yell UK (yell.com)",
+    "canada": "Yellow Pages Canada (yellowpages.ca)",
+    "new_zealand": "Yellow NZ (yellow.co.nz)",
+    "ireland": "Golden Pages Ireland (goldenpages.ie)"
+  },
+  "verified_listings": [
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company_name": "Safair Air Conditioning",
+      "trade": "Air Conditioning & Mechanical Services",
+      "address": "Unit 1/1 Powdrill Road, Prestons NSW 2170",
+      "phone_local": "1300 382 462",
+      "phone_e164": "+611300382462",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company_name": "Crest Air Conditioning",
+      "trade": "HVAC & Ducted Air Conditioning",
+      "address": "Bella Vista, NSW",
+      "phone_local": "(02) 8883 1899",
+      "phone_tollfree": "1300 027 378",
+      "phone_e164": "+61288831899",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company_name": "Riverview Air Conditioning",
+      "trade": "HVAC & Mechanical Services",
+      "address": "Sydney, NSW",
+      "phone_local": "(02) 9898 9288",
+      "phone_e164": "+61298989288",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company_name": "Airomania Air Conditioning",
+      "trade": "Air Conditioning & Electrical",
+      "address": "Sydney, NSW",
+      "phone_local": "(02) 9686 2900",
+      "phone_e164": "+61296862900",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company_name": "Aquarius Air Conditioning",
+      "trade": "Air Conditioning Installation & Repairs",
+      "address": "Sydney, NSW",
+      "phone_local": "(02) 9899 2155",
+      "phone_e164": "+61298992155",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company_name": "Natural Cool Airconditioning & Engineering Pte Ltd",
+      "trade": "Air Conditioning Installation, Chemical Wash & Servicing",
+      "address": "1 Lorong 2 Toa Payoh, Singapore",
+      "phone_local": "+65 6454 1771",
+      "phone_e164": "+6564541771",
+      "phone_alt": "+65 6454 5775",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company_name": "Absolute Aircon (Absolute Air-Conditioning)",
+      "trade": "Residential & Commercial Aircon Servicing",
+      "address": "Singapore",
+      "phone_local": "+65 6692 1093",
+      "phone_e164": "+6566921093",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company_name": "The Air Conditioning Company",
+      "trade": "Commercial & Residential Air Conditioning",
+      "address": "London",
+      "phone_local": "020 8346 6000",
+      "phone_e164": "+442083466000",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company_name": "Air Woolf Air Conditioning",
+      "trade": "Air Conditioning Contractors & Maintenance",
+      "address": "526-528 Watford Way, Mill Hill, London, NW7 4RS",
+      "phone_local": "020 8959 6464",
+      "phone_e164": "+442089596464",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company_name": "Gross Air Conditioning",
+      "trade": "Air Conditioning & Ventilation",
+      "address": "102 Vale Road, London, N4 1FL",
+      "phone_local": "020 3861 7000",
+      "phone_e164": "+442038617000",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company_name": "Snug & Chill",
+      "trade": "Air Conditioning & Heat Pumps",
+      "address": "Edgware, London, HA8",
+      "phone_local": "020 3727 6186",
+      "phone_e164": "+442037276186",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company_name": "Dr HVAC and Plumbing",
+      "trade": "HVAC, Furnace Repair & Plumbing",
+      "address": "397 Donlands Ave Unit 105, East York, ON M4J 3S3",
+      "phone_local": "(416) 448-2360",
+      "phone_e164": "+14164482360",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company_name": "Home Trade Standards (Condo HVAC)",
+      "trade": "Condo HVAC Specialists & Heat Pumps",
+      "address": "3983 Chesswood Dr, North York, ON M3J 2R8",
+      "phone_local": "(416) 736-7001",
+      "phone_e164": "+14167367001",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company_name": "Dupont Heating & Air Conditioning Ltd",
+      "trade": "Heating Contractors & Air Conditioning",
+      "address": "1400 Dufferin St, Toronto, ON M6H 4C8",
+      "phone_local": "(416) 532-2859",
+      "phone_e164": "+14165322859",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company_name": "Cozy World Inc",
+      "trade": "HVAC Installation & Heating Systems",
+      "address": "17 Tippett Rd, North York, ON M3H 2V1",
+      "phone_local": "(416) 635-1000",
+      "phone_e164": "+14166351000",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company_name": "Varcoe Air Conditioning and Heat Pumps",
+      "trade": "Heat Pumps & Air Conditioning",
+      "address": "21 Elliot Street, Papakura, Auckland",
+      "phone_local": "0800 888 88",
+      "phone_e164": "+6480088888",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company_name": "Heat Pump City",
+      "trade": "Heat Pumps & Ventilation",
+      "address": "77 Porana Road, Hillcrest, Auckland",
+      "phone_local": "09 475 5583",
+      "phone_tollfree": "0800 934 678",
+      "phone_e164": "+6494755583",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company_name": "Tempest Air Conditioning Systems",
+      "trade": "Air Conditioning & Climate Control",
+      "address": "6 Workspace Drive, Hobsonville, Auckland",
+      "phone_local": "09 415 6960",
+      "phone_e164": "+6494156960",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company_name": "Flocon Air Conditioning & Mechanical Contractors",
+      "trade": "Commercial & Residential Air Conditioning",
+      "address": "146 Central Park Drive, Henderson, Auckland",
+      "phone_local": "09 281 2267",
+      "phone_e164": "+6492812267",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company_name": "Green Air Conditioning",
+      "trade": "Air Conditioning Installation & Service",
+      "address": "141 Peary Road, Mount Eden, Auckland",
+      "phone_local": "021 062 8201",
+      "phone_e164": "+64210628201",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company_name": "Kearns Eamonn Heating & Plumbing Ltd",
+      "trade": "Heating, Gas Boilers & Plumbing",
+      "address": "Dublin",
+      "phone_local": "(01) 841 7129",
+      "phone_mobile": "(087) 257 0416",
+      "phone_e164": "+35318417129",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company_name": "Assured Quality Plumbing Services",
+      "trade": "Plumbing & Heating Services",
+      "address": "Cabinteely, Dublin",
+      "phone_local": "(01) 678 4040",
+      "phone_e164": "+35316784040",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company_name": "Alliance Ireland Building and Maintenance Services",
+      "trade": "Plumbing, Electrical & HVAC Maintenance",
+      "address": "Rathcoole, Dublin",
+      "phone_local": "(01) 697 2017",
+      "phone_e164": "+35316972017",
+      "status": "Verified Active Directory Listing"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company_name": "Advanced Air Conditioning & Refrigeration Ltd",
+      "trade": "Commercial Air Conditioning & Refrigeration",
+      "address": "Terenure, Dublin",
+      "phone_local": "(01) 406 9454",
+      "phone_e164": "+35314069454",
+      "status": "Verified Active Directory Listing"
+    }
+  ]
+}
