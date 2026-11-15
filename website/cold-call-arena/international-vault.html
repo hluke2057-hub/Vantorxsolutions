@@ -27331,11 +27331,12 @@ const LEADS_DATA = [
 
     const endpoints = [];
     if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-      endpoints.push('/api/lead-calls/lead-call-sync', '/api/audit?action=lead-call-sync');
+      endpoints.push('/api/audit?action=lead-call-sync', '/api/lead-calls', '/api/lead-calls/sync');
     }
     endpoints.push(
-      'https://www.vantorxsolutions.com/api/lead-calls/lead-call-sync',
-      'https://www.vantorxsolutions.com/api/audit?action=lead-call-sync'
+      'https://www.vantorxsolutions.com/api/audit?action=lead-call-sync',
+      'https://www.vantorxsolutions.com/api/lead-calls',
+      'https://www.vantorxsolutions.com/api/lead-calls/sync'
     );
 
     try {
@@ -27537,11 +27538,12 @@ const LEADS_DATA = [
 
     const endpoints = [];
     if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-      endpoints.push('/api/lead-calls/lead-call-sync', '/api/audit?action=lead-call-sync');
+      endpoints.push('/api/audit?action=lead-call-sync', '/api/lead-calls', '/api/lead-calls/sync');
     }
     endpoints.push(
-      'https://www.vantorxsolutions.com/api/lead-calls/lead-call-sync',
-      'https://www.vantorxsolutions.com/api/audit?action=lead-call-sync'
+      'https://www.vantorxsolutions.com/api/audit?action=lead-call-sync',
+      'https://www.vantorxsolutions.com/api/lead-calls',
+      'https://www.vantorxsolutions.com/api/lead-calls/sync'
     );
 
     let success = false;

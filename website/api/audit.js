@@ -913,13 +913,12 @@ module.exports = async function handler(req, res) {
   }
 
   // 2. Real-Time Shared Lead Call Synchronization across Sales Reps
-  if (action === "lead-calls" || action === "lead-call-roster") {
+  if (action === "lead-calls" || action === "lead-call-roster" || action === "lead-call-sync" || action === "sync" || action === "lead-sync") {
+    if (req.method === "POST" || req.method === "PUT" || req.method === "PATCH") {
+      return handleLeadCallSync(req, res);
+    }
     const calls = await getLeadCallRecords();
     return res.status(200).json({ ok: true, calls });
-  }
-
-  if (action === "lead-call-sync") {
-    return handleLeadCallSync(req, res);
   }
 
   if (action === "scan-emails") {
