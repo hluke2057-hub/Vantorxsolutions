@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-14T23:48:00Z",
+  "last_updated": "2026-11-14T23:50:00Z",
   "source_directories": {
     "australia": "Yellow Pages Australia (yellowpages.com.au)",
     "singapore": "Yellow Pages Singapore (yellowpages.com.sg)",
@@ -17,18 +17,32 @@
       "address": "Unit 1/1 Powdrill Road, Prestons NSW 2170",
       "phone_local": "1300 382 462",
       "phone_e164": "+611300382462",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Australia/Sydney (AEDT, UTC+11)",
+      "business_hours": {
+        "monday_friday": "9:00 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "On-call message service"
+      },
+      "us_calling_window_est": "5:00 PM – 1:00 AM EST (Next day local business hours)"
     },
     {
       "country": "Australia",
       "directory": "Yellow Pages Australia (yellowpages.com.au)",
       "company_name": "Crest Air Conditioning",
       "trade": "HVAC & Ducted Air Conditioning",
-      "address": "Bella Vista, NSW",
+      "address": "Unit 3, 5-7 Meridian Pl, Bella Vista NSW 2153",
       "phone_local": "(02) 8883 1899",
       "phone_tollfree": "1300 027 378",
       "phone_e164": "+61288831899",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Australia/Sydney (AEDT, UTC+11)",
+      "business_hours": {
+        "monday_friday": "7:30 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Commercial priority dispatch"
+      },
+      "us_calling_window_est": "3:30 PM – 1:00 AM EST"
     },
     {
       "country": "Australia",
@@ -38,7 +52,14 @@
       "address": "Sydney, NSW",
       "phone_local": "(02) 9898 9288",
       "phone_e164": "+61298989288",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Australia/Sydney (AEDT, UTC+11)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "After-hours commercial on-call"
+      },
+      "us_calling_window_est": "4:00 PM – 1:00 AM EST"
     },
     {
       "country": "Australia",
@@ -48,7 +69,14 @@
       "address": "Sydney, NSW",
       "phone_local": "(02) 9686 2900",
       "phone_e164": "+61296862900",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Australia/Sydney (AEDT, UTC+11)",
+      "business_hours": {
+        "monday_friday": "7:00 AM – 5:00 PM",
+        "saturday": "By appointment",
+        "sunday": "Closed",
+        "emergency": "Emergency dispatch available"
+      },
+      "us_calling_window_est": "3:00 PM – 1:00 AM EST"
     },
     {
       "country": "Australia",
@@ -58,38 +86,83 @@
       "address": "Sydney, NSW",
       "phone_local": "(02) 9899 2155",
       "phone_e164": "+61298992155",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Australia/Sydney (AEDT, UTC+11)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Residential breakdown line"
+      },
+      "us_calling_window_est": "4:00 PM – 1:00 AM EST"
     },
     {
       "country": "Singapore",
       "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
-      "company_name": "Natural Cool Airconditioning & Engineering Pte Ltd",
-      "trade": "Air Conditioning Installation, Chemical Wash & Servicing",
-      "address": "1 Lorong 2 Toa Payoh, Singapore",
+      "company_name": "Natural Cool Airconditioning & Engineering",
+      "trade": "Aircon Installation, Chemical Wash & Servicing",
+      "address": "87 Defu Lane 10, Natural Cool Building, Singapore 539219",
       "phone_local": "+65 6454 1771",
       "phone_e164": "+6564541771",
       "phone_alt": "+65 6454 5775",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Asia/Singapore (SGT, UTC+8)",
+      "business_hours": {
+        "monday_friday": "8:30 AM – 5:30 PM",
+        "saturday": "8:30 AM – 5:30 PM",
+        "sunday": "Closed",
+        "emergency": "Hotline routing"
+      },
+      "us_calling_window_est": "7:30 PM – 4:30 AM EST"
     },
     {
       "country": "Singapore",
       "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
-      "company_name": "Absolute Aircon (Absolute Air-Conditioning)",
+      "company_name": "Billy Aircon Servicing & Repair",
       "trade": "Residential & Commercial Aircon Servicing",
-      "address": "Singapore",
-      "phone_local": "+65 6692 1093",
-      "phone_e164": "+6566921093",
-      "status": "Verified Active Directory Listing"
+      "address": "Singapore Central",
+      "phone_local": "+65 9456 0875",
+      "phone_e164": "+6594560875",
+      "timezone": "Asia/Singapore (SGT, UTC+8)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 8:00 PM",
+        "saturday": "8:00 AM – 8:00 PM",
+        "sunday": "8:00 AM – 8:00 PM",
+        "emergency": "WhatsApp 24/7 quote desk"
+      },
+      "us_calling_window_est": "7:00 PM – 7:00 AM EST"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company_name": "Gain City Aircon Care & Engineering",
+      "trade": "Air Conditioning Sales & Emergency Repair",
+      "address": "Sungei Kadut Megastore, Singapore",
+      "phone_local": "+65 6230 8277",
+      "phone_e164": "+6562308277",
+      "timezone": "Asia/Singapore (SGT, UTC+8)",
+      "business_hours": {
+        "monday_friday": "11:00 AM – 10:00 PM",
+        "saturday": "11:00 AM – 10:00 PM",
+        "sunday": "11:00 AM – 10:00 PM",
+        "emergency": "Day-and-night emergency repair team"
+      },
+      "us_calling_window_est": "10:00 PM – 9:00 AM EST"
     },
     {
       "country": "United Kingdom",
       "directory": "Yell UK (yell.com)",
       "company_name": "The Air Conditioning Company",
       "trade": "Commercial & Residential Air Conditioning",
-      "address": "London",
+      "address": "London NW7",
       "phone_local": "020 8346 6000",
       "phone_e164": "+442083466000",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Europe/London (GMT, UTC+0)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 5:30 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Emergency breakdown inquiries"
+      },
+      "us_calling_window_est": "3:00 AM – 12:30 PM EST"
     },
     {
       "country": "United Kingdom",
@@ -99,7 +172,14 @@
       "address": "526-528 Watford Way, Mill Hill, London, NW7 4RS",
       "phone_local": "020 8959 6464",
       "phone_e164": "+442089596464",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Europe/London (GMT, UTC+0)",
+      "business_hours": {
+        "monday_friday": "8:30 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Contract maintenance line"
+      },
+      "us_calling_window_est": "3:30 AM – 12:00 PM EST"
     },
     {
       "country": "United Kingdom",
@@ -109,7 +189,14 @@
       "address": "102 Vale Road, London, N4 1FL",
       "phone_local": "020 3861 7000",
       "phone_e164": "+442038617000",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Europe/London (GMT, UTC+0)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Commercial ventilation on-call"
+      },
+      "us_calling_window_est": "3:00 AM – 12:00 PM EST"
     },
     {
       "country": "United Kingdom",
@@ -119,7 +206,14 @@
       "address": "Edgware, London, HA8",
       "phone_local": "020 3727 6186",
       "phone_e164": "+442037276186",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Europe/London (GMT, UTC+0)",
+      "business_hours": {
+        "monday_friday": "8:30 AM – 6:00 PM",
+        "saturday": "9:00 AM – 2:00 PM",
+        "sunday": "Closed",
+        "emergency": "Emergency dispatch"
+      },
+      "us_calling_window_est": "3:30 AM – 1:00 PM EST"
     },
     {
       "country": "Canada",
@@ -129,17 +223,31 @@
       "address": "397 Donlands Ave Unit 105, East York, ON M4J 3S3",
       "phone_local": "(416) 448-2360",
       "phone_e164": "+14164482360",
-      "status": "Verified Active Directory Listing"
+      "timezone": "America/Toronto (EST, UTC-5)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 5:00 PM (Office)",
+        "saturday": "Emergency only",
+        "sunday": "Emergency only",
+        "emergency": "24/7 Emergency Hotline"
+      },
+      "us_calling_window_est": "8:00 AM – 5:00 PM EST (Identical time zone)"
     },
     {
       "country": "Canada",
       "directory": "Yellow Pages Canada (yellowpages.ca)",
-      "company_name": "Home Trade Standards (Condo HVAC)",
+      "company_name": "Home Trade Standards",
       "trade": "Condo HVAC Specialists & Heat Pumps",
       "address": "3983 Chesswood Dr, North York, ON M3J 2R8",
       "phone_local": "(416) 736-7001",
       "phone_e164": "+14167367001",
-      "status": "Verified Active Directory Listing"
+      "timezone": "America/Toronto (EST, UTC-5)",
+      "business_hours": {
+        "monday_friday": "8:30 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Property management on-call"
+      },
+      "us_calling_window_est": "8:30 AM – 5:00 PM EST"
     },
     {
       "country": "Canada",
@@ -149,7 +257,14 @@
       "address": "1400 Dufferin St, Toronto, ON M6H 4C8",
       "phone_local": "(416) 532-2859",
       "phone_e164": "+14165322859",
-      "status": "Verified Active Directory Listing"
+      "timezone": "America/Toronto (EST, UTC-5)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 6:00 PM",
+        "saturday": "8:00 AM – 4:00 PM",
+        "sunday": "Emergency only",
+        "emergency": "24/7 Emergency Repair Service"
+      },
+      "us_calling_window_est": "8:00 AM – 6:00 PM EST"
     },
     {
       "country": "Canada",
@@ -159,7 +274,14 @@
       "address": "17 Tippett Rd, North York, ON M3H 2V1",
       "phone_local": "(416) 635-1000",
       "phone_e164": "+14166351000",
-      "status": "Verified Active Directory Listing"
+      "timezone": "America/Toronto (EST, UTC-5)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 8:00 PM",
+        "saturday": "8:00 AM – 8:00 PM",
+        "sunday": "8:00 AM – 8:00 PM",
+        "emergency": "Daily 12-hour dispatch"
+      },
+      "us_calling_window_est": "8:00 AM – 8:00 PM EST"
     },
     {
       "country": "New Zealand",
@@ -169,7 +291,14 @@
       "address": "21 Elliot Street, Papakura, Auckland",
       "phone_local": "0800 888 88",
       "phone_e164": "+6480088888",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Service breakdown line"
+      },
+      "us_calling_window_est": "2:00 PM – 11:00 PM EST (Next day NZ business hours)"
     },
     {
       "country": "New Zealand",
@@ -180,7 +309,14 @@
       "phone_local": "09 475 5583",
       "phone_tollfree": "0800 934 678",
       "phone_e164": "+6494755583",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
+      "business_hours": {
+        "monday_friday": "8:30 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Residential hotline"
+      },
+      "us_calling_window_est": "2:30 PM – 11:00 PM EST"
     },
     {
       "country": "New Zealand",
@@ -190,7 +326,14 @@
       "address": "6 Workspace Drive, Hobsonville, Auckland",
       "phone_local": "09 415 6960",
       "phone_e164": "+6494156960",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 4:30 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Commercial HVAC on-call"
+      },
+      "us_calling_window_est": "2:00 PM – 10:30 PM EST"
     },
     {
       "country": "New Zealand",
@@ -200,7 +343,14 @@
       "address": "146 Central Park Drive, Henderson, Auckland",
       "phone_local": "09 281 2267",
       "phone_e164": "+6492812267",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
+      "business_hours": {
+        "monday_friday": "7:30 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Mechanical contractor dispatch"
+      },
+      "us_calling_window_est": "1:30 PM – 11:00 PM EST"
     },
     {
       "country": "New Zealand",
@@ -210,18 +360,32 @@
       "address": "141 Peary Road, Mount Eden, Auckland",
       "phone_local": "021 062 8201",
       "phone_e164": "+64210628201",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 5:00 PM",
+        "saturday": "9:00 AM – 1:00 PM",
+        "sunday": "Closed",
+        "emergency": "Urgent installation callout"
+      },
+      "us_calling_window_est": "2:00 PM – 11:00 PM EST"
     },
     {
       "country": "Ireland",
       "directory": "Golden Pages Ireland (goldenpages.ie)",
       "company_name": "Kearns Eamonn Heating & Plumbing Ltd",
       "trade": "Heating, Gas Boilers & Plumbing",
-      "address": "Dublin",
+      "address": "Dublin & Wicklow",
       "phone_local": "(01) 841 7129",
       "phone_mobile": "(087) 257 0416",
       "phone_e164": "+35318417129",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Europe/Dublin (GMT, UTC+0)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 6:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Mobile on-call line (087 257 0416)"
+      },
+      "us_calling_window_est": "3:00 AM – 1:00 PM EST"
     },
     {
       "country": "Ireland",
@@ -231,7 +395,14 @@
       "address": "Cabinteely, Dublin",
       "phone_local": "(01) 678 4040",
       "phone_e164": "+35316784040",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Europe/Dublin (GMT, UTC+0)",
+      "business_hours": {
+        "monday_friday": "9:00 AM – 7:00 PM",
+        "saturday": "9:00 AM – 2:00 PM",
+        "sunday": "Closed",
+        "emergency": "Emergency call-out service"
+      },
+      "us_calling_window_est": "4:00 AM – 2:00 PM EST"
     },
     {
       "country": "Ireland",
@@ -241,7 +412,14 @@
       "address": "Rathcoole, Dublin",
       "phone_local": "(01) 697 2017",
       "phone_e164": "+35316972017",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Europe/Dublin (GMT, UTC+0)",
+      "business_hours": {
+        "monday_friday": "8:00 AM – 5:30 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Commercial facility dispatch"
+      },
+      "us_calling_window_est": "3:00 AM – 12:30 PM EST"
     },
     {
       "country": "Ireland",
@@ -251,7 +429,14 @@
       "address": "Terenure, Dublin",
       "phone_local": "(01) 406 9454",
       "phone_e164": "+35314069454",
-      "status": "Verified Active Directory Listing"
+      "timezone": "Europe/Dublin (GMT, UTC+0)",
+      "business_hours": {
+        "monday_friday": "8:30 AM – 5:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed",
+        "emergency": "Refrigeration breakdown dispatch"
+      },
+      "us_calling_window_est": "3:30 AM – 12:00 PM EST"
     }
   ]
 }
