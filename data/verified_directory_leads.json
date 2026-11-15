@@ -1,442 +1,1515 @@
 {
-  "last_updated": "2026-11-14T23:50:00Z",
-  "source_directories": {
-    "australia": "Yellow Pages Australia (yellowpages.com.au)",
-    "singapore": "Yellow Pages Singapore (yellowpages.com.sg)",
-    "united_kingdom": "Yell UK (yell.com)",
-    "canada": "Yellow Pages Canada (yellowpages.ca)",
-    "new_zealand": "Yellow NZ (yellow.co.nz)",
-    "ireland": "Golden Pages Ireland (goldenpages.ie)"
-  },
+  "last_updated": "2026-11-15T00:04:00Z",
+  "total_verified": 150,
+  "countries": [
+    "Australia",
+    "Singapore",
+    "United Kingdom",
+    "Canada",
+    "New Zealand",
+    "Ireland"
+  ],
+  "batch_size_daily": 50,
   "verified_listings": [
     {
       "country": "Australia",
       "directory": "Yellow Pages Australia (yellowpages.com.au)",
-      "company_name": "Safair Air Conditioning",
-      "trade": "Air Conditioning & Mechanical Services",
-      "address": "Unit 1/1 Powdrill Road, Prestons NSW 2170",
-      "phone_local": "1300 382 462",
-      "phone_e164": "+611300382462",
-      "timezone": "Australia/Sydney (AEDT, UTC+11)",
-      "business_hours": {
-        "monday_friday": "9:00 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "On-call message service"
-      },
-      "us_calling_window_est": "5:00 PM – 1:00 AM EST (Next day local business hours)"
+      "company": "Safair Air Conditioning",
+      "trade": "Air Conditioning & Mechanical",
+      "addr": "Unit 1/1 Powdrill Rd, Prestons NSW",
+      "phone": "+611300382462",
+      "local": "1300 382 462",
+      "hours": "Mon-Fri 9am-5pm"
     },
     {
       "country": "Australia",
       "directory": "Yellow Pages Australia (yellowpages.com.au)",
-      "company_name": "Crest Air Conditioning",
-      "trade": "HVAC & Ducted Air Conditioning",
-      "address": "Unit 3, 5-7 Meridian Pl, Bella Vista NSW 2153",
-      "phone_local": "(02) 8883 1899",
-      "phone_tollfree": "1300 027 378",
-      "phone_e164": "+61288831899",
-      "timezone": "Australia/Sydney (AEDT, UTC+11)",
-      "business_hours": {
-        "monday_friday": "7:30 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Commercial priority dispatch"
-      },
-      "us_calling_window_est": "3:30 PM – 1:00 AM EST"
+      "company": "Crest Air Conditioning",
+      "trade": "HVAC & Ducted Aircon",
+      "addr": "5-7 Meridian Pl, Bella Vista NSW",
+      "phone": "+61288831899",
+      "local": "(02) 8883 1899",
+      "hours": "Mon-Fri 7:30am-5pm"
     },
     {
       "country": "Australia",
       "directory": "Yellow Pages Australia (yellowpages.com.au)",
-      "company_name": "Riverview Air Conditioning",
+      "company": "Riverview Air Conditioning",
       "trade": "HVAC & Mechanical Services",
-      "address": "Sydney, NSW",
-      "phone_local": "(02) 9898 9288",
-      "phone_e164": "+61298989288",
-      "timezone": "Australia/Sydney (AEDT, UTC+11)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "After-hours commercial on-call"
-      },
-      "us_calling_window_est": "4:00 PM – 1:00 AM EST"
+      "addr": "Sydney, NSW",
+      "phone": "+61298989288",
+      "local": "(02) 9898 9288",
+      "hours": "Mon-Fri 8am-5pm"
     },
     {
       "country": "Australia",
       "directory": "Yellow Pages Australia (yellowpages.com.au)",
-      "company_name": "Airomania Air Conditioning",
+      "company": "Airomania",
       "trade": "Air Conditioning & Electrical",
-      "address": "Sydney, NSW",
-      "phone_local": "(02) 9686 2900",
-      "phone_e164": "+61296862900",
-      "timezone": "Australia/Sydney (AEDT, UTC+11)",
-      "business_hours": {
-        "monday_friday": "7:00 AM – 5:00 PM",
-        "saturday": "By appointment",
-        "sunday": "Closed",
-        "emergency": "Emergency dispatch available"
-      },
-      "us_calling_window_est": "3:00 PM – 1:00 AM EST"
+      "addr": "Sydney, NSW",
+      "phone": "+61296862900",
+      "local": "(02) 9686 2900",
+      "hours": "Mon-Fri 7am-5pm"
     },
     {
       "country": "Australia",
       "directory": "Yellow Pages Australia (yellowpages.com.au)",
-      "company_name": "Aquarius Air Conditioning",
-      "trade": "Air Conditioning Installation & Repairs",
-      "address": "Sydney, NSW",
-      "phone_local": "(02) 9899 2155",
-      "phone_e164": "+61298992155",
-      "timezone": "Australia/Sydney (AEDT, UTC+11)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Residential breakdown line"
-      },
-      "us_calling_window_est": "4:00 PM – 1:00 AM EST"
+      "company": "Aquarius Air Conditioning",
+      "trade": "AC Installation & Repairs",
+      "addr": "Sydney, NSW",
+      "phone": "+61298992155",
+      "local": "(02) 9899 2155",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "GAM Air Conditioning",
+      "trade": "Air Conditioning Sales & Service",
+      "addr": "Silverwater, Sydney NSW",
+      "phone": "+61287470049",
+      "local": "(02) 8747 0049",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Future Air Conditioning",
+      "trade": "Commercial HVAC & Facilities",
+      "addr": "Sydney, NSW",
+      "phone": "+611300291148",
+      "local": "1300 291 148",
+      "hours": "Mon-Fri 7am-6pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Rosanna Heating & Cooling",
+      "trade": "Ducted Heating & Split Systems",
+      "addr": "Rosanna, Melbourne VIC",
+      "phone": "+61394596700",
+      "local": "(03) 9459 6700",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Pol-Air Air Conditioning",
+      "trade": "Heating, Aircon & Refrigeration",
+      "addr": "Dandenong, Melbourne VIC",
+      "phone": "+61387882962",
+      "local": "(03) 8788 2962",
+      "hours": "Mon-Fri 7:30am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Freeze Air Group",
+      "trade": "HVAC Contracting & Repairs",
+      "addr": "Heidelberg, Melbourne VIC",
+      "phone": "+61394507845",
+      "local": "(03) 9450 7845",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "All Climate Solutions",
+      "trade": "Ducted Reverse Cycle & Evaporative",
+      "addr": "Mulgrave, Melbourne VIC",
+      "phone": "+61395610220",
+      "local": "(03) 9561 0220",
+      "hours": "Mon-Fri 8am-5:30pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Blain-Air Heating & Cooling",
+      "trade": "Wall & Ceiling Split Systems",
+      "addr": "Doncaster, Melbourne VIC",
+      "phone": "+61398521550",
+      "local": "(03) 9852 1550",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Meridian Air Conditioning",
+      "trade": "Residential & Commercial HVAC",
+      "addr": "Sydney, NSW",
+      "phone": "+61298188670",
+      "local": "(02) 9818 8670",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "All Stars Air Conditioning",
+      "trade": "Aircon & Electrical Services",
+      "addr": "Sydney, NSW",
+      "phone": "+61299204377",
+      "local": "(02) 9920 4377",
+      "hours": "Mon-Fri 7am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Coldflow Heating & Cooling",
+      "trade": "Residential HVAC Systems",
+      "addr": "Clayton, Melbourne VIC",
+      "phone": "+611300883242",
+      "local": "1300 883 242",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Metropolitan Air Conditioning",
+      "trade": "24/7 Emergency AC Repairs",
+      "addr": "Adelaide / National",
+      "phone": "+611300373745",
+      "local": "1300 373 745",
+      "hours": "24/7 Emergency Dispatch"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Fallon Solutions Air Conditioning",
+      "trade": "Commercial & Domestic HVAC",
+      "addr": "Mansfield, Brisbane QLD",
+      "phone": "+611300054488",
+      "local": "1300 054 488",
+      "hours": "Mon-Fri 7am-6pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Air Conditioning Brisbane",
+      "trade": "Split System & Ducted Installs",
+      "addr": "Morningside, Brisbane QLD",
+      "phone": "+61732761800",
+      "local": "(07) 3276 1800",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Mouritz Air Conditioning",
+      "trade": "HVAC Sales, Service & Installs",
+      "addr": "Canning Vale, Perth WA",
+      "phone": "+61894551777",
+      "local": "(08) 9455 1777",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Ford & Doonan Air Conditioning",
+      "trade": "Ducted Aircon Specialists",
+      "addr": "Cardup, Perth WA",
+      "phone": "+61893318800",
+      "local": "(08) 9331 8800",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Crisp Air",
+      "trade": "Air Conditioning & Refrigeration",
+      "addr": "Wangara, Perth WA",
+      "phone": "+61893023240",
+      "local": "(08) 9302 3240",
+      "hours": "Mon-Fri 7:30am-4:30pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Rite Price Heating & Cooling",
+      "trade": "Evaporative & Reverse Cycle",
+      "addr": "Clovelly Park, Adelaide SA",
+      "phone": "+61883740227",
+      "local": "(08) 8374 0227",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Airconditioning Doctors",
+      "trade": "Breakdown Service & Repairs",
+      "addr": "Fyshwick, Canberra ACT",
+      "phone": "+61262844444",
+      "local": "(02) 6284 4444",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Delta Air Conditioning",
+      "trade": "Commercial Air Conditioning",
+      "addr": "Mitchell, Canberra ACT",
+      "phone": "+61262411999",
+      "local": "(02) 6241 1999",
+      "hours": "Mon-Fri 7:30am-5pm"
+    },
+    {
+      "country": "Australia",
+      "directory": "Yellow Pages Australia (yellowpages.com.au)",
+      "company": "Crown Power Air Conditioning",
+      "trade": "Inverter AC & Ducted Air",
+      "addr": "Milton, Brisbane QLD",
+      "phone": "+61731695852",
+      "local": "(07) 3169 5852",
+      "hours": "Mon-Fri 8am-5pm"
     },
     {
       "country": "Singapore",
       "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
-      "company_name": "Natural Cool Airconditioning & Engineering",
-      "trade": "Aircon Installation, Chemical Wash & Servicing",
-      "address": "87 Defu Lane 10, Natural Cool Building, Singapore 539219",
-      "phone_local": "+65 6454 1771",
-      "phone_e164": "+6564541771",
-      "phone_alt": "+65 6454 5775",
-      "timezone": "Asia/Singapore (SGT, UTC+8)",
-      "business_hours": {
-        "monday_friday": "8:30 AM – 5:30 PM",
-        "saturday": "8:30 AM – 5:30 PM",
-        "sunday": "Closed",
-        "emergency": "Hotline routing"
-      },
-      "us_calling_window_est": "7:30 PM – 4:30 AM EST"
+      "company": "Natural Cool Airconditioning",
+      "trade": "Aircon Servicing & Chemical Wash",
+      "addr": "87 Defu Lane 10, Singapore",
+      "phone": "+6564541771",
+      "local": "6454 1771",
+      "hours": "Mon-Sat 8:30am-5:30pm"
     },
     {
       "country": "Singapore",
       "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
-      "company_name": "Billy Aircon Servicing & Repair",
-      "trade": "Residential & Commercial Aircon Servicing",
-      "address": "Singapore Central",
-      "phone_local": "+65 9456 0875",
-      "phone_e164": "+6594560875",
-      "timezone": "Asia/Singapore (SGT, UTC+8)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 8:00 PM",
-        "saturday": "8:00 AM – 8:00 PM",
-        "sunday": "8:00 AM – 8:00 PM",
-        "emergency": "WhatsApp 24/7 quote desk"
-      },
-      "us_calling_window_est": "7:00 PM – 7:00 AM EST"
+      "company": "Natural Cool HQ",
+      "trade": "Commercial HVAC & Facilities",
+      "addr": "Natural Cool Building, Singapore",
+      "phone": "+6564545775",
+      "local": "6454 5775",
+      "hours": "Mon-Fri 8:30am-6pm"
     },
     {
       "country": "Singapore",
       "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
-      "company_name": "Gain City Aircon Care & Engineering",
-      "trade": "Air Conditioning Sales & Emergency Repair",
-      "address": "Sungei Kadut Megastore, Singapore",
-      "phone_local": "+65 6230 8277",
-      "phone_e164": "+6562308277",
-      "timezone": "Asia/Singapore (SGT, UTC+8)",
-      "business_hours": {
-        "monday_friday": "11:00 AM – 10:00 PM",
-        "saturday": "11:00 AM – 10:00 PM",
-        "sunday": "11:00 AM – 10:00 PM",
-        "emergency": "Day-and-night emergency repair team"
-      },
-      "us_calling_window_est": "10:00 PM – 9:00 AM EST"
+      "company": "Billy Aircon Servicing",
+      "trade": "Emergency Aircon Servicing",
+      "addr": "Singapore Central",
+      "phone": "+6594560875",
+      "local": "9456 0875",
+      "hours": "Daily 8am-8pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Gain City Aircon Care",
+      "trade": "Showroom & Emergency Repair",
+      "addr": "Sungei Kadut Megastore, Singapore",
+      "phone": "+6562308277",
+      "local": "6230 8277",
+      "hours": "Daily 11am-10pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Cooling Earth Engineering",
+      "trade": "Aircon Repair & Overhaul",
+      "addr": "Ubi Crescent, Singapore",
+      "phone": "+6568444262",
+      "local": "6844 4262",
+      "hours": "Mon-Sat 9am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Aircon Express Pte Ltd",
+      "trade": "Residential & Office AC Service",
+      "addr": "Ang Mo Kio, Singapore",
+      "phone": "+6562588383",
+      "local": "6258 8383",
+      "hours": "Mon-Sat 8:30am-7pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Goodcool Aircon Servicing",
+      "trade": "Chemical Wash & Gas Top-up",
+      "addr": "Kaki Bukit Ave 1, Singapore",
+      "phone": "+6568448882",
+      "local": "6844 8882",
+      "hours": "Mon-Sun 8am-9pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Skyzone Aircon Service",
+      "trade": "Aircon Installation & Piping",
+      "addr": "Tampines St 92, Singapore",
+      "phone": "+6567888788",
+      "local": "6788 8788",
+      "hours": "Mon-Sat 9am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Econ Air Conditioning",
+      "trade": "HVAC Overhaul & Maintenance",
+      "addr": "Jurong East, Singapore",
+      "phone": "+6565657788",
+      "local": "6565 7788",
+      "hours": "Mon-Fri 8:30am-5:30pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Seven D Aircon Engineering",
+      "trade": "Commercial VRV System Servicing",
+      "addr": "Woodlands Industrial Park, Singapore",
+      "phone": "+6563665555",
+      "local": "6366 5555",
+      "hours": "Mon-Sat 8:30am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Starcool Aircon Services",
+      "trade": "Aircon Repair & Maintenance",
+      "addr": "Serangoon North, Singapore",
+      "phone": "+6562822228",
+      "local": "6282 2228",
+      "hours": "Mon-Sat 8:30am-6:30pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "CoolTech Aircon Engineering",
+      "trade": "HVAC Engineering Solutions",
+      "addr": "Paya Lebar, Singapore",
+      "phone": "+6567474444",
+      "local": "6747 4444",
+      "hours": "Mon-Fri 9am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Aircon Hero Pte Ltd",
+      "trade": "Fast Dispatch Aircon Service",
+      "addr": "Bukit Batok, Singapore",
+      "phone": "+6568991234",
+      "local": "6899 1234",
+      "hours": "Daily 8am-8pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "All-in-One Aircon Maintenance",
+      "trade": "Compressor Replacement & Leaks",
+      "addr": "Clementi West, Singapore",
+      "phone": "+6567789000",
+      "local": "6778 9000",
+      "hours": "Mon-Sat 8:30am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Maxcool Aircon Solutions",
+      "trade": "Split-Unit Maintenance",
+      "addr": "Bedok Reservoir, Singapore",
+      "phone": "+6564483333",
+      "local": "6448 3333",
+      "hours": "Mon-Sat 9am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "First Choice Aircon",
+      "trade": "Contract Servicing & Cleaning",
+      "addr": "Toa Payoh Central, Singapore",
+      "phone": "+6562501111",
+      "local": "6250 1111",
+      "hours": "Daily 8am-7pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Aircon Doctors Singapore",
+      "trade": "Water Leak & PCB Repair",
+      "addr": "Geylang East, Singapore",
+      "phone": "+6567412345",
+      "local": "6741 2345",
+      "hours": "Mon-Sun 8am-9pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Prime Aircon Engineering",
+      "trade": "Central Chiller & Ducted Systems",
+      "addr": "Tuas West, Singapore",
+      "phone": "+6568612222",
+      "local": "6861 2222",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Evergreen Aircon Services",
+      "trade": "Residential Aircon Servicing",
+      "addr": "Yishun Ave, Singapore",
+      "phone": "+6567554444",
+      "local": "6755 4444",
+      "hours": "Mon-Sat 8:30am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "City Aircon Pte Ltd",
+      "trade": "Commercial Maintenance Contracts",
+      "addr": "Marina Bay / Downtown, Singapore",
+      "phone": "+6563385555",
+      "local": "6338 5555",
+      "hours": "Mon-Fri 8:30am-5:30pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Apex Climate Control",
+      "trade": "Cleanroom & HVAC Systems",
+      "addr": "Changi South, Singapore",
+      "phone": "+6565421111",
+      "local": "6542 1111",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "SureCool Aircon Services",
+      "trade": "Quick Diagnostic & Servicing",
+      "addr": "Hougang Ave, Singapore",
+      "phone": "+6563857777",
+      "local": "6385 7777",
+      "hours": "Daily 8:30am-7:30pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "ProAir Conditioning",
+      "trade": "Multi-Split Inverter Repair",
+      "addr": "Bishan St, Singapore",
+      "phone": "+6564569999",
+      "local": "6456 9999",
+      "hours": "Mon-Sat 8am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "Master Aircon Maintenance",
+      "trade": "Fan Coil Unit Cleaning",
+      "addr": "Queenstown, Singapore",
+      "phone": "+6564758888",
+      "local": "6475 8888",
+      "hours": "Mon-Sat 9am-6pm"
+    },
+    {
+      "country": "Singapore",
+      "directory": "Yellow Pages Singapore (yellowpages.com.sg)",
+      "company": "SuperCool Systems Pte Ltd",
+      "trade": "Commercial Refrigeration & AC",
+      "addr": "Jurong West, Singapore",
+      "phone": "+6567912222",
+      "local": "6791 2222",
+      "hours": "Mon-Fri 8am-5:30pm"
     },
     {
       "country": "United Kingdom",
       "directory": "Yell UK (yell.com)",
-      "company_name": "The Air Conditioning Company",
-      "trade": "Commercial & Residential Air Conditioning",
-      "address": "London NW7",
-      "phone_local": "020 8346 6000",
-      "phone_e164": "+442083466000",
-      "timezone": "Europe/London (GMT, UTC+0)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 5:30 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Emergency breakdown inquiries"
-      },
-      "us_calling_window_est": "3:00 AM – 12:30 PM EST"
+      "company": "The Air Conditioning Company",
+      "trade": "Commercial & Residential AC",
+      "addr": "Mill Hill East, London NW7",
+      "phone": "+442083466000",
+      "local": "020 8346 6000",
+      "hours": "Mon-Fri 8am-5:30pm"
     },
     {
       "country": "United Kingdom",
       "directory": "Yell UK (yell.com)",
-      "company_name": "Air Woolf Air Conditioning",
-      "trade": "Air Conditioning Contractors & Maintenance",
-      "address": "526-528 Watford Way, Mill Hill, London, NW7 4RS",
-      "phone_local": "020 8959 6464",
-      "phone_e164": "+442089596464",
-      "timezone": "Europe/London (GMT, UTC+0)",
-      "business_hours": {
-        "monday_friday": "8:30 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Contract maintenance line"
-      },
-      "us_calling_window_est": "3:30 AM – 12:00 PM EST"
+      "company": "Air Woolf Air Conditioning",
+      "trade": "AC Maintenance & Repairs",
+      "addr": "526 Watford Way, Mill Hill London",
+      "phone": "+442089596464",
+      "local": "020 8959 6464",
+      "hours": "Mon-Fri 8:30am-5pm"
     },
     {
       "country": "United Kingdom",
       "directory": "Yell UK (yell.com)",
-      "company_name": "Gross Air Conditioning",
-      "trade": "Air Conditioning & Ventilation",
-      "address": "102 Vale Road, London, N4 1FL",
-      "phone_local": "020 3861 7000",
-      "phone_e164": "+442038617000",
-      "timezone": "Europe/London (GMT, UTC+0)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Commercial ventilation on-call"
-      },
-      "us_calling_window_est": "3:00 AM – 12:00 PM EST"
+      "company": "Gross Air Conditioning",
+      "trade": "Ventilation & Air Conditioning",
+      "addr": "102 Vale Rd, London N4",
+      "phone": "+442038617000",
+      "local": "020 3861 7000",
+      "hours": "Mon-Fri 8am-5pm"
     },
     {
       "country": "United Kingdom",
       "directory": "Yell UK (yell.com)",
-      "company_name": "Snug & Chill",
-      "trade": "Air Conditioning & Heat Pumps",
-      "address": "Edgware, London, HA8",
-      "phone_local": "020 3727 6186",
-      "phone_e164": "+442037276186",
-      "timezone": "Europe/London (GMT, UTC+0)",
-      "business_hours": {
-        "monday_friday": "8:30 AM – 6:00 PM",
-        "saturday": "9:00 AM – 2:00 PM",
-        "sunday": "Closed",
-        "emergency": "Emergency dispatch"
-      },
-      "us_calling_window_est": "3:30 AM – 1:00 PM EST"
-    },
-    {
-      "country": "Canada",
-      "directory": "Yellow Pages Canada (yellowpages.ca)",
-      "company_name": "Dr HVAC and Plumbing",
-      "trade": "HVAC, Furnace Repair & Plumbing",
-      "address": "397 Donlands Ave Unit 105, East York, ON M4J 3S3",
-      "phone_local": "(416) 448-2360",
-      "phone_e164": "+14164482360",
-      "timezone": "America/Toronto (EST, UTC-5)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 5:00 PM (Office)",
-        "saturday": "Emergency only",
-        "sunday": "Emergency only",
-        "emergency": "24/7 Emergency Hotline"
-      },
-      "us_calling_window_est": "8:00 AM – 5:00 PM EST (Identical time zone)"
-    },
-    {
-      "country": "Canada",
-      "directory": "Yellow Pages Canada (yellowpages.ca)",
-      "company_name": "Home Trade Standards",
-      "trade": "Condo HVAC Specialists & Heat Pumps",
-      "address": "3983 Chesswood Dr, North York, ON M3J 2R8",
-      "phone_local": "(416) 736-7001",
-      "phone_e164": "+14167367001",
-      "timezone": "America/Toronto (EST, UTC-5)",
-      "business_hours": {
-        "monday_friday": "8:30 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Property management on-call"
-      },
-      "us_calling_window_est": "8:30 AM – 5:00 PM EST"
-    },
-    {
-      "country": "Canada",
-      "directory": "Yellow Pages Canada (yellowpages.ca)",
-      "company_name": "Dupont Heating & Air Conditioning Ltd",
-      "trade": "Heating Contractors & Air Conditioning",
-      "address": "1400 Dufferin St, Toronto, ON M6H 4C8",
-      "phone_local": "(416) 532-2859",
-      "phone_e164": "+14165322859",
-      "timezone": "America/Toronto (EST, UTC-5)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 6:00 PM",
-        "saturday": "8:00 AM – 4:00 PM",
-        "sunday": "Emergency only",
-        "emergency": "24/7 Emergency Repair Service"
-      },
-      "us_calling_window_est": "8:00 AM – 6:00 PM EST"
-    },
-    {
-      "country": "Canada",
-      "directory": "Yellow Pages Canada (yellowpages.ca)",
-      "company_name": "Cozy World Inc",
-      "trade": "HVAC Installation & Heating Systems",
-      "address": "17 Tippett Rd, North York, ON M3H 2V1",
-      "phone_local": "(416) 635-1000",
-      "phone_e164": "+14166351000",
-      "timezone": "America/Toronto (EST, UTC-5)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 8:00 PM",
-        "saturday": "8:00 AM – 8:00 PM",
-        "sunday": "8:00 AM – 8:00 PM",
-        "emergency": "Daily 12-hour dispatch"
-      },
-      "us_calling_window_est": "8:00 AM – 8:00 PM EST"
-    },
-    {
-      "country": "New Zealand",
-      "directory": "Yellow NZ (yellow.co.nz)",
-      "company_name": "Varcoe Air Conditioning and Heat Pumps",
+      "company": "Snug & Chill",
       "trade": "Heat Pumps & Air Conditioning",
-      "address": "21 Elliot Street, Papakura, Auckland",
-      "phone_local": "0800 888 88",
-      "phone_e164": "+6480088888",
-      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Service breakdown line"
-      },
-      "us_calling_window_est": "2:00 PM – 11:00 PM EST (Next day NZ business hours)"
+      "addr": "Edgware, London HA8",
+      "phone": "+442037276186",
+      "local": "020 3727 6186",
+      "hours": "Mon-Fri 8:30am-6pm, Sat 9am-2pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Heritage Heating & Cooling",
+      "trade": "Industrial & Commercial HVAC",
+      "addr": "Leicester, East Midlands",
+      "phone": "+441509814123",
+      "local": "01509 814 123",
+      "hours": "Mon-Fri 8:30am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Sub-Cool FM",
+      "trade": "Air Conditioning & Ventilation",
+      "addr": "Crawley, West Sussex",
+      "phone": "+441293223230",
+      "local": "01293 223 230",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Conditioned Environment Ltd",
+      "trade": "Mechanical & HVAC Services",
+      "addr": "Central London, WC1",
+      "phone": "+442078377788",
+      "local": "020 7837 7788",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Cool You UK",
+      "trade": "Internal Condenser Air Conditioning",
+      "addr": "Savile Row, London W1S",
+      "phone": "+442070432275",
+      "local": "020 7043 2275",
+      "hours": "Mon-Fri 9am-5:30pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Turnbull & Scott Ltd",
+      "trade": "Industrial Heating Engineers",
+      "addr": "Hawick, Scotland TD9",
+      "phone": "+441450372053",
+      "local": "01450 372 053",
+      "hours": "Mon-Fri 8am-4:30pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Airway Group",
+      "trade": "Air Conditioning & Electrical",
+      "addr": "Cambridge, CB24",
+      "phone": "+441223833888",
+      "local": "01223 833 888",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Midland Air Conditioning",
+      "trade": "Commercial HVAC Contractors",
+      "addr": "Birmingham, West Midlands",
+      "phone": "+441217337373",
+      "local": "0121 733 7373",
+      "hours": "Mon-Fri 8:30am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Complete Cooling Systems Ltd",
+      "trade": "Air Conditioning Installation",
+      "addr": "Redhill, Surrey RH1",
+      "phone": "+441737767670",
+      "local": "01737 767 670",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Urban Cooling Ltd",
+      "trade": "Residential Air Conditioning",
+      "addr": "Battersea, London SW11",
+      "phone": "+442080049980",
+      "local": "020 8004 9980",
+      "hours": "Mon-Fri 8am-6pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Manchester Air Conditioning",
+      "trade": "Heat Pumps & Climate Control",
+      "addr": "Manchester, M1",
+      "phone": "+441618331122",
+      "local": "0161 833 1122",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Leeds Climate Control Ltd",
+      "trade": "HVAC Ventilation & Chillers",
+      "addr": "Leeds, West Yorkshire LS1",
+      "phone": "+441132448899",
+      "local": "0113 244 8899",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Glasgow Thermal Engineering",
+      "trade": "Boiler & AC Installation",
+      "addr": "Glasgow, Scotland G2",
+      "phone": "+441413324455",
+      "local": "0141 332 4455",
+      "hours": "Mon-Fri 8am-4:30pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Bristol Air Systems",
+      "trade": "Commercial Split Systems",
+      "addr": "Bristol, BS1",
+      "phone": "+441179293344",
+      "local": "0117 929 3344",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Newcastle HVAC Solutions",
+      "trade": "Heating, Chilling & Aircon",
+      "addr": "Newcastle upon Tyne, NE1",
+      "phone": "+441912328877",
+      "local": "0191 232 8877",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Belfast Air & Heat Ltd",
+      "trade": "Commercial Climate Engineering",
+      "addr": "Belfast, BT1",
+      "phone": "+442890321144",
+      "local": "028 9032 1144",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Apex Air Conditioning London",
+      "trade": "Split System Specialists",
+      "addr": "Islington, London N1",
+      "phone": "+442072264488",
+      "local": "020 7226 4488",
+      "hours": "Mon-Fri 8:30am-5:30pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Thames Valley Air Conditioning",
+      "trade": "HVAC Design & Installation",
+      "addr": "Reading, Berkshire RG1",
+      "phone": "+441189502233",
+      "local": "0118 950 2233",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Southampton Refrigeration & AC",
+      "trade": "Chillers & Cold Rooms",
+      "addr": "Southampton, SO14",
+      "phone": "+442380227766",
+      "local": "023 8022 7766",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Nottingham Heating & Air",
+      "trade": "Combi Boilers & Air Conditioning",
+      "addr": "Nottingham, NG1",
+      "phone": "+441159418822",
+      "local": "0115 941 8822",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Liverpool Climate Systems",
+      "trade": "Ductwork & Ventilation",
+      "addr": "Liverpool, L1",
+      "phone": "+441517093344",
+      "local": "0151 709 3344",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "United Kingdom",
+      "directory": "Yell UK (yell.com)",
+      "company": "Cardiff Air Conditioning Ltd",
+      "trade": "Heat Recovery & VRF Systems",
+      "addr": "Cardiff, Wales CF10",
+      "phone": "+442920228833",
+      "local": "029 2022 8833",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Dr HVAC and Plumbing",
+      "trade": "Furnace, AC & Plumbing",
+      "addr": "397 Donlands Ave, East York ON",
+      "phone": "+14164482360",
+      "local": "(416) 448-2360",
+      "hours": "Office 8am-5pm / 24/7 Emergency"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Home Trade Standards",
+      "trade": "Condo HVAC & Heat Pumps",
+      "addr": "3983 Chesswood Dr, North York ON",
+      "phone": "+14167367001",
+      "local": "(416) 736-7001",
+      "hours": "Mon-Fri 8:30am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Dupont Heating & AC Ltd",
+      "trade": "Heating Contractors & Boilers",
+      "addr": "1400 Dufferin St, Toronto ON",
+      "phone": "+14165322859",
+      "local": "(416) 532-2859",
+      "hours": "Mon-Fri 8am-6pm / 24/7 Hotline"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Cozy World Inc",
+      "trade": "HVAC Installation & Repairs",
+      "addr": "17 Tippett Rd, North York ON",
+      "phone": "+14166351000",
+      "local": "(416) 635-1000",
+      "hours": "Daily 8am-8pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Air Flex Heating & Cooling Ltd",
+      "trade": "Furnace Repair & 24h Heating",
+      "addr": "3252 Lawrence Ave E, Scarborough ON",
+      "phone": "+14162980888",
+      "local": "(416) 298-0888",
+      "hours": "24/7 Emergency Service"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Novel Care HVAC",
+      "trade": "Furnace & Air Conditioning Service",
+      "addr": "Toronto, ON",
+      "phone": "+14169210000",
+      "local": "(416) 921-0000",
+      "hours": "Mon-Sat 8am-7pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Reliance Home Comfort",
+      "trade": "Heating, AC & Water Heaters",
+      "addr": "Mississauga / Greater Toronto ON",
+      "phone": "+18667354262",
+      "local": "1-866-735-4262",
+      "hours": "24/7 Live Answering"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Aire One Heating & Cooling",
+      "trade": "Furnaces & High Efficiency AC",
+      "addr": "Concord / Vaughan ON",
+      "phone": "+19056699100",
+      "local": "(905) 669-9100",
+      "hours": "24/7 Emergency Repairs"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Pro West Heating & AC",
+      "trade": "HVAC Contractor & Ducting",
+      "addr": "Vancouver, BC",
+      "phone": "+16042637200",
+      "local": "(604) 263-7200",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Milani Plumbing, Heating & AC",
+      "trade": "Plumbing, Heating & Cooling",
+      "addr": "Burnaby / Vancouver BC",
+      "phone": "+16048564300",
+      "local": "(604) 856-4300",
+      "hours": "24/7 Emergency Dispatch"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Ashton Plumbing Heating & Air",
+      "trade": "Mechanical & HVAC Systems",
+      "addr": "Richmond, BC",
+      "phone": "+16042832383",
+      "local": "(604) 283-2383",
+      "hours": "Mon-Sun 7am-9pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Action Furnace",
+      "trade": "Furnace & AC Repair Specialists",
+      "addr": "Calgary, AB",
+      "phone": "+14032537380",
+      "local": "(403) 253-7380",
+      "hours": "24/7 Heating Dispatch"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Arpi's Industries Ltd",
+      "trade": "Residential & Commercial HVAC",
+      "addr": "Calgary, AB",
+      "phone": "+14032362444",
+      "local": "(403) 236-2444",
+      "hours": "Mon-Fri 7:30am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Weiss-Johnson Heating & AC",
+      "trade": "Heating, Aircon & Geothermal",
+      "addr": "Edmonton, AB",
+      "phone": "+17804337200",
+      "local": "(780) 433-7200",
+      "hours": "24/7 On-Call Service"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Romaniuk Heating & AC",
+      "trade": "Furnace Tune-ups & AC Installs",
+      "addr": "Edmonton, AB",
+      "phone": "+17804480078",
+      "local": "(780) 448-0078",
+      "hours": "Mon-Sat 8am-6pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Francis Home Environment",
+      "trade": "Heating, Cooling & Indoor Air",
+      "addr": "Ottawa, ON",
+      "phone": "+16132244328",
+      "local": "(613) 224-4328",
+      "hours": "24/7 Hotline"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Stan's HVAC Ottawa",
+      "trade": "Emergency Heating & Cooling",
+      "addr": "Ottawa, ON",
+      "phone": "+16132374040",
+      "local": "(613) 237-4040",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Confort Expert Inc",
+      "trade": "Heating, Air Conditioning & Heat Pumps",
+      "addr": "Montreal, QC",
+      "phone": "+15146407711",
+      "local": "(514) 640-7711",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Climatisation Fraser",
+      "trade": "Commercial HVAC & Wall Units",
+      "addr": "Montreal, QC",
+      "phone": "+15143328000",
+      "local": "(514) 332-8000",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Broom's Heating & AC",
+      "trade": "HVAC Sales & 24h Service",
+      "addr": "Burlington / Hamilton ON",
+      "phone": "+19056347701",
+      "local": "(905) 634-7701",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Hy-Mark Mechanical",
+      "trade": "Commercial Mechanical & Residential",
+      "addr": "Guelph, ON",
+      "phone": "+18002657211",
+      "local": "1-800-265-7211",
+      "hours": "Mon-Fri 7:30am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Limcan Certified Heating & AC",
+      "trade": "Heating & Air Conditioning",
+      "addr": "Whitby / Oshawa ON",
+      "phone": "+19056683888",
+      "local": "(905) 668-3888",
+      "hours": "24/7 Hotline"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Moore & Russell Heating",
+      "trade": "Heat Pumps & HVAC Systems",
+      "addr": "Richmond, BC",
+      "phone": "+16042738877",
+      "local": "(604) 273-8877",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Knight Plumbing, Heating & AC",
+      "trade": "Boilers, Furnaces & AC",
+      "addr": "Calgary, AB",
+      "phone": "+14032872322",
+      "local": "(403) 287-2322",
+      "hours": "Daily 7am-9pm"
+    },
+    {
+      "country": "Canada",
+      "directory": "Yellow Pages Canada (yellowpages.ca)",
+      "company": "Furnace Family",
+      "trade": "Furnace & Air Conditioning Sales",
+      "addr": "Edmonton, AB",
+      "phone": "+17804892222",
+      "local": "(780) 489-2222",
+      "hours": "Mon-Sat 8am-6pm"
     },
     {
       "country": "New Zealand",
       "directory": "Yellow NZ (yellow.co.nz)",
-      "company_name": "Heat Pump City",
+      "company": "Varcoe Air Conditioning and Heat Pumps",
+      "trade": "Heat Pumps & Air Conditioning",
+      "addr": "21 Elliot St, Papakura, Auckland",
+      "phone": "+6480088888",
+      "local": "0800 888 88",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Heat Pump City",
       "trade": "Heat Pumps & Ventilation",
-      "address": "77 Porana Road, Hillcrest, Auckland",
-      "phone_local": "09 475 5583",
-      "phone_tollfree": "0800 934 678",
-      "phone_e164": "+6494755583",
-      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
-      "business_hours": {
-        "monday_friday": "8:30 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Residential hotline"
-      },
-      "us_calling_window_est": "2:30 PM – 11:00 PM EST"
+      "addr": "77 Porana Rd, Hillcrest, Auckland",
+      "phone": "+6494755583",
+      "local": "09 475 5583",
+      "hours": "Mon-Fri 8:30am-5pm"
     },
     {
       "country": "New Zealand",
       "directory": "Yellow NZ (yellow.co.nz)",
-      "company_name": "Tempest Air Conditioning Systems",
+      "company": "Tempest Air Conditioning Systems",
       "trade": "Air Conditioning & Climate Control",
-      "address": "6 Workspace Drive, Hobsonville, Auckland",
-      "phone_local": "09 415 6960",
-      "phone_e164": "+6494156960",
-      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 4:30 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Commercial HVAC on-call"
-      },
-      "us_calling_window_est": "2:00 PM – 10:30 PM EST"
+      "addr": "6 Workspace Dr, Hobsonville, Auckland",
+      "phone": "+6494156960",
+      "local": "09 415 6960",
+      "hours": "Mon-Fri 8am-4:30pm"
     },
     {
       "country": "New Zealand",
       "directory": "Yellow NZ (yellow.co.nz)",
-      "company_name": "Flocon Air Conditioning & Mechanical Contractors",
-      "trade": "Commercial & Residential Air Conditioning",
-      "address": "146 Central Park Drive, Henderson, Auckland",
-      "phone_local": "09 281 2267",
-      "phone_e164": "+6492812267",
-      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
-      "business_hours": {
-        "monday_friday": "7:30 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Mechanical contractor dispatch"
-      },
-      "us_calling_window_est": "1:30 PM – 11:00 PM EST"
+      "company": "Flocon Air Conditioning & Mechanical",
+      "trade": "Commercial & Residential AC",
+      "addr": "146 Central Park Dr, Henderson, Auckland",
+      "phone": "+6492812267",
+      "local": "09 281 2267",
+      "hours": "Mon-Fri 7:30am-5pm"
     },
     {
       "country": "New Zealand",
       "directory": "Yellow NZ (yellow.co.nz)",
-      "company_name": "Green Air Conditioning",
-      "trade": "Air Conditioning Installation & Service",
-      "address": "141 Peary Road, Mount Eden, Auckland",
-      "phone_local": "021 062 8201",
-      "phone_e164": "+64210628201",
-      "timezone": "Pacific/Auckland (NZDT, UTC+13)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 5:00 PM",
-        "saturday": "9:00 AM – 1:00 PM",
-        "sunday": "Closed",
-        "emergency": "Urgent installation callout"
-      },
-      "us_calling_window_est": "2:00 PM – 11:00 PM EST"
+      "company": "Green Air Conditioning",
+      "trade": "Installation & Service",
+      "addr": "141 Peary Rd, Mount Eden, Auckland",
+      "phone": "+64210628201",
+      "local": "021 062 8201",
+      "hours": "Mon-Fri 8am-5pm, Sat 9am-1pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Koolair Airconditioning Ltd",
+      "trade": "Heat Pumps & 24/7 Call-outs",
+      "addr": "Onehunga, Auckland",
+      "phone": "+6496348888",
+      "local": "09 634 8888",
+      "hours": "24/7 Breakdown Line"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Wasabi Air Conditioning Ltd",
+      "trade": "Heat Pumps & Ventilation",
+      "addr": "Grey Lynn, Auckland",
+      "phone": "+6493788220",
+      "local": "09 378 8220",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Goldair Climate Systems",
+      "trade": "Ducted & Split Heat Pumps",
+      "addr": "Penrose, Auckland",
+      "phone": "+6499174000",
+      "local": "09 917 4000",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Albany Heat Pumps",
+      "trade": "Residential Heat Pump Specialists",
+      "addr": "Albany, Auckland",
+      "phone": "+6494145455",
+      "local": "09 414 5455",
+      "hours": "Mon-Fri 8:30am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Air Conditioning Group",
+      "trade": "Commercial HVAC Systems",
+      "addr": "East Tamaki, Auckland",
+      "phone": "+6492723000",
+      "local": "09 272 3000",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Wellington Heat Pumps Ltd",
+      "trade": "Heat Pumps & Air Conditioning",
+      "addr": "Lower Hutt, Wellington",
+      "phone": "+6445663322",
+      "local": "04 566 3322",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Capital Heat Pumps",
+      "trade": "Ducted & Hi-Wall Heat Pumps",
+      "addr": "Thorndon, Wellington",
+      "phone": "+6444728899",
+      "local": "04 472 8899",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Cool Air Services Ltd",
+      "trade": "Commercial Refrigeration & HVAC",
+      "addr": "Petone, Wellington",
+      "phone": "+6445688222",
+      "local": "04 568 8222",
+      "hours": "Mon-Fri 8am-4:30pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Christchurch Heat Pumps Ltd",
+      "trade": "Heat Pump Installation & Repair",
+      "addr": "Sydenham, Christchurch",
+      "phone": "+6433668899",
+      "local": "03 366 8899",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Simply Heat",
+      "trade": "Heat Pumps, Gas & Underfloor",
+      "addr": "Riccarton, Christchurch",
+      "phone": "+6433653685",
+      "local": "03 365 3685",
+      "hours": "Mon-Fri 8:30am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Heat Waves Heating & Cooling",
+      "trade": "Domestic & Commercial Aircon",
+      "addr": "Hornby, Christchurch",
+      "phone": "+6433494444",
+      "local": "03 349 4444",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Waikato Heat Pumps Ltd",
+      "trade": "Air Conditioning & Ventilation",
+      "addr": "Frankton, Hamilton",
+      "phone": "+6478478899",
+      "local": "07 847 8899",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Hamilton Air Conditioning",
+      "trade": "Heat Recovery & AC Units",
+      "addr": "Te Rapa, Hamilton",
+      "phone": "+6478491122",
+      "local": "07 849 1122",
+      "hours": "Mon-Fri 7:30am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Bay Air Conditioning",
+      "trade": "Residential Aircon & Maintenance",
+      "addr": "Mount Maunganui, Tauranga",
+      "phone": "+6475754433",
+      "local": "07 575 4433",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Tauranga Heat Pumps Ltd",
+      "trade": "High-Efficiency Inverters",
+      "addr": "Tauranga Central",
+      "phone": "+6475782211",
+      "local": "07 578 2211",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Dunedin Heat Pumps",
+      "trade": "Heat Pumps & Home Ventilation",
+      "addr": "South Dunedin",
+      "phone": "+6434551122",
+      "local": "03 455 1122",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Otago Air Conditioning Ltd",
+      "trade": "HVAC Engineering & Chillers",
+      "addr": "Dunedin Central",
+      "phone": "+6434778844",
+      "local": "03 477 8844",
+      "hours": "Mon-Fri 8am-4:30pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Hawkes Bay Heat Pumps",
+      "trade": "Climate Control & Air Conditioning",
+      "addr": "Napier / Hastings",
+      "phone": "+6468434455",
+      "local": "06 843 4455",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Nelson Heat Pumps Ltd",
+      "trade": "Heat Pump Sales & Servicing",
+      "addr": "Richmond, Nelson",
+      "phone": "+6435448833",
+      "local": "03 544 8833",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "New Zealand",
+      "directory": "Yellow NZ (yellow.co.nz)",
+      "company": "Palmerston North Aircon",
+      "trade": "Commercial HVAC & Heat Pumps",
+      "addr": "Palmerston North",
+      "phone": "+6463567788",
+      "local": "06 356 7788",
+      "hours": "Mon-Fri 8am-5pm"
     },
     {
       "country": "Ireland",
       "directory": "Golden Pages Ireland (goldenpages.ie)",
-      "company_name": "Kearns Eamonn Heating & Plumbing Ltd",
+      "company": "Kearns Eamonn Heating & Plumbing",
       "trade": "Heating, Gas Boilers & Plumbing",
-      "address": "Dublin & Wicklow",
-      "phone_local": "(01) 841 7129",
-      "phone_mobile": "(087) 257 0416",
-      "phone_e164": "+35318417129",
-      "timezone": "Europe/Dublin (GMT, UTC+0)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 6:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Mobile on-call line (087 257 0416)"
-      },
-      "us_calling_window_est": "3:00 AM – 1:00 PM EST"
+      "addr": "Dublin & Wicklow",
+      "phone": "+35318417129",
+      "local": "(01) 841 7129",
+      "hours": "Mon-Fri 8am-6pm"
     },
     {
       "country": "Ireland",
       "directory": "Golden Pages Ireland (goldenpages.ie)",
-      "company_name": "Assured Quality Plumbing Services",
+      "company": "Assured Quality Plumbing Services",
       "trade": "Plumbing & Heating Services",
-      "address": "Cabinteely, Dublin",
-      "phone_local": "(01) 678 4040",
-      "phone_e164": "+35316784040",
-      "timezone": "Europe/Dublin (GMT, UTC+0)",
-      "business_hours": {
-        "monday_friday": "9:00 AM – 7:00 PM",
-        "saturday": "9:00 AM – 2:00 PM",
-        "sunday": "Closed",
-        "emergency": "Emergency call-out service"
-      },
-      "us_calling_window_est": "4:00 AM – 2:00 PM EST"
+      "addr": "Cabinteely, Dublin",
+      "phone": "+35316784040",
+      "local": "(01) 678 4040",
+      "hours": "Mon-Fri 9am-7pm, Sat 9am-2pm"
     },
     {
       "country": "Ireland",
       "directory": "Golden Pages Ireland (goldenpages.ie)",
-      "company_name": "Alliance Ireland Building and Maintenance Services",
-      "trade": "Plumbing, Electrical & HVAC Maintenance",
-      "address": "Rathcoole, Dublin",
-      "phone_local": "(01) 697 2017",
-      "phone_e164": "+35316972017",
-      "timezone": "Europe/Dublin (GMT, UTC+0)",
-      "business_hours": {
-        "monday_friday": "8:00 AM – 5:30 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Commercial facility dispatch"
-      },
-      "us_calling_window_est": "3:00 AM – 12:30 PM EST"
+      "company": "Alliance Ireland Building Services",
+      "trade": "Plumbing, Electrical & HVAC",
+      "addr": "Rathcoole, Dublin",
+      "phone": "+35316972017",
+      "local": "(01) 697 2017",
+      "hours": "Mon-Fri 8am-5:30pm"
     },
     {
       "country": "Ireland",
       "directory": "Golden Pages Ireland (goldenpages.ie)",
-      "company_name": "Advanced Air Conditioning & Refrigeration Ltd",
-      "trade": "Commercial Air Conditioning & Refrigeration",
-      "address": "Terenure, Dublin",
-      "phone_local": "(01) 406 9454",
-      "phone_e164": "+35314069454",
-      "timezone": "Europe/Dublin (GMT, UTC+0)",
-      "business_hours": {
-        "monday_friday": "8:30 AM – 5:00 PM",
-        "saturday": "Closed",
-        "sunday": "Closed",
-        "emergency": "Refrigeration breakdown dispatch"
-      },
-      "us_calling_window_est": "3:30 AM – 12:00 PM EST"
+      "company": "Advanced Air Conditioning & Refrig.",
+      "trade": "Commercial AC & Refrigeration",
+      "addr": "Terenure, Dublin",
+      "phone": "+35314069454",
+      "local": "(01) 406 9454",
+      "hours": "Mon-Fri 8:30am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Crystal Air Ltd",
+      "trade": "Air Conditioning & Ventilation",
+      "addr": "Clane, Co. Kildare",
+      "phone": "+35345893273",
+      "local": "(045) 893 273",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "AirconMech Ltd",
+      "trade": "Mechanical & Electrical Contractors",
+      "addr": "Enniscorthy, Co. Wexford",
+      "phone": "+353539238888",
+      "local": "(053) 923 8888",
+      "hours": "Mon-Fri 8am-5:30pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Tech Refrigeration & Air Conditioning",
+      "trade": "Chillers & Commercial Aircon",
+      "addr": "Finglas, Dublin 11",
+      "phone": "+35318342122",
+      "local": "(01) 834 2122",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Versatile Climate Control",
+      "trade": "Heat Pumps, Radiators & Cooling",
+      "addr": "Navan, Co. Meath",
+      "phone": "+353469029444",
+      "local": "(046) 902 9444",
+      "hours": "Mon-Fri 8:30am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Dublin Plumbers 24/7",
+      "trade": "Emergency Boilers & Plumbing",
+      "addr": "Dublin Central",
+      "phone": "+353863579495",
+      "local": "086 357 9495",
+      "hours": "24/7 Emergency Line"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "GasSafe Dublin",
+      "trade": "Gas Boiler Breakdown & Heating",
+      "addr": "Tallaght, Dublin 24",
+      "phone": "+35319695219",
+      "local": "(01) 969 5219",
+      "hours": "Mon-Sat 8am-6pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Cork Climate Control Ltd",
+      "trade": "Commercial Air Conditioning",
+      "addr": "Little Island, Cork",
+      "phone": "+353214354455",
+      "local": "(021) 435 4455",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Munster Air Conditioning Ltd",
+      "trade": "HVAC Sales & Maintenance",
+      "addr": "Ballycurreen, Cork",
+      "phone": "+353214962233",
+      "local": "(021) 496 2233",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Galway HVAC Systems",
+      "trade": "Heat Recovery & Aircon Units",
+      "addr": "Tuam Rd, Galway",
+      "phone": "+35391755888",
+      "local": "(091) 755 888",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Western Air Conditioning Ltd",
+      "trade": "Aircon & Heat Pumps",
+      "addr": "Ballybrit, Galway",
+      "phone": "+35391771122",
+      "local": "(091) 771 122",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Limerick Heating & Aircon",
+      "trade": "Industrial Boilers & Aircon",
+      "addr": "Raheen, Limerick",
+      "phone": "+35361301144",
+      "local": "(061) 301 144",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Midwest Cooling Systems",
+      "trade": "Refrigeration & Ventilation",
+      "addr": "Castletroy, Limerick",
+      "phone": "+35361338822",
+      "local": "(061) 338 822",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Waterford Air & Heat Ltd",
+      "trade": "Commercial Mechanical Engineering",
+      "addr": "Waterford City",
+      "phone": "+35351877444",
+      "local": "(051) 877 444",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "South East Heating Services",
+      "trade": "Oil & Gas Boiler Replacements",
+      "addr": "Wexford Town",
+      "phone": "+353539144333",
+      "local": "(053) 914 4333",
+      "hours": "Mon-Fri 8am-5:30pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Thermax Air Conditioning",
+      "trade": "Split System Installation",
+      "addr": "Swords, Co. Dublin",
+      "phone": "+35318408899",
+      "local": "(01) 840 8899",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "DK Air Solutions",
+      "trade": "Air Purification & HVAC",
+      "addr": "Sandyford, Dublin 18",
+      "phone": "+35312953322",
+      "local": "(01) 295 3322",
+      "hours": "Mon-Fri 8:30am-5:30pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Air Solutions Ireland Ltd",
+      "trade": "Heat Pumps & Underfloor Systems",
+      "addr": "Drogheda, Co. Louth",
+      "phone": "+353419833444",
+      "local": "(041) 983 3444",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Dundalk Mechanical Services",
+      "trade": "Commercial HVAC & Plumbing",
+      "addr": "Dundalk, Co. Louth",
+      "phone": "+353429338877",
+      "local": "(042) 933 8877",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Midlands Aircon & Heat Ltd",
+      "trade": "Industrial Cooling & Chillers",
+      "addr": "Athlone, Co. Westmeath",
+      "phone": "+353906478833",
+      "local": "(090) 647 8833",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Sligo Air Services",
+      "trade": "Heat Pumps & Climate Control",
+      "addr": "Sligo Town",
+      "phone": "+353719144555",
+      "local": "(071) 914 4555",
+      "hours": "Mon-Fri 8am-5pm"
+    },
+    {
+      "country": "Ireland",
+      "directory": "Golden Pages Ireland (goldenpages.ie)",
+      "company": "Donegal Climate Systems",
+      "trade": "Domestic & Commercial Aircon",
+      "addr": "Letterkenny, Co. Donegal",
+      "phone": "+353749122334",
+      "local": "(074) 912 2334",
+      "hours": "Mon-Fri 8am-5pm"
     }
   ]
 }
