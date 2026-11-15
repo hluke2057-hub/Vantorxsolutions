@@ -73,6 +73,22 @@
       "destination": "/cold-call-arena/index.html"
     },
     {
+      "source": "/private",
+      "destination": "/cold-call-arena/international-vault.html"
+    },
+    {
+      "source": "/private/",
+      "destination": "/cold-call-arena/international-vault.html"
+    },
+    {
+      "source": "/vault",
+      "destination": "/cold-call-arena/international-vault.html"
+    },
+    {
+      "source": "/vault/",
+      "destination": "/cold-call-arena/international-vault.html"
+    },
+    {
       "source": "/demo",
       "destination": "/demo/index.html"
     },
