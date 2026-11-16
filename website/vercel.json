@@ -33,16 +33,24 @@
       "destination": "/api/notifications?action=send-email"
     },
     {
+      "source": "/api/resend-webhook",
+      "destination": "/api/notifications?action=resend-webhook"
+    },
+    {
+      "source": "/api/email-delivery",
+      "destination": "/api/notifications?action=email-delivery"
+    },
+    {
       "source": "/api/email-delivery/:action",
-      "destination": "/api/email-delivery?action=:action"
+      "destination": "/api/notifications?action=email-delivery&deliveryAction=:action"
     },
     {
       "source": "/api/verify-email",
-      "destination": "/api/email-delivery?action=verify"
+      "destination": "/api/notifications?action=email-delivery&deliveryAction=verify"
     },
     {
       "source": "/api/unsubscribe",
-      "destination": "/api/email-delivery?action=unsubscribe"
+      "destination": "/api/notifications?action=email-delivery&deliveryAction=unsubscribe"
     },
     {
       "source": "/api/notifications/:action",

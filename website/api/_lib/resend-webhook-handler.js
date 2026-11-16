@@ -1,4 +1,4 @@
-const { recordEvent, addSuppression } = require("./_lib/delivery-store");
+const { recordEvent, addSuppression } = require("./delivery-store");
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -78,7 +78,6 @@ module.exports = async function handler(req, res) {
       failureReason = data.message || "Delivery delayed by receiving server (temporary graylisting/throttle)";
     }
 
-    // Record into delivery store
     const updatedRecord = recordEvent({
       emailId,
       recipient,

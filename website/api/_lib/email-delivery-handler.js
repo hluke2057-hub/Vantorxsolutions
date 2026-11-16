@@ -5,8 +5,8 @@ const {
   addSuppression,
   addUnsubscribe,
   loadStore
-} = require("./_lib/delivery-store");
-const { verifyEmail, verifyBatch } = require("./_lib/verifier");
+} = require("./delivery-store");
+const { verifyEmail, verifyBatch } = require("./verifier");
 
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -18,7 +18,12 @@ module.exports = async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const action = (req.query && req.query.action) || (req.body && req.body.action) || "metrics";
+  let action = (req.query && (req.query.deliveryAction || req.query.action)) || 
+               (req.body && (req.body.deliveryAction || req.body.action)) || "metrics";
+
+  if (action === "email-delivery") {
+    action = (req.query && req.query.deliveryAction) || "metrics";
+  }
 
   // 1. GET METRICS
   if (action === "metrics" && req.method === "GET") {
@@ -43,7 +48,7 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  // 3. GET EMAIL DETAIL (CLICK TO SEE EXACT FAILURE REASON)
+  // 3. GET EMAIL DETAIL
   if (action === "detail" && req.method === "GET") {
     try {
       const id = req.query.id;
@@ -111,7 +116,6 @@ module.exports = async function handler(req, res) {
     });
 
     if (req.method === "GET") {
-      // Return clean confirmation HTML page for recipient
       res.setHeader("Content-Type", "text/html; charset=utf-8");
       return res.status(200).send(`
 <!DOCTYPE html>

@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-11-16T19:15:03.714Z",
+  "lastUpdated": "2026-11-16T20:13:24.775Z",
   "stats": {
-    "totalProcessed": 1,
-    "totalSent": 1,
-    "totalDelivered": 1,
+    "totalProcessed": 2,
+    "totalSent": 2,
+    "totalDelivered": 2,
     "totalBounced": 0,
     "totalSuppressed": 1,
     "totalFailed": 0,
@@ -28,6 +28,20 @@
       "suppressionOrigin": null,
       "source": "deliverability_test_suite",
       "lastUpdatedAt": "2026-11-16T19:15:03.715Z"
+    },
+    "test_123": {
+      "id": "test_123",
+      "recipient": "test@example.com",
+      "businessName": "test",
+      "subject": "(Webhook Recorded)",
+      "sender": "VantorX Outbound",
+      "sentAt": "2026-11-16T20:13:24.775Z",
+      "status": "delivered",
+      "verificationStatus": "UNKNOWN",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "resend_webhook",
+      "lastUpdatedAt": "2026-11-16T20:13:24.775Z"
     }
   },
   "suppressions": [
@@ -50,6 +64,18 @@
       "details": {
         "provider": "Resend",
         "status": "250 OK"
+      }
+    },
+    {
+      "id": "evt_1794860004775_qsrx",
+      "emailId": "test_123",
+      "recipient": "test@example.com",
+      "type": "email.delivered",
+      "timestamp": "2026-11-16T20:13:24.775Z",
+      "details": {
+        "to": "test@example.com",
+        "email_id": "test_123",
+        "reason": null
       }
     }
   ]

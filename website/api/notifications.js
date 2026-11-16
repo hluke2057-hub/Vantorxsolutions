@@ -4,26 +4,52 @@ const { sendEmail } = require("./_lib/email");
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, svix-id, svix-timestamp, svix-signature");
   res.setHeader("Cache-Control", "no-store");
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
 
-  // Handle VantorX Official Business Email Dispatch (/api/send-email rewritten to /api/notifications?action=send-email)
-  const action = (req.query && req.query.action) || (req.body && req.body.action);
-  if (action === "send-email" || (req.url && req.url.includes("send-email"))) {
+  const url = req.url || "";
+  const query = req.query || {};
+  let body = req.body || {};
+  if (typeof body === "string") {
+    try { body = JSON.parse(body); } catch (_) { body = {}; }
+  }
+  const action = query.action || body.action || "";
+
+  // 1. Resend Inbound Webhook Router
+  if (action === "resend-webhook" || url.includes("resend-webhook")) {
+    const webhookHandler = require("./_lib/resend-webhook-handler");
+    return webhookHandler(req, res);
+  }
+
+  // 2. Email Delivery & Suppression Infrastructure Router
+  if (
+    action === "email-delivery" ||
+    url.includes("email-delivery") ||
+    url.includes("verify-email") ||
+    url.includes("unsubscribe") ||
+    query.deliveryAction ||
+    action === "metrics" ||
+    action === "log" ||
+    action === "detail" ||
+    action === "suppressions" ||
+    action === "verify" ||
+    action === "unsubscribe"
+  ) {
+    const deliveryHandler = require("./_lib/email-delivery-handler");
+    return deliveryHandler(req, res);
+  }
+
+  // 3. VantorX Official Business Email Dispatch Router (/api/send-email)
+  if (action === "send-email" || url.includes("send-email")) {
     if (req.method !== "POST") {
       res.setHeader("Allow", "POST");
       return res.status(405).json({ ok: false, error: "Method not allowed. Use POST." });
     }
     try {
-      let body = req.body;
-      if (typeof body === "string") {
-        try { body = JSON.parse(body); } catch (_) { body = {}; }
-      }
-      body = body || {};
       const { to, subject, text, html, senderAlias, businessName, source } = body;
 
       if (!to || !to.includes("@")) {
@@ -87,6 +113,7 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // 4. Default Supabase Notifications Handler
   if (req.method !== "GET" && req.method !== "PUT" && req.method !== "POST") {
     return methodNotAllowed(res, ["GET", "PUT", "POST"]);
   }
@@ -122,8 +149,7 @@ module.exports = async function handler(req, res) {
     }
 
     // PUT/POST - mark read
-    const body = req.body || {};
-    const notifId = body.id || (req.query && req.query.id);
+    const notifId = body.id || query.id;
 
     if (notifId) {
       await supabaseRequest(`/rest/v1/notifications?id=eq.${encodeURIComponent(notifId)}`, {
