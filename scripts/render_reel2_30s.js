@@ -14,7 +14,7 @@ const puppeteer = require('puppeteer-core');
 const ffmpegPath = require('ffmpeg-static');
 
 const EDGE_PATH = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-const ARTIFACT_DIR = 'C:\\Users\\hungr\\.gemini\\antigravity\\brain\\b805e771-e1c1-4976-afc1-cd59dd49eae0';
+const ARTIFACT_DIR = 'C:\\Users\\hungr\\.gemini\\antigravity\\brain\\80451426-584a-4969-8d9c-573a8dd3a27d';
 
 const dryVoicePath = path.resolve('website/demo/audio/reel2-30s-voiceover-dry.mp3');
 const tsJsonPath = path.resolve('website/demo/audio/reel2-30s-timestamps.json');
