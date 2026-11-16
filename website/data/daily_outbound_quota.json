@@ -1,12 +1,13 @@
 {
-  "date": "2026-11-15",
+  "date": "2026-11-16",
   "dailyLimit": 100,
-  "todaySent": 30,
-  "todayRemaining": 70,
-  "lastDispatchAt": "2026-11-16T00:56:14.860Z",
+  "todaySent": 12,
+  "todayRemaining": 88,
+  "lastDispatchAt": "2026-11-16T18:19:23.526Z",
   "history": {
     "2026-11-12": 2,
     "2026-11-13": 30,
-    "2026-11-14": 30
+    "2026-11-14": 30,
+    "2026-11-15": 30
   }
 }
