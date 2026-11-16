@@ -49,10 +49,11 @@ function cleanAndValidateLead(raw, index) {
 
   const formattedPhone = `(${digits.substring(0, 3)}) ${digits.substring(3, 6)}-${digits.substring(6)}`;
 
-  // Strict 2 to 10 Employee Bracket (Manta verified)
+  // Strict 1 to 10 Employee Bracket - NO SYNTHETIC MODULO FALLBACKS
   let emp = parseInt(raw.employees, 10);
-  if (isNaN(emp) || emp < 2 || emp > 10) {
-    emp = (index % 7) + 2; // Clamp safely to 2-8
+  if (isNaN(emp) || emp < 1 || emp > 10) {
+    // Reject any record without verified 1-10 employees
+    return null;
   }
 
   let employeeTier = 'smallCrew';
