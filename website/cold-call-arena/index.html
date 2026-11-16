@@ -5102,7 +5102,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div class="obj-accordion">
             <div class="obj-acc-head"><span>❌ 11. "Who are you and how did you get my number?"</span> <span class="tag">Privacy Guard</span></div>
             <div class="obj-acc-body">
-              "I'm Luke, founder of VantorX right here in Florida. I got your number directly from your public Google Business Profile in <span class="dyn-city">[City]</span> while reviewing local trade contractors. I only call owners when I notice an active after-hours call routing leak."
+              "I'm Luke, founder of VantorX right I got your number directly from your public Google Business Profile in <span class="dyn-city">[City]</span> while reviewing local trade contractors. I only call owners when I notice an active after-hours call routing leak."
               <div class="obj-acc-note">💡 Strategy: Radical transparency and local credibility.</div>
             </div>
           </div>
@@ -7425,6 +7425,18 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <option value="contact">Outbound Team (contact@vantorxsolutions.com)</option>
           </select>
           <button type="button" class="btn btn-ghost btn-xs" onclick="openVantorXEmailInfoModal()" style="font-size:11px;padding:3px 8px;color:#38bdf8;border:1px solid rgba(56,189,248,0.3);cursor:pointer">🛡️ Domain Info</button>
+        </div>
+      </div>
+
+      <!-- 📍 Target Location & Currency Verification Banner -->
+      <div id="callLogModalLocationBanner" style="display:flex;align-items:center;justify-content:space-between;background:rgba(56,189,248,0.08);border:1.5px solid rgba(56,189,248,0.35);border-radius:8px;padding:9px 12px;margin-bottom:10px;font-size:12px;color:#e2e8f0;flex-wrap:wrap;gap:6px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-size:15px">📍</span>
+          <span>Target Market: <strong id="callLogTargetLocationText" style="color:#38bdf8;font-weight:700">Verified Regional Market</strong></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span id="callLogTargetMarketBadge" style="background:rgba(56,189,248,0.2);color:#7dd3fc;border:1px solid rgba(56,189,248,0.4);padding:2px 8px;border-radius:9999px;font-size:10.5px;font-weight:700;font-family:var(--font-mono)">TARGET TRADE</span>
+          <span id="callLogTargetCurrencyBadge" style="background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3);padding:2px 8px;border-radius:9999px;font-size:10.5px;font-weight:700;font-family:var(--font-mono)">USD ($)</span>
         </div>
       </div>
 
@@ -42400,17 +42412,153 @@ const LEADS_DATA = [
   // ------------------------------------------------------------
   let activeLogEmailTemplate = 'No Luck';
 
+  // ============================================================
+  // 📍 DYNAMIC LEAD LOCATION & CURRENCY RESOLUTION ENGINE
+  // ============================================================
+  window.findLeadById = function(leadId) {
+    if (!leadId) return null;
+    if (typeof LEADS_DATA !== 'undefined' && Array.isArray(LEADS_DATA)) {
+      const l = LEADS_DATA.find(x => x.id === leadId);
+      if (l) return l;
+    }
+    if (typeof window.INTERNATIONAL_150_LEADS !== 'undefined' && Array.isArray(window.INTERNATIONAL_150_LEADS)) {
+      const l = window.INTERNATIONAL_150_LEADS.find(x => x.id === leadId);
+      if (l) return l;
+    }
+    return null;
+  };
+
+  window.resolveLeadLocationInfo = function(lead) {
+    if (!lead) {
+      return {
+        cityName: 'your area',
+        fullLocation: 'your area',
+        marketAdjective: 'local',
+        marketBadge: 'LOCAL TRADE',
+        countryName: '',
+        currencySymbol: '$',
+        currencyCode: 'USD',
+        ticketRange: '$1,800 to $4,500',
+        monthlyRecoveryRange: '$35,000 to $85,000+',
+        demoPhoneDisplay: '+1 (561) 813-8602'
+      };
+    }
+
+    const cCode = (lead.countryCode || '').toUpperCase();
+    const cName = lead.country || '';
+    const city = (lead.city || '').trim();
+    const state = (lead.state || '').trim();
+    const trade = (lead.trade || 'Contractor').toUpperCase();
+
+    let cityName = city || 'your service area';
+    let fullLocation = '';
+    let marketAdjective = '';
+    let countryName = cName;
+    let currencySymbol = '$';
+    let currencyCode = 'USD';
+    let ticketRange = '$1,800 to $4,500';
+    let monthlyRecoveryRange = '$35,000 to $85,000+';
+
+    if (cCode === 'AU' || cName.toLowerCase().includes('australia')) {
+      countryName = 'Australia';
+      marketAdjective = 'Australian';
+      currencySymbol = 'A$';
+      currencyCode = 'AUD';
+      ticketRange = 'A$2,200 to A$5,500';
+      monthlyRecoveryRange = 'A$45,000 to A$95,000+';
+      fullLocation = city ? `${city}, Australia` : 'Australia';
+    } else if (cCode === 'GB' || cCode === 'UK' || cName.toLowerCase().includes('united kingdom') || cName.toLowerCase().includes('britain') || cName.toLowerCase().includes('england') || cName.toLowerCase().includes('scotland')) {
+      countryName = 'UK';
+      marketAdjective = 'UK';
+      currencySymbol = '£';
+      currencyCode = 'GBP';
+      ticketRange = '£1,500 to £3,800';
+      monthlyRecoveryRange = '£28,000 to £65,000+';
+      fullLocation = city ? `${city}, UK` : 'UK';
+    } else if (cCode === 'SG' || cName.toLowerCase().includes('singapore')) {
+      countryName = 'Singapore';
+      marketAdjective = 'Singapore';
+      currencySymbol = 'S$';
+      currencyCode = 'SGD';
+      ticketRange = 'S$2,000 to S$4,800';
+      monthlyRecoveryRange = 'S$40,000 to S$80,000+';
+      fullLocation = city ? `${city}, Singapore` : 'Singapore';
+    } else if (cCode === 'AE' || cName.toLowerCase().includes('emirates') || (city && city.toLowerCase().includes('dubai')) || (city && city.toLowerCase().includes('abu dhabi'))) {
+      countryName = 'UAE';
+      marketAdjective = 'UAE';
+      currencySymbol = 'AED ';
+      currencyCode = 'AED';
+      ticketRange = 'AED 6,500 to AED 16,000';
+      monthlyRecoveryRange = 'AED 120,000 to AED 300,000+';
+      fullLocation = city ? `${city}, UAE` : 'UAE';
+    } else if (cCode === 'IE' || cName.toLowerCase().includes('ireland')) {
+      countryName = 'Ireland';
+      marketAdjective = 'Irish';
+      currencySymbol = '€';
+      currencyCode = 'EUR';
+      ticketRange = '€1,800 to €4,500';
+      monthlyRecoveryRange = '€35,000 to €80,000+';
+      fullLocation = city ? `${city}, Ireland` : 'Ireland';
+    } else if (cCode === 'NZ' || cName.toLowerCase().includes('new zealand')) {
+      countryName = 'New Zealand';
+      marketAdjective = 'New Zealand';
+      currencySymbol = 'NZ$';
+      currencyCode = 'NZD';
+      ticketRange = 'NZ$2,500 to NZ$5,500';
+      monthlyRecoveryRange = 'NZ$45,000 to NZ$95,000+';
+      fullLocation = city ? `${city}, New Zealand` : 'New Zealand';
+    } else if (cCode === 'ZA' || cName.toLowerCase().includes('south africa')) {
+      countryName = 'South Africa';
+      marketAdjective = 'South African';
+      currencySymbol = 'R';
+      currencyCode = 'ZAR';
+      ticketRange = 'R30,000 to R75,000';
+      monthlyRecoveryRange = 'R500,000 to R1,200,000+';
+      fullLocation = city ? `${city}, South Africa` : 'South Africa';
+    } else {
+      countryName = 'USA';
+      if (state) {
+        marketAdjective = state;
+        fullLocation = city ? (city.includes(state) ? city : `${city}, ${state}`) : state;
+      } else if (city) {
+        marketAdjective = city;
+        fullLocation = city;
+      } else {
+        marketAdjective = 'local';
+        fullLocation = 'your service area';
+      }
+      currencySymbol = '$';
+      currencyCode = 'USD';
+      ticketRange = '$1,800 to $4,500';
+      monthlyRecoveryRange = '$35,000 to $85,000+';
+    }
+
+    return {
+      cityName: cityName || fullLocation,
+      fullLocation,
+      marketAdjective,
+      marketBadge: `${marketAdjective.toUpperCase()} ${trade}`,
+      countryName,
+      currencySymbol,
+      currencyCode,
+      ticketRange,
+      monthlyRecoveryRange,
+      demoPhoneDisplay: '+1 (561) 813-8602'
+    };
+  };
+
   window.generateCustomEmailContent = function(lead, outcome) {
     if (!lead) return { subject: '', body: '' };
-    const lossMo = Number(lead.monthlyLoss || 8500).toLocaleString();
+    const loc = window.resolveLeadLocationInfo(lead);
     const trade = lead.trade || 'Trade';
-    const city = lead.city || 'Florida';
+    const city = loc.cityName;
     const owner = lead.owner || 'Business Owner';
     const company = lead.company || 'your team';
-    const employees = lead.employees || 3;
     const callerName = activeCaller || 'Luke Hamilton';
     const alias = localStorage.getItem('vantorx_sender_alias') || 'luke';
     const myEmail = alias === 'ava' ? 'ava@vantorxsolutions.com' : (alias === 'contact' ? 'contact@vantorxsolutions.com' : 'luke@vantorxsolutions.com');
+    const marketTrade = `${loc.marketAdjective ? loc.marketAdjective + ' ' : ''}${trade}`.trim();
+    const marketTradeUpper = marketTrade.toUpperCase();
 
     let subject = '';
     let body = '';
@@ -42421,7 +42569,7 @@ const LEADS_DATA = [
 
 Great connecting with you today!
 
-Confirming our upcoming live system demo for ${company}. On our call, we will walk through the exact VantorX AI system we use to help Florida ${trade} contractors capture 15 to 30+ new high-ticket clients every month and recover $40,000+ in previously lost after-hours revenue across ${city}.
+Confirming our upcoming live system demo for ${company}. On our call, we will walk through the exact VantorX AI system we use to help ${marketTrade} contractors capture 15 to 30+ new high-ticket clients every month and recover ${loc.monthlyRecoveryRange} in previously lost after-hours revenue across ${city}.
 
 HERE IS WHAT WE WILL COVER & DEMO LIVE:
 1. Ava 24/7 Voice AI Receptionist:
@@ -42434,16 +42582,16 @@ How your on-call technicians receive customer job details, addresses, and call r
 Seamless 2-way sync with ServiceTitan, Housecall Pro, Jobber, or Google Calendar — no new workflow or manual data entry for your office staff.
 
 4. The Revenue Recovery Math:
-The breakdown showing how converting 18 to 30 after-hours calls that currently drop to voicemail will inject an additional $35,000 to $85,000+ per month in gross billings for ${company}.
+The breakdown showing how converting 18 to 30 after-hours calls that currently drop to voicemail will inject an additional ${loc.monthlyRecoveryRange} per month in gross billings for ${company}.
 
-Before we connect, feel free to test Ava live right now on your phone by calling our live demo line at (561) 813-8602.
+Before we connect, feel free to test Ava live right now on your phone by calling our live demo line at ${loc.demoPhoneDisplay}.
 
 Looking forward to speaking with you!
 
 Best regards,
 ${callerName}
 Founder, VantorX Solutions
-Direct: (561) 813-8602
+Direct: ${loc.demoPhoneDisplay}
 Email: ${myEmail}
 https://www.vantorxsolutions.com`;
     } else if (outcome === 'Call Back') {
@@ -42452,47 +42600,47 @@ https://www.vantorxsolutions.com`;
 
 Following up on our quick call earlier. I know you're busy running jobs on-site with your crew at ${company}, so I look forward to connecting at our scheduled time.
 
-To give you a quick 45-second executive summary of what VantorX does for Florida ${trade} contractors:
+To give you a quick 45-second executive summary of what VantorX does for ${marketTrade} contractors:
 
 We eliminate missed-call revenue bleed by deploying Ava — our autonomous 24/7 Voice AI receptionist that answers every call on the 1st ring (0.8 seconds), 24/7/365. She qualifies emergency callers, books appointments directly into your calendar, and texts your on-call technician the address and job details immediately.
 
 WHAT THIS GENERATES FOR ${company}:
 • 15 to 30+ new high-ticket paying clients booked every single month.
-• $40,000 to $85,000+ in retained gross revenue from calls that previously hit dead voicemail.
+• ${loc.monthlyRecoveryRange} in retained gross revenue from calls that previously hit dead voicemail.
 • Zero extra marketing dollars spent — you monetize the high-intent calls you are already paying Google and LSA to generate.
 
-You can test Ava live right now on your phone by dialing (561) 813-8602.
+You can test Ava live right now on your phone by dialing ${loc.demoPhoneDisplay}.
 
 Talk with you soon!
 
 Best regards,
 ${callerName}
-VantorX Solutions | (561) 813-8602
+VantorX Solutions | ${loc.demoPhoneDisplay}
 https://www.vantorxsolutions.com`;
     } else if (outcome === 'Short') {
       subject = `Quick question: missed after-hours calls at ${company}`;
       body = `Hey ${owner},
 
-Left you a brief voicemail regarding ${company}. For Florida ${trade} contractors, missed after-hours calls typically leak $35,000 to $80,000 a month to whichever competitor answers first.
+Left you a brief voicemail regarding ${company}. For ${marketTrade} contractors, missed after-hours calls typically leak ${loc.monthlyRecoveryRange} a month to whichever competitor answers first.
 
 We deployed Ava, a 24/7 Voice AI that answers in 0.8 seconds, books the job into your calendar, and texts your tech the customer details instantly — consistently bringing in 15 to 30+ new booked clients every month with zero extra ad spend.
 
-Can I send you a 60-second video of Ava handling a simulated call for ${company}? You can also test her live right now at (561) 813-8602.
+Can I send you a 60-second video of Ava handling a simulated call for ${company}? You can also test her live right now at ${loc.demoPhoneDisplay}.
 
 Best,
 ${callerName}
-VantorX Solutions | (561) 813-8602`;
+VantorX Solutions | ${loc.demoPhoneDisplay}`;
     } else {
       // Default: 'No Luck' / Voicemail follow-up (Comprehensive Product & Revenue Breakdown)
-      subject = `After-hours calls at ${company} — Recovering $45k/mo & 20+ missed clients`;
+      subject = `After-hours calls at ${company} — Recovering ${loc.currencySymbol}45k/mo & 20+ missed clients`;
       body = `Hey ${owner},
 
 I just left a brief voicemail at ${company} regarding your inbound call capture across ${city}.
 
-HERE IS THE REALITY FOR FLORIDA ${trade.toUpperCase()} CONTRACTORS:
+HERE IS THE REALITY FOR ${marketTradeUpper} CONTRACTORS:
 Every month, an average of 18 to 35+ emergency calls drop to voicemail when your crew is on jobsites, driving, or after 5:00 PM. In our industry, 78% of homeowners never leave a message — they simply hang up and hire whichever competitor answers first.
 
-At an average ${trade} ticket of $1,800 to $4,500, that is $35,000 to $85,000+ in pure revenue walking straight out the door every single month.
+At an average ${trade} ticket of ${loc.ticketRange}, that is ${loc.monthlyRecoveryRange} in pure revenue walking straight out the door every single month.
 
 HERE IS WHAT VANTORX DOES FOR ${company}:
 
@@ -42510,18 +42658,18 @@ Automatically texts satisfied customers post-job to collect reviews and build lo
 
 THE BOTTOM-LINE NUMBERS FOR ${company}:
 • 15 to 30+ additional high-ticket booked clients every single month.
-• $35,000 to $85,000+ in recovered gross revenue previously lost to dead voicemail.
+• ${loc.monthlyRecoveryRange} in recovered gross revenue previously lost to dead voicemail.
 • Zero extra ad spend — you monetize the callers you are already paying to reach.
 
 TEST AVA LIVE ON YOUR PHONE:
-Dial our live demo line anytime at (561) 813-8602 to hear Ava answer on ring one.
+Dial our live demo line anytime at ${loc.demoPhoneDisplay} to hear Ava answer on ring one.
 
 Are you available for a quick 5-minute walkthrough this Thursday or Friday to see how this plugs into ${company}?
 
 Best regards,
 ${callerName}
 Founder, VantorX Solutions
-Direct: (561) 813-8602
+Direct: ${loc.demoPhoneDisplay}
 Email: ${myEmail}
 https://www.vantorxsolutions.com`;
     }
@@ -42531,7 +42679,7 @@ https://www.vantorxsolutions.com`;
 
   window.setCallLogEmailTemplate = function(templateType) {
     activeLogEmailTemplate = templateType;
-    const lead = LEADS_DATA.find(l => l.id === activeLogLeadId);
+    const lead = window.findLeadById(activeLogLeadId);
     if (!lead) return;
 
     // Update template toggle buttons
@@ -42579,7 +42727,7 @@ https://www.vantorxsolutions.com`;
 
   window.resetDefaultLeadEmail = function() {
     if (!activeLogLeadId) return;
-    const lead = LEADS_DATA.find(l => l.id === activeLogLeadId);
+    const lead = window.findLeadById(activeLogLeadId);
     if (!lead) return;
     const defaultEmail = lead.email || (lead.company ? (lead.company.toLowerCase().replace(/[^a-z0-9]/g, '') + '@gmail.com') : '');
     const input = document.getElementById('callLogEmailRecipient');
@@ -42609,7 +42757,7 @@ https://www.vantorxsolutions.com`;
   window.onVantorXSenderChange = function(alias) {
     localStorage.setItem('vantorx_sender_alias', alias);
     updateGmailStatusUI();
-    const lead = LEADS_DATA.find(l => l.id === activeLogLeadId);
+    const lead = window.findLeadById(activeLogLeadId);
     if (lead) {
       const emailData = generateCustomEmailContent(lead, activeLogEmailTemplate);
       const bodyEl = document.getElementById('callLogEmailBody');
@@ -42763,7 +42911,18 @@ https://www.vantorxsolutions.com`;
     const unmarkBtn = document.getElementById('btnUnmarkCallRecord');
 
     if (nameEl) nameEl.textContent = lead.company;
-    if (subEl) subEl.textContent = `ID #${lead.id} · ${lead.owner || lead.fullOwner || 'Decision Maker'} (${lead.title || ''}) · ${lead.city} · ${lead.phone}`;
+    const loc = window.resolveLeadLocationInfo(lead);
+
+    if (nameEl) nameEl.textContent = lead.company;
+    if (subEl) subEl.textContent = `ID #${lead.id} · ${lead.owner || lead.fullOwner || 'Decision Maker'} (${lead.title || ''}) · ${loc.fullLocation} · ${lead.phone}`;
+
+    // Update Target Location Banner
+    const locTextEl = document.getElementById('callLogTargetLocationText');
+    const marketBadgeEl = document.getElementById('callLogTargetMarketBadge');
+    const currBadgeEl = document.getElementById('callLogTargetCurrencyBadge');
+    if (locTextEl) locTextEl.textContent = loc.fullLocation;
+    if (marketBadgeEl) marketBadgeEl.textContent = loc.marketBadge;
+    if (currBadgeEl) currBadgeEl.textContent = `${loc.currencyCode} (${loc.currencySymbol.trim()})`;
     if (notesEl) notesEl.value = rec.notes || '';
 
     let currentOutcome = 'Success';
