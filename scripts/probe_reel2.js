@@ -1,6 +1,7 @@
 const { execSync } = require('child_process');
+const path = require('path');
 const ffmpeg = require('ffmpeg-static');
-const p = 'C:/Users/hungr/.gemini/antigravity/scratch/Vantorxsolutions/website/demo/video/vantorx-30s-reel-2.mp4';
+const p = path.resolve('website/demo/video/vantorx-nvidia-reel.mp4');
 
 try {
   // Use ffmpeg to get info
