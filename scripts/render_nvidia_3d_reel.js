@@ -32,7 +32,7 @@ const outNamedMp4 = path.join(root, 'website/demo/video/vantorx-nvidia-reel.mp4'
 const outSpeedMp4 = path.join(root, 'website/demo/video/vantorx-speed-to-lead-reel.mp4');
 
 const tsData = JSON.parse(fs.readFileSync(tsJsonPath, 'utf8'));
-const TOTAL_SEC = 75.1;
+const TOTAL_SEC = Number(tsData.duration || 74.3);
 const FPS = 30;
 const W = 1080;
 const H = 1920;
@@ -1573,10 +1573,22 @@ const tmpHtmlPath = path.join(root, 'scripts/tmp_3d_nvidia.html');
 fs.writeFileSync(tmpHtmlPath, htmlContent, 'utf8');
 
 async function renderVideo() {
+  const userDataDir = path.join(root, '.cache/edge_profile_3d');
+  if (!fs.existsSync(userDataDir)) fs.mkdirSync(userDataDir, { recursive: true });
+
   const browser = await puppeteer.launch({
     executablePath: EDGE_PATH,
     headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-web-security']
+    userDataDir: userDataDir,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--allow-file-access-from-files',
+      '--disable-web-security',
+      '--disable-gpu-shader-disk-cache',
+      '--disable-gpu-program-cache'
+    ]
   });
 
   const page = await browser.newPage();
@@ -1608,14 +1620,22 @@ async function renderVideo() {
   const ff = spawn(ffmpegPath, ffArgs, { stdio: ['pipe', 'ignore', 'pipe'] });
   let ffErr = '';
   ff.stderr.on('data', d => ffErr += d.toString());
+  let stdinClosed = false;
+  ff.stdin.on('error', () => { stdinClosed = true; });
 
   const startTime = Date.now();
   for (let f = 0; f < totalFrames; f++) {
+    if (stdinClosed) break;
     const t = f / FPS;
     await page.evaluate((tm) => window.renderFrame(tm), t);
-    const buf = await page.screenshot({ type: 'jpeg', quality: 90 });
-    if (!ff.stdin.write(buf)) {
-      await new Promise(res => ff.stdin.once('drain', res));
+    const buf = await page.screenshot({ type: 'jpeg', quality: 85 });
+    if (stdinClosed) break;
+    try {
+      if (!ff.stdin.write(buf)) {
+        await new Promise(res => ff.stdin.once('drain', res));
+      }
+    } catch (e) {
+      break;
     }
     if (f % 60 === 0 || f === totalFrames - 1) {
       const pct = ((f / totalFrames) * 100).toFixed(0);
@@ -1624,13 +1644,14 @@ async function renderVideo() {
     }
   }
 
-  ff.stdin.end();
+  try { ff.stdin.end(); } catch (e) {}
   await new Promise((resolve, reject) => {
     ff.on('close', code => code === 0 ? resolve() : reject(new Error(ffErr)));
   });
 
   await browser.close();
   try { fs.unlinkSync(tmpHtmlPath); } catch (e) {}
+  try { fs.rmSync(userDataDir, { recursive: true, force: true }); } catch (e) {}
 
   // Duplicate to outNamedMp4, outSpeedMp4 and Artifact Directory
   fs.copyFileSync(outMp4Path, outNamedMp4);
