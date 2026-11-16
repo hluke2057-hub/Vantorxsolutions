@@ -1,0 +1,526 @@
+{
+  "text": "It’s one hundred and thirty degrees on this roof. Your hands are locked on a two-hundred-pound compressor.\nAnd your phone is screaming. A frantic homeowner with a dead A-C unit. If you let go, the equipment drops. If you don't answer, she calls your competitor.\nMeet AVA. She answers in point eight seconds, speaks with calm professional empathy, and locks the emergency dispatch while you keep working.\nYou finish the job. Check your phone. The five-thousand-dollar replacement is already on your calendar.\nNever lose a high-ticket job to voicemail again. Call the number on your screen to test AVA live, or comment AVA below.",
+  "duration": 43.096,
+  "words": [
+    {
+      "word": "It’s",
+      "start": 0,
+      "end": 0.209
+    },
+    {
+      "word": "one",
+      "start": 0.267,
+      "end": 0.441
+    },
+    {
+      "word": "hundred",
+      "start": 0.488,
+      "end": 0.755
+    },
+    {
+      "word": "and",
+      "start": 0.778,
+      "end": 0.859
+    },
+    {
+      "word": "thirty",
+      "start": 0.906,
+      "end": 1.138
+    },
+    {
+      "word": "degrees",
+      "start": 1.196,
+      "end": 1.591
+    },
+    {
+      "word": "on",
+      "start": 1.649,
+      "end": 1.718
+    },
+    {
+      "word": "this",
+      "start": 1.765,
+      "end": 1.892
+    },
+    {
+      "word": "roof.",
+      "start": 1.962,
+      "end": 2.368
+    },
+    {
+      "word": "Your",
+      "start": 2.81,
+      "end": 3.019
+    },
+    {
+      "word": "hands",
+      "start": 3.088,
+      "end": 3.402
+    },
+    {
+      "word": "are",
+      "start": 3.437,
+      "end": 3.541
+    },
+    {
+      "word": "locked",
+      "start": 3.599,
+      "end": 3.936
+    },
+    {
+      "word": "on",
+      "start": 3.994,
+      "end": 4.098
+    },
+    {
+      "word": "a",
+      "start": 4.145,
+      "end": 4.168
+    },
+    {
+      "word": "two-hundred-pound",
+      "start": 4.238,
+      "end": 5.108
+    },
+    {
+      "word": "compressor.",
+      "start": 5.166,
+      "end": 5.909
+    },
+    {
+      "word": "And",
+      "start": 6.235,
+      "end": 6.385
+    },
+    {
+      "word": "your",
+      "start": 6.432,
+      "end": 6.56
+    },
+    {
+      "word": "phone",
+      "start": 6.618,
+      "end": 7.024
+    },
+    {
+      "word": "is",
+      "start": 7.082,
+      "end": 7.175
+    },
+    {
+      "word": "screaming.",
+      "start": 7.245,
+      "end": 7.895
+    },
+    {
+      "word": "A",
+      "start": 8.336,
+      "end": 8.417
+    },
+    {
+      "word": "frantic",
+      "start": 8.51,
+      "end": 8.905
+    },
+    {
+      "word": "homeowner",
+      "start": 8.963,
+      "end": 9.497
+    },
+    {
+      "word": "with",
+      "start": 9.555,
+      "end": 9.694
+    },
+    {
+      "word": "a",
+      "start": 9.741,
+      "end": 9.764
+    },
+    {
+      "word": "dead",
+      "start": 9.845,
+      "end": 10.077
+    },
+    {
+      "word": "A-C",
+      "start": 10.159,
+      "end": 10.6
+    },
+    {
+      "word": "unit.",
+      "start": 10.716,
+      "end": 11.169
+    },
+    {
+      "word": "If",
+      "start": 11.552,
+      "end": 11.68
+    },
+    {
+      "word": "you",
+      "start": 11.714,
+      "end": 11.784
+    },
+    {
+      "word": "let",
+      "start": 11.865,
+      "end": 12.016
+    },
+    {
+      "word": "go,",
+      "start": 12.074,
+      "end": 12.469
+    },
+    {
+      "word": "the",
+      "start": 12.597,
+      "end": 12.713
+    },
+    {
+      "word": "equipment",
+      "start": 12.783,
+      "end": 13.201
+    },
+    {
+      "word": "drops.",
+      "start": 13.235,
+      "end": 13.897
+    },
+    {
+      "word": "If",
+      "start": 14.28,
+      "end": 14.408
+    },
+    {
+      "word": "you",
+      "start": 14.454,
+      "end": 14.524
+    },
+    {
+      "word": "don't",
+      "start": 14.582,
+      "end": 14.803
+    },
+    {
+      "word": "answer,",
+      "start": 14.861,
+      "end": 15.314
+    },
+    {
+      "word": "she",
+      "start": 15.464,
+      "end": 15.604
+    },
+    {
+      "word": "calls",
+      "start": 15.662,
+      "end": 15.964
+    },
+    {
+      "word": "your",
+      "start": 16.01,
+      "end": 16.126
+    },
+    {
+      "word": "competitor.",
+      "start": 16.184,
+      "end": 16.951
+    },
+    {
+      "word": "Meet",
+      "start": 17.125,
+      "end": 17.392
+    },
+    {
+      "word": "AVA.",
+      "start": 17.473,
+      "end": 18.46
+    },
+    {
+      "word": "She",
+      "start": 18.843,
+      "end": 18.994
+    },
+    {
+      "word": "answers",
+      "start": 19.075,
+      "end": 19.435
+    },
+    {
+      "word": "in",
+      "start": 19.493,
+      "end": 19.574
+    },
+    {
+      "word": "point",
+      "start": 19.656,
+      "end": 19.911
+    },
+    {
+      "word": "eight",
+      "start": 19.981,
+      "end": 20.178
+    },
+    {
+      "word": "seconds,",
+      "start": 20.248,
+      "end": 20.851
+    },
+    {
+      "word": "speaks",
+      "start": 21.026,
+      "end": 21.397
+    },
+    {
+      "word": "with",
+      "start": 21.444,
+      "end": 21.595
+    },
+    {
+      "word": "calm",
+      "start": 21.664,
+      "end": 22.012
+    },
+    {
+      "word": "professional",
+      "start": 22.082,
+      "end": 22.639
+    },
+    {
+      "word": "empathy,",
+      "start": 22.709,
+      "end": 23.301
+    },
+    {
+      "word": "and",
+      "start": 23.475,
+      "end": 23.626
+    },
+    {
+      "word": "locks",
+      "start": 23.742,
+      "end": 24.056
+    },
+    {
+      "word": "the",
+      "start": 24.102,
+      "end": 24.184
+    },
+    {
+      "word": "emergency",
+      "start": 24.253,
+      "end": 24.764
+    },
+    {
+      "word": "dispatch",
+      "start": 24.834,
+      "end": 25.31
+    },
+    {
+      "word": "while",
+      "start": 25.345,
+      "end": 25.53
+    },
+    {
+      "word": "you",
+      "start": 25.577,
+      "end": 25.67
+    },
+    {
+      "word": "keep",
+      "start": 25.751,
+      "end": 25.936
+    },
+    {
+      "word": "working.",
+      "start": 25.994,
+      "end": 26.575
+    },
+    {
+      "word": "You",
+      "start": 27.272,
+      "end": 27.399
+    },
+    {
+      "word": "finish",
+      "start": 27.515,
+      "end": 27.806
+    },
+    {
+      "word": "the",
+      "start": 27.875,
+      "end": 27.945
+    },
+    {
+      "word": "job.",
+      "start": 28.003,
+      "end": 28.549
+    },
+    {
+      "word": "Check",
+      "start": 28.932,
+      "end": 29.141
+    },
+    {
+      "word": "your",
+      "start": 29.187,
+      "end": 29.292
+    },
+    {
+      "word": "phone.",
+      "start": 29.315,
+      "end": 29.849
+    },
+    {
+      "word": "The",
+      "start": 30.453,
+      "end": 30.569
+    },
+    {
+      "word": "five-thousand-dollar",
+      "start": 30.638,
+      "end": 31.556
+    },
+    {
+      "word": "replacement",
+      "start": 31.614,
+      "end": 32.159
+    },
+    {
+      "word": "is",
+      "start": 32.206,
+      "end": 32.287
+    },
+    {
+      "word": "already",
+      "start": 32.357,
+      "end": 32.751
+    },
+    {
+      "word": "on",
+      "start": 32.833,
+      "end": 32.926
+    },
+    {
+      "word": "your",
+      "start": 32.972,
+      "end": 33.077
+    },
+    {
+      "word": "calendar.",
+      "start": 33.111,
+      "end": 33.75
+    },
+    {
+      "word": "Never",
+      "start": 34.354,
+      "end": 34.609
+    },
+    {
+      "word": "lose",
+      "start": 34.667,
+      "end": 34.911
+    },
+    {
+      "word": "a",
+      "start": 34.946,
+      "end": 34.981
+    },
+    {
+      "word": "high-ticket",
+      "start": 35.05,
+      "end": 35.561
+    },
+    {
+      "word": "job",
+      "start": 35.619,
+      "end": 35.898
+    },
+    {
+      "word": "to",
+      "start": 35.967,
+      "end": 36.026
+    },
+    {
+      "word": "voicemail",
+      "start": 36.095,
+      "end": 36.618
+    },
+    {
+      "word": "again.",
+      "start": 36.676,
+      "end": 37.233
+    },
+    {
+      "word": "Call",
+      "start": 37.93,
+      "end": 38.185
+    },
+    {
+      "word": "the",
+      "start": 38.255,
+      "end": 38.324
+    },
+    {
+      "word": "number",
+      "start": 38.359,
+      "end": 38.591
+    },
+    {
+      "word": "on",
+      "start": 38.649,
+      "end": 38.719
+    },
+    {
+      "word": "your",
+      "start": 38.765,
+      "end": 38.87
+    },
+    {
+      "word": "screen",
+      "start": 38.905,
+      "end": 39.265
+    },
+    {
+      "word": "to",
+      "start": 39.334,
+      "end": 39.404
+    },
+    {
+      "word": "test",
+      "start": 39.474,
+      "end": 39.764
+    },
+    {
+      "word": "AVA",
+      "start": 39.845,
+      "end": 40.321
+    },
+    {
+      "word": "live,",
+      "start": 40.437,
+      "end": 41.006
+    },
+    {
+      "word": "or",
+      "start": 41.18,
+      "end": 41.32
+    },
+    {
+      "word": "comment",
+      "start": 41.389,
+      "end": 41.772
+    },
+    {
+      "word": "AVA",
+      "start": 41.842,
+      "end": 42.295
+    },
+    {
+      "word": "below.",
+      "start": 42.376,
+      "end": 43.096
+    }
+  ]
+}
