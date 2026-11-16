@@ -1,11 +1,19 @@
-// scripts/render_cueva_nvidia_reel.js
-// VantorX Viral Reel: "Nvidia's CEO Cheated" (75.1s Master Cut)
-// - Slow, gradual curiosity hook (0s - 15.5s)
-// - 1995 Sega $5M story & ruthless automation (15.5s - 33.5s)
-// - Reality check: -$8k/wk Voicemail Graveyard (33.5s - 46.1s)
-// - Seamless cut to AVA Voice AI + Sub-Second Mobile Website + Live CTA (46.1s - 75.1s)
-// - Non-stop continuous camera motion (dollies, pans, punch-ins, rumble kicks)
-// - Zero static standing, continuous cutaways, 45 floating ambient particles, 18+ tactile Foley SFX
+// scripts/render_nvidia_3d_reel.js
+// VantorX 3D Motion Graphics Reel: "Nvidia's Secret / Jensen Huang 1995" (75.1s Master Cut)
+// Features:
+// - True 3D Isometric Projection Engine (3D Matrix Math, Depth Sorting, Directional Lighting)
+// - Continuous 3D Camera Momentum (Dollies, 3D Orbits, Roll, Cinematic Tilts, Impact Shakes)
+// - 3D Rotating Silicon GPU Die with Gold Pins, Circuit Pulses & Nvidia Emblems
+// - 3D Shattering Polygon Shards & Explosive Dynamics
+// - 3D Holographic Boardroom Table & Rotating $5M Check
+// - 3D Interlocking Automation Gears & Fiber Optic Data Streams
+// - 3D Vibrating Smartphone with Incoming Emergency Call & Voicemail Bleed
+// - 3D Disintegrating Dollar Stacks (-$8,000 Cash Bleed)
+// - 3D AVA Voice AI Reactor (Triple-Axis Gyroscope Rings + 3D Neural Sphere)
+// - 3D Sub-Second Response Speedometer (0.8s Slam)
+// - 3D Glassmorphic Dispatch Cards Flying in Perspective
+// - 3D Live Phone Dialer ((561) 813-8602) & Pulsing "Comment AVA" CTA
+// - Kinetic Hormozi-Style Captions Synced to Word Timestamps
 
 const fs = require('fs');
 const path = require('path');
@@ -15,20 +23,21 @@ const ffmpegPath = require('ffmpeg-static');
 
 const root = 'C:/Users/hungr/.gemini/antigravity/scratch/Vantorxsolutions';
 const EDGE_PATH = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-const ARTIFACT_DIR = 'C:\\Users\\hungr\\.gemini\\antigravity\\brain\\b805e771-e1c1-4976-afc1-cd59dd49eae0';
+const ARTIFACT_DIR = 'C:\\Users\\hungr\\.gemini\\antigravity\\brain\\80451426-584a-4969-8d9c-573a8dd3a27d';
 
 const audioPath = path.join(root, 'website/demo/audio/reel-nvidia-master.wav');
 const tsJsonPath = path.join(root, 'website/demo/audio/reel-nvidia-timestamps.json');
 const outMp4Path = path.join(root, 'website/demo/video/vantorx-30s-reel-2.mp4');
 const outNamedMp4 = path.join(root, 'website/demo/video/vantorx-nvidia-reel.mp4');
+const outSpeedMp4 = path.join(root, 'website/demo/video/vantorx-speed-to-lead-reel.mp4');
 
 const tsData = JSON.parse(fs.readFileSync(tsJsonPath, 'utf8'));
-const TOTAL_SEC = 75.1; // Full 75.1s master audio duration
+const TOTAL_SEC = 75.1;
 const FPS = 30;
 const W = 1080;
 const H = 1920;
 
-console.log(`Starting High-Fidelity 75s Cueva Reel Render: ${TOTAL_SEC}s (${tsData.words.length} words, ${Math.ceil(TOTAL_SEC * FPS)} frames)`);
+console.log(`Starting 3D Motion Graphics Reel Render: ${TOTAL_SEC}s (${tsData.words.length} words, ${Math.ceil(TOTAL_SEC * FPS)} frames)`);
 
 const htmlContent = `<!DOCTYPE html>
 <html>
@@ -36,7 +45,7 @@ const htmlContent = `<!DOCTYPE html>
   <meta charset="utf-8">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 1080px; height: 1920px; }
+    body { background: #04060d; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 1080px; height: 1920px; }
     canvas { width: 1080px; height: 1920px; image-rendering: -webkit-optimize-contrast; }
   </style>
 </head>
@@ -48,20 +57,97 @@ const htmlContent = `<!DOCTYPE html>
     const WORDS = ${JSON.stringify(tsData.words)};
     const W = 1080, H = 1920;
 
-    // Deterministic ambient floating particles (45 particles)
-    const PARTICLES = [];
-    for (let i = 0; i < 45; i++) {
-      PARTICLES.push({
-        baseX: (i * 12347) % W,
-        baseY: (i * 31415) % H,
-        speedX: 12 + (i % 5) * 8,
-        speedY: -18 - (i % 7) * 9,
-        r: 2.5 + (i % 4) * 2,
-        color: (i % 3 === 0) ? 'rgba(250, 204, 21, 0.45)' : (i % 3 === 1) ? 'rgba(56, 189, 248, 0.35)' : 'rgba(74, 222, 128, 0.4)'
+    // ==========================================
+    // 3D MATH & PROJECTION ENGINE
+    // ==========================================
+    const FOV = 1000;
+
+    // 3D Point Rotation & Camera Projection
+    function project3D(pt, cam) {
+      // 1. World space to Camera space translation
+      let x = pt.x - cam.x;
+      let y = pt.y - cam.y;
+      let z = pt.z - cam.z;
+
+      // 2. Yaw (around Y axis)
+      if (cam.yaw) {
+        const cosY = Math.cos(cam.yaw), sinY = Math.sin(cam.yaw);
+        const nx = x * cosY - z * sinY;
+        const nz = x * sinY + z * cosY;
+        x = nx; z = nz;
+      }
+
+      // 3. Pitch (around X axis)
+      if (cam.pitch) {
+        const cosP = Math.cos(cam.pitch), sinP = Math.sin(cam.pitch);
+        const ny = y * cosP - z * sinP;
+        const nz = y * sinP + z * cosP;
+        y = ny; z = nz;
+      }
+
+      // 4. Roll (around Z axis)
+      if (cam.roll) {
+        const cosR = Math.cos(cam.roll), sinR = Math.sin(cam.roll);
+        const nx = x * cosR - y * sinR;
+        const ny = x * sinR + y * cosR;
+        x = nx; y = ny;
+      }
+
+      // 5. Perspective projection
+      const effZ = z + FOV;
+      if (effZ <= 20) return null; // Behind camera
+      const scale = FOV / effZ;
+      return {
+        sx: W / 2 + x * scale,
+        sy: H / 2 + y * scale,
+        scale: scale,
+        depth: z
+      };
+    }
+
+    // Rotate a 3D point around local origin [rx, ry, rz]
+    function rotatePoint(p, rx, ry, rz) {
+      let x = p.x, y = p.y, z = p.z;
+      // Rot X
+      if (rx) {
+        const c = Math.cos(rx), s = Math.sin(rx);
+        const ny = y * c - z * s;
+        const nz = y * s + z * c;
+        y = ny; z = nz;
+      }
+      // Rot Y
+      if (ry) {
+        const c = Math.cos(ry), s = Math.sin(ry);
+        const nx = x * c + z * s;
+        const nz = -x * s + z * c;
+        x = nx; z = nz;
+      }
+      // Rot Z
+      if (rz) {
+        const c = Math.cos(rz), s = Math.sin(rz);
+        const nx = x * c - y * s;
+        const ny = x * s + y * c;
+        x = nx; y = ny;
+      }
+      return { x, y, z };
+    }
+
+    // Deterministic 3D Ambient Dust Particles (70 particles)
+    const DUST = [];
+    for (let i = 0; i < 70; i++) {
+      DUST.push({
+        x: ((i * 12347) % 2400) - 1200,
+        y: ((i * 31415) % 3200) - 1600,
+        z: ((i * 54321) % 2200) - 400,
+        speedX: 18 + (i % 5) * 12,
+        speedY: -25 - (i % 7) * 15,
+        speedZ: (i % 3 === 0 ? 30 : -20),
+        r: 3 + (i % 4) * 2.5,
+        color: (i % 4 === 0) ? '#00f0ff' : (i % 4 === 1) ? '#22c55e' : (i % 4 === 2) ? '#facc15' : '#a855f7'
       });
     }
 
-    // Helper: Rounded Rectangle
+    // Helper: Draw Rounded Rectangle
     function drawRoundBox(ctx, x, y, w, h, r, fillColor, strokeColor, lineW = 2) {
       ctx.beginPath();
       if (typeof ctx.roundRect === 'function') {
@@ -83,135 +169,1124 @@ const htmlContent = `<!DOCTYPE html>
       if (strokeColor) { ctx.strokeStyle = strokeColor; ctx.lineWidth = lineW; ctx.stroke(); }
     }
 
-    // Camera rumble / screen-shake impulses calculated from exact SFX hits
-    function getCameraTransform(t) {
-      // Base continuous slow cinematic dolly push
-      let scale = 1.0 + Math.sin(t * 0.28) * 0.035;
-      let offsetX = Math.cos(t * 0.42) * 14;
-      let offsetY = Math.sin(t * 0.35) * 10;
-      let rot = Math.sin(t * 0.25) * 0.004;
+    // ==========================================
+    // 3D RENDERING COMPONENTS
+    // ==========================================
 
-      // Rumble impulse triggers
-      const triggers = [0.0, 5.13, 12.06, 15.48, 20.0, 27.36, 34.25, 38.02, 44.59, 46.14, 50.67, 58.72, 66.28];
-      triggers.forEach(trig => {
+    // 1. Infinite 3D Cyber Floor Grid
+    function render3DGrid(cam, t, gridRGB = { r: 0, g: 240, b: 255 }, horizonY = 320) {
+      ctx.save();
+      const floorY = 560; // 3D world height of floor
+      const gridSpacing = 160;
+      const numLinesX = 18;
+      const zStart = 0;
+      const zEnd = 2400;
+      const zOffset = (t * 420) % gridSpacing;
+
+      // Longitudinal lines (Z-direction)
+      for (let ix = -numLinesX / 2; ix <= numLinesX / 2; ix++) {
+        const wx = ix * gridSpacing;
+        const p1 = project3D({ x: wx, y: floorY, z: zStart }, cam);
+        const p2 = project3D({ x: wx, y: floorY, z: zEnd }, cam);
+        if (p1 && p2) {
+          const alpha = 0.35 * (1 - Math.abs(ix) / (numLinesX / 2));
+          ctx.strokeStyle = 'rgba(' + gridRGB.r + ',' + gridRGB.g + ',' + gridRGB.b + ',' + alpha + ')';
+          ctx.lineWidth = Math.max(1, 2.5 * p1.scale);
+          ctx.beginPath();
+          ctx.moveTo(p1.sx, p1.sy);
+          ctx.lineTo(p2.sx, p2.sy);
+          ctx.stroke();
+        }
+      }
+
+      // Latitudinal lines (X-direction)
+      for (let z = zStart - zOffset; z <= zEnd; z += gridSpacing) {
+        if (z < 10) continue;
+        const leftP = project3D({ x: -1600, y: floorY, z: z }, cam);
+        const rightP = project3D({ x: 1600, y: floorY, z: z }, cam);
+        if (leftP && rightP) {
+          const depthFade = Math.max(0, 1 - (z / zEnd));
+          ctx.strokeStyle = 'rgba(' + gridRGB.r + ',' + gridRGB.g + ',' + gridRGB.b + ',' + (depthFade * 0.45) + ')';
+          ctx.lineWidth = Math.max(1, 2 * leftP.scale);
+          ctx.beginPath();
+          ctx.moveTo(leftP.sx, leftP.sy);
+          ctx.lineTo(rightP.sx, rightP.sy);
+          ctx.stroke();
+        }
+      }
+
+      // Glowing horizon streak
+      const horiz = project3D({ x: 0, y: floorY, z: zEnd }, cam);
+      if (horiz) {
+        const hGrad = ctx.createLinearGradient(0, horiz.sy - 80, 0, horiz.sy + 120);
+        hGrad.addColorStop(0, 'rgba(0, 240, 255, 0)');
+        hGrad.addColorStop(0.5, 'rgba(0, 240, 255, 0.35)');
+        hGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = hGrad;
+        ctx.fillRect(0, horiz.sy - 80, W, 200);
+      }
+      ctx.restore();
+    }
+
+    // 2. 3D Floating Dust & Cyber Light Orbs
+    function render3DDust(cam, t) {
+      ctx.save();
+      DUST.forEach(p => {
+        const curX = ((p.x + t * p.speedX) % 2400 + 2400) % 2400 - 1200;
+        const curY = ((p.y + t * p.speedY) % 3200 + 3200) % 3200 - 1600;
+        const curZ = ((p.z + t * p.speedZ) % 2200 + 2200) % 2200 - 400;
+
+        const proj = project3D({ x: curX, y: curY, z: curZ }, cam);
+        if (proj && proj.scale > 0) {
+          const r = Math.max(1, p.r * proj.scale);
+          const alpha = Math.min(0.85, 0.3 + proj.scale * 0.5);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = alpha;
+          ctx.beginPath();
+          ctx.arc(proj.sx, proj.sy, r, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Glow halo for larger particles
+          if (r > 3) {
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = alpha * 0.3;
+            ctx.beginPath();
+            ctx.arc(proj.sx, proj.sy, r * 2.8, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      });
+      ctx.globalAlpha = 1.0;
+      ctx.restore();
+    }
+
+    // 3. 3D Silicon Microchip (Nvidia GPU NV1 Die)
+    function render3DMicrochip(center, rx, ry, rz, cam, t, opts = {}) {
+      const {
+        chipSize = 340,
+        thickness = 46,
+        isCracking = false,
+        crackProgress = 0,
+        highlightText = 'NVIDIA NV1',
+        subText = '3nm TENSOR DIE'
+      } = opts;
+
+      const half = chipSize / 2;
+      const th = thickness / 2;
+
+      // Define local 8 vertices of the chip box
+      const localVerts = [
+        { x: -half, y: -half, z: -th }, // 0: Top-Left-Front
+        { x: half, y: -half, z: -th },  // 1: Top-Right-Front
+        { x: half, y: half, z: -th },   // 2: Bot-Right-Front
+        { x: -half, y: half, z: -th },  // 3: Bot-Left-Front
+        { x: -half, y: -half, z: th },  // 4: Top-Left-Back
+        { x: half, y: -half, z: th },   // 5: Top-Right-Back
+        { x: half, y: half, z: th },    // 6: Bot-Right-Back
+        { x: -half, y: half, z: th }    // 7: Bot-Left-Back
+      ];
+
+      // Rotate and translate vertices
+      const worldVerts = localVerts.map(v => {
+        const rot = rotatePoint(v, rx, ry, rz);
+        return {
+          x: center.x + rot.x,
+          y: center.y + rot.y,
+          z: center.z + rot.z
+        };
+      });
+
+      // Project vertices
+      const proj = worldVerts.map(v => project3D(v, cam));
+      if (proj.some(p => p === null)) return;
+
+      // Define 6 faces with normal vectors for lighting
+      const faces = [
+        { indices: [0, 1, 2, 3], normal: { x: 0, y: 0, z: -1 }, type: 'front' },
+        { indices: [5, 4, 7, 6], normal: { x: 0, y: 0, z: 1 },  type: 'back' },
+        { indices: [4, 5, 1, 0], normal: { x: 0, y: -1, z: 0 }, type: 'top' },
+        { indices: [3, 2, 6, 7], normal: { x: 0, y: 1, z: 0 },  type: 'bottom' },
+        { indices: [4, 0, 3, 7], normal: { x: -1, y: 0, z: 0 }, type: 'left' },
+        { indices: [1, 5, 6, 2], normal: { x: 1, y: 0, z: 0 },  type: 'right' }
+      ];
+
+      // Light source in camera space: from top-right-front
+      const lightDir = { x: 0.5, y: -0.7, z: -0.8 };
+      const lightLen = Math.hypot(lightDir.x, lightDir.y, lightDir.z);
+      lightDir.x /= lightLen; lightDir.y /= lightLen; lightDir.z /= lightLen;
+
+      // Calculate face centers for depth sorting
+      faces.forEach(f => {
+        const rotNorm = rotatePoint(f.normal, rx, ry, rz);
+        f.worldNormal = rotNorm;
+        // Dot product with camera vector (view vector ~ z)
+        f.dotCam = rotNorm.z;
+        // Calculate average depth
+        let sumZ = 0;
+        f.indices.forEach(idx => sumZ += worldVerts[idx].z);
+        f.avgZ = sumZ / 4;
+        // Light intensity
+        const dotLight = -(rotNorm.x * lightDir.x + rotNorm.y * lightDir.y + rotNorm.z * lightDir.z);
+        f.light = Math.max(0.18, (dotLight + 1) * 0.5);
+      });
+
+      // Sort faces by depth (back to front)
+      faces.sort((a, b) => b.avgZ - a.avgZ);
+
+      // Render each face
+      faces.forEach(face => {
+        const p0 = proj[face.indices[0]];
+        const p1 = proj[face.indices[1]];
+        const p2 = proj[face.indices[2]];
+        const p3 = proj[face.indices[3]];
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(p0.sx, p0.sy);
+        ctx.lineTo(p1.sx, p1.sy);
+        ctx.lineTo(p2.sx, p2.sy);
+        ctx.lineTo(p3.sx, p3.sy);
+        ctx.closePath();
+
+        if (face.type === 'front') {
+          // Top silicon surface: Dark obsidian mirrored die with green neon circuit patterns
+          const grad = ctx.createLinearGradient(p0.sx, p0.sy, p2.sx, p2.sy);
+          grad.addColorStop(0, '#0c151c');
+          grad.addColorStop(0.5, '#070b10');
+          grad.addColorStop(1, '#020406');
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          // Glowing border
+          ctx.strokeStyle = isCracking ? '#ef4444' : '#22c55e';
+          ctx.lineWidth = Math.max(2, 4 * p0.scale);
+          ctx.stroke();
+
+          // Silicon circuit bus lines (animated energy pulses)
+          ctx.strokeStyle = isCracking ? 'rgba(239, 68, 68, 0.45)' : 'rgba(34, 197, 94, 0.55)';
+          ctx.lineWidth = Math.max(1, 2 * p0.scale);
+          const centerSx = (p0.sx + p2.sx) / 2;
+          const centerSy = (p0.sy + p2.sy) / 2;
+
+          // Radial circuit rings on die
+          for (let r = 20; r <= 110; r += 28) {
+            const scaledR = r * p0.scale;
+            ctx.beginPath();
+            ctx.arc(centerSx, centerSy, scaledR, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+
+          // Circuit bus traces pulsing
+          const pulseOffset = (t * 8) % 1;
+          for (let a = 0; a < 8; a++) {
+            const ang = (a * Math.PI / 4) + t * 0.4;
+            const x1 = centerSx + Math.cos(ang) * (30 * p0.scale);
+            const y1 = centerSy + Math.sin(ang) * (30 * p0.scale);
+            const x2 = centerSx + Math.cos(ang) * (130 * p0.scale);
+            const y2 = centerSy + Math.sin(ang) * (130 * p0.scale);
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+
+            // Pulsing photon node
+            const px = x1 + (x2 - x1) * pulseOffset;
+            const py = y1 + (y2 - y1) * pulseOffset;
+            ctx.fillStyle = isCracking ? '#ff7878' : '#86efac';
+            ctx.beginPath();
+            ctx.arc(px, py, 3.5 * p0.scale, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          // Center Nvidia / Titan Typography
+          ctx.save();
+          ctx.translate(centerSx, centerSy);
+          const angle2D = Math.atan2(p1.sy - p0.sy, p1.sx - p0.sx);
+          ctx.rotate(angle2D);
+
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.font = "900 " + Math.round(28 * p0.scale) + "px Arial, sans-serif";
+          ctx.fillStyle = isCracking ? '#fca5a5' : '#ffffff';
+          ctx.shadowColor = isCracking ? '#ef4444' : '#22c55e';
+          ctx.shadowBlur = 12 * p0.scale;
+          ctx.fillText(highlightText, 0, -10 * p0.scale);
+
+          ctx.font = "800 " + Math.round(15 * p0.scale) + "px Arial, sans-serif";
+          ctx.fillStyle = isCracking ? '#ef4444' : '#4ade80';
+          ctx.shadowBlur = 0;
+          ctx.fillText(subText, 0, 16 * p0.scale);
+          ctx.restore();
+
+          // If cracking, draw jagged fracture fissures
+          if (isCracking && crackProgress > 0) {
+            ctx.strokeStyle = '#ff2222';
+            ctx.shadowColor = '#ff0000';
+            ctx.shadowBlur = 24 * p0.scale;
+            ctx.lineWidth = Math.max(3, 8 * p0.scale * crackProgress);
+            ctx.beginPath();
+            ctx.moveTo(centerSx - 130 * p0.scale, centerSy - 80 * p0.scale);
+            ctx.lineTo(centerSx - 20 * p0.scale, centerSy - 10 * p0.scale);
+            ctx.lineTo(centerSx + 30 * p0.scale, centerSy + 20 * p0.scale);
+            ctx.lineTo(centerSx + 140 * p0.scale, centerSy + 90 * p0.scale);
+            ctx.stroke();
+          }
+        } else {
+          // Side bevel faces with metallic gold interconnect pins
+          const baseCol = (face.type === 'top' || face.type === 'bottom') ? '#1e293b' : '#0f172a';
+          ctx.fillStyle = baseCol;
+          ctx.fill();
+
+          // Metallic bevel highlight
+          ctx.strokeStyle = "rgba(250, 204, 21, " + (0.4 * face.light) + ")";
+          ctx.lineWidth = Math.max(1, 2.5 * p0.scale);
+          ctx.stroke();
+
+          // Gold contact pins on side faces
+          const numPins = 8;
+          ctx.fillStyle = "rgba(234, 179, 8, " + (0.85 * face.light) + ")";
+          for (let i = 1; i < numPins; i++) {
+            const factor = i / numPins;
+            const pinX = p0.sx + (p1.sx - p0.sx) * factor;
+            const pinY = p0.sy + (p1.sy - p0.sy) * factor;
+            const pinW = (p3.sx - p0.sx) * 0.45;
+            const pinH = (p3.sy - p0.sy) * 0.45;
+            ctx.beginPath();
+            ctx.arc(pinX + pinW / 2, pinY + pinH / 2, 2.5 * p0.scale, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        ctx.restore();
+      });
+    }
+
+    // 4. 3D Shattered Shards Explosion (Act 2 Failure)
+    function render3DShards(center, progress, cam, t) {
+      ctx.save();
+      const numShards = 24;
+      for (let i = 0; i < numShards; i++) {
+        const seed = i * 17.38;
+        const angle = (i / numShards) * Math.PI * 2 + seed;
+        const speed = 400 + (i % 7) * 90;
+        const dist = progress * speed;
+
+        const shardWorld = {
+          x: center.x + Math.cos(angle) * dist + (i % 3 - 1) * 60,
+          y: center.y + Math.sin(angle) * dist * 0.7 + progress * 240, // gravity drop
+          z: center.z - progress * 600 + Math.sin(seed) * 200 // fly toward camera
+        };
+
+        const shardRot = {
+          rx: t * 5 + i,
+          ry: t * 4 + i * 2,
+          rz: t * 6 + i * 3
+        };
+
+        const size = (24 + (i % 5) * 12) * (1 - progress * 0.35);
+        const p1 = project3D({
+          x: shardWorld.x + rotatePoint({ x: -size, y: -size, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).x,
+          y: shardWorld.y + rotatePoint({ x: -size, y: -size, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).y,
+          z: shardWorld.z + rotatePoint({ x: -size, y: -size, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).z
+        }, cam);
+        const p2 = project3D({
+          x: shardWorld.x + rotatePoint({ x: size, y: -size * 0.5, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).x,
+          y: shardWorld.y + rotatePoint({ x: size, y: -size * 0.5, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).y,
+          z: shardWorld.z + rotatePoint({ x: size, y: -size * 0.5, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).z
+        }, cam);
+        const p3 = project3D({
+          x: shardWorld.x + rotatePoint({ x: 0, y: size, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).x,
+          y: shardWorld.y + rotatePoint({ x: 0, y: size, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).y,
+          z: shardWorld.z + rotatePoint({ x: 0, y: size, z: 0 }, shardRot.rx, shardRot.ry, shardRot.rz).z
+        }, cam);
+
+        if (p1 && p2 && p3) {
+          ctx.beginPath();
+          ctx.moveTo(p1.sx, p1.sy);
+          ctx.lineTo(p2.sx, p2.sy);
+          ctx.lineTo(p3.sx, p3.sy);
+          ctx.closePath();
+
+          ctx.fillStyle = (i % 2 === 0) ? '#ef4444' : '#f97316';
+          ctx.shadowColor = '#ff0000';
+          ctx.shadowBlur = 16 * p1.scale;
+          ctx.fill();
+
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = Math.max(1, 2 * p1.scale);
+          ctx.stroke();
+        }
+      }
+      ctx.restore();
+    }
+
+    // 5. 3D Floating Hologram $5,000,000 Check (Sega Rescue)
+    function render3DCheck(center, rx, ry, rz, cam, t) {
+      const w = 480, h = 260;
+      const hw = w / 2, hh = h / 2;
+
+      const corners = [
+        { x: -hw, y: -hh, z: 0 },
+        { x: hw, y: -hh, z: 0 },
+        { x: hw, y: hh, z: 0 },
+        { x: -hw, y: hh, z: 0 }
+      ];
+
+      const world = corners.map(c => {
+        const r = rotatePoint(c, rx, ry, rz);
+        return { x: center.x + r.x, y: center.y + r.y, z: center.z + r.z };
+      });
+
+      const p = world.map(pt => project3D(pt, cam));
+      if (p.some(pt => pt === null)) return;
+
+      ctx.save();
+      // Holographic green beam from below
+      const beamBot = project3D({ x: center.x, y: center.y + 450, z: center.z }, cam);
+      if (beamBot) {
+        const bGrad = ctx.createLinearGradient((p[0].sx + p[1].sx)/2, (p[0].sy + p[1].sy)/2, beamBot.sx, beamBot.sy);
+        bGrad.addColorStop(0, 'rgba(34, 197, 94, 0.45)');
+        bGrad.addColorStop(1, 'rgba(34, 197, 94, 0)');
+        ctx.fillStyle = bGrad;
+        ctx.beginPath();
+        ctx.moveTo(p[3].sx, p[3].sy);
+        ctx.lineTo(p[2].sx, p[2].sy);
+        ctx.lineTo(beamBot.sx + 100 * beamBot.scale, beamBot.sy);
+        ctx.lineTo(beamBot.sx - 100 * beamBot.scale, beamBot.sy);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // 3D Glassmorphic Emerald Check Body
+      ctx.beginPath();
+      ctx.moveTo(p[0].sx, p[0].sy);
+      ctx.lineTo(p[1].sx, p[1].sy);
+      ctx.lineTo(p[2].sx, p[2].sy);
+      ctx.lineTo(p[3].sx, p[3].sy);
+      ctx.closePath();
+
+      const chGrad = ctx.createLinearGradient(p[0].sx, p[0].sy, p[2].sx, p[2].sy);
+      chGrad.addColorStop(0, 'rgba(6, 78, 59, 0.92)');
+      chGrad.addColorStop(0.5, 'rgba(4, 120, 87, 0.95)');
+      chGrad.addColorStop(1, 'rgba(2, 44, 34, 0.95)');
+      ctx.fillStyle = chGrad;
+      ctx.fill();
+
+      // Glowing green border
+      ctx.strokeStyle = '#4ade80';
+      ctx.lineWidth = Math.max(3, 6 * p[0].scale);
+      ctx.shadowColor = '#22c55e';
+      ctx.shadowBlur = 24 * p[0].scale;
+      ctx.stroke();
+
+      // Check text in 3D perspective
+      const cx = (p[0].sx + p[2].sx) / 2;
+      const cy = (p[0].sy + p[2].sy) / 2;
+      const ang = Math.atan2(p[1].sy - p[0].sy, p[1].sx - p[0].sx);
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(ang);
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#a7f3d0';
+      ctx.font = "800 " + Math.round(18 * p[0].scale) + "px Arial, sans-serif";
+      ctx.fillText('SEGA ENTERPRISES • EMERGENCY ADVANCE', 0, -68 * p[0].scale);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = "900 " + Math.round(48 * p[0].scale) + "px Arial, sans-serif";
+      ctx.shadowColor = '#4ade80';
+      ctx.shadowBlur = 18 * p[0].scale;
+      ctx.fillText('$5,000,000', 0, -10 * p[0].scale);
+
+      ctx.fillStyle = '#6ee7b7';
+      ctx.font = "800 " + Math.round(16 * p[0].scale) + "px Arial, sans-serif";
+      ctx.shadowBlur = 0;
+      ctx.fillText('PAY TO THE ORDER OF: NVIDIA CORP', 0, 38 * p[0].scale);
+
+      ctx.fillStyle = '#fde047';
+      ctx.font = "900 " + Math.round(14 * p[0].scale) + "px Arial, sans-serif";
+      ctx.fillText('STATUS: CLEARED (SAVED FROM DEATH)', 0, 72 * p[0].scale);
+
+      ctx.restore();
+      ctx.restore();
+    }
+
+    // 6. 3D Interlocking Automation Gears
+    function render3DGears(center, cam, t) {
+      ctx.save();
+      const gears = [
+        { x: -140, y: -60, r: 120, teeth: 12, speed: 1.8, color: '#00f0ff' },
+        { x: 110, y: 30, r: 95, teeth: 10, speed: -2.3, color: '#22c55e' },
+        { x: -40, y: 150, r: 80, teeth: 8, speed: 2.7, color: '#facc15' }
+      ];
+
+      gears.forEach(g => {
+        const pt = project3D({ x: center.x + g.x, y: center.y + g.y, z: center.z }, cam);
+        if (!pt) return;
+
+        const rad = g.r * pt.scale;
+        const rot = t * g.speed;
+
+        ctx.save();
+        ctx.translate(pt.sx, pt.sy);
+        ctx.rotate(rot);
+
+        // Gear core
+        ctx.fillStyle = '#0f172a';
+        ctx.beginPath();
+        ctx.arc(0, 0, rad, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = g.color;
+        ctx.lineWidth = Math.max(2, 4.5 * pt.scale);
+        ctx.shadowColor = g.color;
+        ctx.shadowBlur = 14 * pt.scale;
+        ctx.stroke();
+
+        // Gear teeth
+        for (let i = 0; i < g.teeth; i++) {
+          const a = (i / g.teeth) * Math.PI * 2;
+          ctx.save();
+          ctx.rotate(a);
+          ctx.fillStyle = g.color;
+          drawRoundBox(ctx, -10 * pt.scale, -rad - 18 * pt.scale, 20 * pt.scale, 24 * pt.scale, 4, g.color, null);
+          ctx.restore();
+        }
+
+        // Center hub
+        ctx.fillStyle = '#020617';
+        ctx.beginPath();
+        ctx.arc(0, 0, rad * 0.38, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = Math.max(1, 2.5 * pt.scale);
+        ctx.stroke();
+
+        ctx.restore();
+      });
+
+      ctx.restore();
+    }
+
+    // 7. 3D Floating Smartphone with Emergency Incoming Call & Voicemail Bleed
+    function render3DPhone(center, rx, ry, rz, cam, t, opts = {}) {
+      const {
+        isRinging = true,
+        isMissed = false,
+        caller = 'Sarah W. (Emergency Pipe Burst)',
+        jobValue = '$8,000.00'
+      } = opts;
+
+      const w = 340, h = 640, th = 32;
+      const hw = w / 2, hh = h / 2;
+
+      // Phone vibration shake if ringing
+      let vibX = 0, vibY = 0;
+      if (isRinging && !isMissed) {
+        vibX = Math.sin(t * 55) * 8;
+        vibY = Math.cos(t * 65) * 8;
+      }
+
+      const localVerts = [
+        { x: -hw + vibX, y: -hh + vibY, z: -th },
+        { x: hw + vibX, y: -hh + vibY, z: -th },
+        { x: hw + vibX, y: hh + vibY, z: -th },
+        { x: -hw + vibX, y: hh + vibY, z: -th },
+        { x: -hw + vibX, y: -hh + vibY, z: th },
+        { x: hw + vibX, y: -hh + vibY, z: th },
+        { x: hw + vibX, y: hh + vibY, z: th },
+        { x: -hw + vibX, y: hh + vibY, z: th }
+      ];
+
+      const world = localVerts.map(v => {
+        const r = rotatePoint(v, rx, ry, rz);
+        return { x: center.x + r.x, y: center.y + r.y, z: center.z + r.z };
+      });
+
+      const p = world.map(pt => project3D(pt, cam));
+      if (p.some(pt => pt === null)) return;
+
+      ctx.save();
+
+      // Draw phone chassis (back & sides)
+      ctx.fillStyle = '#0f172a';
+      ctx.beginPath();
+      ctx.moveTo(p[4].sx, p[4].sy);
+      ctx.lineTo(p[5].sx, p[5].sy);
+      ctx.lineTo(p[6].sx, p[6].sy);
+      ctx.lineTo(p[7].sx, p[7].sy);
+      ctx.closePath();
+      ctx.fill();
+
+      // Titanium edge shine
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = Math.max(2, 4 * p[0].scale);
+      ctx.stroke();
+
+      // Screen Face (p[0], p[1], p[2], p[3])
+      ctx.beginPath();
+      ctx.moveTo(p[0].sx, p[0].sy);
+      ctx.lineTo(p[1].sx, p[1].sy);
+      ctx.lineTo(p[2].sx, p[2].sy);
+      ctx.lineTo(p[3].sx, p[3].sy);
+      ctx.closePath();
+
+      const screenGrad = ctx.createLinearGradient(p[0].sx, p[0].sy, p[2].sx, p[2].sy);
+      if (isMissed) {
+        screenGrad.addColorStop(0, '#450a0a');
+        screenGrad.addColorStop(1, '#180404');
+      } else {
+        screenGrad.addColorStop(0, '#090d16');
+        screenGrad.addColorStop(1, '#030712');
+      }
+      ctx.fillStyle = screenGrad;
+      ctx.fill();
+
+      // Screen outer rim
+      ctx.strokeStyle = isMissed ? '#ef4444' : isRinging ? '#facc15' : '#38bdf8';
+      ctx.lineWidth = Math.max(3, 5 * p[0].scale);
+      ctx.shadowColor = ctx.strokeStyle;
+      ctx.shadowBlur = 20 * p[0].scale;
+      ctx.stroke();
+
+      // Screen Content in 3D perspective
+      const cx = (p[0].sx + p[2].sx) / 2;
+      const cy = (p[0].sy + p[2].sy) / 2;
+      const ang = Math.atan2(p[1].sy - p[0].sy, p[1].sx - p[0].sx);
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(ang);
+      ctx.textAlign = 'center';
+
+      if (isMissed) {
+        // Red Missed Call & Voicemail Stamp
+        ctx.fillStyle = '#ef4444';
+        ctx.font = "900 " + Math.round(28 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('⚠️ MISSED CALL', 0, -140 * p[0].scale);
+
+        ctx.fillStyle = '#fca5a5';
+        ctx.font = "800 " + Math.round(18 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('DIED IN VOICEMAIL', 0, -100 * p[0].scale);
+
+        // Skull / Warning symbol
+        ctx.fillStyle = '#ef4444';
+        ctx.font = "900 " + Math.round(62 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('💀', 0, -20 * p[0].scale);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = "900 " + Math.round(38 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('-$8,000.00', 0, 60 * p[0].scale);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = "700 " + Math.round(14 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('Customer called competitor #2', 0, 110 * p[0].scale);
+      } else {
+        // Ringing Emergency Caller Screen
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = "800 " + Math.round(16 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('INCOMING EMERGENCY CALL...', 0, -160 * p[0].scale);
+
+        // Caller Avatar Ring
+        const ringPulse = Math.sin(t * 12) * 8;
+        ctx.strokeStyle = '#22c55e';
+        ctx.lineWidth = 4 * p[0].scale;
+        ctx.beginPath();
+        ctx.arc(0, -70 * p[0].scale, (38 + ringPulse) * p[0].scale, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.font = "900 " + Math.round(36 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('📞', 0, -68 * p[0].scale);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = "900 " + Math.round(22 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('Sarah W.', 0, 10 * p[0].scale);
+
+        ctx.fillStyle = '#facc15';
+        ctx.font = "800 " + Math.round(15 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('BURST PIPE • FLOODING ATTIC', 0, 42 * p[0].scale);
+
+        ctx.fillStyle = '#4ade80';
+        ctx.font = "900 " + Math.round(28 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText(jobValue, 0, 88 * p[0].scale);
+
+        ctx.fillStyle = '#ef4444';
+        ctx.font = "800 " + Math.round(14 * p[0].scale) + "px Arial, sans-serif";
+        ctx.fillText('(Contractor stuck on ladder)', 0, 126 * p[0].scale);
+      }
+
+      ctx.restore();
+      ctx.restore();
+    }
+
+    // 8. 3D Tumbling Currency Stacks & Burning Red Embers (-$8,000 Lost)
+    function render3DCurrency(center, cam, t) {
+      ctx.save();
+      const numBills = 16;
+      for (let i = 0; i < numBills; i++) {
+        const seed = i * 43.12;
+        const driftT = (t * 1.5 + i * 0.25) % 3.0; // cycle
+        const bx = center.x + Math.sin(seed + t) * 320 + (i % 4 - 2) * 80;
+        const by = center.y - 100 + driftT * 260 + (i * 20);
+        const bz = center.z + Math.cos(seed) * 200 - driftT * 200;
+
+        const rot = {
+          rx: t * 3 + i,
+          ry: t * 4 + i * 1.5,
+          rz: t * 2 + i * 0.8
+        };
+
+        const w = 110, h = 55;
+        const p1 = project3D({
+          x: bx + rotatePoint({ x: -w/2, y: -h/2, z: 0 }, rot.rx, rot.ry, rot.rz).x,
+          y: by + rotatePoint({ x: -w/2, y: -h/2, z: 0 }, rot.rx, rot.ry, rot.rz).y,
+          z: bz + rotatePoint({ x: -w/2, y: -h/2, z: 0 }, rot.rx, rot.ry, rot.rz).z
+        }, cam);
+        const p2 = project3D({
+          x: bx + rotatePoint({ x: w/2, y: -h/2, z: 0 }, rot.rx, rot.ry, rot.rz).x,
+          y: by + rotatePoint({ x: w/2, y: -h/2, z: 0 }, rot.rx, rot.ry, rot.rz).y,
+          z: bz + rotatePoint({ x: w/2, y: -h/2, z: 0 }, rot.rx, rot.ry, rot.rz).z
+        }, cam);
+        const p3 = project3D({
+          x: bx + rotatePoint({ x: w/2, y: h/2, z: 0 }, rot.rx, rot.ry, rot.rz).x,
+          y: by + rotatePoint({ x: w/2, y: h/2, z: 0 }, rot.rx, rot.ry, rot.rz).y,
+          z: bz + rotatePoint({ x: w/2, y: h/2, z: 0 }, rot.rx, rot.ry, rot.rz).z
+        }, cam);
+        const p4 = project3D({
+          x: bx + rotatePoint({ x: -w/2, y: h/2, z: 0 }, rot.rx, rot.ry, rot.rz).x,
+          y: by + rotatePoint({ x: -w/2, y: h/2, z: 0 }, rot.rx, rot.ry, rot.rz).y,
+          z: bz + rotatePoint({ x: -w/2, y: h/2, z: 0 }, rot.rx, rot.ry, rot.rz).z
+        }, cam);
+
+        if (p1 && p2 && p3 && p4) {
+          ctx.beginPath();
+          ctx.moveTo(p1.sx, p1.sy);
+          ctx.lineTo(p2.sx, p2.sy);
+          ctx.lineTo(p3.sx, p3.sy);
+          ctx.lineTo(p4.sx, p4.sy);
+          ctx.closePath();
+
+          ctx.fillStyle = 'rgba(239, 68, 68, 0.75)';
+          ctx.shadowColor = '#ef4444';
+          ctx.shadowBlur = 14 * p1.scale;
+          ctx.fill();
+
+          ctx.strokeStyle = '#fee2e2';
+          ctx.lineWidth = Math.max(1, 2 * p1.scale);
+          ctx.stroke();
+
+          // $100 marking
+          const midX = (p1.sx + p3.sx) / 2;
+          const midY = (p1.sy + p3.sy) / 2;
+          ctx.fillStyle = '#ffffff';
+          ctx.font = "900 " + Math.round(18 * p1.scale) + "px Arial, sans-serif";
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('$100', midX, midY);
+        }
+      }
+      ctx.restore();
+    }
+
+    // 9. 3D AVA Voice AI Reactor (Triple-Axis Gyroscope & 3D Neural Sound Sphere)
+    function render3DAvaReactor(center, cam, t) {
+      ctx.save();
+      const r = 240;
+
+      // 3 Concentric Gyroscope Rings rotating on 3 axes
+      const rings = [
+        { rotX: t * 1.6, rotY: 0, rotZ: t * 0.8, color: '#00f0ff', rad: r },
+        { rotX: 0, rotY: t * 2.1, rotZ: t * 1.2, color: '#a855f7', rad: r * 0.85 },
+        { rotX: t * 1.1, rotY: t * 1.4, rotZ: 0, color: '#22c55e', rad: r * 0.7 }
+      ];
+
+      rings.forEach(ring => {
+        const numPts = 36;
+        ctx.strokeStyle = ring.color;
+        ctx.lineWidth = Math.max(2, 4.5 * (FOV / (FOV + center.z)));
+        ctx.shadowColor = ring.color;
+        ctx.shadowBlur = 18;
+        ctx.beginPath();
+
+        let first = null;
+        for (let i = 0; i <= numPts; i++) {
+          const ang = (i / numPts) * Math.PI * 2;
+          const local = {
+            x: Math.cos(ang) * ring.rad,
+            y: Math.sin(ang) * ring.rad,
+            z: 0
+          };
+          const rot = rotatePoint(local, ring.rotX, ring.rotY, ring.rotZ);
+          const pt = project3D({
+            x: center.x + rot.x,
+            y: center.y + rot.y,
+            z: center.z + rot.z
+          }, cam);
+
+          if (pt) {
+            if (i === 0) { ctx.moveTo(pt.sx, pt.sy); first = pt; }
+            else { ctx.lineTo(pt.sx, pt.sy); }
+          }
+        }
+        ctx.stroke();
+      });
+
+      // Inner 3D Neural Sphere with 36 glowing connected nodes
+      const numNodes = 36;
+      const sphereR = r * 0.45 + Math.sin(t * 14) * 12; // breathing audio pulse
+      const projectedNodes = [];
+
+      for (let i = 0; i < numNodes; i++) {
+        const phi = Math.acos(-1 + (2 * i) / numNodes);
+        const theta = Math.sqrt(numNodes * Math.PI) * phi + t * 1.5;
+
+        const nx = Math.cos(theta) * Math.sin(phi) * sphereR;
+        const ny = Math.sin(theta) * Math.sin(phi) * sphereR;
+        const nz = Math.cos(phi) * sphereR;
+
+        const pt = project3D({
+          x: center.x + nx,
+          y: center.y + ny,
+          z: center.z + nz
+        }, cam);
+
+        if (pt) projectedNodes.push(pt);
+      }
+
+      // Connect nearby nodes with laser arcs
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
+      ctx.lineWidth = 1.5;
+      for (let i = 0; i < projectedNodes.length; i++) {
+        for (let j = i + 1; j < projectedNodes.length; j++) {
+          const dx = projectedNodes[i].sx - projectedNodes[j].sx;
+          const dy = projectedNodes[i].sy - projectedNodes[j].sy;
+          const d = Math.hypot(dx, dy);
+          if (d < 85) {
+            ctx.beginPath();
+            ctx.moveTo(projectedNodes[i].sx, projectedNodes[i].sy);
+            ctx.lineTo(projectedNodes[j].sx, projectedNodes[j].sy);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw node sparks
+      projectedNodes.forEach(pt => {
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(pt.sx, pt.sy, 3.5 * pt.scale, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Core Voice AI Label
+      const corePt = project3D(center, cam);
+      if (corePt) {
+        ctx.save();
+        ctx.translate(corePt.sx, corePt.sy);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = "900 " + Math.round(38 * corePt.scale) + "px Arial, sans-serif";
+        ctx.fillStyle = '#00f0ff';
+        ctx.shadowColor = '#00f0ff';
+        ctx.shadowBlur = 24 * corePt.scale;
+        ctx.fillText('AVA', 0, -6 * corePt.scale);
+
+        ctx.font = "800 " + Math.round(14 * corePt.scale) + "px Arial, sans-serif";
+        ctx.fillStyle = '#22c55e';
+        ctx.fillText('24/7 VOICE AI', 0, 22 * corePt.scale);
+        ctx.restore();
+      }
+
+      ctx.restore();
+    }
+
+    // 10. 3D Sub-Second Speedometer Gauge (0.8s Slam)
+    function render3DSpeedometer(center, cam, t) {
+      const pt = project3D(center, cam);
+      if (!pt) return;
+
+      ctx.save();
+      ctx.translate(pt.sx, pt.sy);
+      ctx.scale(pt.scale, pt.scale);
+
+      const rad = 140;
+
+      // Arc track
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.lineWidth = 18;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.arc(0, 0, rad, Math.PI * 0.75, Math.PI * 2.25);
+      ctx.stroke();
+
+      // Green active speed arc
+      ctx.strokeStyle = '#22c55e';
+      ctx.shadowColor = '#22c55e';
+      ctx.shadowBlur = 22;
+      ctx.beginPath();
+      ctx.arc(0, 0, rad, Math.PI * 0.75, Math.PI * 1.25);
+      ctx.stroke();
+
+      // Needle slamming to 0.8s
+      const needleAngle = Math.PI * 0.75 + (Math.PI * 0.5) * (0.8 / 3.0) + Math.sin(t * 18) * 0.04;
+      ctx.save();
+      ctx.rotate(needleAngle);
+      ctx.fillStyle = '#facc15';
+      ctx.beginPath();
+      ctx.moveTo(-6, 0);
+      ctx.lineTo(0, -rad + 10);
+      ctx.lineTo(6, 0);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+
+      // Center Hub & Readout
+      ctx.fillStyle = '#0f172a';
+      ctx.beginPath();
+      ctx.arc(0, 0, 32, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 48px Arial, sans-serif';
+      ctx.shadowColor = '#22c55e';
+      ctx.shadowBlur = 18;
+      ctx.fillText('0.8s', 0, 75);
+
+      ctx.font = '800 18px Arial, sans-serif';
+      ctx.fillStyle = '#86efac';
+      ctx.shadowBlur = 0;
+      ctx.fillText('1ST RING ANSWER', 0, 110);
+
+      ctx.restore();
+    }
+
+    // 11. 3D Glassmorphic Dispatch Cards Flying in Perspective
+    function render3DDispatchCard(center, rot, cam, title, subtitle, icon, badge, color = '#00f0ff') {
+      const w = 520, h = 130;
+      const hw = w / 2, hh = h / 2;
+
+      const corners = [
+        { x: -hw, y: -hh, z: 0 },
+        { x: hw, y: -hh, z: 0 },
+        { x: hw, y: hh, z: 0 },
+        { x: -hw, y: hh, z: 0 }
+      ];
+
+      const world = corners.map(c => {
+        const r = rotatePoint(c, rot.rx, rot.ry, rot.rz);
+        return { x: center.x + r.x, y: center.y + r.y, z: center.z + r.z };
+      });
+
+      const p = world.map(pt => project3D(pt, cam));
+      if (p.some(pt => pt === null)) return;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(p[0].sx, p[0].sy);
+      ctx.lineTo(p[1].sx, p[1].sy);
+      ctx.lineTo(p[2].sx, p[2].sy);
+      ctx.lineTo(p[3].sx, p[3].sy);
+      ctx.closePath();
+
+      const bg = ctx.createLinearGradient(p[0].sx, p[0].sy, p[2].sx, p[2].sy);
+      bg.addColorStop(0, 'rgba(15, 23, 42, 0.94)');
+      bg.addColorStop(1, 'rgba(3, 7, 18, 0.94)');
+      ctx.fillStyle = bg;
+      ctx.fill();
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = Math.max(2, 4.5 * p[0].scale);
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 18 * p[0].scale;
+      ctx.stroke();
+
+      const cx = (p[0].sx + p[2].sx) / 2;
+      const cy = (p[0].sy + p[2].sy) / 2;
+      const ang = Math.atan2(p[1].sy - p[0].sy, p[1].sx - p[0].sx);
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(ang);
+
+      // Icon
+      ctx.font = "900 " + Math.round(44 * p[0].scale) + "px Arial, sans-serif";
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(icon, -220 * p[0].scale, 0);
+
+      // Title
+      ctx.fillStyle = '#ffffff';
+      ctx.font = "900 " + Math.round(23 * p[0].scale) + "px Arial, sans-serif";
+      ctx.fillText(title, -150 * p[0].scale, -18 * p[0].scale);
+
+      // Subtitle
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = "700 " + Math.round(15 * p[0].scale) + "px Arial, sans-serif";
+      ctx.fillText(subtitle, -150 * p[0].scale, 18 * p[0].scale);
+
+      // Badge
+      ctx.fillStyle = color;
+      ctx.font = "900 " + Math.round(14 * p[0].scale) + "px Arial, sans-serif";
+      ctx.textAlign = 'right';
+      ctx.fillText(badge, 220 * p[0].scale, 0);
+
+      ctx.restore();
+      ctx.restore();
+    }
+
+    // 12. 3D Live Call Challenge Finale Screen
+    function render3DFinale(center, cam, t) {
+      const pt = project3D(center, cam);
+      if (!pt) return;
+
+      ctx.save();
+      ctx.translate(pt.sx, pt.sy);
+      ctx.scale(pt.scale, pt.scale);
+
+      // Main CTA Card Box
+      const w = 780, h = 480;
+      drawRoundBox(ctx, -w/2, -h/2, w, h, 28, 'rgba(10, 15, 29, 0.96)', '#38bdf8', 4);
+
+      // Glowing pulse ring around card
+      ctx.strokeStyle = '#00f0ff';
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 32;
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      // Top Tag
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#facc15';
+      ctx.font = '900 24px Arial, sans-serif';
+      ctx.fillText('⚡ LIVE SYSTEM ACTIVE · TEST AVA RIGHT NOW', 0, -170);
+
+      // Live Phone Number
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 66px Arial, sans-serif';
+      ctx.shadowColor = '#38bdf8';
+      ctx.shadowBlur = 24;
+      ctx.fillText('(561) 813-8602', 0, -85);
+
+      // Subtext
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '800 22px Arial, sans-serif';
+      ctx.shadowBlur = 0;
+      ctx.fillText('DIAL FROM ANY PHONE · HEAR HER ANSWER IN 0.8s', 0, -25);
+
+      // Green "CALL LIVE" Button
+      const btnW = 540, btnH = 82;
+      const pulseScale = 1 + Math.sin(t * 8) * 0.03;
+      ctx.save();
+      ctx.scale(pulseScale, pulseScale);
+      drawRoundBox(ctx, -btnW/2, 20, btnW, btnH, 18, 'linear-gradient(135deg, #22c55e, #16a34a)', '#86efac', 3);
+
+      ctx.fillStyle = '#041f0e';
+      ctx.font = '900 32px Arial, sans-serif';
+      ctx.shadowBlur = 0;
+      ctx.fillText('📞 TAP OR DIAL (561) 813-8602', 0, 68);
+      ctx.restore();
+
+      // Comment AVA Banner
+      ctx.fillStyle = '#facc15';
+      ctx.font = '900 28px Arial, sans-serif';
+      ctx.fillText('💬 OR COMMENT "AVA" BELOW FOR DEMO', 0, 185);
+
+      ctx.restore();
+    }
+
+    // ==========================================
+    // MAIN MASTER FRAME RENDERER (0s - 75.1s)
+    // ==========================================
+    window.renderFrame = function(t) {
+      // Clear Screen
+      ctx.fillStyle = '#03060d';
+      ctx.fillRect(0, 0, W, H);
+
+      // Dynamic Camera Trajectory (Continuous forward push & cinematic drift)
+      let sceneProgress = 0;
+      if (t < 15.2) sceneProgress = t / 15.2;
+      else if (t < 33.5) sceneProgress = (t - 15.2) / (33.5 - 15.2);
+      else if (t < 46.5) sceneProgress = (t - 33.5) / (46.5 - 33.5);
+      else sceneProgress = (t - 46.5) / (75.1 - 46.5);
+
+      // Continuous forward camera push per scene (-180 to -80)
+      const forwardPush = -180 + sceneProgress * 120;
+
+      let cam = {
+        x: Math.sin(t * 0.45) * 60,
+        y: Math.cos(t * 0.35) * 40 - 30,
+        z: forwardPush + Math.sin(t * 0.3) * 30,
+        pitch: -0.05 + Math.sin(t * 0.45) * 0.025,
+        yaw: Math.sin(t * 0.35) * 0.04,
+        roll: Math.cos(t * 0.28) * 0.018
+      };
+
+      // Sound/Impact Screen Shake & White Flash on hard beats
+      let flashAlpha = 0;
+      const impactBeats = [0.0, 5.13, 11.8, 15.48, 20.0, 27.36, 34.25, 38.02, 44.59, 46.14, 50.67, 58.72, 66.28];
+      impactBeats.forEach(trig => {
         const diff = t - trig;
-        if (diff >= 0 && diff < 0.45) {
-          const decay = 1 - (diff / 0.45);
-          const freq = 42;
-          offsetX += Math.sin(diff * freq) * 18 * decay;
-          offsetY += Math.cos(diff * freq * 1.3) * 16 * decay;
-          scale += Math.sin(diff * freq * 0.8) * 0.04 * decay;
+        if (diff >= 0 && diff < 0.38) {
+          const decay = 1 - (diff / 0.38);
+          cam.x += Math.sin(diff * 52) * 18 * decay;
+          cam.y += Math.cos(diff * 64) * 16 * decay;
+          cam.roll += Math.sin(diff * 48) * 0.035 * decay;
+          if (diff < 0.12) {
+            flashAlpha = Math.max(flashAlpha, (1 - diff / 0.12) * 0.25);
+          }
         }
       });
 
-      // Dramatic Punch-Ins on Key Moments
-      // 1. "Nvidia's CEO Cheated" (11.5s - 13.5s)
-      if (t >= 11.5 && t <= 13.5) {
-        scale += 0.08;
-      }
-      // 2. "$5,000,000 RESCUE" (27.0s - 29.5s)
-      if (t >= 27.0 && t <= 29.5) {
-        scale += 0.07;
-      }
-      // 3. "-$8,000 VOICEMAIL BLEED" (38.0s - 45.0s)
-      if (t >= 38.0 && t <= 45.0) {
-        scale += 0.05;
-      }
-      // 4. "MEET AVA VOICE AI" (50.5s - 56.0s)
-      if (t >= 50.5 && t <= 56.0) {
-        scale += 0.06;
-      }
-      // 5. "CALL (561) 813-8602 NOW" (66.0s - 75.1s)
-      if (t >= 66.0) {
-        scale += 0.04;
-      }
+      // 1. Render 3D Ground Cyber Grid
+      render3DGrid(cam, t, (t >= 33.5 && t < 46.5) ? { r: 239, g: 68, b: 68 } : { r: 0, g: 240, b: 255 });
 
-      return { scale, offsetX, offsetY, rot };
-    }
+      // 2. Render 3D Floating Dust & Cyber Particles
+      render3DDust(cam, t);
 
-    // Authentic Cueva Studio Room Backdrop with Stepper & Horizon
-    function drawCuevaRoom(wallTop, wallBot, floorColor, activeStep, t, topTag) {
+      // 3. Top Progress Stepper (① NVIDIA ② 1995 SEGA ③ THE BLEED ④ AVA 0.8s)
+      const curAct = (t < 15.2) ? 1 : (t < 33.5) ? 2 : (t < 46.5) ? 3 : 4;
+      const actTitles = ['① NVIDIA $3T EMPIRE', '② 1995 SEGA RESCUE', '③ -$8,000 VOICEMAIL BLEED', '④ AVA 24/7 VOICE AI'];
+
       ctx.save();
-      const bg = ctx.createLinearGradient(0, 0, 0, H * 0.77);
-      bg.addColorStop(0, wallTop);
-      bg.addColorStop(1, wallBot);
-      ctx.fillStyle = bg;
-      ctx.fillRect(-100, -100, W + 200, H * 0.77 + 100);
-
-      // Studio vertical wall paneling texture with subtle horizontal drift
-      const panelDrift = (Math.sin(t * 0.3) * 12);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.028)';
-      for (let x = -72; x < W + 72; x += 72) {
-        ctx.fillRect(x + panelDrift, 0, 28, H * 0.77);
-      }
-
-      // Moving studio ambient center spotlight
-      const spotX = W / 2 + Math.sin(t * 0.5) * 60;
-      const spotY = H * 0.38 + Math.cos(t * 0.4) * 40;
-      const spot = ctx.createRadialGradient(spotX, spotY, 50, spotX, spotY, 680);
-      spot.addColorStop(0, 'rgba(255, 255, 255, 0.14)');
-      spot.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      ctx.fillStyle = spot;
-      ctx.fillRect(0, 0, W, H * 0.77);
-
-      // Dark stage floor (Bottom 23% where captions float cleanly)
-      const floorGrad = ctx.createLinearGradient(0, H * 0.77, 0, H);
-      floorGrad.addColorStop(0, floorColor || '#090612');
-      floorGrad.addColorStop(1, '#020105');
-      ctx.fillStyle = floorGrad;
-      ctx.fillRect(-100, H * 0.77, W + 200, H * 0.23 + 100);
-
-      // Crisp stage floor horizon molding line
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.moveTo(-100, H * 0.77);
-      ctx.lineTo(W + 100, H * 0.77);
-      ctx.stroke();
-
-      // Top Progress Stepper (① ② ③ ④)
       const stepY = 135;
-      const spacing = 76;
+      const spacing = 80;
       const startX = W / 2 - (spacing * 1.5);
-
-      // Ambient golden glow behind active stepper pills
-      const glowCenterX = startX + ((activeStep - 1) * spacing);
-      const stepGlow = ctx.createRadialGradient(glowCenterX, stepY, 10, glowCenterX, stepY, 150);
-      stepGlow.addColorStop(0, 'rgba(250, 204, 21, 0.4)');
-      stepGlow.addColorStop(1, 'rgba(250, 204, 21, 0)');
-      ctx.fillStyle = stepGlow;
-      ctx.beginPath();
-      ctx.arc(glowCenterX, stepY, 150, 0, Math.PI * 2);
-      ctx.fill();
-
       for (let i = 1; i <= 4; i++) {
         const cx = startX + (i - 1) * spacing;
-        const isLit = i <= activeStep;
-        const isCurrent = i === activeStep;
-        const r = isCurrent ? (26 + Math.sin(t * 6) * 2.5) : 24;
+        const isCurrent = (i === curAct);
+        const isPast = (i < curAct);
 
         ctx.beginPath();
-        ctx.arc(cx, stepY, r, 0, Math.PI * 2);
-        if (isLit) {
+        ctx.arc(cx, stepY, isCurrent ? 24 : 20, 0, Math.PI * 2);
+        if (isCurrent) {
           ctx.fillStyle = '#facc15';
           ctx.fill();
-          ctx.lineWidth = 4;
-          ctx.strokeStyle = '#fef08a';
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 3.5;
           ctx.stroke();
 
-          ctx.font = '900 24px "Segoe UI", Arial, sans-serif';
+          ctx.font = '900 22px Arial, sans-serif';
           ctx.fillStyle = '#090d16';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.fillText(String(i), cx, stepY + 1);
-        } else {
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+        } else if (isPast) {
+          ctx.fillStyle = '#22c55e';
           ctx.fill();
-          ctx.lineWidth = 3;
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
-          ctx.stroke();
-
-          ctx.font = '800 22px "Segoe UI", Arial, sans-serif';
+          ctx.font = '900 20px Arial, sans-serif';
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('✓', cx, stepY + 1);
+        } else {
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+          ctx.fill();
+          ctx.font = '800 18px Arial, sans-serif';
           ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
@@ -219,1049 +1294,206 @@ const htmlContent = `<!DOCTYPE html>
         }
       }
 
-      if (topTag) {
-        ctx.font = '900 23px "Segoe UI", Arial, sans-serif';
-        ctx.fillStyle = '#facc15';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'top';
-        ctx.fillText(topTag.toUpperCase(), W / 2, stepY + 44);
-      }
-
+      ctx.font = '900 24px Arial, sans-serif';
+      ctx.fillStyle = (curAct === 3) ? '#ef4444' : '#facc15';
+      ctx.textAlign = 'center';
+      ctx.fillText(actTitles[curAct - 1], W / 2, stepY + 54);
       ctx.restore();
-    }
 
-    // Draw ambient floating dust & light particles
-    function drawParticles(t) {
-      ctx.save();
-      PARTICLES.forEach(p => {
-        const curX = (p.baseX + t * p.speedX) % (W + 80) - 40;
-        const curY = ((p.baseY + t * p.speedY) % (H * 0.77 + 80) + (H * 0.77 + 80)) % (H * 0.77 + 80) - 40;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(curX, curY, p.r + Math.sin(t * 4 + p.baseX) * 0.8, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      ctx.restore();
-    }
+      // ==========================================
+      // SCENE LOGIC (BASED ON EXACT TIMESTAMPS)
+      // ==========================================
 
-    // Authentic Cueva 2D Character Renderer
-    function drawCuevaChar(opts, t) {
-      const {
-        x,
-        y,
-        scale = 1.0,
-        outfit = 'suit', // 'suit' | 'contractor' | 'jensen' | 'sega'
-        hair = 'curly_gold', // 'curly_gold' | 'hardhat' | 'silver_jensen' | 'slick_dark'
-        mood = 'smile', // 'smile' | 'talk' | 'panic' | 'worried' | 'smirk'
-        leftArmAngle = 0.25,
-        rightArmAngle = -0.25,
-        holdingItem = null // 'gpu' | 'wrench' | 'contract' | 'phone'
-      } = opts;
+      // ACT 1: 0s - 15.2s (The $3T Question & "Jensen Huang Cheated")
+      if (t < 15.2) {
+        const chipCenter = { x: 0, y: -40, z: 250 };
+        const rx = 0.35 + Math.sin(t * 1.2) * 0.15;
+        const ry = t * 1.1;
+        const rz = Math.sin(t * 0.8) * 0.1;
 
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.scale(scale * 1.85, scale * 1.85);
+        // Is it the "cheated" punchline? (11.5s - 14.5s)
+        const isCheated = (t >= 11.5 && t <= 14.5);
 
-      const bob = Math.sin(t * 4.5 + x * 0.02) * 2.5;
-
-      // 1. Shoes on stage floor
-      ctx.fillStyle = '#111827';
-      ctx.beginPath();
-      ctx.ellipse(-26, -6, 20, 9, 0, 0, Math.PI * 2);
-      ctx.ellipse(26, -6, 20, 9, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 2. Legs / Trousers
-      ctx.fillStyle = (outfit === 'contractor') ? '#1e293b' : (outfit === 'jensen') ? '#020617' : '#1f2937';
-      drawRoundBox(ctx, -38, -105, 26, 98, 6, ctx.fillStyle, null);
-      drawRoundBox(ctx, 12, -105, 26, 98, 6, ctx.fillStyle, null);
-
-      // 3. Torso with breathing bob
-      ctx.save();
-      ctx.translate(0, bob);
-
-      if (outfit === 'jensen') {
-        // Jensen's Black Leather Jacket with zipper line
-        drawRoundBox(ctx, -50, -225, 100, 125, 16, '#09090b', '#22c55e', 2.5);
-        ctx.fillStyle = '#18181b';
-        ctx.beginPath();
-        ctx.moveTo(-22, -225); ctx.lineTo(22, -225); ctx.lineTo(0, -170); ctx.closePath();
-        ctx.fill();
-        ctx.strokeStyle = '#a1a1aa';
-        ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(0, -170); ctx.lineTo(0, -105); ctx.stroke();
-      } else if (outfit === 'contractor') {
-        drawRoundBox(ctx, -48, -225, 96, 125, 16, '#1d4ed8', null);
-        drawRoundBox(ctx, -46, -223, 92, 120, 14, '#f97316', '#fb923c', 2);
-        ctx.fillStyle = '#fde047';
-        ctx.fillRect(-46, -155, 92, 10);
-        ctx.fillRect(-46, -130, 92, 10);
-        ctx.fillRect(-30, -223, 12, 68);
-        ctx.fillRect(18, -223, 12, 68);
-      } else if (outfit === 'sega') {
-        drawRoundBox(ctx, -48, -225, 96, 125, 16, '#18181b', '#27272a', 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath(); ctx.moveTo(-20, -225); ctx.lineTo(20, -225); ctx.lineTo(0, -165); ctx.closePath(); ctx.fill();
-        ctx.fillStyle = '#0284c7';
-        ctx.beginPath(); ctx.moveTo(-6, -215); ctx.lineTo(6, -215); ctx.lineTo(10, -130); ctx.lineTo(0, -115); ctx.lineTo(-10, -130); ctx.closePath(); ctx.fill();
-      } else {
-        drawRoundBox(ctx, -48, -225, 96, 125, 16, '#27272a', '#3f3f46', 2);
-        ctx.fillStyle = '#bae6fd';
-        ctx.beginPath(); ctx.moveTo(-22, -225); ctx.lineTo(22, -225); ctx.lineTo(0, -165); ctx.closePath(); ctx.fill();
-      }
-
-      // 4. Arms & Hands
-      const armCol = (outfit === 'jensen') ? '#09090b' : (outfit === 'contractor') ? '#1d4ed8' : '#18181b';
-      [-1, 1].forEach(side => {
-        const isRight = side === 1;
-        const shoulderX = side * 48;
-        const shoulderY = -208;
-        const angle = isRight ? rightArmAngle : leftArmAngle;
-
-        ctx.save();
-        ctx.translate(shoulderX, shoulderY);
-        ctx.rotate(angle);
-
-        drawRoundBox(ctx, -12, 0, 24, 78, 11, armCol, null);
-
-        // Round Peach Hand
-        ctx.fillStyle = '#eab68c';
-        ctx.beginPath();
-        ctx.arc(0, 86, 14, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Handheld props
-        if (isRight && holdingItem === 'gpu') {
-          ctx.save();
-          ctx.translate(6, 88);
-          // 3D glowing GPU circuit board with pulsing fan
-          drawRoundBox(ctx, -26, -50, 52, 52, 10, '#15803d', '#4ade80', 3.5);
-          ctx.strokeStyle = '#22c55e';
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(0, -24, 16, 0, Math.PI * 2);
-          ctx.stroke();
-          // Spinning fan blades
-          const fanRot = t * 15;
-          ctx.save();
-          ctx.translate(0, -24);
-          ctx.rotate(fanRot);
-          for (let b = 0; b < 4; b++) {
-            ctx.rotate(Math.PI / 2);
-            ctx.fillStyle = '#4ade80';
-            ctx.fillRect(-2, -14, 4, 12);
-          }
-          ctx.restore();
-          ctx.font = '900 12px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.textAlign = 'center';
-          ctx.fillText('GPU', 0, -2);
-          ctx.restore();
-        } else if (isRight && holdingItem === 'wrench') {
-          ctx.save();
-          ctx.translate(4, 86);
-          ctx.rotate(-0.5 + Math.sin(t * 7) * 0.2);
-          drawRoundBox(ctx, -5, -45, 10, 48, 4, '#cbd5e1', '#64748b', 2);
-          ctx.beginPath();
-          ctx.arc(0, -48, 12, 0.4, Math.PI * 2 - 0.4);
-          ctx.lineWidth = 6;
-          ctx.strokeStyle = '#cbd5e1';
-          ctx.stroke();
-          ctx.restore();
-        } else if (isRight && holdingItem === 'contract') {
-          ctx.save();
-          ctx.translate(10, 80);
-          drawRoundBox(ctx, -32, -54, 64, 48, 6, '#10b981', '#34d399', 3);
-          ctx.font = '900 15px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#041f14';
-          ctx.textAlign = 'center';
-          ctx.fillText('$5M', 0, -32);
-          ctx.font = '800 9px "Segoe UI", Arial, sans-serif';
-          ctx.fillText('CONTRACT', 0, -18);
-          ctx.restore();
-        }
-
-        ctx.restore();
-      });
-
-      // 5. Head (Large expressive Cueva round head)
-      const headY = -278;
-      ctx.fillStyle = '#eab68c';
-      ctx.beginPath();
-      ctx.arc(0, headY, 46, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Forehead shadow
-      ctx.fillStyle = 'rgba(180, 115, 70, 0.28)';
-      ctx.beginPath();
-      ctx.ellipse(0, headY - 18, 34, 14, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 6. Eyes with specular shine dots & blinking
-      const blink = Math.sin(t * 3.5 + x) > 0.96;
-      [-15, 15].forEach(ex => {
-        if (blink) {
-          ctx.strokeStyle = '#111827';
-          ctx.lineWidth = 3.5;
-          ctx.beginPath();
-          ctx.moveTo(ex - 7, headY - 4);
-          ctx.lineTo(ex + 7, headY - 4);
-          ctx.stroke();
-        } else {
-          ctx.fillStyle = '#111827';
-          ctx.beginPath();
-          ctx.arc(ex, headY - 4, 5.8, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.arc(ex - 1.8, headY - 6, 2.0, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      });
-
-      // Jensen's Glasses
-      if (hair === 'silver_jensen') {
-        ctx.strokeStyle = '#38bdf8';
-        ctx.lineWidth = 3.5;
-        drawRoundBox(ctx, -26, headY - 14, 22, 18, 4, 'rgba(56, 189, 248, 0.15)', '#38bdf8', 3);
-        drawRoundBox(ctx, 4, headY - 14, 22, 18, 4, 'rgba(56, 189, 248, 0.15)', '#38bdf8', 3);
-        ctx.beginPath(); ctx.moveTo(-4, headY - 5); ctx.lineTo(4, headY - 5); ctx.stroke();
-      }
-
-      // 7. Eyebrows
-      ctx.strokeStyle = '#3f2314';
-      ctx.lineWidth = 4.2;
-      ctx.lineCap = 'round';
-      if (mood === 'panic' || mood === 'worried') {
-        ctx.beginPath();
-        ctx.moveTo(-24, headY - 14); ctx.lineTo(-8, headY - 20);
-        ctx.moveTo(24, headY - 14); ctx.lineTo(8, headY - 20);
-        ctx.stroke();
-      } else {
-        ctx.beginPath();
-        ctx.moveTo(-23, headY - 17); ctx.lineTo(-8, headY - 16);
-        ctx.moveTo(8, headY - 16); ctx.lineTo(23, headY - 17);
-        ctx.stroke();
-      }
-
-      // 8. Mouth
-      ctx.strokeStyle = '#5c2814';
-      ctx.fillStyle = '#5c2814';
-      ctx.lineWidth = 4.0;
-      if (mood === 'panic') {
-        const openH = 8 + Math.abs(Math.sin(t * 10)) * 5;
-        ctx.beginPath();
-        ctx.ellipse(0, headY + 16, 11, openH, 0, 0, Math.PI * 2);
-        ctx.fill();
-      } else if (mood === 'talk') {
-        const talkOpen = 3 + Math.abs(Math.sin(t * 14)) * 6;
-        ctx.beginPath();
-        ctx.ellipse(0, headY + 15, 10, talkOpen, 0, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        ctx.beginPath();
-        ctx.arc(0, headY + 8, 14, 0.2, Math.PI - 0.15);
-        ctx.stroke();
-      }
-
-      // 9. Hair / Headwear
-      if (hair === 'silver_jensen') {
-        ctx.fillStyle = '#94a3b8';
-        const puffs = [
-          { cx: -32, cy: headY - 22, r: 20 },
-          { cx: -16, cy: headY - 40, r: 24 },
-          { cx: 8,   cy: headY - 42, r: 25 },
-          { cx: 30,  cy: headY - 24, r: 21 },
-          { cx: -38, cy: headY - 4,  r: 16 },
-          { cx: 38,  cy: headY - 4,  r: 16 },
-          { cx: 0,   cy: headY - 28, r: 22 }
-        ];
-        puffs.forEach(p => {
-          ctx.beginPath(); ctx.arc(p.cx, p.cy, p.r, 0, Math.PI * 2); ctx.fill();
+        render3DMicrochip(chipCenter, rx, ry, rz, cam, t, {
+          chipSize: 360,
+          thickness: 52,
+          isCracking: isCheated,
+          crackProgress: isCheated ? (t - 11.5) / 3.0 : 0,
+          highlightText: isCheated ? '⚠️ CHEATED DEATH' : 'NVIDIA TITAN',
+          subText: isCheated ? 'UNFAIR ADVANTAGE' : '$3,000,000,000,000'
         });
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-        ctx.lineWidth = 4.5;
-        ctx.beginPath(); ctx.moveTo(-24, headY - 34); ctx.lineTo(-14, headY - 42); ctx.stroke();
-      } else if (hair === 'hardhat') {
-        ctx.fillStyle = '#78350f';
-        ctx.beginPath(); ctx.arc(-38, headY - 10, 12, 0, Math.PI * 2); ctx.arc(38, headY - 10, 12, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = '#facc15';
-        ctx.beginPath(); ctx.arc(0, headY - 16, 48, Math.PI, Math.PI * 2); ctx.fill();
-        drawRoundBox(ctx, -56, headY - 20, 112, 11, 5, '#eab308', '#fef08a', 1.5);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-        ctx.lineWidth = 4.5;
-        ctx.beginPath(); ctx.arc(0, headY - 16, 36, Math.PI + 0.4, Math.PI + 1.1); ctx.stroke();
-      } else if (hair === 'slick_dark') {
-        ctx.fillStyle = '#1e293b';
-        ctx.beginPath(); ctx.arc(0, headY - 14, 48, Math.PI - 0.15, Math.PI * 2 + 0.15); ctx.fill();
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-        ctx.lineWidth = 4;
-        ctx.beginPath(); ctx.moveTo(12, headY - 38); ctx.lineTo(24, headY - 30); ctx.stroke();
-      } else {
-        ctx.fillStyle = '#b4823e';
-        const puffs = [
-          { cx: -32, cy: headY - 22, r: 20 },
-          { cx: -16, cy: headY - 40, r: 24 },
-          { cx: 8,   cy: headY - 42, r: 25 },
-          { cx: 30,  cy: headY - 24, r: 21 },
-          { cx: -38, cy: headY - 4,  r: 16 },
-          { cx: 38,  cy: headY - 4,  r: 16 },
-          { cx: 0,   cy: headY - 28, r: 22 }
-        ];
-        puffs.forEach(p => {
-          ctx.beginPath(); ctx.arc(p.cx, p.cy, p.r, 0, Math.PI * 2); ctx.fill();
-        });
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-        ctx.lineWidth = 4.5;
-        ctx.beginPath(); ctx.moveTo(-24, headY - 34); ctx.lineTo(-14, headY - 42); ctx.stroke();
-      }
 
-      ctx.restore();
-      ctx.restore();
-    }
-
-    // Render Master Frame at Time T
-    window.renderFrame = function(t) {
-      ctx.clearRect(0, 0, W, H);
-
-      // 1. Get Camera Transforms for continuous movement
-      const cam = getCameraTransform(t);
-      ctx.save();
-      ctx.translate(W / 2 + cam.offsetX, H / 2 + cam.offsetY);
-      ctx.rotate(cam.rot);
-      ctx.scale(cam.scale, cam.scale);
-      ctx.translate(-W / 2, -H / 2);
-
-      // ============================================================
-      // SCENE TIMELINE (Calibrated to ElevenLabs Timestamps):
-      // Act 1 (Gradual Hook): 0.0s - 15.48s
-      //   1A (0.0s - 5.13s): $3 Trillion Empire Counter & Globe
-      //   1B (5.13s - 6.77s): "Think Again" Camera Push
-      //   1C (6.77s - 12.65s): Jensen Huang Cheated Death & Glowing GPU
-      //   1D (12.65s - 15.48s): "Let Me Explain" Blueprint Expansion
-      // Act 2 (1995 Sega Deep Story): 15.48s - 33.50s
-      //   2A (15.48s - 20.36s): 30 Days to Bankruptcy CRT Terminal
-      //   2B (20.36s - 29.65s): Tokyo Boardroom & $5M Sega Rescue Contract
-      //   2C (29.65s - 33.50s): Pivoting to Ruthless Automation Circuit
-      // Act 3 (The Reality Check / Bleed): 33.50s - 46.14s
-      //   3A (33.50s - 38.02s): "Nobody is Perfect" Reality Check
-      //   3B (38.02s - 46.14s): Attic Ladder & -$8k/wk Voicemail Graveyard
-      // Act 4 (Seamless Cut to AVA & Products): 46.14s - 75.10s
-      //   4A (46.14s - 50.67s): The Unfair Advantage Matrix
-      //   4B (50.67s - 58.72s): Meet AVA Voice AI & Sub-Second Mobile Website
-      //   4C (58.72s - 66.28s): 0.8s Answer & Direct Truck Dispatch SMS
-      //   4D (66.28s - 75.10s): High-Voltage Live Dialer CTA (561) 813-8602
-      // ============================================================
-
-      if (t < 15.48) {
-        // ==========================================
-        // ACT 1: GRADUAL CURIOSITY HOOK (0s - 15.5s)
-        // ==========================================
-        drawCuevaRoom('#3b0764', '#0f021c', '#06010b', 1, t, "01 · THE HOOK • THE $3 TRILLION SECRET");
-        drawParticles(t);
-
-        if (t < 5.13) {
-          // 1A: The $3 Trillion Empire Question
-          const empireVal = Math.min(3000000000000, Math.floor((t / 3.5) * 3000000000000));
-          const formattedVal = '$' + empireVal.toLocaleString();
-
-          // Rotating 3D Globe Wireframe
-          const globeY = 480;
+        // Floating 3D Valuation Monument
+        const bannerPt = project3D({ x: 0, y: 310, z: 180 }, cam);
+        if (bannerPt) {
           ctx.save();
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
-          ctx.lineWidth = 3;
-          ctx.beginPath();
-          ctx.arc(W / 2, globeY, 150, 0, Math.PI * 2);
-          ctx.stroke();
+          ctx.translate(bannerPt.sx, bannerPt.sy);
+          ctx.scale(bannerPt.scale, bannerPt.scale);
+          drawRoundBox(ctx, -260, -50, 520, 100, 20, 'rgba(10, 20, 35, 0.92)', isCheated ? '#ef4444' : '#22c55e', 3.5);
 
-          // Rotating longitude lines
-          for (let l = -2; l <= 2; l++) {
-            const rotShift = (t * 1.5 + l * 0.8) % Math.PI;
-            ctx.beginPath();
-            ctx.ellipse(W / 2, globeY, Math.max(0.1, Math.abs(150 * Math.cos(rotShift))), 150, 0, 0, Math.PI * 2);
-            ctx.stroke();
-          }
-          // Latitude rings
-          for (let lat = -100; lat <= 100; lat += 60) {
-            const rad = Math.sqrt(Math.max(1, 150 * 150 - lat * lat));
-            ctx.beginPath();
-            ctx.ellipse(W / 2, globeY + lat, rad, Math.max(0.1, rad * 0.25), 0, 0, Math.PI * 2);
-            ctx.stroke();
-          }
-          ctx.restore();
-
-          // Big Counter Card
-          drawRoundBox(ctx, 100, 210, 880, 160, 24, 'rgba(56, 189, 248, 0.16)', '#38bdf8', 4);
-          ctx.font = '900 30px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#7dd3fc';
           ctx.textAlign = 'center';
-          ctx.fillText('NVIDIA MARKET CAP', W / 2, 260);
-
-          ctx.font = '900 68px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#facc15';
-          ctx.fillText(formattedVal, W / 2, 335);
-
-          // Cueva Presenter walking onto stage from left
-          const walkProgress = Math.min(1.0, t / 2.0);
-          const presX = -100 + walkProgress * (W / 2 + 100);
-          drawCuevaChar({
-            x: presX,
-            y: H * 0.77,
-            scale: 1.0,
-            outfit: 'suit',
-            hair: 'curly_gold',
-            mood: 'talk',
-            leftArmAngle: 0.35 + Math.sin(t * 5) * 0.15,
-            rightArmAngle: -0.8 + Math.cos(t * 5) * 0.15,
-            holdingItem: null
-          }, t);
-
-        } else if (t < 6.77) {
-          // 1B: "Think Again" Camera Push
-          const pulse = 1 + Math.sin(t * 12) * 0.03;
-          ctx.save();
-          ctx.translate(W / 2, 420);
-          ctx.scale(pulse, pulse);
-
-          drawRoundBox(ctx, -430, -145, 860, 290, 28, 'rgba(244, 63, 94, 0.25)', '#f43f5e', 5);
-          ctx.font = '900 34px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#fca5a5';
-          ctx.textAlign = 'center';
-          ctx.fillText('THE UNTOLD TRUTH', 0, -78);
-
-          ctx.font = '900 110px "Segoe UI", Arial, sans-serif';
           ctx.fillStyle = '#ffffff';
-          ctx.fillText('THINK AGAIN.', 0, 30);
+          ctx.font = '900 42px Arial, sans-serif';
+          ctx.shadowColor = isCheated ? '#ef4444' : '#22c55e';
+          ctx.shadowBlur = 18;
+          ctx.fillText(isCheated ? 'RULE BREAKER' : '$3 TRILLION EMPIRE', 0, -6);
 
-          ctx.font = '900 38px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#f43f5e';
-          ctx.fillText('HOW DID THEY ACTUALLY SURVIVE?', 0, 105);
-          ctx.restore();
-
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 1.0,
-            outfit: 'suit',
-            hair: 'curly_gold',
-            mood: 'talk',
-            leftArmAngle: 0.7,
-            rightArmAngle: -0.7,
-            holdingItem: null
-          }, t);
-
-        } else if (t < 12.65) {
-          // 1C: "Jensen Huang Cheated Death"
-          drawRoundBox(ctx, 100, 210, 880, 270, 28, 'rgba(244, 63, 94, 0.25)', '#f43f5e', 5);
-          ctx.font = '900 34px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#fca5a5';
-          ctx.textAlign = 'center';
-          ctx.fillText('CONFIDENTIAL SILICON VALLEY HISTORY', W / 2, 270);
-
-          ctx.font = '900 82px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText("JENSEN HUANG", W / 2, 355);
-
-          ctx.font = '900 110px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#f43f5e';
-          ctx.fillText('CHEATED DEATH.', W / 2, 455);
-
-          // Jensen Huang on Center Stage holding glowing NV1 GPU
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 1.0,
-            outfit: 'jensen',
-            hair: 'silver_jensen',
-            mood: 'talk',
-            leftArmAngle: 0.25,
-            rightArmAngle: -1.05 + Math.sin(t * 6) * 0.08,
-            holdingItem: 'gpu'
-          }, t);
-
-          // Snapping electrical arcs around GPU
-          ctx.strokeStyle = '#4ade80';
-          ctx.lineWidth = 3;
-          for (let arc = 0; arc < 4; arc++) {
-            const arcAngle = t * 12 + arc * (Math.PI / 2);
-            const gx = W / 2 + 130 + Math.cos(arcAngle) * 45;
-            const gy = H * 0.77 - 220 + Math.sin(arcAngle) * 45;
-            ctx.beginPath();
-            ctx.moveTo(W / 2 + 130, H * 0.77 - 220);
-            ctx.lineTo(gx, gy);
-            ctx.stroke();
-          }
-
-        } else {
-          // 1D: "Let Me Explain" (12.65s - 15.48s)
-          drawRoundBox(ctx, 120, 230, 840, 200, 24, 'rgba(56, 189, 248, 0.2)', '#38bdf8', 4);
-          ctx.font = '900 76px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#38bdf8';
-          ctx.textAlign = 'center';
-          ctx.fillText('LET ME EXPLAIN.', W / 2, 320);
-
-          ctx.font = '800 32px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('WHAT HAPPENED IN 1995...', W / 2, 385);
-
-          // Holographic blueprint schematic between Jensen and Presenter
-          drawRoundBox(ctx, 320, 470, 440, 240, 16, 'rgba(15, 23, 42, 0.85)', '#0ea5e9', 3);
-          ctx.fillStyle = 'rgba(14, 165, 233, 0.3)';
-          for (let g = 340; g <= 740; g += 40) {
-            ctx.fillRect(g, 490, 2, 200);
-          }
-          ctx.font = '900 24px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#38bdf8';
-          ctx.fillText('NV1 MICROPROCESSOR BLUEPRINT', 540, 530);
-          ctx.font = '900 42px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ef4444';
-          ctx.fillText('ARCHITECTURAL FLAW', 540, 610);
-
-          drawCuevaChar({
-            x: 240,
-            y: H * 0.77,
-            scale: 0.95,
-            outfit: 'suit',
-            hair: 'curly_gold',
-            mood: 'talk',
-            leftArmAngle: 0.3,
-            rightArmAngle: -0.9,
-            holdingItem: null
-          }, t);
-
-          drawCuevaChar({
-            x: 840,
-            y: H * 0.77,
-            scale: 0.95,
-            outfit: 'jensen',
-            hair: 'silver_jensen',
-            mood: 'smirk',
-            leftArmAngle: 0.8,
-            rightArmAngle: -0.3,
-            holdingItem: 'gpu'
-          }, t);
-        }
-
-      } else if (t < 33.50) {
-        // ==========================================
-        // ACT 2: 1995 SEGA $5M STORY (15.5s - 33.5s)
-        // ==========================================
-        drawCuevaRoom('#064e3b', '#022c22', '#02140f', 2, t, "02 · THE DEEP STORY • 1995 SEGA PIVOT");
-        drawParticles(t);
-
-        if (t < 20.36) {
-          // 2A: 30 Days to Total Bankruptcy CRT Terminal
-          drawRoundBox(ctx, 100, 220, 880, 420, 24, '#090d16', '#ef4444', 4);
-          ctx.font = '900 32px "Courier New", monospace';
-          ctx.fillStyle = '#f87171';
-          ctx.textAlign = 'center';
-          ctx.fillText('SYSTEM ALERT · 1995 NVIDIA CASH RESERVES', W / 2, 280);
-
-          // Digital Countdown Clock
-          const daysLeft = Math.max(1, 30 - Math.floor((t - 15.48) * 5.8));
-          ctx.font = '900 110px "Courier New", monospace';
-          ctx.fillStyle = '#ef4444';
-          ctx.fillText(String(daysLeft) + ' DAYS', W / 2, 395);
-
-          ctx.font = '800 36px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#fca5a5';
-          ctx.fillText('TO TOTAL BANKRUPTCY', W / 2, 455);
-
-          // Draining Cash Bar
-          const cashPct = Math.max(0.04, 1.0 - ((t - 15.48) / 4.88));
-          drawRoundBox(ctx, 160, 500, 760, 45, 12, '#18181b', '#3f3f46', 2);
-          drawRoundBox(ctx, 160, 500, 760 * cashPct, 45, 12, '#ef4444', null);
-
-          ctx.font = '900 24px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('CASH RUNWAY DRAINING: ' + Math.round(cashPct * 100) + '%', W / 2, 595);
-
-          // Jensen looking worried on stage
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 1.0,
-            outfit: 'jensen',
-            hair: 'silver_jensen',
-            mood: 'worried',
-            leftArmAngle: 0.45,
-            rightArmAngle: -0.45,
-            holdingItem: null
-          }, t);
-
-        } else if (t < 29.65) {
-          // 2B: Sega Tokyo Boardroom $5M Rescue
-          // Sega Boardroom Table
-          ctx.save();
-          const tableGrad = ctx.createLinearGradient(0, H * 0.62, 0, H * 0.78);
-          tableGrad.addColorStop(0, '#78350f');
-          tableGrad.addColorStop(1, '#451a03');
-          ctx.fillStyle = tableGrad;
-          ctx.beginPath();
-          ctx.moveTo(120, H * 0.74);
-          ctx.lineTo(960, H * 0.74);
-          ctx.lineTo(1040, H * 0.78);
-          ctx.lineTo(40, H * 0.78);
-          ctx.closePath();
-          ctx.fill();
-          ctx.strokeStyle = '#d97706';
-          ctx.lineWidth = 4;
-          ctx.stroke();
-          ctx.restore();
-
-          // $5M Sega Rescue Card
-          drawRoundBox(ctx, 100, 220, 880, 240, 24, 'rgba(16, 185, 129, 0.22)', '#10b981', 4);
-          ctx.font = '900 32px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#6ee7b7';
-          ctx.textAlign = 'center';
-          ctx.fillText('TOKYO · SEGA HEADQUARTERS', W / 2, 280);
-
-          ctx.font = '900 86px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#34d399';
-          ctx.fillText('+$5,000,000 RESCUE', W / 2, 370);
-
-          ctx.font = '800 32px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('CONFESSED FAILURE · WON THE CONTRACT', W / 2, 425);
-
-          // Signed Contract sliding across table with green wax seal
-          const contractSlide = Math.min(1.0, (t - 20.36) / 2.5);
-          const cX = 700 - contractSlide * 220;
-          drawRoundBox(ctx, cX - 90, 520, 180, 120, 10, '#ffffff', '#10b981', 3);
-          ctx.fillStyle = '#1e293b';
-          ctx.fillRect(cX - 70, 545, 140, 6);
-          ctx.fillRect(cX - 70, 565, 120, 6);
-          ctx.fillRect(cX - 70, 585, 100, 6);
-          // Wax seal
-          ctx.fillStyle = '#ef4444';
-          ctx.beginPath();
-          ctx.arc(cX + 55, 605, 18, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Jensen on Left negotiating
-          drawCuevaChar({
-            x: 270,
-            y: H * 0.77,
-            scale: 0.95,
-            outfit: 'jensen',
-            hair: 'silver_jensen',
-            mood: 'talk',
-            leftArmAngle: 0.15,
-            rightArmAngle: -0.95 + Math.sin(t * 6) * 0.1,
-            holdingItem: null
-          }, t);
-
-          // Sega Executive on Right holding contract
-          drawCuevaChar({
-            x: 810,
-            y: H * 0.77,
-            scale: 0.95,
-            outfit: 'sega',
-            hair: 'slick_dark',
-            mood: 'smile',
-            leftArmAngle: 0.85,
-            rightArmAngle: -0.2,
-            holdingItem: 'contract'
-          }, t);
-
-        } else {
-          // 2C: Pivoting to Ruthless Automation (29.65s - 33.50s)
-          drawRoundBox(ctx, 100, 220, 880, 230, 24, 'rgba(34, 197, 94, 0.22)', '#22c55e', 4);
-          ctx.font = '900 32px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#86efac';
-          ctx.textAlign = 'center';
-          ctx.fillText('THE NVIDIA TURNING POINT', W / 2, 280);
-
-          ctx.font = '900 68px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('RUTHLESS AUTOMATION', W / 2, 360);
-
-          ctx.font = '800 30px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#4ade80';
-          ctx.fillText('SIMULATED EVERYTHING BEFORE BUILDING', W / 2, 415);
-
-          // Rotating Automation Gear & Circuit Grid
-          const gearAngle = t * 3;
-          ctx.save();
-          ctx.translate(W / 2, 600);
-          ctx.rotate(gearAngle);
-          ctx.strokeStyle = '#4ade80';
-          ctx.lineWidth = 6;
-          ctx.beginPath();
-          ctx.arc(0, 0, 70, 0, Math.PI * 2);
-          ctx.stroke();
-          for (let cog = 0; cog < 8; cog++) {
-            ctx.rotate(Math.PI / 4);
-            ctx.fillStyle = '#22c55e';
-            ctx.fillRect(-12, -90, 24, 25);
-          }
-          ctx.restore();
-
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 1.0,
-            outfit: 'jensen',
-            hair: 'silver_jensen',
-            mood: 'smile',
-            leftArmAngle: 0.6,
-            rightArmAngle: -0.6,
-            holdingItem: 'gpu'
-          }, t);
-        }
-
-      } else if (t < 46.14) {
-        // ==========================================
-        // ACT 3: REALITY CHECK / BLEED (33.5s - 46.1s)
-        // ==========================================
-        drawCuevaRoom('#451a03', '#1c0a00', '#0a0401', 3, t, "03 · THE REALITY • NOBODY'S PERFECT");
-
-        // Rain particle system for attic storm atmosphere
-        ctx.save();
-        ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
-        ctx.lineWidth = 2.5;
-        for (let r = 0; r < 40; r++) {
-          const rx = (r * 73 + t * 450) % (W + 100) - 50;
-          const ry = (r * 127 + t * 780) % (H * 0.77);
-          ctx.beginPath();
-          ctx.moveTo(rx, ry);
-          ctx.lineTo(rx - 8, ry + 24);
-          ctx.stroke();
-        }
-        ctx.restore();
-
-        if (t < 38.02) {
-          // 3A: "Nobody is Perfect. Neither is Your Business."
-          ctx.font = '900 76px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#fbbf24';
-          ctx.textAlign = 'center';
-          ctx.fillText("NOBODY'S PERFECT.", W / 2, 280);
-
-          ctx.font = '900 52px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('NEITHER IS YOUR BUSINESS.', W / 2, 355);
-
-          drawRoundBox(ctx, 120, 420, 840, 180, 24, 'rgba(239, 68, 68, 0.2)', '#ef4444', 4);
-          ctx.font = '800 32px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#fca5a5';
-          ctx.fillText('REALITY CHECK FOR CONTRACTORS', W / 2, 480);
-          ctx.font = '900 58px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#f87171';
-          ctx.fillText('YOU CANNOT BE IN TWO PLACES', W / 2, 555);
-
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 1.0,
-            outfit: 'suit',
-            hair: 'curly_gold',
-            mood: 'talk',
-            leftArmAngle: 0.5,
-            rightArmAngle: -0.5,
-            holdingItem: null
-          }, t);
-
-        } else {
-          // 3B: Attic Ladder Sway & -$8,000 Voicemail Graveyard
-          drawRoundBox(ctx, 120, 220, 840, 240, 24, 'rgba(244, 63, 94, 0.22)', '#f43f5e', 5);
-          ctx.font = '800 30px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#fca5a5';
-          ctx.textAlign = 'center';
-          ctx.fillText('VOICEMAIL GRAVEYARD', W / 2, 275);
-
-          ctx.font = '900 96px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('-$8,000 / WEEK', W / 2, 370);
-
-          ctx.font = '800 28px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#f43f5e';
-          ctx.fillText('LOST WHILE YOU ARE ON A LADDER', W / 2, 425);
-
-          // Swaying Attic Wooden Ladder behind Bob
-          const ladderSway = Math.sin(t * 3.5) * 8;
-          ctx.save();
-          ctx.strokeStyle = 'rgba(245, 158, 11, 0.55)';
-          ctx.lineWidth = 14;
-          ctx.beginPath();
-          ctx.moveTo(W / 2 - 130 + ladderSway, 520); ctx.lineTo(W / 2 - 130, H * 0.77);
-          ctx.moveTo(W / 2 + 130 + ladderSway, 520); ctx.lineTo(W / 2 + 130, H * 0.77);
-          ctx.stroke();
-          ctx.lineWidth = 8;
-          for (let r = 560; r <= 1400; r += 75) {
-            ctx.beginPath(); ctx.moveTo(W / 2 - 130 + ladderSway, r); ctx.lineTo(W / 2 + 130 + ladderSway, r); ctx.stroke();
-          }
-          ctx.restore();
-
-          // Bob the Contractor with Hardhat, Vest, and Wrench (Panicked!)
-          drawCuevaChar({
-            x: W / 2 + ladderSway * 0.5,
-            y: H * 0.77,
-            scale: 0.95,
-            outfit: 'contractor',
-            hair: 'hardhat',
-            mood: 'panic',
-            leftArmAngle: 0.7,
-            rightArmAngle: -0.9,
-            holdingItem: 'wrench'
-          }, t);
-
-          // Red Buzzing Phone Notification Alert
-          const buzz = Math.sin(t * 26) * 12;
-          drawRoundBox(ctx, W / 2 + 150 + buzz, 960, 260, 75, 16, '#ef4444', '#fecaca', 3);
-          ctx.font = '900 28px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.textAlign = 'center';
-          ctx.fillText('MISSED CALL ✕', W / 2 + 280 + buzz, 1008);
-
-          // Broken glass cracks on Voicemail card
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-          ctx.lineWidth = 3;
-          ctx.beginPath();
-          ctx.moveTo(W / 2, 370); ctx.lineTo(W / 2 + 50, 320);
-          ctx.moveTo(W / 2, 370); ctx.lineTo(W / 2 - 60, 390);
-          ctx.moveTo(W / 2, 370); ctx.lineTo(W / 2 + 30, 420);
-          ctx.stroke();
-        }
-
-      } else {
-        // ==========================================
-        // ACT 4: SEAMLESS CUT TO AVA & PRODUCTS (46.1s - 75.1s)
-        // ==========================================
-        drawCuevaRoom('#1e1b4b', '#064e3b', '#02120e', 4, t, '04 · THE UNFAIR ADVANTAGE • MEET AVA');
-        drawParticles(t);
-
-        if (t < 50.67) {
-          // 4A: "Jensen Had an Unfair Advantage, Now You Do Too"
-          drawRoundBox(ctx, 100, 220, 880, 240, 24, 'rgba(56, 189, 248, 0.22)', '#38bdf8', 4);
-          ctx.font = '900 32px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#7dd3fc';
-          ctx.textAlign = 'center';
-          ctx.fillText('THE LEVEL PLAYING FIELD IS A LIE', W / 2, 280);
-
-          ctx.font = '900 70px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('YOUR UNFAIR ADVANTAGE', W / 2, 365);
-
-          ctx.font = '800 32px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#34d399';
-          ctx.fillText('AUTOMATE YOUR FRONT OFFICE 24/7', W / 2, 420);
-
-          // Glowing cyan cyber core in center stage
-          const corePulse = 1 + Math.sin(t * 8) * 0.12;
-          ctx.save();
-          ctx.translate(W / 2, 620);
-          ctx.scale(corePulse, corePulse);
-          const coreGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, 90);
-          coreGrad.addColorStop(0, '#38bdf8');
-          coreGrad.addColorStop(0.6, '#0284c7');
-          coreGrad.addColorStop(1, 'rgba(2, 132, 199, 0)');
-          ctx.fillStyle = coreGrad;
-          ctx.beginPath();
-          ctx.arc(0, 0, 90, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.restore();
-
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 1.0,
-            outfit: 'suit',
-            hair: 'curly_gold',
-            mood: 'smile',
-            leftArmAngle: 0.6,
-            rightArmAngle: -0.6,
-            holdingItem: null
-          }, t);
-
-        } else if (t < 58.72) {
-          // 4B: Meet AVA Voice AI & Sub-Second Mobile Website
-          // Top Big Promotion Header
-          drawRoundBox(ctx, 100, 210, 880, 100, 20, 'rgba(56, 189, 248, 0.18)', '#38bdf8', 3);
-          ctx.font = '900 46px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.textAlign = 'center';
-          ctx.fillText('MEET AVA · 24/7 VOICE AI RECEPTIONIST', W / 2, 275);
-
-          // Neon AI Hologram Brain on Left
-          const holoX = 340, holoY = 480;
-          for (let r = 0; r < 3; r++) {
-            const rad = 110 + r * 30 + Math.sin(t * 5 + r) * 6;
-            ctx.strokeStyle = 'rgba(244, 114, 182, ' + (0.35 - r * 0.08) + ')';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(holoX, holoY, rad, 0, Math.PI * 2);
-            ctx.stroke();
-          }
-
-          // Glowing Neon Head Silhouette
-          ctx.strokeStyle = '#f472b6';
-          ctx.lineWidth = 5;
-          ctx.shadowColor = '#f472b6';
-          ctx.shadowBlur = 20;
-          ctx.beginPath();
-          ctx.arc(holoX, holoY - 10, 90, -Math.PI * 0.85, Math.PI * 0.45);
-          ctx.lineTo(holoX + 40, holoY + 100);
-          ctx.lineTo(holoX - 40, holoY + 100);
-          ctx.lineTo(holoX - 48, holoY + 60);
-          ctx.lineTo(holoX - 82, holoY + 55);
-          ctx.closePath();
-          ctx.stroke();
+          ctx.font = '800 18px Arial, sans-serif';
+          ctx.fillStyle = isCheated ? '#fca5a5' : '#86efac';
           ctx.shadowBlur = 0;
-
-          // Glowing Brain Lobes
-          ctx.fillStyle = '#fb7185';
-          const lobes = [
-            { dx: -24, dy: -24, r: 28 },
-            { dx: 20,  dy: -24, r: 28 },
-            { dx: -30, dy: 6,   r: 24 },
-            { dx: 26,  dy: 6,   r: 24 },
-            { dx: 0,   dy: -8,  r: 28 }
-          ];
-          lobes.forEach(l => {
-            ctx.beginPath(); ctx.arc(holoX + l.dx, holoY + l.dy, l.r, 0, Math.PI * 2); ctx.fill();
-          });
-
-          // Floating Badge: ⚡ 0.8s ANSWER
-          drawRoundBox(ctx, holoX - 140, holoY - 145, 280, 45, 12, '#065f46', '#4ade80', 2.5);
-          ctx.font = '900 20px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#4ade80';
-          ctx.textAlign = 'center';
-          ctx.fillText('⚡ AVA AI • 0.8s ANSWER', holoX, holoY - 116);
-
-          // Ultra-Fast Mobile Website Mockup on Right
-          const phoneX = 740, phoneY = 480;
-          drawRoundBox(ctx, phoneX - 160, phoneY - 170, 320, 360, 28, '#0f172a', '#38bdf8', 4);
-          // Phone notch & top bar
-          ctx.fillStyle = '#020617';
-          drawRoundBox(ctx, phoneX - 60, phoneY - 165, 120, 18, 9, '#020617', null);
-          // 0.6s Speed Badge
-          drawRoundBox(ctx, phoneX - 130, phoneY - 120, 260, 48, 12, 'rgba(52, 211, 153, 0.25)', '#34d399', 2);
-          ctx.font = '900 22px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#34d399';
-          ctx.fillText('⚡ 0.6s LOAD SPEED', phoneX, phoneY - 88);
-
-          // Simulated Website Content inside Phone
-          drawRoundBox(ctx, phoneX - 130, phoneY - 55, 260, 110, 14, '#1e293b', null);
-          ctx.font = '900 20px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('PRO-TECH AIR SERVICES', phoneX, phoneY - 25);
-          ctx.font = '700 15px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#94a3b8';
-          ctx.fillText('24/7 HVAC Emergency Booking', phoneX, phoneY);
-
-          // 100/100 Google Lighthouse Score
-          drawRoundBox(ctx, phoneX - 110, phoneY + 70, 220, 42, 10, '#065f46', '#4ade80', 2);
-          ctx.font = '900 20px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#4ade80';
-          ctx.fillText('SCORE: 100/100 MOBILE', phoneX, phoneY + 97);
-
-          // Cueva Presenter in Center pointing to both
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 0.95,
-            outfit: 'suit',
-            hair: 'curly_gold',
-            mood: 'talk',
-            leftArmAngle: 0.8,
-            rightArmAngle: -0.8,
-            holdingItem: null
-          }, t);
-
-        } else if (t < 66.28) {
-          // 4C: 0.8s Answer & Direct Truck Dispatch SMS
-          drawRoundBox(ctx, 100, 210, 880, 100, 20, 'rgba(56, 189, 248, 0.18)', '#38bdf8', 3);
-          ctx.font = '900 44px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.textAlign = 'center';
-          ctx.fillText('QUALIFIES LEADS & DISPATCHES TO YOUR TRUCK', W / 2, 275);
-
-          // Incoming SMS Dispatch Card (Sliding down)
-          const smsSlide = Math.min(1.0, (t - 58.72) / 1.5);
-          const smsY = 340 + smsSlide * 60;
-          drawRoundBox(ctx, 140, smsY, 800, 260, 24, '#0f172a', '#38bdf8', 4);
-
-          ctx.font = '800 24px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#38bdf8';
-          ctx.textAlign = 'left';
-          ctx.fillText('📲 INSTANT DISPATCH TO YOUR PHONE:', 180, smsY + 48);
-
-          ctx.font = '900 32px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText('✅ Carlin Oates — AC Compressor Failure', 180, smsY + 100);
-
-          ctx.font = '700 26px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#cbd5e1';
-          ctx.fillText('📍 Miami, FL • Qualified • Slot Booked: Today 2 PM', 180, smsY + 145);
-
-          ctx.font = '900 42px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#4ade80';
-          ctx.fillText('💰 +$8,000 JOB SECURED 24/7', 180, smsY + 215);
-
-          // Cueva Presenter on stage
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 1.0,
-            outfit: 'suit',
-            hair: 'curly_gold',
-            mood: 'smile',
-            leftArmAngle: 0.35,
-            rightArmAngle: -0.9 + Math.sin(t * 4) * 0.08,
-            holdingItem: null
-          }, t);
-
-        } else {
-          // 4D: High-Voltage CTA (66.28s - 75.10s)
-          // Top Big Promotion Header
-          drawRoundBox(ctx, 100, 210, 880, 110, 22, 'rgba(56, 189, 248, 0.18)', '#38bdf8', 3);
-          ctx.font = '900 50px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.textAlign = 'center';
-          ctx.fillText('NEVER MISS AN $8,000 JOB AGAIN', W / 2, 280);
-
-          // Pulsing Dial Box
-          const ctaPulse = 1 + Math.sin(t * 7) * 0.03;
-          ctx.save();
-          ctx.translate(W / 2, 490);
-          ctx.scale(ctaPulse, ctaPulse);
-
-          drawRoundBox(ctx, -440, -120, 880, 240, 28, 'rgba(52, 211, 153, 0.25)', '#34d399', 5);
-          ctx.font = '900 84px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.textAlign = 'center';
-          ctx.fillText('📞 (561) 813-8602', 0, -10);
-
-          ctx.font = '900 36px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#facc15';
-          ctx.fillText('TEST AVA LIVE RIGHT NOW', 0, 65);
+          ctx.fillText(isCheated ? 'Jensen Huang refused to die' : 'BUILT BY RUTHLESS ADVANTAGE', 0, 28);
           ctx.restore();
-
-          // Bottom Comment Pill
-          drawRoundBox(ctx, 160, 680, 760, 85, 22, 'rgba(244, 63, 94, 0.25)', '#f43f5e', 4);
-          ctx.font = '900 38px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
-          ctx.textAlign = 'center';
-          ctx.fillText('OR COMMENT "AVA" BELOW', W / 2, 735);
-
-          drawCuevaChar({
-            x: W / 2,
-            y: H * 0.77,
-            scale: 0.95,
-            outfit: 'suit',
-            hair: 'curly_gold',
-            mood: 'talk',
-            leftArmAngle: 0.6,
-            rightArmAngle: -0.6,
-            holdingItem: null
-          }, t);
         }
       }
 
-      // ============================================================
-      // HORMOZI-STYLE KINETIC CAPTIONS ON STAGE FLOOR (Y = 1580 - 1800)
-      // ============================================================
+      // ACT 2: 15.2s - 33.5s (1995 Bankruptcy, Shattered Chip, Sega $5M Check, Automation)
+      else if (t < 33.5) {
+        const timeInAct = t - 15.2;
+
+        if (timeInAct < 5.8) {
+          // 15.2s - 21.0s: "In 1995 Nvidia was 30 days from total bankruptcy. Their chip was broken."
+          const chipCenter = { x: 0, y: -40, z: 260 };
+          const shatterProgress = Math.min(1.0, Math.max(0, (timeInAct - 3.2) / 2.6));
+
+          if (shatterProgress > 0) {
+            render3DShards(chipCenter, shatterProgress, cam, t);
+          } else {
+            render3DMicrochip(chipCenter, 0.45, timeInAct * 1.5, 0.1, cam, t, {
+              chipSize: 340,
+              thickness: 48,
+              isCracking: true,
+              crackProgress: timeInAct / 3.2,
+              highlightText: 'NV1 CHIP BROKEN',
+              subText: '30 DAYS TO BANKRUPTCY'
+            });
+          }
+
+          // Warning Countdown Banner
+          const warnPt = project3D({ x: 0, y: 310, z: 200 }, cam);
+          if (warnPt) {
+            ctx.save();
+            ctx.translate(warnPt.sx, warnPt.sy);
+            ctx.scale(warnPt.scale, warnPt.scale);
+            drawRoundBox(ctx, -250, -45, 500, 90, 18, 'rgba(40, 10, 15, 0.94)', '#ef4444', 3.5);
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 36px Arial, sans-serif';
+            ctx.shadowColor = '#ef4444';
+            ctx.shadowBlur = 18;
+            ctx.fillText('🚨 30 DAYS TO TOTAL DEATH', 0, -5);
+            ctx.font = '800 17px Arial, sans-serif';
+            ctx.fillStyle = '#fca5a5';
+            ctx.fillText('1995: Zero cash. Hardware failed.', 0, 26);
+            ctx.restore();
+          }
+        } else if (timeInAct < 13.5) {
+          // 21.0s - 28.7s: Jensen Sega Boardroom Confession & $5M Rescue Check
+          const checkCenter = { x: 0, y: -30, z: 240 };
+          const rx = 0.2 + Math.sin(t * 1.4) * 0.1;
+          const ry = Math.sin(t * 1.6) * 0.35;
+          const rz = Math.cos(t * 1.1) * 0.08;
+
+          render3DCheck(checkCenter, rx, ry, rz, cam, t);
+        } else {
+          // 28.7s - 33.5s: Ruthless Automation
+          const gearCenter = { x: 0, y: -30, z: 260 };
+          render3DGears(gearCenter, cam, t);
+
+          const autoPt = project3D({ x: 0, y: 290, z: 200 }, cam);
+          if (autoPt) {
+            ctx.save();
+            ctx.translate(autoPt.sx, autoPt.sy);
+            ctx.scale(autoPt.scale, autoPt.scale);
+            drawRoundBox(ctx, -260, -45, 520, 90, 18, 'rgba(10, 25, 20, 0.94)', '#22c55e', 3.5);
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 38px Arial, sans-serif';
+            ctx.shadowColor = '#22c55e';
+            ctx.shadowBlur = 18;
+            ctx.fillText('⚡ RUTHLESS AUTOMATION', 0, -5);
+            ctx.font = '800 17px Arial, sans-serif';
+            ctx.fillStyle = '#86efac';
+            ctx.fillText('Replaced manual bottleneck with software', 0, 26);
+            ctx.restore();
+          }
+        }
+      }
+
+      // ACT 3: 33.5s - 46.5s (Contractor Attic, Emergency Voicemail Bleed & -$8,000 Cash Disintegration)
+      else if (t < 46.5) {
+        const timeInBleed = t - 33.5;
+        const isMissed = (timeInBleed >= 4.5); // After 38.0s, call misses
+
+        const phoneCenter = { x: 0, y: -40, z: 240 };
+        const rx = 0.25 + Math.sin(t * 1.5) * 0.08;
+        const ry = -0.3 + Math.cos(t * 1.2) * 0.15;
+        const rz = Math.sin(t * 1.8) * 0.05;
+
+        render3DPhone(phoneCenter, rx, ry, rz, cam, t, {
+          isRinging: !isMissed,
+          isMissed: isMissed,
+          caller: 'Sarah W. (Emergency Pipe Burst)',
+          jobValue: '$8,000.00'
+        });
+
+        if (isMissed) {
+          // Stacks of falling $100 bills scattering in 3D
+          render3DCurrency(phoneCenter, cam, t);
+
+          const bleedPt = project3D({ x: 0, y: 310, z: 180 }, cam);
+          if (bleedPt) {
+            ctx.save();
+            ctx.translate(bleedPt.sx, bleedPt.sy);
+            ctx.scale(bleedPt.scale, bleedPt.scale);
+            drawRoundBox(ctx, -260, -45, 520, 90, 18, 'rgba(45, 10, 15, 0.96)', '#ef4444', 3.5);
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 40px Arial, sans-serif';
+            ctx.shadowColor = '#ef4444';
+            ctx.shadowBlur = 20;
+            ctx.fillText('-$8,000 LOST TO VOICEMAIL', 0, -5);
+            ctx.font = '800 17px Arial, sans-serif';
+            ctx.fillStyle = '#fca5a5';
+            ctx.fillText('While you were stuck on a ladder or asleep', 0, 26);
+            ctx.restore();
+          }
+        }
+      }
+
+      // ACT 4: 46.5s - 75.1s (AVA Voice AI, 0.8s Slam, Dispatch Cards & Live CTA Challenge)
+      else {
+        const timeInAva = t - 46.5;
+
+        if (timeInAva < 17.5) {
+          // 46.5s - 64.0s: AVA 24/7 Voice AI Reactor & Speedometer & Dispatch Cards
+          const reactorCenter = { x: 0, y: -160, z: 260 };
+          render3DAvaReactor(reactorCenter, cam, t);
+
+          // Speedometer
+          const speedCenter = { x: -260, y: 220, z: 220 };
+          render3DSpeedometer(speedCenter, cam, t);
+
+          // Dispatch cards sliding in sequentially
+          if (timeInAva >= 2.5 && timeInAva < 7.5) {
+            const cardCenter = { x: 140, y: 220, z: 190 };
+            render3DDispatchCard(cardCenter, { rx: 0.1, ry: -0.2, rz: 0 }, cam, '0.8s 1ST RING ANSWER', 'Instant Voice AI Pickup', '⚡', 'SUB-SECOND', '#00f0ff');
+          } else if (timeInAva >= 7.5 && timeInAva < 12.5) {
+            const cardCenter = { x: 140, y: 220, z: 190 };
+            render3DDispatchCard(cardCenter, { rx: 0.1, ry: -0.2, rz: 0 }, cam, 'JOB QUALIFIED & PRICED', 'Books directly onto calendar', '🎯', 'AUTOMATED', '#22c55e');
+          } else if (timeInAva >= 12.5) {
+            const cardCenter = { x: 140, y: 220, z: 190 };
+            render3DDispatchCard(cardCenter, { rx: 0.1, ry: -0.2, rz: 0 }, cam, 'DISPATCHED TO TRUCK', 'SMS with address & problem', '🚚', 'INSTANT SMS', '#facc15');
+          }
+        } else {
+          // 64.0s - 75.1s: Grand Finale Live Call Challenge (561) 813-8602 & Comment AVA
+          const finaleCenter = { x: 0, y: -40, z: 210 };
+          render3DFinale(finaleCenter, cam, t);
+        }
+      }
+
+      // ==========================================
+      // KINETIC HORMOZI CAPTIONS (Synced to words)
+      // ==========================================
       const activeWordIdx = WORDS.findIndex(w => t >= w.start && t <= w.end);
       let targetIdx = activeWordIdx;
       if (targetIdx === -1) {
@@ -1281,13 +1513,17 @@ const htmlContent = `<!DOCTYPE html>
       ctx.textBaseline = 'middle';
 
       let totalWidth = 0;
-      ctx.font = '900 58px "Segoe UI", Arial, sans-serif';
+      ctx.font = '900 62px Arial, sans-serif';
       const wordMetrics = chunkWords.map(cw => {
         const txt = cw.word.toUpperCase();
         const m = ctx.measureText(txt);
-        totalWidth += m.width + 28;
+        totalWidth += m.width + 30;
         return { txt, width: m.width, isCurrent: (cw.start <= t && cw.end >= t) };
       });
+
+      // Backdrop glassmorphic pill for captions
+      const pillW = Math.min(W - 80, totalWidth + 90);
+      drawRoundBox(ctx, W / 2 - pillW / 2, capY - 58, pillW, 116, 26, 'rgba(4, 8, 18, 0.88)', 'rgba(56, 189, 248, 0.35)', 2.5);
 
       let startWordX = W / 2 - totalWidth / 2;
       wordMetrics.forEach((wm) => {
@@ -1296,34 +1532,44 @@ const htmlContent = `<!DOCTYPE html>
         ctx.translate(curWordX, capY);
 
         if (wm.isCurrent) {
-          const pop = 1 + Math.sin(t * 18) * 0.08;
+          const pop = 1 + Math.sin(t * 20) * 0.1;
           ctx.scale(pop, pop);
 
           // Yellow/Green kinetic glow highlight
-          ctx.font = '900 68px "Segoe UI", Arial, sans-serif';
+          ctx.font = '900 72px Arial, sans-serif';
           ctx.fillStyle = '#facc15';
           ctx.shadowColor = '#facc15';
-          ctx.shadowBlur = 20;
+          ctx.shadowBlur = 24;
+          // 3D Drop text shadow
+          ctx.fillText(wm.txt, 3, 3);
+          ctx.fillStyle = '#ffffff';
           ctx.fillText(wm.txt, 0, 0);
         } else {
-          ctx.font = '900 56px "Segoe UI", Arial, sans-serif';
-          ctx.fillStyle = '#ffffff';
+          ctx.font = '900 58px Arial, sans-serif';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
           ctx.shadowBlur = 0;
           ctx.fillText(wm.txt, 0, 0);
         }
 
         ctx.restore();
-        startWordX += wm.width + 28;
+        startWordX += wm.width + 30;
       });
 
       ctx.restore();
-      ctx.restore(); // Restore camera transform
+
+      // White Impact Flash on Key Punchlines
+      if (flashAlpha > 0) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(255, 255, 255, ' + flashAlpha + ')';
+        ctx.fillRect(0, 0, W, H);
+        ctx.restore();
+      }
     };
   </script>
 </body>
 </html>`;
 
-const tmpHtmlPath = path.join(root, 'scripts/tmp_cueva_nvidia.html');
+const tmpHtmlPath = path.join(root, 'scripts/tmp_3d_nvidia.html');
 fs.writeFileSync(tmpHtmlPath, htmlContent, 'utf8');
 
 async function renderVideo() {
@@ -1334,6 +1580,8 @@ async function renderVideo() {
   });
 
   const page = await browser.newPage();
+  page.on('pageerror', err => console.error('BROWSER PAGE ERROR:', err.message, err.stack));
+  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
   await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
   await page.goto('file:///' + tmpHtmlPath.replace(/\\/g, '/'), { waitUntil: 'load' });
 
@@ -1372,7 +1620,7 @@ async function renderVideo() {
     if (f % 60 === 0 || f === totalFrames - 1) {
       const pct = ((f / totalFrames) * 100).toFixed(0);
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-      process.stdout.write(`\r[RENDER] Frame ${f}/${totalFrames} (${pct}%) — ${elapsed}s elapsed`);
+      process.stdout.write(`\r[3D RENDER] Frame ${f}/${totalFrames} (${pct}%) — ${elapsed}s elapsed`);
     }
   }
 
@@ -1384,13 +1632,18 @@ async function renderVideo() {
   await browser.close();
   try { fs.unlinkSync(tmpHtmlPath); } catch (e) {}
 
-  // Duplicate to outNamedMp4 and Artifact Directory
+  // Duplicate to outNamedMp4, outSpeedMp4 and Artifact Directory
   fs.copyFileSync(outMp4Path, outNamedMp4);
-  fs.copyFileSync(outMp4Path, path.join(ARTIFACT_DIR, 'vantorx-30s-reel-2.mp4'));
-  fs.copyFileSync(outMp4Path, path.join(ARTIFACT_DIR, 'vantorx-nvidia-reel.mp4'));
+  fs.copyFileSync(outMp4Path, outSpeedMp4);
+  try {
+    fs.copyFileSync(outMp4Path, path.join(ARTIFACT_DIR, 'vantorx-30s-reel-2.mp4'));
+    fs.copyFileSync(outMp4Path, path.join(ARTIFACT_DIR, 'vantorx-nvidia-reel.mp4'));
+  } catch (e) {
+    console.log('Artifact copy skipped:', e.message);
+  }
 
   const sz = (fs.statSync(outMp4Path).size / (1024 * 1024)).toFixed(2);
-  console.log(`\n✅ High-Fidelity Cueva Nvidia Reel Rendered: ${outMp4Path} (${sz} MB)`);
+  console.log(`\n✅ 3D Motion Graphics Nvidia Reel Rendered: ${outMp4Path} (${sz} MB)`);
 }
 
 renderVideo().catch(err => {
