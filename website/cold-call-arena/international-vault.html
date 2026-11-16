@@ -1474,6 +1474,9 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <span id="teamCallSyncDot" style="width:8px;height:8px;background:#34d399;border-radius:50%;display:inline-block"></span>
         🔄 Sync Cloud Calls
       </button>
+      <button class="btn btn-ghost btn-sm" id="btnOpenDeliveryDashboard" onclick="openDeliveryDashboardModal()" style="border:1.5px solid rgba(16,185,129,0.5);color:#34d399;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.1);cursor:pointer" title="View live Resend deliverability metrics, bounce rates, and suppression guard">
+        <span>📊</span> Resend Deliverability
+      </button>
       <button class="btn btn-ghost btn-sm" onclick="pushLocalCallsToCloud()" style="border:1px solid rgba(245,158,11,0.4);color:var(--accent2);font-size:12px;font-weight:700" title="Upload local calls to team cloud">
         ☁️ Push Calls
       </button>
@@ -7452,6 +7455,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <option value="contact">Outbound Team (contact@vantorxsolutions.com)</option>
           </select>
           <button type="button" class="btn btn-ghost btn-xs" onclick="openVantorXEmailInfoModal()" style="font-size:11px;padding:3px 8px;color:#38bdf8;border:1px solid rgba(56,189,248,0.3);cursor:pointer">🛡️ Domain Info</button>
+          <button type="button" class="btn btn-ghost btn-xs" onclick="openDeliveryDashboardModal()" style="font-size:11px;padding:3px 8px;color:#34d399;border:1px solid rgba(52,211,153,0.3);background:rgba(16,185,129,0.08);cursor:pointer">📊 Delivery Dashboard</button>
         </div>
       </div>
 
@@ -18209,7 +18213,7 @@ https://www.vantorxsolutions.com`;
     if (!activeLogLeadId) return;
     const lead = window.findLeadById(activeLogLeadId);
     if (!lead) return;
-    const defaultEmail = lead.email || (lead.company ? (lead.company.toLowerCase().replace(/[^a-z0-9]/g, '') + '@gmail.com') : '');
+    const defaultEmail = lead.email || '';
     const input = document.getElementById('callLogEmailRecipient');
     if (input) {
       input.value = defaultEmail;
@@ -30788,7 +30792,7 @@ https://www.vantorxsolutions.com`;
     if (!activeLogLeadId) return;
     const lead = window.findLeadById(activeLogLeadId);
     if (!lead) return;
-    const defaultEmail = lead.email || (lead.company ? (lead.company.toLowerCase().replace(/[^a-z0-9]/g, '') + '@gmail.com') : '');
+    const defaultEmail = lead.email || '';
     const input = document.getElementById('callLogEmailRecipient');
     if (input) {
       input.value = defaultEmail;
@@ -43007,5 +43011,6 @@ window.resetIntlFilters = function() {
   </div>
 </div>
 
+<script src="delivery-dashboard.js"></script>
 </body>
 </html>

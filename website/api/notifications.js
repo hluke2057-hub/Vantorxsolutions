@@ -24,7 +24,7 @@ module.exports = async function handler(req, res) {
         try { body = JSON.parse(body); } catch (_) { body = {}; }
       }
       body = body || {};
-      const { to, subject, text, html, senderAlias } = body;
+      const { to, subject, text, html, senderAlias, businessName, source } = body;
 
       if (!to || !to.includes("@")) {
         return res.status(400).json({ ok: false, error: "Missing or invalid recipient email address ('to')." });
@@ -57,13 +57,18 @@ module.exports = async function handler(req, res) {
         text: emailBody,
         html: htmlFormatted,
         from: fromAddress,
-        replyTo: "Luke Hamilton <luke@vantorxsolutions.com>"
+        replyTo: "Luke Hamilton <luke@vantorxsolutions.com>",
+        businessName: businessName || null,
+        source: source || "arena_app"
       });
 
       if (!result.ok) {
-        return res.status(502).json({
+        const statusCode = result.suppressed ? 403 : (result.unverified ? 422 : 502);
+        return res.status(statusCode).json({
           ok: false,
-          error: result.error || "Failed to dispatch email through VantorX email gateway."
+          error: result.error || "Failed to dispatch email through VantorX email gateway.",
+          suppressed: Boolean(result.suppressed),
+          unverified: Boolean(result.unverified)
         });
       }
 

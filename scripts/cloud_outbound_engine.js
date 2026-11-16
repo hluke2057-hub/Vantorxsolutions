@@ -1,3 +1,4 @@
+const { sendEmail } = require("../website/api/_lib/email");
 /**
  * VantorX Solutions — 24/7 Autonomous Verified Cloud Outbound Engine
  * 
@@ -197,26 +198,19 @@ async function sendPhysicalEmail(lead) {
   }
 
   try {
-    const payload = {
-      from: `${SENDER_NAME} <${SENDER_EMAIL}>`,
-      to: [lead.email],
+    const res = await sendEmail({
+      to: lead.email,
       subject: lead.subject,
-      text: lead.body
-    };
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
+      text: lead.body,
+      from: `${SENDER_NAME} <${SENDER_EMAIL}>`,
+      businessName: lead.company,
+      source: "cloud_outbound_engine"
     });
-    const data = await response.json();
-    if (!response.ok) {
-      console.error(`[Resend Error] Delivery failed for ${lead.email}:`, data);
+    if (!res.ok) {
+      console.error(`[Resend Error] Delivery failed for ${lead.email}:`, res.error);
       return null;
     }
-    return data.id || null;
+    return res.id || null;
   } catch (err) {
     console.error(`[Resend Exception] Delivery failed for ${lead.email}:`, err.message);
     return null;
