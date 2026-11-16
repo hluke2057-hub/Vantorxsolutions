@@ -7598,6 +7598,19 @@ window.switchTab = function(targetTabId) {
   }
 };
 
+window.openIntlEmailModal = function(leadId) {
+  if (typeof window.openCallLogModal === 'function') {
+    window.openCallLogModal(leadId);
+    setTimeout(() => {
+      const emailInput = document.getElementById('callLogEmailRecipient');
+      if (emailInput) {
+        emailInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        emailInput.focus();
+      }
+    }, 150);
+  }
+};
+
 window.promptEditLeadWebsite = function(leadId) {
   const l = (window.INTERNATIONAL_150_LEADS || []).find(x => x.id === leadId);
   const currentUrl = localStorage.getItem('vantorx_intl_custom_url_' + leadId) || (l ? l.websiteUrl : '') || '';
@@ -17985,6 +17998,10 @@ https://www.vantorxsolutions.com`;
   };
 
   window.onCustomEmailRecipientInput = function(val) {
+    if (activeLogLeadId && activeLogLeadId.startsWith('intl_')) {
+      localStorage.setItem('vantorx_intl_email_' + activeLogLeadId, (val || '').trim());
+      if (typeof renderInternationalLeadsTable === 'function') renderInternationalLeadsTable();
+    }
     if (!activeLogLeadId) return;
     const trimmed = (val || '').trim();
     if (!CALL_RECORDS[activeLogLeadId]) CALL_RECORDS[activeLogLeadId] = {};
@@ -18073,7 +18090,7 @@ https://www.vantorxsolutions.com`;
 
   window.sendCustomizedCallEmail = async function() {
     if (!activeLogLeadId) return;
-    const lead = LEADS_DATA.find(l => l.id === activeLogLeadId);
+    const lead = (typeof LEADS_DATA !== 'undefined' ? LEADS_DATA.find(l => l.id === activeLogLeadId) : null) || (window.INTERNATIONAL_150_LEADS || []).find(l => l.id === activeLogLeadId);
     const recipientInput = document.getElementById('callLogEmailRecipient');
     const recipient = (recipientInput?.value || '').trim();
 
@@ -18180,7 +18197,7 @@ https://www.vantorxsolutions.com`;
   };
 
   window.openCallLogModal = function(leadId) {
-    const lead = LEADS_DATA.find(l => l.id === leadId);
+    const lead = (typeof LEADS_DATA !== 'undefined' ? LEADS_DATA.find(l => l.id === leadId) : null) || (window.INTERNATIONAL_150_LEADS || []).find(l => l.id === leadId);
     if (!lead) return;
     activeLogLeadId = leadId;
     const rec = CALL_RECORDS[leadId] || {};
@@ -18191,7 +18208,7 @@ https://www.vantorxsolutions.com`;
     const unmarkBtn = document.getElementById('btnUnmarkCallRecord');
 
     if (nameEl) nameEl.textContent = lead.company;
-    if (subEl) subEl.textContent = `ID #${lead.id} · ${lead.owner} (${lead.title}) · ${lead.city} · ${lead.phone}`;
+    if (subEl) subEl.textContent = `ID #${lead.id} · ${lead.owner || lead.fullOwner || 'Decision Maker'} (${lead.title || ''}) · ${lead.city} · ${lead.phone}`;
     if (notesEl) notesEl.value = rec.notes || '';
 
     let currentOutcome = 'Success';
@@ -18212,7 +18229,11 @@ https://www.vantorxsolutions.com`;
     if (coNameEl) coNameEl.textContent = lead.company;
 
     const emailInput = document.getElementById('callLogEmailRecipient');
-    const defaultEmail = rec.customEmail || rec.email || lead.email || '';
+    const savedIntlEmail = localStorage.getItem('vantorx_intl_email_' + lead.id);
+    let defaultEmail = savedIntlEmail || rec.customEmail || rec.email || lead.email || (lead.id === 'intl_011' ? 'info@allclimatesolution.com' : '');
+    if (lead.id === 'intl_011' && !savedIntlEmail) {
+      localStorage.setItem('vantorx_intl_email_intl_011', 'info@allclimatesolution.com');
+    }
     if (emailInput) {
       emailInput.value = defaultEmail;
       emailInput.style.borderColor = 'var(--line2)';
@@ -19615,6 +19636,7 @@ window.INTERNATIONAL_150_LEADS = [
   },
   {
     "id": "intl_011",
+    "email": "info@allclimatesolution.com",
     "company": "All Climate Solutions",
     "owner": "Operations Manager",
     "fullOwner": "Managing Director (All Climate Solutions)",
@@ -25329,6 +25351,18 @@ window.renderInternationalLeadsTable = function() {
           <a href="tel:${l.phone.replace(/[^0-9+]/g, '')}" style="font-family:var(--font-mono);color:#38bdf8;font-weight:800;text-decoration:none;font-size:13px;display:inline-flex;align-items:center;gap:4px">
             <span>📞</span> <span>${l.phone}</span>
           </a>
+          ${(() => {
+            const savedEmail = localStorage.getItem('vantorx_intl_email_' + l.id) || l.email || (l.id === 'intl_011' ? 'info@allclimatesolution.com' : '');
+            if (savedEmail) {
+              return `
+                <div style="font-size:11px;margin-top:3px;display:flex;align-items:center;gap:3px">
+                  <span>✉️</span>
+                  <a href="javascript:void(0)" onclick="openIntlEmailModal('${l.id}')" style="color:#38bdf8;font-family:monospace;font-size:11px;text-decoration:none;font-weight:600" title="Click to send automatic email">${savedEmail}</a>
+                </div>
+              `;
+            }
+            return '';
+          })()}
         </td>
         <td>
           <div style="font-family:var(--font-mono);font-size:13px;font-weight:800;color:#ffffff">${localTimeStr}</div>
@@ -25404,6 +25438,9 @@ window.renderInternationalLeadsTable = function() {
           <div style="display:flex;gap:6px;flex-wrap:wrap">
             <button type="button" class="btn btn-gold btn-xs" onclick="selectIntlLeadForPitch('${l.id}')" style="font-weight:800">
               📞 Pitch
+            </button>
+            <button type="button" class="btn btn-ghost btn-xs" onclick="openIntlEmailModal('${l.id}')" style="font-weight:700;color:#6ee7b7;border:1px solid rgba(52,211,153,0.5);background:rgba(52,211,153,0.08);display:inline-flex;align-items:center;gap:3px;padding:3px 7px" title="Send automatic email to ${l.company}">
+              <span>✉️</span> <span>Send Email</span>
             </button>
             <button type="button" class="btn btn-secondary btn-xs" onclick="openIntlCallbackModal('${l.id}')" style="font-weight:700">
               ⏳ Callback
