@@ -33,16 +33,8 @@
       "destination": "/api/notifications?action=send-email"
     },
     {
-      "source": "/api/email-delivery",
-      "destination": "/api/email-delivery"
-    },
-    {
       "source": "/api/email-delivery/:action",
       "destination": "/api/email-delivery?action=:action"
-    },
-    {
-      "source": "/api/resend-webhook",
-      "destination": "/api/resend-webhook"
     },
     {
       "source": "/api/verify-email",
