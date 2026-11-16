@@ -1,11 +1,11 @@
 // scripts/render_reel2_30s.js
-// Builds VantorX Reel #2 (<30s):
-// Act 1: Hook (0s - 4.8s)
-// Act 2: Explanation (4.8s - 12.2s)
-// Act 3: Example (12.2s - 22.8s)
-// Act 4: Final Comment & CTA (22.8s - 29.0s)
-// Audio: Clean ElevenLabs Voiceover + Tactile Cueva Foley SFX ONLY (NO background music).
-// Video: 1080x1920 60fps Cueva 2D Kinetic Stick-Figure + HUD Animation.
+// Builds VantorX Reel #2 (<30s) with ELITE 3D KINETIC MOTION GRAPHICS:
+// - Zero static dead frames (continuous camera drift, particles, and laser scanning)
+// - 3D Isometric Smartphone Mockup rotating and vibrating with incoming emergency call
+// - Chromatic Aberration & Glitch on -$8,000 Voicemail Explosion
+// - 78% Neon Speedometer Arc & 3D Split Cards (Your Shop vs Competitor)
+// - Ava Cybernetic Visor & Dancing Audio Waveform HUD with 0.38s Latency
+// - Hormozi / Vox kinetic typography with spring scale pops & neon glows
 
 const fs = require('fs');
 const path = require('path');
@@ -21,6 +21,7 @@ const tsJsonPath = path.resolve('website/demo/audio/reel2-30s-timestamps.json');
 const outWavPath = path.resolve('website/demo/audio/reel2-30s-master.wav');
 const outMp3Path = path.resolve('website/demo/audio/reel2-30s-master.mp3');
 const outMp4Path = path.resolve('website/demo/video/vantorx-30s-reel-2.mp4');
+const speedToLeadPath = path.resolve('website/demo/video/vantorx-speed-to-lead-reel.mp4');
 
 const tsData = JSON.parse(fs.readFileSync(tsJsonPath, 'utf8'));
 const TOTAL_SEC = Math.min(29.8, Math.ceil((tsData.duration + 0.65) * 10) / 10);
@@ -122,7 +123,6 @@ async function renderAudioMaster() {
       o.connect(g); g.connect(sfxGain); o.start(t); o.stop(t + 0.36);
     }
 
-    // Find act start times from exact word timestamps
     const findWordTime = (regex, def) => {
       const w = words.find(x => regex.test(x.word));
       return w ? w.start : def;
@@ -174,275 +174,538 @@ async function renderAudioMaster() {
 }
 
 async function renderVideo() {
-  const act2T = (tsData.words[11] || { start: 6.838 }).start;
-  const act3T = (tsData.words[32] || { start: 14.640 }).start;
-  const act4T = (tsData.words[54] || { start: 23.197 }).start;
-
-  const html = `<!DOCTYPE html><html><head><style>*{margin:0;padding:0}body{background:#02040a;overflow:hidden}</style></head>
+  const html = `<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800;900&family=Inter:wght@700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{background:#04060c;overflow:hidden;font-family:'Space Grotesk',sans-serif}</style></head>
   <body><canvas id="c" width="1080" height="1920"></canvas>
   <script>
   const WORDS = ${JSON.stringify(tsData.words)};
-  const ACT2 = ${act2T};
-  const ACT3 = ${act3T};
-  const ACT4 = ${act4T};
   const W = 1080, H = 1920;
   const canvas = document.getElementById('c');
   const ctx = canvas.getContext('2d');
 
-  // Group into stable 2-3 word chunks so captions never overlap or jump awkwardly
+  const PARTICLES = [];
+  for (let i = 0; i < 90; i++) {
+    PARTICLES.push({
+      x: (i * 97) % W,
+      y: (i * 131) % H,
+      vx: ((i % 5) - 2) * 22,
+      vy: -35 - (i % 7) * 18,
+      r: 1.5 + (i % 4) * 1.8,
+      alpha: 0.25 + (i % 5) * 0.15,
+      color: (i % 3 === 0) ? '#00f0ff' : ((i % 3 === 1) ? '#ffb800' : '#ff2e54')
+    });
+  }
+
   const CHUNKS = [];
   for (let i = 0; i < WORDS.length; i += 3) {
     const slice = WORDS.slice(i, i + 3);
     CHUNKS.push({
       start: slice[0].start,
-      end: slice[slice.length - 1].end + 0.15,
+      end: slice[slice.length - 1].end + 0.25,
       words: slice
     });
   }
 
-  function drawStickMan(x, y, scale, pose, color = '#ffffff') {
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.scale(scale, scale);
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
-    ctx.lineWidth = 10;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-
-    // Head
-    ctx.beginPath();
-    ctx.arc(0, -110, 32, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Hardhat or headset hint
-    if (pose === 'contractor' || pose === 'shocked') {
-      ctx.beginPath();
-      ctx.strokeStyle = '#fbbf24';
-      ctx.arc(0, -120, 34, Math.PI, 0);
-      ctx.stroke();
-      ctx.strokeStyle = color;
-    }
-
-    // Torso
-    ctx.beginPath();
-    ctx.moveTo(0, -78);
-    ctx.lineTo(0, 32);
-    ctx.stroke();
-
-    // Arms & Legs by pose
-    if (pose === 'shocked') {
-      ctx.beginPath();
-      ctx.moveTo(0, -56); ctx.lineTo(-54, -95);
-      ctx.moveTo(0, -56); ctx.lineTo(54, -95);
-      ctx.moveTo(0, 32); ctx.lineTo(-34, 120);
-      ctx.moveTo(0, 32); ctx.lineTo(34, 120);
-      ctx.stroke();
-    } else if (pose === 'tapping') {
-      ctx.beginPath();
-      ctx.moveTo(0, -56); ctx.lineTo(52, -32); ctx.lineTo(74, -48);
-      ctx.moveTo(0, -56); ctx.lineTo(-36, -10);
-      ctx.moveTo(0, 32); ctx.lineTo(-28, 120);
-      ctx.moveTo(0, 32); ctx.lineTo(28, 120);
-      ctx.stroke();
-    } else {
-      ctx.beginPath();
-      ctx.moveTo(0, -56); ctx.lineTo(-48, -12);
-      ctx.moveTo(0, -56); ctx.lineTo(52, -72);
-      ctx.moveTo(0, 32); ctx.lineTo(-28, 120);
-      ctx.moveTo(0, 32); ctx.lineTo(28, 120);
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-  function roundRect(x, y, w, h, r) {
+  function roundRect(ctx, x, y, w, h, r) {
     ctx.beginPath();
     ctx.roundRect(x, y, w, h, r);
   }
 
-  window.renderAtTime = function(t) {
-    ctx.clearRect(0, 0, W, H);
-    // Dark Cueva backdrop with subtle radial grid
-    const g = ctx.createRadialGradient(W/2, H*0.42, 60, W/2, H/2, H*0.85);
-    g.addColorStop(0, '#0f172a');
-    g.addColorStop(0.55, '#060a14');
-    g.addColorStop(1, '#020307');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, W, H);
+  function draw3DPhone(ctx, cx, cy, rotY, tiltX, scale, opts = {}) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(scale, scale);
 
-    // Subtle grid lines
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.05)';
-    ctx.lineWidth = 2;
-    for (let x = 0; x < W; x += 90) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
-    for (let y = 0; y < H; y += 90) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+    const cosY = Math.cos(rotY);
+    ctx.transform(cosY, tiltX * 0.2, 0, 1, 0, 0);
 
-    // Act Indicator Pill at top
-    let actLabel = '01 · THE HOOK', actColor = '#f43f5e';
-    if (t >= ACT4) { actLabel = '04 · STOP THE BLEED'; actColor = '#34d399'; }
-    else if (t >= ACT3) { actLabel = '03 · LIVE EXAMPLE'; actColor = '#38bdf8'; }
-    else if (t >= ACT2) { actLabel = '02 · WHY YOU LOSE JOBS'; actColor = '#fbbf24'; }
+    const pw = 420, ph = 840, pr = 54;
 
-    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-    ctx.strokeStyle = actColor;
-    ctx.lineWidth = 3;
-    roundRect(W/2 - 210, 110, 420, 62, 31);
-    ctx.fill(); ctx.stroke();
-    ctx.fillStyle = actColor;
-    ctx.font = '800 26px "Segoe UI", Arial, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(actLabel, W/2, 142);
+    ctx.shadowColor = opts.glowColor || 'rgba(0, 240, 255, 0.45)';
+    ctx.shadowBlur = 45;
+    ctx.fillStyle = '#0b0f19';
+    roundRect(ctx, -pw/2 - 6, -ph/2 - 6, pw + 12, ph + 12, pr + 4);
+    ctx.fill();
+    ctx.shadowBlur = 0;
 
-    // MAIN SCENE ARTWORK (Y = 260..1180)
-    if (t < ACT2) {
-      // ACT 1: VOICEMAIL BURNING $8,000
-      const pulse = 1 + Math.sin(t * 8) * 0.03;
-      ctx.save();
-      ctx.translate(W/2, 540);
-      ctx.scale(pulse, pulse);
-      ctx.fillStyle = 'rgba(244, 63, 94, 0.14)';
-      ctx.strokeStyle = '#f43f5e';
-      ctx.lineWidth = 6;
-      roundRect(-350, -170, 700, 320, 32);
-      ctx.fill(); ctx.stroke();
-      ctx.fillStyle = '#fca5a5';
-      ctx.font = '800 32px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('VOICEMAIL GRAVEYARD', 0, -98);
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '900 124px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('-$8,000', 0, 10);
-      ctx.fillStyle = '#f43f5e';
-      ctx.font = '700 30px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('LOST EVERY MISSED CALL', 0, 104);
-      ctx.restore();
+    const metalGrad = ctx.createLinearGradient(-pw/2, -ph/2, pw/2, ph/2);
+    metalGrad.addColorStop(0, '#334155');
+    metalGrad.addColorStop(0.5, '#0f172a');
+    metalGrad.addColorStop(1, '#1e293b');
+    ctx.fillStyle = metalGrad;
+    roundRect(ctx, -pw/2, -ph/2, pw, ph, pr);
+    ctx.fill();
 
-      drawStickMan(W/2, 990, 1.4, 'shocked', '#f8fafc');
-    } else if (t < ACT3) {
-      // ACT 2: 78% STAT + HOMEOWNER TAPPING COMPETITOR
-      ctx.fillStyle = '#fbbf24';
-      ctx.font = '900 184px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('78%', W/2, 410);
-      ctx.fillStyle = '#e2e8f0';
-      ctx.font = '800 38px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('HIRE WHOEVER PICKS UP FIRST', W/2, 515);
+    ctx.strokeStyle = opts.rimColor || '#00f0ff';
+    ctx.lineWidth = 3.5;
+    ctx.stroke();
 
-      // Google tap cards
-      const cards = [
-        { name: 'YOUR SHOP — NO ANSWER', sub: 'Sent to voicemail', bad: true, y: 615 },
-        { name: 'COMPETITOR — ANSWERED LIVE', sub: 'Booked the $8,000 job', bad: false, y: 780 }
-      ];
-      cards.forEach((cd) => {
-        ctx.fillStyle = cd.bad ? 'rgba(244,63,94,0.12)' : 'rgba(52,211,153,0.15)';
-        ctx.strokeStyle = cd.bad ? '#f43f5e' : '#34d399';
-        ctx.lineWidth = 4;
-        roundRect(140, cd.y, 800, 130, 22);
-        ctx.fill(); ctx.stroke();
-        ctx.textAlign = 'left';
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '800 34px "Segoe UI", Arial, sans-serif';
-        ctx.fillText(cd.name, 180, cd.y + 48);
-        ctx.fillStyle = cd.bad ? '#fda4af' : '#6ee7b7';
-        ctx.font = '700 28px "Segoe UI", Arial, sans-serif';
-        ctx.fillText(cd.sub, 180, cd.y + 92);
-        ctx.textAlign = 'center';
-      });
-      drawStickMan(W/2, 1110, 0.95, 'tapping', '#fbbf24');
-    } else if (t < ACT4) {
-      // ACT 3: FRIDAY 7 PM AC EMERGENCY EXAMPLE + AVA 0.8s ANSWER + SMS DISPATCH
-      const dt = t - ACT3;
-      ctx.fillStyle = 'rgba(56, 189, 248, 0.12)';
-      ctx.strokeStyle = '#38bdf8';
+    const bw = pw - 24, bh = ph - 24, br = pr - 8;
+    ctx.fillStyle = opts.screenBg || '#030712';
+    roundRect(ctx, -bw/2, -bh/2, bw, bh, br);
+    ctx.fill();
+
+    ctx.save();
+    ctx.clip();
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+    ctx.lineWidth = 1.5;
+    for (let gx = -bw/2; gx < bw/2; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, -bh/2); ctx.lineTo(gx, bh/2); ctx.stroke(); }
+    for (let gy = -bh/2; gy < bh/2; gy += 40) { ctx.beginPath(); ctx.moveTo(-bw/2, gy); ctx.lineTo(bw/2, gy); ctx.stroke(); }
+
+    ctx.fillStyle = '#000000';
+    roundRect(ctx, -65, -bh/2 + 16, 130, 32, 16);
+    ctx.fill();
+
+    if (opts.type === 'call_alert') {
+      const ringPulse = (Math.sin(opts.time * 12) + 1) * 0.5;
+      
+      ctx.strokeStyle = 'rgba(255, 46, 84, ' + (0.8 - ringPulse * 0.6) + ')';
       ctx.lineWidth = 4;
-      roundRect(130, 290, 820, 210, 28);
-      ctx.fill(); ctx.stroke();
-      ctx.fillStyle = '#38bdf8';
-      ctx.font = '800 34px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('FRIDAY · 7:00 PM · EMERGENCY AC', W/2, 355);
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '900 72px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('AVA ANSWERS IN 0.8s', W/2, 435);
+      ctx.beginPath();
+      ctx.arc(0, -90, 80 + ringPulse * 60, 0, Math.PI * 2);
+      ctx.stroke();
 
-      // Animated audio waveform
-      for (let i = -10; i <= 10; i++) {
-        const amp = 24 + Math.abs(Math.sin(t * 10 + i * 0.6)) * 64;
-        ctx.fillStyle = '#34d399';
-        roundRect(W/2 + i * 28 - 8, 630 - amp/2, 16, amp, 8);
+      ctx.fillStyle = 'rgba(255, 46, 84, 0.18)';
+      ctx.strokeStyle = '#ff2e54';
+      ctx.lineWidth = 3;
+      roundRect(ctx, -bw/2 + 24, -200, bw - 48, 220, 24);
+      ctx.fill(); ctx.stroke();
+
+      ctx.fillStyle = '#ff2e54';
+      ctx.font = '800 22px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('🚨 MISSED CALL RECORDED', 0, -155);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 36px "Space Grotesk", sans-serif';
+      ctx.fillText('EMERGENCY LEAK', 0, -105);
+
+      ctx.fillStyle = '#fca5a5';
+      ctx.font = '700 24px "Inter", sans-serif';
+      ctx.fillText('Dumped to Voicemail', 0, -65);
+      ctx.fillText('LOST REVENUE: -$8,000', 0, -25);
+
+      ctx.fillStyle = 'rgba(255, 184, 0, 0.2)';
+      ctx.strokeStyle = '#ffb800';
+      roundRect(ctx, -bw/2 + 24, 70, bw - 48, 120, 20);
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#ffb800';
+      ctx.font = '800 20px "JetBrains Mono", monospace';
+      ctx.fillText('87% CALLERS HANG UP', 0, 115);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 24px "Inter", sans-serif';
+      ctx.fillText('Tapping Competitor...', 0, 155);
+
+    } else if (opts.type === 'ava_active') {
+      const time = opts.time;
+      ctx.fillStyle = 'rgba(0, 240, 255, 0.15)';
+      ctx.strokeStyle = '#00f0ff';
+      ctx.lineWidth = 4;
+      roundRect(ctx, -140, -180, 280, 130, 28);
+      ctx.fill(); ctx.stroke();
+
+      const visorGlow = ctx.createLinearGradient(-120, 0, 120, 0);
+      visorGlow.addColorStop(0, '#0070f3');
+      visorGlow.addColorStop(0.5, '#00f0ff');
+      visorGlow.addColorStop(1, '#00ff85');
+      ctx.fillStyle = visorGlow;
+      roundRect(ctx, -110, -125, 220, 18, 9);
+      ctx.fill();
+
+      ctx.fillStyle = '#00ff85';
+      for (let w = -7; w <= 7; w++) {
+        const barH = 20 + Math.abs(Math.sin(time * 14 + w * 0.8)) * 80;
+        roundRect(ctx, w * 18 - 5, 20 - barH/2, 10, barH, 5);
         ctx.fill();
       }
 
-      // Dispatched SMS card sliding up
-      const smsAlpha = Math.min(1, Math.max(0.15, (dt - 2.0) / 1.5));
+      ctx.fillStyle = 'rgba(0, 255, 133, 0.18)';
+      ctx.strokeStyle = '#00ff85';
+      ctx.lineWidth = 2.5;
+      roundRect(ctx, -120, 130, 240, 54, 27);
+      ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#00ff85';
+      ctx.font = '900 24px "JetBrains Mono", monospace';
+      ctx.fillText('⚡ 0.38s INSTANT ANSWER', 0, 165);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 26px "Space Grotesk", sans-serif';
+      ctx.fillText('DISPATCH LOCKED ON CALENDAR', 0, 235);
+    }
+
+    const glareX = -pw + ((opts.time * 280) % (pw * 2.5));
+    const glareGrad = ctx.createLinearGradient(glareX, -ph/2, glareX + 160, ph/2);
+    glareGrad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+    glareGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.12)');
+    glareGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = glareGrad;
+    ctx.fillRect(-bw/2, -bh/2, bw, bh);
+
+    ctx.restore();
+    ctx.restore();
+  }
+
+  window.renderAtTime = function(t) {
+    ctx.clearRect(0, 0, W, H);
+
+    let shakeX = 0, shakeY = 0;
+    const shakePoints = [0.0, 4.28, 6.84, 14.64, 17.80, 23.20];
+    for (const sp of shakePoints) {
+      if (t >= sp && t <= sp + 0.35) {
+        const decay = 1 - (t - sp) / 0.35;
+        shakeX = (Math.sin(t * 70) * 16) * decay;
+        shakeY = (Math.cos(t * 85) * 16) * decay;
+        break;
+      }
+    }
+
+    const camZoom = 1.0 + Math.sin(t * 1.8) * 0.025;
+    const camRot = Math.sin(t * 1.4) * 0.015;
+
+    ctx.save();
+    ctx.translate(W/2 + shakeX, H/2 + shakeY);
+    ctx.rotate(camRot);
+    ctx.scale(camZoom, camZoom);
+    ctx.translate(-W/2, -H/2);
+
+    const bgRad = ctx.createRadialGradient(W/2, H*0.45, 100, W/2, H/2, H*0.85);
+    bgRad.addColorStop(0, '#0a1024');
+    bgRad.addColorStop(0.5, '#050813');
+    bgRad.addColorStop(1, '#020308');
+    ctx.fillStyle = bgRad;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.06)';
+    ctx.lineWidth = 2;
+    for (let x = -200; x <= W + 200; x += 110) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(W/2 + (x - W/2) * 1.6, H);
+      ctx.stroke();
+    }
+    for (let y = 0; y <= H; y += 120) {
+      const pY = (y + (t * 70) % 120);
+      ctx.beginPath();
+      ctx.moveTo(0, pY);
+      ctx.lineTo(W, pY);
+      ctx.stroke();
+    }
+
+    for (let i = 0; i < PARTICLES.length; i++) {
+      const p = PARTICLES[i];
+      const py = (p.y + p.vy * t) % H;
+      const actualY = py < 0 ? py + H : py;
+      const px = (p.x + p.vx * t + Math.sin(t * 2 + i) * 35) % W;
+      const actualX = px < 0 ? px + W : px;
+
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha * (0.6 + 0.4 * Math.sin(t * 4 + i));
+      ctx.beginPath();
+      ctx.arc(actualX, actualY, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1.0;
+
+    const scanY = (t * 540) % (H + 200) - 100;
+    const laserGrad = ctx.createLinearGradient(0, scanY - 30, 0, scanY + 30);
+    laserGrad.addColorStop(0, 'rgba(0, 240, 255, 0)');
+    laserGrad.addColorStop(0.5, 'rgba(0, 240, 255, 0.35)');
+    laserGrad.addColorStop(1, 'rgba(0, 240, 255, 0)');
+    ctx.fillStyle = laserGrad;
+    ctx.fillRect(0, scanY - 30, W, 60);
+
+    ctx.strokeStyle = '#00f0ff';
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = '#00f0ff';
+    ctx.shadowBlur = 15;
+    ctx.beginPath();
+    ctx.moveTo(0, scanY);
+    ctx.lineTo(W, scanY);
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    let hudTag = 'VOICEMAIL BLEED CRIME SCENE', hudCol = '#ff2e54';
+    if (t >= 23.2) { hudTag = 'LIVE SPEAKERPHONE CHALLENGE · DIAL NOW'; hudCol = '#00ff85'; }
+    else if (t >= 14.6) { hudTag = '24/7 VOICE AI DISPATCH · UNDER 0.4s'; hudCol = '#00f0ff'; }
+    else if (t >= 5.6) { hudTag = 'THE 78% LOCAL CONTRACTOR LAW'; hudCol = '#ffb800'; }
+
+    ctx.fillStyle = 'rgba(11, 15, 25, 0.85)';
+    ctx.strokeStyle = hudCol;
+    ctx.lineWidth = 3;
+    roundRect(ctx, W/2 - 270, 90, 540, 68, 34);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle = hudCol;
+    ctx.font = '900 24px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(hudTag, W/2, 124);
+
+    if (t < 5.6) {
+      const phoneVibe = Math.sin(t * 36) * 12;
+      const phoneRotY = Math.sin(t * 2.5) * 0.18;
+      draw3DPhone(ctx, W/2 + phoneVibe, 720, phoneRotY, 0.1, 1.15, {
+        time: t,
+        type: 'call_alert',
+        rimColor: '#ff2e54',
+        glowColor: 'rgba(255, 46, 84, 0.6)'
+      });
+
+      const popT = Math.max(0, t - 3.17);
+      const scalePop = popT > 0 ? (1.0 + Math.max(0, 0.35 * Math.exp(-popT * 5))) : 1.0;
+
       ctx.save();
-      ctx.globalAlpha = smsAlpha;
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.16)';
-      ctx.strokeStyle = '#34d399';
+      ctx.translate(W/2, 1260);
+      ctx.scale(scalePop, scalePop);
+
+      ctx.fillStyle = 'rgba(255, 46, 84, 0.18)';
+      ctx.strokeStyle = '#ff2e54';
       ctx.lineWidth = 5;
-      roundRect(140, 760, 800, 240, 28);
+      roundRect(ctx, -440, -120, 880, 240, 32);
+      ctx.fill(); ctx.stroke();
+
+      ctx.fillStyle = '#00f0ff';
+      ctx.font = '900 132px "Space Grotesk", sans-serif';
+      ctx.fillText('-$8,000', -4, 26);
+      ctx.fillStyle = '#ff2e54';
+      ctx.fillText('-$8,000', 4, 30);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText('-$8,000', 0, 28);
+
+      ctx.fillStyle = '#fca5a5';
+      ctx.font = '800 32px "Inter", sans-serif';
+      ctx.fillText('LOST EVERY MISSED EMERGENCY CALL', 0, 88);
+      ctx.restore();
+
+    } else if (t < 14.6) {
+      const dt = t - 5.6;
+      const dialRadius = 200;
+      ctx.save();
+      ctx.translate(W/2, 540);
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.lineWidth = 26;
+      ctx.beginPath();
+      ctx.arc(0, 0, dialRadius, Math.PI * 0.75, Math.PI * 2.25);
+      ctx.stroke();
+
+      const arcProgress = Math.min(0.78, dt * 0.45);
+      const endAngle = Math.PI * 0.75 + (Math.PI * 1.5) * (arcProgress / 1.0);
+      const arcGrad = ctx.createLinearGradient(-dialRadius, 0, dialRadius, 0);
+      arcGrad.addColorStop(0, '#ffb800');
+      arcGrad.addColorStop(1, '#00ff85');
+      ctx.strokeStyle = arcGrad;
+      ctx.lineWidth = 26;
+      ctx.shadowColor = '#ffb800';
+      ctx.shadowBlur = 30;
+      ctx.beginPath();
+      ctx.arc(0, 0, dialRadius, Math.PI * 0.75, endAngle);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 148px "Space Grotesk", sans-serif';
+      ctx.fillText('78%', 0, 30);
+      ctx.fillStyle = '#ffb800';
+      ctx.font = '800 28px "JetBrains Mono", monospace';
+      ctx.fillText('HIRE THE 1st CONTRACTOR WHO PICKS UP', 0, 95);
+      ctx.restore();
+
+      const cardSlide = Math.min(1, dt * 1.8);
+      const cardY1 = 860, cardY2 = 1040;
+
+      ctx.save();
+      ctx.translate(W/2 + (1 - cardSlide) * -300, cardY1);
+      ctx.fillStyle = 'rgba(255, 46, 84, 0.16)';
+      ctx.strokeStyle = '#ff2e54';
+      ctx.lineWidth = 4;
+      roundRect(ctx, -450, -65, 900, 130, 24);
       ctx.fill(); ctx.stroke();
       ctx.textAlign = 'left';
-      ctx.fillStyle = '#34d399';
-      ctx.font = '800 30px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('SMS SENT TO YOUR PHONE', 185, 820);
       ctx.fillStyle = '#ffffff';
-      ctx.font = '800 38px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('EMERGENCY AC JOB BOOKED', 185, 885);
-      ctx.fillStyle = '#cbd5e1';
-      ctx.font = '600 30px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('Qualified · Fee Quoted · Ready for Tech', 185, 945);
-      ctx.textAlign = 'center';
+      ctx.font = '800 36px "Space Grotesk", sans-serif';
+      ctx.fillText('❌ YOUR SHOP: VOICEMAIL', -400, -10);
+      ctx.fillStyle = '#fca5a5';
+      ctx.font = '700 28px "Inter", sans-serif';
+      ctx.fillText('87% hang up & call competitor', -400, 34);
       ctx.restore();
-    } else {
-      // ACT 4: FINAL COMMENT & CALL CTA
-      ctx.fillStyle = '#34d399';
-      ctx.font = '900 58px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('TEST AVA LIVE RIGHT NOW', W/2, 420);
 
-      ctx.fillStyle = 'rgba(52, 211, 153, 0.14)';
-      ctx.strokeStyle = '#34d399';
-      ctx.lineWidth = 6;
-      roundRect(120, 500, 840, 220, 34);
+      ctx.save();
+      ctx.translate(W/2 + (1 - cardSlide) * 300, cardY2);
+      ctx.fillStyle = 'rgba(0, 255, 133, 0.16)';
+      ctx.strokeStyle = '#00ff85';
+      ctx.lineWidth = 4;
+      roundRect(ctx, -450, -65, 900, 130, 24);
       ctx.fill(); ctx.stroke();
+      ctx.textAlign = 'left';
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 94px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('(561) 813-8602', W/2, 615);
+      ctx.font = '800 36px "Space Grotesk", sans-serif';
+      ctx.fillText('✅ COMPETITOR: ANSWERED LIVE', -400, -10);
+      ctx.fillStyle = '#6ee7b7';
+      ctx.font = '700 28px "Inter", sans-serif';
+      ctx.fillText('Took the $8,000 check that had your name on it', -400, 34);
+      ctx.restore();
 
-      ctx.fillStyle = '#fbbf24';
-      ctx.font = '900 62px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('OR COMMENT "AVA"', W/2, 830);
+    } else if (t < 23.2) {
+      const dt = t - 14.6;
+      const rotY = Math.sin(t * 2.2) * 0.14;
+      draw3DPhone(ctx, W/2, 680, rotY, -0.05, 1.12, {
+        time: t,
+        type: 'ava_active',
+        rimColor: '#00f0ff',
+        glowColor: 'rgba(0, 240, 255, 0.6)'
+      });
+
+      const smsPop = Math.min(1, Math.max(0, (dt - 2.2) * 2.5));
+      if (smsPop > 0) {
+        ctx.save();
+        ctx.translate(W/2, 1200);
+        ctx.scale(smsPop, smsPop);
+
+        ctx.shadowColor = '#00ff85';
+        ctx.shadowBlur = 35;
+        ctx.fillStyle = 'rgba(11, 23, 20, 0.94)';
+        ctx.strokeStyle = '#00ff85';
+        ctx.lineWidth = 5;
+        roundRect(ctx, -440, -110, 880, 220, 30);
+        ctx.fill(); ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#00ff85';
+        ctx.font = '900 26px "JetBrains Mono", monospace';
+        ctx.fillText('📱 DISPATCH SENT TO YOUR CREW IN 24s', -390, -50);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 42px "Space Grotesk", sans-serif';
+        ctx.fillText('$8,000 AC SYSTEM REPAIR BOOKED', -390, 8);
+
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '700 28px "Inter", sans-serif';
+        ctx.fillText('Diagnostic Quoted · On-Call Tech Carlos Locked In', -390, 58);
+        ctx.restore();
+      }
+
+    } else {
+      const pulse = 1.0 + Math.sin(t * 6) * 0.035;
+
+      ctx.save();
+      ctx.translate(W/2, 620);
+      ctx.scale(pulse, pulse);
+
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 50;
+      ctx.fillStyle = 'rgba(8, 14, 28, 0.92)';
+      ctx.strokeStyle = '#00f0ff';
+      ctx.lineWidth = 6;
+      roundRect(ctx, -460, -180, 920, 360, 36);
+      ctx.fill(); ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      ctx.fillStyle = '#00ff85';
+      ctx.font = '900 32px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('📞 TEST AVA LIVE ON SPEAKERPHONE', 0, -95);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 108px "Space Grotesk", sans-serif';
+      ctx.fillText('(561) 813-8602', 0, 20);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '800 30px "Inter", sans-serif';
+      ctx.fillText('Answers in 0.4s · Speaks Spanish · Zero Lock-In', 0, 110);
+      ctx.restore();
+
+      const btnBounce = 1.0 + Math.sin(t * 8) * 0.05;
+      ctx.save();
+      ctx.translate(W/2, 1080);
+      ctx.scale(btnBounce, btnBounce);
+
+      ctx.shadowColor = '#ffb800';
+      ctx.shadowBlur = 40;
+      ctx.fillStyle = '#ffb800';
+      roundRect(ctx, -380, -60, 760, 120, 28);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      ctx.fillStyle = '#080c16';
+      ctx.font = '900 52px "Space Grotesk", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('COMMENT "AVA" BELOW', 0, 16);
+      ctx.restore();
+
       ctx.fillStyle = '#94a3b8';
-      ctx.font = '700 34px "Segoe UI", Arial, sans-serif';
-      ctx.fillText('WE WILL DM YOU THE FREE DEMO LINK', W/2, 900);
+      ctx.font = '800 32px "Inter", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('For the 48-Hour Zero-Friction Contractor Rollout', W/2, 1240);
     }
 
-    // WORD-SYNCED KINETIC CAPTIONS (lower safe zone Y = 1380)
     const activeChunk = CHUNKS.find(c => t >= c.start - 0.05 && t <= c.end) || CHUNKS[CHUNKS.length - 1];
-    if (activeChunk && t <= WORDS[WORDS.length - 1].end + 0.5) {
-      ctx.font = '900 66px "Segoe UI", Arial, sans-serif';
-      const lineStr = activeChunk.words.map(w => w.word.toUpperCase()).join(' ');
+    if (activeChunk && t <= WORDS[WORDS.length - 1].end + 0.6) {
+      ctx.save();
+      ctx.translate(W/2, 1530);
+
+      ctx.fillStyle = 'rgba(6, 10, 20, 0.88)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.lineWidth = 3;
+      roundRect(ctx, -480, -80, 960, 160, 30);
+      ctx.fill(); ctx.stroke();
+
+      ctx.font = '900 68px "Space Grotesk", sans-serif';
       const wordsUp = activeChunk.words.map(w => ({
         txt: w.word.toUpperCase(),
-        active: t >= w.start && t <= w.end + 0.08
+        start: w.start,
+        end: w.end,
+        isActive: (t >= w.start && t <= w.end + 0.12)
       }));
+
       const widths = wordsUp.map(w => ctx.measureText(w.txt + ' ').width);
       const totalW = widths.reduce((a, b) => a + b, 0);
-      let cx = W/2 - totalW/2;
+      let curX = -totalW / 2;
+
       wordsUp.forEach((w, idx) => {
         ctx.textAlign = 'left';
+
+        let scale = 1.0;
+        if (w.isActive) {
+          const wordElapsed = Math.max(0, t - w.start);
+          scale = 1.0 + Math.max(0, 0.28 * Math.exp(-wordElapsed * 10));
+        }
+
+        ctx.save();
+        ctx.translate(curX + widths[idx] / 2, 22);
+        ctx.scale(scale, scale);
+
         ctx.strokeStyle = '#000000';
         ctx.lineWidth = 14;
-        ctx.strokeText(w.txt, cx, 1380);
-        ctx.fillStyle = w.active ? '#34d399' : '#ffffff';
-        ctx.fillText(w.txt, cx, 1380);
-        cx += widths[idx];
+        ctx.strokeText(w.txt, -widths[idx] / 2, 0);
+
+        if (w.isActive) {
+          ctx.shadowColor = '#00f0ff';
+          ctx.shadowBlur = 25;
+          ctx.fillStyle = '#00f0ff';
+        } else {
+          ctx.shadowBlur = 0;
+          ctx.fillStyle = '#ffffff';
+        }
+        ctx.fillText(w.txt, -widths[idx] / 2, 0);
+        ctx.restore();
+
+        curX += widths[idx];
       });
-      ctx.textAlign = 'center';
+      ctx.restore();
     }
 
-    // Subtle VantorX watermark bottom
-    ctx.fillStyle = 'rgba(148, 163, 184, 0.5)';
-    ctx.font = '800 26px "Segoe UI", Arial, sans-serif';
-    ctx.fillText('VANTORX SOLUTIONS · VANTORXSOLUTIONS.COM', W/2, 1780);
+    ctx.fillStyle = 'rgba(148, 163, 184, 0.45)';
+    ctx.font = '800 24px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('VANTORX SOLUTIONS // VANTORXSOLUTIONS.COM', W/2, 1820);
+
+    ctx.restore();
   };
   </script></body></html>`;
 
@@ -456,7 +719,7 @@ async function renderVideo() {
 
   const fps = 30;
   const totalFrames = Math.ceil(TOTAL_SEC * fps);
-  console.log(`Rendering ${totalFrames} frames @ ${fps}fps for Reel #2 (${TOTAL_SEC}s)...`);
+  console.log(`Rendering ${totalFrames} frames @ ${fps}fps with High-Octane 3D Motion Graphics (${TOTAL_SEC}s)...`);
 
   const ffArgs = [
     '-y',
@@ -494,8 +757,9 @@ async function renderVideo() {
 
   await browser.close();
   try { fs.unlinkSync(htmlFile); } catch (e) {}
-  fs.copyFileSync(outMp4Path, path.join(ARTIFACT_DIR, 'vantorx-30s-reel-2.mp4'));
-  console.log(`✅ Reel #2 MP4 Rendered: ${outMp4Path} (${(fs.statSync(outMp4Path).size / (1024 * 1024)).toFixed(2)} MB)`);
+  fs.copyFileSync(outMp4Path, speedToLeadPath);
+  try { fs.copyFileSync(outMp4Path, path.join(ARTIFACT_DIR, 'vantorx-30s-reel-2.mp4')); } catch (e) {}
+  console.log(`✅ High-Octane 3D Reel MP4 Rendered: ${outMp4Path} (${(fs.statSync(outMp4Path).size / (1024 * 1024)).toFixed(2)} MB)`);
 }
 
 (async () => {
