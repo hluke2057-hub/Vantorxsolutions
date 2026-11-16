@@ -1842,25 +1842,6 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
   <!-- TAB: 🔒 PRIVATE OWNER WORKBENCH: 150 INTERNATIONAL LOCAL BUSINESS TARGETS (UK, AU, CA, IE, NZ) -->
   <div id="tabNoWebsite" class="tab-panel">
     
-    <!-- 🔒 ACCESS CODE LOCK SCREEN (Code: noodle) -->
-    <div id="flAccessCodeGate" class="fl-access-gate" style="display:none">
-      <div class="fl-gate-card">
-        <div class="fl-gate-icon">🔒</div>
-        <div class="fl-gate-badge">PRIVATE INTERNATIONAL VAULT · ENGLISH-SPEAKING MARKETS</div>
-        <h2>Access Code Required</h2>
-        <p class="fl-gate-subtitle">This confidential founder workbench contains 150 international local business targets across the UK, Australia, Canada, Ireland, and New Zealand with zero AI automation and massive web modernization upside. Enter access code to unlock.</p>
-        
-        <div class="fl-gate-input-wrap">
-          <input type="password" id="flAccessCodeInput" placeholder="Enter Access Code" class="fl-gate-input" autocomplete="off" onkeydown="if(event.key==='Enter') unlockFloridaVault();">
-          <div id="flAccessCodeError" class="fl-gate-error" style="display:none">❌ Incorrect access code. Access denied.</div>
-        </div>
-
-        <button type="button" class="btn btn-gold" id="btnUnlockFloridaVault" onclick="unlockFloridaVault()" style="width:100%;padding:13px;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px">
-          <span>🔑</span> <span>Unlock International Vault ➔</span>
-        </button>
-      </div>
-    </div>
-
     <div id="flVaultContent">
     <div class="lead-cockpit" style="margin-bottom:24px">
       
@@ -1871,7 +1852,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
             <span style="font-size:28px">🌍</span>
             <div>
               <div style="display:flex;align-items:center;gap:10px">
-                <span style="font-family:var(--font-head);font-size:20px;font-weight:800;color:#ffffff;letter-spacing:0.02em">PRIVATE INTERNATIONAL VAULT: 150 TARGETS</span>
+                <span style="font-family:var(--font-head);font-size:20px;font-weight:800;color:#ffffff;letter-spacing:0.02em">PRIVATE WORKBENCH (150 TARGETS)</span>
                 <span style="font-size:11px;font-family:var(--font-mono);font-weight:800;background:rgba(56,189,248,0.2);border:1px solid #38bdf8;color:#7dd3fc;padding:2px 10px;border-radius:999px">UNSATURATED ENGLISH MARKETS</span>
               </div>
               <div style="font-size:13px;color:#94a3b8;margin-top:2px">
@@ -1918,7 +1899,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       <div class="daily-batch-banner" style="border-color:rgba(56,189,248,0.4)">
         <div class="batch-hud-grid">
           <div class="batch-title-area">
-            <h3><span>🎯</span> <span id="intlBatchHeadingText">ACTIVE INTERNATIONAL DIAL QUEUE: 150 TARGETS (ZERO AI SATURATION)</span></h3>
+            <h3><span>🎯</span> <span id="intlBatchHeadingText">ACTIVE PRIVATE DIAL QUEUE: 150 TARGETS (ZERO AI SATURATION)</span></h3>
             <div class="batch-subtitle">
               <span>Today</span> · 150 verified English-speaking international business targets · Instant AI phone receptionist &amp; $1,500 website-flip opportunities
             </div>
@@ -2130,11 +2111,12 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <select id="intlCountryFilterSelect" class="custom-select" onchange="handleIntlFilterChange()">
             <option value="all">All Countries (150)</option>
-            <option value="United Kingdom">🇬🇧 United Kingdom (40)</option>
-            <option value="Australia">🇦🇺 Australia (40)</option>
-            <option value="Canada">🇨🇦 Canada (35)</option>
-            <option value="Ireland">🇮🇪 Ireland (20)</option>
-            <option value="New Zealand">🇳🇿 New Zealand (15)</option>
+            <option value="Australia">🇦🇺 Australia</option>
+            <option value="Singapore">🇸🇬 Singapore</option>
+            <option value="United Kingdom">🇬🇧 United Kingdom</option>
+            <option value="Canada">🇨🇦 Canada</option>
+            <option value="New Zealand">🇳🇿 New Zealand</option>
+            <option value="Ireland">🇮🇪 Ireland</option>
           </select>
           <select id="intlWindowFilterSelect" class="custom-select" onchange="handleIntlFilterChange()">
             <option value="all">All Calling Windows</option>
@@ -2276,7 +2258,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
       </div>
 
     </div><!-- END lead-cockpit -->
-    </div><!-- END flVaultContent -->
+    
 
     <!-- ⏳ INTERNATIONAL CALLBACK MODAL WITH TIME ZONE CONVERTER -->
     <div id="intlCallbackModal" class="leads-locked-card" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;width:90%;max-width:540px;background:#0d121d;border:2px solid #38bdf8;border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.85)">
@@ -48782,69 +48764,19 @@ https://www.vantorxsolutions.com`;
   // Render Leads Table
   
 // ============================================================
-// 🔒 ACCESS CODE GATE ENGINE FOR FLORIDA NO-WEBSITE TAB (Code: noodle)
+// 🔒 PRIVATE TAB INSTANT ACCESS ENGINE
 // ============================================================
-window.ACCESS_CODE_FLORIDA = 'noodle';
-
-window.unlockFloridaVault = function() {
-  const input = document.getElementById('flAccessCodeInput');
-  const err = document.getElementById('flAccessCodeError');
-  const code = (input ? input.value : '').trim().toLowerCase();
-
-  if (code === window.ACCESS_CODE_FLORIDA) {
-    localStorage.setItem('vantorx_fl_vault_unlocked', 'true');
-    const gate = document.getElementById('flAccessCodeGate');
-    const content = document.getElementById('flVaultContent');
-    if (gate) gate.style.display = 'none';
-    if (content) content.style.display = 'block';
-    if (err) err.style.display = 'none';
-    if (typeof window.renderFloridaLeadsTable === 'function') {
-      window.renderFloridaLeadsTable();
-    }
-    showToast('🔓 Vault Unlocked! Welcome to the 100 Florida Targets.');
-  } else {
-    if (err) {
-      err.style.display = 'block';
-      err.textContent = '❌ Incorrect access code. Access denied.';
-    }
-    if (input) {
-      input.classList.add('error-shake');
-      setTimeout(() => input.classList.remove('error-shake'), 450);
-      input.select();
-    }
-  }
-};
-
-window.lockFloridaVault = function() {
-  localStorage.removeItem('vantorx_fl_vault_unlocked');
-  window.checkFloridaVaultAccess();
-  showToast('🔒 Vault Locked. Access code required.');
-};
-
 window.checkFloridaVaultAccess = function() {
-  const isUnlocked = localStorage.getItem('vantorx_fl_vault_unlocked') === 'true';
-  const gate = document.getElementById('flAccessCodeGate');
   const content = document.getElementById('flVaultContent');
-
-  if (isUnlocked) {
-    if (gate) gate.style.display = 'none';
-    if (content) content.style.display = 'block';
-    if (typeof window.renderFloridaLeadsTable === 'function') {
-      window.renderFloridaLeadsTable();
-    }
-  } else {
-    if (gate) gate.style.display = 'flex';
-    if (content) content.style.display = 'none';
-    setTimeout(() => {
-      const input = document.getElementById('flAccessCodeInput');
-      if (input) {
-        input.value = '';
-        input.focus();
-      }
-    }, 120);
+  if (content) content.style.display = 'block';
+  if (typeof window.initInternationalWorldClocks === 'function') {
+    window.initInternationalWorldClocks();
+  }
+  if (typeof window.renderInternationalLeadsTable === 'function') {
+    window.renderInternationalLeadsTable();
   }
 };
-
+window.unlockFloridaVault = window.checkFloridaVaultAccess;
 window.CURRENT_FL_CB_LEAD_ID = null;
 
 window.openFloridaCallbackModal = function(leadId) {
@@ -56120,6 +56052,17 @@ window.resetIntlFilters = function() {
 };
 
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    if (typeof window.initInternationalWorldClocks === 'function') {
+      window.initInternationalWorldClocks();
+    }
+    if (typeof window.renderInternationalLeadsTable === 'function') {
+      window.renderInternationalLeadsTable();
+    }
+  }, 300);
+});
 </script>
 </body>
 </html>
