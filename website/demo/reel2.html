@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VantorX — Reel: The 130°F Rooftop Mirage (Cinematic 3D Commercial)</title>
+  <title>VantorX — Commercial: HVAC Contractor Missed Call &amp; AVA AI Receptionist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -16,7 +16,6 @@
       --gold-light: #fbbf24;
       --cyan: #38bdf8;
       --emerald: #10b981;
-      --nvidia: #22c55e;
       --text: #f8fafc;
       --muted: #94a3b8;
     }
@@ -33,16 +32,16 @@
     }
     .header {
       text-align: center;
-      max-width: 680px;
+      max-width: 720px;
       margin-bottom: 24px;
     }
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid rgba(34, 197, 94, 0.45);
-      color: #86efac;
+      background: rgba(0, 240, 255, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.45);
+      color: #38bdf8;
       padding: 6px 14px;
       border-radius: 999px;
       font-size: 12px;
@@ -60,13 +59,14 @@
       margin-bottom: 8px;
     }
     h1 span {
-      background: linear-gradient(135deg, #86efac, #22c55e, #fbbf24);
+      background: linear-gradient(135deg, #38bdf8, #00f0ff, #facc15);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .subtitle {
       color: var(--muted);
       font-size: 14px;
+      line-height: 1.5;
     }
     
     .reel-stage-container {
@@ -87,7 +87,7 @@
       border: 3px solid rgba(255, 255, 255, 0.18);
       border-radius: 36px;
       overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(34, 197, 94, 0.2);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 240, 255, 0.25);
       position: relative;
       display: flex;
       align-items: center;
@@ -156,15 +156,15 @@
       transition: all 0.2s;
     }
     .act-item.active {
-      background: rgba(34, 197, 94, 0.14);
-      border-color: rgba(34, 197, 94, 0.5);
+      background: rgba(0, 240, 255, 0.12);
+      border-color: rgba(0, 240, 255, 0.6);
     }
     .act-time {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       font-weight: 800;
-      color: var(--nvidia);
-      background: rgba(34, 197, 94, 0.15);
+      color: var(--cyan);
+      background: rgba(0, 240, 255, 0.12);
       padding: 3px 6px;
       border-radius: 6px;
       white-space: nowrap;
@@ -178,6 +178,7 @@
       font-size: 12px;
       color: var(--muted);
       margin-top: 2px;
+      line-height: 1.4;
     }
     
     .btn {
@@ -196,13 +197,13 @@
       width: 100%;
     }
     .btn-green {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #022c14;
-      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
+      background: linear-gradient(135deg, #00f0ff, #0284c7);
+      color: #031726;
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.35);
     }
     .btn-green:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(34, 197, 94, 0.5);
+      box-shadow: 0 12px 28px rgba(0, 240, 255, 0.5);
     }
     .btn-outline {
       background: rgba(255, 255, 255, 0.05);
@@ -232,7 +233,7 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: var(--emerald);
+      background: #10b981;
       color: #041f14;
       font-weight: 800;
       padding: 12px 20px;
@@ -245,25 +246,25 @@
 <body>
 
   <div class="header">
-    <div class="badge" style="background:rgba(56,189,248,0.15);border-color:rgba(56,189,248,0.45);color:#7dd3fc">⚡ Stick Figure Storytelling &amp; Studio Audio Master Cut</div>
-    <h1>Reel #2: <span>Nvidia's Survival &amp; The $8k Voicemail Bleed</span></h1>
-    <p class="subtitle">Nvidia Cheated Death (0-15s) • Sega $5M Boardroom Rescue (15-33s) • Bob's 130°F Attic Ladder Crisis (33-46s) • Ava 24/7 Voice AI Dispatch (46-74s)</p>
+    <div class="badge">🎬 Cinematic 3D Commercial • VantorX Solutions</div>
+    <h1>Reel: <span>Never Miss Another High-Value Job</span></h1>
+    <p class="subtitle">90° Heatwave Emergency (0-7.8s) • Frustrated Customer (7.8-14.8s) • AVA 24/7 AI Receptionist (14.8-22.8s) • Confirmed Booking (22.8-27.2s) • VantorX Solutions (27.2-34.2s)</p>
   </div>
 
   <div class="reel-stage-container">
     <div class="phone-mockup">
       <div class="phone-notch"></div>
-      <video id="reelVideo" src="video/vantorx-30s-reel-2.mp4?v=rooftop_cinematic_master" controls playsinline preload="auto"></video>
+      <video id="reelVideo" src="video/vantorx-ai-receptionist-commercial.mp4?v=hvac_rebuild_master" controls playsinline preload="auto" poster="video/hvac_scene1.jpg"></video>
     </div>
 
     <div class="meta-sidebar">
       
-      <div class="card" style="border-color: rgba(56, 189, 248, 0.4);">
+      <div class="card" style="border-color: rgba(0, 240, 255, 0.4);">
         <div class="card-title" style="color: #38bdf8;">📥 Post Ready Video</div>
         <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a href="video/vantorx-30s-reel-2.mp4?v=rooftop_cinematic_master" download="vantorx-rooftop-commercial.mp4" class="btn btn-green" style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:#04121d">
+          <a href="video/vantorx-ai-receptionist-commercial.mp4?v=hvac_rebuild_master" download="vantorx-hvac-commercial.mp4" class="btn btn-green">
             <span>⚡</span>
-            <span>Download Reel: The 130°F Rooftop Mirage (.MP4)</span>
+            <span>Download Master Commercial (34.2s MP4)</span>
           </a>
           <button type="button" class="btn btn-outline" onclick="copyCaption()">
             <span>📋</span>
@@ -273,34 +274,41 @@
       </div>
 
       <div class="card">
-        <div class="card-title">🎬 4-Act Retention Breakdown (Paced for 100% Watch Time)</div>
+        <div class="card-title">🎬 5-Scene Commercial Breakdown</div>
         <div class="act-list">
           <div class="act-item" id="act1">
-            <span class="act-time">0:00 - 0:15.5</span>
+            <span class="act-time">0:00 - 0:07.8</span>
             <div>
-              <div class="act-name">Act 1: The Gradual Curiosity Hook</div>
-              <div class="act-desc">"Did Nvidia build a three trillion dollar empire by playing by the book? Think again. The untold truth about how Nvidia actually survived... is that Jensen Huang cheated. Let me explain."</div>
+              <div class="act-name">Scene 1: The Hook (Busy On The Job)</div>
+              <div class="act-desc">"On a ninety-degree day, your hands are buried in high-voltage wiring. An emergency call rings in your work van, but you can't pick up."</div>
             </div>
           </div>
           <div class="act-item" id="act2">
-            <span class="act-time">0:15.5 - 0:33.5</span>
+            <span class="act-time">0:07.8 - 0:14.8</span>
             <div>
-              <div class="act-name">Act 2: The Deep Story (1995 Sega Boardroom $5M Rescue)</div>
-              <div class="act-desc">"In 1995, Nvidia was thirty days from total bankruptcy. Their chip was broken. Jensen walked into Sega's boardroom, confessed they failed, and walked out with five million dollars anyway... by pivoting to ruthless automation."</div>
+              <div class="act-name">Scene 2: The Problem (Lost Customer)</div>
+              <div class="act-desc">"Across town, a frustrated homeowner hangs up on your voicemail. Unless you have AVA."</div>
             </div>
           </div>
           <div class="act-item" id="act3">
-            <span class="act-time">0:33.5 - 0:46.1</span>
+            <span class="act-time">0:14.8 - 0:22.8</span>
             <div>
-              <div class="act-name">Act 3: The Reality Check (Attic Ladder &amp; -$8k Voicemail Bleed)</div>
-              <div class="act-desc">"Here's the truth: Nobody is perfect. And neither is your business. You're losing eight thousand dollars every single week because emergency calls ring while you're on a ladder, and die in voicemail."</div>
+              <div class="act-name">Scene 3: The Solution (AVA Instant Answer)</div>
+              <div class="act-desc">"Our Voice AI receptionist answers on the first ring, captures the customer's request, and locks the appointment onto your schedule."</div>
             </div>
           </div>
           <div class="act-item" id="act4">
-            <span class="act-time">0:46.1 - 1:15.1</span>
+            <span class="act-time">0:22.8 - 0:27.2</span>
             <div>
-              <div class="act-name">Act 4: Seamless Cut to AVA Voice AI &amp; Sub-Second Website</div>
-              <div class="act-desc">"Jensen had an unfair advantage, and now you do too. Meet AVA: our 24/7 Voice AI Receptionist paired with a sub-second mobile website. She answers in 0.8s, qualifies jobs, and dispatches straight to your truck. Call (561) 813-8602 or comment AVA."</div>
+              <div class="act-name">Scene 4: The Result (Confirmed Job)</div>
+              <div class="act-desc">"You finish your shift, check your phone, and arrive at a confirmed job."</div>
+            </div>
+          </div>
+          <div class="act-item" id="act5">
+            <span class="act-time">0:27.2 - 0:34.2</span>
+            <div>
+              <div class="act-name">Scene 5: The Commercial Finale &amp; CTA</div>
+              <div class="act-desc">"Stop losing calls while you work. Call 561-813-8602, or comment AVA below."</div>
             </div>
           </div>
         </div>
@@ -308,33 +316,23 @@
 
       <div class="card">
         <div class="card-title">📝 High-Converting Instagram Caption</div>
-        <div class="caption-box" id="captionText">Did Nvidia build a $3 Trillion empire by playing by the book? 
+        <div class="caption-box" id="captionText">Stop scrolling. Every single call hitting your voicemail is costing your shop thousands. 📉
 
-Think again. 
+78% of homeowners hire whoever picks up FIRST.
 
-The untold truth about how Nvidia actually survived... is that Jensen Huang cheated death.
+When you're stuck on a job or buried in wiring, they don't wait — they tap the next contractor on Google.
 
-In 1995, Nvidia was 30 days from total bankruptcy. Their flagship gaming chip was completely broken.
+Meet AVA: our 24/7 Voice AI Receptionist built specifically for trade contractors.
+✅ Answers on the 1st ring in under 1 second
+✅ Qualifies emergency jobs & captures caller details
+✅ Dispatches booked appointments straight to your phone
 
-Instead of hiding behind PR, Jensen walked straight into Sega's boardroom, confessed they failed, and walked out with $5,000,000 anyway... by pivoting to ruthless automation. 
+Stop donating high-value jobs to your competitors while you work.
 
-Here's the truth: Nobody is perfect. And neither is your business. 📉
-
-Every single week, contractors lose $8,000 in emergency jobs while stuck on a ladder or asleep, because calls ring and die in voicemail.
-
-Jensen had an unfair advantage. And now you do too. ⚡
-
-Meet AVA: our 24/7 Voice AI Receptionist paired with a sub-second mobile website.
-✅ Answers in 0.8 seconds on the 1st ring
-✅ Qualifies emergency jobs & books calendar slots
-✅ Dispatches client details straight to your truck
-
-Don't play fair when your competitors are answering voicemail 3 hours late.
-
-📞 Call (561) 813-8602 to test AVA live right now
+📞 Call (561) 813-8602 right now to test AVA live on speakerphone.
 💬 Or comment "AVA" below and we’ll install her for your shop.
 
-#contractor #hvac #plumbing #roofing #electrician #bluecollar #servicebusiness #nvidia #jensenhuang #speedtolead #voiceai #aiautomation #smallbusinessowner</div>
+#hvac #contractor #plumbing #roofing #electrician #bluecollar #servicebusiness #fieldservice #servicetitan #voiceai #speedtolead #contractorlife #smallbusinessowner #vantorx</div>
       </div>
 
       <div style="display:flex;gap:10px">
@@ -354,11 +352,11 @@ Don't play fair when your competitors are answering voicemail 3 hours late.
   <script>
     const video = document.getElementById('reelVideo');
     const acts = [
-      { id: 'act1', start: 0, end: 15.48 },
-      { id: 'act2', start: 15.48, end: 33.50 },
-      { id: 'act3', start: 33.50, end: 46.14 },
-      { id: 'act4', start: 46.14, end: 75.10 }
-    ];
+      { id: 'act1', start: 0, end: 7.8 },
+      { id: 'act2', start: 7.8, end: 14.8 },
+      { id: 'act3', start: 14.8, end: 22.8 },
+      { id: 'act4', start: 22.8, end: 27.2 },
+      { id: 'act5', start: 27.2, end: 34.2 }
     ];
 
     video.addEventListener('timeupdate', () => {

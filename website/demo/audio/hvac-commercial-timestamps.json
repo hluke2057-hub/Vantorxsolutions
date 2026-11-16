@@ -1,0 +1,436 @@
+{
+  "text": "On a ninety-degree day, your hands are buried in high-voltage wiring.\nAn emergency call rings in your work van, but you can't pick up.\nAcross town, a frustrated homeowner hangs up on your voicemail.\nUnless you have AVA.\nOur Voice AI receptionist answers on the first ring, captures the customer's request, and locks the appointment onto your schedule.\nYou finish your shift, check your phone, and arrive at a confirmed job.\nStop losing calls while you work.\nCall five-six-one, eight-one-three, eighty-six zero-two, or comment AVA below.",
+  "duration": 34.18,
+  "words": [
+    {
+      "word": "On",
+      "start": 0,
+      "end": 0.163
+    },
+    {
+      "word": "a",
+      "start": 0.209,
+      "end": 0.232
+    },
+    {
+      "word": "ninety-degree",
+      "start": 0.302,
+      "end": 0.917
+    },
+    {
+      "word": "day,",
+      "start": 0.975,
+      "end": 1.231
+    },
+    {
+      "word": "your",
+      "start": 1.254,
+      "end": 1.393
+    },
+    {
+      "word": "hands",
+      "start": 1.451,
+      "end": 1.741
+    },
+    {
+      "word": "are",
+      "start": 1.776,
+      "end": 1.892
+    },
+    {
+      "word": "buried",
+      "start": 1.927,
+      "end": 2.241
+    },
+    {
+      "word": "in",
+      "start": 2.276,
+      "end": 2.334
+    },
+    {
+      "word": "high-voltage",
+      "start": 2.426,
+      "end": 3.065
+    },
+    {
+      "word": "wiring.",
+      "start": 3.123,
+      "end": 3.796
+    },
+    {
+      "word": "An",
+      "start": 4.18,
+      "end": 4.331
+    },
+    {
+      "word": "emergency",
+      "start": 4.377,
+      "end": 4.888
+    },
+    {
+      "word": "call",
+      "start": 4.957,
+      "end": 5.19
+    },
+    {
+      "word": "rings",
+      "start": 5.271,
+      "end": 5.538
+    },
+    {
+      "word": "in",
+      "start": 5.584,
+      "end": 5.654
+    },
+    {
+      "word": "your",
+      "start": 5.7,
+      "end": 5.817
+    },
+    {
+      "word": "work",
+      "start": 5.863,
+      "end": 6.06
+    },
+    {
+      "word": "van,",
+      "start": 6.118,
+      "end": 6.42
+    },
+    {
+      "word": "but",
+      "start": 6.444,
+      "end": 6.56
+    },
+    {
+      "word": "you",
+      "start": 6.594,
+      "end": 6.676
+    },
+    {
+      "word": "can't",
+      "start": 6.722,
+      "end": 6.966
+    },
+    {
+      "word": "pick",
+      "start": 7.012,
+      "end": 7.21
+    },
+    {
+      "word": "up.",
+      "start": 7.291,
+      "end": 7.616
+    },
+    {
+      "word": "Across",
+      "start": 7.999,
+      "end": 8.429
+    },
+    {
+      "word": "town,",
+      "start": 8.499,
+      "end": 8.87
+    },
+    {
+      "word": "a",
+      "start": 8.893,
+      "end": 8.916
+    },
+    {
+      "word": "frustrated",
+      "start": 8.986,
+      "end": 9.52
+    },
+    {
+      "word": "homeowner",
+      "start": 9.567,
+      "end": 10.077
+    },
+    {
+      "word": "hangs",
+      "start": 10.159,
+      "end": 10.426
+    },
+    {
+      "word": "up",
+      "start": 10.484,
+      "end": 10.588
+    },
+    {
+      "word": "on",
+      "start": 10.658,
+      "end": 10.728
+    },
+    {
+      "word": "your",
+      "start": 10.774,
+      "end": 10.879
+    },
+    {
+      "word": "voicemail.",
+      "start": 10.913,
+      "end": 11.668
+    },
+    {
+      "word": "Unless",
+      "start": 12.481,
+      "end": 12.887
+    },
+    {
+      "word": "you",
+      "start": 12.933,
+      "end": 13.015
+    },
+    {
+      "word": "have",
+      "start": 13.096,
+      "end": 13.282
+    },
+    {
+      "word": "AVA.",
+      "start": 13.317,
+      "end": 14.002
+    },
+    {
+      "word": "Our",
+      "start": 15.302,
+      "end": 15.511
+    },
+    {
+      "word": "Voice",
+      "start": 15.581,
+      "end": 15.848
+    },
+    {
+      "word": "AI",
+      "start": 15.894,
+      "end": 16.219
+    },
+    {
+      "word": "receptionist",
+      "start": 16.289,
+      "end": 16.916
+    },
+    {
+      "word": "answers",
+      "start": 16.974,
+      "end": 17.287
+    },
+    {
+      "word": "on",
+      "start": 17.334,
+      "end": 17.403
+    },
+    {
+      "word": "the",
+      "start": 17.438,
+      "end": 17.508
+    },
+    {
+      "word": "first",
+      "start": 17.554,
+      "end": 17.775
+    },
+    {
+      "word": "ring,",
+      "start": 17.845,
+      "end": 18.216
+    },
+    {
+      "word": "captures",
+      "start": 18.39,
+      "end": 18.855
+    },
+    {
+      "word": "the",
+      "start": 18.889,
+      "end": 18.959
+    },
+    {
+      "word": "customer's",
+      "start": 18.994,
+      "end": 19.423
+    },
+    {
+      "word": "request,",
+      "start": 19.482,
+      "end": 20.039
+    },
+    {
+      "word": "and",
+      "start": 20.155,
+      "end": 20.306
+    },
+    {
+      "word": "locks",
+      "start": 20.387,
+      "end": 20.654
+    },
+    {
+      "word": "the",
+      "start": 20.701,
+      "end": 20.77
+    },
+    {
+      "word": "appointment",
+      "start": 20.817,
+      "end": 21.293
+    },
+    {
+      "word": "onto",
+      "start": 21.362,
+      "end": 21.571
+    },
+    {
+      "word": "your",
+      "start": 21.641,
+      "end": 21.745
+    },
+    {
+      "word": "schedule.",
+      "start": 21.78,
+      "end": 22.396
+    },
+    {
+      "word": "You",
+      "start": 22.999,
+      "end": 23.127
+    },
+    {
+      "word": "finish",
+      "start": 23.185,
+      "end": 23.429
+    },
+    {
+      "word": "your",
+      "start": 23.475,
+      "end": 23.58
+    },
+    {
+      "word": "shift,",
+      "start": 23.615,
+      "end": 24.067
+    },
+    {
+      "word": "check",
+      "start": 24.16,
+      "end": 24.381
+    },
+    {
+      "word": "your",
+      "start": 24.427,
+      "end": 24.532
+    },
+    {
+      "word": "phone,",
+      "start": 24.567,
+      "end": 25.019
+    },
+    {
+      "word": "and",
+      "start": 25.136,
+      "end": 25.275
+    },
+    {
+      "word": "arrive",
+      "start": 25.321,
+      "end": 25.646
+    },
+    {
+      "word": "at",
+      "start": 25.681,
+      "end": 25.751
+    },
+    {
+      "word": "a",
+      "start": 25.786,
+      "end": 25.809
+    },
+    {
+      "word": "confirmed",
+      "start": 25.855,
+      "end": 26.343
+    },
+    {
+      "word": "job.",
+      "start": 26.424,
+      "end": 26.97
+    },
+    {
+      "word": "Stop",
+      "start": 27.353,
+      "end": 27.62
+    },
+    {
+      "word": "losing",
+      "start": 27.678,
+      "end": 27.945
+    },
+    {
+      "word": "calls",
+      "start": 28.003,
+      "end": 28.317
+    },
+    {
+      "word": "while",
+      "start": 28.351,
+      "end": 28.526
+    },
+    {
+      "word": "you",
+      "start": 28.56,
+      "end": 28.63
+    },
+    {
+      "word": "work.",
+      "start": 28.7,
+      "end": 29.048
+    },
+    {
+      "word": "Call",
+      "start": 29.431,
+      "end": 29.663
+    },
+    {
+      "word": "five-six-one,",
+      "start": 29.733,
+      "end": 30.499
+    },
+    {
+      "word": "eight-one-three,",
+      "start": 30.534,
+      "end": 31.277
+    },
+    {
+      "word": "eighty-six",
+      "start": 31.312,
+      "end": 31.718
+    },
+    {
+      "word": "zero-two,",
+      "start": 31.765,
+      "end": 32.345
+    },
+    {
+      "word": "or",
+      "start": 32.392,
+      "end": 32.519
+    },
+    {
+      "word": "comment",
+      "start": 32.589,
+      "end": 32.949
+    },
+    {
+      "word": "AVA",
+      "start": 33.007,
+      "end": 33.413
+    },
+    {
+      "word": "below.",
+      "start": 33.483,
+      "end": 34.18
+    }
+  ]
+}
