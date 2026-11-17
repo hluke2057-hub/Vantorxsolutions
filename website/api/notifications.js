@@ -17,10 +17,11 @@ module.exports = async function handler(req, res) {
   if (typeof body === "string") {
     try { body = JSON.parse(body); } catch (_) { body = {}; }
   }
+  const subsystem = query.subsystem || "";
   const action = query.action || body.action || "";
 
   // 1. Resend Inbound Webhook Router
-  if (action === "resend-webhook" || url.includes("resend-webhook")) {
+  if (action === "resend-webhook" || subsystem === "resend-webhook" || url.includes("resend-webhook")) {
     const webhookHandler = require("./_lib/resend-webhook-handler");
     return webhookHandler(req, res);
   }
@@ -28,6 +29,7 @@ module.exports = async function handler(req, res) {
   // 2. Email Delivery & Suppression Infrastructure Router
   if (
     action === "email-delivery" ||
+    subsystem === "email-delivery" ||
     url.includes("email-delivery") ||
     url.includes("verify-email") ||
     url.includes("unsubscribe") ||
