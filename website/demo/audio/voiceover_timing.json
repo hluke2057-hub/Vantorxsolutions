@@ -1,0 +1,65 @@
+[
+  {
+    "id": "s1",
+    "scene": "Scene 1: Hook & Decay Timer",
+    "text": "Speed to lead is everything. Seventy-eight percent of homeowners hire whoever answers first.",
+    "targetStart": 0.2,
+    "rate": "+22%",
+    "duration": 5.71,
+    "clipPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\continuous_tts\\s1\\audio.mp3"
+  },
+  {
+    "id": "s2",
+    "scene": "Scene 2: Voicemail Graveyard",
+    "text": "When your phone goes to voicemail, they hang up and hire your competitor in eight seconds.",
+    "targetStart": 3.4,
+    "rate": "+22%",
+    "duration": 4.7,
+    "clipPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\continuous_tts\\s2\\audio.mp3"
+  },
+  {
+    "id": "s3",
+    "scene": "Scene 3: 0.2s Instant Pickup",
+    "text": "VantorX answers instantly in zero-point-two seconds, picking up before the second ring.",
+    "targetStart": 7,
+    "rate": "+20%",
+    "duration": 5.04,
+    "clipPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\continuous_tts\\s3\\audio.mp3"
+  },
+  {
+    "id": "s4a",
+    "scene": "Scene 4A: Lead Qualification",
+    "text": "Our AI receptionist qualifies the customer, captures the issue, and tags high-priority jobs.",
+    "targetStart": 11.2,
+    "rate": "+20%",
+    "duration": 5.86,
+    "clipPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\continuous_tts\\s4a\\audio.mp3"
+  },
+  {
+    "id": "s4b",
+    "scene": "Scene 4B: Calendar & SMS Dispatch",
+    "text": "It locks the appointment directly to your schedule and texts the dispatch details to your phone.",
+    "targetStart": 14.6,
+    "rate": "+20%",
+    "duration": 4.82,
+    "clipPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\continuous_tts\\s4b\\audio.mp3"
+  },
+  {
+    "id": "s5",
+    "scene": "Scene 5: Revenue Spline & Out-Answer",
+    "text": "While you focus on the job site, VantorX fills your schedule with thousands in extra revenue.",
+    "targetStart": 18.2,
+    "rate": "+18%",
+    "duration": 5.18,
+    "clipPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\continuous_tts\\s5\\audio.mp3"
+  },
+  {
+    "id": "s6",
+    "scene": "Scene 6: Brand Vortex & CTA",
+    "text": "Out-answer your competition today. Visit vantorxsolutions.com.",
+    "targetStart": 23.8,
+    "rate": "+12%",
+    "duration": 5.3,
+    "clipPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\continuous_tts\\s6\\audio.mp3"
+  }
+]

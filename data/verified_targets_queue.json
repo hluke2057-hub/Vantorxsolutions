@@ -2,10 +2,10 @@
   {
     "id": "pb_004",
     "company": "Friendly A/C",
-    "owner": "David",
-    "fullOwner": "David Miller",
+    "owner": "Arioste",
+    "fullOwner": "Arioste Polydor",
     "title": "Managing Partner",
-    "phone": "(561) 246-8805",
+    "phone": "(561) 305-4832",
     "city": "Boca Raton, FL",
     "state": "FL",
     "trade": "HVAC",
@@ -16,7 +16,7 @@
     "netSavings": 0,
     "painPoint": "Emergency AC repair calls going to voicemail after 5 PM while competitors close jobs",
     "batch": 1,
-    "employees": 3,
+    "employees": 6,
     "employeeTier": "sweetSpot",
     "employeeTierName": "Small Local Sweet Spot",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -26,7 +26,7 @@
     "mx_status": "VERIFIED",
     "mx_host": "alt2.aspmx.l.google.com",
     "email": "service@friendlyac.com",
-    "website": "https://www.friendlyac.com",
+    "website": "https://friendly-ac.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/friendlyac.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=David%20Friendly%20A%2FC&page=1",
@@ -41,7 +41,8 @@
     "sentAt": "2026-11-16T18:19:22.540Z",
     "emailSource": "Website Verified",
     "mxHost": "alt2.aspmx.l.google.com",
-    "touch": 3
+    "touch": 3,
+    "employeeSource": "ZoomInfo (6 Employees) · Core South FL AC Shop"
   },
   {
     "id": "pb_006",
@@ -90,10 +91,10 @@
   {
     "id": "pb_015",
     "company": "Ewing & Ewing Air Conditioning",
-    "owner": "Team",
-    "fullOwner": "Owner / Lead Estimator",
+    "owner": "James",
+    "fullOwner": "James Ewing",
     "title": "Owner / Principal",
-    "phone": "(561) 220-6484",
+    "phone": "(561) 798-2665",
     "city": "West Palm Beach, FL",
     "state": "FL",
     "trade": "HVAC",
@@ -104,7 +105,7 @@
     "netSavings": 0,
     "painPoint": "After-hours call overflow and weekend voicemail triage for Palm Beach homeowners",
     "batch": 1,
-    "employees": 3,
+    "employees": 6,
     "employeeTier": "sweetSpot",
     "employeeTierName": "Small Local Sweet Spot",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -177,8 +178,8 @@
   {
     "id": "pb_017",
     "company": "Copperhead Plumbing LLC",
-    "owner": "Jason",
-    "fullOwner": "Jason Cole",
+    "owner": "Nicholas",
+    "fullOwner": "Nicholas P. Miller",
     "title": "Owner",
     "phone": "(561) 292-0232",
     "city": "West Palm Beach, FL",
@@ -191,7 +192,7 @@
     "netSavings": 0,
     "painPoint": "Homeowners calling three plumbers and hiring the one who responds via text first",
     "batch": 1,
-    "employees": 1,
+    "employees": 3,
     "employeeTier": "sweetSpot",
     "employeeTierName": "Small Local Sweet Spot",
     "employeeLabel": "1 Staff - Small Local Sweet Spot",
@@ -215,7 +216,9 @@
     "body": "Hi Jason,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for West Palm Beach, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=pb_017\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Copperhead Plumbing LLC a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "resendMessageId": "01a1eb17-74a4-7cf9-a78d-1b5605626dac",
     "sentAt": "2026-11-17T19:59:05.451Z",
-    "touch": 3
+    "touch": 3,
+    "employeeSource": "ZoomInfo (3 Employees) · Local Specialist Crew",
+    "website": "https://copperhead-plumbing.com"
   },
   {
     "id": "pb_020",
@@ -3558,11 +3561,11 @@
   {
     "id": "fl_se_004",
     "company": "Friendly A/C",
-    "owner": "David",
-    "fullOwner": "David Miller",
+    "owner": "Arioste",
+    "fullOwner": "Arioste Polydor",
     "title": "Managing Partner",
     "email": "service@friendlyac.com",
-    "phone": "(561) 290-1426",
+    "phone": "(561) 305-4832",
     "city": "Boca Raton, FL",
     "trade": "HVAC",
     "service": "24/7 AI Phone Receptionist (Ava)",
@@ -3576,7 +3579,7 @@
     "body": "Hi David,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Boca Raton, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_004\n\nIf you ever want to plug the $8,200/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Friendly A/C a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "mx_status": "VERIFIED",
     "mx_host": "alt3.aspmx.l.google.com",
-    "website": "https://www.friendlyac.com",
+    "website": "https://friendly-ac.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/friendlyac.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=David%20Friendly%20A%2FC&page=1",
@@ -3585,7 +3588,9 @@
       "contactout": "https://contactout.com/search?q=David%20Friendly%20A%2FC"
     },
     "emailSource": "Website Verified",
-    "mxHost": "alt2.aspmx.l.google.com"
+    "mxHost": "alt2.aspmx.l.google.com",
+    "employees": 6,
+    "employeeSource": "ZoomInfo (6 Employees) · Core South FL AC Shop"
   },
   {
     "id": "fl_se_006",
@@ -3624,11 +3629,11 @@
   {
     "id": "fl_se_015",
     "company": "Ewing & Ewing Air Conditioning",
-    "owner": "Team",
-    "fullOwner": "Owner / Lead Estimator",
+    "owner": "James",
+    "fullOwner": "James Ewing",
     "title": "Owner / Principal",
     "email": "service@ewingair.com",
-    "phone": "(561) 220-6484",
+    "phone": "(561) 798-2665",
     "city": "West Palm Beach, FL",
     "trade": "HVAC",
     "service": "Full Digital Infrastructure Bundle",
@@ -3651,7 +3656,8 @@
       "contactout": "https://contactout.com/search?q=the%20owner%20Ewing%20%26%20Ewing%20Air%20Conditioning"
     },
     "emailSource": "Website Verified",
-    "mxHost": "alt4.aspmx.l.google.com"
+    "mxHost": "alt4.aspmx.l.google.com",
+    "employees": 6
   },
   {
     "id": "fl_se_016",
@@ -3687,8 +3693,8 @@
   {
     "id": "fl_se_017",
     "company": "Copperhead Plumbing LLC",
-    "owner": "Jason",
-    "fullOwner": "Jason Cole",
+    "owner": "Nicholas",
+    "fullOwner": "Nicholas P. Miller",
     "title": "Owner",
     "email": "jason@copperheadplumbing.com",
     "phone": "(561) 292-0232",
@@ -3715,7 +3721,10 @@
     },
     "emailSource": "MX Verified (copperheadplumbing-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
-    "mxHost": "copperheadplumbing-com.mail.protection.outlook.com"
+    "mxHost": "copperheadplumbing-com.mail.protection.outlook.com",
+    "employees": 3,
+    "employeeSource": "ZoomInfo (3 Employees) · Local Specialist Crew",
+    "website": "https://copperhead-plumbing.com"
   },
   {
     "id": "fl_se_021",

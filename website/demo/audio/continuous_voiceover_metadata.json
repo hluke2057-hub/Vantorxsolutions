@@ -1,0 +1,65 @@
+[
+  {
+    "id": "scene1",
+    "start": 0.15,
+    "maxDur": 3,
+    "rate": "+22%",
+    "text": "Speed to lead is everything. Most customers hire whoever answers first.",
+    "actualDur": 3,
+    "fittedPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\final_tts_clips\\scene1\\fitted.wav"
+  },
+  {
+    "id": "scene2",
+    "start": 3.25,
+    "maxDur": 3.65,
+    "rate": "+22%",
+    "text": "When you hit voicemail, that caller hangs up and books your competitor in seconds.",
+    "actualDur": 3.65,
+    "fittedPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\final_tts_clips\\scene2\\fitted.wav"
+  },
+  {
+    "id": "scene3",
+    "start": 7,
+    "maxDur": 3.9,
+    "rate": "+20%",
+    "text": "VantorX answers in zero-point-two seconds, picking up before the second ring.",
+    "actualDur": 3.9,
+    "fittedPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\final_tts_clips\\scene3\\fitted.wav"
+  },
+  {
+    "id": "scene4a",
+    "start": 11,
+    "maxDur": 3.4,
+    "rate": "+22%",
+    "text": "Our AI qualifies the lead, diagnoses the issue, and captures every detail live.",
+    "actualDur": 3.4,
+    "fittedPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\final_tts_clips\\scene4a\\fitted.wav"
+  },
+  {
+    "id": "scene4b",
+    "start": 14.5,
+    "maxDur": 3.4,
+    "rate": "+22%",
+    "text": "It syncs your calendar, locks the slot, and texts the dispatch alert to your phone.",
+    "actualDur": 3.4,
+    "fittedPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\final_tts_clips\\scene4b\\fitted.wav"
+  },
+  {
+    "id": "scene5",
+    "start": 18,
+    "maxDur": 5.6,
+    "rate": "+18%",
+    "text": "While you focus on the job site, VantorX stacks your schedule with confirmed revenue.",
+    "actualDur": 4.75,
+    "fittedPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\final_tts_clips\\scene5\\fitted.wav"
+  },
+  {
+    "id": "scene6",
+    "start": 23.8,
+    "maxDur": 3.8,
+    "rate": "+15%",
+    "text": "Out-answer your competition today. Visit vantorxsolutions.com.",
+    "actualDur": 3.8,
+    "fittedPath": "C:\\Users\\hungr\\.gemini\\antigravity\\scratch\\Vantorxsolutions\\website\\demo\\audio\\final_tts_clips\\scene6\\fitted.wav"
+  }
+]
