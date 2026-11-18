@@ -1,16 +1,16 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-11-17T19:59:08.214Z",
+  "lastUpdated": "2026-11-18T19:22:00.124Z",
   "stats": {
-    "totalProcessed": 17,
-    "totalSent": 17,
+    "totalProcessed": 32,
+    "totalSent": 32,
     "totalDelivered": 2,
     "totalBounced": 0,
     "totalSuppressed": 1,
     "totalFailed": 0,
     "totalReplied": 0,
     "totalUnsubscribed": 0,
-    "deliveryRate": "11.8%",
+    "deliveryRate": "6.3%",
     "bounceRate": "0.0%",
     "complaintRate": "0.00%"
   },
@@ -252,6 +252,216 @@
       "suppressionOrigin": null,
       "source": "cloud_outbound_engine",
       "lastUpdatedAt": "2026-11-17T19:59:08.214Z"
+    },
+    "01a1f01b-cf30-7d90-a489-7cff469b066c": {
+      "id": "01a1f01b-cf30-7d90-a489-7cff469b066c",
+      "recipient": "contact@allweathercontractors.com",
+      "businessName": "All Weather Contractors",
+      "subject": "Re: Quick question for Dan regarding All Weather Contractors AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:56.839Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:56.839Z"
+    },
+    "01a1f01b-cfef-7e1d-b98e-c1fe0a519c23": {
+      "id": "01a1f01b-cfef-7e1d-b98e-c1fe0a519c23",
+      "recipient": "frank@targetairconditioning.com",
+      "businessName": "Target Air Conditioning",
+      "subject": "Re: Quick question for Frank regarding Target Air Conditioning quote requests",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:57.030Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:57.030Z"
+    },
+    "01a1f01b-d103-78af-a1cc-f321f5dd74ae": {
+      "id": "01a1f01b-d103-78af-a1cc-f321f5dd74ae",
+      "recipient": "service@coolingadvisors.com",
+      "businessName": "Cooling Advisors",
+      "subject": "Re: Quick question for Chris regarding Cooling Advisors AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:57.304Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:57.304Z"
+    },
+    "01a1f01b-d198-7bee-9820-b0f9f056fea5": {
+      "id": "01a1f01b-d198-7bee-9820-b0f9f056fea5",
+      "recipient": "office@texasstarroofing.com",
+      "businessName": "Texas Star Roofing",
+      "subject": "Re: Quick question for Dave regarding Texas Star Roofing after-hours calls",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:57.453Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:57.453Z"
+    },
+    "01a1f01b-d21c-7cd3-a74d-d0e9dd7cac2e": {
+      "id": "01a1f01b-d21c-7cd3-a74d-d0e9dd7cac2e",
+      "recipient": "jeff@peakroofingconstruction.com",
+      "businessName": "Peak Roofing & Construction",
+      "subject": "Re: Quick question for Jeff regarding Peak Roofing & Construction AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:57.587Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:57.587Z"
+    },
+    "01a1f01b-d29d-7205-91fa-d79e397b47dd": {
+      "id": "01a1f01b-d29d-7205-91fa-d79e397b47dd",
+      "recipient": "mark@coppellplumbing.com",
+      "businessName": "Coppell Plumbing",
+      "subject": "Re: Quick question for Mark regarding Coppell Plumbing after-hours calls",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:57.714Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:57.714Z"
+    },
+    "01a1f01b-d34c-78f5-8bf6-9076f48dc517": {
+      "id": "01a1f01b-d34c-78f5-8bf6-9076f48dc517",
+      "recipient": "mark@publicserviceplumbers.com",
+      "businessName": "Public Service Plumbers",
+      "subject": "Re: Quick question for Mark regarding Public Service Plumbers AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:57.889Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:57.889Z"
+    },
+    "01a1f01b-d45d-7d19-9741-051ece4e918e": {
+      "id": "01a1f01b-d45d-7d19-9741-051ece4e918e",
+      "recipient": "office@cloverelectric.com",
+      "businessName": "Clover Electric",
+      "subject": "Re: Quick question for Team regarding Clover Electric after-hours calls",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:58.168Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:58.168Z"
+    },
+    "01a1f01b-d561-7673-b0bc-37b455e7daac": {
+      "id": "01a1f01b-d561-7673-b0bc-37b455e7daac",
+      "recipient": "justin@blackhillrestoration.com",
+      "businessName": "Blackhill Restoration",
+      "subject": "Re: Quick question for Justin regarding Blackhill Restoration AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:58.422Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:58.422Z"
+    },
+    "01a1f01b-d5fb-779f-a8f5-a73a78f83bbf": {
+      "id": "01a1f01b-d5fb-779f-a8f5-a73a78f83bbf",
+      "recipient": "eric@regentrestoration.com",
+      "businessName": "Regent Restoration",
+      "subject": "Re: Quick question for Eric regarding Regent Restoration after-hours calls",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:58.625Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:58.625Z"
+    },
+    "01a1f01b-d6d0-7268-9c91-7007b3d21a63": {
+      "id": "01a1f01b-d6d0-7268-9c91-7007b3d21a63",
+      "recipient": "david@efficienthomesolutions.com",
+      "businessName": "Efficient Home Solutions",
+      "subject": "Re: Quick question for David regarding Efficient Home Solutions AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:58.796Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:58.796Z"
+    },
+    "01a1f01b-d888-704d-9884-1a14e43dec76": {
+      "id": "01a1f01b-d888-704d-9884-1a14e43dec76",
+      "recipient": "steve@tempoair.com",
+      "businessName": "Tempo Air",
+      "subject": "Re: Quick question for Steve regarding Tempo Air AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:59.230Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:59.230Z"
+    },
+    "01a1f01b-d96a-77c5-90b7-c21ed0965f91": {
+      "id": "01a1f01b-d96a-77c5-90b7-c21ed0965f91",
+      "recipient": "info@johnmoore.com",
+      "businessName": "John Moore Services",
+      "subject": "Re: Quick question for Don regarding John Moore Services AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:59.461Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:59.461Z"
+    },
+    "01a1f01b-da2c-78fd-b51a-1f5cc45efec9": {
+      "id": "01a1f01b-da2c-78fd-b51a-1f5cc45efec9",
+      "recipient": "paul@universalhomeexperts.com",
+      "businessName": "Universal Home Experts",
+      "subject": "Re: Quick question for Paul regarding Universal Home Experts AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:21:59.654Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:21:59.654Z"
+    },
+    "01a1f01b-dc03-7edd-a872-3b35d8c517aa": {
+      "id": "01a1f01b-dc03-7edd-a872-3b35d8c517aa",
+      "recipient": "rick@richmondsair.com",
+      "businessName": "Richmond's Air",
+      "subject": "Re: Quick question for Rick regarding Richmond's Air after-hours calls",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-18T19:22:00.124Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-18T19:22:00.124Z"
     }
   },
   "suppressions": [
@@ -464,6 +674,186 @@
       "timestamp": "2026-11-17T19:59:08.214Z",
       "details": {
         "subject": "Re: Quick question for William regarding Greens Energy Services AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029716839_6oax",
+      "emailId": "01a1f01b-cf30-7d90-a489-7cff469b066c",
+      "recipient": "contact@allweathercontractors.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:56.839Z",
+      "details": {
+        "subject": "Re: Quick question for Dan regarding All Weather Contractors AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029717030_uimx",
+      "emailId": "01a1f01b-cfef-7e1d-b98e-c1fe0a519c23",
+      "recipient": "frank@targetairconditioning.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:57.030Z",
+      "details": {
+        "subject": "Re: Quick question for Frank regarding Target Air Conditioning quote requests",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029717304_4a6v",
+      "emailId": "01a1f01b-d103-78af-a1cc-f321f5dd74ae",
+      "recipient": "service@coolingadvisors.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:57.304Z",
+      "details": {
+        "subject": "Re: Quick question for Chris regarding Cooling Advisors AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029717453_sc7e",
+      "emailId": "01a1f01b-d198-7bee-9820-b0f9f056fea5",
+      "recipient": "office@texasstarroofing.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:57.453Z",
+      "details": {
+        "subject": "Re: Quick question for Dave regarding Texas Star Roofing after-hours calls",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029717587_n4tq",
+      "emailId": "01a1f01b-d21c-7cd3-a74d-d0e9dd7cac2e",
+      "recipient": "jeff@peakroofingconstruction.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:57.587Z",
+      "details": {
+        "subject": "Re: Quick question for Jeff regarding Peak Roofing & Construction AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029717714_u4vn",
+      "emailId": "01a1f01b-d29d-7205-91fa-d79e397b47dd",
+      "recipient": "mark@coppellplumbing.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:57.714Z",
+      "details": {
+        "subject": "Re: Quick question for Mark regarding Coppell Plumbing after-hours calls",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029717889_hd7u",
+      "emailId": "01a1f01b-d34c-78f5-8bf6-9076f48dc517",
+      "recipient": "mark@publicserviceplumbers.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:57.889Z",
+      "details": {
+        "subject": "Re: Quick question for Mark regarding Public Service Plumbers AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029718168_q3pl",
+      "emailId": "01a1f01b-d45d-7d19-9741-051ece4e918e",
+      "recipient": "office@cloverelectric.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:58.168Z",
+      "details": {
+        "subject": "Re: Quick question for Team regarding Clover Electric after-hours calls",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029718422_4cpd",
+      "emailId": "01a1f01b-d561-7673-b0bc-37b455e7daac",
+      "recipient": "justin@blackhillrestoration.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:58.422Z",
+      "details": {
+        "subject": "Re: Quick question for Justin regarding Blackhill Restoration AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029718625_x0ym",
+      "emailId": "01a1f01b-d5fb-779f-a8f5-a73a78f83bbf",
+      "recipient": "eric@regentrestoration.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:58.625Z",
+      "details": {
+        "subject": "Re: Quick question for Eric regarding Regent Restoration after-hours calls",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029718796_iw8w",
+      "emailId": "01a1f01b-d6d0-7268-9c91-7007b3d21a63",
+      "recipient": "david@efficienthomesolutions.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:58.796Z",
+      "details": {
+        "subject": "Re: Quick question for David regarding Efficient Home Solutions AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029719230_qf4i",
+      "emailId": "01a1f01b-d888-704d-9884-1a14e43dec76",
+      "recipient": "steve@tempoair.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:59.230Z",
+      "details": {
+        "subject": "Re: Quick question for Steve regarding Tempo Air AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029719461_071w",
+      "emailId": "01a1f01b-d96a-77c5-90b7-c21ed0965f91",
+      "recipient": "info@johnmoore.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:59.461Z",
+      "details": {
+        "subject": "Re: Quick question for Don regarding John Moore Services AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029719654_4tlc",
+      "emailId": "01a1f01b-da2c-78fd-b51a-1f5cc45efec9",
+      "recipient": "paul@universalhomeexperts.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:21:59.654Z",
+      "details": {
+        "subject": "Re: Quick question for Paul regarding Universal Home Experts AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795029720124_gsx7",
+      "emailId": "01a1f01b-dc03-7edd-a872-3b35d8c517aa",
+      "recipient": "rick@richmondsair.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-18T19:22:00.124Z",
+      "details": {
+        "subject": "Re: Quick question for Rick regarding Richmond's Air after-hours calls",
         "sender": "Luke <luke@vantorxsolutions.com>",
         "failureReason": null
       }
