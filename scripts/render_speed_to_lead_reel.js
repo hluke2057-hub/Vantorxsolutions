@@ -160,8 +160,8 @@ const htmlContent = `<!DOCTYPE html>
       // Giant Digital Stopwatch Ticking Down, 78% First-Responder Stat
       // Kinetic Headline: "SPEED TO LEAD IS EVERYTHING"
       // ==============================================================
-      if (t >= 0.0 && t < 3.2) {
-        const s1Prog = Math.min(1, Math.max(0, t / 3.0));
+      if (t >= 0.0 && t < 4.05) {
+        const s1Prog = Math.min(1, Math.max(0, t / 4.0));
 
         // Kinetic Headline
         const headProg = Math.min(1, (t - 0.2) / 0.5);
@@ -195,7 +195,7 @@ const htmlContent = `<!DOCTYPE html>
         ctx.stroke();
 
         // Ticking Arc
-        const timeFraction = Math.max(0, 1 - (t / 3.0));
+        const timeFraction = Math.max(0, 1 - (t / 4.0));
         ctx.strokeStyle = '#ef4444';
         ctx.lineWidth = 14;
         ctx.shadowColor = '#ef4444';
@@ -205,7 +205,7 @@ const htmlContent = `<!DOCTYPE html>
         ctx.stroke();
 
         // Inner Digital Timer: 05:00 counting down rapidly
-        const msLeft = Math.max(0, Math.floor((1 - (t / 3.0)) * 300));
+        const msLeft = Math.max(0, Math.floor((1 - (t / 4.0)) * 300));
         const mins = String(Math.floor(msLeft / 60)).padStart(2, '0');
         const secs = String(msLeft % 60).padStart(2, '0');
 
@@ -223,8 +223,8 @@ const htmlContent = `<!DOCTYPE html>
         ctx.restore();
 
         // Massive Statistic Card: 78% of customers buy from the first responder
-        if (t >= 0.8) {
-          const statProg = Math.min(1, (t - 0.8) / 0.5);
+        if (t >= 1.0) {
+          const statProg = Math.min(1, (t - 1.0) / 0.5);
           ctx.save();
           ctx.translate(W / 2, 1260);
           ctx.scale(easeOutBack(statProg), easeOutBack(statProg));
@@ -252,11 +252,11 @@ const htmlContent = `<!DOCTYPE html>
       // Competitor Phone Rings Endlessly -> Voicemail -> Customer Moves On
       // Headline: "IF YOU DON'T ANSWER, THEY CALL THE NEXT GUY"
       // ==============================================================
-      else if (t >= 3.0 && t < 7.0) {
-        const s2Prog = (t - 3.0) / 4.0;
+      else if (t >= 4.05 && t < 8.05) {
+        const s2Prog = (t - 4.05) / 4.0;
 
         // Headline
-        const headProg = Math.min(1, (t - 3.0) / 0.5);
+        const headProg = Math.min(1, (t - 4.05) / 0.5);
         ctx.save();
         ctx.translate(W / 2, 240);
         ctx.scale(easeOutBack(headProg), easeOutBack(headProg));
@@ -280,7 +280,7 @@ const htmlContent = `<!DOCTYPE html>
         roundRect(ctx, -150, -300, 300, 600, 32, '#03060f', null);
 
         // Ringing cycles
-        const rings = Math.min(5, Math.floor((t - 3.0) * 1.5) + 1);
+        const rings = Math.min(5, Math.floor((t - 4.05) * 1.5) + 1);
         drawPhoneIcon(ctx, 0, -80, 85, '#ef4444');
 
         ctx.textAlign = 'center';
@@ -289,7 +289,7 @@ const htmlContent = `<!DOCTYPE html>
         ctx.fillText('Ringing... (' + rings + ')', 0, 15);
 
         // At 4.5s -> Voicemail Reached
-        if (t >= 4.5) {
+        if (t >= 5.5) {
           roundRect(ctx, -130, 60, 260, 60, 18, '#ef4444', null);
           ctx.font = '900 22px "SF Pro Display", sans-serif';
           ctx.fillStyle = '#ffffff';
@@ -302,8 +302,8 @@ const htmlContent = `<!DOCTYPE html>
         ctx.restore();
 
         // Animated "Customer Back to Google" Card
-        if (t >= 5.0) {
-          const cardProg = Math.min(1, (t - 5.0) / 0.5);
+        if (t >= 6.0) {
+          const cardProg = Math.min(1, (t - 6.0) / 0.5);
           ctx.save();
           ctx.translate(W / 2, 1340);
           ctx.scale(easeOutBack(cardProg), easeOutBack(cardProg));
@@ -331,13 +331,13 @@ const htmlContent = `<!DOCTYPE html>
       // Sonic Boom, High-Speed Tachometer Snaps into Green,
       // Headline: "VANTORX ANSWERS IN 0.2 SECONDS"
       // ==============================================================
-      else if (t >= 6.8 && t < 11.2) {
-        const s3Prog = (t - 6.8) / 4.2;
+      else if (t >= 8.05 && t < 12.15) {
+        const s3Prog = (t - 8.05) / 4.1;
 
         // Expanding Cyan Sonic Shockwave
-        if (t < 7.8) {
-          const waveR = (t - 6.8) * 1600;
-          ctx.strokeStyle = 'rgba(56, 189, 248, ' + Math.max(0, 1 - (t - 6.8) / 1.0) + ')';
+        if (t < 9.2) {
+          const waveR = (t - 8.05) * 1600;
+          ctx.strokeStyle = 'rgba(56, 189, 248, ' + Math.max(0, 1 - (t - 8.05) / 1.0) + ')';
           ctx.lineWidth = 8;
           ctx.beginPath();
           ctx.arc(W / 2, 820, waveR, 0, Math.PI * 2);
@@ -345,7 +345,7 @@ const htmlContent = `<!DOCTYPE html>
         }
 
         // Headline
-        const headProg = Math.min(1, (t - 7.0) / 0.5);
+        const headProg = Math.min(1, (t - 8.1) / 0.5);
         ctx.save();
         ctx.translate(W / 2, 240);
         ctx.scale(easeOutBack(headProg), easeOutBack(headProg));
@@ -377,7 +377,7 @@ const htmlContent = `<!DOCTYPE html>
         ctx.stroke();
 
         // Active Emerald Arc
-        const speedFrac = Math.min(1, Math.max(0, (t - 7.2) / 0.6));
+        const speedFrac = Math.min(1, Math.max(0, (t - 8.2) / 0.6));
         const speedEase = easeOutElastic(speedFrac);
         ctx.strokeStyle = '#10b981';
         ctx.shadowColor = '#10b981';
@@ -400,8 +400,8 @@ const htmlContent = `<!DOCTYPE html>
         ctx.restore();
 
         // Status Card: "CALL CONNECTED AUTOMATICALLY"
-        if (t >= 8.2) {
-          const cardProg = Math.min(1, (t - 8.2) / 0.4);
+        if (t >= 9.4) {
+          const cardProg = Math.min(1, (t - 9.4) / 0.4);
           ctx.save();
           ctx.translate(W / 2, 1340);
           ctx.scale(easeOutBack(cardProg), easeOutBack(cardProg));
@@ -427,10 +427,10 @@ const htmlContent = `<!DOCTYPE html>
       // Live Voice Waveform, Contact Lead Card, Calendar Slot Locked, SMS Dispatch
       // Headline: "QUALIFIES & BOOKS 24/7"
       // ==============================================================
-      else if (t >= 11.0 && t < 18.2) {
+      else if (t >= 12.15 && t < 19.85) {
 
         // Sub-phase A: Audio Waveform & CRM Card (11.0s – 14.5s)
-        if (t < 14.5) {
+        if (t < 15.95) {
           ctx.save();
           ctx.translate(W / 2, 240);
           ctx.textAlign = 'center';
@@ -554,8 +554,8 @@ const htmlContent = `<!DOCTYPE html>
           ctx.restore();
 
           // Real-time SMS Notification to Owner
-          if (t >= 15.2) {
-            const smsProg = Math.min(1, (t - 15.2) / 0.4);
+          if (t >= 17.2) {
+            const smsProg = Math.min(1, (t - 17.2) / 0.4);
             ctx.save();
             ctx.translate(W / 2, 1260);
             ctx.scale(easeOutBack(smsProg), easeOutBack(smsProg));
@@ -580,11 +580,11 @@ const htmlContent = `<!DOCTYPE html>
       // Upward Growth Spline Curve, 100% Booked Calendar,
       // Headline: "OUT-ANSWER YOUR COMPETITION"
       // ==============================================================
-      else if (t >= 18.0 && t < 24.0) {
-        const s5Prog = (t - 18.0) / 5.8;
+      else if (t >= 19.85 && t < 23.95) {
+        const s5Prog = (t - 19.85) / 4.1;
 
         // Headline
-        const headProg = Math.min(1, (t - 18.0) / 0.5);
+        const headProg = Math.min(1, (t - 19.85) / 0.5);
         ctx.save();
         ctx.translate(W / 2, 240);
         ctx.scale(easeOutBack(headProg), easeOutBack(headProg));
@@ -603,9 +603,9 @@ const htmlContent = `<!DOCTYPE html>
 
         // 3 Stacked Confirmed Bookings Cards
         const bookedDecks = [
-          { name: 'Sarah J. • AC Emergency', time: '11:30 AM', delay: 18.3 },
-          { name: 'Robert C. • System Quote', time: '02:00 PM', delay: 18.7 },
-          { name: 'Michael M. • Duct Repair', time: '04:30 PM', delay: 19.1 }
+          { name: 'Sarah J. • AC Emergency', time: '11:30 AM', delay: 20.0 },
+          { name: 'Robert C. • System Quote', time: '02:00 PM', delay: 20.4 },
+          { name: 'Michael M. • Duct Repair', time: '04:30 PM', delay: 20.8 }
         ];
 
         bookedDecks.forEach((card, idx) => {
@@ -665,7 +665,7 @@ const htmlContent = `<!DOCTYPE html>
         }
 
         // Exponential Curve Points
-        const graphProg = Math.min(1, Math.max(0, (t - 19.2) / 3.4));
+        const graphProg = Math.min(1, Math.max(0, (t - 20.2) / 3.4));
         const pts = [
           { x: -350, y: 150 },
           { x: -220, y: 120 },
@@ -748,7 +748,7 @@ const htmlContent = `<!DOCTYPE html>
       // Gravitational Vortex Collapse into Glowing VantorX Geometric Emblem
       // "VANTORX" · "YOUR BUSINESS. ALWAYS ANSWERED." · "vantorxsolutions.com"
       // ==============================================================
-      else if (t >= 23.8) {
+      else if (t >= 23.95) {
         const logoProg = Math.min(1, (t - 24.0) / 0.8);
         const logoScale = easeOutBack(logoProg);
 
@@ -858,9 +858,117 @@ const htmlContent = `<!DOCTYPE html>
 
         ctx.restore();
       }
+      // ==============================================================
+      // CONTINUOUS DYNAMIC KARAOKE CAPTION READOUT (READING OUT ALL THE TIME)
+      // Displays current sentence with active spoken word highlighted in Gold
+      // ==============================================================
+      const CAPTION_SEGMENTS = [
+        {
+          start: 0.15, end: 3.95,
+          words: ["SPEED", "TO", "LEAD", "IS", "EVERYTHING.", "MOST", "CUSTOMERS", "HIRE", "WHOEVER", "ANSWERS", "FIRST."]
+        },
+        {
+          start: 4.10, end: 7.90,
+          words: ["WHEN", "YOU", "HIT", "VOICEMAIL,", "THAT", "CALLER", "HANGS", "UP", "AND", "CALLS", "YOUR", "COMPETITOR."]
+        },
+        {
+          start: 8.10, end: 12.00,
+          words: ["VANTORX", "ANSWERS", "IN", "0.2", "SECONDS,", "PICKING", "UP", "BEFORE", "THE", "SECOND", "RING."]
+        },
+        {
+          start: 12.20, end: 15.80,
+          words: ["OUR", "AI", "RECEPTIONIST", "QUALIFIES", "THE", "CUSTOMER", "AND", "CAPTURES", "EVERY", "DETAIL", "LIVE."]
+        },
+        {
+          start: 16.00, end: 19.70,
+          words: ["IT", "SYNCS", "YOUR", "CALENDAR,", "LOCKS", "THE", "SLOT,", "AND", "TEXTS", "THE", "DISPATCH", "ALERT."]
+        },
+        {
+          start: 19.90, end: 23.80,
+          words: ["WHILE", "YOU", "FOCUS", "ON", "THE", "JOB,", "VANTORX", "STACKS", "YOUR", "SCHEDULE", "WITH", "REVENUE."]
+        },
+        {
+          start: 24.00, end: 27.60,
+          words: ["OUT-ANSWER", "YOUR", "COMPETITION", "TODAY.", "VISIT", "VANTORXSOLUTIONS.COM"]
+        }
+      ];
+
+      const curCap = CAPTION_SEGMENTS.find(c => t >= c.start && t <= c.end + 0.12);
+      if (curCap) {
+        ctx.save();
+        ctx.translate(W / 2, 1690);
+
+        // Glassmorphism Caption Capsule
+        const capW = 960;
+        const capH = 120;
+        roundRect(ctx, -capW / 2, -capH / 2, capW, capH, 26, 'rgba(4, 9, 24, 0.94)', 'rgba(56, 189, 248, 0.85)', 2.5);
+
+        // Subtle Ambient Glow
+        ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
+        ctx.shadowBlur = 16;
+
+        // Word progress calculation
+        const prog = Math.max(0, Math.min(0.999, (t - curCap.start) / (curCap.end - curCap.start)));
+        const activeWordIdx = Math.floor(prog * curCap.words.length);
+
+        ctx.font = '900 27px "SF Pro Display", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Split into 2 lines if long
+        const totalWords = curCap.words.length;
+        let line1Words = curCap.words;
+        let line2Words = [];
+        let mid = Math.ceil(totalWords / 2);
+        if (totalWords > 6) {
+          line1Words = curCap.words.slice(0, mid);
+          line2Words = curCap.words.slice(mid);
+        }
+
+        function renderWordLine(lineWords, startIdx, lineY) {
+          const spaceW = 12;
+          const wordWidths = lineWords.map(w => ctx.measureText(w).width);
+          const totalLineW = wordWidths.reduce((a, b) => a + b, 0) + (lineWords.length - 1) * spaceW;
+          let drawX = -totalLineW / 2;
+
+          lineWords.forEach((word, wIdx) => {
+            const globalIdx = startIdx + wIdx;
+            const isCurrent = (globalIdx === activeWordIdx);
+            const isPast = (globalIdx < activeWordIdx);
+
+            if (isCurrent) {
+              ctx.fillStyle = '#facc15'; // Neon Gold for active word being spoken
+              ctx.shadowColor = '#facc15';
+              ctx.shadowBlur = 16;
+              ctx.fillText(word, drawX + wordWidths[wIdx] / 2, lineY);
+            } else if (isPast) {
+              ctx.fillStyle = '#38bdf8'; // Electric Cyan for spoken words
+              ctx.shadowColor = 'transparent';
+              ctx.shadowBlur = 0;
+              ctx.fillText(word, drawX + wordWidths[wIdx] / 2, lineY);
+            } else {
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'; // Subdued white for upcoming words
+              ctx.shadowColor = 'transparent';
+              ctx.shadowBlur = 0;
+              ctx.fillText(word, drawX + wordWidths[wIdx] / 2, lineY);
+            }
+            drawX += wordWidths[wIdx] + spaceW;
+          });
+        }
+
+        if (line2Words.length > 0) {
+          renderWordLine(line1Words, 0, -20);
+          renderWordLine(line2Words, mid, 22);
+        } else {
+          renderWordLine(line1Words, 0, 0);
+        }
+
+        ctx.restore();
+      }
 
       ctx.restore();
     };
+
   </script>
 </body>
 </html>`;

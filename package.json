@@ -28,6 +28,7 @@
     "three": "^0.187.0"
   },
   "devDependencies": {
-    "archiver": "^8.0.0"
+    "archiver": "^8.0.0",
+    "msedge-tts": "^2.1.1"
   }
 }
