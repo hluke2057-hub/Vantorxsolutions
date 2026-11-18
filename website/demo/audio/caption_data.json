@@ -1,72 +1,62 @@
 [
   {
     "id": "s1",
-    "start": 0.15,
-    "targetDur": 3.8,
-    "rate": "+15%",
-    "text": "Speed to lead is everything. Most customers hire whoever answers first.",
-    "caption": "SPEED TO LEAD IS EVERYTHING. MOST CUSTOMERS HIRE WHOEVER ANSWERS FIRST.",
-    "actualDur": 3.8,
-    "end": 3.9499999999999997
+    "start": 0.1,
+    "targetDur": 4.8,
+    "rate": "+22%",
+    "text": "Seventy-eight percent of buyers hire whoever answers first. But when you miss a call, that money goes straight to your competitor.",
+    "caption": "78% OF HOMEOWNERS HIRE WHOEVER ANSWERS FIRST. UNANSWERED CALLS GO TO YOUR COMPETITOR!",
+    "actualDur": 4.8,
+    "end": 4.8999999999999995
   },
   {
     "id": "s2",
-    "start": 4.1,
-    "targetDur": 3.8,
-    "rate": "+15%",
-    "text": "When your phone hits voicemail, that caller hangs up and calls your competitor.",
-    "caption": "WHEN YOU HIT VOICEMAIL, THAT CALLER HANGS UP AND CALLS YOUR COMPETITOR.",
-    "actualDur": 3.8,
-    "end": 7.8999999999999995
+    "start": 5.1,
+    "targetDur": 4.8,
+    "rate": "+20%",
+    "text": "When your phone hits voicemail, that customer hangs up in eight seconds and calls the next contractor on Google.",
+    "caption": "WHEN YOU HIT VOICEMAIL, THEY HANG UP IN 8 SECONDS AND HIRE THE NEXT CONTRACTOR!",
+    "actualDur": 4.8,
+    "end": 9.899999999999999
   },
   {
     "id": "s3",
-    "start": 8.1,
-    "targetDur": 3.9,
-    "rate": "+15%",
-    "text": "VantorX answers in zero-point-two seconds, picking up before the second ring.",
-    "caption": "VANTORX ANSWERS IN 0.2 SECONDS, PICKING UP BEFORE THE SECOND RING.",
-    "actualDur": 3.9,
-    "end": 12
+    "start": 10.1,
+    "targetDur": 4.7,
+    "rate": "+20%",
+    "text": "That is why contractors switch to VantorX. Our AI answers in zero-point-two seconds, picking up before the second ring.",
+    "caption": "VANTORX ANSWERS IN 0.2 SECONDS, PICKING UP BEFORE RING TWO 24/7!",
+    "actualDur": 4.7,
+    "end": 14.8
   },
   {
-    "id": "s4a",
-    "start": 12.2,
-    "targetDur": 3.6,
-    "rate": "+15%",
-    "text": "Our AI receptionist qualifies the customer and captures every job detail live.",
-    "caption": "OUR AI RECEPTIONIST QUALIFIES THE CUSTOMER AND CAPTURES EVERY DETAIL LIVE.",
-    "actualDur": 3.6,
-    "end": 15.799999999999999
-  },
-  {
-    "id": "s4b",
-    "start": 16,
-    "targetDur": 3.7,
-    "rate": "+15%",
-    "text": "It syncs your calendar, locks the slot, and texts the dispatch alert to your phone.",
-    "caption": "IT SYNCS YOUR CALENDAR, LOCKS THE SLOT, AND TEXTS THE DISPATCH ALERT.",
-    "actualDur": 3.7,
-    "end": 19.7
+    "id": "s4",
+    "start": 15.1,
+    "targetDur": 4.8,
+    "rate": "+20%",
+    "text": "It qualifies the repair, locks the appointment directly to your schedule, and texts the details straight to your phone.",
+    "caption": "IT QUALIFIES THE REPAIR, LOCKS YOUR CALENDAR, AND TEXTS THE JOB DETAILS!",
+    "actualDur": 4.8,
+    "end": 19.9
   },
   {
     "id": "s5",
-    "start": 19.9,
-    "targetDur": 3.9,
-    "rate": "+12%",
-    "text": "While you focus on the job, VantorX stacks your schedule with confirmed revenue.",
-    "caption": "WHILE YOU FOCUS ON THE JOB, VANTORX STACKS YOUR SCHEDULE WITH REVENUE.",
-    "actualDur": 3.9,
-    "end": 23.799999999999997
+    "start": 20.1,
+    "targetDur": 4.3,
+    "rate": "+18%",
+    "text": "While you focus on the job, VantorX fills your schedule with thousands in confirmed revenue.",
+    "caption": "WHILE YOU FOCUS ON THE WORK, VANTORX STACKS YOUR SCHEDULE WITH REVENUE!",
+    "actualDur": 4.3,
+    "end": 24.400000000000002
   },
   {
     "id": "s6",
-    "start": 24,
-    "targetDur": 3.6,
-    "rate": "+10%",
+    "start": 24.6,
+    "targetDur": 3.2,
+    "rate": "+18%",
     "text": "Out-answer your competition today. Visit vantorxsolutions.com.",
     "caption": "OUT-ANSWER YOUR COMPETITION TODAY. VISIT VANTORXSOLUTIONS.COM",
-    "actualDur": 3.6,
-    "end": 27.6
+    "actualDur": 3.2,
+    "end": 27.8
   }
 ]
