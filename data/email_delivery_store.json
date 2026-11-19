@@ -1,16 +1,16 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-11-18T19:22:00.124Z",
+  "lastUpdated": "2026-11-19T18:35:40.635Z",
   "stats": {
-    "totalProcessed": 32,
-    "totalSent": 32,
+    "totalProcessed": 47,
+    "totalSent": 47,
     "totalDelivered": 2,
     "totalBounced": 0,
     "totalSuppressed": 1,
     "totalFailed": 0,
     "totalReplied": 0,
     "totalUnsubscribed": 0,
-    "deliveryRate": "6.3%",
+    "deliveryRate": "4.3%",
     "bounceRate": "0.0%",
     "complaintRate": "0.00%"
   },
@@ -462,6 +462,216 @@
       "suppressionOrigin": null,
       "source": "cloud_outbound_engine",
       "lastUpdatedAt": "2026-11-18T19:22:00.124Z"
+    },
+    "01a1f517-bf3d-77a7-8268-54cdcfaec923": {
+      "id": "01a1f517-bf3d-77a7-8268-54cdcfaec923",
+      "recipient": "adam@plumbingexperts.com",
+      "businessName": "Plumbing Experts Inc.",
+      "subject": "Final note regarding Plumbing Experts Inc. call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:36.690Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:36.690Z"
+    },
+    "01a1f517-c095-7c75-b7f9-9741c787632e": {
+      "id": "01a1f517-c095-7c75-b7f9-9741c787632e",
+      "recipient": "neil@abcroofing.com",
+      "businessName": "ABC Roofing Corp.",
+      "subject": "Final note regarding ABC Roofing Corp. call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:37.038Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:37.038Z"
+    },
+    "01a1f517-c1d2-7238-a71c-1e76f96d4128": {
+      "id": "01a1f517-c1d2-7238-a71c-1e76f96d4128",
+      "recipient": "mark@powercoreelectric.com",
+      "businessName": "Power Core Electric",
+      "subject": "Final note regarding Power Core Electric call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:37.356Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:37.356Z"
+    },
+    "01a1f517-c2e3-728f-a192-cea1c10bae80": {
+      "id": "01a1f517-c2e3-728f-a192-cea1c10bae80",
+      "recipient": "carlos@totalrepairpros.com",
+      "businessName": "Total Repair Pros",
+      "subject": "Final note regarding Total Repair Pros call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:37.626Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:37.626Z"
+    },
+    "01a1f517-c3aa-7085-80a3-b9b56427c73e": {
+      "id": "01a1f517-c3aa-7085-80a3-b9b56427c73e",
+      "recipient": "info@tsroofingsystems.com",
+      "businessName": "T&S Roofing Systems",
+      "subject": "Final note regarding T&S Roofing Systems call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:37.828Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:37.828Z"
+    },
+    "01a1f517-c4b0-7136-87d7-0b91fd0c78bc": {
+      "id": "01a1f517-c4b0-7136-87d7-0b91fd0c78bc",
+      "recipient": "info@actionairconditioning.com",
+      "businessName": "Action Air Conditioning",
+      "subject": "Final note regarding Action Air Conditioning call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:38.083Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:38.083Z"
+    },
+    "01a1f517-c66b-7bd5-afa4-c0c82ef7043b": {
+      "id": "01a1f517-c66b-7bd5-afa4-c0c82ef7043b",
+      "recipient": "info@bayareaelectric.com",
+      "businessName": "Bay Area Electric",
+      "subject": "Final note regarding Bay Area Electric call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:38.530Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:38.530Z"
+    },
+    "01a1f517-c74f-7964-b0e0-5861b4f4b6e3": {
+      "id": "01a1f517-c74f-7964-b0e0-5861b4f4b6e3",
+      "recipient": "ken@tampabayplumbers.com",
+      "businessName": "Tampa Bay Plumbers LLC",
+      "subject": "Final note regarding Tampa Bay Plumbers LLC call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:38.755Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:38.755Z"
+    },
+    "01a1f517-c85c-743a-bf27-b75d4bb8cb4e": {
+      "id": "01a1f517-c85c-743a-bf27-b75d4bb8cb4e",
+      "recipient": "joe@baytobayroofing.com",
+      "businessName": "Bay to Bay Roofing",
+      "subject": "Final note regarding Bay to Bay Roofing call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:39.024Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:39.024Z"
+    },
+    "01a1f517-c93c-7258-a576-09335afb3311": {
+      "id": "01a1f517-c93c-7258-a576-09335afb3311",
+      "recipient": "shawn@staydryroofingoftampa.com",
+      "businessName": "Stay Dry Roofing of Tampa",
+      "subject": "Final note regarding Stay Dry Roofing of Tampa call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:39.245Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:39.245Z"
+    },
+    "01a1f517-ca81-7da3-81a9-b959cbabb205": {
+      "id": "01a1f517-ca81-7da3-81a9-b959cbabb205",
+      "recipient": "jeff@pinellascomfortsystems.com",
+      "businessName": "Pinellas Comfort Systems",
+      "subject": "Final note regarding Pinellas Comfort Systems call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:39.576Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:39.576Z"
+    },
+    "01a1f517-cb75-76d0-bc5e-341d9ca69c5d": {
+      "id": "01a1f517-cb75-76d0-bc5e-341d9ca69c5d",
+      "recipient": "info@aircareheatingcooling.com",
+      "businessName": "Air Care Heating & Cooling",
+      "subject": "Final note regarding Air Care Heating & Cooling call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:39.830Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:39.830Z"
+    },
+    "01a1f517-cc75-7857-9f25-abaaad2a2cd9": {
+      "id": "01a1f517-cc75-7857-9f25-abaaad2a2cd9",
+      "recipient": "chris@precisionroofcrafters.com",
+      "businessName": "Precision Roof Crafters",
+      "subject": "Re: Quick question for Chris regarding Precision Roof Crafters AI search rankings",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:40.084Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:40.084Z"
+    },
+    "01a1f517-cd82-7dfb-b656-5dcc428ccad4": {
+      "id": "01a1f517-cd82-7dfb-b656-5dcc428ccad4",
+      "recipient": "peter@strataroofingandconstruction.com",
+      "businessName": "Strata Roofing and Construction",
+      "subject": "Re: Quick question for Peter regarding Strata Roofing and Construction quote requests",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:40.344Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:40.344Z"
+    },
+    "01a1f517-ce99-7e46-a8a2-332ec5ae5dca": {
+      "id": "01a1f517-ce99-7e46-a8a2-332ec5ae5dca",
+      "recipient": "info@aaronselectricalservice.com",
+      "businessName": "Aaron's Electrical Service",
+      "subject": "Re: Quick question for Aaron regarding Aaron's Electrical Service after-hours calls",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-19T18:35:40.635Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-19T18:35:40.635Z"
     }
   },
   "suppressions": [
@@ -854,6 +1064,186 @@
       "timestamp": "2026-11-18T19:22:00.124Z",
       "details": {
         "subject": "Re: Quick question for Rick regarding Richmond's Air after-hours calls",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113336690_efem",
+      "emailId": "01a1f517-bf3d-77a7-8268-54cdcfaec923",
+      "recipient": "adam@plumbingexperts.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:36.690Z",
+      "details": {
+        "subject": "Final note regarding Plumbing Experts Inc. call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113337038_ga9n",
+      "emailId": "01a1f517-c095-7c75-b7f9-9741c787632e",
+      "recipient": "neil@abcroofing.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:37.038Z",
+      "details": {
+        "subject": "Final note regarding ABC Roofing Corp. call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113337356_yhbz",
+      "emailId": "01a1f517-c1d2-7238-a71c-1e76f96d4128",
+      "recipient": "mark@powercoreelectric.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:37.356Z",
+      "details": {
+        "subject": "Final note regarding Power Core Electric call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113337626_ke1a",
+      "emailId": "01a1f517-c2e3-728f-a192-cea1c10bae80",
+      "recipient": "carlos@totalrepairpros.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:37.626Z",
+      "details": {
+        "subject": "Final note regarding Total Repair Pros call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113337828_9qz7",
+      "emailId": "01a1f517-c3aa-7085-80a3-b9b56427c73e",
+      "recipient": "info@tsroofingsystems.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:37.828Z",
+      "details": {
+        "subject": "Final note regarding T&S Roofing Systems call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113338083_wo7r",
+      "emailId": "01a1f517-c4b0-7136-87d7-0b91fd0c78bc",
+      "recipient": "info@actionairconditioning.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:38.083Z",
+      "details": {
+        "subject": "Final note regarding Action Air Conditioning call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113338530_58zg",
+      "emailId": "01a1f517-c66b-7bd5-afa4-c0c82ef7043b",
+      "recipient": "info@bayareaelectric.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:38.530Z",
+      "details": {
+        "subject": "Final note regarding Bay Area Electric call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113338755_onsq",
+      "emailId": "01a1f517-c74f-7964-b0e0-5861b4f4b6e3",
+      "recipient": "ken@tampabayplumbers.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:38.755Z",
+      "details": {
+        "subject": "Final note regarding Tampa Bay Plumbers LLC call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113339024_bw0l",
+      "emailId": "01a1f517-c85c-743a-bf27-b75d4bb8cb4e",
+      "recipient": "joe@baytobayroofing.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:39.024Z",
+      "details": {
+        "subject": "Final note regarding Bay to Bay Roofing call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113339245_uhvx",
+      "emailId": "01a1f517-c93c-7258-a576-09335afb3311",
+      "recipient": "shawn@staydryroofingoftampa.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:39.245Z",
+      "details": {
+        "subject": "Final note regarding Stay Dry Roofing of Tampa call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113339576_utbp",
+      "emailId": "01a1f517-ca81-7da3-81a9-b959cbabb205",
+      "recipient": "jeff@pinellascomfortsystems.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:39.576Z",
+      "details": {
+        "subject": "Final note regarding Pinellas Comfort Systems call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113339830_9amt",
+      "emailId": "01a1f517-cb75-76d0-bc5e-341d9ca69c5d",
+      "recipient": "info@aircareheatingcooling.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:39.830Z",
+      "details": {
+        "subject": "Final note regarding Air Care Heating & Cooling call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113340084_8d3y",
+      "emailId": "01a1f517-cc75-7857-9f25-abaaad2a2cd9",
+      "recipient": "chris@precisionroofcrafters.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:40.084Z",
+      "details": {
+        "subject": "Re: Quick question for Chris regarding Precision Roof Crafters AI search rankings",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113340344_8zgl",
+      "emailId": "01a1f517-cd82-7dfb-b656-5dcc428ccad4",
+      "recipient": "peter@strataroofingandconstruction.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:40.344Z",
+      "details": {
+        "subject": "Re: Quick question for Peter regarding Strata Roofing and Construction quote requests",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795113340635_w9mv",
+      "emailId": "01a1f517-ce99-7e46-a8a2-332ec5ae5dca",
+      "recipient": "info@aaronselectricalservice.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-19T18:35:40.635Z",
+      "details": {
+        "subject": "Re: Quick question for Aaron regarding Aaron's Electrical Service after-hours calls",
         "sender": "Luke <luke@vantorxsolutions.com>",
         "failureReason": null
       }

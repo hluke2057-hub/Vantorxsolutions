@@ -2,10 +2,10 @@
   {
     "id": "pb_004",
     "company": "Friendly A/C",
-    "owner": "David",
-    "fullOwner": "David Miller",
+    "owner": "Arioste",
+    "fullOwner": "Arioste Polydor",
     "title": "Managing Partner",
-    "phone": "(561) 246-8805",
+    "phone": "(561) 305-4832",
     "city": "Boca Raton, FL",
     "state": "FL",
     "trade": "HVAC",
@@ -16,7 +16,7 @@
     "netSavings": 0,
     "painPoint": "Emergency AC repair calls going to voicemail after 5 PM while competitors close jobs",
     "batch": 1,
-    "employees": 3,
+    "employees": 6,
     "employeeTier": "sweetSpot",
     "employeeTierName": "Small Local Sweet Spot",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -26,7 +26,7 @@
     "mx_status": "VERIFIED",
     "mx_host": "alt2.aspmx.l.google.com",
     "email": "service@friendlyac.com",
-    "website": "https://www.friendlyac.com",
+    "website": "https://friendly-ac.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/friendlyac.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=David%20Friendly%20A%2FC&page=1",
@@ -41,7 +41,8 @@
     "sentAt": "2026-11-16T18:19:22.540Z",
     "emailSource": "Website Verified",
     "mxHost": "alt2.aspmx.l.google.com",
-    "touch": 3
+    "touch": 3,
+    "employeeSource": "ZoomInfo (6 Employees) · Core South FL AC Shop"
   },
   {
     "id": "pb_006",
@@ -90,10 +91,10 @@
   {
     "id": "pb_015",
     "company": "Ewing & Ewing Air Conditioning",
-    "owner": "Team",
-    "fullOwner": "Owner / Lead Estimator",
+    "owner": "James",
+    "fullOwner": "James Ewing",
     "title": "Owner / Principal",
-    "phone": "(561) 220-6484",
+    "phone": "(561) 798-2665",
     "city": "West Palm Beach, FL",
     "state": "FL",
     "trade": "HVAC",
@@ -104,7 +105,7 @@
     "netSavings": 0,
     "painPoint": "After-hours call overflow and weekend voicemail triage for Palm Beach homeowners",
     "batch": 1,
-    "employees": 3,
+    "employees": 6,
     "employeeTier": "sweetSpot",
     "employeeTierName": "Small Local Sweet Spot",
     "employeeLabel": "3 Staff - Small Local Sweet Spot",
@@ -177,8 +178,8 @@
   {
     "id": "pb_017",
     "company": "Copperhead Plumbing LLC",
-    "owner": "Jason",
-    "fullOwner": "Jason Cole",
+    "owner": "Nicholas",
+    "fullOwner": "Nicholas P. Miller",
     "title": "Owner",
     "phone": "(561) 292-0232",
     "city": "West Palm Beach, FL",
@@ -191,7 +192,7 @@
     "netSavings": 0,
     "painPoint": "Homeowners calling three plumbers and hiring the one who responds via text first",
     "batch": 1,
-    "employees": 1,
+    "employees": 3,
     "employeeTier": "sweetSpot",
     "employeeTierName": "Small Local Sweet Spot",
     "employeeLabel": "1 Staff - Small Local Sweet Spot",
@@ -215,7 +216,9 @@
     "body": "Hi Jason,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for West Palm Beach, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=pb_017\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Copperhead Plumbing LLC a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "resendMessageId": "01a1eb17-74a4-7cf9-a78d-1b5605626dac",
     "sentAt": "2026-11-17T19:59:05.451Z",
-    "touch": 3
+    "touch": 3,
+    "employeeSource": "ZoomInfo (3 Employees) · Local Specialist Crew",
+    "website": "https://copperhead-plumbing.com"
   },
   {
     "id": "pb_020",
@@ -677,11 +680,11 @@
     "mxHost": "aspmx3.googlemail.com",
     "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Re: Quick question for Adam regarding Plumbing Experts Inc. quote requests",
-    "body": "Hi Adam,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Plumbing Experts Inc..\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=bw_041\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c2b7-75c8-997c-dbf57b85e761",
-    "sentAt": "2026-11-16T00:56:12.767Z",
-    "touch": 2
+    "subject": "Final note regarding Plumbing Experts Inc. call capture",
+    "body": "Hi Adam,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Pompano Beach, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=bw_041\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Plumbing Experts Inc. a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-bf3d-77a7-8268-54cdcfaec923",
+    "sentAt": "2026-11-19T18:35:36.692Z",
+    "touch": 3
   },
   {
     "id": "bw_044",
@@ -721,11 +724,11 @@
     "mxHost": "mx.abcroofing.com.cust.a.hostedemail.com",
     "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Re: Quick question for Neil regarding ABC Roofing Corp. AI search rankings",
-    "body": "Hi Neil,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at ABC Roofing Corp..\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=bw_044\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c375-7117-a4b9-4eac15bacbe6",
-    "sentAt": "2026-11-16T00:56:12.958Z",
-    "touch": 2
+    "subject": "Final note regarding ABC Roofing Corp. call capture",
+    "body": "Hi Neil,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Coral Springs, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=bw_044\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at ABC Roofing Corp. a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c095-7c75-b7f9-9741c787632e",
+    "sentAt": "2026-11-19T18:35:37.038Z",
+    "touch": 3
   },
   {
     "id": "bw_047",
@@ -765,11 +768,11 @@
     "mxHost": "powercoreelectric-com.mail.protection.outlook.com",
     "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Re: Quick question for Mark regarding Power Core Electric after-hours calls",
-    "body": "Hi Mark,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Power Core Electric.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=bw_047\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c3ec-7204-bdf5-a05de3ceb38d",
-    "sentAt": "2026-11-16T00:56:13.080Z",
-    "touch": 2
+    "subject": "Final note regarding Power Core Electric call capture",
+    "body": "Hi Mark,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Deerfield Beach, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=bw_047\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Power Core Electric a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c1d2-7238-a71c-1e76f96d4128",
+    "sentAt": "2026-11-19T18:35:37.357Z",
+    "touch": 3
   },
   {
     "id": "bw_048",
@@ -1008,11 +1011,11 @@
     "mxHost": "totalrepairpros-com.mail.protection.outlook.com",
     "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Re: Quick question for Carlos regarding Total Repair Pros AI search rankings",
-    "body": "Hi Carlos,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Total Repair Pros.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=md_065\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c4ae-78b0-8a1d-5ef3e2122ecc",
-    "sentAt": "2026-11-16T00:56:13.268Z",
-    "touch": 2
+    "subject": "Final note regarding Total Repair Pros call capture",
+    "body": "Hi Carlos,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Coral Gables, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=md_065\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Total Repair Pros a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c2e3-728f-a192-cea1c10bae80",
+    "sentAt": "2026-11-19T18:35:37.627Z",
+    "touch": 3
   },
   {
     "id": "md_069",
@@ -1051,11 +1054,11 @@
     "mxStatus": "VERIFIED",
     "mxHost": "alt2.aspmx.l.google.com",
     "status": "sent",
-    "subject": "Re: Quick question for Danny regarding T&S Roofing Systems AI search rankings",
-    "body": "Hi Danny,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at T&S Roofing Systems.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=md_069\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c545-7a17-b9c9-7df14500ff7b",
-    "sentAt": "2026-11-16T00:56:13.422Z",
-    "touch": 2
+    "subject": "Final note regarding T&S Roofing Systems call capture",
+    "body": "Hi Danny,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Miami, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=md_069\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at T&S Roofing Systems a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c3aa-7085-80a3-b9b56427c73e",
+    "sentAt": "2026-11-19T18:35:37.828Z",
+    "touch": 3
   },
   {
     "id": "tb_077",
@@ -1289,11 +1292,11 @@
     "mxStatus": "VERIFIED",
     "mxHost": "actionairconditioning-com.mail.protection.outlook.com",
     "status": "sent",
-    "subject": "Re: Quick question for Ron regarding Action Air Conditioning after-hours calls",
-    "body": "Hi Ron,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Action Air Conditioning.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=tb_086\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c622-7997-bfab-9b07100119b6",
-    "sentAt": "2026-11-16T00:56:13.641Z",
-    "touch": 2
+    "subject": "Final note regarding Action Air Conditioning call capture",
+    "body": "Hi Ron,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Brandon, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=tb_086\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Action Air Conditioning a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c4b0-7136-87d7-0b91fd0c78bc",
+    "sentAt": "2026-11-19T18:35:38.083Z",
+    "touch": 3
   },
   {
     "id": "tb_091",
@@ -1332,11 +1335,11 @@
     "mxStatus": "VERIFIED",
     "mxHost": "mx3-usg1.ppe-hosted.com",
     "status": "sent",
-    "subject": "Re: Quick question for Jim regarding Bay Area Electric after-hours calls",
-    "body": "Hi Jim,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Bay Area Electric.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=tb_091\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c78c-768a-816b-2aa7e5951ebb",
-    "sentAt": "2026-11-16T00:56:14.004Z",
-    "touch": 2
+    "subject": "Final note regarding Bay Area Electric call capture",
+    "body": "Hi Jim,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Tampa, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=tb_091\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Bay Area Electric a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c66b-7bd5-afa4-c0c82ef7043b",
+    "sentAt": "2026-11-19T18:35:38.530Z",
+    "touch": 3
   },
   {
     "id": "tb_093",
@@ -1376,11 +1379,11 @@
     "mxHost": "mx.tampabayplumbers.com.cust.a.hostedemail.com",
     "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Re: Quick question for Ken regarding Tampa Bay Plumbers LLC after-hours calls",
-    "body": "Hi Ken,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Tampa Bay Plumbers LLC.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=tb_093\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c877-77cd-ad71-a3cbcb296690",
-    "sentAt": "2026-11-16T00:56:14.236Z",
-    "touch": 2
+    "subject": "Final note regarding Tampa Bay Plumbers LLC call capture",
+    "body": "Hi Ken,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Tampa, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=tb_093\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Tampa Bay Plumbers LLC a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c74f-7964-b0e0-5861b4f4b6e3",
+    "sentAt": "2026-11-19T18:35:38.755Z",
+    "touch": 3
   },
   {
     "id": "tb_095",
@@ -1420,11 +1423,11 @@
     "mxHost": "mx2.privateemail.com",
     "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Re: Quick question for Joe regarding Bay to Bay Roofing after-hours calls",
-    "body": "Hi Joe,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Bay to Bay Roofing.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=tb_095\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-c958-7c74-944a-62770c5dd3a3",
-    "sentAt": "2026-11-16T00:56:14.465Z",
-    "touch": 2
+    "subject": "Final note regarding Bay to Bay Roofing call capture",
+    "body": "Hi Joe,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Tampa, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=tb_095\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Bay to Bay Roofing a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c85c-743a-bf27-b75d4bb8cb4e",
+    "sentAt": "2026-11-19T18:35:39.025Z",
+    "touch": 3
   },
   {
     "id": "tb_096",
@@ -1464,11 +1467,11 @@
     "mxHost": "smtp.secureserver.net",
     "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Re: Quick question for Shawn regarding Stay Dry Roofing of Tampa AI search rankings",
-    "body": "Hi Shawn,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Stay Dry Roofing of Tampa.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=tb_096\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e1da-cae4-7ce8-81bd-ebe573905c48",
-    "sentAt": "2026-11-16T00:56:14.860Z",
-    "touch": 2
+    "subject": "Final note regarding Stay Dry Roofing of Tampa call capture",
+    "body": "Hi Shawn,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Tampa, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=tb_096\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Stay Dry Roofing of Tampa a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-c93c-7258-a576-09335afb3311",
+    "sentAt": "2026-11-19T18:35:39.245Z",
+    "touch": 3
   },
   {
     "id": "tb_099",
@@ -1508,11 +1511,11 @@
     "mxHost": "mx-caprica.easydns.com",
     "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Re: Quick question for Jeff regarding Pinellas Comfort Systems AI search rankings",
-    "body": "Hi Jeff,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Pinellas Comfort Systems.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=tb_099\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e595-d14f-7ef9-bfb5-fd04a0f51bdd",
-    "sentAt": "2026-11-16T18:19:23.452Z",
-    "touch": 2
+    "subject": "Final note regarding Pinellas Comfort Systems call capture",
+    "body": "Hi Jeff,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Pinellas Park, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=tb_099\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Pinellas Comfort Systems a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-ca81-7da3-81a9-b959cbabb205",
+    "sentAt": "2026-11-19T18:35:39.576Z",
+    "touch": 3
   },
   {
     "id": "tb_100",
@@ -1551,11 +1554,11 @@
     "mxStatus": "VERIFIED",
     "mxHost": "mx1-us1.ppe-hosted.com",
     "status": "sent",
-    "subject": "Re: Quick question for Tony regarding Air Care Heating & Cooling quote requests",
-    "body": "Hi Tony,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Air Care Heating & Cooling.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=tb_100\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": "01a1e595-d1f2-7632-9a5f-2333d2c97b6a",
-    "sentAt": "2026-11-16T18:19:23.526Z",
-    "touch": 2
+    "subject": "Final note regarding Air Care Heating & Cooling call capture",
+    "body": "Hi Tony,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Largo, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=tb_100\n\nIf you ever want to plug the $8,500/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Air Care Heating & Cooling a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-cb75-76d0-bc5e-341d9ca69c5d",
+    "sentAt": "2026-11-19T18:35:39.831Z",
+    "touch": 3
   },
   {
     "id": "cf_102",
@@ -2754,12 +2757,12 @@
     "emailSource": "MX Verified (precisionroofcrafters-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "precisionroofcrafters-com.mail.protection.outlook.com",
-    "status": "pending",
+    "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Quick question for Chris regarding Precision Roof Crafters AI search rankings",
-    "body": "Hi Chris,\n\nI was running an AI search audit on ChatGPT, Perplexity, and Google Gemini for top-recommended Roofing contractors in Houston, TX.\n\nWhile Precision Roof Crafters has great local reviews, when homeowners ask ChatGPT or Perplexity 'Who is the best Roofing contractor near me?', the AI search engines aren't recommending you — they are directing high-ticket jobs to competitors.\n\nHere is why: Traditional SEO only targets old Google links. Today, millions of homeowners search using AI assistants on their phones. AI engines ignore traditional keywords unless your company has an engineered llms.txt protocol and structured Schema knowledge graph.\n\nI prepared your company's full AI search and operations audit here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_189\n\nWe built the AEO Engine (Answer Engine Optimization) specifically for trade contractors to get you ranked as the #1 recommended answer across ChatGPT, Perplexity, Claude, and Gemini.\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you what ChatGPT says when local homeowners search for Roofing in Houston, TX?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": null,
-    "sentAt": "2026-11-14T21:21:54.284Z",
+    "subject": "Re: Quick question for Chris regarding Precision Roof Crafters AI search rankings",
+    "body": "Hi Chris,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Precision Roof Crafters.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_189\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-cc75-7857-9f25-abaaad2a2cd9",
+    "sentAt": "2026-11-19T18:35:40.085Z",
     "touch": 2
   },
   {
@@ -2798,12 +2801,12 @@
     "emailSource": "MX Verified (strataroofingandconstruction-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
     "mxHost": "strataroofingandconstruction-com.mail.protection.outlook.com",
-    "status": "pending",
+    "status": "sent",
     "dnsError": "Quarantined guessed mailbox to prevent Resend hard bounce",
-    "subject": "Quick question for Peter regarding Strata Roofing and Construction quote requests",
-    "body": "Hi Peter,\n\nQuick question regarding Strata Roofing and Construction's customer response speed:\n\nWhen customers in Houston, TX fill out an online estimate request or call while your team is tied up on active jobs, what is your average follow-up time?\n\nHarvard Business Review research shows that businesses that respond to leads within 90 seconds are 700% more likely to close the job compared to waiting just 30 minutes. In Roofing, speed is everything.\n\nI prepared your shop's speed-to-lead audit here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_190\n\nWe deploy LeadFlow specifically for local trade contractors:\n• Automatically sends an instant, personalized two-way SMS within 3 seconds whenever a daytime call is missed\n• Follows up with online estimate requests in under 90 seconds\n• Rescues up to $7,800/mo in lost revenue before homeowners call a competitor\n\nCould we hop on a quick 10–15 minute Zoom call this Tuesday or Thursday so I can show you our live missed-call speed test?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": null,
-    "sentAt": "2026-11-14T21:21:54.561Z",
+    "subject": "Re: Quick question for Peter regarding Strata Roofing and Construction quote requests",
+    "body": "Hi Peter,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Strata Roofing and Construction.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_190\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-cd82-7dfb-b656-5dcc428ccad4",
+    "sentAt": "2026-11-19T18:35:40.344Z",
     "touch": 2
   },
   {
@@ -2842,11 +2845,11 @@
     "emailSource": "Website Scraped & Verified",
     "mxStatus": "VERIFIED",
     "mxHost": "mx3-usg2.ppe-hosted.com",
-    "status": "pending",
-    "subject": "Quick question for Aaron regarding Aaron's Electrical Service after-hours calls",
-    "body": "Hi Aaron,\n\nSaw your solid reputation in Spring, TX — congrats on building a trusted local brand.\n\nI was auditing local Electrical providers in Spring, TX and noticed that after 5:00 PM and on weekends, customer calls either hit an answering service or go straight to voicemail.\n\nIn Electrical, customers needing prompt service almost never wait for a callback — they hang up and call the next competitor who answers. We calculated that missing just 2–3 after-hours or overflow calls a week costs Aaron's Electrical Service roughly $8,500/mo in lost jobs.\n\nI put together your confidential live diagnostic file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_193\n\nWe built Ava, an AI phone receptionist designed specifically for service businesses:\n1. Answers in 1 ring, 24/7/365, with natural human conversation\n2. Triages urgent requests vs. general inquiries\n3. Books appointments directly into your Google / Outlook calendar\n4. Sends priority SMS alerts directly to your on-call team or cell phone\n\nCould we jump on a brief 10–15 minute Zoom screen share this week so I can show you how Ava handles a live call test?\n\nYou can also test Ava live right now from your cell phone at (561) 813-8602.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
-    "resendMessageId": null,
-    "sentAt": "2026-11-14T21:21:54.740Z",
+    "status": "sent",
+    "subject": "Re: Quick question for Aaron regarding Aaron's Electrical Service after-hours calls",
+    "body": "Hi Aaron,\n\nFollowing up on my note from earlier this week — I know you're busy managing operations at Aaron's Electrical Service.\n\nI included your shop's live diagnostic audit file here:\n-> https://www.vantorxsolutions.com/audit/?id=hou_193\n\nI also wanted to leave you our direct demo line: (561) 813-8602.\n\nIf you call it from your cell phone right now, you can experience Ava (our AI phone receptionist) firsthand. She speaks naturally, triages customer inquiries, and books directly into your calendar without putting callers on hold.\n\nWould you be open to a quick 10-minute Zoom screen share this week to see how we've set this up for other businesses in your area?\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
+    "resendMessageId": "01a1f517-ce99-7e46-a8a2-332ec5ae5dca",
+    "sentAt": "2026-11-19T18:35:40.636Z",
     "touch": 2
   },
   {
@@ -3558,11 +3561,11 @@
   {
     "id": "fl_se_004",
     "company": "Friendly A/C",
-    "owner": "David",
-    "fullOwner": "David Miller",
+    "owner": "Arioste",
+    "fullOwner": "Arioste Polydor",
     "title": "Managing Partner",
     "email": "service@friendlyac.com",
-    "phone": "(561) 290-1426",
+    "phone": "(561) 305-4832",
     "city": "Boca Raton, FL",
     "trade": "HVAC",
     "service": "24/7 AI Phone Receptionist (Ava)",
@@ -3576,7 +3579,7 @@
     "body": "Hi David,\n\nI haven't heard back, so I assume you're either completely satisfied with your current call capture setup or simply swamped right now.\n\nBefore I close out your audit file for Boca Raton, FL, I wanted to share your complete diagnostic numbers and live pricing architecture:\n-> https://www.vantorxsolutions.com/audit/?id=fl_se_004\n\nIf you ever want to plug the $8,200/mo leak from missed calls or test our AI receptionist, you can always test Ava 24/7 at (561) 813-8602 or grab 15 minutes on my calendar.\n\nWishing you and the team at Friendly A/C a great season.\n\nBest,\nLuke\nFounder, VantorX Solutions\nDirect: (561) 813-8602\nWebsite: https://www.vantorxsolutions.com",
     "mx_status": "VERIFIED",
     "mx_host": "alt3.aspmx.l.google.com",
-    "website": "https://www.friendlyac.com",
+    "website": "https://friendly-ac.com",
     "enrichmentLinks": {
       "hunter": "https://hunter.io/try/search/friendlyac.com",
       "apollo": "https://app.apollo.io/#/people?qKeywords=David%20Friendly%20A%2FC&page=1",
@@ -3585,7 +3588,9 @@
       "contactout": "https://contactout.com/search?q=David%20Friendly%20A%2FC"
     },
     "emailSource": "Website Verified",
-    "mxHost": "alt2.aspmx.l.google.com"
+    "mxHost": "alt2.aspmx.l.google.com",
+    "employees": 6,
+    "employeeSource": "ZoomInfo (6 Employees) · Core South FL AC Shop"
   },
   {
     "id": "fl_se_006",
@@ -3624,11 +3629,11 @@
   {
     "id": "fl_se_015",
     "company": "Ewing & Ewing Air Conditioning",
-    "owner": "Team",
-    "fullOwner": "Owner / Lead Estimator",
+    "owner": "James",
+    "fullOwner": "James Ewing",
     "title": "Owner / Principal",
     "email": "service@ewingair.com",
-    "phone": "(561) 220-6484",
+    "phone": "(561) 798-2665",
     "city": "West Palm Beach, FL",
     "trade": "HVAC",
     "service": "Full Digital Infrastructure Bundle",
@@ -3651,7 +3656,8 @@
       "contactout": "https://contactout.com/search?q=the%20owner%20Ewing%20%26%20Ewing%20Air%20Conditioning"
     },
     "emailSource": "Website Verified",
-    "mxHost": "alt4.aspmx.l.google.com"
+    "mxHost": "alt4.aspmx.l.google.com",
+    "employees": 6
   },
   {
     "id": "fl_se_016",
@@ -3687,8 +3693,8 @@
   {
     "id": "fl_se_017",
     "company": "Copperhead Plumbing LLC",
-    "owner": "Jason",
-    "fullOwner": "Jason Cole",
+    "owner": "Nicholas",
+    "fullOwner": "Nicholas P. Miller",
     "title": "Owner",
     "email": "jason@copperheadplumbing.com",
     "phone": "(561) 292-0232",
@@ -3715,7 +3721,10 @@
     },
     "emailSource": "MX Verified (copperheadplumbing-com.mail.protection.outlook.com)",
     "mxStatus": "VERIFIED",
-    "mxHost": "copperheadplumbing-com.mail.protection.outlook.com"
+    "mxHost": "copperheadplumbing-com.mail.protection.outlook.com",
+    "employees": 3,
+    "employeeSource": "ZoomInfo (3 Employees) · Local Specialist Crew",
+    "website": "https://copperhead-plumbing.com"
   },
   {
     "id": "fl_se_021",
