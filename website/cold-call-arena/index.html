@@ -1585,15 +1585,18 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
 
       <!-- 📋 VIEW SWITCHER: QUEUE (TO CALL) VS PREVIOUSLY CALLED HISTORY -->
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px;background:linear-gradient(135deg,rgba(15,23,42,0.8),rgba(11,15,22,0.8));border:1px solid rgba(245,158,11,0.3);border-radius:16px;padding:14px 18px">
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-          <button type="button" class="view-toggle-pill active" id="btnViewToCall" onclick="switchLeadView('toCall')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid #f59e0b;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f;cursor:pointer;transition:all 0.2s">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <button type="button" class="view-toggle-pill active" id="btnViewToCall" onclick="switchLeadView('toCall')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid #f59e0b;background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a0f;cursor:pointer;transition:all 0.2s">
             <span>📋</span> Dial Queue: To Call (<span id="uncalledCountBadge">265</span>)
           </button>
-          <button type="button" class="view-toggle-pill" id="btnViewCallbacks" onclick="switchLeadView('callbacks')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid rgba(56,189,248,0.5);background:rgba(56,189,248,0.12);color:#38bdf8;cursor:pointer;transition:all 0.2s">
-            <span>⏳</span> Callbacks &amp; Follow-Ups (<span id="callbackCountBadge">7</span>)
+          <button type="button" class="view-toggle-pill" id="btnViewCallbacksAndSuccess" onclick="switchLeadView('callbacksAndSuccess')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid rgba(245,158,11,0.4);background:rgba(245,158,11,0.12);color:#fcd34d;cursor:pointer;transition:all 0.2s" title="Organized leads called and marked Callback or Success, sorted chronologically by Date &amp; Time">
+            <span>⭐</span> Callbacks &amp; Deals (<span id="callbackAndSuccessBadge">0</span>)
           </button>
-          <button type="button" class="view-toggle-pill" id="btnViewCalledHistory" onclick="switchLeadView('calledHistory')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid var(--line);background:rgba(255,255,255,0.06);color:#cbd5e1;cursor:pointer;transition:all 0.2s">
-            <span>✅</span> Previously Called History (<span id="calledCountBadge">6</span>)
+          <button type="button" class="view-toggle-pill" id="btnViewCallbacks" onclick="switchLeadView('callbacks')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid rgba(56,189,248,0.5);background:rgba(56,189,248,0.12);color:#38bdf8;cursor:pointer;transition:all 0.2s">
+            <span>⏳</span> Callbacks Only (<span id="callbackCountBadge">7</span>)
+          </button>
+          <button type="button" class="view-toggle-pill" id="btnViewCalledHistory" onclick="switchLeadView('calledHistory')" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;font-size:14px;font-weight:800;border:1px solid var(--line);background:rgba(255,255,255,0.06);color:#cbd5e1;cursor:pointer;transition:all 0.2s">
+            <span>✅</span> All Called History (<span id="calledCountBadge">6</span>)
           </button>
         </div>
 
@@ -1779,6 +1782,8 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
           <div style="margin-left:auto;display:flex;align-items:center;gap:6px">
             <label for="leadSortSelect" style="font-size:11px;color:var(--dim);font-family:var(--font-mono);font-weight:700">SORT:</label>
             <select id="leadSortSelect" style="background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:4px 8px;border-radius:6px;font-size:12px;cursor:pointer">
+              <option value="timeDesc">🕒 Call Date &amp; Time (Newest First)</option>
+              <option value="timeAsc">🕒 Call Date &amp; Time (Oldest First)</option>
               <option value="empAsc" selected>🎯 Smallest First (1-4 Staff Priority)</option>
               <option value="default">Default Queue Order</option>
               <option value="leakDesc">Highest Leak First ($)</option>
@@ -1813,7 +1818,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
         <table class="excel-table" id="leadExcelTable">
           <thead>
             <tr>
-              <th style="min-width:120px">Call Status</th>
+              <th style="min-width:140px">Call Status &amp; Time</th>
               <th>Contractor / Company</th>
               <th>Decision Maker</th>
               <th>City, State &amp; Trade</th>
@@ -1823,7 +1828,7 @@ header{background:rgba(15,21,34,0.88);backdrop-filter:blur(14px);border-bottom:1
               <th>Annual Leak ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View real-world trade ticket math">ℹ️ Math</span></th>
               <th>Net Saved ($) <span class="math-info-pill" onclick="openLeakMathModal()" title="View net profit formula">ℹ️ Math</span></th>
               <th style="min-width:180px">Target Package ➔ Fallback Offer</th>
-              <th>Outcome &amp; Notes</th>
+              <th style="min-width:200px">Outcome, Notes &amp; Undo</th>
               <th style="text-align:right">Action</th>
             </tr>
           </thead>
@@ -17203,6 +17208,94 @@ const LEADS_DATA = [
   }
   window.getLeadCallRecord = getLeadCallRecord;
 
+  function getRecordTimestampMs(rec) {
+    if (!rec) return 0;
+    if (typeof rec.calledAtMs === 'number' && !isNaN(rec.calledAtMs) && rec.calledAtMs > 0) return rec.calledAtMs;
+    if (rec.updatedAt) {
+      const t = new Date(rec.updatedAt).getTime();
+      if (!isNaN(t) && t > 0) return t;
+    }
+    if (rec.calledAt) {
+      const t = new Date(rec.calledAt).getTime();
+      if (!isNaN(t) && t > 0) return t;
+    }
+    if (rec.timestamp) {
+      const parts = rec.timestamp.match(/(\d+):(\d+)\s*(AM|PM)?/i);
+      if (parts) {
+        let hours = parseInt(parts[1], 10);
+        const minutes = parseInt(parts[2], 10);
+        const ampm = (parts[3] || '').toUpperCase();
+        if (ampm === 'PM' && hours < 12) hours += 12;
+        if (ampm === 'AM' && hours === 12) hours = 0;
+        let d = new Date();
+        if (rec.date) {
+          const parsedD = new Date(rec.date);
+          if (!isNaN(parsedD.getTime())) d = parsedD;
+        }
+        d.setHours(hours, minutes, 0, 0);
+        return d.getTime();
+      }
+    }
+    return 0;
+  }
+  window.getRecordTimestampMs = getRecordTimestampMs;
+
+  function formatCallDateTimeDisplay(rec) {
+    if (!rec) return '';
+    if (rec.fullDateTime) return rec.fullDateTime;
+    if (rec.dateStr && rec.timestamp) return `${rec.dateStr} · ${rec.timestamp}`;
+    if (rec.timestamp) return `Today · ${rec.timestamp}`;
+    if (rec.updatedAt) {
+      try {
+        return new Date(rec.updatedAt).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      } catch(e) {}
+    }
+    return 'Recently Called';
+  }
+  window.formatCallDateTimeDisplay = formatCallDateTimeDisplay;
+
+  function unmarkLeadCall(id) {
+    if (!id) return;
+    const lead = (window.LEADS_DATA || []).find(l => l.id === id);
+    const rec = (CALL_RECORDS && CALL_RECORDS[id]) ? CALL_RECORDS[id] : {};
+    const wasCalled = !!(rec && rec.called);
+    const wasDemo = rec && (rec.outcome === 'Success' || rec.outcome === 'Booked Demo');
+
+    if (CALL_RECORDS && CALL_RECORDS[id]) {
+      CALL_RECORDS[id].called = false;
+      CALL_RECORDS[id].outcome = 'Uncalled';
+      CALL_RECORDS[id].timestamp = '';
+      CALL_RECORDS[id].calledAtMs = 0;
+      CALL_RECORDS[id].calledAt = '';
+    }
+
+    const u = (typeof getActiveUser === 'function') ? getActiveUser() : null;
+    if (u) {
+      if (wasCalled) {
+        u.dailyDials = Math.max(0, (u.dailyDials || 1) - 1);
+      }
+      if (wasDemo) {
+        u.dailyDemos = Math.max(0, (u.dailyDemos || 1) - 1);
+      }
+      if (typeof saveUserProfiles === 'function') saveUserProfiles();
+      if (typeof updateDailyGoalsUI === 'function') updateDailyGoalsUI();
+    }
+
+    saveCallRecords();
+    if (typeof syncCallRecordToCloud === 'function') {
+      syncCallRecordToCloud(id, (CALL_RECORDS && CALL_RECORDS[id]) || { called: false, outcome: 'Uncalled' });
+    }
+    if (typeof renderLeadsTable === 'function') renderLeadsTable();
+    if (typeof updateQuotaHUD === 'function') updateQuotaHUD();
+    if (window.activeLead && window.activeLead.id === id && typeof updatePrompterCallStatus === 'function') {
+      updatePrompterCallStatus(id);
+    }
+    if (typeof showToast === 'function') {
+      showToast(`↺ Mistake fixed: Reverted "${lead?.company || 'Lead'}" back to To-Call Queue.`);
+    }
+  }
+  window.unmarkLeadCall = unmarkLeadCall;
+
   let CALL_RECORDS = {};
   try {
     const _storedCalls = JSON.parse(localStorage.getItem('vantorx_lead_calls_v1'));
@@ -18597,7 +18690,7 @@ const LEADS_DATA = [
   window.getTodayFreshRange = getTodayFreshRange;
   window.isIntakePaused = isIntakePaused;
 
-  let currentLeadView = 'toCall'; // 'toCall' or 'calledHistory'
+  let currentLeadView = 'toCall'; // 'toCall', 'callbacksAndSuccess', 'callbacks', or 'calledHistory'
   window.currentLeadView = currentLeadView;
 
   window.switchLeadView = function(view) {
@@ -18605,6 +18698,7 @@ const LEADS_DATA = [
     window.currentLeadView = view;
     
     const btnToCall = document.getElementById('btnViewToCall');
+    const btnCbSuccess = document.getElementById('btnViewCallbacksAndSuccess');
     const btnCallbacks = document.getElementById('btnViewCallbacks');
     const btnCalled = document.getElementById('btnViewCalledHistory');
 
@@ -18613,7 +18707,7 @@ const LEADS_DATA = [
       background: 'rgba(255,255,255,0.06)',
       color: '#cbd5e1'
     };
-    [btnToCall, btnCallbacks, btnCalled].forEach(btn => {
+    [btnToCall, btnCbSuccess, btnCallbacks, btnCalled].forEach(btn => {
       if (btn) {
         btn.style.border = defaultStyle.border;
         btn.style.background = defaultStyle.background;
@@ -18622,12 +18716,29 @@ const LEADS_DATA = [
       }
     });
 
+    const sortSel = document.getElementById('leadSortSelect');
+
     if (view === 'toCall') {
       if (btnToCall) {
         btnToCall.style.border = '1px solid #f59e0b';
         btnToCall.style.background = 'linear-gradient(135deg,#f59e0b,#d97706)';
         btnToCall.style.color = '#070a0f';
         btnToCall.classList.add('active');
+      }
+      if (sortSel && (currentSort === 'timeDesc' || currentSort === 'timeAsc')) {
+        sortSel.value = 'empAsc';
+        currentSort = 'empAsc';
+      }
+    } else if (view === 'callbacksAndSuccess') {
+      if (btnCbSuccess) {
+        btnCbSuccess.style.border = '1px solid #f59e0b';
+        btnCbSuccess.style.background = 'linear-gradient(135deg,#d97706,#b45309)';
+        btnCbSuccess.style.color = '#ffffff';
+        btnCbSuccess.classList.add('active');
+      }
+      if (sortSel) {
+        sortSel.value = 'timeDesc';
+        currentSort = 'timeDesc';
       }
     } else if (view === 'callbacks') {
       if (btnCallbacks) {
@@ -18636,6 +18747,10 @@ const LEADS_DATA = [
         btnCallbacks.style.color = '#ffffff';
         btnCallbacks.classList.add('active');
       }
+      if (sortSel) {
+        sortSel.value = 'timeDesc';
+        currentSort = 'timeDesc';
+      }
     } else if (view === 'calledHistory') {
       if (btnCalled) {
         btnCalled.style.border = '1px solid #34d399';
@@ -18643,8 +18758,16 @@ const LEADS_DATA = [
         btnCalled.style.color = '#070a0f';
         btnCalled.classList.add('active');
       }
+      if (sortSel) {
+        sortSel.value = 'timeDesc';
+        currentSort = 'timeDesc';
+      }
     }
 
+    currentLeadPage = 1;
+    if (typeof updateBatchHeading === 'function') {
+      updateBatchHeading();
+    }
     if (typeof renderLeadsTable === 'function') {
       renderLeadsTable();
     }
@@ -18741,8 +18864,23 @@ const LEADS_DATA = [
 
   function updateBatchHeading() {
     const heading = document.getElementById('batchHeadingText');
+    const sub = document.querySelector('.batch-subtitle');
     const activeLimit = getActiveQueueLimit();
     if (heading) {
+      if (currentLeadView === 'callbacksAndSuccess') {
+        heading.textContent = `⭐ ORGANIZED CALLS: CALLBACKS & BOOKED DEALS`;
+        if (sub) sub.innerHTML = `<span>🕒 Chronologically Organized by Date & Time</span> · Review who you called · Fix mistakes or click ↺ Undo to revert instantly`;
+        return;
+      } else if (currentLeadView === 'callbacks') {
+        heading.textContent = `⏳ SCHEDULED CALLBACKS & FOLLOW-UPS`;
+        if (sub) sub.innerHTML = `<span>🕒 Chronologically Organized by Date & Time</span> · Priority trade contractor callbacks requiring next outreach`;
+        return;
+      } else if (currentLeadView === 'calledHistory') {
+        heading.textContent = `✅ COMPLETED CALL LOG HISTORY`;
+        if (sub) sub.innerHTML = `<span>🕒 Chronologically Organized by Date & Time</span> · Full archive of all placed calls, outcomes, notes, and emails`;
+        return;
+      }
+
       if (currentBatch === 'today100' || currentBatch === 'activeQueue' || currentBatch === 'todayFresh') {
         heading.textContent = `ACTIVE US COLD CALL QUEUE: ${activeLimit} VERIFIED TARGETS (200 DAILY TEAM QUOTA)`;
       } else if (currentBatch === 'all') {
@@ -18758,6 +18896,7 @@ const LEADS_DATA = [
       } else {
         heading.textContent = `BATCH #${currentBatch}: 50 VERIFIED REGIONAL TARGETS`;
       }
+      if (sub) sub.innerHTML = `<span id="todayDateDisplay">Today</span> · 100 fresh verified trade contractor leads added daily · 0 fake numbers · 100% verified real businesses`;
     }
     updateBatchDropdownLabels();
   }
@@ -19165,6 +19304,7 @@ const LEADS_DATA = [
     // Update uncalled vs called vs callback counts using robust resolver
     let totalCalledCount = 0;
     let totalCallbackCount = 0;
+    let totalSuccessCount = 0;
 
     (window.LEADS_DATA || []).forEach(lead => {
       const rec = (typeof getLeadCallRecord === 'function') ? getLeadCallRecord(lead) : ((window.CALL_RECORDS || {})[lead.id]);
@@ -19173,16 +19313,22 @@ const LEADS_DATA = [
         if (rec.outcome === 'Call Back' || rec.outcome === 'Callback Scheduled') {
           totalCallbackCount++;
         }
+        if (rec.outcome === 'Success' || rec.outcome === 'Booked Demo') {
+          totalSuccessCount++;
+        }
       }
     });
     const totalUncalledCount = Math.max(0, (window.LEADS_DATA || []).length - totalCalledCount);
+    const totalCallbackAndSuccessCount = totalCallbackCount + totalSuccessCount;
 
     const uncalledBadgeEl = document.getElementById('uncalledCountBadge');
     const callbackBadgeEl = document.getElementById('callbackCountBadge');
     const calledBadgeEl = document.getElementById('calledCountBadge');
+    const cbSuccessBadgeEl = document.getElementById('callbackAndSuccessBadge');
     if (uncalledBadgeEl) uncalledBadgeEl.textContent = totalUncalledCount;
     if (callbackBadgeEl) callbackBadgeEl.textContent = totalCallbackCount;
     if (calledBadgeEl) calledBadgeEl.textContent = totalCalledCount;
+    if (cbSuccessBadgeEl) cbSuccessBadgeEl.textContent = totalCallbackAndSuccessCount;
 
     const countStatusAllEl = document.getElementById('countStatusAll');
     const countStatusUncalledEl = document.getElementById('countStatusUncalled');
@@ -19246,11 +19392,13 @@ const LEADS_DATA = [
       const rec = (typeof getLeadCallRecord === 'function') ? getLeadCallRecord(lead) : ((window.CALL_RECORDS || {})[lead.id]);
       const isCalled = !!(rec && rec.called);
       const isCallback = isCalled && (rec.outcome === 'Call Back' || rec.outcome === 'Callback Scheduled');
+      const isSuccess = isCalled && (rec.outcome === 'Success' || rec.outcome === 'Booked Demo');
 
       // Lead View toggles
       if (currentLeadView === 'toCall' && isCalled) return false;
       if (currentLeadView === 'callbacks' && !isCallback) return false;
       if (currentLeadView === 'calledHistory' && !isCalled) return false;
+      if (currentLeadView === 'callbacksAndSuccess' && (!isCalled || (!isCallback && !isSuccess))) return false;
 
       // Status pill filters
       if (currentStatusFilter === 'uncalled' && isCalled) return false;
@@ -19288,15 +19436,31 @@ const LEADS_DATA = [
       );
     });
 
-    // Sorting (Defaults to Smallest Local First: 1-5 Staff Priority)
-    if (currentSort === 'empAsc') {
+    // Sorting (Defaults to Date & Time for Called Views; Smallest Local First for Dial Queue)
+    if (currentSort === 'timeDesc' || currentLeadView === 'callbacksAndSuccess' || ((currentLeadView === 'callbacks' || currentLeadView === 'calledHistory') && currentSort !== 'timeAsc' && currentSort !== 'empAsc' && currentSort !== 'leakDesc')) {
+      filtered.sort((a, b) => {
+        const recA = (typeof getLeadCallRecord === 'function' ? getLeadCallRecord(a) : ((window.CALL_RECORDS || {})[a.id])) || {};
+        const recB = (typeof getLeadCallRecord === 'function' ? getLeadCallRecord(b) : ((window.CALL_RECORDS || {})[b.id])) || {};
+        const timeA = (typeof getRecordTimestampMs === 'function') ? getRecordTimestampMs(recA) : 0;
+        const timeB = (typeof getRecordTimestampMs === 'function') ? getRecordTimestampMs(recB) : 0;
+        return timeB - timeA; // Newest first
+      });
+    } else if (currentSort === 'timeAsc') {
+      filtered.sort((a, b) => {
+        const recA = (typeof getLeadCallRecord === 'function' ? getLeadCallRecord(a) : ((window.CALL_RECORDS || {})[a.id])) || {};
+        const recB = (typeof getLeadCallRecord === 'function' ? getLeadCallRecord(b) : ((window.CALL_RECORDS || {})[b.id])) || {};
+        const timeA = (typeof getRecordTimestampMs === 'function') ? getRecordTimestampMs(recA) : 0;
+        const timeB = (typeof getRecordTimestampMs === 'function') ? getRecordTimestampMs(recB) : 0;
+        return timeA - timeB; // Oldest first
+      });
+    } else if (currentSort === 'empAsc') {
       filtered.sort((a, b) => (a.employees || 3) - (b.employees || 3));
     } else if (currentSort === 'leakDesc') {
       filtered.sort((a, b) => (b.annualLoss || 0) - (a.annualLoss || 0));
     }
 
-    // ☀️ ACTIVE QUEUE SLICE (+100 ON DEMAND VIA BUTTON)
-    if (currentBatch === 'today100' || currentBatch === 'todayFresh' || currentBatch === 'activeQueue') {
+    // ☀️ ACTIVE QUEUE SLICE (+100 ON DEMAND VIA BUTTON) - ONLY FOR DIAL QUEUE
+    if ((currentBatch === 'today100' || currentBatch === 'todayFresh' || currentBatch === 'activeQueue') && currentLeadView === 'toCall') {
       filtered = filtered.slice(0, activeLimit);
     }
 
@@ -19309,7 +19473,13 @@ const LEADS_DATA = [
     const rangeText = document.getElementById('leadPageRangeText');
     if (rangeText) {
       const scopeNote = (!isNumberedBatch && isCustomFilter) ? ' <span class="search-scope-badge">🌐 Nationwide Search</span>' : '';
-      if (totalCount === 0) {
+      if (currentLeadView === 'callbacksAndSuccess') {
+        rangeText.innerHTML = `Showing <strong>${totalCount}</strong> Callbacks &amp; Successes · 🕒 <strong>Chronological Order (Newest First)</strong> · Click <strong>↺ Undo</strong> on any row to revert accidental marks`;
+      } else if (currentLeadView === 'callbacks') {
+        rangeText.innerHTML = `Showing <strong>${totalCount}</strong> Scheduled Callbacks · 🕒 <strong>Chronological Order (Newest First)</strong>`;
+      } else if (currentLeadView === 'calledHistory') {
+        rangeText.innerHTML = `Showing <strong>${totalCount}</strong> Logged Calls · 🕒 <strong>Chronological Order (Newest First)</strong>`;
+      } else if (totalCount === 0) {
         rangeText.innerHTML = `Found <strong>0</strong> matching contractor targets${scopeNote}`;
       } else if (leadPageSize === 'all' || totalCount <= leadPageSize) {
         rangeText.innerHTML = `Showing all <strong>${totalCount}</strong> matching leads${scopeNote}`;
@@ -19372,7 +19542,7 @@ const LEADS_DATA = [
                  `<span class="status-badge status-badge-noluck" onclick="openCallLogModal('${lead.id}')" title="Click to edit: No Luck">❌ No Luck</span>`) :
                 `<span class="status-badge status-badge-uncalled" onclick="openCallLogModal('${lead.id}')" title="Click to log call">⏳ To Call</span>`
               }
-              ${isCalled && rec.caller ? `<div class="caller-tag">By ${rec.caller} · ${rec.timestamp || ''}</div>` : ''}
+              ${isCalled ? `<div class="caller-tag" style="margin-top:3px;font-size:10.5px">🕒 ${(typeof formatCallDateTimeDisplay === 'function') ? formatCallDateTimeDisplay(rec) : (rec.timestamp || 'Today')}${rec.caller ? ` · <span style="color:#fcd34d">${rec.caller}</span>` : ''}</div>` : ''}
             </div>
           </div>
         </td>
@@ -19438,15 +19608,17 @@ const LEADS_DATA = [
           </div>
         </td>
         <td>
-          <div style="display:flex;align-items:center;gap:6px">
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
             <select class="outcome-select" data-id="${lead.id}">
               <option value="Success" ${isSuccess ? 'selected' : ''}>🎉 Success</option>
               <option value="Call Back" ${isCallback ? 'selected' : ''}>⏳ Call Back</option>
               <option value="No Luck" ${(isNoLuck || (!isSuccess && !isCallback)) ? 'selected' : ''}>❌ No Luck</option>
             </select>
             <button class="btn-note" data-id="${lead.id}" onclick="openCallLogModal('${lead.id}')" title="${rec.notes ? rec.notes : 'Click to add/edit call note'}">📝</button>
+            ${isCalled ? `<button type="button" class="btn btn-ghost btn-sm" onclick="unmarkLeadCall('${lead.id}')" style="border:1px solid rgba(239,68,68,0.4);background:rgba(239,68,68,0.12);color:#fca5a5;padding:3px 8px;font-size:11px;font-weight:700;border-radius:6px;cursor:pointer;white-space:nowrap" title="Fix Mistake: Revert this lead back to To-Call Queue">↺ Undo</button>` : ''}
           </div>
           ${rec.notes ? `<div class="call-note-tag" onclick="openCallLogModal('${lead.id}')" title="Click to edit: ${rec.notes}">📝 Why: "${rec.notes}"</div>` : `<button type="button" class="btn-note-add" onclick="openCallLogModal('${lead.id}')">+ Add Note Why</button>`}
+          ${isCalled ? `<div style="font-size:10px;color:#94a3b8;margin-top:3px;font-family:var(--font-mono)">🕒 ${(typeof formatCallDateTimeDisplay === 'function') ? formatCallDateTimeDisplay(rec) : (rec.timestamp || '')}</div>` : ''}
         </td>
         <td style="text-align:right">
           <button class="btn-pitch-lead" data-id="${lead.id}">📞 Pitch Lead ➔</button>
@@ -19467,10 +19639,22 @@ const LEADS_DATA = [
         if (isChecked) {
           const prevOutcome = CALL_RECORDS[id]?.outcome;
           const defaultOutcome = (prevOutcome && prevOutcome !== 'Uncalled') ? prevOutcome : 'Called';
+          const now = new Date();
+          const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          const dateStr = now.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+          const fullDateTime = now.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+          const existingRec = CALL_RECORDS[id] || {};
+
           CALL_RECORDS[id] = {
+            ...existingRec,
+            id: id,
             called: true,
             caller: activeCaller,
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            timestamp: timeStr,
+            dateStr: dateStr,
+            fullDateTime: fullDateTime,
+            calledAt: now.toISOString(),
+            calledAtMs: now.getTime(),
             outcome: defaultOutcome,
             notes: CALL_RECORDS[id]?.notes || ''
           };
@@ -19486,20 +19670,7 @@ const LEADS_DATA = [
           if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
           showToast(`✓ Checked off ${lead?.company || 'Lead'} as Called! Saved.`);
         } else {
-          if (CALL_RECORDS[id]) {
-            CALL_RECORDS[id].called = false;
-          }
-          if (wasCalled) {
-            u.dailyDials = Math.max(0, (u.dailyDials || 1) - 1);
-          }
-          saveUserProfiles();
-          updateDailyGoalsUI();
-          saveCallRecords();
-          syncCallRecordToCloud(id, CALL_RECORDS[id]);
-          renderLeadsTable();
-          updateQuotaHUD();
-          if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
-          showToast(`Unchecked ${lead?.company || 'Lead'} as to-call. Saved.`);
+          unmarkLeadCall(id);
         }
       });
     });
@@ -19510,32 +19681,44 @@ const LEADS_DATA = [
         const id = sel.dataset.id;
         const outcome = sel.value;
         const wasCalled = !!(CALL_RECORDS[id]?.called);
-        if (!CALL_RECORDS[id]) {
-          CALL_RECORDS[id] = {
-            called: true,
-            caller: activeCaller,
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-            outcome: outcome,
-            notes: ''
-          };
-        } else {
-          CALL_RECORDS[id].called = true;
-          CALL_RECORDS[id].caller = activeCaller;
-          CALL_RECORDS[id].timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-          CALL_RECORDS[id].outcome = outcome;
-        }
+        const prevOutcome = CALL_RECORDS[id]?.outcome;
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const dateStr = now.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+        const fullDateTime = now.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const existingRec = CALL_RECORDS[id] || {};
+
+        CALL_RECORDS[id] = {
+          ...existingRec,
+          id: id,
+          called: true,
+          caller: activeCaller,
+          timestamp: timeStr,
+          dateStr: dateStr,
+          fullDateTime: fullDateTime,
+          calledAt: now.toISOString(),
+          calledAtMs: now.getTime(),
+          outcome: outcome,
+          notes: existingRec.notes || ''
+        };
+
+        const u = getActiveUser();
         if (!wasCalled) {
-          const u = getActiveUser();
           u.dailyDials = (u.dailyDials || 0) + 1;
-          saveUserProfiles();
-          updateDailyGoalsUI();
         }
+        if (outcome === 'Success' && prevOutcome !== 'Success' && prevOutcome !== 'Booked Demo') {
+          u.dailyDemos = (u.dailyDemos || 0) + 1;
+        } else if ((prevOutcome === 'Success' || prevOutcome === 'Booked Demo') && outcome !== 'Success') {
+          u.dailyDemos = Math.max(0, (u.dailyDemos || 1) - 1);
+        }
+        saveUserProfiles();
+        updateDailyGoalsUI();
         saveCallRecords();
         syncCallRecordToCloud(id, CALL_RECORDS[id]);
         renderLeadsTable();
         updateQuotaHUD();
         if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
-        showToast(`Outcome logged: ${outcome}`);
+        showToast(`✓ Updated outcome: ${outcome}`);
       });
     });
 
@@ -20174,15 +20357,27 @@ https://www.vantorxsolutions.com`;
     const notesEl = document.getElementById('callLogModalNotes');
     const note = notesEl ? notesEl.value.trim() : '';
     const wasCalled = !!(CALL_RECORDS[id]?.called);
+    const prevOutcome = CALL_RECORDS[id]?.outcome;
 
     const recipientInput = document.getElementById('callLogEmailRecipient');
     const customEmail = (recipientInput?.value || '').trim();
     const existingRec = CALL_RECORDS[id] || {};
 
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const dateStr = now.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+    const fullDateTime = now.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
     CALL_RECORDS[id] = {
+      ...existingRec,
+      id: id,
       called: true,
       caller: activeCaller,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      timestamp: timeStr,
+      dateStr: dateStr,
+      fullDateTime: fullDateTime,
+      calledAt: now.toISOString(),
+      calledAtMs: now.getTime(),
       outcome: selectedCallOutcome,
       notes: note,
       email: customEmail || existingRec.email || lead?.email || '',
@@ -20194,8 +20389,10 @@ https://www.vantorxsolutions.com`;
     if (!wasCalled) {
       u.dailyDials = (u.dailyDials || 0) + 1;
     }
-    if (selectedCallOutcome === 'Success') {
+    if (selectedCallOutcome === 'Success' && prevOutcome !== 'Success' && prevOutcome !== 'Booked Demo') {
       u.dailyDemos = (u.dailyDemos || 0) + 1;
+    } else if ((prevOutcome === 'Success' || prevOutcome === 'Booked Demo') && selectedCallOutcome !== 'Success') {
+      u.dailyDemos = Math.max(0, (u.dailyDemos || 1) - 1);
     }
     saveUserProfiles();
     updateDailyGoalsUI();
@@ -20213,23 +20410,8 @@ https://www.vantorxsolutions.com`;
   window.unmarkActiveCallRecord = function() {
     if (!activeLogLeadId) return;
     const id = activeLogLeadId;
-    const lead = LEADS_DATA.find(l => l.id === id);
-    if (CALL_RECORDS[id]) {
-      CALL_RECORDS[id].called = false;
-    }
-    const u = getActiveUser();
-    u.dailyDials = Math.max(0, (u.dailyDials || 1) - 1);
-    saveUserProfiles();
-    updateDailyGoalsUI();
-    saveCallRecords();
-    syncCallRecordToCloud(id, CALL_RECORDS[id]);
-
     closeCallLogModal();
-    renderLeadsTable();
-    updateQuotaHUD();
-    if (activeLead && activeLead.id === id) updatePrompterCallStatus(id);
-
-    showToast(`Unmarked ${lead?.company || 'Lead'} as to-call.`);
+    unmarkLeadCall(id);
   };
 
   function updateQuotaHUD() {
@@ -20457,19 +20639,20 @@ https://www.vantorxsolutions.com`;
     });
   }
 
-  // Export CSV Listener
-  document.getElementById('exportLeadsCsvBtn').addEventListener('click', () => {
-    let csv = 'ID,Company,Owner,Title,City,State,Trade,Employees,EmployeeTier,Phone,Service,AnnualLeak,NetSavings,CallStatus,CalledBy,CallTimestamp,Outcome,Notes\n';
+  // Export CSV Function & Listener
+  window.exportLeadsCsv = function() {
+    let csv = 'ID,Company,Owner,Title,City,State,Trade,Employees,EmployeeTier,Phone,Service,AnnualLeak,NetSavings,CallStatus,CalledBy,CallTimestamp,CallDateTime,Outcome,Notes\n';
     LEADS_DATA.forEach(l => {
-      const rec = CALL_RECORDS[l.id] || {};
+      const rec = (typeof getLeadCallRecord === 'function') ? getLeadCallRecord(l) : (CALL_RECORDS[l.id] || {});
       const status = rec.called ? 'Called' : 'Uncalled';
       const caller = rec.caller || '';
       const ts = rec.timestamp || '';
+      const dt = rec.fullDateTime || rec.dateStr || ts;
       const outcome = rec.outcome || 'Uncalled';
       const notes = (rec.notes || '').replace(/"/g, '""');
       const empCount = l.employees || 3;
       const empTier = l.employeeTier || 'sweetSpot';
-      csv += `"${l.id}","${l.company}","${l.owner}","${l.title}","${l.city}","${l.state}","${l.trade}",${empCount},"${empTier}","${l.phone}","${l.service}",${l.annualLoss},${l.netSavings},"${status}","${caller}","${ts}","${outcome}","${notes}"\n`;
+      csv += `"${l.id}","${l.company}","${l.owner}","${l.title}","${l.city}","${l.state}","${l.trade}",${empCount},"${empTier}","${l.phone}","${l.service}",${l.annualLoss},${l.netSavings},"${status}","${caller}","${ts}","${dt}","${outcome}","${notes}"\n`;
     });
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
@@ -20478,8 +20661,12 @@ https://www.vantorxsolutions.com`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showToast('✓ 750 Leads with Call Logs exported to CSV!');
-  });
+    showToast('✓ Leads with Call Logs exported to CSV!');
+  };
+  const exportBtnEl = document.getElementById('exportLeadsCsvBtn');
+  if (exportBtnEl) {
+    exportBtnEl.addEventListener('click', () => { window.exportLeadsCsv(); });
+  }
 
   // ============================================================
   // 🎯 LOAD LEAD INTO MULTI-PRODUCT TELEPROMPTER
