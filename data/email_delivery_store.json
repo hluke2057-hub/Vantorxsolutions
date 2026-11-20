@@ -1,16 +1,16 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-11-20T17:58:23.069Z",
+  "lastUpdated": "2026-11-20T23:57:28.326Z",
   "stats": {
-    "totalProcessed": 62,
-    "totalSent": 62,
+    "totalProcessed": 70,
+    "totalSent": 70,
     "totalDelivered": 2,
     "totalBounced": 0,
     "totalSuppressed": 1,
     "totalFailed": 0,
     "totalReplied": 0,
     "totalUnsubscribed": 0,
-    "deliveryRate": "3.2%",
+    "deliveryRate": "2.9%",
     "bounceRate": "0.0%",
     "complaintRate": "0.00%"
   },
@@ -882,6 +882,118 @@
       "suppressionOrigin": null,
       "source": "cloud_outbound_engine",
       "lastUpdatedAt": "2026-11-20T17:58:23.069Z"
+    },
+    "01a1fb64-c489-776d-8f26-1d003e4abb2c": {
+      "id": "01a1fb64-c489-776d-8f26-1d003e4abb2c",
+      "recipient": "charlie@acesolvesitall.com",
+      "businessName": "Ace Solves It All",
+      "subject": "Final note regarding Ace Solves It All call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-20T23:57:27.583Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-20T23:57:27.583Z"
+    },
+    "01a1fb64-c571-78e4-9b69-9eaf6d1dc6d8": {
+      "id": "01a1fb64-c571-78e4-9b69-9eaf6d1dc6d8",
+      "recipient": "ken@modernplumbingindustries.com",
+      "businessName": "Modern Plumbing Industries, Inc.",
+      "subject": "Final note regarding Modern Plumbing Industries, Inc. call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-20T23:57:27.814Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-20T23:57:27.814Z"
+    },
+    "01a1fb64-c59e-70cc-aff4-5126f5a1e3df": {
+      "id": "01a1fb64-c59e-70cc-aff4-5126f5a1e3df",
+      "recipient": "liam@emeraldplumbing.com",
+      "businessName": "Emerald Plumbing",
+      "subject": "Final note regarding Emerald Plumbing call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-20T23:57:27.860Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-20T23:57:27.860Z"
+    },
+    "01a1fb64-c5eb-7363-9924-b9991d73bf4e": {
+      "id": "01a1fb64-c5eb-7363-9924-b9991d73bf4e",
+      "recipient": "marco@unitedrestorationteam.com",
+      "businessName": "United Restoration Team",
+      "subject": "Final note regarding United Restoration Team call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-20T23:57:27.936Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-20T23:57:27.936Z"
+    },
+    "01a1fb64-c60f-74d2-a44c-7b221660d365": {
+      "id": "01a1fb64-c60f-74d2-a44c-7b221660d365",
+      "recipient": "herrellplumbing@gmail.com",
+      "businessName": "Herrell Plumbing",
+      "subject": "Final note regarding Herrell Plumbing call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-20T23:57:27.973Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-20T23:57:27.973Z"
+    },
+    "01a1fb64-c65a-7b36-9e39-8c16fe10fdf5": {
+      "id": "01a1fb64-c65a-7b36-9e39-8c16fe10fdf5",
+      "recipient": "dave@aqualityelectric.com",
+      "businessName": "A-Quality Electric",
+      "subject": "Final note regarding A-Quality Electric call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-20T23:57:28.048Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-20T23:57:28.048Z"
+    },
+    "01a1fb64-c686-766e-89f5-4d197cb15d72": {
+      "id": "01a1fb64-c686-766e-89f5-4d197cb15d72",
+      "recipient": "randy@airtechofcentralflorida.com",
+      "businessName": "Air Tech of Central Florida",
+      "subject": "Final note regarding Air Tech of Central Florida call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-20T23:57:28.095Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-20T23:57:28.095Z"
+    },
+    "01a1fb64-c770-70b3-859c-c9ee3190f469": {
+      "id": "01a1fb64-c770-70b3-859c-c9ee3190f469",
+      "recipient": "info@greensenergy.com",
+      "businessName": "Greens Energy Services",
+      "subject": "Final note regarding Greens Energy Services call capture",
+      "sender": "Luke <luke@vantorxsolutions.com>",
+      "sentAt": "2026-11-20T23:57:28.325Z",
+      "status": "sent",
+      "verificationStatus": "VALID",
+      "failureReason": null,
+      "suppressionOrigin": null,
+      "source": "cloud_outbound_engine",
+      "lastUpdatedAt": "2026-11-20T23:57:28.326Z"
     }
   },
   "suppressions": [
@@ -1634,6 +1746,102 @@
       "timestamp": "2026-11-20T17:58:23.069Z",
       "details": {
         "subject": "Re: Quick question for Tommy regarding All Year Cooling & Heating emergency calls",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795219047583_are5",
+      "emailId": "01a1fb64-c489-776d-8f26-1d003e4abb2c",
+      "recipient": "charlie@acesolvesitall.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-20T23:57:27.583Z",
+      "details": {
+        "subject": "Final note regarding Ace Solves It All call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795219047814_0zh2",
+      "emailId": "01a1fb64-c571-78e4-9b69-9eaf6d1dc6d8",
+      "recipient": "ken@modernplumbingindustries.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-20T23:57:27.814Z",
+      "details": {
+        "subject": "Final note regarding Modern Plumbing Industries, Inc. call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795219047860_910i",
+      "emailId": "01a1fb64-c59e-70cc-aff4-5126f5a1e3df",
+      "recipient": "liam@emeraldplumbing.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-20T23:57:27.860Z",
+      "details": {
+        "subject": "Final note regarding Emerald Plumbing call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795219047936_q9ay",
+      "emailId": "01a1fb64-c5eb-7363-9924-b9991d73bf4e",
+      "recipient": "marco@unitedrestorationteam.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-20T23:57:27.936Z",
+      "details": {
+        "subject": "Final note regarding United Restoration Team call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795219047973_gd06",
+      "emailId": "01a1fb64-c60f-74d2-a44c-7b221660d365",
+      "recipient": "herrellplumbing@gmail.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-20T23:57:27.973Z",
+      "details": {
+        "subject": "Final note regarding Herrell Plumbing call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795219048048_ntw2",
+      "emailId": "01a1fb64-c65a-7b36-9e39-8c16fe10fdf5",
+      "recipient": "dave@aqualityelectric.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-20T23:57:28.048Z",
+      "details": {
+        "subject": "Final note regarding A-Quality Electric call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795219048095_reqa",
+      "emailId": "01a1fb64-c686-766e-89f5-4d197cb15d72",
+      "recipient": "randy@airtechofcentralflorida.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-20T23:57:28.095Z",
+      "details": {
+        "subject": "Final note regarding Air Tech of Central Florida call capture",
+        "sender": "Luke <luke@vantorxsolutions.com>",
+        "failureReason": null
+      }
+    },
+    {
+      "id": "evt_1795219048326_gupn",
+      "emailId": "01a1fb64-c770-70b3-859c-c9ee3190f469",
+      "recipient": "info@greensenergy.com",
+      "type": "email.sent",
+      "timestamp": "2026-11-20T23:57:28.326Z",
+      "details": {
+        "subject": "Final note regarding Greens Energy Services call capture",
         "sender": "Luke <luke@vantorxsolutions.com>",
         "failureReason": null
       }
